@@ -1,0 +1,47 @@
+{
+  "name": "@oceanbase/icons",
+  "version": "0.2.2",
+  "description": "The Icon Library for OceanBase",
+  "keywords": [
+    "OceanBase",
+    "database",
+    "design",
+    "icon",
+    "react",
+    "component"
+  ],
+  "homepage": "https://github.com/oceanbase/oceanbase-design/packages/icons",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:oceanbase/design.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "unpkg": "dist/design.min.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "files": [
+    "es",
+    "lib",
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "npm run generate && father build",
+    "generate": "rm -rf src && ts-node scripts/generate.ts"
+  },
+  "dependencies": {
+    "@ant-design/colors": "^7.0.0",
+    "@ant-design/icons": "^4.8.0",
+    "@oceanbase/icons-svg": "^1.0.4"
+  },
+  "peerDependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "useWorkspaces": true,
+  "packages": ["packages/*"],
+  "version": "independent",
+  "npmClient": "pnpm",
+  "changelog": {
+    "repo": "oceanbase/design",
+    "cacheDir": ".changelog"
+  },
+  "ignoreChanges": [
+    "**/*.md",
+    "**/*.test.ts",
+    "**/*.e2e.ts",
+    "**/demos/**",
+    "**/fixtures/**",
+    "**/dist/**",
+    "**/lib/**",
+    "**/es/**",
+    "**/test/**"
+  ]
+}

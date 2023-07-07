@@ -1,0 +1,46 @@
+@import '../variable.less';
+
+@prefix: ob-batch-operation-bar;
+
+.@{prefix} {
+  position: fixed;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: rgba(0, 0, 0, 1);
+  background-color: #fff;
+  box-shadow: @boxShadowSecondary;
+  .@{prefix}-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    margin: 0 24px;
+    .@{prefix}-title {
+      font-weight: 500;
+    }
+    .@{prefix}-cancel,
+    .@{prefix}-display-btn {
+      color: @blue;
+      cursor: pointer;
+    }
+    .@{prefix}-display-text {
+      margin-right: 4px;
+    }
+  }
+  .@{prefix}-content {
+    max-height: 328px;
+    padding: 0 24px 24px;
+    overflow: auto;
+  }
+  .@{prefix}-content-active {
+    max-height: 328px;
+    transition: max-height 0.25s;
+  }
+  .@{prefix}-content-hidden {
+    max-height: 0;
+    padding: 0;
+    transition: max-height 0.25s;
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "types": ["jest", "node", "@ant-design/cssinjs"],
+    "declaration": true,
+    // TS 编译时跳过对 node_modules 依赖的检查
+    "skipLibCheck": true,
+    // ref: https://github.com/microsoft/TypeScript/issues/47663#issuecomment-1519138189
+    "preserveSymlinks": true,
+    "resolveJsonModule": true,
+    "baseUrl": "./",
+    "paths": {
+      "@@/*": [".dumi/tmp/*"],
+      "@oceanbase/design": ["packages/design/src/index.ts"],
+      "@oceanbase/design/es/*": ["packages/design/src/*"],
+      "@oceanbase/design/locale/*": ["packages/design/src/locale/*"],
+      "@oceanbase/icons": ["packages/icons/src/index.ts"],
+      "@oceanbase/icons/es/*": ["packages/icons/src/*"],
+      "@oceanbase/ui": ["packages/ui/src/index.ts"],
+      "@oceanbase/ui/es/*": ["packages/ui/src/*"],
+      "@oceanbase/ui/locale/*": ["packages/ui/src/locale/*"],
+      "@oceanbase/charts": ["packages/charts/src/index.ts"],
+      "@oceanbase/charts/es/*": ["packages/charts/src/*"],
+      "@oceanbase/util": ["packages/util/src/index.ts"]
+    }
+  },
+  "exclude": [
+    "src/**/__test__",
+    "src/**/*.+(test|e2e|spec).+(js|jsx|ts|tsx)",
+    "node_modules",
+    "build",
+    "es",
+    "lib",
+    "dist",
+    "script"
+  ]
+}

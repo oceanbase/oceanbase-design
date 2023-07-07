@@ -1,0 +1,117 @@
+@import '../variable.less';
+
+@prefix: ob-task-graph;
+
+.container {
+  position: relative;
+  padding-bottom: 0 !important;
+
+  .@{prefixCls}-page-header {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .tech-page-container-header-inner {
+    background-color: #fafbff;
+
+    .@{prefixCls}-page-header-heading .@{prefixCls}-page-header-heading-title {
+      font-size: 16px;
+    }
+  }
+
+  .@{prefix}-split-pane {
+    top: auto !important;
+    height: calc(100% - 36px) !important;
+    min-height: calc(100% - 36px) !important;
+    margin: -24px;
+
+    .@{prefix}-tabs-wrapper {
+      width: 100%;
+    }
+
+    .@{prefixCls}-tabs {
+      height: 100%;
+
+      .@{prefixCls}-tabs-nav-container {
+        height: 32px;
+        padding-top: 4px;
+      }
+
+      .@{prefixCls}-tabs-bar {
+        margin-bottom: 0;
+        background-color: #fff;
+        border-bottom: none;
+      }
+
+      .@{prefixCls}-tabs-tab {
+        min-width: 120px;
+        height: 28px;
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+        line-height: 28px;
+        background-color: #fff;
+        border: none;
+        border-bottom: 1px solid #e8e8e8;
+        border-radius: 0;
+        transition: none;
+
+        &:hover {
+          color: @colorTextSecondary;
+        }
+
+        div {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 20px;
+          margin-top: 4px;
+          padding: 0 8px;
+          border-left: 1px solid #e8e8e8;
+        }
+      }
+
+      .@{prefixCls}-tabs-tab:last-child {
+        div {
+          border-left: none;
+        }
+      }
+
+      .@{prefixCls}-tabs-tab-active {
+        color: @colorText;
+        font-weight: normal;
+        background-color: #f7f8fc;
+        border-bottom: none;
+        border-left: none;
+        border-radius: 2px;
+
+        div {
+          border-left: none;
+        }
+
+        & + .@{prefixCls}-tabs-tab {
+          div {
+            border-left: none;
+          }
+        }
+      }
+
+      .@{prefixCls}-tabs-extra-content {
+        margin-right: 16px;
+        line-height: 32px;
+      }
+
+      .@{prefixCls}-tabs-content {
+        // TODO: 需要减去 64px，否则部分结尾的日志看不到，原因待排查
+        height: calc(100% - 64px);
+        padding: 16px;
+        overflow: scroll;
+        color: @colorTextSecondary;
+        line-height: 22px;
+        white-space: pre-wrap;
+        word-break: break-all;
+        background-color: #f7f8fc;
+      }
+    }
+  }
+}

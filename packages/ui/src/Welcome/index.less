@@ -1,0 +1,186 @@
+@import '../variable.less';
+
+@prefix: ob-welcome;
+
+.@{prefix}-container {
+  height: 100%;
+  padding-bottom: 0 !important;
+  overflow: auto;
+  background-color: #fff;
+
+  .tech-page-container-content {
+    // 由于 umi 的本地开发和线上打包的 CSS 样式优先级不一致，导致下列样式在线上环境不生效，因此先加上 !important
+    // issue: https://github.com/umijs/umi/issues/5741
+    padding: 0 !important;
+  }
+
+  .@{prefix}-page-header {
+    height: 272px;
+    padding-top: 72px;
+    padding-left: 100px;
+    color: #fff;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    p {
+      text-align: justify;
+    }
+
+    img {
+      width: 80px;
+    }
+
+    .@{prefix}-title {
+      font-size: 32px;
+      font-family: SFProText-Medium;
+    }
+
+    .@{prefix}-description {
+      margin-top: 16px;
+      margin-bottom: 32px;
+      font-family: SFProText-Regular;
+      opacity: 0.85;
+    }
+  }
+
+  .@{prefix}-introduce {
+    margin: 0 32px;
+    margin-top: -48px;
+    margin-bottom: 40px;
+
+    .@{prefixCls}-card-body {
+      padding: 48px 68px;
+      box-shadow: 0 1px 40px 2px rgba(28, 116, 230, 0.1);
+    }
+
+    .@{prefix}-item {
+      display: flex;
+
+      img {
+        margin-right: 12px;
+      }
+
+      .title {
+        color: @colorText;
+        font-size: 16px;
+        font-family: PingFangSC-Medium;
+      }
+
+      .description {
+        margin-top: 4px;
+        color: @colorTextSecondary;
+        font-family: SFProText-Regular;
+      }
+    }
+  }
+
+  .@{prefix}-content {
+    padding: 0 32px;
+    padding-bottom: 90px;
+
+    .@{prefix}-left {
+      padding: 0 36px;
+      border-right: 1px solid #e8e8e8;
+
+      .@{prefix}-item {
+        display: flex;
+        padding: 24px 24px;
+
+        .@{prefix}-order-wrapper {
+          .@{prefix}-order {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            color: @colorTextQuaternary;
+            text-align: center;
+            border: 1px solid @colorTextQuaternary;
+            border-radius: 24px;
+          }
+        }
+
+        .@{prefix}-title {
+          margin-top: 0;
+          color: @colorText;
+          font-size: 16px;
+        }
+
+        .@{prefix}-description {
+          margin-top: 8px;
+          color: @colorTextTertiary;
+        }
+      }
+
+      .@{prefix}-btn-wrapper {
+        margin-right: 24px;
+        margin-left: 60px;
+      }
+    }
+
+    .@{prefix}-right {
+      padding: 24px 64px;
+
+      .@{prefix}-title {
+        margin-bottom: 16px;
+        color: @colorText;
+        font-size: 16px;
+        font-family: PingFangSC-Medium;
+      }
+
+      .@{prefixCls}-btn {
+        margin-right: 12px;
+        margin-bottom: 12px;
+        background: rgba(24, 144, 255, 0.06);
+        border: none;
+      }
+
+      .@{prefix}-more {
+        background: rgba(0, 0, 0, 0.04);
+      }
+    }
+  }
+}
+
+.@{prefix}-step {
+  display: flex;
+  // margin-right: 30px;
+  margin-bottom: 30px;
+  padding: 20px 30px 20px 0;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 2px;
+
+  &:hover {
+    box-shadow: 0 4px 16px 0;
+    cursor: pointer;
+  }
+
+  &:nth-child(even) {
+    margin-right: 0;
+  }
+
+  .@{prefix}-step-left {
+    padding: 0 20px;
+  }
+
+  .@{prefix}-step-right {
+    .@{prefix}-step-title {
+      color: @colorText;
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .@{prefix}-step-description {
+      color: @colorTextTertiary;
+    }
+  }
+
+  .@{prefix}-step-operations {
+    color: #0090ff;
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+.borderRight {
+  border-right: 1px solid #e8e8e8;
+}

@@ -1,0 +1,86 @@
+import React from 'react';
+import { Button, Tag, Space } from '@oceanbase/design';
+import { ProList } from '@oceanbase/ui';
+
+const dataSource = [
+  {
+    name: 'OceanBase Design',
+    image:
+      'https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original',
+    desc: '我是一条测试的描述',
+  },
+  {
+    name: 'OceanBase Database',
+    image:
+      'https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original',
+    desc: '我是一条测试的描述',
+  },
+  {
+    name: 'OceanBase Cloud',
+    image:
+      'https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original',
+    desc: '我是一条测试的描述',
+  },
+];
+
+export default () => (
+  <ProList
+    toolBarRender={() => {
+      return [
+        <Button key="add" type="primary">
+          新建
+        </Button>,
+      ];
+    }}
+    onRow={(record) => {
+      return {
+        onMouseEnter: () => {
+          console.log(record);
+        },
+        onClick: () => {
+          console.log(record);
+        },
+      };
+    }}
+    rowKey="name"
+    headerTitle="基础列表"
+    tooltip="基础列表的配置"
+    dataSource={dataSource}
+    showActions="hover"
+    showExtra="hover"
+    metas={{
+      title: {
+        dataIndex: 'name',
+      },
+      avatar: {
+        dataIndex: 'image',
+      },
+      description: {
+        dataIndex: 'desc',
+      },
+      subTitle: {
+        render: () => {
+          return (
+            <Space size={0}>
+              <Tag color="blue">OceanBase Design</Tag>
+              <Tag color="#5BD8A6">OceanBase Design</Tag>
+            </Space>
+          );
+        },
+      },
+      actions: {
+        render: (text, row) => [
+          <a href={row.html_url} target="_blank" rel="noopener noreferrer" key="link">
+            链路
+          </a>,
+          <a href={row.html_url} target="_blank" rel="noopener noreferrer" key="warning">
+            报警
+          </a>,
+          <a href={row.html_url} target="_blank" rel="noopener noreferrer" key="view">
+            查看
+          </a>,
+        ],
+      },
+    }}
+  />
+);

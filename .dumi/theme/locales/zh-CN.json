@@ -1,0 +1,18 @@
+{
+  "app.theme.switch.dark": "暗黑主题",
+  "app.theme.switch.compact": "紧凑主题",
+  "app.theme.switch.motion.on": "动画开启",
+  "app.theme.switch.motion.off": "动画关闭",
+  "app.header.menu.more": "更多",
+  "app.header.menu.pro.components": "Ant Design Pro Components",
+  "app.header.menu.charts": "Ant Design Charts",
+  "app.header.lang": "English",
+  "app.content.edit-page": "在 GitHub 上编辑此页！",
+  "app.content.contributors": "文档贡献者",
+  "app.component.examples": "代码演示",
+  "app.docs.components.icon.search.placeholder": "在此搜索图标，点击图标可复制代码",
+  "app.docs.components.icon.outlined": "线框风格",
+  "app.docs.components.icon.filled": "实底风格",
+  "app.docs.components.icon.two-tone": "双色风格",
+  "app.components.overview.search": "搜索组件"
+}

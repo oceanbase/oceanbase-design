@@ -1,0 +1,49 @@
+@prefix: ob-fullscreen;
+.@{prefix}-box {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.88);
+  font-size: 14px;
+  line-height: 1.5714285714285714;
+  list-style: none;
+
+  &.@{prefix}-box-fullscreen {
+    position: fixed;
+    z-index: 900;
+    background: #fff;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+  }
+  .@{prefix}-box-header {
+    display: flex;
+    height: 64px;
+    .@{prefix}-box-header-left {
+      flex: 1;
+      padding-block: 20px;
+      padding-inline: 24px;
+    }
+    .@{prefix}-box-header-icon {
+      cursor: pointer;
+    }
+    .@{prefix}-box-header-title {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      margin-inline-start: 24px;
+    }
+    .@{prefix}-box-header-extra {
+      flex: 2;
+      line-height: 64px;
+      text-align: end;
+      padding-inline-end: 24px;
+    }
+  }
+}
+
+/* 避免滚动穿透 */
+.@{prefix}-body-overflow-hidden {
+  overflow: hidden;
+}

@@ -1,0 +1,11 @@
+test/fixtures
+dist
+es
+lib
+config/wrapper.js
+.doc
+.dumi/tmp
+.dumi/tmp-test
+.dumi/tmp-production
+demo/
+__test__/

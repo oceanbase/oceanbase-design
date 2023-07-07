@@ -1,0 +1,325 @@
+@import '../variable.less';
+
+@prefix: ob-login;
+
+.@{prefix}-container {
+  display: flex;
+  justify-content: space-between;
+  min-width: 768px;
+  height: 100vh;
+  min-height: 600px;
+  overflow: auto;
+
+  .@{prefix}-bg {
+    width: 540px;
+    min-width: 400px;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .@{prefix}-info {
+      margin: 185px 90px 0 90px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 56px;
+      font-family: PingFangSC;
+
+      .@{prefix}-start {
+        margin-top: 22px;
+        color: #f4f4f4;
+        font-weight: 500;
+        font-size: 32px;
+        letter-spacing: 0;
+      }
+    }
+  }
+  .@{prefix}-card {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 600px;
+    background-color: #fff;
+
+    .@{prefix}-locale {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      color: @colorTextTertiary;
+      font-family: PingFangSC-Regular;
+      cursor: pointer;
+    }
+
+    .@{prefix}-board {
+      position: absolute;
+      top: 48px;
+    }
+
+    .@{prefix}-content {
+      margin-top: -60px;
+      .@{prefix}-logo {
+        display: block;
+        height: 68px;
+        margin: 0 auto;
+        margin-bottom: 40px;
+      }
+
+      .@{prefix}-activate-logo,
+      .@{prefix}-reigster-logo {
+        display: block;
+        height: 68px;
+        margin: 0 auto;
+      }
+
+      .@{prefix}-register,
+      .@{prefix}-activate {
+        .@{prefixCls}-form-item-with-help {
+          margin-bottom: 24px;
+        }
+      }
+
+      .@{prefix}-form {
+        width: 100%;
+
+        input::placeholder {
+          font-size: 14px;
+        }
+
+        .@{prefixCls}-form-item {
+          width: 404px;
+          margin-bottom: 24px;
+          padding-bottom: 0;
+        }
+
+        .@{prefixCls}-input-affix-wrapper {
+          width: 404px;
+          height: 40px;
+          border-radius: 8px;
+
+          .@{prefixCls}-input-prefix {
+            .@{iconPrefixCls} {
+              font-size: 20px;
+            }
+          }
+
+          // 覆盖 input:-internal-autofill-selected 自带背景色样式问题
+          .@{prefixCls}-input {
+            box-shadow: inset 0 0 0 1000px white !important;
+          }
+
+          .@{prefixCls}-input:-internal-autofill-selected {
+            box-shadow: inset 0 0 0 1000px white !important;
+          }
+          .@{prefixCls}-input:focus:-internal-autofill-selected {
+            box-shadow: inset 0 0 0 1000px white !important;
+          }
+        }
+
+        .@{prefixCls}-input-affix-wrapper .@{prefixCls}-input:not(:first-child) {
+          padding-left: 8px;
+        }
+
+        .@{prefixCls}-input-affix-wrapper-focused {
+          border-color: @colorPrimary;
+        }
+
+        .@{prefix}-form-focus-input {
+          .@{prefixCls}-input-prefix {
+            .@{iconPrefixCls} {
+              color: @colorPrimary;
+            }
+          }
+        }
+      }
+
+      .@{prefix}-auth-code {
+        display: flex;
+        align-items: start;
+        width: 100%;
+        margin-bottom: 24px;
+        padding-bottom: 0;
+        & > .@{prefixCls}-space-item:first-child {
+          flex: 1;
+        }
+        .@{prefixCls}-form-item {
+          margin-bottom: 0;
+        }
+        .@{prefix}-code-btn {
+          position: relative;
+          height: 38px;
+          border: 1px solid @colorBorder;
+          border-radius: 8px;
+          cursor: pointer;
+          img {
+            height: 38px;
+            border-radius: 8px;
+          }
+          .@{prefix}-code-mask {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 38px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+            inset: 0;
+          }
+          &.@{prefix}-error,
+          &:hover {
+            .@{prefix}-code-mask {
+              opacity: 1;
+            }
+          }
+        }
+      }
+      .@{prefix}-submit-btn {
+        width: 404px;
+        height: 40px;
+        border-radius: 8px;
+      }
+
+      .@{prefix}-switch-btn {
+        margin-top: 24px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .@{prefix}-watermark-wrapper {
+        position: absolute;
+        bottom: 40px;
+        width: 404px;
+        text-align: center;
+
+        .@{prefix}-watermark {
+          height: 16px;
+        }
+      }
+
+      .@{prefix}-alert {
+        width: 404px;
+        margin-bottom: 24px;
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+@media (max-width: 2048px) {
+  .@{prefix}-container {
+    .@{prefix}-bg {
+      width: 800px;
+
+      .@{prefix}-info {
+        margin: 185px 48px 0 48px;
+        font-size: 72px;
+        .@{prefix}-start {
+          font-size: 48px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1800px) {
+  .@{prefix}-container {
+    .@{prefix}-bg {
+      width: 700px;
+
+      .@{prefix}-info {
+        margin: 185px 48px 0 48px;
+        font-size: 64px;
+        .@{prefix}-start {
+          font-size: 40px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1600px) {
+  .@{prefix}-container {
+    .@{prefix}-bg {
+      width: 600px;
+
+      .@{prefix}-info {
+        margin: 185px 48px 0 48px;
+        font-size: 56px;
+        .@{prefix}-start {
+          font-size: 32px;
+        }
+      }
+    }
+  }
+}
+
+// 设置的登录页最小高度，防止 logo 偏移位置偏移遮住输入框
+@media (max-height: 650px) {
+  .@{prefix}-container {
+    .@{prefix}-watermark-wrapper {
+      position: absolute;
+      top: 600px;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .@{prefix}-container {
+    .@{prefix}-bg {
+      width: 500px;
+
+      .@{prefix}-info {
+        margin: 185px 48px 0 48px;
+        font-size: 48px;
+        .@{prefix}-start {
+          font-size: 28px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .@{prefix}-container {
+    .@{prefix}-bg {
+      width: 400px;
+
+      .@{prefix}-info {
+        margin: 185px 32px 0 32px;
+        font-size: 40px;
+        .@{prefix}-start {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .@{prefix}-container {
+    .@{prefix}-bg {
+      width: 250px;
+
+      .@{prefix}-info {
+        margin: 185px 24px 0 24px;
+        font-size: 32px;
+
+        .@{prefix}-start {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+.@{prefix}-container-with-board {
+  .@{prefix}-card {
+    .@{prefix}-content {
+      margin-top: 0;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@import '../variable.less';
+
+@prefix: ob-task-graph-item;
+
+.@{prefix}-menu {
+  // 设置 fixed，避免下拉菜单占据空间导致底部出现白色方块
+  position: fixed;
+
+  .@{prefix}-task-id-wrapper {
+    padding: 5px 12px;
+
+    .@{prefixCls}-typography {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: @colorTextTertiary;
+
+      .@{prefixCls}-typography-copy {
+        color: @colorTextTertiary;
+      }
+    }
+  }
+}

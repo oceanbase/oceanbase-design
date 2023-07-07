@@ -1,0 +1,18 @@
+{
+  "app.theme.switch.dark": "Dark theme",
+  "app.theme.switch.compact": "Compact theme",
+  "app.theme.switch.motion.on": "Motion On",
+  "app.theme.switch.motion.off": "Motion Off",
+  "app.header.menu.more": "More",
+  "app.header.menu.pro.components": "Ant Design Pro Components",
+  "app.header.menu.charts": "Ant Design Charts",
+  "app.header.lang": "中文",
+  "app.content.edit-page": "Edit this page on GitHub!",
+  "app.content.contributors": "contributors",
+  "app.component.examples": "Examples",
+  "app.docs.components.icon.search.placeholder": "Search icons here, click icon to copy code",
+  "app.docs.components.icon.outlined": "Outlined",
+  "app.docs.components.icon.filled": "Filled",
+  "app.docs.components.icon.two-tone": "Two Tone",
+  "app.components.overview.search": "Search in components"
+}

@@ -1,0 +1,114 @@
+@import '../variable.less';
+
+@prefix: ob-dialog;
+
+.@{prefix}-container-embed {
+  @radius: 1px;
+  // 这里用 !important 是为了增加权重覆写弹窗模式的属性
+  border: 1px solid @border-color !important;
+  border-radius: @radius !important;
+  box-shadow: none !important;
+  @border-color: #dde4ed;
+}
+
+.@{prefix}-container {
+  position: fixed;
+  z-index: 999;
+  box-sizing: content-box;
+  color: #eee;
+  background-color: rgba(65, 74, 77, 1);
+  border-radius: 8px;
+  box-shadow: @boxShadowSecondary;
+  transition: visibility 0.2s ease-in-out, opacity 0.2s linear;
+  @header: 52px;
+  @footer: 40px;
+  @radius: 1px;
+  @border-color: #dde4ed;
+  @font-color: #38465c;
+
+  .@{prefix}-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: @header;
+    padding: 0 25px;
+    line-height: @header;
+    background-color: #fff;
+    border-radius: @radius;
+    cursor: grab;
+    user-select: none;
+
+    .@{prefix}-title {
+      display: inline-block;
+      width: 60%;
+      overflow: hidden;
+      color: @font-color;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      word-break: keep-all;
+    }
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    .@{prefix}-controls {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      text-align: center;
+
+      .@{prefix}-item {
+        @size: 15px;
+
+        display: inline-block;
+        width: @size;
+        margin-left: 16px;
+        color: @font-color;
+        font-size: @size;
+        line-height: @size;
+        text-align: center;
+        cursor: pointer;
+        transition-duration: 0.3s;
+
+        .@{prefix}-item-link {
+          padding-top: 2px;
+          color: @font-color;
+        }
+      }
+    }
+  }
+
+  .@{prefix}-main {
+    position: relative;
+    height: calc(~'100% - @{header}');
+    padding: 0 8px 8px 8px;
+    overflow: hidden;
+    background-color: #fff;
+    border-top: 1px solid #dde4ed;
+    .@{prefix}-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9;
+      width: 100%;
+      height: 100%;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  }
+
+  .@{prefix}-anchor {
+    position: absolute;
+    z-index: 9;
+    user-select: none;
+  }
+}
+
+.@{prefix}-container:focus {
+  outline: transparent;
+}

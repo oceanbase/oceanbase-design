@@ -1,0 +1,78 @@
+##########################################################
+#            OBFlow Secret Scan Ignore List              #
+##########################################################
+# Above the segmentation lines there are suspected privacy information #
+# Please use the file name as the first line and the igored information #
+# should be started with tab. #
+# Under the segmentation lines there are the folders which you need to ignore #
+##########################################################
+**
+  *@antgroup.com
+  *@antfin.com
+  *@alipay.com
+  *@list.alibaba-inc.com
+  *@example.com
+  *@changeme.com
+  *@domain.com
+  https://charts.ant.design*
+  https://nodejs.org*
+  https://umijs.org*
+  https://d.umijs.org*
+  http://momentjs.cn*
+  https://reactjs.org*
+  https://zh-hans.reactjs.org*
+  https://ahooks.js.org*
+  https://lodash.com*
+  https://www.npmjs.com*
+  https://npmjs.com*
+  https://registry.npmjs.org*
+  https://stackoverflow.com*
+  https://github.com*
+  https://gitpod.io*
+  https://oapi.dingtalk.com*
+  https://www.oceanbase.com*
+  http://www.antgroup.com*
+  https://www.alipay.com*
+  https://kitchen.alipay.com
+  https://gw.alipayobjects.com*
+  https://mdn.alipayobjects.com*
+  https://gw-office.alipayobjects.com*
+  https://img.alicdn.com*
+  http://www.w3.org*
+  https://developer.mozilla.org*
+  http://ns.adobe.com*
+  http://fontello.com*
+  https://www.lodashjs.com*
+  *.zhihu.com*
+  *ant.design*
+  https://fb.me*
+  https://facebook.github.io*
+  http://feross.org*
+  http://semver.org*
+  https://codesandbox.io*
+  http://editorconfig.org*
+  www.baidu.com*
+  https://www.baidu.com*
+  https://docs.docker.com*
+  https://highlightjs.org*
+  https://microsoft.github.io*
+  https://marketplace.visualstudio.com*
+  http://iconfont.cn*
+  https://blog.prototypr.io*
+  *sentry.io*
+  *example.com*
+  http://127.0.0.1*
+  https://127.0.0.1*
+  http://127.1*
+  http://192.168.0.1*
+  http://1.1.1.1*
+  http://2.2.2.2*
+--------------------------------------------------------
+# Should use GLOB wildcard to config and analysis the ignored folder
+# The root patch should start with '/'
+/config/**
+/mock/**
+/public/**
+/.git/**
+/pnpm-lock.yaml
+--------------------------------------------------------

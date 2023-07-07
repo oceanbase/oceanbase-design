@@ -1,0 +1,5 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 1024 1024">
+  <path d="M880 112c17.673 0 32 14.327 32 32v736c0 17.673-14.327 32-32 32H144c-17.673 0-32-14.327-32-32V144c0-17.673 14.327-32 32-32h736z m-40 72H184v656h656V184z" p-id="44915"></path>
+  <path d="M480 112h64v800h-64zM232 249h200v64H232z m360 0h200v64H592zM232 377h200v64H232z m0 128h200v64H232z m360-128h200v64H592z m0 128h200v64H592z" p-id="44916"></path>
+</svg>

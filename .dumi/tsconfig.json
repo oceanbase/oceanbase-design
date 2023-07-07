@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "baseUrl": "../",
+    "paths": {
+      "@@/*": [".dumi/tmp/*"],
+      "@oceanbase/design": ["packages/design/src/index.ts"],
+      "@oceanbase/design/es/*": ["packages/design/src/*"],
+      "dumi/theme/*": [".dumi/theme/*"]
+    }
+  },
+  "include": ["./**/*", "../site/theme/template/Content"]
+}

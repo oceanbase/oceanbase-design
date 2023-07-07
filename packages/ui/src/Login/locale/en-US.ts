@@ -1,0 +1,28 @@
+export default {
+  usernamePlaceholder: 'Please input username',
+  usernameMessage: 'Username is required',
+  passwordPlaceholder: 'Please input password',
+  passwordMessage: 'Password is required',
+  loginText: 'Login',
+  isLoadingWarn: 'In progress',
+  usernameLabel: 'Username',
+  switchLoginLabel: 'Already have an account',
+  switchRegisterLabel: 'Register',
+  userExistMessage: 'Username already exists',
+  usernameFormatMessage: 'Incorrect username format',
+  samePasswordMessage: 'The two passwords are inconsistent',
+  usernameHelp:
+    'Support English, numbers, underscores and special characters (._+@#$%), length 4~48 characters',
+  usernameLengthMessage: 'User name supports 4~48 characters in length',
+  passwordLabel: 'Password',
+  passwordHelp:
+    'Contain at least 2 digits, 2 uppercase letters, 2 lowercase letters and 2 special characters (._+@#$%), with a length of 8~32 characters',
+  confirmPwdLabel: 'Confirm password',
+  confirmPwdMessage: 'Please enter the password again',
+  registerBtn: 'Sign up',
+  registerTitle: 'Sign up',
+  activeTitle: 'Set password to activate account',
+  activeTitleDescrition: 'For account security, you need to set a password to activate the account',
+  activeSubmitBtn: 'Activation',
+  activeBackBtn: 'Go back to the previous step',
+};

@@ -1,0 +1,10 @@
+node_modules
+.dumi/tmp
+.dumi/tmp-test
+.dumi/tmp-production
+# 生成的主题样式文件避免被 prettier 格式化，否则颜色值总是被格式化为小写，导致出现不必要的 diff
+packages/design/src/theme/style/*.less
+# icons 包下的源码都是自动生成，无需格式化 
+packages/icons/src
+.secignore
+LICENSE

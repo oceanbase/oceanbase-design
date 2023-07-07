@@ -1,0 +1,44 @@
+{
+  "name": "@oceanbase/charts",
+  "version": "0.2.5",
+  "description": "The Chart library for OceanBase",
+  "homepage": "https://github.com/oceanbase/oceanbase-design/packages/charts",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:oceanbase/design.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "unpkg": "dist/charts.min.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "files": [
+    "es",
+    "lib",
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "NODE_OPTIONS=--max_old_space_size=4096 father build"
+  },
+  "dependencies": {
+    "@ant-design/charts": "^1.4.2",
+    "@oceanbase/util": "workspace:^",
+    "classnames": "^2.3.2",
+    "lodash": "^4.17.21",
+    "tinycolor2": "^1.6.0",
+    "use-resize-observer": "^9.1.0"
+  },
+  "devDependencies": {
+    "@types/tinycolor2": "^1.4.3"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  }
+}

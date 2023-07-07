@@ -1,0 +1,54 @@
+@import '~@oceanbase/design/es/theme/index.less';
+
+// 限制最大宽度，避免页面被无限拉伸
+// 暂时去除最大宽度限制
+@maxWidth: 8192px;
+@prefixCls: ant;
+@iconPrefixCls: anticon;
+
+// 边框渐变
+.border-gradient
+  (
+    // 背景色，默认为透明色
+    @background-color: transparent,
+    // 边框色
+    @border-color,
+    // 边框宽度
+    @border-width: 1px, 
+    // 边框样式
+    @border-style: solid,
+    // 边框圆角
+    @border-radius: 0px
+  ) {
+  background-image: @background-color, @border-color;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  border: @border-width @border-style transparent;
+  border-radius: @border-radius;
+  transition: border-width 0.3s;
+}
+
+@keyframes activeGradientAnimation {
+  0% {
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+  }
+  100% {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+}
+
+@keyframes selectedGradientAnimation {
+  0% {
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    // 选中态有圆角渐变动画
+    border-radius: 0;
+  }
+  100% {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 8px;
+  }
+}
