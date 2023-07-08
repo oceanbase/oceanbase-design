@@ -18,7 +18,7 @@ nav:
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
 | treeNode | 树结构数据 | Node | [] | - |
-| defaultExpandAll | 是否默认展开所有节点 | boolean | false | 0.9.10 |
+| defaultExpandAll | 是否默认展开所有节点 | boolean | false | - |
 | checkable | 是否节点可选 | boolean | true | - |
 | titleRender | 自定义节点 title 渲染函数 | (nodeData: Node) => ReactNode | - | - |
 | onChange | 选中改变的回调函数 | (nodes: Node[]) => void | - | - |
