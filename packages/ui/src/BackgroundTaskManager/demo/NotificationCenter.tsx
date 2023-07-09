@@ -5,7 +5,7 @@ import type {
   TaskMgrID,
 } from '@oceanbase/ui';
 import { BackgroundTaskManager, BackgroundTaskManagerConstants } from '@oceanbase/ui';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { getTaskById } from './mockApi';
 
 const { NotificationApi, REFRESH_FREQUENCY } = BackgroundTaskManagerConstants;

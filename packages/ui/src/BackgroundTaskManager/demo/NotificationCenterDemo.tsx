@@ -1,5 +1,5 @@
 import { Button, message } from '@oceanbase/design';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import NotificationCenter from './NotificationCenter';
 
 export default () => {
