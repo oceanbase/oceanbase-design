@@ -267,7 +267,6 @@ const Content: React.FC<{ children: ReactNode }> = ({ children }) => {
               </Space>
             </Typography.Paragraph>
           ) : null}
-          {!meta.frontmatter.__autoDescription && meta.frontmatter.description}
           {children}
           {/* {meta.frontmatter.filename && (
             <ContributorsList
