@@ -22,7 +22,7 @@ nav:
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
-| type | 类型 | `default` \| `light` \| `info` \| `success` \| `warning` \| `error` | `default` |  |
-| mouseFollow | 是否跟随鼠标移动，开启后会去掉箭头，并且 `placement`、`open` 和 `trigger` 等属性也将失效 | boolean | false |  |
+| type | 类型 | default \| light \| info \| success \| warning \| error | default | - |
+| mouseFollow | 是否跟随鼠标移动，开启后会去掉箭头，并且 `placement`、`open` 和 `trigger` 等属性也将失效 | boolean | false | - |
 
 - 更多 API 详见 antd Tooltip 文档: https://ant.design/components/tooltip-cn

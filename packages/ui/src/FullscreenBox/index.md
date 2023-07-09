@@ -34,10 +34,10 @@ nav:
 
 ## API 参数
 
-| 参数 | 说明 | 类型 | 默认值 |
-| :-- | :-- | :-- | :-- |
-| className | 自定义类名 | `string` | - |
-| style | 全屏容器的样式 | `React.CSSProperties` | - |
-| defaultMode | 默认的全屏模式，不可变 | <code>browser &#124; viewport</code> | 'viewport' |
-| header | 自定义 Header | <code>false &#124; ReactNode &#124; { title: ReactNode; extra: ReactNode }</code> | - |
-| onChange | 全屏状态值改变后的回调 | `(fullscreen: boolean) => void` | ​- |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| :-- | :-- | :-- | :-- | :-- |
+| className | 自定义类名 | string | - | - |
+| style | 全屏容器的样式 | React.CSSProperties | - | - |
+| defaultMode | 默认的全屏模式，不可变 | <code>browser &#124; viewport</code> | viewport | - |
+| header | 自定义 Header | <code>false &#124; ReactNode &#124; { title: ReactNode; extra: ReactNode }</code> | - | - |
+| onChange | 全屏状态值改变后的回调 | (fullscreen: boolean) => void | ​- | - |

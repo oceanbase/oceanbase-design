@@ -21,7 +21,7 @@ nav:
 | :-- | :-- | :-- | :-- | :-- |
 | width | 图表宽度 | number | height | - |
 | height | 图表高度 | number | 400 | - |
-| layout <Badge>扩展属性</Badge> | 布局 | 'vertical' | 'horizontal' \| 'vertical' | - |
+| layout <Badge>扩展属性</Badge> | 布局 | vertical | horizontal \| vertical | - |
 | title <Badge>扩展属性</Badge> | 标题 | ReactNode | - | - |
 | percent | 百分比数值 | number，范围 0-1 | - | - |
 | warningPercent <Badge>扩展属性</Badge> | 警告水位线 | number，范围 0-1 | - | - |

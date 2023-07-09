@@ -29,7 +29,7 @@ nav:
 | iconUrl | 产品 icon 的 URL 地址，用于设置子侧边栏的 icon | string | - | - |
 | logoUrl | 产品 logo 的 URL 地址，用于 `关于` 弹窗中的展示，通常与登录页的 logo 一致 | string | - | - |
 | simpleLogoUrl | 产品简版 logo 的 URL 地址，用于左侧菜单导航的展示 | string | - | - |
-| topHeader | 顶部导航栏内容 | [TopHeader](basic-layout#topheader) |  | - |
+| topHeader | 顶部导航栏内容 | [TopHeader](basic-layout#topheader) | - | - |
 | menus | 侧边栏导航的菜单项列表，为空则不展示 | [MenuItem](basic-layout#menuitem)[] | - | - |
 | defaultCollapsed | 侧边栏导航是否默认收起 | boolean | false | - |
 | defaultSelectedKeys | 默认选中的菜单 keys | string[] | [] | - |
@@ -61,13 +61,13 @@ nav:
 | pdfPath | 帮助文档下载对应的 path 路径，默认优先使用路径中的文件名 | string | - | - |
 | showLocale | 是否展示国际化切换入口 | boolean | false | - |
 | username | 用户名 | string | - | - |
-| userMenu | 用户下拉菜单 | ReactNode |  | - |
-| appData | 产品信息 | [AppData](basic-layout#appdata) |  | - |
+| userMenu | 用户下拉菜单 | ReactNode | - | - |
+| appData | 产品信息 | [AppData](basic-layout#appdata) | - | - |
 
 ### AppData
 
-| 参数        | 说明               | 类型   | 默认值 | 版本 |     |
-| :---------- | :----------------- | :----- | :----- | :--- | --- |
+| 参数        | 说明               | 类型   | 默认值 | 版本 |
+| :---------- | :----------------- | :----- | :----- | :--- |
 | shortName   | 产品简称，比如 OCP | string | -      | -    |
 | version     | 产品版本           | string | -      | -    |
 | releaseTime | 产品发布时间       | string | -      | -    |

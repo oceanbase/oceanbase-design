@@ -78,20 +78,20 @@ nav:
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
-| type | 设置按钮类型，可选值为 `primary` 或者不设 | string | - |
-| hideable | 设置是否可隐藏 | boolean | true |
-| size | 设置按钮尺寸 | `'small'` \| `'default'` | `'default'` |
-| icon | 指定按钮图标 | URL \| ReactNode | - |
-| open | 指定是否打开 | boolean | false |
-| defaultHide | 默认是否隐藏, `hideable`为`true`时有效 | boolean | false |
-| disabled | 指定是否禁用 | boolean | false |
-| loading | 是否为加载中状态 | boolean | false |
-| position | 初始位置 | { right: number, bottom: number } | {right: 24, bottom: 24} |
-| badge | antd Badge 组件相关属性 | 参考 <a href="https://ant.design/components/badge-cn/#API" target="_blank">badge</a> 组件 | - |
-| tooltip | antd Tooltip 组件相关属性 | 参考 <a href="https://ant.design/components/tooltip-cn/#API" target="_blank">tooltip</a> 组件 | - |
-| id | 若页面中有多个侧边提示组件，则通过 id 标识当前组件，用于缓存侧边提示组件是否隐藏配置 | string | - |
-| onDragStart | 开始拖动的方法回调 | () => void | - |
-| onDragEnd | 结束拖动的方法回调 | () => void | - |
-| onDrag | 拖动中的方法回调 | (offset: {right: number, bottom: number}) => void | - |
-| buttonStyle | 按钮的样式 | `React.CSSProperties` | - | 2.10.3 |
-| buttonClassName | 按钮的类 | string | - | 2.10.3 |
+| type | 设置按钮类型，可选值为 `primary` 或者不设 | string | - | - |
+| hideable | 设置是否可隐藏 | boolean | true | - |
+| size | 设置按钮尺寸 | small \| default | default | - |
+| icon | 指定按钮图标 | URL \| ReactNode | - | - |
+| open | 指定是否打开 | boolean | false | - |
+| defaultHide | 默认是否隐藏, `hideable`为`true`时有效 | boolean | false | - |
+| disabled | 指定是否禁用 | boolean | false | - |
+| loading | 是否为加载中状态 | boolean | false | - |
+| position | 初始位置 | { right: number, bottom: number } | {right: 24, bottom: 24} | - |
+| badge | antd Badge 组件相关属性 | 参考 <a href="https://ant.design/components/badge-cn/#API" target="_blank">badge</a> 组件 | - | - |
+| tooltip | antd Tooltip 组件相关属性 | 参考 <a href="https://ant.design/components/tooltip-cn/#API" target="_blank">tooltip</a> 组件 | - | - |
+| id | 若页面中有多个侧边提示组件，则通过 id 标识当前组件，用于缓存侧边提示组件是否隐藏配置 | string | - | - |
+| onDragStart | 开始拖动的方法回调 | () => void | - | - |
+| onDragEnd | 结束拖动的方法回调 | () => void | - | - |
+| onDrag | 拖动中的方法回调 | (offset: {right: number, bottom: number}) => void | - | - |
+| buttonStyle | 按钮的样式 | React.CSSProperties | - | 2.10.3 | - |
+| buttonClassName | 按钮的类 | string | - | 2.10.3 | - |

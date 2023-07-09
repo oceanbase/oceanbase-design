@@ -24,6 +24,6 @@ nav:
 | colorField | 扇形颜色映射对应的数据字段名 | string | - | - |
 | isDonut <Badge>扩展属性</Badge> | 是否为环图 | boolean | false | - |
 | isHalfDonut <Badge>扩展属性</Badge> | 是否为半圆环图 | boolean | false | - |
-| statisticTitle <Badge>扩展属性</Badge> | 统计标题 | string | '总数' | - |
+| statisticTitle <Badge>扩展属性</Badge> | 统计标题 | string | 总数 | - |
 
 - 更多 API 详见 Ant Design Charts 文档：https://charts.ant.design/zh/examples/pie/basic#basic
