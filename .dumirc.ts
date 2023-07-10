@@ -9,6 +9,10 @@ export default defineConfig({
   ssr: process.env.NODE_ENV === 'production' ? {} : false,
   hash: true,
   crossorigin: {},
+  // ref: https://d.umijs.org/config#sitemap
+  sitemap: {
+    hostname: 'https://design.oceanbase.com',
+  },
   extraBabelPresets: [require.resolve('@emotion/babel-preset-css-prop')],
   outputPath: 'site',
   analytics: {
