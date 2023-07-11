@@ -62,26 +62,26 @@ nav:
 
 ### Highlight
 
-| 参数 | 说明 | 类型 | 默认值 |
-| :-- | :-- | :-- | :-- |
-| language | 指定语言类型，详见下表，若不指定语言组件会智能探测为可选类型语言中的一种进行渲染 | string | - |
-| theme | 指定主题，可选 `dark`, `light` | string | `light` |
-| lineNumber | 指定代码块行号是否开启，可选 `true`, `false` | boolean | false |
-| copyable | 指定代码块是否展示复制按钮，可选 `true`, `false` | boolean | true |
-| onCopyChange | 点击复制按钮的回掉 | `(value) => void` | - |
-| height | 指定代码块高度，用于需要控制代码块高度固定的场景, 非 innerHTML 场景有效 | number | - |
-| innerHTML | 使用 `dangerouslySetInnerHTML` 来渲染多段代码，代码使用`<pre><code></code></pre>`进行包裹，在从 cms 场景获取代码渲染的情况下非常有用，请自行确保传入的代码内容安全，防止`XSS`代码注入. | boolean | false |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| :-- | :-- | :-- | :-- | :-- |
+| language | 指定语言类型，详见下表，若不指定语言组件会智能探测为可选类型语言中的一种进行渲染 | string | - | - |
+| theme | 指定主题，可选 `dark`, `light` | string \| dark \| light | light | - |
+| lineNumber | 指定代码块行号是否开启，可选 `true`, `false` | boolean | false | - |
+| copyable | 指定代码块是否展示复制按钮，可选 `true`, `false` | boolean | true | - |
+| onCopyChange | 点击复制按钮的回掉 | (value) => void | - | - |
+| height | 指定代码块高度，用于需要控制代码块高度固定的场景, 非 innerHTML 场景有效 | number | - | - |
+| innerHTML | 使用 `dangerouslySetInnerHTML` 来渲染多段代码，代码使用`<pre><code></code></pre>`进行包裹，在从 cms 场景获取代码渲染的情况下非常有用，请自行确保传入的代码内容安全，防止`XSS`代码注入. | boolean | false | - |
 
 ### Highlight.Diff
 
-| 参数 | 说明 | 类型 | 默认值 |
-| :-- | :-- | :-- | :-- |
-| language | 指定语言类型，详见下表，若不指定语言组件会智能探测为可选类型语言中的一种进行渲染 | string | - |
-| theme | 指定主题，可选 `dark`, `light` | string | `light` |
-| source | 对比原始代码 | string | - |
-| split | 是否拆分成两栏对比 | boolean | false |
-| startRowIndex | 起始行号，若为数组类型，则分别指定左右两边的起始行号 | number \| `number[x,y]` | 1 |
-| target | 对比目标代码 | string | - |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| :-- | :-- | :-- | :-- | :-- |
+| language | 指定语言类型，详见下表，若不指定语言组件会智能探测为可选类型语言中的一种进行渲染 | string | - | - |
+| theme | 指定主题，可选 `dark`, `light` | string \| dark \| light | light | - |
+| source | 对比原始代码 | string | - | - |
+| split | 是否拆分成两栏对比 | boolean | false | - |
+| startRowIndex | 起始行号，若为数组类型，则分别指定左右两边的起始行号 | number \| number[x,y] | 1 | - |
+| target | 对比目标代码 | string | - | - |
 
 ### 目前支持的语言列表
 

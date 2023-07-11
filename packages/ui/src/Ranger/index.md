@@ -28,7 +28,7 @@ nav:
 | onChange | value 变化时的回调函数 | (range: Dayjs[] \| Moment[]) => void | noop | - |
 | defaultValue | DatePicker 控件的默认值 | Dayjs[] \| Moment[] | - | - |
 | defaultQuickValue | 快速选择的默认值（优先级低于 value/defaultValue） | string | - | - |
-| mode | 渲染类型 | 'default' \| 'mini' | 'default' | - |
+| mode | 渲染类型 | default \| mini | default | - |
 | pastOnly | 只能选择过去时间 | boolean | false | - |
 | disabledDate | 不可选择的日期 | (currentDate: Dayjs \| Moment) => boolean | - | - |
 | 其他 antd/RangePicker 的 `props` | [antd-RangePicker](https://ant.design/components/date-picker-cn/#RangePicker) | - | - | - |
@@ -42,7 +42,7 @@ nav:
 | defaultName | name 的默认值 | string | - | - |
 | onNameChange | value 变化时的回调函数 | (name: string) => void | - | - |
 | onChange | value 变化时的回调函数 | (range: Dayjs[] \| Moment[]) => void | noop | - |
-| type | 渲染类型 | 'select' or 'dropdown' | 'select' | - |
+| type | 渲染类型 | select \| dropdown | select | - |
 
 ### RangeOption
 

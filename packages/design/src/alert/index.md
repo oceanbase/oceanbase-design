@@ -31,7 +31,7 @@ nav:
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
-| ghost | 是否为透明背景，开启后会去掉背景、边框和内部间距，可用于轻量提示或者提示内嵌等场景 | boolean | false |  |
-| colored | 是否全局着色，包括文本、关闭 icon 等 | boolean | false |  |
+| ghost | 是否为透明背景，开启后会去掉背景、边框和内部间距，可用于轻量提示或者提示内嵌等场景 | boolean | false | - |
+| colored | 是否全局着色，包括文本、关闭 icon 等 | boolean | false | - |
 
 - 更多 API 详见 antd Alert 文档: https://ant.design/components/alert-cn
