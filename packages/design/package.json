@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.22.6",
-    "@babel/preset-env": "^7.22.6",
+    "@babel/preset-env": "^7.22.7",
     "antd-token-previewer": "^1.1.0"
   },
   "peerDependencies": {
