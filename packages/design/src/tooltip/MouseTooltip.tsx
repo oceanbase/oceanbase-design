@@ -95,4 +95,8 @@ const MouseTooltip: React.FC<MouseTooltipProps> = ({
   );
 };
 
+if (process.env.NODE_ENV !== 'production') {
+  MouseTooltip.displayName = 'MouseTooltip';
+}
+
 export default MouseTooltip;
