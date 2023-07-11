@@ -18,18 +18,30 @@ const localeList = [
   },
 ];
 
+// keys not to check
+const excludeKeys = [
+  'app.docs.components.icon.category.direction',
+  'app.docs.components.icon.category.suggestion',
+  'app.docs.components.icon.category.editor',
+  'app.docs.components.icon.category.data',
+  'app.docs.components.icon.category.other',
+  'app.docs.components.icon.category.logo',
+];
+
 async function execute() {
   for (const localeItem of localeList) {
     const localeData = JSON.parse(fs.readFileSync(localeItem.path));
     for (const key in localeData) {
       const text = localeData[key];
-      try {
-        await runScript(`grep -qr ${key} .dumi --exclude-dir=locales --exclude-dir=tmp`);
-      } catch (err) {
-        // If no result macthes, should throw `RunScriptError`
-        if (err.name === 'RunScriptError') {
-          delete localeData[key];
-          fs.appendFileSync(filePath, `${key}: ${text}\n`);
+      if (!excludeKeys.includes(key)) {
+        try {
+          await runScript(`grep -qr ${key} .dumi --exclude-dir=locales --exclude-dir=tmp`);
+        } catch (err) {
+          // If no result macthes, should throw `RunScriptError`
+          if (err.name === 'RunScriptError') {
+            delete localeData[key];
+            fs.appendFileSync(filePath, `${key}: ${text}\n`);
+          }
         }
       }
     }

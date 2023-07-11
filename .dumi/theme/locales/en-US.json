@@ -14,5 +14,11 @@
   "app.docs.components.icon.outlined": "Outlined",
   "app.docs.components.icon.filled": "Filled",
   "app.docs.components.icon.two-tone": "Two Tone",
-  "app.components.overview.search": "Search in components"
+  "app.components.overview.search": "Search in components",
+  "app.docs.components.icon.category.direction": "Directional Icons",
+  "app.docs.components.icon.category.suggestion": "Suggested Icons",
+  "app.docs.components.icon.category.editor": "Editor Icons",
+  "app.docs.components.icon.category.data": "Data Icons",
+  "app.docs.components.icon.category.other": "Application Icons",
+  "app.docs.components.icon.category.logo": "Brand and Logos"
 }
