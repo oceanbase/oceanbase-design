@@ -1,3 +1,4 @@
+import React from 'react';
 import useHistory from '../_util/useHistory';
 
 export default ({ route, params, routes, paths }) => {
