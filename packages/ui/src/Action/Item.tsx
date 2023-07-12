@@ -49,7 +49,7 @@ export class ActionButton extends React.PureComponent<BaseProps> {
 
               const handle = onClick?.();
 
-              if ((handle as Promise<void>).then) {
+              if ((handle as Promise<void>)?.then) {
                 (handle as Promise<void>).then(() => {
                   this.setState({ loading: false });
                 });
