@@ -1,4 +1,4 @@
-﻿name: Build CI
+﻿name: CI
 
 on: [push, pull_request]
 
@@ -21,8 +21,9 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: 8.6.0
-      - name: Build and lint
+      - name: CI
         run: |
           pnpm install
           pnpm run build
           pnpm run lint
+          pnpm run test
