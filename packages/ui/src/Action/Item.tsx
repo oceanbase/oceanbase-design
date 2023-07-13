@@ -44,16 +44,14 @@ export class ActionButton extends React.PureComponent<BaseProps> {
           danger={danger}
           disabled={disabled}
           onClick={_ => {
-            if (enableLoading) {
+            const handle = onClick?.();
+
+            if (enableLoading && (handle as Promise<void>)?.then) {
               this.setState({ loading: true });
 
-              const handle = onClick?.();
-
-              if ((handle as Promise<void>).then) {
-                (handle as Promise<void>).then(() => {
-                  this.setState({ loading: false });
-                });
-              }
+              (handle as Promise<void>).then(() => {
+                this.setState({ loading: false });
+              });
             }
           }}
         >
