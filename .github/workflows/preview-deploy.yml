@@ -2,8 +2,9 @@ name: Preview Deploy
 
 on:
   workflow_run:
-    workflows: ["Preview Build"]
-    types: completed
+    workflows: [Preview Build]
+    types:
+      - completed
 
 permissions:
   contents: read
