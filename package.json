@@ -52,7 +52,7 @@
     "@types/jest": "^27.5.2",
     "@types/node": "^20.4.1",
     "@types/react": "^18.2.14",
-    "@umijs/fabric": "^2.14.1",
+    "@umijs/fabric": "^4.0.1",
     "@umijs/test": "^4.0.72",
     "antd": "^5.6.4",
     "antd-style": "^3.4.1",
