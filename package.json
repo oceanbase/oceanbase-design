@@ -12,7 +12,6 @@
     "dev": "npx babel --presets @babel/preset-env packages/design/src/theme/index.ts --out-file ./.dumi/tmp/plugin-theme-less/theme.js && cross-env UMI_ENV=theme dumi dev",
     "prepare": "dumi setup",
     "prepublishOnly": "npm run build",
-    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "publish": "lerna publish",
     "publish:from-package": "lerna publish from-package",
     "site:build": "dumi build",
@@ -21,6 +20,9 @@
     "test": "npm run version && cross-env TZ=UTC jest ",
     "test:coverage": "npm run version && cross-env TZ=UTC TEST_LOG=none jest --coverage",
     "test:update": "pnpm run version && cross-env TZ=UTC  jest --updateSnapshot",
+    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx  --fix --format=pretty ./ && npm run tsc && npm run lint:prettier",
+    "lint:prettier": "npm run prettier && git diff && prettier --version && prettier --check \"packages/**/**.{js,jsx,tsx,ts,less,md,json}\" --end-of-line auto",
+    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "locale:remove-useless": "ts-node scripts/remove-useless-locale.ts"
   },
   "lint-staged": {
