@@ -76,7 +76,7 @@ QueryParameter
 | search2Query | 自定义将 form value 处理为 query 的处理函数 | (value: any) => string | string[] | null | - | 否 |
 | query2Search | 自定义 query 处理为 from value 的处理函数 | (query: string \| string[] \| null) => any | - | 否 |
 
-## getTableData(config: Config)
+## useTableData(config: Config)
 
 获取表格数据，内置后端分页、筛选和排序的请求逻辑，同时支持条件请求。其中与后端接口的约定如下，业务层不需要手动管理:
 
@@ -87,11 +87,12 @@ QueryParameter
 
 ```jsx
 import { useState } from 'react';
-import { getTableData } from '@oceanbase/util';
+import { useTableData } from '@oceanbase/util';
 
 const [name, setName] = useState('');
 const [age, setAge] = useState('');
-const { tableProps, refresh } = getTableData({
+
+const { tableProps, refresh } = useTableData({
   fn: () => new Promise(resolve => resolve()),
   params: {
     name,
