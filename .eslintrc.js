@@ -3,6 +3,7 @@ module.exports = {
   rules: {
     'import/no-unresolved': 0,
     'import/no-extraneous-dependencies': 0,
+    'import/no-dynamic-require': 0,
     'react/jsx-boolean-value': 0,
     'jsx-a11y/label-has-associated-control': 'off',
     // transfer lint，后面优化
@@ -17,6 +18,5 @@ module.exports = {
     'no-shadow': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'global-require': 'warn',
-    'import/no-dynamic-require': 'warn',
   },
 };
