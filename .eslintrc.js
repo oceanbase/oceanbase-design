@@ -17,5 +17,6 @@ module.exports = {
     'no-shadow': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'global-require': 'warn',
+    'import/no-dynamic-require': 'warn',
   },
 };
