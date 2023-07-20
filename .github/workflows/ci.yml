@@ -24,6 +24,4 @@ jobs:
       - name: CI
         run: |
           pnpm install
-          pnpm run build
-          pnpm run lint
-          pnpm run test
+          pnpm run ci
