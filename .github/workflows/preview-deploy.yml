@@ -52,18 +52,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
             <a href="https://preview-${{ steps.pr.outputs.id }}-oceanbase-design.surge.sh" target="_blank">
-              <div
-                style="display: inline-block;
-                       font-size: 96px;
-                       padding: 32px 64px;
-                       background-color: #006AFF;
-                       color: #fff;
-                       border-radius: 16px;
-                       box-shadow: 0 6px 16px 0 rgba(54, 69, 99, 0.08), 0 3px 6px -4px rgba(54, 69, 99, 0.12), 0 9px 28px 8px rgba(54, 69, 99, 0.05);
-                      "
-              >
-                🎉 Preview is ready!
-              </div>
+              <img width="360" src="https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*biIGSYhvfOQAAAAAAAAAAAAADvSFAQ/original">
             </a>
             <!-- AUTO_PREVIEW_HOOK -->
           body-include: '<!-- AUTO_PREVIEW_HOOK -->'
