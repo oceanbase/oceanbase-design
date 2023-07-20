@@ -2,8 +2,8 @@ import fs from 'fs';
 import type { IApi } from 'dumi';
 // umi 插件只能 import 支持 CommonJS 语法库和文件，因此需要使用 lib 产物
 import formatToken from 'antd/lib/theme/util/alias';
+import defaultThemeToken from './packages/design/src/theme/default';
 import theme from './.dumi/tmp/plugin-theme-less/theme.js';
-import defaultThemeToken from '../theme/default';
 
 export default (api: IApi) => {
   // 生成 default.less、dark.less 和 compact.less 主题文件
