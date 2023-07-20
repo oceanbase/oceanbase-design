@@ -10,12 +10,12 @@ const CUSTOMIZE = 'customize';
 
 describe('Ranger ', () => {
   beforeEach(() => {
-    MockDate.set(moment('2017-09-18T03:30:07.795'));
+    const FORMAT_TYPE = 'YYYY-MM-DD HH:mm:ss';
+    MockDate.set(moment('2017-09-18T03:30:07.795').format(FORMAT_TYPE));
 
     jest.mock('antd', () => {
       const antd = jest.requireActual('antd');
       const DatePicker = () => <div></div>;
-      const FORMAT_TYPE = 'YYYY-MM-DD HH:mm:ss';
       DatePicker.RangePicker = ({ value }) => (
         <div data-testid="range-picker">
           <div data-testid="range-picker-item1">{value[0].format(FORMAT_TYPE)}</div>
