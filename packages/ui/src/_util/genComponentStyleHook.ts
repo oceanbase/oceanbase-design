@@ -19,10 +19,11 @@ export interface OBToken extends ProAliasToken {
 
 export function genComponentStyleHook(componentName: string, styleFn: GenerateStyle<OBToken>) {
   return (prefixCls: string) => {
+    const { getPrefixCls, iconPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+    const rootPrefixCls = getPrefixCls();
+    const componentCls = `.${prefixCls}`;
+
     return useStyle(componentName, token => {
-      const { getPrefixCls, iconPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
-      const rootPrefixCls = getPrefixCls();
-      const componentCls = `.${prefixCls}`;
       const mergedToken: OBToken = {
         ...token,
         componentCls,
