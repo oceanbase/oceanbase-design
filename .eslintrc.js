@@ -6,7 +6,6 @@ module.exports = {
     'import/no-dynamic-require': 0,
     'react/jsx-boolean-value': 0,
     'jsx-a11y/label-has-associated-control': 'off',
-    // transfer lint，后面优化
     'jsx-a11y/label-has-for': 'off',
     'no-param-reassign': 'off',
     'no-nested-ternary': 'off',
