@@ -1,5 +1,6 @@
 import { find, isNaN, isString } from 'lodash';
 import { stringifyUrl } from 'query-string';
+import isUrl from 'is-url';
 
 /**
  * 是否为空值，包括 null、undefined、'' 和 NaN
@@ -47,7 +48,10 @@ export function directTo(url: string, blank = true) {
   // 约定 window.displayMode 为 embed 时为 iframe 嵌入模式，此时 directTo 会在当前页打开
   // 并且跳转时自动传递 displayMode 参数，以保证后续页面下 directTo 也在当前页打开
   const displayMode = window.displayMode;
-  const newUrl = !routerBase || routerBase === '/' ? url : `${routerBase}${url}`;
+  const newUrl =
+    // 如果部署在根路径，或者是完整 URL，则使用原始值
+    !routerBase || routerBase === '/' || isUrl(url) ? url : `${routerBase}${url}`;
+
   if (blank && displayMode !== 'embed') {
     // 在新的标签页中打开
     const blankWindow = window.open('about:blank');
