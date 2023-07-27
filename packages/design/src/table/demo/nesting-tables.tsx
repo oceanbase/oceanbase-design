@@ -1,8 +1,8 @@
-import { DownOutlined } from '@ant-design/icons';
+import React from 'react';
 import type { TableColumnsType } from '@oceanbase/design';
 import { Badge, Dropdown, Space, Table } from '@oceanbase/design';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
-import React from 'react';
+import { DownOutlined } from '@oceanbase/icons';
 
 interface DataType {
   key: React.Key;

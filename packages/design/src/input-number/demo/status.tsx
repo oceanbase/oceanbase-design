@@ -1,6 +1,6 @@
-import ClockCircleOutlined from '@ant-design/icons/ClockCircleOutlined';
-import { InputNumber, Space } from 'antd';
 import React from 'react';
+import { InputNumber, Space } from '@oceanbase/design';
+import { ClockCircleOutlined } from '@oceanbase/icons';
 
 const App: React.FC = () => (
   <Space direction="vertical" style={{ width: '100%' }}>
