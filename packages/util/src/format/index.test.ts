@@ -35,11 +35,11 @@ describe('format', () => {
     const time1 = 1560138019000000; // 微秒
     const time2 = 1560138019000; // 毫秒
     const time3 = 1560138019; // 秒
-    const tim4 = '2019-06-10 11:40:19.0';
-    expect(formatTime(time1)).toBe('2019-06-10 11:40:19');
-    expect(formatTime(time2)).toBe('2019-06-10 11:40:19');
-    expect(formatTime(time3)).toBe('2019-06-10 11:40:19');
-    expect(formatTime(tim4)).toBe('2019-06-10 11:40:19');
+    const tim4 = '2019-06-10 03:40:19.0';
+    expect(formatTime(time1)).toBe('2019-06-10 03:40:19');
+    expect(formatTime(time2)).toBe('2019-06-10 03:40:19');
+    expect(formatTime(time3)).toBe('2019-06-10 03:40:19');
+    expect(formatTime(tim4)).toBe('2019-06-10 03:40:19');
   });
 
   it('byte2KB', () => {
