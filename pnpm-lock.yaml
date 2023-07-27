@@ -252,9 +252,6 @@ importers:
       '@ant-design/icons':
         specifier: ^4.8.0
         version: 4.8.0(react-dom@16.14.0)(react@16.14.0)
-      '@ant-design/pro-components':
-        specifier: ^2.6.8
-        version: 2.6.8(antd@5.7.3)(rc-field-form@1.35.0)(react-dom@16.14.0)(react@16.14.0)
       '@oceanbase/util':
         specifier: workspace:^
         version: link:../util

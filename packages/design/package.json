@@ -38,7 +38,6 @@
   "dependencies": {
     "@ant-design/cssinjs": "^1.15.0",
     "@ant-design/icons": "^4.8.0",
-    "@ant-design/pro-components": "^2.6.8",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
     "antd": "^5.7.3",
