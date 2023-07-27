@@ -1,4 +1,4 @@
-import { EllipsisOutlined } from '@ant-design/icons';
+import { EllipsisOutlined } from '@oceanbase/icons';
 import { Button, Card, Descriptions, Dropdown, message, Radio, Table } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
 import { useState } from 'react';

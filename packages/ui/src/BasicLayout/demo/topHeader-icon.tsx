@@ -1,7 +1,7 @@
 /**
  * iframe: 600
  */
-import Icon from '@ant-design/icons';
+import Icon from '@oceanbase/icons';
 import { Menu, message } from '@oceanbase/design';
 import { BasicLayout, IconFont, Lottie } from '@oceanbase/ui';
 // @ts-ignore

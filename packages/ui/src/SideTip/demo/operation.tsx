@@ -3,7 +3,7 @@
  * iframe: true
  */
 
-import { SettingFilled } from '@ant-design/icons';
+import { SettingFilled } from '@oceanbase/icons';
 import { useState } from 'react';
 import { Dropdown, Menu } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
