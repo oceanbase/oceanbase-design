@@ -249,9 +249,9 @@ importers:
       '@ant-design/cssinjs':
         specifier: ^1.15.0
         version: 1.15.0(react-dom@16.14.0)(react@16.14.0)
-      '@ant-design/icons':
-        specifier: ^4.8.0
-        version: 4.8.0(react-dom@16.14.0)(react@16.14.0)
+      '@oceanbase/icons':
+        specifier: workspace:^
+        version: link:../icons
       '@oceanbase/util':
         specifier: workspace:^
         version: link:../util

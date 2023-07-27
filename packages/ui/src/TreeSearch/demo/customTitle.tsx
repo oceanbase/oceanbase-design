@@ -3,7 +3,7 @@ import {
   FolderViewOutlined,
   ProfileOutlined,
   TableOutlined,
-} from '@ant-design/icons';
+} from '@oceanbase/icons';
 import { TreeSearch } from '@oceanbase/ui';
 import { DataNode } from 'antd/es/tree';
 import React from 'react';

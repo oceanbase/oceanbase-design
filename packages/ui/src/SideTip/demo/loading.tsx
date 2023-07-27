@@ -3,7 +3,7 @@
  * iframe: true
  */
 
-import { HeartOutlined, HeartTwoTone } from '@ant-design/icons';
+import { HeartOutlined, HeartTwoTone } from '@oceanbase/icons';
 import { SideTip } from '@oceanbase/ui';
 
 export default () => {

@@ -3,7 +3,7 @@
  * iframe: true
  */
 
-import { CloudUploadOutlined } from '@ant-design/icons';
+import { CloudUploadOutlined } from '@oceanbase/icons';
 import { useState } from 'react';
 import { message } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';

@@ -1,10 +1,10 @@
-import { DownOutlined } from '@ant-design/icons';
-import type { RadioChangeEvent } from '@oceanbase/design';
+import React, { useState } from 'react';
 import { Form, Radio, Space, Switch, Table } from '@oceanbase/design';
+import type { RadioChangeEvent } from '@oceanbase/design';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import type { ExpandableConfig, TableRowSelection } from 'antd/es/table/interface';
-import React, { useState } from 'react';
+import { DownOutlined } from '@oceanbase/icons';
 
 interface DataType {
   key: number;

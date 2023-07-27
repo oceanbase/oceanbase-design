@@ -6,7 +6,7 @@ import {
   ClockCircleOutlined,
   HomeOutlined,
   ReadOutlined,
-} from '@ant-design/icons';
+} from '@oceanbase/icons';
 import { Button, Card, Space, Steps } from '@oceanbase/design';
 import { BasicLayout, PageContainer } from '@oceanbase/ui';
 import { useState } from 'react';

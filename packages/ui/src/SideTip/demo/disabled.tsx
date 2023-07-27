@@ -3,7 +3,7 @@
  * iframe: true
  */
 
-import { EditOutlined } from '@ant-design/icons';
+import { EditOutlined } from '@oceanbase/icons';
 import { message } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
 
