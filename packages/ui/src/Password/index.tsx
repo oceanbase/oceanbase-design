@@ -1,5 +1,5 @@
 import { Button, Input, message, Popover } from '@oceanbase/design';
-import type { PasswordProps as AntdPasswordProps } from 'antd/es/input';
+import type { PasswordProps as InputPasswordProps } from '@oceanbase/design/es/input';
 import RandExp from 'randexp';
 import React, { useState } from 'react';
 import { token } from '@oceanbase/design';
@@ -23,7 +23,7 @@ export interface PasswordLocale {
   andKeepItProperly: string;
 }
 
-export interface PasswordProps extends LocaleWrapperProps, Omit<AntdPasswordProps, 'onChange'> {
+export interface PasswordProps extends LocaleWrapperProps, Omit<InputPasswordProps, 'onChange'> {
   value?: string;
   onChange?: (value?: string) => void;
   rules?: Validator[];

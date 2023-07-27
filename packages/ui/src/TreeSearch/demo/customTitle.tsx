@@ -5,7 +5,7 @@ import {
   TableOutlined,
 } from '@oceanbase/icons';
 import { TreeSearch } from '@oceanbase/ui';
-import { DataNode } from 'antd/es/tree';
+import { DataNode } from '@oceanbase/design/es/tree';
 import React from 'react';
 import './style.less';
 

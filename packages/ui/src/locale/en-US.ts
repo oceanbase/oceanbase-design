@@ -1,4 +1,4 @@
-import antdEnUS from 'antd/es/locale/en_US';
+import enUS from '@oceanbase/design/es/locale/en-US';
 import BasicLayout from '../BasicLayout/locale/en-US';
 import BatchOperationBar from '../BatchOperationBar/locale/en-US';
 import Boundary from '../Boundary/locale/en-US';
@@ -16,7 +16,7 @@ import Welcome from '../Welcome/locale/en-US';
 import type { Locale } from './index';
 
 export default {
-  ...antdEnUS,
+  ...enUS,
   // 业务组件
   BasicLayout,
   PageContainer,

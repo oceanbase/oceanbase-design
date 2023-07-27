@@ -5,7 +5,7 @@ import {
   UserOutlined,
 } from '@oceanbase/icons';
 import { Alert, Button, Form, Input, Space } from '@oceanbase/design';
-import type { FormProps } from 'antd/es/form';
+import type { FormProps } from '@oceanbase/design/es/form';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { token } from '@oceanbase/design';

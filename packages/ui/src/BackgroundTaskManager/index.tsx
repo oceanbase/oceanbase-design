@@ -1,5 +1,3 @@
-import { notification } from '@oceanbase/design';
-import type { GlobalConfigProps, NotificationInstance } from 'antd/es/notification/interface';
 import React, {
   forwardRef,
   useCallback,
@@ -8,6 +6,11 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { notification } from '@oceanbase/design';
+import type {
+  GlobalConfigProps,
+  NotificationInstance,
+} from '@oceanbase/design/es/notification/interface';
 import { REFRESH_FREQUENCY } from './constants';
 import { RefreshMan } from './RefreshMan';
 

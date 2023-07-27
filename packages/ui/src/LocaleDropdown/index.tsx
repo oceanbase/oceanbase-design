@@ -1,7 +1,7 @@
 import { GlobalOutlined } from '@oceanbase/icons';
 import { findByValue } from '@oceanbase/util';
 import { Dropdown, Menu, Space } from '@oceanbase/design';
-import type { DropdownProps } from 'antd/es/dropdown';
+import type { DropdownProps } from '@oceanbase/design/es/dropdown';
 import React from 'react';
 import { LOCALE_LIST } from '../constant';
 import type { Locale } from '../interface';
