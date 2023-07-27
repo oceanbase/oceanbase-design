@@ -1,6 +1,6 @@
 import type { ProAliasToken } from '@ant-design/pro-components';
-import { useStyle, PageContainer } from '@ant-design/pro-components';
-import type { GenerateStyle } from 'antd/es/theme/internal';
+import { useStyle } from '@ant-design/pro-components';
+import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import React from 'react';
 import { ConfigProvider } from '@oceanbase/design';
 

@@ -1,4 +1,4 @@
-import antdZhTW from 'antd/es/locale/zh_TW';
+import zhTW from '@oceanbase/design/es/locale/zh-TW';
 import BasicLayout from '../BasicLayout/locale/zh-TW';
 import BatchOperationBar from '../BatchOperationBar/locale/zh-TW';
 import Dialog from '../Dialog/locale/zh-TW';
@@ -13,7 +13,7 @@ import Welcome from '../Welcome/locale/zh-TW';
 import type { Locale } from './index';
 
 export default {
-  ...antdZhTW,
+  ...zhTW,
   // 业务组件
   BasicLayout,
   PageContainer,

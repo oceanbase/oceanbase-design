@@ -1,4 +1,4 @@
-import antdZhCN from 'antd/es/locale/zh_CN';
+import zhCN from '@oceanbase/design/es/locale/zh-CN';
 import BasicLayout from '../BasicLayout/locale/zh-CN';
 import BatchOperationBar from '../BatchOperationBar/locale/zh-CN';
 import Dialog from '../Dialog/locale/zh-CN';
@@ -16,7 +16,7 @@ import Welcome from '../Welcome/locale/zh-CN';
 import type { Locale } from './index';
 
 export default {
-  ...antdZhCN,
+  ...zhCN,
   // 业务组件
   BasicLayout,
   PageContainer,

@@ -1,5 +1,5 @@
 import { Alert, Button, Form, Input } from '@oceanbase/design';
-import type { FormProps } from 'antd/es/form';
+import type { FormProps } from '@oceanbase/design/es/form';
 import { toString } from 'lodash';
 import React, { useCallback } from 'react';
 import { getPrefix } from '../_util';
