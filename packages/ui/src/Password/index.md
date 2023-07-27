@@ -15,6 +15,8 @@ nav:
 
 <code src="./demo/custom-rules-and-random-generate.tsx" title="自定义校验规则 + 生成随机密码"></code>
 
+<code src="./demo/encrypt-password.tsx" title="对生成的密码加密"></code>
+
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
@@ -22,6 +24,7 @@ nav:
 | rules | 密码校验规则 | [Validator](password#validator)[] | - | - |
 | generatePasswordRegex | 随机生成密码的正则表达式，不为空则展示随机生成的按钮 | RegExp | - | - |
 | value | 密码框内容 | string | - | - |
+| publicKey | RSA 加密用的公钥，如果需要进行密码加密，传入公钥即可 | string | - | - |
 | onChange | 密码框内容变化的回调 | (value?: string) => void | - | - |
 | onValidate | 密码框内容变化触发校验的回调 | (passed: boolean) => void | - | - |
 

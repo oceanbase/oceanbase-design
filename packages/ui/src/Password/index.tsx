@@ -7,6 +7,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import type { Validator } from './Content';
+import useEncrypt from '../_util/useEncrypt';
 import Content from './Content';
 import zhCN from './locale/zh-CN';
 
@@ -25,6 +26,8 @@ export interface PasswordLocale {
 
 export interface PasswordProps extends LocaleWrapperProps, Omit<AntdPasswordProps, 'onChange'> {
   value?: string;
+  // RSA 加密用的公钥，如果需要进行密码加密，传入公钥即可
+  publicKey?: string;
   onChange?: (value?: string) => void;
   rules?: Validator[];
   onValidate?: (passed: boolean) => void;
@@ -36,14 +39,18 @@ const Password: React.FC<PasswordProps> = ({
   value,
   locale,
   rules,
+  publicKey,
   onChange,
   onValidate,
   generatePasswordRegex,
   ...restProps
 }) => {
+  const { encrypt } = useEncrypt();
+
   const [fieldError, setFieldError] = useState<string[]>([]);
   const [isValidating, setIsValidating] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
+  const [privateValue, setPrivateValue] = useState();
 
   const defaultRules: Validator[] = [
     {
@@ -84,7 +91,12 @@ const Password: React.FC<PasswordProps> = ({
     onValidate?.(newFieldError.length === 0);
     // 先触发 onValidate，再异步触发 onChange，以便在 antd3 Form 的类组件场景下，校验规则 validator 能获取到最新的 passed 值。
     setTimeout(() => {
-      onChange?.(newValue);
+      if (publicKey) {
+        setPrivateValue(newValue)
+        onChange?.(encrypt(newValue,publicKey));
+      } else {
+        onChange?.(newValue);    
+      }
     }, 0);
   };
 
@@ -115,15 +127,22 @@ const Password: React.FC<PasswordProps> = ({
           }
           overlayStyle={{ maxWidth: 400 }}
         >
-          <Input.Password
-            value={value}
+          {publicKey ? <Input.Password
             autoComplete="new-password"
             onChange={e => {
               handleChange(e?.target?.value);
             }}
             placeholder={generatePasswordRegex ? locale.generatePlaceholder : locale.placeholder}
             {...restProps}
-          />
+          /> : <Input.Password
+          value={value}
+          autoComplete="new-password"
+          onChange={e => {
+            handleChange(e?.target?.value);
+          }}
+          placeholder={generatePasswordRegex ? locale.generatePlaceholder : locale.placeholder}
+          {...restProps}
+        />}
         </Popover>
         {generatePasswordRegex && (
           <Button
@@ -146,7 +165,8 @@ const Password: React.FC<PasswordProps> = ({
         >
           {locale.pleaseKeepYourPasswordIn}
           <CopyToClipboard
-            text={value}
+          // 开启加密后，复制密码需要用未加密状态的
+            text={publicKey ? privateValue : value }
             onCopy={() => {
               message.success(locale.copySuccessfully);
             }}
