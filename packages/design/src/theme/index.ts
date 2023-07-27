@@ -1,5 +1,6 @@
 import { theme } from 'antd';
 
+export * from 'antd/es/theme/internal';
 export * from 'antd/es/theme';
 
 const defaultSeed = {
