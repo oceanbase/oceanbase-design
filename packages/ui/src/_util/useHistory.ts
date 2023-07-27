@@ -6,10 +6,16 @@ import {
   // @ts-ignore
   useNavigate,
 } from 'react-router-dom';
+import { directTo } from '@oceanbase/util';
 
 export default () => {
   return {
-    // push: useHistory ? useHistory().push : useNavigate ? useNavigate() : null,
-    push: useNavigate ? useNavigate() : null,
+    push: useHistory
+      ? useHistory().push
+      : useNavigate
+      ? useNavigate()
+      : (path: string) => {
+          directTo(path, false);
+        },
   };
 };
