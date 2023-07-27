@@ -1,4 +1,5 @@
-import { useEffect, useCallback, MutableRefObject } from 'react';
+import { useEffect, useCallback } from 'react';
+import type { MutableRefObject } from 'react';
 import { toNumber, omit, toString, debounce } from 'lodash';
 import qs from 'query-string';
 
@@ -51,12 +52,6 @@ export const useScrollToPosition = (target?: TargetType, options?: OptionsType) 
   const scrollToPosition = () => {
     sessionStorage.setItem('toPosition', 'ok');
   };
-
-  if (!target) {
-    return {
-      scrollToPosition,
-    };
-  }
 
   const { mode = 'sessionStorage', ready } = options || {};
 

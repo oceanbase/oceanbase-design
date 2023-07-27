@@ -1,6 +1,6 @@
 import { PlusOutlined } from '@oceanbase/icons';
 import { Button, Card, Col, Row } from '@oceanbase/design';
-import type { ButtonProps } from 'antd/es/button';
+import type { ButtonProps } from '@oceanbase/design/es/button';
 import classNames from 'classnames';
 import React from 'react';
 import LocaleWrapper from '../locale/LocaleWrapper';

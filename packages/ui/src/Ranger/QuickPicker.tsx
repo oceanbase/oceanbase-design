@@ -31,6 +31,7 @@ interface IProps extends LocaleWrapperProps {
   name?: string;
   defaultName?: string;
   isMoment?: boolean;
+  size?: 'small' | 'large' | 'middle';
 }
 
 const prefix = getPrefix('ranger-quick-picker');

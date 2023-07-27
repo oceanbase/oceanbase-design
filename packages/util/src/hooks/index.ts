@@ -8,7 +8,7 @@ const sortOrderMap = {
   descend: 'desc',
 };
 
-const defaultAsnycFnOfGetTableData = () => {
+const defaultAsnycFnOfUseTableData = () => {
   const promise = new Promise(resolve => {
     resolve({
       tableProps: {
@@ -38,9 +38,8 @@ const defaultAsnycFnOfGetTableData = () => {
  * 获取表格数据，内置后端分页、筛选和排序的请求逻辑，同时支持条件请求
  * TODO: 后续需要补全 TS 类型定义
  */
-export function getTableData({ fn, params = {}, condition = [], refreshDeps = [], options = {} }) {
+export function useTableData({ fn, params = {}, condition = [], refreshDeps = [], options = {} }) {
   const { pagePropName = 'page', sizePropName = 'size', ...restOptions } = options as any;
-  let result;
   const newOptions = {
     formatResult: res => {
       const { data } = (res || {}) as any;
@@ -55,30 +54,32 @@ export function getTableData({ fn, params = {}, condition = [], refreshDeps = []
     ...restOptions,
   };
 
-  if (some(condition, item => isNullValue(item))) {
-    result = useAntdTable(defaultAsnycFnOfGetTableData, newOptions);
-  } else {
-    result = useAntdTable(({ current, pageSize, sorter = {}, filters = {} }) => {
-      let newFilters = {} as any;
-      Object.keys(filters).forEach(key => {
-        // antd 4.x 的表格筛选，在筛选项为空时，对应字段为 null 值，为了适配这里调用 join 方法前需要做非空判断
-        newFilters[key] = filters[key] && filters[key].join(',');
-      });
-      // 对列表查询参数进行处理
-      const newParams = omitBy(
-        {
-          [pagePropName]: current,
-          [sizePropName]: pageSize,
-          sort: sorter.order
-            ? `${sorter.field},${sortOrderMap[sorter.order as 'ascend' | 'descend']}`
-            : null,
-          ...newFilters,
-          ...params,
-        },
-        value => isNil(value) || value === '' // 将空值剔除
-      );
-      return fn(newParams);
-    }, newOptions);
+  const serviceFn = some(condition, item => isNullValue(item))
+    ? defaultAsnycFnOfUseTableData
+    : ({ current, pageSize, sorter = {}, filters = {} }) => {
+        let newFilters = {} as any;
+        Object.keys(filters).forEach(key => {
+          // antd 4.x 的表格筛选，在筛选项为空时，对应字段为 null 值，为了适配这里调用 join 方法前需要做非空判断
+          newFilters[key] = filters[key] && filters[key].join(',');
+        });
+        // 对列表查询参数进行处理
+        const newParams = omitBy(
+          {
+            [pagePropName]: current,
+            [sizePropName]: pageSize,
+            sort: sorter.order
+              ? `${sorter.field},${sortOrderMap[sorter.order as 'ascend' | 'descend']}`
+              : null,
+            ...newFilters,
+            ...params,
+          },
+          value => isNil(value) || value === '' // 将空值剔除
+        );
+        return fn(newParams);
+      };
+
+  const result = useAntdTable(serviceFn, newOptions);
+  if (result) {
     result.tableProps.pagination.showSizeChanger = true;
     result.tableProps.pagination.showTotal = (total: number) => `共 ${total} 条`;
   }

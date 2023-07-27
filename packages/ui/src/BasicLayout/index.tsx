@@ -70,6 +70,7 @@ export interface BasicLayoutProps extends LocaleWrapperProps {
   subSideMenus?: MenuItem[];
   /* 子侧边栏Menu属性 */
   subSideMenuProps?: MenuProps;
+  prefixCls?: string;
   style?: React.CSSProperties;
 }
 
