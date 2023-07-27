@@ -3,7 +3,7 @@
     "target": "esnext",
     "module": "commonjs",
     "moduleResolution": "node",
-    "jsx": "preserve",
+    "jsx": "react",
     "esModuleInterop": true,
     "types": ["jest", "node", "@ant-design/cssinjs"],
     "declaration": true,
@@ -28,5 +28,5 @@
       "@oceanbase/util": ["packages/util/src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "build", "es", "lib", "dist", "script"]
+  "exclude": ["node_modules", "build", "es", "lib", "dist", "scripts"]
 }

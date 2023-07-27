@@ -26,39 +26,8 @@ import {
 } from './constant';
 import QuickPicker from './QuickPicker';
 import InternalRanger from './Ranger';
-import type { RangeOption } from './typing';
 
-type InternalRangerType = typeof InternalRanger;
-
-interface RangerType extends InternalRangerType {
-  NEAR_1_MINUTES: RangeOption;
-  NEAR_5_MINUTES: RangeOption;
-  NEAR_10_MINUTES: RangeOption;
-  NEAR_20_MINUTES: RangeOption;
-  NEAR_30_MINUTES: RangeOption;
-  NEAR_1_HOURS: RangeOption;
-  NEAR_2_HOURS: RangeOption;
-  NEAR_3_HOURS: RangeOption;
-  NEAR_6_HOURS: RangeOption;
-  TODAY: RangeOption;
-  YESTERDAY: RangeOption;
-  TOMORROW: RangeOption;
-  THIS_WEEK: RangeOption;
-  LAST_WEEK: RangeOption;
-  NEXT_WEEK: RangeOption;
-  THIS_MONTH: RangeOption;
-  LAST_MONTH: RangeOption;
-  NEXT_MONTH: RangeOption;
-  THIS_QUARTER: RangeOption;
-  LAST_QUARTER: RangeOption;
-  NEXT_QUARTER: RangeOption;
-  THIS_YEAR: RangeOption;
-  LAST_YEAR: RangeOption;
-  NEXT_YEAR: RangeOption;
-  QuickPicker: typeof QuickPicker;
-}
-
-const Ranger: RangerType = InternalRanger as RangerType;
+const Ranger = InternalRanger;
 
 // 内置 ranges
 Ranger.NEAR_1_MINUTES = NEAR_1_MINUTES;

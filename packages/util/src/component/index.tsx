@@ -6,9 +6,7 @@ import React from 'react';
  **/
 export function joinComponent<T>(
   array: T[] = [],
-  render: (item: T) => React.ReactNode = () => {
-    return '';
-  },
+  render: (item: T) => React.ReactNode,
   seperator = '、'
 ) {
   return array.map((item, index) => {
@@ -17,7 +15,7 @@ export function joinComponent<T>(
       return content;
     }
     return (
-      <span>
+      <span key={index}>
         {content}
         {seperator}
       </span>

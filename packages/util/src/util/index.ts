@@ -27,6 +27,15 @@ export function findByValue<T extends { value: FindByValueType }>(
   return find(array, item => item && item.value === value) || ({} as T);
 }
 
+declare global {
+  interface Window {
+    // 页面路由前缀
+    routerBase?: string;
+    // 页面展示模式
+    displayMode?: 'default' | 'embed';
+  }
+}
+
 /**
  * 页面跳转，不同于 history.push() 仅支持同一标签页下跳转，directTo 常用于新开标签页跳转
  * @param {string}  url 跳转链接，支持相对链接和绝对链接
