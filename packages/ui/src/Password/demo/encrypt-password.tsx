@@ -1,8 +1,11 @@
 import { Button, Form, Input } from '@oceanbase/design';
 import { Password } from '@oceanbase/ui';
 import { useState } from 'react';
+import useEncrypt from '../../_util/useEncrypt';
 
 export default () => {
+  const { encrypt } = useEncrypt();
+
   const [form] = Form.useForm();
   const { validateFields } = form;
   const [passed, setPassed] = useState(false);
@@ -58,7 +61,13 @@ export default () => {
           },
         ]}
       >
-        <Password onValidate={setPassed} publicKey={publicKey}/>
+        <Password 
+        onValidate={setPassed} 
+        customEncryption={(val)=> {
+          return encrypt(val,publicKey)
+        }}
+        // publicKey={publicKey}
+        />
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" onClick={onSubmit}>

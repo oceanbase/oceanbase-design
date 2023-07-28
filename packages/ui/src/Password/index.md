@@ -24,7 +24,8 @@ nav:
 | rules | 密码校验规则 | [Validator](password#validator)[] | - | - |
 | generatePasswordRegex | 随机生成密码的正则表达式，不为空则展示随机生成的按钮 | RegExp | - | - |
 | value | 密码框内容 | string | - | - |
-| publicKey | RSA 加密用的公钥，如果需要进行密码加密，传入公钥即可 | string | - | - |
+| publicKey | RSA 加密用的公钥，如果需要进行密码加密，且采用RSA方式加密，传入公钥即可,与 customEncryption 不可同时使用 | string | - | - |
+| customEncryption | 自定义加密方式，需要将加密后结果 return；与 publicKey 不可同时使用， | (password?: string) => string | - | - |
 | onChange | 密码框内容变化的回调 | (value?: string) => void | - | - |
 | onValidate | 密码框内容变化触发校验的回调 | (passed: boolean) => void | - | - |
 

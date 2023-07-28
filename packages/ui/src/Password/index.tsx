@@ -28,6 +28,8 @@ export interface PasswordProps extends LocaleWrapperProps, Omit<AntdPasswordProp
   value?: string;
   // RSA 加密用的公钥，如果需要进行密码加密，传入公钥即可
   publicKey?: string;
+  // 自定义加密算法 需要将加密后结果 return
+  customEncryption?: (value?: string) => string;
   onChange?: (value?: string) => void;
   rules?: Validator[];
   onValidate?: (passed: boolean) => void;
@@ -42,6 +44,7 @@ const Password: React.FC<PasswordProps> = ({
   publicKey,
   onChange,
   onValidate,
+  customEncryption,
   generatePasswordRegex,
   ...restProps
 }) => {
@@ -94,6 +97,9 @@ const Password: React.FC<PasswordProps> = ({
       if (publicKey) {
         setPrivateValue(newValue)
         onChange?.(encrypt(newValue,publicKey));
+      } else if (customEncryption) { 
+        setPrivateValue(newValue)
+        onChange?.(customEncryption(newValue));
       } else {
         onChange?.(newValue);    
       }
@@ -127,7 +133,7 @@ const Password: React.FC<PasswordProps> = ({
           }
           overlayStyle={{ maxWidth: 400 }}
         >
-          {publicKey ? <Input.Password
+          {(publicKey || customEncryption) ? <Input.Password
             autoComplete="new-password"
             onChange={e => {
               handleChange(e?.target?.value);
@@ -166,7 +172,7 @@ const Password: React.FC<PasswordProps> = ({
           {locale.pleaseKeepYourPasswordIn}
           <CopyToClipboard
           // 开启加密后，复制密码需要用未加密状态的
-            text={publicKey ? privateValue : value }
+            text={publicKey || customEncryption ? privateValue : value }
             onCopy={() => {
               message.success(locale.copySuccessfully);
             }}
