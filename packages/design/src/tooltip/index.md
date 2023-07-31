@@ -24,7 +24,7 @@ nav:
 | :-- | :-- | :-- | :-- | :-- |
 | type | 类型 | default \| light \| info \| success \| warning \| error | default | - |
 | mouseFollow | 是否跟随鼠标移动，开启后会去掉箭头，并且 `placement`、`open` 和 `trigger` 等属性也将失效 | boolean | false | - |
-| closeIcon | 自定义关闭按钮 | boolean | ReactNode | false | - |
+| closeIcon | 自定义关闭按钮 | boolean \| ReactNode | false | - |
 | closeTitle | 自定义关闭标题 |  ReactNode | - | - |
 | onClose | 关闭时的回调（可通过 e.preventDefault() 来阻止默认行为） | (e) => void | - | - |
 
