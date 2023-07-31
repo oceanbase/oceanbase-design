@@ -118,7 +118,7 @@ const Tooltip: CompoundedComponent = ({
   return mouseFollow ? (
     <MouseTooltip
       title={title}
-      color={typeItem?.backgroundColor}
+      color={color || typeItem?.backgroundColor}
       overlayInnerStyle={{
         color: typeItem?.color,
         ...overlayInnerStyle,
@@ -131,7 +131,7 @@ const Tooltip: CompoundedComponent = ({
     <AntTooltip
       title={titleWithCloseIcon}
       open={open}
-      color={typeItem?.backgroundColor}
+      color={color || typeItem?.backgroundColor}
       overlayInnerStyle={{
         color: typeItem?.color,
         ...overlayInnerStyle,
