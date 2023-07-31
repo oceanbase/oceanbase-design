@@ -143,6 +143,9 @@ const Tooltip: CompoundedComponent = ({
   );
 };
 
+if (process.env.NODE_ENV !== 'production') {
+  Tooltip.displayName = AntTooltip.displayName;
+}
 
 Tooltip.__ANT_TOOLTIP = true;
 
