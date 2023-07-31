@@ -70,14 +70,6 @@ const Tooltip: CompoundedComponent = ({
   const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
 
   const [open, setOpen] = React.useState(undefined);
-  const token = useToken()
-
-  useEffect(() => {
-    // 使用 open 关闭 tooltip 后，将 open 重新设置为 undefined 让 antd tooltip 继续接管展示逻辑
-    if (open === false) {
-      setOpen(undefined)
-    }
-  }, [open])
 
   const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -89,9 +81,10 @@ const Tooltip: CompoundedComponent = ({
     setOpen(false);
   };
 
+  const hasCloseIcon = !(closeIcon === false || closeIcon === null)
   const spaceStyle = { display: 'flex', justifyContent: 'space-between' }
   const CloseIconNode = useMemo(() => {
-    if (closeIcon === false || closeIcon === null) {
+    if (!hasCloseIcon) {
       return null
     }
 
@@ -131,6 +124,11 @@ const Tooltip: CompoundedComponent = ({
     <AntTooltip
       title={titleWithCloseIcon}
       open={open}
+      onOpenChange={v => {
+        if (v && hasCloseIcon) {
+          setOpen(v)
+        }
+      }}
       color={color || typeItem?.backgroundColor}
       overlayInnerStyle={{
         color: typeItem?.color,
