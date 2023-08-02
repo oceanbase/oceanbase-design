@@ -25,34 +25,32 @@ nav:
 
 由于 BasicLayout 左侧和顶部导航的跳转依赖路由能力，需要通过 ConfigProvider 全局注入 `navigate` 函数才会生效。
 
-- 对于 `react-router-dom v6` 或 `umi3`:
+- 对于 `umi3`:
 
 ```tsx | pure
 import { ConfigProvider } from '@oceanbase/design';
 import { BasicLayout } from '@oceanbase/ui';
-// for react-router-dom v6
-import { useNavigate } from 'react-router-dom';
-// for umi v4
-// import { useNavigate } from 'umi';
+// for umi v4 with react-router-dom v6
+import { useNavigate } from 'umi';
 
 const App = () => {
+  const navigate = useNavigate();
   return (
-    <ConfigProvider navigate={useNavigate()}>
+    <ConfigProvider navigate={navigate}>
       <BasicLayout />
     </ConfigProvider>
   );
 };
 ```
 
-- 对于 `react-router-dom v5` 或 `umi4`:
+- 对于 `umi4`:
 
 ```tsx | pure
 import { ConfigProvider } from '@oceanbase/design';
 import { BasicLayout } from '@oceanbase/ui';
-// for react-router-dom v5
 import { useHistory } from 'react-router-dom';
-// for umi v3
-// import { useHistory } from 'umi';
+// for umi v3 with react-router-dom v5
+import { useHistory } from 'umi';
 
 const App = () => {
   const history = useHistory();
