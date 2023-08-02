@@ -14,7 +14,7 @@ import type { Locale } from '../interface';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import { directTo, getPrefix } from '../_util';
-import useHistory from '../_util/useHistory';
+import useNavigate from '../_util/useNavigate';
 import zhCN from './locale/zh-CN';
 // @ts-ignore
 import logoImg from '../assets/logo/oceanbase_logo.svg';
@@ -100,7 +100,7 @@ const Header: React.FC<HeaderProps> = ({
   langs,
   ...restProps
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   // 是否为欢迎页
   // 主要是为了处理与欢迎页搭配使用的场景
@@ -110,7 +110,7 @@ const Header: React.FC<HeaderProps> = ({
     <Menu
       onClick={({ key }) => {
         if (key === 'welcome') {
-          history.push(welcomePath);
+          navigate?.(welcomePath);
         } else if (key === 'viewDocs') {
           directTo(docsPath);
         } else if (key === 'downloadDocs') {
@@ -144,7 +144,7 @@ const Header: React.FC<HeaderProps> = ({
           src={simpleLogoUrl}
           alt=""
           onClick={() => {
-            history.push('/');
+            navigate?.('/');
           }}
           className={`${prefix}-logo`}
         />

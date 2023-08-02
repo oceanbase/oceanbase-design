@@ -59,6 +59,7 @@ const format2Search = (value: any, parameter: QueryParameter) => {
  * @returns
  */
 export const useQuery = <T extends SearchValues>(
+  // TODO: history 仅使用 react-router-dom v5，后续需要改造适配 react-router-dom v6
   history: any,
   queryParameters: (QueryParameter | string)[]
 ) => {
