@@ -2,7 +2,6 @@ import { Menu } from '@oceanbase/design';
 import { isArray } from 'lodash';
 import { pathToRegexp } from 'path-to-regexp';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { getPrefix } from '../_util';
 import useHistory from '../_util/useHistory';
 import './index.less';
@@ -30,7 +29,7 @@ export default (props: MenuProps) => {
   const { menuList, className, style } = props;
   const [selectedKeys, setSelectedKeys] = useState(['0']);
   const [menus, setMenus] = useState([]);
-  const location = useLocation();
+  const location = window.location;
 
   const history = useHistory();
 

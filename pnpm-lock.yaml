@@ -376,9 +376,6 @@ importers:
       react-json-view:
         specifier: ^1.21.3
         version: 1.21.3(@types/react@18.2.17)(react-dom@16.14.0)(react@16.14.0)
-      react-router-dom:
-        specifier: '>=5.2.0'
-        version: 6.14.2(react-dom@16.14.0)(react@16.14.0)
       react-split-pane:
         specifier: ^0.1.92
         version: 0.1.92(react-dom@16.14.0)(react@16.14.0)
@@ -5173,11 +5170,6 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: true
 
-  /@remix-run/router@1.7.2:
-    resolution: {integrity: sha512-7Lcn7IqGMV+vizMPoEl5F0XDshcdDYtMI6uJLQdQz5CfZAwy3vvGKYSUk789qndt5dEC4HfSjviSYlSoHGL2+A==}
-    engines: {node: '>=14'}
-    dev: false
-
   /@rgrove/parse-xml@2.0.4:
     resolution: {integrity: sha512-344bRXnUMu1tWqq1GJO2nCSqJRGTzcNLErcG2HZbVhUo90R5xQ6YdsCqtuT0KaFyN/mlxWqt2SdHSRNzwDvT5g==}
     engines: {node: '>=6.0.0'}
@@ -8100,7 +8092,7 @@ packages:
       '@babel/plugin-syntax-jsx': 7.22.5(@babel/core@7.22.9)
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.11(@babel/core@7.22.9)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      styled-components: 5.3.11(@babel/core@7.22.9)(react-dom@16.14.0)(react-is@18.2.0)(react@16.14.0)
     transitivePeerDependencies:
       - '@babel/core'
     dev: true
@@ -20221,19 +20213,6 @@ packages:
       react-dom: 16.14.0(react@16.14.0)
     dev: false
 
-  /react-router-dom@6.14.2(react-dom@16.14.0)(react@16.14.0):
-    resolution: {integrity: sha512-5pWX0jdKR48XFZBuJqHosX3AAHjRAzygouMTyimnBPOLdY3WjzUSKhus2FVMihUFWzeLebDgr4r8UeQFAct7Bg==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      react: '>=16.8'
-      react-dom: '>=16.8'
-    dependencies:
-      '@remix-run/router': 1.7.2
-      react: 16.14.0
-      react-dom: 16.14.0(react@16.14.0)
-      react-router: 6.14.2(react@16.14.0)
-    dev: false
-
   /react-router-dom@6.3.0(react-dom@18.1.0)(react@18.1.0):
     resolution: {integrity: sha512-uaJj7LKytRxZNQV8+RbzJWnJ8K2nPsOOEuX7aQstlMZKQT0164C+X2w6bnkqU3sjtLvpd5ojrezAyfZ1+0sStw==}
     peerDependencies:
@@ -20257,16 +20236,6 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       react-router: 6.3.0(react@18.2.0)
     dev: true
-
-  /react-router@6.14.2(react@16.14.0):
-    resolution: {integrity: sha512-09Zss2dE2z+T1D03IheqAFtK4UzQyX8nFPWx6jkwdYzGLXd5ie06A6ezS2fO6zJfEb/SpG6UocN2O1hfD+2urQ==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      react: '>=16.8'
-    dependencies:
-      '@remix-run/router': 1.7.2
-      react: 16.14.0
-    dev: false
 
   /react-router@6.3.0(react@18.1.0):
     resolution: {integrity: sha512-7Wh1DzVQ+tlFjkeo+ujvjSqSJmkt1+8JO+T5xklPlgrh70y7ogx75ODRW0ThWhY7S+6yEDks8TYrtQe/aoboBQ==}
