@@ -20,6 +20,49 @@ nav:
 
 <code src="./demo/empty.tsx" title="空页面"></code>
 
+## 与路由搭配使用
+
+由于 PageContainer 内置的面包屑导航跳转依赖路由能力，需要通过 ConfigProvider 全局注入 `navigate` 函数才会生效。
+
+- 对于 `react-router-dom v6` 或 `umi4`:
+
+```tsx | pure
+import { ConfigProvider } from '@oceanbase/design';
+import { PageContainer } from '@oceanbase/ui';
+// for react-router-dom v6
+import { useNavigate } from 'react-router-dom';
+// for umi v4
+// import { useNavigate } from 'umi';
+
+const App = () => {
+  return (
+    <ConfigProvider navigate={useNavigate()}>
+      <PageContainer />
+    </ConfigProvider>
+  );
+};
+```
+
+- 对于 `react-router-dom v5` 或 `umi3`:
+
+```tsx | pure
+import { ConfigProvider } from '@oceanbase/design';
+import { PageContainer } from '@oceanbase/ui';
+// for react-router-dom v5
+import { useHistory } from 'react-router-dom';
+// for umi v3
+// import { useHistory } from 'umi';
+
+const App = () => {
+  const history = useHistory();
+  return (
+    <ConfigProvider navigate={history.push}>
+      <PageContainer />
+    </ConfigProvider>
+  );
+};
+```
+
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
