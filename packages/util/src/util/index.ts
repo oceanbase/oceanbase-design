@@ -1,5 +1,5 @@
 import { find, isNaN, isString } from 'lodash';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
 import isUrl from 'is-url';
 
 /**
@@ -63,7 +63,7 @@ export function directTo(url: string, blank = true) {
     }
   } else {
     // 在当前标签页打开
-    window.location.href = stringifyUrl({
+    window.location.href = queryString.stringifyUrl({
       url: newUrl,
       query: {
         displayMode,
