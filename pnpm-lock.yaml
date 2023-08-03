@@ -383,8 +383,8 @@ importers:
         specifier: ^0.1.92
         version: 0.1.92(react-dom@16.14.0)(react@16.14.0)
       screenfull:
-        specifier: ^5.2.0
-        version: 5.2.0
+        specifier: ^6.0.2
+        version: 6.0.2
     devDependencies:
       '@antv/g6':
         specifier: 3.4.10
@@ -21247,6 +21247,11 @@ packages:
   /screenfull@5.2.0:
     resolution: {integrity: sha512-9BakfsO2aUQN2K9Fdbj87RJIEZ82Q9IGim7FqM5OsebfoFC6ZHXgDq/KvniuLTPdeM8wY2o6Dj3WQ7KeQCj3cA==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /screenfull@6.0.2:
+    resolution: {integrity: sha512-AQdy8s4WhNvUZ6P8F6PB21tSPIYKniic+Ogx0AacBMjKP1GUHN2E9URxQHtCusiwxudnCKkdy4GrHXPPJSkCCw==}
+    engines: {node: ^14.13.1 || >=16.0.0}
     dev: false
 
   /scroll-into-view-if-needed@2.2.31:
