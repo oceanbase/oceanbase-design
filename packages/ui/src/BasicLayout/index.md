@@ -51,6 +51,8 @@ import { BasicLayout } from '@oceanbase/ui';
 import { useHistory } from 'react-router-dom';
 // for umi v3 with react-router-dom v5
 import { useHistory } from 'umi';
+// or use `history` directly
+// import { history } from 'umi';
 
 const App = () => {
   const history = useHistory();
