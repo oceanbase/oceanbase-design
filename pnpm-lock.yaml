@@ -60,8 +60,8 @@ importers:
         specifier: ^14.4.3
         version: 14.4.3(@testing-library/dom@8.20.1)
       '@types/jest':
-        specifier: ^27.5.2
-        version: 27.5.2
+        specifier: ^29.5.3
+        version: 29.5.3
       '@types/node':
         specifier: ^20.4.5
         version: 20.4.5
@@ -4424,7 +4424,7 @@ packages:
     resolution: {integrity: sha512-cSiMDx9oI9vvVT+V/WHcbqrksNoc9PIPFiks1lPS7zrVWkEbgA6REQyYmRd2H71kihzqhX5TJ20f2dWv6oEPdA==}
     engines: {node: ^14.17.0 || >=16.0.0}
     dependencies:
-      chalk: 4.1.0
+      chalk: 4.1.2
       execa: 5.1.1
       strong-log-transformer: 2.1.0
     dev: true
@@ -5919,6 +5919,13 @@ packages:
     dependencies:
       jest-matcher-utils: 27.5.1
       pretty-format: 27.5.1
+    dev: true
+
+  /@types/jest@29.5.3:
+    resolution: {integrity: sha512-1Nq7YrO/vJE/FYnqYyw0FS8LdrjExSgIiHyKg7xPpn+yi8Q4huZryKnkJatN1ZRH89Kw2v33/8ZMB7DuZeSLlA==}
+    dependencies:
+      expect: 29.6.2
+      pretty-format: 29.6.2
     dev: true
 
   /@types/js-cookie@2.2.7:
@@ -8132,7 +8139,7 @@ packages:
       '@babel/plugin-syntax-jsx': 7.22.5(@babel/core@7.22.9)
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.11(@babel/core@7.22.9)(react-dom@16.14.0)(react-is@18.2.0)(react@16.14.0)
+      styled-components: 5.3.11(@babel/core@7.22.9)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
     dev: true
@@ -14221,7 +14228,7 @@ packages:
     resolution: {integrity: sha512-t+ST7CB9GX5F2xKwhwCf0TAR17uNDiaPTZnVymP9lw0lssa9vG+AFyDZoeIHStU3WowFFwT+ky+er0WVl2yGhA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
-      chalk: 4.1.0
+      chalk: 4.1.2
       diff-sequences: 29.4.3
       jest-get-type: 29.4.3
       pretty-format: 29.6.2
