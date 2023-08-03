@@ -75,6 +75,7 @@
     "mockdate": "^3.0.5",
     "prettier": "^2.8.8",
     "prismjs": "^1.29.0",
+    "rc-checkbox": "^3.1.0",
     "rc-drawer": "^6.3.0",
     "rc-footer": "^0.6.8",
     "rc-tabs": "^12.9.0",
