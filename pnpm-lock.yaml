@@ -105,8 +105,8 @@ importers:
         specifier: ^27.2.3
         version: 27.2.3(@typescript-eslint/eslint-plugin@5.62.0)(eslint@8.46.0)(jest@29.6.2)(typescript@5.1.6)
       execa:
-        specifier: ^5.1.1
-        version: 5.1.1
+        specifier: ^7.2.0
+        version: 7.2.0
       father:
         specifier: ^4.3.0
         version: 4.3.0(@types/node@20.4.5)(styled-components@6.0.6)(webpack@5.88.2)
@@ -8132,7 +8132,7 @@ packages:
       '@babel/plugin-syntax-jsx': 7.22.5(@babel/core@7.22.9)
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.11(@babel/core@7.22.9)(react-dom@16.14.0)(react-is@18.2.0)(react@16.14.0)
+      styled-components: 5.3.11(@babel/core@7.22.9)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
     dev: true
@@ -11352,9 +11352,9 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       cross-spawn: 7.0.3
-      get-stream: 6.0.0
+      get-stream: 6.0.1
       human-signals: 2.1.0
-      is-stream: 2.0.0
+      is-stream: 2.0.1
       merge-stream: 2.0.0
       npm-run-path: 4.0.1
       onetime: 5.1.2
