@@ -3,8 +3,8 @@ import { setAlpha } from '@ant-design/pro-components';
 import { token } from '@oceanbase/design';
 import { isNullValue } from '@oceanbase/util';
 import { ConfigProvider, Divider, Layout, Menu, Tooltip } from '@oceanbase/design';
-import type { BadgeProps } from 'antd/es/badge';
-import type { MenuProps } from 'antd/es/menu';
+import type { BadgeProps } from '@oceanbase/design/es/badge';
+import type { MenuProps } from '@oceanbase/design/es/menu';
 import classNames from 'classnames';
 import { some } from 'lodash';
 import { pathToRegexp } from 'path-to-regexp';
@@ -12,7 +12,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import { getPrefix, isEnglish, urlToList } from '../_util';
-import useHistory from '../_util/useHistory';
+import useNavigate from '../_util/useNavigate';
 import type { HeaderProps } from './Header';
 import Header from './Header';
 import zhCN from './locale/zh-CN';
@@ -70,6 +70,7 @@ export interface BasicLayoutProps extends LocaleWrapperProps {
   subSideMenus?: MenuItem[];
   /* 子侧边栏Menu属性 */
   subSideMenuProps?: MenuProps;
+  prefixCls?: string;
   style?: React.CSSProperties;
 }
 
@@ -99,7 +100,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   const { wrapSSR, hashId } = useStyle(prefixCls);
   const basicLayoutCls = classNames(className, hashId);
 
-  const history = useHistory();
+  const navigate = useNavigate();
   // 侧边栏导航是否收起
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
   const [selectedKeys, setSelectedKeys] = useState(defaultSelectedKeys);
@@ -205,7 +206,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
             key={item.link}
             onClick={() => {
               if (pathname !== item.link) {
-                history.push(item.link);
+                navigate?.(item.link);
               }
             }}
           >
@@ -270,7 +271,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
             key={item.link}
             onClick={() => {
               if (pathname !== item.link) {
-                history.push(item.link);
+                navigate?.(item.link);
               }
             }}
           >

@@ -1,6 +1,6 @@
 import { SearchOutlined } from '@oceanbase/icons';
 import { Divider, Empty, Form, Input, Tree } from '@oceanbase/design';
-import type { DataNode } from 'antd/es/tree';
+import type { DataNode } from '@oceanbase/design/es/tree';
 import React, {
   forwardRef,
   useEffect,

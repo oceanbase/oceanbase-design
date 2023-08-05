@@ -1,5 +1,6 @@
 import { theme } from 'antd';
 
+export * from 'antd/es/theme/internal';
 export * from 'antd/es/theme';
 
 const defaultSeed = {
@@ -26,7 +27,7 @@ export default {
   },
   components: {
     InputNumber: {
-      handleVisible: true,
+      handleVisible: true as true,
     },
   },
 };

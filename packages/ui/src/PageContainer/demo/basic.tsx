@@ -1,7 +1,7 @@
 /**
  * iframe: 600
  */
-import { EllipsisOutlined } from '@ant-design/icons';
+import { EllipsisOutlined } from '@oceanbase/icons';
 import { Button, Descriptions, Dropdown, Radio } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
 

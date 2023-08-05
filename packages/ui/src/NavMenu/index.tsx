@@ -2,9 +2,8 @@ import { Menu } from '@oceanbase/design';
 import { isArray } from 'lodash';
 import { pathToRegexp } from 'path-to-regexp';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { getPrefix } from '../_util';
-import useHistory from '../_util/useHistory';
+import useNavigate from '../_util/useNavigate';
 import './index.less';
 
 const prefix = getPrefix('menu');
@@ -30,9 +29,9 @@ export default (props: MenuProps) => {
   const { menuList, className, style } = props;
   const [selectedKeys, setSelectedKeys] = useState(['0']);
   const [menus, setMenus] = useState([]);
-  const location = useLocation();
+  const location = window.location;
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const preProcess = useCallback(
     list => {
@@ -79,9 +78,9 @@ export default (props: MenuProps) => {
   const onMenuClick = useCallback(
     link => {
       const linkList = isArray(link) ? link : [link];
-      history.push(linkList[0]);
+      navigate?.(linkList[0]);
     },
-    [history]
+    [navigate]
   );
 
   return (

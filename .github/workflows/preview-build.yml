@@ -1,0 +1,58 @@
+name: Preview Build
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+# Cancel prev CI if new commit come
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build-site:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8.6.0
+
+      - name: Build site
+        env:
+          SITE_ENV: development
+        run: |
+          pnpm install
+          pnpm run site:build
+
+      # avoid deploy failed by `:id` directory
+      # ref: https://github.com/actions/upload-artifact/issues/85
+      - name: Remove dynamic route path
+        run: |
+          rm -rf site/~demos/:id
+
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: site/
+          retention-days: 5
+
+      # Upload PR id for next workflow use
+      - name: Save PR id
+        if: ${{ always() }}
+        run: echo ${{ github.event.number }} > ./pr-id.txt
+
+      - name: Upload PR id
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: pr
+          path: ./pr-id.txt

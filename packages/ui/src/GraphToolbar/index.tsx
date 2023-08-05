@@ -68,7 +68,7 @@ const GraphToolbar: React.FC<GraphToolbarProps> = ({
     // 上层调用 fitView() 后缩放可能超过 100%，因此这里再做一次缩放，避免缩放超过 100%
     graph?.zoomTo(initialZoom, getCenterPointByGraph(graph));
     setZoom(initialZoom);
-    graph?.on(
+    (graph as any)?.on(
       'wheelzoom',
       // 使用防抖函数，避免状态改变过于频繁，影响页面交互流畅
       // 设置延迟时间为 16ms，为渲染一帧所需时间

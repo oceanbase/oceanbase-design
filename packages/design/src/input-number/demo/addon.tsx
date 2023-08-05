@@ -1,6 +1,6 @@
-import { SettingOutlined } from '@ant-design/icons';
-import { Cascader, InputNumber, Select, Space } from '@oceanbase/design';
 import React from 'react';
+import { Cascader, InputNumber, Select, Space } from '@oceanbase/design';
+import { SettingOutlined } from '@oceanbase/icons';
 
 const { Option } = Select;
 

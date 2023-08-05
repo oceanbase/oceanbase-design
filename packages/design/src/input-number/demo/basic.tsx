@@ -1,5 +1,5 @@
-import { InputNumber } from '@oceanbase/design';
 import React from 'react';
+import { InputNumber } from '@oceanbase/design';
 
 const onChange = (value: number) => {
   console.log('changed', value);

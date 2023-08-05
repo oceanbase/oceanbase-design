@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { PageContainerToken } from '@ant-design/pro-layout/es/components/PageContainer/style';
-import type { GenerateStyle } from 'antd/es/theme/internal';
+import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (

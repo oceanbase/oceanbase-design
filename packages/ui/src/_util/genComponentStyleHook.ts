@@ -1,6 +1,6 @@
 import type { ProAliasToken } from '@ant-design/pro-components';
 import { useStyle } from '@ant-design/pro-components';
-import type { GenerateStyle } from 'antd/es/theme/internal';
+import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import React from 'react';
 import { ConfigProvider } from '@oceanbase/design';
 
@@ -19,10 +19,11 @@ export interface OBToken extends ProAliasToken {
 
 export function genComponentStyleHook(componentName: string, styleFn: GenerateStyle<OBToken>) {
   return (prefixCls: string) => {
+    const { getPrefixCls, iconPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+    const rootPrefixCls = getPrefixCls();
+    const componentCls = `.${prefixCls}`;
+
     return useStyle(componentName, token => {
-      const { getPrefixCls, iconPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
-      const rootPrefixCls = getPrefixCls();
-      const componentCls = `.${prefixCls}`;
       const mergedToken: OBToken = {
         ...token,
         componentCls,

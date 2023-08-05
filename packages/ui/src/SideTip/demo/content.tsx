@@ -3,7 +3,7 @@
  * iframe: 600
  */
 
-import { FileTextOutlined } from '@ant-design/icons';
+import { FileTextOutlined } from '@oceanbase/icons';
 import { Badge, Card, Dropdown, Progress, Table } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
 import { findByValue } from '@oceanbase/util';

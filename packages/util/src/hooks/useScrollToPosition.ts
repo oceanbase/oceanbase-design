@@ -1,6 +1,7 @@
-import { useEffect, useCallback, MutableRefObject } from 'react';
+import { useEffect, useCallback } from 'react';
+import type { MutableRefObject } from 'react';
 import { toNumber, omit, toString, debounce } from 'lodash';
-import qs from 'query-string';
+import queryString from 'query-string';
 
 type OptionsType = {
   // 支持 url 和 sessionStorage 两次存储值的方式
@@ -52,12 +53,6 @@ export const useScrollToPosition = (target?: TargetType, options?: OptionsType) 
     sessionStorage.setItem('toPosition', 'ok');
   };
 
-  if (!target) {
-    return {
-      scrollToPosition,
-    };
-  }
-
   const { mode = 'sessionStorage', ready } = options || {};
 
   const topId = `${location.pathname}-scrollTop`;
@@ -88,10 +83,10 @@ export const useScrollToPosition = (target?: TargetType, options?: OptionsType) 
       sessionStorage.setItem(topId, toString(scroll?.top));
       sessionStorage.setItem(leftId, toString(scroll?.left));
     } else {
-      const parsed = qs.parse(location.search);
+      const parsed = queryString.parse(location.search);
       parsed.scrollTop = scroll?.top;
       parsed.scrollLeft = scroll?.left;
-      const stringified = qs.stringify(parsed);
+      const stringified = queryString.stringify(parsed);
       // 往 state 中注入 scrollTop 和 scrollLeft, pushState 不会刷新页面，但浏览器回退的时候会保留值
       window.history.pushState({}, '', `${location.origin}${location.pathname}?${stringified}`);
     }
@@ -105,8 +100,8 @@ export const useScrollToPosition = (target?: TargetType, options?: OptionsType) 
       sessionStorage.removeItem(topId);
       sessionStorage.removeItem(leftId);
     } else {
-      const parsed = qs.parse(location.search);
-      const stringified = qs.stringify(omit(parsed, ['scrollTop', 'scrollLeft']));
+      const parsed = queryString.parse(location.search);
+      const stringified = queryString.stringify(omit(parsed, ['scrollTop', 'scrollLeft']));
       // 将 location search 中的 scrollTop, scrollLeft 删除
       window.history.replaceState({}, '', `${location.origin}${location.pathname}?${stringified}`);
     }
@@ -126,7 +121,7 @@ export const useScrollToPosition = (target?: TargetType, options?: OptionsType) 
       return;
     }
 
-    const parsed = qs.parse(location.search);
+    const parsed = queryString.parse(location.search);
     const top = mode === 'query' ? parsed.scrollTop : sessionStorage.getItem(topId);
     const left = mode === 'query' ? parsed.scrollLeft : sessionStorage.getItem(leftId);
     const dom = getScrollEle(ele);

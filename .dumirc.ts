@@ -18,6 +18,52 @@ export default defineConfig({
   analytics: {
     ga_v2: 'G-81Y5XPZY2E',
   },
+  metas: [
+    {
+      property: 'og:site_name',
+      content: 'OceanBase Design',
+    },
+    {
+      'data-rh': 'keywords',
+      property: 'og:image',
+      content:
+        'https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original',
+    },
+    {
+      property: 'og:description',
+      content: '🌈 基于 Ant Design 进行延展和二次开发的企业级设计系统',
+    },
+    {
+      name: 'keywords',
+      content:
+        'OceanBase,oceanbase,OceanBase Design,oceanbase design,ui,react,component,library,typescript,chart',
+    },
+    {
+      name: 'description',
+      content:
+        '🌈 基于 Ant Design 进行延展和二次开发的企业级设计系统，帮助设计开发者快速搭建具备「专业感」的产品',
+    },
+    {
+      name: 'apple-mobile-web-app-capable',
+      content: 'yes',
+    },
+    {
+      name: 'apple-mobile-web-app-status-bar-style',
+      content: 'black-translucent',
+    },
+    {
+      name: 'theme-color',
+      content: '#006AFF',
+    },
+    {
+      name: 'google-site-verification',
+      content: '6w1DTgL9q7k3aVfHCgHYkMedx7Av5yqiWoaELwfTofk',
+    },
+    {
+      name: 'baidu-site-verification',
+      content: 'codeva-7qwXtDi3fM',
+    },
+  ],
   resolve: {
     docDirs: [
       { type: 'doc', dir: 'docs' },

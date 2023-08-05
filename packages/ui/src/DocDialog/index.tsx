@@ -1,6 +1,5 @@
 import { debounce } from 'lodash';
 import React, { useEffect, useMemo, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import type { IDialogProps } from '../Dialog';
 import Dialog from '../Dialog';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
@@ -52,7 +51,7 @@ const DocDialogComp = (props: IDocDialogProps) => {
   } = props;
   const [clientHeight, setClientHeight] = useState(document.body.clientHeight);
   const [clientWidth, setClientWidth] = useState(document.body.clientWidth);
-  const location = useLocation();
+  const location = window.location;
 
   const currentLink = useMemo(() => {
     const { pathname } = location;

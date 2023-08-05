@@ -96,7 +96,7 @@ export function toPercent(value: number | string, decimal: number = 2): string {
 /**
  * 格式化数字展示，小数部分四舍五入，可通过 decimal 参数指定保留的小数位数
  */
-export function formatNumber(value: number | string, decimal: number = 2): number {
+export function formatNumber(value: number, decimal: number = 2): number {
   return isNil(value)
     ? value
     : Math.round(toNumber(value) * Math.pow(10, decimal)) / Math.pow(10, decimal);

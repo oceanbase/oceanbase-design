@@ -3,7 +3,7 @@
  * iframe: 500
  */
 
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@oceanbase/icons';
 import { Modal } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
 import { useState } from 'react';

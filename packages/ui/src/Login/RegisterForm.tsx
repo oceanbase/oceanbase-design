@@ -1,5 +1,5 @@
 import { Alert, Button, Form, Input } from '@oceanbase/design';
-import type { FormProps, RuleObject } from 'antd/es/form';
+import type { FormProps, RuleObject } from '@oceanbase/design/es/form';
 import { isFunction, toString } from 'lodash';
 import React, { useCallback } from 'react';
 import { getPrefix } from '../_util';
@@ -37,7 +37,7 @@ const Register: React.FC<IRegisterFormProps> = ({
   errorMessage,
   ...restProps
 }) => {
-  const [formRef] = Form.useForm();
+  const [form] = Form.useForm();
 
   const handleValidateAccount = useCallback(
     async (rule: RuleObject, value: string) => {
@@ -54,18 +54,18 @@ const Register: React.FC<IRegisterFormProps> = ({
 
   const handleValidateConfirmPassword = useCallback(
     (rule, value, callback) => {
-      if (!formRef) {
+      if (!form) {
         callback();
         return;
       }
-      const pwd = formRef.getFieldValue('password');
+      const pwd = (form as any).getFieldValue('password');
       if (toString(value) !== toString(pwd)) {
         callback(locale.samePasswordMessage);
         return;
       }
       callback();
     },
-    [formRef]
+    [form]
   );
 
   const passwordRegexpRule = passwordRule || {
@@ -78,7 +78,7 @@ const Register: React.FC<IRegisterFormProps> = ({
       layout="vertical"
       requiredMark={false}
       className={`${prefix}-form`}
-      form={formRef}
+      form={form}
       {...restProps}
       data-testid="login.register"
     >

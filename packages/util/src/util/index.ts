@@ -1,5 +1,6 @@
 import { find, isNaN, isString } from 'lodash';
-import { stringifyUrl } from 'query-string';
+import queryString from 'query-string';
+import isUrl from 'is-url';
 
 /**
  * 是否为空值，包括 null、undefined、'' 和 NaN
@@ -27,6 +28,15 @@ export function findByValue<T extends { value: FindByValueType }>(
   return find(array, item => item && item.value === value) || ({} as T);
 }
 
+declare global {
+  interface Window {
+    // 页面路由前缀
+    routerBase?: string;
+    // 页面展示模式
+    displayMode?: 'default' | 'embed';
+  }
+}
+
 /**
  * 页面跳转，不同于 history.push() 仅支持同一标签页下跳转，directTo 常用于新开标签页跳转
  * @param {string}  url 跳转链接，支持相对链接和绝对链接
@@ -38,7 +48,10 @@ export function directTo(url: string, blank = true) {
   // 约定 window.displayMode 为 embed 时为 iframe 嵌入模式，此时 directTo 会在当前页打开
   // 并且跳转时自动传递 displayMode 参数，以保证后续页面下 directTo 也在当前页打开
   const displayMode = window.displayMode;
-  const newUrl = !routerBase || routerBase === '/' ? url : `${routerBase}${url}`;
+  const newUrl =
+    // 如果部署在根路径，或者是完整 URL，则使用原始值
+    !routerBase || routerBase === '/' || isUrl(url) ? url : `${routerBase}${url}`;
+
   if (blank && displayMode !== 'embed') {
     // 在新的标签页中打开
     const blankWindow = window.open('about:blank');
@@ -50,7 +63,7 @@ export function directTo(url: string, blank = true) {
     }
   } else {
     // 在当前标签页打开
-    window.location.href = stringifyUrl({
+    window.location.href = queryString.stringifyUrl({
       url: newUrl,
       query: {
         displayMode,

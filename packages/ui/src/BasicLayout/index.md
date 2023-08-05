@@ -21,6 +21,49 @@ nav:
 
 <code src="./demo/welcome.tsx" title="和欢迎页搭配使用"></code>
 
+## 与路由搭配使用
+
+由于 BasicLayout 左侧和顶部导航的跳转依赖路由能力，需要通过 ConfigProvider 全局注入 `navigate` 函数才会生效。
+
+- 对于 `umi v4`:
+
+```tsx | pure
+import { ConfigProvider } from '@oceanbase/design';
+import { BasicLayout } from '@oceanbase/ui';
+// for umi v4 with react-router-dom v6
+import { useNavigate } from 'umi';
+
+const App = () => {
+  const navigate = useNavigate();
+  return (
+    <ConfigProvider navigate={navigate}>
+      <BasicLayout />
+    </ConfigProvider>
+  );
+};
+```
+
+- 对于 `umi v3`:
+
+```tsx | pure
+import { ConfigProvider } from '@oceanbase/design';
+import { BasicLayout } from '@oceanbase/ui';
+import { useHistory } from 'react-router-dom';
+// for umi v3 with react-router-dom v5
+import { useHistory } from 'umi';
+// or use `history` directly
+// import { history } from 'umi';
+
+const App = () => {
+  const history = useHistory();
+  return (
+    <ConfigProvider navigate={history.push}>
+      <BasicLayout />
+    </ConfigProvider>
+  );
+};
+```
+
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |

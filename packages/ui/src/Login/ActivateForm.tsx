@@ -1,5 +1,5 @@
 import { Alert, Button, Form, Input } from '@oceanbase/design';
-import type { FormProps } from 'antd/es/form';
+import type { FormProps } from '@oceanbase/design/es/form';
 import { toString } from 'lodash';
 import React, { useCallback } from 'react';
 import { getPrefix } from '../_util';
@@ -31,22 +31,22 @@ const Activate: React.FC<IActivateFormProps> = ({
   goBack,
   ...restProps
 }) => {
-  const [formRef] = Form.useForm();
+  const [form] = Form.useForm();
 
   const handleValidateConfirmPassword = useCallback(
     (rule, value, callback) => {
-      if (!formRef) {
+      if (!form) {
         callback();
         return;
       }
-      const pwd = formRef.getFieldValue('password');
+      const pwd = (form as any).getFieldValue('password');
       if (toString(value) !== toString(pwd)) {
         callback(locale.samePasswordMessage);
         return;
       }
       callback();
     },
-    [formRef]
+    [form]
   );
 
   const passwordRegexpRule = passwordRule || {
@@ -59,7 +59,7 @@ const Activate: React.FC<IActivateFormProps> = ({
       layout="vertical"
       requiredMark={false}
       className={`${prefix}-form`}
-      form={formRef}
+      form={form}
       {...restProps}
       data-testid="login.register"
     >

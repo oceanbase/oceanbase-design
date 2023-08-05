@@ -3,8 +3,8 @@
  * transform: true
  */
 import { Button, Space, Table } from '@oceanbase/design';
+import type { ColumnsType } from '@oceanbase/design/es/table';
 import { BatchOperationBar } from '@oceanbase/ui';
-import type { ColumnsType } from 'antd/es/table';
 import React from 'react';
 
 interface DataType {

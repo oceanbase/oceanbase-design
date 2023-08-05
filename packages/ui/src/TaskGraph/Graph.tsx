@@ -177,7 +177,7 @@ class TaskGraph extends React.PureComponent<TaskGraphProps, TaskGraphState> {
       });
 
       // 监听节点的 mouseleave 事件
-      graph.on('node:mouseleave', () => {
+      (graph as any).on('node:mouseleave', () => {
         if (!this.menu) {
           this.menu = document.getElementById('menu');
         }

@@ -3,7 +3,7 @@
  * iframe: true
  */
 
-import { ArrowUpOutlined } from '@ant-design/icons';
+import { ArrowUpOutlined } from '@oceanbase/icons';
 import { BackTop } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
 
