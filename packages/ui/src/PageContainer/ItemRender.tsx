@@ -1,5 +1,5 @@
 import React from 'react';
-import useHistory from '../_util/useHistory';
+import useNavigate from '../_util/useNavigate';
 
 export default ({ route, params, routes, paths }) => {
   const routeIndex = routes.indexOf(route);
@@ -14,14 +14,14 @@ export default ({ route, params, routes, paths }) => {
       .map(item => item.path)
       .join('/');
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return last ? (
     <span>{title}</span>
   ) : (
     <a
       onClick={() => {
-        history.push(path);
+        navigate?.(path);
       }}
     >
       {title}

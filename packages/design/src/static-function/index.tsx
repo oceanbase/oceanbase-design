@@ -28,7 +28,9 @@ let message: MessageInstance & {
 let notification: NotificationInstance & {
   useNotification: typeof antNotification.useNotification;
 } = antNotification;
-let modal: Omit<ModalStaticFunctions, 'warn'> = AntModal;
+let modal: Omit<ModalStaticFunctions, 'warn'> & {
+  useModal: typeof AntModal.useModal;
+} = AntModal;
 
 export default () => {
   // 自动注入 useToken，避免每次使用都要声明一遍，比较繁琐
@@ -36,12 +38,18 @@ export default () => {
 
   const staticFunction = App.useApp();
   // 替换 antd 的静态方法，支持消费 ConfigProvider 配置
-  message = staticFunction.message;
-  message.useMessage = antMessage.useMessage;
-  notification = staticFunction.notification;
-  notification.useNotification = antNotification.useNotification;
-  modal = staticFunction.modal;
-  modal.useModal = AntModal.useModal;
+  message = {
+    ...staticFunction.message,
+    useMessage: antMessage.useMessage,
+  };
+  notification = {
+    ...staticFunction.notification,
+    useNotification: antNotification.useNotification,
+  };
+  modal = {
+    ...staticFunction.modal,
+    useModal: AntModal.useModal,
+  };
   return null;
 };
 

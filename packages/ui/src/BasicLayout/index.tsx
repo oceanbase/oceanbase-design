@@ -12,7 +12,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import { getPrefix, isEnglish, urlToList } from '../_util';
-import useHistory from '../_util/useHistory';
+import useNavigate from '../_util/useNavigate';
 import type { HeaderProps } from './Header';
 import Header from './Header';
 import zhCN from './locale/zh-CN';
@@ -100,7 +100,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   const { wrapSSR, hashId } = useStyle(prefixCls);
   const basicLayoutCls = classNames(className, hashId);
 
-  const history = useHistory();
+  const navigate = useNavigate();
   // 侧边栏导航是否收起
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
   const [selectedKeys, setSelectedKeys] = useState(defaultSelectedKeys);
@@ -206,7 +206,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
             key={item.link}
             onClick={() => {
               if (pathname !== item.link) {
-                history.push(item.link);
+                navigate?.(item.link);
               }
             }}
           >
@@ -271,7 +271,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
             key={item.link}
             onClick={() => {
               if (pathname !== item.link) {
-                history.push(item.link);
+                navigate?.(item.link);
               }
             }}
           >
