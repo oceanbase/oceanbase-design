@@ -9,10 +9,14 @@ nav:
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 - 🆕 新增 `type` 属性，支持 `default`、`light`、`info`、`success`、`warning` 和 `error` 五种类型的 Tooltip。
 - 🆕 新增 `mouseFollow` 属性，支持鼠标跟随。
+- 🆕 新增 `closeIcon` 属性，支持展示关闭按钮。
+- 🆕 新增 `onClose` 属性，关闭按钮被点击时调用此函数，可以配合 `open` 和 `onOpenChange` 属性来控制 `Tooltip` 展示。
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="基本" description="基本 Tooltip 的用法，可以通过设置 closeIcon 变为可关闭标签并自定义关闭按钮，设置为 true 时将使用默认关闭按钮。可以设置 closeTitle 来改变关闭按钮的布局。可关闭标签具有 onClose 事件"></code>
+<code src="./demo/basic.tsx" title="基本"></code>
+
+<code src="./demo/close-icon.tsx" title="关闭按钮" description="Tooltip 可以通过设置 closeIcon 变为可关闭 Tooltip, 并支持自定义关闭按钮，设置为 true 时将使用默认关闭按钮。可关闭 Tooltip 具有 onClose 事件"></code>
 
 <code src="./demo/type.tsx" title="Tooltip 类型" description="Tooltip 有五种类型：default、light、info、success、warning 和 error，以满足不同场景的提示需求。"></code>
 
