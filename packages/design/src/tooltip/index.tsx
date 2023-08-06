@@ -83,10 +83,9 @@ const Tooltip: CompoundedComponent = ({
       return null
     }
 
-    const IconNode = closeIcon === true ? <CloseOutlined className={`${prefixCls}-close-icon`} onClick={handleCloseClick} /> : <span className={`${prefixCls}-close-icon`} onClick={handleCloseClick}>
+    return closeIcon === true ? <CloseOutlined className={`${prefixCls}-close-icon`} onClick={handleCloseClick} /> : <span className={`${prefixCls}-close-icon`} onClick={handleCloseClick}>
       {closeIcon}
     </span>
-    return IconNode
   }, [closeIcon])
 
   const titleNode = typeof title === 'function' ? title() : title
@@ -96,7 +95,6 @@ const Tooltip: CompoundedComponent = ({
       {CloseIconNode}
     </Space >
   )
-
 
   const typeList = getTooltipTypeList();
   const typeItem = typeList.find(item => item.type === type);
