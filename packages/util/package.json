@@ -39,9 +39,6 @@
     "moment": "^2.29.4",
     "query-string": "^8.1.0"
   },
-  "devDependencies": {
-    "@types/filesize": "^4.2.0"
-  },
   "peerDependencies": {
     "react": ">=16.9.0"
   }
