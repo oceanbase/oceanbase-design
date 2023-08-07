@@ -129,6 +129,7 @@ export default defineConfig({
             { title: 'Message 全局提示', link: '/components/message' },
             { title: 'Modal 对话框', link: '/components/modal' },
             { title: 'Notification 通知提醒框', link: '/components/notification' },
+            { title: 'Spin 加载中', link: '/components/spin' },
           ],
         },
         {

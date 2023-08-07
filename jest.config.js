@@ -9,4 +9,5 @@ module.exports = {
     '^react$': require.resolve('react'),
     '\\.(css|less|sass|scss)$': require.resolve('identity-obj-proxy'),
   },
+  setupFiles: ['jest-canvas-mock'],
 };
