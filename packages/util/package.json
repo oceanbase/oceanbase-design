@@ -33,14 +33,11 @@
   },
   "dependencies": {
     "ahooks": "^2.10.14",
-    "filesize": "^4.2.1",
+    "filesize": "^10.0.8",
     "is-url": "^1.2.4",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "query-string": "^8.1.0"
-  },
-  "devDependencies": {
-    "@types/filesize": "^4.2.0"
   },
   "peerDependencies": {
     "react": ">=16.9.0"

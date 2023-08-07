@@ -397,10 +397,10 @@ importers:
     dependencies:
       ahooks:
         specifier: ^2.10.14
-        version: 2.10.14(react@18.2.0)
+        version: 2.10.14(react@16.14.0)
       filesize:
-        specifier: ^4.2.1
-        version: 4.2.1
+        specifier: ^10.0.8
+        version: 10.0.8
       is-url:
         specifier: ^1.2.4
         version: 1.2.4
@@ -415,11 +415,7 @@ importers:
         version: 8.1.0
       react:
         specifier: '>=16.9.0'
-        version: 18.2.0
-    devDependencies:
-      '@types/filesize':
-        specifier: ^4.2.0
-        version: 4.2.0
+        version: 16.14.0
 
 packages:
 
@@ -440,16 +436,6 @@ packages:
       lodash.debounce: 4.0.8
       lodash.throttle: 4.1.1
       react: 16.14.0
-    dev: false
-
-  /@ahooksjs/use-request@2.8.15(react@18.2.0):
-    resolution: {integrity: sha512-xhVaM4fyIiAMdVFuuU5i3CFUdFa/IblF+fvITVMFaUEO3w/V5tVCAF6WIA3T03n1/RPuzRkA7Ao1PFtSGtGelw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0
-    dependencies:
-      lodash.debounce: 4.0.8
-      lodash.throttle: 4.1.1
-      react: 18.2.0
     dev: false
 
   /@amap/amap-jsapi-loader@1.0.1:
@@ -5925,10 +5911,6 @@ packages:
     resolution: {integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==}
     dev: true
 
-  /@types/filesize@4.2.0:
-    resolution: {integrity: sha512-cGnXW1YH24LI6iCWFjaJ9nVX/WX3d1XzIjJuniZWMD+hpGBWDECCeh8H4MwTg17IMKRU1pfjwfI8crok7b2fEA==}
-    dev: true
-
   /@types/fs-extra@11.0.1:
     resolution: {integrity: sha512-MxObHvNl4A69ofaTRU8DFqvgzzv8s9yRtaPPm5gud9HDNvpB3GPQFvNuTWAI59B9huVGV5jXYJwbCsmBsOGYWA==}
     dependencies:
@@ -7424,25 +7406,6 @@ packages:
       screenfull: 5.2.0
     dev: false
 
-  /ahooks@2.10.14(react@18.2.0):
-    resolution: {integrity: sha512-axWa7VoAgu7bxA56dDl0CXW4rvaQmDBiov/d3tAy0x1YNYywYMKokL8TdLgJ5zO/oXGiWmG7BxlGOQGkqE/zkQ==}
-    engines: {node: '>=8.0.0'}
-    peerDependencies:
-      react: ^16.8.6 || ^17.0
-    dependencies:
-      '@ahooksjs/use-request': 2.8.15(react@18.2.0)
-      '@types/js-cookie': 2.2.7
-      dayjs: 1.11.9
-      intersection-observer: 0.7.0
-      js-cookie: 2.2.1
-      lodash.debounce: 4.0.8
-      lodash.isequal: 4.5.0
-      lodash.throttle: 4.1.1
-      react: 18.2.0
-      resize-observer-polyfill: 1.5.1
-      screenfull: 5.2.0
-    dev: false
-
   /ajv-keywords@3.5.2(ajv@6.12.6):
     resolution: {integrity: sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==}
     peerDependencies:
@@ -8450,7 +8413,7 @@ packages:
       '@babel/plugin-syntax-jsx': 7.22.5(@babel/core@7.22.9)
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.11(@babel/core@7.22.9)(react-dom@16.14.0)(react-is@18.2.0)(react@16.14.0)
+      styled-components: 5.3.11(@babel/core@7.22.9)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
     dev: true
@@ -12049,15 +12012,15 @@ packages:
       trim-repeated: 1.0.0
     dev: true
 
+  /filesize@10.0.8:
+    resolution: {integrity: sha512-/ylBrxZ1GAjgh2CEemKKLwTtmXfWqTtN1jRl6iqLwnMEucUX5cmaCCUPGstQOHVCcK9uYL6o1cPNakLQU2sasQ==}
+    engines: {node: '>= 10.4.0'}
+    dev: false
+
   /filesize@3.6.1:
     resolution: {integrity: sha512-7KjR1vv6qnicaPMi1iiTcI85CyYwRO/PSFCu6SvqL8jN2Wjt/NIYQTFtFs7fSDCYOstUkEWIQGFUg5YZQfjlcg==}
     engines: {node: '>= 0.4.0'}
     dev: true
-
-  /filesize@4.2.1:
-    resolution: {integrity: sha512-bP82Hi8VRZX/TUBKfE24iiUGsB/sfm2WUrwTQyAzQrhO3V9IhcBBNBXMyzLY5orACxRyYJ3d2HeRVX+eFv4lmA==}
-    engines: {node: '>= 0.4.0'}
-    dev: false
 
   /fill-range@4.0.0:
     resolution: {integrity: sha512-VcpLTWqWDiTerugjj8e3+esbg+skS3M9e54UuR3iCeIDMXCLTsAH8hTSzDQU/X6/6t3eYkOKoZSef2PlU6U1XQ==}
@@ -21184,6 +21147,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
+    dev: true
 
   /reactcss@1.2.3(react@16.14.0):
     resolution: {integrity: sha512-KiwVUcFu1RErkI97ywr8nvx8dNOpT03rbnma0SSalTYjkrPYaEajR4a/MRt6DZ46K6arDRbWMNHF+xH7G7n/8A==}
