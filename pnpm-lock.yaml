@@ -396,8 +396,8 @@ importers:
         specifier: ^2.10.14
         version: 2.10.14(react@18.2.0)
       filesize:
-        specifier: ^4.2.1
-        version: 4.2.1
+        specifier: ^10.0.8
+        version: 10.0.8
       is-url:
         specifier: ^1.2.4
         version: 1.2.4
@@ -11923,15 +11923,15 @@ packages:
       trim-repeated: 1.0.0
     dev: true
 
+  /filesize@10.0.8:
+    resolution: {integrity: sha512-/ylBrxZ1GAjgh2CEemKKLwTtmXfWqTtN1jRl6iqLwnMEucUX5cmaCCUPGstQOHVCcK9uYL6o1cPNakLQU2sasQ==}
+    engines: {node: '>= 10.4.0'}
+    dev: false
+
   /filesize@3.6.1:
     resolution: {integrity: sha512-7KjR1vv6qnicaPMi1iiTcI85CyYwRO/PSFCu6SvqL8jN2Wjt/NIYQTFtFs7fSDCYOstUkEWIQGFUg5YZQfjlcg==}
     engines: {node: '>= 0.4.0'}
     dev: true
-
-  /filesize@4.2.1:
-    resolution: {integrity: sha512-bP82Hi8VRZX/TUBKfE24iiUGsB/sfm2WUrwTQyAzQrhO3V9IhcBBNBXMyzLY5orACxRyYJ3d2HeRVX+eFv4lmA==}
-    engines: {node: '>= 0.4.0'}
-    dev: false
 
   /fill-range@4.0.0:
     resolution: {integrity: sha512-VcpLTWqWDiTerugjj8e3+esbg+skS3M9e54UuR3iCeIDMXCLTsAH8hTSzDQU/X6/6t3eYkOKoZSef2PlU6U1XQ==}
