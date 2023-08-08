@@ -16,7 +16,7 @@ export function genComponentStyleHook(
 ) {
   return (prefixCls: string) => {
     const useStyle = antGenComponentStyleHook(
-      `OB-${componentName}`,
+      `OB-${componentName}` as ComponentName,
       token => {
         return [styleFn(token)];
       },
