@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import ContentWithQuestion from '..';
+import ContentWithIcon from '..';
 
-describe('ContentWithQuestion', () => {
+describe('ContentWithIcon', () => {
   it('渲染正常', async () => {
-    const { getByTestId } = render(<ContentWithQuestion content="hello" />);
+    const { getByTestId } = render(<ContentWithIcon content="hello" />);
     expect(getByTestId('content').textContent).toEqual('hello');
     // expect(getByTestId('icon')).not.toBeNull();
   });

@@ -159,8 +159,8 @@ export default defineConfig({
           children: [
             { title: 'Action 操作项', link: '/biz-components/action' },
             {
-              title: 'ContentWithQuestion 文字旁提示',
-              link: '/biz-components/content-with-question',
+              title: 'ContentWithIcon 文字旁提示',
+              link: '/biz-components/content-with-icon',
             },
             { title: 'Ranger 日期快速选择', link: '/biz-components/ranger' },
             { title: 'TreeSearch 树搜索', link: '/biz-components/tree-search' },
