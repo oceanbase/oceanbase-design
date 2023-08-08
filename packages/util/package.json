@@ -32,7 +32,7 @@
     "build": "father build"
   },
   "dependencies": {
-    "ahooks": "^2.10.14",
+    "ahooks": "^3.7.8",
     "filesize": "^10.0.8",
     "is-url": "^1.2.4",
     "lodash": "^4.17.21",

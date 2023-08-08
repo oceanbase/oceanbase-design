@@ -259,8 +259,8 @@ importers:
         specifier: workspace:^
         version: link:../util
       ahooks:
-        specifier: ^2.10.14
-        version: 2.10.14(react@16.14.0)
+        specifier: ^3.7.8
+        version: 3.7.8(react@16.14.0)
       antd:
         specifier: ^5.8.2
         version: 5.8.2(moment@2.29.4)(react-dom@16.14.0)(react@16.14.0)
@@ -332,8 +332,8 @@ importers:
         specifier: workspace:^
         version: link:../util
       ahooks:
-        specifier: ^2.10.14
-        version: 2.10.14(react@16.14.0)
+        specifier: ^3.7.8
+        version: 3.7.8(react@16.14.0)
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -396,8 +396,8 @@ importers:
   packages/util:
     dependencies:
       ahooks:
-        specifier: ^2.10.14
-        version: 2.10.14(react@18.2.0)
+        specifier: ^3.7.8
+        version: 3.7.8(react@18.2.0)
       filesize:
         specifier: ^10.0.8
         version: 10.0.8
@@ -427,26 +427,6 @@ packages:
   /@adobe/css-tools@4.3.0:
     resolution: {integrity: sha512-+RNNcQvw2V1bmnBTPAtOLfW/9mhH2vC67+rUSi5T8EtEWt6lEnGNY2GuhZ1/YwbgikT1TkhvidCDmN5Q5YCo/w==}
     dev: true
-
-  /@ahooksjs/use-request@2.8.15(react@16.14.0):
-    resolution: {integrity: sha512-xhVaM4fyIiAMdVFuuU5i3CFUdFa/IblF+fvITVMFaUEO3w/V5tVCAF6WIA3T03n1/RPuzRkA7Ao1PFtSGtGelw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0
-    dependencies:
-      lodash.debounce: 4.0.8
-      lodash.throttle: 4.1.1
-      react: 16.14.0
-    dev: false
-
-  /@ahooksjs/use-request@2.8.15(react@18.2.0):
-    resolution: {integrity: sha512-xhVaM4fyIiAMdVFuuU5i3CFUdFa/IblF+fvITVMFaUEO3w/V5tVCAF6WIA3T03n1/RPuzRkA7Ao1PFtSGtGelw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0
-    dependencies:
-      lodash.debounce: 4.0.8
-      lodash.throttle: 4.1.1
-      react: 18.2.0
-    dev: false
 
   /@amap/amap-jsapi-loader@1.0.1:
     resolution: {integrity: sha512-nPyLKt7Ow/ThHLkSvn2etQlUzqxmTVgK7bIgwdBRTg2HK5668oN7xVxkaiRe3YZEzGzfV2XgH5Jmu2T73ljejw==}
@@ -4431,7 +4411,7 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.10
       hoist-non-react-statics: 3.3.2
       react: 18.1.0
       react-is: 16.13.1
@@ -4443,7 +4423,7 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.10
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
       react-is: 16.13.1
@@ -6802,7 +6782,7 @@ packages:
   /@umijs/history@5.3.1:
     resolution: {integrity: sha512-/e0cEGrR2bIWQD7pRl3dl9dcyRGeC9hoW0OCvUTT/hjY0EfUrkd6G8ZanVghPMpDuY5usxq9GVcvrT8KNXLWvA==}
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.10
       query-string: 6.14.1
     dev: true
 
@@ -7286,42 +7266,46 @@ packages:
       clean-stack: 2.2.0
       indent-string: 4.0.0
 
-  /ahooks@2.10.14(react@16.14.0):
-    resolution: {integrity: sha512-axWa7VoAgu7bxA56dDl0CXW4rvaQmDBiov/d3tAy0x1YNYywYMKokL8TdLgJ5zO/oXGiWmG7BxlGOQGkqE/zkQ==}
+  /ahooks-v3-count@1.0.0:
+    resolution: {integrity: sha512-V7uUvAwnimu6eh/PED4mCDjE7tokeZQLKlxg9lCTMPhN+NjsSbtdacByVlR1oluXQzD3MOw55wylDmQo4+S9ZQ==}
+    dev: false
+
+  /ahooks@3.7.8(react@16.14.0):
+    resolution: {integrity: sha512-e/NMlQWoCjaUtncNFIZk3FG1ImSkV/JhScQSkTqnftakRwdfZWSw6zzoWSG9OMYqPNs2MguDYBUFFC6THelWXA==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
-      react: ^16.8.6 || ^17.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@ahooksjs/use-request': 2.8.15(react@16.14.0)
+      '@babel/runtime': 7.22.10
       '@types/js-cookie': 2.2.7
+      ahooks-v3-count: 1.0.0
       dayjs: 1.11.9
-      intersection-observer: 0.7.0
+      intersection-observer: 0.12.2
       js-cookie: 2.2.1
-      lodash.debounce: 4.0.8
-      lodash.isequal: 4.5.0
-      lodash.throttle: 4.1.1
+      lodash: 4.17.21
       react: 16.14.0
       resize-observer-polyfill: 1.5.1
       screenfull: 5.2.0
+      tslib: 2.6.1
     dev: false
 
-  /ahooks@2.10.14(react@18.2.0):
-    resolution: {integrity: sha512-axWa7VoAgu7bxA56dDl0CXW4rvaQmDBiov/d3tAy0x1YNYywYMKokL8TdLgJ5zO/oXGiWmG7BxlGOQGkqE/zkQ==}
+  /ahooks@3.7.8(react@18.2.0):
+    resolution: {integrity: sha512-e/NMlQWoCjaUtncNFIZk3FG1ImSkV/JhScQSkTqnftakRwdfZWSw6zzoWSG9OMYqPNs2MguDYBUFFC6THelWXA==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
-      react: ^16.8.6 || ^17.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@ahooksjs/use-request': 2.8.15(react@18.2.0)
+      '@babel/runtime': 7.22.10
       '@types/js-cookie': 2.2.7
+      ahooks-v3-count: 1.0.0
       dayjs: 1.11.9
-      intersection-observer: 0.7.0
+      intersection-observer: 0.12.2
       js-cookie: 2.2.1
-      lodash.debounce: 4.0.8
-      lodash.isequal: 4.5.0
-      lodash.throttle: 4.1.1
+      lodash: 4.17.21
       react: 18.2.0
       resize-observer-polyfill: 1.5.1
       screenfull: 5.2.0
+      tslib: 2.6.1
     dev: false
 
   /ajv-keywords@3.5.2(ajv@6.12.6):
@@ -12848,7 +12832,7 @@ packages:
   /history@5.3.0:
     resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.10
     dev: true
 
   /hmac-drbg@1.0.1:
@@ -13339,8 +13323,8 @@ packages:
       has: 1.0.3
       side-channel: 1.0.4
 
-  /intersection-observer@0.7.0:
-    resolution: {integrity: sha512-Id0Fij0HsB/vKWGeBe9PxeY45ttRiBmhFyyt/geBdDHBYNctMRTE3dC1U3ujzz3lap+hVXlEcVaB56kZP/eEUg==}
+  /intersection-observer@0.12.2:
+    resolution: {integrity: sha512-7m1vEcPCxXYI8HqnL8CKI6siDyD+eIWSwgB3DZA+ZTogxk9I4CDnj4wilt9x/+/QbHI4YG5YZNmC6458/e9Ktg==}
     dev: false
 
   /intl-messageformat@10.5.0:
@@ -15231,6 +15215,7 @@ packages:
 
   /lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
+    dev: true
 
   /lodash.flow@3.5.0:
     resolution: {integrity: sha512-ff3BX/tSioo+XojX4MOsOMhJw0nZoUEF011LX8g8d3gvjVbxd89cCio4BCXronjxcTUIJUoqKEUA+n4CqvvRPw==}
@@ -15242,6 +15227,7 @@ packages:
 
   /lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    dev: true
 
   /lodash.ismatch@4.4.0:
     resolution: {integrity: sha512-fPMfXjGQEV9Xsq/8MTSgUf255gawYRbjwMyDbcvDhXgV7enSZA0hynz6vMPnpAb5iONEzBHBPsT+0zes5Z301g==}
@@ -15269,6 +15255,7 @@ packages:
 
   /lodash.throttle@4.1.1:
     resolution: {integrity: sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==}
+    dev: true
 
   /lodash.tonumber@4.0.3:
     resolution: {integrity: sha512-SY0SwuPOHRwKcCNTdsntPYb+Zddz5mDUIVFABzRMqmAiL41pMeyoQFGxYAw5zdc9NnH4pbJqiqqp5ckfxa+zSA==}
@@ -20096,7 +20083,7 @@ packages:
       react: ^16.6.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.6.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.10
       invariant: 2.2.4
       prop-types: 15.8.1
       react: 18.1.0
@@ -20111,7 +20098,7 @@ packages:
       react: ^16.6.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.6.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.10
       invariant: 2.2.4
       prop-types: 15.8.1
       react: 18.2.0
