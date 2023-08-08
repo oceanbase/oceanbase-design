@@ -40,8 +40,8 @@ const Tabs = ({
 }: TabsProps) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('tabs', customizePrefixCls);
-  const { wrapSSR, hashId } = useStyle(prefixCls);
-  const tabsCls = classNames(className, hashId);
+  const { wrapSSR } = useStyle(prefixCls);
+  const tabsCls = classNames(className);
 
   const ref = useRef<HTMLDivElement>();
   const isHorizontal = !tabPosition || tabPosition === 'top' || tabPosition === 'bottom';

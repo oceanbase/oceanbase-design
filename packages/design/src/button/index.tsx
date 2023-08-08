@@ -12,8 +12,8 @@ export type ButtonProps = AntButtonProps;
 const Button = ({ prefixCls: customizePrefixCls, className, ...restProps }: ButtonProps) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('btn', customizePrefixCls);
-  const { wrapSSR, hashId } = useStyle(prefixCls);
-  const buttonCls = classNames(className, hashId);
+  const { wrapSSR } = useStyle(prefixCls);
+  const buttonCls = classNames(className);
   return wrapSSR(<AntButton prefixCls={customizePrefixCls} className={buttonCls} {...restProps} />);
 };
 

@@ -30,14 +30,13 @@ const Spin = ({
   const isGrayIndicator = isDefaultIndicator && gray;
 
   const prefixCls = getPrefixCls('spin', customizePrefixCls);
-  const { wrapSSR, hashId } = useStyle(prefixCls);
+  const { wrapSSR } = useStyle(prefixCls);
   const spinCls = classNames(
     {
       [`${prefixCls}-oceanbase`]: isDefaultIndicator,
       [`${prefixCls}-oceanbase-gray`]: isGrayIndicator,
     },
-    className,
-    hashId
+    className
   );
 
   return wrapSSR(
