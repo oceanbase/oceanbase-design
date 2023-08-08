@@ -21,14 +21,13 @@ const Alert = ({
 }: AlertProps) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('alert', customizePrefixCls);
-  const { wrapSSR, hashId } = useStyle(prefixCls);
+  const { wrapSSR } = useStyle(prefixCls);
   const alertCls = classNames(
     {
       [`${prefixCls}-ghost`]: ghost,
       [`${prefixCls}-colored`]: colored,
     },
-    className,
-    hashId
+    className
   );
   return wrapSSR(<AntAlert prefixCls={customizePrefixCls} className={alertCls} {...restProps} />);
 };

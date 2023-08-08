@@ -24,8 +24,8 @@ const Descriptions = ({
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('descriptions', customizePrefixCls);
   const typographyPrefixCls = getPrefixCls('typography', customizePrefixCls);
-  const { wrapSSR, hashId } = useStyle(prefixCls, typographyPrefixCls);
-  const descriptionsCls = classNames(className, hashId);
+  const { wrapSSR } = useStyle(prefixCls, typographyPrefixCls);
+  const descriptionsCls = classNames(className);
 
   // 仅无边框时定制 children
   const newChildren = bordered

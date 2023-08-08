@@ -55,13 +55,12 @@ function Table<T>(props: TableProps<T>) {
 
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('table', customizePrefixCls);
-  const { wrapSSR, hashId } = useStyle(prefixCls);
+  const { wrapSSR } = useStyle(prefixCls);
   const tableCls = classNames(
     {
       [`${prefixCls}-expandable`]: !isEmpty(expandable),
     },
-    className,
-    hashId
+    className
   );
 
   const [openPopver, setOpenPopver] = useState<boolean>(false);

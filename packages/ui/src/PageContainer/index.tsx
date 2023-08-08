@@ -43,7 +43,7 @@ const PageContainer = ({
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const rootPrefixCls = getPrefixCls();
   const prefixCls = getPrefixCls('pro-page-container', customizePrefixCls);
-  const { wrapSSR, hashId } = useStyle(prefixCls);
+  const { wrapSSR } = useStyle(prefixCls);
 
   const { reload, subTitle, breadcrumb } = header || {};
   const reloadProps =
@@ -90,8 +90,7 @@ const PageContainer = ({
     {
       [`${prefixCls}-no-page-header`]: noHasHeader,
     },
-    className,
-    hashId
+    className
   );
 
   return wrapSSR(

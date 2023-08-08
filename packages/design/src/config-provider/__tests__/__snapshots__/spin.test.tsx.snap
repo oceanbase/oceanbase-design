@@ -7,7 +7,7 @@ exports[`ConfigProvider spin spin.indicator should work 1`] = `
   <div
     aria-busy="true"
     aria-live="polite"
-    class="ant-spin ant-spin-spinning css-dev-only-do-not-override-fpg3f5"
+    class="ant-spin ant-spin-spinning"
   >
     <div
       class="custom-indicator ant-spin-dot"
