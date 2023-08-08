@@ -27,13 +27,11 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       },
     },
     [`${componentCls}${componentCls}-contain-tabs`]: {
-      [`${componentCls}-head`]: {
-        ...(genTagStyle({
-          ...token,
-          componentCls: tabsComponentCls,
-          prefixCls: tabsPrefixCls,
-        }) as CSSObject),
-      },
+      [`${componentCls}-head`]: genTagStyle({
+        ...token,
+        componentCls: tabsComponentCls,
+        prefixCls: tabsPrefixCls,
+      }),
     },
   };
 };

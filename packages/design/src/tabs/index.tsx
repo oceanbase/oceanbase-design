@@ -88,6 +88,7 @@ const Tabs = ({
 
   return wrapSSR(
     <AntTabs
+      // @ts-ignore
       ref={ref}
       items={newItems}
       defaultActiveKey={defaultActiveKey}

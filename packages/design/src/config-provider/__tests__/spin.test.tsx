@@ -4,9 +4,7 @@ import ConfigProvider from '..';
 import Spin from '../../spin';
 
 describe('ConfigProvider spin', () => {
-  beforeEach(() => {});
-
-  it('ConfigProvider spin.indicator should work', () => {
+  it('spin.indicator should work', () => {
     const { container, asFragment } = render(
       <ConfigProvider
         spin={{
@@ -16,9 +14,8 @@ describe('ConfigProvider spin', () => {
         <Spin />
       </ConfigProvider>
     );
-    expect(container.querySelector<HTMLElement>('.ant-spin-dot')?.className).toContain(
-      'custom-indicator'
-    );
+    expect(container.querySelector('.custom-indicator')).toBeTruthy();
+    expect(container.querySelector('.ant-spin-oceanbase')).toBeFalsy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 });

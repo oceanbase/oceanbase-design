@@ -18,13 +18,14 @@ const defaultSeed = {
   red: '#ff4b4b',
 };
 
+// should use reference assign instead of clone assign
+const defaultConfig = theme.defaultConfig;
+defaultConfig.token = defaultSeed;
+
 export default {
   ...theme,
   defaultSeed,
-  defaultConfig: {
-    ...theme.defaultConfig,
-    defaultSeed,
-  },
+  defaultConfig,
   components: {
     InputNumber: {
       handleVisible: true as true,
