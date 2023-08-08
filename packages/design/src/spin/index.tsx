@@ -2,7 +2,7 @@ import { Spin as AntSpin } from 'antd';
 import type { SpinProps as AntSpinProps } from 'antd/es/spin';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
-import ConfigProvider, { ConfigConsumerProps } from '../config-provider';
+import ConfigProvider from '../config-provider';
 import Lottie from '../lottie';
 import useStyle from './style';
 
@@ -27,12 +27,14 @@ const Spin = ({
     spin?.indicator ||
     (gray ? <Lottie path="/lottie/spin-gray.json" /> : <Lottie path="/lottie/spin.json" />);
   const isDefaultIndicator = !(customizeIndicator || spin?.indicator);
+  const isGrayIndicator = isDefaultIndicator && gray;
 
   const prefixCls = getPrefixCls('spin', customizePrefixCls);
   const { wrapSSR, hashId } = useStyle(prefixCls);
   const spinCls = classNames(
     {
       [`${prefixCls}-oceanbase`]: isDefaultIndicator,
+      [`${prefixCls}-oceanbase-gray`]: isGrayIndicator,
     },
     className,
     hashId

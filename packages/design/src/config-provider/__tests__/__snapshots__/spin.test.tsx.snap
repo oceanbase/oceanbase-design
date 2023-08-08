@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ConfigProvider spin ConfigProvider spin.indicator should work 1`] = `
+exports[`ConfigProvider spin spin.indicator should work 1`] = `
 <div
-  class="css-dev-only-do-not-override-1ty3d1f ant-app"
+  class="ant-app"
 >
   <div
     aria-busy="true"
     aria-live="polite"
-    class="ant-spin ant-spin-spinning css-dev-only-do-not-override-1w4v3hc css-dev-only-do-not-override-1ty3d1f"
+    class="ant-spin ant-spin-spinning css-dev-only-do-not-override-1w4v3hc"
   >
     <div
       class="custom-indicator ant-spin-dot"

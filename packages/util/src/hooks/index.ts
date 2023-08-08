@@ -57,6 +57,7 @@ export function useTableData({ fn, params = {}, condition = [], refreshDeps = []
   const serviceFn = some(condition, item => isNullValue(item))
     ? defaultAsnycFnOfUseTableData
     : ({ current, pageSize, sorter = {}, filters = {} }) => {
+        // eslint-disable-next-line
         let newFilters = {} as any;
         Object.keys(filters).forEach(key => {
           // antd 4.x 的表格筛选，在筛选项为空时，对应字段为 null 值，为了适配这里调用 join 方法前需要做非空判断
@@ -67,8 +68,10 @@ export function useTableData({ fn, params = {}, condition = [], refreshDeps = []
           {
             [pagePropName]: current,
             [sizePropName]: pageSize,
+            // @ts-ignore
             sort: sorter.order
-              ? `${sorter.field},${sortOrderMap[sorter.order as 'ascend' | 'descend']}`
+              ? // @ts-ignore
+                `${sorter.field},${sortOrderMap[sorter.order as 'ascend' | 'descend']}`
               : null,
             ...newFilters,
             ...params,
@@ -80,7 +83,9 @@ export function useTableData({ fn, params = {}, condition = [], refreshDeps = []
 
   const result = useAntdTable(serviceFn, newOptions);
   if (result) {
+    // @ts-ignore
     result.tableProps.pagination.showSizeChanger = true;
+    // @ts-ignore
     result.tableProps.pagination.showTotal = (total: number) => `共 ${total} 条`;
   }
   return result;
