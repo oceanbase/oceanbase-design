@@ -27,7 +27,7 @@ export default {
   },
   components: {
     InputNumber: {
-      handleVisible: true,
+      handleVisible: true as true,
     },
   },
 };

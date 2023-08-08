@@ -7,9 +7,9 @@ import type {
 import StaticFunction from '../static-function';
 import defaultTheme from '../theme';
 import defaultThemeToken from '../theme/default';
+import type { NavigateFunction } from './navigate';
 
-const { defaultSeed, components } = defaultTheme;
-
+export * from './navigate';
 export * from 'antd/es/config-provider';
 
 export interface ThemeConfig extends AntThemeConfig {
@@ -18,11 +18,25 @@ export interface ThemeConfig extends AntThemeConfig {
 
 export interface ConfigProviderProps extends AntConfigProviderProps {
   theme?: ThemeConfig;
+  // set global route navigate function
+  // for react-router-dom v5: history.push
+  // for react-router-dom v6: navigate
+  navigate?: NavigateFunction;
 }
+
+export interface ExtendedConfigConsumerProps {
+  navigate?: NavigateFunction;
+}
+
+const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
+  navigate: undefined,
+});
+
+const { defaultSeed, components } = defaultTheme;
 
 // ConfigProvider 默认设置主题和内嵌 App，支持 message, notification 和 Modal 等静态方法消费 ConfigProvider 配置
 // ref: https://ant.design/components/app-cn
-const ConfigProvider = ({ children, theme, ...restProps }: ConfigProviderProps) => {
+const ConfigProvider = ({ children, theme, navigate, ...restProps }: ConfigProviderProps) => {
   return (
     <AntConfigProvider
       theme={{
@@ -50,15 +64,22 @@ const ConfigProvider = ({ children, theme, ...restProps }: ConfigProviderProps) 
       }}
       {...restProps}
     >
-      <App>
-        {children}
-        <StaticFunction />
-      </App>
+      <ExtendedConfigContext.Provider
+        value={{
+          navigate,
+        }}
+      >
+        <App>
+          {children}
+          <StaticFunction />
+        </App>
+      </ExtendedConfigContext.Provider>
     </AntConfigProvider>
   );
 };
 
 ConfigProvider.ConfigContext = AntConfigProvider.ConfigContext;
+ConfigProvider.ExtendedConfigContext = ExtendedConfigContext;
 ConfigProvider.SizeContext = AntConfigProvider.SizeContext;
 ConfigProvider.config = AntConfigProvider.config;
 ConfigProvider.useConfig = AntConfigProvider.useConfig;

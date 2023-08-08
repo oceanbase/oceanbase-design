@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { toNumber } from 'lodash';
-import qs from 'query-string';
+import queryString from 'query-string';
 import { isNullValue } from '../util';
 import { toBoolean } from '../format';
 import { jsonParse } from '../robust';
@@ -59,10 +59,11 @@ const format2Search = (value: any, parameter: QueryParameter) => {
  * @returns
  */
 export const useQuery = <T extends SearchValues>(
+  // TODO: history 仅使用 react-router-dom v5，后续需要改造适配 react-router-dom v6
   history: any,
   queryParameters: (QueryParameter | string)[]
 ) => {
-  const searches = useRef(qs.parse(location?.search) ?? {});
+  const searches = useRef(queryString.parse(location?.search) ?? {});
 
   const initialQueryValues = useRef(
     queryParameters.reduce((collection, parameter) => {

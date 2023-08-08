@@ -58,7 +58,7 @@ const Tooltip: CompoundedComponent = ({
   const typeItem = typeList.find(item => item.type === type);
   return mouseFollow ? (
     <MouseTooltip
-      color={typeItem?.backgroundColor}
+      color={color || typeItem?.backgroundColor}
       overlayInnerStyle={{
         color: typeItem?.color,
         ...overlayInnerStyle,
@@ -69,7 +69,7 @@ const Tooltip: CompoundedComponent = ({
     </MouseTooltip>
   ) : (
     <AntTooltip
-      color={typeItem?.backgroundColor}
+      color={color || typeItem?.backgroundColor}
       overlayInnerStyle={{
         color: typeItem?.color,
         ...overlayInnerStyle,
