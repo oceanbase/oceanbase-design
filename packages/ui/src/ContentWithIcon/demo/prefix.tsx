@@ -1,8 +1,10 @@
-import { ContentWithQuestion } from '@oceanbase/ui';
+import React from 'react';
+import { ContentWithIcon } from '@oceanbase/ui';
 
 export default () => {
   return (
-    <ContentWithQuestion
+    <ContentWithIcon
+      iconType="info"
       content="付费服务占比"
       tooltip={{
         title:

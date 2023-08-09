@@ -130,13 +130,20 @@ const Sidebar: React.FC = () => {
   const [menuItems, selectedKey] = useMenu();
   const isDark = theme.includes('dark');
   const {
-    token: { colorBgContainer, colorFillSecondary },
+    token: { colorBgContainer, colorBgTextHover },
   } = useSiteToken();
 
   const menuChild = (
     <ConfigProvider
       theme={{
-        components: { Menu: { itemBg: colorBgContainer, itemHoverBg: colorFillSecondary } },
+        components: {
+          Menu: {
+            itemBg: colorBgContainer,
+            itemHoverBg: colorBgTextHover,
+            darkItemBg: colorBgContainer,
+            darkItemHoverBg: colorBgTextHover,
+          },
+        },
       }}
     >
       <Menu

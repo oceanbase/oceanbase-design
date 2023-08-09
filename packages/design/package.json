@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/design",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "description": "The Design System of OceanBase",
   "keywords": [
     "OceanBase",
@@ -40,18 +40,23 @@
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.8.0",
+    "antd": "^5.8.2",
     "classnames": "^2.3.2",
     "jsencrypt": "^3.3.2",
     "lodash": "^4.17.21",
+<<<<<<< HEAD
     "randexp": "^0.5.3",
     "rc-util": "^5.35.0",
     "react-copy-to-clipboard": "^5.1.0",
+=======
+    "lottie-web": "^5.12.2",
+    "rc-util": "^5.36.0",
+>>>>>>> 1c8094549de30bc9776e29d404e1bf08515c92a3
     "react-sticky-mouse-tooltip": "^0.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.9",
-    "@babel/preset-env": "^7.22.9",
+    "@babel/cli": "^7.22.10",
+    "@babel/preset-env": "^7.22.10",
     "antd-token-previewer": "^1.1.0"
   },
   "peerDependencies": {

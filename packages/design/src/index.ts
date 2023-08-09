@@ -20,6 +20,7 @@ export { default as Tabs } from './tabs';
 export { default as theme } from './theme';
 export { default as Tooltip } from './tooltip';
 export { default as Breadcrumb } from './breadcrumb';
+export { default as Spin } from './spin';
 
 const { useToken } = theme;
 

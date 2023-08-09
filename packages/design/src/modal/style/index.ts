@@ -20,7 +20,7 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
 
 export default (prefixCls: string) => {
   const useStyle = genComponentStyleHook('Modal', token => {
-    return [genModalStyle(token)];
+    return [genModalStyle(token as ModalToken)];
   });
   return useStyle(prefixCls);
 };

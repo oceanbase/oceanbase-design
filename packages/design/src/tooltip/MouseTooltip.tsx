@@ -88,7 +88,7 @@ const MouseTooltip: React.FC<MouseTooltipProps> = ({
           }}
           {...restProps}
         >
-          <div ref={ref}>{title}</div>
+          <div ref={ref}>{typeof title === 'function' ? title() : title}</div>
         </ReactStickyMouseTooltip>
       )}
     </>

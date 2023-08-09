@@ -1,7 +1,7 @@
 import { Descriptions as AntDescriptions, Typography } from 'antd';
 import type { DescriptionsProps as AntDescriptionsProps } from 'antd/es/descriptions';
+import type { TooltipPlacement } from 'antd/es/tooltip';
 import classNames from 'classnames';
-import { isObject } from 'lodash';
 import toArray from 'rc-util/lib/Children/toArray';
 import type { ReactElement } from 'react';
 import React, { isValidElement, useContext } from 'react';
@@ -24,8 +24,8 @@ const Descriptions = ({
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('descriptions', customizePrefixCls);
   const typographyPrefixCls = getPrefixCls('typography', customizePrefixCls);
-  const { wrapSSR, hashId } = useStyle(prefixCls, typographyPrefixCls);
-  const descriptionsCls = classNames(className, hashId);
+  const { wrapSSR } = useStyle(prefixCls, typographyPrefixCls);
+  const descriptionsCls = classNames(className);
 
   // 仅无边框时定制 children
   const newChildren = bordered
@@ -38,7 +38,7 @@ const Descriptions = ({
             const itemChildrenType = (itemChildren as ReactElement)?.type as any;
             const defaultEllipsis = {
               tooltip: {
-                placement: 'topLeft',
+                placement: 'topLeft' as TooltipPlacement,
                 title: itemChildren,
               },
             };
@@ -51,7 +51,7 @@ const Descriptions = ({
                   <Typography.Text
                     {...restContentProps}
                     ellipsis={
-                      isObject(ellipsis)
+                      typeof ellipsis === 'object'
                         ? {
                             ...ellipsis,
                             tooltip:
@@ -61,7 +61,7 @@ const Descriptions = ({
                                 : {
                                     ...defaultEllipsis.tooltip,
                                     // TooltipProps
-                                    ...(isObject(ellipsis.tooltip) &&
+                                    ...(typeof ellipsis.tooltip === 'object' &&
                                     !isValidElement(ellipsis.tooltip)
                                       ? ellipsis.tooltip
                                       : {

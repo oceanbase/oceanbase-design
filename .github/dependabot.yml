@@ -6,8 +6,11 @@
 version: 2
 updates:
   - package-ecosystem: "npm" # See documentation for possible values
+    versioning-strategy: "increase"
     directory: "/" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
     ignore:
       - dependency-name: "@antv/g6"
+      # execa latest 7.x works only in ES module
+      - dependency-name: "execa"

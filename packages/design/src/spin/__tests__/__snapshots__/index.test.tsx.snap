@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spin custom indicator should work 1`] = `
+<div
+  aria-busy="true"
+  aria-live="polite"
+  class="ant-spin ant-spin-spinning"
+>
+  <div
+    class="custom-indicator ant-spin-dot"
+  />
+</div>
+`;
+
+exports[`Spin default indicator should render correctly 1`] = `
+<div
+  aria-busy="true"
+  aria-live="polite"
+  class="ant-spin ant-spin-spinning ant-spin-oceanbase"
+>
+  <div
+    class="ant-spin-dot"
+    style="display: inline-block;"
+  />
+</div>
+`;
+
+exports[`Spin gray default indicator should render correctly 1`] = `
+<div
+  aria-busy="true"
+  aria-live="polite"
+  class="ant-spin ant-spin-spinning ant-spin-oceanbase ant-spin-oceanbase-gray"
+>
+  <div
+    class="ant-spin-dot"
+    style="display: inline-block;"
+  />
+</div>
+`;

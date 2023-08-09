@@ -10,11 +10,11 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="../locale/demo/basic.tsx" title="国际化"></code>
-
 <code src="./demo/size.tsx" title="尺寸"></code>
-
 <code src="./demo/theme.tsx" title="主题"></code>
+<code src="./demo/spin.tsx" title="Spin"></code>
 
 ### 统一样式前缀
 
@@ -35,37 +35,10 @@ const App: React.FC = () => {
 export default App;
 ```
 
-- 对于 Umi:
-
-```js
-// config.ts 或 .umirc.ts
-export default {
-  lessLoader: {
-    modifyVars: {
-      prefixCls: 'prefix',
-      iconPrefixCls: 'icon-prefix',
-    },
-  },
-};
-```
-
-- 对于 Webpack:
-
-```js
-// webpack.config.js
-{
-  loader: "less-loader",
-  options: {
-    lessOptions: {
-      modifyVars: {
-        prefixCls: 'prefix',
-        iconPrefixCls: 'icon-prefix',
-      },
-    },
-  },
-}
-```
-
 ## API
 
-- 详见 antd ConfigProvider 文档: https://ant.design/components/config-provider-cn
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| :-- | :-- | :-- | :-- | :-- |
+| spin | Spin 全局配置 | `{ indicator?: ReactNode; className?: string; style?: React.CSSProperties; }` | undefined | - |
+
+- 更多 API 详见 antd ConfigProvider 文档: https://ant.design/components/config-provider-cn

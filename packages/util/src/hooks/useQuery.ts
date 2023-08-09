@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { toNumber } from 'lodash';
-import qs from 'query-string';
+import queryString from 'query-string';
 import { isNullValue } from '../util';
 import { toBoolean } from '../format';
 import { jsonParse } from '../robust';
@@ -63,7 +63,7 @@ export const useQuery = <T extends SearchValues>(
   history: any,
   queryParameters: (QueryParameter | string)[]
 ) => {
-  const searches = useRef(qs.parse(location?.search) ?? {});
+  const searches = useRef(queryString.parse(location?.search) ?? {});
 
   const initialQueryValues = useRef(
     queryParameters.reduce((collection, parameter) => {
