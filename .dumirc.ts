@@ -145,6 +145,7 @@ export default defineConfig({
             { title: 'PageContainer 页容器', link: '/biz-components/page-container' },
             // { title: 'NavMenu', link: '/biz-components/nav-menu' },
             { title: 'Welcome 欢迎页', link: '/biz-components/welcome' },
+            { title: 'GridLayout 栅格布局', link: '/biz-components/grid-layout' },
           ],
         },
         {
