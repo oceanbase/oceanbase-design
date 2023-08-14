@@ -29,6 +29,7 @@ const Item: React.FC<TagSelectItemProps> = ({
     ...restProps
 }) => {
     const [checked, setChecked] = useState<boolean>(restProps.defaultChecked);
+    const coverType = typeof cover;
 
     const prefixCls = getPrefix('tag-select');
     const {wrapSSR, hashId} = useStyle(prefixCls);
@@ -39,8 +40,9 @@ const Item: React.FC<TagSelectItemProps> = ({
             [`${prefixCls}-checked`]: checked,
             multiple: tagSelectGroup.multiple,
             [`${prefixCls}-${tagSelectGroup.size}`]: tagSelectGroup.size,
-            [`${prefixCls}-disabled`]: restProps.disabled,
-            [`${prefixCls}-img`]: !!cover
+            [`${prefixCls}-disabled`]: tagSelectGroup.disabled || restProps.disabled,
+            [`${prefixCls}-img`]: coverType === 'string',
+            [`${prefixCls}-custom`]: coverType !== 'string'
         },
         hashId
     );
@@ -64,11 +66,9 @@ const Item: React.FC<TagSelectItemProps> = ({
 
     const renderCover = () => {
         return (
-            <div className={`${prefixCls}-cover`}>
-                {typeof cover === 'string' ? (
-                    <img src={cover} alt="tagselect" />
-                ) : cover}
-            </div>
+            coverType === 'string' ? <div className={`${prefixCls}-cover`}>
+                <img src={cover} alt="tagselect" />
+            </div> : cover
         );
     };
 

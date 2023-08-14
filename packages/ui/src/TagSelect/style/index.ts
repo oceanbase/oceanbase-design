@@ -6,9 +6,9 @@ export type TagSelectToken = FullToken<any>;
 
 const genSizeStyle = (height: number, fontSize: number): CSSObject => {
     return {
-        height,
-        fontSize,
-        lineHeight: `${height}px`
+        paddingTop: `${height}px`,
+        paddingBottom: `${height}px`,
+        fontSize
     };
 };
 
@@ -57,10 +57,8 @@ export const genTagSelectStyle: GenerateStyle<TagSelectToken> = (token: TagSelec
             background: token.colorWhite,
             border: `${token.lineWidth}px ${token.lineType} ${token.colorBorder}`,
             borderRadius: token.borderRadius,
-            marginRight: token.marginSM,
-            height: token.controlHeight,
-            lineHeight: token.controlHeight + 'px',
-            padding: `0 ${token.paddingContentHorizontal}px`,
+            marginRight: token.marginXS,
+            padding: `${token.paddingXXS}px ${token.paddingContentHorizontal}px`,
             cursor: 'pointer',
             [`${componentCls}-input`]: {
                 width: 0,
@@ -73,7 +71,6 @@ export const genTagSelectStyle: GenerateStyle<TagSelectToken> = (token: TagSelec
             },
             [`&:has(${componentCls}-cover)`]: {
                 padding: 0,
-                lineHeight: 0,
                 ...genImgCoverStyle('76px', '40px')
             } 
         },
@@ -89,10 +86,13 @@ export const genTagSelectStyle: GenerateStyle<TagSelectToken> = (token: TagSelec
                 marginTop: '1px'
             }
         },
-        [`${componentCls}-large${componentCls}-img`]: genImgCoverStyle('228px', '120px'),
+        [`${componentCls}-large${componentCls}-img`]: {
+            ...genImgCoverStyle('228px', '120px'),
+            marginRight: '16px'
+        },
         [`${componentCls}-small${componentCls}-img`]: genImgCoverStyle('76px', '32px'),
-        [`${componentCls}-large`]: genSizeStyle(token.controlHeightLG, token.fontSizeLG),
-        [`${componentCls}-small`]: genSizeStyle(token.controlHeightSM, token.fontSize),
+        [`${componentCls}-large`]: genSizeStyle(token.paddingContentVerticalSM, token.fontSize),
+        [`${componentCls}-small`]: genSizeStyle(0, token.fontSize),
         [`${componentCls}-wrapper:not(${componentCls}-disabled):hover`]: {
             color: token.colorPrimaryTextHover
         },

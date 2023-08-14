@@ -8,9 +8,10 @@ nav:
 ## 代码演示
 <code src="./demo/tagSelect-base.tsx" title="基本"></code>
 <code src="./demo/tagSelect-group.tsx" title="标签选择器组合"></code>
-<code src="./demo/tagSelect-disabled" title="禁用"></code>
-<code src="./demo/tagSelect-size" title="尺寸"></code>
+<code src="./demo/tagSelect-radio" title="单选"></code>
+<code src="./demo/tagSelect-multiple" title="多选"></code>
 <code src="./demo/tagSelect-img" title="图片标签"></code>
+<code src="./demo/tagSelect-size" title="尺寸"></code>
 
 ## API
 
@@ -21,7 +22,7 @@ nav:
 | defaultChecked | 初始是否选中  | boolean               | false | 
 | value     | 选项值            | string \| number     | -  |
 | disabled  | 禁用              | boolean               | false |
-| cover     | 设置为图片选项      | string \| ReactNode   | -     |
+| cover     | 设置为图片选项或自定义形式 | string \| ReactNode   | -     |
 | onChange  | 变化时的回调       | function(e: Event)    |  -  |
 
 

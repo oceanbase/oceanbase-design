@@ -2,8 +2,11 @@ import React from 'react';
 import { App, ConfigProvider as AntConfigProvider } from 'antd';
 import type {
   ConfigProviderProps as AntConfigProviderProps,
+  ConfigConsumerProps as AntConfigConsumerProps,
   ThemeConfig as AntThemeConfig,
 } from 'antd/es/config-provider';
+import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
+import type { SpinIndicator } from 'antd/es/spin';
 import StaticFunction from '../static-function';
 import defaultTheme from '../theme';
 import defaultThemeToken from '../theme/default';
@@ -16,12 +19,21 @@ export interface ThemeConfig extends AntThemeConfig {
   isDark?: boolean;
 }
 
+export type SpinConfig = ComponentStyleConfig & {
+  indicator?: SpinIndicator;
+};
+
+export interface ConfigConsumerProps extends AntConfigConsumerProps {
+  spin?: SpinConfig;
+}
+
 export interface ConfigProviderProps extends AntConfigProviderProps {
   theme?: ThemeConfig;
   // set global route navigate function
   // for react-router-dom v5: history.push
   // for react-router-dom v6: navigate
   navigate?: NavigateFunction;
+  spin?: SpinConfig;
 }
 
 export interface ExtendedConfigConsumerProps {
@@ -36,9 +48,10 @@ const { defaultSeed, components } = defaultTheme;
 
 // ConfigProvider 默认设置主题和内嵌 App，支持 message, notification 和 Modal 等静态方法消费 ConfigProvider 配置
 // ref: https://ant.design/components/app-cn
-const ConfigProvider = ({ children, theme, navigate, ...restProps }: ConfigProviderProps) => {
+const ConfigProvider = ({ children, theme, navigate, spin, ...restProps }: ConfigProviderProps) => {
   return (
     <AntConfigProvider
+      spin={spin}
       theme={{
         ...theme,
         // Only set seed token for dark theme
@@ -78,7 +91,8 @@ const ConfigProvider = ({ children, theme, navigate, ...restProps }: ConfigProvi
   );
 };
 
-ConfigProvider.ConfigContext = AntConfigProvider.ConfigContext;
+ConfigProvider.ConfigContext =
+  AntConfigProvider.ConfigContext as React.Context<ConfigConsumerProps>;
 ConfigProvider.ExtendedConfigContext = ExtendedConfigContext;
 ConfigProvider.SizeContext = AntConfigProvider.SizeContext;
 ConfigProvider.config = AntConfigProvider.config;

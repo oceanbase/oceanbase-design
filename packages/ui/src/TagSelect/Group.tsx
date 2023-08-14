@@ -87,6 +87,7 @@ const Group: React.FC<TagSelectGroupProps> = ({
         multiple,
         size,
         value,
+        disabled: restProps.disabled,
         onChange: restProps.onChange,
         registerValue,
         handleValueChange

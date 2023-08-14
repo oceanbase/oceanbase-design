@@ -37,13 +37,12 @@ const Card = ({
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('card', customizePrefixCls);
   const tabsPrefixCls = getPrefixCls('tabs', customizePrefixCls);
-  const { wrapSSR, hashId } = useStyle(prefixCls, tabsPrefixCls);
+  const { wrapSSR } = useStyle(prefixCls, tabsPrefixCls);
   const cardCls = classNames(
     {
       [`${prefixCls}-no-divider`]: !divided,
     },
-    className,
-    hashId
+    className
   );
 
   const ref = useRef<HTMLDivElement>();

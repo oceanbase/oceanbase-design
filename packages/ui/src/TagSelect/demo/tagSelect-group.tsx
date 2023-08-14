@@ -5,15 +5,15 @@ export default () => {
 
     const option = [
         {
-            label: '标签1',
+            label: '未选中选项',
             value: 1
         },
         {
-            label: '标签2',
+            label: '未选中选项',
             value: 2
         },
         {
-            label: '标签3',
+            label: '未选中选项',
             value: 3
         }
     ];
