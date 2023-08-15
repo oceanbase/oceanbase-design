@@ -14,6 +14,8 @@ const Modal = ({
   prefixCls: customizePrefixCls,
   className,
   rootClassName,
+  title,
+  footer,
   ...restProps
 }: ModalProps) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -26,6 +28,8 @@ const Modal = ({
       prefixCls={customizePrefixCls}
       className={modalCls}
       rootClassName={classNames(rootClassName)}
+      title={title}
+      footer={footer}
       {...restProps}
     />
   );
