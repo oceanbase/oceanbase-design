@@ -35,3 +35,4 @@ export { default as SideTip } from './SideTip';
 export { default as TaskGraph } from './TaskGraph';
 export { default as TreeSearch } from './TreeSearch';
 export { default as Welcome } from './Welcome';
+export {default as TagSelect} from './TagSelect';
