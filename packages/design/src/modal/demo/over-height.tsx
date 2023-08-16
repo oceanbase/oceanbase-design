@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal } from '@oceanbase/design';
+import { Button, Modal, token } from '@oceanbase/design';
 
 export default () => {
   const [open, setOpen] = useState(false);
@@ -12,7 +12,7 @@ export default () => {
           setOpen(true);
         }}
       >
-        Open Modal
+        Open Modal of over height
       </Button>
       <Modal
         title="Basic Modal"
@@ -24,9 +24,15 @@ export default () => {
           setOpen(false);
         }}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <div
+          style={{
+            height: '100vh',
+            background: token.colorBgLayout,
+            padding: 12,
+          }}
+        >
+          scroll-y is enabled by default when over height.
+        </div>
       </Modal>
     </>
   );
