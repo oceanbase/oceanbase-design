@@ -59,8 +59,28 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
     colorWarningHover,
     colorError,
     colorErrorHover,
+    colorIcon,
+    colorIconHover,
+    motionDurationMid,
   } = token;
+  // height = fontSize * lineHeight
+  const height = token.fontSize * token.lineHeight;
   return {
+    [`${componentCls}`]: {
+      // vertical align to flex-start
+      alignItems: 'flex-start',
+      [`${componentCls}-icon`]: {
+        height,
+      },
+      [`${componentCls}-close-icon`]: {
+        height,
+        color: colorIcon,
+        transition: `color ${motionDurationMid}`,
+        '&:hover': {
+          color: colorIconHover,
+        },
+      },
+    },
     [`${componentCls}${componentCls}-with-description`]: {
       paddingBlock: token.padding,
       [`${componentCls}-message`]: {
