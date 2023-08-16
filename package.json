@@ -62,7 +62,7 @@
     "@umijs/test": "^4.0.75",
     "antd": "^5.8.3",
     "antd-style": "^3.4.4",
-    "antd-token-previewer": "^1.1.0",
+    "antd-token-previewer": "^2.0.1",
     "babel-jest": "^29.6.2",
     "classnames": "^2.3.2",
     "copy-to-clipboard": "^3.3.3",
