@@ -12,10 +12,10 @@ export default () => {
           setOpen(true);
         }}
       >
-        Open Modal of over height
+        Open over height Modal
       </Button>
       <Modal
-        title="Basic Modal"
+        title="Over height Modal"
         open={open}
         onOk={() => {
           setOpen(false);
