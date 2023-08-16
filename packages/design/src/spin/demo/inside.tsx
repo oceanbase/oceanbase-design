@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spin } from '@oceanbase/design';
+import { Spin, token } from '@oceanbase/design';
 
 const App: React.FC = () => (
   <div
@@ -8,7 +8,7 @@ const App: React.FC = () => (
       marginBottom: 20,
       padding: '30px 50px',
       textAlign: 'center',
-      background: 'rgba(0, 0, 0, 0.05)',
+      background: token.colorBgLayout,
       borderRadius: 4,
     }}
   >
