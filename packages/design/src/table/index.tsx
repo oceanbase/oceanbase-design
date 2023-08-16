@@ -81,7 +81,7 @@ function Table<T>(props: TableProps<T>) {
               },
         render: (text, record, index) => {
           const element = (
-            item.render ? item.render(text, record, index) : record[item.dataIndex]
+            item.render ? item.render(text, record, index) : record[(item as any).dataIndex]
           ) as ReactElement | undefined;
           const elementType = element?.type as any;
           // 如果目标元素已经被 Tooltip 包裹，则去掉默认的 Tooltip，避免有两个 Tooltip
