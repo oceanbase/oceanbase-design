@@ -30,20 +30,20 @@ const IconBadge = ({ icon, status, text, className, ...restProps }: IconBadgePro
     statusIcon = icon
   } else {
     if (status === 'processing') {
-      statusIcon = <Loading3QuartersOutlined className={classNameIcon} style={{ color: '#006aff' }} />;
+      statusIcon = <Loading3QuartersOutlined />;
     } else if (status === 'success') {
-      statusIcon = <CheckCircleFilled className={classNameIcon} style={{ color: '#0ac185' }} />;
+      statusIcon = <CheckCircleFilled />;
     } else if (status === 'error') {
-      statusIcon = <CloseCircleFilled className={classNameIcon} style={{ color: '#ff4b4b' }} />;
+      statusIcon = <CloseCircleFilled />;
     } else if (status === 'warning') {
-      statusIcon = <Icon component={WaitingSvg} className={classNameIcon} style={{ color: '#ffac33' }} />
+      statusIcon = <Icon component={WaitingSvg} />
     } else if (status === 'default') {
-      statusIcon = <StopFilled className={classNameIcon} style={{ color: '#CDD5E4' }} />;
+      statusIcon = <StopFilled />;
     }
   }
 
   return (<Space className={`${className}`}>
-    {statusIcon}
+    <span className={classNameIcon}>{statusIcon}</span>
     {statusTextNode}
   </Space>)
 };
