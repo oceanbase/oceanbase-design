@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
 import Lottie from '../lottie';
+import spinJson from './assets/spin.json';
+import spinGrayJson from './assets/spin-gray.json';
 import useStyle from './style';
 
 export * from 'antd/es/spin';
@@ -25,7 +27,7 @@ const Spin = ({
   const indicator =
     customizeIndicator ||
     spin?.indicator ||
-    (gray ? <Lottie path="/lottie/spin-gray.json" /> : <Lottie path="/lottie/spin.json" />);
+    (gray ? <Lottie animationData={spinGrayJson} /> : <Lottie animationData={spinJson} />);
   const isDefaultIndicator = !(customizeIndicator || spin?.indicator);
   const isGrayIndicator = isDefaultIndicator && gray;
 
