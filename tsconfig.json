@@ -9,8 +9,6 @@
     "declaration": true,
     // TS 编译时跳过对 node_modules 依赖的检查
     "skipLibCheck": true,
-    // ref: https://github.com/microsoft/TypeScript/issues/47663#issuecomment-1519138189
-    "preserveSymlinks": true,
     "resolveJsonModule": true,
     "baseUrl": "./",
     "paths": {

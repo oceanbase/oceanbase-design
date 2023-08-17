@@ -36,11 +36,11 @@
     "postbuild": "cp src/style/reset.css dist/"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.16.1",
+    "@ant-design/cssinjs": "^1.16.2",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.8.2",
+    "antd": "^5.8.3",
     "classnames": "^2.3.2",
     "jsencrypt": "^3.3.2",
     "lodash": "^4.17.21",

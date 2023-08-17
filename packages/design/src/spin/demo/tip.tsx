@@ -1,9 +1,9 @@
 import React from 'react';
-import { Alert, Space, Spin } from '@oceanbase/design';
+import { Alert, Space, Spin, token } from '@oceanbase/design';
 
 const containerStyle = {
   padding: 50,
-  background: 'rgba(0, 0, 0, 0.05)',
+  background: token.colorBgLayout,
   borderRadius: 4,
   width: 120,
   height: 120,
