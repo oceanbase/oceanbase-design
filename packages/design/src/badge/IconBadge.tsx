@@ -1,4 +1,5 @@
 import React from 'react';
+import { Space } from 'antd';
 import Icon, {
   CloseCircleFilled,
   CheckCircleFilled,
@@ -29,22 +30,22 @@ const IconBadge = ({ icon, status, text, className, ...restProps }: IconBadgePro
     statusIcon = icon
   } else {
     if (status === 'processing') {
-      statusIcon = <Loading3QuartersOutlined className={classNameIcon} style={{ color: '#0ac185' }} />;
+      statusIcon = <Loading3QuartersOutlined className={classNameIcon} style={{ color: '#006aff' }} />;
     } else if (status === 'success') {
-      statusIcon = <CheckCircleFilled className={classNameIcon} style={{ color: '#ff4b4b' }} />;
+      statusIcon = <CheckCircleFilled className={classNameIcon} style={{ color: '#0ac185' }} />;
     } else if (status === 'error') {
-      statusIcon = <CloseCircleFilled className={classNameIcon} style={{ color: '#CDD5E4' }} />;
+      statusIcon = <CloseCircleFilled className={classNameIcon} style={{ color: '#ff4b4b' }} />;
     } else if (status === 'warning') {
-      statusIcon = <Icon component={WaitingSvg} className={classNameIcon} style={{ color: '#006aff' }} />
+      statusIcon = <Icon component={WaitingSvg} className={classNameIcon} style={{ color: '#ffac33' }} />
     } else if (status === 'default') {
-      statusIcon = <StopFilled className={classNameIcon} style={{ color: '#ffac33' }} />;
+      statusIcon = <StopFilled className={classNameIcon} style={{ color: '#CDD5E4' }} />;
     }
   }
 
-  return (<span className={`${className}`}>
+  return (<Space className={`${className}`}>
     {statusIcon}
     {statusTextNode}
-  </span>)
+  </Space>)
 };
 
 export default IconBadge;

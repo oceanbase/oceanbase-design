@@ -21,6 +21,6 @@ demo:
 
 | 参数 | 说明                                         | 类型    | 默认值 | 版本 |
 | :--- | :------------------------------------------- | :------ | :----- | :--- |
-| icon | 状态标识是否为图标形势，传入true采用默认icon，传入Icon可自定义icon | boolean | React.ReactNode | false  | -    |
+| icon | 状态标识是否为图标形势，传入true采用默认icon，传入Icon可自定义icon | boolean \| React.ReactNode | false  | -    |
 
 - 更多 API 详见 antd Badge 文档: https://ant.design/components/badge-cn
