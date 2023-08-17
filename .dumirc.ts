@@ -5,7 +5,7 @@ export default defineConfig({
   mfsu: {},
   // 默认重定向到子包的 src 文件夹
   // ref: https://d.umijs.org/config#monoreporedirect
-  monorepoRedirect: {},
+  // monorepoRedirect: {},
   ssr: process.env.NODE_ENV === 'production' ? {} : false,
   hash: true,
   crossorigin: {},
@@ -130,6 +130,9 @@ export default defineConfig({
             { title: 'Modal 对话框', link: '/components/modal' },
             { title: 'Notification 通知提醒框', link: '/components/notification' },
             { title: 'Spin 加载中', link: '/components/spin' },
+            { title: 'Badge 徽标数', link: '/components/badge' },
+
+            
           ],
         },
         {
