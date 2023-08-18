@@ -7,7 +7,7 @@ import Icon, {
   StopFilled
 } from '@ant-design/icons';
 // @ts-ignore
-import { ReactComponent as WaitingSvg } from './style/waiting.svg';
+import { WaitingSvg } from './style/waiting.svg';
 
 export interface IconBadgeProps {
   prefixCls: any,
