@@ -6,6 +6,8 @@ import Icon, {
   Loading3QuartersOutlined,
   StopFilled
 } from '@ant-design/icons';
+// @ts-ignore
+import { ReactComponent as WaitingSvg } from './style/waiting.svg';
 
 export interface IconBadgeProps {
   prefixCls: any,
@@ -14,8 +16,6 @@ export interface IconBadgeProps {
   text?: React.ReactNode;
   icon?: boolean | React.ReactNode;
 }
-
-const WaitingSvg = <svg t="1692177915450" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6069" width="18" height="18"><path d="M512 85.333333a426.666667 426.666667 0 1 1 0 853.333334A426.666667 426.666667 0 0 1 512 85.333333zM298.666667 469.333333a42.666667 42.666667 0 1 0 0 85.333334 42.666667 42.666667 0 0 0 0-85.333334z m213.333333 0a42.666667 42.666667 0 1 0 0 85.333334 42.666667 42.666667 0 0 0 0-85.333334z m213.333333 0a42.666667 42.666667 0 1 0 0 85.333334 42.666667 42.666667 0 0 0 0-85.333334z" fill="#FAAD14" p-id="6070"></path></svg>;
 
 const IconBadge = ({ icon, status, text, className, ...restProps }: IconBadgeProps) => {
 
