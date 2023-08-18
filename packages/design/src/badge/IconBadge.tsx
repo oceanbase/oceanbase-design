@@ -7,7 +7,7 @@ import Icon, {
   StopFilled
 } from '@ant-design/icons';
 // @ts-ignore
-import { WaitingSvg } from './style/waiting.svg';
+import waitingIcon from './style/waiting.png';
 
 export interface IconBadgeProps {
   prefixCls: any,
@@ -33,7 +33,13 @@ const IconBadge = ({ icon, status, text, className, ...restProps }: IconBadgePro
     } else if (status === 'error') {
       statusIcon = <CloseCircleFilled />;
     } else if (status === 'warning') {
-      statusIcon = <Icon component={WaitingSvg} />
+      statusIcon = <img
+        src={waitingIcon}
+        alt=""
+        style={{
+          marginBottom: 3
+        }}
+      />
     } else if (status === 'default') {
       statusIcon = <StopFilled />;
     }
