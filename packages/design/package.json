@@ -44,14 +44,10 @@
     "classnames": "^2.3.2",
     "jsencrypt": "^3.3.2",
     "lodash": "^4.17.21",
-<<<<<<< HEAD
     "randexp": "^0.5.3",
-    "rc-util": "^5.35.0",
     "react-copy-to-clipboard": "^5.1.0",
-=======
     "lottie-web": "^5.12.2",
     "rc-util": "^5.36.0",
->>>>>>> 1c8094549de30bc9776e29d404e1bf08515c92a3
     "react-sticky-mouse-tooltip": "^0.0.1"
   },
   "devDependencies": {
