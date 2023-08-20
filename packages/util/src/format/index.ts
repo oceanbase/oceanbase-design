@@ -1,5 +1,5 @@
 import { isNil, isNaN, toNumber } from 'lodash';
-import filesize from 'filesize';
+import { filesize } from 'filesize';
 import moment from 'moment';
 import { DATE_FORMAT } from '../constant';
 import { isNullValue } from '../util';
@@ -9,7 +9,7 @@ type Base = 2 | 10;
 /**
  * 将字节数格式化为易读的形式
  */
-export function humanSize(bytes: number | string, base: Base = 2): string {
+export function humanSize(bytes: number | string, base: Base = 2) {
   const newBytes = toNumber(bytes);
   return filesize(newBytes, { base });
 }

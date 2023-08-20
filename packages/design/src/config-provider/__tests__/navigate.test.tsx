@@ -4,9 +4,7 @@ import { render } from '@testing-library/react';
 import ConfigProvider from '..';
 
 describe('ConfigProvider navigate', () => {
-  beforeEach(() => {});
-
-  it('ConfigProvider navigate should work', () => {
+  it('navigate should work', () => {
     const Child = () => {
       const { navigate } = useContext(ConfigProvider.ExtendedConfigContext);
       expect(typeof navigate).toBe('function');

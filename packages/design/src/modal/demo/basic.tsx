@@ -1,12 +1,11 @@
-import { Button, ConfigProvider, Modal, theme } from '@oceanbase/design';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Button, Modal } from '@oceanbase/design';
 
 export default () => {
   const [open, setOpen] = useState(false);
 
-  // 在应用外围包裹一次 ConfigProvider 即可
   return (
-    <ConfigProvider theme={theme}>
+    <>
       <Button
         type="primary"
         onClick={() => {
@@ -29,6 +28,6 @@ export default () => {
         <p>Some contents...</p>
         <p>Some contents...</p>
       </Modal>
-    </ConfigProvider>
+    </>
   );
 };

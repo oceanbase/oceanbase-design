@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfigProvider spin spin.indicator should work 1`] = `
+<div
+  class="ant-app"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-spinning"
+  >
+    <div
+      class="custom-indicator ant-spin-dot"
+    />
+  </div>
+</div>
+`;

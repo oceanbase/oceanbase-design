@@ -14,18 +14,22 @@ const Modal = ({
   prefixCls: customizePrefixCls,
   className,
   rootClassName,
+  title,
+  footer,
   ...restProps
 }: ModalProps) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('modal', customizePrefixCls);
-  const { wrapSSR, hashId } = useStyle(prefixCls);
-  const modalCls = classNames(className, hashId);
+  const { wrapSSR } = useStyle(prefixCls);
+  const modalCls = classNames(className);
 
   return wrapSSR(
     <AntModal
       prefixCls={customizePrefixCls}
       className={modalCls}
-      rootClassName={classNames(rootClassName, hashId)}
+      rootClassName={classNames(rootClassName)}
+      title={title}
+      footer={footer}
       {...restProps}
     />
   );

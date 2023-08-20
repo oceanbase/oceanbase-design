@@ -129,6 +129,7 @@ export default defineConfig({
             { title: 'Message 全局提示', link: '/components/message' },
             { title: 'Modal 对话框', link: '/components/modal' },
             { title: 'Notification 通知提醒框', link: '/components/notification' },
+            { title: 'Spin 加载中', link: '/components/spin' },
           ],
         },
         {
@@ -158,8 +159,8 @@ export default defineConfig({
           children: [
             { title: 'Action 操作项', link: '/biz-components/action' },
             {
-              title: 'ContentWithQuestion 文字旁提示',
-              link: '/biz-components/content-with-question',
+              title: 'ContentWithIcon 文字旁提示',
+              link: '/biz-components/content-with-icon',
             },
             { title: 'Ranger 日期快速选择', link: '/biz-components/ranger' },
             { title: 'TreeSearch 树搜索', link: '/biz-components/tree-search' },
@@ -176,6 +177,7 @@ export default defineConfig({
             { title: 'SideTip 悬浮操作按钮', link: '/biz-components/side-tip' },
             { title: 'FullscreenBox 全屏盒子', link: '/biz-components/fullscreen-box' },
             { title: 'Highlight 代码高亮', link: '/biz-components/highlight' },
+            {title: 'TagSelect 标签式单选/多选', link: '/biz-components/tag-select'}
           ],
         },
       ],

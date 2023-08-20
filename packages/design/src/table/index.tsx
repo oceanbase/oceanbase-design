@@ -1,6 +1,5 @@
-import type { TableProps as AntTableProps } from 'antd';
 import { Popover, Space, Table as AntTable, Typography } from 'antd';
-import { useLocale } from 'antd/es/locale';
+import type { TableProps as AntTableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import type { RowSelectMethod, TableLocale as AntTableLocale } from 'antd/es/table/interface';
 import classNames from 'classnames';
@@ -56,13 +55,12 @@ function Table<T>(props: TableProps<T>) {
 
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('table', customizePrefixCls);
-  const { wrapSSR, hashId } = useStyle(prefixCls);
+  const { wrapSSR } = useStyle(prefixCls);
   const tableCls = classNames(
     {
       [`${prefixCls}-expandable`]: !isEmpty(expandable),
     },
-    className,
-    hashId
+    className
   );
 
   const [openPopver, setOpenPopver] = useState<boolean>(false);
@@ -83,7 +81,7 @@ function Table<T>(props: TableProps<T>) {
               },
         render: (text, record, index) => {
           const element = (
-            item.render ? item.render(text, record, index) : record[item.dataIndex]
+            item.render ? item.render(text, record, index) : record[(item as any).dataIndex]
           ) as ReactElement | undefined;
           const elementType = element?.type as any;
           // 如果目标元素已经被 Tooltip 包裹，则去掉默认的 Tooltip，避免有两个 Tooltip
@@ -127,6 +125,7 @@ function Table<T>(props: TableProps<T>) {
   const renderOptionsBar = (total: number, range: [number, number]) => {
     if (isEmpty(rowSelection) || isEmpty(currentSelectedRowKeys)) {
       return (
+        // @ts-ignore
         <span>{pagination && pagination?.showTotal && pagination?.showTotal(total, range)}</span>
       );
     }
@@ -171,6 +170,7 @@ function Table<T>(props: TableProps<T>) {
             </Space>
           )}
         </div>
+        {/* @ts-ignore */}
         <span>{pagination && pagination?.showTotal && pagination?.showTotal(total, range)}</span>
       </div>
     );
@@ -205,6 +205,7 @@ function Table<T>(props: TableProps<T>) {
           ? false
           : {
               ...pagination,
+              // @ts-ignore
               showTotal: renderOptionsBar,
             }
       }

@@ -36,19 +36,20 @@
     "postbuild": "cp src/style/reset.css dist/"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.16.1",
+    "@ant-design/cssinjs": "^1.16.2",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.8.0",
+    "antd": "^5.8.3",
     "classnames": "^2.3.2",
     "lodash": "^4.17.21",
-    "rc-util": "^5.35.0",
+    "lottie-web": "^5.12.2",
+    "rc-util": "^5.36.0",
     "react-sticky-mouse-tooltip": "^0.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.9",
-    "@babel/preset-env": "^7.22.9",
+    "@babel/cli": "^7.22.10",
+    "@babel/preset-env": "^7.22.10",
     "antd-token-previewer": "^1.1.0"
   },
   "peerDependencies": {
