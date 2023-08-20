@@ -23,9 +23,7 @@ const App: React.FC = () => {
           setOpen(false)
         }}
         onOpenChange={(v) => {
-          if (v) {
-            setOpen(v)
-          }
+          setOpen(v)
         }}
       >
         <Button>Set open</Button>
