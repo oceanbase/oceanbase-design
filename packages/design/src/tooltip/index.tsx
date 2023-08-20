@@ -1,7 +1,8 @@
 import { Tooltip as AntTooltip, Space } from 'antd';
 import type { TooltipPropsWithTitle as AntTooltipPropsWithTitle } from 'antd/es/tooltip';
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { CloseOutlined } from '@oceanbase/icons';
+import { isNil } from 'lodash';
 import { token } from '../static-function';
 import MouseTooltip from './MouseTooltip';
 import ConfigProvider from '../config-provider';
@@ -62,6 +63,7 @@ const Tooltip: CompoundedComponent = ({
   onClose,
   title,
   className,
+  open: propOpen,
   ...restProps
 }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -71,10 +73,19 @@ const Tooltip: CompoundedComponent = ({
   const { wrapSSR, hashId } = useStyle(prefixCls);
 
   const tooltipCls = classNames(className, hashId);
+  const [innerOpen, setInnerOpen] = useState(undefined)
+
+  const open = isNil(propOpen) ? innerOpen : propOpen
 
   const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     onClose?.(e);
+
+    if (e.defaultPrevented) {
+      return;
+    }
+
+    setInnerOpen(false);
   };
 
   const hasCloseIcon = !!closeIcon
@@ -115,6 +126,10 @@ const Tooltip: CompoundedComponent = ({
     <AntTooltip
       title={hasCloseIcon ? titleWithCloseIcon : title}
       color={color || typeItem?.backgroundColor}
+      open={open}
+      onOpenChange={(open) => {
+        setInnerOpen(open)
+      }}
       overlayInnerStyle={{
         color: typeItem?.color,
         ...overlayInnerStyle,

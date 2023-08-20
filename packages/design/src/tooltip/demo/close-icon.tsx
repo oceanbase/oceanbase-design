@@ -11,6 +11,12 @@ const App: React.FC = () => {
   return (
     <Space>
       <Tooltip title="This is prompt text"
+        closeIcon={true}
+      >
+        <Button>Default Close Tooltip</Button>
+      </Tooltip>
+
+      <Tooltip title="This is prompt text"
         open={open}
         closeIcon={true}
         onClose={() => {
