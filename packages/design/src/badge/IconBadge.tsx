@@ -1,6 +1,6 @@
 import React from 'react';
 import { Space } from 'antd';
-import Icon, {
+import {
   CloseCircleFilled,
   CheckCircleFilled,
   Loading3QuartersOutlined,
@@ -20,33 +20,29 @@ export interface IconBadgeProps {
 const IconBadge = ({ icon, status, text, className, ...restProps }: IconBadgeProps) => {
 
   const classNameIcon = `ant-badge-status-icon ant-badge-status-${status}`
-  let statusIcon: React.ReactNode | undefined = undefined;
   const statusTextNode = !text ? <></> : <span className="ant-badge-status-text">{text}</span>;
 
-  if (icon && typeof icon !== 'boolean') {
-    statusIcon = icon
-  } else {
-    if (status === 'processing') {
-      statusIcon = <Loading3QuartersOutlined />;
-    } else if (status === 'success') {
-      statusIcon = <CheckCircleFilled />;
-    } else if (status === 'error') {
-      statusIcon = <CloseCircleFilled />;
-    } else if (status === 'warning') {
-      statusIcon = <img
-        src={waitingIcon}
-        alt=""
-        style={{
-          marginBottom: 3
-        }}
-      />
-    } else if (status === 'default') {
-      statusIcon = <StopFilled />;
-    }
-  }
+  const iconMap = {
+    default: <StopFilled />,
+    processing: <Loading3QuartersOutlined style={{
+      display: 'inline-block',
+      animation: 'loadingCircle 1s infinite linear'
+    }} />,
+    success: <CheckCircleFilled />,
+    error: <CloseCircleFilled />,
+    warning: <img
+      src={waitingIcon}
+      alt=""
+      style={{
+        marginBottom: 3
+      }}
+    />,
+  };
 
   return (<Space className={`${className}`}>
-    <span className={classNameIcon}>{statusIcon}</span>
+    <span className={classNameIcon}>
+      {React.isValidElement(icon) ? icon : iconMap?.[status]}
+    </span>
     {statusTextNode}
   </Space>)
 };

@@ -2,7 +2,6 @@ import React from 'react';
 import { Badge, Space } from '@oceanbase/design';
 import { LoadingOutlined, AppleOutlined, WindowsOutlined, ChromeOutlined, TaobaoOutlined } from '@ant-design/icons';
 
-
 const App: React.FC = () => (
   <Space size="middle" direction="vertical">
     <Badge icon={<LoadingOutlined />} status="success" text="Success" />
