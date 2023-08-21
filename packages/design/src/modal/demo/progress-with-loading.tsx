@@ -30,16 +30,24 @@ export default () => {
             setFailOpen(true);
           }}
         >
-          Open Progress Modal from loading to success
+          Open Progress Modal from loading to fail
         </Button>
       </Space>
       <Modal.Progress
         title={done ? '🎉 Success to create cluster!' : 'Cluster is creating...'}
         open={successOpen}
+        loading={done ? false : true}
+        progress={
+          done
+            ? {
+                percent: 100,
+              }
+            : {}
+        }
         description={
           done
             ? 'Congratulations! please enjoy your OceanBase journey.'
-            : 'Cluster is creating, please waiting for a few seconds.'
+            : 'Cluster is creating, please waiting for 3 seconds.'
         }
         onOk={() => {
           setSuccessOpen(false);
@@ -53,9 +61,15 @@ export default () => {
       <Modal.Progress
         title={done ? '😭 Fail to create cluster!' : 'Cluster is creating...'}
         open={failOpen}
-        progress={{
-          status: done ? 'exception' : 'normal',
-        }}
+        loading={done ? false : true}
+        progress={
+          done
+            ? {
+                percent: 100,
+                status: 'exception',
+              }
+            : {}
+        }
         description={
           done ? (
             <Alert
@@ -65,7 +79,7 @@ export default () => {
               description="This is error message. This is error message. This is error message. This is error message."
             />
           ) : (
-            'Cluster is creating, please waiting for a few seconds.'
+            'Cluster is creating, please waiting for 3 seconds.'
           )
         }
         onOk={() => {

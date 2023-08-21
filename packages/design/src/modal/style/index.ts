@@ -40,18 +40,22 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
     /* Modal.Progress */
     [`${componentCls}${componentCls}-progress`]: {
       [`${componentCls}-content`]: {
-        padding: `${token.paddingXL}px ${token.paddingLG}px`,
+        padding: `${token.paddingXL + token.padding}px ${token.paddingLG + token.padding}px`,
         [`${componentCls}-header`]: {
           textAlign: 'center',
-          marginBottom: token.marginXL,
+          marginBottom: token.marginXXL,
           [`${componentCls}-title`]: {
             fontSize: token.fontSizeHeading4,
           },
         },
         [`${componentCls}-body`]: {
           textAlign: 'center',
-          [`${componentCls}-description`]: {
-            marginTop: token.marginXL,
+          [`${componentCls}-progress-loading`]: {
+            fontSize: 200,
+            color: token.colorInfo,
+          },
+          [`${componentCls}-progress-description`]: {
+            marginTop: token.marginXXL,
             color: token.colorTextTertiary,
           },
           // should align to left for Alert

@@ -5,8 +5,10 @@ import type { ProgressProps } from 'antd/es/progress';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import Modal from './Modal';
+import { LoadingOutlined } from '@oceanbase/icons';
 
 export interface ModalProgressProps extends ModalProps {
+  loading?: boolean;
   progress?: ProgressProps;
   description?: React.ReactNode;
 }
@@ -14,8 +16,9 @@ export interface ModalProgressProps extends ModalProps {
 const Progress = ({
   prefixCls: customizePrefixCls,
   className,
-  width = 480,
+  width = 567,
   maskClosable = false,
+  loading,
   progress,
   description,
   footer = null,
@@ -35,8 +38,12 @@ const Progress = ({
       {...restProps}
     >
       <>
-        <AntProgress type="circle" size={200} {...progress} />
-        <div className={`${prefixCls}-description`}>{description}</div>
+        {loading ? (
+          <LoadingOutlined className={`${prefixCls}-progress-loading`} />
+        ) : (
+          <AntProgress type="circle" size={200} {...progress} />
+        )}
+        <div className={`${prefixCls}-progress-description`}>{description}</div>
       </>
     </Modal>
   );

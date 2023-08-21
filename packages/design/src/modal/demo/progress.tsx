@@ -33,7 +33,7 @@ export default () => {
             setFailOpen(true);
           }}
         >
-          Open Progress Modal from percent to success
+          Open Progress Modal from percent to fail
         </Button>
       </Space>
       <Modal.Progress
