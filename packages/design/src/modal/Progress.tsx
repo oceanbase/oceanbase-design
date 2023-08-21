@@ -43,7 +43,7 @@ const Progress = ({
         ) : (
           <AntProgress type="circle" size={200} {...progress} />
         )}
-        <div className={`${prefixCls}-progress-description`}>{description}</div>
+        {description && <div className={`${prefixCls}-progress-description`}>{description}</div>}
       </>
     </Modal>
   );
