@@ -35,7 +35,7 @@ export interface PasswordProps extends AntdPasswordProps {
   publicKey?: string;
   // 自定义加密算法 需要将加密后结果 return
   customEncryption?: (value?: string) => string;
-  onPasswordChange?: (value?: string) => void;
+  onChange?: (value?: string) => void;
   rules?: Validator[];
   onValidate?: (passed: boolean) => void;
   generatePasswordRegex?: RegExp;
@@ -47,21 +47,22 @@ const Password: React.FC<PasswordProps> = ({
   locale: customLocale,
   rules,
   publicKey,
-  onPasswordChange,
+  onChange,
   onValidate,
   customEncryption,
   generatePasswordRegex,
   ...restProps
 }) => {
+  // console.log('value', value)
   const { encrypt } = useEncrypt();
 
-  const { InputPassword, ...restLocale } = {
-    ...customLocale,
-    InputPassword: {
-      ...enUS?.Input?.InputPassword,
-      ...customLocale?.InputPassword,
-    },
-  };
+  // const { InputPassword, ...restLocale } = {
+  //   ...customLocale,
+  //   InputPassword: {
+  //     ...enUS?.Input?.InputPassword,
+  //     ...customLocale?.InputPassword,
+  //   },
+  // };
 
   const [fieldError, setFieldError] = useState<string[]>([]);
   const [isValidating, setIsValidating] = useState(false);
@@ -71,18 +72,18 @@ const Password: React.FC<PasswordProps> = ({
   const defaultRules: Validator[] = [
     {
       validate: (val?: string) => val?.length >= 8 && val?.length <= 32,
-      message: InputPassword?.lengthRuleMessage,
+      message: ''//InputPassword?.lengthRuleMessage,
     },
     {
       validate: (val?: string) => /^[0-9a-zA-Z~!@#%^&*_\-+=|(){}\[\]:;,.?/`$'"<>\\]+$/.test(val),
-      message: InputPassword?.charRuleMessage,
+      message: ''//InputPassword?.charRuleMessage,
     },
     {
       validate: (val?: string) =>
         /(?=(.*[a-z]){2,})(?=(.*[A-Z]){2,})(?=(.*\d){2,})(?=(.*[~!@#%^&*_\-+=|(){}\[\]:;,.?/`$'"<>\\]){2,})/.test(
           val
         ),
-      message: InputPassword?.strengthRuleMessage,
+      message: ''//InputPassword?.strengthRuleMessage,
     },
   ];
   const newRules = rules || defaultRules;
@@ -109,12 +110,12 @@ const Password: React.FC<PasswordProps> = ({
     setTimeout(() => {
       if (publicKey) {
         setPrivateValue(newValue)
-        onPasswordChange?.(encrypt(newValue,publicKey));
+        onChange?.(encrypt(newValue,publicKey));
       } else if (customEncryption) { 
         setPrivateValue(newValue)
-        onPasswordChange?.(customEncryption(newValue));
+        onChange?.(customEncryption(newValue));
       } else {
-        onPasswordChange?.(newValue);    
+        onChange?.(newValue);    
       }
     }, 0);
   };
@@ -129,6 +130,7 @@ const Password: React.FC<PasswordProps> = ({
     return getRandomPassword();
   };
 
+  // console.log('value', value)
   return (
     <>
       <div style={{ display: 'flex' }}>
@@ -146,12 +148,14 @@ const Password: React.FC<PasswordProps> = ({
           }
           overlayStyle={{ maxWidth: 400 }}
         >
-          {(publicKey || customEncryption) ? <AntPassword
+          {(publicKey || customEncryption) ? 
+          <AntPassword
+          // value={value}
             autoComplete="new-password"
             onChange={e => {
               handleChange(e?.target?.value);
             }}
-            placeholder={generatePasswordRegex ? InputPassword?.generatePlaceholder : InputPassword?.placeholder}
+            // placeholder={generatePasswordRegex ? InputPassword?.generatePlaceholder : InputPassword?.placeholder}
             {...restProps}
           /> : <AntPassword
           value={value}
@@ -159,7 +163,7 @@ const Password: React.FC<PasswordProps> = ({
           onChange={e => {
             handleChange(e?.target?.value);
           }}
-          placeholder={generatePasswordRegex ? InputPassword?.generatePlaceholder : InputPassword?.placeholder}
+          // placeholder={generatePasswordRegex ? InputPassword?.generatePlaceholder : InputPassword?.placeholder}
           {...restProps}
         />}
         </Popover>
@@ -170,7 +174,8 @@ const Password: React.FC<PasswordProps> = ({
             }}
             style={{ marginLeft: 8 }}
           >
-            {InputPassword?.randomlyGenerate}
+            111
+            {/* {InputPassword?.randomlyGenerate} */}
           </Button>
         )}
       </div>
@@ -182,17 +187,17 @@ const Password: React.FC<PasswordProps> = ({
             lineHeight: '22px',
           }}
         >
-        {InputPassword?.pleaseKeepYourPasswordIn}
+        {/* {InputPassword?.pleaseKeepYourPasswordIn}
           <CopyToClipboard
           // 开启加密后，复制密码需要用未加密状态的
             text={publicKey || customEncryption ? privateValue : value }
             onCopy={() => {
-              message.success(InputPassword?.copySuccessfully);
+              // message.success(InputPassword?.copySuccessfully);
             }}
           >
            <a>{InputPassword?.copyPassword}</a>
           </CopyToClipboard>
-          {InputPassword?.andKeepItProperly}
+          {InputPassword?.andKeepItProperly} */}
         </div>
       )}
     </>
