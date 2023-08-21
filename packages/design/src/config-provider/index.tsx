@@ -8,6 +8,7 @@ import type {
 import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
 import type { SpinIndicator } from 'antd/es/spin';
 import StaticFunction from '../static-function';
+import type { Locale } from '../locale';
 import defaultTheme from '../theme';
 import defaultThemeToken from '../theme/default';
 import type { NavigateFunction } from './navigate';
@@ -24,6 +25,7 @@ export type SpinConfig = ComponentStyleConfig & {
 };
 
 export interface ConfigConsumerProps extends AntConfigConsumerProps {
+  locale?: Locale;
   spin?: SpinConfig;
 }
 

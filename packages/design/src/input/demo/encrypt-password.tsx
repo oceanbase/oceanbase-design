@@ -1,5 +1,5 @@
 import { Button, Form, Input } from '@oceanbase/design';
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 import useEncrypt from '../../_util/useEncrypt';
 
 const App: React.FC = () => {
@@ -25,22 +25,16 @@ const App: React.FC = () => {
 
   const onSubmit = () => {
     validateFields().then(values => {
-      const { username, password } = values;
-      alert(`表单校验通过 username：${username}, password：${password}`);
+      const { password } = values;
+      alert(`表单校验通过 password：${password}`);
     });
   };
 
-  const publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDsHofawSO/g3F45RXdIQoss2UNH2FQL7hWcbtNIsK3jt728Veg2R4Jasyfvxz7RwPIrfImsM7ZXI2R+matPLsL06KTecWtsXgtM/hLcEB31T4AABInS/QjG8/lIEc/QWic0/sm/Skn7vXw3KrV24LAi5P7oQjE7X3HMRnYMnrMFQIDAQAB"
+  const publicKey =
+    'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDsHofawSO/g3F45RXdIQoss2UNH2FQL7hWcbtNIsK3jt728Veg2R4Jasyfvxz7RwPIrfImsM7ZXI2R+matPLsL06KTecWtsXgtM/hLcEB31T4AABInS/QjG8/lIEc/QWic0/sm/Skn7vXw3KrV24LAi5P7oQjE7X3HMRnYMnrMFQIDAQAB';
 
   return (
     <Form form={form} {...formItemLayout}>
-      <Form.Item
-        name="username"
-        label="用户名"
-        rules={[{ required: true, message: '请输入用户名' }]}
-      >
-        <Input />
-      </Form.Item>
       <Form.Item
         name="password"
         label="密码"
@@ -60,12 +54,12 @@ const App: React.FC = () => {
           },
         ]}
       >
-        <Input.Password 
-        onValidate={setPassed} 
-        customEncryption={(val)=> {
-          return encrypt(val,publicKey)
-        }}
-        // publicKey={publicKey}
+        <Input.Password
+          onValidate={setPassed}
+          customEncryption={val => {
+            return encrypt(val, publicKey);
+          }}
+          // publicKey={publicKey}
         />
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>

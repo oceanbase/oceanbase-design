@@ -1,34 +1,34 @@
-import { Input } from 'antd';
-import { Button, message, Popover } from '@oceanbase/design';
-import type { PasswordProps as AntdPasswordProps } from 'antd/es/input';
-import RandExp from 'randexp';
 import React, { useState } from 'react';
-import { token } from '@oceanbase/design';
+import { Input } from 'antd';
+import type { PasswordProps as AntdPasswordProps } from 'antd/es/input';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import type { Validator } from './Content';
+import RandExp from 'randexp';
+import Button from '../../button';
+import Popover from '../../popover';
+import message from '../../message';
+import { token } from '../../static-function';
+import ConfigProvider from '../../config-provider';
+import type { ConfigConsumerProps } from '../../config-provider';
+import defaultLocale from '../../locale/en-US';
 import useEncrypt from '../../_util/useEncrypt';
 import Content from './Content';
-// import zhCN from '../locale/zh-CN';
-import enUS from '../locale/en-US';
+import type { Validator } from './Content';
 
 const AntPassword = Input.Password;
 
 export interface PasswordLocale {
-  InputPassword?: {
-    lengthRuleMessage?: string;
-    charRuleMessage?: string;
-    strengthRuleMessage?: string;
-    placeholder?: string;
-    generatePlaceholder?: string;
-    randomlyGenerate?: string;
-    pleaseKeepYourPasswordIn?: string;
-    copySuccessfully?: string;
-    copyPassword?: string;
-    andKeepItProperly?: string;
-  }
+  lengthRuleMessage?: string;
+  charRuleMessage?: string;
+  strengthRuleMessage?: string;
+  placeholder?: string;
+  generatePlaceholder?: string;
+  randomlyGenerate?: string;
+  pleaseKeepYourPasswordIn?: string;
+  copySuccessfully?: string;
+  copyPassword?: string;
+  andKeepItProperly?: string;
 }
 
-// Omit<AntdPasswordProps, 'onChange'>
 export interface PasswordProps extends AntdPasswordProps {
   value?: string;
   // RSA 加密用的公钥，如果需要进行密码加密，传入公钥即可
@@ -53,16 +53,12 @@ const Password: React.FC<PasswordProps> = ({
   generatePasswordRegex,
   ...restProps
 }) => {
-  // console.log('value', value)
   const { encrypt } = useEncrypt();
 
-  // const { InputPassword, ...restLocale } = {
-  //   ...customLocale,
-  //   InputPassword: {
-  //     ...enUS?.Input?.InputPassword,
-  //     ...customLocale?.InputPassword,
-  //   },
-  // };
+  const { locale: contextLocale = defaultLocale } = React.useContext<ConfigConsumerProps>(
+    ConfigProvider.ConfigContext
+  );
+  const passwordLocale: PasswordLocale = { ...contextLocale.Input.Password, ...customLocale };
 
   const [fieldError, setFieldError] = useState<string[]>([]);
   const [isValidating, setIsValidating] = useState(false);
@@ -72,18 +68,18 @@ const Password: React.FC<PasswordProps> = ({
   const defaultRules: Validator[] = [
     {
       validate: (val?: string) => val?.length >= 8 && val?.length <= 32,
-      message: ''//InputPassword?.lengthRuleMessage,
+      message: passwordLocale.lengthRuleMessage,
     },
     {
       validate: (val?: string) => /^[0-9a-zA-Z~!@#%^&*_\-+=|(){}\[\]:;,.?/`$'"<>\\]+$/.test(val),
-      message: ''//InputPassword?.charRuleMessage,
+      message: passwordLocale.charRuleMessage,
     },
     {
       validate: (val?: string) =>
         /(?=(.*[a-z]){2,})(?=(.*[A-Z]){2,})(?=(.*\d){2,})(?=(.*[~!@#%^&*_\-+=|(){}\[\]:;,.?/`$'"<>\\]){2,})/.test(
           val
         ),
-      message: ''//InputPassword?.strengthRuleMessage,
+      message: passwordLocale.strengthRuleMessage,
     },
   ];
   const newRules = rules || defaultRules;
@@ -109,13 +105,13 @@ const Password: React.FC<PasswordProps> = ({
     // 先触发 onValidate，再异步触发 onChange，以便在 antd3 Form 的类组件场景下，校验规则 validator 能获取到最新的 passed 值。
     setTimeout(() => {
       if (publicKey) {
-        setPrivateValue(newValue)
-        onChange?.(encrypt(newValue,publicKey));
-      } else if (customEncryption) { 
-        setPrivateValue(newValue)
+        setPrivateValue(newValue);
+        onChange?.(encrypt(newValue, publicKey));
+      } else if (customEncryption) {
+        setPrivateValue(newValue);
         onChange?.(customEncryption(newValue));
       } else {
-        onChange?.(newValue);    
+        onChange?.(newValue);
       }
     }, 0);
   };
@@ -130,7 +126,6 @@ const Password: React.FC<PasswordProps> = ({
     return getRandomPassword();
   };
 
-  // console.log('value', value)
   return (
     <>
       <div style={{ display: 'flex' }}>
@@ -148,24 +143,35 @@ const Password: React.FC<PasswordProps> = ({
           }
           overlayStyle={{ maxWidth: 400 }}
         >
-          {(publicKey || customEncryption) ? 
-          <AntPassword
-          // value={value}
-            autoComplete="new-password"
-            onChange={e => {
-              handleChange(e?.target?.value);
-            }}
-            // placeholder={generatePasswordRegex ? InputPassword?.generatePlaceholder : InputPassword?.placeholder}
-            {...restProps}
-          /> : <AntPassword
-          value={value}
-          autoComplete="new-password"
-          onChange={e => {
-            handleChange(e?.target?.value);
-          }}
-          // placeholder={generatePasswordRegex ? InputPassword?.generatePlaceholder : InputPassword?.placeholder}
-          {...restProps}
-        />}
+          {publicKey || customEncryption ? (
+            <AntPassword
+              value={value}
+              autoComplete="new-password"
+              onChange={e => {
+                handleChange(e?.target?.value);
+              }}
+              placeholder={
+                generatePasswordRegex
+                  ? passwordLocale.generatePlaceholder
+                  : passwordLocale.placeholder
+              }
+              {...restProps}
+            />
+          ) : (
+            <AntPassword
+              value={value}
+              autoComplete="new-password"
+              onChange={e => {
+                handleChange(e?.target?.value);
+              }}
+              placeholder={
+                generatePasswordRegex
+                  ? passwordLocale.generatePlaceholder
+                  : passwordLocale.placeholder
+              }
+              {...restProps}
+            />
+          )}
         </Popover>
         {generatePasswordRegex && (
           <Button
@@ -174,8 +180,7 @@ const Password: React.FC<PasswordProps> = ({
             }}
             style={{ marginLeft: 8 }}
           >
-            111
-            {/* {InputPassword?.randomlyGenerate} */}
+            {passwordLocale.randomlyGenerate}
           </Button>
         )}
       </div>
@@ -187,23 +192,22 @@ const Password: React.FC<PasswordProps> = ({
             lineHeight: '22px',
           }}
         >
-        {/* {InputPassword?.pleaseKeepYourPasswordIn}
+          {passwordLocale?.pleaseKeepYourPasswordIn}
           <CopyToClipboard
-          // 开启加密后，复制密码需要用未加密状态的
-            text={publicKey || customEncryption ? privateValue : value }
+            // 开启加密后，复制密码需要用未加密状态的
+            text={publicKey || customEncryption ? privateValue : value}
             onCopy={() => {
-              // message.success(InputPassword?.copySuccessfully);
+              message.success(passwordLocale.copySuccessfully);
             }}
           >
-           <a>{InputPassword?.copyPassword}</a>
+            <a>{passwordLocale.copyPassword}</a>
           </CopyToClipboard>
-          {InputPassword?.andKeepItProperly} */}
+          {passwordLocale.andKeepItProperly}
         </div>
       )}
     </>
   );
 };
-
 
 const InputPassword = Password as typeof AntPassword;
 

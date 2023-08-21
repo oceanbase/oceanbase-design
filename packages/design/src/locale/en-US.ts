@@ -14,7 +14,8 @@ export default {
     },
   },
   Input: {
-    InputPassword: {
+    ...enUS.Input,
+    Password: {
       lengthRuleMessage: '8 to 32 characters',
       charRuleMessage:
         'Contains only letters, numbers and symbols including ~!@#%^&*_-+=|(){}[]:;,.?/`$"<>\\',
@@ -28,5 +29,5 @@ export default {
       copyPassword: ' copy password ',
       andKeepItProperly: 'and keep it properly',
     },
-  }
+  },
 } as Locale;

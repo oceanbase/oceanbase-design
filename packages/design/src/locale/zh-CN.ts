@@ -14,7 +14,8 @@ export default {
     },
   },
   Input: {
-    InputPassword: {
+    ...zhCN.Input,
+    Password: {
       lengthRuleMessage: '长度为 8~32 个字符',
       charRuleMessage: '只能包含字母、数字和特殊字符（~!@#%^&*_-+=|(){}[]:;,.?/`$"<>\\）',
       strengthRuleMessage: '大小写字母、数字和特殊字符都至少包含 2 个',
@@ -26,5 +27,5 @@ export default {
       copyPassword: '复制密码',
       andKeepItProperly: '并妥善保存',
     },
-  }
+  },
 } as Locale;

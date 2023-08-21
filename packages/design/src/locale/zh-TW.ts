@@ -14,7 +14,8 @@ export default {
     },
   },
   Input: {
-    InputPassword: {
+    ...zhTW.Input,
+    Password: {
       lengthRuleMessage: '長度為 8~32 個字符',
       charRuleMessage: '只能包含字母、數字和特殊字符（~!@#%^&*_-+=|(){}[]:;,.?/`$"<>\\）',
       strengthRuleMessage: '大小寫字母、數字和特殊字符都至少包含 2 個',
@@ -26,5 +27,5 @@ export default {
       copyPassword: '複製密碼',
       andKeepItProperly: '並妥善保存',
     },
-  }
+  },
 } as Locale;

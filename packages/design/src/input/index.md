@@ -7,19 +7,16 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="基本" description="使用内置的校验规则"></code>
-
-<code src="./demo/input-password-basic.tsx" title="基本" description="使用内置的校验规则"></code>
-
-<code src="./demo/custom-rules.tsx" title="自定义校验规则"></code>
-
+<!-- prettier-ignore -->
+<code src="./demo/input-password-basic.tsx" title="密码强度校验" description="使用内置的校验规则"></code>
+<code src="./demo/custom-rules.tsx" title="自定义密码校验规则"></code>
 <code src="./demo/random-generate-password.tsx" title="生成随机密码"></code>
-
-<code src="./demo/custom-rules-and-random-generate.tsx" title="自定义校验规则 + 生成随机密码"></code>
-
-<code src="./demo/encrypt-password.tsx" title="对生成的密码加密"></code>
+<code src="./demo/custom-rules-and-random-generate.tsx" title="自定义密码校验规则 + 生成随机密码"></code>
+<code src="./demo/encrypt-password.tsx" title="密码加密"></code>
 
 ## API
+
+### Input.Password
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |

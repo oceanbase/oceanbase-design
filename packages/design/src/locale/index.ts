@@ -6,5 +6,7 @@ export * from 'antd/es/locale';
 
 export interface Locale extends AntLocale {
   Table?: TableLocale;
-  Input?: PasswordLocale;
+  Input?: {
+    Password?: PasswordLocale;
+  };
 }

@@ -1,5 +1,6 @@
-import { Button, Form, Input } from '@oceanbase/design';
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
+import { Button, Form } from '@oceanbase/design';
+import { Input } from 'antd';
 
 const App: React.FC = () => {
   const [form] = Form.useForm();
@@ -22,20 +23,13 @@ const App: React.FC = () => {
 
   const onSubmit = () => {
     validateFields().then(values => {
-      const { username, password } = values;
-      alert(`表单校验通过 username：${username}, password：${password}`);
+      const { password } = values;
+      alert(`表单校验通过 password：${password}`);
     });
   };
 
   return (
     <Form form={form} {...formItemLayout}>
-      <Form.Item
-        name="username"
-        label="用户名"
-        rules={[{ required: true, message: '请输入用户名' }]}
-      >
-        <Input />
-      </Form.Item>
       <Form.Item
         name="password"
         label="密码"
