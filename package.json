@@ -59,7 +59,7 @@
     "@types/node": "^20.5.0",
     "@types/react": "^18.2.20",
     "@umijs/fabric": "^4.0.1",
-    "@umijs/test": "^4.0.75",
+    "@umijs/test": "^4.0.76",
     "antd": "^5.8.4",
     "antd-style": "^3.4.4",
     "antd-token-previewer": "^1.1.0",
