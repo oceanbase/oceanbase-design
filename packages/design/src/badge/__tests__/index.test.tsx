@@ -15,8 +15,7 @@ describe('Badge', () => {
     const { container, asFragment } = render(
       <Badge status='success' icon={<TaobaoOutlined />} />
     );
-    expect(container.querySelector('.custom-indicator')).toBeTruthy();
-    expect(container.querySelector('.ant-spin-oceanbase')).toBeFalsy();
+    expect(container.querySelector('.ant-badge-status-icon')).toBeTruthy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 });
