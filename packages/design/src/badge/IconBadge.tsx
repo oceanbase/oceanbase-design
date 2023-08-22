@@ -4,10 +4,11 @@ import {
   CloseCircleFilled,
   CheckCircleFilled,
   Loading3QuartersOutlined,
-  StopFilled
+  StopFilled,
+  ClockCircleFilled
 } from '@ant-design/icons';
 // @ts-ignore
-import waitingIcon from './style/waiting.png';
+// import waitingIcon from './style/waiting.png';
 
 export interface IconBadgeProps {
   prefixCls: any,
@@ -30,13 +31,7 @@ const IconBadge = ({ icon, status, text, className, ...restProps }: IconBadgePro
     }} />,
     success: <CheckCircleFilled />,
     error: <CloseCircleFilled />,
-    warning: <img
-      src={waitingIcon}
-      alt=""
-      style={{
-        marginBottom: 3
-      }}
-    />,
+    warning: <ClockCircleFilled />,
   };
 
   return (<Space className={`${className}`}>
