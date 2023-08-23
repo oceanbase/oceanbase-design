@@ -43,5 +43,7 @@ export type { TinyColumnConfig } from './Tiny/TinyColumn';
 
 export { default as Progress } from './Tiny/Progress';
 export type { ProgressConfig } from './Tiny/Progress';
+export { default as Score } from './Score';
+export type { ScoreConfig } from './Score';
 
 export { theme } from './theme';

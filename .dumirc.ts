@@ -227,6 +227,10 @@ export default defineConfig({
               title: 'Tiny 迷你图',
               link: '/charts/tiny',
             },
+            {
+              title: 'Score 得分图',
+              link: '/charts/score',
+            },
           ],
         },
       ],
