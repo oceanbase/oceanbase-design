@@ -8,6 +8,7 @@ nav:
 ## 代码演示
 
 <!-- prettier-ignore -->
+<code src="./demo/basic.tsx" title="密码框" description="密码框"></code>
 <code src="./demo/input-password-basic.tsx" title="密码强度校验" description="使用内置的校验规则"></code>
 <code src="./demo/custom-rules.tsx" title="自定义密码校验规则"></code>
 <code src="./demo/random-generate-password.tsx" title="生成随机密码"></code>
@@ -20,7 +21,7 @@ nav:
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
-| rules | 密码校验规则 | [Validator](password#validator)[] | - | - |
+| rules | 是否激活密码校验提示，传入 true 表示采用默认校验规则，传入相应规则，采用自定义校验规则 | boolean |[Validator](password#validator)[] | false | - |
 | generatePasswordRegex | 随机生成密码的正则表达式，不为空则展示随机生成的按钮 | RegExp | - | - |
 | value | 密码框内容 | string | - | - |
 | publicKey | RSA 加密用的公钥，如果需要进行密码加密，且采用RSA方式加密，传入公钥即可,与 customEncryption 不可同时使用 | string | - | - |

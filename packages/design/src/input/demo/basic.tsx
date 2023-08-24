@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Form } from '@oceanbase/design';
 import { Input } from 'antd';
 
 const App: React.FC = () => {
   const [form] = Form.useForm();
   const { validateFields } = form;
-  const [passed, setPassed] = useState(false);
   const formItemLayout = {
     labelCol: {
       span: 4,
@@ -38,18 +37,9 @@ const App: React.FC = () => {
             required: true,
             message: '请输入密码',
           },
-          {
-            validator: (rule, value, callback) => {
-              if (value && !passed) {
-                callback('密码设置不符合要求');
-              } else {
-                callback();
-              }
-            },
-          },
         ]}
       >
-        <Input.Password onValidate={setPassed} rules={true}/>
+        <Input.Password />
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" onClick={onSubmit}>

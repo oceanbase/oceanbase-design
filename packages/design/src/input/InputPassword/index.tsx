@@ -36,7 +36,7 @@ export interface PasswordProps extends AntdPasswordProps {
   // 自定义加密算法 需要将加密后结果 return
   customEncryption?: (value?: string) => string;
   onChange?: (value?: string) => void;
-  rules?: Validator[];
+  rules?: boolean | Validator[];
   onValidate?: (passed: boolean) => void;
   generatePasswordRegex?: RegExp;
   locale?: PasswordLocale;
@@ -45,7 +45,7 @@ export interface PasswordProps extends AntdPasswordProps {
 const Password: React.FC<PasswordProps> = ({
   value,
   locale: customLocale,
-  rules,
+  rules = false,
   publicKey,
   onChange,
   onValidate,
@@ -82,7 +82,7 @@ const Password: React.FC<PasswordProps> = ({
       message: passwordLocale.strengthRuleMessage,
     },
   ];
-  const newRules = rules || defaultRules;
+  const newRules = rules && rules?.length > 0 ? rules : (rules ? defaultRules : []);
 
   const handleChange = (newValue?: string) => {
     if (!isTouched) {
@@ -132,20 +132,19 @@ const Password: React.FC<PasswordProps> = ({
         <Popover
           trigger="click"
           placement="right"
-          content={
+          content={newRules?.length > 0 ?
             <Content
               isTouched={isTouched}
               value={value}
               isValidating={isValidating}
               rules={newRules}
               fieldError={fieldError}
-            />
+            /> : null
           }
           overlayStyle={{ maxWidth: 400 }}
         >
           {publicKey || customEncryption ? (
             <AntPassword
-              value={value}
               autoComplete="new-password"
               onChange={e => {
                 handleChange(e?.target?.value);

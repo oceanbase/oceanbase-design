@@ -109,6 +109,7 @@ export default defineConfig({
           title: '数据录入',
           children: [
             { title: 'Form 表单', link: '/components/form' },
+            { title: 'Input 输入框', link: '/components/input' },
             { title: 'InputNumber 数字输入框', link: '/components/input-number' },
           ],
         },
