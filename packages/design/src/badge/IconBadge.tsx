@@ -20,8 +20,8 @@ export interface IconBadgeProps {
 
 const IconBadge = ({ icon, status, text, className, ...restProps }: IconBadgeProps) => {
 
-  const classNameIcon = `ant-badge-status-icon ant-badge-status-${status}`
-  const statusTextNode = !text ? <></> : <span className="ant-badge-status-text">{text}</span>;
+  const classNameIcon = `${className}-status-icon ${className}-status-${status}`
+  const statusTextNode = !text ? <></> : <span className={`${className}-status-text`}>{text}</span>;
 
   const iconMap = {
     default: <StopFilled />,
