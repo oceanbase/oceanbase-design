@@ -21,7 +21,7 @@ nav:
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
-| rules | 是否激活密码校验提示，传入 true 表示采用默认校验规则，传入相应规则，采用自定义校验规则 | boolean |[Validator](password#validator)[] | false | - |
+| rules | 是否激活密码校验提示，传入 true 表示采用默认校验规则，传入相应规则，采用自定义校验规则 | boolean \| [Validator](password#validator)[] | false | - |
 | generatePasswordRegex | 随机生成密码的正则表达式，不为空则展示随机生成的按钮 | RegExp | - | - |
 | value | 密码框内容 | string | - | - |
 | publicKey | RSA 加密用的公钥，如果需要进行密码加密，且采用RSA方式加密，传入公钥即可,与 customEncryption 不可同时使用 | string | - | - |

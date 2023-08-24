@@ -80,6 +80,7 @@
     "jest-environment-jsdom": "^29.6.2",
     "jest-fetch-mock": "^3.0.3",
     "jsonml-to-react-element": "^1.1.11",
+    "react-copy-to-clipboard": "^5.1.0",
     "jsonml.js": "^0.1.0",
     "lerna": "^7.1.5",
     "lint-staged": "^13.3.0",
