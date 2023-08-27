@@ -58,14 +58,14 @@ const ConfigProvider = ({ children, theme, navigate, spin, ...restProps }: Confi
         // Because defaultThemeToken is designed for light theme
         token: theme?.isDark
           ? {
-              ...defaultSeed,
-              ...theme?.token,
-            }
+            ...defaultSeed,
+            ...theme?.token,
+          }
           : {
-              ...defaultSeed,
-              ...defaultThemeToken,
-              ...theme?.token,
-            },
+            ...defaultSeed,
+            ...defaultThemeToken,
+            ...theme?.token,
+          },
         components: {
           ...components,
           ...theme?.components,
@@ -94,7 +94,6 @@ const ConfigProvider = ({ children, theme, navigate, spin, ...restProps }: Confi
 ConfigProvider.ConfigContext =
   AntConfigProvider.ConfigContext as React.Context<ConfigConsumerProps>;
 ConfigProvider.ExtendedConfigContext = ExtendedConfigContext;
-ConfigProvider.SizeContext = AntConfigProvider.SizeContext;
 ConfigProvider.config = AntConfigProvider.config;
 ConfigProvider.useConfig = AntConfigProvider.useConfig;
 
