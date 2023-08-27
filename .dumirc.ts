@@ -174,10 +174,7 @@ export default defineConfig({
               title: 'BackgroundTaskManager 后台任务管理器',
               link: '/biz-components/background-task-manager',
             },
-            { title: 'SideTip 悬浮操作按钮', link: '/biz-components/side-tip' },
-            { title: 'FullscreenBox 全屏盒子', link: '/biz-components/fullscreen-box' },
-            { title: 'Highlight 代码高亮', link: '/biz-components/highlight' },
-            {title: 'TagSelect 标签式单选/多选', link: '/biz-components/tag-select'}
+            { title: 'TagSelect 标签式单选/多选', link: '/biz-components/tag-select' },
           ],
         },
       ],
