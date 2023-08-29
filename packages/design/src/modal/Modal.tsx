@@ -1,38 +1,18 @@
 import { Modal as AntModal } from 'antd';
-import type { ModalProps as AntModalProps } from 'antd/es/modal';
+import type { ModalProps } from 'antd/es/modal';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
 import { modal } from '../static-function';
 import useStyle from './style';
 
-export * from 'antd/es/modal';
-
-export type ModalProps = AntModalProps;
-
-const Modal = ({
-  prefixCls: customizePrefixCls,
-  className,
-  rootClassName,
-  title,
-  footer,
-  ...restProps
-}: ModalProps) => {
+const Modal = ({ prefixCls: customizePrefixCls, className, ...restProps }: ModalProps) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('modal', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
   const modalCls = classNames(className);
 
-  return wrapSSR(
-    <AntModal
-      prefixCls={customizePrefixCls}
-      className={modalCls}
-      rootClassName={classNames(rootClassName)}
-      title={title}
-      footer={footer}
-      {...restProps}
-    />
-  );
+  return wrapSSR(<AntModal prefixCls={customizePrefixCls} className={modalCls} {...restProps} />);
 };
 
 // 替换 Modal 上的静态方法，支持消费 ConfigProvider 配置

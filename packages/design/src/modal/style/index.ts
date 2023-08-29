@@ -6,6 +6,7 @@ export type ModalToken = FullToken<'Modal'>;
 
 export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSSObject => {
   const {
+    antCls,
     componentCls,
     marginSM,
     marginLG,
@@ -20,6 +21,7 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
   const titleHeight = fontSizeHeading5 * lineHeightHeading5;
 
   return {
+    /* Modal */
     [`${componentCls}:not(${componentCls}-confirm)`]: {
       [`${componentCls}-header`]: {
         marginBottom: marginLG,
@@ -35,6 +37,38 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
         marginTop: marginLG,
       },
     },
+    /* Modal.Progress */
+    [`${componentCls}${componentCls}-progress`]: {
+      [`${componentCls}-content`]: {
+        padding: `${token.paddingXL + token.padding}px ${token.paddingLG + token.padding}px`,
+        [`${componentCls}-header`]: {
+          textAlign: 'center',
+          marginBottom: token.marginXXL,
+          [`${componentCls}-title`]: {
+            fontSize: token.fontSizeHeading4,
+          },
+        },
+        [`${componentCls}-body`]: {
+          textAlign: 'center',
+          [`${componentCls}-progress-loading`]: {
+            fontSize: 200,
+            color: token.colorInfo,
+          },
+          [`${componentCls}-progress-description`]: {
+            marginTop: token.marginXXL,
+            color: token.colorTextTertiary,
+          },
+          // should align to left for Alert
+          [`${antCls}-alert`]: {
+            textAlign: 'left',
+          },
+        },
+        [`${componentCls}-footer`]: {
+          textAlign: 'center',
+        },
+      },
+    },
+    /* Modal.method() */
     [`${componentCls}-confirm`]: {
       [`${componentCls}-body ${componentCls}-confirm-title +${componentCls}-confirm-content`]: {
         marginBlockStart: marginSM,
