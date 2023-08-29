@@ -4,10 +4,9 @@ import { Score } from '@oceanbase/charts';
 export default () => {
   return (
     <Score
-      size={300}
       value={100}
       color="#A084E8"
-      unit={false}
+      unit=""
       valueStyle={{ color: '#D0BFFF' }}
     />
   );

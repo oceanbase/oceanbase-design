@@ -188,6 +188,10 @@ export default defineConfig({
               link: '/charts/stat',
             },
             {
+              title: 'Score 得分图',
+              link: '/charts/score',
+            },
+            {
               title: 'Line 折线图',
               link: '/charts/line',
             },
@@ -226,10 +230,6 @@ export default defineConfig({
             {
               title: 'Tiny 迷你图',
               link: '/charts/tiny',
-            },
-            {
-              title: 'Score 得分图',
-              link: '/charts/score',
             },
           ],
         },

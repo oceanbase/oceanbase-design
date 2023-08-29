@@ -3,25 +3,21 @@ import { Score } from '@oceanbase/charts';
 import { Col, Row, Form, Radio } from '@oceanbase/design';
 
 export default () => {
-  const [size, setSize] = useState('large');
+  const [size, setSize] = useState('middle');
 
   return (
     <div>
       <Form
-        layout="horizontal"
         style={{ marginBottom: '30px' }}
       >
-        <Row gutter={8}>
-          <Col span={12}>
-            <Form.Item label="Size">
-              <Radio.Group value={size} onChange={e => setSize(e.target.value)}>
-                <Radio.Button value='large'>Large</Radio.Button>
-                <Radio.Button value='middle'>Default</Radio.Button>
-                <Radio.Button value='small'>Small</Radio.Button>
-              </Radio.Group>
-            </Form.Item>
-          </Col>
-        </Row>
+        <Form.Item label="Size">
+          <Radio.Group value={size} onChange={e => setSize(e.target.value)}>
+            <Radio.Button value='large'>Large</Radio.Button>
+            <Radio.Button value='middle'>Default</Radio.Button>
+            <Radio.Button value='small'>Small</Radio.Button>
+            <Radio.Button value={300}>300px</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
       </Form>
       <Row>
         <Col span={6}>

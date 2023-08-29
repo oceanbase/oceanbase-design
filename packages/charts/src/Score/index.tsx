@@ -1,15 +1,20 @@
 import React from 'react';
-import { toString } from 'lodash';
 import { calculateFontSize } from '../util/measureText';
+import classNames from 'classnames';
+import { sortByNumber } from '@oceanbase/util';
+import { toNumber, toString } from 'lodash';
+import { theme } from '../theme';
 import './index.less';
 
 export interface ScoreConfig {
-  size?: number | string;
+  size?: string | number;
   color?: string;
   value: number;
   valueStyle?: React.CSSProperties;
-  unit?: string | boolean;
+  unit?: string;
   unitStyle?: React.CSSProperties;
+  className?: string;
+  thresholds?: Record<string, string>;
 }
 
 const prefixCls = 'ob-score';
@@ -19,10 +24,10 @@ const largeSize = 200;
 const LINE_HEIGHT = 1.2;
 const VALUE_FONT_WEIGHT = 500;
 
-const firstColor = '#6caf4b';
-const secondColor = '#3f82e0';
-const thirdColor = '#ff8303';
-const fourthlyColor = '#de5c51';
+const successColor = theme.semanticGreen;
+const infoColor = theme.defaultColor;
+const warningColor = theme.semanticYellow;
+const errorColor = theme.semanticRed;
 
 const Score: React.FC<ScoreConfig> = ({
   size,
@@ -31,22 +36,38 @@ const Score: React.FC<ScoreConfig> = ({
   valueStyle,
   unit,
   unitStyle,
+  className,
+  thresholds = {},
   ...restConfig
 }) => {
-  const showUnit = unit === false ? null : unit || '分';
+  const showUnit = unit === '' ? null : unit || '分';
 
   let currentColor = '';
   if (color) {
     currentColor = color;
   } else if (value >= 85) {
-    currentColor = firstColor;
+    currentColor = successColor;
   } else if (value < 85 && value >= 70) {
-    currentColor = secondColor;
+    currentColor = infoColor;
   } else if (value < 70 && value >= 60) {
-    currentColor = thirdColor;
+    currentColor = warningColor;
   } else {
-    currentColor = fourthlyColor;
+    currentColor = errorColor;
   }
+
+  const thresholdList = Object.keys(thresholds)
+    .map(key => ({
+      value: toNumber(key),
+      color: thresholds[key],
+    }))
+    .sort((a, b) => sortByNumber(a, b, 'value'));
+  currentColor =
+    thresholdList.find(
+      (item, index) =>
+        !value ||
+        (value >= item.value &&
+          (!thresholdList[index + 1] || value < thresholdList[index + 1]?.value))
+    )?.color || currentColor;
 
   const bgColorStyle: React.CSSProperties = {
     backgroundColor: currentColor
@@ -57,12 +78,18 @@ const Score: React.FC<ScoreConfig> = ({
   }
 
   let style: React.CSSProperties = {};
-  if (typeof size === 'string') {
+  if (size) {
     switch (size) {
       case 'small':
         style = {
           width: smallSize,
           height: smallSize,
+        }
+        break;
+      case 'middle':
+        style = {
+          width: middleSize,
+          height: middleSize,
         }
         break;
       case 'large':
@@ -71,23 +98,12 @@ const Score: React.FC<ScoreConfig> = ({
           height: largeSize,
         }
         break;
-      case 'large':
-        style = {
-          width: middleSize,
-          height: middleSize,
-        }
-        break;
       default:
         style = {
           width: size,
           height: size,
         }
         break
-    }
-  } else if (typeof size === 'number') {
-    style = {
-      width: size,
-      height: size,
     }
   } else {
     style = {
@@ -116,12 +132,12 @@ const Score: React.FC<ScoreConfig> = ({
 
   return (
     <div
-      className={`${prefixCls}-container`}
-      style={{ ...style }}
+      className={classNames(`${prefixCls}-container`, className)}
+      style={style}
       {...restConfig}
     >
-      <div className={`${prefixCls}-background-first`} style={{ ...bgColorStyle }} />
-      <div className={`${prefixCls}-background-second`} style={{ ...bgColorStyle }} />
+      <div className={`${prefixCls}-background-first`} style={bgColorStyle} />
+      <div className={`${prefixCls}-background-second`} style={bgColorStyle} />
       <div className={`${prefixCls}-circle`}>
         <div className={`${prefixCls}-circle-content`}>
           <span className={`${prefixCls}-value`} style={{ fontSize: `${numberFontSize}px`, ...fontColorStyle, ...(valueStyle || {}) }} >{value || 0}</span>
