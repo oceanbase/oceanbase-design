@@ -24,8 +24,8 @@ importers:
         specifier: ^7.22.10
         version: 7.22.10(@babel/core@7.22.10)
       '@ctrl/tinycolor':
-        specifier: ^3.6.0
-        version: 3.6.0
+        specifier: ^4.0.1
+        version: 4.0.1
       '@emotion/babel-preset-css-prop':
         specifier: ^11.11.0
         version: 11.11.0(@babel/core@7.22.10)
@@ -3428,6 +3428,11 @@ packages:
   /@ctrl/tinycolor@3.6.0:
     resolution: {integrity: sha512-/Z3l6pXthq0JvMYdUFyX9j0MaCltlIn6mfh9jLyQwg5aPKxkyNa0PTHtU1AlFXLNk55ZuAeJRcpvq+tmLfKmaQ==}
     engines: {node: '>=10'}
+
+  /@ctrl/tinycolor@4.0.1:
+    resolution: {integrity: sha512-dfimuE1mfaqL8P8jyQzdk9yFeFUWCyhjK5VyydXgDtQO0fezr6aWaGauHnlI07BZBIF45gahb0oxJjkUcylDwQ==}
+    engines: {node: '>=14'}
+    dev: true
 
   /@dagrejs/graphlib@2.1.4:
     resolution: {integrity: sha512-QCg9sL4uhjn468FDEsb/S9hS2xUZSrv/+dApb1Ze5VKO96pTXKNJZ6MGhIpgWkc1TVhbVGH9/7rq/Mf8/jWicw==}
@@ -8207,7 +8212,7 @@ packages:
       '@babel/plugin-syntax-jsx': 7.22.5(@babel/core@7.22.10)
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.11(@babel/core@7.22.10)(react-dom@16.14.0)(react-is@18.2.0)(react@16.14.0)
+      styled-components: 5.3.11(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
     dev: true
