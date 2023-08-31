@@ -16,6 +16,7 @@ export { default as Modal } from './modal';
 export { message, notification, token } from './static-function';
 export { default as Table } from './table';
 export { default as Tabs } from './tabs';
+export {default as Tag} from './tag';
 export { default as theme } from './theme';
 export { default as Tooltip } from './tooltip';
 export { default as Breadcrumb } from './breadcrumb';
