@@ -22,6 +22,10 @@ return (
 );
 ```
 
+## 使用示例
+
+<code src="../../packages/ui/src/locale/demo/basic.tsx"></code>
+
 ## 目前支持语言
 
 目前支持以下语言：
