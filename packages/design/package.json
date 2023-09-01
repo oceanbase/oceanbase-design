@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/design",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "description": "The Design System of OceanBase",
   "keywords": [
     "OceanBase",
@@ -46,7 +46,7 @@
     "lodash": "^4.17.21",
     "randexp": "^0.5.3",
     "lottie-web": "^5.12.2",
-    "rc-util": "^5.36.0",
+    "rc-util": "^5.37.0",
     "react-sticky-mouse-tooltip": "^0.0.1"
   },
   "devDependencies": {

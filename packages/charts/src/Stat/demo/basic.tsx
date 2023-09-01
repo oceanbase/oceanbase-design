@@ -16,8 +16,8 @@ export default () => {
     height,
     ...(extra
       ? {
-          [extra]: extra === 'prefix' ? '$' : 'USD',
-        }
+        [extra]: extra === 'prefix' ? '$' : 'USD',
+      }
       : {}),
     layout,
     themeMode,
