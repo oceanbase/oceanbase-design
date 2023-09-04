@@ -1,17 +1,22 @@
 import React, { forwardRef } from 'react';
 import type { TinyColumnConfig as AntTinyColumnConfig } from '@ant-design/charts';
 import { TinyColumn as AntTinyColumn } from '@ant-design/charts';
-import { theme } from '../theme';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 
-export type TinyColumnConfig = AntTinyColumnConfig;
+export interface TinyColumnConfig extends AntTinyColumnConfig {
+  theme?: Theme;
+}
 
 const TinyColumn: React.FC<TinyColumnConfig> = forwardRef(
-  ({ height = 60, columnStyle, label, ...restConfig }, ref) => {
+  ({ height = 60, columnStyle, label, theme, ...restConfig }, ref) => {
+    const themeConfig = useTheme(theme);
+
     const newConfig: TinyColumnConfig = {
       height,
       appendPadding: label ? [16, 0, 0, 0] : 0,
-      maxColumnWidth: theme.columnWidth,
-      minColumnWidth: theme.columnWidth,
+      maxColumnWidth: themeConfig.columnWidth,
+      minColumnWidth: themeConfig.columnWidth,
       columnStyle: {
         radius: [2, 2, 0, 0],
         ...columnStyle,
@@ -23,7 +28,7 @@ const TinyColumn: React.FC<TinyColumnConfig> = forwardRef(
             ...label,
           }
         : undefined,
-      theme: 'ob',
+      theme: themeConfig.theme,
       ...restConfig,
     };
     return <AntTinyColumn {...newConfig} ref={ref} />;

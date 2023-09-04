@@ -31,7 +31,6 @@ export default () => {
       position: 'top-left',
     },
   };
-  console.log(Bar);
   return (
     <Row gutter={200}>
       <Col span={12}>

@@ -7,19 +7,23 @@ import { sortByMoment } from '@oceanbase/util';
 import useResizeObserver from 'use-resize-observer';
 import type { Tooltip } from '../hooks/useTooltipScrollable';
 import useTooltipScrollable from '../hooks/useTooltipScrollable';
-import { theme } from '../theme';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 
 export interface DualAxesConfig extends Omit<AntDualAxesConfig, 'yAxis'> {
   // 限制双轴图的 yAxis 为对象格式，而非数组格式。官方文档的示例均为对象格式，方便统一用法
   yAxis: false | Record<string, Axis>;
   tooltip?: false | Tooltip;
+  theme?: Theme;
 }
 
 const DualAxes: React.FC<DualAxesConfig> = forwardRef(
   (
-    { data, xField, yField, xAxis, yAxis, tooltip, legend, geometryOptions, ...restConfig },
+    { data, xField, yField, xAxis, yAxis, tooltip, legend, geometryOptions, theme, ...restConfig },
     ref
   ) => {
+    const themeConfig = useTheme(theme);
+
     const yField1 = yField?.[0];
     const yField2 = yField?.[1];
 
@@ -59,8 +63,8 @@ const DualAxes: React.FC<DualAxesConfig> = forwardRef(
                 line: {
                   ...xAxis?.grid?.line,
                   style: {
-                    lineWidth: theme.styleSheet.axisGridBorder,
-                    stroke: theme.styleSheet.axisGridBorderColor,
+                    lineWidth: themeConfig.styleSheet.axisGridBorder,
+                    stroke: themeConfig.styleSheet.axisGridBorderColor,
                     lineDash: [4, 4],
                     ...xAxis?.grid?.line?.style,
                   },
@@ -106,8 +110,8 @@ const DualAxes: React.FC<DualAxesConfig> = forwardRef(
           // 堆叠柱状图中最后一段对应的值
           const lastStackValue = stackValues?.[0];
           defaultGeometryOption = {
-            maxColumnWidth: theme.columnWidth,
-            minColumnWidth: theme.columnWidth,
+            maxColumnWidth: themeConfig.columnWidth,
+            minColumnWidth: themeConfig.columnWidth,
             columnStyle: datum => {
               return {
                 radius:
@@ -130,7 +134,7 @@ const DualAxes: React.FC<DualAxesConfig> = forwardRef(
           ...item,
         };
       }),
-      theme: 'ob',
+      theme: themeConfig.theme,
       ...restConfig,
     };
     return (

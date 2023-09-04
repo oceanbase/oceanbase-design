@@ -7,7 +7,7 @@ import {
 } from '@ant-design/cssinjs';
 import { App, theme as obTheme } from '@oceanbase/design';
 import type { DirectionType } from '@oceanbase/design/es/config-provider';
-import { createSearchParams, useOutlet, useSearchParams } from 'dumi';
+import { usePrefersColor, createSearchParams, useOutlet, useSearchParams } from 'dumi';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import useLayoutState from '../../hooks/useLayoutState';
 import SiteThemeProvider from '../SiteThemeProvider';
@@ -42,6 +42,7 @@ const GlobalLayout: React.FC = () => {
   const outlet = useOutlet();
   const { pathname } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [, , setPrefersColor] = usePrefersColor();
   const [{ theme = [], direction, isMobile }, setSiteState] = useLayoutState<SiteState>({
     isMobile: false,
     direction: 'ltr',
@@ -69,6 +70,8 @@ const GlobalLayout: React.FC = () => {
             ...nextSearchParams,
             theme: value.filter(t => t !== 'light'),
           });
+          // Set theme of dumi site
+          setPrefersColor(value?.filter(t => t === 'dark' || t === 'light')?.[0]);
         }
       });
 
@@ -88,6 +91,8 @@ const GlobalLayout: React.FC = () => {
     const _direction = searchParams.get('direction') as DirectionType;
 
     setSiteState({ theme: _theme, direction: _direction === 'rtl' ? 'rtl' : 'ltr' });
+    // Set theme of dumi site
+    setPrefersColor(_theme?.filter(t => t === 'dark' || t === 'light')?.[0]);
     // Handle isMobile
     updateMobileMode();
 

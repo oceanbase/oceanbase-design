@@ -1,8 +1,10 @@
 import React, { forwardRef } from 'react';
 import type { BarConfig as AntBarConfig } from '@ant-design/charts';
 import { Bar as AntBar } from '@ant-design/charts';
-import { theme } from '../theme';
+import { uniq } from 'lodash';
 import { toPercent } from '../util/number';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 
 export interface BarConfig extends AntBarConfig {
   // 是否为进度条形图，数值范围为 0 ~ 1
@@ -11,6 +13,7 @@ export interface BarConfig extends AntBarConfig {
   warningPercent?: number;
   // 危险水位线，仅 isProgress 为 true 时生效
   dangerPercent?: number;
+  theme?: Theme;
 }
 
 const Bar: React.FC<BarConfig> = forwardRef(
@@ -32,14 +35,16 @@ const Bar: React.FC<BarConfig> = forwardRef(
       xAxis,
       yAxis,
       legend,
+      theme,
       ...restConfig
     },
     ref
   ) => {
+    const themeConfig = useTheme(theme);
     const stackValues =
       (isStack &&
         seriesField &&
-        data?.filter(item => item[seriesField]).map(item => item[seriesField])) ||
+        uniq(data?.filter(item => item[seriesField]).map(item => item[seriesField]))) ||
       [];
     // 堆叠柱状图中最后一段对应的值
     const lastStackValue = stackValues?.[stackValues?.length - 1];
@@ -51,8 +56,8 @@ const Bar: React.FC<BarConfig> = forwardRef(
       isPercent,
       isRange,
       seriesField,
-      maxBarWidth: theme.barWidth,
-      minBarWidth: theme.barWidth,
+      maxBarWidth: themeConfig.barWidth,
+      minBarWidth: themeConfig.barWidth,
       meta: isProgress
         ? {
             ...meta,
@@ -78,9 +83,9 @@ const Bar: React.FC<BarConfig> = forwardRef(
         let color;
         if (isProgress) {
           if (dangerPercent && datum[xField] >= dangerPercent) {
-            color = theme.semanticRed;
+            color = themeConfig.semanticRed;
           } else if (warningPercent && datum[xField] >= warningPercent) {
-            color = theme.semanticYellow;
+            color = themeConfig.semanticYellow;
           }
         }
 
@@ -112,7 +117,7 @@ const Bar: React.FC<BarConfig> = forwardRef(
         ? {
             ...barBackground,
             style: {
-              fill: theme.barBackgroundColor,
+              fill: themeConfig.barBackgroundColor,
               ...barBackground?.style,
             },
           }
@@ -125,8 +130,8 @@ const Bar: React.FC<BarConfig> = forwardRef(
           line: {
             ...yAxis?.grid?.line,
             style: {
-              lineWidth: theme.styleSheet.axisGridBorder,
-              stroke: theme.styleSheet.axisGridBorderColor,
+              lineWidth: themeConfig.styleSheet.axisGridBorder,
+              stroke: themeConfig.styleSheet.axisGridBorderColor,
               lineDash: [4, 4],
               ...yAxis?.grid?.line?.style,
             },
@@ -142,7 +147,7 @@ const Bar: React.FC<BarConfig> = forwardRef(
           ...legend?.marker,
         },
       },
-      theme: 'ob',
+      theme: themeConfig.theme,
       ...restConfig,
     };
     return <AntBar {...newConfig} ref={ref} />;
