@@ -10,7 +10,7 @@ export interface ChartProviderProps extends ChartConsumerProps {
 
 const ChartProvider: React.FC<ChartProviderProps> & {
   ChartContext: typeof ChartContext;
-} = ({ children, theme, ...restProps }) => {
+} = ({ children, theme = 'light', ...restProps }) => {
   return (
     <ChartContext.Provider
       value={{

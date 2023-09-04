@@ -1,26 +1,28 @@
 import React, { forwardRef } from 'react';
 import type { LiquidConfig as AntLiquidConfig } from '@ant-design/charts';
 import { Liquid as AntLiquid } from '@ant-design/charts';
+// @ts-ignore
+import type { PathCommand } from '@antv/g-base';
 import { toPercent } from '../util/number';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
 
-function rectWithRadius(x: number, y: number, width: number, height: number) {
+function rectWithRadius(x: number, y: number, width: number, height: number): PathCommand[] {
   const GOLDEN_SECTION_RATIO = 0.618;
   const h = height / 2;
   const w = (width / 2) * GOLDEN_SECTION_RATIO;
   const radius = 6;
-  return `
-      M ${x - w + radius} ${y - h}
-      L ${x + w - radius} ${y - h}
-      a ${radius}, ${radius} 0 0 1 ${radius}, ${radius}
-      L ${x + w} ${y + h - radius}
-      a ${radius}, ${radius} 0 0 1 ${-radius}, ${radius}
-      L ${x - w + radius} ${y + h}
-      a ${radius}, ${radius} 0 0 1 ${-radius}, ${-radius}
-      L ${x - w} ${y - h + radius}
-      a ${radius}, ${radius} 0 0 1 ${radius}, ${-radius}
-    `;
+  return [
+    ['M', x - w + radius, y - h],
+    ['L', x + w - radius, y - h],
+    ['a', radius, radius, 0, 0, 1, radius, radius],
+    ['L', x + w, y + h - radius],
+    ['a', radius, radius, 0, 0, 1, -radius, radius],
+    ['L', x - w + radius, y + h],
+    ['a', radius, radius, 0, 0, 1, -radius, -radius],
+    ['L', x - w, y - h + radius],
+    ['a', radius, radius, 0, 0, 1, radius, -radius],
+  ];
 }
 
 export interface LiquidConfig extends AntLiquidConfig {

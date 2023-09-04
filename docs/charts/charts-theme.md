@@ -12,15 +12,25 @@ OceanBase Charts 的设计体系遵循 AntV 设计规范，并在此基础上扩
 import { ChartProvider, useTheme } from '@oceanbase/charts';
 
 export default () {
+  // 获取主题配置
   const themeConfig = useTheme();
   // 主题色
-  console.log(theme.defaultColor);
+  console.log(themeConfig.defaultColor);
   // 折线图线宽
-  console.log(theme.styleSheet.lineBorder);
+  console.log(themeConfig.styleSheet.lineBorder);
+  // 设置主题
   return (
-    <ChartProvider theme="dark">
-      {...}
-    </ChartProvider>
+    <>
+      <ChartProvider theme="light">
+        {...}
+      </ChartProvider>
+      <ChartProvider theme="dark">
+        {...}
+      </ChartProvider>
+      <ChartProvider theme={{ defaultColor: '#ff0000', subColor: '#00ff00' }}>
+        {...}
+      </ChartProvider>
+    </>
   );
 };
 ```

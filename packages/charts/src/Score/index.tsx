@@ -83,7 +83,10 @@ const Score: React.FC<ScoreConfig> = ({
     color: currentColor,
   };
 
-  let style: React.CSSProperties = {};
+  let style = {
+    width: 0,
+    height: 0,
+  };
   if (size) {
     switch (size) {
       case 'small':
@@ -106,8 +109,8 @@ const Score: React.FC<ScoreConfig> = ({
         break;
       default:
         style = {
-          width: size,
-          height: size,
+          width: size as number,
+          height: size as number,
         };
         break;
     }

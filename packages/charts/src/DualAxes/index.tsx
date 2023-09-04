@@ -1,7 +1,9 @@
 import React, { forwardRef } from 'react';
 import type { DualAxesConfig as AntDualAxesConfig } from '@ant-design/charts';
 import { DualAxes as AntDualAxes } from '@ant-design/charts';
+// @ts-ignore
 import type { GeometryColumnOption } from '@antv/g2plot/esm/plots/dual-axes/types';
+// @ts-ignore
 import type { Axis } from '@antv/g2plot/esm/types/axis';
 import { sortByMoment } from '@oceanbase/util';
 import useResizeObserver from 'use-resize-observer';
@@ -12,7 +14,7 @@ import type { Theme } from '../theme';
 
 export interface DualAxesConfig extends Omit<AntDualAxesConfig, 'yAxis'> {
   // 限制双轴图的 yAxis 为对象格式，而非数组格式。官方文档的示例均为对象格式，方便统一用法
-  yAxis: false | Record<string, Axis>;
+  yAxis?: Record<string, Axis>;
   tooltip?: false | Tooltip;
   theme?: Theme;
 }
@@ -71,7 +73,7 @@ const DualAxes: React.FC<DualAxesConfig> = forwardRef(
                 },
               },
       },
-      yAxis: yAxis !== false && {
+      yAxis: yAxis && {
         [yField1]: yAxis?.[yField1] !== false && {
           // 避免超出 Y 轴刻度线
           nice: true,

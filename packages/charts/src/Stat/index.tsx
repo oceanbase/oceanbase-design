@@ -4,8 +4,7 @@ import { toNumber, toString } from 'lodash';
 import classNames from 'classnames';
 import useResizeObserver from 'use-resize-observer';
 import { sortByNumber } from '@oceanbase/util';
-import type { Plot, AllBaseConfig } from '@ant-design/charts';
-import type { TinyAreaConfig } from '../Tiny/TinyArea';
+import type { TinyAreaConfig, TinyAreaRef } from '../Tiny/TinyArea';
 import TinyArea from '../Tiny/TinyArea';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
@@ -189,9 +188,7 @@ const Stat: React.FC<StatConfig> = ({
   );
   const prefixAndSuffixFontSize = valueFontSize * fontSizeReductionFactor(valueFontSize);
 
-  const chartRef = useRef<{
-    getChart: () => Plot<AllBaseConfig>;
-  }>();
+  const chartRef = useRef<TinyAreaRef>();
   // 图表占据一半高度
   const chartHeight = containerHeight * chartHeightPercent;
 
@@ -287,7 +284,11 @@ const Stat: React.FC<StatConfig> = ({
       </div>
       {containerHeight > 0 && hasChart && (
         <div className={`${prefixCls}-chart`}>
-          <TinyArea {...chartConfig} ref={chartRef} />
+          <TinyArea
+            {...chartConfig}
+            // @ts-ignore
+            ref={chartRef}
+          />
         </div>
       )}
     </div>
