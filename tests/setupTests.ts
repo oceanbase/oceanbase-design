@@ -19,6 +19,10 @@ jest.mock('react', () => ({
 
 jest.setTimeout(60000);
 
+if (typeof window.URL.createObjectURL === 'undefined') {
+  window.URL.createObjectURL = jest.fn();
+}
+
 /* eslint-disable global-require */
 if (typeof window !== 'undefined') {
   // ref: https://github.com/ant-design/ant-design/issues/18774
