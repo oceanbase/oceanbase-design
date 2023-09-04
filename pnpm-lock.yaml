@@ -24,8 +24,8 @@ importers:
         specifier: ^7.22.10
         version: 7.22.10(@babel/core@7.22.10)
       '@ctrl/tinycolor':
-        specifier: ^4.0.1
-        version: 4.0.1
+        specifier: ^4.0.2
+        version: 4.0.2
       '@emotion/babel-preset-css-prop':
         specifier: ^11.11.0
         version: 11.11.0(@babel/core@7.22.10)
@@ -2220,6 +2220,7 @@ packages:
   /@babel/plugin-proposal-object-rest-spread@7.20.7(@babel/core@7.22.10):
     resolution: {integrity: sha512-d2S98yCiLxDVmBmE8UjGcfPvNEUbA1U5q5WxaWFUGRzJSVAZqm5W6MbPct0jxnegUZ0niLeNX+IOzEs7wYg9Dg==}
     engines: {node: '>=6.9.0'}
+    deprecated: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-object-rest-spread instead.
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
@@ -3429,8 +3430,8 @@ packages:
     resolution: {integrity: sha512-/Z3l6pXthq0JvMYdUFyX9j0MaCltlIn6mfh9jLyQwg5aPKxkyNa0PTHtU1AlFXLNk55ZuAeJRcpvq+tmLfKmaQ==}
     engines: {node: '>=10'}
 
-  /@ctrl/tinycolor@4.0.1:
-    resolution: {integrity: sha512-dfimuE1mfaqL8P8jyQzdk9yFeFUWCyhjK5VyydXgDtQO0fezr6aWaGauHnlI07BZBIF45gahb0oxJjkUcylDwQ==}
+  /@ctrl/tinycolor@4.0.2:
+    resolution: {integrity: sha512-fKQinXE9pJ83J1n+C3rDl2xNLJwfoYNvXLRy5cYZA9hBJJw2q+sbb/AOSNKmLxnTWyNTmy4994dueSwP4opi5g==}
     engines: {node: '>=14'}
     dev: true
 
