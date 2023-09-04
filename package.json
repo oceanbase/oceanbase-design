@@ -40,7 +40,7 @@
   "devDependencies": {
     "@ant-design/colors": "^7.0.0",
     "@ant-design/cssinjs": "^1.16.2",
-    "@ant-design/icons": "^5.2.5",
+    "@ant-design/icons": "^5.2.6",
     "@babel/cli": "^7.22.10",
     "@babel/preset-env": "^7.22.10",
     "@ctrl/tinycolor": "^4.0.1",

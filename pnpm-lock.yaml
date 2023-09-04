@@ -15,8 +15,8 @@ importers:
         specifier: ^1.16.2
         version: 1.16.2(react-dom@18.2.0)(react@18.2.0)
       '@ant-design/icons':
-        specifier: ^5.2.5
-        version: 5.2.5(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^5.2.6
+        version: 5.2.6(react-dom@18.2.0)(react@18.2.0)
       '@babel/cli':
         specifier: ^7.22.10
         version: 7.22.10(@babel/core@7.22.10)
@@ -305,8 +305,8 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0
       '@ant-design/icons':
-        specifier: ^5.2.5
-        version: 5.2.5(react-dom@16.14.0)(react@16.14.0)
+        specifier: ^5.2.6
+        version: 5.2.6(react-dom@16.14.0)(react@16.14.0)
       '@oceanbase/icons-svg':
         specifier: ^1.0.4
         version: 1.0.4
@@ -630,8 +630,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: true
 
-  /@ant-design/icons@5.2.5(react-dom@16.14.0)(react@16.14.0):
-    resolution: {integrity: sha512-9Jc59v5fl5dzmxqLWtRev3dJwU7Ya9ZheoI6XmZjZiQ7PRtk77rC+Rbt7GJzAPPg43RQ4YO53RE1u8n+Et97vQ==}
+  /@ant-design/icons@5.2.6(react-dom@16.14.0)(react@16.14.0):
+    resolution: {integrity: sha512-4wn0WShF43TrggskBJPRqCD0fcHbzTYjnaoskdiJrVHg86yxoZ8ZUqsXvyn4WUqehRiFKnaclOhqk9w4Ui2KVw==}
     engines: {node: '>=8'}
     peerDependencies:
       react: '>=16.0.0'
@@ -641,13 +641,12 @@ packages:
       '@ant-design/icons-svg': 4.3.0
       '@babel/runtime': 7.22.10
       classnames: 2.3.2
-      lodash.camelcase: 4.3.0
       rc-util: 5.37.0(react-dom@16.14.0)(react@16.14.0)
       react: 16.14.0
       react-dom: 16.14.0(react@16.14.0)
 
-  /@ant-design/icons@5.2.5(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-9Jc59v5fl5dzmxqLWtRev3dJwU7Ya9ZheoI6XmZjZiQ7PRtk77rC+Rbt7GJzAPPg43RQ4YO53RE1u8n+Et97vQ==}
+  /@ant-design/icons@5.2.6(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-4wn0WShF43TrggskBJPRqCD0fcHbzTYjnaoskdiJrVHg86yxoZ8ZUqsXvyn4WUqehRiFKnaclOhqk9w4Ui2KVw==}
     engines: {node: '>=8'}
     peerDependencies:
       react: '>=16.0.0'
@@ -657,7 +656,6 @@ packages:
       '@ant-design/icons-svg': 4.3.0
       '@babel/runtime': 7.22.10
       classnames: 2.3.2
-      lodash.camelcase: 4.3.0
       rc-util: 5.37.0(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -696,7 +694,7 @@ packages:
       antd: '>=4.23.0 || >=5.0.0'
       react: '>=17.0.0'
     dependencies:
-      '@ant-design/icons': 5.2.5(react-dom@16.14.0)(react@16.14.0)
+      '@ant-design/icons': 5.2.6(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-provider': 2.12.1(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-utils': 2.13.0(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
       '@babel/runtime': 7.22.10
@@ -764,7 +762,7 @@ packages:
       antd: '>=4.23.0 || >=5.0.0'
       react: '>=17.0.0'
     dependencies:
-      '@ant-design/icons': 5.2.5(react-dom@16.14.0)(react@16.14.0)
+      '@ant-design/icons': 5.2.6(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-provider': 2.12.1(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-utils': 2.13.0(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
       '@babel/runtime': 7.22.10
@@ -793,7 +791,7 @@ packages:
       '@types/lodash.merge':
         optional: true
     dependencies:
-      '@ant-design/icons': 5.2.5(react-dom@16.14.0)(react@16.14.0)
+      '@ant-design/icons': 5.2.6(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-field': 2.11.0(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-provider': 2.12.1(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-utils': 2.13.0(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
@@ -819,7 +817,7 @@ packages:
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
     dependencies:
-      '@ant-design/icons': 5.2.5(react-dom@16.14.0)(react@16.14.0)
+      '@ant-design/icons': 5.2.6(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-provider': 2.12.1(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-utils': 2.13.0(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
       '@babel/runtime': 7.22.10
@@ -846,7 +844,7 @@ packages:
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
     dependencies:
-      '@ant-design/icons': 5.2.5(react-dom@16.14.0)(react@16.14.0)
+      '@ant-design/icons': 5.2.6(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-card': 2.5.11(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-field': 2.11.0(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-table': 3.10.6(antd@5.8.4)(rc-field-form@1.37.0)(react-dom@16.14.0)(react@16.14.0)
@@ -902,7 +900,7 @@ packages:
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
     dependencies:
-      '@ant-design/icons': 5.2.5(react-dom@16.14.0)(react@16.14.0)
+      '@ant-design/icons': 5.2.6(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-card': 2.5.11(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-field': 2.11.0(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-form': 2.18.0(antd@5.8.4)(rc-field-form@1.37.0)(react-dom@16.14.0)(react@16.14.0)
@@ -934,7 +932,7 @@ packages:
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
     dependencies:
-      '@ant-design/icons': 5.2.5(react-dom@16.14.0)(react@16.14.0)
+      '@ant-design/icons': 5.2.6(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/pro-provider': 2.12.1(antd@5.8.4)(react-dom@16.14.0)(react@16.14.0)
       '@babel/runtime': 7.22.10
       antd: 5.8.4(moment@2.29.4)(react-dom@16.14.0)(react@16.14.0)
@@ -2220,6 +2218,7 @@ packages:
   /@babel/plugin-proposal-object-rest-spread@7.20.7(@babel/core@7.22.10):
     resolution: {integrity: sha512-d2S98yCiLxDVmBmE8UjGcfPvNEUbA1U5q5WxaWFUGRzJSVAZqm5W6MbPct0jxnegUZ0niLeNX+IOzEs7wYg9Dg==}
     engines: {node: '>=6.9.0'}
+    deprecated: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-object-rest-spread instead.
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
@@ -7709,7 +7708,7 @@ packages:
     dependencies:
       '@ant-design/colors': 7.0.0
       '@ant-design/cssinjs': 1.16.2(react-dom@16.14.0)(react@16.14.0)
-      '@ant-design/icons': 5.2.5(react-dom@16.14.0)(react@16.14.0)
+      '@ant-design/icons': 5.2.6(react-dom@16.14.0)(react@16.14.0)
       '@ant-design/react-slick': 1.0.2(react@16.14.0)
       '@babel/runtime': 7.22.10
       '@ctrl/tinycolor': 3.6.0
@@ -8212,7 +8211,7 @@ packages:
       '@babel/plugin-syntax-jsx': 7.22.5(@babel/core@7.22.10)
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.11(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      styled-components: 5.3.11(@babel/core@7.22.10)(react-dom@16.14.0)(react-is@18.2.0)(react@16.14.0)
     transitivePeerDependencies:
       - '@babel/core'
     dev: true
@@ -15518,6 +15517,7 @@ packages:
 
   /lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
+    dev: false
 
   /lodash.curry@4.1.1:
     resolution: {integrity: sha512-/u14pXGviLaweY5JI0IUzgzF2J6Ne8INyzAZjImcryjgkZ+ebruBxy2/JaOOkTqScddcYtakjhSaeemV8lR0tA==}
