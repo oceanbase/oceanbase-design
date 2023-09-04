@@ -1,4 +1,5 @@
 import { ConfigProvider, token } from '@oceanbase/design';
+import { ChartProvider } from '@oceanbase/charts';
 import type { ThemeProviderProps } from 'antd-style';
 import { ThemeProvider } from 'antd-style';
 import type { FC } from 'react';
@@ -40,7 +41,7 @@ const SiteThemeProvider: FC<ThemeProviderProps> = ({ children, theme, ...rest })
         direction={direction}
         locale={lang === 'cn' ? zhCN : undefined}
       >
-        {children}
+        <ChartProvider theme={theme.isDark ? 'dark' : 'light'}>{children}</ChartProvider>
       </ConfigProvider>
     </ThemeProvider>
   );

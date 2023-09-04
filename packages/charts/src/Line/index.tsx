@@ -5,14 +5,21 @@ import { Line as AntLine } from '@ant-design/charts';
 import useResizeObserver from 'use-resize-observer';
 import type { Tooltip } from '../hooks/useTooltipScrollable';
 import useTooltipScrollable from '../hooks/useTooltipScrollable';
-import { theme } from '../theme';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 
 export interface LineConfig extends AntLineConfig {
   tooltip?: false | Tooltip;
+  theme?: Theme;
 }
 
 const Line: React.FC<LineConfig> = forwardRef(
-  ({ data, stepType, xField, xAxis, yAxis, tooltip, legend, interactions, ...restConfig }, ref) => {
+  (
+    { data, stepType, xField, xAxis, yAxis, tooltip, legend, interactions, theme, ...restConfig },
+    ref
+  ) => {
+    const themeConfig = useTheme(theme);
+
     const { ref: containerRef, height: containerHeight } = useResizeObserver<HTMLDivElement>({
       // 包含 padding 和 border
       box: 'border-box',
@@ -44,8 +51,8 @@ const Line: React.FC<LineConfig> = forwardRef(
                 line: {
                   ...xAxis?.grid?.line,
                   style: {
-                    lineWidth: theme.styleSheet.axisGridBorder,
-                    stroke: theme.styleSheet.axisGridBorderColor,
+                    lineWidth: themeConfig.styleSheet.axisGridBorder,
+                    stroke: themeConfig.styleSheet.axisGridBorderColor,
                     lineDash: [4, 4],
                     ...xAxis?.grid?.line?.style,
                   },
@@ -75,7 +82,7 @@ const Line: React.FC<LineConfig> = forwardRef(
           type: 'brush-x',
         },
       ],
-      theme: 'ob',
+      theme: themeConfig.theme,
       ...restConfig,
     };
     return (

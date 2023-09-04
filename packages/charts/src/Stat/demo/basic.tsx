@@ -7,7 +7,6 @@ export default () => {
   const [height, setHeight] = useState(100);
   const [span, setSpan] = useState(8);
   const [layout, setLayout] = useState('vertical');
-  const [themeMode, setThemeMode] = useState('light');
   const [colorMode, setColorMode] = useState('background');
   const [chartMode, setChartMode] = useState('area');
   const [textAlign, setTextAlign] = useState('auto');
@@ -16,11 +15,10 @@ export default () => {
     height,
     ...(extra
       ? {
-        [extra]: extra === 'prefix' ? '$' : 'USD',
-      }
+          [extra]: extra === 'prefix' ? '$' : 'USD',
+        }
       : {}),
     layout,
-    themeMode,
     colorMode,
     chartMode,
     chartData: [
@@ -73,14 +71,6 @@ export default () => {
               <Radio.Group value={layout} onChange={e => setLayout(e.target.value)}>
                 <Radio.Button value="vertical">Vertical</Radio.Button>
                 <Radio.Button value="horizontal">Horizontal</Radio.Button>
-              </Radio.Group>
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item label="Theme Mode">
-              <Radio.Group value={themeMode} onChange={e => setThemeMode(e.target.value)}>
-                <Radio.Button value="light">Light</Radio.Button>
-                <Radio.Button value="dark">Dark</Radio.Button>
               </Radio.Group>
             </Form.Item>
           </Col>

@@ -1,16 +1,24 @@
 import React, { forwardRef } from 'react';
 import type { ColumnConfig as AntColumnConfig } from '@ant-design/charts';
 import { Column as AntColumn } from '@ant-design/charts';
-import { theme } from '../theme';
+import { uniq } from 'lodash';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 
-export type ColumnConfig = AntColumnConfig;
+export interface ColumnConfig extends AntColumnConfig {
+  theme?: Theme;
+}
 
 const Column: React.FC<ColumnConfig> = forwardRef(
-  ({ data, isStack, isGroup, isRange, seriesField, label, xAxis, legend, ...restConfig }, ref) => {
+  (
+    { data, isStack, isGroup, isRange, seriesField, label, xAxis, legend, theme, ...restConfig },
+    ref
+  ) => {
+    const themeConfig = useTheme(theme);
     const stackValues =
       (isStack &&
         seriesField &&
-        data?.filter(item => item[seriesField]).map(item => item[seriesField])) ||
+        uniq(data?.filter(item => item[seriesField]).map(item => item[seriesField]))) ||
       [];
     // 堆叠柱状图中最后一段对应的值
     const lastStackValue = stackValues?.[0];
@@ -20,8 +28,8 @@ const Column: React.FC<ColumnConfig> = forwardRef(
       isGroup,
       isRange,
       seriesField,
-      maxColumnWidth: theme.columnWidth,
-      minColumnWidth: theme.columnWidth,
+      maxColumnWidth: themeConfig.columnWidth,
+      minColumnWidth: themeConfig.columnWidth,
       // 普通柱状图 label 会展示在顶部，需要留出一定空间，否则 label 会被遮挡
       appendPadding: isStack || isGroup || isRange ? 0 : [16, 0, 0, 0],
       // 分组柱状图组内柱子间距，仅分组柱状图生效
@@ -62,8 +70,8 @@ const Column: React.FC<ColumnConfig> = forwardRef(
                 line: {
                   ...xAxis?.grid?.line,
                   style: {
-                    lineWidth: theme.styleSheet.axisGridBorder,
-                    stroke: theme.styleSheet.axisGridBorderColor,
+                    lineWidth: themeConfig.styleSheet.axisGridBorder,
+                    stroke: themeConfig.styleSheet.axisGridBorderColor,
                     lineDash: [4, 4],
                     ...xAxis?.grid?.line?.style,
                   },
@@ -79,7 +87,7 @@ const Column: React.FC<ColumnConfig> = forwardRef(
           ...legend?.marker,
         },
       },
-      theme: 'ob',
+      theme: themeConfig.theme,
       ...restConfig,
     };
     return <AntColumn {...newConfig} ref={ref} />;

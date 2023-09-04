@@ -3,7 +3,8 @@ import { calculateFontSize } from '../util/measureText';
 import classNames from 'classnames';
 import { sortByNumber } from '@oceanbase/util';
 import { toNumber, toString } from 'lodash';
-import { theme } from '../theme';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 import './index.less';
 
 export interface ScoreConfig {
@@ -13,8 +14,10 @@ export interface ScoreConfig {
   valueStyle?: React.CSSProperties;
   unit?: string;
   unitStyle?: React.CSSProperties;
-  className?: string;
+
   thresholds?: Record<string, string>;
+  theme?: Theme;
+  className?: string;
 }
 
 const prefixCls = 'ob-score';
@@ -24,11 +27,6 @@ const largeSize = 200;
 const LINE_HEIGHT = 1.2;
 const VALUE_FONT_WEIGHT = 500;
 
-const successColor = theme.semanticGreen;
-const infoColor = theme.defaultColor;
-const warningColor = theme.semanticYellow;
-const errorColor = theme.semanticRed;
-
 const Score: React.FC<ScoreConfig> = ({
   size,
   color,
@@ -36,11 +34,17 @@ const Score: React.FC<ScoreConfig> = ({
   valueStyle,
   unit,
   unitStyle,
-  className,
   thresholds = {},
+  className,
+  theme,
   ...restConfig
 }) => {
-  const showUnit = unit === '' ? null : unit || '分';
+  const themeConfig = useTheme(theme);
+
+  const successColor = themeConfig.semanticGreen;
+  const infoColor = themeConfig.defaultColor;
+  const warningColor = themeConfig.semanticYellow;
+  const errorColor = themeConfig.semanticRed;
 
   let currentColor = '';
   if (color) {
@@ -54,6 +58,8 @@ const Score: React.FC<ScoreConfig> = ({
   } else {
     currentColor = errorColor;
   }
+
+  const showUnit = unit === '' ? null : unit || '分';
 
   const thresholdList = Object.keys(thresholds)
     .map(key => ({
@@ -70,46 +76,49 @@ const Score: React.FC<ScoreConfig> = ({
     )?.color || currentColor;
 
   const bgColorStyle: React.CSSProperties = {
-    backgroundColor: currentColor
-  }
+    backgroundColor: currentColor,
+  };
 
   const fontColorStyle: React.CSSProperties = {
-    color: currentColor
-  }
+    color: currentColor,
+  };
 
-  let style: React.CSSProperties = {};
+  let style = {
+    width: 0,
+    height: 0,
+  };
   if (size) {
     switch (size) {
       case 'small':
         style = {
           width: smallSize,
           height: smallSize,
-        }
+        };
         break;
       case 'middle':
         style = {
           width: middleSize,
           height: middleSize,
-        }
+        };
         break;
       case 'large':
         style = {
           width: largeSize,
           height: largeSize,
-        }
+        };
         break;
       default:
         style = {
-          width: size,
-          height: size,
-        }
-        break
+          width: size as number,
+          height: size as number,
+        };
+        break;
     }
   } else {
     style = {
       width: middleSize,
       height: middleSize,
-    }
+    };
   }
 
   const numberFontSize = calculateFontSize(
@@ -131,17 +140,35 @@ const Score: React.FC<ScoreConfig> = ({
   );
 
   return (
-    <div
-      className={classNames(`${prefixCls}-container`, className)}
-      style={style}
-      {...restConfig}
-    >
+    <div className={classNames(`${prefixCls}-container`, className)} style={style} {...restConfig}>
       <div className={`${prefixCls}-background-first`} style={bgColorStyle} />
       <div className={`${prefixCls}-background-second`} style={bgColorStyle} />
-      <div className={`${prefixCls}-circle`}>
+      <div
+        className={`${prefixCls}-circle`}
+        style={{
+          backgroundColor: themeConfig.backgroundColor,
+        }}
+      >
         <div className={`${prefixCls}-circle-content`}>
-          <span className={`${prefixCls}-value`} style={{ fontSize: `${numberFontSize}px`, ...fontColorStyle, ...(valueStyle || {}) }} >{value || 0}</span>
-          {showUnit ? <span className={`${prefixCls}-unit`} style={{ fontSize: `${unitFontSize}px`, marginLeft: style.width * 0.04, ...fontColorStyle, ...(unitStyle || {}) }} >{showUnit}</span> : null}
+          <span
+            className={`${prefixCls}-value`}
+            style={{ fontSize: `${numberFontSize}px`, ...fontColorStyle, ...(valueStyle || {}) }}
+          >
+            {value || 0}
+          </span>
+          {showUnit ? (
+            <span
+              className={`${prefixCls}-unit`}
+              style={{
+                fontSize: `${unitFontSize}px`,
+                marginLeft: style.width * 0.04,
+                ...fontColorStyle,
+                ...(unitStyle || {}),
+              }}
+            >
+              {showUnit}
+            </span>
+          ) : null}
         </div>
       </div>
     </div>

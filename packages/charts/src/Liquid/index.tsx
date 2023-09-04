@@ -1,25 +1,28 @@
 import React, { forwardRef } from 'react';
 import type { LiquidConfig as AntLiquidConfig } from '@ant-design/charts';
 import { Liquid as AntLiquid } from '@ant-design/charts';
+// @ts-ignore
+import type { PathCommand } from '@antv/g-base';
 import { toPercent } from '../util/number';
-import { theme } from '../theme';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 
-function rectWithRadius(x: number, y: number, width: number, height: number) {
+function rectWithRadius(x: number, y: number, width: number, height: number): PathCommand[] {
   const GOLDEN_SECTION_RATIO = 0.618;
   const h = height / 2;
   const w = (width / 2) * GOLDEN_SECTION_RATIO;
   const radius = 6;
-  return `
-      M ${x - w + radius} ${y - h}
-      L ${x + w - radius} ${y - h}
-      a ${radius}, ${radius} 0 0 1 ${radius}, ${radius}
-      L ${x + w} ${y + h - radius}
-      a ${radius}, ${radius} 0 0 1 ${-radius}, ${radius}
-      L ${x - w + radius} ${y + h}
-      a ${radius}, ${radius} 0 0 1 ${-radius}, ${-radius}
-      L ${x - w} ${y - h + radius}
-      a ${radius}, ${radius} 0 0 1 ${radius}, ${-radius}
-    `;
+  return [
+    ['M', x - w + radius, y - h],
+    ['L', x + w - radius, y - h],
+    ['a', radius, radius, 0, 0, 1, radius, radius],
+    ['L', x + w, y + h - radius],
+    ['a', radius, radius, 0, 0, 1, -radius, radius],
+    ['L', x - w + radius, y + h],
+    ['a', radius, radius, 0, 0, 1, -radius, -radius],
+    ['L', x - w, y - h + radius],
+    ['a', radius, radius, 0, 0, 1, radius, -radius],
+  ];
 }
 
 export interface LiquidConfig extends AntLiquidConfig {
@@ -32,6 +35,7 @@ export interface LiquidConfig extends AntLiquidConfig {
   dangerPercent?: number;
   // 百分比最多保留的有效小数位数
   decimal?: number;
+  theme?: Theme;
 }
 
 const Liquid: React.FC<LiquidConfig> = forwardRef(
@@ -52,15 +56,18 @@ const Liquid: React.FC<LiquidConfig> = forwardRef(
       outline,
       wave,
       statistic,
+      theme,
       ...restConfig
     },
     ref
   ) => {
+    const themeConfig = useTheme(theme);
+
     let color;
     if (dangerPercent && percent >= dangerPercent) {
-      color = theme.semanticRed;
+      color = themeConfig.semanticRed;
     } else if (warningPercent && percent >= warningPercent) {
-      color = theme.semanticYellow;
+      color = themeConfig.semanticYellow;
     }
     const newConfig: LiquidConfig = {
       height,
@@ -74,13 +81,13 @@ const Liquid: React.FC<LiquidConfig> = forwardRef(
       percent,
       liquidStyle: {
         // 水波背景色
-        fill: color || theme.semanticGreen,
+        fill: color || themeConfig.semanticGreen,
         radius: 10,
         ...liquidStyle,
       },
       shapeStyle: {
         // 形状背景色
-        fill: '#F5F8FE',
+        fill: themeConfig.subColor,
         radius: 10,
         ...shapeStyle,
       },
@@ -103,7 +110,7 @@ const Liquid: React.FC<LiquidConfig> = forwardRef(
         content: false,
         ...statistic,
       },
-      theme: 'ob',
+      theme: themeConfig.theme,
       ...restConfig,
     };
     return layout === 'horizontal' ? (
@@ -119,7 +126,9 @@ const Liquid: React.FC<LiquidConfig> = forwardRef(
             height,
           }}
         >
-          <span style={{ color: color || theme.styleSheet.axisLabelFillColor, lineHeight: 1 }}>
+          <span
+            style={{ color: color || themeConfig.styleSheet.axisLabelFillColor, lineHeight: 1 }}
+          >
             {title}
           </span>
           <span
@@ -157,7 +166,7 @@ const Liquid: React.FC<LiquidConfig> = forwardRef(
         {title && (
           <div
             style={{
-              color: color || theme.styleSheet.axisLabelFillColor,
+              color: color || themeConfig.styleSheet.axisLabelFillColor,
               marginTop: 4,
             }}
           >

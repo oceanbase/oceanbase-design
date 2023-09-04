@@ -1,12 +1,22 @@
 import React, { forwardRef } from 'react';
 import type { TinyAreaConfig as AntTinyAreaConfig } from '@ant-design/charts';
 import { TinyArea as AntTinyArea } from '@ant-design/charts';
-import { theme } from '../theme';
+import type { Plot, AllBaseConfig } from '@ant-design/charts';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 
-export type TinyAreaConfig = AntTinyAreaConfig;
+export interface TinyAreaRef {
+  getChart: () => Plot<AllBaseConfig>;
+}
 
-const TinyArea: React.FC<TinyAreaConfig> = forwardRef(
-  ({ height = 60, color, line, point, ...restConfig }, ref) => {
+export interface TinyAreaConfig extends AntTinyAreaConfig {
+  theme?: Theme;
+}
+
+const TinyArea: React.FC<TinyAreaConfig> = forwardRef<TinyAreaRef, TinyAreaConfig>(
+  ({ height = 60, color, line, point, areaStyle, theme, ...restConfig }, ref) => {
+    const themeConfig = useTheme(theme);
+
     const newConfig: TinyAreaConfig = {
       height,
       line: {
@@ -24,14 +34,18 @@ const TinyArea: React.FC<TinyAreaConfig> = forwardRef(
             size: 1.5,
             ...point,
             style: {
-              fill: typeof color === 'string' ? color : theme.defaultColor,
+              fill: typeof color === 'string' ? color : themeConfig.defaultColor,
               // 去掉边框
               lineWidth: 0,
               ...point.style,
             },
           }
         : undefined,
-      theme: 'ob',
+      areaStyle: {
+        fill: themeConfig.semanticBlueGradient,
+        ...areaStyle,
+      },
+      theme: themeConfig.theme,
       ...restConfig,
     };
     return <AntTinyArea {...newConfig} ref={ref} />;
