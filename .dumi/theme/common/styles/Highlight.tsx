@@ -19,7 +19,7 @@ export default () => {
           padding: 16px 32px;
           color: ${token.colorText};
           font-size: ${token.fontSize}px;
-          font-family: 'Lucida Console', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+          font-family: ${token.fontFamilyCode};
           line-height: 2;
           white-space: pre;
           background: white;
@@ -30,7 +30,7 @@ export default () => {
         code[class*='language-'],
         pre[class*='language-'] {
           color: black;
-          font-family: 'Lucida Console', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+          font-family: ${token.fontFamilyCode};
           line-height: 1.5;
           direction: ltr;
           white-space: pre;

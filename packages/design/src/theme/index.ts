@@ -5,6 +5,7 @@ export * from 'antd/es/theme';
 
 const defaultSeed = {
   ...theme.defaultSeed,
+  /* Color */
   colorPrimary: '#006AFF',
   colorInfo: '#006aff',
   colorSuccess: '#0ac185',
@@ -16,6 +17,12 @@ const defaultSeed = {
   green: '#0ac185',
   yellow: '#ffac33',
   red: '#ff4b4b',
+  /* Font */
+  // `Helvetica Neue For Number`: Number Font, defined in genComponentStyleHook
+  // `Source Sans Pro`: English Font
+  // `PingFang SC`: Chinese Font
+  fontFamily: `'Helvetica Neue For Number', 'Source Sans Pro', 'PingFang SC', ${theme.defaultSeed.fontFamily}`,
+  fontFamilyCode: `Menlo, ${theme.defaultSeed.fontFamilyCode}`,
 };
 
 // should use reference assign instead of clone assign
