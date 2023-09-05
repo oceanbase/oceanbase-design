@@ -1,4 +1,4 @@
-import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
+import { mergeToken, type FullToken, type GenerateStyle} from 'antd/es/theme/internal';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import { genPresetColor } from 'antd/lib/theme/internal';
 import capitalize from 'antd/lib/_util/capitalize';
@@ -75,13 +75,23 @@ export const genTagStyle: GenerateStyle<TagToken> = (token: TagToken) => {
 
 export default (prefixCls: string) => {
     const useStyle = genComponentStyleHook('Tag', token => {
+        const {lineWidth, fontSizeIcon} = token;
+        const tagFontSize = token.fontSizeSM;
+        const tagLineHeight = `${token.lineHeightSM * tagFontSize}px`;
+        const TagToken = mergeToken<TagToken>(token, {
+            tagFontSize,
+            tagLineHeight,
+            tagIconSize: fontSizeIcon - 2 * lineWidth,
+            tagPaddingHorizontal: 8,
+            tagBorderlessBg: token.colorFillTertiary,
+        });
         return [
-            genTagStyle(token),
-            genPresetStyle(token),
-            genTagPresetStatusStyle(token, 'success', 'Success'),
-            genTagPresetStatusStyle(token, 'error', 'Error'),
-            genTagPresetStatusStyle(token, 'processing', 'Info'),
-            genTagPresetStatusStyle(token, 'warning', 'Warning')
+            genTagStyle(TagToken),
+            genPresetStyle(TagToken),
+            genTagPresetStatusStyle(TagToken, 'success', 'Success'),
+            genTagPresetStatusStyle(TagToken, 'error', 'Error'),
+            genTagPresetStatusStyle(TagToken, 'processing', 'Info'),
+            genTagPresetStatusStyle(TagToken, 'warning', 'Warning')
         ];
     });
     return useStyle(prefixCls);
