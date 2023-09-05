@@ -147,3 +147,9 @@ export default () {
 <!-- ### 高级预览 (Token)
 
 <code src="./demo/previewer-advanced.tsx"></code> -->
+
+## 默认字体预览
+
+| 数字字体 <br/> Helvetica Neue | 英文字体 <br/> Source Sans Pro | 中文字体 <br/> PingFang SC | 代码字体 <br/> Menlo |
+| :-- | :-- | :-- | :-- |
+| <div style="font-size: 30px">0123456789</div> | <div style="font-size: 24px"><div>ABCDEFGHIJKLMNOPQRSTUVWXYZ</div><div>abcdefghijklmnopqrstuvwxyz</div></div> | <div style="font-size: 24px">汉 雀</div> | <code>import { Button } from '@oceanbase/design';</code> |

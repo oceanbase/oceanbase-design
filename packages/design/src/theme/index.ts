@@ -18,9 +18,9 @@ const defaultSeed = {
   yellow: '#ffac33',
   red: '#ff4b4b',
   /* Font */
-  // `Helvetica Neue For Number`: Number Font, defined in genComponentStyleHook
-  // `Source Sans Pro`: English Font
-  // `PingFang SC`: Chinese Font
+  // `Helvetica Neue For Number`: Number Font, defined in @font-face of genComponentStyleHook
+  // `Source Sans Pro`: English Font, defined in @font-face of genComponentStyleHook
+  // `PingFang SC`: Chinese Font, defined in @font-face of genComponentStyleHook
   fontFamily: `'Helvetica Neue For Number', 'Source Sans Pro', 'PingFang SC', ${theme.defaultSeed.fontFamily}`,
   fontFamilyCode: `Menlo, ${theme.defaultSeed.fontFamilyCode}`,
 };
