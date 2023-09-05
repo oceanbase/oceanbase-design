@@ -18,7 +18,7 @@ const useStyle = () => {
       color: ${colorTextHeading};
       font-weight: bold;
       font-size: 18px;
-      font-family: AlibabaPuHuiTi, ${fontFamily}, sans-serif;
+      font-family: AlibabaPuHuiTi;
       line-height: ${headerHeight}px;
       letter-spacing: -0.18px;
       white-space: nowrap;

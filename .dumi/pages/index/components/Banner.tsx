@@ -28,7 +28,7 @@ const useStyle = () => {
   return {
     titleBase: css`
       h1& {
-        font-family: AliPuHui, ${token.fontFamily};
+        font-family: AliPuHui;
         background-image: linear-gradient(-225deg, #ffa005 0%, #0181fd 48%, #07c846 100%);
         -webkit-background-clip: text;
         color: transparent;

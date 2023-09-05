@@ -44,6 +44,7 @@ export const genGlobalStyle = (token: DerivativeToken, componentPrefixCls: strin
       // Chinese Font
       ['@font-face']: {
         fontFamily: 'PingFang SC',
+        fontWeight: 900,
         src: `local("PingFang SC"), url(${PingFangSCWOFF2}) format("woff2"), url(${PingFangSCWOFF}) format("woff"), url(${PingFangSCTTF}) format("truetype")`,
       },
     },

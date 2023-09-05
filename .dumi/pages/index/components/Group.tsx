@@ -70,7 +70,7 @@ export default function Group(props: GroupProps) {
             fontWeight: 900,
             color: titleColor,
             // Special for the title
-            fontFamily: `AliPuHui, ${token.fontFamily}`,
+            fontFamily: 'AliPuHui',
             fontSize: isMobile ? token.fontSizeHeading2 : token.fontSizeHeading1,
           }}
         >
