@@ -324,6 +324,12 @@ const GlobalStyle: React.FC = () => {
                 max-width: unset;
               }
             }
+            
+            td {
+              &:nth-child(3) {
+                color: ${token.magenta7};
+              }
+            }
 
             th {
               color: #5c6b77;
