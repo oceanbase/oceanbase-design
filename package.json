@@ -60,7 +60,7 @@
     "@types/react": "^18.2.21",
     "@umijs/fabric": "^4.0.1",
     "@umijs/test": "^4.0.75",
-    "antd": "^5.8.4",
+    "antd": "^5.8.6",
     "antd-style": "^3.4.4",
     "antd-token-previewer": "^1.1.0",
     "babel-jest": "^29.6.4",
