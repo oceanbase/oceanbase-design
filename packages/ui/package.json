@@ -35,8 +35,8 @@
     "build": "father build"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.16.2",
-    "@ant-design/pro-components": "^2.6.12",
+    "@ant-design/cssinjs": "^1.17.0",
+    "@ant-design/pro-components": "^2.6.16",
     "@oceanbase/design": "workspace:^",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
