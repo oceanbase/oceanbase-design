@@ -71,6 +71,7 @@ const ConfigProvider = ({ children, theme, navigate, spin, ...restProps }: Confi
         components: {
           ...components,
           ...theme?.components,
+          // @ts-ignore
           InputNumber: {
             ...components?.InputNumber,
             ...theme?.components?.InputNumber,
