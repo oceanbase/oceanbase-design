@@ -1,5 +1,4 @@
 import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import MockDate from 'mockdate';
 import moment from 'moment';

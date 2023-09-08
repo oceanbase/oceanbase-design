@@ -2,6 +2,8 @@ import React, { forwardRef } from 'react';
 import type { PieConfig as AntPieConfig } from '@ant-design/charts';
 import { Pie as AntPie } from '@ant-design/charts';
 import { isString } from 'lodash';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 
 export const measureTextSize = (text: string, font: any = {}) => {
   const { fontSize, fontFamily = 'sans-serif', fontWeight, fontStyle, fontVariant } = font;
@@ -49,6 +51,7 @@ export interface PieConfig extends AntPieConfig {
   isHalfDonut?: boolean;
   // 统计标题，仅环图生效
   statisticTitle?: string;
+  theme?: Theme;
 }
 
 const Pie: React.FC<PieConfig> = forwardRef(
@@ -67,13 +70,15 @@ const Pie: React.FC<PieConfig> = forwardRef(
       interactions,
       statistic,
       statisticTitle = '总数',
+      theme,
       ...restConfig
     },
     ref
   ) => {
+    const themeConfig = useTheme(theme);
+
     // 是否为环图
     const isDonut = isDonutProp || isHalfDonut || !!innerRadius;
-
     const titleFontSize = 14;
     const contentFontSize = 32;
 
@@ -104,6 +109,7 @@ const Pie: React.FC<PieConfig> = forwardRef(
       pieStyle: {
         // 环图间距为 2，饼图间距为 1
         lineWidth: isDonut ? 2 : 1,
+        stroke: themeConfig.backgroundColor,
         ...pieStyle,
       },
       legend: legend !== false && {
@@ -141,6 +147,7 @@ const Pie: React.FC<PieConfig> = forwardRef(
           style: {
             fontSize: `${titleFontSize}px`,
             fontFamily: 'Avenir-Heavy',
+            color: themeConfig.styleSheet.annotationTextFillColor,
             ...statistic?.title?.style,
           },
         },
@@ -166,11 +173,12 @@ const Pie: React.FC<PieConfig> = forwardRef(
           style: {
             fontSize: `${contentFontSize}px`,
             fontFamily: 'PingFangSC',
+            color: themeConfig.styleSheet.annotationTextFillColor,
             ...statistic?.content?.style,
           },
         },
       },
-      theme: 'ob',
+      theme: themeConfig.theme,
       ...restConfig,
     };
     return <AntPie {...newConfig} ref={ref} />;

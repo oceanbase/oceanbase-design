@@ -5,14 +5,20 @@ import { sortByMoment } from '@oceanbase/util';
 import useResizeObserver from 'use-resize-observer';
 import type { Tooltip } from '../hooks/useTooltipScrollable';
 import useTooltipScrollable from '../hooks/useTooltipScrollable';
-import { theme } from '../theme';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 
 export interface AreaConfig extends AntAreaConfig {
   tooltip?: false | Tooltip;
+  theme?: Theme;
 }
 
 const Area: React.FC<AreaConfig> = forwardRef(
-  ({ data, line, xField, xAxis, yAxis, tooltip, legend, interactions, ...restConfig }, ref) => {
+  (
+    { data, line, xField, xAxis, yAxis, tooltip, legend, interactions, theme, ...restConfig },
+    ref
+  ) => {
+    const themeConfig = useTheme(theme);
     const { ref: containerRef, height: containerHeight } = useResizeObserver<HTMLDivElement>({
       // 包含 padding 和 border
       box: 'border-box',
@@ -30,7 +36,7 @@ const Area: React.FC<AreaConfig> = forwardRef(
       line: {
         ...line,
         style: {
-          lineWidth: theme.styleSheet.lineBorder,
+          lineWidth: themeConfig.styleSheet.lineBorder,
           ...line?.style,
         },
       },
@@ -50,8 +56,8 @@ const Area: React.FC<AreaConfig> = forwardRef(
                 line: {
                   ...xAxis?.grid?.line,
                   style: {
-                    lineWidth: theme.styleSheet.axisGridBorder,
-                    stroke: theme.styleSheet.axisGridBorderColor,
+                    lineWidth: themeConfig.styleSheet.axisGridBorder,
+                    stroke: themeConfig.styleSheet.axisGridBorderColor,
                     lineDash: [4, 4],
                     ...xAxis?.grid?.line?.style,
                   },
@@ -81,7 +87,7 @@ const Area: React.FC<AreaConfig> = forwardRef(
           type: 'brush-x',
         },
       ],
-      theme: 'ob',
+      theme: themeConfig.theme,
       ...restConfig,
     };
     return (

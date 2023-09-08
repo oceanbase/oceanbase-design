@@ -1,14 +1,23 @@
 import React, { forwardRef } from 'react';
 import type { HistogramConfig as AntHistogramConfig } from '@ant-design/charts';
 import { Histogram as AntHistogram } from '@ant-design/charts';
-import { theme } from '../theme';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 
-export type HistogramConfig = AntHistogramConfig;
+export interface HistogramConfig extends AntHistogramConfig {
+  theme?: Theme;
+}
 
 const Histogram: React.FC<HistogramConfig> = forwardRef(
-  ({ binWidth, meta, xAxis, legend, ...restConfig }, ref) => {
+  ({ binWidth, columnStyle, meta, xAxis, legend, theme, ...restConfig }, ref) => {
+    const themeConfig = useTheme(theme);
+
     const newConfig: HistogramConfig = {
       binWidth,
+      columnStyle: {
+        stroke: themeConfig.backgroundColor,
+        ...columnStyle,
+      },
       meta: {
         ...meta,
         range: {
@@ -29,8 +38,8 @@ const Histogram: React.FC<HistogramConfig> = forwardRef(
                 line: {
                   ...xAxis?.grid?.line,
                   style: {
-                    lineWidth: theme.styleSheet.axisGridBorder,
-                    stroke: theme.styleSheet.axisGridBorderColor,
+                    lineWidth: themeConfig.styleSheet.axisGridBorder,
+                    stroke: themeConfig.styleSheet.axisGridBorderColor,
                     lineDash: [4, 4],
                     ...xAxis?.grid?.line?.style,
                   },
@@ -46,7 +55,7 @@ const Histogram: React.FC<HistogramConfig> = forwardRef(
           ...legend?.marker,
         },
       },
-      theme: 'ob',
+      theme: themeConfig.theme,
       ...restConfig,
     };
     return <AntHistogram {...newConfig} ref={ref} />;

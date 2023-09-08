@@ -1,11 +1,17 @@
 import React, { forwardRef } from 'react';
 import type { TinyLineConfig as AntTinyLineConfig } from '@ant-design/charts';
 import { TinyLine as AntTinyLine } from '@ant-design/charts';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 
-export type TinyLineConfig = AntTinyLineConfig;
+export interface TinyLineConfig extends AntTinyLineConfig {
+  theme?: Theme;
+}
 
 const TinyLine: React.FC<TinyLineConfig> = forwardRef(
-  ({ height = 60, color, lineStyle, point, ...restConfig }, ref) => {
+  ({ height = 60, color, lineStyle, point, theme, ...restConfig }, ref) => {
+    const themeConfig = useTheme(theme);
+
     const newConfig: TinyLineConfig = {
       height,
       color,
@@ -27,7 +33,7 @@ const TinyLine: React.FC<TinyLineConfig> = forwardRef(
             },
           }
         : undefined,
-      theme: 'ob',
+      theme: themeConfig.theme,
       ...restConfig,
     };
     return <AntTinyLine {...newConfig} ref={ref} />;
