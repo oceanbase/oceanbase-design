@@ -15,3 +15,36 @@ exports[`ConfigProvider spin spin.indicator should work 1`] = `
   </div>
 </div>
 `;
+
+exports[`ConfigProvider spin spin.indicator should work in nested ConfigProvider 1`] = `
+<div
+  class="ant-app"
+>
+  <div
+    class="ant-app"
+  >
+    <div
+      aria-busy="true"
+      aria-live="polite"
+      class="ant-spin ant-spin-spinning"
+    >
+      <div
+        class="custom-indicator-1 ant-spin-dot"
+      />
+    </div>
+  </div>
+  <div
+    class="ant-app"
+  >
+    <div
+      aria-busy="true"
+      aria-live="polite"
+      class="ant-spin ant-spin-spinning"
+    >
+      <div
+        class="custom-indicator-2 ant-spin-dot"
+      />
+    </div>
+  </div>
+</div>
+`;

@@ -49,6 +49,8 @@ const { defaultSeed, components } = defaultTheme;
 // ConfigProvider 默认设置主题和内嵌 App，支持 message, notification 和 Modal 等静态方法消费 ConfigProvider 配置
 // ref: https://ant.design/components/app-cn
 const ConfigProvider = ({ children, theme, navigate, spin, ...restProps }: ConfigProviderProps) => {
+  // inherit from parent ConfigProvider
+  const parentContext = React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
   return (
     <AntConfigProvider
       spin={spin}
@@ -79,7 +81,7 @@ const ConfigProvider = ({ children, theme, navigate, spin, ...restProps }: Confi
     >
       <ExtendedConfigContext.Provider
         value={{
-          navigate,
+          navigate: navigate === undefined ? parentContext.navigate : navigate,
         }}
       >
         <App>
