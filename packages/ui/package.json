@@ -3,8 +3,7 @@
   "version": "0.2.16",
   "description": "The UI library based on OceanBase Design",
   "keywords": [
-    "OceanBase",
-    "database",
+    "oceanbase",
     "design",
     "ui",
     "react",
