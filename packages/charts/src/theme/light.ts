@@ -4,16 +4,16 @@ const { registerTheme } = G2;
 
 // 分类色板
 const COLORS_10 = [
-  '#4C96FF',
-  '#53D3A9',
-  '#FFBE5F',
-  '#5BC4FF',
-  '#809CD1',
-  '#A881FF',
-  '#FF9F9F',
-  '#6875FF',
-  '#AEDB43',
-  '#FF7ECB',
+  '#3d88f2',
+  '#f2c655',
+  '#24b383',
+  '#79c0f2',
+  '#4b71a6',
+  '#f29130',
+  '#4d998c',
+  '#86bf69',
+  '#996b54',
+  '#d9b98d',
 ];
 
 const BLACK_COLORS = {
@@ -55,8 +55,8 @@ const lightTheme = {
   subColor: '#F5F8FE',
   // 语义色
   semanticBlue: COLORS_10[0],
-  semanticGreen: '#53D3A9',
-  semanticYellow: '#FFAC33',
+  semanticGreen: '#24b383',
+  semanticYellow: '#f2c655',
   semanticRed: '#FF4B4B',
 
   /* 以下为自定义主题 token */
