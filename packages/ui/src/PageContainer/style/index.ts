@@ -100,7 +100,7 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
 
 export default (prefixCls: string) => {
   const useStyle = genComponentStyleHook('PageContainer', token => {
-    return [genPageContainerStyle(token)];
+    return [genPageContainerStyle(token as PageContainerToken)];
   });
   return useStyle(prefixCls);
 };
