@@ -35,7 +35,7 @@ export interface PasswordProps extends AntdPasswordProps {
   publicKey?: string;
   // 自定义加密算法 需要将加密后结果 return
   customEncryption?: (value?: string) => string;
-  onChange?: (value?: string) => void;
+  onChange?: (value?: any) => void;
   rules?: boolean | Validator[];
   onValidate?: (passed: boolean) => void;
   generatePasswordRegex?: RegExp;
@@ -63,7 +63,7 @@ const Password: React.FC<PasswordProps> = ({
   const [fieldError, setFieldError] = useState<string[]>([]);
   const [isValidating, setIsValidating] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
-  const [privateValue, setPrivateValue] = useState();
+  const [privateValue, setPrivateValue] = useState<string | undefined>();
 
   const defaultRules: Validator[] = [
     {
@@ -82,7 +82,7 @@ const Password: React.FC<PasswordProps> = ({
       message: passwordLocale.strengthRuleMessage,
     },
   ];
-  const newRules = rules && rules?.length > 0 ? rules : (rules ? defaultRules : []);
+  const newRules = rules && (Array.isArray(rules) &&  rules?.length > 0) ? rules : (rules ? defaultRules : []);
 
   const handleChange = (newValue?: string) => {
     if (!isTouched) {
