@@ -168,8 +168,8 @@ importers:
         specifier: ^0.6.8
         version: 0.6.8(react-dom@18.2.0)(react@18.2.0)
       rc-tabs:
-        specifier: ^12.12.0
-        version: 12.12.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^12.12.1
+        version: 12.12.1(react-dom@18.2.0)(react@18.2.0)
       rc-util:
         specifier: ^5.37.0
         version: 5.37.0(react-dom@18.2.0)(react@18.2.0)
@@ -4694,7 +4694,7 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.15
       hoist-non-react-statics: 3.3.2
       react: 18.1.0
       react-is: 16.13.1
@@ -4706,7 +4706,7 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.15
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
       react-is: 16.13.1
@@ -6953,7 +6953,7 @@ packages:
   /@umijs/history@5.3.1:
     resolution: {integrity: sha512-/e0cEGrR2bIWQD7pRl3dl9dcyRGeC9hoW0OCvUTT/hjY0EfUrkd6G8ZanVghPMpDuY5usxq9GVcvrT8KNXLWvA==}
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.15
       query-string: 6.14.1
     dev: true
 
@@ -10467,7 +10467,7 @@ packages:
       prismjs: 1.29.0
       raw-loader: 4.0.2(webpack@5.88.2)
       rc-motion: 2.9.0(react-dom@18.2.0)(react@18.2.0)
-      rc-tabs: 12.12.0(react-dom@18.2.0)(react@18.2.0)
+      rc-tabs: 12.12.1(react-dom@18.2.0)(react@18.2.0)
       rc-tree: 5.7.10(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-copy-to-clipboard: 5.1.0(react@18.2.0)
@@ -13055,7 +13055,7 @@ packages:
   /history@5.3.0:
     resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.15
     dev: true
 
   /hmac-drbg@1.0.1:
@@ -19931,8 +19931,8 @@ packages:
       react: 16.14.0
       react-dom: 16.14.0(react@16.14.0)
 
-  /rc-tabs@12.12.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-lConG2e3N0w63j3MezC4fOFtJnclaxXpp9PsnRzDT/uUd6Rj9gYC8ob7JfxbUOdMxxmZbmrfV4v9tfHhOq3dnQ==}
+  /rc-tabs@12.12.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-e10VBjEkECdPl4XZSs9to81SE+mgclBTM7J8/LMsFqmJoi05Tci91bRnmeeDtrcOCx2PuZdJv57XUlC4d8PEIw==}
     engines: {node: '>=8.x'}
     peerDependencies:
       react: '>=16.9.0'
@@ -20373,7 +20373,7 @@ packages:
       react: ^16.6.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.6.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.15
       invariant: 2.2.4
       prop-types: 15.8.1
       react: 18.1.0
@@ -20388,7 +20388,7 @@ packages:
       react: ^16.6.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.6.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.22.15
       invariant: 2.2.4
       prop-types: 15.8.1
       react: 18.2.0
