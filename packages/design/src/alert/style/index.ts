@@ -114,7 +114,7 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
 
 export default (prefixCls: string) => {
   const useStyle = genComponentStyleHook('Alert', token => {
-    return [genAlertStyle(token)];
+    return [genAlertStyle(token as AlertToken)];
   });
   return useStyle(prefixCls);
 };
