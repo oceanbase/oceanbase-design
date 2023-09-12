@@ -36,7 +36,7 @@ export default (prefixCls: string, typographyPrefixCls: string) => {
         ...token,
         typographyPrefixCls,
         typographyComponentCls: `.${typographyPrefixCls}`,
-      }),
+      } as DescriptionsToken),
     ];
   });
   return useStyle(prefixCls);

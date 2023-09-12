@@ -31,7 +31,7 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
         ...token,
         componentCls: tabsComponentCls,
         prefixCls: tabsPrefixCls,
-      }),
+      } as CardToken),
     },
   };
 };
