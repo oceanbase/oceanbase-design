@@ -82,7 +82,7 @@
     "jsonml-to-react-element": "^1.1.11",
     "jsonml.js": "^0.1.0",
     "lerna": "^7.2.0",
-    "lint-staged": "^13.3.0",
+    "lint-staged": "^14.0.1",
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
     "mockdate": "^3.0.5",
