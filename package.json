@@ -56,7 +56,7 @@
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.5.4",
-    "@types/node": "^20.5.9",
+    "@types/node": "^20.6.2",
     "@types/react": "^18.2.21",
     "@umijs/fabric": "^4.0.1",
     "@umijs/test": "^4.0.79",
