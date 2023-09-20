@@ -131,6 +131,9 @@ export default defineConfig({
             { title: 'Modal 对话框', link: '/components/modal' },
             { title: 'Notification 通知提醒框', link: '/components/notification' },
             { title: 'Spin 加载中', link: '/components/spin' },
+            { title: 'Badge 徽标数', link: '/components/badge' },
+
+            
           ],
         },
         {

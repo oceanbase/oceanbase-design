@@ -20,6 +20,7 @@ export { default as theme } from './theme';
 export { default as Tooltip } from './tooltip';
 export { default as Breadcrumb } from './breadcrumb';
 export { default as Spin } from './spin';
+export { default as Badge } from './badge';
 
 const { useToken } = theme;
 
