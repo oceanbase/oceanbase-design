@@ -1,4 +1,5 @@
 const { addSubmoduleImport, removeEmptyModuleImport, parseStrToArray } = require('./index');
+const { markDependency } = require('./marker');
 const { printOptions } = require('./config');
 
 function importComponent(j, root, options) {
@@ -38,6 +39,7 @@ function importComponent(j, root, options) {
               after: fromPkgName,
             });
           }
+          markDependency(toPkg.name);
         }
       });
       if (path.value.specifiers.length > 0) {
@@ -45,6 +47,7 @@ function importComponent(j, root, options) {
         const toPkg = toPkgList.find(toPkg => !toPkg.components);
         if (toPkg) {
           path.value.source.value = path.value.source.value?.replace(fromPkgName, toPkg.name);
+          markDependency(toPkg.name);
         }
       }
     }

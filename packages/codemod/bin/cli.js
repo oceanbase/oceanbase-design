@@ -253,8 +253,8 @@ async function bootstrap() {
     const depsList = await getDependencies();
     await upgradeDetect(
       dir,
-      depsList.includes('@ant-design/charts'),
-      depsList.includes('@alipay/ob-util')
+      depsList.includes('@oceanbase/charts'),
+      depsList.includes('@oceanbase/util')
     );
   } catch (err) {
     console.log('skip summary due to', err);

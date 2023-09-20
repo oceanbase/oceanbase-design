@@ -10,7 +10,9 @@ const markerPath = path.join(
 const newline = '\n';
 
 function ensureFile() {
-  return fs.openSync(markerPath, 'w');
+  if (!fs.existsSync(markerPath)) {
+    fs.openSync(markerPath, 'w');
+  }
 }
 
 async function cleanup() {
