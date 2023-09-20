@@ -5,16 +5,14 @@ function importComponent(j, root, options) {
   const { fromPkgNames, toPkgList } = options;
   let hasChanged = false;
 
-  root
-    .find(j.ImportDeclaration)
-    .filter(path =>
-      fromPkgNames.some(fromPkgName => new RegExp(fromPkgName).test(path.value.source.value))
-    )
-    .forEach(path => {
-      hasChanged = true;
-      const fromPkgName = fromPkgNames.find(fromPkgName =>
-        new RegExp(fromPkgName).test(path.value.source.value)
-      );
+  root.find(j.ImportDeclaration).forEach(path => {
+    hasChanged = true;
+    const fromPkgName = fromPkgNames.find(
+      fromPkgName =>
+        fromPkgName === path.value.source.value ||
+        new RegExp(`${fromPkgName}/(es|lib|locale)/`).test(path.value.source.value)
+    );
+    if (fromPkgName) {
       path.value.specifiers.forEach(specifier => {
         const toPkgByComponents = toPkgList.find(toPkg =>
           toPkg.components?.includes(specifier.imported.name)
@@ -25,7 +23,7 @@ function importComponent(j, root, options) {
         const toPkg = toPkgByComponents || toPkgByTypes;
         if (toPkg) {
           // replace to toPkg for xxx/es/xxx、xxx/lib/xxx
-          if (new RegExp(`${fromPkgName}/(es|lib)/`).test(path.value.source.value)) {
+          if (new RegExp(`${fromPkgName}/(es|lib|locale)/`).test(path.value.source.value)) {
             path.value.source.value = path.value.source.value?.replace(fromPkgName, toPkg.name);
           } else {
             // remove old imports
@@ -49,7 +47,8 @@ function importComponent(j, root, options) {
           path.value.source.value = path.value.source.value?.replace(fromPkgName, toPkg.name);
         }
       }
-    });
+    }
+  });
 
   return hasChanged;
 }
