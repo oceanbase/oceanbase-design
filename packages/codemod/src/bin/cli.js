@@ -118,7 +118,7 @@ async function transform(transformer, parser, filePath, options) {
   }
 }
 
-async function upgradeDetect(targetDir, needOBCharts, needCompatible) {
+async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
   const result = [];
   const cwd = path.join(process.cwd(), targetDir);
   const { readPackageUp } = await import('read-pkg-up');
@@ -129,28 +129,25 @@ async function upgradeDetect(targetDir, needOBCharts, needCompatible) {
     pkgJsonPath = "we didn't find your package.json";
     // unknown dependency property
     result.push(['install', '@oceanbase/design', pkgUpgradeList['@oceanbase/design']]);
+    result.push(['install', '@oceanbase/ui', pkgUpgradeList['@oceanbase/ui']]);
     if (needOBCharts) {
       result.push(['install', '@oceanbase/charts', pkgUpgradeList['@oceanbase/charts'].version]);
     }
 
-    if (needCompatible) {
-      result.push([
-        'install',
-        '@ant-design/compatible',
-        pkgUpgradeList['@ant-design/compatible'].version,
-      ]);
+    if (needObUtil) {
+      result.push(['install', '@oceanbase/util', pkgUpgradeList['@oceanbase/util'].version]);
     }
   } else {
     const { packageJson } = closetPkgJson;
     pkgJsonPath = closetPkgJson.path;
 
     // dependencies must be installed or upgraded with correct version
-    const mustInstallOrUpgradeDeps = ['@oceanbase/design', '@oceanbase/icons'];
+    const mustInstallOrUpgradeDeps = ['@oceanbase/design', '@oceanbase/ui'];
     if (needOBCharts) {
       mustInstallOrUpgradeDeps.push('@oceanbase/charts');
     }
-    if (needCompatible) {
-      mustInstallOrUpgradeDeps.push('@ant-design/compatible');
+    if (needObUtil) {
+      mustInstallOrUpgradeDeps.push('@oceanbase/util');
     }
 
     // handle mustInstallOrUpgradeDeps
@@ -254,13 +251,13 @@ async function bootstrap() {
     const depsList = await getDependencies();
     await upgradeDetect(
       dir,
-      depsList.includes('@ant-design/pro-layout'),
-      depsList.includes('@ant-design/compatible')
+      depsList.includes('@ant-design/charts'),
+      depsList.includes('@alipay/ob-util')
     );
   } catch (err) {
     console.log('skip summary due to', err);
   } finally {
-    console.log(`\n----------- Thanks for using @ant-design/codemod ${pkg.version} -----------`);
+    console.log(`\n----------- Thanks for using @oceanbase/codemod ${pkg.version} -----------`);
   }
 }
 
