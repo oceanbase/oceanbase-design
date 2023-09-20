@@ -11,7 +11,8 @@ const App: React.FC = () => (
       <Badge icon={true} status="warning" />
     </Space>
     <br />
-    <Space size="middle" direction="vertical">
+    <br />
+    <Space direction="vertical">
       <Badge icon={true} status="success" text="Success" />
       <Badge icon={true} status="error" text="Error" />
       <Badge icon={true} status="default" text="Default" />
@@ -19,7 +20,6 @@ const App: React.FC = () => (
       <Badge icon={true} status="warning" text="Warning" />
     </Space>
   </>
-
 );
 
 export default App;
