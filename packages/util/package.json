@@ -3,8 +3,7 @@
   "version": "0.2.7",
   "description": "The Util Library for OceanBase",
   "keywords": [
-    "OceanBase",
-    "database",
+    "oceanbase",
     "util"
   ],
   "homepage": "https://github.com/oceanbase/oceanbase-design/packages/util",
