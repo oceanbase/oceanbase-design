@@ -23,8 +23,10 @@ const transformersDir = path.join(__dirname, '../transforms');
 const ignoreConfig = path.join(__dirname, './codemod.ignore');
 
 const transformers = [
+  'antd-and-ob-charts-to-oceanbase-charts',
   'antd-to-oceanbase-design',
-  'obui-to-oceanbase-design',
+  'obui-to-oceanbase-design-and-ui',
+  'obutil-to-oceanbase-util',
   'techui-to-oceanbase-ui',
 ];
 

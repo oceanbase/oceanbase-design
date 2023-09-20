@@ -1,8 +1,5 @@
 const importComponent = require('./utils/import-component');
 
-// from: import { Button, BasicLayout } from '@alipay/ob-ui';
-// to1: import { Button } from '@oceanbase/design';
-// to2: import { BasicLayout } from '@oceanbase/ui';
 module.exports = (file, api, options) => {
   return importComponent(file, api, {
     ...options,
