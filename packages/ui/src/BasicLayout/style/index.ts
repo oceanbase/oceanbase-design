@@ -23,7 +23,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
 
 export default (prefixCls: string) => {
   const useStyle = genComponentStyleHook('BasicLayout', token => {
-    return [genBasicLayoutStyle(token)];
+    return [genBasicLayoutStyle(token as BasicLayoutToken)];
   });
   return useStyle(prefixCls);
 };
