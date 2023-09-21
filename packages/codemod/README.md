@@ -64,7 +64,7 @@ import components and typs from `antd` to `@oceanbase/design` and `@oceanbase/ui
   export default Demo;
 ```
 
-### `techui-to-oceanbase-ui`
+### `page-container-to-oceanbase-ui`
 
 import `PageContainer` from `@alipay/tech-ui` to `@ant-design/pro-components` and `@oceanbase/ui`.
 
@@ -84,14 +84,28 @@ import `PageContainer` from `@alipay/tech-ui` to `@ant-design/pro-components` an
   export default Demo;
 ```
 
-### `antd-charts-to-oceanbase-charts`
+### `antd-and-ob-charts-to-oceanbase-charts`
 
-import components and typs from `@ant-design/charts` to `@oceanbase/charts`.
+import components and typs from `@ant-design/charts` and `@alipay/ob-charts` to `@oceanbase/charts`.
 
 ```diff
   import React from 'react';
 - import { Bar, Line } from '@ant-design/charts';
 - import type { BarConfig, LineConfig } from '@ant-design/charts';
++ import { Bar, Line } from '@oceanbase/charts';
++ import type { BarConfig, LineConfig } from '@oceanbase/charts';
+
+  const Demo = () => {
+    return <div />;
+  };
+
+  export default Demo;
+```
+
+```diff
+  import React from 'react';
+- import { Bar, Line } from '@alipay/ob-charts';
+- import type { BarConfig, LineConfig } from '@ant-design/ob-charts';
 + import { Bar, Line } from '@oceanbase/charts';
 + import type { BarConfig, LineConfig } from '@oceanbase/charts';
 

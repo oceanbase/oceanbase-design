@@ -11,6 +11,9 @@ const updateCheck = require('update-check');
 const findUp = require('find-up');
 const semver = require('semver');
 const { run: jscodeshift } = require('jscodeshift/src/Runner');
+const execa = require('execa');
+const isDirectory = require('is-directory');
+const commandExistsSync = require('command-exists').sync;
 
 const pkg = require('../package.json');
 const pkgUpgradeList = require('./upgrade-list');
@@ -23,9 +26,11 @@ const transformersDir = path.join(__dirname, '../transforms');
 const ignoreConfig = path.join(__dirname, './codemod.ignore');
 
 const transformers = [
+  'antd-and-ob-charts-to-oceanbase-charts',
   'antd-to-oceanbase-design',
-  'obui-to-oceanbase-design',
-  'techui-to-oceanbase-ui',
+  'obui-to-oceanbase-design-and-ui',
+  'obutil-to-oceanbase-util',
+  'page-container-to-oceanbase-ui',
 ];
 
 const dependencyProperties = [
@@ -72,13 +77,19 @@ function getMaxWorkers(options = {}) {
   return options.cpus || Math.max(2, Math.ceil(os.cpus().length / 3));
 }
 
-function getRunnerArgs(transformerPath, parser = 'tsx', options = {}) {
+function getRunnerArgs(transformerPath, parser = 'babylon', options = {}) {
   const args = {
     verbose: 2,
     // limit usage for cpus
     cpus: getMaxWorkers(options),
     parser,
-    extensions: ['tsx', 'ts', 'jsx', 'js'].join(','),
+    // https://github.com/facebook/jscodeshift/blob/master/src/Runner.js#L255
+    // https://github.com/facebook/jscodeshift/blob/master/src/Worker.js#L50
+    babel: false,
+    // override default babylon parser config to enable `decorator-legacy`
+    // https://github.com/facebook/jscodeshift/blob/master/parser/babylon.js
+    parserConfig: require('./babylon.config.json'),
+    extensions: ['js', 'jsx', 'ts', 'tsx', 'd.ts'].join(','),
     transform: transformerPath,
     ignorePattern: '**/node_modules',
     ignoreConfig,
@@ -89,7 +100,7 @@ function getRunnerArgs(transformerPath, parser = 'tsx', options = {}) {
 
 async function run(filePath, args = {}) {
   for (const transformer of transformers) {
-    await transform(transformer, 'tsx', filePath, args);
+    await transform(transformer, 'babylon', filePath, args);
   }
 }
 
@@ -108,6 +119,7 @@ async function transform(transformer, parser, filePath, options) {
 
     // js part
     await jscodeshift(transformerPath, [filePath], args);
+    console.log();
   } catch (err) {
     console.error(err);
     if (process.env.NODE_ENV === 'local') {
@@ -195,10 +207,14 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
 
   console.log(
     chalk.yellow(
-      "It's recommended to install or upgrade these dependencies to ensure working well with oceanbase design system\n"
+      'It will install or upgrade these dependencies to ensure working well with oceanbase design system\n'
     )
   );
-  console.log(`> package.json file:  ${pkgJsonPath} \n`);
+  console.log(`> Update package.json file: ${pkgJsonPath} \n`);
+  const npmCommand = commandExistsSync('tnpm') ? 'tnpm' : 'npm';
+
+  // install dependencies
+  console.log(`New package installing...\n`);
   const dependencies = result.map(([operateType, depName, expectVersion, dependencyProperty]) =>
     [
       _.capitalize(operateType),
@@ -206,18 +222,37 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
       dependencyProperty ? `in ${dependencyProperty}` : '',
     ].join(' ')
   );
-
   console.log(dependencies.map(n => `* ${n}`).join('\n'));
+  console.log('\n');
+  const installDependencies = result.map(([_, depName, expectVersion]) =>
+    expectVersion ? `${depName}@${expectVersion}` : depName
+  );
+  await execa(npmCommand, ['install', ...installDependencies, '--save'], {
+    stdio: 'inherit',
+  });
+  console.log(`\nNew package installed!\n`);
+
+  // uninstall dependencies
+  console.log(`Deprecated package uninstalling...\n`);
+  const uninstallDependencies = ['@alipay/ob-ui', '@alipay/ob-util', '@alipay/ob-charts'];
+  console.log(uninstallDependencies.map(n => `* ${n}`).join('\n'));
+  console.log('\n');
+  await execa(npmCommand, ['uninstall', ...uninstallDependencies, '--save'], {
+    stdio: 'inherit',
+  });
+  console.log(`\nDeprecated package uninstalled!\n`);
 }
 
 /**
  * options
- * --force   // force skip git checking (dangerously)
- * --cpus=1  // specify cpus cores to use
+ * --force             // force skip git checking (dangerously)
+ * --cpus=1            // specify cpus cores to use
+ * --disablePrettier   // disable prettier
  */
 
 async function bootstrap() {
   const dir = process.argv[2];
+
   // eslint-disable-next-line global-require
   const args = require('yargs-parser')(process.argv.slice(3));
   if (process.env.NODE_ENV !== 'local') {
@@ -246,13 +281,27 @@ async function bootstrap() {
 
   await run(dir, args);
 
+  if (!args.disablePrettier) {
+    console.log('----------- Prettier Format -----------\n');
+    console.log('[Prettier] format files running...');
+    try {
+      const isDir = isDirectory.sync(dir);
+      const path = isDir ? '**/*.{js,jsx,tsx,ts,d.ts}' : dir;
+      const npxCommand = commandExistsSync('tnpx') ? 'tnpx' : 'npx';
+      await execa(npxCommand, ['prettier', '--write', path], { stdio: 'inherit' });
+      console.log('\n[Prettier] format files completed!\n');
+    } catch (err) {
+      console.log('\n[Prettier] format files failed, please format it by yourself.\n', err);
+    }
+  }
+
   try {
-    console.log('----------- dependencies alert -----------\n');
+    console.log('----------- Dependencies Alert -----------\n');
     const depsList = await getDependencies();
     await upgradeDetect(
       dir,
-      depsList.includes('@ant-design/charts'),
-      depsList.includes('@alipay/ob-util')
+      depsList.includes('@oceanbase/charts'),
+      depsList.includes('@oceanbase/util')
     );
   } catch (err) {
     console.log('skip summary due to', err);

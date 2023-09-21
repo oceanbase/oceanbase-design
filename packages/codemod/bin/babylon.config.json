@@ -1,0 +1,45 @@
+{
+  "sourceType": "module",
+  "allowImportExportEverywhere": true,
+  "allowReturnOutsideFunction": true,
+  "startLine": 1,
+  "tokens": true,
+  "plugins": [
+    "jsx",
+    "typescript",
+    "asyncGenerators",
+    "bigInt",
+    "classProperties",
+    "classPrivateProperties",
+    "classPrivateMethods",
+    [
+      "decorators",
+      {
+        "decoratorsBeforeExport": true
+      }
+    ],
+    "doExpressions",
+    "dynamicImport",
+    "exportDefaultFrom",
+    "exportExtensions",
+    "exportNamespaceFrom",
+    "functionBind",
+    "functionSent",
+    "importMeta",
+    "logicalAssignment",
+    "nullishCoalescingOperator",
+    "numericSeparator",
+    "objectRestSpread",
+    "optionalCatchBinding",
+    "optionalChaining",
+    [
+      "pipelineOperator",
+      {
+        "proposal": "minimal"
+      }
+    ],
+    "throwExpressions",
+    "asyncDoExpressions",
+    "topLevelAwait"
+  ]
+}

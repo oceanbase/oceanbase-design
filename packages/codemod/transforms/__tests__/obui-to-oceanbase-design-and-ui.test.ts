@@ -5,6 +5,6 @@ const tests = ['obui'];
 
 describe(testUnit, () => {
   tests.forEach(test =>
-    defineTest(__dirname, testUnit, {}, `${testUnit}/${test}`, { parser: 'tsx' })
+    defineTest(__dirname, testUnit, {}, `${testUnit}/${test}`, { parser: 'babylon' })
   );
 });
