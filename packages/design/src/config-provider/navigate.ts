@@ -20,7 +20,7 @@ export interface Path {
   hash: string;
 }
 
-export type To = string | Partial<Path>;
+export type To = string | Partial<Path> | any;
 
 export type RelativeRoutingType = 'route' | 'path';
 
@@ -33,5 +33,5 @@ export interface NavigateOptions {
 
 export interface NavigateFunction {
   (to: To, options?: NavigateOptions): void;
-  (delta: number): void;
+  (delta: number | any): void;
 }
