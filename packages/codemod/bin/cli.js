@@ -13,6 +13,7 @@ const semver = require('semver');
 const { run: jscodeshift } = require('jscodeshift/src/Runner');
 const execa = require('execa');
 const isDirectory = require('is-directory');
+const commandExistsSync = require('command-exists').sync;
 
 const pkg = require('../package.json');
 const pkgUpgradeList = require('./upgrade-list');
@@ -82,7 +83,7 @@ function getRunnerArgs(transformerPath, parser = 'tsx', options = {}) {
     // limit usage for cpus
     cpus: getMaxWorkers(options),
     parser,
-    extensions: ['tsx', 'ts', 'jsx', 'js'].join(','),
+    extensions: ['js', 'jsx', 'ts', 'tsx', 'd.ts'].join(','),
     transform: transformerPath,
     ignorePattern: '**/node_modules',
     ignoreConfig,
@@ -200,10 +201,14 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
 
   console.log(
     chalk.yellow(
-      "It's recommended to install or upgrade these dependencies to ensure working well with oceanbase design system\n"
+      'It will install or upgrade these dependencies to ensure working well with oceanbase design system\n'
     )
   );
-  console.log(`> package.json file:  ${pkgJsonPath} \n`);
+  console.log(`> Update package.json file: ${pkgJsonPath} \n`);
+  const npmCommand = commandExistsSync('tnpm') ? 'tnpm' : 'npm';
+
+  // install dependencies
+  console.log(`New package installing...\n`);
   const dependencies = result.map(([operateType, depName, expectVersion, dependencyProperty]) =>
     [
       _.capitalize(operateType),
@@ -211,8 +216,25 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
       dependencyProperty ? `in ${dependencyProperty}` : '',
     ].join(' ')
   );
-
   console.log(dependencies.map(n => `* ${n}`).join('\n'));
+  console.log('\n');
+  const installDependencies = result.map(([_, depName, expectVersion]) =>
+    expectVersion ? `${depName}@${expectVersion}` : depName
+  );
+  await execa(npmCommand, ['install', ...installDependencies, '--save'], {
+    stdio: 'inherit',
+  });
+  console.log(`\nNew package installed!\n`);
+
+  // uninstall dependencies
+  console.log(`Deprecated package uninstalling...\n`);
+  const uninstallDependencies = ['@alipay/ob-ui', '@alipay/ob-util', '@alipay/ob-charts'];
+  console.log(uninstallDependencies.map(n => `* ${n}`).join('\n'));
+  console.log('\n');
+  await execa(npmCommand, ['uninstall', ...uninstallDependencies, '--save'], {
+    stdio: 'inherit',
+  });
+  console.log(`\nDeprecated package uninstalled!\n`);
 }
 
 /**
@@ -254,16 +276,21 @@ async function bootstrap() {
   await run(dir, args);
 
   if (!args.disablePrettier) {
-    console.log('----------- prettier format -----------\n');
-    const isDir = isDirectory.sync(dir);
-    console.log('[Prettier] format files running...\n');
-    const path = isDir ? '**/*.{js,jsx,tsx,ts}' : dir;
-    await execa('npx', ['prettier', '--write', path], { stdio: 'inherit' });
-    console.log('\n[Prettier] format files completed!\n');
+    console.log('----------- Prettier Format -----------\n');
+    console.log('[Prettier] format files running...');
+    try {
+      const isDir = isDirectory.sync(dir);
+      const path = isDir ? '**/*.{js,jsx,tsx,ts,d.ts}' : dir;
+      const npxCommand = commandExistsSync('tnpx') ? 'tnpx' : 'npx';
+      await execa(npxCommand, ['prettier', '--write', path], { stdio: 'inherit' });
+      console.log('\n[Prettier] format files completed!\n');
+    } catch (err) {
+      console.log('\n[Prettier] format files failed, please format it by yourself.\n', err);
+    }
   }
 
   try {
-    console.log('----------- dependencies alert -----------\n');
+    console.log('----------- Dependencies Alert -----------\n');
     const depsList = await getDependencies();
     await upgradeDetect(
       dir,
