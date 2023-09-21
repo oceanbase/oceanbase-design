@@ -11,6 +11,8 @@ const updateCheck = require('update-check');
 const findUp = require('find-up');
 const semver = require('semver');
 const { run: jscodeshift } = require('jscodeshift/src/Runner');
+const execa = require('execa');
+const isDirectory = require('is-directory');
 
 const pkg = require('../package.json');
 const pkgUpgradeList = require('./upgrade-list');
@@ -110,6 +112,7 @@ async function transform(transformer, parser, filePath, options) {
 
     // js part
     await jscodeshift(transformerPath, [filePath], args);
+    console.log();
   } catch (err) {
     console.error(err);
     if (process.env.NODE_ENV === 'local') {
@@ -214,12 +217,14 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
 
 /**
  * options
- * --force   // force skip git checking (dangerously)
- * --cpus=1  // specify cpus cores to use
+ * --force             // force skip git checking (dangerously)
+ * --cpus=1            // specify cpus cores to use
+ * --disablePrettier   // disable prettier
  */
 
 async function bootstrap() {
   const dir = process.argv[2];
+
   // eslint-disable-next-line global-require
   const args = require('yargs-parser')(process.argv.slice(3));
   if (process.env.NODE_ENV !== 'local') {
@@ -247,6 +252,15 @@ async function bootstrap() {
   }
 
   await run(dir, args);
+
+  if (!args.disablePrettier) {
+    console.log('----------- prettier format -----------\n');
+    const isDir = isDirectory.sync(dir);
+    console.log('[Prettier] format files running...\n');
+    const path = isDir ? '**/*.{js,jsx,tsx,ts}' : dir;
+    await execa('npx', ['prettier', '--write', path], { stdio: 'inherit' });
+    console.log('\n[Prettier] format files completed!\n');
+  }
 
   try {
     console.log('----------- dependencies alert -----------\n');
