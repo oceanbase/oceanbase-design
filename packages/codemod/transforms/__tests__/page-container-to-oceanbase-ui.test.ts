@@ -5,6 +5,6 @@ const tests = ['techui', 'pro-components'];
 
 describe(testUnit, () => {
   tests.forEach(test =>
-    defineTest(__dirname, testUnit, {}, `${testUnit}/${test}`, { parser: 'tsx' })
+    defineTest(__dirname, testUnit, {}, `${testUnit}/${test}`, { parser: 'babylon' })
   );
 });

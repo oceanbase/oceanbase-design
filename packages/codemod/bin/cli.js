@@ -77,12 +77,18 @@ function getMaxWorkers(options = {}) {
   return options.cpus || Math.max(2, Math.ceil(os.cpus().length / 3));
 }
 
-function getRunnerArgs(transformerPath, parser = 'tsx', options = {}) {
+function getRunnerArgs(transformerPath, parser = 'babylon', options = {}) {
   const args = {
     verbose: 2,
     // limit usage for cpus
     cpus: getMaxWorkers(options),
     parser,
+    // https://github.com/facebook/jscodeshift/blob/master/src/Runner.js#L255
+    // https://github.com/facebook/jscodeshift/blob/master/src/Worker.js#L50
+    babel: false,
+    // override default babylon parser config to enable `decorator-legacy`
+    // https://github.com/facebook/jscodeshift/blob/master/parser/babylon.js
+    parserConfig: require('./babylon.config.json'),
     extensions: ['js', 'jsx', 'ts', 'tsx', 'd.ts'].join(','),
     transform: transformerPath,
     ignorePattern: '**/node_modules',
@@ -94,7 +100,7 @@ function getRunnerArgs(transformerPath, parser = 'tsx', options = {}) {
 
 async function run(filePath, args = {}) {
   for (const transformer of transformers) {
-    await transform(transformer, 'tsx', filePath, args);
+    await transform(transformer, 'babylon', filePath, args);
   }
 }
 
