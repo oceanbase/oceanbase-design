@@ -29,7 +29,7 @@ const transformers = [
   'antd-to-oceanbase-design',
   'obui-to-oceanbase-design-and-ui',
   'obutil-to-oceanbase-util',
-  'techui-to-oceanbase-ui',
+  'page-container-to-oceanbase-ui',
 ];
 
 const dependencyProperties = [

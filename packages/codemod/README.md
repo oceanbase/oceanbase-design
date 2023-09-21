@@ -64,7 +64,7 @@ import components and typs from `antd` to `@oceanbase/design` and `@oceanbase/ui
   export default Demo;
 ```
 
-### `techui-to-oceanbase-ui`
+### `page-container-to-oceanbase-ui`
 
 import `PageContainer` from `@alipay/tech-ui` to `@ant-design/pro-components` and `@oceanbase/ui`.
 
