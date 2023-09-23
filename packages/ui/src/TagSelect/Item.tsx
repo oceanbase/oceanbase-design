@@ -10,7 +10,7 @@ import TagSelectContext from './TagSelectContext';
 export interface TagSelectItemProps {
     children?: React.ReactNode;
     cover?: React.ReactNode;
-    value?: string | number;
+    value?: TagSelectValueType;
     defaultChecked?:boolean;
     checked?: boolean;
     title?: string;
@@ -67,7 +67,7 @@ const Item: React.FC<TagSelectItemProps> = ({
     const renderCover = () => {
         return (
             coverType === 'string' ? <div className={`${prefixCls}-cover`}>
-                <img src={cover} alt="tagselect" />
+                <img src={cover as string} alt="tagselect" />
             </div> : cover
         );
     };

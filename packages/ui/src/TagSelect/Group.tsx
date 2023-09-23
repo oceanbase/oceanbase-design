@@ -6,7 +6,7 @@ import Item from './Item';
 import useStyle from './style';
 
 
-export type TagSelectValueType = string | number;
+export type TagSelectValueType = string | number | readonly string[];
 
 export interface TagSelectOptionType {
     label: React.ReactNode;

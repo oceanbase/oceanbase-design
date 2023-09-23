@@ -24,13 +24,13 @@ export function genComponentStyleHook(componentName: string, styleFn: GenerateSt
     const componentCls = `.${prefixCls}`;
 
     return useStyle(componentName, token => {
-      const mergedToken: OBToken = {
+      const mergedToken = {
         ...token,
         componentCls,
         prefixCls,
         iconCls: `.${iconPrefixCls}`,
         antCls: `.${rootPrefixCls}`,
-      };
+      } as OBToken;
       return [styleFn(mergedToken)];
     });
   };
