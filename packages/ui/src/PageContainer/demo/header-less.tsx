@@ -1,3 +1,4 @@
+import React from 'react';
 import { Card, Table } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
 

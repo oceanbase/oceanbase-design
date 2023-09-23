@@ -1,10 +1,9 @@
 /**
  * iframe: 600
  */
+import React, { useState } from 'react';
 import { message } from '@oceanbase/design';
 import { Login } from '@oceanbase/ui';
-import { useState } from 'react';
-// @ts-ignore
 import background_img from '../../assets/background_img.svg';
 
 export default () => {

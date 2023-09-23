@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Radio } from '@oceanbase/design';
 import { Lottie } from '@oceanbase/ui';
 

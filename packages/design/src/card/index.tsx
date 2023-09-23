@@ -10,6 +10,7 @@ import ConfigProvider from '../config-provider';
 import useInkBar from '../tabs/hooks/useInkBar';
 import useStyle from './style';
 
+export * from 'antd/es/card/Card';
 export * from 'antd/es/card';
 
 export interface CardTabListType extends AntCardTabListType {

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Badge, Descriptions } from '@oceanbase/design';
 
 export default () => (

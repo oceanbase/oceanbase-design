@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Stat } from '@oceanbase/charts';
 import { Col, Row, Form, Radio } from '@oceanbase/design';
 import { range } from 'lodash';

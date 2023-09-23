@@ -7,6 +7,7 @@ import { useTheme } from '../theme';
 import type { Theme } from '../theme';
 
 export interface ProgressConfig extends AntProgressConfig {
+  maxColumnWidth?: number;
   // 是否为紧凑型布局，此时进度条与标签的间距较小，常用于表格等场景
   compact?: boolean;
   // 左侧标题

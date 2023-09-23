@@ -95,7 +95,7 @@ const App: React.FC = () => {
       <Table
         columns={columns}
         expandable={{
-          expandedRowRender,
+          expandedRowRender: () => expandedRowRender('large'),
           defaultExpandedRowKeys: ['0'],
         }}
         dataSource={data}

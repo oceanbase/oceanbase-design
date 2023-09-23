@@ -1,3 +1,4 @@
+import React from 'react';
 import { Gauge, useTheme } from '@oceanbase/charts';
 
 export default () => {

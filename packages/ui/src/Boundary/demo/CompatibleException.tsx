@@ -1,3 +1,4 @@
+import React from 'react';
 import { Boundary } from '@oceanbase/ui';
 
 export default () => {

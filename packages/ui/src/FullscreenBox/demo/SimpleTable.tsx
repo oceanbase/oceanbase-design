@@ -1,3 +1,4 @@
+import React from 'react';
 import { Divider, Table, Tag } from '@oceanbase/design';
 
 export const SimpleTable = () => {

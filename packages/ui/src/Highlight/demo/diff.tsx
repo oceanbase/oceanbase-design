@@ -1,10 +1,9 @@
 /**
  * title: Diff 比较
  */
-
+import React from 'react';
 import { Select, Space, Switch } from '@oceanbase/design';
 import { Highlight } from '@oceanbase/ui';
-import React from 'react';
 
 const languages = {
   // BASH

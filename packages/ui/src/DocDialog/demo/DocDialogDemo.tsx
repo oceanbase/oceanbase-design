@@ -1,6 +1,6 @@
+import React, { useCallback, useState } from 'react';
 import { Button } from '@oceanbase/design';
 import { DocDialog } from '@oceanbase/ui';
-import { useCallback, useState } from 'react';
 import './index.less';
 
 const docLink = 'https://www.oceanbase.com/docs/enterprise';

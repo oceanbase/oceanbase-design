@@ -11,12 +11,13 @@ import {
   Table,
   Tabs,
 } from '@oceanbase/design';
+import { SizeType } from '@oceanbase/design/es/config-provider';
 import React, { useState } from 'react';
 
 const { TabPane } = Tabs;
 
 const App: React.FC = () => {
-  const [componentSize, setComponentSize] = useState('small');
+  const [componentSize, setComponentSize] = useState<SizeType>('small');
 
   return (
     <>

@@ -2,9 +2,9 @@
  * title: 加载中
  * iframe: true
  */
-
-import { HeartOutlined, HeartTwoTone } from '@oceanbase/icons';
+import React from 'react';
 import { SideTip } from '@oceanbase/ui';
+import { HeartOutlined, HeartTwoTone } from '@oceanbase/icons';
 
 export default () => {
   return (

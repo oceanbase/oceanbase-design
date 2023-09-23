@@ -1,3 +1,4 @@
+import React from 'react';
 import {TagSelect} from '@oceanbase/ui';
 
 export default () => {
