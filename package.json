@@ -7,7 +7,7 @@
   "scripts": {
     "build": "pnpm --filter \"@oceanbase/**\" build",
     "build:watch": "pnpm --filter \"@oceanbase/**\" build --watch",
-    "ci": "npm run build && npm run lint && npm run test",
+    "ci": "npm run tsc && npm run build && npm run lint && npm run test",
     "deploy": "npm run site:build && npm run site:deploy",
     "dev": "tsc --skipLibCheck packages/design/src/theme/index.ts --outDir ./.dumi/tmp/plugin-theme-less && cross-env UMI_ENV=theme dumi dev",
     "prepare": "dumi setup",
