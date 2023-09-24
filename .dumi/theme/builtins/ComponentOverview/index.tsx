@@ -29,7 +29,10 @@ const useStyle = () => {
       cursor: pointer;
       transition: all 0.5s;
       &:hover {
-        box-shadow: 0 6px 16px -8px #00000014, 0 9px 28px #0000000d, 0 12px 48px 16px #00000008;
+        box-shadow:
+          0 6px 16px -8px #00000014,
+          0 9px 28px #0000000d,
+          0 12px 48px 16px #00000008;
       }
     `,
     componentsOverviewAffix: css`
