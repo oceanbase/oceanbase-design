@@ -1,3 +1,4 @@
+import React from 'react';
 import { Descriptions, Tooltip } from '@oceanbase/design';
 
 export default () => (

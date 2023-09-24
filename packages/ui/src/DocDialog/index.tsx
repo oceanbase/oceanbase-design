@@ -28,7 +28,7 @@ export interface IDocDialogProps extends LocaleWrapperProps {
   docUrls?: Record<string, string>;
   embedConfig?: IDialogConfig;
   normalConfig?: IDialogConfig;
-  normalModeWidth?: string;
+  normalModeWidth?: number;
   defautTop?: number;
   visible: boolean;
   setRootWidth: (newWidth: string) => void;

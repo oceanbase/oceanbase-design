@@ -47,7 +47,9 @@ const PageContainer = ({
 
   const { reload, subTitle, breadcrumb } = header || {};
   const reloadProps =
-    isObject(reload) && !React.isValidElement(reload) ? (reload as IconComponentProps) : {};
+    isObject(reload) && !React.isValidElement(reload)
+      ? (reload as Omit<IconComponentProps, 'ref'>)
+      : {};
   const reloadCls = classNames(
     `${rootPrefixCls}-page-header-heading-reload`,
     reloadProps.className

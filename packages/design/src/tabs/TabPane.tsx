@@ -6,4 +6,4 @@ export interface TabPaneProps extends AntTabPaneProps {
   tag?: React.ReactNode;
 }
 
-export default AntTabs.TabPane;
+export default AntTabs.TabPane as React.FC<TabPaneProps>;

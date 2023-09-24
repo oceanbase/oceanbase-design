@@ -1,3 +1,4 @@
+import React from 'react';
 import { Space } from '@oceanbase/design';
 import { Ranger } from '@oceanbase/ui';
 

@@ -2,10 +2,10 @@
  * title: 回到顶部
  * iframe: true
  */
-
-import { ArrowUpOutlined } from '@oceanbase/icons';
+import React from 'react';
 import { BackTop } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
+import { ArrowUpOutlined } from '@oceanbase/icons';
 
 export default () => {
   return (

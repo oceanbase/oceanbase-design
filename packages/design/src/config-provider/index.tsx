@@ -14,6 +14,9 @@ import defaultThemeToken from '../theme/default';
 import type { NavigateFunction } from './navigate';
 
 export * from './navigate';
+export * from 'antd/es/config-provider/context';
+export * from 'antd/es/config-provider/SizeContext';
+export * from 'antd/es/config-provider/DisabledContext';
 export * from 'antd/es/config-provider';
 
 export interface ThemeConfig extends AntThemeConfig {

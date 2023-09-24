@@ -1,7 +1,7 @@
 /**
  * title: 展示代码块行号
  */
-
+import React from 'react';
 import { Highlight } from '@oceanbase/ui';
 
 export default () => (

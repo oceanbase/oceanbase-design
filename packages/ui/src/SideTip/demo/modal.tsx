@@ -2,11 +2,10 @@
  * title: 点击新建 Modal
  * iframe: 500
  */
-
-import { PlusOutlined } from '@oceanbase/icons';
+import React, { useState } from 'react';
 import { Modal } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
-import { useState } from 'react';
+import { PlusOutlined } from '@oceanbase/icons';
 
 export default () => {
   const [open, setOpen] = useState(false);

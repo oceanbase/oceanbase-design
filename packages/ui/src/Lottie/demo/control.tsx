@@ -1,8 +1,8 @@
+import React, { useState, useRef } from 'react';
 import { Button, Space } from '@oceanbase/design';
 import { PauseCircleOutlined, PlayCircleFilled } from '@oceanbase/icons';
 import { Lottie } from '@oceanbase/ui';
 import { LottieRef } from '@oceanbase/ui/es/Lottie';
-import { useState, useRef } from 'react';
 
 export default () => {
   const ref = useRef<LottieRef>();

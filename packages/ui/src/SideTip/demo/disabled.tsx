@@ -2,10 +2,10 @@
  * title: 不可用
  * iframe: true
  */
-
-import { EditOutlined } from '@oceanbase/icons';
+import React from 'react';
 import { message } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
+import { EditOutlined } from '@oceanbase/icons';
 
 export default () => {
   return (

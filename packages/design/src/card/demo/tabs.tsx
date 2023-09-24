@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Form, Radio, Switch } from '@oceanbase/design';
+import type { CardSize } from '@oceanbase/design/es/card';
 
 const tabList = [
   {
@@ -42,7 +43,7 @@ const contentListNoTitle: Record<string, React.ReactNode> = {
 };
 
 const App: React.FC = () => {
-  const [size, setSize] = useState('default');
+  const [size, setSize] = useState<CardSize>('default');
   const [divided, setDivided] = useState(true);
   const [activeTabKey1, setActiveTabKey1] = useState<string>('tab1');
   const [activeTabKey2, setActiveTabKey2] = useState<string>('app');

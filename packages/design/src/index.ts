@@ -15,7 +15,10 @@ export { default as Form } from './form';
 export { default as Modal } from './modal';
 export { message, notification, token } from './static-function';
 export { default as Table } from './table';
+
 export { default as Tabs } from './tabs';
+export type { TabsProps } from './tabs';
+
 export { default as theme } from './theme';
 export { default as Tooltip } from './tooltip';
 export { default as Breadcrumb } from './breadcrumb';

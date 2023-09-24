@@ -1,3 +1,4 @@
+import React from 'react';
 import { Ranger } from '@oceanbase/ui';
 
 export default () => {

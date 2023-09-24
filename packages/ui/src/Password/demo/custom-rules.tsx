@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import { Button, Form, Input } from '@oceanbase/design';
 import { Password } from '@oceanbase/ui';
-import { useState } from 'react';
 
 export default () => {
   const [form] = Form.useForm();

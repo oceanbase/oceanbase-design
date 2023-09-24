@@ -1,6 +1,7 @@
 /**
  * iframe: 600
  */
+import React from 'react';
 import { EllipsisOutlined } from '@oceanbase/icons';
 import { Button, Descriptions, Dropdown, Radio } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';

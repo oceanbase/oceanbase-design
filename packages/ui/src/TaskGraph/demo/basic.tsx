@@ -1,6 +1,7 @@
 /**
  * iframe: 600
  */
+import React from 'react';
 import { message } from '@oceanbase/design';
 import { TaskGraph } from '@oceanbase/ui';
 

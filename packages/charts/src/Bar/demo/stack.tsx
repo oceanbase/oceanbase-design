@@ -1,3 +1,4 @@
+import React from 'react';
 import { Bar } from '@oceanbase/charts';
 import { Col, Row } from '@oceanbase/design';
 
