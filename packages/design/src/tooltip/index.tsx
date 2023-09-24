@@ -24,7 +24,7 @@ export const getTooltipTypeList = () => [
   {
     type: 'light',
     color: token.colorText,
-    backgroundColor: '#ffffff',
+    backgroundColor: token.colorBgElevated,
   },
   {
     type: 'success',
@@ -89,11 +89,11 @@ const Tooltip: CompoundedComponent = ({
   };
 
   const hasCloseIcon = !!closeIcon;
+
   const CloseIconNode = useMemo(() => {
     if (!hasCloseIcon) {
       return null;
     }
-
     return closeIcon === true ? (
       <CloseOutlined className={`${prefixCls}-close-icon`} onClick={handleCloseClick} />
     ) : (
@@ -132,8 +132,8 @@ const Tooltip: CompoundedComponent = ({
         title={hasCloseIcon ? titleWithCloseIcon : title}
         color={color || typeItem?.backgroundColor}
         open={open}
-        onOpenChange={open => {
-          setInnerOpen(open);
+        onOpenChange={newOpen => {
+          setInnerOpen(newOpen);
         }}
         overlayInnerStyle={{
           color: typeItem?.color,
