@@ -11,7 +11,7 @@ const prefix = getPrefix('menu');
 export interface IMenu {
   key: string;
   title: string;
-  link: string;
+  link: string | string[];
   disabled?: boolean;
   openNewTab?: boolean; // 不在本应用内打开
   href?: boolean;

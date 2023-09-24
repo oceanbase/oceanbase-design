@@ -44,7 +44,7 @@ function createScriptUrlElements(
 
 export default function create(
     options: CustomIconOptions = {},
-): React.SFC<IconFontProps> {
+): React.FC<IconFontProps> {
     const { scriptUrl, extraCommonProps = {} } = options;
 
     /**

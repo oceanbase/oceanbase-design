@@ -1,16 +1,12 @@
 import React from 'react';
 import { TreeSearch } from '@oceanbase/ui';
-import { DataNode } from '@oceanbase/design/es/tree';
+import type { DataNode } from '@oceanbase/design/es/tree';
 import './style.less';
 
 interface Node extends DataNode {
   extra: React.ReactNode;
+  title?: React.ReactNode;
 }
-
-const alertMsg = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-  event.stopPropagation();
-  alert('test');
-};
 
 function dig(path = '0', level = 3) {
   const list = [];

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Column } from '@oceanbase/charts';
+import type { ColumnConfig } from '@oceanbase/charts';
 import { Col, Row } from '@oceanbase/design';
 
 export default () => {
@@ -37,7 +38,8 @@ export default () => {
       sales: 38,
     },
   ];
-  const config = {
+  const config: ColumnConfig = {
+    data,
     xField: 'type',
     yField: 'sales',
     label: {
@@ -48,10 +50,10 @@ export default () => {
   return (
     <Row gutter={200}>
       <Col span={12}>
-        <Column height={200} data={data} {...config} />
+        <Column height={200} {...config} />
       </Col>
       <Col span={12}>
-        <Column height={200} data={data.slice(0, 2)} {...config} />
+        <Column height={200} {...config} data={data.slice(0, 2)} />
       </Col>
     </Row>
   );

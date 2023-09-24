@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pie } from '@oceanbase/charts';
+import type { PieConfig } from '@oceanbase/charts';
 import { Col, Row } from '@oceanbase/design';
 
 export default () => {
@@ -29,7 +30,7 @@ export default () => {
       value: 5,
     },
   ];
-  const config1 = {
+  const config1: PieConfig = {
     data,
     angleField: 'value',
     colorField: 'type',
@@ -38,7 +39,7 @@ export default () => {
       position: 'bottom',
     },
   };
-  const config2 = {
+  const config2: PieConfig = {
     ...config1,
     legend: {
       position: 'right',

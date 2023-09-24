@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { Stat } from '@oceanbase/charts';
+import type { StatConfig } from '@oceanbase/charts';
 import { Col, Row, Form, Radio } from '@oceanbase/design';
 import { range } from 'lodash';
 
 export default () => {
   const [height, setHeight] = useState(100);
   const [span, setSpan] = useState(8);
-  const [layout, setLayout] = useState('vertical');
-  const [colorMode, setColorMode] = useState('background');
-  const [chartMode, setChartMode] = useState('area');
-  const [textAlign, setTextAlign] = useState('auto');
+  const [layout, setLayout] = useState<StatConfig['layout']>('vertical');
+  const [colorMode, setColorMode] = useState<StatConfig['colorMode']>('background');
+  const [chartMode, setChartMode] = useState<StatConfig['chartMode']>('area');
+  const [textAlign, setTextAlign] = useState<StatConfig['textAlign']>('auto');
   const [extra, setExtra] = useState('suffix');
-  const config = {
+  const config: StatConfig = {
     height,
     ...(extra
       ? {
