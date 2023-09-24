@@ -8,3 +8,11 @@ packages/design/src/theme/style/*.less
 packages/icons/src
 .secignore
 LICENSE
+es
+lib
+dist
+/site
+/server
+/public
+__testfixtures__
+

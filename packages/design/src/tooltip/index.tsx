@@ -68,14 +68,14 @@ const Tooltip: CompoundedComponent = ({
 }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
 
-  const { prefixCls: customizePrefixCls } = restProps
+  const { prefixCls: customizePrefixCls } = restProps;
   const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
   const { wrapSSR, hashId } = useStyle(prefixCls);
 
   const tooltipCls = classNames(className, hashId);
-  const [innerOpen, setInnerOpen] = useState(undefined)
+  const [innerOpen, setInnerOpen] = useState(undefined);
 
-  const open = isNil(propOpen) ? innerOpen : propOpen
+  const open = isNil(propOpen) ? innerOpen : propOpen;
 
   const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -88,58 +88,64 @@ const Tooltip: CompoundedComponent = ({
     setInnerOpen(false);
   };
 
-  const hasCloseIcon = !!closeIcon
+  const hasCloseIcon = !!closeIcon;
   const CloseIconNode = useMemo(() => {
     if (!hasCloseIcon) {
-      return null
+      return null;
     }
 
-    return closeIcon === true ? <CloseOutlined className={`${prefixCls}-close-icon`} onClick={handleCloseClick} /> : <span className={`${prefixCls}-close-icon`} onClick={handleCloseClick}>
-      {closeIcon}
-    </span>
-  }, [closeIcon])
+    return closeIcon === true ? (
+      <CloseOutlined className={`${prefixCls}-close-icon`} onClick={handleCloseClick} />
+    ) : (
+      <span className={`${prefixCls}-close-icon`} onClick={handleCloseClick}>
+        {closeIcon}
+      </span>
+    );
+  }, [closeIcon]);
 
-  const titleNode = typeof title === 'function' ? title() : title
+  const titleNode = typeof title === 'function' ? title() : title;
   const titleWithCloseIcon = (
     <Space className={`${prefixCls}-close-icon-wrap`}>
       {titleNode}
       {CloseIconNode}
-    </Space >
-  )
+    </Space>
+  );
 
   const typeList = getTooltipTypeList();
   const typeItem = typeList.find(item => item.type === type);
-  return wrapSSR(mouseFollow ? (
-    <MouseTooltip
-      title={title}
-      color={color || typeItem?.backgroundColor}
-      overlayInnerStyle={{
-        color: typeItem?.color,
-        ...overlayInnerStyle,
-      }}
-      className={tooltipCls}
-      {...restProps}
-    >
-      {children}
-    </MouseTooltip>
-  ) : (
-    <AntTooltip
-      title={hasCloseIcon ? titleWithCloseIcon : title}
-      color={color || typeItem?.backgroundColor}
-      open={open}
-      onOpenChange={(open) => {
-        setInnerOpen(open)
-      }}
-      overlayInnerStyle={{
-        color: typeItem?.color,
-        ...overlayInnerStyle,
-      }}
-      className={tooltipCls}
-      {...restProps}
-    >
-      {children}
-    </AntTooltip>
-  ));
+  return wrapSSR(
+    mouseFollow ? (
+      <MouseTooltip
+        title={title}
+        color={color || typeItem?.backgroundColor}
+        overlayInnerStyle={{
+          color: typeItem?.color,
+          ...overlayInnerStyle,
+        }}
+        className={tooltipCls}
+        {...restProps}
+      >
+        {children}
+      </MouseTooltip>
+    ) : (
+      <AntTooltip
+        title={hasCloseIcon ? titleWithCloseIcon : title}
+        color={color || typeItem?.backgroundColor}
+        open={open}
+        onOpenChange={open => {
+          setInnerOpen(open);
+        }}
+        overlayInnerStyle={{
+          color: typeItem?.color,
+          ...overlayInnerStyle,
+        }}
+        className={tooltipCls}
+        {...restProps}
+      >
+        {children}
+      </AntTooltip>
+    )
+  );
 };
 
 if (process.env.NODE_ENV !== 'production') {

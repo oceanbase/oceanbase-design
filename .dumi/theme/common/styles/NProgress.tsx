@@ -13,7 +13,9 @@ export default () => {
           }
 
           .peg {
-            box-shadow: 0 0 10px ${token.colorPrimary}, 0 0 5px ${token.colorPrimary};
+            box-shadow:
+              0 0 10px ${token.colorPrimary},
+              0 0 5px ${token.colorPrimary};
           }
 
           .spinner-icon {

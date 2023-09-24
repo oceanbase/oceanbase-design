@@ -30,7 +30,9 @@ export default () => {
             background-color: inherit;
             border-radius: 4px;
             cursor: pointer;
-            transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            transition:
+              color 0.3s ease-in-out,
+              background-color 0.3s ease-in-out;
 
             .rtl & {
               margin: 3px 0;

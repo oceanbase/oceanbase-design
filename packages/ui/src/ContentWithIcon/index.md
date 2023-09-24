@@ -9,9 +9,7 @@ nav:
 
 ### 基本使用
 
-组件默认情况图标在文字后，如不需要自定义图标，则不需要传 suffixIcon 
-<code src="./demo/basic.tsx" ></code>
-
+组件默认情况图标在文字后，如不需要自定义图标，则不需要传 suffixIcon <code src="./demo/basic.tsx" ></code>
 
 ### 图标在文字前
 

@@ -2,7 +2,7 @@
  * title: 小尺寸
  * iframe: true
  */
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 import { message } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
 import { CloudUploadOutlined } from '@oceanbase/icons';

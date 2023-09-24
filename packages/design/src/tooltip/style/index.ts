@@ -23,11 +23,15 @@ export const genTooltipStyle: GenerateStyle<TooltipToken> = (token: TooltipToken
 };
 
 export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Tooltip', token => {
-    return [genTooltipStyle(token as TooltipToken)];
-  }, ({ zIndexPopupBase, colorBgSpotlight }) => ({
-    zIndexPopup: zIndexPopupBase + 70,
-    colorBgDefault: colorBgSpotlight,
-  }),);
+  const useStyle = genComponentStyleHook(
+    'Tooltip',
+    token => {
+      return [genTooltipStyle(token as TooltipToken)];
+    },
+    ({ zIndexPopupBase, colorBgSpotlight }) => ({
+      zIndexPopup: zIndexPopupBase + 70,
+      colorBgDefault: colorBgSpotlight,
+    })
+  );
   return useStyle(prefixCls);
 };

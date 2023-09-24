@@ -96,15 +96,15 @@ const ContentWithIcon: React.FC<ContentWithIconProps> = ({
           <span style={{ color: '#5C6B8A' }}>文本示意不超过二十字文本示意不超过二十字</span>
         </Space>
       ) : // 提示文案描述带有链接
-        tooltipWithLink ? (
-          <Popover {...popOver}>
-            {isValidElement(iconConfig) ? iconConfig : defaultIconType()}
-          </Popover>
-        ) : (
-          <Tooltip {...tooltip}>
-            {isValidElement(iconConfig) ? iconConfig : defaultIconType()}
-          </Tooltip>
-        )
+      tooltipWithLink ? (
+        <Popover {...popOver}>
+          {isValidElement(iconConfig) ? iconConfig : defaultIconType()}
+        </Popover>
+      ) : (
+        <Tooltip {...tooltip}>
+          {isValidElement(iconConfig) ? iconConfig : defaultIconType()}
+        </Tooltip>
+      )
     ) : null;
   };
 
@@ -121,7 +121,7 @@ const ContentWithIcon: React.FC<ContentWithIconProps> = ({
           <Space size={4}>
             {getIcon(
               //  图标在文字前
-              prefixIcon === true ? defaultIconType() : prefixIcon,
+              prefixIcon === true ? defaultIconType() : prefixIcon
             )}
             <span
               data-testid="content"
