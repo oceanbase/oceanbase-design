@@ -61,7 +61,7 @@
     "@umijs/fabric": "^4.0.1",
     "@umijs/test": "^4.0.79",
     "antd": "^5.9.0",
-    "antd-style": "^3.4.5",
+    "antd-style": "^3.5.0",
     "antd-token-previewer": "^1.1.0",
     "babel-jest": "^29.6.4",
     "classnames": "^2.3.2",
