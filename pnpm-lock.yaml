@@ -311,8 +311,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       enzyme-to-json:
-        specifier: ^3.4.0
-        version: 3.4.0(enzyme@3.0.0)
+        specifier: ^3.6.2
+        version: 3.6.2(enzyme@3.0.0)
 
   packages/design:
     dependencies:
@@ -6152,6 +6152,12 @@ packages:
       '@babel/types': 7.22.19
     dev: true
 
+  /@types/cheerio@0.22.32:
+    resolution: {integrity: sha512-4RrpCp5ufWTLb6/1RCOjazRhUM6DTD79l763det29n8kLmPB7XeN46cxlUf2GsSF+0g6CbWT5nYl8C/Gs15bdg==}
+    dependencies:
+      '@types/node': 20.6.2
+    dev: true
+
   /@types/d3-timer@1.0.10:
     resolution: {integrity: sha512-ZnAbquVqy+4ZjdW0cY6URp+qF/AzTVNda2jYyOzpR2cPT35FTXl78s15Bomph9+ckOiI1TtkljnWkwbIGAb6rg==}
     dev: true
@@ -8390,7 +8396,7 @@ packages:
       '@babel/plugin-syntax-jsx': 7.22.5(@babel/core@7.22.15)
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.11(@babel/core@7.22.15)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      styled-components: 5.3.11(@babel/core@7.22.15)(react-dom@16.14.0)(react-is@18.2.0)(react@16.14.0)
     transitivePeerDependencies:
       - '@babel/core'
     dev: true
@@ -10882,14 +10888,16 @@ packages:
     hasBin: true
     dev: true
 
-  /enzyme-to-json@3.4.0(enzyme@3.0.0):
-    resolution: {integrity: sha512-gbu8P8PMAtb+qtKuGVRdZIYxWHC03q1dGS3EKRmUzmTDIracu3o6cQ0d4xI2YWojbelbxjYOsmqM5EgAL0WgIA==}
-    engines: {node: '>=4.0.0'}
+  /enzyme-to-json@3.6.2(enzyme@3.0.0):
+    resolution: {integrity: sha512-Ynm6Z6R6iwQ0g2g1YToz6DWhxVnt8Dy1ijR2zynRKxTyBGA8rCDXU3rs2Qc4OKvUvc2Qoe1bcFK6bnPs20TrTg==}
+    engines: {node: '>=6.0.0'}
     peerDependencies:
       enzyme: ^3.4.0
     dependencies:
+      '@types/cheerio': 0.22.32
       enzyme: 3.0.0
       lodash: 4.17.21
+      react-is: 16.13.1
     dev: true
 
   /enzyme@3.0.0:
