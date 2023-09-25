@@ -1,18 +1,18 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Stat } from '@oceanbase/charts';
+import type { StatConfig } from '@oceanbase/charts';
 import { Col, Row, Form, Radio } from '@oceanbase/design';
 import { range } from 'lodash';
 
 export default () => {
   const [height, setHeight] = useState(100);
   const [span, setSpan] = useState(8);
-  const [layout, setLayout] = useState('vertical');
-  const [themeMode, setThemeMode] = useState('light');
-  const [colorMode, setColorMode] = useState('background');
-  const [chartMode, setChartMode] = useState('area');
-  const [textAlign, setTextAlign] = useState('auto');
+  const [layout, setLayout] = useState<StatConfig['layout']>('vertical');
+  const [colorMode, setColorMode] = useState<StatConfig['colorMode']>('background');
+  const [chartMode, setChartMode] = useState<StatConfig['chartMode']>('area');
+  const [textAlign, setTextAlign] = useState<StatConfig['textAlign']>('auto');
   const [extra, setExtra] = useState('suffix');
-  const config = {
+  const config: StatConfig = {
     height,
     ...(extra
       ? {
@@ -20,7 +20,6 @@ export default () => {
         }
       : {}),
     layout,
-    themeMode,
     colorMode,
     chartMode,
     chartData: [
@@ -73,14 +72,6 @@ export default () => {
               <Radio.Group value={layout} onChange={e => setLayout(e.target.value)}>
                 <Radio.Button value="vertical">Vertical</Radio.Button>
                 <Radio.Button value="horizontal">Horizontal</Radio.Button>
-              </Radio.Group>
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item label="Theme Mode">
-              <Radio.Group value={themeMode} onChange={e => setThemeMode(e.target.value)}>
-                <Radio.Button value="light">Light</Radio.Button>
-                <Radio.Button value="dark">Dark</Radio.Button>
               </Radio.Group>
             </Form.Item>
           </Col>

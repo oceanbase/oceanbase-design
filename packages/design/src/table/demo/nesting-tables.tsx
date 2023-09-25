@@ -1,7 +1,7 @@
 import React from 'react';
 import type { TableColumnsType } from '@oceanbase/design';
 import { Badge, Dropdown, Space, Table } from '@oceanbase/design';
-import type { SizeType } from 'antd/es/config-provider/SizeContext';
+import type { SizeType } from '@oceanbase/design/es/config-provider';
 import { DownOutlined } from '@oceanbase/icons';
 
 interface DataType {
@@ -95,7 +95,7 @@ const App: React.FC = () => {
       <Table
         columns={columns}
         expandable={{
-          expandedRowRender,
+          expandedRowRender: () => expandedRowRender('large'),
           defaultExpandedRowKeys: ['0'],
         }}
         dataSource={data}

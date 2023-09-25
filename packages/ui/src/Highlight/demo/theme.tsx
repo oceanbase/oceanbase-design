@@ -1,10 +1,9 @@
 /**
  * title: 切换语言与主题
  */
-
+import React, { useState } from 'react';
 import { Select, Space } from '@oceanbase/design';
 import { Highlight } from '@oceanbase/ui';
-import { useState } from 'react';
 import configs from './config';
 
 const DEFAULT_LANGUAGE = 'bash';

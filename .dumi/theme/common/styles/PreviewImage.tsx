@@ -132,8 +132,12 @@ export default () => {
 
         .preview-image-boxes.preview-image-boxes-with-carousel img {
           padding: 0;
-          box-shadow: 0 1px 0 0 #ddd, 0 3px 0 0 ${token.colorBgContainer}, 0 4px 0 0 #ddd,
-            0 6px 0 0 ${token.colorBgContainer}, 0 7px 0 0 #ddd;
+          box-shadow:
+            0 1px 0 0 #ddd,
+            0 3px 0 0 ${token.colorBgContainer},
+            0 4px 0 0 #ddd,
+            0 6px 0 0 ${token.colorBgContainer},
+            0 7px 0 0 #ddd;
         }
 
         .preview-image-box img:hover {

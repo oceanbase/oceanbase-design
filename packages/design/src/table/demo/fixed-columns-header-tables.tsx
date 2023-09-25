@@ -1,5 +1,13 @@
-import { Table } from '@oceanbase/design';
 import React from 'react';
+import { Table } from '@oceanbase/design';
+import { ColumnProps } from '@oceanbase/design/es/table';
+
+interface DataType {
+  key: string;
+  name: string;
+  age: number;
+  address: string;
+}
 
 const App: React.FC = () => {
   const dataSource = [
@@ -35,7 +43,7 @@ const App: React.FC = () => {
     },
   ];
 
-  const columns = [
+  const columns: ColumnProps<DataType>[] = [
     {
       title: 'Full Name',
       width: 100,

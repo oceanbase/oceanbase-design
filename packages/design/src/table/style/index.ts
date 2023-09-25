@@ -196,7 +196,7 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
 
 export default (prefixCls: string) => {
   const useStyle = genComponentStyleHook('Table', token => {
-    return [genTableStyle(token)];
+    return [genTableStyle(token as TableToken)];
   });
   return useStyle(prefixCls);
 };

@@ -1,7 +1,9 @@
-import { TinyLine, theme } from '@oceanbase/charts';
+import React from 'react';
+import { TinyLine, useTheme } from '@oceanbase/charts';
 import { Col, Row } from '@oceanbase/design';
 
 export default () => {
+  const themeConfig = useTheme();
   const data = [
     264, 417, 438, 887, 309, 397, 550, 575, 563, 430, 525, 592, 492, 467, 513, 546, 983, 340, 539,
     243, 226, 192,
@@ -11,7 +13,7 @@ export default () => {
   };
   const config2 = {
     ...config1,
-    color: theme.semanticGreen,
+    color: themeConfig.semanticGreen,
     point: {},
   };
   return (

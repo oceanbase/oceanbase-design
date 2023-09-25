@@ -1,3 +1,4 @@
+import React from 'react';
 import { Line } from '@oceanbase/charts';
 
 export default () => {

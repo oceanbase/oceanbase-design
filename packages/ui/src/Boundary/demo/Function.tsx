@@ -1,5 +1,5 @@
+import React, { useCallback, useState } from 'react';
 import { Boundary } from '@oceanbase/ui';
-import { useCallback, useState } from 'react';
 
 export default () => {
   const [state, setState] = useState('NOT_OPEN');

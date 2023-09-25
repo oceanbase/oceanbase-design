@@ -1,19 +1,24 @@
 import React, { forwardRef } from 'react';
 import type { GaugeConfig as AntGaugeConfig } from '@ant-design/charts';
 import { Gauge as AntGauge } from '@ant-design/charts';
-import { theme } from '../theme';
 import { toPercent } from '../util/number';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 
-export type GaugeConfig = AntGaugeConfig;
+export interface GaugeConfig extends AntGaugeConfig {
+  theme?: Theme;
+}
 
 const Gauge: React.FC<GaugeConfig> = forwardRef(
-  ({ percent, range, axis, indicator, statistic, ...restConfig }, ref) => {
+  ({ percent, range, axis, indicator, statistic, theme, ...restConfig }, ref) => {
+    const themeConfig = useTheme(theme);
+
     const newConfig: GaugeConfig = {
       percent,
       startAngle: (Math.PI * 11) / 12,
       endAngle: (Math.PI * 1) / 12,
       range: {
-        color: theme.semanticGreen,
+        color: themeConfig.semanticGreen,
         ...range,
       },
       axis: axis !== false && {
@@ -58,7 +63,7 @@ const Gauge: React.FC<GaugeConfig> = forwardRef(
           },
         },
       },
-      theme: 'ob',
+      theme: themeConfig.theme,
       ...restConfig,
     };
     return <AntGauge {...newConfig} ref={ref} />;

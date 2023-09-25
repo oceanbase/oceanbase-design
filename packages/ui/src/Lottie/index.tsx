@@ -6,7 +6,10 @@ import classNames from 'classnames';
 
 export interface LottieProps extends Omit<AnimationConfig, 'container'> {
   // 动画文件路径，一般为 json 格式
-  path: string;
+  path?: string;
+  // 动画数据，一般为 json 内容，和 path 二选一
+  animationData?: any;
+  // 展示模式
   mode?: 'default' | 'icon';
   // 是否循环播放
   loop?: boolean;

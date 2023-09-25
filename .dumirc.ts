@@ -6,7 +6,8 @@ export default defineConfig({
   // 默认重定向到子包的 src 文件夹
   // ref: https://d.umijs.org/config#monoreporedirect
   monorepoRedirect: {},
-  ssr: process.env.NODE_ENV === 'production' ? {} : false,
+  // umi.server.js build error, disable it for now
+  // ssr: process.env.NODE_ENV === 'production' ? {} : false,
   hash: true,
   crossorigin: {},
   // ref: https://d.umijs.org/config#sitemap
@@ -131,6 +132,7 @@ export default defineConfig({
             { title: 'Modal 对话框', link: '/components/modal' },
             { title: 'Notification 通知提醒框', link: '/components/notification' },
             { title: 'Spin 加载中', link: '/components/spin' },
+            { title: 'Badge 徽标数', link: '/components/badge' },
           ],
         },
         {
@@ -175,10 +177,7 @@ export default defineConfig({
               title: 'BackgroundTaskManager 后台任务管理器',
               link: '/biz-components/background-task-manager',
             },
-            { title: 'SideTip 悬浮操作按钮', link: '/biz-components/side-tip' },
-            { title: 'FullscreenBox 全屏盒子', link: '/biz-components/fullscreen-box' },
-            { title: 'Highlight 代码高亮', link: '/biz-components/highlight' },
-            {title: 'TagSelect 标签式单选/多选', link: '/biz-components/tag-select'}
+            { title: 'TagSelect 标签式单选/多选', link: '/biz-components/tag-select' },
           ],
         },
       ],
@@ -188,6 +187,10 @@ export default defineConfig({
             {
               title: 'Stat 数字统计',
               link: '/charts/stat',
+            },
+            {
+              title: 'Score 得分图',
+              link: '/charts/score',
             },
             {
               title: 'Line 折线图',

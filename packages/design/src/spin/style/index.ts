@@ -13,13 +13,16 @@ const genSizeStyle = (spinDotSize: number, token: SpinToken): CSSObject => {
   const spinDotWidth = spinDotSize;
   const spinDotHight = spinDotWidth * (295 / 397);
   return {
-    [`${componentCls}-dot`]: {
-      width: spinDotWidth,
-      height: spinDotHight,
-    },
-    [`${componentCls}-text`]: {
-      width: spinDotWidth,
-      color: colorText,
+    // only work for oceanbase indicator
+    [`&${componentCls}-oceanbase`]: {
+      [`${componentCls}-dot`]: {
+        width: spinDotWidth,
+        height: spinDotHight,
+      },
+      [`${componentCls}-text`]: {
+        width: spinDotWidth,
+        color: colorText,
+      },
     },
   };
 };
@@ -35,6 +38,7 @@ const genNestedSizeStyle = (spinDotSize: number, token: SpinToken): CSSObject =>
   const dotMarginTop = -spinDotHight / 2;
   const textPaddingTop = (spinDotHight - fontSize) / 2 + 2;
   return {
+    // only work for oceanbase indicator
     [`&${componentCls}-oceanbase`]: {
       [`${componentCls}-dot`]: {
         marginLeft: dotMarginLeft,
@@ -53,11 +57,10 @@ const genNestedSizeStyle = (spinDotSize: number, token: SpinToken): CSSObject =>
 export const genSpinStyle: GenerateStyle<SpinToken> = (token: SpinToken): CSSObject => {
   const { componentCls, spinDotSize, spinDotSizeSM, spinDotSizeLG } = token;
   return {
-    // only work for oceanbase indicator
     [`${componentCls}`]: {
-      [`&-oceanbase`]: genSizeStyle(spinDotSize, token),
-      [`&-sm&-oceanbase`]: genSizeStyle(spinDotSizeSM, token),
-      [`&-lg&-oceanbase`]: genSizeStyle(spinDotSizeLG, token),
+      [`&`]: genSizeStyle(spinDotSize, token),
+      [`&-sm`]: genSizeStyle(spinDotSizeSM, token),
+      [`&-lg`]: genSizeStyle(spinDotSizeLG, token),
     },
     [`${componentCls}-nested-loading`]: {
       [`> div > ${componentCls}`]: {

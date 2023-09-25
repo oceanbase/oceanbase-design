@@ -34,7 +34,7 @@ nav:
 
 | 参数        | 说明           | 类型      | 默认值 | 版本 |
 | :---------- | :------------- | :-------- | :----- | :--- |
-| geometry    | 图形类型       | string    | line | -    |
+| geometry    | 图形类型       | string    | line   | -    |
 | seriesField | 分类字段名     | string    | -      | -    |
 | smooth      | 是否平滑       | boolean   | false  | -    |
 | lineStyle   | 折线样式       | LineStyle | -      | -    |
@@ -44,7 +44,7 @@ nav:
 
 | 参数        | 说明           | 类型        | 默认值 | 版本 |
 | :---------- | :------------- | :---------- | :----- | :--- |
-| geometry    | 图形类型       | string      | line | -    |
+| geometry    | 图形类型       | string      | line   | -    |
 | seriesField | 分类字段名     | string      | -      | -    |
 | groupField  | 分组字段名     | string      | -      | -    |
 | isStack     | 是否堆叠柱状图 | boolean     | false  | -    |

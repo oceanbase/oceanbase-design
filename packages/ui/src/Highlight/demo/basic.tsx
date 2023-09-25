@@ -1,7 +1,7 @@
 /**
  * title: 指定语言
  */
-
+import React from 'react';
 import { Highlight } from '@oceanbase/ui';
 
 export default () => (

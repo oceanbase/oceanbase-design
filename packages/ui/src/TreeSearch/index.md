@@ -42,6 +42,6 @@ nav:
 
 | 参数         | 说明                     | 类型       | 默认值 | 版本 |
 | :----------- | :----------------------- | :--------- | :----- | :--- |
-| reset        | 重置搜索区和 tree 的内容 | () => void | -      | -      |
-| checkAll     | 全选 tree 的内容         | () => void | -      | -      |
-| invertSelect | 反选 tree 的内容         | () => void | -      | -      |
+| reset        | 重置搜索区和 tree 的内容 | () => void | -      | -    |
+| checkAll     | 全选 tree 的内容         | () => void | -      | -    |
+| invertSelect | 反选 tree 的内容         | () => void | -      | -    |

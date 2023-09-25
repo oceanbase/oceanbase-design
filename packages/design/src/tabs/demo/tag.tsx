@@ -1,6 +1,6 @@
-import type { TabsProps } from '@oceanbase/design';
-import { Tabs } from '@oceanbase/design';
 import React from 'react';
+import { Tabs } from '@oceanbase/design';
+import type { TabsProps } from '@oceanbase/design';
 
 const onChange = (key: string) => {
   console.log(key);

@@ -4,10 +4,10 @@ import { toNumber, toString } from 'lodash';
 import classNames from 'classnames';
 import useResizeObserver from 'use-resize-observer';
 import { sortByNumber } from '@oceanbase/util';
-import type { Plot, AllBaseConfig } from '@ant-design/charts';
-import type { TinyAreaConfig } from '../Tiny/TinyArea';
+import type { TinyAreaConfig, TinyAreaRef } from '../Tiny/TinyArea';
 import TinyArea from '../Tiny/TinyArea';
-import { theme } from '../theme';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 import { calculateFontSize } from '../util/measureText';
 import './index.less';
 
@@ -19,7 +19,7 @@ export interface StatConfig {
   prefix?: string;
   suffix?: string;
   layout?: 'vertical' | 'horizontal';
-  themeMode?: 'light' | 'dark';
+  theme?: Theme;
   colorMode?: 'none' | 'value' | 'background';
   chartMode?: 'none' | 'line' | 'area';
   chartData?: number[];
@@ -53,7 +53,7 @@ const Stat: React.FC<StatConfig> = ({
   prefix,
   suffix,
   layout = 'vertical',
-  themeMode = 'light',
+  theme,
   colorMode = 'background',
   chartMode,
   chartData = [],
@@ -63,6 +63,7 @@ const Stat: React.FC<StatConfig> = ({
   style,
   ...restConfig
 }) => {
+  const themeConfig = useTheme(theme);
   const {
     ref: containerRef,
     width: containerWidth = 0,
@@ -84,10 +85,10 @@ const Stat: React.FC<StatConfig> = ({
         !value ||
         (value >= item.value &&
           (!thresholdList[index + 1] || value < thresholdList[index + 1]?.value))
-    )?.color || theme.defaultColor;
+    )?.color || themeConfig.defaultColor;
 
   // ref: https://github.com/grafana/grafana/blob/main/packages/grafana-ui/src/components/BigValue/BigValueLayout.tsx#L131
-  const themeFactor = themeMode === 'dark' || theme.isDark ? 1 : -0.7;
+  const themeFactor = themeConfig.theme === 'dark' ? 1 : -0.7;
   const bgColor1 = tinycolor(color)
     .darken(15 * themeFactor)
     .spin(8)
@@ -187,9 +188,7 @@ const Stat: React.FC<StatConfig> = ({
   );
   const prefixAndSuffixFontSize = valueFontSize * fontSizeReductionFactor(valueFontSize);
 
-  const chartRef = useRef<{
-    getChart: () => Plot<AllBaseConfig>;
-  }>();
+  const chartRef = useRef<TinyAreaRef>();
   // 图表占据一半高度
   const chartHeight = containerHeight * chartHeightPercent;
 
@@ -285,7 +284,11 @@ const Stat: React.FC<StatConfig> = ({
       </div>
       {containerHeight > 0 && hasChart && (
         <div className={`${prefixCls}-chart`}>
-          <TinyArea {...chartConfig} ref={chartRef} />
+          <TinyArea
+            {...chartConfig}
+            // @ts-ignore
+            ref={chartRef}
+          />
         </div>
       )}
     </div>

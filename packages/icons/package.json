@@ -1,10 +1,9 @@
 {
   "name": "@oceanbase/icons",
-  "version": "0.2.3",
+  "version": "0.2.6",
   "description": "The Icon Library for OceanBase",
   "keywords": [
-    "OceanBase",
-    "database",
+    "oceanbase",
     "design",
     "icon",
     "react",
@@ -37,7 +36,7 @@
   },
   "dependencies": {
     "@ant-design/colors": "^7.0.0",
-    "@ant-design/icons": "^5.2.5",
+    "@ant-design/icons": "^5.2.6",
     "@oceanbase/icons-svg": "^1.0.4"
   },
   "peerDependencies": {

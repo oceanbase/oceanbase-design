@@ -7,6 +7,7 @@ const pkgList = readdirSync(join(__dirname, './packages')).filter(
 
 const moduleNameMapper = {
   '^react$': require.resolve('react'),
+  '^.+\\.svg$': require.resolve('jest-svg-transformer'),
   '\\.(css|less|sass|scss)$': require.resolve('identity-obj-proxy'),
 };
 

@@ -325,6 +325,12 @@ const GlobalStyle: React.FC = () => {
               }
             }
 
+            td {
+              &:nth-child(3) {
+                color: ${token.magenta7};
+              }
+            }
+
             th {
               color: #5c6b77;
               font-weight: 500;

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Radio, Space, Switch, Table } from '@oceanbase/design';
 import type { RadioChangeEvent } from '@oceanbase/design';
-import type { SizeType } from 'antd/es/config-provider/SizeContext';
-import type { ColumnsType, TableProps } from 'antd/es/table';
-import type { ExpandableConfig, TableRowSelection } from 'antd/es/table/interface';
+import type { SizeType } from '@oceanbase/design/es/config-provider';
+import type { ColumnsType, TableProps } from '@oceanbase/design/es/table';
+import type { ExpandableConfig, TableRowSelection } from '@oceanbase/design/es/table/interface';
 import { DownOutlined } from '@oceanbase/icons';
 
 interface DataType {

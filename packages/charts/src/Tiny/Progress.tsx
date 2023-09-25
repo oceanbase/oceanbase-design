@@ -3,9 +3,11 @@ import type { ProgressConfig as AntProgressConfig } from '@ant-design/charts';
 import { Progress as AntProgress } from '@ant-design/charts';
 import useResizeObserver from 'use-resize-observer';
 import { toPercent } from '../util/number';
-import { theme } from '../theme';
+import { useTheme } from '../theme';
+import type { Theme } from '../theme';
 
 export interface ProgressConfig extends AntProgressConfig {
+  maxColumnWidth?: number;
   // 是否为紧凑型布局，此时进度条与标签的间距较小，常用于表格等场景
   compact?: boolean;
   // 左侧标题
@@ -20,6 +22,7 @@ export interface ProgressConfig extends AntProgressConfig {
   formatter?: (percent: number) => React.ReactNode;
   // 百分比标签样式
   percentStyle?: React.CSSProperties;
+  theme?: Theme;
 }
 
 const Progress: React.FC<ProgressConfig> = forwardRef(
@@ -32,12 +35,14 @@ const Progress: React.FC<ProgressConfig> = forwardRef(
       dangerPercent,
       decimal = 2,
       formatter = value => `${toPercent(value, decimal)}%`,
-      style,
       percentStyle,
+      theme,
+      style,
       ...restConfig
     },
     ref
   ) => {
+    const themeConfig = useTheme(theme);
     const { ref: titleRef, width: titleWidth } = useResizeObserver<HTMLDivElement>({
       // 包含 padding 和 border
       box: 'border-box',
@@ -49,9 +54,9 @@ const Progress: React.FC<ProgressConfig> = forwardRef(
 
     let color;
     if (dangerPercent && percent >= dangerPercent) {
-      color = theme.semanticRed;
+      color = themeConfig.semanticRed;
     } else if (warningPercent && percent >= warningPercent) {
-      color = theme.semanticYellow;
+      color = themeConfig.semanticYellow;
     }
 
     const padding = compact ? 8 : 16;
@@ -59,8 +64,8 @@ const Progress: React.FC<ProgressConfig> = forwardRef(
     const newConfig: ProgressConfig = {
       height: 20,
       percent,
-      theme: 'ob',
-      color: [color || theme.defaultColor, theme.barBackgroundColor],
+      color: [color || themeConfig.defaultColor, themeConfig.barBackgroundColor],
+      theme: themeConfig.theme,
       ...restConfig,
     };
     return (
@@ -79,7 +84,7 @@ const Progress: React.FC<ProgressConfig> = forwardRef(
               textAlign: 'left',
               // 避免换行
               whiteSpace: 'nowrap',
-              color: color || theme.styleSheet.axisLabelFillColor,
+              color: color || themeConfig.styleSheet.axisLabelFillColor,
             }}
           >
             {title}

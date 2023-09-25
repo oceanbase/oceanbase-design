@@ -77,7 +77,7 @@ nav:
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
-| :-- | :-- | :-- | :-- | :-- |
+| :-- | :-- | :-- | :-- | :-- | --- |
 | type | 设置按钮类型，可选值为 `primary` 或者不设 | string | - | - |
 | hideable | 设置是否可隐藏 | boolean | true | - |
 | size | 设置按钮尺寸 | small \| default | default | - |

@@ -23,7 +23,7 @@ export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) =
 
 export default (prefixCls: string) => {
   const useStyle = genComponentStyleHook('Button', token => {
-    return [genButtonStyle(token)];
+    return [genButtonStyle(token as ButtonToken)];
   });
   return useStyle(prefixCls);
 };
