@@ -4,6 +4,7 @@ import { TinyArea as AntTinyArea } from '@ant-design/charts';
 import type { Plot, AllBaseConfig } from '@ant-design/charts';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export interface TinyAreaRef {
   getChart: () => Plot<AllBaseConfig>;
@@ -52,4 +53,4 @@ const TinyArea: React.FC<TinyAreaConfig> = forwardRef<TinyAreaRef, TinyAreaConfi
   }
 );
 
-export default TinyArea;
+export default customMemo(TinyArea);

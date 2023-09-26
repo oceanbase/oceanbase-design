@@ -5,6 +5,7 @@ import { uniq } from 'lodash';
 import { toPercent } from '../util/number';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export interface BarConfig extends AntBarConfig {
   // 是否为进度条形图，数值范围为 0 ~ 1
@@ -154,4 +155,4 @@ const Bar: React.FC<BarConfig> = forwardRef(
   }
 );
 
-export default Bar;
+export default customMemo(Bar);

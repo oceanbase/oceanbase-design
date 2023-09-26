@@ -3,6 +3,7 @@ import type { TinyLineConfig as AntTinyLineConfig } from '@ant-design/charts';
 import { TinyLine as AntTinyLine } from '@ant-design/charts';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export interface TinyLineConfig extends AntTinyLineConfig {
   theme?: Theme;
@@ -40,4 +41,4 @@ const TinyLine: React.FC<TinyLineConfig> = forwardRef(
   }
 );
 
-export default TinyLine;
+export default customMemo(TinyLine);

@@ -4,6 +4,7 @@ import { Pie as AntPie } from '@ant-design/charts';
 import { isString } from 'lodash';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export const measureTextSize = (text: string, font: any = {}) => {
   const { fontSize, fontFamily = 'sans-serif', fontWeight, fontStyle, fontVariant } = font;
@@ -185,4 +186,4 @@ const Pie: React.FC<PieConfig> = forwardRef(
   }
 );
 
-export default Pie;
+export default customMemo(Pie);

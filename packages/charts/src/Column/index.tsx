@@ -4,6 +4,7 @@ import { Column as AntColumn } from '@ant-design/charts';
 import { uniq } from 'lodash';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export interface ColumnConfig extends AntColumnConfig {
   theme?: Theme;
@@ -94,4 +95,4 @@ const Column: React.FC<ColumnConfig> = forwardRef(
   }
 );
 
-export default Column;
+export default customMemo(Column);

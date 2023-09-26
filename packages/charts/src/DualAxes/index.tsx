@@ -11,6 +11,7 @@ import type { Tooltip } from '../hooks/useTooltipScrollable';
 import useTooltipScrollable from '../hooks/useTooltipScrollable';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export interface DualAxesConfig extends Omit<AntDualAxesConfig, 'yAxis'> {
   // 限制双轴图的 yAxis 为对象格式，而非数组格式。官方文档的示例均为对象格式，方便统一用法
@@ -147,4 +148,4 @@ const DualAxes: React.FC<DualAxesConfig> = forwardRef(
   }
 );
 
-export default DualAxes;
+export default customMemo(DualAxes);
