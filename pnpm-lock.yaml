@@ -78,8 +78,8 @@ importers:
         specifier: ^5.9.0
         version: 5.9.0(moment@2.29.4)(react-dom@16.14.0)(react@16.14.0)
       antd-style:
-        specifier: ^3.4.5
-        version: 3.4.5(@types/react@18.2.21)(antd@5.9.0)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^3.5.0
+        version: 3.5.0(@types/react@18.2.21)(antd@5.9.0)(react-dom@18.2.0)(react@18.2.0)
       antd-token-previewer:
         specifier: ^1.1.0
         version: 1.1.0(@babel/core@7.22.15)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
@@ -7723,8 +7723,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /antd-style@3.4.5(@types/react@18.2.21)(antd@5.9.0)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-6aC4P9XyuVy0O7eZ+HZXd8GbbFX9HgzsXsJ341ihJhgqrfsQZNx8lDQvS2kCV6ao99QqtyTDphK9gWOgV2bHEw==}
+  /antd-style@3.5.0(@types/react@18.2.21)(antd@5.9.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-t+DQWx/ib3PZIONA9eD/qx3PPjdqsiIEjL5X9uf+Gvu58tm1KoLeCZJYNKqT8Td1I1r7+phie3o0De1zPavqIQ==}
     peerDependencies:
       antd: '>=5.8.1'
       react: '>=18'
