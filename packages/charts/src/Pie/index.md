@@ -13,6 +13,8 @@ nav:
 
 <code src="./demo/half-donut.tsx" title="半圆环图"></code>
 
+<code src="./demo/state-change.tsx" title="useMemo-状态改变" debug></code>
+
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |

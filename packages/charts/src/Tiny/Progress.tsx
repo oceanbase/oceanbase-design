@@ -5,6 +5,7 @@ import useResizeObserver from 'use-resize-observer';
 import { toPercent } from '../util/number';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export interface ProgressConfig extends AntProgressConfig {
   maxColumnWidth?: number;
@@ -116,4 +117,4 @@ const Progress: React.FC<ProgressConfig> = forwardRef(
   }
 );
 
-export default Progress;
+export default customMemo(Progress);

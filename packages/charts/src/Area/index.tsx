@@ -7,6 +7,7 @@ import type { Tooltip } from '../hooks/useTooltipScrollable';
 import useTooltipScrollable from '../hooks/useTooltipScrollable';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export interface AreaConfig extends AntAreaConfig {
   tooltip?: false | Tooltip;
@@ -98,4 +99,4 @@ const Area: React.FC<AreaConfig> = forwardRef(
   }
 );
 
-export default Area;
+export default customMemo(Area);

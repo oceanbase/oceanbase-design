@@ -7,6 +7,7 @@ import type { Tooltip } from '../hooks/useTooltipScrollable';
 import useTooltipScrollable from '../hooks/useTooltipScrollable';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export interface LineConfig extends AntLineConfig {
   tooltip?: false | Tooltip;
@@ -93,4 +94,4 @@ const Line: React.FC<LineConfig> = forwardRef(
   }
 );
 
-export default Line;
+export default customMemo(Line);

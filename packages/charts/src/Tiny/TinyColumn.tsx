@@ -5,6 +5,7 @@ import { TinyColumn as AntTinyColumn } from '@ant-design/charts';
 import type { Label } from '@antv/g2plot/esm/types/label';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export interface TinyColumnConfig extends AntTinyColumnConfig {
   theme?: Theme;
@@ -40,4 +41,4 @@ const TinyColumn: React.FC<TinyColumnConfig> = forwardRef(
   }
 );
 
-export default TinyColumn;
+export default customMemo(TinyColumn);
