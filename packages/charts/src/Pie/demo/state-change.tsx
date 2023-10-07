@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Pie } from '@oceanbase/charts';
 
 const Demo: React.FC = () => {
@@ -30,16 +30,13 @@ const Demo: React.FC = () => {
     },
   ]);
 
-  // memo function to avoid re-render
-  const onReady = useCallback(plot => {
-    console.log(plot);
-  }, []);
-
   const config = {
     data,
     angleField: 'value',
     colorField: 'type',
-    onReady,
+    onReady: plot => {
+      console.log(plot);
+    },
   };
 
   return (
@@ -50,7 +47,7 @@ const Demo: React.FC = () => {
           setCount(count + 1);
         }}
         style={{
-          marginLeft: 16,
+          marginLeft: 8,
         }}
       >
         外部状态改变不会重新渲染
@@ -73,7 +70,7 @@ const Demo: React.FC = () => {
           ]);
         }}
         style={{
-          marginLeft: 16,
+          marginLeft: 8,
         }}
       >
         数据改变重新渲染
