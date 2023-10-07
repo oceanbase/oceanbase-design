@@ -29,3 +29,5 @@ const { useToken } = theme;
 
 // 直接导出 useToken，方便上层使用
 export { useToken };
+
+export type { PresetStatusColorType } from 'antd/es/_util/colors';
