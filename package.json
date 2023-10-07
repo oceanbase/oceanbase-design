@@ -57,7 +57,7 @@
     "@testing-library/user-event": "^14.5.1",
     "@types/jest": "^29.5.4",
     "@types/node": "^20.6.2",
-    "@types/react": "^18.2.21",
+    "@types/react": "^18.2.24",
     "@umijs/fabric": "^4.0.1",
     "@umijs/test": "^4.0.79",
     "antd": "^5.9.0",
