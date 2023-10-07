@@ -305,8 +305,8 @@ importers:
         specifier: ^29.2.3
         version: 29.5.4
       '@types/jscodeshift':
-        specifier: ^0.11.5
-        version: 0.11.5
+        specifier: ^0.11.7
+        version: 0.11.7
       enzyme:
         specifier: ^3.0.0
         version: 3.0.0
@@ -6277,8 +6277,8 @@ packages:
     resolution: {integrity: sha512-aLkWa0C0vO5b4Sr798E26QgOkss68Un0bLjs7u9qxzPT5CG+8DuNTffWES58YzJs3hrVAOs1wonycqEBqNJubA==}
     dev: false
 
-  /@types/jscodeshift@0.11.5:
-    resolution: {integrity: sha512-7JV0qdblTeWFigevmwFUgROXX395F+MQx6v0YqPn8Bx0B4Sng6alEejz9PENzgLYpG+zL0O4tGdBzc4gKZH8XA==}
+  /@types/jscodeshift@0.11.7:
+    resolution: {integrity: sha512-YJ+dQlL2a8dR+iNExYVxiFMa4nhoUgIhYN47rCCdwkRPYdURkee4bCskMhNNCUNo14wbjVf7C0iIKL5tQ9jecw==}
     dependencies:
       ast-types: 0.14.2
       recast: 0.20.5
