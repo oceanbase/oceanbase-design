@@ -52,7 +52,7 @@
     "antd-token-previewer": "^1.1.0"
   },
   "peerDependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
   }
 }
