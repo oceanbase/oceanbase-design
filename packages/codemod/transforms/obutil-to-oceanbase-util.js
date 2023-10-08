@@ -7,6 +7,15 @@ module.exports = (file, api, options) => {
     toPkgList: [
       {
         name: '@oceanbase/util',
+        components: [
+          {
+            // rename
+            getTableData: 'useTableData',
+          },
+        ],
+      },
+      {
+        name: '@oceanbase/util',
       },
     ],
   });
