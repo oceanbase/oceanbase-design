@@ -10,7 +10,7 @@ export interface ColumnConfig extends AntColumnConfig {
   theme?: Theme;
 }
 
-const Column: React.FC<ColumnConfig> = forwardRef(
+const Column = forwardRef<unknown, ColumnConfig>(
   (
     { data, isStack, isGroup, isRange, seriesField, label, xAxis, legend, theme, ...restConfig },
     ref

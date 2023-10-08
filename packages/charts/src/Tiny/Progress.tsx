@@ -26,7 +26,7 @@ export interface ProgressConfig extends AntProgressConfig {
   theme?: Theme;
 }
 
-const Progress: React.FC<ProgressConfig> = forwardRef(
+const Progress = forwardRef<unknown, ProgressConfig>(
   (
     {
       compact = false,
