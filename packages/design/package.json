@@ -48,7 +48,7 @@
     "react-sticky-mouse-tooltip": "^0.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.15",
+    "@babel/cli": "^7.23.0",
     "@babel/preset-env": "^7.22.20",
     "antd-token-previewer": "^1.1.0"
   },

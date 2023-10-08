@@ -41,7 +41,7 @@
     "@ant-design/colors": "^7.0.0",
     "@ant-design/cssinjs": "^1.17.0",
     "@ant-design/icons": "^5.2.6",
-    "@babel/cli": "^7.22.15",
+    "@babel/cli": "^7.23.0",
     "@babel/preset-env": "^7.22.20",
     "@ctrl/tinycolor": "^4.0.2",
     "@emotion/babel-preset-css-prop": "^11.11.0",
