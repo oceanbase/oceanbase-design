@@ -55,7 +55,7 @@ export interface PieConfig extends AntPieConfig {
   theme?: Theme;
 }
 
-const Pie: React.FC<PieConfig> = forwardRef(
+const Pie = forwardRef<unknown, PieConfig>(
   (
     {
       data,

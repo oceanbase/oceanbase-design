@@ -39,7 +39,7 @@ export interface LiquidConfig extends AntLiquidConfig {
   theme?: Theme;
 }
 
-const Liquid: React.FC<LiquidConfig> = forwardRef(
+const Liquid = forwardRef<unknown, LiquidConfig>(
   (
     {
       height = 400,

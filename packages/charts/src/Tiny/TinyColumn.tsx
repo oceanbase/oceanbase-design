@@ -14,7 +14,7 @@ export interface TinyColumnConfig extends AntTinyColumnConfig {
   minColumnWidth?: number;
 }
 
-const TinyColumn: React.FC<TinyColumnConfig> = forwardRef(
+const TinyColumn = forwardRef<unknown, TinyColumnConfig>(
   ({ height = 60, columnStyle, label, theme, ...restConfig }, ref) => {
     const themeConfig = useTheme(theme);
 

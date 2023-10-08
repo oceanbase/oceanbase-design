@@ -10,7 +10,7 @@ export interface GaugeConfig extends AntGaugeConfig {
   theme?: Theme;
 }
 
-const Gauge: React.FC<GaugeConfig> = forwardRef(
+const Gauge = forwardRef<unknown, GaugeConfig>(
   ({ percent, range, axis, indicator, statistic, theme, ...restConfig }, ref) => {
     const themeConfig = useTheme(theme);
 
