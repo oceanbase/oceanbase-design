@@ -6,7 +6,7 @@ import {
   WindowsOutlined,
   ChromeOutlined,
   TaobaoOutlined,
-} from '@ant-design/icons';
+} from '@oceanbase/icons';
 
 const App: React.FC = () => (
   <Space direction="vertical">
