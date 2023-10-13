@@ -1,14 +1,13 @@
-import { isNullValue } from '@oceanbase/util';
+import React, { useState, useRef, useContext, } from 'react';
 import { Space, Tabs as AntTabs, Tag } from 'antd';
-import React, { useState, useRef, useContext } from 'react';
 import type { TabsProps as AntTabsProps, TabsPosition as AntTabsPosition } from 'antd/es/tabs';
 import type { Tab as AntTab } from 'rc-tabs/es/interface';
+import { isNullValue } from '@oceanbase/util';
+import { useUpdateEffect } from 'ahooks';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
-import useInkBar from './hooks/useInkBar';
 import useLegacyItems from './hooks/useLegacyItems';
 import useStyle from './style';
-import { useUpdateEffect } from 'ahooks';
 import TabPane from './TabPane';
 
 export * from 'antd/es/tabs';
@@ -36,6 +35,7 @@ const Tabs = ({
   tabPosition,
   prefixCls: customizePrefixCls,
   className,
+  indicatorSize,
   ...restProps
 }: TabsProps) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -77,14 +77,6 @@ const Tabs = ({
     }
   }, [activeKeyProp]);
 
-  useInkBar({
-    prefixCls,
-    activeKey,
-    size,
-    type,
-    tabPosition,
-    containerRef: ref,
-  });
 
   return wrapSSR(
     <AntTabs
@@ -98,6 +90,9 @@ const Tabs = ({
       }}
       size={size}
       type={type}
+      //  水平布局，宽度 >= 24，则两侧各减去 8px，并保持水平居中
+      // 垂直布局，高度始终与 Tab btn 相同，并保持垂直居中
+      indicatorSize={isHorizontal ? (origin) => (origin >= 24 ? origin - 16 : origin) : 16}
       tabPosition={tabPosition}
       tabBarGutter={!type || type === 'line' ? (isHorizontal ? 24 : 0) : undefined}
       prefixCls={customizePrefixCls}
