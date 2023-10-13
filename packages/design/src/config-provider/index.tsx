@@ -28,6 +28,8 @@ export type SpinConfig = ComponentStyleConfig & {
 };
 
 export interface ConfigConsumerProps extends AntConfigConsumerProps {
+  theme?: ThemeConfig;
+  navigate?: NavigateFunction;
   spin?: SpinConfig;
 }
 
