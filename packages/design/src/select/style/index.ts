@@ -17,7 +17,7 @@ export const genSelectStyle: GenerateStyle<SelectToken> = (token: SelectToken): 
 };
 
 export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Select', token => {
+  const useStyle = genComponentStyleHook('Select', (token: SelectToken) => {
     return [genSelectStyle(token)];
   });
   return useStyle(prefixCls);
