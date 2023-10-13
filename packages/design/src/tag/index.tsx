@@ -1,46 +1,58 @@
-import {Tag as AntTag} from 'antd';
+import { Tag as AntTag } from 'antd';
 import type { TagProps as AntTagProps } from 'antd/es/tag';
-import {Tooltip} from '@oceanbase/design';
+import { Tooltip, Typography } from '@oceanbase/design';
 import classNames from 'classnames';
-import React, {useContext} from 'react';
+import React, { ReactElement, useContext } from 'react';
 import ConfigProvider from '../config-provider';
 import useStyle from './style';
 
 export * from 'antd/es/tag';
 
 export interface TagProps extends AntTagProps {
-    width?: string
-};
+  ellipsis?: boolean;
+}
 
-const {CheckableTag} = AntTag;
-
+const { CheckableTag } = AntTag;
 
 const Tag = ({
-    prefixCls: customizePrefixCls,
-    className,
-    width,
-    ...restProps
+  prefixCls: customizePrefixCls,
+  className,
+  ellipsis = true,
+  ...restProps
 }: TagProps) => {
-    const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
-    const prefixCls = getPrefixCls('tag', customizePrefixCls);
-    const {wrapSSR} = useStyle(prefixCls);
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('tag', customizePrefixCls);
+  const { wrapSSR } = useStyle(prefixCls);
 
-    const tagCls = classNames(
-        {
-            [`${prefixCls}-ellipsis`]: !!width
-        },
-        className
-    );
+  const tagCls = classNames(
+    {
+      [`${prefixCls}-ellipsis`]: ellipsis,
+    },
+    className
+  );
+  const childrenType = (restProps.children as ReactElement)?.type as any;
+  const { ellipsis: defalutEllipsis } = (restProps.children as ReactElement)?.props || {};
 
-    const tagRender = width ? <Tooltip title={restProps.children}>
-        <AntTag prefixCls={customizePrefixCls} className={tagCls} style={{maxWidth: width}} {...restProps} />
-    </Tooltip> : <AntTag prefixCls={customizePrefixCls} className={tagCls} {...restProps} />;
+  const ellipsisConfig =
+    typeof defalutEllipsis === 'object'
+      ? defalutEllipsis
+      : {
+          tooltip: childrenType?.__ANT_TOOLTIP ? false : restProps.children,
+        };
 
-    return wrapSSR(tagRender);
+  return ellipsis ? (
+    wrapSSR(
+      <Typography.Text ellipsis={{ ...ellipsisConfig }}>
+        <AntTag prefixCls={customizePrefixCls} className={tagCls} {...restProps} />
+      </Typography.Text>
+    )
+  ) : (
+    <AntTag prefixCls={customizePrefixCls} className={tagCls} {...restProps} />
+  );
 };
 
 if (process.env.NODE_ENV !== 'production') {
-    Tag.displayName = AntTag.displayName;
+  Tag.displayName = AntTag.displayName;
 }
 
 Tag.CheckableTag = CheckableTag;
