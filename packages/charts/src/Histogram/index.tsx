@@ -3,12 +3,13 @@ import type { HistogramConfig as AntHistogramConfig } from '@ant-design/charts';
 import { Histogram as AntHistogram } from '@ant-design/charts';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export interface HistogramConfig extends AntHistogramConfig {
   theme?: Theme;
 }
 
-const Histogram: React.FC<HistogramConfig> = forwardRef(
+const Histogram = forwardRef<unknown, HistogramConfig>(
   ({ binWidth, columnStyle, meta, xAxis, legend, theme, ...restConfig }, ref) => {
     const themeConfig = useTheme(theme);
 
@@ -62,4 +63,4 @@ const Histogram: React.FC<HistogramConfig> = forwardRef(
   }
 );
 
-export default Histogram;
+export default customMemo(Histogram);

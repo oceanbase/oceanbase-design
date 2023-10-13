@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/icons",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "The Icon Library for OceanBase",
   "keywords": [
     "oceanbase",
@@ -40,7 +40,7 @@
     "@oceanbase/icons-svg": "^1.0.4"
   },
   "peerDependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
   }
 }

@@ -17,7 +17,7 @@ npx -p @oceanbase/codemod codemod src
 
 ### `antd-to-oceanbase-design`
 
-import components and typs from `antd` and `@alipay/bigfish/antd` to `@oceanbase/design`.
+import components and types from `antd` and `@alipay/bigfish/antd` to `@oceanbase/design`.
 
 ```diff
   import React from 'react';
@@ -43,7 +43,7 @@ import components and typs from `antd` and `@alipay/bigfish/antd` to `@oceanbase
 
 ### `obui-to-oceanbase-design-and-ui`
 
-import components and typs from `antd` to `@oceanbase/design` and `@oceanbase/ui`.
+import components and types from `antd` to `@oceanbase/design` and `@oceanbase/ui`.
 
 ```diff
   import React from 'react';
@@ -86,7 +86,7 @@ import `PageContainer` from `@alipay/tech-ui` to `@ant-design/pro-components` an
 
 ### `antd-and-ob-charts-to-oceanbase-charts`
 
-import components and typs from `@ant-design/charts` and `@alipay/ob-charts` to `@oceanbase/charts`.
+import components and types from `@ant-design/charts` and `@alipay/ob-charts` to `@oceanbase/charts`.
 
 ```diff
   import React from 'react';
@@ -118,15 +118,17 @@ import components and typs from `@ant-design/charts` and `@alipay/ob-charts` to 
 
 ### `obutil-to-oceanbase-util`
 
-import components and typs from `@alipay/ob-util` to `@oceanbase/util`.
+import utils and hooks from `@alipay/ob-util` to `@oceanbase/util`. Additionally, it will rename `getTableData` to `useTableData` to follow hooks naming conventions.
 
 ```diff
   import React from 'react';
-- import { isNullValue, sortByNumber } from '@alipay/ob-util';
-+ import { isNullValue, sortByNumber } from '@oceanbase/util';
+- import { isNullValue, sortByNumber, getTableData } from '@alipay/ob-util';
++ import { isNullValue, sortByNumber, useTableData } from '@oceanbase/util';
 
   const Demo = () => {
-    return <div />;
+-    const { tableProps } = getTableData(fn, {});
++    const { tableProps } = useTableData(fn, {});
+     return <div />;
   };
 
   export default Demo;
