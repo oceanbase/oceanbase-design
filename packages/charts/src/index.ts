@@ -1,4 +1,8 @@
+import { G2 } from '@ant-design/charts';
+import { pathSlide } from './animation/path-slide';
 import './index.less';
+
+G2.registerAnimation('path-slide', pathSlide);
 
 export * from '@ant-design/charts';
 
