@@ -1,10 +1,10 @@
 import { useControllableValue } from 'ahooks';
-import { App, Button, Divider, Menu, Typography } from '@oceanbase/design';
+import { App, ConfigProvider, Button, Divider, Menu, Typography } from '@oceanbase/design';
 import type { AlertProps } from '@oceanbase/design/es/alert';
 import type { FormProps } from '@oceanbase/design/es/form';
 import { message } from '@oceanbase/design';
 import classNames from 'classnames';
-import React, { useCallback } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { LOCALE_LIST } from '../constant';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import { getPrefix, setLocale } from '../_util';
@@ -17,6 +17,8 @@ import type { IRegisterFormProps } from './RegisterForm';
 import RegisterForm from './RegisterForm';
 // @ts-ignore
 import logoImg from '../assets/logo/oceanbase_logo.svg';
+// @ts-ignore
+import logoImgDark from '../assets/logo/oceanbase_logo_dark.svg';
 import type { Locale } from '../interface';
 import LocaleDropdown from '../LocaleDropdown';
 import './index.less';
@@ -118,6 +120,8 @@ const Login: React.FC<LoginProps> = props => {
   });
 
   const isLoading = loginProps?.loading || registerProps?.loading || otherLoginProps?.loading;
+
+  const { theme } = useContext(ConfigProvider.ConfigContext);
 
   const switchForm = useCallback(() => {
     if (isLoading) {
@@ -234,7 +238,11 @@ const Login: React.FC<LoginProps> = props => {
                 className={`${prefix}-watermark-wrapper`}
                 style={{ paddingLeft: showAuthCode ? 96 : 0 }}
               >
-                <img src={logoImg} alt="" className={`${prefix}-watermark`} />
+                <img
+                  src={theme.isDark ? logoImgDark : logoImg}
+                  alt=""
+                  className={`${prefix}-watermark`}
+                />
               </div>
             ) : null}
           </div>

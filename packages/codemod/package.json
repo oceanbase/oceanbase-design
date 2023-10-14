@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/codemod",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Codemod for OceanBase Design upgrade",
   "keywords": [
     "oceanbase",
@@ -39,7 +39,7 @@
     "yargs-parser": "^21.1.1"
   },
   "devDependencies": {
-    "@types/jest": "^29.2.3",
+    "@types/jest": "^29.5.5",
     "@types/jscodeshift": "^0.11.7",
     "enzyme": "^3.0.0",
     "enzyme-to-json": "^3.6.2"
