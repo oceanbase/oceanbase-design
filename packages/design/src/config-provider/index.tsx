@@ -28,6 +28,8 @@ export type SpinConfig = ComponentStyleConfig & {
 };
 
 export interface ConfigConsumerProps extends AntConfigConsumerProps {
+  theme?: ThemeConfig;
+  navigate?: NavigateFunction;
   spin?: SpinConfig;
 }
 
@@ -50,7 +52,14 @@ const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
 
 const { defaultSeed, components } = defaultTheme;
 
-const ConfigProvider = ({ children, theme, navigate, spin, ...restProps }: ConfigProviderProps) => {
+const ConfigProvider = ({
+  children,
+  theme,
+  navigate,
+  spin,
+  tabs,
+  ...restProps
+}: ConfigProviderProps) => {
   // inherit from parent ConfigProvider
   const parentContext = React.useContext<ConfigConsumerProps>(AntConfigProvider.ConfigContext);
   const parentExtendedContext =
@@ -58,6 +67,13 @@ const ConfigProvider = ({ children, theme, navigate, spin, ...restProps }: Confi
   return (
     <AntConfigProvider
       spin={merge(parentContext.spin, spin)}
+      tabs={merge(
+        {
+          indicatorSize: origin => (origin >= 24 ? origin - 16 : origin),
+        },
+        parentContext.tabs,
+        tabs
+      )}
       theme={merge(
         {
           // Only set seed token for dark theme

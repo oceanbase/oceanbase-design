@@ -9,6 +9,7 @@ import { App, theme as obTheme } from '@oceanbase/design';
 import type { DirectionType } from '@oceanbase/design/es/config-provider';
 import { usePrefersColor, createSearchParams, useOutlet, useSearchParams } from 'dumi';
 import React, { useCallback, useEffect, useMemo } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import useLayoutState from '../../hooks/useLayoutState';
 import SiteThemeProvider from '../SiteThemeProvider';
 import useLocation from '../../hooks/useLocation';
@@ -135,6 +136,7 @@ const GlobalLayout: React.FC = () => {
                 onChange={nextTheme => updateSiteConfig({ theme: nextTheme })}
               />
             )}
+            <Analytics />
           </App>
         </SiteThemeProvider>
       </SiteContext.Provider>
