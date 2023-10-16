@@ -1,5 +1,5 @@
 import { Select, Tag } from '@oceanbase/design';
-import React from 'react';
+import React, { useState } from 'react';
 
 const options = ['gold', 'green', 'red', 'cyan'];
 
@@ -16,16 +16,28 @@ const tagRender = props => {
   );
 };
 
-const App: React.FC = () => (
-  <>
-    <Select
-      mode="multiple"
-      tagRender={tagRender}
-      defaultValue={['gold', 'cyan']}
-      style={{ width: '100%' }}
-      options={options.map(item => ({ label: item, value: item }))}
-    />
-  </>
-);
+const App: React.FC = () => {
+  const [theme, setTheme] = useState();
+  return (
+    <>
+      <Select
+        mode="multiple"
+        tagRender={tagRender}
+        defaultValue={['gold', 'cyan']}
+        style={{ width: '100%' }}
+        options={options.map(item => ({ label: item, value: item }))}
+      />
+      <Select mode="tags" style={{ width: '100%' }} defaultValue={['test']} />
+      <Select<'light' | 'dark'>
+        // defaultValue={DEFAULT_THEME}
+        style={{ width: 120 }}
+        onChange={value => setTheme(value)}
+      >
+        <Select.Option value="light">白色主题</Select.Option>
+        <Select.Option value="dark">黑色主题</Select.Option>
+      </Select>
+    </>
+  );
+};
 
 export default App;
