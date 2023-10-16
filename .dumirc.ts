@@ -162,6 +162,10 @@ export default defineConfig({
           children: [
             { title: 'Action 操作项', link: '/biz-components/action' },
             {
+              title: 'ContentWithQuestion 问号旁提示',
+              link: '/biz-components/content-with-question',
+            },
+            {
               title: 'ContentWithIcon 文字旁提示',
               link: '/biz-components/content-with-icon',
             },
