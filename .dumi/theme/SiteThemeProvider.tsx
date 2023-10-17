@@ -1,4 +1,5 @@
 import { ConfigProvider, token } from '@oceanbase/design';
+import type { ThemeConfig } from '@oceanbase/design';
 import { ChartProvider } from '@oceanbase/charts';
 import type { ThemeProviderProps } from 'antd-style';
 import { ThemeProvider } from 'antd-style';
@@ -8,7 +9,13 @@ import useLocale from '../hooks/useLocale';
 import SiteContext from './slots/SiteContext';
 import zhCN from '../../packages/design/src/locale/zh-CN';
 
-const SiteThemeProvider: FC<ThemeProviderProps> = ({ children, theme, ...rest }) => {
+const SiteThemeProvider: FC<
+  ThemeProviderProps<any> & {
+    theme: ThemeConfig & {
+      isDark?: boolean;
+    };
+  }
+> = ({ children, theme, ...rest }) => {
   const { getPrefixCls, iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const rootPrefixCls = getPrefixCls();
 
@@ -37,7 +44,7 @@ const SiteThemeProvider: FC<ThemeProviderProps> = ({ children, theme, ...rest })
     >
       <ConfigProvider
         {...rest}
-        theme={theme}
+        theme={theme as ThemeConfig}
         direction={direction}
         locale={lang === 'cn' ? zhCN : undefined}
       >
