@@ -27,11 +27,11 @@
     "command-exists": "^1.2.9",
     "execa": "^5.1.1",
     "find-up": "^4.1.0",
-    "glob": "^8.0.3",
+    "glob": "^8.1.0",
     "is-directory": "^0.3.1",
     "is-git-clean": "^1.1.0",
     "jscodeshift": "^0.15.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "prettier": "^3.0.3",
     "read-pkg-up": "^9.1.0",
     "semver": "^7.5.4",
@@ -41,7 +41,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.5",
     "@types/jscodeshift": "^0.11.7",
-    "enzyme": "^3.0.0",
+    "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2"
   }
 }
