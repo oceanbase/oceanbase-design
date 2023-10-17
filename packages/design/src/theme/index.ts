@@ -22,13 +22,12 @@ const defaultSeed = {
 const defaultConfig = theme.defaultConfig;
 defaultConfig.token = defaultSeed;
 
-export default {
-  ...theme,
-  defaultSeed,
-  defaultConfig,
-  components: {
-    InputNumber: {
-      handleVisible: true as true,
-    },
+theme.defaultSeed = defaultSeed;
+theme.defaultConfig = defaultConfig;
+(theme as any).components = {
+  InputNumber: {
+    handleVisible: true as true,
   },
 };
+
+export default theme;
