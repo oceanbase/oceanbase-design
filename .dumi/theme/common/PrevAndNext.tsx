@@ -1,7 +1,7 @@
 import { LeftOutlined, RightOutlined } from '@oceanbase/icons';
 import { css } from '@emotion/react';
 import type { MenuProps } from '@oceanbase/design';
-import type { MenuItemType } from '@oceanbase/design/es/menu/hooks/useItems';
+import type { MenuItemType } from '@oceanbase/design/es/menu';
 import React, { useMemo } from 'react';
 import useMenu from '../../hooks/useMenu';
 import useSiteToken from '../../hooks/useSiteToken';
