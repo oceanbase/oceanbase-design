@@ -2,7 +2,7 @@
 
 exports[`Badge status custom icon 1`] = `
 <span
-  class="ant-badge ant-badge-status css-dev-only-do-not-override-amq5gd"
+  class="ant-badge ant-badge-status"
   style="display: inline-block;"
 >
   <span
@@ -53,7 +53,7 @@ exports[`Badge status dot 1`] = `
 
 exports[`Badge status icon 1`] = `
 <span
-  class="ant-badge ant-badge-status css-dev-only-do-not-override-amq5gd"
+  class="ant-badge ant-badge-status"
   style="display: inline-block;"
 >
   <span
