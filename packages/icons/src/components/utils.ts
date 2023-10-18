@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 // import { insertCss } from 'insert-css';
-import { generate as generateColor } from "@ant-design/colors";
+import { generate as generateColor } from '@ant-design/colors';
 // import warn from 'rc-util/lib/warning';
-import { AbstractNode, IconDefinition } from "../types";
+import { AbstractNode, IconDefinition } from '../types';
 
 export function warning(valid: boolean, message: string) {
   //   warn(valid, `[@ant-design/icons] ${message}`);
@@ -13,10 +13,10 @@ export function warning(valid: boolean, message: string) {
 
 export function isIconDefinition(target: any): target is IconDefinition {
   return (
-    typeof target === "object" &&
-    typeof target.name === "string" &&
-    typeof target.theme === "string" &&
-    (typeof target.icon === "object" || typeof target.icon === "function")
+    typeof target === 'object' &&
+    typeof target.name === 'string' &&
+    typeof target.theme === 'string' &&
+    (typeof target.icon === 'object' || typeof target.icon === 'function')
   );
 }
 
@@ -24,7 +24,7 @@ export function normalizeAttrs(attrs: Attrs = {}): Attrs {
   return Object.keys(attrs).reduce((acc: Attrs, key) => {
     const val = attrs[key];
     switch (key) {
-      case "class":
+      case 'class':
         acc.className = val;
         delete acc.class;
         break;
@@ -48,9 +48,7 @@ export function generate(
     return React.createElement(
       node.tag,
       { key, ...normalizeAttrs(node.attrs) },
-      (node.children || []).map((child, index) =>
-        generate(child, `${key}-${node.tag}-${index}`)
-      )
+      (node.children || []).map((child, index) => generate(child, `${key}-${node.tag}-${index}`))
     );
   }
   return React.createElement(
@@ -60,9 +58,7 @@ export function generate(
       ...normalizeAttrs(node.attrs),
       ...rootProps,
     },
-    (node.children || []).map((child, index) =>
-      generate(child, `${key}-${node.tag}-${index}`)
-    )
+    (node.children || []).map((child, index) => generate(child, `${key}-${node.tag}-${index}`))
   );
 }
 
@@ -84,11 +80,11 @@ export function normalizeTwoToneColors(
 // These props make sure that the SVG behaviours like general text.
 // Reference: https://blog.prototypr.io/align-svg-icons-to-text-and-say-goodbye-to-font-icons-d44b3d7b26b4
 export const svgBaseProps = {
-  width: "1em",
-  height: "1em",
-  fill: "currentColor",
-  "aria-hidden": "true",
-  focusable: "false",
+  width: '1em',
+  height: '1em',
+  fill: 'currentColor',
+  'aria-hidden': 'true',
+  focusable: 'false',
 };
 
 export const iconStyles = `
