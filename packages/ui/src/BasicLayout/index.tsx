@@ -96,9 +96,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   ...restProps
 }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
-  const prefixCls = getPrefixCls('basic-layout', customizePrefixCls);
+  const prefixCls = getPrefixCls('pro-basic-layout', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
-  const basicLayoutCls = classNames(className);
+  const basicLayoutCls = classNames(prefixCls, className);
 
   const navigate = useNavigate();
   // 侧边栏导航是否收起

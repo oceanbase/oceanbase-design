@@ -7,13 +7,15 @@ export type BasicLayoutToken = FullToken<any>;
 export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
   token: BasicLayoutToken
 ): CSSObject => {
-  const { proComponentsCls } = token;
+  const { componentCls, proComponentsCls } = token;
 
   return {
-    // Set style of PageContainer in BasicLayout
-    [`${proComponentsCls}-page-container`]: {
-      // 48px is the height of BasicLayout header
-      minHeight: 'calc(100vh - 48px)',
+    [`${componentCls}`]: {
+      // Set style of PageContainer in BasicLayout
+      [`${proComponentsCls}-page-container`]: {
+        // 48px is the height of BasicLayout header
+        minHeight: 'calc(100vh - 48px)',
+      },
     },
     [`${proComponentsCls}-footer-bar`]: {
       width: `calc(100% - 192px - 24px)`,
