@@ -31,7 +31,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "father build"
+    "build": "NODE_OPTIONS=--max_old_space_size=4096 father build"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.17.2",
