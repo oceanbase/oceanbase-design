@@ -1,5 +1,3 @@
-import { theme } from 'antd';
-
 // 引入 antd/dist/reset.css，以重置基本样式，保证原生元素遵从 antd 规范样式
 // ref: https://ant.design/docs/react/migration-v5-cn#%E6%8A%80%E6%9C%AF%E8%B0%83%E6%95%B4
 import 'antd/dist/reset.css';
@@ -25,9 +23,9 @@ export { default as Breadcrumb } from './breadcrumb';
 export { default as Spin } from './spin';
 export { default as Badge } from './badge';
 
-const { useToken } = theme;
+import theme from './theme';
 
-// 直接导出 useToken，方便上层使用
+const { useToken } = theme;
 export { useToken };
 
 export type { PresetStatusColorType } from 'antd/es/_util/colors';
