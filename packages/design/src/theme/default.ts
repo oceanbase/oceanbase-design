@@ -4,7 +4,7 @@ export default {
   colorPrimaryBgHover: '#EAF1FF',
   colorPrimaryBorder: '#B3CCFF',
   colorPrimaryBorderHover: '#5189FB',
-  colorPrimaryHover: '#004CE6',
+  colorPrimaryHover: '#5189FB',
   colorPrimaryTextHover: '#5189FB',
   colorPrimaryText: '#006AFF',
   colorPrimaryTextActive: '#004CE6',
@@ -60,11 +60,10 @@ export default {
   colorBgMask: 'rgba(19, 32, 57,  0.65)',
   colorBorder: '#CDD5E4',
   colorBorderSecondary: '#E2E8F3',
-  colorFillQuaternary: 'rgb(245, 248, 254, 0.45)',
-  colorFillTertiary: 'rgb(245, 248, 254, 0.65)',
-  colorFillSecondary: 'rgb(245, 248, 254, 0.85)',
+  colorFillQuaternary: '#F8FAFE',
+  colorFillTertiary: '#F5F8FE',
+  colorFillSecondary: '#F5F8FE',
   colorFill: '#F5F8FE',
-  colorIcon: '#8592AD',
   boxShadowSecondary:
     '0 6px 16px 0 rgba(54, 69, 99, 0.08), 0 3px 6px -4px rgba(54, 69, 99, 0.12), 0 9px 28px 8px rgba(54, 69, 99, 0.05)',
   boxShadow:
