@@ -31,7 +31,8 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
       },
       [`${antCls}-page-header`]: {
         [`${antCls}-page-header-breadcrumb`]: {
-          marginBottom: 6,
+          // overwritten pro-components style
+          paddingBlockStart: 0,
         },
         [`${antCls}-page-header-heading-title`]: {
           fontSize: fontSizeHeading3,
@@ -62,8 +63,10 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
       },
       // 减小内容区左右两侧间距
       [`${componentCls}-warp-page-header`]: {
-        paddingInline: `${paddingLG}px !important`,
-        paddingBlock: `${padding}px !important`,
+        paddingInlineStart: paddingLG,
+        paddingInlineEnd: paddingLG,
+        paddingBlockStart: padding,
+        paddingBlockEnd: padding,
       },
       [`${componentCls}-children-container`]: {
         paddingInline: paddingLG,

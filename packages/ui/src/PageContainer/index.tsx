@@ -55,7 +55,7 @@ const PageContainer = ({
     reloadProps.className
   );
 
-  const newSubTitle = subTitle && (
+  const newSubTitle = (reload || subTitle) && (
     <Space size={12}>
       {reload && (
         <Tooltip title={locale.reload}>
