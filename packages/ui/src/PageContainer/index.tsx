@@ -37,6 +37,7 @@ const PageContainer = ({
   extraContent,
   tabList,
   tabBarExtraContent,
+  footerToolBarProps,
   locale,
   ...restProps
 }: PageContainerProps) => {
@@ -80,7 +81,7 @@ const PageContainer = ({
     },
   };
   const noHasHeader =
-    ['title', 'subTitle', 'extra', 'tags', 'footer', 'avatar', 'backIcon', 'breadcrumb'].every(
+    ['title', 'subTitle', 'extra', 'tags', 'avatar', 'backIcon', 'breadcrumb'].every(
       item => !newHeader?.[item]
     ) &&
     !content &&
@@ -104,6 +105,11 @@ const PageContainer = ({
       extraContent={extraContent}
       tabList={tabList}
       tabBarExtraContent={tabBarExtraContent}
+      footerToolBarProps={{
+        ...footerToolBarProps,
+        // render footer as same level with PageContainer instead of under body
+        portalDom: false,
+      }}
       {...restProps}
     />
   );
