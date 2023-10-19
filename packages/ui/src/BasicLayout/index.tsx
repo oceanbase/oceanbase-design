@@ -292,7 +292,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   let siderWidth = 0;
   // 根据菜单项的配置计算侧边栏的宽度
   if (subSideMenus && menus) {
-    siderWidth = collapsed ? 104 : 192;
+    siderWidth = collapsed ? 52 * 2 : 208;
   } else if (subSideMenus && !menus) {
     siderWidth = 52;
   } else if (!subSideMenus && menus) {
@@ -307,6 +307,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
       <Layout
         className={classNames(prefix, className, basicLayoutCls, {
           [`${prefix}-with-banner`]: banner,
+          [`${prefixCls}-sider-${siderWidth}`]: true,
         })}
         {...restProps}
       >
