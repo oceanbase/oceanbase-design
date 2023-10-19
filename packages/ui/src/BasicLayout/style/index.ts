@@ -7,7 +7,19 @@ export type BasicLayoutToken = FullToken<any>;
 export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
   token: BasicLayoutToken
 ): CSSObject => {
-  const { componentCls, proComponentsCls } = token;
+  const { componentCls, proComponentsCls, motionDurationSlow } = token;
+  const siderWidthList = [0, 52, 52 * 2, 192, 208];
+
+  const footerBarStyle: CSSObject = {};
+  siderWidthList.forEach(width => {
+    footerBarStyle[`${componentCls}${componentCls}-sider-${width}`] = {
+      [`${proComponentsCls}-footer-bar`]: {
+        // footer bar width adapt to sider width of BasicLayout
+        width: width === 0 ? '100%' : `calc(100% - ${width}px - 24px)`,
+        transition: `width ${motionDurationSlow}`,
+      },
+    };
+  });
 
   return {
     [`${componentCls}`]: {
@@ -16,10 +28,8 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
         // 48px is the height of BasicLayout header
         minHeight: 'calc(100vh - 48px)',
       },
-      [`${proComponentsCls}-footer-bar`]: {
-        width: `calc(100% - 192px - 24px)`,
-      },
     },
+    ...footerBarStyle,
   };
 };
 
