@@ -16,9 +16,9 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
         // 48px is the height of BasicLayout header
         minHeight: 'calc(100vh - 48px)',
       },
-    },
-    [`${proComponentsCls}-footer-bar`]: {
-      width: `calc(100% - 192px - 24px)`,
+      [`${proComponentsCls}-footer-bar`]: {
+        width: `calc(100% - 192px - 24px)`,
+      },
     },
   };
 };
