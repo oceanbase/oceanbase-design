@@ -3,6 +3,7 @@ const { markDependency } = require('./marker');
 const { printOptions } = require('./config');
 const { isPlainObject } = require('lodash');
 const { flatten } = require('lodash');
+const { some } = require('lodash');
 
 function importComponent(j, root, options) {
   const { fromPkgNames, toPkgList } = options;
@@ -19,15 +20,18 @@ function importComponent(j, root, options) {
       path.value.specifiers.forEach(specifier => {
         const toPkgByComponents = toPkgList.find(
           toPkg =>
-            toPkg.components?.includes(specifier.imported.name) ||
-            toPkg.components?.find(component => component[specifier.imported.name])
+            toPkg.components?.includes(specifier.imported?.name) ||
+            toPkg.components?.find(component => component[specifier.imported?.name])
         );
         const toPkgByTypes = toPkgList.find(
           toPkg =>
-            toPkg.types?.includes(specifier.imported.name) ||
-            toPkg.types?.find(type => type[specifier.imported.name])
+            toPkg.types?.includes(specifier.imported?.name) ||
+            toPkg.types?.find(type => type[specifier.imported?.name])
         );
-        const toPkg = toPkgByComponents || toPkgByTypes;
+        const toPkgByPaths = toPkgList.find(toPkg =>
+          some(toPkg.paths, pathString => path.value.source.value?.includes(pathString))
+        );
+        const toPkg = toPkgByComponents || toPkgByTypes || toPkgByPaths;
         if (toPkg) {
           // replace to toPkg for xxx/es/xxx、xxx/lib/xxx
           if (new RegExp(`${fromPkgName}/(es|lib|locale)/`).test(path.value.source.value)) {
@@ -35,17 +39,17 @@ function importComponent(j, root, options) {
           } else {
             // remove old imports
             path.value.specifiers = path.value.specifiers.filter(
-              item => !item.imported || item.imported.name !== specifier.imported.name
+              item => !item.imported || item.imported?.name !== specifier.imported?.name
             );
             const renameComponent = toPkg.components?.find(
-              component => component[specifier.imported.name]
+              component => component[specifier.imported?.name]
             );
-            const renameType = toPkg.types?.find(type => type[specifier.imported.name]);
+            const renameType = toPkg.types?.find(type => type[specifier.imported?.name]);
             const rename = renameComponent || renameType;
             // add and rename new imports
             addSubmoduleImport(j, root, {
               moduleName: toPkg.name,
-              importedName: rename ? rename[specifier.imported.name] : specifier.imported.name,
+              importedName: rename ? rename[specifier.imported?.name] : specifier.imported?.name,
               importKind: toPkgByTypes ? 'type' : 'value',
               after: fromPkgName,
             });
@@ -53,10 +57,10 @@ function importComponent(j, root, options) {
             if (rename) {
               root
                 .find(j.Identifier, {
-                  name: specifier.imported.name,
+                  name: specifier.imported?.name,
                 })
                 .forEach(path => {
-                  path.node.name = rename[specifier.imported.name];
+                  path.node.name = rename[specifier.imported?.name];
                 });
             }
           }

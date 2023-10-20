@@ -43,6 +43,7 @@ module.exports = (file, api, options) => {
           'LottieProps',
           'NavMenuProps',
         ],
+        paths: ['/locale/', '/locale/'],
       },
       {
         name: '@oceanbase/design',
