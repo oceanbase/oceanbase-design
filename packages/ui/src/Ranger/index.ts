@@ -27,6 +27,9 @@ import {
 import QuickPicker from './QuickPicker';
 import InternalRanger from './Ranger';
 
+export * from './QuickPicker';
+export * from './Ranger';
+
 const Ranger = InternalRanger;
 
 // 内置 ranges
