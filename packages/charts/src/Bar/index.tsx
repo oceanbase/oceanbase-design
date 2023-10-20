@@ -17,7 +17,7 @@ export interface BarConfig extends AntBarConfig {
   theme?: Theme;
 }
 
-const Bar: React.FC<BarConfig> = forwardRef(
+const Bar = forwardRef<unknown, BarConfig>(
   (
     {
       data,

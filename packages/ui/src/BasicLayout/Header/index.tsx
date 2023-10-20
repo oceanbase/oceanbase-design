@@ -5,10 +5,10 @@ import {
   ReadFilled,
   UserOutlined,
 } from '@oceanbase/icons';
-import { Button, Dropdown, Menu, Modal, Space, Tooltip } from '@oceanbase/design';
+import { ConfigProvider, Button, Dropdown, Menu, Modal, Space, Tooltip } from '@oceanbase/design';
 import classNames from 'classnames';
 import moment from 'moment';
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { OB_SITE_LINK } from '../../constant';
 import type { Locale } from '../../interface';
 import type { LocaleWrapperProps } from '../../locale/LocaleWrapper';
@@ -18,6 +18,8 @@ import useNavigate from '../../_util/useNavigate';
 import zhCN from '../locale/zh-CN';
 // @ts-ignore
 import logoImg from '../../assets/logo/oceanbase_logo.svg';
+// @ts-ignore
+import logoImgDark from '../../assets/logo/oceanbase_logo_dark.svg';
 // @ts-ignore
 // 自定义 SVG 图标需要将其导入为图片，而不能是 ReactComponent，因为需要依赖 webpack 插件
 // 虽然本地开发可以生效，但构建后的产物在上层项目中不会生效，导致 SVG 展示为空
@@ -100,6 +102,7 @@ const Header: React.FC<HeaderProps> = ({
   langs,
   ...restProps
 }) => {
+  const { theme } = useContext(ConfigProvider.ConfigContext);
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
 
@@ -293,7 +296,7 @@ const Header: React.FC<HeaderProps> = ({
                 <span className={`${prefix}-copyright`}>
                   {locale.right} <CopyrightOutlined /> {moment().year()} {locale.company}
                 </span>
-                <img src={logoImg} alt="" style={{ height: 12 }} />
+                <img src={theme.isDark ? logoImgDark : logoImg} alt="" style={{ height: 12 }} />
               </div>
             </div>
           </div>

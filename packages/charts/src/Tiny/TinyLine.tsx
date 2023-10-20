@@ -9,7 +9,7 @@ export interface TinyLineConfig extends AntTinyLineConfig {
   theme?: Theme;
 }
 
-const TinyLine: React.FC<TinyLineConfig> = forwardRef(
+const TinyLine = forwardRef<unknown, TinyLineConfig>(
   ({ height = 60, color, lineStyle, point, theme, ...restConfig }, ref) => {
     const themeConfig = useTheme(theme);
 

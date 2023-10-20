@@ -17,7 +17,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
     colorPrimaryBorder,
     colorPrimary,
   } = token;
-
+  debugger
   const maxWidth = '8192px'
 
   return {

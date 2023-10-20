@@ -46,7 +46,7 @@ const App: React.FC = () => {
   const columns: ColumnProps<DataType>[] = [
     {
       title: 'Full Name',
-      width: 100,
+      width: 120,
       dataIndex: 'name',
       key: 'name',
       fixed: 'left',
@@ -76,7 +76,7 @@ const App: React.FC = () => {
     },
   ];
 
-  return <Table columns={columns} dataSource={dataSource} scroll={{ x: 1440, y: 200 }} />;
+  return <Table columns={columns} dataSource={dataSource} scroll={{ x: 1440 }} />;
 };
 
 export default App;

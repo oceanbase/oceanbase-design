@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import type { DualAxesConfig as AntDualAxesConfig } from '@ant-design/charts';
 import { DualAxes as AntDualAxes } from '@ant-design/charts';
 // @ts-ignore
@@ -6,7 +6,7 @@ import type { GeometryColumnOption } from '@antv/g2plot/esm/plots/dual-axes/type
 // @ts-ignore
 import type { Axis } from '@antv/g2plot/esm/types/axis';
 import { sortByMoment } from '@oceanbase/util';
-import useResizeObserver from 'use-resize-observer';
+import { composeRef } from 'rc-util/es/ref';
 import type { Tooltip } from '../hooks/useTooltipScrollable';
 import useTooltipScrollable from '../hooks/useTooltipScrollable';
 import { useTheme } from '../theme';
@@ -20,21 +20,22 @@ export interface DualAxesConfig extends Omit<AntDualAxesConfig, 'yAxis'> {
   theme?: Theme;
 }
 
-const DualAxes: React.FC<DualAxesConfig> = forwardRef(
+const DualAxes = forwardRef<unknown, DualAxesConfig>(
   (
     { data, xField, yField, xAxis, yAxis, tooltip, legend, geometryOptions, theme, ...restConfig },
     ref
   ) => {
     const themeConfig = useTheme(theme);
 
+    const chartRef = useRef(null);
+    const mergedRef = composeRef(ref, chartRef);
+    const tooltipConfig = useTooltipScrollable(
+      tooltip,
+      chartRef.current?.getChart()?.chart?.height
+    );
+
     const yField1 = yField?.[0];
     const yField2 = yField?.[1];
-
-    const { ref: containerRef, height: containerHeight } = useResizeObserver<HTMLDivElement>({
-      // 包含 padding 和 border
-      box: 'border-box',
-    });
-    const tooltipConfig = useTooltipScrollable(tooltip, containerHeight);
 
     const newConfig: DualAxesConfig = {
       data:
@@ -140,11 +141,7 @@ const DualAxes: React.FC<DualAxesConfig> = forwardRef(
       theme: themeConfig.theme,
       ...restConfig,
     };
-    return (
-      <div ref={containerRef}>
-        <AntDualAxes {...newConfig} ref={ref} />
-      </div>
-    );
+    return <AntDualAxes {...newConfig} ref={mergedRef} />;
   }
 );
 

@@ -1,17 +1,37 @@
 /**
  * iframe: 600
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { EllipsisOutlined } from '@oceanbase/icons';
-import { Button, Descriptions, Dropdown, Radio } from '@oceanbase/design';
+import { Button, Descriptions, Dropdown, Radio, message } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
 
 export default () => {
+  const [loading, setLoading] = useState(false);
+
+  const mockRequest = () => {
+    const promise = new Promise<void>(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    });
+    setLoading(true);
+    promise.then(() => {
+      setLoading(false);
+      message.success('刷新成功');
+    });
+  };
   return (
     <PageContainer
       ghost={false}
       header={{
         title: '页面标题',
+        reload: {
+          spin: loading,
+          onClick: () => {
+            mockRequest();
+          },
+        },
         breadcrumb: {
           items: [
             {

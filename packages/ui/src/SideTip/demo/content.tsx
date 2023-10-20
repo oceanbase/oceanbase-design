@@ -4,6 +4,7 @@
  */
 import React, { useState } from 'react';
 import { Badge, Card, Dropdown, Progress, Table } from '@oceanbase/design';
+import type { PresetStatusColorType } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
 import { FileTextOutlined } from '@oceanbase/icons';
 import { findByValue } from '@oceanbase/util';
@@ -35,7 +36,7 @@ export default () => {
       width: 100,
       render: text => {
         const { label = '全部', badgeStatus = 'default' } = findByValue(STATUS_LIST, text) || {};
-        return <Badge status={badgeStatus} text={label} />;
+        return <Badge status={badgeStatus as PresetStatusColorType} text={label} />;
       },
     },
 

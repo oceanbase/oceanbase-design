@@ -8,7 +8,9 @@ import {
 import { App, theme as obTheme } from '@oceanbase/design';
 import type { DirectionType } from '@oceanbase/design/es/config-provider';
 import { usePrefersColor, createSearchParams, useOutlet, useSearchParams } from 'dumi';
+import { IColorValue } from 'dumi/dist/client/theme-api/usePrefersColor';
 import React, { useCallback, useEffect, useMemo } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import useLayoutState from '../../hooks/useLayoutState';
 import SiteThemeProvider from '../SiteThemeProvider';
 import useLocation from '../../hooks/useLocation';
@@ -69,9 +71,9 @@ const GlobalLayout: React.FC = () => {
           nextSearchParams = createSearchParams({
             ...nextSearchParams,
             theme: value.filter(t => t !== 'light'),
-          });
+          } as URLSearchParams & any);
           // Set theme of dumi site
-          setPrefersColor(value?.filter(t => t === 'dark' || t === 'light')?.[0]);
+          setPrefersColor(value?.filter(t => t === 'dark' || t === 'light')?.[0] as IColorValue);
         }
       });
 
@@ -92,7 +94,7 @@ const GlobalLayout: React.FC = () => {
 
     setSiteState({ theme: _theme, direction: _direction === 'rtl' ? 'rtl' : 'ltr' });
     // Set theme of dumi site
-    setPrefersColor(_theme?.filter(t => t === 'dark' || t === 'light')?.[0]);
+    setPrefersColor(_theme?.filter(t => t === 'dark' || t === 'light')?.[0] as IColorValue);
     // Handle isMobile
     updateMobileMode();
 
@@ -135,6 +137,7 @@ const GlobalLayout: React.FC = () => {
                 onChange={nextTheme => updateSiteConfig({ theme: nextTheme })}
               />
             )}
+            <Analytics />
           </App>
         </SiteThemeProvider>
       </SiteContext.Provider>

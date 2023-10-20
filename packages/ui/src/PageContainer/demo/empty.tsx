@@ -11,6 +11,7 @@ export default () => {
       header={{
         title: '总览',
       }}
+      footer={[<a>111</a>]}
     >
       <Card
         bordered={false}

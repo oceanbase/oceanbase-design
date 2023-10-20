@@ -68,7 +68,7 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
   return {
     [`${componentCls}`]: {
       // vertical align to flex-start
-      alignItems: 'flex-start',
+      alignItems: 'flex-start !important',
       [`${componentCls}-icon`]: {
         height,
       },

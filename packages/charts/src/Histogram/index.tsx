@@ -9,7 +9,7 @@ export interface HistogramConfig extends AntHistogramConfig {
   theme?: Theme;
 }
 
-const Histogram: React.FC<HistogramConfig> = forwardRef(
+const Histogram = forwardRef<unknown, HistogramConfig>(
   ({ binWidth, columnStyle, meta, xAxis, legend, theme, ...restConfig }, ref) => {
     const themeConfig = useTheme(theme);
 

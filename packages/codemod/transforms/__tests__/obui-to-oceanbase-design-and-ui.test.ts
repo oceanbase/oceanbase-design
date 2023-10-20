@@ -1,7 +1,7 @@
 import { defineTest } from 'jscodeshift/src/testUtils';
 
 const testUnit = 'obui-to-oceanbase-design-and-ui';
-const tests = ['obui'];
+const tests = ['obui', 'locale'];
 
 describe(testUnit, () => {
   tests.forEach(test =>

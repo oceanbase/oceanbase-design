@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/charts",
-  "version": "0.2.10",
+  "version": "0.2.14",
   "description": "The Chart library for OceanBase",
   "homepage": "https://github.com/oceanbase/oceanbase-design/packages/charts",
   "repository": {
@@ -31,14 +31,15 @@
     "@oceanbase/util": "workspace:^",
     "classnames": "^2.3.2",
     "lodash": "^4.17.21",
+    "rc-util": "^5.38.0",
     "tinycolor2": "^1.6.0",
     "use-resize-observer": "^9.1.0"
   },
   "devDependencies": {
-    "@types/tinycolor2": "^1.4.3"
+    "@types/tinycolor2": "^1.4.4"
   },
   "peerDependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
   }
 }

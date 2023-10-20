@@ -1,12 +1,12 @@
-import * as React from "react";
-import { AbstractNode, IconDefinition } from "../types";
+import * as React from 'react';
+import { AbstractNode, IconDefinition } from '../types';
 import {
   generate,
   getSecondaryColor,
   isIconDefinition,
   warning,
   // useInsertStyles,
-} from "./utils";
+} from './utils';
 
 export interface IconProps {
   icon: IconDefinition;
@@ -28,18 +28,14 @@ export interface TwoToneColorPalette extends TwoToneColorPaletteSetter {
 }
 
 const twoToneColorPalette: TwoToneColorPalette = {
-  primaryColor: "#333",
-  secondaryColor: "#E6E6E6",
+  primaryColor: '#333',
+  secondaryColor: '#E6E6E6',
   calculated: false,
 };
 
-function setTwoToneColors({
-  primaryColor,
-  secondaryColor,
-}: TwoToneColorPaletteSetter) {
+function setTwoToneColors({ primaryColor, secondaryColor }: TwoToneColorPaletteSetter) {
   twoToneColorPalette.primaryColor = primaryColor;
-  twoToneColorPalette.secondaryColor =
-    secondaryColor || getSecondaryColor(primaryColor);
+  twoToneColorPalette.secondaryColor = secondaryColor || getSecondaryColor(primaryColor);
   twoToneColorPalette.calculated = !!secondaryColor;
 }
 
@@ -54,16 +50,8 @@ interface IconBaseComponent<P> extends React.FC<P> {
   setTwoToneColors: typeof setTwoToneColors;
 }
 
-const IconBase: IconBaseComponent<IconProps> = (props) => {
-  const {
-    icon,
-    className,
-    onClick,
-    style,
-    primaryColor,
-    secondaryColor,
-    ...restProps
-  } = props;
+const IconBase: IconBaseComponent<IconProps> = props => {
+  const { icon, className, onClick, style, primaryColor, secondaryColor, ...restProps } = props;
 
   let colors: TwoToneColorPalette = twoToneColorPalette;
   if (primaryColor) {
@@ -75,17 +63,14 @@ const IconBase: IconBaseComponent<IconProps> = (props) => {
 
   // useInsertStyles();
 
-  warning(
-    isIconDefinition(icon),
-    `icon should be icon definiton, but got ${icon}`
-  );
+  warning(isIconDefinition(icon), `icon should be icon definiton, but got ${icon}`);
 
   if (!isIconDefinition(icon)) {
     return null;
   }
 
   let target = icon;
-  if (target && typeof target.icon === "function") {
+  if (target && typeof target.icon === 'function') {
     target = {
       ...target,
       icon: target.icon(colors.primaryColor, colors.secondaryColor),
@@ -95,16 +80,16 @@ const IconBase: IconBaseComponent<IconProps> = (props) => {
     className,
     onClick,
     style,
-    "data-icon": target.name,
-    width: "1em",
-    height: "1em",
-    fill: "currentColor",
-    "aria-hidden": "true",
+    'data-icon': target.name,
+    width: '1em',
+    height: '1em',
+    fill: 'currentColor',
+    'aria-hidden': 'true',
     ...restProps,
   });
 };
 
-IconBase.displayName = "IconReact";
+IconBase.displayName = 'IconReact';
 IconBase.getTwoToneColors = getTwoToneColors;
 IconBase.setTwoToneColors = setTwoToneColors;
 

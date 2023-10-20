@@ -2,13 +2,13 @@ import { CaretRightFilled, LeftOutlined, RightOutlined } from '@oceanbase/icons'
 import { setAlpha } from '@ant-design/pro-components';
 import { token } from '@oceanbase/design';
 import { isNullValue } from '@oceanbase/util';
-import { Divider, Layout, Menu, Tooltip } from '@oceanbase/design';
+import { ConfigProvider, Divider, Layout, Menu, Tooltip } from '@oceanbase/design';
 import type { BadgeProps } from '@oceanbase/design/es/badge';
 import type { MenuProps } from '@oceanbase/design/es/menu';
 import classNames from 'classnames';
 import { some } from 'lodash';
 import { pathToRegexp } from 'path-to-regexp';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import { getPrefix, isEnglish, urlToList } from '../_util';
@@ -69,9 +69,11 @@ export interface BasicLayoutProps extends LocaleWrapperProps {
   subSideMenus?: MenuItem[];
   /* 子侧边栏Menu属性 */
   subSideMenuProps?: MenuProps;
-  // prefixCls?: string;
+  prefixCls?: string;
   style?: React.CSSProperties;
 }
+
+  const prefix = getPrefix('layout');
 
 const BasicLayout: React.FC<BasicLayoutProps> = ({
   children,
@@ -89,13 +91,19 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   subSideMenuProps,
   subSideMenus,
   className,
+  prefixCls: customizePrefixCls,
   ...restProps
 }) => {
 
-  const prefixCls = getPrefix('layout');
+  // const prefixCls = getPrefix('layout');
+  // const { wrapSSR, hashId } = useStyle(prefixCls);
+  // const basicLayoutCls = classNames(className);
+  
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('pro-basic-layout', customizePrefixCls);
   const { wrapSSR, hashId } = useStyle(prefixCls);
-  const basicLayoutCls = classNames(className);
-
+  const basicLayoutCls = classNames(prefixCls, className);
+debugger
   const navigate = useNavigate();
   // 侧边栏导航是否收起
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
@@ -288,7 +296,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   let siderWidth = 0;
   // 根据菜单项的配置计算侧边栏的宽度
   if (subSideMenus && menus) {
-    siderWidth = collapsed ? 104 : 192;
+    siderWidth = collapsed ? 52 * 2 : 208;
   } else if (subSideMenus && !menus) {
     siderWidth = 52;
   } else if (!subSideMenus && menus) {
@@ -301,8 +309,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
     <>
       {banner && <div className={`${prefixCls}-banner-wrapper`}>{banner}</div>}
       <Layout
-        className={classNames(prefixCls, className, hashId, basicLayoutCls, {
-          [`${prefixCls}-with-banner`]: banner,
+        className={classNames(prefix, className, basicLayoutCls, {
+          [`${prefix}-with-banner`]: banner,
+          [`${prefixCls}-sider-${siderWidth}`]: true,
         })}
         {...restProps}
       >
