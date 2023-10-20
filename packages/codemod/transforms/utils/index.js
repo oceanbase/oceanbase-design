@@ -138,7 +138,9 @@ function addModuleImport(j, root, { pkgName, importSpecifier, importKind, before
 
           return a.imported.name.localeCompare(b.imported.name);
         });
-        return j.importDeclaration(mergedImportSpecifiers, j.literal(pkgName));
+        const importStatement = j.importDeclaration(mergedImportSpecifiers, j.literal(pkgName));
+        importStatement.importKind = importKind;
+        return importStatement;
       });
     return true;
   }
