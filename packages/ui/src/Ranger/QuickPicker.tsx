@@ -22,7 +22,7 @@ interface SelectProps {
 
 export type QuickType = 'select' | 'dropdown';
 
-interface IProps extends LocaleWrapperProps {
+interface QuickPickerProps extends LocaleWrapperProps {
   selects: RangeOption[];
   type?: QuickType;
   onChange: (range: RangeValue) => void;
@@ -92,7 +92,7 @@ const RangeSelect = ({ selects, onChange, value, customable, locale = {}, size }
   );
 };
 
-export default (props: IProps) => {
+export default (props: QuickPickerProps) => {
   const {
     type = 'select',
     name,
