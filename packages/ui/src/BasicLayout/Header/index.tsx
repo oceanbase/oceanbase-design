@@ -9,21 +9,21 @@ import { Button, Dropdown, Menu, Modal, Space, Tooltip } from '@oceanbase/design
 import classNames from 'classnames';
 import moment from 'moment';
 import React, { useState } from 'react';
-import { OB_SITE_LINK } from '../constant';
-import type { Locale } from '../interface';
-import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
-import LocaleWrapper from '../locale/LocaleWrapper';
-import { directTo, getPrefix } from '../_util';
-import useNavigate from '../_util/useNavigate';
-import zhCN from './locale/zh-CN';
+import { OB_SITE_LINK } from '../../constant';
+import type { Locale } from '../../interface';
+import type { LocaleWrapperProps } from '../../locale/LocaleWrapper';
+import LocaleWrapper from '../../locale/LocaleWrapper';
+import { directTo, getPrefix } from '../../_util';
+import useNavigate from '../../_util/useNavigate';
+import zhCN from '../locale/zh-CN';
 // @ts-ignore
-import logoImg from '../assets/logo/oceanbase_logo.svg';
+import logoImg from '../../assets/logo/oceanbase_logo.svg';
 // @ts-ignore
 // 自定义 SVG 图标需要将其导入为图片，而不能是 ReactComponent，因为需要依赖 webpack 插件
 // 虽然本地开发可以生效，但构建后的产物在上层项目中不会生效，导致 SVG 展示为空
-import UserSvg from '../assets/user.svg';
-import LocaleDropdown from '../LocaleDropdown';
-import './Header.less';
+import UserSvg from '../../assets/user.svg';
+import LocaleDropdown from '../../LocaleDropdown';
+import useStyle from './style';
 
 export type OverlayFunc = () => React.ReactElement;
 
@@ -102,6 +102,10 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
+
+  const prefixCls = getPrefix('layout-header');
+  const { wrapSSR } = useStyle(prefixCls);
+
   // 是否为欢迎页
   // 主要是为了处理与欢迎页搭配使用的场景
   const isWelcome = pathname === welcomePath;
@@ -125,6 +129,7 @@ const Header: React.FC<HeaderProps> = ({
       }}
     >
       {welcomePath && <Menu.Item key="welcome">{locale.welcome}</Menu.Item>}
+      {docsPath && <Menu.Item key="viewDocs">{locale.viewDocs}</Menu.Item>}
       {pdfPath && <Menu.Item key="downloadDocs">{locale.downloadDocs}</Menu.Item>}
       <Menu.Item key="about">{`${locale.about}${
         appData.shortName ? ` ${appData.shortName}` : ''
@@ -132,7 +137,7 @@ const Header: React.FC<HeaderProps> = ({
     </Menu>
   );
 
-  return (
+  return wrapSSR(
     <div
       {...restProps}
       className={classNames(`${prefix}`, {
@@ -148,6 +153,7 @@ const Header: React.FC<HeaderProps> = ({
           }}
           className={`${prefix}-logo`}
         />
+
         {title && <div className={`${prefix}-title`}>{title}</div>}
         {showLabel ? (
           <div className={`${prefix}-extra ${prefix}-extra-with-label`}>
@@ -160,11 +166,13 @@ const Header: React.FC<HeaderProps> = ({
                 </Space>
               </Dropdown>
             )}
+
             {showLocale && (
               <span className={`${prefix}-extra-item`}>
                 <LocaleDropdown locales={locales || langs} />
               </span>
             )}
+
             {userMenu ? (
               <Dropdown overlay={userMenu}>
                 <Button shape="round" size="small">
@@ -211,11 +219,13 @@ const Header: React.FC<HeaderProps> = ({
                 </span>
               </Tooltip>
             )}
+
             {showLocale && (
               <span className={`${prefix}-extra-item`}>
                 <LocaleDropdown showLabel={true} locales={locales || langs} />
               </span>
             )}
+
             {userMenu ? (
               <span className={`${prefix}-extra-item`}>
                 <Dropdown overlay={userMenu}>
@@ -226,6 +236,7 @@ const Header: React.FC<HeaderProps> = ({
                       className={`${prefix}-extra-user-icon`}
                       style={{ height: 12 }}
                     />
+
                     <span className={`${prefix}-extra-username`}>{username}</span>
                   </span>
                 </Dropdown>
@@ -239,6 +250,7 @@ const Header: React.FC<HeaderProps> = ({
                     className={`${prefix}-extra-user-icon`}
                     style={{ height: 12 }}
                   />
+
                   <span>{username}</span>
                 </span>
               </span>
@@ -264,9 +276,9 @@ const Header: React.FC<HeaderProps> = ({
                 {locale.version}: {appData.version}
               </div>
               {appData.releaseTime && (
-                <div
-                  className={`${prefix}-date`}
-                >{`${locale.releaseTime}: ${appData.releaseTime}`}</div>
+                <div className={`${prefix}-date`}>
+                  {`${locale.releaseTime}: ${appData.releaseTime}`}
+                </div>
               )}
             </div>
             <div>

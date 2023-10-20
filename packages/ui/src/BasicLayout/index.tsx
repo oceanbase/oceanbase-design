@@ -2,13 +2,13 @@ import { CaretRightFilled, LeftOutlined, RightOutlined } from '@oceanbase/icons'
 import { setAlpha } from '@ant-design/pro-components';
 import { token } from '@oceanbase/design';
 import { isNullValue } from '@oceanbase/util';
-import { ConfigProvider, Divider, Layout, Menu, Tooltip } from '@oceanbase/design';
+import { Divider, Layout, Menu, Tooltip } from '@oceanbase/design';
 import type { BadgeProps } from '@oceanbase/design/es/badge';
 import type { MenuProps } from '@oceanbase/design/es/menu';
 import classNames from 'classnames';
 import { some } from 'lodash';
 import { pathToRegexp } from 'path-to-regexp';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import { getPrefix, isEnglish, urlToList } from '../_util';
@@ -17,7 +17,6 @@ import type { HeaderProps } from './Header';
 import Header from './Header';
 import zhCN from './locale/zh-CN';
 import useStyle from './style';
-import './index.less';
 
 const { Content, Sider } = Layout;
 const { SubMenu, Item } = Menu;
@@ -70,11 +69,9 @@ export interface BasicLayoutProps extends LocaleWrapperProps {
   subSideMenus?: MenuItem[];
   /* 子侧边栏Menu属性 */
   subSideMenuProps?: MenuProps;
-  prefixCls?: string;
+  // prefixCls?: string;
   style?: React.CSSProperties;
 }
-
-const prefix = getPrefix('layout');
 
 const BasicLayout: React.FC<BasicLayoutProps> = ({
   children,
@@ -91,13 +88,12 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   sideHeader,
   subSideMenuProps,
   subSideMenus,
-  prefixCls: customizePrefixCls,
   className,
   ...restProps
 }) => {
-  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
-  const prefixCls = getPrefixCls('basic-layout', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
+
+  const prefixCls = getPrefix('layout');
+  const { wrapSSR, hashId } = useStyle(prefixCls);
   const basicLayoutCls = classNames(className);
 
   const navigate = useNavigate();
@@ -303,10 +299,10 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
 
   return wrapSSR(
     <>
-      {banner && <div className={`${prefix}-banner-wrapper`}>{banner}</div>}
+      {banner && <div className={`${prefixCls}-banner-wrapper`}>{banner}</div>}
       <Layout
-        className={classNames(prefix, className, basicLayoutCls, {
-          [`${prefix}-with-banner`]: banner,
+        className={classNames(prefixCls, className, hashId, basicLayoutCls, {
+          [`${prefixCls}-with-banner`]: banner,
         })}
         {...restProps}
       >
@@ -321,7 +317,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
           {/* content-layout 外需要用 div 包裹，否则内容区的宽度会不固定 */}
           <div>
             <Layout
-              className={`${prefix}-content-layout`}
+              className={`${prefixCls}-content-layout`}
               style={{
                 marginTop: 48,
               }}
@@ -330,19 +326,19 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
                 <Sider
                   theme="light"
                   width={siderWidth}
-                  className={classNames(`${prefix}-sider`, {
-                    [`${prefix}-sider-collapsed`]: collapsed,
-                    [`${prefix}-sider-has-sub-sider`]: subSideMenus,
+                  className={classNames(`${prefixCls}-sider`, {
+                    [`${prefixCls}-sider-collapsed`]: collapsed,
+                    [`${prefixCls}-sider-has-sub-sider`]: subSideMenus,
                   })}
                 >
-                  <div className={`${prefix}-sider-wrapper`}>
+                  <div className={`${prefixCls}-sider-wrapper`}>
                     {/* 子侧边栏菜单 */}
                     {subSideMenus && (
-                      <div className={`${prefix}-sub-sider`}>
+                      <div className={`${prefixCls}-sub-sider`}>
                         <Menu
                           {...subSideMenuProps}
                           mode="vertical"
-                          className={`${prefix}-menu-vertical`}
+                          className={`${prefixCls}-menu-vertical`}
                         >
                           {renderCollapsedMenu(subSideMenus, true)}
                         </Menu>
@@ -356,19 +352,19 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
                           width: '100%',
                         }}
                       >
-                        <div className={`${prefix}-sider-content`}>
+                        <div className={`${prefixCls}-sider-content`}>
                           {/* 侧边栏顶部内容 */}
                           {sideHeader && (
-                            <div className={`${prefix}-sider-header`}>{sideHeader}</div>
+                            <div className={`${prefixCls}-sider-header`}>{sideHeader}</div>
                           )}
                           {/* 侧边栏菜单 */}
-                          <div className={`${prefix}-menu-wrapper`}>
+                          <div className={`${prefixCls}-menu-wrapper`}>
                             {collapsed ? (
-                              <div className={`${prefix}-menu-collapsed`}>
+                              <div className={`${prefixCls}-menu-collapsed`}>
                                 <Menu
                                   {...menuProps}
                                   mode="vertical"
-                                  className={`${prefix}-menu-vertical`}
+                                  className={`${prefixCls}-menu-vertical`}
                                 >
                                   {renderCollapsedMenu(menus, false)}
                                 </Menu>
@@ -387,16 +383,16 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
                                     />
                                   );
                                 }}
-                                className={`${prefix}-menu`}
+                                className={`${prefixCls}-menu`}
                               >
                                 {renderMenu(menus)}
                               </Menu>
                             )}
                           </div>
                         </div>
-                        <div className={`${prefix}-sider-border`}>
+                        <div className={`${prefixCls}-sider-border`}>
                           <div
-                            className={`${prefix}-sider-collapse`}
+                            className={`${prefixCls}-sider-collapse`}
                             onClick={() => {
                               setCollapsed(!collapsed);
                               // 导航展开/收起时，重置 openKeys
@@ -412,7 +408,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
                 </Sider>
               )}
               <Content
-                className={classNames(`${prefix}-content`, `${prefix}-content-${siderWidth}`)}
+                className={classNames(`${prefixCls}-content`, `${prefixCls}-content-${siderWidth}`)}
                 style={{
                   marginLeft: siderWidth,
                 }}

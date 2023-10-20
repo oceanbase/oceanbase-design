@@ -7,47 +7,84 @@ export type BasicLayoutToken = FullToken<any>;
 export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
   token: BasicLayoutToken
 ): CSSObject => {
-  const { 
+  const {
+    antCls,
+    componentCls,
     proComponentsCls,
     colorBgLayout,
     colorText,
-    maxWidth,
     colorBorder,
     colorPrimaryBorder,
     colorPrimary,
-   } = token;
+  } = token;
 
-   const prefix = 'ob-layout';
+  const maxWidth = '8192px'
 
   return {
     // 弹出菜单样式
-    [`${proComponentsCls}-menu-submenu-popup`]: {
-      [`${proComponentsCls}-menu`]: {
+    [`${antCls}-menu-submenu-popup`]: {
+      [`${antCls}-menu`]: {
         paddingLeft: '6px !important',
         backgroundColor: `${colorBgLayout} !important`,
-        [`${proComponentsCls}-menu-item, ${proComponentsCls}-menu-submenu`]: {
+        [`${antCls}-menu-item`]: {
           width: '100%',
           backgroundColor: 'transparent',
           border: 'none',
           marginInline: 0,
-          '&:not\(:last-child\):': {
+          '&:not(:last-child):': {
             marginBottom: '8px !important',
           }
         },
-        [`${proComponentsCls}-menu-item-active, ${proComponentsCls}-menu-submenu-active > & ${proComponentsCls}-menu-submenu-title`]: {
+        [`${antCls}-menu-submenu`]: {
+          width: '100%',
+          backgroundColor: 'transparent',
+          border: 'none',
+          marginInline: 0,
+          '&:not(:last-child):': {
+            marginBottom: '8px !important',
+          }
+        },
+        [`${antCls}-menu-item-active`]: {
           color: 'colorText !important',
           fontWeight: 600,
           animation: 'activeGradientAnimation 0.1s',
           // .border-gradient(linear-gradient(to right, #E9EDF6, colorBgLayout), linear-gradient(90deg, #C6CDD9, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
+          backgroundImage: `linear-gradient(to right, #E9EDF6, ${colorBgLayout}), linear-gradient(90deg, #C6CDD9, ${colorBgLayout})`,
+          backgroundClip: 'padding-box,border-box',
+          backgroundOrigin: 'padding-box,border-box',
+          border: '.5px solid transparent',
+          borderRadius: '8px 0 0 8px',
+          transition: 'border-width .3s'
+
+
+
         },
-    
-        [`${proComponentsCls}-menu-item-selected`]: {
+        [`${antCls}-menu-submenu-active > & ${antCls}-menu-submenu-title`]: {
+          color: 'colorText !important',
+          fontWeight: 600,
+          animation: 'activeGradientAnimation 0.1s',
+          // .border-gradient(linear-gradient(to right, #E9EDF6, colorBgLayout), linear-gradient(90deg, #C6CDD9, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
+          backgroundImage: `linear-gradient(to right, #E9EDF6, ${colorBgLayout}), linear-gradient(90deg, #C6CDD9, ${colorBgLayout})`,
+          backgroundClip: 'padding-box,border-box',
+          backgroundOrigin: 'padding-box,border-box',
+          border: '.5px solid transparent',
+          borderRadius: '8px 0 0 8px',
+          transition: 'border-width .3s'
+        },
+
+        [`${antCls}-menu-item-selected`]: {
           color: `${colorPrimary} !important`,
           fontWeight: 600,
           animation: 'selectedGradientAnimation 0.1s',
           // .border-gradient(linear-gradient(to right, #E5EEFF, #F4F8FF), linear-gradient(90deg, @colorPrimaryBorder, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
+          backgroundImage: `linear-gradient(to right,#E5EEFF,#F4F8FF),linear-gradient(90deg,${colorPrimaryBorder},${colorBgLayout})`,
+          backgroundClip: 'padding-box,border-box',
+          backgroundOrigin: 'padding-box,border-box',
+          border: '.5px solid transparent',
+          borderRadius: '8px 0 0 8px',
+          transition: 'border-width .3s'
         },
-        [`${proComponentsCls}-divider`]: {
+        [`${antCls}-divider`]: {
           width: "'60%'",
           minWidth: '60%',
           margin: '0 0 8px 16px !important'
@@ -55,31 +92,30 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
       },
     },
 
-    [`${prefix}-banner-wrapper`]: {
+    [`${componentCls}-banner-wrapper`]: {
       position: 'fixed',
       top: 0,
       zIndex: 20,
       width: '100%'
     },
-  
 
-    [`${prefix}`]: {
+
+    [`${componentCls}`]: {
       height: '100%',
       backgroundColor: colorBgLayout,
       transition: 'all 0.1s',
-    
-      [`${prefix}-content-layout`]: {
+      [`${componentCls}-content-layout`]: {
         maxWidth: maxWidth,
         // 居中对齐
         margin: '0 auto',
-        [`${prefix}-sider`]: {
+        [`${componentCls}-sider`]: {
           position: 'fixed',
           zIndex: 10,
           padding: '16px 0 16px 16px',
           backgroundColor: colorBgLayout,
           transition: 'all 0.3s',
-    
-          [`${prefix}-sider-border`]: {
+
+          [`${componentCls}-sider-border`]: {
             position: 'relative',
             top: '-16px',
             width: 1,
@@ -88,194 +124,227 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
             cursor: 'pointer',
             opacity: 0,
             // 左右两侧扩大热区
-            '&::after': {
+            ['&::after']: {
               position: 'absolute',
               top: 0,
               right: '-10px',
               bottom: 0,
               left: '-10px',
-              content: '',
+              content: '""',
             },
             '&:hover': {
               opacity: 1,
               // 仅在 hover 时增加过渡动画，避免展开/收起时 border 和 collapse 没有及时消失、影响整体效果
               transition: 'opacity 0.3s',
-              [`${prefix}-sider-collapse`]: {
+              [`${componentCls}-sider-collapse`]: {
                 opacity: 1,
                 transition: 'opacity 0.3s',
               }
             },
-    
-            [`${prefix}-sider-collapse`]: {
+
+            [`${componentCls}-sider-collapse`]: {
               position: 'relative',
-              top: 245,
+              top: '245px',
               right: 10,
               // 需要设置 z-index 以便叠加在分隔线上，否则点击的是分隔线的热区，无法触发 collapse 的点击事件
               zIndex: 1,
-              width: 20,
-              height: 42,
-              lineHeight: 42,
+              width: '20px',
+              height: '42px',
+              lineHeight: '42px',
               textAlign: 'center',
               backgroundColor: '#fff',
               border: `1px solid ${colorBorder}`,
-              borderRadius: 10,
+              borderRadius: '10px',
               cursor: 'pointer',
               opacity: 0,
               // 设置展开/收起按钮中的图标大小
-              // .@{iconPrefixCls} {
-              //   fontSize: 12,
-              // }
+              ['.anticon']: {
+                fontSize: 'px',
+                display: 'block',
+                lineHeight: '42px'
+              }
             }
           },
-    
-          [`${prefix}-sider-wrapper`]: {
+
+          [`${componentCls}-sider-wrapper`]: {
             display: 'flex',
             height: 'calc(100vh - 48px)',
+
             // 菜单通用样式
-            [`${proComponentsCls}-menu`]: {
+            [`${antCls}-menu`]: {
               backgroundColor: 'transparent',
               borderRight: 'none',
-    
-              [`${proComponentsCls}-menu-item, ${proComponentsCls}-menu-submenu`]: {
+
+              [`${antCls}-menu-item`]: {
                 width: '100%',
                 marginTop: 0,
                 marginRight: 'auto',
                 marginLeft: 'auto',
                 color: colorText,
                 backgroundColor: 'transparent',
-                // .@{iconPrefixCls}`] {
-                //   // 图标尺寸设为 18px，因为设计侧给到的图标内侧有间距，需要适当加大尺寸
-                //   width: 18,
-                //   height: 18,
-                //   font-size: 18,
-                // }
+                [`.anticon`]: {
+                  // 图标尺寸设为 18px，因为设计侧给到的图标内侧有间距，需要适当加大尺寸
+                  width: '18px',
+                  height: '18px',
+                  fontSize: '18px',
+                }
               },
-              [`${proComponentsCls}-menu-submenu > ${proComponentsCls}-menu-submenu-title`]: {
+              [`${antCls}-menu-submenu`]: {
                 width: '100%',
-                marginzBottom: '4px !important',
+                marginTop: 0,
+                marginRight: 'auto',
+                marginLeft: 'auto',
+                color: colorText,
+                backgroundColor: 'transparent',
+                [`.anticon`]: {
+                  // 图标尺寸设为 18px，因为设计侧给到的图标内侧有间距，需要适当加大尺寸
+                  width: '18px',
+                  height: '18px',
+                  fontSize: '18px',
+                }
+              },
+              [`${antCls}-menu-submenu > ${antCls}-menu-submenu-title`]: {
+                width: '100%',
+                marginBottom: '4px !important',
                 marginInline: 0,
                 marginBlock: 0,
               }
             },
             // 内嵌菜单样式
-            [`${proComponentsCls}-menu-inline`]: {
+            [`${antCls}-menu-inline`]: {
               // 菜单项间距
-              [`${proComponentsCls}-menu-item, ${proComponentsCls}-menu-submenu`]: {
-                '&:not\(:last-child\)': {
-                  marginzBottom: 16,
-                  // 子菜单展开时 marginzBottom 会变小，为了避免效果突兀，增加过渡效果
-                  transition: 'marginzBottom 0.2s',
+              [`${antCls}-menu-item, ${antCls}-menu-submenu`]: {
+                '&:not(:last-child)': {
+                  marginBottom: '16px',
+                  // 子菜单展开时 marginBottom 会变小，为了避免效果突兀，增加过渡效果
+                  transition: 'marginBottom 0.2s',
                 }
               },
-              [`${proComponentsCls}-menu-submenu-open`]: {
-                '&:not\(:last-child\)': {
-                  // 子菜单展开时，减小 marginzBottom
-                  marginzBottom: 4,
+              [`${antCls}-menu-submenu-open`]: {
+                '&:not(:last-childantCls)': {
+                  // 子菜单展开时，减小 marginBottom
+                  marginBottom: 4,
                 }
               },
               // 子菜单项间距
-              [`${proComponentsCls}-menu-submenu`]: {
-                [`${proComponentsCls}-menu-item:not(:last-child)`]: {
-                  marginzBottom: 4,
+              [`${antCls}-menu-submenu`]: {
+                [`${antCls}-menu-item:not(:last-child)`]: {
+                  marginBottom: 4,
                 }
               },
               // 菜单项缩进
-              [`${proComponentsCls}-menu-item, ${proComponentsCls}-menu-submenu > ${proComponentsCls}-menu-submenu-title`]: {
+              [`${antCls}-menu-item, ${antCls}-menu-submenu > ${antCls}-menu-submenu-title`]: {
                 paddingLeft: '16px !important',
+                [`${antCls}-menu-title-content`]: {
+                  width: '108px'
+                }
               },
               // 子菜单项缩进
-              [`${proComponentsCls}-menu-sub`]: {
-                [`${proComponentsCls}-menu-item`]: {
-                  marginLeft: 16,
+              [`${antCls}-menu-sub`]: {
+                [`${antCls}-menu-item`]: {
+                  marginLeft: '16px',
                   paddingLeft: '28px !important',
                 }
               },
               // 菜单项激活样式
-              [`${proComponentsCls}-menu-item-active, ${proComponentsCls}-menu-submenu-active > ${proComponentsCls}-menu-submenu-title`]: {
+              [`${antCls}-menu-item-active, ${antCls}-menu-submenu-active > ${antCls}-menu-submenu-title`]: {
                 color: `${colorText} !important`,
                 fontWeight: 600,
                 animation: 'activeGradientAnimation 0.1s',
                 // .border-gradient(linear-gradient(to right, #E9EDF6, @colorBgLayout), linear-gradient(90deg, #C6CDD9, @colorBgLayout), 0.5px, solid, 8px 0 0 8px),
+                backgroundImage: `linear-gradient(to right,#E9EDF6, ${colorBgLayout}),linear-gradient(90deg,#C6CDD9,${colorBgLayout})`,
+                backgroundClip: 'padding-box,border-box',
+                backgroundOrigin: 'padding-box,border-box',
+                border: '.5px solid transparent',
+                borderRadius: '8px 0 0 8px',
+                transition: 'border-width .3s',
               },
               // 菜单项选中样式
-              [`${proComponentsCls}-menu-item-selected`]: {
+              [`${antCls}-menu-item-selected`]: {
                 color: `${colorPrimary} !important`,
                 fontWeight: 600,
                 animation: 'selectedGradientAnimation 0.5s',
                 // .border-gradient(linear-gradient(to right, #E5EEFF, #F4F8FF), linear-gradient(90deg, @colorPrimaryBorder, @colorBgLayout), 0.5px, solid, 8px 0 0 8px),
+                backgroundImage: `linear-gradient(to right,#E5EEFF,#F4F8FF),linear-gradient(90deg,${colorPrimaryBorder},${colorBgLayout})`,
+                backgroundClip: 'padding-box,border-box',
+                backgroundOrigin: 'padding-box,border-box',
+                border: '.5px solid transparent',
+                borderRadius: '8px 0 0 8px',
+                transition: 'border-width .3s',
                 '&::after': {
+                  // content: '""',
                   // 去掉菜单项的选中标记
                   display: 'none',
                 }
               },
-              [`${proComponentsCls}-menu-submenu-selected > ${proComponentsCls}-menu-submenu-title`]: {
+              [`${antCls}-menu-submenu-selected > ${antCls}-menu-submenu-title`]: {
                 color: `${colorPrimary} !important`,
               },
-              [`${proComponentsCls}-divider`]: {
+              [`${antCls}-divider`]: {
                 margin: '0 0 16px 0',
               }
             },
-    
+
             // 垂直菜单样式
-            [`${proComponentsCls}-menu-vertical`]: {
+            [`${antCls}-menu-vertical`]: {
               overflowX: 'hidden',
               overflowY: 'auto',
               borderRight: 'none',
-    
-              [`${proComponentsCls}-menu-item, ${proComponentsCls}-menu-submenu`]: {
-                '&:not\(:last-child\)': {
-                  marginzBottom: 4,
+
+              [`${antCls}-menu-item, ${antCls}-menu-submenu`]: {
+                '&:not(:last-child)': {
+                  marginBottom: 4,
                 }
               },
-    
-              [`${proComponentsCls}-menu-item, ${proComponentsCls}-menu-submenu > ${proComponentsCls}-menu-submenu-title`]: {
-                width: 52,
-                height: 52,
+
+              [`${antCls}-menu-item, ${antCls}-menu-submenu > ${antCls}-menu-submenu-title`]: {
+                width: '52px',
+                height: '52px',
                 padding: 0,
-                lineHeight: 52,
+                lineHeight: '52px',
                 textAlign: 'center',
-    
-                [`${proComponentsCls}-menu-title-content`]: {
+
+                [`${antCls}-menu-title-content`]: {
                   display: 'inline-block',
-                  width: 40,
-                  height: 40,
-                  lineHeight: 40,
-                  borderRadius: 8,
+                  width: '40px',
+                  height: '40px',
+                  lineHeight: '40px',
+                  borderRadius: '8px',
                 },
-    
-                [`${proComponentsCls}-menu-submenu-arrow`]: {
+
+                [`${antCls}-menu-submenu-arrow`]: {
                   display: 'none',
                 }
               },
-              [`${proComponentsCls}-menu-item-active, ${proComponentsCls}-menu-submenu-active > ${proComponentsCls}-menu-submenu-title`]: {
-                [`${proComponentsCls}-menu-title-content`]: {
+              [`${antCls}-menu-item-active, ${antCls}-menu-submenu-active > ${antCls}-menu-submenu-title`]: {
+                [`${antCls}-menu-title-content`]: {
                   backgroundColor: '#e9edf6',
                   border: '0.5px solid #c6cdd9',
                 }
               },
-              [`${proComponentsCls}-menu-item-selected, ${proComponentsCls}-menu-submenu-selected > ${proComponentsCls}-menu-submenu-title`]: {
-                [`${proComponentsCls}-menu-title-content`]: {
+              [`${antCls}-menu-item-selected, ${antCls}-menu-submenu-selected > ${antCls}-menu-submenu-title`]: {
+                [`${antCls}-menu-title-content`]: {
                   backgroundColor: '#e5eeff',
                   border: `0.5px solid ${colorPrimaryBorder}`,
                 }
               }
             },
-    
-            [`${prefix}-sub-sider`]: {
+
+            [`${componentCls}-sub-sider`]: {
               borderRight: '1px solid #e2e8f3',
-              [`${proComponentsCls}-divider`]: {
+              [`${antCls}-divider`]: {
                 margin: '0 0 4px 0',
               }
             },
-    
-            [`${prefix}-sub-sider, ${prefix}-menu-collapsed`]: {
-              width: 52,
-              [`${proComponentsCls}-divider`]: {
+
+            [`${componentCls}-sub-sider, ${componentCls}-menu-collapsed`]: {
+              width: '52px',
+              [`${antCls}-divider`]: {
                 margin: '0 0 4px 0',
               }
             },
-    
-            [`${prefix}-sider-content`]: {
+
+            [`${componentCls}-sider-content`]: {
               display: 'flex',
               flex: 1,
               // 纵向排列
@@ -283,12 +352,12 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               // 纵向两端对齐
               justifyContent: 'space-between',
               height: '100%',
-    
-              [`${prefix}-sider-header`]: {
-                paddingTop: 16,
+
+              [`${componentCls}-sider-header`]: {
+                paddingTop: '16px',
               },
-    
-              [`${prefix}-menu-wrapper`]: {
+
+              [`${componentCls}-menu-wrapper`]: {
                 display: 'flex',
                 flexDirection: 'column',
                 // 保证垂直方向超出高度出现滚动
@@ -296,80 +365,83 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
                 justifyContent: 'space-between',
                 overflowX: 'hidden',
                 overflowY: 'auto',
-    
-                [`${prefix}-menu`]: {
-                  marginzBottom: 32,
+
+                [`${componentCls}-menu`]: {
+                  backgroundColor: 'transparent',
+                  borderRight: 'none',
+                  marginBottom: '32px',
                 }
               }
-            }
+            },
+
           }
         },
-    
-        [`${prefix}-sider-collapsed`]: {
+
+        [`${componentCls}-sider-collapsed`]: {
           paddingLeft: 0,
         },
-    
-        [`${prefix}-sider-has-sub-sider`]: {
+
+        [`${componentCls}-sider-has-sub-sider`]: {
           padding: 0,
           // 包含子侧边栏的菜单不支持收起，直接隐藏侧边栏 border 和 collapse
-          [`${prefix}-sider-border`]: {
+          [`${componentCls}-sider-border`]: {
             display: 'none',
-            [`${prefix}-sider-collapse`]: {
+            [`${componentCls}-sider-collapse`]: {
               display: 'none',
             }
           },
-          [`${proComponentsCls}-menu-inline`]: {
-            paddingTop: 16,
-            [`${proComponentsCls}-menu-item, ${proComponentsCls}-menu-submenu`]: {
+          [`${antCls}-menu-inline`]: {
+            paddingTop: '16px',
+            [`${antCls}-menu-item, ${antCls}-menu-submenu`]: {
               '&:not\(:last-child\)': {
-                marginzBottom: '16px !important',
+                marginBottom: '16px !important',
               }
             },
-            [`${proComponentsCls}-divider`]: {
+            [`${antCls}-divider`]: {
               width: '60%',
               minWidth: '60%',
               margin: '-8px 0 8px 16px !important',
             }
           },
-          [`${proComponentsCls}-menu-vertical`]: {
-            paddingTop: 10,
+          [`${antCls}-menu-vertical`]: {
+            paddingTop: '10px',
           },
-          [`${prefix}-sider-content`]: {
-            paddingLeft: 6,
+          [`${componentCls}-sider-content`]: {
+            paddingLeft: '6px',
           }
         },
-    
-        [`${prefix}-content`]: {
+
+        [`${componentCls}-content`]: {
           backgroundColor: colorBgLayout,
           transition: 'all 0.3s',
         }
       }
     },
 
-    // '@media (min-width: maxWidth)': {
-    //   [`${proComponentsCls}-pro-footer-bar`]: {
-    //     right: 'calc((100% - @maxWidth) / 2 + 24px)',
-    //     width: 'calc(@maxWidth - 192px - 24px - 24px)',
-    //     maxWidth: 'calc(@maxWidth - 192px - 24px - 24px)'
-    //   }
-    // },
-    
+    [`@media (min-width: ${maxWidth})`]: {
+      [`${proComponentsCls}-footer-bar`]: {
+        right: `calc((100% - ${maxWidth}) / 2 + 24px)`,
+        width: `calc(${maxWidth} - 192px - 24px - 24px)`,
+        maxWidth: `calc(${maxWidth} - 192px - 24px - 24px)`
+      }
+    },
+
     // 对于 Alert 类型的 banner，自动增加上间距
     // 对于其他类型的 banner，需要业务侧自行设置上间距
-    [`${prefix}-with-banner`]: {
-      marginTop: 38,
+    [`${componentCls}-with-banner`]: {
+      marginTop: '38px',
     },
-    
-    // '@media (min-width: maxWidth)': {
-    //   [`${prefix}`]:  {
-    //     [`${prefix}-content-layout`]: {
-    //       [`${prefix}-sider`]: {
-    //         paddingLeft: 0
-    //       }
-    //     }
-    //   }
-    // }
-};
+
+    [`@media (min-width: ${maxWidth})`]: {
+      [`${componentCls}`]: {
+        [`${componentCls}-content-layout`]: {
+          [`${componentCls}-sider`]: {
+            paddingLeft: 0
+          }
+        }
+      }
+    }
+  };
 }
 
 export default (prefixCls: string) => {
