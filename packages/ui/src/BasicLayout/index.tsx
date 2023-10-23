@@ -1,6 +1,6 @@
 import { CaretRightFilled, LeftOutlined, RightOutlined } from '@oceanbase/icons';
 import { setAlpha } from '@ant-design/pro-components';
-import { token } from '@oceanbase/design';
+import { Typography, token } from '@oceanbase/design';
 import { isNullValue } from '@oceanbase/util';
 import { ConfigProvider, Divider, Layout, Menu, Tooltip } from '@oceanbase/design';
 import type { BadgeProps } from '@oceanbase/design/es/badge';
@@ -11,7 +11,7 @@ import { pathToRegexp } from 'path-to-regexp';
 import React, { useEffect, useState, useContext } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { isEnglish, urlToList } from '../_util';
+import { urlToList } from '../_util';
 import useNavigate from '../_util/useNavigate';
 import type { HeaderProps } from './Header';
 import Header from './Header';
@@ -171,24 +171,22 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
             data-testid="menu.sub"
             key={item.link}
             title={
-              <Tooltip
-                placement="right"
-                title={item.title}
-                // SubMenu 通常都会带 icon，因此这里判断英文环境下如果标题字符长度 > 15 就支持 tooltip 展示
-                {...(isEnglish() && item.title && item.title.length > 15
-                  ? {}
-                  : {
-                      visible: false,
-                      // Support for antd 5.0
-                      open: false,
-                    })}
-                getPopupContainer={() => document.body}
-              >
-                <span>
-                  {renderIcon(item)}
-                  <span>{item.title}</span>
-                </span>
-              </Tooltip>
+              <div>
+                {renderIcon(item)}
+                <Typography.Text
+                  ellipsis={{
+                    tooltip: {
+                      placement: 'right',
+                    },
+                  }}
+                  style={{
+                    lineHeight: '40px',
+                    maxWidth: 80,
+                  }}
+                >
+                  {item.title}
+                </Typography.Text>
+              </div>
             }
           >
             {renderMenu(item.children)}
@@ -205,24 +203,22 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
               }
             }}
           >
-            <Tooltip
-              placement="right"
-              title={item.title}
-              // 对于 Menu.Item，英文环境下如果标题字符长度 > 20 就支持 tooltip 展示
-              {...(isEnglish() && item.title && item.title.length > 20
-                ? {}
-                : {
-                    visible: false,
-                    // Support for antd 5.0
-                    open: false,
-                  })}
-              getPopupContainer={() => document.body}
-            >
-              <span>
-                {renderIcon(item)}
-                <span>{item.title}</span>
-              </span>
-            </Tooltip>
+            <div>
+              {renderIcon(item)}
+              <Typography.Text
+                ellipsis={{
+                  tooltip: {
+                    placement: 'right',
+                  },
+                }}
+                style={{
+                  lineHeight: '40px',
+                  maxWidth: 116,
+                }}
+              >
+                {item.title}
+              </Typography.Text>
+            </div>
           </Item>
         );
       }
