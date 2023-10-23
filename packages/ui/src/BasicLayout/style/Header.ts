@@ -18,7 +18,7 @@ export const genHeaderStyle: GenerateStyle<HeaderToken> = (
       padding: "10px 24px",
       lineHeight: '48px',
       backgroundColor: token.colorBgLayout,
-      boxShadow: "inset 0 -1px 0 0 #e2e8f3",
+      boxShadow: `inset 0 -1px 0 0 ${token.colorBorderSecondary}`,
 
       [`${componentCls}-content`]: {
         display: "flex",
@@ -38,8 +38,8 @@ export const genHeaderStyle: GenerateStyle<HeaderToken> = (
         height: 48,
         lineHeight: '48px',
         textAlign: "center",
-        borderRight: "1px solid #e2e8f3",
-        borderBottom: "1px solid #e2e8f3",
+        borderRight: `1px solid ${token.colorBorderSecondary}`,
+        borderBottom: `1px solid ${token.colorBorderSecondary}`,
         cursor: "pointer",
         img: {
           height: 32,
@@ -112,22 +112,20 @@ export const genHeaderStyle: GenerateStyle<HeaderToken> = (
         marginTop: 12,
       },
       [`${componentCls}-logo`]: {
-        marginTop: 72,
+        height: 72,
       },
       [`${componentCls}-release-info`]: {
         marginTop: 20,
         marginBottom: 50,
         [`${componentCls}-date`]: {
           fontSize: 12,
-          fontFamily: 'Helvetica',
-          opacity: 0.45,
+          color: token.colorTextTertiary,
         },
       },
 
       [`${componentCls}-copyright`]: {
-        color: "#000",
         fontSize: 12,
-        opacity: 0.45,
+        color: token.colorTextTertiary,
       },
     }
 
