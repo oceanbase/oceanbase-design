@@ -62,7 +62,7 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         },
       },
       // 减小内容区左右两侧间距
-      [`${componentCls}-warp-page-header`]: {
+      [`${antCls}-page-header`]: {
         paddingInlineStart: paddingLG,
         paddingInlineEnd: paddingLG,
         paddingBlockStart: padding,
