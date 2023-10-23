@@ -24,6 +24,8 @@ nav:
 
 <code src="./demo/ellipsis.tsx" title="单元格自动省略" description="设置 `column.ellipsis` 可以让单元格内容根据宽度自动省略，并使用 Tooltip 展示全部内容。`说明`: 列头缩略暂不支持和排序筛选一起使用。"></code>
 
+<code src="./demo/edit-row.tsx" title="可编辑行" description="带行编辑功能的表格。"></code>
+
 <code src="./demo/dynamic-settings.tsx" title="动态控制表格属性" description="选择不同配置组合查看效果。"></code>
 
 ## API
