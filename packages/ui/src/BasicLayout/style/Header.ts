@@ -1,14 +1,13 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
-import { genComponentStyleHook } from '../../../_util/genComponentStyleHook';
+import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type HeaderToken = FullToken<any>;
-
 
 export const genHeaderStyle: GenerateStyle<HeaderToken> = (
   token: HeaderToken
 ): CSSObject => {
-  const { componentCls } = token;
+  const { antCls, componentCls } = token;
 
   return {
     [`${componentCls}`]: {
@@ -37,7 +36,7 @@ export const genHeaderStyle: GenerateStyle<HeaderToken> = (
       [`${componentCls}-icon`]: {
         width: 52,
         height: 48,
-        lineHeight: 48,
+        lineHeight: '48px',
         textAlign: "center",
         borderRight: "1px solid #e2e8f3",
         borderBottom: "1px solid #e2e8f3",
@@ -67,7 +66,7 @@ export const genHeaderStyle: GenerateStyle<HeaderToken> = (
           [`${componentCls}-extra-icon-wrapper`]: {
             width: 28,
             height: 28,
-            lineHeight: 28,
+            lineHeight: '28px',
             textAlign: "center",
             border: "0.88px solid #ced4e1",
             borderRadius: 14,
@@ -75,12 +74,11 @@ export const genHeaderStyle: GenerateStyle<HeaderToken> = (
           [`${componentCls}-extra-user-wrapper`]: {
             height: 28,
             padding: "0 10px",
-            lineHeight: 28,
+            lineHeight: '28px',
             border: "0.88px solid #ced4e1",
             borderRadius: 14,
             [`${componentCls}-extra-user-icon`]: {
               marginRight: 6,
-              marginBottom: -2,
             },
           },
         },
@@ -101,14 +99,13 @@ export const genHeaderStyle: GenerateStyle<HeaderToken> = (
       backgroundColor: "transparent",
       borderBottom: "none",
       [`${componentCls}-extra`]: {
-        "@{prefixCls}-btn": {
+        [`${antCls}-btn`]: {
           color: "#fff",
           backgroundColor: "rgba(255, 255, 255, 0.25)",
           border: "0.5px solid rgba(0, 0, 0, 0.1)",
         },
       },
     },
-
 
     [`${componentCls}-about-wrapper`]: {
       [`${componentCls}-about`]: {

@@ -16,6 +16,9 @@ export default defineConfig({
   },
   extraBabelPresets: [require.resolve('@emotion/babel-preset-css-prop')],
   outputPath: 'site',
+  define: {
+    'process.env.VERCEL_ANALYTICS_ID': process.env.VERCEL_ANALYTICS_ID,
+  },
   analytics: {
     ga_v2: 'G-81Y5XPZY2E',
   },

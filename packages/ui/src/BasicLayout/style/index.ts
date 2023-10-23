@@ -16,82 +16,24 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
     colorBorder,
     colorPrimaryBorder,
     colorPrimary,
+    motionDurationSlow,
   } = token;
-  debugger
   const maxWidth = '8192px'
 
-  return {
-    // 弹出菜单样式
-    [`${antCls}-menu-submenu-popup`]: {
-      [`${antCls}-menu`]: {
-        paddingLeft: '6px !important',
-        backgroundColor: `${colorBgLayout} !important`,
-        [`${antCls}-menu-item`]: {
-          width: '100%',
-          backgroundColor: 'transparent',
-          border: 'none',
-          marginInline: 0,
-          '&:not(:last-child):': {
-            marginBottom: '8px !important',
-          }
-        },
-        [`${antCls}-menu-submenu`]: {
-          width: '100%',
-          backgroundColor: 'transparent',
-          border: 'none',
-          marginInline: 0,
-          '&:not(:last-child):': {
-            marginBottom: '8px !important',
-          }
-        },
-        [`${antCls}-menu-item-active`]: {
-          color: 'colorText !important',
-          fontWeight: 600,
-          animation: 'activeGradientAnimation 0.1s',
-          // .border-gradient(linear-gradient(to right, #E9EDF6, colorBgLayout), linear-gradient(90deg, #C6CDD9, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
-          backgroundImage: `linear-gradient(to right, #E9EDF6, ${colorBgLayout}), linear-gradient(90deg, #C6CDD9, ${colorBgLayout})`,
-          backgroundClip: 'padding-box,border-box',
-          backgroundOrigin: 'padding-box,border-box',
-          border: '.5px solid transparent',
-          borderRadius: '8px 0 0 8px',
-          transition: 'border-width .3s'
+  const siderWidthList = [0, 52, 52 * 2, 192, 208];
 
-
-
-        },
-        [`${antCls}-menu-submenu-active > & ${antCls}-menu-submenu-title`]: {
-          color: 'colorText !important',
-          fontWeight: 600,
-          animation: 'activeGradientAnimation 0.1s',
-          // .border-gradient(linear-gradient(to right, #E9EDF6, colorBgLayout), linear-gradient(90deg, #C6CDD9, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
-          backgroundImage: `linear-gradient(to right, #E9EDF6, ${colorBgLayout}), linear-gradient(90deg, #C6CDD9, ${colorBgLayout})`,
-          backgroundClip: 'padding-box,border-box',
-          backgroundOrigin: 'padding-box,border-box',
-          border: '.5px solid transparent',
-          borderRadius: '8px 0 0 8px',
-          transition: 'border-width .3s'
-        },
-
-        [`${antCls}-menu-item-selected`]: {
-          color: `${colorPrimary} !important`,
-          fontWeight: 600,
-          animation: 'selectedGradientAnimation 0.1s',
-          // .border-gradient(linear-gradient(to right, #E5EEFF, #F4F8FF), linear-gradient(90deg, @colorPrimaryBorder, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
-          backgroundImage: `linear-gradient(to right,#E5EEFF,#F4F8FF),linear-gradient(90deg,${colorPrimaryBorder},${colorBgLayout})`,
-          backgroundClip: 'padding-box,border-box',
-          backgroundOrigin: 'padding-box,border-box',
-          border: '.5px solid transparent',
-          borderRadius: '8px 0 0 8px',
-          transition: 'border-width .3s'
-        },
-        [`${antCls}-divider`]: {
-          width: "'60%'",
-          minWidth: '60%',
-          margin: '0 0 8px 16px !important'
-        },
+  const footerBarStyle: CSSObject = {};
+  siderWidthList.forEach(width => {
+    footerBarStyle[`${componentCls}${componentCls}-sider-${width}`] = {
+      [`${proComponentsCls}-footer-bar`]: {
+        // footer bar width adapt to sider width of BasicLayout
+        width: width === 0 ? '100%' : `calc(100% - ${width}px - 24px)`,
+        transition: `width ${motionDurationSlow}`,
       },
-    },
+    };
+  });
 
+  return {
     [`${componentCls}-banner-wrapper`]: {
       position: 'fixed',
       top: 0,
@@ -99,11 +41,24 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
       width: '100%'
     },
 
+    // 对于 Alert 类型的 banner，自动增加上间距
+    // 对于其他类型的 banner，需要业务侧自行设置上间距
+    [`${componentCls}-with-banner`]: {
+      marginTop: '38px',
+    },
+
+    ...footerBarStyle,
 
     [`${componentCls}`]: {
       height: '100%',
       backgroundColor: colorBgLayout,
       transition: 'all 0.1s',
+      // Set style of PageContainer in BasicLayout
+      [`${proComponentsCls}-page-container`]: {
+        // 48px is the height of BasicLayout header
+        minHeight: 'calc(100vh - 48px)',
+      },
+
       [`${componentCls}-content-layout`]: {
         maxWidth: maxWidth,
         // 居中对齐
@@ -419,6 +374,13 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
     },
 
     [`@media (min-width: ${maxWidth})`]: {
+      [`${componentCls}`]: {
+        [`${componentCls}-content-layout`]: {
+          [`${componentCls}-sider`]: {
+            paddingLeft: 0
+          }
+        }
+      },
       [`${proComponentsCls}-footer-bar`]: {
         right: `calc((100% - ${maxWidth}) / 2 + 24px)`,
         width: `calc(${maxWidth} - 192px - 24px - 24px)`,
@@ -426,21 +388,76 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
       }
     },
 
-    // 对于 Alert 类型的 banner，自动增加上间距
-    // 对于其他类型的 banner，需要业务侧自行设置上间距
-    [`${componentCls}-with-banner`]: {
-      marginTop: '38px',
-    },
-
-    [`@media (min-width: ${maxWidth})`]: {
-      [`${componentCls}`]: {
-        [`${componentCls}-content-layout`]: {
-          [`${componentCls}-sider`]: {
-            paddingLeft: 0
+    // 弹出菜单样式
+    [`${antCls}-menu-submenu-popup`]: {
+      [`${antCls}-menu`]: {
+        paddingLeft: '6px !important',
+        backgroundColor: `${colorBgLayout} !important`,
+        [`${antCls}-menu-item`]: {
+          width: '100%',
+          backgroundColor: 'transparent',
+          border: 'none',
+          marginInline: 0,
+          '&:not(:last-child):': {
+            marginBottom: '8px !important',
           }
-        }
-      }
-    }
+        },
+        [`${antCls}-menu-submenu`]: {
+          width: '100%',
+          backgroundColor: 'transparent',
+          border: 'none',
+          marginInline: 0,
+          '&:not(:last-child):': {
+            marginBottom: '8px !important',
+          }
+        },
+        [`${antCls}-menu-item-active`]: {
+          color: 'colorText !important',
+          fontWeight: 600,
+          animation: 'activeGradientAnimation 0.1s',
+          // .border-gradient(linear-gradient(to right, #E9EDF6, colorBgLayout), linear-gradient(90deg, #C6CDD9, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
+          backgroundImage: `linear-gradient(to right, #E9EDF6, ${colorBgLayout}), linear-gradient(90deg, #C6CDD9, ${colorBgLayout})`,
+          backgroundClip: 'padding-box,border-box',
+          backgroundOrigin: 'padding-box,border-box',
+          border: '.5px solid transparent',
+          borderRadius: '8px 0 0 8px',
+          transition: 'border-width .3s'
+
+
+
+        },
+        [`${antCls}-menu-submenu-active > & ${antCls}-menu-submenu-title`]: {
+          color: 'colorText !important',
+          fontWeight: 600,
+          animation: 'activeGradientAnimation 0.1s',
+          // .border-gradient(linear-gradient(to right, #E9EDF6, colorBgLayout), linear-gradient(90deg, #C6CDD9, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
+          backgroundImage: `linear-gradient(to right, #E9EDF6, ${colorBgLayout}), linear-gradient(90deg, #C6CDD9, ${colorBgLayout})`,
+          backgroundClip: 'padding-box,border-box',
+          backgroundOrigin: 'padding-box,border-box',
+          border: '.5px solid transparent',
+          borderRadius: '8px 0 0 8px',
+          transition: 'border-width .3s'
+        },
+
+        [`${antCls}-menu-item-selected`]: {
+          color: `${colorPrimary} !important`,
+          fontWeight: 600,
+          animation: 'selectedGradientAnimation 0.1s',
+          // .border-gradient(linear-gradient(to right, #E5EEFF, #F4F8FF), linear-gradient(90deg, @colorPrimaryBorder, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
+          backgroundImage: `linear-gradient(to right,#E5EEFF,#F4F8FF),linear-gradient(90deg,${colorPrimaryBorder},${colorBgLayout})`,
+          backgroundClip: 'padding-box,border-box',
+          backgroundOrigin: 'padding-box,border-box',
+          border: '.5px solid transparent',
+          borderRadius: '8px 0 0 8px',
+          transition: 'border-width .3s'
+        },
+        [`${antCls}-divider`]: {
+          width: "'60%'",
+          minWidth: '60%',
+          margin: '0 0 8px 16px !important'
+        },
+      },
+    },
   };
 }
 

@@ -14,6 +14,8 @@ nav:
 
 <code src="./demo/basic.tsx" title="基本"></code>
 
+<code src="./demo/bordered.tsx" title="带边框" description="添加表格边框线"></code>
+
 <code src="./demo/fixed-columns-header-tables.tsx" title="固定头和列"></code>
 
 <code src="./demo/multiple-tables.tsx" title="选择和操作"></code>
@@ -23,6 +25,8 @@ nav:
 <code src="./demo/multiple-nesting-tables.tsx" title="可选择的嵌套子表格"></code>
 
 <code src="./demo/ellipsis.tsx" title="单元格自动省略" description="设置 `column.ellipsis` 可以让单元格内容根据宽度自动省略，并使用 Tooltip 展示全部内容。`说明`: 列头缩略暂不支持和排序筛选一起使用。"></code>
+
+<code src="./demo/edit-row.tsx" title="可编辑行" description="带行编辑功能的表格。"></code>
 
 <code src="./demo/dynamic-settings.tsx" title="动态控制表格属性" description="选择不同配置组合查看效果。"></code>
 

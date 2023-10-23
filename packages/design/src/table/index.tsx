@@ -68,7 +68,7 @@ function Table<T>(props: TableProps<T>) {
   const [currentSelectedRows, setCurrentSelectedRows] = useState<any[]>([]);
   const [currentSelectedInfo, setCurrentSelectedInfo] = useState<any>({});
 
-  const newColumns = columns.map(item => {
+  const newColumns = columns?.map(item => {
     if (item.ellipsis) {
       return {
         ...item,

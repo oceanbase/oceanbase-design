@@ -8,7 +8,6 @@ const _ = require('lodash');
 const chalk = require('chalk');
 const isGitClean = require('is-git-clean');
 const updateCheck = require('update-check');
-const findUp = require('find-up');
 const semver = require('semver');
 const { run: jscodeshift } = require('jscodeshift/src/Runner');
 const execa = require('execa');
@@ -286,7 +285,7 @@ async function bootstrap() {
     console.log('[Prettier] format files running...');
     try {
       const isDir = isDirectory.sync(dir);
-      const path = isDir ? '**/*.{js,jsx,tsx,ts,d.ts}' : dir;
+      const path = isDir ? path.join(dir, '**/*.{js,jsx,ts,tsx,d.ts}') : dir;
       const npxCommand = commandExistsSync('tnpx') ? 'tnpx' : 'npx';
       await execa(npxCommand, ['prettier', '--write', path], { stdio: 'inherit' });
       console.log('\n[Prettier] format files completed!\n');

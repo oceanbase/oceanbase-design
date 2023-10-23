@@ -4,28 +4,27 @@ import {
   CopyrightOutlined,
   ReadFilled,
   UserOutlined,
+  UserFilled,
 } from '@oceanbase/icons';
 import { ConfigProvider, Button, Dropdown, Menu, Modal, Space, Tooltip } from '@oceanbase/design';
 import classNames from 'classnames';
 import moment from 'moment';
-import React, { useState,useContext } from 'react';
-import { OB_SITE_LINK } from '../../constant';
-import type { Locale } from '../../interface';
-import type { LocaleWrapperProps } from '../../locale/LocaleWrapper';
-import LocaleWrapper from '../../locale/LocaleWrapper';
-import { directTo, getPrefix } from '../../_util';
-import useNavigate from '../../_util/useNavigate';
-import zhCN from '../locale/zh-CN';
-// @ts-ignore
-import logoImg from '../../assets/logo/oceanbase_logo.svg';
-// @ts-ignore
-import logoImgDark from '../../assets/logo/oceanbase_logo_dark.svg';
+import React, { useState, useContext } from 'react';
+import { OB_SITE_LINK } from '../constant';
+import type { Locale } from '../interface';
+import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
+import LocaleWrapper from '../locale/LocaleWrapper';
+import { directTo } from '../_util';
+import useNavigate from '../_util/useNavigate';
+import zhCN from './locale/zh-CN';
 // @ts-ignore
 // 自定义 SVG 图标需要将其导入为图片，而不能是 ReactComponent，因为需要依赖 webpack 插件
 // 虽然本地开发可以生效，但构建后的产物在上层项目中不会生效，导致 SVG 展示为空
-import UserSvg from '../../assets/user.svg';
-import LocaleDropdown from '../../LocaleDropdown';
-import useStyle from './style';
+import logoImg from '../assets/logo/oceanbase_logo.svg';
+// @ts-ignore
+import logoImgDark from '../assets/logo/oceanbase_logo_dark.svg';
+import LocaleDropdown from '../LocaleDropdown';
+import useStyle from './style/Header';
 
 export type OverlayFunc = () => React.ReactElement;
 
@@ -48,6 +47,7 @@ export interface AppData {
 }
 
 export interface HeaderProps extends LocaleWrapperProps {
+  prefixCls?: string;
   // 单是否收起状态  菜单收起状态只展示：icon, 展开状态展示：icon 文字
   showLabel?: boolean;
   style?: React.CSSProperties;
@@ -78,9 +78,8 @@ export interface HeaderProps extends LocaleWrapperProps {
   langs?: Locale[];
 }
 
-const prefix = getPrefix('layout-header');
-
 const Header: React.FC<HeaderProps> = ({
+  prefixCls: customizePrefixCls,
   showLabel = true,
   title,
   extra,
@@ -102,12 +101,12 @@ const Header: React.FC<HeaderProps> = ({
   langs,
   ...restProps
 }) => {
-  const { theme } = useContext(ConfigProvider.ConfigContext);
+  const { theme, getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('pro-basic-layout-header', `${customizePrefixCls}-header`);
+  const { wrapSSR } = useStyle(prefixCls);
+
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
-
-  const prefixCls = getPrefix('layout-header');
-  const { wrapSSR } = useStyle(prefixCls);
 
   // 是否为欢迎页
   // 主要是为了处理与欢迎页搭配使用的场景
@@ -143,27 +142,27 @@ const Header: React.FC<HeaderProps> = ({
   return wrapSSR(
     <div
       {...restProps}
-      className={classNames(`${prefix}`, {
-        [`${prefix}-welcome`]: isWelcome,
+      className={classNames(prefixCls, {
+        [`${prefixCls}-welcome`]: isWelcome,
       })}
     >
-      <div className={`${prefix}-content`}>
+      <div className={`${prefixCls}-content`}>
         <img
           src={simpleLogoUrl}
           alt=""
           onClick={() => {
             navigate?.('/');
           }}
-          className={`${prefix}-logo`}
+          className={`${prefixCls}-logo`}
         />
 
-        {title && <div className={`${prefix}-title`}>{title}</div>}
+        {title && <div className={`${prefixCls}-title`}>{title}</div>}
         {showLabel ? (
-          <div className={`${prefix}-extra ${prefix}-extra-with-label`}>
+          <div className={`${prefixCls}-extra ${prefixCls}-extra-with-label`}>
             {extra}
             {showHelp && (
               <Dropdown overlay={helpMenu}>
-                <Space className={`${prefix}-extra-item`}>
+                <Space className={`${prefixCls}-extra-item`}>
                   <BulbOutlined />
                   <span data-testid="help">{locale.help}</span>
                 </Space>
@@ -171,7 +170,7 @@ const Header: React.FC<HeaderProps> = ({
             )}
 
             {showLocale && (
-              <span className={`${prefix}-extra-item`}>
+              <span className={`${prefixCls}-extra-item`}>
                 <LocaleDropdown locales={locales || langs} />
               </span>
             )}
@@ -179,7 +178,7 @@ const Header: React.FC<HeaderProps> = ({
             {userMenu ? (
               <Dropdown overlay={userMenu}>
                 <Button shape="round" size="small">
-                  <Space className={`${prefix}-extra-item`}>
+                  <Space className={`${prefixCls}-extra-item`}>
                     <UserOutlined />
                     <span>{username}</span>
                   </Space>
@@ -190,7 +189,7 @@ const Header: React.FC<HeaderProps> = ({
               <>
                 {username ? (
                   <Button shape="round" size="small">
-                    <Space className={`${prefix}-extra-item`}>
+                    <Space className={`${prefixCls}-extra-item`}>
                       <UserOutlined />
                       <span>{username}</span>
                     </Space>
@@ -200,10 +199,10 @@ const Header: React.FC<HeaderProps> = ({
             )}
           </div>
         ) : (
-          <div className={`${prefix}-extra`}>
-            <span className={`${prefix}-extra-item`}>
+          <div className={`${prefixCls}-extra`}>
+            <span className={`${prefixCls}-extra-item`}>
               <Dropdown overlay={helpMenu}>
-                <span className={`${prefix}-extra-icon-wrapper`}>
+                <span className={`${prefixCls}-extra-icon-wrapper`}>
                   <BulbFilled />
                 </span>
               </Dropdown>
@@ -211,12 +210,12 @@ const Header: React.FC<HeaderProps> = ({
             {docsPath && (
               <Tooltip title={locale.viewDocs}>
                 <span
-                  className={`${prefix}-extra-item`}
+                  className={`${prefixCls}-extra-item`}
                   onClick={() => {
                     directTo(docsPath);
                   }}
                 >
-                  <span className={`${prefix}-extra-icon-wrapper`}>
+                  <span className={`${prefixCls}-extra-icon-wrapper`}>
                     <ReadFilled />
                   </span>
                 </span>
@@ -224,36 +223,24 @@ const Header: React.FC<HeaderProps> = ({
             )}
 
             {showLocale && (
-              <span className={`${prefix}-extra-item`}>
+              <span className={`${prefixCls}-extra-item`}>
                 <LocaleDropdown showLabel={true} locales={locales || langs} />
               </span>
             )}
 
             {userMenu ? (
-              <span className={`${prefix}-extra-item`}>
+              <span className={`${prefixCls}-extra-item`}>
                 <Dropdown overlay={userMenu}>
-                  <span className={`${prefix}-extra-user-wrapper`}>
-                    <img
-                      src={UserSvg}
-                      alt=""
-                      className={`${prefix}-extra-user-icon`}
-                      style={{ height: 12 }}
-                    />
-
-                    <span className={`${prefix}-extra-username`}>{username}</span>
+                  <span className={`${prefixCls}-extra-user-wrapper`}>
+                    <UserFilled className={`${prefixCls}-extra-user-icon`} />
+                    <span className={`${prefixCls}-extra-username`}>{username}</span>
                   </span>
                 </Dropdown>
               </span>
             ) : (
-              <span className={`${prefix}-extra-item`}>
-                <span className={`${prefix}-extra-user-wrapper`}>
-                  <img
-                    src={UserSvg}
-                    alt=""
-                    className={`${prefix}-extra-user-icon`}
-                    style={{ height: 12 }}
-                  />
-
+              <span className={`${prefixCls}-extra-item`}>
+                <span className={`${prefixCls}-extra-user-wrapper`}>
+                  <UserFilled className={`${prefixCls}-extra-user-icon`} />
                   <span>{username}</span>
                 </span>
               </span>
@@ -271,15 +258,15 @@ const Header: React.FC<HeaderProps> = ({
           setVisible(false);
         }}
       >
-        <div className={`${prefix}-about-wrapper`}>
-          <div className={`${prefix}-about`}>
-            <img src={logoUrl} alt="" className={`${prefix}-logo`} />
-            <div className={`${prefix}-release-info`}>
-              <div className={`${prefix}-version`}>
+        <div className={`${prefixCls}-about-wrapper`}>
+          <div className={`${prefixCls}-about`}>
+            <img src={logoUrl} alt="" className={`${prefixCls}-logo`} />
+            <div className={`${prefixCls}-release-info`}>
+              <div className={`${prefixCls}-version`}>
                 {locale.version}: {appData.version}
               </div>
               {appData.releaseTime && (
-                <div className={`${prefix}-date`}>
+                <div className={`${prefixCls}-date`}>
                   {`${locale.releaseTime}: ${appData.releaseTime}`}
                 </div>
               )}
@@ -293,7 +280,7 @@ const Header: React.FC<HeaderProps> = ({
               <div
                 style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
               >
-                <span className={`${prefix}-copyright`}>
+                <span className={`${prefixCls}-copyright`}>
                   {locale.right} <CopyrightOutlined /> {moment().year()} {locale.company}
                 </span>
                 <img src={theme.isDark ? logoImgDark : logoImg} alt="" style={{ height: 12 }} />

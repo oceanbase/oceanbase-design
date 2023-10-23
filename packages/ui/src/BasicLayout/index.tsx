@@ -11,7 +11,7 @@ import { pathToRegexp } from 'path-to-regexp';
 import React, { useEffect, useState, useContext } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix, isEnglish, urlToList } from '../_util';
+import { isEnglish, urlToList } from '../_util';
 import useNavigate from '../_util/useNavigate';
 import type { HeaderProps } from './Header';
 import Header from './Header';
@@ -73,8 +73,6 @@ export interface BasicLayoutProps extends LocaleWrapperProps {
   style?: React.CSSProperties;
 }
 
-  const prefix = getPrefix('layout');
-
 const BasicLayout: React.FC<BasicLayoutProps> = ({
   children,
   location: { pathname } = {},
@@ -94,16 +92,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   prefixCls: customizePrefixCls,
   ...restProps
 }) => {
-
-  // const prefixCls = getPrefix('layout');
-  // const { wrapSSR, hashId } = useStyle(prefixCls);
-  // const basicLayoutCls = classNames(className);
-  
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('pro-basic-layout', customizePrefixCls);
-  const { wrapSSR, hashId } = useStyle(prefixCls);
-  const basicLayoutCls = classNames(prefixCls, className);
-debugger
+  const { wrapSSR } = useStyle(prefixCls);
   const navigate = useNavigate();
   // 侧边栏导航是否收起
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
@@ -309,14 +300,19 @@ debugger
     <>
       {banner && <div className={`${prefixCls}-banner-wrapper`}>{banner}</div>}
       <Layout
-        className={classNames(prefix, className, basicLayoutCls, {
-          [`${prefix}-with-banner`]: banner,
-          [`${prefixCls}-sider-${siderWidth}`]: true,
-        })}
+        className={classNames(
+          prefixCls,
+          {
+            [`${prefixCls}-with-banner`]: banner,
+            [`${prefixCls}-sider-${siderWidth}`]: true,
+          },
+          className
+        )}
         {...restProps}
       >
         <React.Fragment>
           <Header
+            prefixCls={prefixCls}
             pathname={pathname}
             iconUrl={iconUrl}
             logoUrl={logoUrl}
