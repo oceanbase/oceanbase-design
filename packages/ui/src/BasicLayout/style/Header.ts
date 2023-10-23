@@ -91,20 +91,6 @@ export const genHeaderStyle: GenerateStyle<HeaderToken> = (
           }
         }
       },
-
-    },
-
-    [`${componentCls}-welcome`]: {
-      color: "#fff",
-      backgroundColor: "transparent",
-      borderBottom: "none",
-      [`${componentCls}-extra`]: {
-        [`${antCls}-btn`]: {
-          color: "#fff",
-          backgroundColor: "rgba(255, 255, 255, 0.25)",
-          border: "0.5px solid rgba(0, 0, 0, 0.1)",
-        },
-      },
     },
 
     [`${componentCls}-about-wrapper`]: {

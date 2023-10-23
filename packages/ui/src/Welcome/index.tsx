@@ -149,7 +149,13 @@ const Welcome: React.FC<WelcomeProps> = ({
             {isDefault && (
               <Col span={24}>
                 <div className={`${prefix}-btn-wrapper`}>
-                  <Button type="primary" icon={<PlusOutlined />} block={true} {...buttonProps}>
+                  <Button
+                    size="large"
+                    type="primary"
+                    icon={<PlusOutlined />}
+                    block={true}
+                    {...buttonProps}
+                  >
                     {buttonText}
                   </Button>
                 </div>

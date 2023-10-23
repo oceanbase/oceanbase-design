@@ -5,8 +5,7 @@
 .@{prefix}-container {
   height: 100%;
   padding-bottom: 0 !important;
-  overflow: auto;
-  background-color: #fff;
+  background-color: @colorBgContainer;
 
   .tech-page-container-content {
     // 由于 umi 的本地开发和线上打包的 CSS 样式优先级不一致，导致下列样式在线上环境不生效，因此先加上 !important
@@ -18,7 +17,7 @@
     height: 272px;
     padding-top: 72px;
     padding-left: 100px;
-    color: #fff;
+    color: @colorBgContainer;
     background-repeat: no-repeat;
     background-size: 100% 100%;
 
@@ -145,7 +144,7 @@
   // margin-right: 30px;
   margin-bottom: 30px;
   padding: 20px 30px 20px 0;
-  background: #fff;
+  background: @colorBgContainer;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 2px;
 
@@ -175,7 +174,7 @@
   }
 
   .@{prefix}-step-operations {
-    color: #0090ff;
+    color: @colorPrimary;
     font-size: 14px;
     line-height: 22px;
   }
