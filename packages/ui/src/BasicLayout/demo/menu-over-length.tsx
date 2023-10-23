@@ -18,7 +18,7 @@ export default () => {
     },
     {
       link: '/~demos/basiclayout-demo-basic/tenant',
-      title: '租户管理',
+      title: '租户管理租户管理租户管理租户管理',
       icon: <IconFont type="tenant" />,
       selectedIcon: <Lottie path="/lottie/tenant.json" mode="icon" loop={false} speed={3} />,
     },
@@ -30,7 +30,7 @@ export default () => {
     },
     {
       link: '/~demos/basiclayout-demo-basic/diagnosis',
-      title: '诊断中心',
+      title: '诊断中心诊断中心诊断中心诊断中心',
       icon: <IconFont type="diagnosis" />,
       selectedIcon: <Lottie path="/lottie/diagnosis.json" mode="icon" loop={false} speed={3} />,
       children: [
