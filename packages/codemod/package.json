@@ -33,7 +33,7 @@
     "jscodeshift": "^0.15.0",
     "lodash": "^4.17.21",
     "prettier": "^3.0.3",
-    "read-pkg-up": "^9.1.0",
+    "read-pkg-up": "^10.1.0",
     "semver": "^7.5.4",
     "update-check": "^1.5.4",
     "yargs-parser": "^21.1.1"
