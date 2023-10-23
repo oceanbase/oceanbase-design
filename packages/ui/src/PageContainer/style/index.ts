@@ -62,7 +62,7 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         },
       },
       // 减小内容区左右两侧间距
-      [`${componentCls}-warp-page-header`]: {
+      [`${antCls}-page-header`]: {
         paddingInlineStart: paddingLG,
         paddingInlineEnd: paddingLG,
         paddingBlockStart: padding,
@@ -72,6 +72,12 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         paddingInline: paddingLG,
         paddingBlockStart: 0,
         paddingBlockEnd: paddingLG,
+      },
+      // remove paddingBlockStart for page header without breadcrumb
+      [`${antCls}-page-header:not(${antCls}-page-header-has-breadcrumb)`]: {
+        [`${antCls}-page-header-heading`]: {
+          paddingBlockStart: 0,
+        },
       },
     },
     [`${componentCls}-no-page-header`]: {
