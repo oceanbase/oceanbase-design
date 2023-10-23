@@ -73,6 +73,12 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         paddingBlockStart: 0,
         paddingBlockEnd: paddingLG,
       },
+      // remove paddingBlockStart for page header without breadcrumb
+      [`${antCls}-page-header:not(${antCls}-page-header-has-breadcrumb)`]: {
+        [`${antCls}-page-header-heading`]: {
+          paddingBlockStart: 0,
+        },
+      },
     },
     [`${componentCls}-no-page-header`]: {
       [`${componentCls}-children-container`]: {
