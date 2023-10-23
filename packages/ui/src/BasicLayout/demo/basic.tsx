@@ -18,7 +18,7 @@ export default () => {
     },
     {
       link: '/~demos/basiclayout-demo-basic/tenant',
-      title: '租户管理',
+      title: '租户管理租户管理租户管理租户管理',
       icon: <IconFont type="tenant" />,
       selectedIcon: <Lottie path="/lottie/tenant.json" mode="icon" loop={false} speed={3} />,
     },
