@@ -133,3 +133,102 @@ import utils and hooks from `@alipay/ob-util` to `@oceanbase/util`. Additionally
 
   export default Demo;
 ```
+
+### `style-to-token`
+
+transform fixed css style to antd v5 design token.
+
+- React function components:
+
+```diff
+  import React from 'react';
+- import { Alert, Button } from '@oceanbase/design';
++ import { Alert, Button, theme } from '@oceanbase/design';
+
+  const Demo = () => {
++   const { token } = theme.useToken();
+    return (
+-     <div>
+-       <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', borderColor: '#fafafa' }} />
+-       <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4D4F' }}></Button>
+-     </div>
++     (<div>
++       <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, borderColor: token.colorBgLayout }} />
++       <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
++     </div>)
+    );
+  };
+
+export default Demo;
+```
+
+- React class components:
+
+```diff
+  import React from 'react';
+- import { Alert, Button } from '@oceanbase/design';
++ import { Alert, Button, token } from '@oceanbase/design';
+
+  class Demo extends React.PureComponent {
+    constructor(props) {
+      super(props);
+      this.state = {};
+    }
+
+    render() {
+      return (
+-       <div>
+-         <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', borderColor: '#fafafa' }} />
+-         <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4D4F' }}></Button>
+-       </div>
++       (<div>
++         <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, borderColor: token.colorBgLayout }} />
++         <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
++       </div>)
+      );
+    }
+  }
+
+  export default Demo;
+```
+
+- Static file (not react components):
+
+```diff
++ import { token } from '@oceanbase/design';
+  const colorMap = {
+-   info: '#1890ff',
+-   success: '#52c41a',
+-   warning: '#faad14',
+-   error: '#ff4D4F',
++   info: token.colorInfo,
++   success: token.colorSuccess,
++   warning: token.colorWarning,
++   error: token.colorError,
+  };
+
+  function getColorList() {
+    return [
+      {
+        type: 'info',
+-       color: '#1890ff',
++       color: token.colorInfo,
+      },
+      {
+        type: 'success',
+-       color: '#52c41a',
++       color: token.colorSuccess,
+      },
+      {
+        type: 'warning',
+-       color: '#faad14',
++       color: token.colorWarning,
+      },
+      {
+        type: 'error',
+-       color: '#ff4D4F',
++       color: token.colorError,
+      }
+    ];
+  }
+```

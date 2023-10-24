@@ -30,6 +30,7 @@ const transformers = [
   'obui-to-oceanbase-design-and-ui',
   'obutil-to-oceanbase-util',
   'page-container-to-oceanbase-ui',
+  'style-to-token',
 ];
 
 const dependencyProperties = [
