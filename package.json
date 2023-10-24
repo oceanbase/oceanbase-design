@@ -119,5 +119,5 @@
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
-  "repository": "git@github.com:oceanbase/design.git"
+  "repository": "git@github.com:oceanbase/oceanbase-design.git"
 }
