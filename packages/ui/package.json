@@ -12,7 +12,7 @@
   "homepage": "https://github.com/oceanbase/oceanbase-design/packages/ui",
   "repository": {
     "type": "git",
-    "url": "git@github.com:oceanbase/design.git"
+    "url": "git@github.com:oceanbase/oceanbase-design.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
