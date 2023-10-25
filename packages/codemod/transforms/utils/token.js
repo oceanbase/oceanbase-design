@@ -35,16 +35,28 @@ const TOKEN_MAP = {
   '#F8FAFE': 'colorFillQuaternary',
 };
 
-function trimAll(str) {
-  return str?.replace(/(\s)*/g, '');
+const TOKEN_MAP_KEYS = Object.keys(TOKEN_MAP);
+
+function customTrim(str) {
+  return str?.replace(/(\s)*([,\(\)])(\s)*/g, '$2');
 }
 
 function formatValue(value) {
-  return trimAll(toLower(value));
+  return customTrim(toLower(value));
+}
+
+function tokenParse(value) {
+  const formattedValue = formatValue(value);
+  const key = TOKEN_MAP_KEYS.find(item => formattedValue.includes(item));
+  return {
+    key,
+    token: TOKEN_MAP[key],
+    formattedValue,
+  };
 }
 
 module.exports = {
   TOKEN_MAP,
-  trimAll,
-  formatValue,
+  TOKEN_MAP_KEYS,
+  tokenParse,
 };

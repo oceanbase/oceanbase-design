@@ -4,6 +4,7 @@ const colorMap = {
   success: token.colorSuccess,
   warning: token.colorWarning,
   error: token.colorError,
+  border: `1px solid ${token.colorBorder}`,
 };
 
 function getColorList() {
@@ -23,6 +24,10 @@ function getColorList() {
     {
       type: 'error',
       color: token.colorError,
-    }
+    },
+    {
+      type: 'border',
+      color: `1px solid ${token.colorBorder}`,
+    },
   ];
 }

@@ -1,20 +1,35 @@
 const { addSubmoduleImport } = require('./utils');
-const { TOKEN_MAP, formatValue } = require('./utils/token');
+const { tokenParse } = require('./utils/token');
 const { printOptions } = require('./utils/config');
 
 function importComponent(j, root, options) {
   let hasChanged = false;
 
   const stringList = root.find(j.StringLiteral, {
-    value: value => TOKEN_MAP[formatValue(value)],
+    value: value => {
+      const { token } = tokenParse(value);
+      return !!token;
+    },
   });
   if (stringList.length > 0) {
-    // replace inline style to token
+    // replace fixed style to token
     stringList.replaceWith(path => {
       hasChanged = true;
-      const stringValue = path.value.value;
-      const mapToken = TOKEN_MAP[formatValue(stringValue)];
-      return j.identifier(`token.${mapToken}`);
+      const { key, token, formattedValue } = tokenParse(path.value.value);
+      return formattedValue === key
+        ? j.identifier(`token.${token}`)
+        : j.templateLiteral(
+            [
+              j.templateElement(
+                {
+                  raw: formattedValue.replace(key, `\${token.${token}}`),
+                  cooked: formattedValue.replace(key, `\${token.${token}}`),
+                },
+                true
+              ),
+            ],
+            []
+          );
     });
 
     root.find(j.BlockStatement).forEach(path => {
