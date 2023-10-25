@@ -4,6 +4,10 @@ A collection of codemod scripts that help migrate to OceanBase Design using [jsc
 
 [![NPM version](https://img.shields.io/npm/v/@oceanbase/codemod.svg?style=flat)](https://npmjs.org/package/@oceanbase/codemod) [![NPM downloads](http://img.shields.io/npm/dm/@oceanbase/codemod.svg?style=flat)](https://npmjs.org/package/@oceanbase/codemod) [![Github Action](https://github.com/oceanbase/oceanbase-design/actions/workflows/ci.yml/badge.svg)](https://github.com/oceanbase/oceanbase-design/actions/workflows/ci.yml)
 
+## Prerequisite
+
+- antd v5 is the prerequisite. If you are using antd v4, please refer to [Upgrade Guideline](https://ant-design.antgroup.com/docs/react/migration-v5).
+
 ## Usage
 
 Before run codemod scripts, you'd better make sure to commit your local git changes firstly.
@@ -136,7 +140,7 @@ import utils and hooks from `@alipay/ob-util` to `@oceanbase/util`. Additionally
 
 ### `style-to-token`
 
-transform fixed css style to antd v5 design token.
+transform fixed style to antd v5 design token.
 
 - React function components:
 
@@ -231,4 +235,32 @@ export default Demo;
       }
     ];
   }
+```
+
+### `less-to-token`
+
+transform less style to antd v5 design token.
+
+```diff
++ @import '~@oceanbase/design/es/theme/index.less';
+  .container {
+-   color: #1890ff;
++   color: @colorInfo;
+-   background: #52c41a;
++   background: @colorSuccess;
+-   background-color: #faad14;
++   background-color: @colorWarning;
+-   border-color: #ff4D4F;
++   border-color: @colorError;
+    .content {
+-     color: rgba(0, 0, 0, 0.85);
++     color: @colorText;
+-     background: rgba(0, 0, 0,0.65);
++     background: @colorTextSecondary;
+-     background-color: rgba(0,0,0,0.45);
++     background-color: @colorTextTertiary;
+-     border: 1px solid #d9d9d9;
++     border: 1px solid @colorBorder;
+    }
+}
 ```

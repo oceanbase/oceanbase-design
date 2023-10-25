@@ -3,7 +3,7 @@ const fs = require('fs');
 const postcss = require('postcss');
 const postcssLess = require('postcss-less');
 const isDirectory = require('is-directory');
-const { TOKEN_MAP, formatValue } = require('./utils/token');
+const { TOKEN_MAP, TOKEN_MAP_KEYS, formatValue } = require('./utils/token');
 
 /**
  * 搜索目录下所有的less文件
@@ -51,8 +51,11 @@ async function transform(file) {
   let tokenLessImported = false;
   // 遍历 AST
   ast.walk(node => {
-    if (node.type === 'decl' && TOKEN_MAP[formatValue(node.value)]) {
-      node.value = `@${TOKEN_MAP[formatValue(node.value)]}`;
+    const formattedValue = formatValue(node.value);
+    const key = TOKEN_MAP_KEYS.find(key => formattedValue.includes(key));
+    const token = TOKEN_MAP[key];
+    if (node.type === 'decl' && token) {
+      node.value = formattedValue.replace(key, `@${token}`);
       modified = true;
     } else if (node.type === 'atrule' && node.name === 'import') {
       if (node.params === "'~@oceanbase/design/es/theme/index.less'") {
