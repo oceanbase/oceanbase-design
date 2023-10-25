@@ -18,7 +18,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
     colorPrimary,
     motionDurationSlow,
   } = token;
-  const maxWidth = '8192px'
+  const maxWidth = '8192px';
 
   const siderWidthList = [0, 52, 52 * 2, 192, 208];
 
@@ -38,7 +38,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
       position: 'fixed',
       top: 0,
       zIndex: 20,
-      width: '100%'
+      width: '100%',
     },
 
     // 对于 Alert 类型的 banner，自动增加上间距
@@ -94,7 +94,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               [`${componentCls}-sider-collapse`]: {
                 opacity: 1,
                 transition: 'opacity 0.3s',
-              }
+              },
             },
 
             [`${componentCls}-sider-collapse`]: {
@@ -116,9 +116,9 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               ['.anticon']: {
                 fontSize: 'px',
                 display: 'block',
-                lineHeight: '42px'
-              }
-            }
+                lineHeight: '42px',
+              },
+            },
           },
 
           [`${componentCls}-sider-wrapper`]: {
@@ -142,7 +142,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
                   width: '18px',
                   height: '18px',
                   fontSize: '18px',
-                }
+                },
               },
               [`${antCls}-menu-submenu`]: {
                 width: '100%',
@@ -156,14 +156,14 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
                   width: '18px',
                   height: '18px',
                   fontSize: '18px',
-                }
+                },
               },
               [`${antCls}-menu-submenu > ${antCls}-menu-submenu-title`]: {
                 width: '100%',
                 marginBottom: '4px !important',
                 marginInline: 0,
                 marginBlock: 0,
-              }
+              },
             },
             // 内嵌菜单样式
             [`${antCls}-menu-inline`]: {
@@ -173,47 +173,48 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
                   marginBottom: '16px',
                   // 子菜单展开时 marginBottom 会变小，为了避免效果突兀，增加过渡效果
                   transition: 'marginBottom 0.2s',
-                }
+                },
               },
               [`${antCls}-menu-submenu-open`]: {
                 '&:not(:last-childantCls)': {
                   // 子菜单展开时，减小 marginBottom
                   marginBottom: 4,
-                }
+                },
               },
               // 子菜单项间距
               [`${antCls}-menu-submenu`]: {
                 [`${antCls}-menu-item:not(:last-child)`]: {
                   marginBottom: 4,
-                }
+                },
               },
               // 菜单项缩进
               [`${antCls}-menu-item, ${antCls}-menu-submenu > ${antCls}-menu-submenu-title`]: {
                 paddingLeft: '16px !important',
                 [`${antCls}-menu-title-content`]: {
-                  width: '108px'
-                }
+                  width: '108px',
+                },
               },
               // 子菜单项缩进
               [`${antCls}-menu-sub`]: {
                 [`${antCls}-menu-item`]: {
                   marginLeft: '16px',
                   paddingLeft: '28px !important',
-                }
+                },
               },
               // 菜单项激活样式
-              [`${antCls}-menu-item-active, ${antCls}-menu-submenu-active > ${antCls}-menu-submenu-title`]: {
-                color: `${colorText} !important`,
-                fontWeight: 600,
-                animation: 'activeGradientAnimation 0.1s',
-                // .border-gradient(linear-gradient(to right, #E9EDF6, @colorBgLayout), linear-gradient(90deg, #C6CDD9, @colorBgLayout), 0.5px, solid, 8px 0 0 8px),
-                backgroundImage: `linear-gradient(to right,#E9EDF6, ${colorBgLayout}),linear-gradient(90deg,#C6CDD9,${colorBgLayout})`,
-                backgroundClip: 'padding-box,border-box',
-                backgroundOrigin: 'padding-box,border-box',
-                border: '.5px solid transparent',
-                borderRadius: '8px 0 0 8px',
-                transition: 'border-width .3s',
-              },
+              [`${antCls}-menu-item-active, ${antCls}-menu-submenu-active > ${antCls}-menu-submenu-title`]:
+                {
+                  color: `${colorText} !important`,
+                  fontWeight: 600,
+                  animation: 'activeGradientAnimation 0.1s',
+                  // .border-gradient(linear-gradient(to right, #E9EDF6, @colorBgLayout), linear-gradient(90deg, #C6CDD9, @colorBgLayout), 0.5px, solid, 8px 0 0 8px),
+                  backgroundImage: `linear-gradient(to right,#E9EDF6, ${colorBgLayout}),linear-gradient(90deg,#C6CDD9,${colorBgLayout})`,
+                  backgroundClip: 'padding-box,border-box',
+                  backgroundOrigin: 'padding-box,border-box',
+                  border: '.5px solid transparent',
+                  borderRadius: '8px 0 0 8px',
+                  transition: 'border-width .3s',
+                },
               // 菜单项选中样式
               [`${antCls}-menu-item-selected`]: {
                 color: `${colorPrimary} !important`,
@@ -230,14 +231,14 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
                   // content: '""',
                   // 去掉菜单项的选中标记
                   display: 'none',
-                }
+                },
               },
               [`${antCls}-menu-submenu-selected > ${antCls}-menu-submenu-title`]: {
                 color: `${colorPrimary} !important`,
               },
               [`${antCls}-divider`]: {
                 margin: '0 0 16px 0',
-              }
+              },
             },
 
             // 垂直菜单样式
@@ -249,7 +250,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               [`${antCls}-menu-item, ${antCls}-menu-submenu`]: {
                 '&:not(:last-child)': {
                   marginBottom: 4,
-                }
+                },
               },
 
               [`${antCls}-menu-item, ${antCls}-menu-submenu > ${antCls}-menu-submenu-title`]: {
@@ -269,34 +270,36 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
 
                 [`${antCls}-menu-submenu-arrow`]: {
                   display: 'none',
-                }
+                },
               },
-              [`${antCls}-menu-item-active, ${antCls}-menu-submenu-active > ${antCls}-menu-submenu-title`]: {
-                [`${antCls}-menu-title-content`]: {
-                  backgroundColor: '#e9edf6',
-                  border: '0.5px solid #c6cdd9',
-                }
-              },
-              [`${antCls}-menu-item-selected, ${antCls}-menu-submenu-selected > ${antCls}-menu-submenu-title`]: {
-                [`${antCls}-menu-title-content`]: {
-                  backgroundColor: '#e5eeff',
-                  border: `0.5px solid ${colorPrimaryBorder}`,
-                }
-              }
+              [`${antCls}-menu-item-active, ${antCls}-menu-submenu-active > ${antCls}-menu-submenu-title`]:
+                {
+                  [`${antCls}-menu-title-content`]: {
+                    backgroundColor: '#e9edf6',
+                    border: '0.5px solid #c6cdd9',
+                  },
+                },
+              [`${antCls}-menu-item-selected, ${antCls}-menu-submenu-selected > ${antCls}-menu-submenu-title`]:
+                {
+                  [`${antCls}-menu-title-content`]: {
+                    backgroundColor: '#e5eeff',
+                    border: `0.5px solid ${colorPrimaryBorder}`,
+                  },
+                },
             },
 
             [`${componentCls}-sub-sider`]: {
               borderRight: '1px solid #e2e8f3',
               [`${antCls}-divider`]: {
                 margin: '0 0 4px 0',
-              }
+              },
             },
 
             [`${componentCls}-sub-sider, ${componentCls}-menu-collapsed`]: {
               width: '52px',
               [`${antCls}-divider`]: {
                 margin: '0 0 4px 0',
-              }
+              },
             },
 
             [`${componentCls}-sider-content`]: {
@@ -325,11 +328,10 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
                   backgroundColor: 'transparent',
                   borderRight: 'none',
                   marginBottom: '32px',
-                }
-              }
+                },
+              },
             },
-
-          }
+          },
         },
 
         [`${componentCls}-sider-collapsed`]: {
@@ -343,49 +345,49 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
             display: 'none',
             [`${componentCls}-sider-collapse`]: {
               display: 'none',
-            }
+            },
           },
           [`${antCls}-menu-inline`]: {
             paddingTop: '16px',
             [`${antCls}-menu-item, ${antCls}-menu-submenu`]: {
-              '&:not\(:last-child\)': {
+              '&:not(:last-child)': {
                 marginBottom: '16px !important',
-              }
+              },
             },
             [`${antCls}-divider`]: {
               width: '60%',
               minWidth: '60%',
               margin: '-8px 0 8px 16px !important',
-            }
+            },
           },
           [`${antCls}-menu-vertical`]: {
             paddingTop: '10px',
           },
           [`${componentCls}-sider-content`]: {
             paddingLeft: '6px',
-          }
+          },
         },
 
         [`${componentCls}-content`]: {
           backgroundColor: colorBgLayout,
           transition: 'all 0.3s',
-        }
-      }
+        },
+      },
     },
 
     [`@media (min-width: ${maxWidth})`]: {
       [`${componentCls}`]: {
         [`${componentCls}-content-layout`]: {
           [`${componentCls}-sider`]: {
-            paddingLeft: 0
-          }
-        }
+            paddingLeft: 0,
+          },
+        },
       },
       [`${proComponentsCls}-footer-bar`]: {
         right: `calc((100% - ${maxWidth}) / 2 + 24px)`,
         width: `calc(${maxWidth} - 192px - 24px - 24px)`,
-        maxWidth: `calc(${maxWidth} - 192px - 24px - 24px)`
-      }
+        maxWidth: `calc(${maxWidth} - 192px - 24px - 24px)`,
+      },
     },
 
     // 弹出菜单样式
@@ -400,7 +402,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
           marginInline: 0,
           '&:not(:last-child):': {
             marginBottom: '8px !important',
-          }
+          },
         },
         [`${antCls}-menu-submenu`]: {
           width: '100%',
@@ -409,7 +411,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
           marginInline: 0,
           '&:not(:last-child):': {
             marginBottom: '8px !important',
-          }
+          },
         },
         [`${antCls}-menu-item-active`]: {
           color: 'colorText !important',
@@ -421,10 +423,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
           backgroundOrigin: 'padding-box,border-box',
           border: '.5px solid transparent',
           borderRadius: '8px 0 0 8px',
-          transition: 'border-width .3s'
-
-
-
+          transition: 'border-width .3s',
         },
         [`${antCls}-menu-submenu-active > & ${antCls}-menu-submenu-title`]: {
           color: 'colorText !important',
@@ -436,7 +435,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
           backgroundOrigin: 'padding-box,border-box',
           border: '.5px solid transparent',
           borderRadius: '8px 0 0 8px',
-          transition: 'border-width .3s'
+          transition: 'border-width .3s',
         },
 
         [`${antCls}-menu-item-selected`]: {
@@ -449,17 +448,17 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
           backgroundOrigin: 'padding-box,border-box',
           border: '.5px solid transparent',
           borderRadius: '8px 0 0 8px',
-          transition: 'border-width .3s'
+          transition: 'border-width .3s',
         },
         [`${antCls}-divider`]: {
           width: "'60%'",
           minWidth: '60%',
-          margin: '0 0 8px 16px !important'
+          margin: '0 0 8px 16px !important',
         },
       },
     },
   };
-}
+};
 
 export default (prefixCls: string) => {
   const useStyle = genComponentStyleHook('BasicLayout', token => {

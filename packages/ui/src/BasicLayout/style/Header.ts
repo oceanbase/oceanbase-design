@@ -4,78 +4,76 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type HeaderToken = FullToken<any>;
 
-export const genHeaderStyle: GenerateStyle<HeaderToken> = (
-  token: HeaderToken
-): CSSObject => {
+export const genHeaderStyle: GenerateStyle<HeaderToken> = (token: HeaderToken): CSSObject => {
   const { antCls, componentCls } = token;
 
   return {
     [`${componentCls}`]: {
-      position: "fixed",
+      position: 'fixed',
       zIndex: 10,
-      width: "100%",
+      width: '100%',
       height: 48,
-      padding: "10px 24px",
+      padding: '10px 24px',
       lineHeight: '48px',
       backgroundColor: token.colorBgLayout,
       boxShadow: `inset 0 -1px 0 0 ${token.colorBorderSecondary}`,
 
       [`${componentCls}-content`]: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         maxWidth: token.maxWidth,
-        height: "100%",
-        margin: "0 auto",
+        height: '100%',
+        margin: '0 auto',
       },
 
       [`${componentCls}-logo`]: {
         height: 24,
-        cursor: 'pointer'
+        cursor: 'pointer',
       },
       [`${componentCls}-icon`]: {
         width: 52,
         height: 48,
         lineHeight: '48px',
-        textAlign: "center",
+        textAlign: 'center',
         borderRight: `1px solid ${token.colorBorderSecondary}`,
         borderBottom: `1px solid ${token.colorBorderSecondary}`,
-        cursor: "pointer",
+        cursor: 'pointer',
         img: {
           height: 32,
-          marginTop: 8
+          marginTop: 8,
         },
       },
       [`${componentCls}-title`]: {
         /* 占据剩余的全部空间 */
         flex: 1,
-        margin: "0 16px",
+        margin: '0 16px',
       },
 
       [`${componentCls}-extra`]: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         [`${componentCls}-extra-item`]: {
-          display: "inline-flex",
+          display: 'inline-flex',
           fontSize: 12,
-          cursor: "pointer",
+          cursor: 'pointer',
           '&:not(:last-child)': {
-            marginRight: 24
+            marginRight: 24,
           },
           [`${componentCls}-extra-icon-wrapper`]: {
             width: 28,
             height: 28,
             lineHeight: '28px',
-            textAlign: "center",
-            border: "0.88px solid #ced4e1",
+            textAlign: 'center',
+            border: '0.88px solid #ced4e1',
             borderRadius: 14,
           },
           [`${componentCls}-extra-user-wrapper`]: {
             height: 28,
-            padding: "0 10px",
+            padding: '0 10px',
             lineHeight: '28px',
-            border: "0.88px solid #ced4e1",
+            border: '0.88px solid #ced4e1',
             borderRadius: 14,
             [`${componentCls}-extra-user-icon`]: {
               marginRight: 6,
@@ -87,9 +85,9 @@ export const genHeaderStyle: GenerateStyle<HeaderToken> = (
       [`${componentCls}-extra-with-label`]: {
         [`${componentCls}-extra-item`]: {
           '&:not(:last-child)': {
-            marginRight: '24px !important'
-          }
-        }
+            marginRight: '24px !important',
+          },
+        },
       },
     },
 
@@ -113,8 +111,7 @@ export const genHeaderStyle: GenerateStyle<HeaderToken> = (
         fontSize: 12,
         color: token.colorTextTertiary,
       },
-    }
-
+    },
   };
 };
 
