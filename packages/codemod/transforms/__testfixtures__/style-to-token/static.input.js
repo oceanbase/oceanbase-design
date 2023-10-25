@@ -3,6 +3,7 @@ const colorMap = {
   success: '#52c41a',
   warning: '#faad14',
   error: '#ff4D4F',
+  border: '1px solid #d9d9d9',
 };
 
 function getColorList() {
@@ -22,6 +23,10 @@ function getColorList() {
     {
       type: 'error',
       color: '#ff4D4F',
-    }
+    },
+    {
+      type: 'border',
+      color: '1px solid #d9d9d9',
+    },
   ];
 }

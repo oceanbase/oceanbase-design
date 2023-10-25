@@ -3,7 +3,7 @@ const fs = require('fs');
 const postcss = require('postcss');
 const postcssLess = require('postcss-less');
 const isDirectory = require('is-directory');
-const { TOKEN_MAP, TOKEN_MAP_KEYS, formatValue } = require('./utils/token');
+const { tokenParse } = require('./utils/token');
 
 /**
  * 搜索目录下所有的less文件
@@ -51,9 +51,7 @@ async function transform(file) {
   let tokenLessImported = false;
   // 遍历 AST
   ast.walk(node => {
-    const formattedValue = formatValue(node.value);
-    const key = TOKEN_MAP_KEYS.find(key => formattedValue.includes(key));
-    const token = TOKEN_MAP[key];
+    const { key, token, formattedValue } = tokenParse(node.value);
     if (node.type === 'decl' && token) {
       node.value = formattedValue.replace(key, `@${token}`);
       modified = true;

@@ -45,9 +45,18 @@ function formatValue(value) {
   return customTrim(toLower(value));
 }
 
+function tokenParse(value) {
+  const formattedValue = formatValue(value);
+  const key = TOKEN_MAP_KEYS.find(item => formattedValue.includes(item));
+  return {
+    key,
+    token: TOKEN_MAP[key],
+    formattedValue,
+  };
+}
+
 module.exports = {
   TOKEN_MAP,
   TOKEN_MAP_KEYS,
-  customTrim,
-  formatValue,
+  tokenParse,
 };
