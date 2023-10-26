@@ -1,0 +1,49 @@
+{
+  "name": "@oceanbase/codemod",
+  "version": "0.2.7",
+  "description": "Codemod for OceanBase Design upgrade",
+  "keywords": [
+    "oceanbase",
+    "oceanbase design",
+    "codemod"
+  ],
+  "homepage": "https://github.com/oceanbase/oceanbase-design/packages/codemod",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:oceanbase/oceanbase-design.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "bin": {
+    "codemod": "./bin/codemod.js"
+  },
+  "scripts": {
+    "build": "father build"
+  },
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "command-exists": "^1.2.9",
+    "execa": "^5.1.1",
+    "find-up": "^4.1.0",
+    "glob": "^10.3.10",
+    "is-directory": "^0.3.1",
+    "is-git-clean": "^1.1.0",
+    "jscodeshift": "^0.15.0",
+    "lodash": "^4.17.21",
+    "postcss": "^8.4.31",
+    "postcss-less": "^6.0.0",
+    "prettier": "^3.0.3",
+    "read-pkg-up": "^10.1.0",
+    "semver": "^7.5.4",
+    "update-check": "^1.5.4",
+    "yargs-parser": "^21.1.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.5",
+    "@types/jscodeshift": "^0.11.7",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2"
+  }
+}
