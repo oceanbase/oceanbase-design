@@ -30,4 +30,3 @@ jobs:
           msg-poster: 'https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*zx7LTI_ECSAAAAAAAAAAAABkARQnAQ'
           msg-footer: '💬 前往 [**OceanBase Design Releases**]({{url}}) 查看更新日志'
           prettier: true
-          prerelease-filter: '-, a, b, A, B'
