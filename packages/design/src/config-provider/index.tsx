@@ -4,7 +4,7 @@ import type {
   ConfigProviderProps as AntConfigProviderProps,
   ThemeConfig as AntThemeConfig,
 } from 'antd/es/config-provider';
-import StaticFunction from '../static-function';
+import StaticFunction, { token } from '../static-function';
 import defaultTheme from '../theme';
 import defaultThemeToken from '../theme/default';
 import type { NavigateFunction } from './navigate';
@@ -45,14 +45,14 @@ const ConfigProvider = ({ children, theme, navigate, ...restProps }: ConfigProvi
         // Because defaultThemeToken is designed for light theme
         token: theme?.isDark
           ? {
-              ...defaultSeed,
-              ...theme?.token,
-            }
+            ...defaultSeed,
+            ...theme?.token,
+          }
           : {
-              ...defaultSeed,
-              ...defaultThemeToken,
-              ...theme?.token,
-            },
+            ...defaultSeed,
+            ...defaultThemeToken,
+            ...theme?.token,
+          },
         components: {
           ...components,
           ...theme?.components,
@@ -60,6 +60,9 @@ const ConfigProvider = ({ children, theme, navigate, ...restProps }: ConfigProvi
             ...components?.InputNumber,
             ...theme?.components?.InputNumber,
           },
+          Segmented: {
+            itemSelectedColor: token.colorPrimary
+          }
         },
       }}
       {...restProps}
