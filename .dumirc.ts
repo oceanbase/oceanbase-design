@@ -124,6 +124,10 @@ export default defineConfig({
             { title: 'Table 表格', link: '/components/table' },
             { title: 'Tabs 标签页', link: '/components/tabs' },
             { title: 'Tooltip 文字提示', link: '/components/tooltip' },
+            {
+              title: 'Segmented 分段控制器',
+              link: '/components/segmented',
+            },
           ],
         },
         {

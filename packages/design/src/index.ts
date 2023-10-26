@@ -22,6 +22,7 @@ export { default as Tooltip } from './tooltip';
 export { default as Breadcrumb } from './breadcrumb';
 export { default as Spin } from './spin';
 export { default as Badge } from './badge';
+export { default as Segmented } from './segmented';
 
 import theme from './theme';
 

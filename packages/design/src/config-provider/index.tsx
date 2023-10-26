@@ -8,7 +8,7 @@ import type {
 import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
 import type { SpinIndicator } from 'antd/es/spin';
 import { merge } from 'lodash';
-import StaticFunction from '../static-function';
+import StaticFunction, { token } from '../static-function';
 import defaultTheme from '../theme';
 import defaultThemeToken from '../theme/default';
 import type { NavigateFunction } from './navigate';
@@ -90,6 +90,9 @@ const ConfigProvider = ({
             ...components,
             InputNumber: {
               ...components?.InputNumber,
+            },
+            Segmented: {
+              itemSelectedColor: token.colorPrimary,
             },
           },
         },
