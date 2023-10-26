@@ -16,10 +16,7 @@ export default () => {
     <Row gutter={[8, 8]}>
       {range(0, 6).map(index => (
         <Col span={8} key={index}>
-          <Score
-            value={index * 20}
-            thresholds={thresholds}
-          />
+          <Score value={index * 20} thresholds={thresholds} />
         </Col>
       ))}
     </Row>

@@ -1,29 +1,32 @@
-import React, { forwardRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import type { AreaConfig as AntAreaConfig } from '@ant-design/charts';
 import { Area as AntArea } from '@ant-design/charts';
 import { sortByMoment } from '@oceanbase/util';
-import useResizeObserver from 'use-resize-observer';
+import { composeRef } from 'rc-util/es/ref';
 import type { Tooltip } from '../hooks/useTooltipScrollable';
 import useTooltipScrollable from '../hooks/useTooltipScrollable';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export interface AreaConfig extends AntAreaConfig {
   tooltip?: false | Tooltip;
   theme?: Theme;
 }
 
-const Area: React.FC<AreaConfig> = forwardRef(
+const Area = forwardRef<unknown, AreaConfig>(
   (
     { data, line, xField, xAxis, yAxis, tooltip, legend, interactions, theme, ...restConfig },
     ref
   ) => {
     const themeConfig = useTheme(theme);
-    const { ref: containerRef, height: containerHeight } = useResizeObserver<HTMLDivElement>({
-      // 包含 padding 和 border
-      box: 'border-box',
-    });
-    const tooltipConfig = useTooltipScrollable(tooltip, containerHeight);
+
+    const chartRef = useRef(null);
+    const mergedRef = composeRef(ref, chartRef);
+    const tooltipConfig = useTooltipScrollable(
+      tooltip,
+      chartRef.current?.getChart()?.chart?.height
+    );
 
     const newConfig: AreaConfig = {
       data:
@@ -90,12 +93,8 @@ const Area: React.FC<AreaConfig> = forwardRef(
       theme: themeConfig.theme,
       ...restConfig,
     };
-    return (
-      <div ref={containerRef}>
-        <AntArea {...newConfig} ref={ref} />
-      </div>
-    );
+    return <AntArea {...newConfig} ref={mergedRef} />;
   }
 );
 
-export default Area;
+export default customMemo(Area);

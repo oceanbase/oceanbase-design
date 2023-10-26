@@ -1,3 +1,4 @@
+import React from 'react';
 import { IconFont } from '@oceanbase/ui';
 import './basic.less';
 

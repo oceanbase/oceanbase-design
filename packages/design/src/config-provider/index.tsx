@@ -7,6 +7,7 @@ import type {
 } from 'antd/es/config-provider';
 import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
 import type { SpinIndicator } from 'antd/es/spin';
+import { merge } from 'lodash';
 import StaticFunction from '../static-function';
 import type { Locale } from '../locale';
 import defaultTheme from '../theme';
@@ -14,6 +15,9 @@ import defaultThemeToken from '../theme/default';
 import type { NavigateFunction } from './navigate';
 
 export * from './navigate';
+export * from 'antd/es/config-provider/context';
+export * from 'antd/es/config-provider/SizeContext';
+export * from 'antd/es/config-provider/DisabledContext';
 export * from 'antd/es/config-provider';
 
 export interface ThemeConfig extends AntThemeConfig {
@@ -26,6 +30,8 @@ export type SpinConfig = ComponentStyleConfig & {
 
 export interface ConfigConsumerProps extends AntConfigConsumerProps {
   locale?: Locale;
+  theme?: ThemeConfig;
+  navigate?: NavigateFunction;
   spin?: SpinConfig;
 }
 
@@ -48,45 +54,59 @@ const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
 
 const { defaultSeed, components } = defaultTheme;
 
-// ConfigProvider 默认设置主题和内嵌 App，支持 message, notification 和 Modal 等静态方法消费 ConfigProvider 配置
-// ref: https://ant.design/components/app-cn
-const ConfigProvider = ({ children, theme, navigate, spin, ...restProps }: ConfigProviderProps) => {
+const ConfigProvider = ({
+  children,
+  theme,
+  navigate,
+  spin,
+  tabs,
+  ...restProps
+}: ConfigProviderProps) => {
   // inherit from parent ConfigProvider
-  const parentContext = React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
+  const parentContext = React.useContext<ConfigConsumerProps>(AntConfigProvider.ConfigContext);
+  const parentExtendedContext =
+    React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
   return (
     <AntConfigProvider
-      spin={spin}
-      theme={{
-        ...theme,
-        // Only set seed token for dark theme
-        // Because defaultThemeToken is designed for light theme
-        token: theme?.isDark
-          ? {
-            ...defaultSeed,
-            ...theme?.token,
-          }
-          : {
-            ...defaultSeed,
-            ...defaultThemeToken,
-            ...theme?.token,
-          },
-        components: {
-          ...components,
-          ...theme?.components,
-          // @ts-ignore
-          InputNumber: {
-            ...components?.InputNumber,
-            ...theme?.components?.InputNumber,
+      spin={merge(parentContext.spin, spin)}
+      tabs={merge(
+        {
+          indicatorSize: origin => (origin >= 24 ? origin - 16 : origin),
+        },
+        parentContext.tabs,
+        tabs
+      )}
+      theme={merge(
+        {
+          // Only set seed token for dark theme
+          // Because defaultThemeToken is designed for light theme
+          token: theme?.isDark
+            ? {
+                ...defaultSeed,
+              }
+            : {
+                ...defaultSeed,
+                ...defaultThemeToken,
+              },
+          components: {
+            ...components,
+            InputNumber: {
+              ...components?.InputNumber,
+            },
           },
         },
-      }}
+        parentContext.theme,
+        theme
+      )}
       {...restProps}
     >
       <ExtendedConfigContext.Provider
         value={{
-          navigate: navigate === undefined ? parentContext.navigate : navigate,
+          navigate: navigate === undefined ? parentExtendedContext.navigate : navigate,
         }}
       >
+        {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
+        {/* ref: https://ant.design/components/app */}
         <App>
           {children}
           <StaticFunction />
@@ -99,7 +119,7 @@ const ConfigProvider = ({ children, theme, navigate, spin, ...restProps }: Confi
 ConfigProvider.ConfigContext =
   AntConfigProvider.ConfigContext as React.Context<ConfigConsumerProps>;
 ConfigProvider.ExtendedConfigContext = ExtendedConfigContext;
-// “SizeContext”已弃用。ts(6385)
+// SizeContext is deprecated
 // ConfigProvider.SizeContext = AntConfigProvider.SizeContext;
 ConfigProvider.config = AntConfigProvider.config;
 ConfigProvider.useConfig = AntConfigProvider.useConfig;

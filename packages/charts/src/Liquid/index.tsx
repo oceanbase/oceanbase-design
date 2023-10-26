@@ -6,6 +6,7 @@ import type { PathCommand } from '@antv/g-base';
 import { toPercent } from '../util/number';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 function rectWithRadius(x: number, y: number, width: number, height: number): PathCommand[] {
   const GOLDEN_SECTION_RATIO = 0.618;
@@ -38,7 +39,7 @@ export interface LiquidConfig extends AntLiquidConfig {
   theme?: Theme;
 }
 
-const Liquid: React.FC<LiquidConfig> = forwardRef(
+const Liquid = forwardRef<unknown, LiquidConfig>(
   (
     {
       height = 400,
@@ -178,4 +179,4 @@ const Liquid: React.FC<LiquidConfig> = forwardRef(
   }
 );
 
-export default Liquid;
+export default customMemo(Liquid);

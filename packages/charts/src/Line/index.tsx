@@ -1,30 +1,32 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import { sortByMoment } from '@oceanbase/util';
 import type { LineConfig as AntLineConfig } from '@ant-design/charts';
 import { Line as AntLine } from '@ant-design/charts';
-import useResizeObserver from 'use-resize-observer';
+import { composeRef } from 'rc-util/es/ref';
 import type { Tooltip } from '../hooks/useTooltipScrollable';
 import useTooltipScrollable from '../hooks/useTooltipScrollable';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export interface LineConfig extends AntLineConfig {
   tooltip?: false | Tooltip;
   theme?: Theme;
 }
 
-const Line: React.FC<LineConfig> = forwardRef(
+const Line = forwardRef<unknown, LineConfig>(
   (
     { data, stepType, xField, xAxis, yAxis, tooltip, legend, interactions, theme, ...restConfig },
     ref
   ) => {
     const themeConfig = useTheme(theme);
 
-    const { ref: containerRef, height: containerHeight } = useResizeObserver<HTMLDivElement>({
-      // 包含 padding 和 border
-      box: 'border-box',
-    });
-    const tooltipConfig = useTooltipScrollable(tooltip, containerHeight);
+    const chartRef = useRef(null);
+    const mergedRef = composeRef(ref, chartRef);
+    const tooltipConfig = useTooltipScrollable(
+      tooltip,
+      chartRef.current?.getChart()?.chart?.height
+    );
 
     const newConfig: LineConfig = {
       data:
@@ -85,12 +87,8 @@ const Line: React.FC<LineConfig> = forwardRef(
       theme: themeConfig.theme,
       ...restConfig,
     };
-    return (
-      <div ref={containerRef}>
-        <AntLine {...newConfig} ref={ref} />
-      </div>
-    );
+    return <AntLine {...newConfig} ref={mergedRef} />;
   }
 );
 
-export default Line;
+export default customMemo(Line);

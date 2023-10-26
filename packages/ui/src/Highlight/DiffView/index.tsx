@@ -5,7 +5,7 @@ import warning from 'rc-util/lib/warning';
 import React, { useEffect, useMemo } from 'react';
 import type { HighlightProps } from '..';
 import { languageMap } from '..';
-import { getPrefix } from '../..//_util';
+import { getPrefix } from '../../_util';
 import { useKeyDownCopyEvent } from '../useKeyDownCopyEvent';
 import DiffCells from './DiffCells';
 // @ts-ignore

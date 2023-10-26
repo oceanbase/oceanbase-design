@@ -7,41 +7,43 @@ export type BadgeToken = FullToken<'Badge'>;
 export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSSObject => {
   const { componentCls } = token;
   return {
-    [`${componentCls}`]: {
-        [`${componentCls}-status-dot`]: {
-          width: 8,
-          height: 8,
+    [`${componentCls}${componentCls}-status`]: {
+      // dot style
+      [`${componentCls}-status-dot`]: {
+        width: 8,
+        height: 8,
+      },
+      // icon style
+      [`${componentCls}-status-icon`]: {
+        fontSize: 12,
+        // remove dot style
+        backgroundColor: 'transparent',
+        ['&::after']: {
+          display: 'none',
         },
-
-        [`${componentCls}-status-icon`]: {
+        [`&${componentCls}-status-success`]: {
           color: token.colorSuccess,
         },
-        [`${componentCls}-status-success`]: {
-          color: token.colorSuccess,
-        },
-        [`${componentCls}-status-processing`]: {
+        [`&${componentCls}-status-processing`]: {
           color: token.colorPrimary,
         },
-        [`${componentCls}-status-default`]: {
+        [`&${componentCls}-status-default`]: {
           color: token.colorTextPlaceholder,
         },
-        [`${componentCls}-status-error`]: {
+        [`&${componentCls}-status-error`]: {
           color: token.colorError,
         },
-        [`${componentCls}-status-warning`]: {
+        [`&${componentCls}-status-warning`]: {
           color: token.colorWarning,
         },
+      },
     },
   };
 };
 
 export default (prefixCls: string) => {
   const useStyle = genComponentStyleHook('Badge', token => {
-    return [
-      genBadgeStyle({
-        ...token,
-      } as BadgeToken),
-    ];
+    return [genBadgeStyle(token as BadgeToken)];
   });
   return useStyle(prefixCls);
 };

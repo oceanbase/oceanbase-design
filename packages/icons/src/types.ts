@@ -9,15 +9,8 @@ export interface AbstractNode {
 export interface IconDefinition {
   name: string; // kebab-case-style
   theme: ThemeType;
-  icon:
-    | ((primaryColor: string, secondaryColor: string) => AbstractNode)
-    | AbstractNode;
+  icon: ((primaryColor: string, secondaryColor: string) => AbstractNode) | AbstractNode;
 }
 
-export type ThemeType = "filled" | "outlined" | "twotone" | "colored" | "svg";
-export type ThemeTypeUpperCase =
-  | "Filled"
-  | "Outlined"
-  | "TwoTone"
-  | "Colored"
-  | "Svg";
+export type ThemeType = 'filled' | 'outlined' | 'twotone' | 'colored' | 'svg';
+export type ThemeTypeUpperCase = 'Filled' | 'Outlined' | 'TwoTone' | 'Colored' | 'Svg';

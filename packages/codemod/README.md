@@ -1,8 +1,12 @@
 # OceanBase Codemod
 
-A collection of codemod scripts that help migrate to OceanBase Design using [jscodeshift](https://github.com/facebook/jscodeshift) and [postcss](https://github.com/postcss/postcss).(Inspired by [@oceanbase/codemod](https://github.com/ant-design/codemod-v5))
+A collection of codemod scripts that help migrate from `antd`, `@alipay/ob-ui`, `@alipay/tech-ui`, `@ant-design/pro-components` and `@ant-design/charts` to OceanBase Design System by using [jscodeshift](https://github.com/facebook/jscodeshift) and [postcss](https://github.com/postcss/postcss). (Inspired by [@ant-design/codemod-v5](https://github.com/ant-design/codemod-v5))
 
-[![NPM version](https://img.shields.io/npm/v/@oceanbase/codemod.svg?style=flat)](https://npmjs.org/package/@oceanbase/codemod) [![NPM downloads](http://img.shields.io/npm/dm/@oceanbase/codemod.svg?style=flat)](https://npmjs.org/package/@oceanbase/codemod) [![Github Action](https://github.com/oceanbase/design/actions/workflows/ci.yml/badge.svg)](https://github.com/oceanbase/design/actions/workflows/ci.yml)
+[![NPM version](https://img.shields.io/npm/v/@oceanbase/codemod.svg?style=flat)](https://npmjs.org/package/@oceanbase/codemod) [![NPM downloads](http://img.shields.io/npm/dm/@oceanbase/codemod.svg?style=flat)](https://npmjs.org/package/@oceanbase/codemod) [![Github Action](https://github.com/oceanbase/oceanbase-design/actions/workflows/ci.yml/badge.svg)](https://github.com/oceanbase/oceanbase-design/actions/workflows/ci.yml)
+
+## Prerequisite
+
+- `antd v5` is the prerequisite. If you are using `antd v4`, please refer to [Upgrade Guideline](https://ant-design.antgroup.com/docs/react/migration-v5).
 
 ## Usage
 
@@ -17,7 +21,7 @@ npx -p @oceanbase/codemod codemod src
 
 ### `antd-to-oceanbase-design`
 
-import components and typs from `antd` and `@alipay/bigfish/antd` to `@oceanbase/design`.
+import components and types from `antd` and `@alipay/bigfish/antd` to `@oceanbase/design`.
 
 ```diff
   import React from 'react';
@@ -43,7 +47,7 @@ import components and typs from `antd` and `@alipay/bigfish/antd` to `@oceanbase
 
 ### `obui-to-oceanbase-design-and-ui`
 
-import components and typs from `antd` to `@oceanbase/design` and `@oceanbase/ui`.
+import components and types from `antd` to `@oceanbase/design` and `@oceanbase/ui`.
 
 ```diff
   import React from 'react';
@@ -64,7 +68,7 @@ import components and typs from `antd` to `@oceanbase/design` and `@oceanbase/ui
   export default Demo;
 ```
 
-### `techui-to-oceanbase-ui`
+### `page-container-to-oceanbase-ui`
 
 import `PageContainer` from `@alipay/tech-ui` to `@ant-design/pro-components` and `@oceanbase/ui`.
 
@@ -84,9 +88,9 @@ import `PageContainer` from `@alipay/tech-ui` to `@ant-design/pro-components` an
   export default Demo;
 ```
 
-### `antd-charts-to-oceanbase-charts`
+### `antd-and-ob-charts-to-oceanbase-charts`
 
-import components and typs from `@ant-design/charts` to `@oceanbase/charts`.
+import components and types from `@ant-design/charts` and `@alipay/ob-charts` to `@oceanbase/charts`.
 
 ```diff
   import React from 'react';
@@ -102,18 +106,168 @@ import components and typs from `@ant-design/charts` to `@oceanbase/charts`.
   export default Demo;
 ```
 
-### `obutil-to-oceanbase-util`
-
-import components and typs from `@alipay/ob-util` to `@oceanbase/util`.
-
 ```diff
   import React from 'react';
-- import { isNullValue, sortByNumber } from '@alipay/ob-util';
-+ import { isNullValue, sortByNumber } from '@oceanbase/util';
+- import { Bar, Line } from '@alipay/ob-charts';
+- import type { BarConfig, LineConfig } from '@ant-design/ob-charts';
++ import { Bar, Line } from '@oceanbase/charts';
++ import type { BarConfig, LineConfig } from '@oceanbase/charts';
 
   const Demo = () => {
     return <div />;
   };
 
   export default Demo;
+```
+
+### `obutil-to-oceanbase-util`
+
+import utils and hooks from `@alipay/ob-util` to `@oceanbase/util`. Additionally, it will rename `getTableData` to `useTableData` to follow hooks naming conventions.
+
+```diff
+  import React from 'react';
+- import { isNullValue, sortByNumber, getTableData } from '@alipay/ob-util';
++ import { isNullValue, sortByNumber, useTableData } from '@oceanbase/util';
+
+  const Demo = () => {
+-    const { tableProps } = getTableData(fn, {});
++    const { tableProps } = useTableData(fn, {});
+     return <div />;
+  };
+
+  export default Demo;
+```
+
+### `style-to-token`
+
+transform fixed style to antd v5 design token.
+
+- React function components:
+
+```diff
+  import React from 'react';
+- import { Alert, Button } from '@oceanbase/design';
++ import { Alert, Button, theme } from '@oceanbase/design';
+
+  const Demo = () => {
++   const { token } = theme.useToken();
+    return (
+-     <div>
+-       <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '1px solid #d9d9d9' }} />
+-       <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4D4F' }}></Button>
+-     </div>
++     (<div>
++       <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBorder}` }} />
++       <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
++     </div>)
+    );
+  };
+
+export default Demo;
+```
+
+- React class components:
+
+```diff
+  import React from 'react';
+- import { Alert, Button } from '@oceanbase/design';
++ import { Alert, Button, token } from '@oceanbase/design';
+
+  class Demo extends React.PureComponent {
+    constructor(props) {
+      super(props);
+      this.state = {};
+    }
+
+    render() {
+      return (
+-       <div>
+-         <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '#d9d9d9' }} />
+-         <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4D4F' }}></Button>
+-       </div>
++       (<div>
++         <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBgLayout}` }} />
++         <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
++       </div>)
+      );
+    }
+  }
+
+  export default Demo;
+```
+
+- Static file (not react components):
+
+```diff
++ import { token } from '@oceanbase/design';
+  const colorMap = {
+-   info: '#1890ff',
+-   success: '#52c41a',
+-   warning: '#faad14',
+-   error: '#ff4D4F',
+-   border: '1px solid #d9d9d9',
++   info: token.colorInfo,
++   success: token.colorSuccess,
++   warning: token.colorWarning,
++   error: token.colorError,
++   border: `1px solid ${token.colorBorder}`,
+  };
+
+  function getColorList() {
+    return [
+      {
+        type: 'info',
+-       color: '#1890ff',
++       color: token.colorInfo,
+      },
+      {
+        type: 'success',
+-       color: '#52c41a',
++       color: token.colorSuccess,
+      },
+      {
+        type: 'warning',
+-       color: '#faad14',
++       color: token.colorWarning,
+      },
+      {
+        type: 'error',
+-       color: '#ff4D4F',
++       color: token.colorError,
+      },
+      {
+        type: 'border',
+-       color: '1px solid #d9d9d9',
++       color: `1px solid ${token.colorBorder}`,
+      },
+    ];
+  }
+```
+
+### `less-to-token`
+
+transform fixed less style to antd v5 design token.
+
+```diff
++ @import '~@oceanbase/design/es/theme/index.less';
+  .container {
+-   color: #1890ff;
+-   background: #52c41a;
+-   background-color: #faad14;
+-   border-color: #ff4D4F;
++   color: @colorInfo;
++   background: @colorSuccess;
++   background-color: @colorWarning;
++   border-color: @colorError;
+    .content {
+-     color: rgba(0, 0, 0, 0.85);
+-     background: rgba(0, 0, 0,0.65);
+-     background-color: rgba(0,0,0,0.45);
+-     border: 1px solid #d9d9d9;
++     color: @colorText;
++     background: @colorTextSecondary;
++     background-color: @colorTextTertiary;
++     border: 1px solid @colorBorder;
+    }
+  }
 ```

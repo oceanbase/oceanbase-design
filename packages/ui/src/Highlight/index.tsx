@@ -166,7 +166,7 @@ const Highlight: React.FC<HighlightProps> = props => {
   const codeRef = React.createRef<HTMLPreElement>();
 
   // 代码块展示的结构
-  const [codeBlock, setCodeBlock] = React.useState();
+  const [codeBlock, setCodeBlock] = React.useState<React.JSX.Element[]>();
 
   // 按需加载语言
   useEffect(() => {

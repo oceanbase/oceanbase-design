@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button, ConfigProvider, notification, Space, theme } from '@oceanbase/design';
 
 export default () => {

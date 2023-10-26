@@ -1,8 +1,7 @@
 import classNames from 'classnames';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import ReactJson from 'react-json-view';
 import { getPrefix } from '../_util';
-
 import type { HighlightProps } from '.';
 import { THEME_DARK } from '.';
 import { useKeyDownCopyEvent } from './useKeyDownCopyEvent';

@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/design",
-  "version": "0.2.16",
+  "version": "0.2.24",
   "description": "The Design System of OceanBase",
   "keywords": [
     "oceanbase",
@@ -12,7 +12,7 @@
   "homepage": "https://github.com/oceanbase/oceanbase-design/packages/design",
   "repository": {
     "type": "git",
-    "url": "git@github.com:oceanbase/design.git"
+    "url": "git@github.com:oceanbase/oceanbase-design.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
@@ -35,26 +35,27 @@
     "postbuild": "cp src/style/reset.css dist/"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.17.0",
+    "@ant-design/cssinjs": "^1.17.2",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.9.0",
+    "antd": "^5.10.2",
     "classnames": "^2.3.2",
     "jsencrypt": "^3.3.2",
     "lodash": "^4.17.21",
     "randexp": "^0.5.3",
     "lottie-web": "^5.12.2",
-    "rc-util": "^5.37.0",
+    "prop-types": "^15.8.1",
+    "rc-util": "^5.38.0",
     "react-sticky-mouse-tooltip": "^0.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.15",
-    "@babel/preset-env": "^7.22.20",
+    "@babel/cli": "^7.23.0",
+    "@babel/preset-env": "^7.23.2",
     "antd-token-previewer": "^1.1.0"
   },
   "peerDependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
   }
 }

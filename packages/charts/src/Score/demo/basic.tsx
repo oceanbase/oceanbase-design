@@ -7,42 +7,28 @@ export default () => {
 
   return (
     <div>
-      <Form
-        style={{ marginBottom: '30px' }}
-      >
+      <Form style={{ marginBottom: '30px' }}>
         <Form.Item label="Size">
           <Radio.Group value={size} onChange={e => setSize(e.target.value)}>
-            <Radio.Button value='large'>Large</Radio.Button>
-            <Radio.Button value='middle'>Default</Radio.Button>
-            <Radio.Button value='small'>Small</Radio.Button>
+            <Radio.Button value="large">Large</Radio.Button>
+            <Radio.Button value="middle">Default</Radio.Button>
+            <Radio.Button value="small">Small</Radio.Button>
             <Radio.Button value={300}>300px</Radio.Button>
           </Radio.Group>
         </Form.Item>
       </Form>
       <Row>
         <Col span={6}>
-          <Score
-            size={size}
-            value={50}
-          />
+          <Score size={size} value={50} />
         </Col>
-        <Col span={6} >
-          <Score
-            size={size}
-            value={60}
-          />
+        <Col span={6}>
+          <Score size={size} value={60} />
         </Col>
-        <Col span={6} >
-          <Score
-            size={size}
-            value={70}
-          />
+        <Col span={6}>
+          <Score size={size} value={70} />
         </Col>
-        <Col span={6} >
-          <Score
-            size={size}
-            value={85}
-          />
+        <Col span={6}>
+          <Score size={size} value={85} />
         </Col>
       </Row>
     </div>

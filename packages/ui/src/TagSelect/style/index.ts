@@ -1,5 +1,5 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken, GenerateStyle } from 'antd/lib/theme/internal';
+import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type TagSelectToken = FullToken<any>;

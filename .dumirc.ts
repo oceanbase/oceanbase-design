@@ -16,6 +16,9 @@ export default defineConfig({
   },
   extraBabelPresets: [require.resolve('@emotion/babel-preset-css-prop')],
   outputPath: 'site',
+  define: {
+    'process.env.VERCEL_ANALYTICS_ID': process.env.VERCEL_ANALYTICS_ID,
+  },
   analytics: {
     ga_v2: 'G-81Y5XPZY2E',
   },
@@ -133,8 +136,6 @@ export default defineConfig({
             { title: 'Notification 通知提醒框', link: '/components/notification' },
             { title: 'Spin 加载中', link: '/components/spin' },
             { title: 'Badge 徽标数', link: '/components/badge' },
-
-            
           ],
         },
         {
@@ -148,6 +149,7 @@ export default defineConfig({
           children: [
             { title: 'BasicLayout 导航和布局', link: '/biz-components/basic-layout' },
             { title: 'PageContainer 页容器', link: '/biz-components/page-container' },
+            { title: 'Login 登录页', link: '/biz-components/login' },
             // { title: 'NavMenu', link: '/biz-components/nav-menu' },
             { title: 'Welcome 欢迎页', link: '/biz-components/welcome' },
           ],
@@ -163,6 +165,10 @@ export default defineConfig({
           title: '其他',
           children: [
             { title: 'Action 操作项', link: '/biz-components/action' },
+            {
+              title: 'ContentWithQuestion 问号旁提示',
+              link: '/biz-components/content-with-question',
+            },
             {
               title: 'ContentWithIcon 文字旁提示',
               link: '/biz-components/content-with-icon',

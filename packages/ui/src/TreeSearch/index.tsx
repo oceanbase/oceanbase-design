@@ -32,7 +32,7 @@ export interface TreeSearchRef {
   invertSelect: () => void;
 }
 
-interface IProps {
+interface TreeSearchProps {
   treeData: Node[];
   titleRender?: (nodeData: DataNode) => React.ReactNode;
   checkable?: boolean;
@@ -50,7 +50,7 @@ interface IProps {
   searchStyle?: {};
 }
 
-export default forwardRef<TreeSearchRef, IProps>(
+export default forwardRef<TreeSearchRef, TreeSearchProps>(
   (
     {
       treeData = [],

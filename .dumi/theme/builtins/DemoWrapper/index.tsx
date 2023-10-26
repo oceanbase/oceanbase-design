@@ -25,26 +25,29 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
 
   const demos = React.useMemo(
     () =>
-      items.reduce((acc, item) => {
-        const { previewerProps } = item;
-        const { debug } = previewerProps;
+      items.reduce(
+        (acc, item) => {
+          const { previewerProps } = item;
+          const { debug } = previewerProps;
 
-        if (debug && !showDebug) return acc;
+          if (debug && !showDebug) return acc;
 
-        return acc.concat({
-          ...item,
-          previewerProps: {
-            ...previewerProps,
-            expand: expandAll,
-            // always override debug property, because dumi will hide debug demo in production
-            debug: false,
-            /**
-             * extra marker for the original debug
-             */
-            originDebug: debug,
-          },
-        });
-      }, [] as typeof items),
+          return acc.concat({
+            ...item,
+            previewerProps: {
+              ...previewerProps,
+              expand: expandAll,
+              // always override debug property, because dumi will hide debug demo in production
+              debug: false,
+              /**
+               * extra marker for the original debug
+               */
+              originDebug: debug,
+            },
+          });
+        },
+        [] as typeof items
+      ),
     [expandAll, showDebug]
   );
 

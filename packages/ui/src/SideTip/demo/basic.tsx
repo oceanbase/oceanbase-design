@@ -2,10 +2,10 @@
  * title: 基本使用
  * iframe: true
  */
-
-import { CloudUploadOutlined } from '@oceanbase/icons';
+import React from 'react';
 import { message } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
+import { CloudUploadOutlined } from '@oceanbase/icons';
 
 export default () => {
   return (

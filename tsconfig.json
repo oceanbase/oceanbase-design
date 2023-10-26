@@ -3,15 +3,18 @@
     "target": "esnext",
     "module": "commonjs",
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
     "esModuleInterop": true,
-    "types": ["jest", "node", "@ant-design/cssinjs"],
+    "types": ["jest", "node"],
     "declaration": true,
     // TS 编译时跳过对 node_modules 依赖的检查
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "baseUrl": "./",
     "paths": {
+      // ref: https://github.com/microsoft/TypeScript/issues/29808#issuecomment-540292885
+      "@ant-design/cssinjs": ["node_modules/@ant-design/cssinjs"],
       "@@/*": [".dumi/tmp/*"],
       "@oceanbase/design": ["packages/design/src/index.ts"],
       "@oceanbase/design/es/*": ["packages/design/src/*"],

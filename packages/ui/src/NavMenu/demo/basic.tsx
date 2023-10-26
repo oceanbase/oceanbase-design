@@ -1,3 +1,4 @@
+import React from 'react';
 import { Layout } from '@oceanbase/design';
 import { NavMenu } from '@oceanbase/ui';
 import './style.less';

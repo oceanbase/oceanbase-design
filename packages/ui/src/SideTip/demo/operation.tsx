@@ -2,11 +2,10 @@
  * title: 操作选单
  * iframe: true
  */
-
-import { SettingFilled } from '@oceanbase/icons';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Dropdown, Menu } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
+import { SettingFilled } from '@oceanbase/icons';
 
 export default () => {
   const [open, setOpen] = useState(false);

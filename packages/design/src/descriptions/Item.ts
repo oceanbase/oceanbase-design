@@ -6,4 +6,4 @@ export interface DescriptionsItemProps extends AntDescriptionsItemProps {
   contentProps?: TextProps;
 }
 
-export default AntDescriptions.Item;
+export default AntDescriptions.Item as React.FC<DescriptionsItemProps>;

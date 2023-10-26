@@ -1,3 +1,4 @@
+import React from 'react';
 import { DualAxes } from '@oceanbase/charts';
 
 export default () => {

@@ -11,7 +11,7 @@ export interface DiffCellsProps {
   rowOffset?: number;
   onMouseDown?: React.MouseEventHandler;
   // antd hashid
-  hashId: string;
+  hashId?: string;
 }
 
 export default function DiffCells({

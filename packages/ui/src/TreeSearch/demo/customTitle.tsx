@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   DatabaseOutlined,
   FolderViewOutlined,
@@ -6,7 +7,6 @@ import {
 } from '@oceanbase/icons';
 import { TreeSearch } from '@oceanbase/ui';
 import { DataNode } from '@oceanbase/design/es/tree';
-import React from 'react';
 import './style.less';
 
 interface Node extends DataNode {

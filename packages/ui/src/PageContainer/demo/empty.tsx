@@ -1,6 +1,7 @@
 /**
  * iframe: 600
  */
+import React from 'react';
 import { Button, Card, Empty } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
 

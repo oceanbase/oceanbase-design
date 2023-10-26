@@ -1,6 +1,6 @@
 import { CaretRightFilled, LeftOutlined, RightOutlined } from '@oceanbase/icons';
 import { setAlpha } from '@ant-design/pro-components';
-import { token } from '@oceanbase/design';
+import { Typography, token } from '@oceanbase/design';
 import { isNullValue } from '@oceanbase/util';
 import { ConfigProvider, Divider, Layout, Menu, Tooltip } from '@oceanbase/design';
 import type { BadgeProps } from '@oceanbase/design/es/badge';
@@ -8,16 +8,15 @@ import type { MenuProps } from '@oceanbase/design/es/menu';
 import classNames from 'classnames';
 import { some } from 'lodash';
 import { pathToRegexp } from 'path-to-regexp';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix, isEnglish, urlToList } from '../_util';
+import { urlToList } from '../_util';
 import useNavigate from '../_util/useNavigate';
 import type { HeaderProps } from './Header';
 import Header from './Header';
 import zhCN from './locale/zh-CN';
 import useStyle from './style';
-import './index.less';
 
 const { Content, Sider } = Layout;
 const { SubMenu, Item } = Menu;
@@ -74,8 +73,6 @@ export interface BasicLayoutProps extends LocaleWrapperProps {
   style?: React.CSSProperties;
 }
 
-const prefix = getPrefix('layout');
-
 const BasicLayout: React.FC<BasicLayoutProps> = ({
   children,
   location: { pathname } = {},
@@ -91,15 +88,13 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   sideHeader,
   subSideMenuProps,
   subSideMenus,
-  prefixCls: customizePrefixCls,
   className,
+  prefixCls: customizePrefixCls,
   ...restProps
 }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
-  const prefixCls = getPrefixCls('basic-layout', customizePrefixCls);
+  const prefixCls = getPrefixCls('pro-basic-layout', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
-  const basicLayoutCls = classNames(className);
-
   const navigate = useNavigate();
   // 侧边栏导航是否收起
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
@@ -176,24 +171,22 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
             data-testid="menu.sub"
             key={item.link}
             title={
-              <Tooltip
-                placement="right"
-                title={item.title}
-                // SubMenu 通常都会带 icon，因此这里判断英文环境下如果标题字符长度 > 15 就支持 tooltip 展示
-                {...(isEnglish() && item.title && item.title.length > 15
-                  ? {}
-                  : {
-                      visible: false,
-                      // Support for antd 5.0
-                      open: false,
-                    })}
-                getPopupContainer={() => document.body}
-              >
-                <span>
-                  {renderIcon(item)}
-                  <span>{item.title}</span>
-                </span>
-              </Tooltip>
+              <div>
+                {renderIcon(item)}
+                <Typography.Text
+                  ellipsis={{
+                    tooltip: {
+                      placement: 'right',
+                    },
+                  }}
+                  style={{
+                    lineHeight: '40px',
+                    maxWidth: 80,
+                  }}
+                >
+                  {item.title}
+                </Typography.Text>
+              </div>
             }
           >
             {renderMenu(item.children)}
@@ -210,24 +203,22 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
               }
             }}
           >
-            <Tooltip
-              placement="right"
-              title={item.title}
-              // 对于 Menu.Item，英文环境下如果标题字符长度 > 20 就支持 tooltip 展示
-              {...(isEnglish() && item.title && item.title.length > 20
-                ? {}
-                : {
-                    visible: false,
-                    // Support for antd 5.0
-                    open: false,
-                  })}
-              getPopupContainer={() => document.body}
-            >
-              <span>
-                {renderIcon(item)}
-                <span>{item.title}</span>
-              </span>
-            </Tooltip>
+            <div>
+              {renderIcon(item)}
+              <Typography.Text
+                ellipsis={{
+                  tooltip: {
+                    placement: 'right',
+                  },
+                }}
+                style={{
+                  lineHeight: '40px',
+                  maxWidth: 116,
+                }}
+              >
+                {item.title}
+              </Typography.Text>
+            </div>
           </Item>
         );
       }
@@ -292,7 +283,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   let siderWidth = 0;
   // 根据菜单项的配置计算侧边栏的宽度
   if (subSideMenus && menus) {
-    siderWidth = collapsed ? 104 : 192;
+    siderWidth = collapsed ? 52 * 2 : 208;
   } else if (subSideMenus && !menus) {
     siderWidth = 52;
   } else if (!subSideMenus && menus) {
@@ -303,15 +294,21 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
 
   return wrapSSR(
     <>
-      {banner && <div className={`${prefix}-banner-wrapper`}>{banner}</div>}
+      {banner && <div className={`${prefixCls}-banner-wrapper`}>{banner}</div>}
       <Layout
-        className={classNames(prefix, className, basicLayoutCls, {
-          [`${prefix}-with-banner`]: banner,
-        })}
+        className={classNames(
+          prefixCls,
+          {
+            [`${prefixCls}-with-banner`]: banner,
+            [`${prefixCls}-sider-${siderWidth}`]: true,
+          },
+          className
+        )}
         {...restProps}
       >
         <React.Fragment>
           <Header
+            prefixCls={prefixCls}
             pathname={pathname}
             iconUrl={iconUrl}
             logoUrl={logoUrl}
@@ -321,7 +318,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
           {/* content-layout 外需要用 div 包裹，否则内容区的宽度会不固定 */}
           <div>
             <Layout
-              className={`${prefix}-content-layout`}
+              className={`${prefixCls}-content-layout`}
               style={{
                 marginTop: 48,
               }}
@@ -330,19 +327,19 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
                 <Sider
                   theme="light"
                   width={siderWidth}
-                  className={classNames(`${prefix}-sider`, {
-                    [`${prefix}-sider-collapsed`]: collapsed,
-                    [`${prefix}-sider-has-sub-sider`]: subSideMenus,
+                  className={classNames(`${prefixCls}-sider`, {
+                    [`${prefixCls}-sider-collapsed`]: collapsed,
+                    [`${prefixCls}-sider-has-sub-sider`]: subSideMenus,
                   })}
                 >
-                  <div className={`${prefix}-sider-wrapper`}>
+                  <div className={`${prefixCls}-sider-wrapper`}>
                     {/* 子侧边栏菜单 */}
                     {subSideMenus && (
-                      <div className={`${prefix}-sub-sider`}>
+                      <div className={`${prefixCls}-sub-sider`}>
                         <Menu
                           {...subSideMenuProps}
                           mode="vertical"
-                          className={`${prefix}-menu-vertical`}
+                          className={`${prefixCls}-menu-vertical`}
                         >
                           {renderCollapsedMenu(subSideMenus, true)}
                         </Menu>
@@ -356,19 +353,19 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
                           width: '100%',
                         }}
                       >
-                        <div className={`${prefix}-sider-content`}>
+                        <div className={`${prefixCls}-sider-content`}>
                           {/* 侧边栏顶部内容 */}
                           {sideHeader && (
-                            <div className={`${prefix}-sider-header`}>{sideHeader}</div>
+                            <div className={`${prefixCls}-sider-header`}>{sideHeader}</div>
                           )}
                           {/* 侧边栏菜单 */}
-                          <div className={`${prefix}-menu-wrapper`}>
+                          <div className={`${prefixCls}-menu-wrapper`}>
                             {collapsed ? (
-                              <div className={`${prefix}-menu-collapsed`}>
+                              <div className={`${prefixCls}-menu-collapsed`}>
                                 <Menu
                                   {...menuProps}
                                   mode="vertical"
-                                  className={`${prefix}-menu-vertical`}
+                                  className={`${prefixCls}-menu-vertical`}
                                 >
                                   {renderCollapsedMenu(menus, false)}
                                 </Menu>
@@ -387,16 +384,16 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
                                     />
                                   );
                                 }}
-                                className={`${prefix}-menu`}
+                                className={`${prefixCls}-menu`}
                               >
                                 {renderMenu(menus)}
                               </Menu>
                             )}
                           </div>
                         </div>
-                        <div className={`${prefix}-sider-border`}>
+                        <div className={`${prefixCls}-sider-border`}>
                           <div
-                            className={`${prefix}-sider-collapse`}
+                            className={`${prefixCls}-sider-collapse`}
                             onClick={() => {
                               setCollapsed(!collapsed);
                               // 导航展开/收起时，重置 openKeys
@@ -412,7 +409,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
                 </Sider>
               )}
               <Content
-                className={classNames(`${prefix}-content`, `${prefix}-content-${siderWidth}`)}
+                className={classNames(`${prefixCls}-content`, `${prefixCls}-content-${siderWidth}`)}
                 style={{
                   marginLeft: siderWidth,
                 }}

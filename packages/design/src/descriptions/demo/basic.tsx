@@ -1,5 +1,5 @@
-import { Descriptions } from '@oceanbase/design';
 import React from 'react';
+import { Descriptions } from '@oceanbase/design';
 
 const App: React.FC = () => (
   <Descriptions title="User Info">

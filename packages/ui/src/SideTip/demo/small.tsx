@@ -2,11 +2,10 @@
  * title: 小尺寸
  * iframe: true
  */
-
-import { CloudUploadOutlined } from '@oceanbase/icons';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { message } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
+import { CloudUploadOutlined } from '@oceanbase/icons';
 
 export default () => {
   const [open, setOpen] = useState(false);

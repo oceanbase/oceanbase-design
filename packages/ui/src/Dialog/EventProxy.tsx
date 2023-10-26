@@ -1,6 +1,6 @@
 import { isFunction } from 'lodash';
 import type { HTMLAttributes } from 'react';
-import { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 
 export const EventProxy = (props: HTMLAttributes<HTMLDivElement>) => {
   const handlers = useMemo(() => {

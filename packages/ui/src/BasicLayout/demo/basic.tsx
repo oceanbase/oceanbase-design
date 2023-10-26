@@ -1,11 +1,11 @@
 /**
  * iframe: 600
  */
-import Icon from '@oceanbase/icons';
+import React from 'react';
 import { Menu, message } from '@oceanbase/design';
 import { BasicLayout, IconFont, Lottie } from '@oceanbase/ui';
+import Icon from '@oceanbase/icons';
 import PageContainerCompleteDemo from '../../PageContainer/demo/complete';
-// @ts-ignore
 import { ReactComponent as MonitorSvg } from '../../assets/monitor.svg';
 
 export default () => {

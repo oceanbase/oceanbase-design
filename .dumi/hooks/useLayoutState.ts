@@ -1,13 +1,11 @@
 import { startTransition, useState } from 'react';
 
-const useLayoutState = <S>(
-  ...args: Parameters<typeof useState<S>>
-): ReturnType<typeof useState<S>> => {
-  const [state, setState] = useState<S>(...args);
+const useLayoutState = <S>(args: S): ReturnType<typeof useState<S>> => {
+  const [state, setState] = useState<S>(args);
 
-  const setLayoutState: typeof setState = (...setStateArgs) => {
+  const setLayoutState: typeof setState = setStateArgs => {
     startTransition(() => {
-      setState(...setStateArgs);
+      setState(setStateArgs);
     });
   };
 

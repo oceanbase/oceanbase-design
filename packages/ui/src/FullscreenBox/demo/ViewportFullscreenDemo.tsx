@@ -1,7 +1,7 @@
 /**
  * title: 基本使用
  */
-
+import React from 'react';
 import { FullscreenBox } from '@oceanbase/ui';
 import { SimpleTable } from './SimpleTable';
 

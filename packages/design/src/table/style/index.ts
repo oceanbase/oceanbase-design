@@ -107,6 +107,25 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
       },
     },
 
+    // 滚动表格样式
+    // 由于滚动表格会在 tbody 下最前面多一个 tr 元素，因此需要设置相反的斑马条样式
+    // .ant-table-scroll-horizontal: 水平滚动
+    // .ant-table-fixed-header: 垂直滚动
+    [`${componentCls}-wrapper ${componentCls}${componentCls}-scroll-horizontal, ${componentCls}-wrapper ${componentCls}${componentCls}-fixed-header`]:
+      {
+        [`${componentCls}-tbody`]: {
+          // 斑马纹样式
+          [`tr:nth-child(2n + 1):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${antCls}-descriptions-row) > td`]:
+            {
+              backgroundColor: colorFillQuaternary,
+            },
+          [`tr:nth-child(2n):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${componentCls}-expanded-row):not(${antCls}-descriptions-row) > td`]:
+            {
+              backgroundColor: colorBgBase,
+            },
+        },
+      },
+
     // large 表格样式
     [`${componentCls}-wrapper`]: {
       [`${componentCls}:not(${componentCls}-middle):not(${componentCls}-small)`]: {
@@ -152,11 +171,6 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
             },
         },
       },
-      [`${componentCls}-pagination`]: {
-        [`&${antCls}-pagination`]: {
-          borderTop: 'none',
-        },
-      },
     },
 
     // 分页器样式
@@ -180,6 +194,14 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
               margin: `0 ${marginXS}px`,
               color: colorLink,
             },
+          },
+        },
+      },
+      [`${componentCls}${componentCls}-bordered`]: {
+        [`&+${componentCls}-pagination`]: {
+          [`&${antCls}-pagination`]: {
+            // Remove pagination borderTop for bordered Table
+            borderTop: 'none',
           },
         },
       },

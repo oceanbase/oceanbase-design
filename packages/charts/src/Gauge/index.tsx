@@ -4,12 +4,13 @@ import { Gauge as AntGauge } from '@ant-design/charts';
 import { toPercent } from '../util/number';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
+import { customMemo } from '../util/custom-memo';
 
 export interface GaugeConfig extends AntGaugeConfig {
   theme?: Theme;
 }
 
-const Gauge: React.FC<GaugeConfig> = forwardRef(
+const Gauge = forwardRef<unknown, GaugeConfig>(
   ({ percent, range, axis, indicator, statistic, theme, ...restConfig }, ref) => {
     const themeConfig = useTheme(theme);
 
@@ -70,4 +71,4 @@ const Gauge: React.FC<GaugeConfig> = forwardRef(
   }
 );
 
-export default Gauge;
+export default customMemo(Gauge);

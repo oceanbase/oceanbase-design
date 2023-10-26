@@ -1,3 +1,4 @@
+import React from 'react';
 import { Card, Table } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
 
@@ -83,7 +84,7 @@ export default () => {
     },
   ];
   return (
-    <PageContainer ghost={true} header={{}}>
+    <PageContainer ghost={true}>
       <Card
         bordered={false}
         tabList={[

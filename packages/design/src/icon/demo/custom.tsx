@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon, { HomeOutlined } from '@oceanbase/icons';
-import type { CustomIconComponentProps } from '@oceanbase/icons/lib/components/Icon';
+import type { CustomIconComponentProps } from '@oceanbase/icons/es/components/Icon';
 import { Space } from '@oceanbase/design';
 
 const HeartSvg = () => (
