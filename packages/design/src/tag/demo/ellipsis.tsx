@@ -1,4 +1,4 @@
-import { Tag, Typography, Tooltip } from '@oceanbase/design';
+import { Tag } from '@oceanbase/design';
 import React from 'react';
 
 const App: React.FC = () => (

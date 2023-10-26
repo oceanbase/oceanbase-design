@@ -1,6 +1,6 @@
 import { Tag as AntTag } from 'antd';
 import type { TagProps as AntTagProps } from 'antd/es/tag';
-import { Tooltip, Typography } from '@oceanbase/design';
+import { Typography } from '@oceanbase/design';
 import classNames from 'classnames';
 import React, { ReactElement, useContext } from 'react';
 import ConfigProvider from '../config-provider';
@@ -31,14 +31,14 @@ const Tag = ({
     className
   );
   const childrenType = (restProps.children as ReactElement)?.type as any;
-  const { ellipsis: defalutEllipsis } = (restProps.children as ReactElement)?.props || {};
+  const { ellipsis: defalutEllipsis, children: defaultChildren } = (restProps.children as ReactElement)?.props || {};
 
   const ellipsisConfig =
     typeof defalutEllipsis === 'object'
       ? defalutEllipsis
       : {
-          tooltip: childrenType?.__ANT_TOOLTIP ? false : restProps.children,
-        };
+        tooltip: childrenType?.__ANT_TOOLTIP ? false : defaultChildren || restProps.children,
+      };
 
   return ellipsis ? (
     wrapSSR(
