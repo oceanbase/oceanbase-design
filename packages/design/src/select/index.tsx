@@ -11,7 +11,7 @@ export * from 'antd/es/select';
 
 export type SelectProps = AntSelectProps;
 
-const Select = ({ prefixCls: customizePrefixCls, className, ...restProps }: SelectProps) => {
+const Select: any = ({ prefixCls: customizePrefixCls, className, ...restProps }: SelectProps) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('select', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
