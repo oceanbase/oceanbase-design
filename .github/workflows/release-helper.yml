@@ -1,0 +1,33 @@
+# Current release process:
+# 1. `pnpm run publish` will generate new tags and publish to npm
+# 4. Then the new tags will trigger this current action
+# 5. The action will generate a new release, and publish DingDing notification at the same time
+
+name: Release Helper
+
+on: create
+
+permissions:
+  contents: read
+
+jobs:
+  release-helper:
+    permissions:
+      # use actions-cool/release-helper to create releases
+      # ref: https://github.com/actions-cool/release-helper
+      contents: write
+    if: github.event.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release Oceanbase Design
+        uses: actions-cool/release-helper@v2
+        with:
+          trigger: 'tag'
+          changelogs: 'docs/design/design-CHANGELOG.md, docs/ui/ui-CHANGELOG.md, docs/charts/charts-CHANGELOG.md, docs/codemod/codemod-CHANGELOG.md'
+          branch: 'master'
+          dingding-token: ${{ secrets.DINGDING_BOT_TOKEN }}
+          msg-title: '# OceanBase Design 发布日志'
+          msg-poster: 'https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*zx7LTI_ECSAAAAAAAAAAAABkARQnAQ'
+          msg-footer: '💬 前往 [**OceanBase Design Releases**]({{url}}) 查看更新日志'
+          prettier: true
+          prerelease-filter: '-, a, b, A, B'
