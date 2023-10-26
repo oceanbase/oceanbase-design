@@ -5,7 +5,10 @@
 
 name: Release Helper
 
-on: create
+on:
+  push:
+    tags:
+      - '*'
 
 permissions:
   contents: read
@@ -16,7 +19,6 @@ jobs:
       # use actions-cool/release-helper to create releases
       # ref: https://github.com/actions-cool/release-helper
       contents: write
-    if: github.event.ref_type == 'tag'
     runs-on: ubuntu-latest
     steps:
       - name: Release Oceanbase Design
