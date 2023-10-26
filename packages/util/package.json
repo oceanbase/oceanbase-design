@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/util",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "The Util Library for OceanBase",
   "keywords": [
     "oceanbase",
@@ -9,7 +9,7 @@
   "homepage": "https://github.com/oceanbase/oceanbase-design/packages/util",
   "repository": {
     "type": "git",
-    "url": "git@github.com:oceanbase/design.git"
+    "url": "git@github.com:oceanbase/oceanbase-design.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",

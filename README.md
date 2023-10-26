@@ -8,7 +8,10 @@
 
 - [@oceanbase/design](https://design.oceanbase.com/docs/design-introduce)
 - [@oceanbase/ui](https://design.oceanbase.com/docs/ui-introduce)
+- [@oceanbase/icons](https://design.oceanbase.com/components/icon)
 - [@oceanbase/charts](https://design.oceanbase.com/docs/charts-introduce)
+- [@oceanbase/util](https://github.com/oceanbase/oceanbase-design/tree/master/packages/util)
+- [@oceanbase/codemod](https://github.com/oceanbase/oceanbase-design/tree/master/packages/codemod)
 
 ## ⌨️ Development
 
@@ -19,7 +22,7 @@ Use Gitpod, a free online dev environment for GitHub.
 Or clone locally:
 
 ```bash
-$ git clone git@github.com:oceanbase/design.git
+$ git clone git@github.com:oceanbase/oceanbase-design.git
 $ cd design
 $ npm install -g pnpm
 $ pnpm install

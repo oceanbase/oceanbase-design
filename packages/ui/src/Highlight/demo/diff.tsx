@@ -61,7 +61,7 @@ const languages = {
    "version": "1.0.0",
    "unpkg": "dist/design.min.js",
    "dumiAssets": "assets.json",
-   "homepage": "https://github.com/oceanbase/design",
+   "homepage": "https://github.com/oceanbase/oceanbase-design",
    "scripts": {
      "start": "npm run dev",
      "build": "npm run build:lib && npm run build:umd && npm run build:less",

@@ -151,7 +151,7 @@ function addModuleImport(j, root, { pkgName, importSpecifier, importKind, before
 
   if (before) {
     insertImportBefore(j, root, { importStatement, importKind, beforeModule: before });
-  } else if (after) {
+  } else {
     insertImportAfter(j, root, { importStatement, importKind, afterModule: after });
   }
 

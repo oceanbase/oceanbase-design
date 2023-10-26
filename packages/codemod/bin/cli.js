@@ -17,6 +17,7 @@ const commandExistsSync = require('command-exists').sync;
 const pkg = require('../package.json');
 const pkgUpgradeList = require('./upgrade-list');
 const { getDependencies } = require('../transforms/utils/marker');
+const { lessToToken } = require('../transforms/less-to-token');
 
 // jscodeshift codemod scripts dir
 const transformersDir = path.join(__dirname, '../transforms');
@@ -30,6 +31,8 @@ const transformers = [
   'obui-to-oceanbase-design-and-ui',
   'obutil-to-oceanbase-util',
   'page-container-to-oceanbase-ui',
+  'style-to-token',
+  'less-to-token',
 ];
 
 const dependencyProperties = [
@@ -112,12 +115,15 @@ async function transform(transformer, parser, filePath, options) {
   });
 
   try {
-    if (process.env.NODE_ENV === 'local') {
-      console.log(`Running jscodeshift with: ${JSON.stringify(args)}`);
+    if (transformer === 'less-to-token') {
+      await lessToToken(filePath);
+    } else {
+      if (process.env.NODE_ENV === 'local') {
+        console.log(`Running jscodeshift with: ${JSON.stringify(args)}`);
+      }
+      // js part
+      await jscodeshift(transformerPath, [filePath], args);
     }
-
-    // js part
-    await jscodeshift(transformerPath, [filePath], args);
     console.log();
   } catch (err) {
     console.error(err);

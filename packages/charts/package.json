@@ -1,11 +1,11 @@
 {
   "name": "@oceanbase/charts",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "description": "The Chart library for OceanBase",
   "homepage": "https://github.com/oceanbase/oceanbase-design/packages/charts",
   "repository": {
     "type": "git",
-    "url": "git@github.com:oceanbase/design.git"
+    "url": "git@github.com:oceanbase/oceanbase-design.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",

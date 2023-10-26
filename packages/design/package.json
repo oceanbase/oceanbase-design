@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/design",
-  "version": "0.2.23",
+  "version": "0.2.24",
   "description": "The Design System of OceanBase",
   "keywords": [
     "oceanbase",
@@ -12,7 +12,7 @@
   "homepage": "https://github.com/oceanbase/oceanbase-design/packages/design",
   "repository": {
     "type": "git",
-    "url": "git@github.com:oceanbase/design.git"
+    "url": "git@github.com:oceanbase/oceanbase-design.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
@@ -39,7 +39,7 @@
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.10.1",
+    "antd": "^5.10.2",
     "classnames": "^2.3.2",
     "lodash": "^4.17.21",
     "lottie-web": "^5.12.2",
