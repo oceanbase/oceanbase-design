@@ -1,12 +1,12 @@
 # OceanBase Codemod
 
-A collection of codemod scripts that help migrate to OceanBase Design using [jscodeshift](https://github.com/facebook/jscodeshift) and [postcss](https://github.com/postcss/postcss).(Inspired by [@oceanbase/codemod](https://github.com/ant-design/codemod-v5))
+A collection of codemod scripts that help migrate from `antd`, `@alipay/ob-ui`, `@alipay/tech-ui`, `@ant-design/pro-components` and `@ant-design/charts` to OceanBase Design System by using [jscodeshift](https://github.com/facebook/jscodeshift) and [postcss](https://github.com/postcss/postcss). (Inspired by [@ant-design/codemod-v5](https://github.com/ant-design/codemod-v5))
 
 [![NPM version](https://img.shields.io/npm/v/@oceanbase/codemod.svg?style=flat)](https://npmjs.org/package/@oceanbase/codemod) [![NPM downloads](http://img.shields.io/npm/dm/@oceanbase/codemod.svg?style=flat)](https://npmjs.org/package/@oceanbase/codemod) [![Github Action](https://github.com/oceanbase/oceanbase-design/actions/workflows/ci.yml/badge.svg)](https://github.com/oceanbase/oceanbase-design/actions/workflows/ci.yml)
 
 ## Prerequisite
 
-- antd v5 is the prerequisite. If you are using antd v4, please refer to [Upgrade Guideline](https://ant-design.antgroup.com/docs/react/migration-v5).
+- `antd v5` is the prerequisite. If you are using `antd v4`, please refer to [Upgrade Guideline](https://ant-design.antgroup.com/docs/react/migration-v5).
 
 ## Usage
 
@@ -252,21 +252,21 @@ transform fixed less style to antd v5 design token.
 + @import '~@oceanbase/design/es/theme/index.less';
   .container {
 -   color: #1890ff;
-+   color: @colorInfo;
 -   background: #52c41a;
-+   background: @colorSuccess;
 -   background-color: #faad14;
-+   background-color: @colorWarning;
 -   border-color: #ff4D4F;
++   color: @colorInfo;
++   background: @colorSuccess;
++   background-color: @colorWarning;
 +   border-color: @colorError;
     .content {
 -     color: rgba(0, 0, 0, 0.85);
-+     color: @colorText;
 -     background: rgba(0, 0, 0,0.65);
-+     background: @colorTextSecondary;
 -     background-color: rgba(0,0,0,0.45);
-+     background-color: @colorTextTertiary;
 -     border: 1px solid #d9d9d9;
++     color: @colorText;
++     background: @colorTextSecondary;
++     background-color: @colorTextTertiary;
 +     border: 1px solid @colorBorder;
     }
   }
