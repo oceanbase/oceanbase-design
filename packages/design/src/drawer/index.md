@@ -15,7 +15,7 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="典型卡片" description="包含标题、内容、操作区域。"></code>
+<code src="./demo/basic.tsx" title="典型带 footer 抽屉" description="包含标题、内容、操作区域。"></code>
 
 <code src="./demo/no-footer.tsx" title="无 footer" description="去掉抽屉底部的 footer。"></code>
 
