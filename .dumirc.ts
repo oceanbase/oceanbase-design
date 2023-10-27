@@ -114,6 +114,7 @@ export default defineConfig({
           children: [
             { title: 'Form 表单', link: '/components/form' },
             { title: 'InputNumber 数字输入框', link: '/components/input-number' },
+            { title: 'Select 选择器', link: '/components/select' },
           ],
         },
         {
@@ -123,6 +124,7 @@ export default defineConfig({
             { title: 'Descriptions 描述列表', link: '/components/descriptions' },
             { title: 'Table 表格', link: '/components/table' },
             { title: 'Tabs 标签页', link: '/components/tabs' },
+            { title: 'Tag 标签', link: '/components/tag' },
             { title: 'Tooltip 文字提示', link: '/components/tooltip' },
           ],
         },
