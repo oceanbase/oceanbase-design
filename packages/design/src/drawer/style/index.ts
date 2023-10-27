@@ -8,20 +8,24 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
   const { componentCls } = token;
   return {
     [`${componentCls}`]: {
+      [`${componentCls}-header`]: {
+        padding: '20px 24px 0',
+        borderBottom: 'none',
+      },
       [`${componentCls}-footer-content`]: {
         position: 'absolute',
         right: 0,
         bottom: 0,
         width: 'calc(100% - 32px)',
-        borderTop: `1px solid ${token.colorBorderSecondary}`,
-        padding: '10px 16px 10px 0',
+        padding: 24,
+        paddingLeft: 0,
         background: token.colorBgContainer,
         zIndex: 10,
         display: 'flex',
         justifyContent: 'end',
         alignItems: 'center',
       },
-    }
+    },
   };
 };
 

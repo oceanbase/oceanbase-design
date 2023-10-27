@@ -1,5 +1,5 @@
 import { Drawer as AntDrawer } from 'antd';
-import { Button, Space, token } from '@oceanbase/design'
+import { Button, Space } from '@oceanbase/design';
 import type { DrawerProps as AntDrawerProps } from 'antd/es/drawer';
 import type { ButtonProps } from '@oceanbase/design/es/button';
 import React, { useContext } from 'react';
@@ -9,7 +9,6 @@ import ConfigProvider from '../config-provider';
 import useStyle from './style';
 
 export * from 'antd/es/drawer';
-
 
 export interface DrawerProps extends AntDrawerProps {
   onOk?: (e) => void;
@@ -42,32 +41,18 @@ const Drawer = ({
 
   return wrapSSR(
     <AntDrawer
-    className={drawerCls}
+      className={drawerCls}
       prefixCls={customizePrefixCls}
       style={{
         // 存在底部操作栏时才追加底部 margin
         marginBottom: footer ? 53 : 0,
         ...style,
       }}
-      {...restProps}>
+      {...restProps}
+    >
       {children}
       {footer && (
-        <div
-        className={`${prefixCls}-footer-content`}
-          // style={{
-          //   position: 'absolute',
-          //   right: 0,
-          //   bottom: 0,
-          //   width: 'calc(100% - 32px)',
-          //   borderTop: `1px solid ${token.colorBorderSecondary}`,
-          //   padding: '10px 16px 10px 0',
-          //   background: '#fff',
-          //   zIndex: 10,
-          //   display: 'flex',
-          //   justifyContent: 'end',
-          //   alignItems: 'center',
-          // }}
-        >
+        <div className={`${prefixCls}-footer-content`}>
           {isBoolean(footer) ? (
             <Space>
               <Button onClick={onCancel}>{cancelText}</Button>
@@ -83,7 +68,6 @@ const Drawer = ({
     </AntDrawer>
   );
 };
-
 
 if (process.env.NODE_ENV !== 'production') {
   Drawer.displayName = AntDrawer.displayName;

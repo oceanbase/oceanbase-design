@@ -90,6 +90,7 @@ export default () => {
       topHeader={{
         welcomePath: '/welcome',
         docsPath: '/docs/index.html',
+        pdfPath: '/docs/index.html',
         username: 'admin',
         userMenu,
         showLocale: true,
