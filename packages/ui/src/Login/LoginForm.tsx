@@ -8,7 +8,7 @@ import { Alert, Button, Form, Input, Space } from '@oceanbase/design';
 import type { FormProps } from '@oceanbase/design/es/form';
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import { token } from '@oceanbase/design';
+import { theme } from '@oceanbase/design';
 import type { LoginLocale } from '.';
 import { getPrefix } from '../_util';
 import './index.less';
@@ -42,6 +42,7 @@ const Login: React.FC<ILoginFormProps> = ({
   onAuthCodeImgChange,
   ...restProps
 }) => {
+  const { token } = theme.useToken();
   const [focusInput, setFocusInput] = useState('');
 
   return (
