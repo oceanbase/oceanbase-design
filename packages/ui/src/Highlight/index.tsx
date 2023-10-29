@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { default as javascript, default as jsx } from './languages/javascript';
 // tsx 本质上也是采用typescript进行解析，hljs做了支持
 import { CheckOutlined, CopyOutlined } from '@oceanbase/icons';
-import { token } from '@oceanbase/design';
+import { theme as obTheme } from '@oceanbase/design';
 import { message } from '@oceanbase/design';
 import classNames from 'classnames';
 import CopyToClipboard from 'react-copy-to-clipboard';
@@ -167,6 +167,8 @@ const Highlight: React.FC<HighlightProps> = props => {
 
   // 代码块展示的结构
   const [codeBlock, setCodeBlock] = React.useState<React.JSX.Element[]>();
+
+  const { token } = obTheme.useToken();
 
   // 按需加载语言
   useEffect(() => {

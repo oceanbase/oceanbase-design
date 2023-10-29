@@ -2,12 +2,13 @@ import { Tooltip as AntTooltip, Space } from 'antd';
 import type { TooltipPropsWithTitle as AntTooltipPropsWithTitle } from 'antd/es/tooltip';
 import React, { useContext, useEffect, useState } from 'react';
 import { CloseOutlined } from '@oceanbase/icons';
+import classNames from 'classnames';
 import { isNil } from 'lodash';
 import { token } from '../static-function';
 import MouseTooltip from './MouseTooltip';
 import ConfigProvider from '../config-provider';
 import useStyle from './style';
-import classNames from 'classnames';
+import { useTooltipTypeList } from './hooks/useTooltipTypeList';
 
 export * from 'antd/es/tooltip';
 
@@ -19,34 +20,6 @@ export interface TooltipProps extends AntTooltipPropsWithTitle {
   closeIcon?: boolean | React.ReactNode;
   onClose?: (e: React.MouseEvent<HTMLElement>) => void;
 }
-
-export const getTooltipTypeList = () => [
-  {
-    type: 'light',
-    color: token.colorText,
-    backgroundColor: token.colorBgElevated,
-  },
-  {
-    type: 'success',
-    color: token.colorSuccess,
-    backgroundColor: token.colorSuccessBg,
-  },
-  {
-    type: 'info',
-    color: token.colorInfo,
-    backgroundColor: token.colorInfoBg,
-  },
-  {
-    type: 'warning',
-    color: token.colorWarning,
-    backgroundColor: token.colorWarningBg,
-  },
-  {
-    type: 'error',
-    color: token.colorError,
-    backgroundColor: token.colorErrorBg,
-  },
-];
 
 type CompoundedComponent = React.FC<TooltipProps> & {
   /** @internal */
@@ -121,7 +94,7 @@ const Tooltip: CompoundedComponent = ({
     titleNode
   );
 
-  const typeList = getTooltipTypeList();
+  const typeList = useTooltipTypeList();
   const typeItem = typeList.find(item => item.type === type);
   return wrapSSR(
     mouseFollow ? (

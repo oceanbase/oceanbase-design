@@ -1,6 +1,6 @@
 import { CaretRightFilled, LeftOutlined, RightOutlined } from '@oceanbase/icons';
 import { setAlpha } from '@ant-design/pro-components';
-import { Typography, token } from '@oceanbase/design';
+import { Typography, theme } from '@oceanbase/design';
 import { isNullValue } from '@oceanbase/util';
 import { ConfigProvider, Divider, Layout, Menu, Tooltip } from '@oceanbase/design';
 import type { BadgeProps } from '@oceanbase/design/es/badge';
@@ -92,6 +92,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   prefixCls: customizePrefixCls,
   ...restProps
 }) => {
+  const { token } = theme.useToken();
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('pro-basic-layout', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);

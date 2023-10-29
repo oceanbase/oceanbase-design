@@ -1,4 +1,4 @@
-import { ConfigProvider, token } from '@oceanbase/design';
+import { ConfigProvider } from '@oceanbase/design';
 import type { ThemeConfig } from '@oceanbase/design';
 import { ChartProvider } from '@oceanbase/charts';
 import type { ThemeProviderProps } from 'antd-style';
@@ -8,6 +8,7 @@ import React, { useContext } from 'react';
 import useLocale from '../hooks/useLocale';
 import SiteContext from './slots/SiteContext';
 import zhCN from '../../packages/design/src/locale/zh-CN';
+import useSiteToken from '../hooks/useSiteToken';
 
 const SiteThemeProvider: FC<
   ThemeProviderProps<any> & {
@@ -21,6 +22,8 @@ const SiteThemeProvider: FC<
 
   const [_, lang] = useLocale();
   const { direction } = useContext(SiteContext);
+
+  const { token } = useSiteToken();
 
   return (
     <ThemeProvider
