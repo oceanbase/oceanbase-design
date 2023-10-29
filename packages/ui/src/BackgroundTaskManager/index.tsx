@@ -55,6 +55,7 @@ export interface BackgroundTaskManagerRef {
   fetchPreset: () => ITaskMgrPreset;
   fetchQueue: () => ITaskMgrQueue;
   fetchQueueNsById: (id: TaskMgrID) => Namespace;
+  closeNotification: (key: string) => void;
 }
 
 interface IProps {
@@ -158,6 +159,10 @@ export default forwardRef<BackgroundTaskManagerRef, IProps>((props, ref) => {
     [queue]
   );
 
+  const closeNotification = useCallback((key: string) => {
+    notification.destroy(key);
+  }, []);
+
   useImperativeHandle(ref, () => ({
     pushQueue,
     popQueue,
@@ -167,6 +172,7 @@ export default forwardRef<BackgroundTaskManagerRef, IProps>((props, ref) => {
     fetchPreset,
     fetchQueue,
     fetchQueueNsById,
+    closeNotification,
   }));
 
   const getLocalStorageIds = useCallback(() => {
