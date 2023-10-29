@@ -1,6 +1,6 @@
 import { Tooltip as AntTooltip, Space } from 'antd';
 import type { TooltipPropsWithTitle as AntTooltipPropsWithTitle } from 'antd/es/tooltip';
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CloseOutlined } from '@oceanbase/icons';
 import { isNil } from 'lodash';
 import { token } from '../static-function';
@@ -55,15 +55,20 @@ type CompoundedComponent = React.FC<TooltipProps> & {
 
 const Tooltip: CompoundedComponent = ({
   children,
+  title,
   type = 'default',
   color,
-  overlayInnerStyle,
   mouseFollow,
   closeIcon = false,
   onClose,
-  title,
+  open,
+  defaultOpen,
+  onOpenChange,
+  visible,
+  defaultVisible,
+  onVisibleChange,
+  overlayInnerStyle,
   className,
-  open: propOpen,
   ...restProps
 }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -73,9 +78,17 @@ const Tooltip: CompoundedComponent = ({
   const { wrapSSR, hashId } = useStyle(prefixCls);
 
   const tooltipCls = classNames(className, hashId);
-  const [innerOpen, setInnerOpen] = useState(undefined);
+  const [innerOpen, setInnerOpen] = useState(open ?? visible ?? defaultOpen ?? defaultVisible);
 
-  const open = isNil(propOpen) ? innerOpen : propOpen;
+  const newOpen = open ?? visible ?? innerOpen;
+
+  useEffect(() => {
+    if (!isNil(open)) {
+      setInnerOpen(open);
+    } else if (!isNil(visible)) {
+      setInnerOpen(visible);
+    }
+  }, [open, visible]);
 
   const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -88,27 +101,24 @@ const Tooltip: CompoundedComponent = ({
     setInnerOpen(false);
   };
 
-  const hasCloseIcon = !!closeIcon;
-
-  const CloseIconNode = useMemo(() => {
-    if (!hasCloseIcon) {
-      return null;
-    }
-    return closeIcon === true ? (
+  const closeIconNode = closeIcon ? (
+    closeIcon === true ? (
       <CloseOutlined className={`${prefixCls}-close-icon`} onClick={handleCloseClick} />
     ) : (
       <span className={`${prefixCls}-close-icon`} onClick={handleCloseClick}>
         {closeIcon}
       </span>
-    );
-  }, [closeIcon]);
+    )
+  ) : null;
 
   const titleNode = typeof title === 'function' ? title() : title;
-  const titleWithCloseIcon = (
+  const newTitle = closeIcon ? (
     <Space className={`${prefixCls}-close-icon-wrap`}>
       {titleNode}
-      {CloseIconNode}
+      {closeIconNode}
     </Space>
+  ) : (
+    titleNode
   );
 
   const typeList = getTooltipTypeList();
@@ -129,11 +139,14 @@ const Tooltip: CompoundedComponent = ({
       </MouseTooltip>
     ) : (
       <AntTooltip
-        title={hasCloseIcon ? titleWithCloseIcon : title}
+        title={newTitle}
         color={color || typeItem?.backgroundColor}
-        open={open}
-        onOpenChange={newOpen => {
-          setInnerOpen(newOpen);
+        open={newOpen}
+        defaultOpen={defaultOpen}
+        onOpenChange={value => {
+          setInnerOpen(value);
+          onVisibleChange?.(value);
+          onOpenChange?.(value);
         }}
         overlayInnerStyle={{
           color: typeItem?.color,
