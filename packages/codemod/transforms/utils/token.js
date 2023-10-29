@@ -14,8 +14,9 @@ const TOKEN_MAP = {
   '#bfbfbf': 'colorBorder',
   '#f0f2f5': 'colorBgLayout',
   '#fafafa': 'colorBgLayout',
-  '#fff': 'colorBgContainer',
+  // priority should be #ffffff > #fff to avoid bad case: '#ffffff' => `${token.colorBgContainer}fff`
   '#ffffff': 'colorBgContainer',
+  '#fff': 'colorBgContainer',
   'rgba(0,0,0,0.85)': 'colorText',
   'rgba(0,0,0,0.65)': 'colorTextSecondary',
   'rgba(0,0,0,0.45)': 'colorTextTertiary',
