@@ -77,7 +77,7 @@ async function lessToToken(file) {
   const allLessFiles = findAllLessFiles(file);
   for await (const item of allLessFiles) {
     const content = await transform(item);
-    fs.writeFileSync(file, content);
+    fs.writeFileSync(item, content);
   }
 }
 
