@@ -14,7 +14,6 @@ const TOKEN_MAP = {
   '#bfbfbf': 'colorBorder',
   '#f0f2f5': 'colorBgLayout',
   '#fafafa': 'colorBgLayout',
-  // priority should be #ffffff > #fff to avoid bad case: '#ffffff' => `${token.colorBgContainer}fff`
   '#ffffff': 'colorBgContainer',
   '#fff': 'colorBgContainer',
   'rgba(0,0,0,0.85)': 'colorText',
@@ -36,7 +35,7 @@ const TOKEN_MAP = {
   '#F8FAFE': 'colorFillQuaternary',
 };
 
-const TOKEN_MAP_KEYS = Object.keys(TOKEN_MAP);
+const TOKEN_MAP_KEYS = Object.keys(TOKEN_MAP).map(item => formatValue(item));
 
 function customTrim(str) {
   return str?.replace(/(\s)*([,\(\)])(\s)*/g, '$2');
@@ -48,7 +47,13 @@ function formatValue(value) {
 
 function tokenParse(value) {
   const formattedValue = formatValue(value);
-  const key = TOKEN_MAP_KEYS.find(item => formattedValue.includes(item));
+  const key = TOKEN_MAP_KEYS.find(
+    item =>
+      formattedValue.endsWith(item) ||
+      formattedValue.includes(`${item} `) ||
+      formattedValue.includes(`${item}, `) ||
+      formattedValue.includes(`${item},`)
+  );
   return {
     key,
     token: TOKEN_MAP[key],
