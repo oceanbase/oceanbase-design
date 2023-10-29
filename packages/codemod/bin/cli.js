@@ -291,9 +291,9 @@ async function bootstrap() {
     console.log('[Prettier] format files running...');
     try {
       const isDir = isDirectory.sync(dir);
-      const path = isDir ? path.join(dir, '**/*.{js,jsx,ts,tsx,d.ts}') : dir;
+      const targetPath = isDir ? path.join(dir, '**/*.{js,jsx,ts,tsx,d.ts}') : dir;
       const npxCommand = commandExistsSync('tnpx') ? 'tnpx' : 'npx';
-      await execa(npxCommand, ['prettier', '--write', path], { stdio: 'inherit' });
+      await execa(npxCommand, ['prettier', '--write', targetPath], { stdio: 'inherit' });
       console.log('\n[Prettier] format files completed!\n');
     } catch (err) {
       console.log('\n[Prettier] format files failed, please format it by yourself.\n', err);
