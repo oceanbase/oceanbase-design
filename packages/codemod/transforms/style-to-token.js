@@ -16,20 +16,15 @@ function importComponent(j, root, options) {
     stringList.replaceWith(path => {
       hasChanged = true;
       const { key, token, formattedValue } = tokenParse(path.value.value);
-      return formattedValue === key
-        ? j.identifier(`token.${token}`)
-        : j.templateLiteral(
-            [
-              j.templateElement(
-                {
-                  raw: formattedValue.replace(key, `\${token.${token}}`),
-                  cooked: formattedValue.replace(key, `\${token.${token}}`),
-                },
-                true
-              ),
-            ],
-            []
-          );
+      const isJSXAttribute = path.parentPath.value.type === 'JSXAttribute';
+      let stringValue = `token.${token}`;
+      let templateStringValue = `\`${formattedValue.replace(key, `\${token.${token}}`)}\``;
+      // add {} wrapper for JSXAttribute
+      if (isJSXAttribute) {
+        stringValue = `{${stringValue}}`;
+        templateStringValue = `{${templateStringValue}}`;
+      }
+      return formattedValue === key ? j.identifier(stringValue) : j.identifier(templateStringValue);
     });
 
     root.find(j.BlockStatement).forEach(path => {

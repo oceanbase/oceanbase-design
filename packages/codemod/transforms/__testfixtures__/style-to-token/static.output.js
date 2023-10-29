@@ -1,4 +1,7 @@
 import { token } from '@oceanbase/design';
+const color = token.colorBgLayout;
+const border = `1px solid ${token.colorBgLayout}`;
+
 const colorMap = {
   info: token.colorInfo,
   success: token.colorSuccess,

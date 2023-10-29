@@ -1,3 +1,6 @@
+const color = '#fafafa';
+const border = '1px solid #fafafa';
+
 const colorMap = {
   info: '#1890ff',
   success: '#52c41a',
