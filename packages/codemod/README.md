@@ -14,7 +14,10 @@ Before run codemod scripts, you'd better make sure to commit your local git chan
 
 ```shell
 # Run directly through npx
+# `src` is the target directory or file that you want to transform.
 npx -p @oceanbase/codemod codemod src
+# options
+# --disablePrettier   // disable prettier
 ```
 
 ## Codemod scripts introduction
