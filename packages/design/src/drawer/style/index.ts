@@ -6,6 +6,7 @@ export type DrawerToken = FullToken<'Drawer'>;
 
 export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): CSSObject => {
   const { componentCls } = token;
+
   return {
     [`${componentCls}`]: {
       [`${componentCls}-header`]: {

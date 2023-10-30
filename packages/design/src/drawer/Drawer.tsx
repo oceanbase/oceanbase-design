@@ -7,7 +7,6 @@ import { isBoolean } from 'lodash';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import useStyle from './style';
-
 export * from 'antd/es/drawer';
 
 export interface DrawerProps extends AntDrawerProps {
@@ -41,11 +40,9 @@ const Drawer = ({
 
   return wrapSSR(
     <AntDrawer
-      className={drawerCls}
+      className={`${drawerCls}`}
       prefixCls={customizePrefixCls}
       style={{
-        // 存在底部操作栏时才追加底部 margin
-        marginBottom: footer ? 53 : 0,
         ...style,
       }}
       {...restProps}
