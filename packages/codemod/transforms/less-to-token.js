@@ -18,7 +18,7 @@ const findAllLessFiles = dir => {
     files.forEach(file => {
       const filePath = path.join(dir, file);
       if (isDirectory.sync(filePath)) {
-        if (filePath.includes('.umi')) {
+        if (filePath.includes('.umi') || filePath.includes('.umi-production')) {
           return;
         }
         lessFiles.push(...findAllLessFiles(filePath));
@@ -26,7 +26,7 @@ const findAllLessFiles = dir => {
         lessFiles.push(filePath);
       }
     });
-  } else {
+  } else if (dir.endsWith('.less')) {
     lessFiles.push(dir);
   }
   return lessFiles;
