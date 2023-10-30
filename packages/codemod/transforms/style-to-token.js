@@ -2,6 +2,20 @@ const { addSubmoduleImport } = require('./utils');
 const { tokenParse } = require('./utils/token');
 const { printOptions } = require('./utils/config');
 
+function isTopBlockStatement(path) {
+  const isBlockStatement = path.value.type === 'BlockStatement';
+  let isTop = isBlockStatement && true;
+  path = path.parentPath;
+  while (isTop && path.value.type !== 'Program') {
+    if (path.value.type === 'BlockStatement') {
+      isTop = false;
+      break;
+    }
+    path = path.parentPath;
+  }
+  return isTop;
+}
+
 function importComponent(j, root, options) {
   let hasChanged = false;
 
@@ -27,35 +41,45 @@ function importComponent(j, root, options) {
       return formattedValue === key ? j.identifier(stringValue) : j.identifier(templateStringValue);
     });
 
-    root.find(j.BlockStatement).forEach(path => {
-      const includeToken =
-        j(path).find(j.Identifier, {
-          name: name => name?.includes('token.'),
-        }).length > 0;
-      if (includeToken) {
-        const includeJsxElementList = j(path).find(j.JSXElement).length > 0;
-        const parentType = path.parentPath.value?.type;
-        // React function component
-        if (includeJsxElementList && parentType !== 'ClassMethod') {
-          const importString = `const { token } = theme.useToken()`;
-          path.get('body').value.unshift(j.expressionStatement(j.identifier(importString)));
-          // import theme from @oceanbase/design
-          addSubmoduleImport(j, root, {
-            moduleName: '@oceanbase/design',
-            importedName: 'theme',
-            importKind: 'value',
-          });
-        } else {
-          // React class component and static file (not react component)
-          // import token from @oceanbase/design
-          addSubmoduleImport(j, root, {
-            moduleName: '@oceanbase/design',
-            importedName: 'token',
-            importKind: 'value',
-          });
+    root
+      .find(j.BlockStatement)
+      .filter(path => isTopBlockStatement(path))
+      .forEach(path => {
+        const includeToken =
+          j(path).find(j.Identifier, {
+            name: name => name?.includes('token.'),
+          }).length > 0;
+        if (includeToken) {
+          const includeJsxElementList = j(path).find(j.JSXElement).length > 0;
+          const includeUseTokenStatement =
+            j(path).find(j.Identifier, {
+              name: name => name.includes('useToken'),
+            }).length > 0;
+          const parentType = path.parentPath.value?.type;
+          // React function component
+          if (includeJsxElementList && parentType !== 'ClassMethod') {
+            if (!includeUseTokenStatement) {
+              const importString = 'const { token } = theme.useToken()';
+              // insert `const { token } = theme.useToken()`
+              path.get('body').value.unshift(j.expressionStatement(j.identifier(importString)));
+              // import theme from @oceanbase/design
+              addSubmoduleImport(j, root, {
+                moduleName: '@oceanbase/design',
+                importedName: 'theme',
+                importKind: 'value',
+              });
+            }
+          } else {
+            // React class component and static file (not react component)
+            // import token from @oceanbase/design
+            addSubmoduleImport(j, root, {
+              moduleName: '@oceanbase/design',
+              importedName: 'token',
+              importKind: 'value',
+            });
+          }
         }
-      }
-    });
+      });
   }
 
   return hasChanged;
