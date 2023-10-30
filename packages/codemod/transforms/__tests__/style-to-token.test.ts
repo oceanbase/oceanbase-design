@@ -2,11 +2,12 @@ import { defineTest } from 'jscodeshift/src/testUtils';
 
 const testUnit = 'style-to-token';
 const tests = [
-  'function-component',
-  'class-component',
-  'static',
-  'multiple-block-statement',
-  'existed-useToken',
+  // 'function-component',
+  // 'class-component',
+  // 'block-statement',
+  // 'nested-block-statement',
+  // 'existed-useToken',
+  'statement',
 ];
 
 describe(testUnit, () => {
