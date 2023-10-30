@@ -8,8 +8,8 @@ const TOKEN_MAP = {
   '#52c41a': 'colorSuccess',
   '#faad14': 'colorWarning',
   '#ff4d4f': 'colorError',
-  '#F5222D': 'colorError',
-  '#F8636B': 'colorError',
+  '#f5222d': 'colorError',
+  '#f8636b': 'colorError',
   '#d9d9d9': 'colorBorder',
   '#bfbfbf': 'colorBorder',
   '#f0f2f5': 'colorBgLayout',
@@ -27,15 +27,15 @@ const TOKEN_MAP = {
   '#0ac185': 'colorSuccess',
   '#ffac33': 'colorWarning',
   '#ff4b4b': 'colorError',
-  '#CDD5E4': 'colorBorder',
-  '#F5F8FE': 'colorBgLayout',
+  '#cdd5e4': 'colorBorder',
+  '#f5f8fe': 'colorBgLayout',
   '#132039': 'colorText',
   '#364563': 'colorTextSecondary',
-  '#8592AD': 'colorTextTertiary',
-  '#F8FAFE': 'colorFillQuaternary',
+  '#8592ad': 'colorTextTertiary',
+  '#f8fafe': 'colorFillQuaternary',
 };
 
-const TOKEN_MAP_KEYS = Object.keys(TOKEN_MAP).map(item => formatValue(item));
+const TOKEN_MAP_KEYS = Object.keys(TOKEN_MAP);
 
 function customTrim(str) {
   return str?.replace(/(\s)*([,\(\)])(\s)*/g, '$2');
