@@ -7,6 +7,23 @@ function isTopBlockStatement(path) {
   let isTop = isBlockStatement && true;
   path = path.parentPath;
   while (isTop && path.value.type !== 'Program') {
+    // isTopBlockStatement => not wrapped by BlockStatement
+    if (path.value.type === 'BlockStatement') {
+      isTop = false;
+      break;
+    }
+    path = path.parentPath;
+  }
+  return isTop;
+}
+
+function isTopStatement(path) {
+  // VariableDeclaration and other XXXStatement is Statement also, so can't judge Statement simplely by `path.value.type`
+  // should filter by `find(j.Statement)` in advance
+  let isTop = true;
+  path = path.parentPath;
+  while (isTop && path.value.type !== 'Program') {
+    // isTopStatement => not wrapped by BlockStatement
     if (path.value.type === 'BlockStatement') {
       isTop = false;
       break;
@@ -43,6 +60,7 @@ function importComponent(j, root, options) {
 
     root
       .find(j.BlockStatement)
+      // avoid duplicate insert for nested block statement
       .filter(path => isTopBlockStatement(path))
       .forEach(path => {
         const includeToken =
@@ -50,18 +68,19 @@ function importComponent(j, root, options) {
             name: name => name?.includes('token.'),
           }).length > 0;
         if (includeToken) {
-          const includeJsxElementList = j(path).find(j.JSXElement).length > 0;
+          const includeJSXElement = j(path).find(j.JSXElement).length > 0;
           const includeUseTokenStatement =
             j(path).find(j.Identifier, {
               name: name => name.includes('useToken'),
             }).length > 0;
           const parentType = path.parentPath.value?.type;
           // React function component
-          if (includeJsxElementList && parentType !== 'ClassMethod') {
+          if (includeJSXElement && parentType !== 'ClassMethod') {
+            // avoid duplicate insert when it's existed
             if (!includeUseTokenStatement) {
-              const importString = 'const { token } = theme.useToken()';
+              const insertString = 'const { token } = theme.useToken()';
               // insert `const { token } = theme.useToken()`
-              path.get('body').value.unshift(j.expressionStatement(j.identifier(importString)));
+              path.get('body').value.unshift(j.expressionStatement(j.identifier(insertString)));
               // import theme from @oceanbase/design
               addSubmoduleImport(j, root, {
                 moduleName: '@oceanbase/design',
@@ -78,6 +97,24 @@ function importComponent(j, root, options) {
               importKind: 'value',
             });
           }
+        }
+      });
+
+    root
+      .find(j.Statement)
+      .filter(path => isTopStatement(path))
+      .forEach(path => {
+        const includeToken =
+          j(path).find(j.Identifier, {
+            name: name => name?.includes('token.'),
+          }).length > 0;
+        if (includeToken) {
+          // import token from @oceanbase/design
+          addSubmoduleImport(j, root, {
+            moduleName: '@oceanbase/design',
+            importedName: 'token',
+            importKind: 'value',
+          });
         }
       });
   }
