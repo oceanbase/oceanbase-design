@@ -20,22 +20,48 @@ const TOKEN_MAP = {
   'rgba(0,0,0,0.65)': 'colorTextSecondary',
   'rgba(0,0,0,0.45)': 'colorTextTertiary',
   'rgba(0,0,0,0.25)': 'colorTextQuaternary',
+  'rgba(0,0,0,.85)': 'colorText',
+  'rgba(0,0,0,.65)': 'colorTextSecondary',
+  'rgba(0,0,0,.45)': 'colorTextTertiary',
+  'rgba(0,0,0,.25)': 'colorTextQuaternary',
   'rgba(0,0,0,0.2)': 'colorFillQuaternary',
   'rgba(0,0,0,0.04)': 'colorBgLayout',
   // obui style => token
   '#006aff': 'colorInfo',
   '#0ac185': 'colorSuccess',
   '#ffac33': 'colorWarning',
+  '#ff9700': 'colorWarning',
   '#ff4b4b': 'colorError',
+  '#ff1a1a': 'colorError',
   '#cdd5e4': 'colorBorder',
   '#f5f8fe': 'colorBgLayout',
+  '#f5f7fa': 'colorBgLayout',
   '#132039': 'colorText',
   '#364563': 'colorTextSecondary',
   '#8592ad': 'colorTextTertiary',
   '#f8fafe': 'colorFillQuaternary',
+  '#086fff': 'colorInfo',
+  '#4dcca2': 'colorSuccess',
+  '#fbba3a': 'colorWarning',
+  '#fff1f0': 'colorErrorBg',
+  '#ffa39e': 'colorErrorBorder',
+  'rgba(24,144,255,0.1)': 'colorInfoBg',
+  'rgba(82,196,26,0.1)': 'colorSuccessBg',
+  'rgba(250,140,22,0.1)': 'colorWarningBg',
+  'rgba(245,34,45,0.1)': 'colorErrorBg',
+  'rgba(140,140,140,0.1)': 'colorBgLayout',
+  'rgba(10,193,133,1)': 'colorSuccess',
+  'rgba(95,149,255,0.10)': 'colorInfoBg',
+  'rgba(95,149,255,0.1)': 'colorInfoBg',
+  'rgba(95,149,255,1)': 'colorInfoBorder',
+  'rgb(243,164,60)': 'colorWarning',
 };
 
 const TOKEN_MAP_KEYS = Object.keys(TOKEN_MAP);
+
+function isLower(str) {
+  return toLower(str) === str;
+}
 
 function customTrim(str) {
   return str?.replace(/(\s)*([,\(\)])(\s)*/g, '$2');
@@ -65,4 +91,5 @@ module.exports = {
   TOKEN_MAP,
   TOKEN_MAP_KEYS,
   tokenParse,
+  isLower,
 };
