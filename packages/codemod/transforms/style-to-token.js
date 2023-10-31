@@ -17,13 +17,11 @@ function isTopBlockStatement(path) {
   return isTop;
 }
 
-function isTopStatement(path) {
-  // VariableDeclaration and other XXXStatement is Statement also, so can't judge Statement simplely by `path.value.type`
-  // should filter by `find(j.Statement)` in advance
+function isTopIdentifier(path) {
   let isTop = true;
   path = path.parentPath;
   while (isTop && path.value.type !== 'Program') {
-    // isTopStatement => not wrapped by BlockStatement
+    // isTopIdentifier => not wrapped by BlockStatement
     if (path.value.type === 'BlockStatement') {
       isTop = false;
       break;
@@ -101,21 +99,15 @@ function importComponent(j, root, options) {
       });
 
     root
-      .find(j.Statement)
-      .filter(path => isTopStatement(path))
-      .forEach(path => {
-        const includeToken =
-          j(path).find(j.Identifier, {
-            name: name => name?.includes('token.'),
-          }).length > 0;
-        if (includeToken) {
-          // import token from @oceanbase/design
-          addSubmoduleImport(j, root, {
-            moduleName: '@oceanbase/design',
-            importedName: 'token',
-            importKind: 'value',
-          });
-        }
+      .find(j.Identifier)
+      .filter(path => isTopIdentifier(path) && path.value.name?.includes('token.'))
+      .forEach(() => {
+        // import token from @oceanbase/design
+        addSubmoduleImport(j, root, {
+          moduleName: '@oceanbase/design',
+          importedName: 'token',
+          importKind: 'value',
+        });
       });
   }
 
