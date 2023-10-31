@@ -5,6 +5,6 @@ const colorMap = {
   info: '#1890ff',
   success: '#52c41a',
   warning: '#faad14',
-  error: '#F5222D',
-  border: '1px solid #D9D9D9',
+  error: '#ff4d4f',
+  border: '1px solid #d9d9d9',
 };

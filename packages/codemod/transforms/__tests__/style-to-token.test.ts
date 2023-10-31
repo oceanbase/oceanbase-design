@@ -8,6 +8,7 @@ const tests = [
   // 'nested-block-statement',
   // 'existed-useToken',
   'statement',
+  'case-insensitive',
 ];
 
 describe(testUnit, () => {
