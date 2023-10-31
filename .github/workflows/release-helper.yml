@@ -3,7 +3,7 @@
 # 4. Then the new tags will trigger this current action
 # 5. The action will generate a new release, and publish DingDing notification at the same time
 
-name: Release Helper 
+name: Release Helper
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Release Oceanbase Design
-        uses: dengfuping/monorepo-release-helper@v1.7
+        uses: dengfuping/monorepo-release-helper@v1
         with:
           branch: 'master'
           changelogs: 'docs/design/design-CHANGELOG.md, docs/ui/ui-CHANGELOG.md, docs/charts/charts-CHANGELOG.md, docs/codemod/codemod-CHANGELOG.md'
