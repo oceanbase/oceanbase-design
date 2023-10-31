@@ -170,9 +170,7 @@ const Header: React.FC<HeaderProps> = ({
             )}
 
             {showLocale && (
-              <span className={`${prefixCls}-extra-item`}>
-                <LocaleDropdown locales={locales || langs} />
-              </span>
+              <LocaleDropdown locales={locales || langs} className={`${prefixCls}-extra-item`} />
             )}
 
             {userMenu ? (
@@ -223,9 +221,11 @@ const Header: React.FC<HeaderProps> = ({
             )}
 
             {showLocale && (
-              <span className={`${prefixCls}-extra-item`}>
-                <LocaleDropdown showLabel={true} locales={locales || langs} />
-              </span>
+              <LocaleDropdown
+                showLabel={true}
+                locales={locales || langs}
+                className={`${prefixCls}-extra-item`}
+              />
             )}
 
             {userMenu ? (
