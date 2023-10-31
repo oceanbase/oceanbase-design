@@ -3,6 +3,7 @@ import { Tag, theme } from '@oceanbase/design';
 import { Link, useFullSidebarData, useSidebarData } from 'dumi';
 import React, { useMemo } from 'react';
 import useLocation from './useLocation';
+import useSiteToken from './useSiteToken';
 
 export interface UseMenuOptions {
   before?: React.ReactNode;
@@ -14,7 +15,7 @@ const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => 
   const { pathname, search } = useLocation();
   const sidebarData = useSidebarData();
   const { before, after } = options;
-  const { token } = theme.useToken();
+  const { token } = useSiteToken();
 
   const menuItems = useMemo<MenuProps['items']>(() => {
     const sidebarItems = [...(sidebarData ?? [])];

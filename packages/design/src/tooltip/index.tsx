@@ -1,13 +1,14 @@
 import { Tooltip as AntTooltip, Space } from 'antd';
 import type { TooltipPropsWithTitle as AntTooltipPropsWithTitle } from 'antd/es/tooltip';
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CloseOutlined } from '@oceanbase/icons';
+import classNames from 'classnames';
 import { isNil } from 'lodash';
 import { token } from '../static-function';
 import MouseTooltip from './MouseTooltip';
 import ConfigProvider from '../config-provider';
 import useStyle from './style';
-import classNames from 'classnames';
+import { useTooltipTypeList } from './hooks/useTooltipTypeList';
 
 export * from 'antd/es/tooltip';
 
@@ -20,34 +21,6 @@ export interface TooltipProps extends AntTooltipPropsWithTitle {
   onClose?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-export const getTooltipTypeList = () => [
-  {
-    type: 'light',
-    color: token.colorText,
-    backgroundColor: token.colorBgElevated,
-  },
-  {
-    type: 'success',
-    color: token.colorSuccess,
-    backgroundColor: token.colorSuccessBg,
-  },
-  {
-    type: 'info',
-    color: token.colorInfo,
-    backgroundColor: token.colorInfoBg,
-  },
-  {
-    type: 'warning',
-    color: token.colorWarning,
-    backgroundColor: token.colorWarningBg,
-  },
-  {
-    type: 'error',
-    color: token.colorError,
-    backgroundColor: token.colorErrorBg,
-  },
-];
-
 type CompoundedComponent = React.FC<TooltipProps> & {
   /** @internal */
   __ANT_TOOLTIP: boolean;
@@ -55,15 +28,20 @@ type CompoundedComponent = React.FC<TooltipProps> & {
 
 const Tooltip: CompoundedComponent = ({
   children,
+  title,
   type = 'default',
   color,
-  overlayInnerStyle,
   mouseFollow,
   closeIcon = false,
   onClose,
-  title,
+  open,
+  defaultOpen,
+  onOpenChange,
+  visible,
+  defaultVisible,
+  onVisibleChange,
+  overlayInnerStyle,
   className,
-  open: propOpen,
   ...restProps
 }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -73,9 +51,17 @@ const Tooltip: CompoundedComponent = ({
   const { wrapSSR, hashId } = useStyle(prefixCls);
 
   const tooltipCls = classNames(className, hashId);
-  const [innerOpen, setInnerOpen] = useState(undefined);
+  const [innerOpen, setInnerOpen] = useState(open ?? visible ?? defaultOpen ?? defaultVisible);
 
-  const open = isNil(propOpen) ? innerOpen : propOpen;
+  const newOpen = open ?? visible ?? innerOpen;
+
+  useEffect(() => {
+    if (!isNil(open)) {
+      setInnerOpen(open);
+    } else if (!isNil(visible)) {
+      setInnerOpen(visible);
+    }
+  }, [open, visible]);
 
   const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -88,30 +74,27 @@ const Tooltip: CompoundedComponent = ({
     setInnerOpen(false);
   };
 
-  const hasCloseIcon = !!closeIcon;
-
-  const CloseIconNode = useMemo(() => {
-    if (!hasCloseIcon) {
-      return null;
-    }
-    return closeIcon === true ? (
+  const closeIconNode = closeIcon ? (
+    closeIcon === true ? (
       <CloseOutlined className={`${prefixCls}-close-icon`} onClick={handleCloseClick} />
     ) : (
       <span className={`${prefixCls}-close-icon`} onClick={handleCloseClick}>
         {closeIcon}
       </span>
-    );
-  }, [closeIcon]);
+    )
+  ) : null;
 
   const titleNode = typeof title === 'function' ? title() : title;
-  const titleWithCloseIcon = (
+  const newTitle = closeIcon ? (
     <Space className={`${prefixCls}-close-icon-wrap`}>
       {titleNode}
-      {CloseIconNode}
+      {closeIconNode}
     </Space>
+  ) : (
+    titleNode
   );
 
-  const typeList = getTooltipTypeList();
+  const typeList = useTooltipTypeList();
   const typeItem = typeList.find(item => item.type === type);
   return wrapSSR(
     mouseFollow ? (
@@ -129,11 +112,14 @@ const Tooltip: CompoundedComponent = ({
       </MouseTooltip>
     ) : (
       <AntTooltip
-        title={hasCloseIcon ? titleWithCloseIcon : title}
+        title={newTitle}
         color={color || typeItem?.backgroundColor}
-        open={open}
-        onOpenChange={newOpen => {
-          setInnerOpen(newOpen);
+        open={newOpen}
+        defaultOpen={defaultOpen}
+        onOpenChange={value => {
+          setInnerOpen(value);
+          onVisibleChange?.(value);
+          onOpenChange?.(value);
         }}
         overlayInnerStyle={{
           color: typeItem?.color,

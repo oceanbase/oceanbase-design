@@ -75,7 +75,6 @@ const NotificationCenter = () => {
         api,
         successCb: (data, id) => {
           const { status, fileName, fileUrl } = data || {};
-
           if ([TASK_CENTER_STATUS.SUCCESS, TASK_CENTER_STATUS.FAILED].includes(status)) {
             popNotificationQueue(id);
             const typeMap = {
@@ -89,6 +88,7 @@ const NotificationCenter = () => {
             return {
               type: typeMap[status],
               config: {
+                key: id,
                 top: 78,
                 duration: null,
                 message: msgMap[status],

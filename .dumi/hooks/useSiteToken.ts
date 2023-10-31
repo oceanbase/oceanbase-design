@@ -4,14 +4,13 @@ import { ConfigProvider, theme } from '@oceanbase/design';
 const { useToken } = theme;
 
 const useSiteToken = () => {
-  const result = useToken();
+  const { token, ...rest } = useToken();
   const { getPrefixCls, iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const rootPrefixCls = getPrefixCls();
-  const { token } = result;
   const siteMarkdownCodeBg = token.colorFillTertiary;
 
   return {
-    ...result,
+    ...rest,
     token: {
       ...token,
       headerHeight: 64,

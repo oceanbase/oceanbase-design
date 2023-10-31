@@ -2,7 +2,7 @@ import { Button, Input, message, Popover } from '@oceanbase/design';
 import type { PasswordProps as InputPasswordProps } from '@oceanbase/design/es/input';
 import RandExp from 'randexp';
 import React, { useState } from 'react';
-import { token } from '@oceanbase/design';
+import { theme } from '@oceanbase/design';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
@@ -41,6 +41,7 @@ const Password: React.FC<PasswordProps> = ({
   generatePasswordRegex,
   ...restProps
 }) => {
+  const { token } = theme.useToken();
   const [fieldError, setFieldError] = useState<string[]>([]);
   const [isValidating, setIsValidating] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
