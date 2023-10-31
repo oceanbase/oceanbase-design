@@ -5,7 +5,7 @@ const Demo = () => {
   const { token } = theme.useToken();
   const columns = [{
     render: () => {
-      return <Tooltip color={token.colorBgContainer} backgroundColor="#fff1f0" borderColor={token.colorBgLayout} border={`1px solid ${token.colorBgLayout}`} />;
+      return <Tooltip color={token.colorBgContainer} backgroundColor={token.colorErrorBg} borderColor={token.colorBgLayout} border={`1px solid ${token.colorBgLayout}`} />;
     },
   }];
   return (
