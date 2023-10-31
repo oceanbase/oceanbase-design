@@ -48,7 +48,7 @@ const App: React.FC = () => {
           </Tabs>
           <Input.Search allowClear />
           <Input.TextArea allowClear />
-          <Select defaultValue="demo" options={[{ value: 'demo' }]} />
+          <Select defaultValue="demo" options={[{ value: 'demo', label: 'demo' }]} />
           <DatePicker />
           <DatePicker.RangePicker />
           <Button>Button</Button>

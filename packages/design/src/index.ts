@@ -16,6 +16,8 @@ export { message, notification, token } from './static-function';
 export { default as Table } from './table';
 
 export { default as Tabs } from './tabs';
+export { default as Tag } from './tag';
+export { default as Select } from './select';
 export type { TabsProps } from './tabs';
 
 export { default as theme } from './theme';

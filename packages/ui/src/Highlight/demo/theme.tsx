@@ -35,7 +35,7 @@ export default () => {
           })}
         </Select>
         主题选择:
-        <Select<'light' | 'dark'>
+        <Select
           defaultValue={DEFAULT_THEME}
           style={{ width: 120 }}
           onChange={value => setTheme(value)}

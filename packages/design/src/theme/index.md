@@ -27,45 +27,7 @@ export default () {
 
 ### 在 React 中使用
 
-- <Badge>⭐️ 推荐</Badge> 通过 `token` 对象来获取 Design Token，和 `useToken` 获取的值完全相同，且有两大优势:
-  - 使用时不用声明 `useToken`，`@oceanbase/design` 会帮你在 ConfigProvider 中自动注入，以降低业务调用成本。
-  - 支持在 React 类组件中使用。
-
-```tsx | pure
-// 无需声明 useToken，即引即用
-import { Button, ConfigProvider, token } from '@oceanbase/design';
-import React from 'react';
-
-const App: React.FC = () => {
-  return (
-    <ConfigProvider>
-      <Button style={{ backgroundColor: token.colorPrimary }}>Button</Button>
-    </ConfigProvider>
-  );
-};
-
-export default App;
-```
-
-```tsx | pure
-// 支持在 React 类组件中使用
-import { Button, ConfigProvider, token } from '@oceanbase/design';
-import React from 'react';
-
-class App extends React.Component {
-  render() {
-    return (
-      <ConfigProvider>
-        <Button style={{ backgroundColor: token.colorPrimary }}>Button</Button>
-      </ConfigProvider>
-    );
-  }
-}
-
-export default App;
-```
-
-- 当然，也可以通过 `useToken` hook 来获取 Design Token。只不过在实际的业务场景中会比较繁琐，而且只能在函数组件中使用。
+- 如果是函数组件，推荐使用 `useToken` hook 来获取 Design Token:
 
 ```tsx | pure
 import { Button, useToken } from '@oceanbase/design';
@@ -80,9 +42,24 @@ const App: React.FC = () => {
 export default App;
 ```
 
+- 如果是类组件，可以通过 `token` 对象来获取 Design Token:
+
+```tsx | pure
+import { Button, ConfigProvider, token } from '@oceanbase/design';
+import React from 'react';
+
+class App extends React.Component {
+  render() {
+    return <Button style={{ backgroundColor: token.colorPrimary }}>Button</Button>;
+  }
+}
+
+export default App;
+```
+
 ### 在非 React 中使用
 
-- 在常量文件、dva model 等非 React 环境下，也可以使用 `token` 对象来获取 Design Token。
+- 在常量文件、dva model 等非 React 环境下，可以使用 `token` 对象来获取 Design Token。
 
 ```ts
 import { token } from '@oceanbase/design';

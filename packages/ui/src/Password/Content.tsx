@@ -1,7 +1,7 @@
 import { CheckCircleFilled, CloseCircleFilled, LoadingOutlined } from '@oceanbase/icons';
 import { Progress, Space } from '@oceanbase/design';
 import React from 'react';
-import { token } from '@oceanbase/design';
+import { theme } from '@oceanbase/design';
 
 export interface Validator {
   validate: (value?: string) => boolean;
@@ -18,6 +18,7 @@ const Content: React.FC<{
   value?: string;
   isTouched: boolean;
 }> = ({ rules, fieldError, isValidating, value, isTouched }) => {
+  const { token } = theme.useToken();
   const statusIconMap = {
     error: <CloseCircleFilled style={{ color: token.colorError }} />,
     success: <CheckCircleFilled style={{ color: token.colorSuccess }} />,

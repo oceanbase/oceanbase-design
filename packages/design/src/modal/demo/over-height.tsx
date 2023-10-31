@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Modal, token } from '@oceanbase/design';
+import { Button, Modal, theme } from '@oceanbase/design';
 
 export default () => {
   const [open, setOpen] = useState(false);
+  const { token } = theme.useToken();
 
   return (
     <>

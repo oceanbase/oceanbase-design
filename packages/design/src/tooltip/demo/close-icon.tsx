@@ -1,40 +1,46 @@
-import { Space, Tooltip, Button } from '@oceanbase/design';
-import { CloseCircleOutlined } from '@oceanbase/icons';
+import { Button, Space, Tooltip, message } from '@oceanbase/design';
+import { CloseCircleOutlined, ReloadOutlined, SyncOutlined } from '@oceanbase/icons';
 import React, { useState } from 'react';
 
 const App: React.FC = () => {
-  const [open, setOpen] = useState(true);
-  const log = (e: React.MouseEvent<HTMLElement>) => {
-    console.log(e);
-  };
+  const [open1, setOpen1] = useState(true);
+  const [open2, setOpen2] = useState(true);
 
   return (
-    <Space>
-      <Tooltip title="This is prompt text" closeIcon={true}>
-        <Button>Default Close Tooltip</Button>
-      </Tooltip>
-
+    <Space size={24}>
       <Tooltip
         title="This is prompt text"
-        open={open}
+        open={open1}
         closeIcon={true}
         onClose={() => {
-          setOpen(false);
-        }}
-        onOpenChange={v => {
-          setOpen(v);
+          setOpen1(false);
+          message.success('Default close icon is clicked');
         }}
       >
-        <Button>Set open</Button>
+        <Button>Default close icon</Button>
       </Tooltip>
       <Tooltip
-        title="This is prompt text This is prompt text This is prompt text This is prompt text"
+        title="This is prompt text"
+        open={open2}
         closeIcon={<CloseCircleOutlined />}
-        onClose={log}
+        onClose={() => {
+          setOpen2(false);
+          message.success('Custom close icon is clicked');
+        }}
       >
-        <Button>Customize closeIcon</Button>
+        <Button>Custom close icon</Button>
       </Tooltip>
+      <Button
+        icon={<ReloadOutlined />}
+        onClick={() => {
+          setOpen1(true);
+          setOpen2(true);
+        }}
+      >
+        Reset
+      </Button>
     </Space>
   );
 };
+
 export default App;

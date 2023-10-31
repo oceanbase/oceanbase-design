@@ -91,7 +91,7 @@ function getRunnerArgs(transformerPath, parser = 'babylon', options = {}) {
     // override default babylon parser config to enable `decorator-legacy`
     // https://github.com/facebook/jscodeshift/blob/master/parser/babylon.js
     parserConfig: require('./babylon.config.json'),
-    extensions: ['js', 'jsx', 'ts', 'tsx', 'd.ts'].join(','),
+    extensions: ['js', 'jsx', 'ts', 'tsx'].join(','),
     transform: transformerPath,
     ignorePattern: '**/node_modules',
     ignoreConfig,
@@ -291,9 +291,9 @@ async function bootstrap() {
     console.log('[Prettier] format files running...');
     try {
       const isDir = isDirectory.sync(dir);
-      const path = isDir ? path.join(dir, '**/*.{js,jsx,ts,tsx,d.ts}') : dir;
+      const targetPath = isDir ? path.join(dir, '**/*.{js,jsx,ts,tsx}') : dir;
       const npxCommand = commandExistsSync('tnpx') ? 'tnpx' : 'npx';
-      await execa(npxCommand, ['prettier', '--write', path], { stdio: 'inherit' });
+      await execa(npxCommand, ['prettier', '--write', targetPath], { stdio: 'inherit' });
       console.log('\n[Prettier] format files completed!\n');
     } catch (err) {
       console.log('\n[Prettier] format files failed, please format it by yourself.\n', err);
