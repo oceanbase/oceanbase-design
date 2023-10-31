@@ -30,6 +30,11 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         minHeight: 'auto',
       },
       [`${antCls}-page-header`]: {
+        // 减小内容区左右两侧间距
+        paddingInlineStart: paddingLG,
+        paddingInlineEnd: paddingLG,
+        paddingBlockStart: padding,
+        paddingBlockEnd: padding,
         [`${antCls}-page-header-breadcrumb`]: {
           // overwritten pro-components style
           paddingBlockStart: 0,
@@ -60,13 +65,6 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         [`${antCls}-page-header-footer`]: {
           marginBlockStart: 0,
         },
-      },
-      // 减小内容区左右两侧间距
-      [`${antCls}-page-header`]: {
-        paddingInlineStart: paddingLG,
-        paddingInlineEnd: paddingLG,
-        paddingBlockStart: padding,
-        paddingBlockEnd: padding,
       },
       [`${componentCls}-children-container`]: {
         paddingInline: paddingLG,
