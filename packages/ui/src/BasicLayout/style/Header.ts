@@ -5,7 +5,7 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 export type HeaderToken = FullToken<any>;
 
 export const genHeaderStyle: GenerateStyle<HeaderToken> = (token: HeaderToken): CSSObject => {
-  const { antCls, componentCls } = token;
+  const { componentCls } = token;
 
   return {
     [`${componentCls}`]: {
