@@ -14,7 +14,7 @@ export default {
     },
   },
   Input: {
-    ...zhTW.Input,
+    // ...zhTW.Input,
     Password: {
       lengthRuleMessage: '長度為 8~32 個字符',
       charRuleMessage: '只能包含字母、數字和特殊字符（~!@#%^&*_-+=|(){}[]:;,.?/`$"<>\\）',

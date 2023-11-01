@@ -14,7 +14,7 @@ export default {
     },
   },
   Input: {
-    ...enUS.Input,
+    // ...enUS.Input,
     Password: {
       lengthRuleMessage: '8 to 32 characters',
       charRuleMessage:

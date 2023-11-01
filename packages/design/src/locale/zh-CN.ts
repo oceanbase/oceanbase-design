@@ -14,7 +14,7 @@ export default {
     },
   },
   Input: {
-    ...zhCN.Input,
+    // ...zhCN.Input,
     Password: {
       lengthRuleMessage: '长度为 8~32 个字符',
       charRuleMessage: '只能包含字母、数字和特殊字符（~!@#%^&*_-+=|(){}[]:;,.?/`$"<>\\）',
