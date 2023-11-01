@@ -64,6 +64,7 @@ export const genTagSelectStyle: GenerateStyle<TagSelectToken> = (
       marginRight: token.marginXS,
       padding: `${token.paddingXXS}px ${token.paddingContentHorizontal}px`,
       cursor: 'pointer',
+      transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
       [`${componentCls}-input`]: {
         width: 0,
         height: 0,
@@ -98,15 +99,15 @@ export const genTagSelectStyle: GenerateStyle<TagSelectToken> = (
     [`${componentCls}-large`]: genSizeStyle(token.paddingContentVerticalSM, token.fontSize),
     [`${componentCls}-small`]: genSizeStyle(0, token.fontSize),
     [`${componentCls}-wrapper:not(${componentCls}-disabled):hover`]: {
-      color: token.colorPrimaryTextHover,
+      borderColor: token.colorPrimaryText,
     },
     [`${componentCls}-checked`]: genColoredStyle(
       token.blue,
       token.colorPrimaryBg,
       token.colorPrimaryText
     ),
-    [`${componentCls}-wrapper${componentCls}-checked:not(${componentCls}-disabled):focus-within`]: {
-      boxShadow: `0 1px 3px 0px #000`,
+    [`${componentCls}-wrapper:not(${componentCls}-disabled):active`]: {
+      boxShadow: `0px 0px 3px ${token.colorPrimary}`,
       borderColor: `${token.colorPrimary}`,
     },
     [`${componentCls}-checked:not(${componentCls}-disabled)`]: {
