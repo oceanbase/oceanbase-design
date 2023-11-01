@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button, ConfigProvider, notification, Space } from '@oceanbase/design';
+import { Button, ConfigProvider, notification, Space, theme } from '@oceanbase/design';
 
 export default () => {
   // 在应用外围包裹一次 ConfigProvider 即可
   return (
-    <ConfigProvider>
+    <ConfigProvider theme={theme}>
       <Space>
         <Button
           onClick={() => {
