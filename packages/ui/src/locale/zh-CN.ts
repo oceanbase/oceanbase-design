@@ -8,7 +8,7 @@ import GraphToolbar from '../GraphToolbar/locale/zh-CN';
 import Highlight from '../Highlight/locale/zh-CN';
 import Login from '../Login/locale/zh-CN';
 import PageContainer from '../PageContainer/locale/zh-CN';
-import { default as Boundary, default as Password } from '../Password/locale/zh-CN';
+import Boundary from '../Boundary/locale/en-US';
 import Ranger from '../Ranger/locale/zh-CN';
 import SideTip from '../SideTip/locale/zh-CN';
 import TaskGraph from '../TaskGraph/locale/zh-CN';
@@ -25,7 +25,6 @@ export default {
   GraphToolbar,
   TaskGraph,
   Ranger,
-  Password,
   Boundary,
   Dialog,
   SideTip,

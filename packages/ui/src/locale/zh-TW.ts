@@ -6,7 +6,7 @@ import DocDialog from '../DocDialog/locale/zh-TW';
 import GraphToolbar from '../GraphToolbar/locale/zh-TW';
 import Login from '../Login/locale/zh-TW';
 import PageContainer from '../PageContainer/locale/zh-TW';
-import { default as Boundary, default as Password } from '../Password/locale/zh-TW';
+import Boundary from '../Boundary/locale/en-US';
 import Ranger from '../Ranger/locale/zh-TW';
 import TaskGraph from '../TaskGraph/locale/zh-TW';
 import Welcome from '../Welcome/locale/zh-TW';
@@ -22,7 +22,6 @@ export default {
   GraphToolbar,
   TaskGraph,
   Ranger,
-  Password,
   Boundary,
   Dialog,
   DocDialog,

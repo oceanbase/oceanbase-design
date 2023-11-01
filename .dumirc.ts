@@ -177,7 +177,6 @@ export default defineConfig({
             },
             { title: 'Ranger 日期快速选择', link: '/biz-components/ranger' },
             { title: 'TreeSearch 树搜索', link: '/biz-components/tree-search' },
-            { title: 'Password 密码输入框', link: '/biz-components/password' },
             { title: 'Boundary 错误兜底', link: '/biz-components/boundary' },
             { title: 'Dialog 嵌入弹窗', link: '/biz-components/dialog' },
             { title: 'DocDialog 文档嵌入弹窗', link: '/biz-components/doc-dialog' },

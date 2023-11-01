@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form } from '@oceanbase/design';
-import { Input } from 'antd';
+import { Button, Form, Input } from '@oceanbase/design';
 
 const App: React.FC = () => {
   const [form] = Form.useForm();
@@ -49,7 +48,7 @@ const App: React.FC = () => {
           },
         ]}
       >
-        <Input.Password onValidate={setPassed} rules={true}/>
+        <Input.Password onValidate={setPassed} rules={true} />
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" onClick={onSubmit}>

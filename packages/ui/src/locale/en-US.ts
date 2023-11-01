@@ -8,7 +8,6 @@ import FullscreenBox from '../FullscreenBox/locale/en-US';
 import GraphToolbar from '../GraphToolbar/locale/en-US';
 import Login from '../Login/locale/en-US';
 import PageContainer from '../PageContainer/locale/en-US';
-import Password from '../Password/locale/en-US';
 import Ranger from '../Ranger/locale/en-US';
 import SideTip from '../SideTip/locale/en-US';
 import TaskGraph from '../TaskGraph/locale/en-US';
@@ -25,7 +24,6 @@ export default {
   GraphToolbar,
   TaskGraph,
   Ranger,
-  Password,
   Boundary,
   Dialog,
   SideTip,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input } from 'antd';
+import { Input as AntInput } from 'antd';
 import type { PasswordProps as AntdPasswordProps } from 'antd/es/input';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import RandExp from 'randexp';
@@ -14,7 +14,7 @@ import useEncrypt from '../../_util/useEncrypt';
 import Content from './Content';
 import type { Validator } from './Content';
 
-const AntPassword = Input.Password;
+const AntPassword = AntInput.Password;
 
 export interface PasswordLocale {
   lengthRuleMessage?: string;
@@ -34,7 +34,7 @@ export interface PasswordProps extends AntdPasswordProps {
   // RSA 加密用的公钥，如果需要进行密码加密，传入公钥即可
   publicKey?: string;
   // 自定义加密算法 需要将加密后结果 return
-  customEncryption?: (value?: string) => string;
+  customEncryption?: (value?: any) => void;
   onChange?: (value?: any) => void;
   rules?: boolean | Validator[];
   onValidate?: (passed: boolean) => void;
@@ -42,7 +42,9 @@ export interface PasswordProps extends AntdPasswordProps {
   locale?: PasswordLocale;
 }
 
-const Password: React.FC<PasswordProps> = ({
+type CompoundedComponent = React.FC<PasswordProps>;
+
+const Password: CompoundedComponent = ({
   value,
   locale: customLocale,
   rules = false,
@@ -82,7 +84,8 @@ const Password: React.FC<PasswordProps> = ({
       message: passwordLocale.strengthRuleMessage,
     },
   ];
-  const newRules = rules && (Array.isArray(rules) &&  rules?.length > 0) ? rules : (rules ? defaultRules : []);
+  const newRules =
+    rules && Array.isArray(rules) && rules?.length > 0 ? rules : rules ? defaultRules : [];
 
   const handleChange = (newValue?: string) => {
     if (!isTouched) {
@@ -132,14 +135,16 @@ const Password: React.FC<PasswordProps> = ({
         <Popover
           trigger="click"
           placement="right"
-          content={newRules?.length > 0 ?
-            <Content
-              isTouched={isTouched}
-              value={value}
-              isValidating={isValidating}
-              rules={newRules}
-              fieldError={fieldError}
-            /> : null
+          content={
+            newRules?.length > 0 ? (
+              <Content
+                isTouched={isTouched}
+                value={value}
+                isValidating={isValidating}
+                rules={newRules}
+                fieldError={fieldError}
+              />
+            ) : null
           }
           overlayStyle={{ maxWidth: 400 }}
         >
@@ -210,4 +215,6 @@ const Password: React.FC<PasswordProps> = ({
 
 const InputPassword = Password as typeof AntPassword;
 
-export default InputPassword;
+AntInput.Password = InputPassword;
+
+export default AntInput.Password as React.FC<PasswordProps>;
