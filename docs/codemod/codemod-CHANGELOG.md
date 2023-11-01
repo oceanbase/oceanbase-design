@@ -8,6 +8,23 @@ group: 自动化迁移工具
 
 ---
 
+## 0.2.8
+
+`2023-10-31`
+
+- 📖 新增 `@oceanbase/design`、`@oceanbase/ui` 和 `@oceanbase/charts` 基于 @oceanbase/codemod 的自动化迁移文档。[#243](https://github.com/oceanbase/oceanbase-design/pull/243)
+- ⭐️ 支持更多颜色值到 Design Token 的自动改写。[#252](https://github.com/oceanbase/oceanbase-design/pull/252)
+- 🐞 修复 `prettier` 代码格式化执行报错的问题。[#236](https://github.com/oceanbase/oceanbase-design/pull/236)
+- 🐞 修复颜色值的匹配规则不严谨导致 token 改写错误的问题。[#238](https://github.com/oceanbase/oceanbase-design/pull/238)
+- 🐞 修复部分颜色值由于大小写敏感没有被改写为 token 的问题。[#244](https://github.com/oceanbase/oceanbase-design/pull/244)
+- style-to-token
+  - 🐞 修复 `JSX` 属性中的颜色值改写后缺少 `{}` 的问题。[#234](https://github.com/oceanbase/oceanbase-design/pull/234)
+  - 🐞 修复 `const { token } = theme.useToken();` 被重复声明的问题。[#240](https://github.com/oceanbase/oceanbase-design/pull/240)
+  - 🐞 修复在非块语句下没有导入 `token` 对象的问题。[#250](https://github.com/oceanbase/oceanbase-design/pull/250)
+- less-to-token
+  - 🐞 修复转换脚本执行报错的问题。[#235](https://github.com/oceanbase/oceanbase-design/pull/235)
+  - 🐞 修复指定单个非 `less` 文件时解析报错的问题。[#242](https://github.com/oceanbase/oceanbase-design/pull/242)
+
 ## 0.2.7
 
 `2023-10-26`

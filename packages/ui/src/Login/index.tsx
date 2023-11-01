@@ -166,11 +166,7 @@ const Login: React.FC<LoginProps> = props => {
           </div>
         </div>
         <div className={`${prefix}-card`}>
-          {showLocale && (
-            <span className={`${prefix}-locale`}>
-              <LocaleDropdown locales={locales} />
-            </span>
-          )}
+          {showLocale && <LocaleDropdown locales={locales} className={`${prefix}-locale`} />}
           {board && <div className={`${prefix}-board`}>{board}</div>}
           <div className={`${prefix}-content`}>
             {showActivate ? (

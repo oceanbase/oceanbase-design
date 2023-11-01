@@ -8,6 +8,13 @@ group: 基础组件
 
 ---
 
+## 0.2.25
+
+`2023-10-31`
+
+- 🔥 新增 Tag 组件，优化 border 样式以弱化边框，内容超长支持自动省略，可通过 `ellipsis` 属性进行控制。[#113](https://github.com/oceanbase/oceanbase-design/pull/113) [@wdyea-ya](https://github.com/wdyea-ya)
+- 🐞 修复 Tooltip 未兼容 `visible` 属性导致显示和隐藏无法受控的问题。[#231](https://github.com/oceanbase/oceanbase-design/pull/231)
+
 ## 0.2.24
 
 `2023-10-26`

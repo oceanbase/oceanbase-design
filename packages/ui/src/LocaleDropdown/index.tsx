@@ -5,7 +5,7 @@ import type { DropdownProps } from '@oceanbase/design/es/dropdown';
 import React from 'react';
 import { LOCALE_LIST } from '../constant';
 import type { Locale } from '../interface';
-import { getLocale, getPrefix, setLocale } from '../_util';
+import { getLocale, setLocale } from '../_util';
 
 export interface LocaleDropdownProps extends DropdownProps {
   // 自定义语言列表
@@ -13,9 +13,12 @@ export interface LocaleDropdownProps extends DropdownProps {
   showLabel?: boolean;
 }
 
-const prefix = getPrefix('layout-header');
-
-const LocaleDropdown: React.FC<LocaleDropdownProps> = ({ locales, showLabel, ...restProps }) => {
+const LocaleDropdown: React.FC<LocaleDropdownProps> = ({
+  locales,
+  showLabel,
+  className,
+  ...restProps
+}) => {
   // 语言切换菜单
   const localeMenu = (
     <Menu
@@ -47,7 +50,7 @@ const LocaleDropdown: React.FC<LocaleDropdownProps> = ({ locales, showLabel, ...
           {findByValue(LOCALE_LIST, getLocale()).minLabel}
         </span>
       ) : (
-        <Space className={`${prefix}-extra-item`}>
+        <Space className={className}>
           <GlobalOutlined />
           {findByValue(LOCALE_LIST, getLocale()).shortLabel}
         </Space>
