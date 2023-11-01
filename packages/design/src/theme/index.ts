@@ -28,8 +28,7 @@ export default {
   defaultConfig,
   components: {
     InputNumber: {
-      handleVisible: true 
-      // as true,
+      handleVisible: true as true,
     },
   },
 };
