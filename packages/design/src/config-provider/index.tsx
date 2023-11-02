@@ -93,6 +93,7 @@ const ConfigProvider = ({
             },
             Segmented: {
               itemSelectedColor: token.colorPrimary,
+              itemHoverBg: theme?.isDark,
             },
           },
         },

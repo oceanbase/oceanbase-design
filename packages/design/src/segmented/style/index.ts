@@ -12,7 +12,7 @@ export const genSegmentedStyle: GenerateStyle<SegmentedToken> = (
   return {
     [`${componentCls}`]: {
       [`${componentCls}-ellipsis`]: {
-        maxWidth: '68px',
+        // maxWidth: '68px',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',

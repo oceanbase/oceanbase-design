@@ -10,8 +10,19 @@ nav:
 
 ## 代码演示
 
+### 基本使用
+
 <code src="./demo/basic.tsx" title="基本"></code>
 
+### 省略展示
+
+ellipsis 传 false 直接展示，默认为 true 隐藏展示，支持省略名字 <code src="./demo/ellipsisItem.tsx" title="省略展示"></code>
+
 ## API
+
+| 参数     | 说明             | 类型    | 默认值 | 版本 |     |
+| :------- | :--------------- | :------ | :----- | :--- | --- |
+| ellipsis | 省略             | boolean | false  | -    |
+| width    | 省略文本展示宽度 | String  | 68px   | -    |
 
 - 更多 API 详见 antd Segmented 文档: https://ant.design/components/segmented-cn
