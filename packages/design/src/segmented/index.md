@@ -12,11 +12,11 @@ nav:
 
 ### 基本使用
 
-<code src="./demo/basic.tsx" title="基本"></code>
+<code src="./demo/basic.tsx" ></code>
 
 ### 省略展示
 
-ellipsis 传 false 直接展示，默认为 true 隐藏展示，支持省略名字 <code src="./demo/ellipsisItem.tsx" title="省略展示"></code>
+ellipsis 传 false 直接展示，默认为 true 隐藏展示，支持省略名字 <code src="./demo/ellipsisItem.tsx" ></code>
 
 ## API
 
