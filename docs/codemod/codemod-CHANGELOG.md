@@ -8,6 +8,13 @@ group: 自动化迁移工具
 
 ---
 
+## 0.2.9
+
+`2023-11-03`
+
+- 🐞 修复 less 函数 `.mixin()` 被错误改写为 `@mixin()` 的问题。[#261](https://github.com/oceanbase/oceanbase-design/pull/261)
+- 🐞 修复 `pro-components` 成员没有正确从 `@alipay/ob-ui` 迁移到 `@oceanbase/ui` 的问题。[#262](https://github.com/oceanbase/oceanbase-design/pull/262)
+
 ## 0.2.8
 
 `2023-10-31`
