@@ -70,11 +70,11 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
   }
 );
 
-Card.Grid = AntCard.Grid;
-Card.Meta = AntCard.Meta;
-
 if (process.env.NODE_ENV !== 'production') {
   Card.displayName = AntCard.displayName;
 }
 
-export default Card;
+export default Object.assign(Card, {
+  Grid: AntCard.Grid,
+  Meta: AntCard.Meta,
+});
