@@ -32,21 +32,11 @@ const findAllLessFiles = dir => {
   return lessFiles;
 };
 
-/**
- * 将 lesscode 转化为 ast
- * @returns ASR
- */
-const less2AST = code =>
-  postcss([])
-    .process(code, {
-      parser: postcssLess.parse,
-      from: undefined,
-    })
-    .then(result => result.root);
-
 async function transform(file) {
   const content = fs.readFileSync(file, 'utf-8');
-  const ast = await less2AST(content);
+  const { root: ast } = await postcss([]).process(content, {
+    syntax: postcssLess,
+  });
   let modified = false;
   let tokenLessImported = false;
   // 遍历 AST
@@ -70,7 +60,7 @@ async function transform(file) {
       params: "'~@oceanbase/design/es/theme/index.less'",
     });
   }
-  return ast.toString();
+  return ast.toString(postcssLess.stringify);
 }
 
 async function lessToToken(file) {

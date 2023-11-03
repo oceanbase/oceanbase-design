@@ -1,0 +1,26 @@
+.mixin-1() {
+  color: #1890ff;
+  background: #52c41a;
+  background-color: #faad14;
+  border-color: #ff4d4f;
+  scrollbar-color: #ffffff;
+}
+
+.mixin-2 {
+  color: #1890ff;
+  background: #52c41a;
+  background-color: #faad14;
+  border-color: #ff4d4f;
+  scrollbar-color: #ffffff;
+}
+
+.container {
+  .mixin-1();
+  .mixin-2();
+  .content {
+    color: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0,0.65);
+    background-color: rgba(0,0,0,0.45);
+    border: 1px solid #d9d9d9;
+  }
+}
