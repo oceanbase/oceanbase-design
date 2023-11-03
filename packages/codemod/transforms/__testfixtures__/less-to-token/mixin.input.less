@@ -14,9 +14,20 @@
   scrollbar-color: #ffffff;
 }
 
+.mixin-3(@color) {
+  color: @color;
+}
+
+.mixin-4(@color, @background-color) {
+  color: @color;
+  background-color: @background-color;
+}
+
 .container {
   .mixin-1();
   .mixin-2();
+  .mixin-3 (#1890FF);
+  .mixin-4(#1890ff, #52c41a);
   .content {
     color: rgba(0, 0, 0, 0.85);
     background: rgba(0, 0, 0,0.65);

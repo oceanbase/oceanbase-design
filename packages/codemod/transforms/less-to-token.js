@@ -41,16 +41,24 @@ async function transform(file) {
   let tokenLessImported = false;
   // 遍历 AST
   ast.walk(node => {
-    const { key, token, formattedValue } = tokenParse(node.value);
-    if (node.type === 'decl' && token) {
-      node.value = formattedValue.replace(key, `@${token}`);
-      modified = true;
+    if (node.type === 'decl') {
+      const { key, token, formattedValue } = tokenParse(node.value);
+      if (token) {
+        node.value = formattedValue.replace(key, `@${token}`);
+        modified = true;
+      }
     } else if (node.type === 'atrule' && node.name === 'import') {
       if (node.params === "'~@oceanbase/design/es/theme/index.less'") {
         tokenLessImported = true;
       } else if (node.params === "'~@alipay/ob-ui/es/theme/index.less'") {
         node.remove();
       }
+    } else if (node.type === 'atrule') {
+      const match = node.params?.match(/\((\S+),\s*(\S+)\)/);
+      // const paramList = match.
+      console.log(match);
+      // node.params = formattedValue.replace(key, `@${token}`);
+      console.log(node);
     }
   });
   // prepend @import '~@oceanbase/design/es/theme/index.less';
