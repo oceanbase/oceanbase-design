@@ -3,7 +3,7 @@ import path from 'path';
 import { transform } from '../less-to-token';
 
 const testUnit = 'less-to-token';
-const tests = ['antd-v4-less-to-token', 'obui-less-to-token', 'case-insensitive'];
+const tests = ['antd-v4-less-to-token', 'obui-less-to-token', 'case-insensitive', 'mixin'];
 
 describe(testUnit, () => {
   tests.forEach(test => {
