@@ -1,5 +1,5 @@
 import { Select as AntSelect } from 'antd';
-import type { SelectProps as AntSelectProps } from 'antd/es/select';
+import type { SelectProps as AntSelectProps, RefSelectProps } from 'antd/es/select';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
@@ -11,13 +11,22 @@ export * from 'antd/es/select';
 
 export type SelectProps = AntSelectProps;
 
-const Select: any = ({ prefixCls: customizePrefixCls, className, ...restProps }: SelectProps) => {
-  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
-  const prefixCls = getPrefixCls('select', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
+const InternalSelect = React.forwardRef<RefSelectProps, SelectProps>(
+  ({ prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
+    const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+    const prefixCls = getPrefixCls('select', customizePrefixCls);
+    const { wrapSSR } = useStyle(prefixCls);
 
-  const selectCls = classNames(className);
-  return wrapSSR(<AntSelect prefixCls={customizePrefixCls} className={selectCls} {...restProps} />);
+    const selectCls = classNames(className);
+    return wrapSSR(
+      <AntSelect ref={ref} prefixCls={customizePrefixCls} className={selectCls} {...restProps} />
+    );
+  }
+);
+
+const Select = InternalSelect as typeof InternalSelect & {
+  Option: typeof Option;
+  OptGroup: typeof OptGroup;
 };
 
 Select.Option = Option;
