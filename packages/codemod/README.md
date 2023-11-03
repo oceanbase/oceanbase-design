@@ -14,7 +14,10 @@ Before run codemod scripts, you'd better make sure to commit your local git chan
 
 ```shell
 # Run directly through npx
+# `src` is the target directory or file that you want to transform.
 npx -p @oceanbase/codemod codemod src
+# options
+# --disablePrettier   // disable prettier
 ```
 
 ## Codemod scripts introduction
@@ -154,7 +157,7 @@ transform fixed style to antd v5 design token.
     return (
 -     <div>
 -       <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '1px solid #d9d9d9' }} />
--       <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4D4F' }}></Button>
+-       <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4d4f' }}></Button>
 -     </div>
 +     (<div>
 +       <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBorder}` }} />
@@ -183,11 +186,13 @@ export default Demo;
       return (
 -       <div>
 -         <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '#d9d9d9' }} />
--         <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4D4F' }}></Button>
+-         <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4d4f' }}></Button>
+-         <div color="#fafafa" border="1px solid #fafafa" />
 -       </div>
 +       (<div>
 +         <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBgLayout}` }} />
 +         <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
++         <div color={token.colorBgLayout} border={`1px solid ${token.colorBgLayout}`} />
 +       </div>)
       );
     }
@@ -200,11 +205,15 @@ export default Demo;
 
 ```diff
 + import { token } from '@oceanbase/design';
+- const color = '#fafafa';
+- const border = '1px solid #fafafa';
++ const color = token.colorBgLayout;
++ const border = `1px solid ${token.colorBgLayout}`;
   const colorMap = {
 -   info: '#1890ff',
 -   success: '#52c41a',
 -   warning: '#faad14',
--   error: '#ff4D4F',
+-   error: '#ff4d4f',
 -   border: '1px solid #d9d9d9',
 +   info: token.colorInfo,
 +   success: token.colorSuccess,
@@ -232,7 +241,7 @@ export default Demo;
       },
       {
         type: 'error',
--       color: '#ff4D4F',
+-       color: '#ff4d4f',
 +       color: token.colorError,
       },
       {
@@ -254,7 +263,7 @@ transform fixed less style to antd v5 design token.
 -   color: #1890ff;
 -   background: #52c41a;
 -   background-color: #faad14;
--   border-color: #ff4D4F;
+-   border-color: #ff4d4f;
 +   color: @colorInfo;
 +   background: @colorSuccess;
 +   background-color: @colorWarning;

@@ -1,12 +1,4 @@
 import { token } from '@oceanbase/design';
-const colorMap = {
-  info: token.colorInfo,
-  success: token.colorSuccess,
-  warning: token.colorWarning,
-  error: token.colorError,
-  border: `1px solid ${token.colorBorder}`,
-};
-
 function getColorList() {
   return [
     {

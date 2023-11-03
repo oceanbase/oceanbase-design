@@ -2,7 +2,7 @@ import { useMouse, useSize } from 'ahooks';
 import type { TooltipPropsWithTitle as AntTooltipPropsWithTitle } from 'antd/es/tooltip';
 import React, { useRef, useState } from 'react';
 import ReactStickyMouseTooltip from 'react-sticky-mouse-tooltip';
-import { token } from '../static-function';
+import theme from '../theme';
 
 interface MouseTooltipProps extends AntTooltipPropsWithTitle {
   /* 外部传入的 visible 并不完全控制显示和隐藏，只是作为是否显示的前提条件 */
@@ -24,6 +24,7 @@ const MouseTooltip: React.FC<MouseTooltipProps> = ({
   mouseLeaveDelay = 0.1,
   ...restProps
 }) => {
+  const { token } = theme.useToken();
   const [visible, setVisible] = useState(false);
 
   const { color: textColor, ...restOverlayInnerStyle } = overlayInnerStyle || {};

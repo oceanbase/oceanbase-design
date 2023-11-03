@@ -18,7 +18,7 @@ const findAllLessFiles = dir => {
     files.forEach(file => {
       const filePath = path.join(dir, file);
       if (isDirectory.sync(filePath)) {
-        if (filePath.includes('.umi')) {
+        if (filePath.includes('.umi') || filePath.includes('.umi-production')) {
           return;
         }
         lessFiles.push(...findAllLessFiles(filePath));
@@ -26,7 +26,7 @@ const findAllLessFiles = dir => {
         lessFiles.push(filePath);
       }
     });
-  } else {
+  } else if (dir.endsWith('.less')) {
     lessFiles.push(dir);
   }
   return lessFiles;
@@ -77,7 +77,7 @@ async function lessToToken(file) {
   const allLessFiles = findAllLessFiles(file);
   for await (const item of allLessFiles) {
     const content = await transform(item);
-    fs.writeFileSync(file, content);
+    fs.writeFileSync(item, content);
   }
 }
 

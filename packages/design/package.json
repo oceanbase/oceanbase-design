@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/design",
-  "version": "0.2.24",
+  "version": "0.2.25",
   "description": "The Design System of OceanBase",
   "keywords": [
     "oceanbase",
@@ -39,7 +39,7 @@
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.10.2",
+    "antd": "^5.10.3",
     "classnames": "^2.3.2",
     "lodash": "^4.17.21",
     "lottie-web": "^5.12.2",
