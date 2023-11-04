@@ -227,5 +227,5 @@ export default Object.assign(ForwardTable, {
   SELECTION_NONE: AntTable.SELECTION_NONE,
   Column: AntTable.Column,
   ColumnGroup: AntTable.ColumnGroup,
-  Summary: !AntTable.Summary,
+  Summary: AntTable.Summary,
 });
