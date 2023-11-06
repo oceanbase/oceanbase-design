@@ -21,15 +21,15 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
   }
 );
 
-Button.Group = AntButton.Group;
-Button.__ANT_BUTTON = (
-  AntButton as typeof AntButton & {
-    __ANT_BUTTON: boolean;
-  }
-).__ANT_BUTTON;
-
 if (process.env.NODE_ENV !== 'production') {
   Button.displayName = AntButton.displayName;
 }
 
-export default Button;
+export default Object.assign(Button, {
+  Group: AntButton.Group,
+  __ANT_BUTTON: (
+    AntButton as typeof AntButton & {
+      __ANT_BUTTON: boolean;
+    }
+  ).__ANT_BUTTON,
+});
