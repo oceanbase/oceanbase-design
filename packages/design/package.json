@@ -50,7 +50,9 @@
   "devDependencies": {
     "@babel/cli": "^7.23.0",
     "@babel/preset-env": "^7.23.2",
-    "antd-token-previewer": "^2.0.5"
+    "antd-token-previewer": "^2.0.5",
+    "rc-select": "^14.10.0",
+    "rc-table": "^7.35.2"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
