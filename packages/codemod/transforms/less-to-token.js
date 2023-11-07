@@ -37,14 +37,18 @@ async function transform(file) {
   const { root: ast } = await postcss([]).process(content, {
     syntax: postcssLess,
   });
-  let modified = false;
+  let hasToken = false;
   let tokenLessImported = false;
   // 遍历 AST
   ast.walk(node => {
-    const { key, token, formattedValue } = tokenParse(node.value);
-    if (node.type === 'decl' && token) {
-      node.value = formattedValue.replace(key, `@${token}`);
-      modified = true;
+    if (node.type === 'decl') {
+      const { key, token, formattedValue } = tokenParse(node.value);
+      if (token) {
+        node.value = formattedValue.replace(key, `@${token}`);
+        hasToken = true;
+      } else if (node.value?.includes('@')) {
+        hasToken = true;
+      }
     } else if (node.type === 'atrule' && node.name === 'import') {
       if (node.params === "'~@oceanbase/design/es/theme/index.less'") {
         tokenLessImported = true;
@@ -54,7 +58,7 @@ async function transform(file) {
     }
   });
   // prepend @import '~@oceanbase/design/es/theme/index.less';
-  if (modified && !tokenLessImported) {
+  if (hasToken && !tokenLessImported) {
     ast.prepend({
       name: 'import',
       params: "'~@oceanbase/design/es/theme/index.less'",
