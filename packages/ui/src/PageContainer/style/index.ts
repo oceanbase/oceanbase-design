@@ -29,12 +29,12 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
       [`${proComponentsCls}-grid-content`]: {
         minHeight: 'auto',
       },
-      [`${antCls}-page-header`]: {
+      [`${componentCls}-warp-page-header,${componentCls}-wrap-page-header`]: {
         // 减小内容区左右两侧间距
-        paddingInlineStart: paddingLG,
-        paddingInlineEnd: paddingLG,
-        paddingBlockStart: padding,
-        paddingBlockEnd: padding,
+        paddingInlineStart: `${paddingLG}px !important`,
+        paddingInlineEnd: `${paddingLG}px !important`,
+        paddingBlockStart: `${padding}px !important`,
+        paddingBlockEnd: `${padding}px !important`,
         [`${antCls}-page-header-breadcrumb`]: {
           // overwritten pro-components style
           paddingBlockStart: 0,
