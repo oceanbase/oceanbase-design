@@ -32,29 +32,23 @@ const findAllLessFiles = dir => {
   return lessFiles;
 };
 
-/**
- * 将 lesscode 转化为 ast
- * @returns ASR
- */
-const less2AST = code =>
-  postcss([])
-    .process(code, {
-      parser: postcssLess.parse,
-      from: undefined,
-    })
-    .then(result => result.root);
-
 async function transform(file) {
   const content = fs.readFileSync(file, 'utf-8');
-  const ast = await less2AST(content);
-  let modified = false;
+  const { root: ast } = await postcss([]).process(content, {
+    syntax: postcssLess,
+  });
+  let hasToken = false;
   let tokenLessImported = false;
   // 遍历 AST
   ast.walk(node => {
-    const { key, token, formattedValue } = tokenParse(node.value);
-    if (node.type === 'decl' && token) {
-      node.value = formattedValue.replace(key, `@${token}`);
-      modified = true;
+    if (node.type === 'decl') {
+      const { key, token, formattedValue } = tokenParse(node.value);
+      if (token) {
+        node.value = formattedValue.replace(key, `@${token}`);
+        hasToken = true;
+      } else if (node.value?.includes('@')) {
+        hasToken = true;
+      }
     } else if (node.type === 'atrule' && node.name === 'import') {
       if (node.params === "'~@oceanbase/design/es/theme/index.less'") {
         tokenLessImported = true;
@@ -64,13 +58,13 @@ async function transform(file) {
     }
   });
   // prepend @import '~@oceanbase/design/es/theme/index.less';
-  if (modified && !tokenLessImported) {
+  if (hasToken && !tokenLessImported) {
     ast.prepend({
       name: 'import',
       params: "'~@oceanbase/design/es/theme/index.less'",
     });
   }
-  return ast.toString();
+  return ast.toString(postcssLess.stringify);
 }
 
 async function lessToToken(file) {
