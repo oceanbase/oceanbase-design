@@ -1,9 +1,9 @@
-import { Button, ConfigProvider, message, Space, theme } from '@oceanbase/design';
+import { Button, ConfigProvider, message, Space } from '@oceanbase/design';
 
 export default () => {
   // 在应用外围包裹一次 ConfigProvider 即可
   return (
-    <ConfigProvider theme={theme}>
+    <ConfigProvider>
       <Space>
         <Button
           onClick={() => {

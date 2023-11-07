@@ -9,8 +9,9 @@ import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
 import type { SpinIndicator } from 'antd/es/spin';
 import { merge } from 'lodash';
 import StaticFunction from '../static-function';
-import defaultTheme from '../theme';
-import defaultThemeToken from '../theme/default';
+import themeConfig from '../theme';
+import defaultTheme from '../theme/default';
+import darkTheme from '../theme/dark';
 import type { NavigateFunction } from './navigate';
 
 export * from './navigate';
@@ -50,7 +51,7 @@ const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
   navigate: undefined,
 });
 
-const { defaultSeed, components } = defaultTheme;
+const { defaultSeed } = themeConfig;
 
 const ConfigProvider = ({
   children,
@@ -76,22 +77,16 @@ const ConfigProvider = ({
       )}
       theme={merge(
         {
-          // Only set seed token for dark theme
-          // Because defaultThemeToken is designed for light theme
           token: theme?.isDark
             ? {
                 ...defaultSeed,
+                ...darkTheme.token,
               }
             : {
                 ...defaultSeed,
-                ...defaultThemeToken,
+                ...defaultTheme.token,
               },
-          components: {
-            ...components,
-            InputNumber: {
-              ...components?.InputNumber,
-            },
-          },
+          components: theme?.isDark ? darkTheme.components : defaultTheme.components,
         },
         parentContext.theme,
         theme
