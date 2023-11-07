@@ -64,7 +64,7 @@
     "@umijs/test": "^4.0.86",
     "@vercel/analytics": "^1.1.1",
     "antd": "^5.10.3",
-    "antd-style": "^3.5.0",
+    "antd-style": "^3.5.1",
     "antd-token-previewer": "^1.1.0",
     "babel-jest": "^29.7.0",
     "classnames": "^2.3.2",
