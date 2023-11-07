@@ -1,15 +1,21 @@
 import { Select as AntSelect } from 'antd';
 import type { SelectProps as AntSelectProps, RefSelectProps } from 'antd/es/select';
+import type { OptGroup, Option } from 'rc-select';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
 import useStyle from './style';
 
-const { Option, OptGroup } = AntSelect;
-
 export * from 'antd/es/select';
 
 export type SelectProps = AntSelectProps;
+
+type CompoundedComponent = React.ForwardRefExoticComponent<
+  SelectProps & React.RefAttributes<RefSelectProps>
+> & {
+  Option: typeof Option;
+  OptGroup: typeof OptGroup;
+};
 
 const InternalSelect = React.forwardRef<RefSelectProps, SelectProps>(
   ({ prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
@@ -24,13 +30,10 @@ const InternalSelect = React.forwardRef<RefSelectProps, SelectProps>(
   }
 );
 
-const Select = InternalSelect as typeof InternalSelect & {
-  Option: typeof Option;
-  OptGroup: typeof OptGroup;
-};
+const Select = InternalSelect as CompoundedComponent;
 
-Select.Option = Option;
-Select.OptGroup = OptGroup;
+Select.Option = AntSelect.Option;
+Select.OptGroup = AntSelect.OptGroup;
 
 if (process.env.NODE_ENV !== 'production') {
   Select.displayName = AntSelect.displayName;

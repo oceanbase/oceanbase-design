@@ -2,6 +2,7 @@ import { Popover, Space, Table as AntTable, Typography } from 'antd';
 import type { TableProps as AntTableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import type { RowSelectMethod, TableLocale as AntTableLocale } from 'antd/es/table/interface';
+import type { Reference } from 'rc-table';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 import type { ReactElement, ReactNode } from 'react';
@@ -9,7 +10,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import ConfigProvider from '../config-provider';
 import enUS from '../locale/en-US';
 import useStyle from './style';
-import { AnyObject } from '../_util/type';
+import type { AnyObject } from '../_util/type';
 
 export * from 'antd/es/table';
 
@@ -32,7 +33,7 @@ export interface TableProps<T> extends AntTableProps<T> {
   locale?: TableLocale;
 }
 
-function Table<T>(props: TableProps<T>, ref: React.Ref<HTMLDivElement>) {
+function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
   const {
     locale: customLocale,
     columns,
@@ -216,7 +217,9 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<HTMLDivElement>) {
 }
 
 const ForwardTable = React.forwardRef(Table) as <RecordType extends AnyObject = AnyObject>(
-  props: React.PropsWithChildren<TableProps<RecordType>> & { ref?: React.Ref<HTMLDivElement> }
+  props: React.PropsWithChildren<TableProps<RecordType>> & {
+    ref?: React.Ref<Reference>;
+  }
 ) => React.ReactElement;
 
 export default Object.assign(ForwardTable, {
