@@ -29,7 +29,7 @@ export default (api: IApi) => {
     ];
 
     themeList.forEach(item => {
-      const mapToken =
+      let mapToken =
         item.theme === 'dark'
           ? {
               // 对于暗色主题，优先级: 算法生成的 Token > 自定义 token
@@ -41,6 +41,14 @@ export default (api: IApi) => {
               ...item.algorithm(defaultSeed),
               ...defaultTheme.token,
             };
+      mapToken = {
+        ...mapToken,
+        // 以下四种预设颜色和语义色保持一致
+        blue: mapToken.colorInfo,
+        green: mapToken.colorSuccess,
+        yellow: mapToken.colorWarning,
+        red: mapToken.colorError,
+      };
       const aliasToken = formatToken(mapToken);
 
       let lessString = '';
