@@ -53,6 +53,8 @@ const Spin = ({
 
 Spin.setDefaultIndicator = AntSpin.setDefaultIndicator;
 
+Spin.setDefaultIndicator(<Spin />);
+
 if (process.env.NODE_ENV !== 'production') {
   Spin.displayName = AntSpin.displayName;
 }

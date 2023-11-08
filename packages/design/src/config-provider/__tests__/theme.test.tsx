@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ConfigProvider, useToken } from '@oceanbase/design';
-import defaultTheme from '@oceanbase/design/es/theme/default';
+import defaultTheme from '../../theme/default';
 
 describe('ConfigProvider theme', () => {
   it('ConfigProvider theme token', () => {
