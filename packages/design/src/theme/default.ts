@@ -1,6 +1,4 @@
-import type { ThemeConfig } from 'antd';
-
-let defaultTheme: ThemeConfig = {
+const defaultTheme = {
   token: {
     colorPrimaryBg: '#EAF1FF',
     colorPrimary: '#006AFF',
@@ -94,18 +92,6 @@ let defaultTheme: ThemeConfig = {
     InputNumber: {
       handleVisible: true,
     },
-  },
-};
-
-defaultTheme = {
-  ...defaultTheme,
-  token: {
-    ...defaultTheme.token,
-    // 以下四种预设颜色和语义色保持一致
-    blue: defaultTheme.token.colorInfo,
-    green: defaultTheme.token.colorSuccess,
-    yellow: defaultTheme.token.colorWarning,
-    red: defaultTheme.token.colorError,
   },
 };
 
