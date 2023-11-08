@@ -7,7 +7,11 @@ import defaultTheme from './default';
 export * from 'antd/lib/theme/internal';
 export * from 'antd/lib/theme';
 
-const seedTokenKeys = Object.keys(theme.defaultSeed);
+const seedTokenKeys = Object.keys(theme.defaultSeed).filter(
+  // should filter special seed token
+  // ref: https://github.com/ant-design/ant-design/blob/master/components/theme/themes/seed.ts#L32
+  key => !['colorBgBase', 'colorTextBase', 'colorLink'].includes(key)
+);
 const seedToken = pick(defaultTheme.token, seedTokenKeys) as SeedToken;
 
 const defaultSeed = {

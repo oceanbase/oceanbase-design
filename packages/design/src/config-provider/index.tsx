@@ -65,6 +65,8 @@ const ConfigProvider = ({
   const parentContext = React.useContext<ConfigConsumerProps>(AntConfigProvider.ConfigContext);
   const parentExtendedContext =
     React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
+  const mergedTheme = merge(parentContext.theme, theme);
+  const currentTheme = mergedTheme.isDark ? darkTheme : defaultTheme;
   return (
     <AntConfigProvider
       spin={merge(parentContext.spin, spin)}
@@ -77,19 +79,13 @@ const ConfigProvider = ({
       )}
       theme={merge(
         {
-          token: theme?.isDark
-            ? {
-                ...defaultSeed,
-                ...darkTheme.token,
-              }
-            : {
-                ...defaultSeed,
-                ...defaultTheme.token,
-              },
-          components: theme?.isDark ? darkTheme.components : defaultTheme.components,
+          token: {
+            ...defaultSeed,
+            ...currentTheme.token,
+          },
+          components: currentTheme.components,
         },
-        parentContext.theme,
-        theme
+        mergedTheme
       )}
       {...restProps}
     >
