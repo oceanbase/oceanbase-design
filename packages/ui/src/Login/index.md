@@ -17,6 +17,8 @@ nav:
 
 <code src="./demo/authCode.tsx" title="登录验证码"></code>
 
+<code src="./demo/bg-image.tsx" title="背景图片"></code>
+
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |

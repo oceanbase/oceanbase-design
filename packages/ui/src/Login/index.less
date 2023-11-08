@@ -5,20 +5,19 @@
 .@{prefix}-container {
   display: flex;
   justify-content: space-between;
-  min-width: 768px;
+  min-width: 960px;
   height: 100vh;
   min-height: 600px;
   overflow: auto;
 
   .@{prefix}-bg {
-    width: 540px;
-    min-width: 400px;
+    width: 40%;
     height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
 
     .@{prefix}-info {
-      margin: 185px 90px 0 90px;
+      margin: 185px 48px 0 48px;
       color: #fff;
       font-weight: 600;
       font-size: 56px;
@@ -209,109 +208,12 @@
   }
 }
 
-@media (max-width: 2048px) {
-  .@{prefix}-container {
-    .@{prefix}-bg {
-      width: 800px;
-
-      .@{prefix}-info {
-        margin: 185px 48px 0 48px;
-        font-size: 72px;
-        .@{prefix}-start {
-          font-size: 48px;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 1800px) {
-  .@{prefix}-container {
-    .@{prefix}-bg {
-      width: 700px;
-
-      .@{prefix}-info {
-        margin: 185px 48px 0 48px;
-        font-size: 64px;
-        .@{prefix}-start {
-          font-size: 40px;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 1600px) {
-  .@{prefix}-container {
-    .@{prefix}-bg {
-      width: 600px;
-
-      .@{prefix}-info {
-        margin: 185px 48px 0 48px;
-        font-size: 56px;
-        .@{prefix}-start {
-          font-size: 32px;
-        }
-      }
-    }
-  }
-}
-
 // 设置的登录页最小高度，防止 logo 偏移位置偏移遮住输入框
 @media (max-height: 650px) {
   .@{prefix}-container {
     .@{prefix}-watermark-wrapper {
       position: absolute;
       top: 600px;
-    }
-  }
-}
-
-@media (max-width: 1200px) {
-  .@{prefix}-container {
-    .@{prefix}-bg {
-      width: 500px;
-
-      .@{prefix}-info {
-        margin: 185px 48px 0 48px;
-        font-size: 48px;
-        .@{prefix}-start {
-          font-size: 28px;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 992px) {
-  .@{prefix}-container {
-    .@{prefix}-bg {
-      width: 400px;
-
-      .@{prefix}-info {
-        margin: 185px 32px 0 32px;
-        font-size: 40px;
-        .@{prefix}-start {
-          font-size: 24px;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .@{prefix}-container {
-    .@{prefix}-bg {
-      width: 250px;
-
-      .@{prefix}-info {
-        margin: 185px 24px 0 24px;
-        font-size: 32px;
-
-        .@{prefix}-start {
-          font-size: 20px;
-        }
-      }
     }
   }
 }

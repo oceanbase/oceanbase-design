@@ -4,17 +4,13 @@
 import React, { useState } from 'react';
 import { message } from '@oceanbase/design';
 import { Login } from '@oceanbase/ui';
-import background_img from '../../assets/background_img.svg';
 
 export default () => {
   const [showRegister, setShowRegister] = useState(false);
   return (
     <Login
       logo="https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*WElAQJswckAAAAAAAAAAAAAADvSFAQ/original"
-      bgImage={background_img}
-      title="Welcome to OCP Express"
-      description="Let's start your usage"
-      board={<h2>顶部公告</h2>}
+      bgImage="https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*qUTHQJTYAuEAAAAAAAAAAAAADvSFAQ/original"
       onShowRegisterChange={setShowRegister}
       showRegister={showRegister}
       registerProps={{
