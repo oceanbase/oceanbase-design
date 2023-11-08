@@ -25,11 +25,12 @@ export default () => {
         }}
         onCancel={() => {
           setOpen(false);
-        }}>
+        }}
+      >
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>
       </Drawer>
     </>
-  )
+  );
 };

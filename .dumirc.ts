@@ -1,8 +1,11 @@
 import path from 'path';
 import { defineConfig } from 'dumi';
+import AntdAliasWebpackPlugin from './antd-alias-webpack-plugin';
 
 export default defineConfig({
-  mfsu: {},
+  mfsu: {
+    exclude: ['antd-token-previewer'],
+  },
   // 默认重定向到子包的 src 文件夹
   // ref: https://d.umijs.org/config#monoreporedirect
   monorepoRedirect: {},
@@ -15,6 +18,10 @@ export default defineConfig({
     hostname: 'https://design.oceanbase.com',
   },
   extraBabelPresets: [require.resolve('@emotion/babel-preset-css-prop')],
+  chainWebpack: config => {
+    config.plugin('antd-alias').use(AntdAliasWebpackPlugin);
+    return config;
+  },
   outputPath: 'site',
   define: {
     'process.env.VERCEL_ANALYTICS_ID': process.env.VERCEL_ANALYTICS_ID,
