@@ -32,11 +32,12 @@ export default (api: IApi) => {
       const mapToken =
         item.theme === 'dark'
           ? {
-              ...item.algorithm(defaultSeed),
+              // 对于暗色主题，优先级: 算法生成的 Token > 自定义 token
               ...darkTheme.token,
+              ...item.algorithm(defaultSeed),
             }
           : {
-              // 对于非暗色主题，自定义 token 的优先级高于算法生成的 Token
+              // 对于非暗色主题，优先级: 自定义 token > 算法生成的 Token
               ...item.algorithm(defaultSeed),
               ...defaultTheme.token,
             };
