@@ -2,18 +2,20 @@
  * transform: true
  * compact: true
  */
-import { theme } from '@oceanbase/design';
+import { ConfigProvider } from '@oceanbase/design';
 import { PreviewDemo } from 'antd-token-previewer';
 
 export default () => {
   return (
-    <PreviewDemo
-      theme={{
-        name: 'OceanBase Design',
-        key: 'ob',
-        config: theme,
-      }}
-      style={{ overflowY: 'hidden' }}
-    />
+    <ConfigProvider>
+      <PreviewDemo
+        theme={{
+          name: 'OceanBase Design',
+          key: 'ob',
+          config: {},
+        }}
+        style={{ overflowY: 'hidden' }}
+      />
+    </ConfigProvider>
   );
 };
