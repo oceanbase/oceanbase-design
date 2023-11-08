@@ -12,7 +12,7 @@ export default () => {
     <Login
       logo="https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*WElAQJswckAAAAAAAAAAAAAADvSFAQ/original"
       bgImage={background_img}
-      title="Welcome OCP Express"
+      title="Welcome to OCP Express"
       description="Let's start your usage"
       onShowRegisterChange={setShowRegister}
       showRegister={showRegister}
