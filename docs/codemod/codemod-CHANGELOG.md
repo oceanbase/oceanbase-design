@@ -8,6 +8,13 @@ group: 自动化迁移工具
 
 ---
 
+## 0.2.10
+
+`2023-11-09`
+
+- 🆕 新增 `--transformer` 命令行参数，用于指定要运行的转换脚本。[#270](https://github.com/oceanbase/oceanbase-design/pull/270)
+- 🐞 修复包含 token 的 less 文件没有自动引入 `~@oceanbase/design/es/theme/index.less` 主题文件的问题。[#269](https://github.com/oceanbase/oceanbase-design/pull/269)
+
 ## 0.2.9
 
 `2023-11-03`
