@@ -1,12 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ConfigProvider, useToken } from '@oceanbase/design';
+import defaultTheme from '../../theme/default';
 
 describe('ConfigProvider theme', () => {
   it('ConfigProvider theme token', () => {
     const Child1 = () => {
       const { token } = useToken();
-      expect(token.colorBgLayout).toBe('#F5F8FE');
+      expect(token.colorBgLayout).toBe(defaultTheme.token.colorBgLayout);
       return <div />;
     };
     const Child2 = () => {

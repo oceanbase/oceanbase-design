@@ -1,6 +1,6 @@
 # OceanBase Codemod
 
-A collection of codemod scripts that help migrate from `antd`, `@alipay/ob-ui`, `@alipay/tech-ui`, `@ant-design/pro-components` and `@ant-design/charts` to OceanBase Design System by using [jscodeshift](https://github.com/facebook/jscodeshift) and [postcss](https://github.com/postcss/postcss). (Inspired by [@ant-design/codemod-v5](https://github.com/ant-design/codemod-v5))
+A collection of codemod transformers that help migrate from `antd`, `@alipay/ob-ui`, `@alipay/tech-ui`, `@ant-design/pro-components` and `@ant-design/charts` to OceanBase Design System by using [jscodeshift](https://github.com/facebook/jscodeshift) and [postcss](https://github.com/postcss/postcss). (Inspired by [@ant-design/codemod-v5](https://github.com/ant-design/codemod-v5))
 
 [![NPM version](https://img.shields.io/npm/v/@oceanbase/codemod.svg?style=flat)](https://npmjs.org/package/@oceanbase/codemod) [![NPM downloads](http://img.shields.io/npm/dm/@oceanbase/codemod.svg?style=flat)](https://npmjs.org/package/@oceanbase/codemod) [![Github Action](https://github.com/oceanbase/oceanbase-design/actions/workflows/ci.yml/badge.svg)](https://github.com/oceanbase/oceanbase-design/actions/workflows/ci.yml)
 
@@ -10,17 +10,24 @@ A collection of codemod scripts that help migrate from `antd`, `@alipay/ob-ui`, 
 
 ## Usage
 
-Before run codemod scripts, you'd better make sure to commit your local git changes firstly.
+Before run codemod, you'd better make sure to commit your local git changes firstly.
 
 ```shell
 # Run directly through npx
 # `src` is the target directory or file that you want to transform.
 npx -p @oceanbase/codemod codemod src
 # options
-# --disablePrettier   // disable prettier
+# --transformer=t1,t2     // run specify transformers
+# --disablePrettier       // disable prettier
 ```
 
-## Codemod scripts introduction
+Run specific transformers:
+
+```shell
+npx -p @oceanbase/codemod codemod src --transformer=style-to-token,less-to-token
+```
+
+## Codemod transformers introduction
 
 ### `antd-to-oceanbase-design`
 

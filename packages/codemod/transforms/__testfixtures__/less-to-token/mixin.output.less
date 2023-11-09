@@ -1,0 +1,28 @@
+@import '~@oceanbase/design/es/theme/index.less';
+
+.mixin-1() {
+  color: @colorInfo;
+  background: @colorSuccess;
+  background-color: @colorWarning;
+  border-color: @colorError;
+  scrollbar-color: @colorBgContainer;
+}
+
+.mixin-2 {
+  color: @colorInfo;
+  background: @colorSuccess;
+  background-color: @colorWarning;
+  border-color: @colorError;
+  scrollbar-color: @colorBgContainer;
+}
+
+.container {
+  .mixin-1();
+  .mixin-2();
+  .content {
+    color: @colorText;
+    background: @colorTextSecondary;
+    background-color: @colorTextTertiary;
+    border: 1px solid @colorBorder;
+  }
+}

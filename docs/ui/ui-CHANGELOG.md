@@ -8,6 +8,18 @@ group: 业务组件
 
 ---
 
+## 0.2.28
+
+`2023-11-09`
+
+- 💄 优化 Login 在不同屏幕尺寸下的样式。[#274](https://github.com/oceanbase/oceanbase-design/pull/274)
+- 💄 优化 TagSelect 选中态的样式。[#260](https://github.com/oceanbase/oceanbase-design/pull/260) [@wdyea-ya](https://github.com/wdyea-ya)
+- 🐞 修复 PageContainer 页头未和内容区对齐，以及顶部间距过小的问题。[#271](https://github.com/oceanbase/oceanbase-design/pull/271)
+
+## 0.2.27
+
+`2023-11-03`
+
 ## 0.2.26
 
 `2023-10-31`

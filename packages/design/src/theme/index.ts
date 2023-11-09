@@ -1,21 +1,25 @@
 import { theme } from 'antd';
+import { pick } from 'lodash';
+// umi 插件只能 import 支持 CommonJS 语法库和文件，因此需要使用 lib 产物
+import type { SeedToken } from 'antd/lib/theme/interface';
+import defaultTheme from './default';
 
-export * from 'antd/es/theme/internal';
-export * from 'antd/es/theme';
+export * from 'antd/lib/theme/internal';
+export * from 'antd/lib/theme';
+
+const seedTokenKeys = Object.keys(theme.defaultSeed);
+const seedToken = {
+  ...pick(defaultTheme.token, seedTokenKeys),
+  // some special seed token should set to ''
+  // ref: https://github.com/ant-design/ant-design/blob/master/components/theme/themes/seed.ts#L32
+  colorBgBase: '',
+  colorTextBase: '',
+  colorLink: '',
+} as SeedToken;
 
 const defaultSeed = {
   ...theme.defaultSeed,
-  colorPrimary: '#006AFF',
-  colorInfo: '#006aff',
-  colorSuccess: '#0ac185',
-  colorWarning: '#ffac33',
-  colorError: '#ff4b4b',
-  borderRadius: 6,
-  // 以下四种预设颜色和语义色保持一致
-  blue: '#006aff',
-  green: '#0ac185',
-  yellow: '#ffac33',
-  red: '#ff4b4b',
+  ...seedToken,
 };
 
 // should use reference assign instead of clone assign
@@ -26,9 +30,4 @@ export default {
   ...theme,
   defaultSeed,
   defaultConfig,
-  components: {
-    InputNumber: {
-      handleVisible: true as true,
-    },
-  },
 };

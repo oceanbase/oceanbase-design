@@ -8,6 +8,20 @@ group: 自动化迁移工具
 
 ---
 
+## 0.2.10
+
+`2023-11-09`
+
+- 🆕 新增 `--transformer` 命令行参数，用于指定要运行的转换脚本。[#270](https://github.com/oceanbase/oceanbase-design/pull/270)
+- 🐞 修复包含 token 的 less 文件没有自动引入 `~@oceanbase/design/es/theme/index.less` 主题文件的问题。[#269](https://github.com/oceanbase/oceanbase-design/pull/269)
+
+## 0.2.9
+
+`2023-11-03`
+
+- 🐞 修复 less 函数 `.mixin()` 被错误改写为 `@mixin()` 的问题。[#261](https://github.com/oceanbase/oceanbase-design/pull/261)
+- 🐞 修复 `pro-components` 成员没有正确从 `@alipay/ob-ui` 迁移到 `@oceanbase/ui` 的问题。[#262](https://github.com/oceanbase/oceanbase-design/pull/262)
+
 ## 0.2.8
 
 `2023-10-31`

@@ -12,6 +12,7 @@ export { default as Descriptions } from './descriptions';
 export { default as Form } from './form';
 export { default as Input } from './input';
 export { default as Modal } from './modal';
+export { default as Drawer } from './drawer';
 export { message, notification, token } from './static-function';
 export { default as Table } from './table';
 

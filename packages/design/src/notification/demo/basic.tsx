@@ -4,7 +4,7 @@ import { Button, ConfigProvider, notification, Space, theme } from '@oceanbase/d
 export default () => {
   // 在应用外围包裹一次 ConfigProvider 即可
   return (
-    <ConfigProvider theme={theme}>
+    <ConfigProvider>
       <Space>
         <Button
           onClick={() => {

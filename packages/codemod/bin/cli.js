@@ -101,7 +101,10 @@ function getRunnerArgs(transformerPath, parser = 'babylon', options = {}) {
 }
 
 async function run(filePath, args = {}) {
-  for (const transformer of transformers) {
+  const targetTransformers =
+    args.transformer?.split(',')?.filter(transformer => transformers.includes(transformer)) ||
+    transformers;
+  for (const transformer of targetTransformers) {
     await transform(transformer, 'babylon', filePath, args);
   }
 }
@@ -250,9 +253,10 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
 
 /**
  * options
- * --force             // force skip git checking (dangerously)
- * --cpus=1            // specify cpus cores to use
- * --disablePrettier   // disable prettier
+ * --force               // force skip git checking (dangerously)
+ * --cpus=1              // specify cpus cores to use
+ * --disablePrettier     // disable prettier
+ * --transformer=t1,t2   // specify target transformer
  */
 
 async function bootstrap() {
