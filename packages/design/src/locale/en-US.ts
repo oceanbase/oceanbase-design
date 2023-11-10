@@ -14,10 +14,7 @@ export default {
     },
   },
   Drawer: {
-    // ...enUS?.Drawer,
-    // drawerFooter: {
     okText: 'OK',
     cancelText: 'Cancel',
-    // }
   },
 } as Locale;

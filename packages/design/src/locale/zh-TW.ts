@@ -14,10 +14,7 @@ export default {
     },
   },
   Drawer: {
-    // ...zhTW?.Drawer,
-    // drawerFooter: {
     okText: '确定',
     cancelText: '取消',
-    // }
   },
 } as Locale;

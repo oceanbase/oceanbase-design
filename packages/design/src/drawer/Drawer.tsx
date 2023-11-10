@@ -49,6 +49,7 @@ const Drawer = ({
     ConfigProvider.ConfigContext
   );
 
+  // @ts-ignore
   const drawerLocale: DrawerLocale = { ...contextLocale?.Drawer, ...customLocale };
 
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
