@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Drawer, Button } from '@oceanbase/design';
+import overHeight from '../../modal/demo/over-height';
 
 export default () => {
   const [open, setOpen] = useState(false);
@@ -17,19 +18,17 @@ export default () => {
       <Drawer
         open={open}
         title="Title"
-        onClose={() => {
-          setOpen(false);
-        }}
         onOk={() => {
           setOpen(false);
         }}
         onCancel={() => {
           setOpen(false);
-        }}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        }}
+      >
+        <p style={{ height: 500 }}>Some contents...</p>
+        <p style={{ height: 500 }}>Some contents...</p>
+        <p style={{ height: 500 }}>Some contents...</p>
       </Drawer>
     </>
-  )
+  );
 };

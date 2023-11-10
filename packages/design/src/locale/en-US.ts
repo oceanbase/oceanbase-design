@@ -13,4 +13,11 @@ export default {
       open: 'Open',
     },
   },
+  Drawer: {
+    // ...enUS?.Drawer,
+    // drawerFooter: {
+    okText: 'OK',
+    cancelText: 'Cancel',
+    // }
+  },
 } as Locale;

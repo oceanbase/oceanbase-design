@@ -13,4 +13,11 @@ export default {
       open: '展開',
     },
   },
+  Drawer: {
+    // ...zhTW?.Drawer,
+    // drawerFooter: {
+    okText: '确定',
+    cancelText: '取消',
+    // }
+  },
 } as Locale;

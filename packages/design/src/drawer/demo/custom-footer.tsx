@@ -20,36 +20,31 @@ export default () => {
         onClose={() => {
           setOpen(false);
         }}
+        extra="底部说明文案"
         footer={
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%'
-          }}>
-            <div>底部说明文案</div>
-            <Space>
-              <Button
-                onClick={() => {
-                  setOpen(false);
-                }}>
-                取消
-              </Button>
-              <Button
-                type="primary"
-                onClick={() => {
-                  setOpen(false);
-                }}>
-                确认
-              </Button>
-            </Space>
-          </div>
+          <Space>
+            <Button
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              取消
+            </Button>
+            <Button
+              type="primary"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              确认
+            </Button>
+          </Space>
         }
       >
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>
-      </Drawer >
+      </Drawer>
     </>
-  )
+  );
 };
