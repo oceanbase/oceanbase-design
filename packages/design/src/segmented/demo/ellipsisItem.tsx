@@ -3,6 +3,13 @@ import { Segmented } from '@oceanbase/design';
 
 export default () => {
   return (
-    <Segmented options={['固定宽度', '季度', '月度宽度shenglue']} ellipsis={true} width={'68px'} />
+    <Segmented
+      block
+      options={[
+        123,
+        456,
+        'longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext',
+      ]}
+    />
   );
 };

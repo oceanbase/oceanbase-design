@@ -7,15 +7,17 @@ export type SegmentedToken = FullToken<'Segmented'>;
 export const genSegmentedStyle: GenerateStyle<SegmentedToken> = (
   token: SegmentedToken
 ): CSSObject => {
-  const { componentCls } = token;
+  const { componentCls, colorPrimary } = token;
 
   return {
     [`${componentCls}`]: {
       [`${componentCls}-ellipsis`]: {
-        // maxWidth: '68px',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
+      },
+      [`${componentCls}-item-selected`]: {
+        color: `${colorPrimary} !important`,
       },
     },
   };

@@ -92,7 +92,6 @@ const ConfigProvider = ({
               ...components?.InputNumber,
             },
             Segmented: {
-              itemSelectedColor: token.colorPrimary,
               itemHoverBg: theme?.isDark,
             },
           },
