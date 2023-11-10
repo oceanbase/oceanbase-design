@@ -60,7 +60,7 @@ const Password: CompoundedComponent = ({
   const { locale: contextLocale = defaultLocale } = React.useContext<ConfigConsumerProps>(
     ConfigProvider.ConfigContext
   );
-  // ts-ignore
+  // @ts-ignore
   const passwordLocale: PasswordLocale = { ...contextLocale?.Input.Password, ...customLocale };
 
   const [fieldError, setFieldError] = useState<string[]>([]);
