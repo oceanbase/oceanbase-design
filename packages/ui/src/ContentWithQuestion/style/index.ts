@@ -10,10 +10,10 @@ export const genContentWithQuestionStyle: GenerateStyle<any> = (token: any): CSS
       display: 'inline-flex',
       alignItems: 'center',
       [`${componentCls}-prefix`]: {
-        marginRight: paddingSM,
+        marginRight: 8,
       },
       [`${componentCls}-suffix`]: {
-        marginLeft: paddingSM,
+        marginLeft: 8,
       },
       [`${componentCls}-help`]: {
         cursor: 'help',
