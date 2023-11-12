@@ -29,6 +29,7 @@ import {
   DoubleRightOutlined,
 } from '@oceanbase/icons';
 import QuickPicker from './QuickPicker';
+import diff from '../Highlight/demo/diff';
 
 export type RangeName = 'customize' | string;
 
@@ -166,6 +167,10 @@ const Ranger = (props: RangerProps) => {
     isPlay ? 1000 : null
   );
 
+  const startTime = innerValue?.[0];
+  const endTime = innerValue?.[1];
+  const differenceMs = endTime?.diff(startTime as any);
+
   return (
     <Space
       size={0}
@@ -206,7 +211,21 @@ const Ranger = (props: RangerProps) => {
         />
       )}
       <Radio.Group value={radioValue} className={`${prefix}-playback-control`} buttonStyle="solid">
-        <Radio.Button value="stepBack">
+        <Radio.Button
+          value="stepBack"
+          onClick={() => {
+            if (isPlay) {
+              setIsPlay(false);
+            }
+
+            if (startTime && endTime) {
+              const newStartTime = (startTime as Dayjs).subtract(differenceMs);
+              const newEndTime = startTime?.clone() as Dayjs;
+
+              datePickerChange([newStartTime, newEndTime]);
+            }
+          }}
+        >
           <DoubleLeftOutlined />
         </Radio.Button>
         <Radio.Button
@@ -219,7 +238,20 @@ const Ranger = (props: RangerProps) => {
         >
           {isPlay ? <PauseOutlined /> : <CaretRightOutlined />}
         </Radio.Button>
-        <Radio.Button value="stepForward">
+        <Radio.Button
+          value="stepForward"
+          disabled={isPlay}
+          onClick={() => {
+            if (startTime && endTime) {
+              const newStartTime = endTime.clone() as Dayjs;
+              const newEndTime = (endTime as Dayjs).add(differenceMs);
+
+              if (newEndTime.isBefore(new Date())) {
+                datePickerChange([newStartTime, newEndTime]);
+              }
+            }
+          }}
+        >
           <DoubleRightOutlined />
         </Radio.Button>
       </Radio.Group>
