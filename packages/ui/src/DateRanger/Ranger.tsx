@@ -210,51 +210,57 @@ const Ranger = (props: RangerProps) => {
           {...omit(rest, 'value', 'onChange')}
         />
       )}
-      <Radio.Group value={radioValue} className={`${prefix}-playback-control`} buttonStyle="solid">
-        <Radio.Button
-          value="stepBack"
-          onClick={() => {
-            if (isPlay) {
-              setIsPlay(false);
-            }
-
-            if (startTime && endTime) {
-              const newStartTime = (startTime as Dayjs).subtract(differenceMs);
-              const newEndTime = startTime?.clone() as Dayjs;
-
-              datePickerChange([newStartTime, newEndTime]);
-            }
-          }}
+      {showRange && (
+        <Radio.Group
+          value={radioValue}
+          className={`${prefix}-playback-control`}
+          buttonStyle="solid"
         >
-          <DoubleLeftOutlined />
-        </Radio.Button>
-        <Radio.Button
-          value={'play'}
-          onClick={() => {
-            const newPlay = !isPlay;
-            setRadioValue(newPlay ? 'play' : '');
-            setIsPlay(newPlay);
-          }}
-        >
-          {isPlay ? <PauseOutlined /> : <CaretRightOutlined />}
-        </Radio.Button>
-        <Radio.Button
-          value="stepForward"
-          disabled={isPlay}
-          onClick={() => {
-            if (startTime && endTime) {
-              const newStartTime = endTime.clone() as Dayjs;
-              const newEndTime = (endTime as Dayjs).add(differenceMs);
+          <Radio.Button
+            value="stepBack"
+            onClick={() => {
+              if (isPlay) {
+                setIsPlay(false);
+              }
 
-              if (newEndTime.isBefore(new Date())) {
+              if (startTime && endTime) {
+                const newStartTime = (startTime as Dayjs).subtract(differenceMs);
+                const newEndTime = startTime?.clone() as Dayjs;
+
                 datePickerChange([newStartTime, newEndTime]);
               }
-            }
-          }}
-        >
-          <DoubleRightOutlined />
-        </Radio.Button>
-      </Radio.Group>
+            }}
+          >
+            <DoubleLeftOutlined />
+          </Radio.Button>
+          <Radio.Button
+            value={'play'}
+            onClick={() => {
+              const newPlay = !isPlay;
+              setRadioValue(newPlay ? 'play' : '');
+              setIsPlay(newPlay);
+            }}
+          >
+            {isPlay ? <PauseOutlined /> : <CaretRightOutlined />}
+          </Radio.Button>
+          <Radio.Button
+            value="stepForward"
+            disabled={isPlay}
+            onClick={() => {
+              if (startTime && endTime) {
+                const newStartTime = endTime.clone() as Dayjs;
+                const newEndTime = (endTime as Dayjs).add(differenceMs);
+
+                if (newEndTime.isBefore(new Date())) {
+                  datePickerChange([newStartTime, newEndTime]);
+                }
+              }
+            }}
+          >
+            <DoubleRightOutlined />
+          </Radio.Button>
+        </Radio.Group>
+      )}
     </Space>
   );
 };
