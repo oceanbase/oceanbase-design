@@ -8,6 +8,26 @@ group: 基础组件
 
 ---
 
+## 0.2.27
+
+`2023-11-09`
+
+- 🌈 更新中性色板，包括 Design Token 以及 less 主题变量。[#272](https://github.com/oceanbase/oceanbase-design/pull/272)
+- 🔥 Drawer [#228](https://github.com/oceanbase/oceanbase-design/pull/228) [@Vanleehao](https://github.com/Vanleehao)
+  - 🌈 定制主题和样式，符合 OceanBase Design 设计规范。
+  - 🆕 新增 `footer` 属性，用于设置抽屉的底部内容，默认为 `取消` 和 `确定` 按钮。
+  - 🆕 新增 `onOk` 和 `onCancel` 属性，用于设置 `取消` 和 `确定` 按钮的回调。
+  - 🆕 新增 `cancelText` 和 `okText` 属性，用于设置 `取消` 和 `确定` 按钮的文字。
+  - 🆕 新增 `okButtonProps` 属性，用于设置 `确定` 按钮的属性。
+  - 🆕 新增 `confirmLoading` 属性，用于设置 `确定` 按钮的加载态。
+- 🆕 全局设置 Spin 的加载指示符为 OceanBase 加载动画。[#273](https://github.com/oceanbase/oceanbase-design/pull/273)
+- 🆕 Badge、Button、Card、Select、Table、Tag 和 Tooltip 支持转发 `ref`。[#259](https://github.com/oceanbase/oceanbase-design/pull/259) [@linhf123](https://github.com/linhf123)
+- 💄 优化 Modal 确认对话框的内容区样式。[#275](https://github.com/oceanbase/oceanbase-design/pull/275)
+
+## 0.2.26
+
+`2023-11-03`
+
 ## 0.2.25
 
 `2023-10-31`

@@ -8,7 +8,7 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
   const {
     antCls,
     componentCls,
-    marginSM,
+    marginXXS,
     marginLG,
     paddingMD,
     borderRadius,
@@ -71,7 +71,8 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
     /* Modal.method() */
     [`${componentCls}-confirm`]: {
       [`${componentCls}-body ${componentCls}-confirm-title +${componentCls}-confirm-content`]: {
-        marginBlockStart: marginSM,
+        marginBlockStart: marginXXS,
+        color: token.colorTextSecondary,
       },
       [`${componentCls}-confirm-btns`]: {
         marginTop: marginLG,
