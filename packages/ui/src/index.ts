@@ -35,6 +35,7 @@ export type { PageContainerProps } from './PageContainer';
 
 export { default as Password } from './Password';
 export { default as Ranger } from './Ranger';
+export { default as DateRanger } from './DateRanger';
 export { default as SideTip } from './SideTip';
 export { default as TaskGraph } from './TaskGraph';
 export { default as TreeSearch } from './TreeSearch';

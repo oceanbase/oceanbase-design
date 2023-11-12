@@ -1,0 +1,65 @@
+@import '../variable.less';
+
+@prefix: ob-ranger;
+
+.@{prefix} {
+  .@{prefixCls}-space-item:nth-child(2) {
+    flex: 1;
+    width: 100%;
+
+    .@{prefixCls}-picker,
+    .@{prefixCls}-picker-range,
+    .ob-ranger-range-picker {
+      width: 100%;
+      // 去掉左侧圆角，以与下拉选择紧密组合在一起
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+
+      input {
+        text-align: center;
+      }
+    }
+  }
+
+  .ob-ranger-date-picker {
+    .@{prefixCls}-select-selector {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+
+      &:hover {
+        z-index: 1;
+      }
+    }
+
+    .@{prefixCls}-select-arrow {
+      z-index: 1;
+    }
+  }
+}
+
+.@{prefix}-show-range {
+  .ob-ranger-quick-picker.ob-ranger-quick-picker-select {
+    margin-right: -1px;
+
+    .@{prefixCls}-select-selector {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+
+      &:hover {
+        z-index: 1;
+      }
+    }
+
+    .@{prefixCls}-select-arrow {
+      z-index: 1;
+    }
+  }
+
+  .@{prefix}-playback-control {
+    margin-left: 8px;
+
+    .@{prefixCls}-radio-button-wrapper {
+      padding-inline: 8px;
+    }
+  }
+}
