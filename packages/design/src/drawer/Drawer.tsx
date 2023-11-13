@@ -19,7 +19,11 @@ export interface DrawerProps extends AntDrawerProps {
   okButtonProps?: ButtonProps;
 }
 
-const Drawer = ({
+type CompoundedComponent = React.FC<DrawerProps> & {
+  _InternalPanelDoNotUseOrYouWillBeFired: typeof AntDrawer._InternalPanelDoNotUseOrYouWillBeFired;
+};
+
+const Drawer: CompoundedComponent = ({
   children,
   onOk,
   onCancel,
@@ -65,6 +69,8 @@ const Drawer = ({
     </AntDrawer>
   );
 };
+
+Drawer._InternalPanelDoNotUseOrYouWillBeFired = AntDrawer._InternalPanelDoNotUseOrYouWillBeFired;
 
 if (process.env.NODE_ENV !== 'production') {
   Drawer.displayName = AntDrawer.displayName;

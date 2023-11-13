@@ -2,19 +2,15 @@
  * transform: true
  * compact: true
  */
+import React from 'react';
 import { ConfigProvider } from '@oceanbase/design';
 import { Previewer } from 'antd-token-previewer';
+import './previewer.less';
 
 export default () => {
   return (
-    <ConfigProvider>
-      <Previewer
-        theme={{
-          name: 'OceanBase Design',
-          key: 'ob',
-          config: {},
-        }}
-      />
+    <ConfigProvider prefixCls="previewer">
+      <Previewer showTheme={true} />
     </ConfigProvider>
   );
 };

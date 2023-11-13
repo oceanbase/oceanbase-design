@@ -13,8 +13,10 @@ export type SelectProps = AntSelectProps;
 type CompoundedComponent = React.ForwardRefExoticComponent<
   SelectProps & React.RefAttributes<RefSelectProps>
 > & {
+  // need to use Option and OptGroup from rc-select to avoid ts error
   Option: typeof Option;
   OptGroup: typeof OptGroup;
+  _InternalPanelDoNotUseOrYouWillBeFired: typeof AntSelect._InternalPanelDoNotUseOrYouWillBeFired;
 };
 
 const InternalSelect = React.forwardRef<RefSelectProps, SelectProps>(
@@ -34,6 +36,8 @@ const Select = InternalSelect as CompoundedComponent;
 
 Select.Option = AntSelect.Option;
 Select.OptGroup = AntSelect.OptGroup;
+
+Select._InternalPanelDoNotUseOrYouWillBeFired = AntSelect._InternalPanelDoNotUseOrYouWillBeFired;
 
 if (process.env.NODE_ENV !== 'production') {
   Select.displayName = AntSelect.displayName;
