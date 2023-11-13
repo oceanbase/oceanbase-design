@@ -38,7 +38,7 @@ const Drawer = ({
   okText, // = '确定',
   okButtonProps,
   confirmLoading = false,
-  footer = true,
+  footer = false,
   extra,
   className,
   prefixCls: customizePrefixCls,

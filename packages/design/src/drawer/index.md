@@ -16,7 +16,7 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="典型抽屉" description="默认包含标题、内容和底部操作。"></code>
+<code src="./demo/basic.tsx" title="典型抽屉" description="默认包含标题、内容。"></code>
 
 <code src="./demo/no-footer.tsx" title="无 footer" description="去掉抽屉底部的 footer。"></code>
 
@@ -32,7 +32,7 @@ nav:
 
 | 参数           | 说明                   | 类型                 | 默认值 | 版本 |
 | :------------- | :--------------------- | :------------------- | :----- | :--- |
-| footer         | 抽屉的页脚             | boolean \| ReactNode | true   | -    |
+| footer         | 抽屉的页脚             | boolean \| ReactNode | false  | -    |
 | extra          | 抽屉页脚的额外说明文案 | string               | -      | -    |
 | onOk           | 点击确定回调           | function(e)          | -      | -    |
 | onCancel       | 点击取消按钮的回调     | function(e)          | -      | -    |

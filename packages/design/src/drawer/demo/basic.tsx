@@ -18,6 +18,7 @@ export default () => {
       <Drawer
         open={open}
         title="Title"
+        footer={true}
         onOk={() => {
           setOpen(false);
         }}
