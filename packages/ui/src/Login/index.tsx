@@ -5,7 +5,6 @@ import type { FormProps } from '@oceanbase/design/es/form';
 import { message } from '@oceanbase/design';
 import classNames from 'classnames';
 import React, { useContext, useCallback } from 'react';
-import { LOCALE_LIST } from '../constant';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import { getPrefix, setLocale } from '../_util';
 import type { IActivateFormProps } from './ActivateForm';
@@ -82,6 +81,7 @@ export interface LoginProps extends FormProps {
   onShowRegisterChange?: (isShow: boolean) => void;
   onShowActivateChange?: (isShow: boolean) => void;
   onAuthCodeImgChange?: () => void;
+  isMobile?: boolean;
 }
 
 const prefix = getPrefix('login');
@@ -106,6 +106,7 @@ const Login: React.FC<LoginProps> = props => {
     showOtherLoginButton,
     authCodeImg,
     onAuthCodeImgChange,
+    isMobile,
     style = {},
   } = props;
   const [showRegister, setShowRegister] = useControllableValue(props, {
@@ -137,18 +138,6 @@ const Login: React.FC<LoginProps> = props => {
     setShowActivate(!showActivate);
   }, [showActivate, isLoading]);
 
-  const localeMenu = (
-    <Menu
-      onClick={({ key }) => {
-        setLocale(key as string);
-      }}
-    >
-      {LOCALE_LIST.filter(item => !locales || locales.includes(item.value as Locale)).map(item => (
-        <Menu.Item key={item.value}>{item.label}</Menu.Item>
-      ))}
-    </Menu>
-  );
-
   const showWaterMark = !showRegister;
 
   return (
@@ -156,6 +145,7 @@ const Login: React.FC<LoginProps> = props => {
       <div
         className={classNames(`${prefix}-container`, {
           [`${prefix}-container-with-board`]: board,
+          [`${prefix}-container-mobile`]: isMobile,
         })}
         style={style}
       >

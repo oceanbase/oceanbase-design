@@ -1,19 +1,13 @@
-/**
- * iframe: 600
- */
 import React, { useState } from 'react';
 import { message } from '@oceanbase/design';
 import { Login } from '@oceanbase/ui';
-import background_img from '../../assets/background_img.svg';
 
 export default () => {
   const [showRegister, setShowRegister] = useState(false);
   return (
     <Login
-      logo="https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*WElAQJswckAAAAAAAAAAAAAADvSFAQ/original"
-      bgImage={background_img}
-      title="Welcome to OCP Express"
-      description="Let's start your usage"
+      logo="https://gw.alipayobjects.com/zos/bmw-prod/3282eb3a-9a1e-4129-968e-be5f9e6cd1a2.svg"
+      bgImage="https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*1G0OQrJI2KYAAAAAAAAAAAAADvSFAQ/original"
       onShowRegisterChange={setShowRegister}
       showRegister={showRegister}
       registerProps={{
@@ -34,6 +28,12 @@ export default () => {
       }}
       enableRegister={true}
       showLocale={true}
+      // enable mobile mode
+      isMobile={true}
+      style={{
+        // Mock mobile width
+        width: 375,
+      }}
     />
   );
 };
