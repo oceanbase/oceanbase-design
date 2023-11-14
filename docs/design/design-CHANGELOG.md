@@ -8,6 +8,13 @@ group: 基础组件
 
 ---
 
+## 0.2.28
+
+`2023-11-14`
+
+- 🌈 新增主题预览和编辑器，便于主题调试和预览。[#287](https://github.com/oceanbase/oceanbase-design/pull/287)
+- 💄 优化 Drawer 的标题、内容区和页脚样式，以符合设计规范。[#283](https://github.com/oceanbase/oceanbase-design/pull/283) [@Vanleehao](https://github.com/Vanleehao)
+
 ## 0.2.27
 
 `2023-11-09`
