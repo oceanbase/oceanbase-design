@@ -13,4 +13,8 @@ export default {
       open: 'Open',
     },
   },
+  Drawer: {
+    okText: 'OK',
+    cancelText: 'Cancel',
+  },
 } as Locale;

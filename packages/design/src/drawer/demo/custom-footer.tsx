@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Drawer, Button, Space } from '@oceanbase/design';
+import { Drawer, Button, Space, Alert } from '@oceanbase/design';
 
 export default () => {
   const [open, setOpen] = useState(false);
@@ -17,29 +17,33 @@ export default () => {
       <Drawer
         open={open}
         title="Title"
-        onClose={() => {
+        onCancel={() => {
           setOpen(false);
         }}
         footer={
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%'
-          }}>
-            <div>底部说明文案</div>
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <div>Some info message</div>
             <Space>
               <Button
                 onClick={() => {
                   setOpen(false);
-                }}>
+                }}
+              >
                 取消
               </Button>
               <Button
                 type="primary"
                 onClick={() => {
                   setOpen(false);
-                }}>
+                }}
+              >
                 确认
               </Button>
             </Space>
@@ -49,7 +53,7 @@ export default () => {
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>
-      </Drawer >
+      </Drawer>
     </>
-  )
+  );
 };

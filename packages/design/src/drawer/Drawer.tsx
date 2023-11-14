@@ -6,8 +6,15 @@ import React, { useContext } from 'react';
 import { isBoolean } from 'lodash';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
+import type { ConfigConsumerProps } from '../config-provider';
+import defaultLocale from '../locale/en-US';
 import useStyle from './style';
 export * from 'antd/es/drawer';
+
+export interface DrawerLocale {
+  okText?: string;
+  cancelText?: string;
+}
 
 export interface DrawerProps extends AntDrawerProps {
   onOk?: (e) => void;
@@ -17,6 +24,7 @@ export interface DrawerProps extends AntDrawerProps {
   cancelText?: string;
   okText?: string;
   okButtonProps?: ButtonProps;
+  locale?: DrawerLocale;
 }
 
 type CompoundedComponent = React.FC<DrawerProps> & {
@@ -24,41 +32,58 @@ type CompoundedComponent = React.FC<DrawerProps> & {
 };
 
 const Drawer: CompoundedComponent = ({
+  locale: customLocale,
   children,
   onOk,
+  onClose,
   onCancel,
-  cancelText = '取消',
-  okText = '确定',
+  okText,
+  cancelText,
   okButtonProps,
   confirmLoading = false,
-  footer = true,
-  className,
+  footer = false,
+  rootClassName,
   prefixCls: customizePrefixCls,
-  style = {},
   ...restProps
 }: DrawerProps) => {
+  const { locale: contextLocale = defaultLocale } = React.useContext<ConfigConsumerProps>(
+    ConfigProvider.ConfigContext
+  );
+  const drawerLocale: DrawerLocale = { ...contextLocale?.Drawer, ...customLocale };
+
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('drawer', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
-  const drawerCls = classNames(prefixCls, className);
+
+  const handleCancel = onCancel || onClose;
+  const showFooter = !!(footer || onOk);
+  const drawerCls = classNames(
+    prefixCls,
+    {
+      [`${prefixCls}-with-footer`]: showFooter,
+    },
+    rootClassName
+  );
+  console.log(showFooter);
 
   return wrapSSR(
     <AntDrawer
-      className={`${drawerCls}`}
+      destroyOnClose={true}
+      onClose={handleCancel}
+      rootClassName={drawerCls}
       prefixCls={customizePrefixCls}
-      style={{
-        ...style,
-      }}
       {...restProps}
     >
       {children}
-      {footer && (
+      {showFooter && (
+        // footer className should not be `${prefixCls}-footer` to avoid conflicts with antd
+        // ref: https://github.com/ant-design/ant-design/blob/master/components/drawer/style/index.ts#L214
         <div className={`${prefixCls}-footer-content`}>
           {isBoolean(footer) ? (
             <Space>
-              <Button onClick={onCancel}>{cancelText}</Button>
+              <Button onClick={handleCancel}>{cancelText || drawerLocale?.cancelText}</Button>
               <Button onClick={onOk} type="primary" loading={confirmLoading} {...okButtonProps}>
-                {okText}
+                {okText || drawerLocale?.okText}
               </Button>
             </Space>
           ) : (

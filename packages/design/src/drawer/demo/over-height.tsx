@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Drawer, Button } from '@oceanbase/design';
+import { Drawer, Button, theme } from '@oceanbase/design';
 
 export default () => {
   const [open, setOpen] = useState(false);
+
+  const { token } = theme.useToken();
 
   return (
     <>
@@ -17,18 +19,15 @@ export default () => {
       <Drawer
         open={open}
         title="Title"
-        onClose={() => {
+        onOk={() => {
           setOpen(false);
         }}
         onCancel={() => {
           setOpen(false);
         }}
-        footer={false}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <div style={{ height: '100vh', backgroundColor: token.colorBgLayout }}></div>
       </Drawer>
     </>
-  )
+  );
 };

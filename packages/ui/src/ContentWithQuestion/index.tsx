@@ -1,11 +1,9 @@
 import { QuestionCircleOutlined } from '@oceanbase/icons';
-import { Space, Tooltip } from '@oceanbase/design';
+import { ConfigProvider, Space, Tooltip } from '@oceanbase/design';
 import classNames from 'classnames';
-import React, { isValidElement } from 'react';
+import React, { useContext, isValidElement } from 'react';
 import { getPrefix } from '../_util';
-import './index.less';
-
-type IconPosition = 'prefix' | 'suffix';
+import useStyle from './style';
 
 export interface ContentWithQuestionProps {
   content?: React.ReactNode;
@@ -20,6 +18,7 @@ export interface ContentWithQuestionProps {
 const prefix = getPrefix('content-with-question');
 
 const ContentWithQuestion: React.FC<ContentWithQuestionProps> = ({
+  prefixCls: customizePrefixCls,
   content,
   tooltip,
   prefixIcon = null,
@@ -28,6 +27,10 @@ const ContentWithQuestion: React.FC<ContentWithQuestionProps> = ({
   children,
   ...restProps
 }: any) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('content-with-question', customizePrefixCls);
+  const { wrapSSR } = useStyle(prefixCls);
+
   // FIXME: antd 已经废弃 icon type 的用法，该组件也需要做相应处理，后面将会是传入 Icon 的形式而非 type
   const getIcon = (iconConfig: React.ReactNode) => {
     return iconConfig ? (
@@ -35,16 +38,18 @@ const ContentWithQuestion: React.FC<ContentWithQuestionProps> = ({
         {isValidElement(iconConfig) ? (
           iconConfig
         ) : (
-          <QuestionCircleOutlined className={`${prefix}-help`} />
+          <QuestionCircleOutlined className={`${prefixCls}-help`} />
         )}
       </Tooltip>
     ) : null;
   };
 
-  return (
+  return wrapSSR(
     <span
+      // eslint-disable-next-line react/no-unknown-property
+      prefixCls={customizePrefixCls}
       className={classNames({
-        [`${prefix}-item`]: true,
+        [`${prefixCls}-item`]: true,
         [className]: !!className,
       })}
       {...restProps}
@@ -53,7 +58,7 @@ const ContentWithQuestion: React.FC<ContentWithQuestionProps> = ({
         {getIcon(
           prefixIcon === true ? (
             <QuestionCircleOutlined
-              className={`${prefix}-help`}
+              className={`${prefixCls}-help`}
               style={{
                 marginRight: 4,
               }}

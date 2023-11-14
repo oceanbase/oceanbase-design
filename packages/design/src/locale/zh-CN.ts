@@ -13,4 +13,8 @@ export default {
       open: '展开',
     },
   },
+  Drawer: {
+    okText: '确定',
+    cancelText: '取消',
+  },
 } as Locale;

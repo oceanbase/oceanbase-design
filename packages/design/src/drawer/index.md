@@ -15,13 +15,15 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="典型抽屉" description="默认包含标题、内容和底部操作。"></code>
+<code src="./demo/basic.tsx" title="基础抽屉" description="默认包含标题、内容。"></code>
 
-<code src="./demo/no-footer.tsx" title="无 footer" description="去掉抽屉底部的 footer。"></code>
+<code src="./demo/footer.tsx" title="开启页脚" description="可通过 `footer` 或 `onOk` 开启页脚。"></code>
 
-<code src="./demo/custom-footer.tsx" title="自定义 footer" description="自定义 footer 的内容。"></code>
+<code src="./demo/custom-footer.tsx" title="自定义页脚"></code>
 
-<code src="./demo/confirmLoading.tsx" title="确定按钮 loading" description="确定按钮 loading。"></code>
+<code src="./demo/over-height.tsx" title="内容超出滚动" description="高度超出自动滚动"></code>
+
+<code src="./demo/confirmLoading.tsx" title="确定按钮 loading"></code>
 
 <code src="./demo/form-drawer.tsx" title="用于 Form 表单" description="与 Form 表单合用，用于收集数据。"></code>
 
@@ -29,14 +31,14 @@ nav:
 
 ## API
 
-| 参数           | 说明               | 类型                 | 默认值 | 版本 |
-| :------------- | :----------------- | :------------------- | :----- | :--- |
-| footer         | 抽屉的页脚         | boolean \| ReactNode | true   | -    |
-| onOk           | 点击确定回调       | function(e)          | -      | -    |
-| onCancel       | 点击取消按钮的回调 | function(e)          | -      | -    |
-| cancelText     | 设置取消按钮文字   | string               | 取消   | -    |
-| okText         | 确认按钮文字       | string               | 确定   | -    |
-| okButtonProps  | ok 按钮 props      | ButtonProps          | -      | -    |
-| confirmLoading | 确定按钮 loading   | boolean              | false  | -    |
+| 参数           | 说明                                 | 类型                 | 默认值 | 版本 |
+| :------------- | :----------------------------------- | :------------------- | :----- | :--- |
+| footer         | 抽屉的页脚                           | boolean \| ReactNode | false  | -    |
+| onOk           | 点击确定回调，不为空时会开启默认页脚 | function(e)          | -      | -    |
+| onCancel       | 点击取消按钮的回调                   | function(e)          | -      | -    |
+| cancelText     | 设置取消按钮文字                     | string               | 取消   | -    |
+| okText         | 确认按钮文字                         | string               | 确定   | -    |
+| okButtonProps  | ok 按钮 props                        | ButtonProps          | -      | -    |
+| confirmLoading | 确定按钮 loading                     | boolean              | false  | -    |
 
 - 更多 API 详见 antd Drawer 文档: https://ant.design/components/drawer-cn
