@@ -52,7 +52,7 @@
     "moment": "^2.29.4",
     "path-to-regexp": "^6.2.1",
     "randexp": "^0.5.3",
-    "rc-util": "^5.38.0",
+    "rc-util": "^5.38.1",
     "react-copy-to-clipboard": "^5.1.0",
     "react-json-view": "^1.21.3",
     "react-split-pane": "^0.1.92",
