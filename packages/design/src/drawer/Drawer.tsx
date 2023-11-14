@@ -64,7 +64,6 @@ const Drawer: CompoundedComponent = ({
     },
     rootClassName
   );
-  console.log(showFooter);
 
   return wrapSSR(
     <AntDrawer
