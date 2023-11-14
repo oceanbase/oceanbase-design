@@ -10,21 +10,31 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
   return {
     [`${componentCls}`]: {
       [`${componentCls}-header`]: {
-        padding: '20px 24px 0',
-        borderBottom: 'none',
+        padding: '20px 24px 24px 24px',
+        borderBottom: 'none !important',
+      },
+      [`${componentCls}-body`]: {
+        padding: '0 24px 24px 24px',
       },
       [`${componentCls}-footer-content`]: {
         position: 'absolute',
         right: 0,
         bottom: 0,
-        width: 'calc(100% - 32px)',
-        padding: 24,
-        paddingLeft: 0,
+        width: '100%',
+        padding: '24px 24px 20px 24px',
         background: token.colorBgContainer,
         zIndex: 10,
         display: 'flex',
-        justifyContent: 'end',
+        justifyContent: 'flex-end',
         alignItems: 'center',
+      },
+    },
+    [`${componentCls}-with-footer`]: {
+      [`${componentCls}-body`]: {
+        padding: '0 24px',
+        // preserve space for footer
+        // marginBottom = paddingTop + Button height + paddingBottom
+        marginBottom: 24 + 32 + 20,
       },
     },
   };

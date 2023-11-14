@@ -13,6 +13,7 @@ import themeConfig from '../theme';
 import defaultTheme from '../theme/default';
 import darkTheme from '../theme/dark';
 import type { NavigateFunction } from './navigate';
+import { Locale } from '../locale';
 
 export * from './navigate';
 export * from 'antd/es/config-provider/context';
@@ -32,6 +33,7 @@ export interface ConfigConsumerProps extends AntConfigConsumerProps {
   theme?: ThemeConfig;
   navigate?: NavigateFunction;
   spin?: SpinConfig;
+  locale?: Locale;
 }
 
 export interface ConfigProviderProps extends AntConfigProviderProps {

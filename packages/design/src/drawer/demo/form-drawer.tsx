@@ -29,9 +29,6 @@ export default () => {
       <Drawer
         open={open}
         title="Title"
-        onClose={() => {
-          setOpen(false);
-        }}
         onOk={() => {
           handleSubmit;
           setOpen(false);

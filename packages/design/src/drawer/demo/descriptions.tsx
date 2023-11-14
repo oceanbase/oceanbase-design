@@ -17,10 +17,6 @@ export default () => {
       <Drawer
         open={open}
         title="Title"
-        footer={false}
-        onClose={() => {
-          setOpen(false);
-        }}
         onCancel={() => {
           setOpen(false);
         }}

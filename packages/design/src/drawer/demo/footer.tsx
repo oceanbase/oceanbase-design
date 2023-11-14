@@ -17,13 +17,13 @@ export default () => {
       <Drawer
         open={open}
         title="Title"
-        confirmLoading={true}
         onOk={() => {
           setOpen(false);
         }}
         onCancel={() => {
           setOpen(false);
         }}
+        footer={true}
       >
         <p>Some contents...</p>
         <p>Some contents...</p>
