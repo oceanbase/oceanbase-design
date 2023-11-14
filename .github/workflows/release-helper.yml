@@ -31,5 +31,5 @@ jobs:
           dingding-token: ${{ secrets.DINGDING_BOT_TOKEN }}
           dingding-message-title: '# 🎉 OceanBase Design 新版本发布 🎉'
           dingding-message-poster: 'https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*zx7LTI_ECSAAAAAAAAAAAABkARQnAQ'
-          dingding-message-footer: '🚀 前往 [**OceanBase Design 官网**](https://design.oceanbase.com) 查看示例和用法 \n\n 🚀 前往 [**OceanBase Design Releases**](https://github.com/oceanbase/oceanbase-design/releases) 查看更新日志 \n\n 🚀 使用 [**OceanBase Codemod**](https://github.com/oceanbase/oceanbase-design/tree/master/packages/codemod) 可一键迁移'
+          dingding-message-footer: '🚀 前往 [**OceanBase Design 官网**](https://design.oceanbase.com) 查看示例和用法 \n 🚀 前往 [**OceanBase Design Releases**](https://github.com/oceanbase/oceanbase-design/releases) 查看更新日志 \n 🚀 使用 [**OceanBase Codemod**](https://github.com/oceanbase/oceanbase-design/tree/master/packages/codemod) 进行一键迁移'
           dingding-message-prettier: true
