@@ -7,7 +7,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { CloseOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
 import { isNil } from 'lodash';
-import { token } from '../static-function';
 import MouseTooltip from './MouseTooltip';
 import ConfigProvider from '../config-provider';
 import useStyle from './style';
@@ -29,6 +28,7 @@ type CompoundedComponent = React.ForwardRefExoticComponent<
 > & {
   /** @internal */
   __ANT_TOOLTIP: boolean;
+  _InternalPanelDoNotUseOrYouWillBeFired: typeof AntTooltip._InternalPanelDoNotUseOrYouWillBeFired;
 };
 
 const Tooltip = React.forwardRef<TooltipRef, TooltipProps>(
@@ -150,5 +150,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 Tooltip.__ANT_TOOLTIP = true;
+
+Tooltip._InternalPanelDoNotUseOrYouWillBeFired = AntTooltip._InternalPanelDoNotUseOrYouWillBeFired;
 
 export default Tooltip;

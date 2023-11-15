@@ -30,4 +30,8 @@ export default {
       andKeepItProperly: 'and keep it properly',
     },
   },
+  Drawer: {
+    okText: 'OK',
+    cancelText: 'Cancel',
+  },
 } as Locale;

@@ -28,4 +28,8 @@ export default {
       andKeepItProperly: '並妥善保存',
     },
   },
+  Drawer: {
+    okText: '确定',
+    cancelText: '取消',
+  },
 } as Locale;
