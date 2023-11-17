@@ -2,7 +2,7 @@ import { Drawer as AntDrawer } from 'antd';
 import { Button, Space } from '@oceanbase/design';
 import type { DrawerProps as AntDrawerProps } from 'antd/es/drawer';
 import type { ButtonProps } from '@oceanbase/design/es/button';
-import React, { useContext } from 'react';
+import React, { isValidElement, useContext } from 'react';
 import { isBoolean } from 'lodash';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
@@ -40,8 +40,8 @@ const Drawer: CompoundedComponent = ({
   okText,
   cancelText,
   okButtonProps,
-  confirmLoading = false,
-  footer = false,
+  confirmLoading,
+  footer,
   rootClassName,
   prefixCls: customizePrefixCls,
   ...restProps
@@ -56,7 +56,8 @@ const Drawer: CompoundedComponent = ({
   const { wrapSSR } = useStyle(prefixCls);
 
   const handleCancel = onCancel || onClose;
-  const showFooter = !!(footer || onOk);
+  const showFooter = !!(footer || onOk) && footer !== false && footer !== null;
+  console.log(footer);
   const drawerCls = classNames(
     prefixCls,
     {
@@ -78,15 +79,15 @@ const Drawer: CompoundedComponent = ({
         // footer className should not be `${prefixCls}-footer` to avoid conflicts with antd
         // ref: https://github.com/ant-design/ant-design/blob/master/components/drawer/style/index.ts#L214
         <div className={`${prefixCls}-footer-content`}>
-          {isBoolean(footer) ? (
+          {isValidElement(footer) ? (
+            footer
+          ) : (
             <Space>
               <Button onClick={handleCancel}>{cancelText || drawerLocale?.cancelText}</Button>
               <Button onClick={onOk} type="primary" loading={confirmLoading} {...okButtonProps}>
                 {okText || drawerLocale?.okText}
               </Button>
             </Space>
-          ) : (
-            footer
           )}
         </div>
       )}
