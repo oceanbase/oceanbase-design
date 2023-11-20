@@ -231,8 +231,8 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
       vanilla-jsoneditor:
-        specifier: ^0.18.9
-        version: 0.18.9
+        specifier: ^0.18.13
+        version: 0.18.13
       web-vitals:
         specifier: ^3.5.0
         version: 3.5.0
@@ -23419,8 +23419,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  /svelte@4.2.1:
-    resolution: {integrity: sha512-LpLqY2Jr7cRxkrTc796/AaaoMLF/1ax7cto8Ot76wrvKQhrPmZ0JgajiWPmg9mTSDqO16SSLiD17r9MsvAPTmw==}
+  /svelte@4.2.7:
+    resolution: {integrity: sha512-UExR1KS7raTdycsUrKLtStayu4hpdV3VZQgM0akX8XbXgLBlosdE/Sf3crOgyh9xIjqSYB3UEBuUlIQKRQX2hg==}
     engines: {node: '>=16'}
     dependencies:
       '@ampproject/remapping': 2.2.1
@@ -24820,13 +24820,13 @@ packages:
     resolution: {integrity: sha512-Wirg6DoCrJpYwMHxkwyvgQ16gr4kgH9zzueHSSSovzQDvlg/XSqpY/stVsI5lz1vqJW1RAtr0Ilyyg1AbokRXA==}
     dev: true
 
-  /vanilla-jsoneditor@0.18.9:
-    resolution: {integrity: sha512-hLgVSrNLTEhHNmfErBg4zv+i3H+LIeEXO/b9effBB8sf+bXTVX21D8Nlz6Qg9XsPvWKjSqI2yJu7eF85CZh2eQ==}
+  /vanilla-jsoneditor@0.18.13:
+    resolution: {integrity: sha512-pq+QHvsmV0lat5RP559RULjNNNH/f/qYdfnMZKJvrP8LJdDIWIMfhJ8rxlXIYqRz9lPTVX9SqPNJm6D9HMIXYQ==}
     dependencies:
       '@fortawesome/free-solid-svg-icons': 6.4.2
       ajv: 8.12.0
       immutable-json-patch: 5.1.3
-      svelte: 4.2.1
+      svelte: 4.2.7
     dev: true
 
   /vary@1.1.2:
