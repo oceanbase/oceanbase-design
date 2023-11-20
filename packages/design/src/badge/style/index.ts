@@ -37,6 +37,10 @@ export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSS
           color: token.colorWarning,
         },
       },
+
+      [`${componentCls}-status-text`]: {
+        marginInlineStart: 8,
+      },
     },
   };
 };
