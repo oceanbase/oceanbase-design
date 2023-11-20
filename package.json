@@ -79,7 +79,7 @@
     "execa": "^5.1.1",
     "father": "^4.3.6",
     "fs-extra": "^11.1.1",
-    "gh-pages": "^6.0.0",
+    "gh-pages": "^6.1.0",
     "html2sketch": "^1.0.2",
     "husky": "^8.0.3",
     "identity-obj-proxy": "^3.0.0",
