@@ -3,6 +3,7 @@ import type { TableProps as AntTableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import type { RowSelectMethod, TableLocale as AntTableLocale } from 'antd/es/table/interface';
 import type { Reference } from 'rc-table';
+import type Summary from 'rc-table/es/Footer/Summary';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 import type { ReactElement, ReactNode } from 'react';
@@ -230,5 +231,5 @@ export default Object.assign(ForwardTable, {
   SELECTION_NONE: AntTable.SELECTION_NONE,
   Column: AntTable.Column,
   ColumnGroup: AntTable.ColumnGroup,
-  Summary: AntTable.Summary,
+  Summary: AntTable.Summary as typeof Summary,
 });
