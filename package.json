@@ -108,7 +108,7 @@
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.2",
     "react-intl": "^6.5.1",
-    "react-router-dom": "^6.18.0",
+    "react-router-dom": "^6.19.0",
     "runscript": "^1.5.3",
     "svg-jest": "^1.0.1",
     "sylvanas": "^0.6.1",
