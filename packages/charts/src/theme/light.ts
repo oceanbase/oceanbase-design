@@ -4,16 +4,39 @@ const { registerTheme } = G2;
 
 // 分类色板
 const COLORS_10 = [
-  '#4C96FF',
-  '#53D3A9',
-  '#FFBE5F',
-  '#5BC4FF',
-  '#809CD1',
-  '#A881FF',
-  '#FF9F9F',
-  '#6875FF',
-  '#AEDB43',
-  '#FF7ECB',
+  '#3D88F2',
+  '#41D9A6',
+  '#FAC357',
+  '#547199',
+  '#79BFF2',
+  '#4D997F',
+  '#88CC66',
+  '#B3749E',
+  '#E6987F',
+  '#8C675B',
+];
+
+const COLORS_20 = [
+  '#3D88F2',
+  '#8BB8F7',
+  '#41D9A6',
+  '#8DE8CA',
+  '#FAC357',
+  '#FCDB9A',
+  '#547199',
+  '#98AAC2',
+  '#79BFF2',
+  '#AFD9F7',
+  '#4D997F',
+  '#94C2B3',
+  '#88CC66',
+  '#B7E0A3',
+  '#B3749E',
+  '#D1ACC5',
+  '#E6987F',
+  '#F0C1B2',
+  '#8C675B',
+  '#BAA49D',
 ];
 
 const BLACK_COLORS = {
@@ -47,24 +70,31 @@ const lightTheme = {
   theme: 'light',
   // 主题色
   defaultColor: COLORS_10[0],
-  // 分类色，分类个数小于 10 时使用
+  // 分类色
   colors10: COLORS_10,
+  colors20: COLORS_20,
   // 背景色
   backgroundColor: '#ffffff',
   // 图表辅助色
-  subColor: '#F5F8FE',
+  subColor: '#F8FAFE',
   // 语义色
-  semanticBlue: COLORS_10[0],
-  semanticGreen: '#53D3A9',
-  semanticYellow: '#FFAC33',
-  semanticRed: '#FF4B4B',
+  semanticBlue: '#3983ED',
+  semanticGreen: '#42C79B',
+  semanticYellow: '#F9B048',
+  semanticOrange: '#F97A3B',
+  semanticRed: '#E5363B',
+  semanticDarkRed: '#89273F',
+  semanticGray: '#ABB8D5',
 
   /* 以下为自定义主题 token */
   // 语义色的渐变色，常用于面积图等区域着色
-  semanticBlueGradient: 'l(270) 0:rgba(76,150,255,0) 1:rgba(76,150,255,0.2)',
-  semanticGreenGradient: 'l(270) 0:rgba(83,211,169,0) 1:rgba(83,211,169,0.2)',
-  semanticYellowGradient: 'l(270) 0:rgba(255,172,51,0) 1:rgba(255,172,51,0.2)',
-  semanticRedGradient: 'l(270) 0:rgba(255,75,75,0) 1:rgba(255,75,75,0.2)',
+  semanticBlueGradient: 'l(270) 0:rgba(57,131,237,0) 1:rgba(57,131,237,0.2)',
+  semanticGreenGradient: 'l(270) 0:rgba(66,199,155,0) 1:rgba(66,199,155,0.2)',
+  semanticYellowGradient: 'l(270) 0:rgba(249,176,72,0) 1:rgba(249,176,72,0.2)',
+  semanticOrangeGradient: 'l(270) 0:rgba(249,122,59,0) 1:rgba(249,122,59,0.2)',
+  semanticRedGradient: 'l(270) 0:rgba(229,54,59,0) 1:rgba(229,54,59,0.2)',
+  semanticDarkRedGradient: 'l(270) 0:rgba(137,39,63,0) 1:rgba(137,39,63,0.2)',
+  semanticGrayGradient: 'l(270) 0:rgba(171,184,213,0) 1:rgba(171,184,213,0.2)',
   // 条形宽度
   barWidth: 12,
   barBackgroundColor: AXIS_LINE_COLOR,

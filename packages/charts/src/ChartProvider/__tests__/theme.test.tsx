@@ -1,13 +1,15 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ChartProvider, useTheme } from '@oceanbase/charts';
+import lightTheme from '../../theme/light';
+import darkTheme from '../../theme/dark';
 
 describe('ChartProvider theme', () => {
   it('default theme', () => {
     const Child = () => {
       const themeConfig = useTheme();
       expect(themeConfig.theme).toBe('light');
-      expect(themeConfig.defaultColor).toBe('#4C96FF');
+      expect(themeConfig.defaultColor).toBe(lightTheme.defaultColor);
       return <div />;
     };
     render(
@@ -21,7 +23,7 @@ describe('ChartProvider theme', () => {
     const Child = () => {
       const themeConfig = useTheme();
       expect(themeConfig.theme).toBe('light');
-      expect(themeConfig.defaultColor).toBe('#4C96FF');
+      expect(themeConfig.defaultColor).toBe(lightTheme.defaultColor);
       return <div />;
     };
     render(
@@ -35,7 +37,7 @@ describe('ChartProvider theme', () => {
     const Child = () => {
       const themeConfig = useTheme();
       expect(themeConfig.theme).toBe('dark');
-      expect(themeConfig.defaultColor).toBe('#4D97FF');
+      expect(themeConfig.defaultColor).toBe(darkTheme.defaultColor);
       return <div />;
     };
     render(
