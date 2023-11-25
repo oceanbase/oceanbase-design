@@ -42,20 +42,20 @@ export const genTagStyle: GenerateStyle<TagToken> = (token: TagToken): CSSObject
   return {
     [`${componentCls}`]: {
       borderColor: getTagBorderColor(token.colorBorder),
-      [`&-ellipsis`]: {
+      ['&-ellipsis']: {
         maxWidth: '100%',
         textOverflow: 'ellipsis',
         overflow: 'hidden',
         verticalAlign: 'bottom',
       },
-      [`&-checkable`]: {
+      ['&-checkable']: {
         borderColor: 'transparent',
       },
-      [`&-hidden`]: {
+      ['&-hidden']: {
         display: 'none',
       },
-      [`&-borderless`]: {
-        border: 'transparent',
+      ['&-borderless']: {
+        borderColor: 'transparent',
       },
     },
   };
