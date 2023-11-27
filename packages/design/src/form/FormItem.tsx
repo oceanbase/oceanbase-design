@@ -13,7 +13,7 @@ export type WrapperTooltipProps = Omit<TooltipProps, 'mouseFollow'> & {
 
 export type LabelTooltipType = WrapperTooltipProps | React.ReactNode;
 
-interface FormItemProps extends AntFormItemProps {
+export interface FormItemProps extends AntFormItemProps {
   tooltip?: WrapperTooltipProps | ReactNode;
 }
 

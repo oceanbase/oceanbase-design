@@ -22,54 +22,59 @@ export interface CardProps extends AntCardProps {
   tabList?: CardTabListType[];
 }
 
-const Card = ({
-  children,
-  divided = true,
-  tabList,
-  prefixCls: customizePrefixCls,
-  className,
-  ...restProps
-}: CardProps) => {
-  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
-  const prefixCls = getPrefixCls('card', customizePrefixCls);
-  const tabsPrefixCls = getPrefixCls('tabs', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls, tabsPrefixCls);
-  const cardCls = classNames(
-    {
-      [`${prefixCls}-no-divider`]: !divided,
-    },
-    className
-  );
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  (
+    { children, divided = true, tabList, prefixCls: customizePrefixCls, className, ...restProps },
+    ref
+  ) => {
+    const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+    const prefixCls = getPrefixCls('card', customizePrefixCls);
+    const tabsPrefixCls = getPrefixCls('tabs', customizePrefixCls);
+    const { wrapSSR } = useStyle(prefixCls, tabsPrefixCls);
 
-  const newTabList = tabList?.map(item => {
-    if (!isNullValue(item.tag)) {
-      return {
-        ...item,
-        tab: (
-          <Space size={4}>
-            {item.tab}
-            <Tag bordered={false} className={`${tabsPrefixCls}-tab-tag`}>
-              {item.tag}
-            </Tag>
-          </Space>
-        ),
-      };
-    }
-    return item;
-  });
+    const cardCls = classNames(
+      {
+        [`${prefixCls}-no-divider`]: !divided,
+      },
+      className
+    );
 
-  return wrapSSR(
-    <AntCard tabList={newTabList} prefixCls={customizePrefixCls} className={cardCls} {...restProps}>
-      {children}
-    </AntCard>
-  );
-};
+    const newTabList = tabList?.map(item => {
+      if (!isNullValue(item.tag)) {
+        return {
+          ...item,
+          tab: (
+            <Space size={4}>
+              {item.tab}
+              <Tag bordered={false} className={`${tabsPrefixCls}-tab-tag`}>
+                {item.tag}
+              </Tag>
+            </Space>
+          ),
+        };
+      }
+      return item;
+    });
 
-Card.Grid = AntCard.Grid;
-Card.Meta = AntCard.Meta;
+    return wrapSSR(
+      <AntCard
+        ref={ref}
+        tabList={newTabList}
+        prefixCls={customizePrefixCls}
+        className={cardCls}
+        {...restProps}
+      >
+        {children}
+      </AntCard>
+    );
+  }
+);
 
 if (process.env.NODE_ENV !== 'production') {
   Card.displayName = AntCard.displayName;
 }
 
-export default Card;
+export default Object.assign(Card, {
+  Grid: AntCard.Grid,
+  Meta: AntCard.Meta,
+});

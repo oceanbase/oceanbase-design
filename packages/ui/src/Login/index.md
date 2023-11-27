@@ -9,6 +9,10 @@ nav:
 
 <code src="./demo/basic.tsx" title="基本"></code>
 
+<code src="./demo/bg-image.tsx" title="背景图片"></code>
+
+<code src="./demo/board.tsx" title="顶部公告"></code>
+
 <code src="./demo/otherLogin.tsx" title="第三方登录"></code>
 
 <code src="./demo/with-alert.tsx" title="警告提示"></code>
@@ -16,6 +20,8 @@ nav:
 <code src="./demo/activate.tsx" title="用户激活"></code>
 
 <code src="./demo/authCode.tsx" title="登录验证码"></code>
+
+<code src="./demo/is-mobile.tsx" title="移动端支持" iframe="600"></code>
 
 ## API
 
@@ -35,3 +41,4 @@ nav:
 | showOtherLoginButton | 是否显示第三方登录按钮 | boolean | - | - |
 | authCodeImg | 验证码图片 URL 地址 | string | - | - |
 | onAuthCodeImgChange | 刷新验证码回调 | function | - | - |
+| isMobile | 是否为移动端 | boolean | false | - |

@@ -8,10 +8,12 @@ import type {
 import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
 import type { SpinIndicator } from 'antd/es/spin';
 import { merge } from 'lodash';
-import StaticFunction, { token } from '../static-function';
-import defaultTheme from '../theme';
-import defaultThemeToken from '../theme/default';
+import StaticFunction from '../static-function';
+import themeConfig from '../theme';
+import defaultTheme from '../theme/default';
+import darkTheme from '../theme/dark';
 import type { NavigateFunction } from './navigate';
+import { Locale } from '../locale';
 
 export * from './navigate';
 export * from 'antd/es/config-provider/context';
@@ -31,6 +33,7 @@ export interface ConfigConsumerProps extends AntConfigConsumerProps {
   theme?: ThemeConfig;
   navigate?: NavigateFunction;
   spin?: SpinConfig;
+  locale?: Locale;
 }
 
 export interface ConfigProviderProps extends AntConfigProviderProps {
@@ -50,7 +53,7 @@ const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
   navigate: undefined,
 });
 
-const { defaultSeed, components } = defaultTheme;
+const { defaultSeed } = themeConfig;
 
 const ConfigProvider = ({
   children,
@@ -64,6 +67,8 @@ const ConfigProvider = ({
   const parentContext = React.useContext<ConfigConsumerProps>(AntConfigProvider.ConfigContext);
   const parentExtendedContext =
     React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
+  const mergedTheme = merge(parentContext.theme, theme);
+  const currentTheme = mergedTheme.isDark ? darkTheme : defaultTheme;
   return (
     <AntConfigProvider
       spin={merge(parentContext.spin, spin)}
@@ -76,28 +81,18 @@ const ConfigProvider = ({
       )}
       theme={merge(
         {
-          // Only set seed token for dark theme
-          // Because defaultThemeToken is designed for light theme
-          token: theme?.isDark
-            ? {
-                ...defaultSeed,
-              }
-            : {
-                ...defaultSeed,
-                ...defaultThemeToken,
-              },
+          token: {
+            ...defaultSeed,
+            ...currentTheme.token,
+          },
           components: {
-            ...components,
-            InputNumber: {
-              ...components?.InputNumber,
-            },
+            ...currentTheme.components,
             Segmented: {
               itemHoverBg: theme?.isDark,
             },
           },
         },
-        parentContext.theme,
-        theme
+        mergedTheme
       )}
       {...restProps}
     >

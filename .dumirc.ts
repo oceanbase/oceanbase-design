@@ -1,8 +1,11 @@
 import path from 'path';
 import { defineConfig } from 'dumi';
+import AntdAliasWebpackPlugin from './antd-alias-webpack-plugin';
 
 export default defineConfig({
-  mfsu: {},
+  mfsu: {
+    exclude: ['antd-token-previewer'],
+  },
   // 默认重定向到子包的 src 文件夹
   // ref: https://d.umijs.org/config#monoreporedirect
   monorepoRedirect: {},
@@ -15,6 +18,10 @@ export default defineConfig({
     hostname: 'https://design.oceanbase.com',
   },
   extraBabelPresets: [require.resolve('@emotion/babel-preset-css-prop')],
+  chainWebpack: config => {
+    config.plugin('antd-alias').use(AntdAliasWebpackPlugin);
+    return config;
+  },
   outputPath: 'site',
   define: {
     'process.env.VERCEL_ANALYTICS_ID': process.env.VERCEL_ANALYTICS_ID,
@@ -138,6 +145,7 @@ export default defineConfig({
             { title: 'Alert 警告提示', link: '/components/alert' },
             { title: 'Message 全局提示', link: '/components/message' },
             { title: 'Modal 对话框', link: '/components/modal' },
+            { title: 'Drawer 抽屉', link: '/components/drawer' },
             { title: 'Notification 通知提醒框', link: '/components/notification' },
             { title: 'Spin 加载中', link: '/components/spin' },
             { title: 'Badge 徽标数', link: '/components/badge' },

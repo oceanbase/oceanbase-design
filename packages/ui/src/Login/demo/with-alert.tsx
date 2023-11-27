@@ -11,7 +11,7 @@ export default () => {
     <Login
       logo="https://gw.alipayobjects.com/zos/bmw-prod/3282eb3a-9a1e-4129-968e-be5f9e6cd1a2.svg"
       bgImage={background_img}
-      title="Welcome OCP Express"
+      title="Welcome to OCP Express"
       description="Let's start your usage"
       alertProps={{
         message: '登录失败，请重新输入',

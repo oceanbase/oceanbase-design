@@ -10,14 +10,14 @@ import type { ModalStaticFunctions } from 'antd/es/modal/confirm';
 import type { NotificationInstance } from 'antd/es/notification/interface';
 import formatToken from 'antd/lib/theme/util/alias';
 import theme from '../theme';
-import defaultThemeToken from '../theme/default';
+import defaultTheme from '../theme/default';
 
 const { defaultAlgorithm, defaultSeed, useToken } = theme;
 
 // 设置默认 token
 const mapToken = {
   ...defaultAlgorithm(defaultSeed),
-  ...defaultThemeToken,
+  ...defaultTheme.token,
   override: {},
 };
 let token = formatToken(mapToken);

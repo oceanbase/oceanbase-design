@@ -5,20 +5,19 @@
 .@{prefix}-container {
   display: flex;
   justify-content: space-between;
-  min-width: 768px;
+  min-width: 960px;
   height: 100vh;
   min-height: 600px;
   overflow: auto;
 
   .@{prefix}-bg {
-    width: 540px;
-    min-width: 400px;
+    width: 40%;
     height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
 
     .@{prefix}-info {
-      margin: 185px 90px 0 90px;
+      margin: 185px 48px 0 48px;
       color: #fff;
       font-weight: 600;
       font-size: 56px;
@@ -43,7 +42,7 @@
     background-color: #fff;
 
     .@{prefix}-locale {
-      position: fixed;
+      position: absolute;
       top: 24px;
       right: 24px;
       color: @colorTextTertiary;
@@ -58,6 +57,7 @@
 
     .@{prefix}-content {
       margin-top: -60px;
+      width: 404px;
       .@{prefix}-logo {
         display: block;
         height: 68px;
@@ -87,13 +87,11 @@
         }
 
         .@{prefixCls}-form-item {
-          width: 404px;
           margin-bottom: 24px;
           padding-bottom: 0;
         }
 
         .@{prefixCls}-input-affix-wrapper {
-          width: 404px;
           height: 40px;
           border-radius: 8px;
 
@@ -178,7 +176,6 @@
         }
       }
       .@{prefix}-submit-btn {
-        width: 404px;
         height: 40px;
         border-radius: 8px;
       }
@@ -201,57 +198,8 @@
       }
 
       .@{prefix}-alert {
-        width: 404px;
         margin-bottom: 24px;
         border-radius: 8px;
-      }
-    }
-  }
-}
-
-@media (max-width: 2048px) {
-  .@{prefix}-container {
-    .@{prefix}-bg {
-      width: 800px;
-
-      .@{prefix}-info {
-        margin: 185px 48px 0 48px;
-        font-size: 72px;
-        .@{prefix}-start {
-          font-size: 48px;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 1800px) {
-  .@{prefix}-container {
-    .@{prefix}-bg {
-      width: 700px;
-
-      .@{prefix}-info {
-        margin: 185px 48px 0 48px;
-        font-size: 64px;
-        .@{prefix}-start {
-          font-size: 40px;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 1600px) {
-  .@{prefix}-container {
-    .@{prefix}-bg {
-      width: 600px;
-
-      .@{prefix}-info {
-        margin: 185px 48px 0 48px;
-        font-size: 56px;
-        .@{prefix}-start {
-          font-size: 32px;
-        }
       }
     }
   }
@@ -267,59 +215,53 @@
   }
 }
 
-@media (max-width: 1200px) {
-  .@{prefix}-container {
-    .@{prefix}-bg {
-      width: 500px;
-
-      .@{prefix}-info {
-        margin: 185px 48px 0 48px;
-        font-size: 48px;
-        .@{prefix}-start {
-          font-size: 28px;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 992px) {
-  .@{prefix}-container {
-    .@{prefix}-bg {
-      width: 400px;
-
-      .@{prefix}-info {
-        margin: 185px 32px 0 32px;
-        font-size: 40px;
-        .@{prefix}-start {
-          font-size: 24px;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .@{prefix}-container {
-    .@{prefix}-bg {
-      width: 250px;
-
-      .@{prefix}-info {
-        margin: 185px 24px 0 24px;
-        font-size: 32px;
-
-        .@{prefix}-start {
-          font-size: 20px;
-        }
-      }
-    }
-  }
-}
-
 .@{prefix}-container-with-board {
   .@{prefix}-card {
     .@{prefix}-content {
       margin-top: 0;
+    }
+  }
+}
+
+.@{prefix}-container-mobile {
+  flex-direction: column;
+  min-width: auto;
+  .@{prefix}-banner {
+    // 移动端设置百分比高度，避免使用 vh，否则安卓端打开软键盘会重新计算高度，导致 banner 图片高度出现跳变
+    height: 25%;
+  }
+  .@{prefix}-bg {
+    width: 100%;
+  }
+  .@{prefix}-card {
+    align-items: start;
+    width: 100%;
+    height: 75%;
+    margin-top: -48px;
+    padding: 0 32px;
+    border-radius: 16px 16px 0 0;
+    position: relative;
+    .@{prefix}-board {
+      top: 8px;
+      left: 24px;
+    }
+    .@{prefix}-locale {
+      top: 8px;
+    }
+    .@{prefix}-content {
+      width: 100%;
+      margin-top: 40px;
+      .@{prefix}-logo {
+        height: 48px;
+        margin-bottom: 24px;
+      }
+      .@{prefix}-watermark-wrapper {
+        // 移动端改为正常文档流，避免安卓端被软键盘顶起
+        width: calc(100% - 64px);
+        position: static;
+        width: 100%;
+        margin-top: 96px;
+      }
     }
   }
 }
