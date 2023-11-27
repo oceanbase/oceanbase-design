@@ -11,6 +11,7 @@ import DescriptionsItem from './Item';
 import useStyle from './style';
 
 export * from 'antd/es/descriptions';
+export type { DescriptionsItemProps } from './Item';
 
 export type DescriptionsProps = AntDescriptionsProps;
 
