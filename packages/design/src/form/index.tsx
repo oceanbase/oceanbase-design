@@ -20,7 +20,7 @@ type CompoundedComponent = React.FC<FormProps> & {
 
 const Form: CompoundedComponent = props => {
   // @ts-ignore
-  return <AntForm requiredMark="optional" {...props} />;
+  return <AntForm requiredMark="optional" scrollToFirstError={true} {...props} />;
 };
 
 Form.Item = Item;
