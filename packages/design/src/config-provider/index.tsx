@@ -110,8 +110,7 @@ const ConfigProvider = ({
 ConfigProvider.ConfigContext =
   AntConfigProvider.ConfigContext as React.Context<ConfigConsumerProps>;
 ConfigProvider.ExtendedConfigContext = ExtendedConfigContext;
-// SizeContext is deprecated
-// ConfigProvider.SizeContext = AntConfigProvider.SizeContext;
+ConfigProvider.SizeContext = AntConfigProvider.SizeContext;
 ConfigProvider.config = AntConfigProvider.config;
 ConfigProvider.useConfig = AntConfigProvider.useConfig;
 
