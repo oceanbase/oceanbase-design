@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Drawer, Button, Space, Alert } from '@oceanbase/design';
+import { Drawer, Button, Space } from '@oceanbase/design';
 
 export default () => {
   const [open, setOpen] = useState(false);
@@ -29,24 +29,24 @@ export default () => {
               alignItems: 'center',
             }}
           >
-            <div>Some info message</div>
             <Space>
-              <Button
-                onClick={() => {
-                  setOpen(false);
-                }}
-              >
-                取消
-              </Button>
               <Button
                 type="primary"
                 onClick={() => {
                   setOpen(false);
                 }}
               >
-                确认
+                Ok
+              </Button>
+              <Button
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                Cancel
               </Button>
             </Space>
+            <div>Some info message</div>
           </div>
         }
       >

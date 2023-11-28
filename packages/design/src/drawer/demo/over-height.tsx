@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
-import { Drawer, Button, theme, Space } from '@oceanbase/design';
+import { Button, Descriptions, Drawer, Form, Input, Space } from '@oceanbase/design';
+import { range } from 'lodash';
 
 export default () => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
 
-  const { token } = theme.useToken();
+  const [form] = Form.useForm();
+  const { validateFields } = form;
+
+  const handleSubmit = () => {
+    validateFields().then(values => {
+      const { name, age } = values;
+      alert(`name: ${name}; age: ${age}`);
+    });
+  };
 
   return (
     <>
@@ -30,13 +39,29 @@ export default () => {
         open={open1}
         title="Drawer with footer"
         onOk={() => {
-          setOpen2(false);
+          handleSubmit();
         }}
         onCancel={() => {
           setOpen1(false);
         }}
       >
-        <div style={{ height: '100vh', backgroundColor: token.colorBgLayout }}></div>
+        <Form layout="vertical" form={form} preserve={false}>
+          {range(1, 20).map(item => (
+            <Form.Item
+              key={item}
+              name={`item ${item}`}
+              label="Name"
+              rules={[
+                {
+                  required: true,
+                  message: `item ${item} is required`,
+                },
+              ]}
+            >
+              <Input placeholder={`item ${item}`} />
+            </Form.Item>
+          ))}
+        </Form>
       </Drawer>
       <Drawer
         open={open2}
@@ -45,7 +70,13 @@ export default () => {
           setOpen2(false);
         }}
       >
-        <div style={{ height: '100vh', backgroundColor: token.colorBgLayout }}></div>
+        <Descriptions layout="vertical" column={1}>
+          {range(1, 20).map(item => (
+            <Descriptions.Item key={item} label={`item ${item}`}>
+              {`Some message of item ${item}`}
+            </Descriptions.Item>
+          ))}
+        </Descriptions>
       </Drawer>
     </>
   );

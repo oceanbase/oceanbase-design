@@ -1,4 +1,4 @@
-import { Button, Form, Input, message } from '@oceanbase/design';
+import { Button, Checkbox, Form, Input, message } from '@oceanbase/design';
 import React from 'react';
 
 const onFinish = (values: any) => {
@@ -21,11 +21,25 @@ const App: React.FC = () => (
       label="Username"
       name="username"
       rules={[{ required: true, message: 'Please input your username!' }]}
+      tooltip={{
+        title: 'This is username',
+      }}
     >
       <Input />
     </Form.Item>
-    <Form.Item label="Address" name="address">
-      <Input />
+    <Form.Item
+      label="Password"
+      name="password"
+      rules={[{ required: true, message: 'Please input your password!' }]}
+      tooltip={{
+        type: 'light',
+        title: 'This is password',
+      }}
+    >
+      <Input.Password autoComplete="new-password" />
+    </Form.Item>
+    <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
+      <Checkbox>Remember me</Checkbox>
     </Form.Item>
     <Form.Item wrapperCol={{ offset: 6, span: 10 }}>
       <Button type="primary" htmlType="submit">

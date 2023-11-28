@@ -13,7 +13,7 @@ import themeConfig from '../theme';
 import defaultTheme from '../theme/default';
 import darkTheme from '../theme/dark';
 import type { NavigateFunction } from './navigate';
-import { Locale } from '../locale';
+import type { Locale } from '../locale';
 
 export * from './navigate';
 export * from 'antd/es/config-provider/context';
@@ -115,8 +115,7 @@ const ConfigProvider = ({
 ConfigProvider.ConfigContext =
   AntConfigProvider.ConfigContext as React.Context<ConfigConsumerProps>;
 ConfigProvider.ExtendedConfigContext = ExtendedConfigContext;
-// SizeContext is deprecated
-// ConfigProvider.SizeContext = AntConfigProvider.SizeContext;
+ConfigProvider.SizeContext = AntConfigProvider.SizeContext;
 ConfigProvider.config = AntConfigProvider.config;
 ConfigProvider.useConfig = AntConfigProvider.useConfig;
 
