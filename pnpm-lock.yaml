@@ -117,8 +117,8 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1
       father:
-        specifier: ^4.3.6
-        version: 4.3.6(@types/node@20.8.6)(styled-components@6.1.0)(webpack@5.89.0)
+        specifier: ^4.3.7
+        version: 4.3.7(@types/node@20.8.6)(styled-components@6.1.0)(webpack@5.89.0)
       fs-extra:
         specifier: ^11.1.1
         version: 11.1.1
@@ -12262,8 +12262,8 @@ packages:
     dependencies:
       reusify: 1.0.4
 
-  /father@4.3.6(@types/node@20.8.6)(styled-components@6.1.0)(webpack@5.89.0):
-    resolution: {integrity: sha512-7WyZnoQM4HzLvIghdX+s2bf91/EDrwdN+CFy/zbUosxWzNzfR4bkbtCKurJWNi082V7/zeglsB5+dIFho2x3fA==}
+  /father@4.3.7(@types/node@20.8.6)(styled-components@6.1.0)(webpack@5.89.0):
+    resolution: {integrity: sha512-Jr+mUYqvjrTfss9ZFxDB280FdUoj6IUVH12U5ocQKEISzPWewzpGrrassf7gi4ugmJNDP8I/Rzje8uZ90C4OpA==}
     hasBin: true
     dependencies:
       '@microsoft/api-extractor': 7.36.3(@types/node@20.8.6)
@@ -15925,7 +15925,6 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -15935,7 +15934,6 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -15945,7 +15943,6 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -15955,7 +15952,6 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
