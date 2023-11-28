@@ -1,14 +1,16 @@
+import React, { isValidElement, useState, useContext } from 'react';
 import { Drawer as AntDrawer } from 'antd';
 import { Button, Space } from '@oceanbase/design';
 import type { DrawerProps as AntDrawerProps } from 'antd/es/drawer';
 import type { ButtonProps } from '@oceanbase/design/es/button';
-import React, { isValidElement, useContext } from 'react';
-import { isBoolean } from 'lodash';
+import { useScroll } from 'ahooks';
 import classNames from 'classnames';
+import { omit } from 'lodash';
 import ConfigProvider from '../config-provider';
 import type { ConfigConsumerProps } from '../config-provider';
 import defaultLocale from '../locale/en-US';
 import useStyle from './style';
+
 export * from 'antd/es/drawer';
 
 export interface DrawerLocale {
@@ -43,6 +45,8 @@ const Drawer: CompoundedComponent = ({
   confirmLoading,
   footer,
   rootClassName,
+  bodyStyle,
+  styles,
   prefixCls: customizePrefixCls,
   ...restProps
 }: DrawerProps) => {
@@ -55,9 +59,20 @@ const Drawer: CompoundedComponent = ({
   const prefixCls = getPrefixCls('drawer', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
 
+  const [contentElment, setContentElement] = useState<HTMLDivElement>();
+  // use useScroll to re-render always when scroll
+  const scroll = useScroll(contentElment);
+  const isScroll = contentElment?.scrollHeight !== contentElment?.clientHeight;
+  // start scroll
+  const isStartScroll = scroll.top > 0;
+  // Determine if an element has been totally scrolled
+  // ref: https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight#determine_if_an_element_has_been_totally_scrolled
+  const isTotalScroll =
+    Math.abs(contentElment?.scrollHeight - contentElment?.clientHeight - contentElment?.scrollTop) <
+    1;
+
   const handleCancel = onCancel || onClose;
   const showFooter = !!(footer || onOk) && footer !== false && footer !== null;
-  console.log(footer);
   const drawerCls = classNames(
     prefixCls,
     {
@@ -72,21 +87,43 @@ const Drawer: CompoundedComponent = ({
       onClose={handleCancel}
       rootClassName={drawerCls}
       prefixCls={customizePrefixCls}
+      classNames={{
+        header: classNames({
+          [`${prefixCls}-header-shadow`]: isStartScroll,
+        }),
+      }}
+      styles={omit(styles, ['body', 'footer'])}
       {...restProps}
     >
-      {children}
+      <div
+        ref={element => {
+          setContentElement(element);
+        }}
+        className={`${prefixCls}-body-content`}
+        style={{
+          ...bodyStyle,
+          ...styles?.body,
+        }}
+      >
+        {children}
+      </div>
       {showFooter && (
         // footer className should not be `${prefixCls}-footer` to avoid conflicts with antd
         // ref: https://github.com/ant-design/ant-design/blob/master/components/drawer/style/index.ts#L214
-        <div className={`${prefixCls}-footer-content`}>
+        <div
+          className={classNames(`${prefixCls}-footer-content`, {
+            [`${prefixCls}-footer-content-shadow`]: isScroll && !isTotalScroll,
+          })}
+          style={styles?.footer}
+        >
           {isValidElement(footer) ? (
             footer
           ) : (
             <Space>
-              <Button onClick={handleCancel}>{cancelText || drawerLocale?.cancelText}</Button>
               <Button onClick={onOk} type="primary" loading={confirmLoading} {...okButtonProps}>
                 {okText || drawerLocale?.okText}
               </Button>
+              <Button onClick={handleCancel}>{cancelText || drawerLocale?.cancelText}</Button>
             </Space>
           )}
         </div>
