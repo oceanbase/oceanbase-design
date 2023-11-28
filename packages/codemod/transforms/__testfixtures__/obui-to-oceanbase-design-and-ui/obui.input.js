@@ -1,5 +1,5 @@
 // import React from 'react';
-// import { Alert, Button, BackgroundTaskManager, BackgroundTaskManagerConstants, BasicLayout, Boundary, ConfigProvider, ContentWithQuestion, IconFont, Login, ModalForm, PageContainer, ProTable, Ranger, theme, TreeSearch } from '@alipay/ob-ui';
+// import { Alert, Button, BackgroundTaskManager, BackgroundTaskManagerConstants, BasicLayout, Boundary, ConfigProvider, IconFont, Login, ModalForm, PageContainer, ProTable, Ranger, theme, TreeSearch } from '@alipay/ob-ui';
 // import type { BackgroundTaskManagerRef, ITaskMgrPreset, ITaskMgrQueue, ModalFormProps, ProTableProps, TaskMgrID } from '@alipay/ob-ui';
 // import type { BasicLayoutProps } from '@alipay/ob-ui/es/BasicLayout';
 // import type { LoginProps } from '@alipay/ob-ui/es/Login';
@@ -7,7 +7,7 @@
 // import { Action } from '@alipay/ob-ui-v1';
 // import type { ActionProps } from '@alipay/ob-ui-v1/es/Action';
 import React from 'react';
-import { Alert, Button, BackgroundTaskManager, BackgroundTaskManagerConstants, BasicLayout, Boundary, ConfigProvider, ContentWithQuestion, IconFont, Login, ModalForm, PageContainer, ProTable, Ranger, theme, TreeSearch } from '@alipay/ob-ui';
+import { Alert, Button, BackgroundTaskManager, BackgroundTaskManagerConstants, BasicLayout, Boundary, ConfigProvider, IconFont, Login, ModalForm, PageContainer, ProTable, Ranger, theme, TreeSearch } from '@alipay/ob-ui';
 import { Action } from '@alipay/ob-ui-v1';
 
 const Demo = () => {
