@@ -6,6 +6,7 @@ import { TextEncoder, TextDecoder } from 'util';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { theme } from '@oceanbase/design';
+import excludeAllWarning from './shared/excludeWarning';
 
 // To ensure snapshot stable, should disable hashed in test env.
 theme.defaultConfig.hashed = false;
@@ -24,6 +25,8 @@ jest.mock('react', () => ({
 }));
 
 jest.setTimeout(60000);
+
+excludeAllWarning();
 
 if (typeof window.URL.createObjectURL === 'undefined') {
   window.URL.createObjectURL = jest.fn();

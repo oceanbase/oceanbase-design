@@ -2,7 +2,13 @@
 const originError = console.error;
 
 export function isSafeWarning(message: boolean, all = false) {
-  const list = ['useLayoutEffect does nothing on the server'];
+  const list = [
+    'useLayoutEffect does nothing on the server',
+    // antd warning
+    'Warning: [antd',
+    // @ant-design/icons warning
+    'Warning: [@ant-design/icons]',
+  ];
 
   if (all) {
     list.push('is deprecated in StrictMode');

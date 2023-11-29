@@ -127,7 +127,7 @@ export default () => {
           ],
         },
         extra: [
-          <Radio.Group defaultValue="option1">
+          <Radio.Group key="1" defaultValue="option1">
             <Radio.Button value="option1">选项 1</Radio.Button>
             <Radio.Button value="option2">选项 2</Radio.Button>
           </Radio.Group>,
