@@ -184,7 +184,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <Form layout="inline" style={{ marginBottom: 16 }}>
+      <Form layout="inline" requiredMark={false} style={{ marginBottom: 16 }}>
         <Form.Item label="Bordered" style={style}>
           <Switch checked={bordered} onChange={handleBorderChange} />
         </Form.Item>

@@ -2,11 +2,13 @@ import { Button, Form, Input, message } from '@oceanbase/design';
 import React from 'react';
 
 const onFinish = (values: any) => {
-  message.success('Success:', values);
+  message.success('Success');
+  console.log(values);
 };
 
 const onFinishFailed = (errorInfo: any) => {
-  message.error('Failed:', errorInfo);
+  message.error('Failed');
+  console.log(errorInfo);
 };
 
 const App: React.FC = () => (

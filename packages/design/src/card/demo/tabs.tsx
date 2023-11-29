@@ -57,7 +57,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <Form layout="inline" style={{ marginBottom: 24 }}>
+      <Form layout="inline" requiredMark={false} style={{ marginBottom: 24 }}>
         <Form.Item label="size">
           <Radio.Group
             value={size}
