@@ -68,7 +68,7 @@ const ConfigProvider = ({
   const parentExtendedContext =
     React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
   const mergedTheme = merge(parentContext.theme, theme);
-  const currentTheme = mergedTheme.isDark ? darkTheme : defaultTheme;
+  const currentTheme = mergedTheme?.isDark ? darkTheme : defaultTheme;
   return (
     <AntConfigProvider
       spin={merge(parentContext.spin, spin)}

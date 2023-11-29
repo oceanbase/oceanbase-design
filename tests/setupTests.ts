@@ -2,7 +2,9 @@
 import 'jest-canvas-mock';
 import { enableFetchMocks } from 'jest-fetch-mock';
 import MockDate from 'mockdate';
+import { TextEncoder, TextDecoder } from 'util';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { theme } from '@oceanbase/design';
 
 // To ensure snapshot stable, should disable hashed in test env.
@@ -10,7 +12,11 @@ theme.defaultConfig.hashed = false;
 
 process.env.TZ = 'UTC';
 
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
 global.React = React;
+
+ReactDOM.createPortal = jest.fn(modal => modal);
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
