@@ -1,4 +1,4 @@
-import { Descriptions as AntDescriptions, Typography } from 'antd';
+import { Descriptions as AntDescriptions } from 'antd';
 import type { DescriptionsProps as AntDescriptionsProps } from 'antd/es/descriptions';
 import type { TooltipPlacement } from 'antd/es/tooltip';
 import classNames from 'classnames';
@@ -6,6 +6,7 @@ import toArray from 'rc-util/lib/Children/toArray';
 import type { ReactElement } from 'react';
 import React, { isValidElement, useContext } from 'react';
 import ConfigProvider from '../config-provider';
+import Typography from '../typography';
 import type { DescriptionsItemProps } from './Item';
 import DescriptionsItem from './Item';
 import useStyle from './style';

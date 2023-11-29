@@ -1,13 +1,13 @@
 import React, { isValidElement, useState, useContext } from 'react';
-import { Drawer as AntDrawer } from 'antd';
-import { Button, Space } from '@oceanbase/design';
+import { Drawer as AntDrawer, Space } from 'antd';
 import type { DrawerProps as AntDrawerProps } from 'antd/es/drawer';
-import type { ButtonProps } from '@oceanbase/design/es/button';
 import { useScroll } from 'ahooks';
 import classNames from 'classnames';
 import { omit } from 'lodash';
 import ConfigProvider from '../config-provider';
 import type { ConfigConsumerProps } from '../config-provider';
+import Button from '../button';
+import type { ButtonProps } from '../button';
 import defaultLocale from '../locale/en-US';
 import useStyle from './style';
 
@@ -49,7 +49,7 @@ const Drawer: CompoundedComponent = ({
   styles,
   prefixCls: customizePrefixCls,
   ...restProps
-}: DrawerProps) => {
+}) => {
   const { locale: contextLocale = defaultLocale } = React.useContext<ConfigConsumerProps>(
     ConfigProvider.ConfigContext
   );
