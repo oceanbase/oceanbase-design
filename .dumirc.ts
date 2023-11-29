@@ -114,6 +114,7 @@ export default defineConfig({
           children: [
             { title: 'Button 按钮', link: '/components/button' },
             { title: 'Icon 图标', link: '/components/icon' },
+            { title: 'Typography 排版', link: '/components/typography' },
           ],
         },
         {

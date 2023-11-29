@@ -11,6 +11,9 @@ export type { AlertProps } from './alert';
 export { default as Button } from './button';
 export type { ButtonProps } from './button';
 
+export { default as Typography } from './typography';
+export type { TypographyProps } from './typography';
+
 export { default as Card } from './card';
 export type { CardProps } from './card';
 

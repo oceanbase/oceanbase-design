@@ -1,4 +1,4 @@
-import { Popover, Space, Table as AntTable, Typography } from 'antd';
+import { Popover, Space, Table as AntTable } from 'antd';
 import type { TableProps as AntTableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import type { RowSelectMethod, TableLocale as AntTableLocale } from 'antd/es/table/interface';
@@ -9,6 +9,7 @@ import { isEmpty } from 'lodash';
 import type { ReactElement, ReactNode } from 'react';
 import React, { useContext, useEffect, useState } from 'react';
 import ConfigProvider from '../config-provider';
+import Typography from '../typography';
 import enUS from '../locale/en-US';
 import useStyle from './style';
 import type { AnyObject } from '../_util/type';
