@@ -15,7 +15,7 @@ export type SegmentedLabeledOption = AntSegmentedLabeledOption & {
   ellipsis?: EllipsisConfig;
 };
 
-export interface SegmentedProps extends AntSegmentedProps {
+export interface SegmentedProps extends Omit<AntSegmentedProps, 'ref'> {
   options: (SegmentedRawOption | SegmentedLabeledOption)[];
 }
 

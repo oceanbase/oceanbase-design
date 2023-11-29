@@ -10,13 +10,7 @@ export const genSegmentedStyle: GenerateStyle<SegmentedToken> = (
   const { componentCls } = token;
 
   return {
-    [`${componentCls}`]: {
-      [`${componentCls}-ellipsis`]: {
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-        textOverflow: 'ellipsis',
-      },
-    },
+    [`${componentCls}`]: {},
   };
 };
 
