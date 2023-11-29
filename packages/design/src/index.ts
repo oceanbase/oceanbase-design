@@ -46,6 +46,9 @@ export type { SelectProps } from './select';
 export { default as Tooltip } from './tooltip';
 export type { TooltipProps } from './tooltip';
 
+export { default as Segmented } from './segmented';
+export type { SegmentedProps } from './segmented';
+
 export { default as Breadcrumb } from './breadcrumb';
 export type { BreadcrumbProps, BreadcrumbItemProps } from './breadcrumb';
 
@@ -54,8 +57,6 @@ export type { SpinProps } from './spin';
 
 export { default as Badge } from './badge';
 export type { BadgeProps } from './badge';
-
-export { default as Segmented } from './segmented';
 
 export { default as theme } from './theme';
 

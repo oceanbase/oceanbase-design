@@ -1,37 +1,47 @@
 import React, { useContext } from 'react';
 import { Segmented as AntSegmented, Typography } from 'antd';
-import type { SegmentedProps as AntSegmentedProps } from 'antd/es/segmented';
-import useStyle from './style';
+import type {
+  SegmentedProps as AntSegmentedProps,
+  SegmentedLabeledOption as AntSegmentedLabeledOption,
+} from 'antd/es/segmented';
+import type { EllipsisConfig } from 'antd/es/typography/Base';
+import type { SegmentedRawOption } from 'rc-segmented';
 import ConfigProvider from '../config-provider';
+import useStyle from './style';
 
 export * from 'antd/es/segmented';
 
-export type SegmentedProps = AntSegmentedProps;
-
-const Segmented: React.FC<SegmentedProps> = ({
-  options,
-  prefixCls: customizePrefixCls,
-  ...restProps
-}: any) => {
-  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
-  const prefixCls = getPrefixCls('segmented', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
-
-  const optionsItems = (option, { index }) => {
-    return {
-      label: <div className={'ant-segmented-ellipsis'}>{option.label || option}</div>,
-      value: option.value || index,
-      ...option,
-    };
-  };
-
-  return wrapSSR(
-    <AntSegmented
-      options={options?.map((option, index) => optionsItems(option, { index }))}
-      defaultValue={0}
-      {...restProps}
-    />
-  );
+export type SegmentedLabeledOption = AntSegmentedLabeledOption & {
+  ellipsis?: EllipsisConfig;
 };
+
+export interface SegmentedProps extends AntSegmentedProps {
+  options: (SegmentedRawOption | SegmentedLabeledOption)[];
+}
+
+const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
+  ({ prefixCls: customizePrefixCls, options, ...restProps }, ref) => {
+    const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+    const prefixCls = getPrefixCls('segmented', customizePrefixCls);
+    const { wrapSSR } = useStyle(prefixCls);
+
+    const newOptions = options?.map(item => {
+      if (typeof item === 'object' && (item as SegmentedLabeledOption)?.ellipsis) {
+        const { label, ...restItem } = item;
+        return {
+          ...restItem,
+          label: <Typography.Text ellipsis={item.ellipsis}>{label}</Typography.Text>,
+        };
+      }
+      return item;
+    });
+
+    return wrapSSR(<AntSegmented ref={ref} options={newOptions} {...restProps} />);
+  }
+);
+
+if (process.env.NODE_ENV !== 'production') {
+  Segmented.displayName = 'Segmented';
+}
 
 export default Segmented;

@@ -85,12 +85,7 @@ const ConfigProvider = ({
             ...defaultSeed,
             ...currentTheme.token,
           },
-          components: {
-            ...currentTheme.components,
-            Segmented: {
-              itemHoverBg: theme?.isDark,
-            },
-          },
+          components: currentTheme.components,
         },
         mergedTheme
       )}

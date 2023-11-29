@@ -1,13 +1,13 @@
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import type { FullToken, GenerateStyle } from 'antd/lib/theme/internal';
 import type { CSSObject } from '@ant-design/cssinjs';
+import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type SegmentedToken = FullToken<'Segmented'>;
 
 export const genSegmentedStyle: GenerateStyle<SegmentedToken> = (
   token: SegmentedToken
 ): CSSObject => {
-  const { componentCls, colorPrimary } = token;
+  const { componentCls } = token;
 
   return {
     [`${componentCls}`]: {
@@ -15,9 +15,6 @@ export const genSegmentedStyle: GenerateStyle<SegmentedToken> = (
         overflow: 'hidden',
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
-      },
-      [`${componentCls}-item-selected`]: {
-        color: `${colorPrimary} !important`,
       },
     },
   };

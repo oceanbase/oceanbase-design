@@ -1,28 +1,12 @@
-import type { RadioChangeEvent } from '@oceanbase/design';
-import { Radio, Segmented, Space } from '@oceanbase/design';
-import React, { useState } from 'react';
+import React from 'react';
+import { Segmented, Space } from '@oceanbase/design';
 
-type SizeType = 'small' | 'middle' | 'large';
-
-const App: React.FC = () => {
-  const [size, setSize] = useState<SizeType>('small');
-
-  const onChange = (e: RadioChangeEvent) => {
-    setSize(e.target.value);
-  };
-
-  return (
-    <>
-      <Radio.Group value={size} onChange={onChange} style={{ marginBottom: 16 }}>
-        <Radio.Button value="small">Small</Radio.Button>
-        <Radio.Button value="middle">Middle</Radio.Button>
-        <Radio.Button value="large">Large</Radio.Button>
-      </Radio.Group>
-      <div>
-        <Segmented size={size} options={['年度', '季度', '年度']} />
-      </div>
-    </>
-  );
-};
+const App: React.FC = () => (
+  <Space direction="vertical">
+    <Segmented size="large" options={['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly']} />
+    <Segmented options={['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly']} />
+    <Segmented size="small" options={['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly']} />
+  </Space>
+);
 
 export default App;
