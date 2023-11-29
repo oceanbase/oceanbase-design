@@ -441,20 +441,6 @@ exports[`renders packages/design/src/card/demo/basic.tsx correctly 1`] = `
 }
 `;
 
-exports[`renders packages/design/src/card/demo/border-less.tsx correctly 1`] = `
-{
-  "html": "<div style="background-color:rgba(0, 0, 0, 0.06);padding:40px 24px;margin:-40px -24px"><div class="ant-card" style="width:300px"><div class="ant-card-head"><div class="ant-card-head-wrapper"><div class="ant-card-head-title">Card title</div></div></div><div class="ant-card-body"><p>Card content</p><p>Card content</p><p>Card content</p></div></div></div>",
-  "type": "demo",
-}
-`;
-
-exports[`renders packages/design/src/card/demo/inner.tsx correctly 1`] = `
-{
-  "html": "<div class="ant-card ant-card-bordered"><div class="ant-card-head"><div class="ant-card-head-wrapper"><div class="ant-card-head-title">Card title</div></div></div><div class="ant-card-body"><div class="ant-card ant-card-bordered ant-card-type-inner"><div class="ant-card-head"><div class="ant-card-head-wrapper"><div class="ant-card-head-title">Inner Card title</div><div class="ant-card-extra"><a href="#">More</a></div></div></div><div class="ant-card-body">Inner Card content</div></div><div class="ant-card ant-card-bordered ant-card-type-inner" style="margin-top:16px"><div class="ant-card-head"><div class="ant-card-head-wrapper"><div class="ant-card-head-title">Inner Card title</div><div class="ant-card-extra"><a href="#">More</a></div></div></div><div class="ant-card-body">Inner Card content</div></div></div></div><br/><div class="ant-card ant-card-bordered"><div class="ant-card-head"><div class="ant-card-head-wrapper"><div class="ant-card-head-title">Card title</div></div></div><div class="ant-card-body" style="padding:0"><div class="ant-card ant-card-no-divider"><div class="ant-card-head"><div class="ant-card-head-wrapper"><div class="ant-card-head-title">Inner Card title</div></div></div><div class="ant-card-body">Inner Card content</div></div><div class="ant-card ant-card-no-divider"><div class="ant-card-head"><div class="ant-card-head-wrapper"><div class="ant-card-head-title">Inner Card title</div></div></div><div class="ant-card-body">Inner Card content</div></div></div></div>",
-  "type": "demo",
-}
-`;
-
 exports[`renders packages/design/src/card/demo/no-divider.tsx correctly 1`] = `
 {
   "html": "<div class="ant-card ant-card-bordered ant-card-no-divider" style="width:300px"><div class="ant-card-head"><div class="ant-card-head-wrapper"><div class="ant-card-head-title">Card title</div><div class="ant-card-extra"><a>More</a></div></div></div><div class="ant-card-body"><p>Card content</p><p>Card content</p><p>Card content</p></div></div>",
