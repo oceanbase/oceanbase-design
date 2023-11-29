@@ -5,7 +5,7 @@ nav:
   path: /components
 ---
 
-- 🔥 完全兼容 antd [Form](https://ant.design/components/form-cn) 的能力和 API，可无缝切换。
+- 🔥 完全继承 antd [Form](https://ant.design/components/form-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 - 📢 Form `requiredMark` 默认为 `optional` 可选样式。
 - 🆕 Form.Item `tooltip` 新增 `type` 属性，支持不同类型的 Tooltip 提示，详见 [Tooltip 文档](/components/Tooltip)。

@@ -5,7 +5,7 @@ nav:
   path: /components
 ---
 
-- 🔥 完全兼容 antd [Segmented](https://ant.design/components/segmented-cn) 的能力和 API，可无缝切换。
+- 🔥 完全继承 antd [Segmented](https://ant.design/components/segmented-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式（颜色宽度等），符合 OceanBase Design 设计规范。
 - 🆕 `options` 选项新增 `ellipsis` 属性，用于配置内容溢出时出现省略和 Tooltip 提示。
 
