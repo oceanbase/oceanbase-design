@@ -1,5 +1,7 @@
+import { useContext } from 'react';
 import { Form as AntForm } from 'antd';
 import type { FormProps as AntFormProps } from 'antd/es/form';
+import ConfigProvider from '../config-provider';
 import Item from './FormItem';
 
 export * from 'antd/es/form';
@@ -19,8 +21,16 @@ type CompoundedComponent = React.FC<FormProps> & {
 };
 
 const Form: CompoundedComponent = props => {
-  // @ts-ignore
-  return <AntForm requiredMark="optional" {...props} />;
+  const { form: contextForm } = useContext(ConfigProvider.ConfigContext);
+  return (
+    // @ts-ignore to ignore children type error
+    <AntForm
+      requiredMark={
+        contextForm?.requiredMark !== undefined ? contextForm?.requiredMark : 'optional'
+      }
+      {...props}
+    />
+  );
 };
 
 Form.Item = Item;

@@ -1,0 +1,257 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Drawer requiredMark could be changed 1`] = `
+<form
+  class="ant-form ant-form-horizontal"
+>
+  <div
+    class="ant-form-item"
+  >
+    <div
+      class="ant-row ant-form-item-row"
+    >
+      <div
+        class="ant-col ant-form-item-label"
+      >
+        <label
+          class="ant-form-item-required"
+          for="name"
+          title="Name"
+        >
+          Name
+        </label>
+      </div>
+      <div
+        class="ant-col ant-form-item-control"
+      >
+        <div
+          class="ant-form-item-control-input"
+        >
+          <div
+            class="ant-form-item-control-input-content"
+          >
+            <input
+              aria-required="true"
+              class="ant-input"
+              id="name"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-form-item"
+  >
+    <div
+      class="ant-row ant-form-item-row"
+    >
+      <div
+        class="ant-col ant-form-item-label"
+      >
+        <label
+          class=""
+          for="address"
+          title="Address"
+        >
+          Address
+        </label>
+      </div>
+      <div
+        class="ant-col ant-form-item-control"
+      >
+        <div
+          class="ant-form-item-control-input"
+        >
+          <div
+            class="ant-form-item-control-input-content"
+          >
+            <input
+              class="ant-input"
+              id="address"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+`;
+
+exports[`Drawer requiredMark could be changed by ConfigProvider 1`] = `
+<div
+  class="ant-app"
+>
+  <form
+    class="ant-form ant-form-horizontal"
+  >
+    <div
+      class="ant-form-item"
+    >
+      <div
+        class="ant-row ant-form-item-row"
+      >
+        <div
+          class="ant-col ant-form-item-label"
+        >
+          <label
+            class="ant-form-item-required"
+            for="name"
+            title="Name"
+          >
+            Name
+          </label>
+        </div>
+        <div
+          class="ant-col ant-form-item-control"
+        >
+          <div
+            class="ant-form-item-control-input"
+          >
+            <div
+              class="ant-form-item-control-input-content"
+            >
+              <input
+                aria-required="true"
+                class="ant-input"
+                id="name"
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-form-item"
+    >
+      <div
+        class="ant-row ant-form-item-row"
+      >
+        <div
+          class="ant-col ant-form-item-label"
+        >
+          <label
+            class=""
+            for="address"
+            title="Address"
+          >
+            Address
+          </label>
+        </div>
+        <div
+          class="ant-col ant-form-item-control"
+        >
+          <div
+            class="ant-form-item-control-input"
+          >
+            <div
+              class="ant-form-item-control-input-content"
+            >
+              <input
+                class="ant-input"
+                id="address"
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`Drawer requiredMark should be optional by default 1`] = `
+<form
+  class="ant-form ant-form-horizontal"
+>
+  <div
+    class="ant-form-item"
+  >
+    <div
+      class="ant-row ant-form-item-row"
+    >
+      <div
+        class="ant-col ant-form-item-label"
+      >
+        <label
+          class="ant-form-item-required ant-form-item-required-mark-optional"
+          for="name"
+          title="Name"
+        >
+          Name
+        </label>
+      </div>
+      <div
+        class="ant-col ant-form-item-control"
+      >
+        <div
+          class="ant-form-item-control-input"
+        >
+          <div
+            class="ant-form-item-control-input-content"
+          >
+            <input
+              aria-required="true"
+              class="ant-input"
+              id="name"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-form-item"
+  >
+    <div
+      class="ant-row ant-form-item-row"
+    >
+      <div
+        class="ant-col ant-form-item-label"
+      >
+        <label
+          class="ant-form-item-required-mark-optional"
+          for="address"
+          title="Address"
+        >
+          Address
+          <span
+            class="ant-form-item-optional"
+            title=""
+          >
+            (optional)
+          </span>
+        </label>
+      </div>
+      <div
+        class="ant-col ant-form-item-control"
+      >
+        <div
+          class="ant-form-item-control-input"
+        >
+          <div
+            class="ant-form-item-control-input-content"
+          >
+            <input
+              class="ant-input"
+              id="address"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+`;
