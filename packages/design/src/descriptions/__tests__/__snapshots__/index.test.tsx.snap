@@ -1,6 +1,108 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Badge Descriptions.Item: remove colon for vertical layout by default 1`] = `
+exports[`Badge contentProps should work for Descriptions.Item 1`] = `
+<div
+  class="ant-descriptions"
+>
+  <div
+    class="ant-descriptions-header"
+  >
+    <div
+      class="ant-descriptions-title"
+    >
+      User Info
+    </div>
+  </div>
+  <div
+    class="ant-descriptions-view"
+  >
+    <table>
+      <tbody>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="3"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                UserName
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  This is long long long long long long long long long long long Link
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
+exports[`Badge contentProps should work for items 1`] = `
+<div
+  class="ant-descriptions"
+>
+  <div
+    class="ant-descriptions-header"
+  >
+    <div
+      class="ant-descriptions-title"
+    >
+      User Info
+    </div>
+  </div>
+  <div
+    class="ant-descriptions-view"
+  >
+    <table>
+      <tbody>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="3"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                UserName
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  This is long long long long long long long long long long long Link
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
+exports[`Badge remove colon for vertical layout by default for Descriptions.Item 1`] = `
 <div
   class="ant-descriptions"
 >
@@ -200,7 +302,7 @@ exports[`Badge Descriptions.Item: remove colon for vertical layout by default 1`
 </div>
 `;
 
-exports[`Badge items: remove colon for vertical layout by default 1`] = `
+exports[`Badge remove colon for vertical layout by default for items 1`] = `
 <div
   class="ant-descriptions"
 >
@@ -277,7 +379,11 @@ exports[`Badge items: remove colon for vertical layout by default 1`] = `
               <span
                 class="ant-descriptions-item-content"
               >
-                Zhou Maomao
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  Zhou Maomao
+                </span>
               </span>
             </div>
           </td>
@@ -291,7 +397,11 @@ exports[`Badge items: remove colon for vertical layout by default 1`] = `
               <span
                 class="ant-descriptions-item-content"
               >
-                1810000000
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  1810000000
+                </span>
               </span>
             </div>
           </td>
@@ -305,7 +415,11 @@ exports[`Badge items: remove colon for vertical layout by default 1`] = `
               <span
                 class="ant-descriptions-item-content"
               >
-                Hangzhou, Zhejiang
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  Hangzhou, Zhejiang
+                </span>
               </span>
             </div>
           </td>
@@ -355,7 +469,11 @@ exports[`Badge items: remove colon for vertical layout by default 1`] = `
               <span
                 class="ant-descriptions-item-content"
               >
-                empty
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  empty
+                </span>
               </span>
             </div>
           </td>
@@ -369,7 +487,11 @@ exports[`Badge items: remove colon for vertical layout by default 1`] = `
               <span
                 class="ant-descriptions-item-content"
               >
-                No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+                </span>
               </span>
             </div>
           </td>
@@ -380,7 +502,7 @@ exports[`Badge items: remove colon for vertical layout by default 1`] = `
 </div>
 `;
 
-exports[`Badge render with Descriptions.Item 1`] = `
+exports[`Badge render for Descriptions.Item 1`] = `
 <div
   class="ant-descriptions"
 >
@@ -527,7 +649,7 @@ exports[`Badge render with Descriptions.Item 1`] = `
 </div>
 `;
 
-exports[`Badge render with items 1`] = `
+exports[`Badge render for items 1`] = `
 <div
   class="ant-descriptions"
 >
@@ -563,7 +685,11 @@ exports[`Badge render with items 1`] = `
               <span
                 class="ant-descriptions-item-content"
               >
-                Zhou Maomao
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  Zhou Maomao
+                </span>
               </span>
             </div>
           </td>
@@ -582,7 +708,11 @@ exports[`Badge render with items 1`] = `
               <span
                 class="ant-descriptions-item-content"
               >
-                1810000000
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  1810000000
+                </span>
               </span>
             </div>
           </td>
@@ -601,7 +731,11 @@ exports[`Badge render with items 1`] = `
               <span
                 class="ant-descriptions-item-content"
               >
-                Hangzhou, Zhejiang
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  Hangzhou, Zhejiang
+                </span>
               </span>
             </div>
           </td>
@@ -624,7 +758,11 @@ exports[`Badge render with items 1`] = `
               <span
                 class="ant-descriptions-item-content"
               >
-                empty
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  empty
+                </span>
               </span>
             </div>
           </td>
@@ -643,7 +781,11 @@ exports[`Badge render with items 1`] = `
               <span
                 class="ant-descriptions-item-content"
               >
-                No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+                </span>
               </span>
             </div>
           </td>

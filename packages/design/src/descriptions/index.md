@@ -7,14 +7,14 @@ nav:
 
 - 🔥 完全继承 antd [Descriptions](https://ant.design/components/descriptions-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和全局样式，符合 OceanBase Design 设计规范。
-- 🆕 无边框模式下，Descriptions.Item 内容超长自动 `ellipsis`，并展示 `Tooltip`。
-- 🆕 无边框模式下，Descriptions.Item 新增 `contentProps` 属性，可设置省略、编辑、复制等内容属性。
+- 🆕 无边框模式下，描述项内容溢出时自动省略，并展示 `Tooltip`。
+- 🆕 无边框模式下，`items` 和 Descriptions.Item 新增 `contentProps` 属性，用于设置省略、编辑、复制等内容属性。
 
 ## 代码演示
 
 <code src="./demo/basic.tsx" title="基本" description="简单展示"></code>
 
-<code src="./demo/content.tsx" title="内容展示" description="内容超长自动 `ellipsis`，并展示 `Tooltip`。同时通过 `contentProps` 可设置省略、编辑、复制等内容属性。"></code>
+<code src="./demo/content.tsx" title="内容展示" description="内容超长自动省略，并展示 `Tooltip`。同时通过 `contentProps` 可设置省略、编辑、复制等内容属性。"></code>
 
 <code src="./demo/vertical.tsx" title="垂直列表" description="默认去掉冒号"></code>
 
@@ -24,7 +24,7 @@ nav:
 
 ## API
 
-### Descriptions.Item
+### items 和 Descriptions.Item
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |

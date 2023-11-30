@@ -4,7 +4,7 @@ import type {
   SegmentedProps as AntSegmentedProps,
   SegmentedLabeledOption as AntSegmentedLabeledOption,
 } from 'antd/es/segmented';
-import type { EllipsisConfig } from 'antd/es/typography/Base';
+import type { EllipsisConfig } from '../typography';
 import type { SegmentedRawOption } from 'rc-segmented';
 import ConfigProvider from '../config-provider';
 import Typography from '../typography';
