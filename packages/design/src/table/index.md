@@ -7,6 +7,7 @@ nav:
 
 - 🔥 完全继承 antd [Alert](https://ant.design/components/alert-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
+- 📢 默认开启 `pagination.hideOnSinglePage`，即只有一页数据时会隐藏分页器。
 - 🆕 设置 `column.ellipsis`，开启自动省略，并使用 Tooltip 展示全部内容。
 - 🆕 新增 `批量操作栏`，可配置选中对象、批量操作项等，详见 [API](#api)。
 

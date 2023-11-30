@@ -49,6 +49,8 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
     prefixCls: customizePrefixCls,
     className,
   } = props;
+  const extendedContext = useContext(ConfigProvider.ExtendedConfigContext);
+
   const { batchOperationBar, ...restLocale } = {
     ...customLocale,
     batchOperationBar: {
@@ -209,8 +211,11 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
         pagination === false
           ? false
           : {
+              hideOnSinglePage:
+                extendedContext.hideOnSinglePage !== undefined
+                  ? extendedContext.hideOnSinglePage
+                  : true,
               ...pagination,
-              // @ts-ignore
               showTotal: renderOptionsBar,
             }
       }
