@@ -20,6 +20,8 @@ nav:
 
 <code src="./demo/inner.tsx" title="嵌套卡片" description="多层级展示，支持多种内部卡片样式。"></code>
 
+<code src="./demo/grid.tsx" title="网格型内嵌卡片"></code>
+
 <code src="./demo/tabs.tsx" title="带页签的卡片" description="页签可设置选项卡后面的标签。"></code>
 
 ## API
