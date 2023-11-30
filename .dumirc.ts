@@ -164,6 +164,7 @@ export default defineConfig({
           children: [
             { title: 'BasicLayout 导航和布局', link: '/biz-components/basic-layout' },
             { title: 'PageContainer 页容器', link: '/biz-components/page-container' },
+            { title: 'FooterToolbar 底部操作栏', link: '/biz-components/footer-toolbar' },
             { title: 'Login 登录页', link: '/biz-components/login' },
             // { title: 'NavMenu', link: '/biz-components/nav-menu' },
             { title: 'Welcome 欢迎页', link: '/biz-components/welcome' },

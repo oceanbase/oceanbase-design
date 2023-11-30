@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FooterToolbar portalDom is true 1`] = `
+<div>
+  <div
+    class="ant-pro-footer-bar"
+  >
+    <div
+      class="ant-pro-footer-bar-left"
+    >
+      Some extra message
+    </div>
+    <div
+      class="ant-pro-footer-bar-right"
+    >
+      <button
+        class="ant-btn ant-btn-default"
+        type="button"
+      >
+        <span>
+          Cancel
+        </span>
+      </button>
+      <button
+        class="ant-btn ant-btn-primary"
+        type="button"
+      >
+        <span>
+          Ok
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`FooterToolbar render 1`] = `
+<div>
+  <div
+    class="ant-pro-footer-bar"
+  >
+    <div
+      class="ant-pro-footer-bar-left"
+    >
+      Some extra message
+    </div>
+    <div
+      class="ant-pro-footer-bar-right"
+    >
+      <button
+        class="ant-btn ant-btn-default"
+        type="button"
+      >
+        <span>
+          Cancel
+        </span>
+      </button>
+      <button
+        class="ant-btn ant-btn-primary"
+        type="button"
+      >
+        <span>
+          Ok
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

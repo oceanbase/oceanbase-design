@@ -33,6 +33,9 @@ export { default as NavMenu } from './NavMenu';
 export { default as PageContainer } from './PageContainer';
 export type { PageContainerProps } from './PageContainer';
 
+export { default as FooterToolbar } from './FooterToolbar';
+export type { FooterToolbarProps } from './FooterToolbar';
+
 export { default as Password } from './Password';
 export { default as Ranger } from './Ranger';
 export { default as SideTip } from './SideTip';
