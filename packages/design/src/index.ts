@@ -21,7 +21,11 @@ export { default as ConfigProvider } from './config-provider';
 export type { ConfigProviderProps } from './config-provider';
 
 export { default as Descriptions } from './descriptions';
-export type { DescriptionsProps, DescriptionsItemProps } from './descriptions';
+export type {
+  DescriptionsProps,
+  DescriptionsItemType,
+  DescriptionsItemProps,
+} from './descriptions';
 
 export { default as Form } from './form';
 export type { FormProps, FormItemProps } from './form';

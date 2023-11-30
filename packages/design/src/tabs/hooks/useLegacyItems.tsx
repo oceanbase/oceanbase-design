@@ -29,7 +29,7 @@ export default function useLegacyItems(
       const { tab, tag, ...restProps } = props || {};
 
       const item: Tab = {
-        key: String(key),
+        key,
         ...restProps,
         label: isNullValue(tag) ? (
           tab
