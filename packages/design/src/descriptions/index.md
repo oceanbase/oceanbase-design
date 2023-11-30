@@ -16,9 +16,15 @@ nav:
 
 <code src="./demo/content.tsx" title="内容展示" description="内容超长自动 `ellipsis`，并展示 `Tooltip`。同时通过 `contentProps` 可设置省略、编辑、复制等内容属性。"></code>
 
-<code src="./demo/bordered.tsx" title="带边框" description="带边框和背景颜色列表"></code>
+<code src="./demo/vertical.tsx" title="垂直列表" description="默认去掉冒号"></code>
+
+<code src="./demo/bordered.tsx" title="带边框"></code>
+
+<code src="./demo/size.tsx" title="不同尺寸"></code>
 
 ## API
+
+### Descriptions.Item
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
