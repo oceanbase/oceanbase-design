@@ -22,7 +22,11 @@ export interface DescriptionsProps extends AntDescriptionsProps {
   items?: DescriptionsItemType[];
 }
 
-const Descriptions: React.FC<DescriptionsProps> = ({
+type CompoundedComponent = React.FC<DescriptionsProps> & {
+  Item: typeof DescriptionsItem;
+};
+
+const Descriptions: CompoundedComponent = ({
   children,
   bordered,
   layout,

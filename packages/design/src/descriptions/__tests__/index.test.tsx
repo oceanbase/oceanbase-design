@@ -49,7 +49,7 @@ const DescriptionsTest2: React.FC<DescriptionsProps> = props => (
   </Descriptions>
 );
 
-describe('Badge', () => {
+describe('Descriptions', () => {
   it('render for items', () => {
     const { container, asFragment } = render(<DescriptionsTest1 />);
     expect(container.querySelector('.ant-descriptions-item-no-colon')).toBeFalsy();

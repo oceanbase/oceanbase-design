@@ -38,6 +38,9 @@ export type { DrawerProps } from './drawer';
 
 export { message, notification, token } from './static-function';
 
+export { default as List } from './list';
+export type { ListProps } from './list';
+
 export { default as Table } from './table';
 export type { TableProps } from './table';
 
