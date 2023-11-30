@@ -11,6 +11,12 @@ export type CardToken = FullToken<'Card'> & {
 export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObject => {
   const { componentCls, tabsComponentCls, tabsPrefixCls, padding, paddingSM, paddingLG } = token;
   return {
+    [`${componentCls}`]: {
+      // nested Card style
+      [`${componentCls}:not(${componentCls}-bordered):not(${componentCls}-type-inner)`]: {
+        boxShadow: 'none',
+      },
+    },
     [`${componentCls}${componentCls}-no-divider`]: {
       [`${componentCls}-head`]: {
         borderBottom: 'none',
@@ -33,10 +39,16 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
         prefixCls: tabsPrefixCls,
       } as CardToken),
     },
-    // nested Card style
-    [`${componentCls}`]: {
-      [`${componentCls}:not(${componentCls}-bordered):not(${componentCls}-type-inner)`]: {
-        boxShadow: 'none',
+    [`${componentCls}${componentCls}-contain-grid`]: {
+      [`${componentCls}-head`]: {
+        // work for Card containing Card.Grid
+        marginBottom: -1,
+      },
+    },
+    [`${componentCls}:not(${componentCls}-contain-grid)`]: {
+      [`${componentCls}-head`]: {
+        // work for Card not containing Card.Grid
+        marginBottom: 0,
       },
     },
   };
