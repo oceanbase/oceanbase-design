@@ -158,7 +158,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
 
   // 渲染菜单
   const renderMenu = (data: MenuItem[]) => {
-    return data.reduce((pre, item) => {
+    return data.reduce((pre, item, index) => {
       const { accessible = true } = item;
       if (
         item.children &&
@@ -226,6 +226,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
       if (item.divider && accessible) {
         pre.push(
           <Divider
+            key={index}
             style={{
               // 渐变的分隔线
               borderImage: `linear-gradient(90deg, ${token.colorTextQuaternary} 0%, ${setAlpha(
