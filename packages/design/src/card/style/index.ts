@@ -33,6 +33,12 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
         prefixCls: tabsPrefixCls,
       } as CardToken),
     },
+    // nested Card style
+    [`${componentCls}`]: {
+      [`${componentCls}:not(${componentCls}-bordered):not(${componentCls}-type-inner)`]: {
+        boxShadow: 'none',
+      },
+    },
   };
 };
 
