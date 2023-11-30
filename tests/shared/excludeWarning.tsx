@@ -3,11 +3,14 @@ const originError = console.error;
 
 export function isSafeWarning(message: boolean, all = false) {
   const list = [
+    // remove react warning
     'useLayoutEffect does nothing on the server',
-    // antd warning
+    // remove antd warning
     'Warning: [antd',
-    // @ant-design/icons warning
+    // remove @ant-design/icons warning
     'Warning: [@ant-design/icons]',
+    // remove warning
+    'Warning:',
   ];
 
   if (all) {
@@ -17,7 +20,6 @@ export function isSafeWarning(message: boolean, all = false) {
   return list.some(msg => String(message).includes(msg));
 }
 
-/** This function will remove `useLayoutEffect` server side warning. Since it's useless. */
 export function excludeWarning() {
   const errorSpy = jest.spyOn(console, 'error').mockImplementation((msg, ...rest) => {
     if (isSafeWarning(msg)) {
