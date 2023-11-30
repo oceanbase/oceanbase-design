@@ -19,6 +19,8 @@ export type DescriptionsProps = AntDescriptionsProps;
 const Descriptions = ({
   children,
   bordered,
+  layout,
+  colon = layout === 'vertical' ? false : undefined,
   prefixCls: customizePrefixCls,
   className,
   ...restProps
@@ -86,6 +88,8 @@ const Descriptions = ({
 
   return wrapSSR(
     <AntDescriptions
+      layout={layout}
+      colon={colon}
       bordered={bordered}
       prefixCls={customizePrefixCls}
       className={descriptionsCls}
