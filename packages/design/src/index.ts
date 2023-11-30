@@ -31,6 +31,9 @@ export type { DrawerProps } from './drawer';
 
 export { message, notification, token } from './static-function';
 
+export { default as Empty } from './empty';
+export type { EmptyProps } from './empty';
+
 export { default as Table } from './table';
 export type { TableProps } from './table';
 
