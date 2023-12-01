@@ -1,7 +1,7 @@
 import React, { isValidElement, useState, useContext } from 'react';
 import { Drawer as AntDrawer, Space } from 'antd';
 import type { DrawerProps as AntDrawerProps } from 'antd/es/drawer';
-import { useScroll } from 'ahooks';
+import { useScroll, useSize } from 'ahooks';
 import classNames from 'classnames';
 import { omit } from 'lodash';
 import ConfigProvider from '../config-provider';
@@ -60,7 +60,9 @@ const Drawer: CompoundedComponent = ({
   const { wrapSSR } = useStyle(prefixCls);
 
   const [contentElment, setContentElement] = useState<HTMLDivElement>();
-  // use useScroll to re-render always when scroll
+  // useSize for re-render when contentElment change size
+  useSize(contentElment);
+  // useScroll for re-render when scroll
   const scroll = useScroll(contentElment);
   const isScroll = contentElment?.scrollHeight !== contentElment?.clientHeight;
   // start scroll
