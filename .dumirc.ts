@@ -8,7 +8,7 @@ export default defineConfig({
   },
   // 默认重定向到子包的 src 文件夹
   // ref: https://d.umijs.org/config#monoreporedirect
-  monorepoRedirect: {},
+  // monorepoRedirect: {},
   // umi.server.js build error, disable it for now
   // ssr: process.env.NODE_ENV === 'production' ? {} : false,
   hash: true,
@@ -151,6 +151,7 @@ export default defineConfig({
             { title: 'Notification 通知提醒框', link: '/components/notification' },
             { title: 'Spin 加载中', link: '/components/spin' },
             { title: 'Badge 徽标数', link: '/components/badge' },
+            { title: 'Result 结果', link: '/components/result' },
           ],
         },
         {

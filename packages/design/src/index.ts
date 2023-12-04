@@ -71,6 +71,9 @@ export type { SpinProps } from './spin';
 export { default as Badge } from './badge';
 export type { BadgeProps } from './badge';
 
+export { default as Result } from './result';
+export type { ResultProps } from './result';
+
 export { default as theme } from './theme';
 
 import theme from './theme';
