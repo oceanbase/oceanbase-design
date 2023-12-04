@@ -6,25 +6,52 @@ export type DrawerToken = FullToken<'Drawer'>;
 
 export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): CSSObject => {
   const { componentCls } = token;
+  const boxShadowBottom =
+    '0 2px 4px 0 rgba(54,69,99,0.04), 0 1px 6px -1px rgba(54,69,99,0.04), 0 1px 2px 0 rgba(54,69,99,0.06)';
+  const boxShadowTop =
+    '0 -2px 4px 0 rgba(54,69,99,0.04), 0 -1px 6px -1px rgba(54,69,99,0.04), 0 -1px 2px 0 rgba(54,69,99,0.06)';
 
   return {
     [`${componentCls}`]: {
-      [`${componentCls}-header`]: {
-        padding: '20px 24px 0',
-        borderBottom: 'none',
+      // should be wrapped by `${componentCls}-content` to overwritten antd style
+      [`${componentCls}-content`]: {
+        [`${componentCls}-header`]: {
+          padding: '16px 24px',
+          borderBottom: 'none',
+          transition: `box-shadow ${token.motionDurationMid}`,
+          // ensure header box-shadow cover body content
+          zIndex: 10,
+        },
+        [`${componentCls}-header-shadow`]: {
+          boxShadow: boxShadowBottom,
+        },
+        [`${componentCls}-body`]: {
+          padding: 0,
+          display: 'flex',
+          flexDirection: 'column',
+        },
+        [`${componentCls}-body-content`]: {
+          padding: '8px 24px 24px 24px',
+          overflow: 'auto',
+        },
+        [`${componentCls}-footer-content`]: {
+          position: 'sticky',
+          padding: '16px 24px',
+          transition: `box-shadow ${token.motionDurationMid}`,
+          // ensure footer box-shadow cover body content
+          zIndex: 10,
+        },
+        [`${componentCls}-footer-content-shadow`]: {
+          boxShadow: boxShadowTop,
+        },
       },
-      [`${componentCls}-footer-content`]: {
-        position: 'absolute',
-        right: 0,
-        bottom: 0,
-        width: 'calc(100% - 32px)',
-        padding: 24,
-        paddingLeft: 0,
-        background: token.colorBgContainer,
-        zIndex: 10,
-        display: 'flex',
-        justifyContent: 'end',
-        alignItems: 'center',
+    },
+    [`${componentCls}${componentCls}-with-footer`]: {
+      // should be wrapped by `${componentCls}-content` to overwritten antd style
+      [`${componentCls}-content`]: {
+        [`${componentCls}-body-content`]: {
+          padding: '8px 24px 8px 24px',
+        },
       },
     },
   };

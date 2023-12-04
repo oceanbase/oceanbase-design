@@ -37,14 +37,13 @@ const WelcomeStep: React.FC<WelcomeStepProps> = props => {
         <p className={`${prefix}-description`}>{description}</p>
         {operations && (
           <div className={`${prefix}-operations`}>
-            {operations &&
-              operations.map(operation => {
-                return (
-                  <span onClick={operation.onClick} className={`${prefix}-operation`}>
-                    {operation.text || locale.defaultOperation}
-                  </span>
-                );
-              })}
+            {operations?.map((operation, index) => {
+              return (
+                <span key={index} onClick={operation.onClick} className={`${prefix}-operation`}>
+                  {operation.text || locale.defaultOperation}
+                </span>
+              );
+            })}
           </div>
         )}
       </div>

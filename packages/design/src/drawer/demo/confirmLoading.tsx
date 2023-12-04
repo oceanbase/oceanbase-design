@@ -18,19 +18,17 @@ export default () => {
         open={open}
         title="Title"
         confirmLoading={true}
-        onClose={() => {
-          setOpen(false);
-        }}
         onOk={() => {
           setOpen(false);
         }}
         onCancel={() => {
           setOpen(false);
-        }}>
+        }}
+      >
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>
       </Drawer>
     </>
-  )
+  );
 };

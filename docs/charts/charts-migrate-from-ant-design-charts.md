@@ -4,7 +4,7 @@ order: 10
 group: 可视化图表
 ---
 
-OceanBase Charts 与 AntV 设计体系一脉相承，完全兼容 [Ant Design Charts](https://charts.ant.design) 的能力和 API。两者仅在图表样式、交互和部分扩展能力上存在差异，因此只需简单替换模块入口，即可从 Ant Design Charts 平滑迁移至 OceanBase Charts。
+OceanBase Charts 与 AntV 设计体系一脉相承，完全继承 [Ant Design Charts](https://charts.ant.design) 的能力和 API。两者仅在图表样式、交互和部分扩展能力上存在差异，因此只需简单替换模块入口，即可从 Ant Design Charts 平滑迁移至 OceanBase Charts。
 
 ## 自动化迁移
 

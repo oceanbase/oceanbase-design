@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Drawer, Button, Form, Input } from '@oceanbase/design';
 
-const FormItem = Form.Item;
-
 export default () => {
   const [form] = Form.useForm();
   const { validateFields } = form;
@@ -12,7 +10,7 @@ export default () => {
   const handleSubmit = () => {
     validateFields().then(values => {
       const { name, age } = values;
-      alert(`name: ${name} ;age: ${age}`);
+      alert(`name: ${name}; age: ${age}`);
     });
   };
 
@@ -29,24 +27,38 @@ export default () => {
       <Drawer
         open={open}
         title="Title"
-        onClose={() => {
-          setOpen(false);
-        }}
         onOk={() => {
-          handleSubmit;
-          setOpen(false);
+          handleSubmit();
         }}
         onCancel={() => {
           setOpen(false);
         }}
       >
-        <Form layout="vertical" form={form} preserve={false} hideRequiredMark={true}>
-          <FormItem name="name" label="姓名">
-            <Input placeholder="请输入" />
-          </FormItem>
-          <FormItem name="age" label="年龄">
-            <Input placeholder="请输入" />
-          </FormItem>
+        <Form layout="vertical" form={form} preserve={false}>
+          <Form.Item
+            name="name"
+            label="Name"
+            rules={[
+              {
+                required: true,
+                message: 'Name is required',
+              },
+            ]}
+          >
+            <Input placeholder="name" />
+          </Form.Item>
+          <Form.Item
+            name="age"
+            label="Age"
+            rules={[
+              {
+                required: true,
+                message: 'Age is required',
+              },
+            ]}
+          >
+            <Input placeholder="age" />
+          </Form.Item>
         </Form>
       </Drawer>
     </>

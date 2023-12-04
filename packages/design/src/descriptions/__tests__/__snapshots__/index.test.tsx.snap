@@ -1,0 +1,797 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Descriptions contentProps should work for Descriptions.Item 1`] = `
+<div
+  class="ant-descriptions"
+>
+  <div
+    class="ant-descriptions-header"
+  >
+    <div
+      class="ant-descriptions-title"
+    >
+      User Info
+    </div>
+  </div>
+  <div
+    class="ant-descriptions-view"
+  >
+    <table>
+      <tbody>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="3"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                UserName
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  This is long long long long long long long long long long long Link
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
+exports[`Descriptions contentProps should work for items 1`] = `
+<div
+  class="ant-descriptions"
+>
+  <div
+    class="ant-descriptions-header"
+  >
+    <div
+      class="ant-descriptions-title"
+    >
+      User Info
+    </div>
+  </div>
+  <div
+    class="ant-descriptions-view"
+  >
+    <table>
+      <tbody>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="3"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                UserName
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  This is long long long long long long long long long long long Link
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
+exports[`Descriptions remove colon for vertical layout by default for Descriptions.Item 1`] = `
+<div
+  class="ant-descriptions"
+>
+  <div
+    class="ant-descriptions-header"
+  >
+    <div
+      class="ant-descriptions-title"
+    >
+      User Info
+    </div>
+  </div>
+  <div
+    class="ant-descriptions-view"
+  >
+    <table>
+      <tbody>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <th
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label ant-descriptions-item-no-colon"
+              >
+                UserName
+              </span>
+            </div>
+          </th>
+          <th
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label ant-descriptions-item-no-colon"
+              >
+                Telephone
+              </span>
+            </div>
+          </th>
+          <th
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label ant-descriptions-item-no-colon"
+              >
+                Live
+              </span>
+            </div>
+          </th>
+        </tr>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  Zhou Maomao
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  1810000000
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  Hangzhou, Zhejiang
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <th
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label ant-descriptions-item-no-colon"
+              >
+                Remark
+              </span>
+            </div>
+          </th>
+          <th
+            class="ant-descriptions-item"
+            colspan="2"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label ant-descriptions-item-no-colon"
+              >
+                Address
+              </span>
+            </div>
+          </th>
+        </tr>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  empty
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="2"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
+exports[`Descriptions remove colon for vertical layout by default for items 1`] = `
+<div
+  class="ant-descriptions"
+>
+  <div
+    class="ant-descriptions-header"
+  >
+    <div
+      class="ant-descriptions-title"
+    >
+      User Info
+    </div>
+  </div>
+  <div
+    class="ant-descriptions-view"
+  >
+    <table>
+      <tbody>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <th
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label ant-descriptions-item-no-colon"
+              >
+                UserName
+              </span>
+            </div>
+          </th>
+          <th
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label ant-descriptions-item-no-colon"
+              >
+                Telephone
+              </span>
+            </div>
+          </th>
+          <th
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label ant-descriptions-item-no-colon"
+              >
+                Live
+              </span>
+            </div>
+          </th>
+        </tr>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  Zhou Maomao
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  1810000000
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  Hangzhou, Zhejiang
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <th
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label ant-descriptions-item-no-colon"
+              >
+                Remark
+              </span>
+            </div>
+          </th>
+          <th
+            class="ant-descriptions-item"
+            colspan="2"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label ant-descriptions-item-no-colon"
+              >
+                Address
+              </span>
+            </div>
+          </th>
+        </tr>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  empty
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="2"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
+exports[`Descriptions render for Descriptions.Item 1`] = `
+<div
+  class="ant-descriptions"
+>
+  <div
+    class="ant-descriptions-header"
+  >
+    <div
+      class="ant-descriptions-title"
+    >
+      User Info
+    </div>
+  </div>
+  <div
+    class="ant-descriptions-view"
+  >
+    <table>
+      <tbody>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                UserName
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  Zhou Maomao
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                Telephone
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  1810000000
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                Live
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  Hangzhou, Zhejiang
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                Remark
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  empty
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="2"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                Address
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
+exports[`Descriptions render for items 1`] = `
+<div
+  class="ant-descriptions"
+>
+  <div
+    class="ant-descriptions-header"
+  >
+    <div
+      class="ant-descriptions-title"
+    >
+      User Info
+    </div>
+  </div>
+  <div
+    class="ant-descriptions-view"
+  >
+    <table>
+      <tbody>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                UserName
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  Zhou Maomao
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                Telephone
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  1810000000
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                Live
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  Hangzhou, Zhejiang
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                Remark
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  empty
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="2"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                Address
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+                >
+                  No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

@@ -115,12 +115,6 @@ export default () {
 
 - 主题的更多用法，请参考 antd 文档: https://ant.design/docs/react/customize-theme-cn
 
-<!-- ## 主题预览 -->
+## 主题预览
 
-<!-- ### 基本预览 -->
-
-<!-- <code src="./demo/previewer-basic.tsx"></code> -->
-
-<!-- ### 高级预览 (Token)
-
-<code src="./demo/previewer-advanced.tsx"></code> -->
+<code src="./demo/previewer.tsx"></code>

@@ -8,6 +8,19 @@ group: 业务组件
 
 ---
 
+## 0.2.31
+
+`2023-11-30`
+
+- 📢 默认关闭 FooterToolbar `portalDom`，即底部操作栏默认渲染到父元素，而不是 `body`。[#333](https://github.com/oceanbase/oceanbase-design/pull/333)
+
+## 0.2.29
+
+`2023-11-14`
+
+- 🆕 Login 新增 `isMobile`` 属性，用于开启移动端样式。[#288](https://github.com/oceanbase/oceanbase-design/pull/288)
+- 🔨 ContentWithQuestion 样式方案从 less 改造为 CSS-in-JS，以支持动态主题。[#283](https://github.com/oceanbase/oceanbase-design/pull/283) [@Vanleehao](https://github.com/Vanleehao)
+
 ## 0.2.28
 
 `2023-11-09`

@@ -9,3 +9,4 @@ config/wrapper.js
 .dumi/tmp-production
 demo/
 __test__/
+antd-alias-webpack-plugin.js

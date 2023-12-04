@@ -17,18 +17,14 @@ export default () => {
       <Drawer
         open={open}
         title="Title"
-        footer={false}
-        onClose={() => {
-          setOpen(false);
-        }}
         onCancel={() => {
           setOpen(false);
         }}
       >
         <Descriptions column={1}>
-          <Descriptions.Item label="姓名">张三</Descriptions.Item>
-          <Descriptions.Item label="年龄">6</Descriptions.Item>
-          <Descriptions.Item label="地址">浙江省杭州市</Descriptions.Item>
+          <Descriptions.Item label="Name">John</Descriptions.Item>
+          <Descriptions.Item label="Age">18</Descriptions.Item>
+          <Descriptions.Item label="Address">Hangzhou, Zhejiang Province</Descriptions.Item>
         </Descriptions>
       </Drawer>
     </>

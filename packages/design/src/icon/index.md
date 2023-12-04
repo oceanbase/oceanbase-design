@@ -5,7 +5,7 @@ nav:
   path: /components
 ---
 
-- 🔥 完全兼容 antd [Icon](https://ant.design/components/button-cn) 的能力和 API，可无缝切换。
+- 🔥 完全继承 antd [Icon](https://ant.design/components/button-cn) 的能力和 API，可无缝切换。
 - 🆕 在 antd 图标基础上，新增上百个通用图标和 OceanBase 业务图标。
 
 ## 使用方法

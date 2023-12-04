@@ -1,9 +1,10 @@
+import React, { useContext } from 'react';
+import type { ReactElement } from 'react';
 import { Tag as AntTag } from 'antd';
 import type { TagProps as AntTagProps } from 'antd/es/tag';
-import { Typography } from '@oceanbase/design';
 import classNames from 'classnames';
-import React, { ReactElement, useContext } from 'react';
 import ConfigProvider from '../config-provider';
+import Typography from '../typography';
 import useStyle from './style';
 
 export * from 'antd/es/tag';

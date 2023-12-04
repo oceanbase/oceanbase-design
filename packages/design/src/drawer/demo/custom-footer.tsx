@@ -17,39 +17,43 @@ export default () => {
       <Drawer
         open={open}
         title="Title"
-        onClose={() => {
+        onCancel={() => {
           setOpen(false);
         }}
         footer={
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%'
-          }}>
-            <div>底部说明文案</div>
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
             <Space>
-              <Button
-                onClick={() => {
-                  setOpen(false);
-                }}>
-                取消
-              </Button>
               <Button
                 type="primary"
                 onClick={() => {
                   setOpen(false);
-                }}>
-                确认
+                }}
+              >
+                Ok
+              </Button>
+              <Button
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                Cancel
               </Button>
             </Space>
+            <div>Some info message</div>
           </div>
         }
       >
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>
-      </Drawer >
+      </Drawer>
     </>
-  )
+  );
 };

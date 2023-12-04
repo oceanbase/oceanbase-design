@@ -1,8 +1,8 @@
 import React from 'react';
-import { Descriptions } from '@oceanbase/design';
+import { Button, Descriptions } from '@oceanbase/design';
 
 const App: React.FC = () => (
-  <Descriptions title="User Info">
+  <Descriptions title="User Info" extra={<Button type="primary">Edit</Button>}>
     <Descriptions.Item label="UserName">Zhou Maomao</Descriptions.Item>
     <Descriptions.Item label="Telephone">1810000000</Descriptions.Item>
     <Descriptions.Item label="Live">Hangzhou, Zhejiang</Descriptions.Item>

@@ -23,7 +23,6 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     const { getPrefixCls, iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('badge', customizePrefixCls);
     const { wrapSSR, hashId } = useStyle(prefixCls);
-    const badgeCls = classNames(prefixCls, className);
 
     const iconMap = {
       default: <StopFilled />,
@@ -45,7 +44,8 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
         {status && icon ? (
           <span
             ref={ref}
-            className={classNames(badgeCls, `${prefixCls}-status`, hashId)}
+            // should add prefixCls as part of className to make style work
+            className={classNames(prefixCls, `${prefixCls}-status`, className, hashId)}
             style={{
               display: 'inline-block',
             }}
@@ -62,7 +62,7 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
           <AntBadge
             ref={ref}
             prefixCls={customizePrefixCls}
-            className={badgeCls}
+            className={className}
             status={status}
             text={text}
             {...restProps}

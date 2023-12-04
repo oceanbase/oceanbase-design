@@ -7,6 +7,10 @@ export type BadgeToken = FullToken<'Badge'>;
 export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSSObject => {
   const { componentCls } = token;
   return {
+    [`${componentCls}`]: {
+      // inherit color from parent instead of fixed colorText
+      color: 'inherit',
+    },
     [`${componentCls}${componentCls}-status`]: {
       // dot style
       [`${componentCls}-status-dot`]: {
@@ -36,6 +40,12 @@ export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSS
         [`&${componentCls}-status-warning`]: {
           color: token.colorWarning,
         },
+      },
+
+      [`${componentCls}-status-text`]: {
+        marginInlineStart: token.marginXS,
+        // inherit color from parent instead of fixed colorText
+        color: 'inherit',
       },
     },
   };

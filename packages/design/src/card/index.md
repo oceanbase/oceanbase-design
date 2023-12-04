@@ -5,8 +5,8 @@ nav:
   path: /components
 ---
 
-- 🔥 完全兼容 antd [Card](https://ant.design/components/card-cn) 的能力和 API，可无缝切换。
-- 💄 定制主题和样式（火柴棍宽度等），符合 OceanBase Design 设计规范。
+- 🔥 完全继承 antd [Card](https://ant.design/components/card-cn) 的能力和 API，可无缝切换。
+- 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 - 🆕 新增 `divided` 属性，控制是否展示分割线。
 - 🆕 `tabList` 新增 `tag` 属性，用于设置选项卡后面的标签。
 
@@ -14,7 +14,13 @@ nav:
 
 <code src="./demo/basic.tsx" title="典型卡片" description="包含标题、内容、操作区域。"></code>
 
+<code src="./demo/border-less.tsx" title="无边框" description="带有阴影，通常位于灰色背景之上。"></code>
+
 <code src="./demo/no-divider.tsx" title="无分割线" description="去掉卡片头部和内容区的分割线。"></code>
+
+<code src="./demo/inner.tsx" title="嵌套卡片" description="多层级展示，支持多种内部卡片样式。"></code>
+
+<code src="./demo/grid.tsx" title="网格型内嵌卡片"></code>
 
 <code src="./demo/tabs.tsx" title="带页签的卡片" description="页签可设置选项卡后面的标签。"></code>
 
