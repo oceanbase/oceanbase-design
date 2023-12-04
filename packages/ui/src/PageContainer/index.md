@@ -5,8 +5,9 @@ nav:
   path: /biz-components
 ---
 
-- 🔥 完全兼容 pro-components [PageContainer](https://procomponents.ant.design/components/page-container) 的能力和 API，可无缝切换。
+- 🔥 完全继承 pro-components [PageContainer](https://procomponents.ant.design/components/page-container) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
+- 📢 默认关闭 `footerToolBarProps.portalDom`，即底部操作栏默认渲染到父元素，而不是 `body`。
 - 🆕 新增 `header.reload` 属性，用于刷新整个页面。
 - 🆕 内置 `header.itemRender`，默认支持 `hashHistory` 和 `browserHistory`，但要求项目安装 `react-router`。详见 [说明](https://ant.design/components/breadcrumb-cn#%E5%92%8C-browserhistory-%E9%85%8D%E5%90%88)。
 

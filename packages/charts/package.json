@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/charts",
-  "version": "0.2.16",
+  "version": "0.2.17",
   "description": "The Chart library for OceanBase",
   "homepage": "https://github.com/oceanbase/oceanbase-design/packages/charts",
   "repository": {

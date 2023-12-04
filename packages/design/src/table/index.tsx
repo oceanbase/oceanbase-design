@@ -1,4 +1,4 @@
-import { Popover, Space, Table as AntTable, Typography } from 'antd';
+import { Popover, Space, Table as AntTable } from 'antd';
 import type { TableProps as AntTableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import type { RowSelectMethod, TableLocale as AntTableLocale } from 'antd/es/table/interface';
@@ -9,6 +9,7 @@ import { isEmpty } from 'lodash';
 import type { ReactElement, ReactNode } from 'react';
 import React, { useContext, useEffect, useState } from 'react';
 import ConfigProvider from '../config-provider';
+import Typography from '../typography';
 import enUS from '../locale/en-US';
 import useStyle from './style';
 import type { AnyObject } from '../_util/type';
@@ -48,6 +49,8 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
     prefixCls: customizePrefixCls,
     className,
   } = props;
+  const extendedContext = useContext(ConfigProvider.ExtendedConfigContext);
+
   const { batchOperationBar, ...restLocale } = {
     ...customLocale,
     batchOperationBar: {
@@ -208,8 +211,11 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
         pagination === false
           ? false
           : {
+              hideOnSinglePage:
+                extendedContext.hideOnSinglePage !== undefined
+                  ? extendedContext.hideOnSinglePage
+                  : true,
               ...pagination,
-              // @ts-ignore
               showTotal: renderOptionsBar,
             }
       }

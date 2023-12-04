@@ -225,7 +225,7 @@ const Login: React.FC<LoginProps> = props => {
                 style={{ paddingLeft: showAuthCode ? 96 : 0 }}
               >
                 <img
-                  src={theme.isDark ? logoImgDark : logoImg}
+                  src={theme?.isDark ? logoImgDark : logoImg}
                   alt=""
                   className={`${prefix}-watermark`}
                 />

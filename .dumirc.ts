@@ -114,6 +114,7 @@ export default defineConfig({
           children: [
             { title: 'Button 按钮', link: '/components/button' },
             { title: 'Icon 图标', link: '/components/icon' },
+            { title: 'Typography 排版', link: '/components/typography' },
           ],
         },
         {
@@ -129,6 +130,7 @@ export default defineConfig({
           children: [
             { title: 'Card 卡片', link: '/components/card' },
             { title: 'Descriptions 描述列表', link: '/components/descriptions' },
+            { title: 'List 列表', link: '/components/list' },
             { title: 'Table 表格', link: '/components/table' },
             { title: 'Tabs 标签页', link: '/components/tabs' },
             { title: 'Tag 标签', link: '/components/tag' },
@@ -162,6 +164,7 @@ export default defineConfig({
           children: [
             { title: 'BasicLayout 导航和布局', link: '/biz-components/basic-layout' },
             { title: 'PageContainer 页容器', link: '/biz-components/page-container' },
+            { title: 'FooterToolbar 底部操作栏', link: '/biz-components/footer-toolbar' },
             { title: 'Login 登录页', link: '/biz-components/login' },
             // { title: 'NavMenu', link: '/biz-components/nav-menu' },
             { title: 'Welcome 欢迎页', link: '/biz-components/welcome' },

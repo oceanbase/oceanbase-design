@@ -11,6 +11,9 @@ export type { AlertProps } from './alert';
 export { default as Button } from './button';
 export type { ButtonProps } from './button';
 
+export { default as Typography } from './typography';
+export type { TypographyProps } from './typography';
+
 export { default as Card } from './card';
 export type { CardProps } from './card';
 
@@ -18,7 +21,11 @@ export { default as ConfigProvider } from './config-provider';
 export type { ConfigProviderProps } from './config-provider';
 
 export { default as Descriptions } from './descriptions';
-export type { DescriptionsProps, DescriptionsItemProps } from './descriptions';
+export type {
+  DescriptionsProps,
+  DescriptionsItemType,
+  DescriptionsItemProps,
+} from './descriptions';
 
 export { default as Form } from './form';
 export type { FormProps, FormItemProps } from './form';
@@ -33,6 +40,9 @@ export { message, notification, token } from './static-function';
 
 export { default as Empty } from './empty';
 export type { EmptyProps } from './empty';
+
+export { default as List } from './list';
+export type { ListProps } from './list';
 
 export { default as Table } from './table';
 export type { TableProps } from './table';

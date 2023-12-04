@@ -5,8 +5,11 @@ nav:
   path: /components
 ---
 
-- 🔥 完全兼容 antd [Drawer](https://ant.design/components/drawer-cn) 的能力和 API，可无缝切换。
-- 💄 定制主题和样式，符合 OceanBase Design 设计规范。比如当内容高度大于等于抽屉高度时，页脚会置底展示；当内容高度小于抽屉高度时，`footer` 会跟随内容展示。
+- 🔥 完全继承 antd [Drawer](https://ant.design/components/drawer-cn) 的能力和 API，可无缝切换。
+- 💄 定制主题和样式，符合 OceanBase Design 设计规范，比如：
+  - 按钮区和主按钮位置居左展示。
+  - 内容区滚动时，动态设置页头和页脚的阴影。
+  - 当内容高度大于等于抽屉高度时，页脚会置底展示；当内容高度小于抽屉高度时，`footer` 会跟随内容展示。
 - 🆕 新增 `footer` 属性，用于设置抽屉的底部内容，默认为 `取消` 和 `确定` 按钮。
 - 🆕 新增 `onOk` 和 `onCancel` 属性，用于设置 `取消` 和 `确定` 按钮的回调。
 - 🆕 新增 `cancelText` 和 `okText` 属性，用于设置 `取消` 和 `确定` 按钮的文字。
@@ -33,8 +36,8 @@ nav:
 
 | 参数           | 说明                               | 类型                 | 默认值 | 版本 |
 | :------------- | :--------------------------------- | :------------------- | :----- | :--- |
-| onOk           | 点击确定回调，设置时会开启默认页脚 | function(e)          | -      | -    |
-| onCancel       | 点击取消按钮的回调                 | function(e)          | -      | -    |
+| onOk           | 点击确定回调，设置时会开启默认页脚 | (e) => void          | -      | -    |
+| onCancel       | 点击取消按钮的回调                 | (e) => void          | -      | -    |
 | cancelText     | 设置取消按钮文字                   | string               | 取消   | -    |
 | okText         | 确认按钮文字                       | string               | 确定   | -    |
 | okButtonProps  | ok 按钮 props                      | ButtonProps          | -      | -    |

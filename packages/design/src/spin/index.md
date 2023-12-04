@@ -7,7 +7,7 @@ demo:
   cols: 2
 ---
 
-- 🔥 完全兼容 antd [Spin](https://ant.design/components/spin-cn) 的能力和 API，可无缝切换。
+- 🔥 完全继承 antd [Spin](https://ant.design/components/spin-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 - 🆕 定制 `indicator` 加载指示符，支持 `默认` 和 `灰色` 两种类型。
 

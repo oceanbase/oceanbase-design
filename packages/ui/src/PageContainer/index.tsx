@@ -106,9 +106,9 @@ const PageContainer = ({
       tabList={tabList}
       tabBarExtraContent={tabBarExtraContent}
       footerToolBarProps={{
-        ...footerToolBarProps,
-        // render footer as same level with PageContainer instead of under body
+        // render footer under parent instead of body by default
         portalDom: false,
+        ...footerToolBarProps,
       }}
       {...restProps}
     />

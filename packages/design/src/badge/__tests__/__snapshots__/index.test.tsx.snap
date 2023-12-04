@@ -38,7 +38,7 @@ exports[`Badge status custom icon 1`] = `
 
 exports[`Badge status dot 1`] = `
 <span
-  class="ant-badge ant-badge-status ant-badge-not-a-wrapper ant-badge"
+  class="ant-badge ant-badge-status ant-badge-not-a-wrapper"
 >
   <span
     class="ant-badge-status-dot ant-badge-status-success"

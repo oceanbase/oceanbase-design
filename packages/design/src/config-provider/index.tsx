@@ -32,6 +32,7 @@ export type SpinConfig = ComponentStyleConfig & {
 export interface ConfigConsumerProps extends AntConfigConsumerProps {
   theme?: ThemeConfig;
   navigate?: NavigateFunction;
+  hideOnSinglePage?: boolean;
   spin?: SpinConfig;
   locale?: Locale;
 }
@@ -42,15 +43,18 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   // for react-router-dom v5: history.push
   // for react-router-dom v6: navigate
   navigate?: NavigateFunction;
+  hideOnSinglePage?: boolean;
   spin?: SpinConfig;
 }
 
 export interface ExtendedConfigConsumerProps {
   navigate?: NavigateFunction;
+  hideOnSinglePage?: boolean;
 }
 
 const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
   navigate: undefined,
+  hideOnSinglePage: true,
 });
 
 const { defaultSeed } = themeConfig;
@@ -59,6 +63,7 @@ const ConfigProvider = ({
   children,
   theme,
   navigate,
+  hideOnSinglePage,
   spin,
   tabs,
   ...restProps
@@ -68,7 +73,7 @@ const ConfigProvider = ({
   const parentExtendedContext =
     React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
   const mergedTheme = merge(parentContext.theme, theme);
-  const currentTheme = mergedTheme.isDark ? darkTheme : defaultTheme;
+  const currentTheme = mergedTheme?.isDark ? darkTheme : defaultTheme;
   return (
     <AntConfigProvider
       spin={merge(parentContext.spin, spin)}
@@ -94,6 +99,10 @@ const ConfigProvider = ({
       <ExtendedConfigContext.Provider
         value={{
           navigate: navigate === undefined ? parentExtendedContext.navigate : navigate,
+          hideOnSinglePage:
+            hideOnSinglePage === undefined
+              ? parentExtendedContext.hideOnSinglePage
+              : hideOnSinglePage,
         }}
       >
         {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}

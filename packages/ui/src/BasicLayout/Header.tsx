@@ -283,7 +283,7 @@ const Header: React.FC<HeaderProps> = ({
                 <span className={`${prefixCls}-copyright`}>
                   {locale.right} <CopyrightOutlined /> {moment().year()} {locale.company}
                 </span>
-                <img src={theme.isDark ? logoImgDark : logoImg} alt="" style={{ height: 12 }} />
+                <img src={theme?.isDark ? logoImgDark : logoImg} alt="" style={{ height: 12 }} />
               </div>
             </div>
           </div>

@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import { Segmented as AntSegmented, Typography } from 'antd';
+import { Segmented as AntSegmented } from 'antd';
 import type {
   SegmentedProps as AntSegmentedProps,
   SegmentedLabeledOption as AntSegmentedLabeledOption,
 } from 'antd/es/segmented';
-import type { EllipsisConfig } from 'antd/es/typography/Base';
+import type { EllipsisConfig } from '../typography';
 import type { SegmentedRawOption } from 'rc-segmented';
 import ConfigProvider from '../config-provider';
+import Typography from '../typography';
 import useStyle from './style';
 
 export * from 'antd/es/segmented';

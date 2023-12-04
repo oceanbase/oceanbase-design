@@ -5,7 +5,7 @@ nav:
   path: /components
 ---
 
-- 🔥 完全兼容 antd [Alert](https://ant.design/components/alert-cn) 的能力和 API，可无缝切换。
+- 🔥 完全继承 antd [Alert](https://ant.design/components/alert-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 - 🆕 新增 `ghost` 属性，支持透明背景。
 - 🆕 新增 `colored` 属性，支持全局着色。

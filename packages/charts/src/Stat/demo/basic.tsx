@@ -44,6 +44,7 @@ export default () => {
           span: 6,
         }}
         wrapperCol={{ span: 18 }}
+        requiredMark={false}
       >
         <Row gutter={8}>
           <Col span={12}>
