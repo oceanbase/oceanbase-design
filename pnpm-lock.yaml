@@ -470,9 +470,6 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
-      lottie-web:
-        specifier: ^5.12.2
-        version: 5.12.2
       moment:
         specifier: ^2.29.4
         version: 2.29.4

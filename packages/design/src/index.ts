@@ -68,6 +68,9 @@ export type { SpinProps } from './spin';
 export { default as Badge } from './badge';
 export type { BadgeProps } from './badge';
 
+export { default as Lottie } from './lottie';
+export type { LottieProps, LottieRef } from './lottie';
+
 export { default as theme } from './theme';
 
 import theme from './theme';
