@@ -69,8 +69,8 @@ importers:
         specifier: ^29.5.10
         version: 29.5.10
       '@types/lodash':
-        specifier: ^4.14.200
-        version: 4.14.200
+        specifier: ^4.14.202
+        version: 4.14.202
       '@types/node':
         specifier: ^20.8.6
         version: 20.8.6
@@ -6411,8 +6411,8 @@ packages:
       '@types/node': 20.8.6
     dev: true
 
-  /@types/lodash@4.14.200:
-    resolution: {integrity: sha512-YI/M/4HRImtNf3pJgbF+W6FrXovqj+T+/HpENLTooK9PnkacBsDpeP3IpHab40CClUfhNmdM2WTNP2sa2dni5Q==}
+  /@types/lodash@4.14.202:
+    resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
     dev: true
 
   /@types/mapbox-gl@1.13.7:
