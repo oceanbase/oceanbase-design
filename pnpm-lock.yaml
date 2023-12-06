@@ -90,8 +90,8 @@ importers:
         specifier: ^5.11.2
         version: 5.11.2(moment@2.29.4)(react-dom@18.2.0)(react@18.2.0)
       antd-style:
-        specifier: 3.5.0
-        version: 3.5.0(@types/react@18.2.38)(antd@5.11.2)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 3.5.2
+        version: 3.5.2(@types/react@18.2.38)(antd@5.11.2)(react-dom@18.2.0)(react@18.2.0)
       antd-token-previewer:
         specifier: ^2.0.5
         version: 2.0.5(@babel/core@7.23.2)(@types/react@18.2.38)(antd@5.11.2)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
@@ -7956,8 +7956,8 @@ packages:
     resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==}
     engines: {node: '>=12'}
 
-  /antd-style@3.5.0(@types/react@18.2.38)(antd@5.11.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-t+DQWx/ib3PZIONA9eD/qx3PPjdqsiIEjL5X9uf+Gvu58tm1KoLeCZJYNKqT8Td1I1r7+phie3o0De1zPavqIQ==}
+  /antd-style@3.5.2(@types/react@18.2.38)(antd@5.11.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-DnISjaD4M37wbKvMVkkx4XetCOvTnmTrmSgETQADzQPRn9PNb0FuLE6djS9SFJgjR9XqNIytn0ano0UBgwgpvA==}
     peerDependencies:
       antd: '>=5.8.1'
       react: '>=18'
