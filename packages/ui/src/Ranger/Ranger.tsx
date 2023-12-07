@@ -31,7 +31,8 @@ export type RangeDateValue = {
   range: RangeValue;
 };
 
-interface RangerProps extends Omit<RangePickerProps, 'mode' | 'picker' | 'value' | 'defaultValue'> {
+export interface RangerProps
+  extends Omit<RangePickerProps, 'mode' | 'picker' | 'value' | 'defaultValue'> {
   // 数据相关
   selects?: RangeOption[];
   defaultQuickValue?: string;

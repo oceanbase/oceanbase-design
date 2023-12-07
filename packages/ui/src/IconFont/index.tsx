@@ -2,7 +2,7 @@ import { createFromIconfontCN } from '@oceanbase/icons';
 import React from 'react';
 import './font/iconfont.css';
 
-interface IconFontProps {
+export interface IconFontProps {
   type: string;
   className?: string;
   style?: React.CSSProperties;

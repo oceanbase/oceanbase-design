@@ -32,7 +32,7 @@ export interface TreeSearchRef {
   invertSelect: () => void;
 }
 
-interface TreeSearchProps {
+export interface TreeSearchProps {
   treeData: Node[];
   titleRender?: (nodeData: DataNode) => React.ReactNode;
   checkable?: boolean;
@@ -47,7 +47,7 @@ interface TreeSearchProps {
   followLeaf?: boolean;
   /** 异步请求节点数据的回调函数 */
   loadData?: (data: unknown) => Promise<void>;
-  searchStyle?: {};
+  searchStyle?: React.CSSProperties;
 }
 
 export default forwardRef<TreeSearchRef, TreeSearchProps>(
