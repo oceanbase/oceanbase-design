@@ -120,7 +120,6 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '400px',
       },
     },
   };
