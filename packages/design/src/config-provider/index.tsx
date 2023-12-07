@@ -9,6 +9,10 @@ import type {
 } from 'antd/es/config-provider';
 import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
 import type { SpinIndicator } from 'antd/es/spin';
+import { StyleProvider } from '@ant-design/cssinjs';
+import type { StyleProviderProps } from '@ant-design/cssinjs';
+import StyleContext from '@ant-design/cssinjs/es/StyleContext';
+import type { StyleContextProps } from '@ant-design/cssinjs/es/StyleContext';
 import { merge } from 'lodash';
 import StaticFunction from '../static-function';
 import themeConfig from '../theme';
@@ -47,6 +51,8 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
   spin?: SpinConfig;
+  // StyleProvider props
+  styleProviderProps?: StyleProviderProps;
 }
 
 export interface ExtendedConfigConsumerProps {
@@ -68,6 +74,7 @@ const ConfigProvider = ({
   hideOnSinglePage,
   spin,
   tabs,
+  styleProviderProps,
   ...restProps
 }: ConfigProviderProps) => {
   // inherit from parent ConfigProvider
@@ -76,6 +83,11 @@ const ConfigProvider = ({
     React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
   const mergedTheme = merge(parentContext.theme, theme);
   const currentTheme = mergedTheme?.isDark ? darkTheme : defaultTheme;
+
+  // inherit from parent StyleProvider
+  const parentStyleContext = React.useContext<StyleContextProps>(StyleContext);
+  const mergedStyleProviderProps = merge(parentStyleContext, styleProviderProps);
+
   return (
     <AntConfigProvider
       spin={merge(parentContext.spin, spin)}
@@ -110,12 +122,14 @@ const ConfigProvider = ({
               : hideOnSinglePage,
         }}
       >
-        {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
-        {/* ref: https://ant.design/components/app */}
-        <App>
-          {children}
-          <StaticFunction />
-        </App>
+        <StyleProvider {...mergedStyleProviderProps}>
+          {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
+          {/* ref: https://ant.design/components/app */}
+          <App>
+            {children}
+            <StaticFunction />
+          </App>
+        </StyleProvider>
       </ExtendedConfigContext.Provider>
     </AntConfigProvider>
   );

@@ -1,6 +1,7 @@
 import type { AnimationConfig, AnimationItem } from 'lottie-web';
 import lottie from 'lottie-web';
-import React, { useState, useEffect, useRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect, useRef, useImperativeHandle, useContext } from 'react';
+import { ConfigProvider } from '@oceanbase/design';
 import { useUpdateEffect } from 'ahooks';
 import classNames from 'classnames';
 
@@ -27,6 +28,8 @@ export interface LottieRef {
 
 const Lottie = React.forwardRef<LottieRef, LottieProps>(
   ({ mode = 'default', loop = true, speed = 1, className, style, ...restProps }, ref) => {
+    const { iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
+
     const [animation, setAnimation] = useState<AnimationItem>();
     const containerRef = useRef<HTMLDivElement>();
 
@@ -58,8 +61,8 @@ const Lottie = React.forwardRef<LottieRef, LottieProps>(
       <div
         ref={containerRef}
         className={classNames(className, {
-          // 图标展示模式，则追加 anticon 类名
-          ['anticon']: mode === 'icon',
+          // add icon className for icon mode to get default icon style
+          [iconPrefixCls]: mode === 'icon',
         })}
         style={{
           display: 'inline-block',

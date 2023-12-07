@@ -9,6 +9,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
 ): CSSObject => {
   const {
     antCls,
+    iconCls,
     componentCls,
     proComponentsCls,
     colorBgLayout,
@@ -113,7 +114,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               cursor: 'pointer',
               opacity: 0,
               // 设置展开/收起按钮中的图标大小
-              ['.anticon']: {
+              [iconCls]: {
                 fontSize: 'px',
                 display: 'block',
                 lineHeight: '42px',
@@ -137,7 +138,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
                 marginLeft: 'auto',
                 color: colorText,
                 backgroundColor: 'transparent',
-                [`.anticon`]: {
+                [iconCls]: {
                   // 图标尺寸设为 18px，因为设计侧给到的图标内侧有间距，需要适当加大尺寸
                   width: '18px',
                   height: '18px',
@@ -151,7 +152,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
                 marginLeft: 'auto',
                 color: colorText,
                 backgroundColor: 'transparent',
-                [`.anticon`]: {
+                [iconCls]: {
                   // 图标尺寸设为 18px，因为设计侧给到的图标内侧有间距，需要适当加大尺寸
                   width: '18px',
                   height: '18px',

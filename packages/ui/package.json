@@ -48,7 +48,6 @@
     "highlightjs-solidity": "^2.0.6",
     "hoist-non-react-statics": "^3.3.2",
     "lodash": "^4.17.21",
-    "lottie-web": "^5.12.2",
     "moment": "^2.29.4",
     "path-to-regexp": "^6.2.1",
     "randexp": "^0.5.3",
