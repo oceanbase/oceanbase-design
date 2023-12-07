@@ -2,5 +2,5 @@ import React from 'react';
 import { Empty } from '@oceanbase/design';
 
 export default () => {
-  return <Empty />;
+  return <Empty size="small" />;
 };

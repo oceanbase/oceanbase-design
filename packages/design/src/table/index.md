@@ -15,6 +15,8 @@ nav:
 
 <code src="./demo/basic.tsx" title="基本"></code>
 
+<code src="./demo/no-data-table.tsx" title="无数据"></code>
+
 <code src="./demo/bordered.tsx" title="带边框" description="添加表格边框线"></code>
 
 <code src="./demo/fixed-columns-header-tables.tsx" title="固定头和列"></code>

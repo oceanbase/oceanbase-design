@@ -4,10 +4,7 @@ import { Result, Button } from '@oceanbase/design';
 export default () => {
   return (
     <Result
-      layout="warning"
-      icon={
-        <img src="https://mass-office.alipay.com/design_kitchen/afts/img/J7MXQpEp8mgAAAAAAAAAABAADmmSAQBr/original?x-oss-process=image/resize,w_400/quality,q_90" />
-      }
+      resultStatus="warning"
       title="诊断异常"
       subTitle={
         <>

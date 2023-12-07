@@ -1,15 +1,14 @@
 import React from 'react';
-import { Result, Button } from '@oceanbase/design';
+import { Empty, Button } from '@oceanbase/design';
 
 export default () => {
   return (
-    <Result
+    <Empty
+      mode="page"
       layout="horizontal"
-      icon={
-        <img src="https://mass-office.alipay.com/design_kitchen/afts/img/KbMkQpeIacgAAAAAAAAAABAADmmSAQBr/original?x-oss-process=image/resize,w_400/quality,q_90" />
-      }
+      iconType="wellcome"
       title="欢迎体验 OB 智能诊断"
-      subTitle={
+      description={
         <>
           <div>• OB 智能诊断是一个数据库问题诊断的控制面板</div>
           <div>• 将详细的数据库数据图形化的展示</div>

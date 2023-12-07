@@ -1,5 +1,7 @@
 import React from 'react';
 import { App, ConfigProvider as AntConfigProvider } from 'antd';
+import { DatabaseOutlined } from '@oceanbase/icons';
+import { Empty } from '@oceanbase/design';
 import type {
   ConfigProviderProps as AntConfigProviderProps,
   ConfigConsumerProps as AntConfigConsumerProps,
@@ -94,6 +96,9 @@ const ConfigProvider = ({
         },
         mergedTheme
       )}
+      renderEmpty={() => {
+        <Empty image={<DatabaseOutlined />} />;
+      }}
       {...restProps}
     >
       <ExtendedConfigContext.Provider

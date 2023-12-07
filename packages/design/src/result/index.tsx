@@ -1,24 +1,20 @@
-import React, { isValidElement, useState, useContext } from 'react';
-import { Result as Antresult, Space } from 'antd';
+import React, { useContext } from 'react';
+import { Result as Antresult } from 'antd';
 import type { ResultProps as AntResultProps } from 'antd/es/result';
-import { useScroll } from 'ahooks';
 import classNames from 'classnames';
-import { omit } from 'lodash';
 import ConfigProvider from '../config-provider';
-import type { ConfigConsumerProps } from '../config-provider';
-import Button from '../button';
-import type { ButtonProps } from '../button';
-import defaultLocale from '../locale/en-US';
 import useStyle from './style';
+import FailedIcon from './icon/FailedIcon';
+import HealthyIcon from './icon/HealthyIcon';
+import RunningIcon from './icon/RunningIcon';
+import SuccessIcon from './icon/SuccessIcon';
+import WarningIcon from './icon/WarningIcon';
 
 export * from 'antd/es/Result';
 
-export interface resultLocale {}
-
 export interface ResultProps extends AntResultProps {
-  locale?: resultLocale;
   type?: string;
-  layout?: string; // horizontal | vertical
+  resultStatus?: string;
 }
 
 type CompoundedComponent = React.FC<ResultProps> & {
@@ -38,14 +34,15 @@ const Extra: React.FC<ExtraProps> = ({ prefixCls, extra }) => {
 };
 
 const Result: CompoundedComponent = ({
-  locale: customLocale,
+  resultStatus,
   type,
-  layout = 'vertical',
   title,
   extra,
   subTitle,
   className,
   children,
+  icon,
+  status,
   rootClassName,
   prefixCls: customizePrefixCls,
   ...restProps
@@ -54,33 +51,40 @@ const Result: CompoundedComponent = ({
   const prefixCls = getPrefixCls('result', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
 
+  const renderIcon = () => {
+    let iconImage;
+    switch (resultStatus) {
+      case 'failed':
+        iconImage = <FailedIcon />;
+        break;
+      case 'healthy':
+        iconImage = <HealthyIcon />;
+        break;
+      case 'running':
+        iconImage = <RunningIcon />;
+        break;
+      case 'success':
+        iconImage = <SuccessIcon />;
+        break;
+      case 'warning':
+        iconImage = <WarningIcon />;
+        break;
+      default:
+        iconImage = <HealthyIcon />;
+        break;
+    }
+    return iconImage;
+  };
+
   return wrapSSR(
-    <>
-      {layout === 'vertical' ? (
-        <Antresult
-          className={classNames(`${prefixCls}`, `${prefixCls}-${layout}`)}
-          title={title}
-          subTitle={subTitle}
-          extra={extra}
-          {...restProps}
-        />
-      ) : (
-        <Antresult
-          className={classNames(`${prefixCls}`, `${prefixCls}-${layout}`)}
-          title={null}
-          extra={null}
-          subTitle={
-            <div className={classNames(`${prefixCls}-describe`)}>
-              <div className={`${prefixCls}-title`}>{title}</div>
-              {subTitle && <div className={`${prefixCls}-subtitle`}>{subTitle}</div>}
-              <Extra prefixCls={prefixCls} extra={extra} />
-              {children && <div className={`${prefixCls}-content`}>{children}</div>}
-            </div>
-          }
-          {...restProps}
-        />
-      )}
-    </>
+    <Antresult
+      className={classNames(`${prefixCls}`)}
+      title={title}
+      subTitle={subTitle}
+      extra={extra}
+      icon={icon || status ? icon : renderIcon()}
+      {...restProps}
+    />
   );
 };
 

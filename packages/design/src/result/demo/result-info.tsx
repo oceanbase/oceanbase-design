@@ -4,10 +4,7 @@ import { Result, Button } from '@oceanbase/design';
 export default () => {
   return (
     <Result
-      status="info"
-      icon={
-        <img src="https://mass-office.alipay.com/design_kitchen/afts/img/o10IQpvuFRUAAAAAAAAAABAADmmSAQBr/original?x-oss-process=image/resize,w_400/quality,q_90" />
-      }
+      resultStatus="healthy"
       title="任务创建"
       subTitle={
         <div>

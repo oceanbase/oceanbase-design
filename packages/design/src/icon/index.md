@@ -24,6 +24,7 @@ npm install --save @oceanbase/icons
 
 <!-- prettier-ignore -->
 <code src="./demo/new.tsx">新增图标</code>
+<code src="./demo/custom.tsx">自定义图标</code>
 
 ## API
 

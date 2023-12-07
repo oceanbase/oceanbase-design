@@ -12,7 +12,7 @@ nav:
 
 <code src="./demo/basic.tsx" title="基础结果页" description="默认包含 Icon、标题、描述内容。"></code>
 
-<code src="./demo/result-horizontal.tsx" title="水平布局结果页" description="默认包含 Icon、标题、描述内容"></code>
+<code src="./demo/customize.tsx" title="自定义 Icon" description="默认包含 Icon、标题、描述内容。"></code>
 
 <code src="./demo/result-info.tsx" title="结果详情展示" description="默认包含 Icon、标题、描述内容"></code>
 
@@ -26,9 +26,8 @@ nav:
 
 ## API
 
-| 参数   | 说明         | 类型                                         | 默认值     | 版本 |
-| :----- | :----------- | :------------------------------------------- | :--------- | :--- |
-| type   | 设置结果类型 | primary \| dashed \| link \| text \| default | default    |
-| layout | 布局         | horizontal \| vertical                       | horizontal | -    |
+| 参数 | 说明         | 类型                                         | 默认值  | 版本 |
+| :--- | :----------- | :------------------------------------------- | :------ | :--- |
+| type | 设置结果类型 | primary \| dashed \| link \| text \| default | default |
 
 - 更多 API 详见 antd Result 文档: https://ant.design/components/result-cn
