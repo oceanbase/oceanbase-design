@@ -51,6 +51,7 @@ const useStyle = () => {
       position: absolute;
       top: 8px;
       inset-inline-end: 0;
+      right: 0;
       width: 160px;
       margin: 12px 0;
       padding: 8px 0;
