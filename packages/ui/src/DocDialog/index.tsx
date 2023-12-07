@@ -1,6 +1,6 @@
 import { debounce } from 'lodash';
 import React, { useEffect, useMemo, useState } from 'react';
-import type { DialogProps } from '../Dialog';
+import type { IDialogProps } from '../Dialog';
 import Dialog from '../Dialog';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
@@ -12,7 +12,7 @@ const MIN_EMBED_WIDTH = 0.3;
 const DEFAULT_MOBILE_CLIENT_WIDTH = 1280;
 const DEFAULT_TOP_HEIGHT = 0;
 
-interface DialogConfig {
+interface IDialogConfig {
   height?: number;
   width?: number;
   top?: number;
@@ -21,13 +21,13 @@ interface DialogConfig {
   max?: [number, number];
 }
 
-export interface DocDialogProps extends LocaleWrapperProps {
+export interface IDocDialogProps extends LocaleWrapperProps {
   className?: string;
   title?: string;
   fallbackUrl: string;
   docUrls?: Record<string, string>;
-  embedConfig?: DialogConfig;
-  normalConfig?: DialogConfig;
+  embedConfig?: IDialogConfig;
+  normalConfig?: IDialogConfig;
   normalModeWidth?: number;
   defautTop?: number;
   visible: boolean;
@@ -35,7 +35,7 @@ export interface DocDialogProps extends LocaleWrapperProps {
   setVisible: (payload: boolean) => void;
 }
 
-const DocDialogComp = (props: DocDialogProps) => {
+const DocDialogComp = (props: IDocDialogProps) => {
   const {
     fallbackUrl,
     docUrls,
@@ -74,7 +74,7 @@ const DocDialogComp = (props: DocDialogProps) => {
   const DialogProps = useMemo(() => {
     const maxDialogHeight = clientHeight - defautTop;
 
-    let result: DialogProps = {
+    let result: IDialogProps = {
       className,
       visible,
       title,

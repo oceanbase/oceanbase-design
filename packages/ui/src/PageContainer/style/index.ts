@@ -2,7 +2,6 @@ import type { CSSObject } from '@ant-design/cssinjs';
 import type { PageContainerToken } from '@ant-design/pro-layout/es/components/PageContainer/style';
 import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
-import { genFooterToolbarStyle } from '../../FooterToolbar/style';
 
 export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
   token: PageContainerToken
@@ -87,10 +86,22 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
     [`${componentCls}-with-footer `]: {
       paddingBottom: 64,
     },
-    ...(genFooterToolbarStyle({
-      ...token,
-      componentCls: `${proComponentsCls}-footer-bar`,
-    }) as object),
+    [`${proComponentsCls}-footer-bar`]: {
+      width: '100%',
+      backgroundColor: colorBgBase,
+      borderRadius: borderRadius,
+      boxShadow: boxShadowSecondary,
+      borderBlockStart: 'none',
+      // 设置底部操作栏的组件高度
+      [`${antCls}-btn:not(${antCls}-input-search-button)`]: {
+        minWidth: 68,
+        height,
+      },
+      [`${antCls}-radio-button-wrapper`]: {
+        height,
+        lineHeight,
+      },
+    },
   };
 };
 

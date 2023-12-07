@@ -6,8 +6,8 @@ nav:
 ---
 
 - 🔥 完全继承 antd [Notification](https://ant.design/components/notification-cn) 的能力和 API，可无缝切换。
-- 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 - 🆕 `notification.method()` 静态方法，支持消费 `ConfigProvider` 全局配置。
+- 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 
 ## 代码演示
 

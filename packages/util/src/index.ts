@@ -1,5 +1,3 @@
-export { version } from '../package.json';
-
 export * from './format';
 export * from './robust';
 export * from './sort';

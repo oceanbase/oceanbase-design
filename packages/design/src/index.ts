@@ -74,9 +74,6 @@ export type { BadgeProps } from './badge';
 export { default as Result } from './result';
 export type { ResultProps } from './result';
 
-export { default as Lottie } from './lottie';
-export type { LottieProps, LottieRef } from './lottie';
-
 export { default as theme } from './theme';
 
 import theme from './theme';

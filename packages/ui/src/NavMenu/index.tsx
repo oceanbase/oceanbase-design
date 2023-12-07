@@ -8,7 +8,7 @@ import './index.less';
 
 const prefix = getPrefix('menu');
 
-export interface NavMenuItem {
+export interface IMenu {
   key: string;
   title: string;
   link: string | string[];
@@ -16,16 +16,16 @@ export interface NavMenuItem {
   openNewTab?: boolean; // 不在本应用内打开
   href?: boolean;
   id?: string;
-  children?: NavMenuItem[];
+  children?: IMenu[];
 }
 
-export interface NavMenuProps {
-  menuList: NavMenuItem[];
+interface MenuProps {
+  menuList: IMenu[];
   className?: string;
   style?: React.CSSProperties;
 }
 
-export default (props: NavMenuProps) => {
+export default (props: MenuProps) => {
   const { menuList, className, style } = props;
   const [selectedKeys, setSelectedKeys] = useState(['0']);
   const [menus, setMenus] = useState([]);

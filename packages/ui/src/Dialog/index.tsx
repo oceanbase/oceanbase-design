@@ -31,17 +31,17 @@ const DEFAULT_BORDER_WIDTH = 24;
 // 预留滚动条宽度
 const SCROLL_BAR_WIDTH = 1;
 
-export interface DialogLocale {
+export interface IDialogLocale {
   helpDocument: string;
   openHelpCenter: string;
 }
 
-export interface DialogExtLink {
+export interface IDialogExtLink {
   text?: string;
   link: string;
 }
 
-export interface DialogProps extends LocaleWrapperProps {
+export interface IDialogProps extends LocaleWrapperProps {
   className?: string;
   visible?: boolean;
   children?: React.ReactNode;
@@ -58,15 +58,15 @@ export interface DialogProps extends LocaleWrapperProps {
   resizable?: boolean;
   draggable?: boolean;
   enableMaximization?: boolean;
-  locale?: DialogLocale;
-  extLink?: DialogExtLink;
+  locale?: IDialogLocale;
+  extLink?: IDialogExtLink;
   // 内部修改外部容器宽度
   setRootWidth?: (newWidth: string) => void;
   // 是否嵌入模式
   isEmbed?: boolean;
 }
 
-interface DialogState {
+interface IDialogStates {
   mask?: boolean;
   width?: number;
   height?: number;
@@ -79,7 +79,7 @@ interface DialogState {
   headerStyle?: Record<string, any>;
 }
 
-class DialogComp extends React.PureComponent<DialogProps, DialogState> {
+class DialogComp extends React.PureComponent<IDialogProps, IDialogStates> {
   state = {
     mask: true,
     width: this.props.width ?? DEFAULT_WIDTH_MEMBER,
@@ -135,7 +135,7 @@ class DialogComp extends React.PureComponent<DialogProps, DialogState> {
     DialogComp.container.appendChild(this.host);
   }
 
-  componentDidUpdate(prevProps: Readonly<DialogProps>, _: Readonly<DialogState>): void {
+  componentDidUpdate(prevProps: Readonly<IDialogProps>, _: Readonly<IDialogStates>): void {
     const {
       visible: preVisible,
       clientWidth: preClientWidth,
@@ -546,7 +546,7 @@ class DialogComp extends React.PureComponent<DialogProps, DialogState> {
   checkSize(width: number, height: number) {
     const { max } = this;
     const { min } = this;
-    const newModel: DialogState = {};
+    const newModel: IDialogStates = {};
 
     const result = {
       widthShouldChange: true,
