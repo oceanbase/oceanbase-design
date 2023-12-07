@@ -10,7 +10,7 @@ import RunningIcon from './icon/RunningIcon';
 import SuccessIcon from './icon/SuccessIcon';
 import WarningIcon from './icon/WarningIcon';
 
-export * from 'antd/es/Result';
+export * from 'antd/es/result';
 
 export interface ResultProps extends AntResultProps {
   type?: string;

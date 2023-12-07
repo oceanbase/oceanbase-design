@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Empty as AntEmpty } from 'antd';
 import { Card } from '@oceanbase/design';
-import type { EmptyProps as AntEmptyProps } from 'antd/es/Empty';
+import type { EmptyProps as AntEmptyProps } from 'antd/es/empty';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import useStyle from './style';
@@ -14,7 +14,7 @@ import EmptyHost from './icon/EmptyHost';
 import EmptyOBProxy from './icon/EmptyOBProxy';
 import EmptyTenant from './icon/EmptyTenant';
 
-export * from 'antd/es/Empty';
+export * from 'antd/es/empty';
 
 interface ExtraProps {
   prefixCls: string;

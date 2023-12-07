@@ -130,6 +130,7 @@ export default defineConfig({
           children: [
             { title: 'Card 卡片', link: '/components/card' },
             { title: 'Descriptions 描述列表', link: '/components/descriptions' },
+            { title: 'Empty 空状态', link: '/components/empty' },
             { title: 'List 列表', link: '/components/list' },
             { title: 'Table 表格', link: '/components/table' },
             { title: 'Tabs 标签页', link: '/components/tabs' },
