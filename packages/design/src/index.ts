@@ -10,6 +10,8 @@ export type { AlertProps } from './alert';
 
 export { default as Button } from './button';
 export type { ButtonProps } from './button';
+export { default as Space } from './space';
+export { Col, Row } from './grid';
 
 export { default as Typography } from './typography';
 export type { TypographyProps } from './typography';
