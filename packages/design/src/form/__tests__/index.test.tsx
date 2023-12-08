@@ -58,4 +58,17 @@ describe('Drawer', () => {
     expect(container.querySelector('.ant-form-item-optional')).toBeFalsy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
+
+  it('Form hideRequiredMark should be priority over ConfigProvider form.requiredMark', () => {
+    const { container, asFragment } = render(
+      <ConfigProvider
+        form={{
+          requiredMark: true,
+        }}
+      >
+        <FormTest hideRequiredMark={true} />
+      </ConfigProvider>
+    );
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
 });
