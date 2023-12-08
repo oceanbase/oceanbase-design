@@ -1,22 +1,6 @@
 import React from 'react';
-import { Empty, Button, Menu, message, Row, Col, Card } from '@oceanbase/design';
+import { Empty, Button, Menu, message } from '@oceanbase/design';
 import { BasicLayout, IconFont, Lottie, PageContainer } from '@oceanbase/ui';
-// import PageContainerCompleteDemo from '../../../../ui/src/PageContainer/demo/complete';
-import Icon from '@oceanbase/icons';
-
-// export default () => {
-//   return (
-//     <Empty
-//       iconType='cluster'
-//       title="Your description title"
-//       description="Your description title content"
-//     >
-//       <Button type="primary" key="console">
-//         your operations
-//       </Button>
-//     </Empty>
-//   );
-// };
 
 export default () => {
   const menus = [
