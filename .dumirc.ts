@@ -1,8 +1,11 @@
 import path from 'path';
 import { defineConfig } from 'dumi';
+import AntdAliasWebpackPlugin from './antd-alias-webpack-plugin';
 
 export default defineConfig({
-  mfsu: {},
+  mfsu: {
+    exclude: ['antd-token-previewer'],
+  },
   // 默认重定向到子包的 src 文件夹
   // ref: https://d.umijs.org/config#monoreporedirect
   monorepoRedirect: {},
@@ -15,6 +18,10 @@ export default defineConfig({
     hostname: 'https://design.oceanbase.com',
   },
   extraBabelPresets: [require.resolve('@emotion/babel-preset-css-prop')],
+  chainWebpack: config => {
+    config.plugin('antd-alias').use(AntdAliasWebpackPlugin);
+    return config;
+  },
   outputPath: 'site',
   define: {
     'process.env.VERCEL_ANALYTICS_ID': process.env.VERCEL_ANALYTICS_ID,
@@ -107,6 +114,7 @@ export default defineConfig({
           children: [
             { title: 'Button 按钮', link: '/components/button' },
             { title: 'Icon 图标', link: '/components/icon' },
+            { title: 'Typography 排版', link: '/components/typography' },
           ],
         },
         {
@@ -122,10 +130,15 @@ export default defineConfig({
           children: [
             { title: 'Card 卡片', link: '/components/card' },
             { title: 'Descriptions 描述列表', link: '/components/descriptions' },
+            { title: 'List 列表', link: '/components/list' },
             { title: 'Table 表格', link: '/components/table' },
             { title: 'Tabs 标签页', link: '/components/tabs' },
             { title: 'Tag 标签', link: '/components/tag' },
             { title: 'Tooltip 文字提示', link: '/components/tooltip' },
+            {
+              title: 'Segmented 分段控制器',
+              link: '/components/segmented',
+            },
           ],
         },
         {
@@ -151,6 +164,7 @@ export default defineConfig({
           children: [
             { title: 'BasicLayout 导航和布局', link: '/biz-components/basic-layout' },
             { title: 'PageContainer 页容器', link: '/biz-components/page-container' },
+            { title: 'FooterToolbar 底部操作栏', link: '/biz-components/footer-toolbar' },
             { title: 'Login 登录页', link: '/biz-components/login' },
             // { title: 'NavMenu', link: '/biz-components/nav-menu' },
             { title: 'Welcome 欢迎页', link: '/biz-components/welcome' },

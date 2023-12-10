@@ -5,7 +5,7 @@ nav:
   path: /components
 ---
 
-- 🔥 完全兼容 antd [Tabs](https://ant.design/components/tabs-cn) 的能力和 API，可无缝切换。
+- 🔥 完全继承 antd [Tabs](https://ant.design/components/tabs-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式（火柴棍宽度等），符合 OceanBase Design 设计规范。
 - 🆕 `items` 和 `TabPane` 新增 `tag` 属性，用于设置选项卡后面的标签。
 

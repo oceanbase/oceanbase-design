@@ -14,7 +14,6 @@ export default () => {
       bgImage={background_img}
       title="Welcome to OCP Express"
       description="Let's start your usage"
-      board={<h2>顶部公告</h2>}
       onShowRegisterChange={setShowRegister}
       showRegister={showRegister}
       registerProps={{

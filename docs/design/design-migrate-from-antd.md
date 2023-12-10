@@ -4,7 +4,7 @@ order: 5
 group: 基础组件
 ---
 
-OceanBase Design 与 Ant Design 设计体系一脉相承，完全兼容 [Ant Design](https://ant.design) 的能力和 API。两者仅在组件主题、样式和扩展能力上存在差异，因此只需简单替换模块入口，即可从 Ant Design 平滑迁移至 OceanBase Design。
+OceanBase Design 与 Ant Design 设计体系一脉相承，完全继承 [Ant Design](https://ant.design) 的能力和 API。两者仅在组件主题、样式和扩展能力上存在差异，因此只需简单替换模块入口，即可从 Ant Design 平滑迁移至 OceanBase Design。
 
 ## 自动化迁移
 

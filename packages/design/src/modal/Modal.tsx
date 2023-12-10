@@ -21,11 +21,14 @@ Modal.info = props => modal.info(props);
 Modal.success = props => modal.success(props);
 Modal.error = props => modal.error(props);
 Modal.warning = props => modal.warning(props);
+Modal.warn = props => modal.warning(props);
 Modal.confirm = props => modal.confirm(props);
 
 Modal.useModal = AntModal.useModal;
 Modal.destroyAll = AntModal.destroyAll;
 Modal.config = AntModal.config;
+
+Modal._InternalPanelDoNotUseOrYouWillBeFired = AntModal._InternalPanelDoNotUseOrYouWillBeFired;
 
 if (process.env.NODE_ENV !== 'production') {
   Modal.displayName = AntModal.displayName;

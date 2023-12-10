@@ -101,6 +101,7 @@ export default ({
       {mainActions.map(action => {
         return React.cloneElement(action, {
           ...action.props,
+          key: action.key,
           enableLoading: enableLoading,
           disabled: isBoolean(action.props.disabled)
             ? action.props.disabled

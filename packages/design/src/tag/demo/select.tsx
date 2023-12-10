@@ -27,13 +27,7 @@ const App: React.FC = () => (
       options={options.map(item => ({ label: item, value: item }))}
     />
     <Divider orientation="left">Input</Divider>
-    <Select
-      mode="tags"
-      showArrow={false}
-      open={false}
-      style={{ width: '100%' }}
-      defaultValue={['input']}
-    />
+    <Select mode="tags" open={false} style={{ width: '100%' }} defaultValue={['input']} />
   </>
 );
 

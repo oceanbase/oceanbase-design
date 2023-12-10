@@ -14,11 +14,11 @@ nav:
 
 ## API
 
-| 参数 | 说明 | 类型 | 默认值 | 版本 |
-| :-- | :-- | :-- | :-- | :-- |
-| content | 文字内容 | String | - | - |
-| tooltip | Tooltip 配置 | TooltipProps | - | - |
-| prefixIcon | 文字前图标配置 | IconProps | null | - |
-| suffixIcon | 文字后图标配置 | IconProps | { type: 'question-circle', spin: false, pointable: true, style: { marginRight: 4 } } | - |
-| className | 组件 className | String | - | - |
-| style | 组件 style | React.CSSProperties | - | - |
+| 参数       | 说明           | 类型                       | 默认值 | 版本 |
+| :--------- | :------------- | :------------------------- | :----- | :--- |
+| content    | 文字内容       | string                     | -      | -    |
+| tooltip    | Tooltip 配置   | TooltipProps               | -      | -    |
+| prefixIcon | 文字前图标配置 | React.ReactNode \| boolean | null   | -    |
+| suffixIcon | 文字后图标配置 | React.ReactNode \| boolean | true   | -    |
+| className  | 组件 className | String                     | -      | -    |
+| style      | 组件 style     | React.CSSProperties        | -      | -    |
