@@ -7,7 +7,7 @@ export interface Tooltip extends AntTooltip {
 
 export default (tooltip?: false | Tooltip, height?: number) => {
   if (!tooltip) {
-    return {};
+    return false;
   }
   const { scrollable, domStyles, ...restTooltip } = tooltip;
   return scrollable
