@@ -1,4 +1,7 @@
-const defaultTheme = {
+import type { ThemeConfig } from 'antd';
+import { formatTheme } from './util/format';
+
+const defaultTheme: ThemeConfig = {
   token: {
     colorPrimaryBg: '#EAF1FF',
     colorPrimary: '#006AFF',
@@ -19,26 +22,26 @@ const defaultTheme = {
     colorSuccessTextHover: '#4DCCA2',
     colorSuccessText: '#0AC185',
     colorSuccessTextActive: '#00B378',
-    colorWarning: '#ffac33',
+    colorWarning: '#FFA21A',
     colorWarningBg: '#FFF5E5',
     colorWarningBgHover: '#ffe7c2',
     colorWarningBorder: '#FFD699',
-    colorWarningBorderHover: '#ffc166',
+    colorWarningBorderHover: '#FFC166',
     colorWarningHover: '#FFC166',
-    colorWarningActive: '#e68800',
+    colorWarningActive: '#FF9700',
     colorWarningTextHover: '#FFC166',
-    colorWarningText: '#ffa21a',
-    colorWarningTextActive: '#e68800',
+    colorWarningText: '#FFA21A',
+    colorWarningTextActive: '#FF9700',
     colorErrorBg: '#ffebeb',
     colorErrorBgHover: '#ffd6d6',
     colorErrorBorder: '#FFB3B3',
     colorErrorBorderHover: '#ff7575',
     colorErrorHover: '#ff7575',
-    colorErrorActive: '#cc0000',
+    colorErrorActive: '#CC0000',
     colorErrorTextHover: '#ff7575',
     colorErrorText: '#ff1a1a',
-    colorErrorTextActive: '#cc0000',
-    colorError: '#FF4B4B',
+    colorErrorTextActive: '#CC0000',
+    colorError: '#F93939',
     colorInfo: '#006AFF',
     colorInfoBg: '#EAF1FF',
     colorInfoBgHover: '#EAF1FF',
@@ -74,9 +77,6 @@ const defaultTheme = {
     colorPrimaryActive: '#004CE6',
   },
   components: {
-    Dropdown: {
-      colorError: '#FF4B4B',
-    },
     Button: {
       borderRadius: 6,
     },
@@ -95,4 +95,13 @@ const defaultTheme = {
   },
 };
 
-export default defaultTheme;
+defaultTheme.token = {
+  ...defaultTheme.token,
+  // preset colors below should be same with semantic colors
+  blue: defaultTheme.token.colorInfo,
+  green: defaultTheme.token.colorSuccess,
+  yellow: defaultTheme.token.colorWarning,
+  red: defaultTheme.token.colorError,
+};
+
+export default formatTheme(defaultTheme);
