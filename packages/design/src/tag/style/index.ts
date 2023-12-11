@@ -1,13 +1,13 @@
 import { type FullToken, type GenerateStyle } from 'antd/es/theme/internal';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import { genPresetColor } from 'antd/lib/theme/internal';
-import { TinyColor } from '@ctrl/tinycolor';
+import { getWeakenBorderColor } from '../../_util/getWeakenBorderColor';
 import type { CSSObject } from '@ant-design/cssinjs';
 
 export type TagToken = FullToken<'Tag'>;
 
 const getTagBorderColor = (color: string) => {
-  return new TinyColor(color).setAlpha(0.4).toHex8String();
+  return getWeakenBorderColor(color);
 };
 
 const genTagPresetStatusStyle = (
