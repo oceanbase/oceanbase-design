@@ -41,7 +41,9 @@ export const genTagStyle: GenerateStyle<TagToken> = (token: TagToken): CSSObject
   const { componentCls } = token;
   return {
     [`${componentCls}`]: {
+      paddingInline: token.paddingXS,
       borderColor: getTagBorderColor(token.colorBorder),
+      fontSize: token.fontSizeSM,
       ['&-ellipsis']: {
         maxWidth: '100%',
         textOverflow: 'ellipsis',
