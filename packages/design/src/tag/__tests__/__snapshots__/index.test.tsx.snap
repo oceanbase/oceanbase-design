@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tag custom ellipsis 1`] = `
+<span
+  class="ant-tag ant-tag-ellipsis"
+>
+  <span
+    class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+  >
+    <div
+      id="test"
+    >
+      Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.
+    </div>
+  </span>
+</span>
+`;
+
+exports[`Tag default ellipsis 1`] = `
+<span
+  class="ant-tag ant-tag-ellipsis"
+>
+  <span
+    class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+  >
+    <div
+      id="test"
+    >
+      Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.
+    </div>
+  </span>
+</span>
+`;
+
+exports[`Tag disable ellipsis 1`] = `
+<span
+  class="ant-tag"
+>
+  <div
+    id="test"
+  >
+    Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.
+  </div>
+</span>
+`;
