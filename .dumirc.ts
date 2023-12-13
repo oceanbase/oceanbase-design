@@ -118,6 +118,13 @@ export default defineConfig({
           ],
         },
         {
+          title: '布局',
+          children: [
+            { title: 'Grid 栅格', link: '/components/grid' },
+            { title: 'Space 间距', link: '/components/space' },
+          ],
+        },
+        {
           title: '数据录入',
           children: [
             { title: 'Form 表单', link: '/components/form' },
