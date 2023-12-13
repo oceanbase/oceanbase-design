@@ -45,10 +45,8 @@ export default function InfoNewVersion() {
     const { content } = getComputedStyle(p);
     setSupportWhere(String(content).includes('CHECK'));
 
-    return () => {
-      document.body.removeChild(p);
-      removeCSS(whereCls);
-    };
+    document.body.removeChild(p);
+    removeCSS(whereCls);
   }, []);
 
   return supportWhere ? null : (
@@ -79,7 +77,7 @@ export default function InfoNewVersion() {
         }}
       >
         {location.whereNotSupport}{' '}
-        <a style={{ color: '#006aff', textDecoration: 'none' }} href={location.whereDocUrl}>
+        <a style={{ color: '#1677ff', textDecoration: 'none' }} href={location.whereDocUrl}>
           {location.whereDocTitle}
         </a>
       </div>

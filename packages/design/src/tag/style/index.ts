@@ -1,13 +1,13 @@
 import { type FullToken, type GenerateStyle } from 'antd/es/theme/internal';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import { genPresetColor } from 'antd/lib/theme/internal';
-import { TinyColor } from '@ctrl/tinycolor';
+import { getWeakenBorderColor } from '../../_util/getWeakenBorderColor';
 import type { CSSObject } from '@ant-design/cssinjs';
 
 export type TagToken = FullToken<'Tag'>;
 
 const getTagBorderColor = (color: string) => {
-  return new TinyColor(color).setAlpha(0.4).toHex8String();
+  return getWeakenBorderColor(color);
 };
 
 const genTagPresetStatusStyle = (
@@ -38,24 +38,29 @@ const genPresetStyle = (token: TagToken) =>
   });
 
 export const genTagStyle: GenerateStyle<TagToken> = (token: TagToken): CSSObject => {
-  const { componentCls } = token;
+  const { antCls, componentCls } = token;
   return {
     [`${componentCls}`]: {
+      paddingInline: token.paddingXS,
       borderColor: getTagBorderColor(token.colorBorder),
-      [`&-ellipsis`]: {
+      fontSize: token.fontSizeSM,
+      [`${antCls}-typography`]: {
+        fontSize: token.fontSizeSM,
+      },
+      ['&-ellipsis']: {
         maxWidth: '100%',
         textOverflow: 'ellipsis',
         overflow: 'hidden',
         verticalAlign: 'bottom',
       },
-      [`&-checkable`]: {
+      ['&-checkable']: {
         borderColor: 'transparent',
       },
-      [`&-hidden`]: {
+      ['&-hidden']: {
         display: 'none',
       },
-      [`&-borderless`]: {
-        border: 'transparent',
+      ['&-borderless']: {
+        borderColor: 'transparent',
       },
     },
   };

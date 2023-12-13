@@ -19,7 +19,7 @@ export type RenderFun = ((props: AlertRenderParams) => ReactNode) | false;
 export type Vertical = 'top' | 'bottom';
 export type Horizontal = 'left' | 'right';
 
-export interface Props extends LocaleWrapperProps {
+export interface BatchOperationBarProps extends LocaleWrapperProps {
   width?: number | string;
   title?: ReactNode;
   selectedRows?: any[];
@@ -41,7 +41,7 @@ export interface Props extends LocaleWrapperProps {
 
 const prefix = 'ob-batch-operation-bar';
 
-const BatchOperationBar = (props: Props) => {
+const BatchOperationBar = (props: BatchOperationBarProps) => {
   const locale = props?.locale;
   const {
     title,

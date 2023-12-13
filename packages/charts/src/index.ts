@@ -2,6 +2,8 @@ import './index.less';
 
 export * from '@ant-design/charts';
 
+export { version } from '../package.json';
+
 export { default as Stat } from './Stat';
 export type { StatConfig } from './Stat';
 
