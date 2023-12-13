@@ -38,12 +38,15 @@ const genPresetStyle = (token: TagToken) =>
   });
 
 export const genTagStyle: GenerateStyle<TagToken> = (token: TagToken): CSSObject => {
-  const { componentCls } = token;
+  const { antCls, componentCls } = token;
   return {
     [`${componentCls}`]: {
       paddingInline: token.paddingXS,
       borderColor: getTagBorderColor(token.colorBorder),
       fontSize: token.fontSizeSM,
+      [`${antCls}-typography`]: {
+        fontSize: token.fontSizeSM,
+      },
       ['&-ellipsis']: {
         maxWidth: '100%',
         textOverflow: 'ellipsis',
