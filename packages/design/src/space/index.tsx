@@ -7,6 +7,7 @@ import type { SpaceProps } from 'antd/es/space';
 import { Space as AntSpace } from 'antd';
 import useStyle from './style';
 
+export * from 'antd/es/space';
 export { SpaceContext } from 'antd/es/space/context';
 
 const Space = React.forwardRef<HTMLDivElement, SpaceProps>(
