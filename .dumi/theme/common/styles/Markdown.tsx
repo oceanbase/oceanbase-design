@@ -403,9 +403,8 @@ const GlobalStyle: React.FC = () => {
             }
           }
         }
-
         .grid-demo,
-        [id^='components-grid-demo-'] {
+        [id^='packages-design-src-grid-demo-'] {
           ${antCls}-row > div,
             .code-box-demo ${antCls}-row > div {
             min-height: 30px;
@@ -416,7 +415,7 @@ const GlobalStyle: React.FC = () => {
             border-radius: 0;
           }
 
-          .code-box-demo ${antCls}-row > div:not(.gutter-row) {
+          ${antCls}-row > div:not(.gutter-row) {
             padding: 16px 0;
             background: ${demoGridColor};
 

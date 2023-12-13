@@ -119,7 +119,10 @@ export default defineConfig({
         },
         {
           title: '布局',
-          children: [{ title: 'Space 间距', link: '/components/space' }],
+          children: [
+            { title: 'Grid 栅格', link: '/components/grid' },
+            { title: 'Space 间距', link: '/components/space' },
+          ],
         },
         {
           title: '数据录入',
