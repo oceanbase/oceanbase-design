@@ -8,6 +8,13 @@ group: 业务组件
 
 ---
 
+## 0.2.33
+
+`2023-12-14`
+
+- 📝 新增 BasicLayout `location` 属性的用法说明，即用于实现选中菜单和当前路由之间的联动。[#363](https://github.com/oceanbase/oceanbase-design/pull/363)
+- 💄 BasicLayout 支持根据当前路由自动设置展开菜单项。[#364](https://github.com/oceanbase/oceanbase-design/pull/364)
+
 ## 0.2.32
 
 `2023-12-08`

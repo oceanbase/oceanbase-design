@@ -8,6 +8,12 @@ group: 可视化图表
 
 ---
 
+## 0.2.19
+
+`2023-12-14`
+
+- 🐞 修复折线图、面积图和双轴图的 tooltip 无法关闭的问题。[#351](https://github.com/oceanbase/oceanbase-design/pull/351) [@Qiuhang817385](https://github.com/Qiuhang817385)
+
 ## 0.2.17
 
 `2023-11-30`
