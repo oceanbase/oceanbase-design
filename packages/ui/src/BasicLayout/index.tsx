@@ -6,7 +6,7 @@ import { ConfigProvider, Divider, Layout, Menu, Tooltip } from '@oceanbase/desig
 import type { BadgeProps } from '@oceanbase/design/es/badge';
 import type { MenuProps } from '@oceanbase/design/es/menu';
 import classNames from 'classnames';
-import { some } from 'lodash';
+import { some, uniq } from 'lodash';
 import { pathToRegexp } from 'path-to-regexp';
 import React, { useEffect, useState, useContext } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
@@ -109,7 +109,13 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
       [];
     const newSelectedKeys: string[] = selectedMenuKeys.filter(item => item);
     if (newSelectedKeys.length > 0) {
-      setSelectedKeys([newSelectedKeys[newSelectedKeys.length - 1]]);
+      // use last selected key to avoid multiple selected menus
+      const selectedKey = newSelectedKeys[newSelectedKeys.length - 1];
+      setSelectedKeys([selectedKey]);
+      // get parent keys of current selectedKey
+      const selectedParentKeys = getParentKeys(menus, selectedKey);
+      // append parent keys as open keys
+      setOpenKeys(uniq([...openKeys, ...selectedParentKeys]));
     } else {
       setSelectedKeys([]);
     }
@@ -118,11 +124,10 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   const menuProps = {
     selectedKeys,
     openKeys,
-    onSelect: (({ selectedKeys: newSelectedKeys }) => {
+    onSelect: ({ selectedKeys: newSelectedKeys }) => {
       setSelectedKeys(newSelectedKeys);
-    }) as any,
+    },
     onOpenChange: newOpenKeys => {
-      // 最多只允许一个子菜单展开
       setOpenKeys(newOpenKeys);
     },
   };
@@ -133,7 +138,21 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
     });
   };
 
-  const getFlatMenuKeys = menuList => {
+  const getParentKeys = (menuList: MenuItem[], selectedKey) => {
+    let keys = [];
+    (menuList || []).forEach(item => {
+      const itemChildren = item.children || [];
+      const childrenKeys = itemChildren.map(child => child.link);
+      if (childrenKeys.includes(selectedKey)) {
+        keys = [...keys, item.link];
+      } else {
+        keys = [...keys, getParentKeys(itemChildren, selectedKey)];
+      }
+    });
+    return keys;
+  };
+
+  const getFlatMenuKeys = (menuList: MenuItem[]) => {
     let keys = [];
     (menuList || []).forEach(item => {
       if (item.children) {
