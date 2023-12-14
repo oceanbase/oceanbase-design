@@ -1,6 +1,6 @@
 @import '../variable.less';
 
-@prefix: ob-ranger;
+@prefix: ob-date-ranger;
 
 .@{prefix} {
   .@{prefixCls}-space-item:nth-child(2) {
@@ -9,7 +9,7 @@
 
     .@{prefixCls}-picker,
     .@{prefixCls}-picker-range,
-    .ob-ranger-range-picker {
+    .@{prefix}-range-picker {
       width: 100%;
       // 去掉左侧圆角，以与下拉选择紧密组合在一起
       border-top-left-radius: 0;
@@ -21,7 +21,11 @@
     }
   }
 
-  .ob-ranger-date-picker {
+  .@{prefix}-picker-input {
+    max-width: 125px;
+  }
+
+  .@{prefix}-date-picker {
     .@{prefixCls}-select-selector {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
@@ -38,7 +42,7 @@
 }
 
 .@{prefix}-show-range {
-  .ob-ranger-quick-picker.ob-ranger-quick-picker-select {
+  .@{prefix}-quick-picker.@{prefix}-quick-picker-select {
     margin-right: -1px;
 
     .@{prefixCls}-select-selector {

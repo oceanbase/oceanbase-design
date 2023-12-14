@@ -1,4 +1,4 @@
-import { Button, DatePicker, Radio, Space } from '@oceanbase/design';
+import { DatePicker, DatePickerProps, Dropdown, Radio, Space } from '@oceanbase/design';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
@@ -17,19 +17,12 @@ import {
   NEAR_1_MINUTES,
   NEAR_30_MINUTES,
   NEAR_TIME_LIST,
+  YEAR_DATE_TIME_FORMAT,
 } from './constant';
 import './index.less';
 import zhCN from './locale/zh-CN';
-import type { QuickType } from './QuickPicker';
 import type { RangeOption } from './typing';
-import {
-  DoubleLeftOutlined,
-  PauseOutlined,
-  CaretRightOutlined,
-  DoubleRightOutlined,
-} from '@oceanbase/icons';
-import QuickPicker from './QuickPicker';
-import diff from '../Highlight/demo/diff';
+import { LeftOutlined, PauseOutlined, CaretRightOutlined, RightOutlined } from '@oceanbase/icons';
 
 export type RangeName = 'customize' | string;
 
@@ -56,7 +49,7 @@ interface RangerProps extends Omit<RangePickerProps, 'mode' | 'picker' | 'value'
   size?: 'small' | 'large' | 'middle';
 }
 
-const prefix = getPrefix('ranger');
+const prefix = getPrefix('date-ranger');
 
 const Ranger = (props: RangerProps) => {
   const {
@@ -76,8 +69,6 @@ const Ranger = (props: RangerProps) => {
     ...rest
   } = props;
 
-  console.log(props.onChange, 'props props props');
-
   // 是否为 moment 时间对象
   const isMoment =
     moment.isMoment(defaultValue?.[0]) ||
@@ -91,8 +82,8 @@ const Ranger = (props: RangerProps) => {
     value || defaultValue ? CUSTOMIZE : defaultQuickValue ?? selects?.[0]?.name
   );
 
-  const [isPlay, setIsPlay] = useState(false);
-  const [radioValue, setRadioValue] = useState('');
+  // 没有 selects 时，回退到普通 RangePicker, 当前时间选项为自定义时，应该显示 RangePicker
+  const [isPlay, setIsPlay] = useState(rangeName !== CUSTOMIZE);
 
   const defaultInternalValue = useMemo(() => {
     return selects
@@ -127,16 +118,19 @@ const Ranger = (props: RangerProps) => {
   }, []);
 
   const handleNameChange = (name: string) => {
+    if (name === CUSTOMIZE) {
+      setIsPlay(false);
+    }
     setRangeName(name);
   };
 
-  const rangeChange = (range: RangeValue, rName?: string) => {
+  const rangeChange = (range: RangeValue) => {
     setInnerValue(range);
     onChange(range);
   };
 
   const datePickerChange = (range: RangeValue) => {
-    rangeChange(range, CUSTOMIZE);
+    rangeChange(range);
     setRangeName(CUSTOMIZE);
   };
 
@@ -146,121 +140,179 @@ const Ranger = (props: RangerProps) => {
     return current && futureDay && current > futureDay;
   };
 
-  let internalQuickType!: QuickType;
-  if (quickType === 'dropdown' && rangeName !== CUSTOMIZE) {
-    internalQuickType = 'dropdown';
-  } else {
-    internalQuickType = 'select';
-  }
-  // 普通模式或者当前时间选项为自定义时，应该显示 rangePicker
-  const showRange = mode === 'default' || rangeName === CUSTOMIZE;
-  // 没有 selects 时，回退到普通 RangePicker
-  const showQuickPicker = selects.length !== 0;
+  const startTime = innerValue?.[0];
+  const endTime = innerValue?.[1];
+  const differenceMs = endTime?.diff(startTime as any);
+  const tagStyle = {
+    backgroundColor: 'rgb(226, 229, 237)',
+    marginRight: 8,
+    display: 'inline-block',
+    width: 72,
+    textAlign: 'center',
+    padding: '6px 0',
+    borderRadius: 4,
+    lineHeight: 1,
+  };
 
   useInterval(
     () => {
       const selected = NEAR_TIME_LIST.find(item => item.name === rangeName);
-      if (selected.range) {
+      if (selected?.range) {
         rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
+      }
+      if (rangeName === CUSTOMIZE) {
+        rangeChange([startTime, isMoment ? moment() : dayjs()] as RangeValue);
       }
     },
     isPlay ? 1000 : null
   );
 
-  const startTime = innerValue?.[0];
-  const endTime = innerValue?.[1];
-  const differenceMs = endTime?.diff(startTime as any);
+  const rangeLabel =
+    rangeName === CUSTOMIZE
+      ? '自定义'
+      : selects.find(_item => _item.name === rangeName)?.rangeLabel;
+
+  const label =
+    rangeName === CUSTOMIZE ? '自定义时间' : selects.find(_item => _item.name === rangeName)?.label;
+
+  const isTerse = isPlay && rangeName !== CUSTOMIZE;
+
+  const thisYear = new Date().getFullYear();
+  const isThisYear = startTime?.year() === thisYear && endTime?.year() === thisYear;
 
   return (
-    <Space
-      size={0}
-      className={classNames(
-        {
-          [`${prefix}-show-range`]: showRange,
-        },
-        prefix
-      )}
-      style={rest.style}
-    >
-      {showQuickPicker && (
-        <QuickPicker
-          customable
-          type={internalQuickType}
-          onChange={rangeChange}
-          onNameChange={handleNameChange}
-          selects={selects}
-          name={rangeName}
-          locale={locale}
-          isMoment={isMoment}
-          size={size}
-        />
-      )}
-      {showRange && (
-        // @ts-ignore
-        <DatePicker.RangePicker
-          disabledDate={pastOnly ? disabledFuture : disabledDate}
-          format={DATE_TIME_FORMAT}
-          defaultValue={defaultValue}
-          value={innerValue || defaultInternalValue}
-          onChange={datePickerChange}
-          showTime={true}
-          className={`${prefix}-range-picker`}
-          size={size}
-          // 透传 props 到 antd Ranger
-          {...omit(rest, 'value', 'onChange')}
-        />
-      )}
-      {showRange && (
-        <Radio.Group
-          value={radioValue}
-          className={`${prefix}-playback-control`}
-          buttonStyle="solid"
+    <Space size={4} className={classNames(prefix)} style={rest.style}>
+      <div style={{ border: '1px solid #d9d9d9', borderRadius: 4 }} size={0}>
+        <Dropdown
+          trigger="click"
+          menu={{
+            items: [
+              ...selects,
+              {
+                name: CUSTOMIZE,
+                rangeLabel: '自定义',
+                label: '自定义时间',
+              },
+            ].map(item => {
+              return {
+                key: item.name,
+                label: (
+                  <span
+                    onClick={() => {
+                      const rName = item.name;
+                      handleNameChange(rName);
+
+                      const selected = NEAR_TIME_LIST.find(_item => _item.name === rName);
+                      // 存在快捷选项切换为极简模式
+                      if (selected?.range) {
+                        setIsPlay(true);
+                        rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
+                      }
+                    }}
+                  >
+                    <span style={tagStyle}>
+                      {item.name === CUSTOMIZE ? '自定义' : item.rangeLabel}
+                    </span>
+                    {locale[item.label] || item.label}
+                  </span>
+                ),
+              };
+            }),
+          }}
         >
-          <Radio.Button
-            value="stepBack"
-            onClick={() => {
-              if (isPlay) {
-                setIsPlay(false);
-              }
+          <Space size={0}>
+            <span
+              style={{
+                ...tagStyle,
+                margin: 0,
+                marginLeft: 8,
+              }}
+            >
+              {rangeLabel}
+            </span>
+            {isTerse && <div style={{ padding: '4px 11px 4px' }}>{label}</div>}
+          </Space>
+        </Dropdown>
+        {!isTerse && (
+          /* @ts-ignore */
+          <DatePicker.RangePicker
+            disabledDate={pastOnly ? disabledFuture : disabledDate}
+            format={v => {
+              // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now),会传入最新的时间导致判断异常
 
-              if (startTime && endTime) {
-                const newStartTime = (startTime as Dayjs).subtract(differenceMs);
-                const newEndTime = startTime?.clone() as Dayjs;
+              const suffixFormat = rangeName === CUSTOMIZE ? ':ss' : '';
 
-                datePickerChange([newStartTime, newEndTime]);
-              }
+              return isThisYear
+                ? v.format(DATE_TIME_FORMAT + suffixFormat)
+                : v.format(YEAR_DATE_TIME_FORMAT + suffixFormat);
             }}
-          >
-            <DoubleLeftOutlined />
-          </Radio.Button>
-          <Radio.Button
-            value={'play'}
-            onClick={() => {
-              const newPlay = !isPlay;
-              setRadioValue(newPlay ? 'play' : '');
-              setIsPlay(newPlay);
-            }}
-          >
-            {isPlay ? <PauseOutlined /> : <CaretRightOutlined />}
-          </Radio.Button>
-          <Radio.Button
-            value="stepForward"
-            disabled={isPlay}
-            onClick={() => {
-              if (startTime && endTime) {
-                const newStartTime = endTime.clone() as Dayjs;
-                const newEndTime = (endTime as Dayjs).add(differenceMs);
+            defaultValue={defaultValue}
+            value={innerValue || defaultInternalValue}
+            onChange={datePickerChange}
+            showTime={true}
+            className={`${prefix}-range-picker`}
+            size={size}
+            bordered={false}
+            style={{ paddingLeft: 4 }}
+            // 透传 props 到 antd Ranger
+            {...omit(rest, 'value', 'onChange')}
+          />
+        )}
+      </div>
+      <Radio.Group
+        value={isPlay ? 'play' : ''}
+        className={`${prefix}-playback-control`}
+        buttonStyle="solid"
+      >
+        <Radio.Button
+          value="stepBack"
+          style={{ paddingInline: 8 }}
+          onClick={() => {
+            if (isPlay) {
+              setIsPlay(false);
+            }
 
-                if (newEndTime.isBefore(new Date())) {
-                  datePickerChange([newStartTime, newEndTime]);
-                }
+            if (startTime && endTime) {
+              const newStartTime = (startTime as Dayjs).subtract(differenceMs);
+              const newEndTime = startTime?.clone() as Dayjs;
+
+              rangeChange([newStartTime, newEndTime]);
+            }
+          }}
+        >
+          <LeftOutlined />
+        </Radio.Button>
+        <Radio.Button
+          value={'play'}
+          style={{ paddingInline: 8 }}
+          onClick={() => {
+            // getNow();
+            const newPlay = !isPlay;
+            setIsPlay(newPlay);
+          }}
+        >
+          {isPlay ? <PauseOutlined /> : <CaretRightOutlined />}
+        </Radio.Button>
+        <Radio.Button
+          value="stepForward"
+          style={{ paddingInline: 8 }}
+          disabled={isPlay}
+          onClick={() => {
+            if (startTime && endTime) {
+              const newStartTime = endTime.clone() as Dayjs;
+              const newEndTime = (endTime as Dayjs).add(differenceMs);
+
+              if (newEndTime.isBefore(new Date())) {
+                rangeChange([newStartTime, newEndTime]);
+              } else {
+                setIsPlay(true);
               }
-            }}
-          >
-            <DoubleRightOutlined />
-          </Radio.Button>
-        </Radio.Group>
-      )}
+            }
+          }}
+        >
+          <RightOutlined />
+        </Radio.Button>
+      </Radio.Group>
     </Space>
   );
 };

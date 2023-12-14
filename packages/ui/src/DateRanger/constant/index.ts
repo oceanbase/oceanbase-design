@@ -1,4 +1,3 @@
-// @ts-nocheck
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import quarterOfYear from 'dayjs/plugin/quarterOfYear';
@@ -16,10 +15,13 @@ const MONTH_UNIT = 'month';
 const QUARTER_UNIT = 'quarter';
 const YEAR_UNIT = 'year';
 
-export const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
+export const YEAR_DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm';
+export const DATE_TIME_FORMAT = 'MM-DD HH:mm';
 
 export const NEAR_1_MINUTES: RangeOption = {
-  name: '近 1 分钟',
+  label: '近 1 分钟',
+  rangeLabel: '1m',
+  name: 'NEAR_1_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().subtract(1, 'minute'),
     current.clone(),
@@ -27,7 +29,9 @@ export const NEAR_1_MINUTES: RangeOption = {
 };
 
 export const NEAR_5_MINUTES: RangeOption = {
-  name: '近 5 分钟',
+  label: '近 5 分钟',
+  rangeLabel: '5m',
+  name: 'NEAR_5_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().subtract(5, 'minute'),
     current.clone(),
@@ -35,7 +39,9 @@ export const NEAR_5_MINUTES: RangeOption = {
 };
 
 export const NEAR_10_MINUTES: RangeOption = {
-  name: '近 10 分钟',
+  label: '近 10 分钟',
+  rangeLabel: '10m',
+  name: 'NEAR_10_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().subtract(10, 'minute'),
     current.clone(),
@@ -43,7 +49,9 @@ export const NEAR_10_MINUTES: RangeOption = {
 };
 
 export const NEAR_20_MINUTES: RangeOption = {
-  name: '近 20 分钟',
+  label: '近 20 分钟',
+  rangeLabel: '20m',
+  name: 'NEAR_20_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().subtract(20, 'minute'),
     current.clone(),
@@ -51,7 +59,9 @@ export const NEAR_20_MINUTES: RangeOption = {
 };
 
 export const NEAR_30_MINUTES: RangeOption = {
-  name: '近 30 分钟',
+  label: '近 30 分钟',
+  rangeLabel: '30m',
+  name: 'NEAR_30_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().subtract(30, 'minute'),
     current.clone(),
@@ -59,7 +69,9 @@ export const NEAR_30_MINUTES: RangeOption = {
 };
 
 export const NEAR_1_HOURS: RangeOption = {
-  name: '近 1 小时',
+  label: '近 1 小时',
+  rangeLabel: '1h',
+  name: 'NEAR_1_HOURS',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().subtract(1, 'hour'),
     current.clone(),
@@ -67,8 +79,9 @@ export const NEAR_1_HOURS: RangeOption = {
 };
 
 export const NEAR_2_HOURS: RangeOption = {
-  name: '近 2 小时',
-  range: () => [moment().subtract(2, 'hour'), moment()],
+  label: '近 2 小时',
+  rangeLabel: '2h',
+  name: 'NEAR_2_HOURS',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().subtract(2, 'hour'),
     current.clone(),
@@ -76,7 +89,9 @@ export const NEAR_2_HOURS: RangeOption = {
 };
 
 export const NEAR_3_HOURS: RangeOption = {
-  name: '近 3 小时',
+  label: '近 3 小时',
+  rangeLabel: '3h',
+  name: 'NEAR_3_HOURS',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().subtract(3, 'hour'),
     current.clone(),
@@ -84,7 +99,9 @@ export const NEAR_3_HOURS: RangeOption = {
 };
 
 export const NEAR_6_HOURS: RangeOption = {
-  name: '近 6 小时',
+  label: '近 6 小时',
+  rangeLabel: '6h',
+  name: 'NEAR_6_HOURS',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().subtract(6, 'hour'),
     current.clone(),
@@ -92,7 +109,9 @@ export const NEAR_6_HOURS: RangeOption = {
 };
 
 export const TODAY: RangeOption = {
-  name: '今天',
+  label: '今天',
+  rangeLabel: '1d',
+  name: 'TODAY',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(DAY_UNIT),
     current.clone().endOf(DAY_UNIT),
@@ -101,22 +120,18 @@ export const TODAY: RangeOption = {
 
 export const YESTERDAY: RangeOption = {
   name: '昨天',
+  rangeLabel: '1d',
+  name: 'YESTERDAY',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(DAY_UNIT).add(-1, DAY_UNIT),
     current.clone().endOf(DAY_UNIT).add(-1, DAY_UNIT),
   ],
 };
 
-export const TOMORROW: RangeOption = {
-  name: '明天',
-  range: (current: Moment | Dayjs = moment()) => [
-    current.clone().startOf(DAY_UNIT).add(1, DAY_UNIT),
-    current.clone().endOf(DAY_UNIT).add(1, DAY_UNIT),
-  ],
-};
-
 export const THIS_WEEK: RangeOption = {
-  name: '本周',
+  label: '近一周',
+  rangeLabel: 'week',
+  name: 'THIS_WEEK',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(WEEK_UNIT),
     current.clone().endOf(WEEK_UNIT),
@@ -124,23 +139,19 @@ export const THIS_WEEK: RangeOption = {
 };
 
 export const LAST_WEEK: RangeOption = {
-  name: '上周',
+  label: '上周',
+  rangeLabel: 'last week',
+  name: 'LAST_WEEK',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(WEEK_UNIT).add(-1, WEEK_UNIT),
     current.clone().endOf(WEEK_UNIT).add(-1, WEEK_UNIT),
   ],
 };
 
-export const NEXT_WEEK: RangeOption = {
-  name: '下周',
-  range: (current: Moment | Dayjs = moment()) => [
-    current.clone().startOf(WEEK_UNIT).add(1, WEEK_UNIT),
-    current.clone().endOf(WEEK_UNIT).add(1, WEEK_UNIT),
-  ],
-};
-
 export const THIS_MONTH: RangeOption = {
-  name: '本月',
+  label: '本月',
+  rangeLabel: '1mo',
+  name: 'THIS_MONTH',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(MONTH_UNIT),
     current.clone().endOf(MONTH_UNIT),
@@ -148,23 +159,19 @@ export const THIS_MONTH: RangeOption = {
 };
 
 export const LAST_MONTH: RangeOption = {
-  name: '上月',
+  label: '上月',
+  rangeLabel: '1mo',
+  name: 'LAST_MONTH',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(MONTH_UNIT).add(-1, MONTH_UNIT),
     current.clone().endOf(MONTH_UNIT).add(-1, MONTH_UNIT),
   ],
 };
 
-export const NEXT_MONTH: RangeOption = {
-  name: '下月',
-  range: (current: Moment | Dayjs = moment()) => [
-    current.clone().startOf(MONTH_UNIT).add(1, MONTH_UNIT),
-    current.clone().endOf(MONTH_UNIT).add(1, MONTH_UNIT),
-  ],
-};
-
 export const THIS_QUARTER: RangeOption = {
-  name: '本季度',
+  label: '本季度',
+  rangeLabel: '1q',
+  name: 'THIS_QUARTER',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(QUARTER_UNIT),
     current.clone().endOf(QUARTER_UNIT),
@@ -172,7 +179,9 @@ export const THIS_QUARTER: RangeOption = {
 };
 
 export const LAST_QUARTER: RangeOption = {
-  name: '上季度',
+  label: '上季度',
+  rangeLabel: '1q',
+  name: 'LAST_QUARTER',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(QUARTER_UNIT).add(-1, QUARTER_UNIT),
     current.clone().endOf(QUARTER_UNIT).add(-1, QUARTER_UNIT),
@@ -180,7 +189,9 @@ export const LAST_QUARTER: RangeOption = {
 };
 
 export const NEXT_QUARTER: RangeOption = {
-  name: '下季度',
+  label: '下季度',
+  rangeLabel: '1q',
+  name: 'NEXT_QUARTER',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(QUARTER_UNIT).add(1, QUARTER_UNIT),
     current.clone().endOf(QUARTER_UNIT).add(1, QUARTER_UNIT),
@@ -188,7 +199,9 @@ export const NEXT_QUARTER: RangeOption = {
 };
 
 export const THIS_YEAR: RangeOption = {
-  name: '今年',
+  label: '今年',
+  rangeLabel: '1y',
+  name: 'THIS_YEAR',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(YEAR_UNIT),
     current.clone().endOf(YEAR_UNIT),
@@ -196,7 +209,9 @@ export const THIS_YEAR: RangeOption = {
 };
 
 export const LAST_YEAR: RangeOption = {
-  name: '去年',
+  label: '去年',
+  rangeLabel: '1y',
+  name: 'LAST_YEAR',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(YEAR_UNIT).add(-1, YEAR_UNIT),
     current.clone().endOf(YEAR_UNIT).add(-1, YEAR_UNIT),
@@ -204,7 +219,9 @@ export const LAST_YEAR: RangeOption = {
 };
 
 export const NEXT_YEAR: RangeOption = {
-  name: '明年',
+  label: '明年',
+  rangeLabel: '1y',
+  name: 'NEXT_YEAR',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(YEAR_UNIT).add(1, YEAR_UNIT),
     current.clone().endOf(YEAR_UNIT).add(1, YEAR_UNIT),
