@@ -11,6 +11,12 @@ export type { AlertProps } from './alert';
 export { default as Button } from './button';
 export type { ButtonProps } from './button';
 
+export { default as Space } from './space';
+export type { SpaceProps, SpaceSize } from './space';
+
+export { Col, Row } from './grid';
+export type { ColProps, RowProps, ColSize } from './grid';
+
 export { default as Typography } from './typography';
 export type { TypographyProps } from './typography';
 
@@ -67,6 +73,9 @@ export type { SpinProps } from './spin';
 
 export { default as Badge } from './badge';
 export type { BadgeProps } from './badge';
+
+export { default as Lottie } from './lottie';
+export type { LottieProps, LottieRef } from './lottie';
 
 export { default as theme } from './theme';
 

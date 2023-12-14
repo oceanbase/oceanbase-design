@@ -40,37 +40,17 @@ const App: React.FC = () => (
       </Button>
     </Space>
     <Space>
-      <Button danger>Danger Default</Button>
-      <Button danger disabled>
+      <Button type="primary" danger>
+        Danger Default
+      </Button>
+      <Button type="primary" danger disabled>
         Danger Default(disabled)
       </Button>
     </Space>
     <Space>
-      <Button danger type="text">
-        Danger Text
-      </Button>
-      <Button danger type="text" disabled>
-        Danger Text(disabled)
-      </Button>
-    </Space>
-    <Space>
-      <Button type="link" danger>
-        Danger Link
-      </Button>
-      <Button type="link" danger disabled>
-        Danger Link(disabled)
-      </Button>
-    </Space>
-    <Space
-      style={{
-        backgroundColor: 'rgb(190, 200, 200)',
-        padding: 16,
-        borderRadius: 6,
-      }}
-    >
-      <Button ghost>Ghost</Button>
-      <Button ghost disabled>
-        Ghost(disabled)
+      <Button danger>Danger Default</Button>
+      <Button danger disabled>
+        Danger Default(disabled)
       </Button>
     </Space>
   </Space>

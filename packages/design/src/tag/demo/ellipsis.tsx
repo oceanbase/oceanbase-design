@@ -9,6 +9,23 @@ const App: React.FC = () => (
       ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for
       excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.
     </Tag>
+    <Tag
+      ellipsis={{
+        tooltip: {
+          placement: 'topLeft',
+          title: 'Custom Title',
+        },
+      }}
+      style={{
+        width: 200,
+        marginTop: 16,
+      }}
+    >
+      Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for
+      excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show
+      ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for
+      excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.
+    </Tag>
   </>
 );
 

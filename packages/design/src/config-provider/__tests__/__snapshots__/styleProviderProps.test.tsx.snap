@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfigProvider styleProviderProps ConfigProvider styleProviderProps.hashPriority 1`] = `
+<div
+  class="ant-app"
+>
+  <div />
+  <div
+    class="ant-app"
+  >
+    <div />
+  </div>
+  <div
+    class="ant-app"
+  >
+    <div />
+  </div>
+</div>
+`;

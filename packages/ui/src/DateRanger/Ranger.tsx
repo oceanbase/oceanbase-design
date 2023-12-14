@@ -33,7 +33,8 @@ export type RangeDateValue = {
   range: RangeValue;
 };
 
-interface RangerProps extends Omit<RangePickerProps, 'mode' | 'picker' | 'value' | 'defaultValue'> {
+export interface DateRangerProps
+  extends Omit<RangePickerProps, 'mode' | 'picker' | 'value' | 'defaultValue'> {
   // 数据相关
   selects?: RangeOption[];
   defaultQuickValue?: string;
@@ -51,7 +52,7 @@ interface RangerProps extends Omit<RangePickerProps, 'mode' | 'picker' | 'value'
 
 const prefix = getPrefix('date-ranger');
 
-const Ranger = (props: RangerProps) => {
+const Ranger = (props: DateRangerProps) => {
   const {
     selects = [NEAR_1_MINUTES, NEAR_30_MINUTES, NEAR_1_HOURS],
     value,
