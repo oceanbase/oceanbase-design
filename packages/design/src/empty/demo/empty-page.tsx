@@ -44,7 +44,6 @@ export default () => {
     >
       <PageContainer ghost={true} header="XXXXX">
         <Empty
-          iconType="obproxy"
           mode="page"
           title="Your description title"
           description="Your description title content"
