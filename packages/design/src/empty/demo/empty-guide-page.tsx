@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Empty, Button, Steps, message } from '@oceanbase/design';
+import React from 'react';
+import { Empty, Button, Steps } from '@oceanbase/design';
+import EmptyIcon from '../icon/EmptyIcon';
 
 export default () => {
   const description = 'This is a description.';
@@ -22,40 +23,14 @@ export default () => {
     },
   ];
 
-  const [current, setCurrent] = useState(0);
-
-  const next = () => {
-    setCurrent(current + 1);
-  };
-
-  const prev = () => {
-    setCurrent(current - 1);
-  };
-
   return (
     <Empty
       mode="page"
-      iconType="tenant"
+      image={<EmptyIcon />}
       title="Your description title"
-      description={<Steps current={current} items={steps} />}
+      description={<Steps current={0} items={steps} />}
     >
-      <div style={{ marginTop: 24 }}>
-        {current < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()}>
-            Next
-          </Button>
-        )}
-        {current === steps.length - 1 && (
-          <Button type="primary" onClick={() => message.success('Processing complete!')}>
-            Done
-          </Button>
-        )}
-        {current > 0 && (
-          <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-            Previous
-          </Button>
-        )}
-      </div>
+      <Button type="primary">操作项</Button>
     </Empty>
   );
 };

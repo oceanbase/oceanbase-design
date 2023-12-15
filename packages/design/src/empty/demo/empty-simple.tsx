@@ -1,5 +1,6 @@
 import React from 'react';
 import { Empty } from '@oceanbase/design';
+
 export default () => {
-  return <Empty iconType="empty" />;
+  return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
 };

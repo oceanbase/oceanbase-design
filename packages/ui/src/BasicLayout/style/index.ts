@@ -236,6 +236,9 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               },
               [`${antCls}-menu-submenu-selected > ${antCls}-menu-submenu-title`]: {
                 color: `${colorPrimary} !important`,
+                [`${antCls}-typography`]: {
+                  color: `${colorPrimary} !important`,
+                },
               },
               [`${antCls}-divider`]: {
                 margin: '0 0 16px 0',

@@ -5,17 +5,21 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 export type EmptyToken = FullToken<'Empty'>;
 
 export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSSObject => {
-  const { componentCls, colorTextTertiary, colorBgLayout, colorFill, colorText } = token;
+  const {
+    antCls,
+    componentCls,
+    colorTextTertiary,
+    colorBgLayout,
+    colorFill,
+    colorText,
+    colorTextSecondary,
+  } = token;
 
   return {
     [`${componentCls}`]: {
       padding: '32px 0',
       [`${componentCls}-image`]: {
-        height: '160px',
-        marginBottom: '24px',
-        [`.anticon`]: {
-          fontSize: '160px',
-        },
+        height: 'auto',
       },
       [`${componentCls}-description`]: {
         [`${componentCls}-title`]: {
@@ -35,6 +39,7 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
           color: colorTextTertiary,
           letterSpacing: 0,
           textAlign: 'center',
+          marginTop: '24px',
         },
         [`${componentCls}-extra`]: {
           textAlign: 'center',
@@ -44,36 +49,36 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
       [`${componentCls}-footer`]: {
         marginTop: '24px!important',
       },
-      ['.ant-steps-horizontal']: {
+      [`${antCls}-steps`]: {
         padding: '24px',
         backgroundColor: colorBgLayout,
         borderRadius: '8px',
-        ['.ant-steps-item-container']: {
-          ['.ant-steps-item-icon']: {
+        [`${antCls}-steps-item-container`]: {
+          [`${antCls}-steps-item-icon`]: {
+            height: '26px',
+            width: '26px',
+            lineHeight: '26px',
             backgroundColor: colorFill,
             borderColor: colorFill,
+            [`${antCls}-steps-icon`]: {
+              color: colorTextSecondary,
+              fontSize: '14px',
+            },
           },
-          ['.ant-steps-item-content']: {
-            ['.ant-steps-item-title']: {
+
+          [`${antCls}-steps-item-content`]: {
+            [`${antCls}-steps-item-title`]: {
               color: colorText,
               lineHeight: '24px',
+              fontSize: '14px',
             },
             ['.ant-steps-item-description']: {
               color: colorTextTertiary,
               lineHeight: '20px',
+              fontSize: '12px',
+              marginTop: '8px',
             },
           },
-        },
-      },
-    },
-
-    [`${componentCls}-small`]: {
-      padding: '48px 0',
-      [`${componentCls}-image`]: {
-        height: '54px',
-        marginBottom: '8px',
-        [`.anticon`]: {
-          fontSize: '54px',
         },
       },
     },

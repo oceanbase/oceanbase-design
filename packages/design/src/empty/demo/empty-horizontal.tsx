@@ -1,12 +1,12 @@
 import React from 'react';
 import { Empty, Button } from '@oceanbase/design';
-
+import WellcomeIcon from '../icon/WellcomeIcon';
 export default () => {
   return (
     <Empty
       mode="page"
       layout="horizontal"
-      iconType="wellcome"
+      image={<WellcomeIcon />}
       title="欢迎体验 OB 智能诊断"
       description={
         <>
