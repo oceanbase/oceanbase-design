@@ -1,10 +1,11 @@
 import React from 'react';
 import { Result, Button } from '@oceanbase/design';
+import FailedIcon from '../icon/FailedIcon';
 
 export default () => {
   return (
     <Result
-      resultStatus="failed"
+      icon={<FailedIcon />}
       title="任务创建失败"
       subTitle={
         <div>

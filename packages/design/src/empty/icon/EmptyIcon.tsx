@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '@oceanbase/icons';
 import type { CustomIconComponentProps } from '@oceanbase/icons/es/components/Icon';
 
-const WellcomeSvg = () => (
+const EmptySvg = () => (
   <svg width="160px" height="160px" viewBox="0 0 160 160" version="1.1">
     <defs>
       <circle id="path-1" cx="33.15" cy="33.15" r="33.15"></circle>
@@ -179,8 +179,8 @@ const WellcomeSvg = () => (
   </svg>
 );
 
-const WellcomeIcon: React.FC = (props: Partial<CustomIconComponentProps>) => (
-  <Icon component={WellcomeSvg} {...props} />
+const EmptyIcon: React.FC = (props: Partial<CustomIconComponentProps>) => (
+  <Icon component={EmptySvg} {...props} />
 );
 
-export default WellcomeIcon;
+export default EmptyIcon;

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Result, Button } from '@oceanbase/design';
+import HealthyIcon from '../icon/HealthyIcon';
 
 export default () => {
   return (
     <Result
-      resultStatus="success"
+      icon={<HealthyIcon />}
       title="任务创建成功"
       subTitle={
         <div>

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Result, Button } from '@oceanbase/design';
+import SuccessIcon from '../icon/SuccessIcon';
 
 export default () => {
   return (
     <Result
-      resultStatus="success"
+      icon={<SuccessIcon />}
       title="任务创建成功"
       subTitle={
         <div>
