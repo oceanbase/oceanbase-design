@@ -6,16 +6,19 @@ export type ButtonToken = FullToken<'Button'>;
 export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) => {
   const { componentCls } = token;
   return {
+    [`${componentCls}`]: {
+      // remove box-shadow for button
+      boxShadow: 'none !important',
+    },
     [`${componentCls}${componentCls}-primary:not([disabled]):not(${componentCls}-disabled):not(${componentCls}-dangerous):not(${componentCls}-background-ghost)`]:
       {
-        background: 'linear-gradient(-45deg, #002bff 0%, #0080ff 100%)',
+        background: 'linear-gradient(-59deg, #002BFF 0%, #0080FF 100%)',
         border: 'none',
-        boxShadow: 'none',
         ['&:hover']: {
-          background: 'linear-gradient(-45deg, #002bff 60%, #0080ff 100%)',
+          background: 'linear-gradient(120deg, #1AA0FF 0%, #1A53FF 100%)',
         },
         ['&:active']: {
-          background: 'linear-gradient(-45deg, #002bff 90%, #0080ff 100%)',
+          background: 'linear-gradient(120deg, #0060E6 0%, #0013E6 100%)',
         },
       },
   };

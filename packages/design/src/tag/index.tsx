@@ -1,49 +1,56 @@
 import React, { useContext } from 'react';
-import type { ReactElement } from 'react';
 import { Tag as AntTag } from 'antd';
 import type { TagProps as AntTagProps } from 'antd/es/tag';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import Typography from '../typography';
 import useStyle from './style';
+import { getEllipsisConfig } from '../_util/getEllipsisConfig';
+import type { Ellipsis } from '../_util/getEllipsisConfig';
+import { TooltipPlacement } from '../tooltip';
 
 export * from 'antd/es/tag';
 
 export interface TagProps extends AntTagProps {
-  ellipsis?: boolean;
+  ellipsis?: Ellipsis;
 }
 
 const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
-  ({ prefixCls: customizePrefixCls, className, ellipsis = true, ...restProps }, ref) => {
+  (
+    {
+      children,
+      prefixCls: customizePrefixCls,
+      className,
+      ellipsis = {
+        tooltip: {
+          title: children,
+        },
+      },
+      ...restProps
+    },
+    ref
+  ) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('tag', customizePrefixCls);
     const { wrapSSR } = useStyle(prefixCls);
 
+    const ellipsisConfig = getEllipsisConfig(ellipsis, children);
+
     const tagCls = classNames(
       {
-        [`${prefixCls}-ellipsis`]: ellipsis,
+        [`${prefixCls}-ellipsis`]: !!ellipsisConfig,
       },
       className
     );
-    const childrenType = (restProps.children as ReactElement)?.type as any;
-    const { ellipsis: defalutEllipsis, children: defaultChildren } =
-      (restProps.children as ReactElement)?.props || {};
 
-    const ellipsisConfig =
-      typeof defalutEllipsis === 'object'
-        ? defalutEllipsis
-        : {
-            tooltip: childrenType?.__ANT_TOOLTIP ? false : defaultChildren || restProps.children,
-          };
-
-    return ellipsis ? (
-      wrapSSR(
-        <Typography.Text ellipsis={{ ...ellipsisConfig }}>
-          <AntTag ref={ref} prefixCls={customizePrefixCls} className={tagCls} {...restProps} />
-        </Typography.Text>
-      )
-    ) : (
-      <AntTag ref={ref} prefixCls={customizePrefixCls} className={tagCls} {...restProps} />
+    return wrapSSR(
+      <AntTag ref={ref} prefixCls={customizePrefixCls} className={tagCls} {...restProps}>
+        {ellipsisConfig ? (
+          <Typography.Text ellipsis={ellipsisConfig}>{children}</Typography.Text>
+        ) : (
+          children
+        )}
+      </AntTag>
     );
   }
 );

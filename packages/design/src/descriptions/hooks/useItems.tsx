@@ -2,8 +2,9 @@ import React, { isValidElement } from 'react';
 import warning from 'antd/es/_util/warning';
 import toArray from 'rc-util/lib/Children/toArray';
 import type { TooltipPlacement } from 'antd/es/tooltip';
-import Typography, { TextProps } from '../../typography';
+import Typography from '../../typography';
 import type { DescriptionsItemType } from '..';
+import { getEllipsisConfig } from '../../_util/getEllipsisConfig';
 
 // Convert children into items
 const children2Items = (children?: React.ReactNode) => {
@@ -24,7 +25,6 @@ const children2Items = (children?: React.ReactNode) => {
 
 function convertItem(props?: DescriptionsItemType, bordered?: boolean) {
   const { children: itemChildren, contentProps, ...restItemProps } = props;
-  const itemChildrenType = (itemChildren as React.ReactElement)?.type as any;
   const defaultEllipsis = {
     tooltip: {
       placement: 'topLeft' as TooltipPlacement,
@@ -38,30 +38,7 @@ function convertItem(props?: DescriptionsItemType, bordered?: boolean) {
     children: bordered ? (
       itemChildren
     ) : (
-      <Typography.Text
-        {...restContentProps}
-        ellipsis={
-          typeof ellipsis === 'object'
-            ? {
-                ...ellipsis,
-                tooltip:
-                  // 如果目标元素已经被 Tooltip 包裹，则去掉默认的 Tooltip，避免有两个 Tooltip
-                  itemChildrenType?.__ANT_TOOLTIP
-                    ? undefined
-                    : {
-                        ...defaultEllipsis.tooltip,
-                        // TooltipProps
-                        ...(typeof ellipsis.tooltip === 'object' &&
-                        !isValidElement(ellipsis.tooltip)
-                          ? ellipsis.tooltip
-                          : {
-                              title: ellipsis.tooltip,
-                            }),
-                      },
-              }
-            : ellipsis
-        }
-      >
+      <Typography.Text {...restContentProps} ellipsis={getEllipsisConfig(ellipsis, itemChildren)}>
         {itemChildren}
       </Typography.Text>
     ),

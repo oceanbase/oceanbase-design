@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/ui",
-  "version": "0.2.32",
+  "version": "0.2.33",
   "description": "The UI library based on OceanBase Design",
   "keywords": [
     "oceanbase",

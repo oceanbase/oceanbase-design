@@ -25,6 +25,19 @@ nav:
 
 ## 与路由搭配使用
 
+### 选中菜单和路由联动
+
+- 为了实现选中菜单和当前路由之间的联动，需要设置 BasicLayout 的 `location` 属性，`umi` 的示例如下:
+
+```tsx
+import { useLocation } from 'umi';
+const location = useLocation();
+
+<BasicLayout location={location} />;
+```
+
+### 路由跳转
+
 由于 BasicLayout 左侧和顶部导航的跳转依赖路由能力，需要通过 ConfigProvider 全局注入 `navigate` 函数才会生效。
 
 - 对于 `umi v4`:
@@ -70,7 +83,8 @@ const App = () => {
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
-| banner | 顶部公告 | ReactNode | - | 0.10.8 |
+| location | location 对象，用于设置选中菜单和当前路由之间的联动 | Location | - | - |
+| banner | 顶部公告 | ReactNode | - |  |
 | iconUrl | 产品 icon 的 URL 地址，用于设置子侧边栏的 icon | string | - | - |
 | logoUrl | 产品 logo 的 URL 地址，用于 `关于` 弹窗中的展示，通常与登录页的 logo 一致 | string | - | - |
 | simpleLogoUrl | 产品简版 logo 的 URL 地址，用于左侧菜单导航的展示 | string | - | - |
