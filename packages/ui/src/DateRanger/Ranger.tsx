@@ -1,8 +1,8 @@
-import { DatePicker, DatePickerProps, Dropdown, Radio, Space } from '@oceanbase/design';
+import { Button, DatePicker, DatePickerProps, Dropdown, Radio, Space } from '@oceanbase/design';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
-import { isNil, noop, omit } from 'lodash';
+import { findIndex, isNil, noop, omit } from 'lodash';
 import type { Moment } from 'moment';
 import moment from 'moment';
 import classNames from 'classnames';
@@ -13,16 +13,31 @@ import { getPrefix } from '../_util';
 import {
   CUSTOMIZE,
   DATE_TIME_FORMAT,
+  LAST_QUARTER,
   NEAR_1_HOURS,
   NEAR_1_MINUTES,
   NEAR_30_MINUTES,
+  NEAR_3_HOURS,
+  NEAR_6_HOURS,
+  TODAY,
+  YESTERDAY,
+  THIS_WEEK,
+  THIS_QUARTER,
+  THIS_YEAR,
   NEAR_TIME_LIST,
   YEAR_DATE_TIME_FORMAT,
+  THIS_MONTH,
 } from './constant';
 import './index.less';
 import zhCN from './locale/zh-CN';
 import type { RangeOption } from './typing';
-import { LeftOutlined, PauseOutlined, CaretRightOutlined, RightOutlined } from '@oceanbase/icons';
+import {
+  LeftOutlined,
+  PauseOutlined,
+  CaretRightOutlined,
+  RightOutlined,
+  ZoomOutOutlined,
+} from '@oceanbase/icons';
 
 export type RangeName = 'customize' | string;
 
@@ -39,8 +54,10 @@ export interface DateRangerProps
   selects?: RangeOption[];
   defaultQuickValue?: string;
   // ui 相关
-  mode?: 'default' | 'mini';
-  quickType?: 'select' | 'dropdown';
+  hasRewind?: boolean;
+  hasPlay?: boolean;
+  hasForward?: boolean;
+  hasZoomOut?: boolean;
   /** 是否只允许选择过去时间 */
   pastOnly?: boolean;
   //固定rangeName
@@ -54,12 +71,26 @@ const prefix = getPrefix('date-ranger');
 
 const Ranger = (props: DateRangerProps) => {
   const {
-    selects = [NEAR_1_MINUTES, NEAR_30_MINUTES, NEAR_1_HOURS],
+    selects = [
+      NEAR_1_MINUTES,
+      NEAR_30_MINUTES,
+      NEAR_1_HOURS,
+      NEAR_3_HOURS,
+      NEAR_6_HOURS,
+      TODAY,
+      THIS_WEEK,
+      THIS_MONTH,
+      THIS_QUARTER,
+      LAST_QUARTER,
+      THIS_YEAR,
+    ],
     value,
     defaultValue,
     defaultQuickValue,
-    mode = 'default',
-    quickType = 'select',
+    hasRewind = true,
+    hasPlay = true,
+    hasForward = true,
+    hasZoomOut = true,
     pastOnly = false,
     onChange = noop,
     disabledDate,
@@ -144,6 +175,79 @@ const Ranger = (props: DateRangerProps) => {
   const startTime = innerValue?.[0];
   const endTime = innerValue?.[1];
   const differenceMs = endTime?.diff(startTime as any);
+  const differenceSeconds = endTime?.diff(startTime as any, 'seconds');
+  const differenceMinutes = endTime?.diff(startTime as any, 'minutes');
+  const differenceHours = endTime?.diff(startTime as any, 'hours');
+  const differenceDays = endTime?.diff(startTime as any, 'days');
+  const differenceWeeks = endTime?.diff(startTime as any, 'weeks');
+  const differenceMonths = endTime?.diff(startTime as any, 'months');
+  const differenceQuarters = endTime?.diff(startTime as any, 'quarters');
+  const differenceYears = endTime?.diff(startTime as any, 'years');
+
+  const getCustomizeRangeLabel = () => {
+    if (differenceYears > 0) {
+      return `${differenceYears}y`;
+    }
+
+    if (differenceQuarters > 0) {
+      return `${differenceQuarters}q`;
+    }
+
+    if (differenceMonths > 0) {
+      return `${differenceMonths}mon`;
+    }
+
+    if (differenceWeeks > 0) {
+      return `${differenceWeeks}w`;
+    }
+
+    if (differenceDays > 0) {
+      return `${differenceDays}d`;
+    }
+
+    if (differenceHours > 0) {
+      return `${differenceHours}h`;
+    }
+
+    if (differenceMinutes > 0) {
+      return `${differenceMinutes}m`;
+    }
+
+    return `${differenceSeconds}s`;
+  };
+
+  const getCustomizeLabel = () => {
+    if (differenceYears > 0) {
+      return `近 ${differenceYears} 年`;
+    }
+
+    if (differenceQuarters > 0) {
+      return `近 ${differenceQuarters} 季度`;
+    }
+
+    if (differenceMonths > 0) {
+      return `近 ${differenceMonths} 月`;
+    }
+
+    if (differenceWeeks > 0) {
+      return `近 ${differenceWeeks} 周`;
+    }
+
+    if (differenceDays > 0) {
+      return `近 ${differenceDays} 天`;
+    }
+
+    if (differenceHours > 0) {
+      return `近 ${differenceHours} 时`;
+    }
+
+    if (differenceMinutes > 0) {
+      return `近 ${differenceMinutes} 分`;
+    }
+
+    return `近 ${differenceSeconds} 秒`;
+  };
+
   const tagStyle = {
     backgroundColor: 'rgb(226, 229, 237)',
     marginRight: 8,
@@ -162,7 +266,8 @@ const Ranger = (props: DateRangerProps) => {
         rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
       }
       if (rangeName === CUSTOMIZE) {
-        rangeChange([startTime, isMoment ? moment() : dayjs()] as RangeValue);
+        const eTime = isMoment ? moment() : dayjs();
+        rangeChange([(eTime as Dayjs)?.subtract(differenceMs), eTime] as RangeValue);
       }
     },
     isPlay ? 1000 : null
@@ -170,20 +275,33 @@ const Ranger = (props: DateRangerProps) => {
 
   const rangeLabel =
     rangeName === CUSTOMIZE
-      ? '自定义'
+      ? getCustomizeRangeLabel()
       : selects.find(_item => _item.name === rangeName)?.rangeLabel;
 
   const label =
-    rangeName === CUSTOMIZE ? '自定义时间' : selects.find(_item => _item.name === rangeName)?.label;
+    rangeName === CUSTOMIZE
+      ? getCustomizeLabel()
+      : selects.find(_item => _item.name === rangeName)?.label;
 
-  const isTerse = isPlay && rangeName !== CUSTOMIZE;
+  const isTerse = isPlay;
 
   const thisYear = new Date().getFullYear();
   const isThisYear = startTime?.year() === thisYear && endTime?.year() === thisYear;
+  const rangeNameIndex = findIndex(selects, item => item.name === rangeName);
+
+  const nextRangeItem =
+    rangeNameIndex === -1
+      ? selects.find(item => {
+          const [s, e] = item.range(isMoment ? moment() : dayjs()) as RangeValue;
+          // 自定义模式下，对比毫秒来选出比当前范围大一级的 rangeItem
+          const diffMs = e.diff(s as any);
+          return diffMs > differenceMs;
+        })
+      : selects[rangeNameIndex + 1];
 
   return (
     <Space size={4} className={classNames(prefix)} style={rest.style}>
-      <div style={{ border: '1px solid #d9d9d9', borderRadius: 4 }} size={0}>
+      <div style={{ border: '1px solid #d9d9d9', borderRadius: 4 }}>
         <Dropdown
           trigger="click"
           menu={{
@@ -211,9 +329,7 @@ const Ranger = (props: DateRangerProps) => {
                       }
                     }}
                   >
-                    <span style={tagStyle}>
-                      {item.name === CUSTOMIZE ? '自定义' : item.rangeLabel}
-                    </span>
+                    <span style={tagStyle}>{item.rangeLabel}</span>
                     {locale[item.label] || item.label}
                   </span>
                 ),
@@ -239,13 +355,8 @@ const Ranger = (props: DateRangerProps) => {
           <DatePicker.RangePicker
             disabledDate={pastOnly ? disabledFuture : disabledDate}
             format={v => {
-              // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now),会传入最新的时间导致判断异常
-
-              const suffixFormat = rangeName === CUSTOMIZE ? ':ss' : '';
-
-              return isThisYear
-                ? v.format(DATE_TIME_FORMAT + suffixFormat)
-                : v.format(YEAR_DATE_TIME_FORMAT + suffixFormat);
+              // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
+              return isThisYear ? v.format(DATE_TIME_FORMAT) : v.format(YEAR_DATE_TIME_FORMAT);
             }}
             defaultValue={defaultValue}
             value={innerValue || defaultInternalValue}
@@ -265,55 +376,75 @@ const Ranger = (props: DateRangerProps) => {
         className={`${prefix}-playback-control`}
         buttonStyle="solid"
       >
-        <Radio.Button
-          value="stepBack"
-          style={{ paddingInline: 8 }}
-          onClick={() => {
-            if (isPlay) {
-              setIsPlay(false);
-            }
-
-            if (startTime && endTime) {
-              const newStartTime = (startTime as Dayjs).subtract(differenceMs);
-              const newEndTime = startTime?.clone() as Dayjs;
-
-              rangeChange([newStartTime, newEndTime]);
-            }
-          }}
-        >
-          <LeftOutlined />
-        </Radio.Button>
-        <Radio.Button
-          value={'play'}
-          style={{ paddingInline: 8 }}
-          onClick={() => {
-            // getNow();
-            const newPlay = !isPlay;
-            setIsPlay(newPlay);
-          }}
-        >
-          {isPlay ? <PauseOutlined /> : <CaretRightOutlined />}
-        </Radio.Button>
-        <Radio.Button
-          value="stepForward"
-          style={{ paddingInline: 8 }}
-          disabled={isPlay}
-          onClick={() => {
-            if (startTime && endTime) {
-              const newStartTime = endTime.clone() as Dayjs;
-              const newEndTime = (endTime as Dayjs).add(differenceMs);
-
-              if (newEndTime.isBefore(new Date())) {
-                rangeChange([newStartTime, newEndTime]);
-              } else {
-                setIsPlay(true);
+        {hasRewind && (
+          <Radio.Button
+            value="stepBack"
+            style={{ paddingInline: 8 }}
+            onClick={() => {
+              if (isPlay) {
+                setIsPlay(false);
               }
+
+              if (startTime && endTime) {
+                const newStartTime = (startTime as Dayjs).subtract(differenceMs);
+                const newEndTime = startTime?.clone() as Dayjs;
+
+                rangeChange([newStartTime, newEndTime]);
+              }
+            }}
+          >
+            <LeftOutlined />
+          </Radio.Button>
+        )}
+        {hasPlay && (
+          <Radio.Button
+            value={'play'}
+            style={{ paddingInline: 8 }}
+            onClick={() => {
+              // getNow();
+              const newPlay = !isPlay;
+              setIsPlay(newPlay);
+            }}
+          >
+            {isPlay ? <PauseOutlined /> : <CaretRightOutlined />}
+          </Radio.Button>
+        )}
+        {hasForward && (
+          <Radio.Button
+            value="stepForward"
+            style={{ paddingInline: 8 }}
+            disabled={isPlay}
+            onClick={() => {
+              if (startTime && endTime) {
+                const newStartTime = endTime.clone() as Dayjs;
+                const newEndTime = (endTime as Dayjs).add(differenceMs);
+
+                if (newEndTime.isBefore(new Date())) {
+                  rangeChange([newStartTime, newEndTime]);
+                } else {
+                  setIsPlay(true);
+                }
+              }
+            }}
+          >
+            <RightOutlined />
+          </Radio.Button>
+        )}
+      </Radio.Group>
+      {hasZoomOut && (
+        <Button
+          disabled={!nextRangeItem}
+          onClick={() => {
+            setIsPlay(true);
+            if (nextRangeItem) {
+              setRangeName(nextRangeItem.name);
+              rangeChange(nextRangeItem.range(isMoment ? moment() : dayjs()) as RangeValue);
+              return;
             }
           }}
-        >
-          <RightOutlined />
-        </Radio.Button>
-      </Radio.Group>
+          icon={<ZoomOutOutlined />}
+        />
+      )}
     </Space>
   );
 };

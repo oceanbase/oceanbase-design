@@ -119,7 +119,7 @@ export const TODAY: RangeOption = {
 };
 
 export const YESTERDAY: RangeOption = {
-  name: '昨天',
+  label: '昨天',
   rangeLabel: '1d',
   name: 'YESTERDAY',
   range: (current: Moment | Dayjs = moment()) => [

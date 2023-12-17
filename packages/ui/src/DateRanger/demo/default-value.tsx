@@ -5,6 +5,6 @@ import dayjs from 'dayjs';
 export default () => (
   <DateRanger
     defaultValue={[dayjs('2019/05/20'), dayjs('2019/06/20')]}
-    selects={[DateRanger.YESTERDAY, DateRanger.TODAY]}
+    selects={[DateRanger.YESTERDAY, DateRanger.TODAY, DateRanger.THIS_WEEK, DateRanger.THIS_MONTH]}
   />
 );
