@@ -129,9 +129,19 @@ export const YESTERDAY: RangeOption = {
   ],
 };
 
+export const LAST_3_DAYS: RangeOption = {
+  label: '近 3 天',
+  rangeLabel: '3d',
+  name: 'LAST_3_DAYS',
+  range: (current: Moment | Dayjs = moment()) => [
+    current.clone().subtract(3, 'days'),
+    current.clone(),
+  ],
+};
+
 export const THIS_WEEK: RangeOption = {
   label: '近一周',
-  rangeLabel: 'week',
+  rangeLabel: '1w',
   name: 'THIS_WEEK',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(WEEK_UNIT),
@@ -169,35 +179,35 @@ export const LAST_MONTH: RangeOption = {
   ],
 };
 
-export const THIS_QUARTER: RangeOption = {
-  label: '本季度',
-  rangeLabel: '1q',
-  name: 'THIS_QUARTER',
-  range: (current: Moment | Dayjs = moment()) => [
-    current.clone().startOf(QUARTER_UNIT),
-    current.clone().endOf(QUARTER_UNIT),
-  ],
-};
+// export const THIS_QUARTER: RangeOption = {
+//   label: '本季度',
+//   rangeLabel: '1q',
+//   name: 'THIS_QUARTER',
+//   range: (current: Moment | Dayjs = moment()) => [
+//     current.clone().startOf(QUARTER_UNIT),
+//     current.clone().endOf(QUARTER_UNIT),
+//   ],
+// };
 
-export const LAST_QUARTER: RangeOption = {
-  label: '上季度',
-  rangeLabel: '1q',
-  name: 'LAST_QUARTER',
-  range: (current: Moment | Dayjs = moment()) => [
-    current.clone().startOf(QUARTER_UNIT).add(-1, QUARTER_UNIT),
-    current.clone().endOf(QUARTER_UNIT).add(-1, QUARTER_UNIT),
-  ],
-};
+// export const LAST_QUARTER: RangeOption = {
+//   label: '上季度',
+//   rangeLabel: '1q',
+//   name: 'LAST_QUARTER',
+//   range: (current: Moment | Dayjs = moment()) => [
+//     current.clone().startOf(QUARTER_UNIT).add(-1, QUARTER_UNIT),
+//     current.clone().endOf(QUARTER_UNIT).add(-1, QUARTER_UNIT),
+//   ],
+// };
 
-export const NEXT_QUARTER: RangeOption = {
-  label: '下季度',
-  rangeLabel: '1q',
-  name: 'NEXT_QUARTER',
-  range: (current: Moment | Dayjs = moment()) => [
-    current.clone().startOf(QUARTER_UNIT).add(1, QUARTER_UNIT),
-    current.clone().endOf(QUARTER_UNIT).add(1, QUARTER_UNIT),
-  ],
-};
+// export const NEXT_QUARTER: RangeOption = {
+//   label: '下季度',
+//   rangeLabel: '1q',
+//   name: 'NEXT_QUARTER',
+//   range: (current: Moment | Dayjs = moment()) => [
+//     current.clone().startOf(QUARTER_UNIT).add(1, QUARTER_UNIT),
+//     current.clone().endOf(QUARTER_UNIT).add(1, QUARTER_UNIT),
+//   ],
+// };
 
 export const THIS_YEAR: RangeOption = {
   label: '今年',

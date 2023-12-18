@@ -19,13 +19,16 @@ nav:
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
-| selects | 快速选择时间配置项 | RangeOption | [NEAR_1_MINUTES, NEAR_30_MINUTES, NEAR_1_HOURS] | - |
+| selects | 快速选择时间配置项 | RangeOption | [NEAR_1_MINUTES, NEAR_30_MINUTES, NEAR_1_HOURS,NEAR_3_HOURS, NEAR_6_HOURS, TODAY, LAST_3_DAYS] | - |
 | value | DatePicker 控件的值 | Dayjs[] \| Moment[] | - | - |
 | onChange | value 变化时的回调函数 | (range: Dayjs[] \| Moment[]) => void | noop | - |
 | defaultValue | DatePicker 控件的默认值 | Dayjs[] \| Moment[] | - | - |
 | defaultQuickValue | 快速选择的默认值（优先级低于 value/defaultValue） | string | - | - |
-| mode | 渲染类型 | default \| mini | default | - |
 | pastOnly | 只能选择过去时间 | boolean | false | - |
+| hasRewind | 后退按钮 | boolean | true | - |
+| hasPlay | 播放按钮 | boolean | true | - |
+| hasForward | 前进按钮 | boolean | true | - |
+| hasZoomOut | 缩小按钮（跨大时间范围） | boolean | true | - |
 | disabledDate | 不可选择的日期 | (currentDate: Dayjs \| Moment) => boolean | - | - |
 | 其他 antd/RangePicker 的 `props` | [antd-RangePicker](https://ant.design/components/date-picker-cn/#RangePicker) | - | - | - |
 
@@ -33,6 +36,7 @@ nav:
 
 | 参数       | 说明                 | 类型                      | 默认值 | 版本 |
 | :--------- | :------------------- | :------------------------ | :----- | :--- |
-| name       | 快速选择的名称       | string                    | -      | -    |
-| localeName | 快速选择的名称(英文) | string                    | -      | -    |
+| label      | 快速选择的名称       | string                    | -      | -    |
+| name       | 快速选择的名称(英文) | string                    | -      | -    |
+| rangeLabel | 快速选择的区间简写   | string                    | -      | -    |
 | range      | 选中的时间区间       | () => Dayjs[] \| Moment[] | -      | -    |

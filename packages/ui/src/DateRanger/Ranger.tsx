@@ -1,4 +1,4 @@
-import { Button, DatePicker, Dropdown, Radio, Space } from '@oceanbase/design';
+import { Button, DatePicker, Dropdown, Radio, Space, theme } from '@oceanbase/design';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
@@ -13,20 +13,15 @@ import { getPrefix } from '../_util';
 import {
   CUSTOMIZE,
   DATE_TIME_FORMAT,
-  LAST_QUARTER,
-  NEAR_1_HOURS,
   NEAR_1_MINUTES,
   NEAR_30_MINUTES,
+  NEAR_1_HOURS,
   NEAR_3_HOURS,
   NEAR_6_HOURS,
   TODAY,
-  YESTERDAY,
-  THIS_WEEK,
-  THIS_QUARTER,
-  THIS_YEAR,
   NEAR_TIME_LIST,
   YEAR_DATE_TIME_FORMAT,
-  THIS_MONTH,
+  LAST_3_DAYS,
 } from './constant';
 import './index.less';
 import zhCN from './locale/zh-CN';
@@ -78,11 +73,7 @@ const Ranger = (props: DateRangerProps) => {
       NEAR_3_HOURS,
       NEAR_6_HOURS,
       TODAY,
-      THIS_WEEK,
-      THIS_MONTH,
-      THIS_QUARTER,
-      LAST_QUARTER,
-      THIS_YEAR,
+      LAST_3_DAYS,
     ],
     value,
     defaultValue,
@@ -100,6 +91,8 @@ const Ranger = (props: DateRangerProps) => {
     stickRangeName = false,
     ...rest
   } = props;
+
+  const { token } = theme.useToken();
 
   // 是否为 moment 时间对象
   const isMoment =
@@ -248,17 +241,6 @@ const Ranger = (props: DateRangerProps) => {
     return `近 ${differenceSeconds} 秒`;
   };
 
-  const tagStyle = {
-    backgroundColor: 'rgb(226, 229, 237)',
-    marginRight: 8,
-    display: 'inline-block',
-    width: 72,
-    padding: '6px 0',
-    borderRadius: 4,
-    lineHeight: 1,
-    textAlign: 'center',
-  };
-
   useInterval(
     () => {
       const selected = NEAR_TIME_LIST.find(item => item.name === rangeName);
@@ -299,7 +281,14 @@ const Ranger = (props: DateRangerProps) => {
 
   return (
     <Space size={4} className={classNames(prefix)} style={rest.style}>
-      <div style={{ border: '1px solid #d9d9d9', borderRadius: 4 }}>
+      <div
+        style={{
+          border: `1px solid ${token.colorBorder}`,
+          borderRadius: 4,
+          boxSizing: 'border-box',
+          minWidth: 160,
+        }}
+      >
         <Dropdown
           trigger={['click']}
           menu={{
@@ -310,42 +299,46 @@ const Ranger = (props: DateRangerProps) => {
                 rangeLabel: '自定义',
                 label: '自定义时间',
               },
-            ].map(item => {
-              return {
-                key: item.name,
-                label: (
-                  <span
-                    onClick={() => {
-                      const rName = item.name;
-                      handleNameChange(rName);
-
-                      const selected = NEAR_TIME_LIST.find(_item => _item.name === rName);
-                      // 存在快捷选项切换为极简模式
-                      if (selected?.range) {
-                        setIsPlay(true);
-                        rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
-                      }
-                    }}
-                  >
+            ]
+              .filter(item => {
+                return !!item;
+              })
+              .map(item => {
+                return {
+                  key: item.name,
+                  label: (
                     <span
-                      style={{
-                        backgroundColor: 'rgb(226, 229, 237)',
-                        marginRight: 8,
-                        display: 'inline-block',
-                        width: 72,
-                        padding: '6px 0',
-                        borderRadius: 4,
-                        lineHeight: 1,
-                        textAlign: 'center',
+                      onClick={() => {
+                        const rName = item.name;
+                        handleNameChange(rName);
+
+                        const selected = NEAR_TIME_LIST.find(_item => _item.name === rName);
+                        // 存在快捷选项切换为极简模式
+                        if (selected?.range) {
+                          setIsPlay(true);
+                          rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
+                        }
                       }}
                     >
-                      {item.rangeLabel}
+                      <span
+                        style={{
+                          backgroundColor: 'rgb(226, 229, 237)',
+                          marginRight: 8,
+                          display: 'inline-block',
+                          width: 60,
+                          padding: '4px 0',
+                          borderRadius: 4,
+                          lineHeight: 1,
+                          textAlign: 'center',
+                        }}
+                      >
+                        {item.rangeLabel}
+                      </span>
+                      {locale[item.label] || item.label}
                     </span>
-                    {locale[item.label] || item.label}
-                  </span>
-                ),
-              };
-            }),
+                  ),
+                };
+              }),
           }}
         >
           <Space size={0}>
@@ -353,8 +346,8 @@ const Ranger = (props: DateRangerProps) => {
               style={{
                 backgroundColor: 'rgb(226, 229, 237)',
                 display: 'inline-block',
-                width: 72,
-                padding: '6px 0',
+                width: 60,
+                padding: '4px 0',
                 borderRadius: 4,
                 lineHeight: 1,
                 textAlign: 'center',
@@ -369,6 +362,7 @@ const Ranger = (props: DateRangerProps) => {
         {!isPlay && (
           /* @ts-ignore */
           <DatePicker.RangePicker
+            className={`${prefix}-range-picker`}
             disabledDate={pastOnly ? disabledFuture : disabledDate}
             format={v => {
               // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
@@ -378,10 +372,8 @@ const Ranger = (props: DateRangerProps) => {
             value={innerValue || defaultInternalValue}
             onChange={datePickerChange}
             showTime={true}
-            className={`${prefix}-range-picker`}
             size={size}
-            bordered={false}
-            style={{ paddingLeft: 4 }}
+            style={{ paddingLeft: 4, border: '0px' }}
             // 透传 props 到 antd Ranger
             {...omit(rest, 'value', 'onChange')}
           />
