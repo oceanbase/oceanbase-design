@@ -24,11 +24,11 @@ nav:
 | onChange | value 变化时的回调函数 | (range: Dayjs[] \| Moment[]) => void | noop | - |
 | defaultValue | DatePicker 控件的默认值 | Dayjs[] \| Moment[] | - | - |
 | defaultQuickValue | 快速选择的默认值（优先级低于 value/defaultValue） | string | - | - |
-| pastOnly | 只能选择过去时间 | boolean | false | - |
 | hasRewind | 后退按钮 | boolean | true | - |
 | hasPlay | 播放按钮 | boolean | true | - |
 | hasForward | 前进按钮 | boolean | true | - |
 | hasZoomOut | 缩小按钮（跨大时间范围） | boolean | true | - |
+| pastOnly | 只能选择过去时间 | boolean | false | - |
 | disabledDate | 不可选择的日期 | (currentDate: Dayjs \| Moment) => boolean | - | - |
 | 其他 antd/RangePicker 的 `props` | [antd-RangePicker](https://ant.design/components/date-picker-cn/#RangePicker) | - | - | - |
 
