@@ -174,7 +174,7 @@ const Ranger = (props: DateRangerProps) => {
   const differenceDays = endTime?.diff(startTime as any, 'days');
   const differenceWeeks = endTime?.diff(startTime as any, 'weeks');
   const differenceMonths = endTime?.diff(startTime as any, 'months');
-  const differenceQuarters = endTime?.diff(startTime as any, 'quarters');
+  // const differenceQuarters = endTime?.diff(startTime as any, 'quarters');
   const differenceYears = endTime?.diff(startTime as any, 'years');
 
   const getCustomizeRangeLabel = () => {
@@ -182,9 +182,9 @@ const Ranger = (props: DateRangerProps) => {
       return `${differenceYears}y`;
     }
 
-    if (differenceQuarters > 0) {
-      return `${differenceQuarters}q`;
-    }
+    // if (differenceQuarters > 0) {
+    //   return `${differenceQuarters}q`;
+    // }
 
     if (differenceMonths > 0) {
       return `${differenceMonths}mon`;
@@ -214,9 +214,9 @@ const Ranger = (props: DateRangerProps) => {
       return `近 ${differenceYears} 年`;
     }
 
-    if (differenceQuarters > 0) {
-      return `近 ${differenceQuarters} 季度`;
-    }
+    // if (differenceQuarters > 0) {
+    //   return `近 ${differenceQuarters} 季度`;
+    // }
 
     if (differenceMonths > 0) {
       return `近 ${differenceMonths} 月`;
