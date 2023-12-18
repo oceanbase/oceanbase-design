@@ -1,4 +1,4 @@
-import { Button, DatePicker, DatePickerProps, Dropdown, Radio, Space } from '@oceanbase/design';
+import { Button, DatePicker, Dropdown, Radio, Space } from '@oceanbase/design';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
@@ -253,10 +253,10 @@ const Ranger = (props: DateRangerProps) => {
     marginRight: 8,
     display: 'inline-block',
     width: 72,
-    textAlign: 'center',
     padding: '6px 0',
     borderRadius: 4,
     lineHeight: 1,
+    textAlign: 'center',
   };
 
   useInterval(
@@ -283,8 +283,6 @@ const Ranger = (props: DateRangerProps) => {
       ? getCustomizeLabel()
       : selects.find(_item => _item.name === rangeName)?.label;
 
-  const isTerse = isPlay;
-
   const thisYear = new Date().getFullYear();
   const isThisYear = startTime?.year() === thisYear && endTime?.year() === thisYear;
   const rangeNameIndex = findIndex(selects, item => item.name === rangeName);
@@ -303,7 +301,7 @@ const Ranger = (props: DateRangerProps) => {
     <Space size={4} className={classNames(prefix)} style={rest.style}>
       <div style={{ border: '1px solid #d9d9d9', borderRadius: 4 }}>
         <Dropdown
-          trigger="click"
+          trigger={['click']}
           menu={{
             items: [
               ...selects,
@@ -329,7 +327,20 @@ const Ranger = (props: DateRangerProps) => {
                       }
                     }}
                   >
-                    <span style={tagStyle}>{item.rangeLabel}</span>
+                    <span
+                      style={{
+                        backgroundColor: 'rgb(226, 229, 237)',
+                        marginRight: 8,
+                        display: 'inline-block',
+                        width: 72,
+                        padding: '6px 0',
+                        borderRadius: 4,
+                        lineHeight: 1,
+                        textAlign: 'center',
+                      }}
+                    >
+                      {item.rangeLabel}
+                    </span>
                     {locale[item.label] || item.label}
                   </span>
                 ),
@@ -340,17 +351,22 @@ const Ranger = (props: DateRangerProps) => {
           <Space size={0}>
             <span
               style={{
-                ...tagStyle,
-                margin: 0,
+                backgroundColor: 'rgb(226, 229, 237)',
+                display: 'inline-block',
+                width: 72,
+                padding: '6px 0',
+                borderRadius: 4,
+                lineHeight: 1,
+                textAlign: 'center',
                 marginLeft: 8,
               }}
             >
               {rangeLabel}
             </span>
-            {isTerse && <div style={{ padding: '4px 11px 4px' }}>{label}</div>}
+            {isPlay && <div style={{ padding: '4px 11px 4px' }}>{label}</div>}
           </Space>
         </Dropdown>
-        {!isTerse && (
+        {!isPlay && (
           /* @ts-ignore */
           <DatePicker.RangePicker
             disabledDate={pastOnly ? disabledFuture : disabledDate}
@@ -401,7 +417,6 @@ const Ranger = (props: DateRangerProps) => {
             value={'play'}
             style={{ paddingInline: 8 }}
             onClick={() => {
-              // getNow();
               const newPlay = !isPlay;
               setIsPlay(newPlay);
             }}

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import quarterOfYear from 'dayjs/plugin/quarterOfYear';
