@@ -3,9 +3,10 @@
  */
 import React from 'react';
 import { Badge, Dropdown, Menu, message, Space } from '@oceanbase/design';
-import { BasicLayout, IconFont, Lottie } from '@oceanbase/ui';
+import { BasicLayout, Lottie } from '@oceanbase/ui';
 import { CaretDownFilled } from '@oceanbase/icons';
 import PageContainerEmptyDemo from '../../PageContainer/demo/empty';
+import IconFont from './IconFont';
 
 export default () => {
   const menus = [
