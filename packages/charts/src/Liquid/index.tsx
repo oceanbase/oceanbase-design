@@ -37,12 +37,15 @@ export interface LiquidConfig extends AntLiquidConfig {
   // 百分比最多保留的有效小数位数
   decimal?: number;
   theme?: Theme;
+  containerStyle?: React.CSSProperties;
+  percentStyle?: React.CSSProperties;
+  titleStyle?: React.CSSProperties;
 }
 
 const Liquid = forwardRef<unknown, LiquidConfig>(
   (
     {
-      height = 400,
+      height,
       // 宽度默认与高度一致，才能保证图表内部上下 padding 为 0
       width = height,
       shape = 'circle',
@@ -58,6 +61,9 @@ const Liquid = forwardRef<unknown, LiquidConfig>(
       wave,
       statistic,
       theme,
+      containerStyle,
+      percentStyle,
+      titleStyle,
       ...restConfig
     },
     ref
@@ -116,7 +122,7 @@ const Liquid = forwardRef<unknown, LiquidConfig>(
     };
     return layout === 'horizontal' ? (
       // 水平布局
-      <div style={{ color, display: 'flex' }}>
+      <div style={{ color, display: 'flex', ...containerStyle }}>
         <AntLiquid {...newConfig} ref={ref} />
         <span
           style={{
@@ -128,7 +134,11 @@ const Liquid = forwardRef<unknown, LiquidConfig>(
           }}
         >
           <span
-            style={{ color: color || themeConfig.styleSheet.axisLabelFillColor, lineHeight: 1 }}
+            style={{
+              color: color || themeConfig.styleSheet.axisLabelFillColor,
+              lineHeight: 1,
+              ...titleStyle,
+            }}
           >
             {title}
           </span>
@@ -137,6 +147,7 @@ const Liquid = forwardRef<unknown, LiquidConfig>(
               display: 'flex',
               alignItems: 'end',
               lineHeight: 1,
+              ...percentStyle,
             }}
           >
             <span
@@ -155,10 +166,11 @@ const Liquid = forwardRef<unknown, LiquidConfig>(
       </div>
     ) : (
       // 垂直布局
-      <div style={{ color, textAlign: 'center' }}>
+      <div style={{ color, textAlign: 'center', ...containerStyle }}>
         <div
           style={{
             marginBottom: 4,
+            ...percentStyle,
           }}
         >
           {`${toPercent(percent, decimal)}%`}
@@ -169,6 +181,7 @@ const Liquid = forwardRef<unknown, LiquidConfig>(
             style={{
               color: color || themeConfig.styleSheet.axisLabelFillColor,
               marginTop: 4,
+              ...titleStyle,
             }}
           >
             {title}
