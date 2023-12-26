@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import type { ColumnConfig as AntColumnConfig } from '@ant-design/charts';
 import { Column as AntColumn } from '@ant-design/charts';
+import { sortByMoment } from '@oceanbase/util';
 import { uniq } from 'lodash';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
@@ -12,7 +13,19 @@ export interface ColumnConfig extends AntColumnConfig {
 
 const Column = forwardRef<unknown, ColumnConfig>(
   (
-    { data, isStack, isGroup, isRange, seriesField, label, xAxis, legend, theme, ...restConfig },
+    {
+      data,
+      xField,
+      isStack,
+      isGroup,
+      isRange,
+      seriesField,
+      label,
+      xAxis,
+      legend,
+      theme,
+      ...restConfig
+    },
     ref
   ) => {
     const themeConfig = useTheme(theme);
@@ -24,7 +37,13 @@ const Column = forwardRef<unknown, ColumnConfig>(
     // 堆叠柱状图中最后一段对应的值
     const lastStackValue = stackValues?.[0];
     const newConfig: ColumnConfig = {
-      data,
+      // xAxis.type 为时间轴时，需要对 data 进行排序
+      data:
+        // issue: https://github.com/antvis/G2/issues/3194
+        xAxis && (xAxis?.type === 'time' || xAxis?.type === 'timeCat')
+          ? data?.sort((a, b) => sortByMoment(a, b, xField || ''))
+          : data,
+      xField,
       isStack,
       isGroup,
       isRange,
@@ -52,15 +71,20 @@ const Column = forwardRef<unknown, ColumnConfig>(
             isRange
               ? 2
               : !isStack ||
-                (isStack &&
-                  seriesField &&
-                  // 堆叠柱状图仅最后一段末端展示 2px 圆角
-                  datum[seriesField] === lastStackValue)
-              ? [2, 2, 0, 0]
-              : [],
+                  (isStack &&
+                    seriesField &&
+                    // 堆叠柱状图仅最后一段末端展示 2px 圆角
+                    datum[seriesField] === lastStackValue)
+                ? [2, 2, 0, 0]
+                : [],
         };
       },
       xAxis: xAxis !== false && {
+        // type 为 time 时需要关闭自动美化，否则 X 轴两侧会留白
+        // issue: https://github.com/antvis/G2Plot/issues/1951
+        nice: xAxis?.type === 'time' ? false : undefined,
+        // 点数 >= 14 时，x 方向展示 7 个刻度线和网格
+        tickCount: data?.length >= 14 ? 7 : undefined,
         ...xAxis,
         // x 方向增加虚线网格
         grid:
@@ -83,10 +107,6 @@ const Column = forwardRef<unknown, ColumnConfig>(
         position: 'bottom-left',
         offsetX: 30,
         ...legend,
-        marker: {
-          symbol: 'circle',
-          ...legend?.marker,
-        },
       },
       theme: themeConfig.theme,
       ...restConfig,
