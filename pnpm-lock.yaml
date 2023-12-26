@@ -81,8 +81,8 @@ importers:
         specifier: ^4.0.1
         version: 4.0.1(jest@29.7.0)(postcss@8.4.31)
       '@umijs/test':
-        specifier: ^4.0.88
-        version: 4.0.88(@babel/core@7.23.2)
+        specifier: ^4.0.90
+        version: 4.0.90(@babel/core@7.23.2)
       '@vercel/analytics':
         specifier: ^1.1.1
         version: 1.1.1
@@ -6941,10 +6941,10 @@ packages:
       - supports-color
     dev: true
 
-  /@umijs/bundler-utils@4.0.88:
-    resolution: {integrity: sha512-jJmen5OLJhO8Hd3GWolC1VvxD5RZLHQl9Jx2Lz2soA1463gAqdAAh0Wa6m69YdVBzh0WzHZ9049RmP23K1ow8A==}
+  /@umijs/bundler-utils@4.0.90:
+    resolution: {integrity: sha512-BMdKGrBLF1ReQYxgJ4egJppVr8ZiP3yoolsKLZg5KmttcuFmOJLGJ/2FXzMM9KbtKfKDDnCINi25STWtWJyF9A==}
     dependencies:
-      '@umijs/utils': 4.0.88
+      '@umijs/utils': 4.0.90
       esbuild: 0.17.19
       regenerate: 1.4.2
       regenerate-unicode-properties: 10.1.1
@@ -7486,13 +7486,13 @@ packages:
       - supports-color
     dev: true
 
-  /@umijs/test@4.0.88(@babel/core@7.23.2):
-    resolution: {integrity: sha512-3v021VhU/aQc3Jk421z3ys1Q5S/JJlIzhJYYds+O1gb3esgeaGIS6OyDA1xmCaqVGgJeYOq408AN43/hCR9rtw==}
+  /@umijs/test@4.0.90(@babel/core@7.23.2):
+    resolution: {integrity: sha512-3/l/qaO/9NzB6zTCTklgLpDgNqm75KXzV4+2wtGf6evH2rubNY5SDokTlfC8v5Pb/PLvRdVmERnyrelFbVjBrA==}
     dependencies:
       '@babel/plugin-transform-modules-commonjs': 7.23.0(@babel/core@7.23.2)
       '@jest/types': 27.5.1
-      '@umijs/bundler-utils': 4.0.88
-      '@umijs/utils': 4.0.88
+      '@umijs/bundler-utils': 4.0.90
+      '@umijs/utils': 4.0.90
       babel-jest: 29.7.0(@babel/core@7.23.2)
       esbuild: 0.17.19
       identity-obj-proxy: 3.0.0
@@ -7528,8 +7528,8 @@ packages:
       pino: 7.11.0
     dev: true
 
-  /@umijs/utils@4.0.88:
-    resolution: {integrity: sha512-b7rW75hQ18+1Q3rt6cqOIed6hftmsExUsfJaCjYCIqFL3DRn+D8Uwb0EEsNlxgLnWUgwGC2KrIYYMvc2Q2XfWA==}
+  /@umijs/utils@4.0.90:
+    resolution: {integrity: sha512-H+/pgp6SjYiehBbSLLaFOdVvLgGpi4mGLKU08j9u1E8uj5Y1DfKISPfzr+PS4YGminQ4RpUvFOw1OicH6fGo3A==}
     dependencies:
       chokidar: 3.5.3
       pino: 7.11.0
