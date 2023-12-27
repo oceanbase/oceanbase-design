@@ -72,7 +72,7 @@ const Stat: React.FC<StatConfig> = ({
     width: containerWidth = 0,
     height: containerHeight = 0,
   } = useResizeObserver<HTMLDivElement>();
-  const isWideLayout = containerWidth / containerHeight > 2.5;
+  const isFlat = containerHeight < 72;
   const padding = containerHeight > 100 ? 12 : 8;
   const maxWidth = containerWidth - padding * 2;
   const maxHeight = containerHeight - padding * 2;
@@ -112,7 +112,7 @@ const Stat: React.FC<StatConfig> = ({
   let valueHeightPercent = 1;
   let chartHeightPercent = 0.5;
 
-  if (isWideLayout) {
+  if (isFlat) {
     if (hasChart) {
       if (layout === 'horizontal') {
         titleWidthPercent = 0.6;
