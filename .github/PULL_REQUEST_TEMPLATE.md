@@ -47,6 +47,10 @@ Thank you!
 1. Describe the problem and the scenario.
 2. GIF or snapshot should be provided if includes UI/interactive modification.
 3. How to fix the problem, and list the final API implementation and usage sample if that is a new feature.
+
+| Before | After |
+| :--- | :--- |
+| [Image] | [Image] |
 -->
 
 ### 📝 Changelog

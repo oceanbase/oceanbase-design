@@ -23,6 +23,7 @@ export interface StatConfig {
   colorMode?: 'none' | 'value' | 'background';
   chartMode?: 'none' | 'line' | 'area';
   chartData?: number[];
+  chartConfig?: TinyAreaConfig;
   textAlign: 'auto' | 'center';
   thresholds?: Record<string, string>;
   className?: string;
@@ -57,6 +58,7 @@ const Stat: React.FC<StatConfig> = ({
   colorMode = 'background',
   chartMode,
   chartData = [],
+  chartConfig,
   textAlign,
   thresholds = {},
   className,
@@ -202,15 +204,17 @@ const Stat: React.FC<StatConfig> = ({
   }, [chartHeight]);
 
   const chartColor = colorMode === 'background' ? 'rgba(256, 256, 256, 0.65)' : color;
-  const chartConfig: TinyAreaConfig = {
+  const newChartConfig: TinyAreaConfig = {
     height: chartHeight,
     data: chartData,
     appendPadding: [0, -8, 0, -8],
     tooltip: false,
     color: chartColor,
+    ...chartConfig,
     areaStyle: {
       fill: chartMode === 'area' ? chartColor : 'transparent',
       fillOpacity: colorMode === 'background' ? 0.65 : 0.15,
+      ...chartConfig?.areaStyle,
     },
   };
 
@@ -285,7 +289,7 @@ const Stat: React.FC<StatConfig> = ({
       {containerHeight > 0 && hasChart && (
         <div className={`${prefixCls}-chart`}>
           <TinyArea
-            {...chartConfig}
+            {...newChartConfig}
             // @ts-ignore
             ref={chartRef}
           />
