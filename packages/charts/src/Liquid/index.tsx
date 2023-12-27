@@ -107,8 +107,6 @@ const Liquid = forwardRef<unknown, LiquidConfig>(
       wave: {
         // 水波个数默认为 1
         count: 1,
-        // 水波长度为图表宽度
-        length: width,
         ...wave,
       },
       // 默认去掉内置的指标文案
