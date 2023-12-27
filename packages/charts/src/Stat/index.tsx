@@ -33,7 +33,8 @@ export interface StatConfig {
 const prefixCls = 'ob-stat';
 
 const LINE_HEIGHT = 1.2;
-const TITLE_MAX_SIZE = 30;
+const TITLE_MAX_SIZE = 20;
+const VALUE_MAX_SIZE = 40;
 const VALUE_FONT_WEIGHT = 500;
 
 function fontSizeReductionFactor(fontSize: number) {
@@ -71,6 +72,7 @@ const Stat: React.FC<StatConfig> = ({
     width: containerWidth = 0,
     height: containerHeight = 0,
   } = useResizeObserver<HTMLDivElement>();
+  const isWideLayout = containerWidth / containerHeight > 2.5;
   const padding = containerHeight > 100 ? 12 : 8;
   const maxWidth = containerWidth - padding * 2;
   const maxHeight = containerHeight - padding * 2;
@@ -101,7 +103,6 @@ const Stat: React.FC<StatConfig> = ({
     .toRgbString();
   const bgColor = `linear-gradient(120deg, ${bgColor1}, ${bgColor2})`;
 
-  const isWideLayout = containerWidth / containerHeight > 2.5;
   const hasChart = chartMode === 'line' || chartMode === 'area';
   const hasPrefixOrSuffix = prefix || suffix;
   const prefixOrSuffixWdithPercent = 0.1;
@@ -185,13 +186,12 @@ const Stat: React.FC<StatConfig> = ({
     maxWidth * valueWidthPercent,
     maxHeight * valueHeightPercent,
     LINE_HEIGHT,
-    undefined,
+    VALUE_MAX_SIZE,
     VALUE_FONT_WEIGHT
   );
   const prefixAndSuffixFontSize = valueFontSize * fontSizeReductionFactor(valueFontSize);
 
   const chartRef = useRef<TinyAreaRef>();
-  // 图表占据一半高度
   const chartHeight = containerHeight * chartHeightPercent;
 
   useEffect(() => {
@@ -207,7 +207,7 @@ const Stat: React.FC<StatConfig> = ({
   const newChartConfig: TinyAreaConfig = {
     height: chartHeight,
     data: chartData,
-    appendPadding: [0, -8, 0, -8],
+    appendPadding: [0, -padding, 0, -padding],
     tooltip: false,
     color: chartColor,
     ...chartConfig,
