@@ -7,7 +7,6 @@ nav:
 
 - 🔥 完全继承 antd [List](https://ant.design/components/list-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
-- 📢 默认开启 `pagination.hideOnSinglePage`，即只有一页数据时会隐藏分页器。
 
 ## 代码演示
 
