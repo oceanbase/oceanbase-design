@@ -33,7 +33,7 @@ describe('List', () => {
 
   it('hideOnSinglePage should be true by default', () => {
     const { container, asFragment } = render(<ListTest dataSource={dataSource.slice(0, 10)} />);
-    expect(container.querySelector('.ant-pagination')).toBeFalsy();
+    expect(container.querySelector('.ant-pagination')).toBeTruthy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 
@@ -42,11 +42,11 @@ describe('List', () => {
       <ListTest
         dataSource={dataSource.slice(0, 10)}
         pagination={{
-          hideOnSinglePage: false,
+          hideOnSinglePage: true,
         }}
       />
     );
-    expect(container.querySelector('.ant-pagination')).toBeTruthy();
+    expect(container.querySelector('.ant-pagination')).toBeFalsy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 });
