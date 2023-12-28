@@ -60,7 +60,7 @@ export interface ExtendedConfigConsumerProps {
 
 const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
   navigate: undefined,
-  hideOnSinglePage: true,
+  hideOnSinglePage: false,
 });
 
 const { defaultSeed } = themeConfig;
@@ -111,10 +111,11 @@ const ConfigProvider = ({
       <ExtendedConfigContext.Provider
         value={{
           navigate: navigate === undefined ? parentExtendedContext.navigate : navigate,
-          hideOnSinglePage:
-            hideOnSinglePage === undefined
-              ? parentExtendedContext.hideOnSinglePage
-              : hideOnSinglePage,
+          hideOnSinglePage: parentContext.pagination?.showSizeChanger
+            ? false
+            : hideOnSinglePage !== undefined
+              ? hideOnSinglePage
+              : parentExtendedContext.hideOnSinglePage,
         }}
       >
         <StyleProvider {...mergedStyleProviderProps}>
