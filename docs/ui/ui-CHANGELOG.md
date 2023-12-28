@@ -8,6 +8,15 @@ group: 业务组件
 
 ---
 
+## 0.2.34
+
+`2023-12-28`
+
+- IconFont
+  - 🐞 修复 IconFont 会请求不必要 JS 资源的问题。[#375](https://github.com/oceanbase/oceanbase-design/pull/375)
+  - 📢 将 IconFont 组件标记为即将废弃，不推荐使用。[#375](https://github.com/oceanbase/oceanbase-design/pull/375)
+- 💄 优化 TagSelect 的 `disabled` 和 `hover` 样式，并将固定样式改造为 Design Token。[#373](https://github.com/oceanbase/oceanbase-design/pull/373)
+
 ## 0.2.33
 
 `2023-12-14`

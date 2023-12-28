@@ -31,7 +31,7 @@ describe('List', () => {
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 
-  it('hideOnSinglePage should be true by default', () => {
+  it('hideOnSinglePage should be false by default', () => {
     const { container, asFragment } = render(<ListTest dataSource={dataSource.slice(0, 10)} />);
     expect(container.querySelector('.ant-pagination')).toBeTruthy();
     expect(asFragment().firstChild).toMatchSnapshot();
