@@ -86,7 +86,7 @@ exports[`List hideOnSinglePage could be changed 1`] = `
 </div>
 `;
 
-exports[`List hideOnSinglePage should be true by default 1`] = `
+exports[`List hideOnSinglePage should be false by default 1`] = `
 <div
   class="ant-list ant-list-split ant-list-bordered ant-list-something-after-last-item"
 >
