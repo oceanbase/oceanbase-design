@@ -61,5 +61,6 @@ export function calculateFontSize(
 
   // final fontSize
   const optimalSize = Math.min(fontSizeBasedOnHeight, fontSizeBasedOnWidth);
-  return Math.min(optimalSize, maxSize ?? optimalSize);
+  // limit between 12px to maxSize
+  return Math.max(Math.min(optimalSize, maxSize ?? optimalSize), 12);
 }
