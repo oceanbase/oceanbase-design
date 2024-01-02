@@ -146,6 +146,7 @@ export default defineConfig({
               title: 'Segmented 分段控制器',
               link: '/components/segmented',
             },
+            { title: 'Empty 空状态', link: '/components/empty' },
           ],
         },
         {
@@ -158,6 +159,7 @@ export default defineConfig({
             { title: 'Notification 通知提醒框', link: '/components/notification' },
             { title: 'Spin 加载中', link: '/components/spin' },
             { title: 'Badge 徽标数', link: '/components/badge' },
+            { title: 'Result 结果', link: '/components/result' },
           ],
         },
         {

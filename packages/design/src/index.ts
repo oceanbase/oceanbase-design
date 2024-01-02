@@ -44,6 +44,9 @@ export type { DrawerProps } from './drawer';
 
 export { message, notification, token } from './static-function';
 
+export { default as Empty } from './empty';
+export type { EmptyProps } from './empty';
+
 export { default as List } from './list';
 export type { ListProps } from './list';
 
@@ -73,6 +76,9 @@ export type { SpinProps } from './spin';
 
 export { default as Badge } from './badge';
 export type { BadgeProps } from './badge';
+
+export { default as Result } from './result';
+export type { ResultProps } from './result';
 
 export { default as Lottie } from './lottie';
 export type { LottieProps, LottieRef } from './lottie';
