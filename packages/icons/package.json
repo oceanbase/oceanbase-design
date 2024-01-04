@@ -35,7 +35,7 @@
     "generate": "rm -rf src && ts-node scripts/generate.ts"
   },
   "dependencies": {
-    "@ant-design/colors": "^7.0.0",
+    "@ant-design/colors": "^7.0.2",
     "@ant-design/icons": "^5.2.6",
     "@oceanbase/icons-svg": "^1.0.5"
   },
