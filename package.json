@@ -120,7 +120,7 @@
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.3",
-    "vanilla-jsoneditor": "^0.19.0",
+    "vanilla-jsoneditor": "^0.21.1",
     "web-vitals": "^3.5.0",
     "yorkie": "^2.0.0"
   }
