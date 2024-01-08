@@ -101,7 +101,7 @@
     "prettier": "^3.1.1",
     "prismjs": "^1.29.0",
     "rc-checkbox": "^3.1.0",
-    "rc-drawer": "^6.5.2",
+    "rc-drawer": "^7.0.0",
     "rc-footer": "^0.6.8",
     "rc-resize-observer": "^1.4.0",
     "rc-segmented": "^2.2.2",
