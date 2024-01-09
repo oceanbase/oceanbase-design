@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import { Tooltip } from '@oceanbase/design';
 import { waitFakeTimer } from '../../../../../tests/util';
 import { CloseCircleOutlined } from '@oceanbase/icons';
+import { isTooltipOpen } from './util';
 
 describe('Tooltip', () => {
   beforeEach(() => {
@@ -134,6 +135,48 @@ describe('Tooltip', () => {
     const buttonElement = container.querySelector('#button');
     fireEvent.mouseEnter(buttonElement!);
     await waitFakeTimer();
+    expect(container.querySelector('.ant-tooltip-open')).toBeNull();
+  });
+
+  it('should hide when title is none', async () => {
+    const onOpenChange = jest.fn();
+
+    const { container, rerender } = render(
+      <Tooltip
+        title="Have a nice day!"
+        mouseEnterDelay={0}
+        mouseLeaveDelay={0}
+        onOpenChange={onOpenChange}
+      >
+        <div id="hello">Hello world!</div>
+      </Tooltip>
+    );
+
+    const divElement = container.querySelector('#hello');
+    fireEvent.mouseEnter(divElement!);
+    await waitFakeTimer();
+    expect(onOpenChange).toHaveBeenCalled();
+    expect(isTooltipOpen()).toBeTruthy();
+    expect(container.querySelector('.ant-tooltip-open')).not.toBeNull();
+
+    fireEvent.mouseLeave(divElement!);
+    await waitFakeTimer();
+    expect(onOpenChange).toHaveBeenCalled();
+    expect(isTooltipOpen()).toBeFalsy();
+    expect(container.querySelector('.ant-tooltip-open')).toBeNull();
+
+    // update `title` value.
+    rerender(
+      <Tooltip title="" mouseEnterDelay={0} mouseLeaveDelay={0} onOpenChange={onOpenChange}>
+        <div id="hello">Hello world!</div>
+      </Tooltip>
+    );
+
+    onOpenChange.mockClear();
+    fireEvent.mouseEnter(divElement!);
+    await waitFakeTimer();
+    expect(onOpenChange).not.toHaveBeenCalled();
+    expect(isTooltipOpen()).toBeFalsy();
     expect(container.querySelector('.ant-tooltip-open')).toBeNull();
   });
 });
