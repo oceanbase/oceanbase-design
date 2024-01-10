@@ -1,9 +1,11 @@
+import fs from 'fs';
 import path from 'path';
 import { defineConfig } from 'dumi';
 import AntdAliasWebpackPlugin from './antd-alias-webpack-plugin';
 
 export default defineConfig({
   mfsu: {
+    // to make AntdAliasWebpackPlugin work
     exclude: ['antd-token-previewer'],
   },
   // 默认重定向到子包的 src 文件夹
@@ -19,7 +21,12 @@ export default defineConfig({
   },
   extraBabelPresets: [require.resolve('@emotion/babel-preset-css-prop')],
   chainWebpack: config => {
-    config.plugin('antd-alias').use(AntdAliasWebpackPlugin);
+    const esPath = path.join(__dirname, 'packages/design/es');
+    const libPath = path.join(__dirname, 'packages/design/es');
+    // AntdAliasWebpackPlugin depends es and lib of @oceanbase/design
+    if (fs.existsSync(esPath) && fs.existsSync(libPath)) {
+      config.plugin('antd-alias').use(AntdAliasWebpackPlugin);
+    }
     return config;
   },
   outputPath: 'site',
