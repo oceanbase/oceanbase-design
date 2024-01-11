@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import type { PieConfig as AntPieConfig } from '@ant-design/charts';
 import { Pie as AntPie } from '@ant-design/charts';
+import { formatNumber } from '@oceanbase/util';
 import { isString } from 'lodash';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
@@ -162,7 +163,7 @@ const Pie = forwardRef<unknown, PieConfig>(
                   const { width } = container.getBoundingClientRect();
                   const text = datum
                     ? `${datum[angleField]}`
-                    : `${filterData?.reduce((a, b) => a + b[angleField], 0)}`;
+                    : `${formatNumber(filterData?.reduce((a, b) => a + b[angleField], 0))}`;
                   return renderStatistic(width, text, {
                     // 这里的字体大小仅用于计算文本宽高，不用于实际样式
                     fontSize: contentFontSize,
