@@ -35,6 +35,7 @@ describe('Drawer', () => {
   it('render with default footer', async () => {
     const { container, asFragment } = render(<DrawerTest footer={true} />);
     await waitFakeTimer();
+    expect(container.querySelector('.ant-drawer-footer-container')).toBeTruthy();
     expect(container.querySelector('.ant-drawer-footer-content')).toBeTruthy();
     expect(container.querySelectorAll('.ant-btn').length).toBe(2);
     expect(container.querySelectorAll('.ant-btn-primary').length).toBe(1);
@@ -44,8 +45,11 @@ describe('Drawer', () => {
   it('render with custom footer', async () => {
     const { container, asFragment } = render(<DrawerTest footer={<div>custom footer</div>} />);
     await waitFakeTimer();
-    expect(container.querySelector('.ant-drawer-footer-content')).toBeTruthy();
-    expect(container.querySelector('.ant-drawer-footer-content').textContent).toBe('custom footer');
+    expect(container.querySelector('.ant-drawer-footer-container')).toBeTruthy();
+    expect(container.querySelector('.ant-drawer-footer-container').textContent).toBe(
+      'custom footer'
+    );
+    expect(container.querySelector('.ant-drawer-footer-content')).toBeFalsy();
     expect(container.querySelector('.ant-btn')).toBeFalsy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
@@ -53,6 +57,7 @@ describe('Drawer', () => {
   it('render with onOk', async () => {
     const { container, asFragment } = render(<DrawerTest onOk={() => {}} />);
     await waitFakeTimer();
+    expect(container.querySelector('.ant-drawer-footer-container')).toBeTruthy();
     expect(container.querySelector('.ant-drawer-footer-content')).toBeTruthy();
     expect(container.querySelectorAll('.ant-btn').length).toBe(2);
     expect(container.querySelectorAll('.ant-btn-primary').length).toBe(1);
@@ -64,6 +69,7 @@ describe('Drawer', () => {
       <DrawerTest onOk={() => {}} okText="custom ok text" cancelText="custom cancel text" />
     );
     await waitFakeTimer();
+    expect(container.querySelector('.ant-drawer-footer-container')).toBeTruthy();
     expect(container.querySelector('.ant-drawer-footer-content')).toBeTruthy();
     expect(container.querySelector('.ant-btn-primary').textContent).toBe('custom ok text');
     expect(container.querySelector('.ant-btn:not(.ant-btn-primary)').textContent).toBe(
@@ -77,9 +83,50 @@ describe('Drawer', () => {
       <DrawerTest onOk={() => {}} confirmLoading={true} okButtonProps={{ danger: true }} />
     );
     await waitFakeTimer();
+    expect(container.querySelector('.ant-drawer-footer-container')).toBeTruthy();
     expect(container.querySelector('.ant-drawer-footer-content')).toBeTruthy();
     expect(container.querySelectorAll('.ant-btn').length).toBe(2);
     expect(container.querySelectorAll('.ant-btn-dangerous').length).toBe(1);
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
+
+  it('render with footerExtra and no footer', async () => {
+    const { container, asFragment } = render(<DrawerTest footerExtra="footer extra" />);
+    await waitFakeTimer();
+    expect(container.querySelector('.ant-drawer-footer-container')).toBeFalsy();
+    expect(container.querySelector('.ant-drawer-footer-content')).toBeFalsy();
+    expect(container.querySelectorAll('.ant-btn').length).toBe(0);
+    expect(container.querySelectorAll('.ant-btn-primary').length).toBe(0);
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
+
+  it('render with footerExtra and default footer', async () => {
+    const { container, asFragment } = render(
+      <DrawerTest footer={true} footerExtra="footer extra" />
+    );
+    await waitFakeTimer();
+    expect(container.querySelector('.ant-drawer-footer-container')).toBeTruthy();
+    expect(container.querySelector('.ant-drawer-footer-content')).toBeTruthy();
+    expect(container.querySelector('.ant-drawer-footer-content').lastChild.textContent).toBe(
+      'footer extra'
+    );
+    expect(container.querySelectorAll('.ant-btn').length).toBe(2);
+    expect(container.querySelectorAll('.ant-btn-primary').length).toBe(1);
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
+
+  it('render with footerExtra and custom footer', async () => {
+    const { container, asFragment } = render(
+      <DrawerTest footer={<div>custom footer</div>} footerExtra={<div>footer extra</div>} />
+    );
+    await waitFakeTimer();
+    expect(container.querySelector('.ant-drawer-footer-container')).toBeTruthy();
+    expect(container.querySelector('.ant-drawer-footer-container').textContent).toBe(
+      'custom footer'
+    );
+    expect(container.querySelector('.ant-drawer-footer-content')).toBeFalsy();
+    expect(container.querySelectorAll('.ant-btn').length).toBe(0);
+    expect(container.querySelectorAll('.ant-btn-primary').length).toBe(0);
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 });
