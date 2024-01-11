@@ -17,6 +17,7 @@ pkgList.forEach((shortName: string) => {
 });
 
 module.exports = {
+  testRegex: '/__tests__/.*\\.test\\.[jt]sx?$',
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
