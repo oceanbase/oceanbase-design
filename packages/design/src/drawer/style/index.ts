@@ -34,14 +34,20 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
           padding: '8px 24px 24px 24px',
           overflow: 'auto',
         },
-        [`${componentCls}-footer-content`]: {
+        [`${componentCls}-footer-container`]: {
           position: 'sticky',
           padding: '16px 24px',
           transition: `box-shadow ${token.motionDurationMid}`,
           // ensure footer box-shadow cover body content
           zIndex: 10,
+          [`${componentCls}-footer-content`]: {
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          },
         },
-        [`${componentCls}-footer-content-shadow`]: {
+        [`${componentCls}-footer-container-shadow`]: {
           boxShadow: boxShadowTop,
         },
       },

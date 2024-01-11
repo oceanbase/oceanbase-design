@@ -23,6 +23,8 @@ export interface DrawerProps extends AntDrawerProps {
   onCancel?: (e) => void;
   confirmLoading?: boolean;
   footer?: React.ReactNode | boolean;
+  // only work for default footer
+  footerExtra?: React.ReactNode;
   cancelText?: string;
   okText?: string;
   okButtonProps?: ButtonProps;
@@ -44,6 +46,7 @@ const Drawer: CompoundedComponent = ({
   okButtonProps,
   confirmLoading,
   footer,
+  footerExtra,
   rootClassName,
   bodyStyle,
   styles,
@@ -113,20 +116,23 @@ const Drawer: CompoundedComponent = ({
         // footer className should not be `${prefixCls}-footer` to avoid conflicts with antd
         // ref: https://github.com/ant-design/ant-design/blob/master/components/drawer/style/index.ts#L214
         <div
-          className={classNames(`${prefixCls}-footer-content`, {
-            [`${prefixCls}-footer-content-shadow`]: isScroll && !isTotalScroll,
+          className={classNames(`${prefixCls}-footer-container`, {
+            [`${prefixCls}-footer-container-shadow`]: isScroll && !isTotalScroll,
           })}
           style={styles?.footer}
         >
           {isValidElement(footer) ? (
             footer
           ) : (
-            <Space>
-              <Button onClick={onOk} type="primary" loading={confirmLoading} {...okButtonProps}>
-                {okText || drawerLocale?.okText}
-              </Button>
-              <Button onClick={handleCancel}>{cancelText || drawerLocale?.cancelText}</Button>
-            </Space>
+            <div className={`${prefixCls}-footer-content`}>
+              <Space>
+                <Button onClick={onOk} type="primary" loading={confirmLoading} {...okButtonProps}>
+                  {okText || drawerLocale?.okText}
+                </Button>
+                <Button onClick={handleCancel}>{cancelText || drawerLocale?.cancelText}</Button>
+              </Space>
+              {footerExtra}
+            </div>
           )}
         </div>
       )}
