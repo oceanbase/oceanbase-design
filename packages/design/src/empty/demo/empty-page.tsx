@@ -47,7 +47,6 @@ export default () => {
           mode="page"
           title="Your description title"
           description="Your description title content"
-          // style={{ height: 500, marginTop: 24 }}
         >
           <Button type="primary" key="console">
             your operations

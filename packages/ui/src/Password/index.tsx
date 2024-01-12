@@ -1,7 +1,7 @@
 import { Button, Input, message, Popover } from '@oceanbase/design';
 import type { PasswordProps as InputPasswordProps } from '@oceanbase/design/es/input';
 import RandExp from 'randexp';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { theme } from '@oceanbase/design';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
@@ -41,6 +41,8 @@ const Password: React.FC<PasswordProps> = ({
   generatePasswordRegex,
   ...restProps
 }) => {
+  const inputRef = useRef(null);
+
   const { token } = theme.useToken();
   const [fieldError, setFieldError] = useState<string[]>([]);
   const [isValidating, setIsValidating] = useState(false);
@@ -84,9 +86,20 @@ const Password: React.FC<PasswordProps> = ({
     setFieldError(newFieldError);
     onValidate?.(newFieldError.length === 0);
     // 先触发 onValidate，再异步触发 onChange，以便在 antd3 Form 的类组件场景下，校验规则 validator 能获取到最新的 passed 值。
+    const startPos = inputRef?.current?.input?.selectionStart;
+    const endPos = inputRef.current.input.selectionEnd;
     setTimeout(() => {
       onChange?.(newValue);
     }, 0);
+    /***
+     * TODO 快速编辑时会发生焦点移至末尾的问题
+     * 解决方案1   去除 onChange 的异步处理  但是会引起antd3 Form 不兼容的问题
+     * 解决方案2   手动设置光标位置，由于onChange 异步处理，光标设置需要延后设置
+     * */
+    setTimeout(() => {
+      // 设置光标位置
+      inputRef.current.setSelectionRange(startPos, endPos, newValue);
+    }, 3);
   };
 
   // 根据正则表达式获取符合要求的随机密码
@@ -118,6 +131,7 @@ const Password: React.FC<PasswordProps> = ({
         >
           <Input.Password
             value={value}
+            ref={inputRef}
             autoComplete="new-password"
             onChange={e => {
               handleChange(e?.target?.value);

@@ -31,6 +31,14 @@ nav:
 | layout | 布局 | horizontal \| vertical | horizontal | - |
 | title | 标题 | React.ReactNode | horizontal | - |
 | extra | 额外内容 | React.ReactNode | horizontal | - |
+| steps | 开启向导模式 | Step | - | - |
 | mode | 展示模式: 页面模式 \| 卡片模式 \| 组件模式 | page \| pageCard \| component | pageCard | - |
+
+## Step
+
+| 参数             | 说明     | 类型            | 默认值 | 版本 |
+| :--------------- | :------- | :-------------- | :----- | :--- |
+| title            | 标题     | React.ReactNode | -      | -    |
+| exdescriptiontra | 额外内容 | React.ReactNode | -      | -    |
 
 - 更多 API 详见 antd Empty 文档: https://ant.design/components/Empty-cn

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Empty, Button, Steps } from '@oceanbase/design';
+import { Empty, Button } from '@oceanbase/design';
 import EmptyIcon from '../icon/EmptyIcon';
 
 export default () => {
@@ -19,17 +19,13 @@ export default () => {
     },
     {
       title: '第四步',
-      description,
+      description:
+        'This is a description.This is a description.This is a description.This is a description.This is a description.',
     },
   ];
 
   return (
-    <Empty
-      mode="page"
-      image={<EmptyIcon />}
-      title="Your description title"
-      description={<Steps current={0} items={steps} />}
-    >
+    <Empty mode="page" image={<EmptyIcon />} title="Your description title" steps={steps}>
       <Button type="primary">操作项</Button>
     </Empty>
   );

@@ -20,6 +20,7 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
       padding: '32px 0',
       [`${componentCls}-image`]: {
         height: 'auto',
+        marginBottom: 0,
       },
       [`${componentCls}-description`]: {
         [`${componentCls}-title`]: {
@@ -68,12 +69,12 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
 
           [`${antCls}-steps-item-content`]: {
             [`${antCls}-steps-item-title`]: {
-              color: colorText,
+              color: `${colorText}!important`,
               lineHeight: '24px',
               fontSize: '14px',
             },
             ['.ant-steps-item-description']: {
-              color: colorTextTertiary,
+              color: `${colorTextTertiary}!important`,
               lineHeight: '20px',
               fontSize: '12px',
               marginTop: '8px',
