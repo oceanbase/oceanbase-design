@@ -158,6 +158,7 @@ const Highlight: React.FC<HighlightProps> = props => {
     theme = THEME_LIGHT,
     onCopyChange = () => {},
     language,
+    locale,
   } = props;
 
   const prefixCls = getPrefix('highlight');
@@ -247,7 +248,7 @@ const Highlight: React.FC<HighlightProps> = props => {
           onCopy={value => {
             onCopyChange(value);
             setCopied(true);
-            message.success('Copied');
+            message.success(locale.copied);
             const tempCopyId = window.setTimeout(() => {
               setCopied(false);
             }, 2000);

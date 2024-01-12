@@ -8,6 +8,15 @@ group: 基础组件
 
 ---
 
+## 0.2.34
+
+`2024-01-12`
+
+- Drawer
+  - 🆕 新增 `footerExtra` 属性，用于设置抽屉底部的额外内容，仅默认页脚生效。[#408](https://github.com/oceanbase/oceanbase-design/pull/408)
+  - 📢 调整页脚的 DOM 结构，并将原先的 `.ant-drawer-footer-content` 类名改为 `.ant-drawer-footer-container`。[#408](https://github.com/oceanbase/oceanbase-design/pull/408)
+- 🐞 修复 Tooltip `title` 为空时仍然展示的问题。[#405](https://github.com/oceanbase/oceanbase-design/pull/405) [@linhf123](https://github.com/linhf123)
+
 ## 0.2.33
 
 `2023-12-28`

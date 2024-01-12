@@ -49,6 +49,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>(
       onVisibleChange,
       overlayInnerStyle,
       className,
+      overlay,
       ...restProps
     },
     ref
@@ -62,15 +63,9 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>(
     const tooltipCls = classNames(className, hashId);
     const [innerOpen, setInnerOpen] = useState(open ?? visible ?? defaultOpen ?? defaultVisible);
 
-    const newOpen = open ?? visible ?? innerOpen;
-
-    useEffect(() => {
-      if (!isNil(open)) {
-        setInnerOpen(open);
-      } else if (!isNil(visible)) {
-        setInnerOpen(visible);
-      }
-    }, [open, visible]);
+    // 同步 ant-design noTitle 逻辑
+    const noTitle = !title && !overlay && title !== 0; // overlay for old version compatibility
+    const newOpen = open ?? visible ?? (noTitle ? false : innerOpen);
 
     const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => {
       e.stopPropagation();
@@ -115,6 +110,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>(
             ...overlayInnerStyle,
           }}
           className={tooltipCls}
+          overlay={overlay}
           {...restProps}
         >
           {children}
@@ -136,6 +132,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>(
             ...overlayInnerStyle,
           }}
           className={tooltipCls}
+          overlay={overlay}
           {...restProps}
         >
           {children}
