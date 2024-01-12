@@ -8,6 +8,12 @@ group: 业务组件
 
 ---
 
+## 0.2.35
+
+`2024-01-12`
+
+- 🌐 Highlight 支持国际化，之前为固定的英文文案。[#409](https://github.com/oceanbase/oceanbase-design/pull/409) [@linhf123](https://github.com/linhf123)
+
 ## 0.2.34
 
 `2023-12-28`
