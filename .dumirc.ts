@@ -216,7 +216,6 @@ export default defineConfig({
               link: '/biz-components/background-task-manager',
             },
             { title: 'TagSelect 标签式单选/多选', link: '/biz-components/tag-select' },
-            { title: 'Highlight 代码高亮', link: '/biz-components/highlight' },
           ],
         },
       ],

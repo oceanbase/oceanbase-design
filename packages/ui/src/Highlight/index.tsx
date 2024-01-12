@@ -161,7 +161,6 @@ const Highlight: React.FC<HighlightProps> = props => {
     locale,
   } = props;
 
-  console.log(locale, 'locale');
   const prefixCls = getPrefix('highlight');
   const themeClass = theme === THEME_DARK ? `${prefixCls}-dark` : `${prefixCls}-light`;
 
