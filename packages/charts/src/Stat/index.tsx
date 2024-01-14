@@ -14,6 +14,7 @@ import './index.less';
 export interface StatConfig {
   width?: number;
   height?: number;
+  padding?: number;
   title?: string;
   value?: number;
   prefix?: string;
@@ -50,6 +51,7 @@ function fontSizeReductionFactor(fontSize: number) {
 const Stat: React.FC<StatConfig> = ({
   width,
   height,
+  padding = 8,
   title,
   value,
   prefix,
@@ -73,7 +75,6 @@ const Stat: React.FC<StatConfig> = ({
     height: containerHeight = 0,
   } = useResizeObserver<HTMLDivElement>();
   const isFlat = containerHeight < 72;
-  const padding = containerHeight > 100 ? 12 : 8;
   const maxWidth = containerWidth - padding * 2;
   const maxHeight = containerHeight - padding * 2;
 
