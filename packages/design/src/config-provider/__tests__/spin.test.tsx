@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import ConfigProvider from '..';
-import Spin from '../../spin';
+import { ConfigProvider, Spin } from '@oceanbase/design';
 
 describe('ConfigProvider spin', () => {
   it('spin.indicator should work', () => {
