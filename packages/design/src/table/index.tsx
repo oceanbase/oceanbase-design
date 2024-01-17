@@ -193,7 +193,7 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
       rowSelection={
         rowSelection
           ? {
-              columnWidth: table.selectionColumnWidth,
+              columnWidth: table?.selectionColumnWidth,
               ...rowSelection,
               onChange: (
                 selectedRowKeys: React.Key[],
