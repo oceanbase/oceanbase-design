@@ -28,6 +28,8 @@ nav:
 
 <code src="./demo/edit-row.tsx" title="可编辑行" description="带行编辑功能的表格。"></code>
 
+<code src="./demo/virtual.tsx" title="虚拟滚动" description="通过 `virtual` 开启虚拟滚动，要求设置 `scroll.x` 和 `scroll.y` 且必须为 number 类型。"></code>
+
 <code src="./demo/dynamic-settings.tsx" title="动态控制表格属性" description="选择不同配置组合查看效果。"></code>
 
 <code src="./demo/with-card.tsx" title="和 Card 组合使用"></code>
