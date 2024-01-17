@@ -171,6 +171,12 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
             },
         },
       },
+      // Remove pagination borderTop for expandable Table
+      [`${componentCls}-pagination`]: {
+        [`&${antCls}-pagination`]: {
+          borderTop: 'none',
+        },
+      },
     },
 
     // 分页器样式
@@ -197,10 +203,10 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
           },
         },
       },
+      // Remove pagination borderTop for bordered Table
       [`${componentCls}${componentCls}-bordered`]: {
         [`&+${componentCls}-pagination`]: {
           [`&${antCls}-pagination`]: {
-            // Remove pagination borderTop for bordered Table
             borderTop: 'none',
           },
         },
