@@ -59,7 +59,7 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
     },
   };
 
-  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const { getPrefixCls, table } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('table', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
   const tableCls = classNames(
@@ -193,6 +193,7 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
       rowSelection={
         rowSelection
           ? {
+              columnWidth: table.selectionColumnWidth,
               ...rowSelection,
               onChange: (
                 selectedRowKeys: React.Key[],

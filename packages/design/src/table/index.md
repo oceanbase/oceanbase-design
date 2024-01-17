@@ -18,7 +18,7 @@ nav:
 
 <code src="./demo/fixed-columns-header-tables.tsx" title="固定头和列"></code>
 
-<code src="./demo/multiple-tables.tsx" title="选择和操作"></code>
+<code src="./demo/row-selection.tsx" title="选择和操作"></code>
 
 <code src="./demo/nesting-tables.tsx" title="嵌套子表格"></code>
 
@@ -29,6 +29,8 @@ nav:
 <code src="./demo/edit-row.tsx" title="可编辑行" description="带行编辑功能的表格。"></code>
 
 <code src="./demo/dynamic-settings.tsx" title="动态控制表格属性" description="选择不同配置组合查看效果。"></code>
+
+<code src="./demo/with-card.tsx" title="和 Card 组合使用"></code>
 
 ## API
 

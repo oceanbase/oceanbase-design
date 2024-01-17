@@ -88,7 +88,7 @@ const App: React.FC = () => {
       toolSelectedContent={toolSelectedContent}
       rowSelection={{
         selectedRowKeys: selectedRowKeys,
-        onChange: (keys: React.Key[], rows: any[]) => {
+        onChange: (keys: React.Key[]) => {
           setSelectedRowKeys(keys);
         },
       }}

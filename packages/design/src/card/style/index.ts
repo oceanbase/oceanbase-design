@@ -8,6 +8,37 @@ export type CardToken = FullToken<'Card'> & {
   tabsPrefixCls: string;
 };
 
+export const genTableStyle = (padding: number, token: CardToken): CSSObject => {
+  const { antCls } = token;
+  const tableComponentCls = `${antCls}-table`;
+  return {
+    [`${tableComponentCls}-wrapper`]: {
+      [`${tableComponentCls}`]: {
+        // first column should align with card title
+        [`${tableComponentCls}-thead > tr > th:first-child, ${tableComponentCls}-tbody > tr > td:first-child`]:
+          {
+            paddingLeft: padding,
+          },
+        // last column should align with card extra
+        [`${tableComponentCls}-thead > tr > th:last-child, ${tableComponentCls}-tbody > tr > td:last-child`]:
+          {
+            paddingRight: padding,
+          },
+      },
+      [`${tableComponentCls}-pagination${antCls}-pagination`]: {
+        // add marginLeft for table batchOperationBar
+        [`${tableComponentCls}-batch-operation-bar`]: {
+          marginLeft: padding,
+        },
+        // add marginRight for table pagination
+        [`& > li:last-child`]: {
+          marginRight: padding,
+        },
+      },
+    },
+  };
+};
+
 export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObject => {
   const { componentCls, tabsComponentCls, tabsPrefixCls, padding, paddingSM, paddingLG } = token;
   return {
@@ -51,6 +82,13 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
         marginBottom: 0,
       },
     },
+    // no body padding card
+    [`${componentCls}${componentCls}-no-body-padding`]: genTableStyle(paddingLG, token),
+    // no body padding small card
+    [`${componentCls}${componentCls}-no-body-padding${componentCls}-small`]: genTableStyle(
+      paddingSM,
+      token
+    ),
   };
 };
 
