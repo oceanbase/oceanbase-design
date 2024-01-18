@@ -19,7 +19,7 @@ const columns: ColumnsType<DataType> = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    width: 100,
+    width: 120,
     fixed: 'left',
     filters: [
       {
@@ -115,10 +115,9 @@ for (let i = 0; i < 100; i++) {
 
 const App: React.FC = () => (
   <Table
+    bordered={true}
     columns={columns}
     dataSource={data}
-    bordered
-    size="middle"
     scroll={{ x: 'calc(700px + 50%)', y: 240 }}
   />
 );
