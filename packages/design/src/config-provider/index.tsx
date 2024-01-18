@@ -33,11 +33,16 @@ export type SpinConfig = ComponentStyleConfig & {
   indicator?: SpinIndicator;
 };
 
+export type TableConfig = ComponentStyleConfig & {
+  selectionColumnWidth?: number;
+};
+
 export interface ConfigConsumerProps extends AntConfigConsumerProps {
   theme?: ThemeConfig;
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
   spin?: SpinConfig;
+  table?: TableConfig;
   locale?: Locale;
 }
 
@@ -49,6 +54,7 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
   spin?: SpinConfig;
+  table?: TableConfig;
   // StyleProvider props
   styleProviderProps?: StyleProviderProps;
 }
@@ -60,7 +66,7 @@ export interface ExtendedConfigConsumerProps {
 
 const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
   navigate: undefined,
-  hideOnSinglePage: true,
+  hideOnSinglePage: false,
 });
 
 const { defaultSeed } = themeConfig;
@@ -71,6 +77,7 @@ const ConfigProvider = ({
   navigate,
   hideOnSinglePage,
   spin,
+  table,
   tabs,
   styleProviderProps,
   ...restProps
@@ -89,6 +96,7 @@ const ConfigProvider = ({
   return (
     <AntConfigProvider
       spin={merge(parentContext.spin, spin)}
+      table={merge(parentContext.table, table)}
       tabs={merge(
         {
           indicatorSize: origin => (origin >= 24 ? origin - 16 : origin),
@@ -111,10 +119,11 @@ const ConfigProvider = ({
       <ExtendedConfigContext.Provider
         value={{
           navigate: navigate === undefined ? parentExtendedContext.navigate : navigate,
-          hideOnSinglePage:
-            hideOnSinglePage === undefined
-              ? parentExtendedContext.hideOnSinglePage
-              : hideOnSinglePage,
+          hideOnSinglePage: parentContext.pagination?.showSizeChanger
+            ? false
+            : hideOnSinglePage !== undefined
+              ? hideOnSinglePage
+              : parentExtendedContext.hideOnSinglePage,
         }}
       >
         <StyleProvider {...mergedStyleProviderProps}>

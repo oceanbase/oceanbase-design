@@ -24,11 +24,16 @@ export default () => {
         onCancel={() => {
           setOpen(false);
         }}
+        bodyStyle={{
+          maxHeight: 400,
+          overflow: 'auto',
+        }}
       >
         <div
           style={{
-            height: '100vh',
+            height: 800,
             background: token.colorBgLayout,
+            borderRadius: token.borderRadius,
             padding: 12,
           }}
         >

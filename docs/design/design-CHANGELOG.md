@@ -8,6 +8,46 @@ group: 基础组件
 
 ---
 
+## 0.2.34
+
+`2024-01-12`
+
+- Drawer
+  - 🆕 新增 `footerExtra` 属性，用于设置抽屉底部的额外内容，仅默认页脚生效。[#408](https://github.com/oceanbase/oceanbase-design/pull/408)
+  - 📢 调整页脚的 DOM 结构，并将原先的 `.ant-drawer-footer-content` 类名改为 `.ant-drawer-footer-container`。[#408](https://github.com/oceanbase/oceanbase-design/pull/408)
+- 🐞 修复 Tooltip `title` 为空时仍然展示的问题。[#405](https://github.com/oceanbase/oceanbase-design/pull/405) [@linhf123](https://github.com/linhf123)
+
+## 0.2.33
+
+`2023-12-28`
+
+- 🐞 ConfigProvider `hideOnSinglePage` 默认值改为 `false`，避免统一去掉分页器带来的问题。[#388](https://github.com/oceanbase/oceanbase-design/pull/388)
+- 🐞 修复 Table 只有一页数据且存在批量操作或 `pageSize` 切换时分页器被隐藏的问题。[#389](https://github.com/oceanbase/oceanbase-design/pull/389)
+- 🐞 修复 List 只有一页数据且存在 `pageSize` 切换时分页器被隐藏的问题。[#390](https://github.com/oceanbase/oceanbase-design/pull/390)
+- 💄 更新 Design Token，新增 `fontHeight`、`fontHeightLG` 和 `fontHeightSM` less 变量。[#381](https://github.com/oceanbase/oceanbase-design/pull/381)
+
+## 0.2.32
+
+`2023-12-14`
+
+- 🔥 Space 和 Grid 组件的间距样式兼容 Chrome 84 以下的浏览器。[#344](https://github.com/oceanbase/oceanbase-design/pull/344) [@wdyea-ya](https://github.com/wdyea-ya)
+- 🌈 更新默认主题的功能色板，包括 Design Token 和 less 变量。[#354](https://github.com/oceanbase/oceanbase-design/pull/354)
+- Tag
+  - 🆕 Tag 新增 `ellipsis` 属性，用于配置内容溢出时的省略和 Tooltip 提示。[#361](https://github.com/oceanbase/oceanbase-design/pull/361)
+  - 🐞 修复 Tag 字体大小不正确的问题。[#360](https://github.com/oceanbase/oceanbase-design/pull/360)
+- 🐞 修复 Select 在多选模式和 `large` & `small` 尺寸下，选中项缺少边框样式的问题。[#332](https://github.com/oceanbase/oceanbase-design/pull/332) [@wdyea-ya](https://github.com/wdyea-ya)
+- 💄 优化 Button 样式，包括更新主按钮的渐变色，并去除 `box-shadow` 阴影。[#352](https://github.com/oceanbase/oceanbase-design/pull/352)
+- TypeScript
+  - 🤖 导出 SpaceProps、SpaceSize、ColProps、ColSize 和 RowProps 的类型定义。[#344](https://github.com/oceanbase/oceanbase-design/pull/344)
+
+## 0.2.31
+
+`2023-12-08`
+
+- 🆕 ConfigProvider 新增 `styleProviderProps` 属性，一般用于配置 StyleProvider 的 `hashPriority` 和 `transformers` 属性实现样式降级，来兼容 Chrome 88 以下的低版本浏览器。[#343](https://github.com/oceanbase/oceanbase-design/pull/343)
+- 🐞 修复 Drawer 的分隔阴影没有跟随内容和窗口尺寸变化实时更新的问题。[#337](https://github.com/oceanbase/oceanbase-design/pull/337)
+- 🐞 修复 Form `hideRequiredMark` 优先级低于 ConfigProvider `form.requiredMark` 的问题。[#349](https://github.com/oceanbase/oceanbase-design/pull/349)
+
 ## 0.2.30
 
 `2023-11-30`

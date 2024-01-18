@@ -10,7 +10,7 @@ import './previewer.less';
 export default () => {
   return (
     <ConfigProvider prefixCls="previewer">
-      <Previewer showTheme={true} />
+      <Previewer showTheme={false} />
     </ConfigProvider>
   );
 };

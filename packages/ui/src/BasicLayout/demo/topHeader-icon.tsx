@@ -3,10 +3,11 @@
  */
 import React from 'react';
 import { Menu, message } from '@oceanbase/design';
-import { BasicLayout, IconFont, Lottie } from '@oceanbase/ui';
+import { BasicLayout, Lottie } from '@oceanbase/ui';
 import Icon from '@oceanbase/icons';
 import { ReactComponent as MonitorSvg } from '../../assets/monitor.svg';
 import PageContainerEmptyDemo from '../../PageContainer/demo/empty';
+import IconFont from './IconFont';
 
 export default () => {
   const menus = [

@@ -7,7 +7,7 @@ const App: React.FC = () => {
   return (
     <div>
       <Form style={{ marginBottom: 24 }}>
-        <Form.Item label="type">
+        <Form.Item label="type" required={true}>
           <Radio.Group
             value={type}
             onChange={e => {

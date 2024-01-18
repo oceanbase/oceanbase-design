@@ -7,7 +7,6 @@ nav:
 
 - 🔥 完全继承 antd [Alert](https://ant.design/components/alert-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
-- 📢 默认开启 `pagination.hideOnSinglePage`，即只有一页数据时会隐藏分页器。
 - 🆕 设置 `column.ellipsis`，开启自动省略，并使用 Tooltip 展示全部内容。
 - 🆕 新增 `批量操作栏`，可配置选中对象、批量操作项等，详见 [API](#api)。
 
@@ -19,7 +18,7 @@ nav:
 
 <code src="./demo/fixed-columns-header-tables.tsx" title="固定头和列"></code>
 
-<code src="./demo/multiple-tables.tsx" title="选择和操作"></code>
+<code src="./demo/row-selection.tsx" title="选择和操作"></code>
 
 <code src="./demo/nesting-tables.tsx" title="嵌套子表格"></code>
 
@@ -37,7 +36,11 @@ nav:
 
 <code src="./demo/edit-row.tsx" title="可编辑行" description="带行编辑功能的表格。"></code>
 
+<code src="./demo/virtual.tsx" title="虚拟滚动" description="通过 `virtual` 开启虚拟滚动，要求设置 `scroll.x` 和 `scroll.y` 且必须为 number 类型。"></code>
+
 <code src="./demo/dynamic-settings.tsx" title="动态控制表格属性" description="选择不同配置组合查看效果。"></code>
+
+<code src="./demo/with-card.tsx" title="和 Card 组合使用"></code>
 
 ## API
 

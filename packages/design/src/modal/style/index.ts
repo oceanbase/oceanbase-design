@@ -26,13 +26,6 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
       [`${componentCls}-header`]: {
         marginBottom: marginLG,
       },
-      [`${componentCls}-body`]: {
-        maxHeight: `calc(100vh - ${top + bottom}px - ${paddingMD * 2}px - ${marginLG * 2}px - ${
-          titleHeight + controlHeight
-        }px)`,
-        overflowY: 'auto',
-        borderRadius,
-      },
       [`${componentCls}-footer`]: {
         marginTop: marginLG,
       },

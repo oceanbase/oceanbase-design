@@ -7,6 +7,7 @@ nav:
 
 - 🔥 完全继承 antd [Tag](https://ant.design/components/tag-cn/) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
+- 🆕 新增 `ellipsis` 属性，用于配置内容溢出时的省略和 Tooltip 提示。
 
 ## 代码演示
 
@@ -14,8 +15,8 @@ nav:
 
 ## API
 
-| 参数     | 说明                   | 类型    | 默认值 |
-| :------- | :--------------------- | :------ | :----- |
-| ellipsis | 内容超长时是否自动省略 | boolean | true   |
+| 参数 | 说明 | 类型 | 默认值 |
+| :-- | :-- | :-- | :-- |
+| ellipsis | 内容超长时是否自动省略 | `boolean` \| [EllipsisConfig](https://ant-design.antgroup.com/components/typography-cn#ellipsis) | true |
 
 - 详见 antd Tag 文档: https://ant.design/components/tag-cn/

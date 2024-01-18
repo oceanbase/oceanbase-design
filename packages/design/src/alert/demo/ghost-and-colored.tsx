@@ -12,7 +12,7 @@ const App: React.FC = () => {
           marginBottom: 24,
         }}
       >
-        <Form.Item label="透明背景">
+        <Form.Item label="透明背景" required={true}>
           <Radio.Group
             value={ghost}
             onChange={e => {
@@ -23,7 +23,7 @@ const App: React.FC = () => {
             <Radio.Button value={false}>否</Radio.Button>
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="全局着色">
+        <Form.Item label="全局着色" required={true}>
           <Radio.Group
             value={colored}
             onChange={e => {

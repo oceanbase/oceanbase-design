@@ -2,6 +2,7 @@ import type { CSSObject } from '@ant-design/cssinjs';
 import type { PageContainerToken } from '@ant-design/pro-layout/es/components/PageContainer/style';
 import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genOperationStyle, genFooterToolbarStyle } from '../../FooterToolbar/style';
 
 export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
   token: PageContainerToken
@@ -11,9 +12,6 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
     proComponentsCls,
     componentCls,
     colorBgLayout,
-    colorBgBase,
-    borderRadius,
-    boxShadowSecondary,
     fontSizeHeading3,
     controlHeightLG,
     padding,
@@ -49,18 +47,8 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
           height,
           lineHeight,
           marginBlock: 0,
-          // 设置页容器右上角的组件高度
-          [`${antCls}-btn:not(${antCls}-input-search-button)`]: {
-            minWidth: controlHeightLG,
-            height,
-          },
-          [`${antCls}-radio-button-wrapper`]: {
-            height,
-            lineHeight,
-          },
-          [`${antCls}-input-wrapper`]: {
-            lineHeight,
-          },
+          // extra operation style
+          ...genOperationStyle(token),
         },
         [`${antCls}-page-header-footer`]: {
           marginBlockStart: 0,
@@ -86,22 +74,10 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
     [`${componentCls}-with-footer `]: {
       paddingBottom: 64,
     },
-    [`${proComponentsCls}-footer-bar`]: {
-      width: '100%',
-      backgroundColor: colorBgBase,
-      borderRadius: borderRadius,
-      boxShadow: boxShadowSecondary,
-      borderBlockStart: 'none',
-      // 设置底部操作栏的组件高度
-      [`${antCls}-btn:not(${antCls}-input-search-button)`]: {
-        minWidth: 68,
-        height,
-      },
-      [`${antCls}-radio-button-wrapper`]: {
-        height,
-        lineHeight,
-      },
-    },
+    ...(genFooterToolbarStyle({
+      ...token,
+      componentCls: `${proComponentsCls}-footer-bar`,
+    }) as object),
   };
 };
 

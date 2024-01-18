@@ -20,15 +20,21 @@ type CompoundedComponent = React.FC<FormProps> & {
   create: typeof AntForm.create;
 };
 
-const Form: CompoundedComponent = props => {
+const Form: CompoundedComponent = ({ hideRequiredMark, ...restProps }) => {
   const { form: contextForm } = useContext(ConfigProvider.ConfigContext);
   return (
     // @ts-ignore to ignore children type error
     <AntForm
       requiredMark={
-        contextForm?.requiredMark !== undefined ? contextForm?.requiredMark : 'optional'
+        // could remove hideRequiredMark logic after https://github.com/ant-design/ant-design/pull/46299 is published
+        hideRequiredMark
+          ? false
+          : contextForm?.requiredMark !== undefined
+          ? contextForm?.requiredMark
+          : 'optional'
       }
-      {...props}
+      hideRequiredMark={hideRequiredMark}
+      {...restProps}
     />
   );
 };

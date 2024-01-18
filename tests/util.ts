@@ -1,6 +1,8 @@
 import { act } from '@testing-library/react';
 import fs from 'fs';
 import { join } from 'path';
+import { _rs as onEsResize } from 'rc-resize-observer/es/utils/observerUtil';
+import { _rs as onLibResize } from 'rc-resize-observer/lib/utils/observerUtil';
 
 export function getPackageList() {
   return fs
@@ -38,4 +40,22 @@ export async function waitFakeTimer(advanceTime = 1000, times = 20) {
       }
     });
   }
+}
+
+export const triggerResize = (target: Element) => {
+  const originGetBoundingClientRect = target.getBoundingClientRect;
+
+  target.getBoundingClientRect = () => ({ width: 510, height: 903 }) as DOMRect;
+
+  act(() => {
+    onLibResize([{ target } as ResizeObserverEntry]);
+    onEsResize([{ target } as ResizeObserverEntry]);
+  });
+
+  target.getBoundingClientRect = originGetBoundingClientRect;
+};
+
+export function isTooltipOpen() {
+  const tooltipEle = document.querySelector('.ant-tooltip');
+  return tooltipEle && !tooltipEle.classList.contains('ant-tooltip-hidden');
 }
