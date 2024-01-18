@@ -83,10 +83,7 @@ const Password: React.FC<PasswordProps> = ({
     setIsValidating(false);
     setFieldError(newFieldError);
     onValidate?.(newFieldError.length === 0);
-    // 先触发 onValidate，再异步触发 onChange，以便在 antd3 Form 的类组件场景下，校验规则 validator 能获取到最新的 passed 值。
-    setTimeout(() => {
-      onChange?.(newValue);
-    }, 0);
+    onChange?.(newValue);
   };
 
   // 根据正则表达式获取符合要求的随机密码
