@@ -79,6 +79,7 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
           // 除内嵌子表格外，设置其他内嵌元素样式
           [`& > *:not(${componentCls}-wrapper)`]: {
             marginTop: -marginSM,
+            padding: `${paddingSM}px ${padding}px`,
             backgroundColor: colorFillQuaternary,
             borderRadius: borderRadiusLG,
           },
