@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { Badge, Button, Dropdown, Space, Table, TableColumnsType } from '@oceanbase/design';
+import {
+  Badge,
+  Button,
+  Dropdown,
+  Form,
+  Radio,
+  Space,
+  Table,
+  TableColumnsType,
+} from '@oceanbase/design';
 import type { SizeType } from '@oceanbase/design/es/config-provider';
 import { DownOutlined } from '@oceanbase/icons';
 
@@ -26,9 +35,9 @@ const items = [
 ];
 
 const App: React.FC = () => {
-  const [selectedRowKeys, setSelectedRowKeys] = useState<any[]>([]);
-  const [middleSelectedRowKeys, setMiddleSelectedRowKeys] = useState<any[]>([]);
-  const [smallSelectedRowKeys, setSmallSelectedRowKeys] = useState<any[]>([]);
+  const [size, setSize] = useState<SizeType>('large');
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+
   const expandedRowRender = (size: SizeType) => {
     const columns: TableColumnsType<ExpandedDataType> = [
       { title: 'Date', dataIndex: 'date', key: 'date' },
@@ -92,7 +101,7 @@ const App: React.FC = () => {
     });
   }
 
-  const toolOptionsRender = (size: any) => {
+  const toolOptionsRender = (size: SizeType) => {
     return [
       <Button size={size}>批量删除</Button>,
       <Button size={size}>批量更新</Button>,
@@ -100,64 +109,40 @@ const App: React.FC = () => {
     ];
   };
 
-  const toolSelectedContent = (selectedRowKeys: any, selectedRows: any) => {
+  const toolSelectedContent = (selectedRowKeys: React.Key[], selectedRows: any[]) => {
     return <Table columns={columns} dataSource={selectedRows} pagination={false} />;
   };
 
   return (
     <>
+      <Form style={{ marginBottom: 24 }}>
+        <Form.Item label="Size" required={true}>
+          <Radio.Group
+            value={size}
+            onChange={e => {
+              setSize(e.target.value);
+            }}
+          >
+            <Radio.Button value="large">large</Radio.Button>
+            <Radio.Button value="middle">middle</Radio.Button>
+            <Radio.Button value="small">small</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+      </Form>
       <Table
+        size={size}
         columns={columns}
-        expandable={{ expandedRowRender, defaultExpandedRowKeys: ['0'] }}
         dataSource={data}
         toolOptionsRender={() => toolOptionsRender('middle')}
         toolSelectedContent={toolSelectedContent}
+        expandable={{
+          expandedRowRender: () => expandedRowRender(size),
+          defaultExpandedRowKeys: ['0'],
+        }}
         rowSelection={{
           selectedRowKeys: selectedRowKeys,
-          onChange: (keys: React.Key[], rows: any[]) => {
+          onChange: (keys: React.Key[]) => {
             setSelectedRowKeys(keys);
-          },
-        }}
-        pagination={{
-          showTotal: total => `共 ${total} 条`,
-        }}
-      />
-      <br />
-      <Table
-        columns={columns}
-        expandable={{
-          expandedRowRender: () => expandedRowRender('middle'),
-          defaultExpandedRowKeys: ['0'],
-        }}
-        dataSource={data}
-        size="middle"
-        toolOptionsRender={() => toolOptionsRender('small')}
-        toolSelectedContent={toolSelectedContent}
-        rowSelection={{
-          selectedRowKeys: middleSelectedRowKeys,
-          onChange: (keys: React.Key[], rows: any[]) => {
-            setMiddleSelectedRowKeys(keys);
-          },
-        }}
-        pagination={{
-          showTotal: total => `共 ${total} 条`,
-        }}
-      />
-      <br />
-      <Table
-        columns={columns}
-        expandable={{
-          expandedRowRender: () => expandedRowRender('small'),
-          defaultExpandedRowKeys: ['0'],
-        }}
-        dataSource={data}
-        size="small"
-        toolOptionsRender={() => toolOptionsRender('small')}
-        toolSelectedContent={toolSelectedContent}
-        rowSelection={{
-          selectedRowKeys: smallSelectedRowKeys,
-          onChange: (keys: React.Key[], rows: any[]) => {
-            setSmallSelectedRowKeys(keys);
           },
         }}
         pagination={{
