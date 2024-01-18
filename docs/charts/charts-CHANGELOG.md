@@ -8,6 +8,13 @@ group: 可视化图表
 
 ---
 
+## 0.2.22
+
+`2024-01-18`
+
+- 🆕 Stat 新增 padding 属性，用于设置图表的内间距。[#412](https://github.com/oceanbase/oceanbase-design/pull/412)
+- 🐞 修复 Pie 环图统计组件标题和内容 `formatter` 不生效的问题。[#413](https://github.com/oceanbase/oceanbase-design/pull/413)
+
 ## 0.2.21
 
 `2024-01-12`
