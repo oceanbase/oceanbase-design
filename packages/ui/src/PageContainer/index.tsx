@@ -37,6 +37,7 @@ const PageContainer = ({
   extraContent,
   tabList,
   tabBarExtraContent,
+  footer,
   footerToolBarProps,
   locale,
   ...restProps
@@ -46,7 +47,7 @@ const PageContainer = ({
   const prefixCls = getPrefixCls('pro-page-container', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
 
-  const { reload, subTitle, breadcrumb } = header || {};
+  const { reload, subTitle, breadcrumb, extra } = header || {};
   const reloadProps =
     isObject(reload) && !React.isValidElement(reload)
       ? (reload as Omit<IconComponentProps, 'ref'>)
@@ -70,8 +71,23 @@ const PageContainer = ({
       {subTitle}
     </Space>
   );
+  const newExtra = React.Children.map(extra, item => (
+    <ConfigProvider
+      // large size component
+      componentSize="large"
+      // middle font size
+      theme={{
+        token: {
+          fontSizeLG: 14,
+        },
+      }}
+    >
+      {item}
+    </ConfigProvider>
+  ));
   const newHeader: PageHeaderProps = header && {
     ...header,
+    extra: newExtra,
     subTitle: newSubTitle,
     breadcrumb: breadcrumb && {
       itemRender: (route, params, routes, paths) => (
@@ -105,6 +121,20 @@ const PageContainer = ({
       extraContent={extraContent}
       tabList={tabList}
       tabBarExtraContent={tabBarExtraContent}
+      footer={React.Children.map(footer, item => (
+        <ConfigProvider
+          // large size component
+          componentSize="large"
+          // middle font size
+          theme={{
+            token: {
+              fontSizeLG: 14,
+            },
+          }}
+        >
+          {item}
+        </ConfigProvider>
+      ))}
       footerToolBarProps={{
         // render footer under parent instead of body by default
         portalDom: false,
