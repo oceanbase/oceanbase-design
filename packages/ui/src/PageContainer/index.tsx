@@ -8,7 +8,7 @@ import { PageContainer as AntPageContainer } from '@ant-design/pro-components';
 import classNames from 'classnames';
 import { isObject } from 'lodash';
 import React, { useContext } from 'react';
-import { ConfigProvider, Space, Tooltip } from '@oceanbase/design';
+import { ConfigProvider, Space, Tooltip, theme } from '@oceanbase/design';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import ItemRender from './ItemRender';
 import zhCN from './locale/zh-CN';
@@ -47,6 +47,8 @@ const PageContainer = ({
   const prefixCls = getPrefixCls('pro-page-container', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
 
+  const { token } = theme.useToken();
+
   const { reload, subTitle, breadcrumb, extra } = header || {};
   const reloadProps =
     isObject(reload) && !React.isValidElement(reload)
@@ -78,7 +80,7 @@ const PageContainer = ({
       // middle font size
       theme={{
         token: {
-          fontSizeLG: 14,
+          fontSizeLG: token.fontSize,
         },
       }}
     >
@@ -128,7 +130,7 @@ const PageContainer = ({
           // middle font size
           theme={{
             token: {
-              fontSizeLG: 14,
+              fontSizeLG: token.fontSize,
             },
           }}
         >
