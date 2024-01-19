@@ -8,6 +8,14 @@ group: 业务组件
 
 ---
 
+## 0.2.36
+
+`2024-01-18`
+
+- 🐞 修复 Password 组件快速输入时丢失字符和焦点跳跃的问题。[#424](https://github.com/oceanbase/oceanbase-design/pull/424) [@Vanleehao](https://github.com/Vanleehao)
+- 🐞 修复 Highlight 国际化不生效的问题。[#419](https://github.com/oceanbase/oceanbase-design/pull/419) [@linhf123](https://github.com/linhf123)
+- 💄 优化 PageContainer 右上角和页脚操作区中的 Input 样式，保证宽高和字体大小符合设计规范。[#426](https://github.com/oceanbase/oceanbase-design/pull/426)
+
 ## 0.2.35
 
 `2024-01-12`
