@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, Form, Radio, Table } from '@oceanbase/design';
 
 const App: React.FC = () => {
+  const [hasTitle, setHasTitle] = useState(true);
   const [hasPadding, setHasPadding] = useState(true);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
@@ -35,8 +36,19 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <Form style={{ marginBottom: 24 }}>
-        <Form.Item label="Card" required={true}>
+      <Form layout="inline" style={{ marginBottom: 24 }}>
+        <Form.Item label="Card title" required={true}>
+          <Radio.Group
+            value={hasTitle}
+            onChange={e => {
+              setHasTitle(e.target.value);
+            }}
+          >
+            <Radio.Button value={true}>Has title</Radio.Button>
+            <Radio.Button value={false}>No title </Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+        <Form.Item label="Card body padding" required={true}>
           <Radio.Group
             value={hasPadding}
             onChange={e => {
@@ -49,7 +61,7 @@ const App: React.FC = () => {
         </Form.Item>
       </Form>
       <Card
-        title="Title"
+        title={hasTitle ? 'Title' : ''}
         bodyStyle={
           hasPadding
             ? {}
