@@ -13,9 +13,11 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="基本"></code>
+<code src="./demo/basic.tsx" title="基本" description="支持 reload 页面刷新"></code>
 
-<code src="./demo/complete.tsx" iframe="600" title="完整使用" description="支持 reload 页面刷新" ></code>
+<code src="./demo/extra-footer.tsx" title="页头和页脚操作区" description="位于页头和页脚操作区的组件尺寸为 `large`，字体大小为 `middle`。"></code>
+
+<code src="./demo/complete.tsx" iframe="600" title="完整使用"></code>
 
 <code src="./demo/header-less.tsx" iframe="600" title="无 PageHeader" description="头部内容为空"></code>
 

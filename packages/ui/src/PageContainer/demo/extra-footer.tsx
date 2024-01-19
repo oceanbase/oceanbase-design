@@ -2,12 +2,22 @@
  * iframe: 600
  */
 import React, { useState } from 'react';
-import { EllipsisOutlined } from '@oceanbase/icons';
-import { Button, Descriptions, Dropdown, Input, Radio, message } from '@oceanbase/design';
+import {
+  Button,
+  DatePicker,
+  Descriptions,
+  Input,
+  Radio,
+  Select,
+  TimePicker,
+  message,
+} from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
+import { SizeType } from '@oceanbase/design/es/config-provider';
 
 export default () => {
   const [loading, setLoading] = useState(false);
+  const [size, setSize] = useState<SizeType>('large');
 
   const mockRequest = () => {
     const promise = new Promise<void>(resolve => {
@@ -49,32 +59,30 @@ export default () => {
           ],
         },
         extra: [
-          <Button key="1">次要按钮</Button>,
-          <Button key="2" type="primary">
-            主要按钮
-          </Button>,
-          <Dropdown
-            menu={{
-              items: [
-                {
-                  label: '下拉菜单',
-                  key: '1',
-                },
-                {
-                  label: '下拉菜单2',
-                  key: '2',
-                },
-                {
-                  label: '下拉菜单3',
-                  key: '3',
-                },
-              ],
+          <DatePicker key="1" size={size} placeholder="DatePicker" />,
+          <DatePicker.RangePicker key="2" size={size} />,
+          <TimePicker key="3" size={size} placeholder="TimePicker" />,
+          <Input.Search key="4" size={size} placeholder="placeholder" allowClear={true} />,
+          <Select
+            key="5"
+            size={size}
+            allowClear={true}
+            defaultValue="large"
+            options={[
+              { value: 'large', label: 'large' },
+              { value: 'middle', label: 'middle' },
+              { value: 'small', label: 'small' },
+            ]}
+            onChange={value => {
+              setSize(value);
             }}
-          >
-            <Button key="3" style={{ padding: '0 8px' }}>
-              <EllipsisOutlined />
-            </Button>
-          </Dropdown>,
+            placeholder="placeholder"
+            style={{ width: 100 }}
+          />,
+          <Radio.Group key="6" size={size} defaultValue="option1">
+            <Radio.Button value="option1">选项 1</Radio.Button>
+            <Radio.Button value="option2">选项 2</Radio.Button>
+          </Radio.Group>,
         ],
       }}
       footer={[<Button>重置</Button>, <Button type="primary">提交</Button>]}
