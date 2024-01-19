@@ -62,11 +62,18 @@ export default () => {
           <DatePicker key="1" size={size} placeholder="DatePicker" />,
           <DatePicker.RangePicker key="2" size={size} />,
           <TimePicker key="3" size={size} placeholder="TimePicker" />,
-          <Input.Search key="4" size={size} placeholder="placeholder" allowClear={true} />,
+          <Input.Search
+            key="4"
+            size={size}
+            placeholder="placeholder"
+            allowClear={true}
+            style={{
+              display: 'block',
+            }}
+          />,
           <Select
             key="5"
             size={size}
-            allowClear={true}
             defaultValue="large"
             options={[
               { value: 'large', label: 'large' },
