@@ -19,6 +19,8 @@ nav:
 
 <code src="./demo/complete.tsx" iframe="600" title="完整使用"></code>
 
+<code src="./demo/with-tabs.tsx" iframe="600" title="和 Tabs 组合使用"></code>
+
 <code src="./demo/header-less.tsx" iframe="600" title="无 PageHeader" description="头部内容为空"></code>
 
 <code src="./demo/empty.tsx" title="空页面"></code>

@@ -58,6 +58,11 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         paddingInline: paddingLG,
         paddingBlockStart: 0,
         paddingBlockEnd: paddingLG,
+        // set top tabs style when it is PageContainer's first child
+        [`& > ${antCls}-tabs-top:not(${antCls}-tabs-card):first-child`]: {
+          // equal to page header paddingBlockEnd
+          marginTop: -padding,
+        },
       },
       // remove paddingBlockStart for page header without breadcrumb
       [`${antCls}-page-header:not(${antCls}-page-header-has-breadcrumb)`]: {
