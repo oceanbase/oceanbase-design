@@ -46,12 +46,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
     return wrapSSR(
       <AntTag ref={ref} prefixCls={customizePrefixCls} className={tagCls} {...restProps}>
         {ellipsisConfig ? (
-          <Typography.Text
-            ellipsis={ellipsisConfig}
-            style={{ color: 'inherit', lineHeight: 'inhert' }}
-          >
-            {children}
-          </Typography.Text>
+          <Typography.Text ellipsis={ellipsisConfig}>{children}</Typography.Text>
         ) : (
           children
         )}
