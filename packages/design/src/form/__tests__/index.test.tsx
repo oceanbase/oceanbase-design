@@ -23,7 +23,7 @@ const FormTest: React.FC<FormProps> = props => (
   </Form>
 );
 
-describe('Drawer', () => {
+describe('Form', () => {
   it('requiredMark should be optional by default', () => {
     const { container, asFragment } = render(<FormTest />);
     expect(
