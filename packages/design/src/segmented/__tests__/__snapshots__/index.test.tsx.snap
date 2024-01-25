@@ -129,7 +129,7 @@ exports[`Segmented render options with ellipsis 1`] = `
         class="ant-segmented-item-label"
       >
         <span
-          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
+          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
         >
           longtext
         </span>
