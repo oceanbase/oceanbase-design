@@ -21,7 +21,7 @@ export interface IRegisterFormProps extends FormProps {
   passwordRule?: {
     pattern?: RegExp;
     message?: string;
-    validator?: (rule, value) => Promise<T>;
+    validator?: (rule, value) => Promise<boolean>;
   }[];
   passwordHelp?: React.ReactNode | string;
   loading?: boolean;
