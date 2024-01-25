@@ -4,34 +4,16 @@ import type { FullToken, GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export const genOperationStyle = (token: FullToken<any>): CSSObject => {
-  const { antCls, fontSize, controlHeightLG } = token;
-  const height = controlHeightLG;
-  const lineHeight = `${controlHeightLG}px`;
+  const { antCls, controlHeightLG } = token;
 
   return {
-    // Button
+    // limit min width for icon button
     [`${antCls}-btn`]: {
       minWidth: controlHeightLG,
-      height,
-      fontSize,
     },
-    // Radio.Button
-    [`${antCls}-radio-button-wrapper`]: {
-      height,
-      lineHeight,
-      fontSize,
-    },
-    // Input
-    [`${antCls}-input-wrapper`]: {
-      lineHeight,
-    },
-    [`${antCls}-input`]: {
-      height,
-      fontSize,
-    },
-    [`${antCls}-input-search-button`]: {
-      height,
-      lineHeight,
+    // set large DatePicker, TimePicker and RangePicker height when font-size is 14px
+    [`${antCls}-picker-large`]: {
+      height: controlHeightLG,
     },
   };
 };

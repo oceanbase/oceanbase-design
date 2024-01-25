@@ -43,6 +43,7 @@ export interface ConfigConsumerProps extends AntConfigConsumerProps {
   hideOnSinglePage?: boolean;
   spin?: SpinConfig;
   table?: TableConfig;
+  builtInApp?: boolean;
   locale?: Locale;
 }
 
@@ -129,7 +130,7 @@ const ConfigProvider = ({
         <StyleProvider {...mergedStyleProviderProps}>
           {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
           {/* ref: https://ant.design/components/app */}
-          <App>
+          <App component={false}>
             {children}
             <StaticFunction />
           </App>

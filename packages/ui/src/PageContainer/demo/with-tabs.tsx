@@ -3,7 +3,7 @@
  */
 import React, { useState } from 'react';
 import { EllipsisOutlined } from '@oceanbase/icons';
-import { Button, Descriptions, Dropdown, Input, Radio, message } from '@oceanbase/design';
+import { Button, Descriptions, Dropdown, Input, Radio, Tabs, message } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
 
 export default () => {
@@ -79,16 +79,21 @@ export default () => {
       }}
       footer={[<Button>重置</Button>, <Button type="primary">提交</Button>]}
     >
-      <Descriptions>
-        <Descriptions.Item label="创建人">曲丽丽</Descriptions.Item>
-        <Descriptions.Item label="电话号码">1810000000</Descriptions.Item>
-        <Descriptions.Item label="地址">浙江省杭州市西湖区工专路</Descriptions.Item>
-        <Descriptions.Item label="关联表单">
-          <a>421421</a>
-        </Descriptions.Item>
-        <Descriptions.Item label="创建时间">2017-01-10</Descriptions.Item>
-        <Descriptions.Item label="备注">这是备注</Descriptions.Item>
-      </Descriptions>
+      <Tabs
+        items={[
+          {
+            key: '1',
+            label: 'Tab 1',
+            children: 'This is content of Tab 1',
+          },
+          {
+            key: '2',
+            label: 'Tab 2',
+            children: 'This is content of Tab 2',
+          },
+        ]}
+        tabBarExtraContent="This is tabBarExtraContent content"
+      />
     </PageContainer>
   );
 };
