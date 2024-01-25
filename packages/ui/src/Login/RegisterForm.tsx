@@ -19,9 +19,11 @@ export interface IRegisterFormProps extends FormProps {
    * 用户自定义密码规则
    */
   passwordRule?: {
-    pattern: RegExp;
-    message: string;
-  };
+    pattern?: RegExp;
+    message?: string;
+    validator?: (rule, value) => Promise<T>;
+  }[];
+  passwordHelp?: React.ReactNode | string;
   loading?: boolean;
   isUserExists?: (account: string) => Promise<boolean>;
   errorMessage?: React.ReactNode | string;
@@ -33,6 +35,7 @@ const Register: React.FC<IRegisterFormProps> = ({
   isUserExists,
   locale,
   loading,
+  passwordHelp,
   passwordRule,
   errorMessage,
   ...restProps
@@ -68,10 +71,12 @@ const Register: React.FC<IRegisterFormProps> = ({
     [form]
   );
 
-  const passwordRegexpRule = passwordRule || {
-    pattern: PASSWORD_REGEX,
-    message: locale.passwordHelp,
-  };
+  const passwordRegexpRule = passwordRule || [
+    {
+      pattern: PASSWORD_REGEX,
+      message: locale.passwordHelp,
+    },
+  ];
 
   return (
     <Form
@@ -116,14 +121,14 @@ const Register: React.FC<IRegisterFormProps> = ({
         name="password"
         label={locale.passwordLabel}
         dependencies={['confirmPassword']}
-        help={passwordRegexpRule.message}
+        help={passwordHelp ? passwordHelp : passwordRegexpRule[0]?.message}
         validateFirst
         rules={[
           {
             required: true,
             message: locale.passwordMessage,
           },
-          passwordRegexpRule,
+          ...passwordRegexpRule,
         ]}
       >
         <Input.Password visibilityToggle={true} autoComplete="new-password" />

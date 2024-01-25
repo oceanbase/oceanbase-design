@@ -9,6 +9,8 @@ nav:
 
 <code src="./demo/basic.tsx" title="基本"></code>
 
+<code src="./demo/customizePassword.tsx" title="自定义密码规则"></code>
+
 <code src="./demo/bg-image.tsx" title="背景图片"></code>
 
 <code src="./demo/board.tsx" title="顶部公告"></code>
