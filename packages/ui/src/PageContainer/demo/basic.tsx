@@ -2,9 +2,9 @@
  * iframe: 600
  */
 import React, { useState } from 'react';
-import { EllipsisOutlined } from '@oceanbase/icons';
-import { Button, Descriptions, Dropdown, Input, Radio, message } from '@oceanbase/design';
+import { Button, Descriptions, Dropdown, message } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
+import { EllipsisOutlined } from '@oceanbase/icons';
 
 export default () => {
   const [loading, setLoading] = useState(false);
@@ -20,6 +20,7 @@ export default () => {
       setLoading(false);
       message.success('刷新成功');
     });
+    return promise;
   };
   return (
     <PageContainer
