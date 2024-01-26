@@ -6,6 +6,7 @@ import {
   Button,
   DatePicker,
   Descriptions,
+  Dropdown,
   Input,
   Radio,
   Select,
@@ -14,10 +15,12 @@ import {
 } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
 import { SizeType } from '@oceanbase/design/es/config-provider';
+import { EllipsisOutlined } from '@oceanbase/icons';
 
 export default () => {
   const [loading, setLoading] = useState(false);
   const [size, setSize] = useState<SizeType>('large');
+  const [inputType, setInputType] = useState('search');
 
   const mockRequest = () => {
     const promise = new Promise<void>(resolve => {
@@ -31,6 +34,8 @@ export default () => {
       message.success('刷新成功');
     });
   };
+  const InputComponent = inputType === 'search' ? Input.Search : Input;
+
   return (
     <PageContainer
       ghost={false}
@@ -62,14 +67,12 @@ export default () => {
           <DatePicker key="1" size={size} placeholder="DatePicker" />,
           <DatePicker.RangePicker key="2" size={size} />,
           <TimePicker key="3" size={size} placeholder="TimePicker" />,
-          <Input.Search
+          <InputComponent
             key="4"
             size={size}
             placeholder="placeholder"
             allowClear={true}
-            style={{
-              display: 'block',
-            }}
+            addonAfter={inputType === 'addon' ? 'suffix' : ''}
           />,
           <Select
             key="5"
@@ -78,7 +81,7 @@ export default () => {
             options={[
               { value: 'large', label: 'large' },
               { value: 'middle', label: 'middle' },
-              { value: 'small', label: 'small' },
+              // { value: 'small', label: 'small' },
             ]}
             onChange={value => {
               setSize(value);
@@ -86,10 +89,43 @@ export default () => {
             placeholder="placeholder"
             style={{ width: 100 }}
           />,
-          <Radio.Group key="6" size={size} defaultValue="option1">
-            <Radio.Button value="option1">选项 1</Radio.Button>
-            <Radio.Button value="option2">选项 2</Radio.Button>
+          <Radio.Group
+            key="6"
+            size={size}
+            value={inputType}
+            onChange={e => {
+              setInputType(e.target.value);
+            }}
+          >
+            <Radio.Button value="input">Input</Radio.Button>
+            <Radio.Button value="search">Search</Radio.Button>
+            <Radio.Button value="addon">Addon</Radio.Button>
           </Radio.Group>,
+          <Button key="7" size={size} type="primary">
+            主要按钮
+          </Button>,
+          <Dropdown
+            menu={{
+              items: [
+                {
+                  label: '下拉菜单',
+                  key: '1',
+                },
+                {
+                  label: '下拉菜单2',
+                  key: '2',
+                },
+                {
+                  label: '下拉菜单3',
+                  key: '3',
+                },
+              ],
+            }}
+          >
+            <Button key="8" size={size} style={{ padding: '0 8px' }}>
+              <EllipsisOutlined />
+            </Button>
+          </Dropdown>,
         ],
       }}
       footer={[<Button>重置</Button>, <Button type="primary">提交</Button>]}

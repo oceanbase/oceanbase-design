@@ -96,7 +96,7 @@ exports[`PageContainer basic 1`] = `
             class="ant-space-item"
           >
             <button
-              class="ant-btn ant-btn-default ant-btn-lg"
+              class="ant-btn ant-btn-default"
               type="button"
             >
               <span>
@@ -108,7 +108,7 @@ exports[`PageContainer basic 1`] = `
             class="ant-space-item"
           >
             <button
-              class="ant-btn ant-btn-primary ant-btn-lg"
+              class="ant-btn ant-btn-primary"
               type="button"
             >
               <span>
@@ -120,7 +120,7 @@ exports[`PageContainer basic 1`] = `
             class="ant-space-item"
           >
             <button
-              class="ant-btn ant-btn-default ant-btn-lg ant-dropdown-trigger"
+              class="ant-btn ant-btn-default ant-dropdown-trigger"
               style="padding: 0px 8px;"
               type="button"
             >
@@ -595,7 +595,6 @@ exports[`PageContainer extra and footer 1`] = `
           >
             <span
               class="ant-input-group-wrapper ant-input-search ant-input-search-large ant-input-group-wrapper-lg"
-              style="display: block;"
             >
               <span
                 class="ant-input-wrapper ant-input-group"
@@ -747,6 +746,25 @@ exports[`PageContainer extra and footer 1`] = `
               class="ant-radio-group ant-radio-group-outline ant-radio-group-large"
             >
               <label
+                class="ant-radio-button-wrapper"
+              >
+                <span
+                  class="ant-radio-button"
+                >
+                  <input
+                    class="ant-radio-button-input"
+                    type="radio"
+                    value="input"
+                  />
+                  <span
+                    class="ant-radio-button-inner"
+                  />
+                </span>
+                <span>
+                  Input
+                </span>
+              </label>
+              <label
                 class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"
               >
                 <span
@@ -756,14 +774,14 @@ exports[`PageContainer extra and footer 1`] = `
                     checked=""
                     class="ant-radio-button-input"
                     type="radio"
-                    value="option1"
+                    value="search"
                   />
                   <span
                     class="ant-radio-button-inner"
                   />
                 </span>
                 <span>
-                  选项 1
+                  Search
                 </span>
               </label>
               <label
@@ -775,17 +793,58 @@ exports[`PageContainer extra and footer 1`] = `
                   <input
                     class="ant-radio-button-input"
                     type="radio"
-                    value="option2"
+                    value="addon"
                   />
                   <span
                     class="ant-radio-button-inner"
                   />
                 </span>
                 <span>
-                  选项 2
+                  Addon
                 </span>
               </label>
             </div>
+          </div>
+          <div
+            class="ant-space-item"
+          >
+            <button
+              class="ant-btn ant-btn-primary ant-btn-lg"
+              type="button"
+            >
+              <span>
+                主要按钮
+              </span>
+            </button>
+          </div>
+          <div
+            class="ant-space-item"
+          >
+            <button
+              class="ant-btn ant-btn-default ant-btn-lg ant-dropdown-trigger"
+              style="padding: 0px 8px;"
+              type="button"
+            >
+              <span
+                aria-label="ellipsis"
+                class="anticon anticon-ellipsis"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="ellipsis"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+                  />
+                </svg>
+              </span>
+            </button>
           </div>
         </div>
       </span>
