@@ -10,30 +10,14 @@ const FooterToolbar: React.FC<FooterToolbarProps> = ({
   // render footer under parent instead of body by default
   portalDom = false,
   prefixCls: customizePrefixCls,
-  children,
   ...restProps
 }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('pro-footer-bar', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
 
-  const { token } = theme.useToken();
-
   return wrapSSR(
-    <AntFooterToolbar portalDom={portalDom} prefixCls={customizePrefixCls} {...restProps}>
-      <ConfigProvider
-        // large size component
-        componentSize="large"
-        // middle font size
-        theme={{
-          token: {
-            fontSizeLG: token.fontSize,
-          },
-        }}
-      >
-        {children}
-      </ConfigProvider>
-    </AntFooterToolbar>
+    <AntFooterToolbar portalDom={portalDom} prefixCls={customizePrefixCls} {...restProps} />
   );
 };
 
