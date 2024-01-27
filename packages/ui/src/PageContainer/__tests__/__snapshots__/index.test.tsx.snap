@@ -420,7 +420,7 @@ exports[`PageContainer extra and footer 1`] = `
             class="ant-space-item"
           >
             <div
-              class="ant-picker ant-picker-large"
+              class="ant-picker ant-picker-large ant-picker-outlined"
             >
               <div
                 class="ant-picker-input"
@@ -463,7 +463,7 @@ exports[`PageContainer extra and footer 1`] = `
             class="ant-space-item"
           >
             <div
-              class="ant-picker ant-picker-range ant-picker-large"
+              class="ant-picker ant-picker-range ant-picker-large ant-picker-outlined"
             >
               <div
                 class="ant-picker-input ant-picker-input-active"
@@ -548,7 +548,7 @@ exports[`PageContainer extra and footer 1`] = `
             class="ant-space-item"
           >
             <div
-              class="ant-picker ant-picker-large"
+              class="ant-picker ant-picker-large ant-picker-outlined"
             >
               <div
                 class="ant-picker-input"
@@ -594,13 +594,13 @@ exports[`PageContainer extra and footer 1`] = `
             class="ant-space-item"
           >
             <span
-              class="ant-input-group-wrapper ant-input-search ant-input-search-large ant-input-group-wrapper-lg"
+              class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-group-wrapper-outlined ant-input-search ant-input-search-large"
             >
               <span
                 class="ant-input-wrapper ant-input-group"
               >
                 <span
-                  class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+                  class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined"
                 >
                   <input
                     class="ant-input ant-input-lg"
@@ -678,7 +678,7 @@ exports[`PageContainer extra and footer 1`] = `
             class="ant-space-item"
           >
             <div
-              class="ant-select ant-select-lg ant-select-single ant-select-show-arrow"
+              class="ant-select ant-select-lg ant-select-outlined ant-select-single ant-select-show-arrow"
               style="width: 100px;"
             >
               <div

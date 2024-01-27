@@ -32,7 +32,7 @@ exports[`Form Form hideRequiredMark should be priority over ConfigProvider form.
           >
             <input
               aria-required="true"
-              class="ant-input"
+              class="ant-input ant-input-outlined"
               id="name"
               type="text"
               value=""
@@ -69,7 +69,7 @@ exports[`Form Form hideRequiredMark should be priority over ConfigProvider form.
             class="ant-form-item-control-input-content"
           >
             <input
-              class="ant-input"
+              class="ant-input ant-input-outlined"
               id="address"
               type="text"
               value=""
@@ -114,7 +114,7 @@ exports[`Form requiredMark could be changed 1`] = `
           >
             <input
               aria-required="true"
-              class="ant-input"
+              class="ant-input ant-input-outlined"
               id="name"
               type="text"
               value=""
@@ -151,7 +151,7 @@ exports[`Form requiredMark could be changed 1`] = `
             class="ant-form-item-control-input-content"
           >
             <input
-              class="ant-input"
+              class="ant-input ant-input-outlined"
               id="address"
               type="text"
               value=""
@@ -196,7 +196,7 @@ exports[`Form requiredMark could be changed by ConfigProvider 1`] = `
           >
             <input
               aria-required="true"
-              class="ant-input"
+              class="ant-input ant-input-outlined"
               id="name"
               type="text"
               value=""
@@ -233,7 +233,7 @@ exports[`Form requiredMark could be changed by ConfigProvider 1`] = `
             class="ant-form-item-control-input-content"
           >
             <input
-              class="ant-input"
+              class="ant-input ant-input-outlined"
               id="address"
               type="text"
               value=""
@@ -278,7 +278,7 @@ exports[`Form requiredMark should be optional by default 1`] = `
           >
             <input
               aria-required="true"
-              class="ant-input"
+              class="ant-input ant-input-outlined"
               id="name"
               type="text"
               value=""
@@ -321,7 +321,7 @@ exports[`Form requiredMark should be optional by default 1`] = `
             class="ant-form-item-control-input-content"
           >
             <input
-              class="ant-input"
+              class="ant-input ant-input-outlined"
               id="address"
               type="text"
               value=""
