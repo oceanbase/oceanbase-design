@@ -71,6 +71,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 
     return wrapSSR(
       <ConfigProvider
+        injectStaticFunction={false}
         table={
           noBodyPadding
             ? {

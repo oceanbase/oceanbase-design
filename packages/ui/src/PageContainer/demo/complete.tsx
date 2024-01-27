@@ -1,5 +1,5 @@
 import { EllipsisOutlined } from '@oceanbase/icons';
-import { Button, Card, Descriptions, Dropdown, message, Radio, Table } from '@oceanbase/design';
+import { Button, Card, Descriptions, Dropdown, Modal, message, Table } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
 import React, { useState } from 'react';
 
@@ -17,6 +17,7 @@ export default () => {
       setLoading(false);
       message.success('刷新成功');
     });
+    return promise;
   };
 
   const dataSource = [
@@ -127,7 +128,23 @@ export default () => {
           ],
         },
         extra: [
-          <Button key="1">次要按钮</Button>,
+          <Button
+            key="1"
+            onClick={() => {
+              Modal.confirm({
+                title: '确定要执行当前任务吗？',
+                onOk: () => {
+                  return mockRequest().then(() => {
+                    Modal.success({
+                      title: '任务提交成功！',
+                    });
+                  });
+                },
+              });
+            }}
+          >
+            次要按钮
+          </Button>,
           <Button key="2" type="primary">
             主要按钮
           </Button>,
