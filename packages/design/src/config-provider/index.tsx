@@ -72,7 +72,16 @@ const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
 
 const { defaultSeed } = themeConfig;
 
-const ConfigProvider = ({
+export type ConfigProviderType = React.FC<ConfigProviderProps> & {
+  ExtendedConfigContext: typeof ExtendedConfigContext;
+} & {
+  ConfigContext: React.Context<ConfigConsumerProps>;
+  SizeContext: typeof AntConfigProvider.SizeContext;
+  config: typeof AntConfigProvider.config;
+  useConfig: typeof AntConfigProvider.useConfig;
+};
+
+const ConfigProvider: ConfigProviderType = ({
   children,
   theme,
   navigate,
@@ -82,7 +91,7 @@ const ConfigProvider = ({
   tabs,
   styleProviderProps,
   ...restProps
-}: ConfigProviderProps) => {
+}) => {
   // inherit from parent ConfigProvider
   const parentContext = React.useContext<ConfigConsumerProps>(AntConfigProvider.ConfigContext);
   const parentExtendedContext =
@@ -140,8 +149,7 @@ const ConfigProvider = ({
   );
 };
 
-ConfigProvider.ConfigContext =
-  AntConfigProvider.ConfigContext as React.Context<ConfigConsumerProps>;
+ConfigProvider.ConfigContext = AntConfigProvider.ConfigContext;
 ConfigProvider.ExtendedConfigContext = ExtendedConfigContext;
 ConfigProvider.SizeContext = AntConfigProvider.SizeContext;
 ConfigProvider.config = AntConfigProvider.config;
