@@ -56,6 +56,8 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   hideOnSinglePage?: boolean;
   spin?: SpinConfig;
   table?: TableConfig;
+  // inject static function to consume ConfigProvider
+  injectStaticFunction?: boolean;
   // StyleProvider props
   styleProviderProps?: StyleProviderProps;
 }
@@ -89,6 +91,7 @@ const ConfigProvider: ConfigProviderType = ({
   spin,
   table,
   tabs,
+  injectStaticFunction = true,
   styleProviderProps,
   ...restProps
 }) => {
@@ -141,7 +144,7 @@ const ConfigProvider: ConfigProviderType = ({
           {/* ref: https://ant.design/components/app */}
           <App component={false}>
             {children}
-            <StaticFunction />
+            {injectStaticFunction && <StaticFunction />}
           </App>
         </StyleProvider>
       </ExtendedConfigContext.Provider>

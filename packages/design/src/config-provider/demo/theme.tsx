@@ -42,10 +42,10 @@ export default () => {
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 20 }}
       >
-        <Form.Item valuePropName="color" name="colorPrimary" label="Primary Color">
+        <Form.Item valuePropName="color" name="colorPrimary" label="Primary Color" required={true}>
           <SketchPicker />
         </Form.Item>
-        <Form.Item name="borderRadius" label="Border Radius">
+        <Form.Item name="borderRadius" label="Border Radius" required={true}>
           <InputNumber />
         </Form.Item>
         <Form.Item name="submit" wrapperCol={{ offset: 4, span: 20 }}>
