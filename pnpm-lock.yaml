@@ -201,8 +201,8 @@ importers:
         specifier: ^2.2.2
         version: 2.2.2(react-dom@18.2.0)(react@18.2.0)
       rc-tabs:
-        specifier: ^12.13.1
-        version: 12.15.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^14.0.0
+        version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
       rc-util:
         specifier: ^5.38.1
         version: 5.38.1(react-dom@18.2.0)(react@18.2.0)
