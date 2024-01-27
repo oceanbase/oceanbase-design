@@ -408,8 +408,8 @@ importers:
         specifier: ^14.10.0
         version: 14.10.0(react-dom@18.2.0)(react@18.2.0)
       rc-table:
-        specifier: ^7.35.2
-        version: 7.36.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^7.38.0
+        version: 7.38.0(react-dom@18.2.0)(react@18.2.0)
 
   packages/icons:
     dependencies:
@@ -21010,23 +21010,6 @@ packages:
       shallowequal: 1.1.0
     dev: false
 
-  /rc-table@7.36.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-9qMxEm/3Y8ukdW8I8ZvmhX0QImfNKzH0JEUlSbyaUlsYTB+/tQEbfaB8YkG4sHVZ1io4pxqK/BXoZYqebi/TIQ==}
-    engines: {node: '>=8.x'}
-    peerDependencies:
-      react: '>=16.9.0'
-      react-dom: '>=16.9.0'
-    dependencies:
-      '@babel/runtime': 7.23.6
-      '@rc-component/context': 1.4.0(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.5.1
-      rc-resize-observer: 1.4.0(react-dom@18.2.0)(react@18.2.0)
-      rc-util: 5.38.1(react-dom@18.2.0)(react@18.2.0)
-      rc-virtual-list: 3.11.3(react-dom@18.2.0)(react@18.2.0)
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: true
-
   /rc-table@7.37.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-hEB17ktLRVfVmdo+U8MjGr+PuIgdQ8Cxj/N5lwMvP/Az7TOrQxwTMLVEDoj207tyPYLTWifHIF9EJREWwyk67g==}
     engines: {node: '>=8.x'}
@@ -21042,6 +21025,23 @@ packages:
       rc-virtual-list: 3.11.3(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+
+  /rc-table@7.38.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-WUIr49nijz/OrHs0Rl263ewnH6sxUpsNMS08ww8zddmvO2WCOg4qHWuHjUqijLY+EeUUXxghjir+q7veHau4Qw==}
+    engines: {node: '>=8.x'}
+    peerDependencies:
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+    dependencies:
+      '@babel/runtime': 7.23.6
+      '@rc-component/context': 1.4.0(react-dom@18.2.0)(react@18.2.0)
+      classnames: 2.5.1
+      rc-resize-observer: 1.4.0(react-dom@18.2.0)(react@18.2.0)
+      rc-util: 5.38.1(react-dom@18.2.0)(react@18.2.0)
+      rc-virtual-list: 3.11.3(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: true
 
   /rc-tabs@12.15.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-aXFLRo7jo531Jed1LgRqrF0VmRnzM/Qki25PknM3S04gqyxpDaHNFpPba05pHhn+d1N+54qIi0IcY1odrCrF2A==}
