@@ -40,7 +40,7 @@ nav:
 
 <code src="./demo/dynamic-settings.tsx" title="动态控制表格属性" description="选择不同配置组合查看效果。"></code>
 
-<code src="./demo/with-card.tsx" title="和 Card 组合使用"></code>
+<code src="./demo/card-table.tsx" title="和 Card 组合使用"></code>
 
 ## API
 

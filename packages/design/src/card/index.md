@@ -24,6 +24,8 @@ nav:
 
 <code src="./demo/tabs.tsx" title="带页签的卡片" description="页签可设置选项卡后面的标签。"></code>
 
+<code src="../table/demo/card-table.tsx" title="和 Table 组合使用"></code>
+
 ## API
 
 | 参数    | 说明           | 类型                                             | 默认值 | 版本 |
