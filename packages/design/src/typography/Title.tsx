@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Typography as AntTypography } from 'antd';
-import classNames from 'classnames';
 import type { TitleProps as AntTitleProps } from 'antd/es/typography/Title';
 import ConfigProvider from '../config-provider';
 import useStyle from './style';
@@ -12,7 +11,7 @@ export * from 'antd/es/typography/Title';
 export interface TitleProps extends AntTitleProps {}
 
 const Title = React.forwardRef<HTMLDivElement, TitleProps>(
-  ({ prefixCls: customizePrefixCls, children, className, ...restProps }, ref) => {
+  ({ prefixCls: customizePrefixCls, children, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography', customizePrefixCls);
     const { wrapSSR } = useStyle(prefixCls);
