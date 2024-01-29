@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Card, Form, Radio, Table } from '@oceanbase/design';
+import { Card, Form, Radio, Switch, Table, theme } from '@oceanbase/design';
 
 const App: React.FC = () => {
+  const { token } = theme.useToken();
+
+  const [hasBorder, setHasBorder] = useState(true);
   const [hasTitle, setHasTitle] = useState(true);
   const [hasPadding, setHasPadding] = useState(true);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -35,32 +38,48 @@ const App: React.FC = () => {
   }
 
   return (
-    <div>
+    <div
+      style={
+        hasBorder
+          ? {}
+          : {
+              backgroundColor: token.colorFillContent,
+              padding: '40px 24px',
+              margin: '-40px -24px',
+            }
+      }
+    >
       <Form layout="inline" style={{ marginBottom: 24 }}>
-        <Form.Item label="Card title" required={true}>
-          <Radio.Group
-            value={hasTitle}
-            onChange={e => {
-              setHasTitle(e.target.value);
+        <Form.Item label="Card bordered" required={true}>
+          <Switch
+            size="small"
+            value={hasBorder}
+            onChange={value => {
+              setHasBorder(value);
             }}
-          >
-            <Radio.Button value={true}>Has title</Radio.Button>
-            <Radio.Button value={false}>No title </Radio.Button>
-          </Radio.Group>
+          />
+        </Form.Item>
+        <Form.Item label="Card title" required={true}>
+          <Switch
+            size="small"
+            value={hasTitle}
+            onChange={value => {
+              setHasTitle(value);
+            }}
+          />
         </Form.Item>
         <Form.Item label="Card body padding" required={true}>
-          <Radio.Group
+          <Switch
+            size="small"
             value={hasPadding}
-            onChange={e => {
-              setHasPadding(e.target.value);
+            onChange={value => {
+              setHasPadding(value);
             }}
-          >
-            <Radio.Button value={true}>Has padding</Radio.Button>
-            <Radio.Button value={false}>No padding </Radio.Button>
-          </Radio.Group>
+          />
         </Form.Item>
       </Form>
       <Card
+        bordered={hasBorder}
         title={hasTitle ? 'Title' : ''}
         bodyStyle={
           hasPadding
