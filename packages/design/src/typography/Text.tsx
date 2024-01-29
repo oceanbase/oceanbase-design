@@ -16,15 +16,9 @@ const Text = React.forwardRef<HTMLSpanElement, TextProps>(
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography', customizePrefixCls);
     const { wrapSSR } = useStyle(prefixCls);
-    const cls = classNames(
-      {
-        [`${prefixCls}-inhert`]: !restProps.type,
-      },
-      className
-    );
 
     return wrapSSR(
-      <AntText ref={ref} prefixCls={customizePrefixCls} className={cls} {...restProps}>
+      <AntText ref={ref} prefixCls={customizePrefixCls} {...restProps}>
         {children}
       </AntText>
     );

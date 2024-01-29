@@ -16,15 +16,9 @@ const Title = React.forwardRef<HTMLDivElement, TitleProps>(
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography', customizePrefixCls);
     const { wrapSSR } = useStyle(prefixCls);
-    const cls = classNames(
-      {
-        [`${prefixCls}-inhert`]: !restProps.type,
-      },
-      className
-    );
 
     return wrapSSR(
-      <AntTitle ref={ref} prefixCls={customizePrefixCls} className={cls} {...restProps}>
+      <AntTitle ref={ref} prefixCls={customizePrefixCls} {...restProps}>
         {children}
       </AntTitle>
     );

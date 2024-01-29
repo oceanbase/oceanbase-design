@@ -5,7 +5,7 @@ exports[`Tag custom ellipsis 1`] = `
   class="ant-tag ant-tag-ellipsis"
 >
   <span
-    class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+    class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
   >
     <div
       id="test"
@@ -21,7 +21,7 @@ exports[`Tag default ellipsis 1`] = `
   class="ant-tag ant-tag-ellipsis"
 >
   <span
-    class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+    class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
   >
     <div
       id="test"

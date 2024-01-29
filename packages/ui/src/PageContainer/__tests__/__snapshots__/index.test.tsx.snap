@@ -185,7 +185,7 @@ exports[`PageContainer basic 1`] = `
                         class="ant-descriptions-item-content"
                       >
                         <span
-                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
                         >
                           曲丽丽
                         </span>
@@ -208,7 +208,7 @@ exports[`PageContainer basic 1`] = `
                         class="ant-descriptions-item-content"
                       >
                         <span
-                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
                         >
                           1810000000
                         </span>
@@ -231,7 +231,7 @@ exports[`PageContainer basic 1`] = `
                         class="ant-descriptions-item-content"
                       >
                         <span
-                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
                         >
                           浙江省杭州市西湖区工专路
                         </span>
@@ -258,7 +258,7 @@ exports[`PageContainer basic 1`] = `
                         class="ant-descriptions-item-content"
                       >
                         <span
-                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
                         >
                           <a>
                             421421
@@ -283,7 +283,7 @@ exports[`PageContainer basic 1`] = `
                         class="ant-descriptions-item-content"
                       >
                         <span
-                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
                         >
                           2017-01-10
                         </span>
@@ -306,7 +306,7 @@ exports[`PageContainer basic 1`] = `
                         class="ant-descriptions-item-content"
                       >
                         <span
-                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
                         >
                           这是备注
                         </span>
@@ -827,7 +827,7 @@ exports[`PageContainer extra and footer 1`] = `
                         class="ant-descriptions-item-content"
                       >
                         <span
-                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
                         >
                           曲丽丽
                         </span>
@@ -850,7 +850,7 @@ exports[`PageContainer extra and footer 1`] = `
                         class="ant-descriptions-item-content"
                       >
                         <span
-                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
                         >
                           1810000000
                         </span>
@@ -873,7 +873,7 @@ exports[`PageContainer extra and footer 1`] = `
                         class="ant-descriptions-item-content"
                       >
                         <span
-                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
                         >
                           浙江省杭州市西湖区工专路
                         </span>
@@ -900,7 +900,7 @@ exports[`PageContainer extra and footer 1`] = `
                         class="ant-descriptions-item-content"
                       >
                         <span
-                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
                         >
                           <a>
                             421421
@@ -925,7 +925,7 @@ exports[`PageContainer extra and footer 1`] = `
                         class="ant-descriptions-item-content"
                       >
                         <span
-                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
                         >
                           2017-01-10
                         </span>
@@ -948,7 +948,7 @@ exports[`PageContainer extra and footer 1`] = `
                         class="ant-descriptions-item-content"
                       >
                         <span
-                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line ant-typography-inhert"
+                          class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"
                         >
                           这是备注
                         </span>

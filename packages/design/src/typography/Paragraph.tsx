@@ -16,15 +16,9 @@ const Paragraph = React.forwardRef<HTMLDivElement, ParagraphProps>(
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography', customizePrefixCls);
     const { wrapSSR } = useStyle(prefixCls);
-    const cls = classNames(
-      {
-        [`${prefixCls}-inhert`]: !restProps.type,
-      },
-      className
-    );
 
     return wrapSSR(
-      <AntParagraph ref={ref} prefixCls={customizePrefixCls} className={cls} {...restProps}>
+      <AntParagraph ref={ref} prefixCls={customizePrefixCls} {...restProps}>
         {children}
       </AntParagraph>
     );
