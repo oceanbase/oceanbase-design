@@ -10,12 +10,13 @@ import {
   Input,
   Radio,
   Select,
+  Space,
   TimePicker,
   message,
 } from '@oceanbase/design';
-import { PageContainer } from '@oceanbase/ui';
+import { PageContainer, Ranger } from '@oceanbase/ui';
 import { SizeType } from '@oceanbase/design/es/config-provider';
-import { EllipsisOutlined } from '@oceanbase/icons';
+import { EllipsisOutlined, LikeOutlined, CommentOutlined, StarOutlined } from '@oceanbase/icons';
 
 export default () => {
   const [loading, setLoading] = useState(false);
@@ -128,7 +129,33 @@ export default () => {
           </Dropdown>,
         ],
       }}
-      footer={[<Button>重置</Button>, <Button type="primary">提交</Button>]}
+      footer={[
+        <Ranger />,
+        <Space.Compact>
+          <Select
+            size={size}
+            defaultValue="option1"
+            options={[
+              { value: 'option1', label: 'Option 1' },
+              { value: 'option2', label: 'Option 2' },
+            ]}
+          />
+          <DatePicker size={size} />
+        </Space.Compact>,
+        <Space.Compact>
+          <Input size={size} defaultValue="0571" />
+          <Input size={size} defaultValue="26888888" />
+        </Space.Compact>,
+        <Space.Compact>
+          <Button size={size} icon={<LikeOutlined />} />
+          <Button size={size} icon={<CommentOutlined />} />
+          <Button icon={<StarOutlined />} />
+        </Space.Compact>,
+        <Button size={size}>重置</Button>,
+        <Button size={size} type="primary">
+          提交
+        </Button>,
+      ]}
     >
       <Descriptions>
         <Descriptions.Item label="创建人">曲丽丽</Descriptions.Item>
