@@ -40,7 +40,7 @@
     "@oceanbase/design": "workspace:^",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
-    "ahooks": "^2.10.14",
+    "ahooks": "^3.7.9",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.10",
     "diff": "^5.1.0",
