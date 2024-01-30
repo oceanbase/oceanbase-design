@@ -3,6 +3,25 @@ import type { FooterToolBarToken } from '@ant-design/pro-layout/es/components/Fo
 import type { FullToken, GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
+export const genCompactStyle = (componentCls: string, subComponentCls: string = ''): CSSObject => {
+  return {
+    [`&${componentCls}-compact-item:not(${componentCls}-compact-last-item)${componentCls}-compact-first-item ${subComponentCls}`]:
+      {
+        borderStartEndRadius: 0,
+        borderEndEndRadius: 0,
+      },
+    [`&${componentCls}-compact-item:not(${componentCls}-compact-first-item):not(${componentCls}-compact-last-item) ${subComponentCls}`]:
+      {
+        borderRadius: 0,
+      },
+    [`&${componentCls}-compact-item:not(${componentCls}-compact-first-item)${componentCls}-compact-last-item ${subComponentCls}`]:
+      {
+        borderStartStartRadius: 0,
+        borderEndStartRadius: 0,
+      },
+  };
+};
+
 export const genOperationStyle = (token: FullToken<any>): CSSObject => {
   const {
     antCls,
@@ -25,6 +44,8 @@ export const genOperationStyle = (token: FullToken<any>): CSSObject => {
       height,
       fontSize,
       borderRadius: borderRadiusLG,
+      // Button in Space.Compact
+      ...genCompactStyle(`${antCls}-btn`),
     },
     // Radio.Button
     [`${antCls}-radio-group`]: {
@@ -46,6 +67,8 @@ export const genOperationStyle = (token: FullToken<any>): CSSObject => {
     [`${antCls}-select`]: {
       height,
       fontSize,
+      // Select in Space.Compact
+      ...genCompactStyle(`${antCls}-select`, `${antCls}-select-selector`),
       [`${antCls}-select-selector`]: {
         borderRadius: borderRadiusLG,
       },
@@ -82,8 +105,11 @@ export const genOperationStyle = (token: FullToken<any>): CSSObject => {
       },
     },
     [`${antCls}-input`]: {
+      height,
       fontSize,
       borderRadius: borderRadiusLG,
+      // Input in Space.Compact
+      ...genCompactStyle(`${antCls}-input`),
     },
     [`${antCls}-input-search-button`]: {
       height,
@@ -100,6 +126,7 @@ export const genOperationStyle = (token: FullToken<any>): CSSObject => {
     [`${antCls}-picker`]: {
       height,
       borderRadius: borderRadiusLG,
+      ...genCompactStyle(`${antCls}-picker`),
       [`${antCls}-picker-input>input`]: {
         fontSize,
       },
