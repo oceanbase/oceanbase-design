@@ -8,6 +8,15 @@ group: 业务组件
 
 ---
 
+## 0.2.38
+
+`2024-01-30`
+
+- PageContainer
+  - 🐞 修复 PageContainer 页头和页脚操作区外的组件尺寸也可能被改为 large 的问题。[#443](https://github.com/oceanbase/oceanbase-design/pull/443)
+  - 💄 修复 PageContainer 页头和页脚操作区样式适配 Space.Compact 组件。[#454](https://github.com/oceanbase/oceanbase-design/pull/454)
+- 🐞 修复 FooterToolbar 子元素外的组件尺寸被改为 large 的问题。[#447](https://github.com/oceanbase/oceanbase-design/pull/447)
+
 ## 0.2.37
 
 `2024-01-19`
