@@ -8,7 +8,7 @@ export default () => {
   return (
     <div>
       <Form style={{ marginBottom: '30px' }}>
-        <Form.Item label="Size">
+        <Form.Item label="Size" required={true}>
           <Radio.Group value={size} onChange={e => setSize(e.target.value)}>
             <Radio.Button value="large">Large</Radio.Button>
             <Radio.Button value="middle">Default</Radio.Button>

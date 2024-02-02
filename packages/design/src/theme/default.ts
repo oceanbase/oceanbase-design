@@ -5,7 +5,7 @@ const defaultTheme: ThemeConfig = {
   token: {
     colorPrimaryBg: '#EAF1FF',
     colorPrimary: '#006AFF',
-    colorPrimaryBgHover: '#d6e4ff',
+    colorPrimaryBgHover: '#EAF1FF',
     colorPrimaryBorder: '#b3ccff',
     colorPrimaryBorderHover: '#5189FB',
     colorPrimaryHover: '#5189fb',
@@ -77,9 +77,6 @@ const defaultTheme: ThemeConfig = {
     colorPrimaryActive: '#004CE6',
   },
   components: {
-    Button: {
-      borderRadius: 6,
-    },
     Segmented: {
       itemColor: '#5C6B8A',
       itemHoverColor: '#132039',
@@ -91,6 +88,11 @@ const defaultTheme: ThemeConfig = {
     },
     InputNumber: {
       handleVisible: true,
+    },
+    Table: {
+      cellPaddingBlock: 12,
+      cellPaddingBlockMD: 8,
+      cellPaddingBlockSM: 4,
     },
   },
 };

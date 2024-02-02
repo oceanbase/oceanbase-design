@@ -33,11 +33,17 @@ export type SpinConfig = ComponentStyleConfig & {
   indicator?: SpinIndicator;
 };
 
+export type TableConfig = ComponentStyleConfig & {
+  selectionColumnWidth?: number;
+};
+
 export interface ConfigConsumerProps extends AntConfigConsumerProps {
   theme?: ThemeConfig;
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
   spin?: SpinConfig;
+  table?: TableConfig;
+  builtInApp?: boolean;
   locale?: Locale;
 }
 
@@ -49,6 +55,9 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
   spin?: SpinConfig;
+  table?: TableConfig;
+  // inject static function to consume ConfigProvider
+  injectStaticFunction?: boolean;
   // StyleProvider props
   styleProviderProps?: StyleProviderProps;
 }
@@ -65,16 +74,27 @@ const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
 
 const { defaultSeed } = themeConfig;
 
-const ConfigProvider = ({
+export type ConfigProviderType = React.FC<ConfigProviderProps> & {
+  ExtendedConfigContext: typeof ExtendedConfigContext;
+} & {
+  ConfigContext: React.Context<ConfigConsumerProps>;
+  SizeContext: typeof AntConfigProvider.SizeContext;
+  config: typeof AntConfigProvider.config;
+  useConfig: typeof AntConfigProvider.useConfig;
+};
+
+const ConfigProvider: ConfigProviderType = ({
   children,
   theme,
   navigate,
   hideOnSinglePage,
   spin,
+  table,
   tabs,
+  injectStaticFunction = true,
   styleProviderProps,
   ...restProps
-}: ConfigProviderProps) => {
+}) => {
   // inherit from parent ConfigProvider
   const parentContext = React.useContext<ConfigConsumerProps>(AntConfigProvider.ConfigContext);
   const parentExtendedContext =
@@ -89,6 +109,7 @@ const ConfigProvider = ({
   return (
     <AntConfigProvider
       spin={merge(parentContext.spin, spin)}
+      table={merge(parentContext.table, table)}
       tabs={merge(
         {
           indicatorSize: origin => (origin >= 24 ? origin - 16 : origin),
@@ -121,9 +142,9 @@ const ConfigProvider = ({
         <StyleProvider {...mergedStyleProviderProps}>
           {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
           {/* ref: https://ant.design/components/app */}
-          <App>
+          <App component={false}>
             {children}
-            <StaticFunction />
+            {injectStaticFunction && <StaticFunction />}
           </App>
         </StyleProvider>
       </ExtendedConfigContext.Provider>
@@ -131,8 +152,7 @@ const ConfigProvider = ({
   );
 };
 
-ConfigProvider.ConfigContext =
-  AntConfigProvider.ConfigContext as React.Context<ConfigConsumerProps>;
+ConfigProvider.ConfigContext = AntConfigProvider.ConfigContext;
 ConfigProvider.ExtendedConfigContext = ExtendedConfigContext;
 ConfigProvider.SizeContext = AntConfigProvider.SizeContext;
 ConfigProvider.config = AntConfigProvider.config;

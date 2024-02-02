@@ -160,7 +160,6 @@ const Highlight: React.FC<HighlightProps> = props => {
     language,
     locale,
   } = props;
-
   const prefixCls = getPrefix('highlight');
   const themeClass = theme === THEME_DARK ? `${prefixCls}-dark` : `${prefixCls}-light`;
 
@@ -323,9 +322,7 @@ const HighlightWrapper: HighlightWrapperProps = (props: HighlightProps) => {
 
 HighlightWrapper.Diff = DiffView;
 
-// export default HighlightWrapper;
-
 export default LocaleWrapper({
-  componentName: 'HighlightWrapper',
+  componentName: 'Highlight',
   defaultLocale: zhCN,
 })(HighlightWrapper);

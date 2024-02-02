@@ -8,6 +8,31 @@ group: 基础组件
 
 ---
 
+## 0.2.37
+
+`2024-01-30`
+
+- 🆕 新增 injectStaticFunction 属性，用于配置 message、notification 和 Modal 静态方法是否可以消费全局配置，默认开启。[#446](https://github.com/oceanbase/oceanbase-design/pull/446)
+- 🐞 修复 Typography 的样式优先级，保证字体和行高默认继承父元素，便于和其他组件组合使用。[#428](https://github.com/oceanbase/oceanbase-design/pull/428) [@wdyea-ya](https://github.com/wdyea-ya)
+- 🐞 修复 Table 选中行和 `hover` 行的背景色不一致的问题。[#455](https://github.com/oceanbase/oceanbase-design/pull/455)
+
+## 0.2.36
+
+`2024-01-19`
+
+- 💄 ConfigProvider 内嵌的 App 组件不再创建 DOM 节点，避免增加一层 DOM 结构影响子元素的样式表现。[#431](https://github.com/oceanbase/oceanbase-design/pull/431)
+
+## 0.2.35
+
+`2024-01-18`
+
+- 🆕 ConfigProvider 新增 table.selectionColumnWidth 属性，用于配置表格的展开列宽度。[#421](https://github.com/oceanbase/oceanbase-design/pull/421)
+- Table
+  - 🐞 修复 Table 可展开时底部出现重复边框的问题。[#420](https://github.com/oceanbase/oceanbase-design/pull/420)
+  - 💄 优化 Table 在无间距卡片内的展示样式，包括第一列和卡片标题对齐、最后一列和卡片操作区对齐、分页器左右增加间距。[#422](https://github.com/oceanbase/oceanbase-design/pull/422)
+  - 💄 减小 Table 单元格的纵向内间距，以对齐设计规范。[#425](https://github.com/oceanbase/oceanbase-design/pull/425)
+- 💄 Modal 去掉最大高度限制，高度超出时内容滚动改由上层控制。[#411](https://github.com/oceanbase/oceanbase-design/pull/411)
+
 ## 0.2.34
 
 `2024-01-12`

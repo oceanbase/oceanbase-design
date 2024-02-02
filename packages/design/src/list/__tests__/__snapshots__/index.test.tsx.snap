@@ -511,7 +511,7 @@ exports[`List render 1`] = `
       >
         <div
           aria-label="Page Size"
-          class="ant-select ant-pagination-options-size-changer ant-select-single ant-select-show-arrow ant-select-show-search"
+          class="ant-select ant-select-outlined ant-pagination-options-size-changer ant-select-single ant-select-show-arrow ant-select-show-search"
         >
           <div
             class="ant-select-selector"
