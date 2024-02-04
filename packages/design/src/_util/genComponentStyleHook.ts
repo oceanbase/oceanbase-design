@@ -22,7 +22,10 @@ export function genComponentStyleHook(
       token => {
         return [styleFn(token)];
       },
-      getDefaultToken
+      getDefaultToken,
+      {
+        resetStyle: false,
+      }
     );
     const [wrapSSR] = useStyle(prefixCls);
     // use hashId from useToken, as hashId is '' when hashed is false
