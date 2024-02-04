@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import type { PieConfig as AntPieConfig } from '@ant-design/charts';
 import { Pie as AntPie } from '@ant-design/charts';
 import { formatNumber } from '@oceanbase/util';
-import { isString } from 'lodash';
+import { isFunction, toString } from 'lodash';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
 import { customMemo } from '../util/custom-memo';
@@ -13,7 +13,7 @@ export const measureTextSize = (text: string, font: any = {}) => {
   if (ctx) {
     // @see https://developer.mozilla.org/zh-CN/docs/Web/CSS/font
     ctx.font = [fontStyle, fontWeight, fontVariant, `${fontSize}px`, fontFamily].join(' ');
-    const metrics = ctx?.measureText(isString(text) ? text : '');
+    const metrics = ctx?.measureText(toString(text) || '');
     return {
       width: metrics.width,
       // ref: https://zhuanlan.zhihu.com/p/455132377
@@ -133,11 +133,16 @@ const Pie = forwardRef<unknown, PieConfig>(
           // content 为空时，默认的 customHtml 才生效
           ...(statistic?.title?.content === undefined
             ? {
-                customHtml: (container, view, datum) => {
+                customHtml: (container, view, datum, filterData) => {
                   const { width, height } = container.getBoundingClientRect();
                   const d = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
                   // 开启 pie-statistic-active 交互时，datum[colorField] 不为空
-                  const text = datum ? datum[colorField] : statisticTitle;
+                  const title = datum ? datum[colorField] : statisticTitle;
+
+                  // format title
+                  const formatter = statistic?.title && statistic?.title?.formatter;
+                  const text = isFunction(formatter) ? formatter(datum, filterData) : title;
+
                   return renderStatistic(d, text, {
                     // 这里的字体大小仅用于计算文本宽高，不用于实际样式
                     fontSize: titleFontSize,
@@ -161,9 +166,14 @@ const Pie = forwardRef<unknown, PieConfig>(
             ? {
                 customHtml: (container, view, datum, filterData) => {
                   const { width } = container.getBoundingClientRect();
-                  const text = datum
+                  const total = datum
                     ? `${datum[angleField]}`
                     : `${formatNumber(filterData?.reduce((a, b) => a + b[angleField], 0))}`;
+
+                  // format content
+                  const formatter = statistic?.content && statistic?.content?.formatter;
+                  const text = isFunction(formatter) ? formatter(datum, filterData) : `${total}`;
+
                   return renderStatistic(width, text, {
                     // 这里的字体大小仅用于计算文本宽高，不用于实际样式
                     fontSize: contentFontSize,

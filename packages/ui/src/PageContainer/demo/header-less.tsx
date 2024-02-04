@@ -84,7 +84,7 @@ export default () => {
     },
   ];
   return (
-    <PageContainer ghost={true}>
+    <PageContainer>
       <Card
         bordered={false}
         tabList={[

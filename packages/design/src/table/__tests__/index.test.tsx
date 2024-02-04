@@ -28,7 +28,7 @@ for (let i = 1; i < 100; i++) {
   });
 }
 
-const TableTest: React.FC<TableProps<any>> = props => (
+export const TableTest: React.FC<TableProps<any>> = props => (
   <Table dataSource={dataSource} columns={columns} {...props} />
 );
 

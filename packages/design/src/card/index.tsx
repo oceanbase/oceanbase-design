@@ -24,7 +24,16 @@ export interface CardProps extends AntCardProps {
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   (
-    { children, divided = true, tabList, prefixCls: customizePrefixCls, className, ...restProps },
+    {
+      children,
+      size,
+      divided = true,
+      tabList,
+      prefixCls: customizePrefixCls,
+      bodyStyle,
+      className,
+      ...restProps
+    },
     ref
   ) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -32,9 +41,13 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     const tabsPrefixCls = getPrefixCls('tabs', customizePrefixCls);
     const { wrapSSR } = useStyle(prefixCls, tabsPrefixCls);
 
+    // card body has no padding
+    const noBodyPadding = [0, '0', '0px'].includes(bodyStyle?.padding);
+
     const cardCls = classNames(
       {
         [`${prefixCls}-no-divider`]: !divided,
+        [`${prefixCls}-no-body-padding`]: noBodyPadding,
       },
       className
     );
@@ -57,15 +70,30 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     });
 
     return wrapSSR(
-      <AntCard
-        ref={ref}
-        tabList={newTabList}
-        prefixCls={customizePrefixCls}
-        className={cardCls}
-        {...restProps}
+      <ConfigProvider
+        injectStaticFunction={false}
+        table={
+          noBodyPadding
+            ? {
+                // expand selection column width for larger padding-left
+                // related to .ant-card-no-body-padding style
+                selectionColumnWidth: size === 'small' ? 36 : 48,
+              }
+            : {}
+        }
       >
-        {children}
-      </AntCard>
+        <AntCard
+          ref={ref}
+          size={size}
+          tabList={newTabList}
+          prefixCls={customizePrefixCls}
+          bodyStyle={bodyStyle}
+          className={cardCls}
+          {...restProps}
+        >
+          {children}
+        </AntCard>
+      </ConfigProvider>
     );
   }
 );

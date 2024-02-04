@@ -1,5 +1,5 @@
 import { EllipsisOutlined } from '@oceanbase/icons';
-import { Button, Card, Descriptions, Dropdown, message, Radio, Table } from '@oceanbase/design';
+import { Button, Card, Descriptions, Dropdown, Modal, message, Table } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
 import React, { useState } from 'react';
 
@@ -17,6 +17,7 @@ export default () => {
       setLoading(false);
       message.success('刷新成功');
     });
+    return promise;
   };
 
   const dataSource = [
@@ -127,12 +128,24 @@ export default () => {
           ],
         },
         extra: [
-          <Radio.Group key="1" defaultValue="option1">
-            <Radio.Button value="option1">选项 1</Radio.Button>
-            <Radio.Button value="option2">选项 2</Radio.Button>
-          </Radio.Group>,
-          <Button key="2">次要按钮</Button>,
-          <Button key="3" type="primary">
+          <Button
+            key="1"
+            onClick={() => {
+              Modal.confirm({
+                title: '确定要执行当前任务吗？',
+                onOk: () => {
+                  return mockRequest().then(() => {
+                    Modal.success({
+                      title: '任务提交成功！',
+                    });
+                  });
+                },
+              });
+            }}
+          >
+            次要按钮
+          </Button>,
+          <Button key="2" type="primary">
             主要按钮
           </Button>,
           <Dropdown
@@ -153,7 +166,7 @@ export default () => {
               ],
             }}
           >
-            <Button key="4" style={{ padding: '0 8px' }}>
+            <Button key="3" style={{ padding: '0 8px' }}>
               <EllipsisOutlined />
             </Button>
           </Dropdown>,

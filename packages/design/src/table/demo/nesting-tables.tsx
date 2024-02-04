@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { TableColumnsType } from '@oceanbase/design';
-import { Badge, Dropdown, Space, Table } from '@oceanbase/design';
+import { Badge, Dropdown, Form, Radio, Space, Table } from '@oceanbase/design';
 import type { SizeType } from '@oceanbase/design/es/config-provider';
 import { DownOutlined } from '@oceanbase/icons';
 
@@ -27,6 +27,8 @@ const items = [
 ];
 
 const App: React.FC = () => {
+  const [size, setSize] = useState<SizeType>('large');
+
   const expandedRowRender = (size: SizeType) => {
     const columns: TableColumnsType<ExpandedDataType> = [
       { title: 'Date', dataIndex: 'date', key: 'date' },
@@ -92,33 +94,28 @@ const App: React.FC = () => {
 
   return (
     <>
+      <Form style={{ marginBottom: 24 }}>
+        <Form.Item label="Size" required={true}>
+          <Radio.Group
+            value={size}
+            onChange={e => {
+              setSize(e.target.value);
+            }}
+          >
+            <Radio.Button value="large">large</Radio.Button>
+            <Radio.Button value="middle">middle</Radio.Button>
+            <Radio.Button value="small">small</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+      </Form>
       <Table
+        size={size}
         columns={columns}
         expandable={{
-          expandedRowRender: () => expandedRowRender('large'),
+          expandedRowRender: () => expandedRowRender(size),
           defaultExpandedRowKeys: ['0'],
         }}
         dataSource={data}
-      />
-      <br />
-      <Table
-        columns={columns}
-        expandable={{
-          expandedRowRender: () => expandedRowRender('middle'),
-          defaultExpandedRowKeys: ['0'],
-        }}
-        dataSource={data}
-        size="middle"
-      />
-      <br />
-      <Table
-        columns={columns}
-        expandable={{
-          expandedRowRender: () => expandedRowRender('small'),
-          defaultExpandedRowKeys: ['0'],
-        }}
-        dataSource={data}
-        size="small"
       />
     </>
   );

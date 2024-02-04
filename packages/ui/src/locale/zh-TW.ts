@@ -4,6 +4,7 @@ import BatchOperationBar from '../BatchOperationBar/locale/zh-TW';
 import Dialog from '../Dialog/locale/zh-TW';
 import DocDialog from '../DocDialog/locale/zh-TW';
 import GraphToolbar from '../GraphToolbar/locale/zh-TW';
+import Highlight from '../Highlight/locale/zh-TW';
 import Login from '../Login/locale/zh-TW';
 import PageContainer from '../PageContainer/locale/zh-TW';
 import { default as Boundary, default as Password } from '../Password/locale/zh-TW';
@@ -25,6 +26,7 @@ export default {
   Password,
   Boundary,
   Dialog,
+  Highlight,
   DocDialog,
   BatchOperationBar,
 } as Locale;
