@@ -25,6 +25,10 @@ export function genComponentStyleHook(
       getDefaultToken,
       {
         resetStyle: false,
+        // antd style order is -999 and -998
+        // ref: https://github.com/ant-design/ant-design/blob/master/components/theme/util/genComponentStyleHook.tsx#L175
+        // obui style order should behind to cover it
+        order: -900,
       }
     );
     const [wrapSSR] = useStyle(prefixCls);
