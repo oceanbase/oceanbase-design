@@ -117,7 +117,7 @@
     "runscript": "^1.5.3",
     "svg-jest": "^1.0.1",
     "sylvanas": "^0.6.1",
-    "ts-jest": "^29.1.1",
+    "ts-jest": "^29.1.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.3",
     "vanilla-jsoneditor": "^0.21.2",
