@@ -43,6 +43,7 @@ const Empty: CompoundedComponent = ({
   const emptyCls = classNames(
     prefixCls,
     {
+      [`${prefixCls}-normal`]: image === simpleEmptyImg,
       [`${prefixCls}-horizontal`]: isHorizontal,
     },
     className
