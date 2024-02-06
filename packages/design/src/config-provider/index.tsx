@@ -16,6 +16,7 @@ import StaticFunction from '../static-function';
 import themeConfig from '../theme';
 import defaultTheme from '../theme/default';
 import darkTheme from '../theme/dark';
+import DefaultRenderEmpty from './DefaultRenderEmpty';
 import type { NavigateFunction } from './navigate';
 import type { Locale } from '../locale';
 
@@ -127,6 +128,10 @@ const ConfigProvider: ConfigProviderType = ({
         },
         mergedTheme
       )}
+      renderEmpty={
+        parentContext.renderEmpty ||
+        (componentName => <DefaultRenderEmpty componentName={componentName} />)
+      }
       {...restProps}
     >
       <ExtendedConfigContext.Provider
