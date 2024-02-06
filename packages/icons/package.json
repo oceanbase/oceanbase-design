@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@ant-design/colors": "^7.0.2",
-    "@ant-design/icons": "^5.2.6",
+    "@ant-design/icons": "^5.3.0",
     "@oceanbase/icons-svg": "^1.0.5"
   },
   "peerDependencies": {

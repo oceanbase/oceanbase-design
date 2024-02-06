@@ -34,9 +34,9 @@
     "build": "NODE_OPTIONS=--max_old_space_size=4096 father build"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.17.2",
-    "@ant-design/pro-components": "^2.6.43",
-    "@ant-design/pro-layout": "^7.17.16",
+    "@ant-design/cssinjs": "^1.18.4",
+    "@ant-design/pro-components": "^2.6.49",
+    "@ant-design/pro-layout": "^7.17.19",
     "@oceanbase/design": "workspace:^",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
