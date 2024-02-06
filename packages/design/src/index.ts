@@ -33,6 +33,9 @@ export type {
   DescriptionsItemProps,
 } from './descriptions';
 
+export { default as Empty } from './empty';
+export type { EmptyProps } from './empty';
+
 export { default as Form } from './form';
 export type { FormProps, FormItemProps } from './form';
 
