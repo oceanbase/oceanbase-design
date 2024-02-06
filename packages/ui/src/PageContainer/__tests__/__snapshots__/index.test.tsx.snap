@@ -426,11 +426,10 @@ exports[`PageContainer extra and footer 1`] = `
                 class="ant-picker-input"
               >
                 <input
+                  aria-invalid="false"
                   autocomplete="off"
                   placeholder="DatePicker"
-                  readonly=""
                   size="12"
-                  title=""
                   value=""
                 />
                 <span
@@ -466,12 +465,13 @@ exports[`PageContainer extra and footer 1`] = `
               class="ant-picker ant-picker-range ant-picker-large ant-picker-outlined"
             >
               <div
-                class="ant-picker-input ant-picker-input-active"
+                class="ant-picker-input"
               >
                 <input
+                  aria-invalid="false"
                   autocomplete="off"
+                  date-range="start"
                   placeholder="开始日期"
-                  readonly=""
                   size="12"
                   value=""
                 />
@@ -508,16 +508,17 @@ exports[`PageContainer extra and footer 1`] = `
                 class="ant-picker-input"
               >
                 <input
+                  aria-invalid="false"
                   autocomplete="off"
+                  date-range="end"
                   placeholder="结束日期"
-                  readonly=""
                   size="12"
                   value=""
                 />
               </div>
               <div
                 class="ant-picker-active-bar"
-                style="left: 0px; width: 0px; position: absolute;"
+                style="position: absolute; width: 0px; left: 0px;"
               />
               <span
                 class="ant-picker-suffix"
@@ -554,11 +555,10 @@ exports[`PageContainer extra and footer 1`] = `
                 class="ant-picker-input"
               >
                 <input
+                  aria-invalid="false"
                   autocomplete="off"
                   placeholder="TimePicker"
-                  readonly=""
                   size="10"
-                  title=""
                   value=""
                 />
                 <span
