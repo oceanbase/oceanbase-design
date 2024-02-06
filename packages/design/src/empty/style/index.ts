@@ -2,7 +2,7 @@ import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
-export type EmptyToken = FullToken<'Empty'>;
+export type EmptyToken = FullToken<'Badge'>;
 
 export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSSObject => {
   const {
@@ -17,67 +17,52 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
 
   return {
     [`${componentCls}`]: {
-      padding: '32px 0',
       [`${componentCls}-image`]: {
         height: 'auto',
-        marginBottom: 0,
       },
       [`${componentCls}-description`]: {
         [`${componentCls}-title`]: {
-          height: '32px',
-          lineHeight: '32px',
-          fontWeight: 600,
-          fontSize: '24px',
-          color: '#132039',
-          letterSpacing: 0,
-          textAlign: 'center',
-          marginBottom: '8px',
+          fontWeight: token.fontWeightStrong,
+          fontSize: token.fontSizeHeading3,
         },
-        [`${componentCls}-subTitle`]: {
-          lineHeight: '22px',
-          fontWeight: 400,
-          fontSize: '14px',
+        [`${componentCls}-description-content`]: {
           color: colorTextTertiary,
-          letterSpacing: 0,
-          textAlign: 'center',
-          marginTop: '24px',
-        },
-        [`${componentCls}-extra`]: {
-          textAlign: 'center',
-          marginTop: '24px',
         },
       },
       [`${componentCls}-footer`]: {
-        marginTop: '24px!important',
+        marginTop: token.marginLG,
       },
       [`${antCls}-steps`]: {
-        padding: '24px',
+        marginTop: token.margin,
+        padding: token.paddingLG,
         backgroundColor: colorBgLayout,
-        borderRadius: '8px',
+        borderRadius: token.borderRadiusLG,
         [`${antCls}-steps-item-container`]: {
           [`${antCls}-steps-item-icon`]: {
-            height: '26px',
-            width: '26px',
-            lineHeight: '26px',
+            height: token.controlHeightSM,
+            width: token.controlHeightSM,
+            lineHeight: `${token.controlHeightSM}px`,
             backgroundColor: colorFill,
             borderColor: colorFill,
             [`${antCls}-steps-icon`]: {
               color: colorTextSecondary,
-              fontSize: '14px',
+              fontSize: token.fontSize,
             },
           },
-
           [`${antCls}-steps-item-content`]: {
             [`${antCls}-steps-item-title`]: {
-              color: `${colorText}!important`,
-              lineHeight: '24px',
-              fontSize: '14px',
+              color: colorText,
+              fontSize: token.fontSize,
+              fontWeight: token.fontWeightStrong,
+              lineHeight: `${token.controlHeightSM}px`,
+              '&::after': {
+                top: token.controlHeightSM / 2,
+              },
             },
-            ['.ant-steps-item-description']: {
-              color: `${colorTextTertiary}!important`,
-              lineHeight: '20px',
-              fontSize: '12px',
-              marginTop: '8px',
+            [`${antCls}-steps-item-description`]: {
+              color: colorTextTertiary,
+              fontSize: token.fontSizeSM,
+              marginTop: token.marginXS,
             },
           },
         },
@@ -86,46 +71,20 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
 
     [`${componentCls}-horizontal`]: {
       display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
       justifyContent: 'center',
+      alignItems: 'center',
       [`${componentCls}-image`]: {
         marginBottom: 0,
       },
       [`${componentCls}-description`]: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        marginLeft: '48px',
-
+        marginLeft: token.marginXXL,
+        textAlign: 'left',
         [`${componentCls}-title`]: {
           marginTop: 0,
         },
-        [`${componentCls}-subTitle`]: {
-          textAlign: 'initial',
+        [`${componentCls}-description-content`]: {
+          marginTop: token.margin,
         },
-      },
-    },
-
-    // page
-    [`${componentCls}-page`]: {
-      height: 'calc(100vh - 98px)',
-      ['.ant-card-body']: {
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '400px',
-      },
-    },
-
-    // pageCard
-    [`${componentCls}-pageCard`]: {
-      ['.ant-card-body']: {
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
       },
     },
   };

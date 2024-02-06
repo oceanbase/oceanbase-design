@@ -1,12 +1,11 @@
 import React from 'react';
 import { Empty, Button } from '@oceanbase/design';
-import WellcomeIcon from '../icon/WellcomeIcon';
+
 export default () => {
   return (
     <Empty
-      mode="page"
       layout="horizontal"
-      image={<WellcomeIcon />}
+      image="https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*5Z-QSplMlFwAAAAAAAAAAAAADmfOAQ/original"
       title="欢迎体验 OB 智能诊断"
       description={
         <>
@@ -15,11 +14,8 @@ export default () => {
           <div>• 旨在帮助客户快速评估数据库的运行状态，并对如何处理问题提供建议和指导</div>
         </>
       }
-      extra={[
-        <Button type="primary" key="console">
-          开启智能诊断
-        </Button>,
-      ]}
-    />
+    >
+      <Button type="primary">开启智能诊断</Button>
+    </Empty>
   );
 };

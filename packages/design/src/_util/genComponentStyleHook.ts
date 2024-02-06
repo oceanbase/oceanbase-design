@@ -25,6 +25,7 @@ export function genComponentStyleHook(
       getDefaultToken,
       {
         resetStyle: false,
+        order: -900,
       }
     );
     const [wrapSSR] = useStyle(prefixCls);

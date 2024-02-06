@@ -1,39 +1,22 @@
 import React, { useContext } from 'react';
-import { Empty as AntEmpty } from 'antd';
-import { Card, Steps } from '@oceanbase/design';
+import { Empty as AntEmpty, Steps } from 'antd';
 import type { EmptyProps as AntEmptyProps } from 'antd/es/empty';
+import type { StepProps } from 'antd/es/steps';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
-import DefaultEmptyImg from './Empty';
-export * from 'antd/es/empty';
+import DefaultEmptyImg from './empty';
+import SimpleEmptyImg from './simple';
 import useStyle from './style';
 
+export * from 'antd/es/empty';
+
 const defaultEmptyImg = <DefaultEmptyImg />;
+const simpleEmptyImg = <SimpleEmptyImg />;
 
-interface ExtraProps {
-  prefixCls: string;
-  extra: React.ReactNode;
-}
-
-const Extra: React.FC<ExtraProps> = ({ prefixCls, extra }) => {
-  if (!extra) {
-    return null;
-  }
-  return <div className={`${prefixCls}-extra`}>{extra}</div>;
-};
-
-export interface Step {
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-}
 export interface EmptyProps extends AntEmptyProps {
-  layout?: string;
-  steps?: Step[];
   title?: React.ReactNode;
-  extra?: React.ReactNode;
-  children?: React.ReactNode;
-  // 展示模式: 页面模式 | 组件模式
-  mode?: 'page' | 'pageCard' | 'component';
+  steps?: StepProps[];
+  layout?: 'horizontal' | 'vertical';
 }
 
 type CompoundedComponent = React.FC<EmptyProps> & {
@@ -42,67 +25,60 @@ type CompoundedComponent = React.FC<EmptyProps> & {
 };
 
 const Empty: CompoundedComponent = ({
-  prefixCls: customizePrefixCls,
-  className,
-  layout = 'vertical',
-  steps,
+  image = defaultEmptyImg,
   title,
   description,
-  extra,
-  image,
-  // image = defaultEmptyImg,
+  steps,
+  layout = 'vertical',
   children,
-  // 默认为页面模式
-  mode = 'pageCard',
+  prefixCls: customizePrefixCls,
+  className,
   style,
   ...restProps
 }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('empty', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
-  const emptyCls = classNames(prefixCls, className);
+  const isHorizontal = layout === 'horizontal';
+  const emptyCls = classNames(
+    prefixCls,
+    {
+      [`${prefixCls}-horizontal`]: isHorizontal,
+    },
+    className
+  );
 
-  const empty = (
+  return wrapSSR(
     <AntEmpty
-      className={classNames(`${emptyCls} ${prefixCls}-${layout}`)}
-      description={
-        steps ? (
-          <Steps current={0} items={steps} />
-        ) : (
-          (title || description || extra) && (
-            <>
-              {title && <div className={`${prefixCls}-title`}>{title}</div>}
-              <div className={`${prefixCls}-subTitle`}>{description}</div>
-              {layout === 'horizontal' && children && (
-                <div className={`${prefixCls}-content`}>{children}</div>
-              )}
-              {extra && <Extra prefixCls={prefixCls} extra={extra} />}
-            </>
-          )
-        )
-      }
       image={image}
+      description={
+        title || description || steps || (isHorizontal && children) ? (
+          <>
+            {title && <div className={`${prefixCls}-title`}>{title}</div>}
+            {description && (
+              <div
+                // to avoid conflicts with `${prefixCls}-description`
+                className={`${prefixCls}-description-content`}
+              >
+                {description}
+              </div>
+            )}
+            {steps && <Steps items={steps} />}
+            {isHorizontal && children && <div className={`${prefixCls}-footer`}>{children}</div>}
+          </>
+        ) : undefined
+      }
+      prefixCls={customizePrefixCls}
+      className={emptyCls}
       {...restProps}
     >
-      {layout !== 'horizontal' && children}
+      {!isHorizontal && children}
     </AntEmpty>
   );
-
-  const pageCard = (
-    <Card className={`${emptyCls}-${mode}`} style={style}>
-      {empty}
-    </Card>
-  );
-
-  const MyEmpty = mode === 'component' ? empty : pageCard;
-
-  return wrapSSR(MyEmpty);
 };
 
-AntEmpty.PRESENTED_IMAGE_SIMPLE = defaultEmptyImg;
-
-Empty.PRESENTED_IMAGE_DEFAULT = AntEmpty.PRESENTED_IMAGE_DEFAULT;
-Empty.PRESENTED_IMAGE_SIMPLE = AntEmpty.PRESENTED_IMAGE_SIMPLE;
+Empty.PRESENTED_IMAGE_DEFAULT = defaultEmptyImg;
+Empty.PRESENTED_IMAGE_SIMPLE = simpleEmptyImg;
 
 if (process.env.NODE_ENV !== 'production') {
   Empty.displayName = AntEmpty.displayName;
