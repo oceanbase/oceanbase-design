@@ -6,7 +6,7 @@ nav:
 ---
 
 - 🔥 完全兼容 antd [Empty](https://ant.design/components/Empty-cn) 的能力和 API，可无缝切换。
-- 💄 定制插图、主题和样式，符合 OceanBase Design 设计规范。
+- 💄 定制插图、主题和样式，以符合 OceanBase Design 设计规范。
 - 🆕 新增 `title` 属性，用于设置空状态标题。
 - 🆕 新增 `steps` 属性，用于设置步骤引导。
 - 🆕 新增 `layout` 属性，用于设置空状态布局，默认为 `vertical`。
@@ -26,6 +26,8 @@ nav:
 <code src="./demo/horizontal.tsx" title="横向布局"></code>
 
 <code src="./demo/with-page-container.tsx" title="和页容器搭配使用"></code>
+
+<code src="./demo/config-provider.tsx" title="全局组件的 Empty 样式"></code>
 
 ## API
 

@@ -6,6 +6,7 @@ nav:
 ---
 
 - 🔥 完全继承 antd [ConfigProvider](https://ant.design/components/config-provider-cn) 的能力和 API，可无缝切换。
+- 🌈 定制全局主题和空状态，以符合 OceanBase Design 设计规范。
 - 🆕 默认内嵌 [App 包裹组件](https://ant.design/components/app-cn)，支持 message, notification 和 Modal 等静态方法消费 ConfigProvider 配置。
 - 🆕 新增 `table.selectionColumnWidth` 属性，用于配置表格的展开列宽度。
 - 🆕 新增 `injectStaticFunction` 属性，用于配置 `message`, `notification` 和 `Modal` 静态方法是否可以消费全局配置，默认开启。
@@ -21,8 +22,9 @@ nav:
 <code src="./demo/size.tsx" title="尺寸"></code>
 <code src="./demo/theme.tsx" title="主题"></code>
 <code src="./demo/spin.tsx" title="Spin"></code>
+<code src="../empty/demo/config-provider.tsx" title="空状态"></code>
 
-### 统一样式前缀
+### 样式前缀
 
 - 通过 `prefixCls` 和 `iconPrefixCls` 可设置 antd 组件和图标的统一样式前缀。
 
