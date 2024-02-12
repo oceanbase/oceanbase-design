@@ -104,7 +104,7 @@
     "rc-drawer": "^7.0.0",
     "rc-footer": "^0.6.8",
     "rc-resize-observer": "^1.4.0",
-    "rc-segmented": "^2.2.2",
+    "rc-segmented": "^2.3.0",
     "rc-tabs": "^12.13.1",
     "rc-util": "^5.38.1",
     "react": "^18.2.0",
