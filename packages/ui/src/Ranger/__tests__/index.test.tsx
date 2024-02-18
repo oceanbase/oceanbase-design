@@ -10,11 +10,11 @@ const CUSTOMIZE = 'customize';
 
 describe('Ranger ', () => {
   beforeEach(() => {
-    const FORMAT_TYPE = 'YYYY-MM-DD HH:mm:ss';
     MockDate.set(moment('2017-09-18T03:30:07.795').format(FORMAT_TYPE));
 
-    jest.mock('antd', () => {
-      const antd = jest.requireActual('antd');
+    vi.mock('antd', async () => {
+      const mockReact = (await vi.importActual('react')) as typeof React;
+      const antd = await vi.importActual('antd');
       const DatePicker = () => <div></div>;
       DatePicker.RangePicker = ({ value }) => (
         <div data-testid="range-picker">
@@ -26,7 +26,6 @@ describe('Ranger ', () => {
       const Select = ({ onSelect, value, children }) => {
         // 考虑 cloneElement 不能有 undefined 的情况，但是实际执行是可以的
         const filtered = children.filter(c => !!c);
-        const mockReact = jest.requireActual('react');
         return (
           <div data-testid="select">
             <div data-testid="select-value">{value}</div>
@@ -92,7 +91,7 @@ describe('Ranger ', () => {
     //   });
 
     //   // it('selects 选中后， onChange 结果正常', () => {
-    //   //   const fakeChange = jest.fn();
+    //   //   const fakeChange = vi.fn();
     //   //   const { getAllByTestId } = render(
     //   //     <Ranger selects={[Ranger.TODAY, Ranger.YESTERDAY]} onChange={fakeChange} />,
     //   //   );
@@ -129,7 +128,7 @@ describe('Ranger ', () => {
     //     expect(getByTestId('select-value').textContent).toBe(name);
     //   });
     //   it('onChange 正常', () => {
-    //     const fakeChange = jest.fn();
+    //     const fakeChange = vi.fn();
     //     const { getAllByTestId } = render(
     //       <Ranger.QuickPicker selects={[Ranger.TODAY, Ranger.YESTERDAY]} onChange={fakeChange} />
     //     );

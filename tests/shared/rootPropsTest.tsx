@@ -34,7 +34,7 @@ export default function rootPropsTest(
 
     beforeEach(() => {
       passed = false;
-      jest.useFakeTimers();
+      vi.useFakeTimers();
     });
 
     afterEach(() => {
@@ -42,7 +42,7 @@ export default function rootPropsTest(
         // eslint-disable-next-line
         console.log(document.body.innerHTML);
       }
-      jest.useRealTimers();
+      vi.useRealTimers();
     });
 
     it('rootClassName', async () => {

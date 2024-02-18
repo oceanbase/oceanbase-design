@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`PageContainer basic 1`] = `
+exports[`PageContainer > basic 1`] = `
 <div
   class="ant-pro-page-container ant-pro-page-container-with-footer"
 >
@@ -324,7 +324,7 @@ exports[`PageContainer basic 1`] = `
 </div>
 `;
 
-exports[`PageContainer extra and footer 1`] = `
+exports[`PageContainer > extra and footer 1`] = `
 <div
   class="ant-pro-page-container ant-pro-page-container-with-footer"
 >
@@ -471,7 +471,7 @@ exports[`PageContainer extra and footer 1`] = `
                   aria-invalid="false"
                   autocomplete="off"
                   date-range="start"
-                  placeholder="开始日期"
+                  placeholder="Start date"
                   size="12"
                   value=""
                 />
@@ -511,7 +511,7 @@ exports[`PageContainer extra and footer 1`] = `
                   aria-invalid="false"
                   autocomplete="off"
                   date-range="end"
-                  placeholder="结束日期"
+                  placeholder="End date"
                   size="12"
                   value=""
                 />

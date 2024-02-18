@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { render, fireEvent } from '@testing-library/react';
+import { vi } from 'vitest';
 import { Tooltip } from '@oceanbase/design';
 import { waitFakeTimer, isTooltipOpen } from '../../../../../tests/util';
 import { CloseCircleOutlined } from '@oceanbase/icons';
 
 describe('Tooltip', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
   afterEach(() => {
-    jest.useRealTimers();
-    jest.clearAllTimers();
+    vi.useRealTimers();
+    vi.clearAllTimers();
   });
 
   it('default close icon should render correctly', async () => {
@@ -51,7 +52,7 @@ describe('Tooltip', () => {
   });
 
   it('check `onOpenChange` arguments', async () => {
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     const { container } = render(
       <Tooltip title="This is prompt text" closeIcon={true} onClose={onClose}>
         <div id="hello">Hello world!</div>
@@ -138,7 +139,7 @@ describe('Tooltip', () => {
   });
 
   it('should hide when title is none', async () => {
-    const onOpenChange = jest.fn();
+    const onOpenChange = vi.fn();
 
     const { container, rerender } = render(
       <Tooltip

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Spin custom indicator should work 1`] = `
+exports[`Spin > custom indicator should work 1`] = `
 <div
   aria-busy="true"
   aria-live="polite"
@@ -12,7 +12,7 @@ exports[`Spin custom indicator should work 1`] = `
 </div>
 `;
 
-exports[`Spin default indicator should render correctly 1`] = `
+exports[`Spin > default indicator should render correctly 1`] = `
 <div
   aria-busy="true"
   aria-live="polite"
@@ -563,7 +563,7 @@ exports[`Spin default indicator should render correctly 1`] = `
 </div>
 `;
 
-exports[`Spin gray default indicator should render correctly 1`] = `
+exports[`Spin > gray default indicator should render correctly 1`] = `
 <div
   aria-busy="true"
   aria-live="polite"

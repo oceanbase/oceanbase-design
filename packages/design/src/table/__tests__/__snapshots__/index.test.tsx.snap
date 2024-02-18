@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Table hideOnSinglePage could be changed 1`] = `
+exports[`Table > hideOnSinglePage could be changed 1`] = `
 <div
   class="ant-table-wrapper"
 >
@@ -260,7 +260,7 @@ exports[`Table hideOnSinglePage could be changed 1`] = `
 </div>
 `;
 
-exports[`Table hideOnSinglePage should be false by default 1`] = `
+exports[`Table > hideOnSinglePage should be false by default 1`] = `
 <div
   class="ant-table-wrapper"
 >
@@ -604,7 +604,7 @@ exports[`Table hideOnSinglePage should be false by default 1`] = `
 </div>
 `;
 
-exports[`Table render 1`] = `
+exports[`Table > render 1`] = `
 <div
   class="ant-table-wrapper"
 >

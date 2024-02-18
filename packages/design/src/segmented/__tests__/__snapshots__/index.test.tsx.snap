@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Segmented render options 1`] = `
+exports[`Segmented > render options 1`] = `
 <div
   class="ant-segmented"
 >
@@ -82,7 +82,7 @@ exports[`Segmented render options 1`] = `
 </div>
 `;
 
-exports[`Segmented render options with ellipsis 1`] = `
+exports[`Segmented > render options with ellipsis 1`] = `
 <div
   class="ant-segmented ant-segmented-block"
 >

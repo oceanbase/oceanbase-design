@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import ContentWithQuestion from '..';
+import { ContentWithQuestion } from '@oceanbase/ui';
 
 describe('ContentWithQuestion', () => {
   it('渲染正常', async () => {

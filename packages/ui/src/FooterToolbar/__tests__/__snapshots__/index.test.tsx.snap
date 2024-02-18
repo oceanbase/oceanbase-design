@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`FooterToolbar portalDom is true 1`] = `
+exports[`FooterToolbar > portalDom is true 1`] = `
 <div>
   <div
     class="ant-pro-footer-bar"
@@ -34,7 +34,7 @@ exports[`FooterToolbar portalDom is true 1`] = `
 </div>
 `;
 
-exports[`FooterToolbar render 1`] = `
+exports[`FooterToolbar > render 1`] = `
 <div>
   <div
     class="ant-pro-footer-bar"

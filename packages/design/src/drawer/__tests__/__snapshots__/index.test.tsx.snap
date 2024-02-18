@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Drawer render correctly 1`] = `
+exports[`Drawer > render correctly 1`] = `
 <div
   class="ant-drawer ant-drawer-right ant-drawer ant-drawer-open ant-drawer-inline"
   tabindex="-1"
@@ -82,7 +82,7 @@ exports[`Drawer render correctly 1`] = `
 </div>
 `;
 
-exports[`Drawer render with confirmLoading and okButtonProps 1`] = `
+exports[`Drawer > render with confirmLoading and okButtonProps 1`] = `
 <div
   class="ant-drawer ant-drawer-right ant-drawer ant-drawer-with-footer ant-drawer-open ant-drawer-inline"
   tabindex="-1"
@@ -223,7 +223,7 @@ exports[`Drawer render with confirmLoading and okButtonProps 1`] = `
 </div>
 `;
 
-exports[`Drawer render with custom footer 1`] = `
+exports[`Drawer > render with custom footer 1`] = `
 <div
   class="ant-drawer ant-drawer-right ant-drawer ant-drawer-with-footer ant-drawer-open ant-drawer-inline"
   tabindex="-1"
@@ -312,7 +312,7 @@ exports[`Drawer render with custom footer 1`] = `
 </div>
 `;
 
-exports[`Drawer render with default footer 1`] = `
+exports[`Drawer > render with default footer 1`] = `
 <div
   class="ant-drawer ant-drawer-right ant-drawer ant-drawer-with-footer ant-drawer-open ant-drawer-inline"
   tabindex="-1"
@@ -430,7 +430,7 @@ exports[`Drawer render with default footer 1`] = `
 </div>
 `;
 
-exports[`Drawer render with footerExtra and custom footer 1`] = `
+exports[`Drawer > render with footerExtra and custom footer 1`] = `
 <div
   class="ant-drawer ant-drawer-right ant-drawer ant-drawer-with-footer ant-drawer-open ant-drawer-inline"
   tabindex="-1"
@@ -519,7 +519,7 @@ exports[`Drawer render with footerExtra and custom footer 1`] = `
 </div>
 `;
 
-exports[`Drawer render with footerExtra and default footer 1`] = `
+exports[`Drawer > render with footerExtra and default footer 1`] = `
 <div
   class="ant-drawer ant-drawer-right ant-drawer ant-drawer-with-footer ant-drawer-open ant-drawer-inline"
   tabindex="-1"
@@ -638,7 +638,7 @@ exports[`Drawer render with footerExtra and default footer 1`] = `
 </div>
 `;
 
-exports[`Drawer render with footerExtra and no footer 1`] = `
+exports[`Drawer > render with footerExtra and no footer 1`] = `
 <div
   class="ant-drawer ant-drawer-right ant-drawer ant-drawer-open ant-drawer-inline"
   tabindex="-1"
@@ -720,7 +720,7 @@ exports[`Drawer render with footerExtra and no footer 1`] = `
 </div>
 `;
 
-exports[`Drawer render with okText and cancenText 1`] = `
+exports[`Drawer > render with okText and cancenText 1`] = `
 <div
   class="ant-drawer ant-drawer-right ant-drawer ant-drawer-with-footer ant-drawer-open ant-drawer-inline"
   tabindex="-1"
@@ -838,7 +838,7 @@ exports[`Drawer render with okText and cancenText 1`] = `
 </div>
 `;
 
-exports[`Drawer render with onOk 1`] = `
+exports[`Drawer > render with onOk 1`] = `
 <div
   class="ant-drawer ant-drawer-right ant-drawer ant-drawer-with-footer ant-drawer-open ant-drawer-inline"
   tabindex="-1"

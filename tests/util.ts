@@ -1,4 +1,5 @@
 import { act } from '@testing-library/react';
+import { vi } from 'vitest';
 import fs from 'fs';
 import { join } from 'path';
 import { _rs as onEsResize } from 'rc-resize-observer/es/utils/observerUtil';
@@ -34,9 +35,9 @@ export async function waitFakeTimer(advanceTime = 1000, times = 20) {
       await Promise.resolve();
 
       if (advanceTime > 0) {
-        jest.advanceTimersByTime(advanceTime);
+        vi.advanceTimersByTime(advanceTime);
       } else {
-        jest.runAllTimers();
+        vi.runAllTimers();
       }
     });
   }
