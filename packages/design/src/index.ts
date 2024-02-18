@@ -71,6 +71,9 @@ export type { SegmentedProps } from './segmented';
 export { default as Breadcrumb } from './breadcrumb';
 export type { BreadcrumbProps, BreadcrumbItemProps } from './breadcrumb';
 
+export { default as Result } from './result';
+export type { ResultProps, ResultType, ResultStatusType } from './result';
+
 export { default as Spin } from './spin';
 export type { SpinProps } from './spin';
 
