@@ -113,7 +113,7 @@
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.3",
     "react-intl": "^6.6.2",
-    "react-router-dom": "^6.22.0",
+    "react-router-dom": "^6.22.1",
     "runscript": "^1.6.0",
     "svg-jest": "^1.0.1",
     "sylvanas": "^0.6.1",
