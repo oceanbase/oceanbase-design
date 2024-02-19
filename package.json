@@ -63,7 +63,7 @@
     "@types/jest": "^29.5.12",
     "@types/lodash": "^4.14.202",
     "@types/node": "^20.11.16",
-    "@types/react": "^18.2.54",
+    "@types/react": "^18.2.56",
     "@umijs/fabric": "^4.0.1",
     "@umijs/test": "^4.1.1",
     "@vercel/analytics": "^1.2.0",
