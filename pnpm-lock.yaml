@@ -42,8 +42,8 @@ importers:
         specifier: ^11.11.0
         version: 11.11.0(@emotion/css@11.11.2)
       '@qixian.cs/github-contributors-list':
-        specifier: ^1.1.0
-        version: 1.1.0(react@18.2.0)
+        specifier: ^2.0.1
+        version: 2.0.1(react-dom@18.2.0)(react@18.2.0)
       '@rc-component/trigger':
         specifier: ^1.18.3
         version: 1.18.3(react-dom@18.2.0)(react@18.2.0)
@@ -5337,12 +5337,15 @@ packages:
       '@babel/runtime': 7.23.9
     dev: false
 
-  /@qixian.cs/github-contributors-list@1.1.0(react@18.2.0):
-    resolution: {integrity: sha512-6ThLEW60wv/2CB7jtlKPiSVnJDI46FmQ1PyPksrlUFp4c7SD0j+IG0NsH9FOOBeDLkJqBsiL7/67N9NfOEklSw==}
+  /@qixian.cs/github-contributors-list@2.0.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-HeOPcdl/GOLUmtzPAwPltOHpEabeIWlIF46QPmIT6Z3/FuI3eGNAUMgaeTaWtfOsa25uarIrY3D8Ry68/W0kRw==}
     peerDependencies:
-      react: '>=16.0.0'
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
     dependencies:
       react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      swr: 2.2.4(react@18.2.0)
     dev: true
 
   /@rc-component/color-picker@1.5.1(react-dom@18.2.0)(react@18.2.0):
@@ -9504,7 +9507,6 @@ packages:
 
   /client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
-    dev: false
 
   /cliui@2.1.0:
     resolution: {integrity: sha512-GIOYRizG+TGoc7Wgc1LiOTLare95R3mzKgoln+Q/lE4ceiYH19gUpl0l0Ffq4lJDEf3FxujMe6IBfOCs7pfqNA==}
@@ -23991,7 +23993,6 @@ packages:
       client-only: 0.0.1
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
-    dev: false
 
   /sylvanas@0.6.1:
     resolution: {integrity: sha512-/hI6AJ522jV4+9iQ1lCmwiqBQDDDYQZQVSDRY+Gt5/Mh2i9rqiG6A9ltMFAAqw0fSkjgfFIMI6e0fAyssQ71xw==}
