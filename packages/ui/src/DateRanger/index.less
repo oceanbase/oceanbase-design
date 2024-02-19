@@ -3,22 +3,24 @@
 @prefix: ob-date-ranger;
 
 .@{prefix} {
-  .@{prefixCls}-space-item:nth-child(2) {
-    flex: 1;
-    width: 100%;
+  .@{prefix}-range-picker {
+    padding-left: 0px;
+    border: 0px;
 
-    .@{prefixCls}-picker,
-    .@{prefixCls}-picker-range,
-    .@{prefix}-range-picker {
-      width: 100%;
-      // 去掉左侧圆角，以与下拉选择紧密组合在一起
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-
-      input {
-        text-align: center;
-      }
+    input {
+      text-align: center;
     }
+  }
+
+  .@{prefix}-wrapper {
+    border: 1px solid @colorBorder;
+    border-radius: 4px;
+    box-sizing: border-box;
+    min-width: 160px;
+  }
+
+  .@{prefix}-play {
+    padding: 4px 11px 4px;
   }
 
   .@{prefix}-picker-input {
@@ -66,4 +68,14 @@
       padding-inline: 8px;
     }
   }
+}
+
+.@{prefix}-label {
+  background-color: rgb(226, 229, 237);
+  display: inline-block;
+  width: 60px;
+  padding: 4px 0;
+  border-radius: 4px;
+  line-height: 1;
+  text-align: center;
 }

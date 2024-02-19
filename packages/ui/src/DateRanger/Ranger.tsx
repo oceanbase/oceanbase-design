@@ -281,14 +281,7 @@ const Ranger = (props: DateRangerProps) => {
 
   return (
     <Space size={4} className={classNames(prefix)} style={rest.style}>
-      <div
-        style={{
-          border: `1px solid ${token.colorBorder}`,
-          borderRadius: 4,
-          boxSizing: 'border-box',
-          minWidth: 160,
-        }}
-      >
+      <div className={`${prefix}-wrapper`}>
         <Dropdown
           trigger={['click']}
           menu={{
@@ -307,7 +300,8 @@ const Ranger = (props: DateRangerProps) => {
                 return {
                   key: item.name,
                   label: (
-                    <span
+                    <Space
+                      size={8}
                       onClick={() => {
                         const rName = item.name;
                         handleNameChange(rName);
@@ -320,22 +314,9 @@ const Ranger = (props: DateRangerProps) => {
                         }
                       }}
                     >
-                      <span
-                        style={{
-                          backgroundColor: 'rgb(226, 229, 237)',
-                          marginRight: 8,
-                          display: 'inline-block',
-                          width: 60,
-                          padding: '4px 0',
-                          borderRadius: 4,
-                          lineHeight: 1,
-                          textAlign: 'center',
-                        }}
-                      >
-                        {item.rangeLabel}
-                      </span>
+                      <span className={`${prefix}-label`}>{item.rangeLabel}</span>
                       {locale[item.label] || item.label}
-                    </span>
+                    </Space>
                   ),
                 };
               }),
@@ -343,20 +324,14 @@ const Ranger = (props: DateRangerProps) => {
         >
           <Space size={0}>
             <span
+              className={`${prefix}-label`}
               style={{
-                backgroundColor: 'rgb(226, 229, 237)',
-                display: 'inline-block',
-                width: 60,
-                padding: '4px 0',
-                borderRadius: 4,
-                lineHeight: 1,
-                textAlign: 'center',
                 marginLeft: 8,
               }}
             >
               {rangeLabel}
             </span>
-            {isPlay && <div style={{ padding: '4px 11px 4px' }}>{label}</div>}
+            {isPlay && <div className={`${prefix}-play`}>{label}</div>}
           </Space>
         </Dropdown>
         {!isPlay && (
@@ -373,7 +348,6 @@ const Ranger = (props: DateRangerProps) => {
             onChange={datePickerChange}
             showTime={true}
             size={size}
-            style={{ paddingLeft: 4, border: '0px' }}
             // 透传 props 到 antd Ranger
             {...omit(rest, 'value', 'onChange')}
           />
