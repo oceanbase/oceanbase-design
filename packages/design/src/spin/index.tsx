@@ -19,7 +19,7 @@ const Spin = ({
   prefixCls: customizePrefixCls,
   className,
   indicator: customizeIndicator,
-  gray,
+  gray = true,
   ...restProps
 }: SpinProps) => {
   const { getPrefixCls, spin } = useContext(ConfigProvider.ConfigContext);
