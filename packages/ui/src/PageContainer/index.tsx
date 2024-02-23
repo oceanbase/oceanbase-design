@@ -8,7 +8,7 @@ import { PageContainer as AntPageContainer } from '@ant-design/pro-components';
 import classNames from 'classnames';
 import { isObject } from 'lodash';
 import React, { useContext } from 'react';
-import { ConfigProvider, Space, Tooltip } from '@oceanbase/design';
+import { ConfigProvider, Space, Spin, Tooltip } from '@oceanbase/design';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import ItemRender from './ItemRender';
 import zhCN from './locale/zh-CN';
@@ -39,6 +39,7 @@ const PageContainer = ({
   tabBarExtraContent,
   footerToolBarProps,
   locale,
+  loading,
   ...restProps
 }: PageContainerProps) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -105,6 +106,13 @@ const PageContainer = ({
       extraContent={extraContent}
       tabList={tabList}
       tabBarExtraContent={tabBarExtraContent}
+      loading={
+        loading === true ? (
+          <Spin size="large" gray={false} className={`${prefixCls}-loading`} />
+        ) : (
+          loading
+        )
+      }
       footerToolBarProps={{
         // render footer under parent instead of body by default
         portalDom: false,
