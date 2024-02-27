@@ -54,14 +54,6 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
           marginBlockStart: 0,
         },
       },
-      // PageContainer loading
-      [`${componentCls}-loading`]: {
-        position: 'absolute',
-        // 27px is 1/2 of large Spin height
-        top: 'calc(50% - 27px)',
-        // 36px is 1/2 of large Spin width
-        insetInlineStart: 'calc(50% - 36px)',
-      },
       [`${componentCls}-children-container`]: {
         paddingInline: paddingLG,
         paddingBlockStart: 0,
