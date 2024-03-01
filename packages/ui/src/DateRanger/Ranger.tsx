@@ -1,4 +1,4 @@
-import { Button, DatePicker, Dropdown, Radio, Space, theme } from '@oceanbase/design';
+import { Button, DatePicker, Dropdown, Radio, Space, Tooltip, theme } from '@oceanbase/design';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
@@ -7,8 +7,9 @@ import type { Moment } from 'moment';
 import moment from 'moment';
 import classNames from 'classnames';
 import { useInterval } from 'ahooks';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import LocaleWrapper from '../locale/LocaleWrapper';
+
 import { getPrefix } from '../_util';
 import {
   CUSTOMIZE,
@@ -33,6 +34,7 @@ import {
   RightOutlined,
   ZoomOutOutlined,
 } from '@oceanbase/icons';
+import InternalPickerPanel from './PickerPanel';
 
 export type RangeName = 'customize' | string;
 
@@ -107,6 +109,13 @@ const Ranger = (props: DateRangerProps) => {
     value || defaultValue ? CUSTOMIZE : defaultQuickValue ?? selects?.[0]?.name
   );
 
+  const [open, setOpen] = useState(false);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const refState = useRef({
+    tooltipOpen,
+  });
+  refState.current.tooltipOpen = tooltipOpen;
+
   // 没有 selects 时，回退到普通 RangePicker, 当前时间选项为自定义时，应该显示 RangePicker
   const [isPlay, setIsPlay] = useState(rangeName !== CUSTOMIZE);
 
@@ -142,9 +151,13 @@ const Ranger = (props: DateRangerProps) => {
     }
   }, []);
 
+  const closeTooltip = () => {
+    setOpen(false);
+    setTooltipOpen(false);
+  };
   const handleNameChange = (name: string) => {
-    if (name === CUSTOMIZE) {
-      setIsPlay(false);
+    if (name !== CUSTOMIZE) {
+      closeTooltip();
     }
     setRangeName(name);
   };
@@ -284,13 +297,56 @@ const Ranger = (props: DateRangerProps) => {
       <div className={`${prefix}-wrapper`}>
         <Dropdown
           trigger={['click']}
+          open={open}
+          // 关闭后进行销毁，才可以将 Tooltip 进行同步关闭
+          destroyPopupOnHide={true}
+          // 存在缓存，会锁死里面的值
+          onOpenChange={o => {
+            if (o === false && refState.current.tooltipOpen) {
+              return;
+            }
+
+            setOpen(o);
+          }}
           menu={{
             items: [
               ...selects,
               {
                 name: CUSTOMIZE,
                 rangeLabel: '自定义',
-                label: '自定义时间',
+                label: (
+                  <Tooltip
+                    open={tooltipOpen}
+                    onOpenChange={o => {
+                      if (o) {
+                        setTooltipOpen(true);
+                      }
+                    }}
+                    placement="right"
+                    overlayStyle={{
+                      maxWidth: 'none',
+                    }}
+                    overlayInnerStyle={{
+                      background: '#fff',
+                    }}
+                    title={
+                      <InternalPickerPanel
+                        // @ts-ignore
+                        locale={locale.rcPicker}
+                        isMoment={isMoment}
+                        // TODO: 代补充值相关逻辑
+                        onOk={v => {
+                          closeTooltip();
+                        }}
+                        onCancel={() => {
+                          closeTooltip();
+                        }}
+                      />
+                    }
+                  >
+                    自定义时间
+                  </Tooltip>
+                ),
               },
             ]
               .filter(item => {
@@ -315,6 +371,7 @@ const Ranger = (props: DateRangerProps) => {
                       }}
                     >
                       <span className={`${prefix}-label`}>{item.rangeLabel}</span>
+                      {/* @ts-ignore */}
                       {locale[item.label] || item.label}
                     </Space>
                   ),
@@ -335,22 +392,32 @@ const Ranger = (props: DateRangerProps) => {
           </Space>
         </Dropdown>
         {!isPlay && (
-          /* @ts-ignore */
-          <DatePicker.RangePicker
-            className={`${prefix}-range-picker`}
-            disabledDate={pastOnly ? disabledFuture : disabledDate}
-            format={v => {
-              // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
-              return isThisYear ? v.format(DATE_TIME_FORMAT) : v.format(YEAR_DATE_TIME_FORMAT);
+          <span
+            onClick={() => {
+              setOpen(true);
             }}
-            defaultValue={defaultValue}
-            value={innerValue || defaultInternalValue}
-            onChange={datePickerChange}
-            showTime={true}
-            size={size}
-            // 透传 props 到 antd Ranger
-            {...omit(rest, 'value', 'onChange')}
-          />
+          >
+            {/* @ts-ignore  */}
+            <DatePicker.RangePicker
+              className={`${prefix}-range-picker`}
+              style={{
+                pointerEvents: 'none',
+              }}
+              disabledDate={pastOnly ? disabledFuture : disabledDate}
+              format={v => {
+                // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
+                return isThisYear ? v.format(DATE_TIME_FORMAT) : v.format(YEAR_DATE_TIME_FORMAT);
+              }}
+              defaultValue={defaultValue}
+              value={innerValue || defaultInternalValue}
+              onChange={datePickerChange}
+              showTime={true}
+              allowClear={false}
+              size={size}
+              // 透传 props 到 antd Ranger
+              {...omit(rest, 'value', 'onChange')}
+            />
+          </span>
         )}
       </div>
       <Radio.Group
@@ -431,6 +498,6 @@ const Ranger = (props: DateRangerProps) => {
 };
 
 export default LocaleWrapper({
-  componentName: 'Ranger',
+  componentName: 'DateRanger',
   defaultLocale: zhCN,
 })(Ranger);

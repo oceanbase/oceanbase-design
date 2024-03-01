@@ -10,6 +10,7 @@ import Login from '../Login/locale/en-US';
 import PageContainer from '../PageContainer/locale/en-US';
 import Password from '../Password/locale/en-US';
 import Ranger from '../Ranger/locale/en-US';
+import DateRanger from '../DateRanger/locale/en-US';
 import SideTip from '../SideTip/locale/en-US';
 import TaskGraph from '../TaskGraph/locale/en-US';
 import Welcome from '../Welcome/locale/en-US';
@@ -32,4 +33,5 @@ export default {
   DocDialog,
   FullscreenBox,
   BatchOperationBar,
+  DateRanger,
 } as Locale;
