@@ -334,8 +334,14 @@ const Ranger = (props: DateRangerProps) => {
                         // @ts-ignore
                         locale={locale.rcPicker}
                         isMoment={isMoment}
-                        // TODO: 代补充值相关逻辑
-                        onOk={v => {
+                        onOk={vList => {
+                          setIsPlay(false);
+                          rangeChange(
+                            vList.map(v => {
+                              return isMoment ? moment(v) : dayjs(v);
+                            }) as RangeValue
+                          );
+
                           closeTooltip();
                         }}
                         onCancel={() => {

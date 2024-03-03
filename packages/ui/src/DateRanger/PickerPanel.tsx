@@ -23,6 +23,12 @@ export interface PickerPanelProps {
 
 const prefixCls = 'ant-picker';
 
+function isValidTimeFormat(timeString) {
+  // 正则表达式，匹配格式如 "00:00:00"
+  const timeFormat = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
+  return timeFormat.test(timeString);
+}
+
 const InternalPickerPanel = (props: PickerPanelProps) => {
   const { isMoment, locale, onOk = noop, onCancel = noop } = props;
   const rootCls = useCSSVarCls(prefixCls);
@@ -141,25 +147,73 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
         >
           <Row gutter={12}>
             <Col span={14}>
-              <Form.Item name="startDate" label="开始日期" style={{ marginBottom: 8 }}>
+              <Form.Item
+                name="startDate"
+                label="开始日期"
+                style={{ marginBottom: 8 }}
+                rules={[
+                  {
+                    required: true,
+                    message: '请输入开始日期',
+                  },
+                ]}
+              >
                 {/* 输入日期时，先检测时间是否合理，合理就回显 */}
                 <Input size="middle" />
               </Form.Item>
             </Col>
             <Col span={10}>
-              <Form.Item name="startTime" label="开始时间" style={{ marginBottom: 8 }}>
+              <Form.Item
+                name="startTime"
+                label="开始时间"
+                style={{ marginBottom: 8 }}
+                rules={[
+                  {
+                    validator(rule, value, callback) {
+                      if (isValidTimeFormat(value)) {
+                        return callback();
+                      }
+                      callback('请输入 HH:mm:ss 格式的时间');
+                    },
+                  },
+                ]}
+              >
                 <Input size="middle" />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={12}>
             <Col span={14}>
-              <Form.Item name="endDate" label="结束日期" style={{ marginBottom: 8 }}>
+              <Form.Item
+                name="endDate"
+                label="结束日期"
+                style={{ marginBottom: 8 }}
+                rules={[
+                  {
+                    required: true,
+                    message: '请输入结束日期',
+                  },
+                ]}
+              >
                 <Input />
               </Form.Item>
             </Col>
             <Col span={10}>
-              <Form.Item name="endTime" label="结束时间" style={{ marginBottom: 8 }}>
+              <Form.Item
+                name="endTime"
+                label="结束时间"
+                style={{ marginBottom: 8 }}
+                rules={[
+                  {
+                    validator(rule, value, callback) {
+                      if (isValidTimeFormat(value)) {
+                        return callback();
+                      }
+                      callback('请输入 HH:mm:ss 格式的时间');
+                    },
+                  },
+                ]}
+              >
                 <Input />
               </Form.Item>
             </Col>
@@ -180,7 +234,10 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           size="small"
           type="primary"
           onClick={() => {
-            onOk(formatValues);
+            form.validateFields().then(values => {
+              const { startDate, startTime, endDate, endTime } = values;
+              onOk([`${startDate} ${startTime}`, `${endDate} ${endTime}`]);
+            });
           }}
         >
           确定
