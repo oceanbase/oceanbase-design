@@ -131,7 +131,7 @@ export const genOperationStyle = (token: FullToken<any>): CSSObject => {
         fontSize,
       },
     },
-  };
+  } as CSSObject;
 };
 
 export const genFooterToolbarStyle: GenerateStyle<FooterToolBarToken> = (
@@ -148,7 +148,7 @@ export const genFooterToolbarStyle: GenerateStyle<FooterToolBarToken> = (
       borderBlockStart: 'none',
       ...genOperationStyle(token),
     },
-  };
+  } as CSSObject;
 };
 
 export default (prefixCls: string) => {

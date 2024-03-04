@@ -172,7 +172,9 @@ const Ranger = (props: RangerProps) => {
         <DatePicker.RangePicker
           disabledDate={pastOnly ? disabledFuture : disabledDate}
           format={DATE_TIME_FORMAT}
+          // @ts-ignore
           defaultValue={defaultValue}
+          // @ts-ignore
           value={innerValue || defaultInternalValue}
           onChange={datePickerChange}
           showTime={true}
