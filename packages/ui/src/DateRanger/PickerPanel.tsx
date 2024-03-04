@@ -1,14 +1,16 @@
 import type { Dayjs } from 'dayjs';
 import type { Moment } from 'moment';
-import React, { useEffect } from 'react';
-import dayjsGenerateConfig from 'rc-picker/lib/generate/dayjs';
-import momentGenerateConfig from 'rc-picker/lib/generate/moment';
+import React, { useEffect, useMemo } from 'react';
+import dayjsGenerateConfig from 'rc-picker/es/generate/dayjs';
+import momentGenerateConfig from 'rc-picker/es/generate/moment';
 import useCSSVarCls from 'antd/es/config-provider/hooks/useCSSVarCls';
 import useStyle from 'antd/es/date-picker/style/index';
 import { PickerPanel } from 'rc-picker';
 import classNames from 'classnames';
-import { Button, Col, Divider, Form, Input, Row, Space } from '@oceanbase/design';
+import { Button, Col, Divider, Form, Input, Row, Space, TimePicker } from '@oceanbase/design';
 import { noop } from 'lodash';
+import moment from 'moment';
+import dayjs from 'dayjs';
 
 type RangeValue = [Moment, Moment] | [Dayjs, Dayjs];
 
@@ -22,6 +24,7 @@ export interface PickerPanelProps {
 }
 
 const prefixCls = 'ant-picker';
+const TIME_FORMAT = 'HH:mm:ss';
 
 function isValidTimeFormat(timeString) {
   // 正则表达式，匹配格式如 "00:00:00"
@@ -74,6 +77,10 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
       endDate: e,
     });
   }, [...formatValues]);
+
+  const defaultTime = useMemo(() => {
+    return isMoment ? moment() : dayjs();
+  }, []);
 
   return (
     <div>
@@ -158,7 +165,6 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                   },
                 ]}
               >
-                {/* 输入日期时，先检测时间是否合理，合理就回显 */}
                 <Input size="middle" />
               </Form.Item>
             </Col>
@@ -167,18 +173,15 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 name="startTime"
                 label="开始时间"
                 style={{ marginBottom: 8 }}
+                initialValue={defaultTime}
                 rules={[
                   {
-                    validator(rule, value, callback) {
-                      if (isValidTimeFormat(value)) {
-                        return callback();
-                      }
-                      callback('请输入 HH:mm:ss 格式的时间');
-                    },
+                    required: true,
+                    message: '请输入开始时间',
                   },
                 ]}
               >
-                <Input size="middle" />
+                <TimePicker />
               </Form.Item>
             </Col>
           </Row>
@@ -203,18 +206,15 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 name="endTime"
                 label="结束时间"
                 style={{ marginBottom: 8 }}
+                initialValue={defaultTime}
                 rules={[
                   {
-                    validator(rule, value, callback) {
-                      if (isValidTimeFormat(value)) {
-                        return callback();
-                      }
-                      callback('请输入 HH:mm:ss 格式的时间');
-                    },
+                    required: true,
+                    message: '请选择结束时间',
                   },
                 ]}
               >
-                <Input />
+                <TimePicker />
               </Form.Item>
             </Col>
           </Row>
@@ -236,7 +236,11 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           onClick={() => {
             form.validateFields().then(values => {
               const { startDate, startTime, endDate, endTime } = values;
-              onOk([`${startDate} ${startTime}`, `${endDate} ${endTime}`]);
+
+              onOk([
+                `${startDate} ${startTime.format(TIME_FORMAT)}`,
+                `${endDate} ${endTime.format(TIME_FORMAT)}`,
+              ]);
             });
           }}
         >

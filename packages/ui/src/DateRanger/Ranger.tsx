@@ -305,7 +305,6 @@ const Ranger = (props: DateRangerProps) => {
             if (o === false && refState.current.tooltipOpen) {
               return;
             }
-
             setOpen(o);
           }}
           menu={{
@@ -314,45 +313,7 @@ const Ranger = (props: DateRangerProps) => {
               {
                 name: CUSTOMIZE,
                 rangeLabel: '自定义',
-                label: (
-                  <Tooltip
-                    open={tooltipOpen}
-                    onOpenChange={o => {
-                      if (o) {
-                        setTooltipOpen(true);
-                      }
-                    }}
-                    placement="right"
-                    overlayStyle={{
-                      maxWidth: 'none',
-                    }}
-                    overlayInnerStyle={{
-                      background: '#fff',
-                    }}
-                    title={
-                      <InternalPickerPanel
-                        // @ts-ignore
-                        locale={locale.rcPicker}
-                        isMoment={isMoment}
-                        onOk={vList => {
-                          setIsPlay(false);
-                          rangeChange(
-                            vList.map(v => {
-                              return isMoment ? moment(v) : dayjs(v);
-                            }) as RangeValue
-                          );
-
-                          closeTooltip();
-                        }}
-                        onCancel={() => {
-                          closeTooltip();
-                        }}
-                      />
-                    }
-                  >
-                    自定义时间
-                  </Tooltip>
-                ),
+                label: '自定义时间',
               },
             ]
               .filter(item => {
@@ -361,26 +322,73 @@ const Ranger = (props: DateRangerProps) => {
               .map(item => {
                 return {
                   key: item.name,
-                  label: (
-                    <Space
-                      size={8}
-                      onClick={() => {
-                        const rName = item.name;
-                        handleNameChange(rName);
+                  label:
+                    item.name === CUSTOMIZE ? (
+                      <Tooltip
+                        open={tooltipOpen}
+                        arrow={false}
+                        onOpenChange={o => {
+                          if (o) {
+                            setTooltipOpen(true);
+                          }
+                        }}
+                        placement="right"
+                        overlayStyle={{
+                          maxWidth: 'none',
+                        }}
+                        overlayInnerStyle={{
+                          background: '#fff',
+                        }}
+                        title={
+                          <InternalPickerPanel
+                            // @ts-ignore
+                            locale={locale.rcPicker}
+                            isMoment={isMoment}
+                            onOk={vList => {
+                              setIsPlay(false);
+                              rangeChange(
+                                vList.map(v => {
+                                  return isMoment ? moment(v) : dayjs(v);
+                                }) as RangeValue
+                              );
 
-                        const selected = NEAR_TIME_LIST.find(_item => _item.name === rName);
-                        // 存在快捷选项切换为极简模式
-                        if (selected?.range) {
-                          setIsPlay(true);
-                          rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
+                              closeTooltip();
+                            }}
+                            onCancel={() => {
+                              closeTooltip();
+                            }}
+                          />
                         }
-                      }}
-                    >
-                      <span className={`${prefix}-label`}>{item.rangeLabel}</span>
-                      {/* @ts-ignore */}
-                      {locale[item.label] || item.label}
-                    </Space>
-                  ),
+                      >
+                        <Space size={8} style={isPlay ? {} : { width: 310 }}>
+                          <span className={`${prefix}-label`}>{item.rangeLabel}</span>
+                          {/* @ts-ignore */}
+                          {locale[item.label] || item.label}
+                        </Space>
+                      </Tooltip>
+                    ) : (
+                      <Space
+                        size={8}
+                        style={isPlay ? {} : { width: 310 }}
+                        onClick={() => {
+                          const rName = item.name;
+                          handleNameChange(rName);
+
+                          const selected = NEAR_TIME_LIST.find(_item => _item.name === rName);
+                          // 存在快捷选项切换为极简模式
+                          if (selected?.range) {
+                            setIsPlay(true);
+                            rangeChange(
+                              selected.range(isMoment ? moment() : dayjs()) as RangeValue
+                            );
+                          }
+                        }}
+                      >
+                        <span className={`${prefix}-label`}>{item.rangeLabel}</span>
+                        {/* @ts-ignore */}
+                        {locale[item.label] || item.label}
+                      </Space>
+                    ),
                 };
               }),
           }}
@@ -414,7 +422,9 @@ const Ranger = (props: DateRangerProps) => {
                 // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
                 return isThisYear ? v.format(DATE_TIME_FORMAT) : v.format(YEAR_DATE_TIME_FORMAT);
               }}
+              // @ts-ignore
               defaultValue={defaultValue}
+              // @ts-ignore
               value={innerValue || defaultInternalValue}
               onChange={datePickerChange}
               showTime={true}
