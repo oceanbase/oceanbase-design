@@ -26,6 +26,7 @@ export default () => {
       </Flex>
       <Divider children="preview" />
       <DateRanger
+        mode="step"
         hasForward={getValue('hasForward')}
         hasPlay={getValue('hasPlay')}
         hasRewind={getValue('hasRewind')}

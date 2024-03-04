@@ -62,9 +62,13 @@ export interface DateRangerProps
   value?: RangeValue;
   defaultValue?: RangeValue;
   size?: 'small' | 'large' | 'middle';
+  mode?: 'normal' | 'step';
 }
 
 const prefix = getPrefix('date-ranger');
+
+const STEP_QUICK = 0;
+const STEP_CUSTOMIZE = 1;
 
 const Ranger = (props: DateRangerProps) => {
   const {
@@ -91,6 +95,7 @@ const Ranger = (props: DateRangerProps) => {
     size,
     //固定rangeName
     stickRangeName = false,
+    mode = 'normal',
     ...rest
   } = props;
 
@@ -109,12 +114,17 @@ const Ranger = (props: DateRangerProps) => {
     value || defaultValue ? CUSTOMIZE : defaultQuickValue ?? selects?.[0]?.name
   );
 
+  const isStepMode = mode === 'step';
+  const [step, setStep] = useState(STEP_QUICK);
+
   const [open, setOpen] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const refState = useRef({
     tooltipOpen,
+    step,
   });
   refState.current.tooltipOpen = tooltipOpen;
+  refState.current.step = step;
 
   // 没有 selects 时，回退到普通 RangePicker, 当前时间选项为自定义时，应该显示 RangePicker
   const [isPlay, setIsPlay] = useState(rangeName !== CUSTOMIZE);
@@ -302,10 +312,56 @@ const Ranger = (props: DateRangerProps) => {
           destroyPopupOnHide={true}
           // 存在缓存，会锁死里面的值
           onOpenChange={o => {
-            if (o === false && refState.current.tooltipOpen) {
+            if (
+              o === false &&
+              (refState.current.tooltipOpen || refState.current.step === STEP_CUSTOMIZE)
+            ) {
               return;
             }
+
             setOpen(o);
+          }}
+          dropdownRender={menu => {
+            if (step === STEP_CUSTOMIZE) {
+              return (
+                <div
+                  style={{
+                    background: '#fff',
+                    padding: '6px 12px',
+                    boxShadow: token.boxShadowSecondary,
+                  }}
+                >
+                  <a
+                    onClick={() => {
+                      setStep(STEP_QUICK);
+                    }}
+                  >
+                    返回上一层
+                  </a>
+                  <InternalPickerPanel
+                    defaultValue={innerValue}
+                    // @ts-ignore
+                    locale={locale.rcPicker}
+                    isMoment={isMoment}
+                    onOk={vList => {
+                      setIsPlay(false);
+                      rangeChange(
+                        vList.map(v => {
+                          return isMoment ? moment(v) : dayjs(v);
+                        }) as RangeValue
+                      );
+                      setStep(STEP_QUICK);
+                      closeTooltip();
+                    }}
+                    onCancel={() => {
+                      setStep(STEP_QUICK);
+                      closeTooltip();
+                    }}
+                  />
+                </div>
+              );
+            }
+            return menu;
           }}
           menu={{
             items: [
@@ -323,7 +379,7 @@ const Ranger = (props: DateRangerProps) => {
                 return {
                   key: item.name,
                   label:
-                    item.name === CUSTOMIZE ? (
+                    item.name === CUSTOMIZE && !isStepMode ? (
                       <Tooltip
                         open={tooltipOpen}
                         arrow={false}
@@ -341,6 +397,7 @@ const Ranger = (props: DateRangerProps) => {
                         }}
                         title={
                           <InternalPickerPanel
+                            defaultValue={innerValue}
                             // @ts-ignore
                             locale={locale.rcPicker}
                             isMoment={isMoment}
@@ -370,9 +427,15 @@ const Ranger = (props: DateRangerProps) => {
                       <Space
                         size={8}
                         style={isPlay ? {} : { width: 310 }}
-                        onClick={() => {
+                        onClick={e => {
                           const rName = item.name;
                           handleNameChange(rName);
+
+                          if (rName === CUSTOMIZE && isStepMode) {
+                            // 阻止冒泡事件，不触发 Dropdown 的默认关闭
+                            e.stopPropagation();
+                            return setStep(STEP_CUSTOMIZE);
+                          }
 
                           const selected = NEAR_TIME_LIST.find(_item => _item.name === rName);
                           // 存在快捷选项切换为极简模式

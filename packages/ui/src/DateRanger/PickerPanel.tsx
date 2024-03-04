@@ -11,6 +11,7 @@ import { Button, Col, Divider, Form, Input, Row, Space, TimePicker } from '@ocea
 import { noop } from 'lodash';
 import moment from 'moment';
 import dayjs from 'dayjs';
+import { useUpdate, useMount } from 'ahooks';
 
 type RangeValue = [Moment, Moment] | [Dayjs, Dayjs];
 
@@ -24,20 +25,16 @@ export interface PickerPanelProps {
 }
 
 const prefixCls = 'ant-picker';
+const DATE_FORMAT = 'YYYY-MM-DD';
 const TIME_FORMAT = 'HH:mm:ss';
 
-function isValidTimeFormat(timeString) {
-  // 正则表达式，匹配格式如 "00:00:00"
-  const timeFormat = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
-  return timeFormat.test(timeString);
-}
-
 const InternalPickerPanel = (props: PickerPanelProps) => {
-  const { isMoment, locale, onOk = noop, onCancel = noop } = props;
+  const { defaultValue = [], isMoment, locale, onOk = noop, onCancel = noop } = props;
   const rootCls = useCSSVarCls(prefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
 
-  const [calendarValue, setCalendarValue] = React.useState([]);
+  const [defaultS, defaultE] = defaultValue;
+  const [calendarValue, setCalendarValue] = React.useState(defaultValue);
   const [internalHoverValues, setInternalHoverValues] = React.useState(null);
 
   const hoverValues = React.useMemo(() => {
@@ -66,7 +63,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
       return a?.valueOf() - b?.valueOf();
     })
     .map(item => {
-      return item.format('YYYY-MM-DD');
+      return item.format(DATE_FORMAT);
     });
 
   const [form] = Form.useForm();
@@ -97,7 +94,6 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             // @ts-ignore
             generateConfig={isMoment ? momentGenerateConfig : dayjsGenerateConfig}
             onFocus={(...res) => {
-              // onSelectorFocus
               console.log(res, 'onFocus');
             }}
             onBlur={(...res) => {
@@ -161,7 +157,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 rules={[
                   {
                     required: true,
-                    message: '请输入开始日期',
+                    message: '请选择开始日期',
                   },
                 ]}
               >
@@ -173,11 +169,11 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 name="startTime"
                 label="开始时间"
                 style={{ marginBottom: 8 }}
-                initialValue={defaultTime}
+                initialValue={defaultS || defaultTime}
                 rules={[
                   {
                     required: true,
-                    message: '请输入开始时间',
+                    message: '请选择开始时间',
                   },
                 ]}
               >
@@ -194,7 +190,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 rules={[
                   {
                     required: true,
-                    message: '请输入结束日期',
+                    message: '请选择结束日期',
                   },
                 ]}
               >
@@ -206,7 +202,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 name="endTime"
                 label="结束时间"
                 style={{ marginBottom: 8 }}
-                initialValue={defaultTime}
+                initialValue={defaultE || defaultTime}
                 rules={[
                   {
                     required: true,
