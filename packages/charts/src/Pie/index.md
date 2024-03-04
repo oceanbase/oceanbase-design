@@ -11,6 +11,8 @@ nav:
 
 <code src="./demo/donut.tsx" title="基础环图"></code>
 
+<code src="./demo/donut-floor.tsx" title="环图-浮点数精度" debug></code>
+
 <code src="./demo/half-donut.tsx" title="半圆环图"></code>
 
 <code src="./demo/state-change.tsx" title="useMemo-状态改变" debug></code>

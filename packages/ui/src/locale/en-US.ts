@@ -6,6 +6,7 @@ import Dialog from '../Dialog/locale/en-US';
 import DocDialog from '../DocDialog/locale/en-US';
 import FullscreenBox from '../FullscreenBox/locale/en-US';
 import GraphToolbar from '../GraphToolbar/locale/en-US';
+import Highlight from '../Highlight/locale/en-US';
 import Login from '../Login/locale/en-US';
 import PageContainer from '../PageContainer/locale/en-US';
 import Password from '../Password/locale/en-US';
@@ -31,6 +32,7 @@ export default {
   Dialog,
   SideTip,
   DocDialog,
+  Highlight,
   FullscreenBox,
   BatchOperationBar,
   DateRanger,

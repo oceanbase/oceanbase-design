@@ -28,7 +28,7 @@ for (let i = 1; i < 100; i++) {
   });
 }
 
-const TableTest: React.FC<TableProps<any>> = props => (
+export const TableTest: React.FC<TableProps<any>> = props => (
   <Table dataSource={dataSource} columns={columns} {...props} />
 );
 
@@ -39,9 +39,9 @@ describe('Table', () => {
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 
-  it('hideOnSinglePage should be true by default', () => {
+  it('hideOnSinglePage should be false by default', () => {
     const { container, asFragment } = render(<TableTest dataSource={dataSource.slice(0, 10)} />);
-    expect(container.querySelector('.ant-pagination')).toBeFalsy();
+    expect(container.querySelector('.ant-pagination')).toBeTruthy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 
@@ -50,11 +50,11 @@ describe('Table', () => {
       <TableTest
         dataSource={dataSource.slice(0, 10)}
         pagination={{
-          hideOnSinglePage: false,
+          hideOnSinglePage: true,
         }}
       />
     );
-    expect(container.querySelector('.ant-pagination')).toBeTruthy();
+    expect(container.querySelector('.ant-pagination')).toBeFalsy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 });

@@ -27,5 +27,8 @@ nav:
 | warningPercent <Badge>扩展属性</Badge> | 警告水位线 | number，范围 0-1 | - | - |
 | dangerPercent <Badge>扩展属性</Badge> | 危险水位线 | number，范围 0-1 | - | - |
 | decimal <Badge>扩展属性</Badge> | 百分比最多保留的有效小数位数 | number | 2 | - |
+| containerStyle | 容器样式 | CSSProperties | - | - |
+| percentStyle | 百分比样式 | CSSProperties | - | - |
+| titleStyle | 标题样式 | CSSProperties | - | - |
 
 - 更多 API 详见 Ant Design Charts 文档：https://charts.ant.design/zh/examples/progress-plots/liquid#basic

@@ -8,6 +8,54 @@ group: 业务组件
 
 ---
 
+## 0.2.38
+
+`2024-01-30`
+
+- PageContainer
+  - 🐞 修复 PageContainer 页头和页脚操作区外的组件尺寸也可能被改为 large 的问题。[#443](https://github.com/oceanbase/oceanbase-design/pull/443)
+  - 💄 修复 PageContainer 页头和页脚操作区样式适配 Space.Compact 组件。[#454](https://github.com/oceanbase/oceanbase-design/pull/454)
+- 🐞 修复 FooterToolbar 子元素外的组件尺寸被改为 large 的问题。[#447](https://github.com/oceanbase/oceanbase-design/pull/447)
+
+## 0.2.37
+
+`2024-01-19`
+
+- PageContainer
+  - 💄 PageContainer 页头和页脚操作区的组件尺寸默认为 `large`、字体大小为 `middle`。[#432](https://github.com/oceanbase/oceanbase-design/pull/432)
+  - 💄 优化 PageContainer 和 Tabs 组合使用时的间距，以对齐设计规范。[#434](https://github.com/oceanbase/oceanbase-design/pull/434)
+- 💄 FooterToolbar 子元素的组件尺寸默认为 `large`、字体大小默认为 `middle`。[#433](https://github.com/oceanbase/oceanbase-design/pull/433)
+
+## 0.2.36
+
+`2024-01-18`
+
+- 🐞 修复 Password 组件快速输入时丢失字符和焦点跳跃的问题。[#424](https://github.com/oceanbase/oceanbase-design/pull/424) [@Vanleehao](https://github.com/Vanleehao)
+- 🐞 修复 Highlight 国际化不生效的问题。[#419](https://github.com/oceanbase/oceanbase-design/pull/419) [@linhf123](https://github.com/linhf123)
+- 💄 优化 PageContainer 右上角和页脚操作区中的 Input 样式，保证宽高和字体大小符合设计规范。[#426](https://github.com/oceanbase/oceanbase-design/pull/426)
+
+## 0.2.35
+
+`2024-01-12`
+
+- 🌐 Highlight 支持国际化，之前为固定的英文文案。[#409](https://github.com/oceanbase/oceanbase-design/pull/409) [@linhf123](https://github.com/linhf123)
+
+## 0.2.34
+
+`2023-12-28`
+
+- IconFont
+  - 🐞 修复 IconFont 会请求不必要 JS 资源的问题。[#375](https://github.com/oceanbase/oceanbase-design/pull/375)
+  - 📢 将 IconFont 组件标记为即将废弃，不推荐使用。[#375](https://github.com/oceanbase/oceanbase-design/pull/375)
+- 💄 优化 TagSelect 的 `disabled` 和 `hover` 样式，并将固定样式改造为 Design Token。[#373](https://github.com/oceanbase/oceanbase-design/pull/373)
+
+## 0.2.33
+
+`2023-12-14`
+
+- 📝 新增 BasicLayout `location` 属性的用法说明，即用于实现选中菜单和当前路由之间的联动。[#363](https://github.com/oceanbase/oceanbase-design/pull/363)
+- 💄 BasicLayout 支持根据当前路由自动设置展开菜单项。[#364](https://github.com/oceanbase/oceanbase-design/pull/364)
+
 ## 0.2.32
 
 `2023-12-08`

@@ -7,12 +7,20 @@ version: 2
 updates:
   - package-ecosystem: "npm" # See documentation for possible values
     versioning-strategy: "increase"
+    target-branch: "feature"
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: "[Feature Branch] "
+    labels:
+      - "dependencies"
+      - "Feature Branch"
     ignore:
       - dependency-name: "@antv/g6"
       # execa latest 7.x works only in ES module
       - dependency-name: "execa"
-      # execa latest 5.x works only in ES module
+      # chalk latest 5.x works only in ES module
       - dependency-name: "chalk"
+      # ahooks latest 3.x need manual upgrade
+      - dependency-name: "ahooks"

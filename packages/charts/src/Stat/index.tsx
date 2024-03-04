@@ -14,6 +14,7 @@ import './index.less';
 export interface StatConfig {
   width?: number;
   height?: number;
+  padding?: number;
   title?: string;
   value?: number;
   prefix?: string;
@@ -23,6 +24,7 @@ export interface StatConfig {
   colorMode?: 'none' | 'value' | 'background';
   chartMode?: 'none' | 'line' | 'area';
   chartData?: number[];
+  chartConfig?: TinyAreaConfig;
   textAlign: 'auto' | 'center';
   thresholds?: Record<string, string>;
   className?: string;
@@ -32,7 +34,8 @@ export interface StatConfig {
 const prefixCls = 'ob-stat';
 
 const LINE_HEIGHT = 1.2;
-const TITLE_MAX_SIZE = 30;
+const TITLE_MAX_SIZE = 20;
+const VALUE_MAX_SIZE = 40;
 const VALUE_FONT_WEIGHT = 500;
 
 function fontSizeReductionFactor(fontSize: number) {
@@ -48,6 +51,7 @@ function fontSizeReductionFactor(fontSize: number) {
 const Stat: React.FC<StatConfig> = ({
   width,
   height,
+  padding = 8,
   title,
   value,
   prefix,
@@ -57,6 +61,7 @@ const Stat: React.FC<StatConfig> = ({
   colorMode = 'background',
   chartMode,
   chartData = [],
+  chartConfig,
   textAlign,
   thresholds = {},
   className,
@@ -69,7 +74,7 @@ const Stat: React.FC<StatConfig> = ({
     width: containerWidth = 0,
     height: containerHeight = 0,
   } = useResizeObserver<HTMLDivElement>();
-  const padding = containerHeight > 100 ? 12 : 8;
+  const isFlat = containerHeight < 72;
   const maxWidth = containerWidth - padding * 2;
   const maxHeight = containerHeight - padding * 2;
 
@@ -99,7 +104,6 @@ const Stat: React.FC<StatConfig> = ({
     .toRgbString();
   const bgColor = `linear-gradient(120deg, ${bgColor1}, ${bgColor2})`;
 
-  const isWideLayout = containerWidth / containerHeight > 2.5;
   const hasChart = chartMode === 'line' || chartMode === 'area';
   const hasPrefixOrSuffix = prefix || suffix;
   const prefixOrSuffixWdithPercent = 0.1;
@@ -109,7 +113,7 @@ const Stat: React.FC<StatConfig> = ({
   let valueHeightPercent = 1;
   let chartHeightPercent = 0.5;
 
-  if (isWideLayout) {
+  if (isFlat) {
     if (hasChart) {
       if (layout === 'horizontal') {
         titleWidthPercent = 0.6;
@@ -183,13 +187,12 @@ const Stat: React.FC<StatConfig> = ({
     maxWidth * valueWidthPercent,
     maxHeight * valueHeightPercent,
     LINE_HEIGHT,
-    undefined,
+    VALUE_MAX_SIZE,
     VALUE_FONT_WEIGHT
   );
   const prefixAndSuffixFontSize = valueFontSize * fontSizeReductionFactor(valueFontSize);
 
   const chartRef = useRef<TinyAreaRef>();
-  // 图表占据一半高度
   const chartHeight = containerHeight * chartHeightPercent;
 
   useEffect(() => {
@@ -202,15 +205,17 @@ const Stat: React.FC<StatConfig> = ({
   }, [chartHeight]);
 
   const chartColor = colorMode === 'background' ? 'rgba(256, 256, 256, 0.65)' : color;
-  const chartConfig: TinyAreaConfig = {
+  const newChartConfig: TinyAreaConfig = {
     height: chartHeight,
     data: chartData,
-    appendPadding: [0, -8, 0, -8],
+    appendPadding: [0, -padding, 0, -padding],
     tooltip: false,
     color: chartColor,
+    ...chartConfig,
     areaStyle: {
       fill: chartMode === 'area' ? chartColor : 'transparent',
       fillOpacity: colorMode === 'background' ? 0.65 : 0.15,
+      ...chartConfig?.areaStyle,
     },
   };
 
@@ -285,7 +290,7 @@ const Stat: React.FC<StatConfig> = ({
       {containerHeight > 0 && hasChart && (
         <div className={`${prefixCls}-chart`}>
           <TinyArea
-            {...chartConfig}
+            {...newChartConfig}
             // @ts-ignore
             ref={chartRef}
           />

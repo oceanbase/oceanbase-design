@@ -8,6 +8,63 @@ group: 基础组件
 
 ---
 
+## 0.2.37
+
+`2024-01-30`
+
+- 🆕 新增 injectStaticFunction 属性，用于配置 message、notification 和 Modal 静态方法是否可以消费全局配置，默认开启。[#446](https://github.com/oceanbase/oceanbase-design/pull/446)
+- 🐞 修复 Typography 的样式优先级，保证字体和行高默认继承父元素，便于和其他组件组合使用。[#428](https://github.com/oceanbase/oceanbase-design/pull/428) [@wdyea-ya](https://github.com/wdyea-ya)
+- 🐞 修复 Table 选中行和 `hover` 行的背景色不一致的问题。[#455](https://github.com/oceanbase/oceanbase-design/pull/455)
+
+## 0.2.36
+
+`2024-01-19`
+
+- 💄 ConfigProvider 内嵌的 App 组件不再创建 DOM 节点，避免增加一层 DOM 结构影响子元素的样式表现。[#431](https://github.com/oceanbase/oceanbase-design/pull/431)
+
+## 0.2.35
+
+`2024-01-18`
+
+- 🆕 ConfigProvider 新增 table.selectionColumnWidth 属性，用于配置表格的展开列宽度。[#421](https://github.com/oceanbase/oceanbase-design/pull/421)
+- Table
+  - 🐞 修复 Table 可展开时底部出现重复边框的问题。[#420](https://github.com/oceanbase/oceanbase-design/pull/420)
+  - 💄 优化 Table 在无间距卡片内的展示样式，包括第一列和卡片标题对齐、最后一列和卡片操作区对齐、分页器左右增加间距。[#422](https://github.com/oceanbase/oceanbase-design/pull/422)
+  - 💄 减小 Table 单元格的纵向内间距，以对齐设计规范。[#425](https://github.com/oceanbase/oceanbase-design/pull/425)
+- 💄 Modal 去掉最大高度限制，高度超出时内容滚动改由上层控制。[#411](https://github.com/oceanbase/oceanbase-design/pull/411)
+
+## 0.2.34
+
+`2024-01-12`
+
+- Drawer
+  - 🆕 新增 `footerExtra` 属性，用于设置抽屉底部的额外内容，仅默认页脚生效。[#408](https://github.com/oceanbase/oceanbase-design/pull/408)
+  - 📢 调整页脚的 DOM 结构，并将原先的 `.ant-drawer-footer-content` 类名改为 `.ant-drawer-footer-container`。[#408](https://github.com/oceanbase/oceanbase-design/pull/408)
+- 🐞 修复 Tooltip `title` 为空时仍然展示的问题。[#405](https://github.com/oceanbase/oceanbase-design/pull/405) [@linhf123](https://github.com/linhf123)
+
+## 0.2.33
+
+`2023-12-28`
+
+- 🐞 ConfigProvider `hideOnSinglePage` 默认值改为 `false`，避免统一去掉分页器带来的问题。[#388](https://github.com/oceanbase/oceanbase-design/pull/388)
+- 🐞 修复 Table 只有一页数据且存在批量操作或 `pageSize` 切换时分页器被隐藏的问题。[#389](https://github.com/oceanbase/oceanbase-design/pull/389)
+- 🐞 修复 List 只有一页数据且存在 `pageSize` 切换时分页器被隐藏的问题。[#390](https://github.com/oceanbase/oceanbase-design/pull/390)
+- 💄 更新 Design Token，新增 `fontHeight`、`fontHeightLG` 和 `fontHeightSM` less 变量。[#381](https://github.com/oceanbase/oceanbase-design/pull/381)
+
+## 0.2.32
+
+`2023-12-14`
+
+- 🔥 Space 和 Grid 组件的间距样式兼容 Chrome 84 以下的浏览器。[#344](https://github.com/oceanbase/oceanbase-design/pull/344) [@wdyea-ya](https://github.com/wdyea-ya)
+- 🌈 更新默认主题的功能色板，包括 Design Token 和 less 变量。[#354](https://github.com/oceanbase/oceanbase-design/pull/354)
+- Tag
+  - 🆕 Tag 新增 `ellipsis` 属性，用于配置内容溢出时的省略和 Tooltip 提示。[#361](https://github.com/oceanbase/oceanbase-design/pull/361)
+  - 🐞 修复 Tag 字体大小不正确的问题。[#360](https://github.com/oceanbase/oceanbase-design/pull/360)
+- 🐞 修复 Select 在多选模式和 `large` & `small` 尺寸下，选中项缺少边框样式的问题。[#332](https://github.com/oceanbase/oceanbase-design/pull/332) [@wdyea-ya](https://github.com/wdyea-ya)
+- 💄 优化 Button 样式，包括更新主按钮的渐变色，并去除 `box-shadow` 阴影。[#352](https://github.com/oceanbase/oceanbase-design/pull/352)
+- TypeScript
+  - 🤖 导出 SpaceProps、SpaceSize、ColProps、ColSize 和 RowProps 的类型定义。[#344](https://github.com/oceanbase/oceanbase-design/pull/344)
+
 ## 0.2.31
 
 `2023-12-08`

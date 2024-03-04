@@ -25,7 +25,6 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
     marginXS,
     marginSM,
   } = token;
-  const largeCellPadding = `${paddingSM}px ${padding}px`;
   return {
     // 表格通用样式
     [`${componentCls}-wrapper ${componentCls}`]: {
@@ -80,7 +79,7 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
           // 除内嵌子表格外，设置其他内嵌元素样式
           [`& > *:not(${componentCls}-wrapper)`]: {
             marginTop: -marginSM,
-            padding: largeCellPadding,
+            padding: `${paddingSM}px ${padding}px`,
             backgroundColor: colorFillQuaternary,
             borderRadius: borderRadiusLG,
           },
@@ -126,22 +125,6 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         },
       },
 
-    // large 表格样式
-    [`${componentCls}-wrapper`]: {
-      [`${componentCls}:not(${componentCls}-middle):not(${componentCls}-small)`]: {
-        [`${componentCls}-thead > tr`]: {
-          ['td, th']: {
-            padding: largeCellPadding,
-          },
-        },
-      },
-      [`${componentCls}-tbody`]: {
-        [`tr:not(${componentCls}-measure-row) > td`]: {
-          padding: largeCellPadding,
-        },
-      },
-    },
-
     // 去掉非展开表格的边框
     [`${componentCls}-wrapper:not(${componentCls}-expandable)`]: {
       [`${componentCls}:not(${componentCls}-bordered)`]: {
@@ -171,6 +154,12 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
             },
         },
       },
+      // Remove pagination borderTop for expandable Table
+      [`${componentCls}-pagination`]: {
+        [`&${antCls}-pagination`]: {
+          borderTop: 'none',
+        },
+      },
     },
 
     // 分页器样式
@@ -197,10 +186,10 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
           },
         },
       },
+      // Remove pagination borderTop for bordered Table
       [`${componentCls}${componentCls}-bordered`]: {
         [`&+${componentCls}-pagination`]: {
           [`&${antCls}-pagination`]: {
-            // Remove pagination borderTop for bordered Table
             borderTop: 'none',
           },
         },

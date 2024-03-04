@@ -2,9 +2,9 @@
  * iframe: 600
  */
 import React, { useState } from 'react';
-import { EllipsisOutlined } from '@oceanbase/icons';
-import { Button, Descriptions, Dropdown, Radio, message } from '@oceanbase/design';
+import { Button, Descriptions, Dropdown, message } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
+import { EllipsisOutlined } from '@oceanbase/icons';
 
 export default () => {
   const [loading, setLoading] = useState(false);
@@ -20,6 +20,7 @@ export default () => {
       setLoading(false);
       message.success('刷新成功');
     });
+    return promise;
   };
   return (
     <PageContainer
@@ -49,12 +50,8 @@ export default () => {
           ],
         },
         extra: [
-          <Radio.Group key="1" defaultValue="option1">
-            <Radio.Button value="option1">选项 1</Radio.Button>
-            <Radio.Button value="option2">选项 2</Radio.Button>
-          </Radio.Group>,
-          <Button key="2">次要按钮</Button>,
-          <Button key="3" type="primary">
+          <Button key="1">次要按钮</Button>,
+          <Button key="2" type="primary">
             主要按钮
           </Button>,
           <Dropdown
@@ -75,7 +72,7 @@ export default () => {
               ],
             }}
           >
-            <Button key="4" style={{ padding: '0 8px' }}>
+            <Button key="3" style={{ padding: '0 8px' }}>
               <EllipsisOutlined />
             </Button>
           </Dropdown>,

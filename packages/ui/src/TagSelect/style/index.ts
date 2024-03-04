@@ -57,7 +57,7 @@ export const genTagSelectStyle: GenerateStyle<TagSelectToken> = (
       position: 'relative',
       display: 'inline-block',
       fontSize: token.fontSize,
-      color: token.colorTextLabel,
+      color: token.colorText,
       background: token.colorWhite,
       border: `${token.lineWidth}px ${token.lineType} ${token.colorBorder}`,
       borderRadius: token.borderRadius,
@@ -97,9 +97,14 @@ export const genTagSelectStyle: GenerateStyle<TagSelectToken> = (
     },
     [`${componentCls}-small${componentCls}-img`]: genImgCoverStyle('76px', '32px'),
     [`${componentCls}-large`]: genSizeStyle(token.paddingContentVerticalSM, token.fontSize),
-    [`${componentCls}-small`]: genSizeStyle(0, token.fontSize),
+    [`${componentCls}-small`]: {
+      ...genSizeStyle(0, token.fontSize),
+      paddingLeft: `${token.paddingSM}px`,
+      paddingRight: `${token.paddingSM}px`,
+    },
     [`${componentCls}-wrapper:not(${componentCls}-disabled):hover`]: {
       borderColor: token.colorPrimaryText,
+      color: token.colorPrimaryText,
     },
     [`${componentCls}-checked`]: genColoredStyle(
       token.blue,
@@ -119,15 +124,15 @@ export const genTagSelectStyle: GenerateStyle<TagSelectToken> = (
       },
     },
     [`${componentCls}-disabled:not(${componentCls}-checked)`]: {
-      ...genColoredStyle(token.colorBorder, '#F6F8FE', '#CDD5E3'),
+      ...genColoredStyle(token.colorBorder, token.colorFillContent, token.colorTextDisabled),
       cursor: 'not-allowed',
     },
     [`${componentCls}-disabled${componentCls}-checked`]: {
       cursor: 'not-allowed',
-      ...genColoredStyle(token.colorBorder, '#E2E8F3', token.colorTextTertiary),
+      ...genColoredStyle(token.colorBorder, token.colorFill, token.colorTextDisabled),
     },
     [`${componentCls}-checked${componentCls}-disabled.multiple`]: {
-      [`${componentCls}-inner`]: genMultipleStyle('#CDD5E3', token),
+      [`${componentCls}-inner`]: genMultipleStyle(token.colorTextDisabled, token),
     },
     [`${componentCls}-checked:not(${componentCls}-disabled).multiple`]: {
       [`${componentCls}-inner`]: genMultipleStyle(token.colorPrimary, token),

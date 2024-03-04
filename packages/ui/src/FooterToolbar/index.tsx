@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { FooterToolbar as AntFooterToolbar } from '@ant-design/pro-components';
 import type { FooterToolbarProps as AntFooterToolbarProps } from '@ant-design/pro-layout/es/components/FooterToolbar';
-import { ConfigProvider } from '@oceanbase/design';
+import { ConfigProvider, theme } from '@oceanbase/design';
 import useStyle from './style';
 
 export type FooterToolbarProps = AntFooterToolbarProps;

@@ -10,10 +10,14 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
   const { componentCls } = token;
 
   return {
-    [`${componentCls}`]: {
-      // inherit color and lineHeight from parent instead of fixed colorText
-      color: 'inherit',
+    // inherit color and lineHeight from parent instead of fixed colorText
+    [`span${componentCls}`]: {
       lineHeight: 'inherit',
+      color: 'inherit',
+    },
+    [`div${componentCls}`]: {
+      lineHeight: 'inherit',
+      color: 'inherit',
     },
   };
 };

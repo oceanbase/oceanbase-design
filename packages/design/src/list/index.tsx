@@ -15,11 +15,12 @@ function List<T>({ pagination, ...restProps }: ListProps<T>) {
       pagination={
         typeof pagination === 'object'
           ? {
-              hideOnSinglePage:
-                extendedContext.hideOnSinglePage !== undefined
-                  ? extendedContext.hideOnSinglePage
-                  : true,
               ...pagination,
+              hideOnSinglePage: pagination?.showSizeChanger
+                ? false
+                : pagination?.hideOnSinglePage !== undefined
+                  ? pagination?.hideOnSinglePage
+                  : extendedContext.hideOnSinglePage,
             }
           : pagination
       }

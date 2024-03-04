@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/util",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "description": "The Util Library for OceanBase",
   "keywords": [
     "oceanbase",
@@ -35,7 +35,7 @@
     "filesize": "^10.1.0",
     "is-url": "^1.2.4",
     "lodash": "^4.17.21",
-    "moment": "^2.29.4",
+    "moment": "^2.30.1",
     "query-string": "^8.1.0"
   },
   "peerDependencies": {
