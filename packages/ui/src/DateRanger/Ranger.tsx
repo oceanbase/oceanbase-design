@@ -85,9 +85,9 @@ const Ranger = (props: DateRangerProps) => {
     defaultValue,
     defaultQuickValue,
     hasRewind = true,
-    hasPlay = true,
+    hasPlay = false,
     hasForward = true,
-    hasZoomOut = true,
+    hasZoomOut = false,
     pastOnly = false,
     onChange = noop,
     disabledDate,
@@ -264,16 +264,20 @@ const Ranger = (props: DateRangerProps) => {
     return `近 ${differenceSeconds} 秒`;
   };
 
+  const setNow = () => {
+    const selected = NEAR_TIME_LIST.find(item => item.name === rangeName);
+    if (selected?.range) {
+      rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
+    }
+    if (rangeName === CUSTOMIZE) {
+      const eTime = isMoment ? moment() : dayjs();
+      rangeChange([(eTime as Dayjs)?.subtract(differenceMs), eTime] as RangeValue);
+    }
+  };
+
   useInterval(
     () => {
-      const selected = NEAR_TIME_LIST.find(item => item.name === rangeName);
-      if (selected?.range) {
-        rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
-      }
-      if (rangeName === CUSTOMIZE) {
-        const eTime = isMoment ? moment() : dayjs();
-        rangeChange([(eTime as Dayjs)?.subtract(differenceMs), eTime] as RangeValue);
-      }
+      setNow();
     },
     isPlay ? 1000 : null
   );
@@ -303,261 +307,271 @@ const Ranger = (props: DateRangerProps) => {
       : selects[rangeNameIndex + 1];
 
   return (
-    <Space size={4} className={classNames(prefix)} style={rest.style}>
-      <div className={`${prefix}-wrapper`}>
-        <Dropdown
-          trigger={['click']}
-          open={open}
-          // 关闭后进行销毁，才可以将 Tooltip 进行同步关闭
-          destroyPopupOnHide={true}
-          // 存在缓存，会锁死里面的值
-          onOpenChange={o => {
-            if (
-              o === false &&
-              (refState.current.tooltipOpen || refState.current.step === STEP_CUSTOMIZE)
-            ) {
-              return;
-            }
+    <Space className={classNames(prefix)} style={rest.style}>
+      <Space size={0}>
+        <div className={`${prefix}-wrapper`}>
+          <Dropdown
+            trigger={['click']}
+            open={open}
+            // 关闭后进行销毁，才可以将 Tooltip 进行同步关闭
+            destroyPopupOnHide={true}
+            // 存在缓存，会锁死里面的值
+            onOpenChange={o => {
+              if (
+                o === false &&
+                (refState.current.tooltipOpen || refState.current.step === STEP_CUSTOMIZE)
+              ) {
+                return;
+              }
 
-            setOpen(o);
-          }}
-          dropdownRender={menu => {
-            if (step === STEP_CUSTOMIZE) {
-              return (
-                <div
-                  style={{
-                    background: '#fff',
-                    padding: '6px 12px',
-                    boxShadow: token.boxShadowSecondary,
-                  }}
-                >
-                  <a
-                    onClick={() => {
-                      setStep(STEP_QUICK);
+              setOpen(o);
+            }}
+            dropdownRender={menu => {
+              if (step === STEP_CUSTOMIZE) {
+                return (
+                  <div
+                    style={{
+                      background: '#fff',
+                      padding: '6px 12px',
+                      boxShadow: token.boxShadowSecondary,
                     }}
                   >
-                    返回上一层
-                  </a>
-                  <InternalPickerPanel
-                    defaultValue={innerValue}
-                    // @ts-ignore
-                    locale={locale.rcPicker}
-                    isMoment={isMoment}
-                    onOk={vList => {
-                      setIsPlay(false);
-                      rangeChange(
-                        vList.map(v => {
-                          return isMoment ? moment(v) : dayjs(v);
-                        }) as RangeValue
-                      );
-                      setStep(STEP_QUICK);
-                      closeTooltip();
-                    }}
-                    onCancel={() => {
-                      setStep(STEP_QUICK);
-                      closeTooltip();
-                    }}
-                  />
-                </div>
-              );
-            }
-            return menu;
-          }}
-          menu={{
-            items: [
-              ...selects,
-              {
-                name: CUSTOMIZE,
-                rangeLabel: '自定义',
-                label: '自定义时间',
-              },
-            ]
-              .filter(item => {
-                return !!item;
-              })
-              .map(item => {
-                return {
-                  key: item.name,
-                  label:
-                    item.name === CUSTOMIZE && !isStepMode ? (
-                      <Tooltip
-                        open={tooltipOpen}
-                        arrow={false}
-                        onOpenChange={o => {
-                          if (o) {
-                            setTooltipOpen(true);
-                          }
-                        }}
-                        placement="right"
-                        overlayStyle={{
-                          maxWidth: 'none',
-                        }}
-                        overlayInnerStyle={{
-                          background: '#fff',
-                        }}
-                        title={
-                          <InternalPickerPanel
-                            defaultValue={innerValue}
-                            // @ts-ignore
-                            locale={locale.rcPicker}
-                            isMoment={isMoment}
-                            onOk={vList => {
-                              setIsPlay(false);
-                              rangeChange(
-                                vList.map(v => {
-                                  return isMoment ? moment(v) : dayjs(v);
-                                }) as RangeValue
-                              );
+                    <a
+                      onClick={() => {
+                        setStep(STEP_QUICK);
+                      }}
+                    >
+                      返回上一层
+                    </a>
+                    <InternalPickerPanel
+                      defaultValue={innerValue}
+                      // @ts-ignore
+                      locale={locale.rcPicker}
+                      isMoment={isMoment}
+                      onOk={vList => {
+                        setIsPlay(false);
+                        rangeChange(
+                          vList.map(v => {
+                            return isMoment ? moment(v) : dayjs(v);
+                          }) as RangeValue
+                        );
+                        setStep(STEP_QUICK);
+                        closeTooltip();
+                      }}
+                      onCancel={() => {
+                        setStep(STEP_QUICK);
+                        closeTooltip();
+                      }}
+                    />
+                  </div>
+                );
+              }
+              return menu;
+            }}
+            menu={{
+              items: [
+                ...selects,
+                {
+                  name: CUSTOMIZE,
+                  rangeLabel: '自定义',
+                  label: '自定义时间',
+                },
+              ]
+                .filter(item => {
+                  return !!item;
+                })
+                .map(item => {
+                  return {
+                    key: item.name,
+                    label:
+                      item.name === CUSTOMIZE && !isStepMode ? (
+                        <Tooltip
+                          open={tooltipOpen}
+                          arrow={false}
+                          onOpenChange={o => {
+                            if (o) {
+                              setTooltipOpen(true);
+                            }
+                          }}
+                          placement="right"
+                          overlayStyle={{
+                            maxWidth: 'none',
+                          }}
+                          overlayInnerStyle={{
+                            background: '#fff',
+                          }}
+                          title={
+                            <InternalPickerPanel
+                              defaultValue={innerValue}
+                              // @ts-ignore
+                              locale={locale.rcPicker}
+                              isMoment={isMoment}
+                              onOk={vList => {
+                                setIsPlay(false);
+                                rangeChange(
+                                  vList.map(v => {
+                                    return isMoment ? moment(v) : dayjs(v);
+                                  }) as RangeValue
+                                );
 
-                              closeTooltip();
-                            }}
-                            onCancel={() => {
-                              closeTooltip();
-                            }}
-                          />
-                        }
-                      >
-                        <Space size={8} style={isPlay ? {} : { width: 310 }}>
+                                closeTooltip();
+                              }}
+                              onCancel={() => {
+                                closeTooltip();
+                              }}
+                            />
+                          }
+                        >
+                          <Space size={8} style={isPlay ? {} : { width: 310 }}>
+                            <span className={`${prefix}-label`}>{item.rangeLabel}</span>
+                            {/* @ts-ignore */}
+                            {locale[item.label] || item.label}
+                          </Space>
+                        </Tooltip>
+                      ) : (
+                        <Space
+                          size={8}
+                          style={isPlay ? {} : { width: 310 }}
+                          onClick={e => {
+                            const rName = item.name;
+                            handleNameChange(rName);
+
+                            if (rName === CUSTOMIZE && isStepMode) {
+                              // 阻止冒泡事件，不触发 Dropdown 的默认关闭
+                              e.stopPropagation();
+                              return setStep(STEP_CUSTOMIZE);
+                            }
+
+                            const selected = NEAR_TIME_LIST.find(_item => _item.name === rName);
+                            // 存在快捷选项切换为极简模式
+                            if (selected?.range) {
+                              setIsPlay(true);
+                              rangeChange(
+                                selected.range(isMoment ? moment() : dayjs()) as RangeValue
+                              );
+                            }
+                          }}
+                        >
                           <span className={`${prefix}-label`}>{item.rangeLabel}</span>
                           {/* @ts-ignore */}
                           {locale[item.label] || item.label}
                         </Space>
-                      </Tooltip>
-                    ) : (
-                      <Space
-                        size={8}
-                        style={isPlay ? {} : { width: 310 }}
-                        onClick={e => {
-                          const rName = item.name;
-                          handleNameChange(rName);
-
-                          if (rName === CUSTOMIZE && isStepMode) {
-                            // 阻止冒泡事件，不触发 Dropdown 的默认关闭
-                            e.stopPropagation();
-                            return setStep(STEP_CUSTOMIZE);
-                          }
-
-                          const selected = NEAR_TIME_LIST.find(_item => _item.name === rName);
-                          // 存在快捷选项切换为极简模式
-                          if (selected?.range) {
-                            setIsPlay(true);
-                            rangeChange(
-                              selected.range(isMoment ? moment() : dayjs()) as RangeValue
-                            );
-                          }
-                        }}
-                      >
-                        <span className={`${prefix}-label`}>{item.rangeLabel}</span>
-                        {/* @ts-ignore */}
-                        {locale[item.label] || item.label}
-                      </Space>
-                    ),
-                };
-              }),
-          }}
-        >
-          <Space size={0}>
+                      ),
+                  };
+                }),
+            }}
+          >
+            <Space size={0}>
+              <span
+                className={`${prefix}-label`}
+                style={{
+                  marginLeft: 8,
+                }}
+              >
+                {rangeLabel}
+              </span>
+              {isPlay && <div className={`${prefix}-play`}>{label}</div>}
+            </Space>
+          </Dropdown>
+          {!isPlay && (
             <span
-              className={`${prefix}-label`}
-              style={{
-                marginLeft: 8,
+              onClick={() => {
+                setOpen(true);
               }}
             >
-              {rangeLabel}
+              {/* @ts-ignore  */}
+              <DatePicker.RangePicker
+                className={`${prefix}-range-picker`}
+                style={{
+                  pointerEvents: 'none',
+                }}
+                disabledDate={pastOnly ? disabledFuture : disabledDate}
+                format={v => {
+                  // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
+                  return isThisYear ? v.format(DATE_TIME_FORMAT) : v.format(YEAR_DATE_TIME_FORMAT);
+                }}
+                // @ts-ignore
+                defaultValue={defaultValue}
+                // @ts-ignore
+                value={innerValue || defaultInternalValue}
+                onChange={datePickerChange}
+                showTime={true}
+                allowClear={false}
+                size={size}
+                // 透传 props 到 antd Ranger
+                {...omit(rest, 'value', 'onChange')}
+              />
             </span>
-            {isPlay && <div className={`${prefix}-play`}>{label}</div>}
-          </Space>
-        </Dropdown>
-        {!isPlay && (
-          <span
-            onClick={() => {
-              setOpen(true);
-            }}
-          >
-            {/* @ts-ignore  */}
-            <DatePicker.RangePicker
-              className={`${prefix}-range-picker`}
-              style={{
-                pointerEvents: 'none',
-              }}
-              disabledDate={pastOnly ? disabledFuture : disabledDate}
-              format={v => {
-                // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
-                return isThisYear ? v.format(DATE_TIME_FORMAT) : v.format(YEAR_DATE_TIME_FORMAT);
-              }}
-              // @ts-ignore
-              defaultValue={defaultValue}
-              // @ts-ignore
-              value={innerValue || defaultInternalValue}
-              onChange={datePickerChange}
-              showTime={true}
-              allowClear={false}
-              size={size}
-              // 透传 props 到 antd Ranger
-              {...omit(rest, 'value', 'onChange')}
-            />
-          </span>
-        )}
-      </div>
-      <Radio.Group
-        value={isPlay ? 'play' : ''}
-        className={`${prefix}-playback-control`}
-        buttonStyle="solid"
-      >
-        {hasRewind && (
-          <Radio.Button
-            value="stepBack"
-            style={{ paddingInline: 8 }}
-            onClick={() => {
-              if (isPlay) {
-                setIsPlay(false);
-              }
-
-              if (startTime && endTime) {
-                const newStartTime = (startTime as Dayjs).subtract(differenceMs);
-                const newEndTime = startTime?.clone() as Dayjs;
-
-                rangeChange([newStartTime, newEndTime]);
-              }
-            }}
-          >
-            <LeftOutlined />
-          </Radio.Button>
-        )}
-        {hasPlay && (
-          <Radio.Button
-            value={'play'}
-            style={{ paddingInline: 8 }}
-            onClick={() => {
-              const newPlay = !isPlay;
-              setIsPlay(newPlay);
-            }}
-          >
-            {isPlay ? <PauseOutlined /> : <CaretRightOutlined />}
-          </Radio.Button>
-        )}
-        {hasForward && (
-          <Radio.Button
-            value="stepForward"
-            style={{ paddingInline: 8 }}
-            disabled={isPlay}
-            onClick={() => {
-              if (startTime && endTime) {
-                const newStartTime = endTime.clone() as Dayjs;
-                const newEndTime = (endTime as Dayjs).add(differenceMs);
-
-                if (newEndTime.isBefore(new Date())) {
-                  rangeChange([newStartTime, newEndTime]);
-                } else {
-                  setIsPlay(true);
+          )}
+        </div>
+        <Radio.Group
+          value={isPlay ? 'play' : ''}
+          className={`${prefix}-playback-control`}
+          buttonStyle="solid"
+        >
+          {hasRewind && (
+            <Radio.Button
+              value="stepBack"
+              style={{ paddingInline: 8, borderInlineStart: '0px' }}
+              onClick={() => {
+                if (isPlay) {
+                  setIsPlay(false);
                 }
-              }
-            }}
-          >
-            <RightOutlined />
-          </Radio.Button>
-        )}
-      </Radio.Group>
+
+                if (startTime && endTime) {
+                  const newStartTime = (startTime as Dayjs).subtract(differenceMs);
+                  const newEndTime = startTime?.clone() as Dayjs;
+
+                  rangeChange([newStartTime, newEndTime]);
+                }
+              }}
+            >
+              <LeftOutlined />
+            </Radio.Button>
+          )}
+          {hasPlay && (
+            <Radio.Button
+              value={'play'}
+              style={{ paddingInline: 8 }}
+              onClick={() => {
+                const newPlay = !isPlay;
+                setIsPlay(newPlay);
+              }}
+            >
+              {isPlay ? <PauseOutlined /> : <CaretRightOutlined />}
+            </Radio.Button>
+          )}
+          {hasForward && (
+            <Radio.Button
+              value="stepForward"
+              style={{ paddingInline: 8 }}
+              disabled={isPlay}
+              onClick={() => {
+                if (startTime && endTime) {
+                  const newStartTime = endTime.clone() as Dayjs;
+                  const newEndTime = (endTime as Dayjs).add(differenceMs);
+
+                  if (newEndTime.isBefore(new Date())) {
+                    rangeChange([newStartTime, newEndTime]);
+                  } else {
+                    setIsPlay(true);
+                  }
+                }
+              }}
+            >
+              <RightOutlined />
+            </Radio.Button>
+          )}
+        </Radio.Group>
+      </Space>
+      <Button
+        style={{ paddingInline: 8 }}
+        onClick={() => {
+          setNow();
+        }}
+      >
+        当前
+      </Button>
       {hasZoomOut && (
         <Button
           disabled={!nextRangeItem}

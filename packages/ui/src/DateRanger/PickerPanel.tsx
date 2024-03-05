@@ -177,7 +177,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                   },
                 ]}
               >
-                <TimePicker />
+                <TimePicker suffixIcon={null} />
               </Form.Item>
             </Col>
           </Row>
@@ -210,7 +210,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                   },
                 ]}
               >
-                <TimePicker />
+                <TimePicker suffixIcon={null} />
               </Form.Item>
             </Col>
           </Row>

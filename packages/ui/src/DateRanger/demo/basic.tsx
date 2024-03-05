@@ -4,10 +4,10 @@ import { Checkbox, Divider, Flex } from '@oceanbase/design';
 
 export default () => {
   const options = [
-    { label: 'hasPlay', value: 'hasPlay' },
+    // { label: 'hasPlay', value: 'hasPlay' },
     { label: 'hasRewind', value: 'hasRewind' },
     { label: 'hasForward', value: 'hasForward' },
-    { label: 'hasZoomOut', value: 'hasZoomOut' },
+    // { label: 'hasZoomOut', value: 'hasZoomOut' },
   ];
 
   const [state, setState] = useState(options.map(item => item.value));
@@ -27,9 +27,9 @@ export default () => {
       <Divider children="preview" />
       <DateRanger
         hasForward={getValue('hasForward')}
-        hasPlay={getValue('hasPlay')}
+        // hasPlay={getValue('hasPlay')}
         hasRewind={getValue('hasRewind')}
-        hasZoomOut={getValue('hasZoomOut')}
+        // hasZoomOut={getValue('hasZoomOut')}
       />
     </div>
   );
