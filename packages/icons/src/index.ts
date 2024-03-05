@@ -3,6 +3,7 @@ export { default as CloneFilled } from './icons/CloneFilled';
 export { default as CpuFilled } from './icons/CpuFilled';
 export { default as DatabaseRadiusFilled } from './icons/DatabaseRadiusFilled';
 export { default as DouyinFilled } from './icons/DouyinFilled';
+export { default as EllipsisCircleFilled } from './icons/EllipsisCircleFilled';
 export { default as HeaderTableFilled } from './icons/HeaderTableFilled';
 export { default as IdcFilled } from './icons/IdcFilled';
 export { default as InternetFilled } from './icons/InternetFilled';
