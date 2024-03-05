@@ -86,7 +86,7 @@ export default (prefixCls: string) => {
         // spinDotSizeLG: token.controlHeight * ratio,
         spinDotSize: token.controlHeight * 1.75, // 56,
         spinDotSizeSM: token.controlHeight * 1.125, // 36
-        spinDotSizeLG: token.controlHeight * 2.5, // 80
+        spinDotSizeLG: token.controlHeight * 2.25, // 72
       } as SpinToken),
     ];
   });
