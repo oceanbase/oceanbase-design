@@ -512,7 +512,7 @@ const Ranger = (props: DateRangerProps) => {
           {hasRewind && (
             <Radio.Button
               value="stepBack"
-              style={{ paddingInline: 8, borderInlineStart: '0px' }}
+              style={{ paddingInline: 8, borderInlineStart: 0, borderRadius: 0 }}
               onClick={() => {
                 if (isPlay) {
                   setIsPlay(false);
