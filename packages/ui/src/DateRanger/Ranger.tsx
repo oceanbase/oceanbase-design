@@ -66,7 +66,6 @@ export interface DateRangerProps
 }
 
 const prefix = getPrefix('date-ranger');
-
 const STEP_QUICK = 0;
 const STEP_CUSTOMIZE = 1;
 
@@ -107,6 +106,8 @@ const Ranger = (props: DateRangerProps) => {
     moment.isMoment(defaultValue?.[1]) ||
     moment.isMoment(value?.[0]) ||
     moment.isMoment(value?.[1]);
+
+  console.log(isMoment, 'isMoment');
 
   const [innerValue, setInnerValue] = useState<RangeValue>(value ?? defaultValue);
 
@@ -191,6 +192,8 @@ const Ranger = (props: DateRangerProps) => {
   const startTime = innerValue?.[0];
   const endTime = innerValue?.[1];
   const differenceMs = endTime?.diff(startTime as any);
+  console.log(startTime?.format(), endTime?.format(), differenceMs, 'fsdfasfasf');
+
   const differenceSeconds = endTime?.diff(startTime as any, 'seconds');
   const differenceMinutes = endTime?.diff(startTime as any, 'minutes');
   const differenceHours = endTime?.diff(startTime as any, 'hours');
@@ -362,6 +365,23 @@ const Ranger = (props: DateRangerProps) => {
               return menu;
             }}
             menu={{
+              onClick: ({ key, domEvent }) => {
+                handleNameChange(key);
+
+                if (key === CUSTOMIZE && isStepMode) {
+                  // updateState 的修改会慢于 openChange 的判断，所以修改 refState.current.step 让 Dropdown 不要关闭
+                  refState.current.step = STEP_CUSTOMIZE;
+                  return setStep(STEP_CUSTOMIZE);
+                }
+
+                const selected = NEAR_TIME_LIST.find(_item => _item.name === key);
+                console.log(selected, key, 'selected');
+                // 存在快捷选项切换为极简模式
+                if (selected?.range) {
+                  setIsPlay(true);
+                  rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
+                }
+              },
               items: [
                 ...selects,
                 {
@@ -422,29 +442,7 @@ const Ranger = (props: DateRangerProps) => {
                           </Space>
                         </Tooltip>
                       ) : (
-                        <Space
-                          size={8}
-                          style={isPlay ? {} : { width: 310 }}
-                          onClick={e => {
-                            const rName = item.name;
-                            handleNameChange(rName);
-
-                            if (rName === CUSTOMIZE && isStepMode) {
-                              // 阻止冒泡事件，不触发 Dropdown 的默认关闭
-                              e.stopPropagation();
-                              return setStep(STEP_CUSTOMIZE);
-                            }
-
-                            const selected = NEAR_TIME_LIST.find(_item => _item.name === rName);
-                            // 存在快捷选项切换为极简模式
-                            if (selected?.range) {
-                              setIsPlay(true);
-                              rangeChange(
-                                selected.range(isMoment ? moment() : dayjs()) as RangeValue
-                              );
-                            }
-                          }}
-                        >
+                        <Space size={8} style={isPlay ? {} : { width: 310 }}>
                           <span className={`${prefix}-label`}>{item.rangeLabel}</span>
                           {/* @ts-ignore */}
                           {locale[item.label] || item.label}
@@ -474,7 +472,7 @@ const Ranger = (props: DateRangerProps) => {
             >
               {/* @ts-ignore  */}
               <DatePicker.RangePicker
-                className={`${prefix}-range-picker`}
+                className={`${prefix}-picker`}
                 style={{
                   pointerEvents: 'none',
                 }}
@@ -514,7 +512,6 @@ const Ranger = (props: DateRangerProps) => {
                 if (startTime && endTime) {
                   const newStartTime = (startTime as Dayjs).subtract(differenceMs);
                   const newEndTime = startTime?.clone() as Dayjs;
-
                   rangeChange([newStartTime, newEndTime]);
                 }
               }}
