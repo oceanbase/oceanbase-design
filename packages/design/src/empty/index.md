@@ -13,11 +13,11 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="基本" description="简单展示"></code>
+<code src="./demo/basic.tsx" title="默认" description="简单展示"></code>
 
-<code src="./demo/complete.tsx" title="完整" description="设置标题、描述和操作"></code>
+<code src="./demo/complete.tsx" title="完整版" description="图片设置为 Empty.PRESENTED_IMAGE_COLORED，包含标题、描述和操作"></code>
 
-<code src="./demo/simple.tsx" title="简洁版" description="图片设置为 Empty.PRESENTED_IMAGE_SIMPLE"></code>
+<code src="./demo/complete-debug.tsx" title="完整版 debug" description="图片设置为 Empty.PRESENTED_IMAGE_COLORED，包含标题、描述和操作" debug></code>
 
 <code src="./demo/image.tsx" title="自定义图片" description="可设置图片链接或 ReactNode"></code>
 

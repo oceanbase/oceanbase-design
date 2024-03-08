@@ -20,6 +20,7 @@ export default () => {
         }}
       >
         <Empty
+          image={Empty.PRESENTED_IMAGE_COLORED}
           title="Create Your Cluster"
           description="There is no cluster, welcome to create one!"
         >

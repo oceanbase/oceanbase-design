@@ -4,14 +4,18 @@ import type { EmptyProps as AntEmptyProps } from 'antd/es/empty';
 import type { StepProps } from 'antd/es/steps';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
-import DefaultEmptyImg from './empty';
-import SimpleEmptyImg from './simple';
+import { useLocale } from '../locale';
+import DefaultEmptyImg from './default';
+import ColoredEmptyImg from './colored';
 import useStyle from './style';
 
 export * from 'antd/es/empty';
 
 const defaultEmptyImg = <DefaultEmptyImg />;
-const simpleEmptyImg = <SimpleEmptyImg />;
+// simple empty image is same as default empty image
+// To be compatible with antd API
+const simpleEmptyImg = <DefaultEmptyImg />;
+const coloredEmptyImg = <ColoredEmptyImg />;
 
 export interface EmptyProps extends AntEmptyProps {
   title?: React.ReactNode;
@@ -22,20 +26,23 @@ export interface EmptyProps extends AntEmptyProps {
 type CompoundedComponent = React.FC<EmptyProps> & {
   PRESENTED_IMAGE_DEFAULT: React.ReactNode;
   PRESENTED_IMAGE_SIMPLE: React.ReactNode;
+  PRESENTED_IMAGE_COLORED: React.ReactNode;
 };
 
-const Empty: CompoundedComponent = ({
-  image = defaultEmptyImg,
-  title,
-  description,
-  steps,
-  layout = 'vertical',
-  children,
-  prefixCls: customizePrefixCls,
-  className,
-  style,
-  ...restProps
-}) => {
+const Empty: CompoundedComponent = props => {
+  const [locale] = useLocale('Empty');
+  const {
+    image = defaultEmptyImg,
+    title,
+    description = locale.description,
+    steps,
+    layout = 'vertical',
+    children,
+    prefixCls: customizePrefixCls,
+    className,
+    style,
+    ...restProps
+  } = props;
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('empty', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
@@ -43,8 +50,8 @@ const Empty: CompoundedComponent = ({
   const emptyCls = classNames(
     prefixCls,
     {
-      [`${prefixCls}-normal`]: image === simpleEmptyImg,
       [`${prefixCls}-horizontal`]: isHorizontal,
+      [`${prefixCls}-small`]: image === defaultEmptyImg || image === simpleEmptyImg,
     },
     className
   );
@@ -53,21 +60,19 @@ const Empty: CompoundedComponent = ({
     <AntEmpty
       image={image}
       description={
-        title || description || steps || (isHorizontal && children) ? (
-          <>
-            {title && <div className={`${prefixCls}-title`}>{title}</div>}
-            {description && (
-              <div
-                // to avoid conflicts with `${prefixCls}-description`
-                className={`${prefixCls}-description-content`}
-              >
-                {description}
-              </div>
-            )}
-            {steps && <Steps items={steps} />}
-            {isHorizontal && children && <div className={`${prefixCls}-footer`}>{children}</div>}
-          </>
-        ) : undefined
+        <>
+          {title && <div className={`${prefixCls}-title`}>{title}</div>}
+          {description && (
+            <div
+              // to avoid conflicts with `${prefixCls}-description`
+              className={`${prefixCls}-description-content`}
+            >
+              {description}
+            </div>
+          )}
+          {steps && <Steps items={steps} />}
+          {isHorizontal && children && <div className={`${prefixCls}-footer`}>{children}</div>}
+        </>
       }
       prefixCls={customizePrefixCls}
       className={emptyCls}
@@ -80,6 +85,7 @@ const Empty: CompoundedComponent = ({
 
 Empty.PRESENTED_IMAGE_DEFAULT = defaultEmptyImg;
 Empty.PRESENTED_IMAGE_SIMPLE = simpleEmptyImg;
+Empty.PRESENTED_IMAGE_COLORED = coloredEmptyImg;
 
 if (process.env.NODE_ENV !== 'production') {
   Empty.displayName = AntEmpty.displayName;
