@@ -275,13 +275,6 @@ const Ranger = (props: DateRangerProps) => {
     }
   };
 
-  useInterval(
-    () => {
-      setNow();
-    },
-    isPlay ? 1000 : null
-  );
-
   const rangeLabel =
     rangeName === CUSTOMIZE
       ? getCustomizeRangeLabel()
