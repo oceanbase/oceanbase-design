@@ -13,7 +13,7 @@ const ProcessingSvg = () => (
     <defs>
       <path
         d="M33.1125,0.0125 L100.6125,0.0125 C118.8875,0.0125 133.725,14.85 133.725,33.125 L133.725,118.1 L33.1125,118.1 C14.8375,118.1 4.4408921e-15,103.2625 4.4408921e-15,84.9875 L4.4408921e-15,33.1125 C4.4408921e-15,14.8375 14.8375,0 33.1125,0 L33.1125,0.0125 Z"
-        id="path-1"
+        id="oceanbase-design-result-processing-path-1"
       ></path>
     </defs>
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -111,11 +111,11 @@ const ProcessingSvg = () => (
           ></polygon>
         </g>
         <g id="Clipped" transform="translate(14.9125, 13.75)">
-          <mask id="mask-2" fill="white">
-            <use href="#path-1"></use>
+          <mask id="oceanbase-design-result-processing-mask-2" fill="white">
+            <use href="#oceanbase-design-result-processing-path-1"></use>
           </mask>
           <g></g>
-          <g mask="url(#mask-2)">
+          <g mask="url(#oceanbase-design-result-processing-mask-2)">
             <g transform="translate(31.5625, 35.9375)">
               <rect
                 fill="#132039"

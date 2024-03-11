@@ -18,15 +18,22 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
   return {
     [`${componentCls}`]: {
       [`${componentCls}-image`]: {
-        height: 'auto',
+        height: 160,
+        marginBottom: 0,
       },
       [`${componentCls}-description`]: {
+        // ensure description content color is correct always
+        color: colorTextTertiary,
         [`${componentCls}-title`]: {
+          color: token.colorText,
           fontWeight: token.fontWeightStrong,
           fontSize: token.fontSizeHeading3,
+          lineHeight: token.lineHeightHeading3,
+          marginTop: token.marginLG,
         },
         [`${componentCls}-description-content`]: {
           color: colorTextTertiary,
+          marginTop: token.marginXS,
         },
       },
       [`${componentCls}-footer`]: {
@@ -74,7 +81,7 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
       justifyContent: 'center',
       alignItems: 'center',
       [`${componentCls}-image`]: {
-        marginBottom: 0,
+        height: 112,
       },
       [`${componentCls}-description`]: {
         marginLeft: token.marginXXL,
@@ -85,6 +92,12 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
         [`${componentCls}-description-content`]: {
           marginTop: token.margin,
         },
+      },
+    },
+
+    [`${componentCls}-small`]: {
+      [`${componentCls}-image`]: {
+        height: 54,
       },
     },
   };

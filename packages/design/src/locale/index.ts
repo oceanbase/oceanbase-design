@@ -8,3 +8,5 @@ export interface Locale extends AntLocale {
   Table?: TableLocale;
   Drawer?: DrawerLocale;
 }
+
+export { default as useLocale } from './useLocale';

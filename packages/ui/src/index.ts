@@ -55,6 +55,9 @@ export type { NavMenuProps, NavMenuItem } from './NavMenu';
 export { default as PageContainer } from './PageContainer';
 export type { PageContainerProps } from './PageContainer';
 
+export { default as PageLoading } from './PageLoading';
+export type { PageLoadingProps } from './PageLoading';
+
 export { default as FooterToolbar } from './FooterToolbar';
 export type { FooterToolbarProps } from './FooterToolbar';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Empty: React.FC = props => (
+const DefaultEmptyImg: React.FC = props => (
   <svg
     width="46.25775px"
     height="46.36575px"
@@ -52,7 +52,7 @@ const Empty: React.FC = props => (
 );
 
 if (process.env.NODE_ENV !== 'production') {
-  Empty.displayName = 'SimpleImage';
+  DefaultEmptyImg.displayName = 'DefaultEmptyImg';
 }
 
-export default Empty;
+export default DefaultEmptyImg;

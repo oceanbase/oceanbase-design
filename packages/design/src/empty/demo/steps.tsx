@@ -23,7 +23,12 @@ export default () => {
   ];
 
   return (
-    <Empty title="Create Your Cluster" steps={steps}>
+    <Empty
+      image={Empty.PRESENTED_IMAGE_COLORED}
+      title="Create Your Cluster"
+      description="There is no cluster, welcome to create one!"
+      steps={steps}
+    >
       <Button type="primary">Create Cluster</Button>
     </Empty>
   );
