@@ -16,16 +16,32 @@ export default () => {
       ]}
     >
       <Typography.Title level={5}>出错原因</Typography.Title>
-      <Typography.Paragraph
+      <div
         style={{
           color: token.colorTextTertiary,
         }}
       >
-        {`Error1: Failed to load Stripe-js at HTMLScriptElement. sanonymous> (727.93344492.async.is:1:7397)
-            Error2: Failed to load Stripe-js at HTMLScriptElement. sanonymous> (727.93344492.async.is:1:7397)
-            Error3: Failed to load Stripe-js at HTMLScriptElement. sanonymous> (727.93344492.async.is:1:7397)
-            Error4: Failed to load Stripe-js at HTMLScriptElement. sanonymous> (727.93344492.async.is:1:7397)`}
-      </Typography.Paragraph>
+        <div>
+          {
+            'Error1: Failed to load Stripe-js at HTMLScriptElement. sanonymous> (727.93344492.async.is:1:7397)'
+          }
+        </div>
+        <div>
+          {
+            'Error2: Failed to load Stripe-js at HTMLScriptElement. sanonymous> (727.93344492.async.is:1:7397)'
+          }
+        </div>
+        <div>
+          {
+            'Error3: Failed to load Stripe-js at HTMLScriptElement. sanonymous> (727.93344492.async.is:1:7397)'
+          }
+        </div>
+        <div>
+          {
+            'Error4: Failed to load Stripe-js at HTMLScriptElement. sanonymous> (727.93344492.async.is:1:7397)'
+          }
+        </div>
+      </div>
     </Result>
   );
 };

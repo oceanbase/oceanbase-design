@@ -13,7 +13,7 @@ const WarningSvg = () => (
     <defs>
       <path
         d="M33.1125,0 L100.6125,0 C118.8875,0 133.725,14.8375 133.725,33.1125 L133.725,118.0875 L33.1125,118.0875 C14.8375,118.0875 -4.4408921e-15,103.25 -4.4408921e-15,84.975 L-4.4408921e-15,33.1125 C-4.4408921e-15,14.8375 14.8375,0 33.1125,0 Z"
-        id="path-1"
+        id="oceanbase-design-result-warning-path-1"
       ></path>
     </defs>
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -24,11 +24,11 @@ const WarningSvg = () => (
           fillRule="nonzero"
         ></path>
         <g id="Clipped" transform="translate(14.9125, 13.75)">
-          <mask id="mask-2" fill="white">
-            <use href="#path-1"></use>
+          <mask id="oceanbase-design-result-warning-mask-2" fill="white">
+            <use href="#oceanbase-design-result-warning-path-1"></use>
           </mask>
           <g></g>
-          <g mask="url(#mask-2)">
+          <g mask="url(#oceanbase-design-result-warning-mask-2)">
             <g transform="translate(-13.25, 47.0625)">
               <path
                 d="M76.075,40.3375 C85.7625,33.55 97.6875,18.85 104.2,0"
