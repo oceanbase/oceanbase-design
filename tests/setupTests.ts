@@ -10,8 +10,6 @@ import excludeAllWarning from './shared/excludeWarning';
 // To ensure snapshot stable, should disable hashed in test env.
 theme.defaultConfig.hashed = false;
 
-process.env.TZ = 'UTC';
-
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 global.React = React;
@@ -101,7 +99,7 @@ global.requestAnimationFrame =
 // browserMocks.js
 export const localStorageMock = (() => {
   let store: any = {
-    umi_locale: 'zh-CN',
+    umi_locale: 'en-US',
   };
 
   return {

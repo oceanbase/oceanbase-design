@@ -25,6 +25,16 @@ export default defineConfig({
       path.join(__dirname, 'tests/vitest.setup.ts'),
       path.join(__dirname, 'tests/setupTests.ts'),
     ],
+    // ref: https://github.com/vitest-dev/vitest/issues/1575#issuecomment-1439286286
+    globalSetup: [path.join(__dirname, 'tests/globalSetup.ts')],
+    // exclude part of charts tests for now
+    // ref: https://github.com/antvis/L7/issues/2332
+    exclude: [
+      '**/Area/__tests__/ref.test.tsx',
+      '**/DualAxes/__tests__/ref.test.tsx',
+      '**/Line/__tests__/ref.test.tsx',
+      '**/Pie/__tests__/donut.test.tsx',
+    ],
     deps: {
       optimizer: {
         web: {
