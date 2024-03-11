@@ -5,7 +5,14 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 export type ResultToken = FullToken<'Result'>;
 
 export const genResultStyle: GenerateStyle<ResultToken> = (token: ResultToken): CSSObject => {
-  return {};
+  const { componentCls } = token;
+  return {
+    [`${componentCls}`]: {
+      [`${componentCls}-content`]: {
+        padding: token.paddingLG,
+      },
+    },
+  };
 };
 
 export default (prefixCls: string) => {

@@ -27,6 +27,8 @@ nav:
 
 <code src="./demo/icon.tsx" title="自定义 icon"></code>
 
+<code src="./demo/with-page-container.tsx" title="和页容器搭配使用"></code>
+
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |

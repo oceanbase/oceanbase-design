@@ -44,11 +44,11 @@ const Svg500 = () => (
           ></rect>
         </g>
         <g id="Clipped" transform="translate(0, 0)">
-          <mask id="mask-2" fill="white">
+          <mask id="oceanbase-design-result-500-mask-2" fill="white">
             <use transform="translate(80, 80) rotate(-45) translate(-80, -80)"></use>
           </mask>
           <g transform="translate(80, 80) rotate(-45) translate(-80, -80)"></g>
-          <g mask="url(#mask-2)">
+          <g mask="url(#oceanbase-design-result-500-mask-2)">
             <g transform="translate(18.166, 42.1381)">
               <path
                 d="M99.5820637,41.2755382 L93.0288089,32.6666047 L3.2143341,32.6666047 C1.44520448,32.6666047 0.0124586593,34.0993505 0.0124586593,35.8684801 L0.0124586593,48.1278008 L78.0659591,48.1278008 L78.0659591,56.7367344 L116.301584,56.7367344 L116.301584,44.4774137 C116.301584,42.708284 114.868839,41.2755382 113.099709,41.2755382 L99.5820637,41.2755382 L99.5820637,41.2755382 Z"

@@ -68,7 +68,7 @@ const Svg404 = () => (
                   ry="32.8"
                 ></ellipse>
                 <g id="Clipped">
-                  <mask id="mask-2" fill="white">
+                  <mask id="oceanbase-design-result-404-mask-2" fill="white">
                     <use transform="translate(34.8187, 24.1269) rotate(-66.22) translate(-34.8187, -24.1269)"></use>
                   </mask>
                   <g transform="translate(34.8187, 24.1269) rotate(-66.22) translate(-34.8187, -24.1269)"></g>
@@ -76,7 +76,7 @@ const Svg404 = () => (
                     d="M64.4080716,38.11257 C61.1330716,43.25007 46.5955716,42.33757 30.0205716,35.03757 C13.4455716,27.73757 2.79557161,17.55007 4.54557161,11.72507 C6.29557161,5.90007003 22.3330716,7.56257003 38.9080716,14.86257 C55.4830716,22.16257 68.1330716,32.28757 64.4080716,38.11257 L64.4080716,38.11257 Z"
                     fill="#132039"
                     fillRule="nonzero"
-                    mask="url(#mask-2)"
+                    mask="url(#oceanbase-design-result-404-mask-2)"
                   ></path>
                 </g>
                 <ellipse
@@ -89,14 +89,14 @@ const Svg404 = () => (
                   ry="15.0625"
                 ></ellipse>
                 <g id="Clipped" transform="translate(17.0449, 18.1949)">
-                  <mask id="mask-4" fill="white">
+                  <mask id="oceanbase-design-result-success-404-4" fill="white">
                     <use transform="translate(15.452, 9.8598) rotate(-66.22) translate(-15.452, -9.8598)"></use>
                   </mask>
                   <g transform="translate(15.452, 9.8598) rotate(-66.22) translate(-15.452, -9.8598)"></g>
                   <ellipse
                     fill="#132039"
                     fillRule="nonzero"
-                    mask="url(#mask-4)"
+                    mask="url(#oceanbase-design-result-success-404-4)"
                     transform="translate(15.0168, 10.8584) rotate(-66.22) translate(-15.0168, -10.8584)"
                     cx="15.0167984"
                     cy="10.8583602"

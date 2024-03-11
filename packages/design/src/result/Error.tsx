@@ -7,7 +7,7 @@ const ErrorSvg = () => (
     <defs>
       <path
         d="M33.1125,0.0125 L100.6125,0.0125 C118.8875,0.0125 133.725,14.85 133.725,33.125 L133.725,118.1 L33.1125,118.1 C14.8375,118.1 0,103.2625 0,84.9875 L0,33.1125 C0,14.8375 14.8375,0 33.1125,0 L33.1125,0.0125 Z"
-        id="path-1"
+        id="oceanbase-design-result-error-path-1"
       ></path>
     </defs>
     <g stroke="none" fill="none">
@@ -38,11 +38,11 @@ const ErrorSvg = () => (
           ></rect>
         </g>
         <g id="Clipped" transform="translate(14.9125, 13.75)">
-          <mask id="mask-2" fill="white">
-            <use href="#path-1"></use>
+          <mask id="oceanbase-design-result-error-mask-2" fill="white">
+            <use href="#oceanbase-design-result-error-path-1"></use>
           </mask>
           <g></g>
-          <g mask="url(#mask-2)">
+          <g mask="url(#oceanbase-design-result-error-mask-2)">
             <g transform="translate(10.4625, 25.15)">
               <path
                 d="M108.075,63.4125 L4.725,63.4125 L10.2125,55.3875 C10.825,54.4875 11.8375,53.9625 12.925,53.9625 L99.8625,53.9625 C100.95,53.9625 101.9625,54.5 102.575,55.3875 L108.0625,63.4125 L108.075,63.4125 Z"

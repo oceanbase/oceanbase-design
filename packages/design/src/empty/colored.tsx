@@ -15,14 +15,14 @@ const ColoredEmptyImg: React.FC = props => (
   >
     <defs>
       <ellipse
-        id="path-1"
+        id="oceanbase-design-empty-colored-path-1"
         cx="62.2411374"
         cy="62.0341728"
         rx="62.2411374"
         ry="62.0341728"
       ></ellipse>
       <ellipse
-        id="path-3"
+        id="oceanbase-design-empty-colored-path-3"
         cx="34.7282761"
         cy="34.6127975"
         rx="34.7282761"
@@ -36,20 +36,20 @@ const ColoredEmptyImg: React.FC = props => (
             <rect x="0" y="0" width="160" height="160"></rect>
             <g transform="translate(10.6667, 0)">
               <g id="Clipped" transform="translate(15.5177, 17.1889)">
-                <mask id="mask-2" fill="white">
-                  <use xlinkHref="#path-1"></use>
+                <mask id="oceanbase-design-empty-colored-mask-2" fill="white">
+                  <use xlinkHref="#oceanbase-design-empty-colored-path-1"></use>
                 </mask>
                 <g></g>
                 <ellipse
                   fill="#0181FD"
                   fillRule="nonzero"
-                  mask="url(#mask-2)"
+                  mask="url(#oceanbase-design-empty-colored-mask-2)"
                   cx="62.2411374"
                   cy="62.0341728"
                   rx="62.2411374"
                   ry="62.0341728"
                 ></ellipse>
-                <g mask="url(#mask-2)">
+                <g mask="url(#oceanbase-design-empty-colored-mask-2)">
                   <g transform="translate(-8.1975, 47.8341)">
                     <g strokeWidth="1" fill="none" fillRule="evenodd">
                       <rect
@@ -247,11 +247,11 @@ const ColoredEmptyImg: React.FC = props => (
                   ></path>
                 </g>
                 <g id="Clipped" transform="translate(4.8927, 4.8552)">
-                  <mask id="mask-4" fill="white">
-                    <use xlinkHref="#path-3"></use>
+                  <mask id="oceanbase-design-empty-colored-mask-4" fill="white">
+                    <use xlinkHref="#oceanbase-design-empty-colored-path-3"></use>
                   </mask>
                   <g></g>
-                  <g mask="url(#mask-4)" fillRule="nonzero">
+                  <g mask="url(#oceanbase-design-empty-colored-mask-4)" fillRule="nonzero">
                     <g transform="translate(-45.2175, 16.1057)">
                       <rect
                         fill="#6ADE90"
