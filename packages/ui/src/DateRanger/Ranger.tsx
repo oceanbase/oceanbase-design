@@ -92,7 +92,7 @@ const Ranger = (props: DateRangerProps) => {
     disabledDate,
     locale,
     size,
-    //固定rangeName
+    //固定 rangeName
     stickRangeName = false,
     mode = 'normal',
     ...rest
@@ -106,8 +106,6 @@ const Ranger = (props: DateRangerProps) => {
     moment.isMoment(defaultValue?.[1]) ||
     moment.isMoment(value?.[0]) ||
     moment.isMoment(value?.[1]);
-
-  console.log(isMoment, 'isMoment');
 
   const [innerValue, setInnerValue] = useState<RangeValue>(value ?? defaultValue);
 
@@ -130,12 +128,6 @@ const Ranger = (props: DateRangerProps) => {
   // 没有 selects 时，回退到普通 RangePicker, 当前时间选项为自定义时，应该显示 RangePicker
   const [isPlay, setIsPlay] = useState(rangeName !== CUSTOMIZE);
 
-  const defaultInternalValue = useMemo(() => {
-    return selects
-      .find(item => item.name === rangeName)
-      ?.range(isMoment ? moment() : dayjs()) as RangeValue;
-  }, [defaultValue]);
-
   const compare = (m1: RangeValue, m2: RangeValue) => {
     if (Array.isArray(m1) && !Array.isArray(m2)) return false;
     if (Array.isArray(m2) && !Array.isArray(m1)) return false;
@@ -155,12 +147,6 @@ const Ranger = (props: DateRangerProps) => {
       }
     }
   }, [value, stickRangeName]);
-
-  useEffect(() => {
-    if (defaultInternalValue) {
-      rangeChange(defaultInternalValue);
-    }
-  }, []);
 
   const closeTooltip = () => {
     setOpen(false);
@@ -192,7 +178,6 @@ const Ranger = (props: DateRangerProps) => {
   const startTime = innerValue?.[0];
   const endTime = innerValue?.[1];
   const differenceMs = endTime?.diff(startTime as any);
-  console.log(startTime?.format(), endTime?.format(), differenceMs, 'fsdfasfasf');
 
   const differenceSeconds = endTime?.diff(startTime as any, 'seconds');
   const differenceMinutes = endTime?.diff(startTime as any, 'minutes');
@@ -274,7 +259,7 @@ const Ranger = (props: DateRangerProps) => {
     }
     if (rangeName === CUSTOMIZE) {
       const eTime = isMoment ? moment() : dayjs();
-      rangeChange([(eTime as Dayjs)?.subtract(differenceMs), eTime] as RangeValue);
+      rangeChange([(eTime as Dayjs)?.clone().subtract(differenceMs), eTime] as RangeValue);
     }
   };
 
@@ -375,7 +360,6 @@ const Ranger = (props: DateRangerProps) => {
                 }
 
                 const selected = NEAR_TIME_LIST.find(_item => _item.name === key);
-                console.log(selected, key, 'selected');
                 // 存在快捷选项切换为极简模式
                 if (selected?.range) {
                   setIsPlay(true);
@@ -482,11 +466,9 @@ const Ranger = (props: DateRangerProps) => {
                   return isThisYear ? v.format(DATE_TIME_FORMAT) : v.format(YEAR_DATE_TIME_FORMAT);
                 }}
                 // @ts-ignore
-                defaultValue={defaultValue}
-                // @ts-ignore
-                value={innerValue || defaultInternalValue}
+                value={innerValue}
                 onChange={datePickerChange}
-                showTime={true}
+                // showTime={true}
                 allowClear={false}
                 size={size}
                 // 透传 props 到 antd Ranger
@@ -510,7 +492,9 @@ const Ranger = (props: DateRangerProps) => {
                 }
 
                 if (startTime && endTime) {
-                  const newStartTime = (startTime as Dayjs).subtract(differenceMs);
+                  const newStartTime = (startTime as Dayjs)
+                    .clone()
+                    .subtract(differenceMs, 'milliseconds');
                   const newEndTime = startTime?.clone() as Dayjs;
                   rangeChange([newStartTime, newEndTime]);
                 }
@@ -539,7 +523,7 @@ const Ranger = (props: DateRangerProps) => {
               onClick={() => {
                 if (startTime && endTime) {
                   const newStartTime = endTime.clone() as Dayjs;
-                  const newEndTime = (endTime as Dayjs).add(differenceMs);
+                  const newEndTime = (endTime as Dayjs).clone().add(differenceMs);
 
                   if (newEndTime.isBefore(new Date())) {
                     rangeChange([newStartTime, newEndTime]);
