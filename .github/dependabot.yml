@@ -11,6 +11,11 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: "[Feature Branch] "
+    labels:
+      - "dependencies"
+      - "Feature Branch"
     ignore:
       - dependency-name: "@antv/g6"
       # execa latest 7.x works only in ES module
