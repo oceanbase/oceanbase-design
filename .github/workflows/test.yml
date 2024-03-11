@@ -1,9 +1,9 @@
-﻿name: CI
+﻿name: Test
 
 on: [pull_request]
 
 jobs:
-  build:
+  test:
     if: github.repository == 'oceanbase/oceanbase-design'
     runs-on: ${{ matrix.os }}
     strategy:
@@ -21,7 +21,7 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: 8.6.0
-      - name: CI
+      - name: Run test
         run: |
           pnpm install
-          pnpm run ci
+          pnpm run test
