@@ -529,6 +529,7 @@ const Ranger = (props: DateRangerProps) => {
                     rangeChange([newStartTime, newEndTime]);
                   } else {
                     setIsPlay(true);
+                    setNow();
                   }
                 }
               }}
