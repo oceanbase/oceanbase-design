@@ -1,21 +1,21 @@
 import React from 'react';
 import { cleanup, fireEvent, render, waitFor } from '@testing-library/react';
-// import Login from '..';
+// import Login from '@oceanbase/icons';
 
 describe('Login', () => {
   beforeAll(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation(query => ({
+      value: vi.fn().mockImplementation(query => ({
         matches: false,
         media: query,
         onchange: null,
-        addListener: jest.fn(), // Deprecated
-        removeListener: jest.fn(), // Deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
+        addListener: vi.fn(), // Deprecated
+        removeListener: vi.fn(), // Deprecated
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
       })),
     });
   });
@@ -25,7 +25,7 @@ describe('Login', () => {
   it('', () => {});
   // it('登录', async () => {
   //   // https://github.com/testing-library/react-testing-library/issues/54
-  //   const fakeFn = jest.fn();
+  //   const fakeFn = vi.fn();
   //   const { getByTestId, debug } = render(
   //     <Login
   //       loginProps={{
@@ -37,7 +37,7 @@ describe('Login', () => {
   //   );
   //   debug(getByTestId('login.form'));
   //   fireEvent.submit(getByTestId('login.form'));
-  //   jest.advanceTimersByTime(1000);
+  //   vi.advanceTimersByTime(1000);
   //   expect(fakeFn).toBeCalledTimes(1);
   // });
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { vi } from 'vitest';
 import { Drawer } from '@oceanbase/design';
 import type { DrawerProps } from '@oceanbase/design';
 import { waitFakeTimer } from '../../../../../tests/util';
@@ -18,11 +19,11 @@ const DrawerTest: React.FC<DrawerProps> = props => (
 
 describe('Drawer', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
   afterEach(() => {
-    jest.useRealTimers();
-    jest.clearAllTimers();
+    vi.useRealTimers();
+    vi.clearAllTimers();
   });
 
   it('render correctly', async () => {

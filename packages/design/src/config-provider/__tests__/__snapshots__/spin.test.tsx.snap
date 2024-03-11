@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`ConfigProvider spin spin.indicator should work 1`] = `
+exports[`ConfigProvider spin > spin.indicator should work 1`] = `
 <div
   aria-busy="true"
   aria-live="polite"
@@ -12,7 +12,7 @@ exports[`ConfigProvider spin spin.indicator should work 1`] = `
 </div>
 `;
 
-exports[`ConfigProvider spin spin.indicator should work in nested ConfigProvider 1`] = `
+exports[`ConfigProvider spin > spin.indicator should work in nested ConfigProvider 1`] = `
 <div
   aria-busy="true"
   aria-live="polite"

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import ContentWithIcon from '..';
+import { ContentWithIcon } from '@oceanbase/ui';
 
 describe('ContentWithIcon', () => {
   it('渲染正常', async () => {

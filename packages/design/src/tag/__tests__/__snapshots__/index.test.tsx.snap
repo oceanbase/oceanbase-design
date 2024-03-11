@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Tag custom ellipsis 1`] = `
+exports[`Tag > custom ellipsis 1`] = `
 <span
   class="ant-tag ant-tag-ellipsis"
 >
@@ -16,7 +16,7 @@ exports[`Tag custom ellipsis 1`] = `
 </span>
 `;
 
-exports[`Tag default ellipsis 1`] = `
+exports[`Tag > default ellipsis 1`] = `
 <span
   class="ant-tag ant-tag-ellipsis"
 >
@@ -32,7 +32,7 @@ exports[`Tag default ellipsis 1`] = `
 </span>
 `;
 
-exports[`Tag disable ellipsis 1`] = `
+exports[`Tag > disable ellipsis 1`] = `
 <span
   class="ant-tag"
 >

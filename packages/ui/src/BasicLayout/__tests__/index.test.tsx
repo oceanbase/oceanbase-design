@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-// import BasicLayout from '..';
+import { BasicLayout } from '@oceanbase/ui';
 
 describe('BasicLayout', () => {
   it('', () => {});

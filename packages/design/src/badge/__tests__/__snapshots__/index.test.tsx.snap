@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Badge status custom icon 1`] = `
+exports[`Badge > status custom icon 1`] = `
 <span
   class="ant-badge ant-badge-status"
   style="display: inline-block;"
@@ -36,7 +36,7 @@ exports[`Badge status custom icon 1`] = `
 </span>
 `;
 
-exports[`Badge status dot 1`] = `
+exports[`Badge > status dot 1`] = `
 <span
   class="ant-badge ant-badge-status ant-badge-not-a-wrapper"
 >
@@ -51,7 +51,7 @@ exports[`Badge status dot 1`] = `
 </span>
 `;
 
-exports[`Badge status icon 1`] = `
+exports[`Badge > status icon 1`] = `
 <span
   class="ant-badge ant-badge-status"
   style="display: inline-block;"

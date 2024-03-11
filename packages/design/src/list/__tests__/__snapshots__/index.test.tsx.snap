@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`List hideOnSinglePage could be changed 1`] = `
+exports[`List > hideOnSinglePage could be changed 1`] = `
 <div
   class="ant-list ant-list-split ant-list-bordered ant-list-something-after-last-item"
 >
@@ -86,7 +86,7 @@ exports[`List hideOnSinglePage could be changed 1`] = `
 </div>
 `;
 
-exports[`List hideOnSinglePage should be false by default 1`] = `
+exports[`List > hideOnSinglePage should be false by default 1`] = `
 <div
   class="ant-list ant-list-split ant-list-bordered ant-list-something-after-last-item"
 >
@@ -252,7 +252,7 @@ exports[`List hideOnSinglePage should be false by default 1`] = `
 </div>
 `;
 
-exports[`List render 1`] = `
+exports[`List > render 1`] = `
 <div
   class="ant-list ant-list-split ant-list-bordered ant-list-something-after-last-item"
 >
