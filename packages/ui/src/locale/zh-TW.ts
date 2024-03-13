@@ -9,6 +9,7 @@ import Login from '../Login/locale/zh-TW';
 import PageContainer from '../PageContainer/locale/zh-TW';
 import { default as Boundary, default as Password } from '../Password/locale/zh-TW';
 import Ranger from '../Ranger/locale/zh-TW';
+import DateRanger from '../DateRanger/locale/zh-TW';
 import TaskGraph from '../TaskGraph/locale/zh-TW';
 import Welcome from '../Welcome/locale/zh-TW';
 import type { Locale } from './index';
@@ -29,4 +30,5 @@ export default {
   Highlight,
   DocDialog,
   BatchOperationBar,
+  DateRanger,
 } as Locale;

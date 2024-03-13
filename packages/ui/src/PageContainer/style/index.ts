@@ -83,7 +83,7 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
       ...token,
       componentCls: `${proComponentsCls}-footer-bar`,
     }) as object),
-  };
+  } as CSSObject;
 };
 
 export default (prefixCls: string) => {

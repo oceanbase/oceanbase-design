@@ -10,6 +10,7 @@ import Login from '../Login/locale/zh-CN';
 import PageContainer from '../PageContainer/locale/zh-CN';
 import { default as Boundary, default as Password } from '../Password/locale/zh-CN';
 import Ranger from '../Ranger/locale/zh-CN';
+import DateRanger from '../DateRanger/locale/zh-CN';
 import SideTip from '../SideTip/locale/zh-CN';
 import TaskGraph from '../TaskGraph/locale/zh-CN';
 import Welcome from '../Welcome/locale/zh-CN';
@@ -33,4 +34,5 @@ export default {
   Highlight,
   FullscreenBox,
   BatchOperationBar,
+  DateRanger,
 } as Locale;
