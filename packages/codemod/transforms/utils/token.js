@@ -27,6 +27,7 @@ const TOKEN_MAP = {
   '#f0f2f5': 'colorBgLayout',
   '#fafafa': 'colorBgLayout',
   '#f7f8fc': 'colorBgLayout',
+  'rgb(250,250,250)': 'colorBgLayout',
   '#ffffff': 'colorBgContainer',
   '#fff': 'colorBgContainer',
   'rgba(0,0,0,0.85)': 'colorText',
