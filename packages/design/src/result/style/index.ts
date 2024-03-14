@@ -10,6 +10,7 @@ export const genResultStyle: GenerateStyle<ResultToken> = (token: ResultToken): 
     [`${componentCls}`]: {
       [`${componentCls}-content`]: {
         padding: token.paddingLG,
+        borderRadius: token.borderRadiusLG,
       },
     },
   };
