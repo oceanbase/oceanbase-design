@@ -12,7 +12,7 @@ const Svg500 = () => (
   >
     <defs>
       <rect
-        id="path-1"
+        id="oceanbase-design-result-500-path-1"
         x="23.4314575"
         y="23.4314575"
         width="113.137085"
@@ -43,9 +43,12 @@ const Svg500 = () => (
             rx="1.20848995"
           ></rect>
         </g>
-        <g id="Clipped" transform="translate(0, 0)">
+        <g transform="translate(0, 0)">
           <mask id="oceanbase-design-result-500-mask-2" fill="white">
-            <use transform="translate(80, 80) rotate(-45) translate(-80, -80)"></use>
+            <use
+              xlinkHref="#oceanbase-design-result-500-path-1"
+              transform="translate(80, 80) rotate(-45) translate(-80, -80)"
+            ></use>
           </mask>
           <g transform="translate(80, 80) rotate(-45) translate(-80, -80)"></g>
           <g mask="url(#oceanbase-design-result-500-mask-2)">
