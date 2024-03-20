@@ -219,8 +219,8 @@ importers:
         specifier: ^5.4.2
         version: 5.4.2
       vanilla-jsoneditor:
-        specifier: ^0.22.0
-        version: 0.22.0(@lezer/common@1.2.1)
+        specifier: ^0.23.0
+        version: 0.23.0(@lezer/common@1.2.1)
       vitest:
         specifier: ^1.3.1
         version: 1.3.1(@types/node@20.11.25)
@@ -24299,8 +24299,8 @@ packages:
     resolution: {integrity: sha512-Wirg6DoCrJpYwMHxkwyvgQ16gr4kgH9zzueHSSSovzQDvlg/XSqpY/stVsI5lz1vqJW1RAtr0Ilyyg1AbokRXA==}
     dev: true
 
-  /vanilla-jsoneditor@0.22.0(@lezer/common@1.2.1):
-    resolution: {integrity: sha512-r6AN3NAWyVFb9pH6iNIa2Q1YiSGai4PGhFN+YnR4OJzXE72hu/Xu/MUbVyGvJxchhPcWj6bIPB1Ox5KSOspmFA==}
+  /vanilla-jsoneditor@0.23.0(@lezer/common@1.2.1):
+    resolution: {integrity: sha512-8gWgvj9xqnlI5M4lXxFN0NUeDsYqT4izh6PeztViRtwaXywH8Z8J0GUWMlnnzWuhvSjnZxlrCP5Yce5V6vwqUA==}
     dependencies:
       '@codemirror/autocomplete': 6.14.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.25.1)(@lezer/common@1.2.1)
       '@codemirror/commands': 6.3.3
