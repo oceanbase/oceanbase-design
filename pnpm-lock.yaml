@@ -15,8 +15,8 @@ importers:
         specifier: ^1.18.4
         version: 1.18.4(react-dom@18.2.0)(react@18.2.0)
       '@ant-design/icons':
-        specifier: ^5.3.1
-        version: 5.3.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^5.3.4
+        version: 5.3.4(react-dom@18.2.0)(react@18.2.0)
       '@babel/cli':
         specifier: ^7.23.9
         version: 7.23.9(@babel/core@7.24.0)
@@ -396,8 +396,8 @@ importers:
         specifier: ^7.0.2
         version: 7.0.2
       '@ant-design/icons':
-        specifier: ^5.3.0
-        version: 5.3.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^5.3.4
+        version: 5.3.4(react-dom@18.2.0)(react@18.2.0)
       '@oceanbase/icons-svg':
         specifier: ^1.0.6
         version: 1.0.6
@@ -661,21 +661,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
-
-  /@ant-design/icons@5.3.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-85zROTJCCApQn0Ee6L9561+Vd7yVKtSWNm2TpmOsYMrumchbzaRK83x1WWHv2VG+Y1ZAaKkDwcnnSPS/eSwNHA==}
-    engines: {node: '>=8'}
-    peerDependencies:
-      react: '>=16.0.0'
-      react-dom: '>=16.0.0'
-    dependencies:
-      '@ant-design/colors': 7.0.2
-      '@ant-design/icons-svg': 4.4.2
-      '@babel/runtime': 7.24.0
-      classnames: 2.5.1
-      rc-util: 5.39.1(react-dom@18.2.0)(react@18.2.0)
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
 
   /@ant-design/icons@5.3.4(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-U5eTSeSFr2V9SeJzYOo5mybAZfsoNuiIA8bvFoZUe+h9LBLs8UwrVaVwcMQC4AhBuojXkLMlmtnIlvUczXXHaQ==}
@@ -8111,7 +8096,7 @@ packages:
     dependencies:
       '@ant-design/colors': 6.0.0
       '@ant-design/cssinjs': 1.18.4(react-dom@18.2.0)(react@18.2.0)
-      '@ant-design/icons': 5.3.1(react-dom@18.2.0)(react@18.2.0)
+      '@ant-design/icons': 5.3.4(react-dom@18.2.0)(react@18.2.0)
       '@arvinxu/layout-kit': 1.4.0(@babel/core@7.24.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       '@babel/runtime': 7.24.0
       '@ctrl/tinycolor': 3.6.1
