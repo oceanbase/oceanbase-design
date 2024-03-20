@@ -39,7 +39,8 @@ const genNestedSizeStyle = (spinDotSize: number, token: SpinToken): CSSObject =>
   const textPaddingTop = (spinDotHight - fontSize) / 2 + 2;
   return {
     // only work for oceanbase indicator
-    [`&${componentCls}-oceanbase`]: {
+    // `& > ${componentCls}-oceanbase` is compatible with double .ant-spin like Table loading
+    [`&${componentCls}-oceanbase, & > ${componentCls}-oceanbase`]: {
       [`${componentCls}-dot`]: {
         marginLeft: dotMarginLeft,
         marginTop: dotMarginTop,

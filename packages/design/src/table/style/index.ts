@@ -162,6 +162,16 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
       },
     },
 
+    // loading style
+    [`${componentCls}-wrapper ${antCls}-spin-blur`]: {
+      [`${componentCls}-tbody`]: {
+        [`${componentCls}-placeholder`]: {
+          // hide empty when Table loading
+          visibility: 'hidden',
+        },
+      },
+    },
+
     // 分页器样式
     [`${componentCls}-wrapper`]: {
       [`${componentCls}-pagination`]: {
