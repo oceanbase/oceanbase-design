@@ -417,8 +417,8 @@ importers:
         specifier: ^2.6.49
         version: 2.6.49(antd@5.15.3)(rc-field-form@1.43.0)(react-dom@18.2.0)(react@18.2.0)
       '@ant-design/pro-layout':
-        specifier: ^7.17.19
-        version: 7.17.19(antd@5.15.3)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^7.17.20
+        version: 7.17.20(antd@5.15.3)(react-dom@18.2.0)(react@18.2.0)
       '@oceanbase/design':
         specifier: workspace:^
         version: link:../design
@@ -850,9 +850,35 @@ packages:
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
     dependencies:
-      '@ant-design/icons': 5.3.1(react-dom@18.2.0)(react@18.2.0)
+      '@ant-design/icons': 5.3.4(react-dom@18.2.0)(react@18.2.0)
       '@ant-design/pro-provider': 2.13.5(antd@5.15.3)(react-dom@18.2.0)(react@18.2.0)
       '@ant-design/pro-utils': 2.15.4(antd@5.15.3)(react-dom@18.2.0)(react@18.2.0)
+      '@babel/runtime': 7.24.0
+      '@umijs/route-utils': 4.0.1
+      '@umijs/use-params': 1.0.9(react@18.2.0)
+      antd: 5.15.3(moment@2.30.1)(react-dom@18.2.0)(react@18.2.0)
+      classnames: 2.5.1
+      lodash.merge: 4.6.2
+      omit.js: 2.0.2
+      path-to-regexp: 2.4.0
+      rc-resize-observer: 1.4.0(react-dom@18.2.0)(react@18.2.0)
+      rc-util: 5.39.1(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      swr: 2.2.5(react@18.2.0)
+      warning: 4.0.3
+    dev: false
+
+  /@ant-design/pro-layout@7.17.20(antd@5.15.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-+5u2BMlVj7QX81iE4FQjvOERMgdNFSOP6ZT87AXMI6sIra3S42HgLDOdaZCcgcQ5lbF3zNqJc9rzPYIXKzOBfQ==}
+    peerDependencies:
+      antd: ^4.24.15 || ^5.11.2
+      react: '>=17.0.0'
+      react-dom: '>=17.0.0'
+    dependencies:
+      '@ant-design/icons': 5.3.4(react-dom@18.2.0)(react@18.2.0)
+      '@ant-design/pro-provider': 2.14.0(antd@5.15.3)(react-dom@18.2.0)(react@18.2.0)
+      '@ant-design/pro-utils': 2.15.5(antd@5.15.3)(react-dom@18.2.0)(react@18.2.0)
       '@babel/runtime': 7.24.0
       '@umijs/route-utils': 4.0.1
       '@umijs/use-params': 1.0.9(react@18.2.0)
@@ -896,6 +922,23 @@ packages:
 
   /@ant-design/pro-provider@2.13.5(antd@5.15.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-ZVmzY2cq4nUvgmAlfgyCAaSZYV2l3n/upIQPXPj8sYcT+N/Pt1CeSVkkgW6By3EqokF6apWdIFU7hZMK2rNhrg==}
+    peerDependencies:
+      antd: ^4.24.15 || ^5.11.2
+      react: '>=17.0.0'
+      react-dom: '>=17.0.0'
+    dependencies:
+      '@ant-design/cssinjs': 1.18.4(react-dom@18.2.0)(react@18.2.0)
+      '@babel/runtime': 7.24.0
+      '@ctrl/tinycolor': 3.6.1
+      antd: 5.15.3(moment@2.30.1)(react-dom@18.2.0)(react@18.2.0)
+      rc-util: 5.39.1(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      swr: 2.2.5(react@18.2.0)
+    dev: false
+
+  /@ant-design/pro-provider@2.14.0(antd@5.15.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-C89hwefeC7OJlLBzPjYS5XbW/t3NAM1KKqPiBeTkr0+KHQE7xjYfh+bi7RcQ7TsHNIYHjd52cEZuEdTJqzyHPg==}
     peerDependencies:
       antd: ^4.24.15 || ^5.11.2
       react: '>=17.0.0'
@@ -966,6 +1009,27 @@ packages:
     dependencies:
       '@ant-design/icons': 5.3.4(react-dom@18.2.0)(react@18.2.0)
       '@ant-design/pro-provider': 2.13.5(antd@5.15.3)(react-dom@18.2.0)(react@18.2.0)
+      '@babel/runtime': 7.24.0
+      antd: 5.15.3(moment@2.30.1)(react-dom@18.2.0)(react@18.2.0)
+      classnames: 2.5.1
+      dayjs: 1.11.10
+      lodash.merge: 4.6.2
+      rc-util: 5.39.1(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      safe-stable-stringify: 2.4.3
+      swr: 2.2.5(react@18.2.0)
+    dev: false
+
+  /@ant-design/pro-utils@2.15.5(antd@5.15.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-352WZhzWRsyRd85R0fIxJgDEl9+vgxIzDxIW7G0/oWpXilxDIUnVVB/U46UM3d1YuR+0PQsKBXJmS1niro8sXA==}
+    peerDependencies:
+      antd: ^4.24.15 || ^5.11.2
+      react: '>=17.0.0'
+      react-dom: '>=17.0.0'
+    dependencies:
+      '@ant-design/icons': 5.3.4(react-dom@18.2.0)(react@18.2.0)
+      '@ant-design/pro-provider': 2.14.0(antd@5.15.3)(react-dom@18.2.0)(react@18.2.0)
       '@babel/runtime': 7.24.0
       antd: 5.15.3(moment@2.30.1)(react-dom@18.2.0)(react@18.2.0)
       classnames: 2.5.1
