@@ -2,6 +2,7 @@ import React from 'react';
 import { Alert, Button, Tooltip } from '@oceanbase/design';
 
 const Demo = () => {
+  const tokenList = ['rgb(0 0 0 / 45%)'];
   return (
     <div>
       <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '1px solid #d9d9d9' }} />
