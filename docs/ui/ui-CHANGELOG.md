@@ -8,6 +8,14 @@ group: 业务组件
 
 ---
 
+## 0.3.0
+
+`2024-03-22`
+
+- 🆕 新增 PageLoading 页面级加载组件。[#497](https://github.com/oceanbase/oceanbase-design/pull/497)
+- 🐞 修复 Password 部分英文文案不正确的问题。[#469](https://github.com/oceanbase/oceanbase-design/pull/469)
+- 💄 优化 PageContainer 加载样式，保证页面内垂直居中。[#497](https://github.com/oceanbase/oceanbase-design/pull/497)
+
 ## 0.2.38
 
 `2024-01-30`
