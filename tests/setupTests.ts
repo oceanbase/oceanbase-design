@@ -1,6 +1,5 @@
 ﻿import '@testing-library/jest-dom';
-import 'jest-canvas-mock';
-import { enableFetchMocks } from 'jest-fetch-mock';
+import createFetchMock from 'vitest-fetch-mock';
 import MockDate from 'mockdate';
 import { TextEncoder, TextDecoder } from 'util';
 import React from 'react';
@@ -11,26 +10,33 @@ import excludeAllWarning from './shared/excludeWarning';
 // To ensure snapshot stable, should disable hashed in test env.
 theme.defaultConfig.hashed = false;
 
-process.env.TZ = 'UTC';
-
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 global.React = React;
 
-ReactDOM.createPortal = jest.fn(modal => modal);
+ReactDOM.createPortal = vi.fn(modal => modal);
 
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useLayoutEffect: jest.requireActual('react').useEffect,
-}));
-
-jest.setTimeout(60000);
+vi.mock('react', async () => {
+  const mockReact = await vi.importActual('react');
+  return {
+    ...mockReact,
+    useLayoutEffect: mockReact.useEffect,
+  };
+});
 
 excludeAllWarning();
 
+const fetchMocker = createFetchMock(vi);
+fetchMocker.enableMocks();
+
 if (typeof window.URL.createObjectURL === 'undefined') {
-  window.URL.createObjectURL = jest.fn();
+  window.URL.createObjectURL = vi.fn();
 }
+
+// Not implemented: window.computedStyle(elt, pseudoElt)
+// ref: https://github.com/NickColley/jest-axe/issues/147#issuecomment-758804533
+const { getComputedStyle } = window;
+window.getComputedStyle = elt => getComputedStyle(elt);
 
 /* eslint-disable global-require */
 if (typeof window !== 'undefined') {
@@ -39,10 +45,10 @@ if (typeof window !== 'undefined') {
     Object.defineProperty(global.window, 'matchMedia', {
       writable: true,
       configurable: true,
-      value: jest.fn(() => ({
+      value: vi.fn(() => ({
         matches: false,
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
       })),
     });
   }
@@ -50,33 +56,31 @@ if (typeof window !== 'undefined') {
     Object.defineProperty(global.window, 'matchMedia', {
       writable: true,
       configurable: true,
-      value: jest.fn(query => ({
+      value: vi.fn(query => ({
         matches: query.includes('max-width'),
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
       })),
     });
   }
   // https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: jest.fn().mockImplementation(query => ({
+    value: vi.fn().mockImplementation(query => ({
       matches: false,
       media: query,
       onchange: null,
-      addListener: jest.fn(), // deprecated
-      removeListener: jest.fn(), // deprecated
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
+      addListener: vi.fn(), // deprecated
+      removeListener: vi.fn(), // deprecated
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
     })),
   });
 }
 
-enableFetchMocks();
-
 Object.defineProperty(window, 'open', {
-  value: jest.fn,
+  value: vi.fn,
 });
 
 const crypto = require('crypto');
@@ -92,16 +96,10 @@ global.requestAnimationFrame =
     return setTimeout(cb, 0);
   };
 
-global.cancelAnimationFrame =
-  global.cancelAnimationFrame ||
-  function cancelAnimationFrame() {
-    return null;
-  };
-
 // browserMocks.js
 export const localStorageMock = (() => {
   let store: any = {
-    umi_locale: 'zh-CN',
+    umi_locale: 'en-US',
   };
 
   return {

@@ -6,6 +6,8 @@ export type BadgeToken = FullToken<'Badge'>;
 
 export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSSObject => {
   const { componentCls } = token;
+  // dot size is larger than antd
+  const dotSize = token.fontSizeLG / 2;
   return {
     [`${componentCls}`]: {
       // inherit color from parent instead of fixed colorText
@@ -14,12 +16,15 @@ export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSS
     [`${componentCls}${componentCls}-status`]: {
       // dot style
       [`${componentCls}-status-dot`]: {
-        width: 8,
-        height: 8,
+        width: dotSize,
+        height: dotSize,
+        [`&${componentCls}-status-default`]: {
+          backgroundColor: token.colorFill,
+        },
       },
       // icon style
       [`${componentCls}-status-icon`]: {
-        fontSize: 12,
+        fontSize: token.fontSizeSM,
         // remove dot style
         backgroundColor: 'transparent',
         ['&::after']: {
@@ -32,7 +37,7 @@ export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSS
           color: token.colorPrimary,
         },
         [`&${componentCls}-status-default`]: {
-          color: token.colorTextPlaceholder,
+          color: token.colorFill,
         },
         [`&${componentCls}-status-error`]: {
           color: token.colorError,

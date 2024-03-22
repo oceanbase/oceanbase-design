@@ -21,7 +21,7 @@ export function isSafeWarning(message: boolean, all = false) {
 }
 
 export function excludeWarning() {
-  const errorSpy = jest.spyOn(console, 'error').mockImplementation((msg, ...rest) => {
+  const errorSpy = vi.spyOn(console, 'error').mockImplementation((msg, ...rest) => {
     if (isSafeWarning(msg)) {
       return;
     }

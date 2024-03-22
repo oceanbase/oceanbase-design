@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { BrowserRouter, useNavigate } from 'react-router-dom';
 import { render } from '@testing-library/react';
-import ConfigProvider from '..';
+import { ConfigProvider } from '@oceanbase/design';
 
 describe('ConfigProvider navigate', () => {
   it('navigate should work', () => {

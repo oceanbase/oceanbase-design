@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Tag } from '@oceanbase/design';
 import type { TagProps } from '@oceanbase/design';
+import { vi } from 'vitest';
 
 const TagTest: React.FC<TagProps> = props => (
   <Tag {...props}>
@@ -16,11 +17,11 @@ const TagTest: React.FC<TagProps> = props => (
 
 describe('Tag', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
   afterEach(() => {
-    jest.useRealTimers();
-    jest.clearAllTimers();
+    vi.useRealTimers();
+    vi.clearAllTimers();
   });
 
   it('default ellipsis', async () => {

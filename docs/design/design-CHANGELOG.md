@@ -8,6 +8,31 @@ group: 基础组件
 
 ---
 
+## 0.3.0
+
+`2024-03-22`
+
+- ⭐️ 去掉所有组件的重置样式，避免被 Tooltip、Popover、Space、Dropdown 等组件包裹时字体大小、颜色被覆盖。[#450](https://github.com/oceanbase/oceanbase-design/pull/450)
+- ⭐️ 组件的样式加载顺序改为 -900，保证自定义样式的优先级高于 antd。[#464](https://github.com/oceanbase/oceanbase-design/pull/464)
+- 🌈 更新中性色板，包括 Design Token 以及 less 主题变量。[#484](https://github.com/oceanbase/oceanbase-design/pull/484)
+- 🔥 新版 Empty 组件 [#465](https://github.com/oceanbase/oceanbase-design/pull/465)
+  - 💄 定制插图、主题和样式，以符合 OceanBase Design 设计规范。
+  - 🆕 新增 `title` 属性，用于设置空状态标题。
+  - 🆕 新增 `steps` 属性，用于设置步骤引导。
+  - 🆕 新增 `layout` 属性，用于设置空状态布局，默认为 vertical。
+  - 🆕 通过 ConfigProvider `renderEmpty` 定制全局组件的空状态。[#467](https://github.com/oceanbase/oceanbase-design/pull/467)
+- 🔥 新版 Result 组件 [#476](https://github.com/oceanbase/oceanbase-design/pull/476)
+  - 💄 定制插图、主题和样式，以符合 OceanBase Design 设计规范。
+  - 🆕 `status` 属性新增 `processing` 枚举值，用于设置进行中的状态。
+- Spin
+  - 💄 更新 Spin 的加载动画，包括灰色和彩色动画。[#512](https://github.com/oceanbase/oceanbase-design/pull/512)
+  - 💄 Spin 的默认加载指示符从彩色动画改为灰色动画。[#491](https://github.com/oceanbase/oceanbase-design/pull/491)
+- Table
+  - 🐞 修复 Table 的 loading 动画没有水平和垂直居中的问题。[#518](https://github.com/oceanbase/oceanbase-design/pull/518)
+  - 💄 Table 处于 `loading` 时隐藏空状态。[#518](https://github.com/oceanbase/oceanbase-design/pull/518)
+- 💄 优化 Badge default 状态的颜色，并更新 default 状态和 warning 状态的图标。[#500](https://github.com/oceanbase/oceanbase-design/pull/500)
+- [Icon] 🆕 新增 `EllipsisCircleFilled` 图标。[#499](https://github.com/oceanbase/oceanbase-design/pull/499)
+
 ## 0.2.37
 
 `2024-01-30`

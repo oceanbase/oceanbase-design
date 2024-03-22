@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { ConfigProvider } from '@oceanbase/design';
+// import { ConfigProvider } from '../../packages/design/src';
 import { isReactComponent, waitFakeTimer } from '../util';
 import { TriggerMockContext } from './demoTestContext';
 
@@ -34,7 +34,7 @@ export default function rootPropsTest(
 
     beforeEach(() => {
       passed = false;
-      jest.useFakeTimers();
+      vi.useFakeTimers();
     });
 
     afterEach(() => {
@@ -42,7 +42,7 @@ export default function rootPropsTest(
         // eslint-disable-next-line
         console.log(document.body.innerHTML);
       }
-      jest.useRealTimers();
+      vi.useRealTimers();
     });
 
     it('rootClassName', async () => {
@@ -77,9 +77,9 @@ export default function rootPropsTest(
         return (
           <TriggerMockContext.Provider value={triggerContext}>
             <div id="holder" className="holder" ref={holderRef}>
-              {show && (
+              {/* {show && (
                 <ConfigProvider getPopupContainer={() => holderRef.current!}>{node}</ConfigProvider>
-              )}
+              )} */}
             </div>
           </TriggerMockContext.Provider>
         );

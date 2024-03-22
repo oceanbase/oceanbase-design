@@ -36,8 +36,8 @@
   },
   "dependencies": {
     "@ant-design/colors": "^7.0.2",
-    "@ant-design/icons": "^5.2.6",
-    "@oceanbase/icons-svg": "^1.0.5"
+    "@ant-design/icons": "^5.3.4",
+    "@oceanbase/icons-svg": "^1.0.6"
   },
   "peerDependencies": {
     "react": ">=16.9.0",

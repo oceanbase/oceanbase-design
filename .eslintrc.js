@@ -14,6 +14,7 @@ module.exports = {
     'no-unused-expressions': 'off',
     'jsx-a11y/mouse-events-have-key-events': 'off',
     'react/require-default-props': 'off',
+    'react/self-closing-comp': 'off',
     'no-shadow': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'global-require': 'warn',

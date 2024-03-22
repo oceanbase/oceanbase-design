@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Descriptions contentProps should work for Descriptions.Item 1`] = `
+exports[`Descriptions > contentProps should work for Descriptions.Item 1`] = `
 <div
   class="ant-descriptions"
 >
@@ -51,7 +51,7 @@ exports[`Descriptions contentProps should work for Descriptions.Item 1`] = `
 </div>
 `;
 
-exports[`Descriptions contentProps should work for items 1`] = `
+exports[`Descriptions > contentProps should work for items 1`] = `
 <div
   class="ant-descriptions"
 >
@@ -102,7 +102,7 @@ exports[`Descriptions contentProps should work for items 1`] = `
 </div>
 `;
 
-exports[`Descriptions remove colon for vertical layout by default for Descriptions.Item 1`] = `
+exports[`Descriptions > remove colon for vertical layout by default for Descriptions.Item 1`] = `
 <div
   class="ant-descriptions"
 >
@@ -302,7 +302,7 @@ exports[`Descriptions remove colon for vertical layout by default for Descriptio
 </div>
 `;
 
-exports[`Descriptions remove colon for vertical layout by default for items 1`] = `
+exports[`Descriptions > remove colon for vertical layout by default for items 1`] = `
 <div
   class="ant-descriptions"
 >
@@ -502,7 +502,7 @@ exports[`Descriptions remove colon for vertical layout by default for items 1`] 
 </div>
 `;
 
-exports[`Descriptions render for Descriptions.Item 1`] = `
+exports[`Descriptions > render for Descriptions.Item 1`] = `
 <div
   class="ant-descriptions"
 >
@@ -649,7 +649,7 @@ exports[`Descriptions render for Descriptions.Item 1`] = `
 </div>
 `;
 
-exports[`Descriptions render for items 1`] = `
+exports[`Descriptions > render for items 1`] = `
 <div
   class="ant-descriptions"
 >

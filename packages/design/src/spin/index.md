@@ -16,7 +16,7 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本用法" description="一个简单的 loading 状态"></code>
 <code src="./demo/size.tsx" title="各种大小" description="小的用于文本加载，默认用于卡片容器级加载，大的用于**页面级**加载"></code>
-<code src="./demo/gray.tsx" title="灰色的加载指示符"></code>
+<code src="./demo/colored.tsx" title="彩色的加载指示符"></code>
 <code src="./demo/inside.tsx" title="放入一个容器中"></code>
 <code src="./demo/nested.tsx" title="卡片加载中" description="可以直接把内容内嵌到 `Spin` 中，将现有容器变为加载状态"></code>
 <code src="./demo/tip.tsx" title="自定义描述文案"></code>
@@ -24,8 +24,8 @@ demo:
 
 ## API
 
-| 参数 | 说明                                         | 类型    | 默认值 | 版本 |
-| :--- | :------------------------------------------- | :------ | :----- | :--- |
-| gray | 是否为灰色的加载指示符，仅针对默认指示符生效 | boolean | false  | -    |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| :-- | :-- | :-- | :-- | :-- |
+| gray | 是否为灰色的加载指示符，仅针对默认指示符生效，关闭后为彩色的加载指示符 | boolean | true | - |
 
 - 更多 API 详见 antd Spin 文档: https://ant.design/components/spin-cn
