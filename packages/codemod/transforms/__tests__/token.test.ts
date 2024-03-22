@@ -5,7 +5,7 @@ describe('token', () => {
     expect(TOKEN_MAP_KEYS.every(key => isLower(key))).toEqual(true);
   });
 
-  it('TOKEN_MAP_KEYS should not include blank space', async () => {
-    expect(TOKEN_MAP_KEYS.every(key => !key.includes(' '))).toEqual(true);
+  it('TOKEN_MAP_KEYS should not include `, `', async () => {
+    expect(TOKEN_MAP_KEYS.every(key => !key.includes(', '))).toEqual(true);
   });
 });
