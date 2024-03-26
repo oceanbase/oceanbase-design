@@ -107,10 +107,16 @@ const Ranger = (props: DateRangerProps) => {
     moment.isMoment(value?.[0]) ||
     moment.isMoment(value?.[1]);
 
-  const [innerValue, setInnerValue] = useState<RangeValue>(value ?? defaultValue);
+  const defaultRangeName =
+    value || defaultValue ? CUSTOMIZE : defaultQuickValue ?? selects?.[0]?.name;
+  const [rangeName, setRangeName] = useState(defaultRangeName);
 
-  const [rangeName, setRangeName] = useState(
-    value || defaultValue ? CUSTOMIZE : defaultQuickValue ?? selects?.[0]?.name
+  const [innerValue, setInnerValue] = useState<RangeValue>(
+    value ??
+      defaultValue ??
+      (selects
+        .find(item => item.name === defaultRangeName)
+        ?.range(isMoment ? moment() : dayjs()) as RangeValue)
   );
 
   const isStepMode = mode === 'step';
@@ -152,6 +158,7 @@ const Ranger = (props: DateRangerProps) => {
     setOpen(false);
     setTooltipOpen(false);
   };
+
   const handleNameChange = (name: string) => {
     if (name !== CUSTOMIZE) {
       closeTooltip();
@@ -351,8 +358,6 @@ const Ranger = (props: DateRangerProps) => {
             }}
             menu={{
               onClick: ({ key, domEvent }) => {
-                handleNameChange(key);
-
                 if (key === CUSTOMIZE && isStepMode) {
                   // updateState 的修改会慢于 openChange 的判断，所以修改 refState.current.step 让 Dropdown 不要关闭
                   refState.current.step = STEP_CUSTOMIZE;
@@ -362,6 +367,7 @@ const Ranger = (props: DateRangerProps) => {
                 const selected = NEAR_TIME_LIST.find(_item => _item.name === key);
                 // 存在快捷选项切换为极简模式
                 if (selected?.range) {
+                  handleNameChange(key);
                   setIsPlay(true);
                   rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
                 }
@@ -459,6 +465,7 @@ const Ranger = (props: DateRangerProps) => {
                 className={`${prefix}-picker`}
                 style={{
                   pointerEvents: 'none',
+                  border: 0,
                 }}
                 disabledDate={pastOnly ? disabledFuture : disabledDate}
                 format={v => {
@@ -468,7 +475,6 @@ const Ranger = (props: DateRangerProps) => {
                 // @ts-ignore
                 value={innerValue}
                 onChange={datePickerChange}
-                // showTime={true}
                 allowClear={false}
                 size={size}
                 // 透传 props 到 antd Ranger

@@ -11,7 +11,7 @@ import { Button, Col, Divider, Form, Input, Row, Space, TimePicker } from '@ocea
 import { noop } from 'lodash';
 import moment from 'moment';
 import dayjs from 'dayjs';
-import { useUpdate, useMount } from 'ahooks';
+import { useUpdate } from 'ahooks';
 
 type RangeValue = [Moment, Moment] | [Dayjs, Dayjs];
 
@@ -36,17 +36,16 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   const [defaultS, defaultE] = defaultValue;
   const [calendarValue, setCalendarValue] = React.useState(defaultValue);
   const [internalHoverValues, setInternalHoverValues] = React.useState(null);
+  const [activeIndex, setActiveIndex] = React.useState(0);
 
   const hoverValues = React.useMemo(() => {
     return internalHoverValues || calendarValue;
   }, [internalHoverValues, calendarValue]);
 
-  const [activeIndex, setActiveIndex] = React.useState(0);
-
   // ======================== Change ========================
   const fillCalendarValue = (date, index: number) =>
     // Trigger change only when date changed
-    fillIndex(hoverValues, index, date);
+    fillIndex(calendarValue, index, date);
 
   function fillIndex<T extends any[]>(ori: T, index: number, value: T[number]): T {
     const clone = [...ori] as T;
@@ -58,7 +57,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     setInternalHoverValues(date ? fillCalendarValue(date, activeIndex) : null);
   };
 
-  const formatValues = [...hoverValues]
+  const formatValues = [...calendarValue]
     .sort((a, b) => {
       return a?.valueOf() - b?.valueOf();
     })
@@ -67,13 +66,13 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     });
 
   const [form] = Form.useForm();
+  const [s, e] = formatValues;
   useEffect(() => {
-    const [s, e] = formatValues;
     form.setFieldsValue({
       startDate: s,
       endDate: e,
     });
-  }, [...formatValues]);
+  }, [s, e]);
 
   const defaultTime = useMemo(() => {
     return isMoment ? moment() : dayjs();
