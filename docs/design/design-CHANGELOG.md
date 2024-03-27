@@ -18,7 +18,7 @@ group: 基础组件
 - 🔥 新版 Empty 组件 [#465](https://github.com/oceanbase/oceanbase-design/pull/465)
   - 💄 定制插图、主题和样式，以符合 OceanBase Design 设计规范。
   - 🆕 新增 `title` 属性，用于设置空状态标题。
-  - 🆕 新增 `steps` 属性，用于设置步骤引导。
+  - 🆕 新增 `steps` 属性，用于设置步骤提示。
   - 🆕 新增 `layout` 属性，用于设置空状态布局，默认为 vertical。
   - 🆕 通过 ConfigProvider `renderEmpty` 定制全局组件的空状态。[#467](https://github.com/oceanbase/oceanbase-design/pull/467)
 - 🔥 新版 Result 组件 [#476](https://github.com/oceanbase/oceanbase-design/pull/476)
