@@ -12,7 +12,14 @@ const Modal = ({ prefixCls: customizePrefixCls, className, ...restProps }: Modal
   const { wrapSSR } = useStyle(prefixCls);
   const modalCls = classNames(className);
 
-  return wrapSSR(<AntModal prefixCls={customizePrefixCls} className={modalCls} {...restProps} />);
+  return wrapSSR(
+    <AntModal
+      destroyOnClose={true}
+      prefixCls={customizePrefixCls}
+      className={modalCls}
+      {...restProps}
+    />
+  );
 };
 
 // 替换 Modal 上的静态方法，支持消费 ConfigProvider 配置
