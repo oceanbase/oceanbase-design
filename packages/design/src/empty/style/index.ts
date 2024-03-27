@@ -80,9 +80,6 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      [`${componentCls}-image`]: {
-        height: 112,
-      },
       [`${componentCls}-description`]: {
         marginLeft: token.marginXXL,
         textAlign: 'left',
