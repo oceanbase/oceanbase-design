@@ -1,4 +1,13 @@
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, DatePicker, Dropdown, Radio, Space, Tooltip, theme } from '@oceanbase/design';
+import type { TooltipProps } from '@oceanbase/design';
+import {
+  LeftOutlined,
+  PauseOutlined,
+  CaretRightOutlined,
+  RightOutlined,
+  ZoomOutOutlined,
+} from '@oceanbase/icons';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
@@ -6,10 +15,7 @@ import { findIndex, isNil, noop, omit } from 'lodash';
 import type { Moment } from 'moment';
 import moment from 'moment';
 import classNames from 'classnames';
-import { useInterval } from 'ahooks';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
 import LocaleWrapper from '../locale/LocaleWrapper';
-
 import { getPrefix } from '../_util';
 import {
   CUSTOMIZE,
@@ -24,17 +30,10 @@ import {
   YEAR_DATE_TIME_FORMAT,
   LAST_3_DAYS,
 } from './constant';
-import './index.less';
-import zhCN from './locale/zh-CN';
 import type { RangeOption } from './typing';
-import {
-  LeftOutlined,
-  PauseOutlined,
-  CaretRightOutlined,
-  RightOutlined,
-  ZoomOutOutlined,
-} from '@oceanbase/icons';
 import InternalPickerPanel from './PickerPanel';
+import zhCN from './locale/zh-CN';
+import './index.less';
 
 export type RangeName = 'customize' | string;
 
@@ -53,6 +52,7 @@ export interface DateRangerProps
   // ui 相关
   hasRewind?: boolean;
   hasPlay?: boolean;
+  hasNow?: boolean;
   hasForward?: boolean;
   hasZoomOut?: boolean;
   /** 是否只允许选择过去时间 */
@@ -63,6 +63,7 @@ export interface DateRangerProps
   defaultValue?: RangeValue;
   size?: 'small' | 'large' | 'middle';
   mode?: 'normal' | 'step';
+  tooltipProps?: TooltipProps;
 }
 
 const prefix = getPrefix('date-ranger');
@@ -85,6 +86,7 @@ const Ranger = (props: DateRangerProps) => {
     defaultQuickValue,
     hasRewind = true,
     hasPlay = false,
+    hasNow = true,
     hasForward = true,
     hasZoomOut = false,
     pastOnly = false,
@@ -95,6 +97,7 @@ const Ranger = (props: DateRangerProps) => {
     //固定 rangeName
     stickRangeName = false,
     mode = 'normal',
+    tooltipProps,
     ...rest
   } = props;
 
@@ -402,6 +405,7 @@ const Ranger = (props: DateRangerProps) => {
                           }}
                           overlayInnerStyle={{
                             background: '#fff',
+                            maxHeight: 'none',
                           }}
                           title={
                             <InternalPickerPanel
@@ -424,6 +428,7 @@ const Ranger = (props: DateRangerProps) => {
                               }}
                             />
                           }
+                          {...tooltipProps}
                         >
                           <Space size={8} style={isPlay ? {} : { width: 310 }}>
                             <span className={`${prefix}-label`}>{item.rangeLabel}</span>
@@ -509,7 +514,7 @@ const Ranger = (props: DateRangerProps) => {
               <LeftOutlined />
             </Radio.Button>
           )}
-          {hasPlay && (
+          {/* {hasPlay && (
             <Radio.Button
               value={'play'}
               style={{ paddingInline: 8 }}
@@ -520,7 +525,7 @@ const Ranger = (props: DateRangerProps) => {
             >
               {isPlay ? <PauseOutlined /> : <CaretRightOutlined />}
             </Radio.Button>
-          )}
+          )} */}
           {hasForward && (
             <Radio.Button
               value="stepForward"
@@ -545,14 +550,16 @@ const Ranger = (props: DateRangerProps) => {
           )}
         </Radio.Group>
       </Space>
-      <Button
-        style={{ paddingInline: 8 }}
-        onClick={() => {
-          setNow();
-        }}
-      >
-        当前
-      </Button>
+      {hasNow && (
+        <Button
+          style={{ paddingInline: 8 }}
+          onClick={() => {
+            setNow();
+          }}
+        >
+          当前
+        </Button>
+      )}
       {hasZoomOut && (
         <Button
           disabled={!nextRangeItem}

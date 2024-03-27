@@ -3,20 +3,19 @@
 @prefix: ob-date-ranger;
 
 .@{prefix} {
-  .@{prefix}-picker {
-    padding-left: 0px;
-    border: 0px;
-
-    input {
-      text-align: center;
-    }
-  }
-
   .@{prefix}-wrapper {
     border: 1px solid @colorBorder;
     border-radius: 4px 0 0 4px;
     box-sizing: border-box;
-    min-width: 160px;
+    // FIXED: 存在不生效情况
+    .@{prefix}-picker {
+      padding-left: 0px;
+      border: 0px;
+      pointer-events: none;
+      input {
+        text-align: center;
+      }
+    }
   }
 
   .@{prefix}-play {
