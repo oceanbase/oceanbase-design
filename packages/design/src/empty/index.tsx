@@ -40,7 +40,6 @@ const Empty: CompoundedComponent = props => {
     children,
     prefixCls: customizePrefixCls,
     className,
-    style,
     ...restProps
   } = props;
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
