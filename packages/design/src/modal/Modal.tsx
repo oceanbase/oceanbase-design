@@ -6,7 +6,7 @@ import ConfigProvider from '../config-provider';
 import { modal } from '../static-function';
 import useStyle from './style';
 
-const Modal = ({ prefixCls: customizePrefixCls, className, ...restProps }: ModalProps) => {
+const Modal = ({ footer, prefixCls: customizePrefixCls, className, ...restProps }: ModalProps) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('modal', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
@@ -15,6 +15,9 @@ const Modal = ({ prefixCls: customizePrefixCls, className, ...restProps }: Modal
   return wrapSSR(
     <AntModal
       destroyOnClose={true}
+      // convert false to null to hide .ant-modal-footer dom
+      // ref: https://github.com/ant-design/ant-design/blob/master/components/modal/Modal.tsx#L105
+      footer={footer === false ? null : footer}
       prefixCls={customizePrefixCls}
       className={modalCls}
       {...restProps}
