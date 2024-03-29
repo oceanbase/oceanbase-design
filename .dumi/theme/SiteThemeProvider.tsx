@@ -12,9 +12,7 @@ import useSiteToken from '../hooks/useSiteToken';
 
 const SiteThemeProvider: FC<
   ThemeProviderProps<any> & {
-    theme: ThemeConfig & {
-      isDark?: boolean;
-    };
+    theme: ThemeConfig;
   }
 > = ({ children, theme, ...rest }) => {
   const { getPrefixCls, iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
