@@ -28,6 +28,8 @@ export * from 'antd/es/config-provider';
 
 export interface ThemeConfig extends AntThemeConfig {
   isDark?: boolean;
+  /* use custom font or not */
+  customFont?: boolean;
 }
 
 export type SpinConfig = ComponentStyleConfig & {
@@ -73,8 +75,6 @@ const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
   hideOnSinglePage: false,
 });
 
-const { defaultSeed } = themeConfig;
-
 export type ConfigProviderType = React.FC<ConfigProviderProps> & {
   ExtendedConfigContext: typeof ExtendedConfigContext;
 } & {
@@ -103,6 +103,7 @@ const ConfigProvider: ConfigProviderType = ({
     React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
   const mergedTheme = merge(parentContext.theme, theme);
   const currentTheme = mergedTheme?.isDark ? darkTheme : defaultTheme;
+  const { token } = themeConfig.useToken();
 
   // inherit from parent StyleProvider
   const parentStyleContext = React.useContext<StyleContextProps>(StyleContext);
@@ -126,16 +127,13 @@ const ConfigProvider: ConfigProviderType = ({
         parentContext.tabs,
         tabs
       )}
-      theme={merge(
-        {
-          token: {
-            ...defaultSeed,
-            ...currentTheme.token,
-          },
-          components: currentTheme.components,
+      theme={merge(currentTheme, mergedTheme, {
+        token: {
+          fontFamily: mergedTheme.customFont
+            ? `'Source Sans Pro', ${token.fontFamily}`
+            : token.fontFamily,
         },
-        mergedTheme
-      )}
+      })}
       renderEmpty={
         parentContext.renderEmpty ||
         (componentName => <DefaultRenderEmpty componentName={componentName} />)

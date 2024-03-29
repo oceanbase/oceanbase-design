@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { render } from '@testing-library/react';
 import { ConfigProvider, useToken } from '@oceanbase/design';
 import defaultTheme from '../../theme/default';
