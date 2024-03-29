@@ -8,6 +8,13 @@ group: 业务组件
 
 ---
 
+## 0.3.1
+
+`2024-03-29`
+
+- 🌐 国际化:
+  - 优化 Ranger 的 `en-US` 翻译。[#533](https://github.com/oceanbase/oceanbase-design/pull/533)
+
 ## 0.3.0
 
 `2024-03-22`
