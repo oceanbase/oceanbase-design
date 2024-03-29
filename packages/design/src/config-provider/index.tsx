@@ -89,6 +89,7 @@ const ConfigProvider: ConfigProviderType = ({
   theme,
   navigate,
   hideOnSinglePage,
+  form,
   spin,
   table,
   tabs,
@@ -109,6 +110,13 @@ const ConfigProvider: ConfigProviderType = ({
 
   return (
     <AntConfigProvider
+      form={merge(
+        {
+          requiredMark: 'optional',
+        },
+        parentContext.form,
+        form
+      )}
       spin={merge(parentContext.spin, spin)}
       table={merge(parentContext.table, table)}
       tabs={merge(

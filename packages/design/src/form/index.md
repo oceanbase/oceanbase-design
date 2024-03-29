@@ -19,6 +19,8 @@ nav:
 
 <code src="./demo/hideRequiredMark.tsx" title="hideRequiredMark" debug></code>
 
+<code src="./demo/pro-form.tsx" title="ProForm" debug></code>
+
 <code src="./demo/form-item-tooltip.tsx" title="配置提示信息"></code>
 
 ## API
