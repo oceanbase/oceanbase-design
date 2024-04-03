@@ -6,6 +6,7 @@ import Password from './Password';
 import TextArea from './TextArea';
 
 export * from 'antd/es/input';
+export type { InputProps, InputLocale } from './Input';
 
 type CompoundedComponent = React.ForwardRefExoticComponent<
   InputProps & React.RefAttributes<InputRef>

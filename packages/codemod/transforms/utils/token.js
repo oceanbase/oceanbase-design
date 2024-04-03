@@ -111,7 +111,7 @@ const TOKEN_MAP = {
   '#f8fafe': 'colorFillQuaternary',
 };
 
-const TOKEN_MAP_KEYS = Object.keys(TOKEN_MAP);
+const TOKEN_MAP_KEYS = Object.keys(TOKEN_MAP).map(key => formatValue(key));
 
 function isLower(str) {
   return toLower(str) === str;
