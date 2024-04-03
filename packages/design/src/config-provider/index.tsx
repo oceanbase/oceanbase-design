@@ -52,6 +52,7 @@ export interface ConfigConsumerProps extends AntConfigConsumerProps {
 
 export interface ConfigProviderProps extends AntConfigProviderProps {
   theme?: ThemeConfig;
+  locale?: Locale;
   // set global route navigate function
   // for react-router-dom v5: history.push
   // for react-router-dom v6: navigate
@@ -87,6 +88,7 @@ export type ConfigProviderType = React.FC<ConfigProviderProps> & {
 const ConfigProvider: ConfigProviderType = ({
   children,
   theme,
+  locale,
   navigate,
   hideOnSinglePage,
   form,
@@ -111,6 +113,7 @@ const ConfigProvider: ConfigProviderType = ({
 
   return (
     <AntConfigProvider
+      locale={merge(parentContext.locale, locale)}
       form={merge(
         {
           requiredMark: 'optional',

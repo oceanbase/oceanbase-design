@@ -9,6 +9,7 @@ nav:
 - 🌈 定制全局主题和空状态，以符合 OceanBase Design 设计规范。
 - 🆕 默认内嵌 [App 包裹组件](https://ant.design/components/app-cn)，支持 message, notification 和 Modal 等静态方法消费 ConfigProvider 配置。
 - 🆕 新增 `theme.customFont` 属性，用于开启 `Source Sans Pro` 定制字体以提升展示效果，仅支持线上应用和英文环境。
+- 🆕 新增 `locale.Input.placeholder` 属性，用于配置 Input 的默认 `placeholder`。
 - 🆕 新增 `table.selectionColumnWidth` 属性，用于配置表格的展开列宽度。
 - 🆕 新增 `injectStaticFunction` 属性，用于配置 `message`, `notification` 和 `Modal` 静态方法是否可以消费全局配置，默认开启。
 
@@ -48,10 +49,11 @@ export default App;
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
-| theme.customFont | 用于开启 `Source Sans Pro` 定制字体以提升展示效果，仅支持线上应用和英文环境 | boolean | undefined | 0.3.1 |
-| spin | Spin 全局配置 | `{ indicator?: ReactNode; className?: string; style?: React.CSSProperties; }` | undefined | - |
-| table | Table 全局配置 | `{ selectionColumnWidth?: width; className?: string; style?: React.CSSProperties; }` | undefined | - |
+| theme.customFont | 用于开启 `Source Sans Pro` 定制字体以提升展示效果，仅支持线上应用和英文环境 | boolean | - | 0.3.1 |
+| locale.Input.placeholder | 用于配置 Input 的默认 `placeholder` | string | - | 0.3.2 |
+| spin | Spin 全局配置 | `{ indicator?: ReactNode; className?: string; style?: React.CSSProperties; }` | - | - |
+| table | Table 全局配置 | `{ selectionColumnWidth?: width; className?: string; style?: React.CSSProperties; }` | - | - |
 | injectStaticFunction | 用于配置 `message`, `notification` 和 `Modal` 静态方法是否可以消费全局配置 <Alert type="warning" showIcon={true} message="📢 注意: 如果有多个 ConfigProvider，建议在最顶层的 ConfigProvider 开启 `injectStaticFunction` 即可，其他 ConfigProvider 则需要关闭该配置，否则静态方法可能会有冲突。"></Alert> | boolean | true | - |
-| styleProviderProps | [StyleProvider 配置](https://github.com/ant-design/cssinjs#styleprovider)，一般用于配置 `hashPriority` 和 `transformers` 属性实现样式降级 | [StyleProviderProps](https://github.com/ant-design/cssinjs/blob/master/src/StyleContext.tsx#L88) | undefined | - |
+| styleProviderProps | [StyleProvider 配置](https://github.com/ant-design/cssinjs#styleprovider)，一般用于配置 `hashPriority` 和 `transformers` 属性实现样式降级 | [StyleProviderProps](https://github.com/ant-design/cssinjs/blob/master/src/StyleContext.tsx#L88) | - | - |
 
 - 更多 API 详见 antd ConfigProvider 文档: https://ant.design/components/config-provider-cn

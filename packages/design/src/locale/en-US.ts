@@ -3,6 +3,13 @@ import type { Locale } from '.';
 
 export default {
   ...enUS,
+  Drawer: {
+    okText: 'OK',
+    cancelText: 'Cancel',
+  },
+  Input: {
+    placeholder: 'Please enter',
+  },
   Table: {
     ...enUS.Table,
     batchOperationBar: {
@@ -12,9 +19,5 @@ export default {
       collapse: 'Collapse',
       open: 'Open',
     },
-  },
-  Drawer: {
-    okText: 'OK',
-    cancelText: 'Cancel',
   },
 } as Locale;
