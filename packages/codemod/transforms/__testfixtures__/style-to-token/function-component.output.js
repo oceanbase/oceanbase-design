@@ -3,7 +3,7 @@ import { Alert, Button, theme, Tooltip } from '@oceanbase/design';
 
 const Demo = () => {
   const { token } = theme.useToken();
-  const tokenList = [token.colorTextTertiary];
+  const tokenList = [token.colorTextTertiary, token.colorInfo, token.colorBgLayout];
   return (
     (<div>
       <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBorder}` }} />
