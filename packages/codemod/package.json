@@ -23,6 +23,7 @@
     "build": "father build"
   },
   "dependencies": {
+    "@oceanbase/design": "workspace:^",
     "chalk": "^3.0.0",
     "command-exists": "^1.2.9",
     "execa": "^5.1.1",
