@@ -26,7 +26,7 @@ const placeholderExpect = (container: HTMLElement, placeholder?: string) => {
   );
 };
 
-describe('Form', () => {
+describe('Input placeholder', () => {
   it('default placeholder should be correct', () => {
     const { container, asFragment } = render(<InputTest />);
     placeholderExpect(container, 'Please enter');
