@@ -1,5 +1,14 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Input placeholder > ConfigProvider locale.Input.placeholder should be priority to ConfigProvider locale.global.inputPlaceholder 1`] = `
+<input
+  class="ant-input ant-input-outlined"
+  placeholder="Input global placeholder"
+  type="text"
+  value=""
+/>
+`;
+
 exports[`Input placeholder > ConfigProvider locale.Input.placeholder should work 1`] = `
 <input
   class="ant-input ant-input-outlined"
@@ -9,7 +18,25 @@ exports[`Input placeholder > ConfigProvider locale.Input.placeholder should work
 />
 `;
 
+exports[`Input placeholder > ConfigProvider locale.global.inputPlaceholder should work 1`] = `
+<input
+  class="ant-input ant-input-outlined"
+  placeholder="global placeholder"
+  type="text"
+  value=""
+/>
+`;
+
 exports[`Input placeholder > Input placeholder should be priority to ConfigProvider locale.Input.placeholder 1`] = `
+<input
+  class="ant-input ant-input-outlined"
+  placeholder="custom placeholder"
+  type="text"
+  value=""
+/>
+`;
+
+exports[`Input placeholder > Input placeholder should be priority to ConfigProvider locale.global.inputPlaceholder 1`] = `
 <input
   class="ant-input ant-input-outlined"
   placeholder="custom placeholder"

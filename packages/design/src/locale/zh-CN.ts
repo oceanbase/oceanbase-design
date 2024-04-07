@@ -3,12 +3,13 @@ import type { Locale } from '.';
 
 export default {
   ...zhCN,
+  global: {
+    ...zhCN.global,
+    inputPlaceholder: '请输入',
+  },
   Drawer: {
     okText: '确定',
     cancelText: '取消',
-  },
-  Input: {
-    placeholder: '请输入',
   },
   Table: {
     ...zhCN.Table,

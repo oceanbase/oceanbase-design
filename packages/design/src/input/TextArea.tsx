@@ -16,6 +16,7 @@ const TextArea = forwardRef<InputRef, TextAreaProps>(
   ({ locale: customLocale, ...restProps }, ref) => {
     const { locale: contextLocale } = useContext<ConfigConsumerProps>(ConfigProvider.ConfigContext);
     const inputLocale: InputLocale = {
+      placeholder: contextLocale?.global?.inputPlaceholder || defaultLocale.global.inputPlaceholder,
       ...defaultLocale.Input,
       ...contextLocale?.Input,
       ...customLocale,

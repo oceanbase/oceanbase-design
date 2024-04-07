@@ -72,4 +72,58 @@ describe('Input placeholder', () => {
     placeholderExpect(container, 'custom placeholder');
     expect(asFragment().firstChild).toMatchSnapshot();
   });
+
+  it('ConfigProvider locale.global.inputPlaceholder should work', () => {
+    const { container, asFragment } = render(
+      <ConfigProvider
+        locale={{
+          locale: 'en',
+          global: {
+            inputPlaceholder: 'global placeholder',
+          },
+        }}
+      >
+        <InputTest />
+      </ConfigProvider>
+    );
+    placeholderExpect(container, 'global placeholder');
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
+
+  it('Input placeholder should be priority to ConfigProvider locale.global.inputPlaceholder', () => {
+    const { container, asFragment } = render(
+      <ConfigProvider
+        locale={{
+          locale: 'en',
+          global: {
+            inputPlaceholder: 'global placeholder',
+          },
+        }}
+      >
+        <InputTest placeholder="custom placeholder" />
+      </ConfigProvider>
+    );
+    placeholderExpect(container, 'custom placeholder');
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
+
+  it('ConfigProvider locale.Input.placeholder should be priority to ConfigProvider locale.global.inputPlaceholder', () => {
+    const { container, asFragment } = render(
+      <ConfigProvider
+        locale={{
+          locale: 'en',
+          global: {
+            inputPlaceholder: 'global placeholder',
+          },
+          Input: {
+            placeholder: 'Input global placeholder',
+          },
+        }}
+      >
+        <InputTest />
+      </ConfigProvider>
+    );
+    placeholderExpect(container, 'Input global placeholder');
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
 });

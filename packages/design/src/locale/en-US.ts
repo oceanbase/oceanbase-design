@@ -3,12 +3,13 @@ import type { Locale } from '.';
 
 export default {
   ...enUS,
+  global: {
+    ...enUS.global,
+    inputPlaceholder: 'Please enter',
+  },
   Drawer: {
     okText: 'OK',
     cancelText: 'Cancel',
-  },
-  Input: {
-    placeholder: 'Please enter',
   },
   Table: {
     ...enUS.Table,
