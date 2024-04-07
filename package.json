@@ -110,7 +110,7 @@
     "react-router-dom": "^6.22.3",
     "runscript": "^1.6.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.2",
+    "typescript": "^5.4.4",
     "vanilla-jsoneditor": "^0.23.0",
     "vitest": "^1.4.0",
     "vitest-canvas-mock": "^0.3.3",
