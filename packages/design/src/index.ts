@@ -65,6 +65,9 @@ export type { InputProps } from './input';
 export { default as Select } from './select';
 export type { SelectProps } from './select';
 
+export { default as TreeSelect } from './tree-select';
+export type { TreeSelectProps } from './tree-select';
+
 export { default as Tooltip } from './tooltip';
 export type { TooltipProps } from './tooltip';
 

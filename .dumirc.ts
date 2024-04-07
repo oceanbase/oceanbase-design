@@ -138,6 +138,7 @@ export default defineConfig({
             { title: 'Input 输入框', link: '/components/input' },
             { title: 'InputNumber 数字输入框', link: '/components/input-number' },
             { title: 'Select 选择器', link: '/components/select' },
+            { title: 'TreeSelect 树选择', link: '/components/tree-select' },
           ],
         },
         {
