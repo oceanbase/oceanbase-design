@@ -62,6 +62,9 @@ export type { TagProps } from './tag';
 export { default as Input } from './input';
 export type { InputProps } from './input';
 
+export { default as InputNumber } from './input-number';
+export type { InputNumberProps } from './input-number';
+
 export { default as Select } from './select';
 export type { SelectProps } from './select';
 
