@@ -100,7 +100,7 @@ exports[`ConfigProvider form > ConfigProvider form.requiredMark should be \`opti
             class="ant-form-item-optional"
             title=""
           >
-            （可选）
+            (optional)
           </span>
         </label>
       </div>

@@ -1,12 +1,14 @@
 import type { Locale as AntLocale } from 'antd/es/locale';
-import type { TableLocale } from '../table';
 import type { DrawerLocale } from '../drawer';
+import type { InputLocale } from '../input';
+import type { TableLocale } from '../table';
 
 export * from 'antd/es/locale';
 
 export interface Locale extends AntLocale {
-  Table?: TableLocale;
   Drawer?: DrawerLocale;
+  Input?: InputLocale;
+  Table?: TableLocale;
 }
 
 export { default as useLocale } from './useLocale';

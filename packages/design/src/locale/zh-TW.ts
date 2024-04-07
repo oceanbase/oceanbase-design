@@ -3,6 +3,13 @@ import type { Locale } from '.';
 
 export default {
   ...zhTW,
+  Drawer: {
+    okText: '确定',
+    cancelText: '取消',
+  },
+  Input: {
+    placeholder: '請輸入',
+  },
   Table: {
     ...zhTW.Table,
     batchOperationBar: {
@@ -12,9 +19,5 @@ export default {
       collapse: '收起',
       open: '展開',
     },
-  },
-  Drawer: {
-    okText: '确定',
-    cancelText: '取消',
   },
 } as Locale;
