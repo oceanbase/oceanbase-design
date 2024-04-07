@@ -3,6 +3,8 @@
   "app.theme.switch.compact": "Compact theme",
   "app.theme.switch.motion.on": "Motion On",
   "app.theme.switch.motion.off": "Motion Off",
+  "app.theme.switch.font.default": "Default Font",
+  "app.theme.switch.font.custom": "Custom Font",
   "app.header.menu.more": "More",
   "app.header.menu.pro.components": "Ant Design Pro Components",
   "app.header.menu.charts": "Ant Design Charts",

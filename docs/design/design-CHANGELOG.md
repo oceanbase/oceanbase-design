@@ -8,6 +8,21 @@ group: 基础组件
 
 ---
 
+## 0.3.1
+
+`2024-03-29`
+
+- ConfigProvider
+  - 🆕 新增 `theme.customFont` 属性，用于开启 `Source Sans Pro` 定制字体以提升展示效果，仅支持线上应用和英文环境。[#536](https://github.com/oceanbase/oceanbase-design/pull/536)
+  - 🐞 ConfigProvider `form.requiredMark` 属性的默认值改为 `optional`，以修复可选样式在 ProForm 没有默认开启的问题。[#535](https://github.com/oceanbase/oceanbase-design/pull/535)
+- Empty
+  - ⭐️ Empty 新增 `PRESENTED_IMAGE_GUIDE` 内置图片，用于功能开通等引导类场景。[#532](https://github.com/oceanbase/oceanbase-design/pull/532)
+  - 🐞 修复 Empty `style` 属性不生效的问题。[#529](https://github.com/oceanbase/oceanbase-design/pull/529)
+- 📢 Form `preserve` 属性的默认值改为 `false`。[#534](https://github.com/oceanbase/oceanbase-design/pull/534)
+- Modal
+  - 📢 Modal `destroyOnClose` 属性的默认值改为 `true`。[#530](https://github.com/oceanbase/oceanbase-design/pull/530)
+  - 🐞 修复 Modal `footer` 为 `false` 时未去掉页脚 DOM 的问题。[#531](https://github.com/oceanbase/oceanbase-design/pull/531)
+
 ## 0.3.0
 
 `2024-03-22`
@@ -18,7 +33,7 @@ group: 基础组件
 - 🔥 新版 Empty 组件 [#465](https://github.com/oceanbase/oceanbase-design/pull/465)
   - 💄 定制插图、主题和样式，以符合 OceanBase Design 设计规范。
   - 🆕 新增 `title` 属性，用于设置空状态标题。
-  - 🆕 新增 `steps` 属性，用于设置步骤引导。
+  - 🆕 新增 `steps` 属性，用于设置步骤提示。
   - 🆕 新增 `layout` 属性，用于设置空状态布局，默认为 vertical。
   - 🆕 通过 ConfigProvider `renderEmpty` 定制全局组件的空状态。[#467](https://github.com/oceanbase/oceanbase-design/pull/467)
 - 🔥 新版 Result 组件 [#476](https://github.com/oceanbase/oceanbase-design/pull/476)

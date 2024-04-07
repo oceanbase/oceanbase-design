@@ -124,6 +124,7 @@ const GlobalLayout: React.FC = () => {
           theme={{
             algorithm: getAlgorithm(theme),
             isDark: theme.includes('dark'),
+            customFont: theme.includes('custom-font'),
             token: {
               motion: !theme.includes('motion-off'),
             },

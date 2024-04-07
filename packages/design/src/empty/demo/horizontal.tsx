@@ -5,7 +5,7 @@ export default () => {
   return (
     <Empty
       layout="horizontal"
-      image="https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*KMWoRLCIATsAAAAAAAAAAAAADmfOAQ/original"
+      image={Empty.PRESENTED_IMAGE_GUIDE}
       title="欢迎体验 OB 智能诊断"
       description={
         <>

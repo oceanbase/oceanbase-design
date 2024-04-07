@@ -30,10 +30,11 @@ const Form: CompoundedComponent = ({ hideRequiredMark, ...restProps }) => {
         hideRequiredMark
           ? false
           : contextForm?.requiredMark !== undefined
-          ? contextForm?.requiredMark
-          : 'optional'
+            ? contextForm?.requiredMark
+            : 'optional'
       }
       hideRequiredMark={hideRequiredMark}
+      preserve={false}
       {...restProps}
     />
   );

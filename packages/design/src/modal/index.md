@@ -7,6 +7,7 @@ nav:
 
 - 🔥 完全继承 antd [Modal](https://ant.design/components/modal-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
+- 📢 `destroyOnClose` 属性的默认值为 `true`。
 - 🆕 新增 `Modal.Progress` 组件，可用于异步任务或耗时较长的场景。
 - 🆕 `Modal.method()` 静态方法，支持消费 `ConfigProvider` 全局配置。
 
@@ -23,7 +24,11 @@ nav:
 
 ### Modal
 
-- 详见 antd Modal 文档: https://ant.design/components/modal-cn#api
+| 参数           | 说明                        | 类型    | 默认值 | 版本  |
+| :------------- | :-------------------------- | :------ | :----- | :---- |
+| destroyOnClose | 关闭时销毁 Modal 里的子元素 | boolean | true   | 0.3.1 |
+
+- 更多 API 详见 antd Modal 文档: https://ant.design/components/modal-cn#api
 
 ### Modal.Progress
 
@@ -31,6 +36,7 @@ nav:
 | :-- | :-- | :-- | :-- | :-- |
 | width | 对话框宽度 | string \| number | 480 | - |
 | maskClosable | 点击蒙层是否允许关闭 | boolean | false | - |
+| destroyOnClose | 关闭时销毁 Modal 里的子元素 | boolean | true | 0.3.1 |
 | title | 标题 | ReactNode | - | - |
 | loading | 是否加载中 | boolean | false | - |
 | progress | 进度条属性 | [ProgressProps](https://ant-design.antgroup.com/components/progress-cn#api) | `{ type: 'circle', size: 150  }` | - |

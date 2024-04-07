@@ -24,7 +24,7 @@ export { default as Card } from './card';
 export type { CardProps } from './card';
 
 export { default as ConfigProvider } from './config-provider';
-export type { ConfigProviderProps } from './config-provider';
+export type { ConfigProviderProps, ConfigConsumerProps, ThemeConfig } from './config-provider';
 
 export { default as Descriptions } from './descriptions';
 export type {
