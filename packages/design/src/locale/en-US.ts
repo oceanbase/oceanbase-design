@@ -7,6 +7,10 @@ export default {
     ...enUS.global,
     inputPlaceholder: 'Please enter',
   },
+  Pagination: {
+    ...enUS.Pagination,
+    total: '${total} in Total',
+  },
   Drawer: {
     okText: 'OK',
     cancelText: 'Cancel',
