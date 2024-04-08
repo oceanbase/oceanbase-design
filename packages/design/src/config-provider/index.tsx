@@ -6,6 +6,7 @@ import type {
   ThemeConfig as AntThemeConfig,
 } from 'antd/es/config-provider';
 import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
+import type { PaginationConfig } from 'antd/es/pagination';
 import type { SpinIndicator } from 'antd/es/spin';
 import { StyleProvider } from '@ant-design/cssinjs';
 import type { StyleProviderProps } from '@ant-design/cssinjs';
@@ -58,6 +59,7 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   // for react-router-dom v6: navigate
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
+  pagination?: PaginationConfig;
   spin?: SpinConfig;
   table?: TableConfig;
   // inject static function to consume ConfigProvider

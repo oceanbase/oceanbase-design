@@ -7,6 +7,10 @@ export default {
     ...zhCN.global,
     inputPlaceholder: '请输入',
   },
+  Pagination: {
+    ...zhCN.Pagination,
+    total: '共 ${total} 条',
+  },
   Drawer: {
     okText: '确定',
     cancelText: '取消',

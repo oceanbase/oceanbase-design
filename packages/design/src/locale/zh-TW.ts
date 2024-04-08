@@ -7,6 +7,10 @@ export default {
     ...zhTW.global,
     inputPlaceholder: '請輸入',
   },
+  Pagination: {
+    ...zhTW.Pagination,
+    total: '共 ${total} 條',
+  },
   Drawer: {
     okText: '确定',
     cancelText: '取消',

@@ -190,6 +190,10 @@ export default defineConfig({
           ],
         },
         {
+          title: 'ProComponents 组件',
+          children: [{ title: 'ProTable 高级表格', link: '/biz-components/pro-table' }],
+        },
+        {
           title: '可视化',
           children: [
             { title: 'TaskGraph 任务流程图', link: '/biz-components/task-graph' },
