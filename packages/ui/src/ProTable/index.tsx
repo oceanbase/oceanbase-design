@@ -3,7 +3,6 @@ import { ProTable as AntProTable } from '@ant-design/pro-components';
 import type { ProTableProps } from '@ant-design/pro-components';
 import classNames from 'classnames';
 import { ConfigProvider, Table } from '@oceanbase/design';
-import LocaleWrapper from '../locale/LocaleWrapper';
 import useStyle from './style';
 
 export { ProTableProps };
