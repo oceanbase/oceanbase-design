@@ -1,6 +1,6 @@
 import { TreeSelect as AntTreeSelect } from 'antd';
 import type { TreeSelectProps as AntTreeSelectProps } from 'antd/es/tree-select';
-import { TreeNode as AntTreeNode } from 'rc-tree-select';
+import type { TreeNode as AntTreeNode } from 'rc-tree-select';
 import type { BaseSelectRef } from 'rc-select';
 import classNames from 'classnames';
 import React, { useContext } from 'react';

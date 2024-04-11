@@ -15,7 +15,9 @@ demo:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本使用"></code>
-<code src="./demo/custom-tag-render.tsx" title="自定义标签样式" description="允许自定义选择标签的样式"></code>
+<code src="./demo/multiple.tsx" title="多选"></code>
 <code src="./demo/tags.tsx" title="标签" description="标签式选择，支持输入任意内容"></code>
+<code src="./demo/variant.tsx" title="多种展示形式" description="支持 `outlined`、`filled` 和 `borderless` 三种形态。"></code>
+<code src="./demo/custom-tag-render.tsx" title="自定义标签样式" description="允许自定义选择标签的样式"></code>
 
 - 详见 antd Select 文档: https://ant.design/components/select-cn/

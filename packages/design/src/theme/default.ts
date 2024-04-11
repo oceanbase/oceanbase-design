@@ -1,6 +1,9 @@
 import type { ThemeConfig } from 'antd';
 import { formatTheme } from './util/format';
 
+// Calculated by colorBorder and getWeakenBorderColor()
+const tagColorBorder = '#cdd5e466';
+
 const defaultTheme: ThemeConfig = {
   token: {
     colorPrimaryBg: '#EAF1FF',
@@ -80,6 +83,15 @@ const defaultTheme: ThemeConfig = {
   components: {
     InputNumber: {
       handleVisible: true,
+    },
+    Select: {
+      // work for all multiple select component, including Select, TreeSelect and Cascader and so on
+      multipleItemBg: '#F8FAFE',
+      multipleItemBorderColor: tagColorBorder,
+      multipleItemBorderColorDisabled: tagColorBorder,
+    },
+    Tag: {
+      colorBorder: tagColorBorder,
     },
     Table: {
       cellPaddingBlock: 12,
