@@ -17,14 +17,18 @@ export default (api: IApi) => {
       {
         theme: 'default',
         algorithm: defaultAlgorithm,
+        token: defaultTheme.token,
       },
       {
         theme: 'dark',
         algorithm: darkAlgorithm,
+        token: darkTheme.token,
       },
       {
         theme: 'compact',
         algorithm: compactAlgorithm,
+        // 使用 defaultTheme token
+        token: defaultTheme.token,
       },
     ];
 
@@ -33,13 +37,13 @@ export default (api: IApi) => {
         item.theme === 'dark'
           ? {
               // 对于暗色主题，优先级: 算法生成的 Token > 自定义 token
-              ...darkTheme.token,
+              ...item.token,
               ...item.algorithm(defaultSeed),
             }
           : {
               // 对于非暗色主题，优先级: 自定义 token > 算法生成的 Token
               ...item.algorithm(defaultSeed),
-              ...defaultTheme.token,
+              ...item.token,
             };
       mapToken = {
         ...mapToken,
@@ -48,6 +52,15 @@ export default (api: IApi) => {
         green: mapToken.colorSuccess,
         yellow: mapToken.colorWarning,
         red: mapToken.colorError,
+        // override token
+        override:
+          item.theme === 'dark'
+            ? {}
+            : // 对于非暗色主题，需要覆盖部分 Alias Token 的值
+              {
+                boxShadow: item.token.boxShadow,
+                boxShadowSecondary: item.token.boxShadow,
+              },
       };
       const aliasToken = formatToken(mapToken);
 
