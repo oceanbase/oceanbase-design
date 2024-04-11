@@ -28,10 +28,9 @@ const genTagPresetStatusStyle = (
 };
 
 const genPresetStyle = (token: TagToken) =>
-  genPresetColor(token, (colorKey, { textColor, lightBorderColor }) => {
+  genPresetColor(token, (colorKey, { lightBorderColor }) => {
     return {
       [`${token.componentCls}${token.componentCls}-${colorKey}`]: {
-        color: textColor,
         borderColor: getTagBorderColor(lightBorderColor),
       },
     };
