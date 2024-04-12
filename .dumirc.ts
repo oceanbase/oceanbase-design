@@ -192,7 +192,10 @@ export default defineConfig({
         },
         {
           title: 'ProComponents 组件',
-          children: [{ title: 'ProTable 高级表格', link: '/biz-components/pro-table' }],
+          children: [
+            { title: 'ProTable 高级表格', link: '/biz-components/pro-table' },
+            { title: 'LightFilter 轻量筛选', link: '/biz-components/light-filter' },
+          ],
         },
         {
           title: '可视化',

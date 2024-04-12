@@ -36,7 +36,6 @@
   "dependencies": {
     "@ant-design/cssinjs": "^1.19.1",
     "@ant-design/pro-components": "^2.7.0",
-    "@ant-design/pro-layout": "^7.19.0",
     "@oceanbase/design": "workspace:^",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
@@ -58,6 +57,8 @@
     "screenfull": "^6.0.2"
   },
   "devDependencies": {
+    "@ant-design/pro-form": "^2.25.1",
+    "@ant-design/pro-layout": "^7.19.0",
     "@antv/g6": "3.4.10"
   },
   "peerDependencies": {

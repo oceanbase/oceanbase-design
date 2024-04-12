@@ -64,6 +64,9 @@ export type { FooterToolbarProps } from './FooterToolbar';
 export { default as ProTable } from './ProTable';
 export type { ProTableProps } from './ProTable';
 
+export { default as LightFilter } from './LightFilter';
+export type { LightFilterProps } from './LightFilter';
+
 export { default as Password } from './Password';
 export type { PasswordProps } from './Password';
 
