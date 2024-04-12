@@ -41,8 +41,6 @@ const Line = forwardRef<unknown, LineConfig>(
         // type 为 time 时需要关闭自动美化，否则 X 轴两侧会留白
         // issue: https://github.com/antvis/G2Plot/issues/1951
         nice: xAxis?.type === 'time' ? false : undefined,
-        // 非阶梯折线图，并且点数 >= 14，x 方向展示 7 个刻度线和网格
-        tickCount: !stepType && data?.length >= 14 ? 7 : undefined,
         ...xAxis,
         // x 方向增加虚线网格
         grid:

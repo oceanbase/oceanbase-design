@@ -18,6 +18,9 @@ export default () => {
     data,
     xField: 'Date',
     yField: 'scales',
+    xAxis: {
+      type: 'timeCat',
+    },
   };
   return <Line {...config} />;
 };

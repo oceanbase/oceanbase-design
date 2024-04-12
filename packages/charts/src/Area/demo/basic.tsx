@@ -18,6 +18,9 @@ export default () => {
     data,
     xField: 'timePeriod',
     yField: 'value',
+    xAxis: {
+      tickCount: 7,
+    },
   };
   return <Area {...config} />;
 };

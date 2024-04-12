@@ -264,12 +264,12 @@ export default defineConfig({
               link: '/charts/histogram',
             },
             {
-              title: 'Pie 饼图&环图',
-              link: '/charts/pie',
-            },
-            {
               title: 'DualAxes 双轴图',
               link: '/charts/dual-axes',
+            },
+            {
+              title: 'Pie 饼图&环图',
+              link: '/charts/pie',
             },
             {
               title: 'Gauge 仪表盘',

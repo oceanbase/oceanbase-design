@@ -19,6 +19,9 @@ export default () => {
     xField: 'date',
     yField: 'value',
     seriesField: 'country',
+    xAxis: {
+      tickCount: 7,
+    },
   };
   return <Area {...config} />;
 };
