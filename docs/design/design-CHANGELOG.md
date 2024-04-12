@@ -8,6 +8,23 @@ group: 基础组件
 
 ---
 
+## 0.3.2
+
+`2024-04-12`
+
+- 📢 Input `placeholder` 默认为 `请输入`。[#540](https://github.com/oceanbase/oceanbase-design/pull/540)
+- 📢 InputNumber `placeholder` 默认为 `请输入`。[#548](https://github.com/oceanbase/oceanbase-design/pull/548)
+- 📢 Select `placeholder` 默认为 `请选择`。[#546](https://github.com/oceanbase/oceanbase-design/pull/546)
+- 📢 TreeSelect `placeholder` 默认为 `请选择`。[#547](https://github.com/oceanbase/oceanbase-design/pull/547)
+- ConfigProvider
+  - 🆕 ConfigProvider 新增 `locale.Input.placeholder` 属性，用于配置 Input 的默认 placeholder。[#540](https://github.com/oceanbase/oceanbase-design/pull/540)
+  - 🆕 ConfigProvider 新增 `locale.global.inputPlaceholder` 和 `locale.InputNumber.placeholder` 属性，用于配置 InputNumber 的默认 placeholder。[#548](https://github.com/oceanbase/oceanbase-design/pull/548)
+  - 🆕 ConfigProvider 新增 `locale.Select.placeholder` 属性，用于配置 Select 的默认 placeholder。[#546](https://github.com/oceanbase/oceanbase-design/pull/546)
+  - 🆕 ConfigProvider 新增 `locale.TreeSelect.placeholder` 属性，用于配置 Select 的默认 `placeholder`。[#547](https://github.com/oceanbase/oceanbase-design/pull/547)
+- 🐞 修复主题 Token `boxShadow` 和 `boxShadowSecondary` 通过静态 token 对象和 less 变量访问时值不正确的问题。[#552](https://github.com/oceanbase/oceanbase-design/pull/552)
+- 💄 优化 Select、TreeSelect 和 Cascader 多选项的背景色和边框色，以对齐设计规范。[#553](https://github.com/oceanbase/oceanbase-design/pull/553)
+- 💄 Table 分页器配置默认改为 `{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '50', '100'], showTotal: total => \`共 ${total} 条\` }`。
+
 ## 0.3.1
 
 `2024-03-29`
