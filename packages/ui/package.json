@@ -34,6 +34,7 @@
     "build": "NODE_OPTIONS=--max_old_space_size=4096 father build"
   },
   "dependencies": {
+    "@antv/g6": "3.4.10",
     "@ant-design/cssinjs": "^1.19.1",
     "@ant-design/pro-components": "^2.7.0",
     "@oceanbase/design": "workspace:^",
@@ -58,11 +59,9 @@
   },
   "devDependencies": {
     "@ant-design/pro-form": "^2.25.1",
-    "@ant-design/pro-layout": "^7.19.0",
-    "@antv/g6": "3.4.10"
+    "@ant-design/pro-layout": "^7.19.0"
   },
   "peerDependencies": {
-    "@antv/g6": "3.4.10",
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
   }
