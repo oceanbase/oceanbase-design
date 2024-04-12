@@ -1,6 +1,6 @@
 import React from 'react';
 import { Bar } from '@oceanbase/charts';
-import { Col, Row } from '@oceanbase/design';
+import type { BarConfig } from '@oceanbase/charts';
 
 export default () => {
   const data = [
@@ -110,25 +110,13 @@ export default () => {
       value: 628,
     },
   ];
-  const config = {
+  const config: BarConfig = {
+    data,
     xField: 'value',
     yField: 'year',
     seriesField: 'country',
     isPercent: true,
     isStack: true,
   };
-  return (
-    <Row gutter={200}>
-      <Col span={12}>
-        <Bar height={200} data={data} {...config} />
-      </Col>
-      <Col span={12}>
-        <Bar
-          height={200}
-          data={data.filter(item => ['1750', '1800'].includes(item.year))}
-          {...config}
-        />
-      </Col>
-    </Row>
-  );
+  return <Bar data={data} {...config} />;
 };

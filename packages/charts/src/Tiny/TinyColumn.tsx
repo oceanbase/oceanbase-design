@@ -21,8 +21,6 @@ const TinyColumn = forwardRef<unknown, TinyColumnConfig>(
     const newConfig: TinyColumnConfig = {
       height,
       appendPadding: label ? [16, 0, 0, 0] : 0,
-      maxColumnWidth: themeConfig.columnWidth,
-      minColumnWidth: themeConfig.columnWidth,
       columnStyle: {
         radius: [2, 2, 0, 0],
         ...columnStyle,

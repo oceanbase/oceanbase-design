@@ -1,7 +1,6 @@
 import React from 'react';
 import { Column } from '@oceanbase/charts';
 import type { ColumnConfig } from '@oceanbase/charts';
-import { Col, Row } from '@oceanbase/design';
 
 export default () => {
   const data = [
@@ -47,14 +46,5 @@ export default () => {
       position: 'top',
     },
   };
-  return (
-    <Row gutter={200}>
-      <Col span={12}>
-        <Column height={200} {...config} />
-      </Col>
-      <Col span={12}>
-        <Column height={200} {...config} data={data.slice(0, 2)} />
-      </Col>
-    </Row>
-  );
+  return <Column {...config} />;
 };

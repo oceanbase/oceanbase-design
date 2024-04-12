@@ -1,6 +1,6 @@
 import React from 'react';
 import { Column } from '@oceanbase/charts';
-import { Col, Row } from '@oceanbase/design';
+import type { ColumnConfig } from '@oceanbase/charts';
 
 export default () => {
   const data = [
@@ -55,24 +55,12 @@ export default () => {
       value: 100,
     },
   ];
-  const config = {
+  const config: ColumnConfig = {
+    data,
     isGroup: true,
     xField: 'label',
     yField: 'value',
     seriesField: 'type',
   };
-  return (
-    <Row gutter={200}>
-      <Col span={12}>
-        <Column height={250} data={data} {...config} />
-      </Col>
-      <Col span={12}>
-        <Column
-          height={250}
-          data={data.filter(item => ['Mon.', 'Tues.'].includes(item.label))}
-          {...config}
-        />
-      </Col>
-    </Row>
-  );
+  return <Column {...config} />;
 };

@@ -48,8 +48,6 @@ const Column = forwardRef<unknown, ColumnConfig>(
       isGroup,
       isRange,
       seriesField,
-      maxColumnWidth: themeConfig.columnWidth,
-      minColumnWidth: themeConfig.columnWidth,
       // 普通柱状图 label 会展示在顶部，需要留出一定空间，否则 label 会被遮挡
       appendPadding: isStack || isGroup || isRange ? 0 : [16, 0, 0, 0],
       // 分组柱状图组内柱子间距，仅分组柱状图生效
