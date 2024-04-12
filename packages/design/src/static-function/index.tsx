@@ -18,7 +18,11 @@ const { defaultAlgorithm, defaultSeed, useToken } = theme;
 const mapToken = {
   ...defaultAlgorithm(defaultSeed),
   ...defaultTheme.token,
-  override: {},
+  // 需要覆盖部分 Alias Token 的值
+  override: {
+    boxShadow: defaultTheme.token.boxShadow,
+    boxShadowSecondary: defaultTheme.token.boxShadow,
+  },
 };
 let token = formatToken(mapToken);
 

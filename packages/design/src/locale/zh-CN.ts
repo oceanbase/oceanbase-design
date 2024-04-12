@@ -3,6 +3,18 @@ import type { Locale } from '.';
 
 export default {
   ...zhCN,
+  global: {
+    ...zhCN.global,
+    inputPlaceholder: '请输入',
+  },
+  Pagination: {
+    ...zhCN.Pagination,
+    total: '共 ${total} 条',
+  },
+  Drawer: {
+    okText: '确定',
+    cancelText: '取消',
+  },
   Table: {
     ...zhCN.Table,
     batchOperationBar: {
@@ -12,9 +24,5 @@ export default {
       collapse: '收起',
       open: '展开',
     },
-  },
-  Drawer: {
-    okText: '确定',
-    cancelText: '取消',
   },
 } as Locale;

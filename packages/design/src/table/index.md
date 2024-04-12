@@ -46,6 +46,7 @@ nav:
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
+| pagination | 分页配置 | ReactNode | {} | - |
 | cancelText | 选择表格中 取消 按钮文案 | ReactNode | - | - |
 | collapseText | 选择表格中 收起 按钮文案 | ReactNode | - | - |
 | openText | 选择表格中 展开 按钮文案 | ReactNode | - | - |

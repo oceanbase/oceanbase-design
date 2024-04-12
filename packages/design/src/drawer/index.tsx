@@ -53,10 +53,14 @@ const Drawer: CompoundedComponent = ({
   prefixCls: customizePrefixCls,
   ...restProps
 }) => {
-  const { locale: contextLocale = defaultLocale } = React.useContext<ConfigConsumerProps>(
+  const { locale: contextLocale } = React.useContext<ConfigConsumerProps>(
     ConfigProvider.ConfigContext
   );
-  const drawerLocale: DrawerLocale = { ...contextLocale?.Drawer, ...customLocale };
+  const drawerLocale: DrawerLocale = {
+    ...defaultLocale.Drawer,
+    ...contextLocale?.Drawer,
+    ...customLocale,
+  };
 
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('drawer', customizePrefixCls);

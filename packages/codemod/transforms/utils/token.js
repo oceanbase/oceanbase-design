@@ -1,6 +1,36 @@
-const { toLower } = require('lodash');
+const { isString, fromPairs, toLower } = require('lodash');
+const { default: defaultTheme } = require('@oceanbase/design/lib/theme/default');
+
+const token = defaultTheme.token;
+
+const tokenMap = fromPairs(
+  Object.keys(token)
+    .filter(key =>
+      // filter token by token key
+      key.startsWith('color')
+    )
+    .filter(
+      key =>
+        // filter token by token value
+        isString(token[key]) && !!token[key]
+    )
+    .map(key => {
+      return [token[key], key];
+    })
+    // sort by token value and token key length
+    .sort((a, b) => {
+      if (a[0] > b[0]) {
+        return 1;
+      } else if (a[0] < b[0]) {
+        return -1;
+      }
+      return a[1]?.length > b[1]?.length ? -1 : a[1]?.length < b[1]?.length ? 1 : 0;
+    })
+);
 
 const TOKEN_MAP = {
+  // obui 3.x style => token
+  ...tokenMap,
   // antd style => token
   '#1677ff': 'colorInfo',
   '#1890ff': 'colorInfo',
@@ -51,8 +81,7 @@ const TOKEN_MAP = {
   'rgba(0,0,0,0.04)': 'colorBgLayout',
   '#f5f6fa': 'colorBgLayout',
   '#edeff2': 'colorBgLayout',
-  // obui style => token
-  '#006aff': 'colorInfo',
+  // obui legacy style => token
   '#086fff': 'colorInfo',
   'rgba(24,144,255,0.1)': 'colorInfoBg',
   'rgba(95,149,255,0.10)': 'colorInfoBg',
@@ -82,7 +111,7 @@ const TOKEN_MAP = {
   '#f8fafe': 'colorFillQuaternary',
 };
 
-const TOKEN_MAP_KEYS = Object.keys(TOKEN_MAP);
+const TOKEN_MAP_KEYS = Object.keys(TOKEN_MAP).map(key => formatValue(key));
 
 function isLower(str) {
   return toLower(str) === str;

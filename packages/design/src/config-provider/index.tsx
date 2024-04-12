@@ -6,6 +6,7 @@ import type {
   ThemeConfig as AntThemeConfig,
 } from 'antd/es/config-provider';
 import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
+import type { PaginationConfig } from 'antd/es/pagination';
 import type { SpinIndicator } from 'antd/es/spin';
 import { StyleProvider } from '@ant-design/cssinjs';
 import type { StyleProviderProps } from '@ant-design/cssinjs';
@@ -52,11 +53,13 @@ export interface ConfigConsumerProps extends AntConfigConsumerProps {
 
 export interface ConfigProviderProps extends AntConfigProviderProps {
   theme?: ThemeConfig;
+  locale?: Locale;
   // set global route navigate function
   // for react-router-dom v5: history.push
   // for react-router-dom v6: navigate
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
+  pagination?: PaginationConfig;
   spin?: SpinConfig;
   table?: TableConfig;
   // inject static function to consume ConfigProvider
@@ -87,6 +90,7 @@ export type ConfigProviderType = React.FC<ConfigProviderProps> & {
 const ConfigProvider: ConfigProviderType = ({
   children,
   theme,
+  locale,
   navigate,
   hideOnSinglePage,
   form,
@@ -111,6 +115,7 @@ const ConfigProvider: ConfigProviderType = ({
 
   return (
     <AntConfigProvider
+      locale={merge(parentContext.locale, locale)}
       form={merge(
         {
           requiredMark: 'optional',

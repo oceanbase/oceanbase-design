@@ -134,9 +134,12 @@ export default defineConfig({
         {
           title: '数据录入',
           children: [
+            { title: 'Cascader 级联选择', link: '/components/cascader' },
             { title: 'Form 表单', link: '/components/form' },
+            { title: 'Input 输入框', link: '/components/input' },
             { title: 'InputNumber 数字输入框', link: '/components/input-number' },
             { title: 'Select 选择器', link: '/components/select' },
+            { title: 'TreeSelect 树选择', link: '/components/tree-select' },
           ],
         },
         {
@@ -185,6 +188,13 @@ export default defineConfig({
             { title: 'Login 登录页', link: '/biz-components/login' },
             // { title: 'NavMenu', link: '/biz-components/nav-menu' },
             { title: 'Welcome 欢迎页', link: '/biz-components/welcome' },
+          ],
+        },
+        {
+          title: 'ProComponents 组件',
+          children: [
+            { title: 'ProTable 高级表格', link: '/biz-components/pro-table' },
+            { title: 'LightFilter 轻量筛选', link: '/biz-components/light-filter' },
           ],
         },
         {
@@ -254,12 +264,12 @@ export default defineConfig({
               link: '/charts/histogram',
             },
             {
-              title: 'Pie 饼图&环图',
-              link: '/charts/pie',
-            },
-            {
               title: 'DualAxes 双轴图',
               link: '/charts/dual-axes',
+            },
+            {
+              title: 'Pie 饼图&环图',
+              link: '/charts/pie',
             },
             {
               title: 'Gauge 仪表盘',

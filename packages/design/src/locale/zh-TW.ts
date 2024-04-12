@@ -3,6 +3,18 @@ import type { Locale } from '.';
 
 export default {
   ...zhTW,
+  global: {
+    ...zhTW.global,
+    inputPlaceholder: '請輸入',
+  },
+  Pagination: {
+    ...zhTW.Pagination,
+    total: '共 ${total} 條',
+  },
+  Drawer: {
+    okText: '确定',
+    cancelText: '取消',
+  },
   Table: {
     ...zhTW.Table,
     batchOperationBar: {
@@ -12,9 +24,5 @@ export default {
       collapse: '收起',
       open: '展開',
     },
-  },
-  Drawer: {
-    okText: '确定',
-    cancelText: '取消',
   },
 } as Locale;

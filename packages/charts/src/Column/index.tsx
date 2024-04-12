@@ -48,8 +48,6 @@ const Column = forwardRef<unknown, ColumnConfig>(
       isGroup,
       isRange,
       seriesField,
-      maxColumnWidth: themeConfig.columnWidth,
-      minColumnWidth: themeConfig.columnWidth,
       // 普通柱状图 label 会展示在顶部，需要留出一定空间，否则 label 会被遮挡
       appendPadding: isStack || isGroup || isRange ? 0 : [16, 0, 0, 0],
       // 分组柱状图组内柱子间距，仅分组柱状图生效
@@ -83,8 +81,6 @@ const Column = forwardRef<unknown, ColumnConfig>(
         // type 为 time 时需要关闭自动美化，否则 X 轴两侧会留白
         // issue: https://github.com/antvis/G2Plot/issues/1951
         nice: xAxis?.type === 'time' ? false : undefined,
-        // 点数 >= 14 时，x 方向展示 7 个刻度线和网格
-        tickCount: data?.length >= 14 ? 7 : undefined,
         ...xAxis,
         // x 方向增加虚线网格
         grid:
