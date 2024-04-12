@@ -114,8 +114,6 @@ const DualAxes = forwardRef<unknown, DualAxesConfig>(
           // 堆叠柱状图中最后一段对应的值
           const lastStackValue = stackValues?.[0];
           defaultGeometryOption = {
-            maxColumnWidth: themeConfig.columnWidth,
-            minColumnWidth: themeConfig.columnWidth,
             columnStyle: datum => {
               return {
                 radius:
@@ -123,12 +121,12 @@ const DualAxes = forwardRef<unknown, DualAxesConfig>(
                   isRange
                     ? 2
                     : !isStack ||
-                      (isStack &&
-                        seriesField &&
-                        // 堆叠柱状图仅最后一段末端展示 2px 圆角
-                        datum[seriesField] === lastStackValue)
-                    ? [2, 2, 0, 0]
-                    : [],
+                        (isStack &&
+                          seriesField &&
+                          // 堆叠柱状图仅最后一段末端展示 2px 圆角
+                          datum[seriesField] === lastStackValue)
+                      ? [2, 2, 0, 0]
+                      : [],
               };
             },
           };

@@ -95,11 +95,7 @@ const lightTheme = {
   semanticRedGradient: 'l(270) 0:rgba(229,54,59,0) 1:rgba(229,54,59,0.2)',
   semanticDarkRedGradient: 'l(270) 0:rgba(137,39,63,0) 1:rgba(137,39,63,0.2)',
   semanticGrayGradient: 'l(270) 0:rgba(171,184,213,0) 1:rgba(171,184,213,0.2)',
-  // 条形宽度
-  barWidth: 12,
   barBackgroundColor: AXIS_LINE_COLOR,
-  // 柱子宽度
-  columnWidth: 16,
   styleSheet: {
     /** 默认颜色 */
     brandColor: COLORS_10[0],
