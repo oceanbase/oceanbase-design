@@ -8,6 +8,16 @@ group: 业务组件
 
 ---
 
+## 0.3.2
+
+`2024-04-12`
+
+- 💄 优化 LightFilter 圆角、内间距、背景色等样式，以对齐设计规范。[#554](https://github.com/oceanbase/oceanbase-design/pull/554)
+- ProTable [#549](https://github.com/oceanbase/oceanbase-design/pull/549)
+  - 🐞 修复 ProTable 没有继承 Table 样式的问题。
+  - 🐞 修复 ProTable 查询表单带有 `requiredMark` 可选样式的问题。
+  - 💄 ProTable 分页器配置默认改为 `{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '50', '100'], showTotal: total => \`共 ${total} 条\` }`。
+
 ## 0.3.1
 
 `2024-03-29`
