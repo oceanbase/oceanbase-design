@@ -33,7 +33,7 @@ const App: React.FC = () => {
   return (
     <ProTable
       headerTitle="高级表格"
-      cardBordered={true}
+      search={{ filterType: 'light' }}
       columns={columns}
       dataSource={dataSource}
     />

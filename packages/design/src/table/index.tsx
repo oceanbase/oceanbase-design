@@ -11,7 +11,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import ConfigProvider from '../config-provider';
 import Typography from '../typography';
 import enUS from '../locale/en-US';
-import useStyle, { genTableStyle } from './style';
+import useStyle from './style';
 import type { AnyObject } from '../_util/type';
 import useDefaultPagination from './hooks/useDefaultPagination';
 
@@ -246,6 +246,6 @@ export default Object.assign(ForwardTable, {
   Column: AntTable.Column,
   ColumnGroup: AntTable.ColumnGroup,
   Summary: AntTable.Summary as typeof Summary,
-  genTableStyle,
+  useStyle,
   useDefaultPagination,
 });
