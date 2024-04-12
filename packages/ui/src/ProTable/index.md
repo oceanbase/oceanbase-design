@@ -13,6 +13,8 @@ nav:
 
 <code src="./demo/basic.tsx" title="基本"></code>
 
+<code src="./demo/light-filter.tsx" title="轻量筛选"></code>
+
 ## API
 
 | 参数        | 说明     | 类型                           | 默认值  | 版本 |
