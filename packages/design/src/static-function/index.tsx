@@ -36,6 +36,9 @@ let modal: Omit<ModalStaticFunctions, 'warn'> & {
   useModal: typeof AntModal.useModal;
 } = AntModal;
 
+// injected static function or not
+let injectedStaticFunction = false;
+
 export default () => {
   // 自动注入 useToken，避免每次使用都要声明一遍，比较繁琐
   token = useToken().token;
@@ -54,7 +57,8 @@ export default () => {
     ...staticFunction.modal,
     useModal: AntModal.useModal,
   };
+  injectedStaticFunction = true;
   return null;
 };
 
-export { token, message, notification, modal };
+export { token, message, notification, modal, injectedStaticFunction };

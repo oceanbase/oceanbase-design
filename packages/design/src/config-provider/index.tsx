@@ -13,7 +13,7 @@ import type { StyleProviderProps } from '@ant-design/cssinjs';
 import StyleContext from '@ant-design/cssinjs/es/StyleContext';
 import type { StyleContextProps } from '@ant-design/cssinjs/es/StyleContext';
 import { merge } from 'lodash';
-import StaticFunction from '../static-function';
+import StaticFunction, { injectedStaticFunction } from '../static-function';
 import themeConfig from '../theme';
 import defaultTheme from '../theme/default';
 import darkTheme from '../theme/dark';
@@ -97,7 +97,7 @@ const ConfigProvider: ConfigProviderType = ({
   spin,
   table,
   tabs,
-  injectStaticFunction = true,
+  injectStaticFunction = !injectedStaticFunction,
   styleProviderProps,
   ...restProps
 }) => {
