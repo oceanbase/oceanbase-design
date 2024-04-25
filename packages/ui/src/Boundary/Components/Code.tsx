@@ -6,8 +6,9 @@ import type { CodeType } from '../constant';
 import { CODE_PRESET } from '../constant';
 import type { BoundaryLocale } from '../IBoundary';
 import zhCN from '../locale/zh-CN';
+import classNames from 'classnames';
 
-export interface IBoundaryCode extends LocaleWrapperProps {
+export interface IBoundaryCode extends LocaleWrapperProps, React.HTMLProps<HTMLDivElement> {
   code: CodeType;
   onClick?: () => void;
   children?: React.ReactNode;
@@ -18,7 +19,8 @@ export interface IBoundaryCode extends LocaleWrapperProps {
 }
 
 const BoundaryCode: React.FC<IBoundaryCode> = props => {
-  const { children, onClick, code, imageUrl, title, buttonText, locale } = props;
+  const { children, onClick, code, imageUrl, title, buttonText, locale, className, ...restProps } =
+    props;
 
   const info = useMemo(() => {
     const data = CODE_PRESET(locale);
@@ -27,7 +29,15 @@ const BoundaryCode: React.FC<IBoundaryCode> = props => {
   }, [code, locale]);
 
   return (
-    <div className="boundary-container boundary-code">
+    <div
+      className={classNames(
+        'boundary-container',
+        'boundary-code',
+        `ob-boundary-${code}`,
+        className
+      )}
+      {...restProps}
+    >
       <div className="empty">
         <img src={imageUrl || info.imageUrl} />
         <h4>{title || info.title}</h4>
