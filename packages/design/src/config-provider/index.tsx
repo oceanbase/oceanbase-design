@@ -108,6 +108,8 @@ const ConfigProvider: ConfigProviderType = ({
   const mergedTheme = merge(parentContext.theme, theme);
   const currentTheme = mergedTheme?.isDark ? darkTheme : defaultTheme;
   const { token } = themeConfig.useToken();
+  const fontFamily = mergedTheme.token?.fontFamily || token.fontFamily;
+  const customFont = mergedTheme.customFont;
 
   // inherit from parent StyleProvider
   const parentStyleContext = React.useContext<StyleContextProps>(StyleContext);
@@ -135,9 +137,9 @@ const ConfigProvider: ConfigProviderType = ({
       theme={merge(currentTheme, mergedTheme, {
         token: {
           fontFamily:
-            mergedTheme.customFont && !token.fontFamily.startsWith(`'Source Sans Pro'`)
-              ? `'Source Sans Pro', ${token.fontFamily}`
-              : token.fontFamily,
+            customFont && !fontFamily.startsWith(`'Source Sans Pro'`)
+              ? `'Source Sans Pro', ${fontFamily}`
+              : fontFamily,
         },
       })}
       renderEmpty={
