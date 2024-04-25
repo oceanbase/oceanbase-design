@@ -8,6 +8,12 @@ group: 业务组件
 
 ---
 
+## 0.3.3
+
+`2024-04-25`
+
+- ⭐️ Boundary 组件支持 `className` 属性，并且根据不同组件内置 ob-boundary-error、ob-boundary-403 和 ob-boundary-404 类名，便于上层判断异常类型。[#571](https://github.com/oceanbase/oceanbase-design/pull/571)
+
 ## 0.3.2
 
 `2024-04-12`

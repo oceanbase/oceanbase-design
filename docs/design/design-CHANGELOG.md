@@ -8,6 +8,17 @@ group: 基础组件
 
 ---
 
+## 0.3.3
+
+`2024-04-25`
+
+- ConfigProvider
+  - 🐞 修复 ConfigProvider 开启 `theme.customFont` 并且多次嵌套后 `fontFamily` 不正确的问题。[#572](https://github.com/oceanbase/oceanbase-design/pull/572)
+  - 🐞 修复 ConfigProvider 自定义 `theme.token.fontFamily` 不生效的问题。[#573](https://github.com/oceanbase/oceanbase-design/pull/573)
+  - 🐞 修复 ConfigProvider 多次使用会默认多次注入 StaticFunction，导致 Modal、message 和 notification 静态方法不会正常展示的问题。[#574](https://github.com/oceanbase/oceanbase-design/pull/574)
+- 🐞 修复主题 Token `boxShadowSecondary` 通过静态 token 对象和 less 变量访问时值不正确的问题。[#569](https://github.com/oceanbase/oceanbase-design/pull/569)
+- 💄 优化 Radio.Button 选中置灰态的背景颜色，避免和字体颜色区分不清。[#570](https://github.com/oceanbase/oceanbase-design/pull/570)
+
 ## 0.3.2
 
 `2024-04-12`
