@@ -5,8 +5,9 @@ import LocaleWrapper from '../../locale/LocaleWrapper';
 import { EXCEPTION_PRESET } from '../constant';
 import type { BoundaryLocale } from '../IBoundary';
 import zhCN from '../locale/zh-CN';
+import classNames from 'classnames';
 
-export interface ExceptionProps extends LocaleWrapperProps {
+export interface ExceptionProps extends LocaleWrapperProps, React.HTMLProps<HTMLDivElement> {
   children?: React.ReactNode;
   style?: React.CSSProperties;
   imageUrl?: string;
@@ -62,6 +63,8 @@ class BoundaryException extends React.PureComponent<ExceptionProps, ExceptionSta
       showError = false,
       hasButton = true,
       locale,
+      className,
+      ...restProps
     } = this.props;
 
     const errorInfo = EXCEPTION_PRESET(locale).ERROR_BOUNDARY;
@@ -72,7 +75,10 @@ class BoundaryException extends React.PureComponent<ExceptionProps, ExceptionSta
 
     if (this.state?.hasError) {
       return (
-        <div className="boundary-container">
+        <div
+          className={classNames('boundary-container', 'ob-boundary-error', className)}
+          {...restProps}
+        >
           <div className="empty">
             <img src={imageUrl || errorInfo.imageUrl} />
             <h4>{title || errorInfo.title}</h4>
@@ -105,7 +111,14 @@ class BoundaryException extends React.PureComponent<ExceptionProps, ExceptionSta
       );
     } else if (isNotCompatible) {
       return (
-        <div className="boundary-container">
+        <div
+          className={classNames(
+            'boundary-container',
+            'ob-boundary-browser-not-compatible',
+            className
+          )}
+          {...restProps}
+        >
           <div className="empty">
             <img src={imageUrl || notCompatibleInfo.imageUrl} />
             <h4>{title || notCompatibleInfo.title}</h4>
