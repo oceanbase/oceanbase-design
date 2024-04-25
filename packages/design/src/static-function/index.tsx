@@ -21,7 +21,7 @@ const mapToken = {
   // 需要覆盖部分 Alias Token 的值
   override: {
     boxShadow: defaultTheme.token.boxShadow,
-    boxShadowSecondary: defaultTheme.token.boxShadow,
+    boxShadowSecondary: defaultTheme.token.boxShadowSecondary,
   },
 };
 let token = formatToken(mapToken);
