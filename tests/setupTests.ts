@@ -16,14 +16,6 @@ global.React = React;
 
 ReactDOM.createPortal = vi.fn(modal => modal);
 
-vi.mock('react', async () => {
-  const mockReact = await vi.importActual('react');
-  return {
-    ...mockReact,
-    useLayoutEffect: mockReact.useEffect,
-  };
-});
-
 excludeAllWarning();
 
 const fetchMocker = createFetchMock(vi);
