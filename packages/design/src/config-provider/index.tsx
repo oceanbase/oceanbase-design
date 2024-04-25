@@ -134,9 +134,10 @@ const ConfigProvider: ConfigProviderType = ({
       )}
       theme={merge(currentTheme, mergedTheme, {
         token: {
-          fontFamily: mergedTheme.customFont
-            ? `'Source Sans Pro', ${token.fontFamily}`
-            : token.fontFamily,
+          fontFamily:
+            mergedTheme.customFont && !token.fontFamily.startsWith(`'Source Sans Pro'`)
+              ? `'Source Sans Pro', ${token.fontFamily}`
+              : token.fontFamily,
         },
       })}
       renderEmpty={
