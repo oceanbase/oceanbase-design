@@ -84,6 +84,10 @@ const defaultTheme: ThemeConfig = {
     InputNumber: {
       handleVisible: true,
     },
+    Radio: {
+      // temporarily fix style for checked disabled Radio.Button
+      controlItemBgActiveDisabled: '#e2e8f3',
+    },
     Select: {
       // work for all multiple select component, including Select, TreeSelect and Cascader and so on
       multipleItemBg: '#F8FAFE',

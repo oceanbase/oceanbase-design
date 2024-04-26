@@ -4,7 +4,12 @@ import { ConfigProvider, token } from '@oceanbase/design';
 import defaultTheme from '../../theme/default';
 
 describe('ConfigProvider static function', () => {
-  it('token', () => {
+  it('static token', () => {
+    expect(token.boxShadow).toBe(defaultTheme.token.boxShadow);
+    expect(token.boxShadowSecondary).toBe(defaultTheme.token.boxShadowSecondary);
+  });
+
+  it('static token in ConfigProvider', () => {
     render(
       <ConfigProvider>
         <div />

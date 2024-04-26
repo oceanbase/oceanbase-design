@@ -59,7 +59,7 @@ export default (api: IApi) => {
             : // 对于非暗色主题，需要覆盖部分 Alias Token 的值
               {
                 boxShadow: item.token.boxShadow,
-                boxShadowSecondary: item.token.boxShadow,
+                boxShadowSecondary: item.token.boxShadowSecondary,
               },
       };
       const aliasToken = formatToken(mapToken);
