@@ -62,13 +62,10 @@ export interface DateRangerProps
   value?: RangeValue;
   defaultValue?: RangeValue;
   size?: 'small' | 'large' | 'middle';
-  mode?: 'normal' | 'step';
   tooltipProps?: TooltipProps;
 }
 
 const prefix = getPrefix('date-ranger');
-const STEP_QUICK = 0;
-const STEP_CUSTOMIZE = 1;
 
 const Ranger = (props: DateRangerProps) => {
   const {
@@ -96,7 +93,6 @@ const Ranger = (props: DateRangerProps) => {
     size,
     //固定 rangeName
     stickRangeName = false,
-    mode = 'normal',
     tooltipProps,
     ...rest
   } = props;
@@ -122,17 +118,12 @@ const Ranger = (props: DateRangerProps) => {
         ?.range(isMoment ? moment() : dayjs()) as RangeValue)
   );
 
-  const isStepMode = mode === 'step';
-  const [step, setStep] = useState(STEP_QUICK);
-
   const [open, setOpen] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const refState = useRef({
     tooltipOpen,
-    step,
   });
   refState.current.tooltipOpen = tooltipOpen;
-  refState.current.step = step;
 
   // 没有 selects 时，回退到普通 RangePicker, 当前时间选项为自定义时，应该显示 RangePicker
   const [isPlay, setIsPlay] = useState(rangeName !== CUSTOMIZE);
@@ -308,65 +299,14 @@ const Ranger = (props: DateRangerProps) => {
             destroyPopupOnHide={true}
             // 存在缓存，会锁死里面的值
             onOpenChange={o => {
-              if (
-                o === false &&
-                (refState.current.tooltipOpen || refState.current.step === STEP_CUSTOMIZE)
-              ) {
+              if (o === false && refState.current.tooltipOpen) {
                 return;
               }
 
               setOpen(o);
             }}
-            dropdownRender={menu => {
-              if (step === STEP_CUSTOMIZE) {
-                return (
-                  <div
-                    style={{
-                      background: '#fff',
-                      padding: '6px 12px',
-                      boxShadow: token.boxShadowSecondary,
-                    }}
-                  >
-                    <a
-                      onClick={() => {
-                        setStep(STEP_QUICK);
-                      }}
-                    >
-                      返回上一层
-                    </a>
-                    <InternalPickerPanel
-                      defaultValue={innerValue}
-                      // @ts-ignore
-                      locale={locale.rcPicker}
-                      isMoment={isMoment}
-                      onOk={vList => {
-                        setIsPlay(false);
-                        rangeChange(
-                          vList.map(v => {
-                            return isMoment ? moment(v) : dayjs(v);
-                          }) as RangeValue
-                        );
-                        setStep(STEP_QUICK);
-                        closeTooltip();
-                      }}
-                      onCancel={() => {
-                        setStep(STEP_QUICK);
-                        closeTooltip();
-                      }}
-                    />
-                  </div>
-                );
-              }
-              return menu;
-            }}
             menu={{
               onClick: ({ key, domEvent }) => {
-                if (key === CUSTOMIZE && isStepMode) {
-                  // updateState 的修改会慢于 openChange 的判断，所以修改 refState.current.step 让 Dropdown 不要关闭
-                  refState.current.step = STEP_CUSTOMIZE;
-                  return setStep(STEP_CUSTOMIZE);
-                }
-
                 const selected = NEAR_TIME_LIST.find(_item => _item.name === key);
                 // 存在快捷选项切换为极简模式
                 if (selected?.range) {
@@ -390,7 +330,7 @@ const Ranger = (props: DateRangerProps) => {
                   return {
                     key: item.name,
                     label:
-                      item.name === CUSTOMIZE && !isStepMode ? (
+                      item.name === CUSTOMIZE ? (
                         <Tooltip
                           open={tooltipOpen}
                           arrow={false}
@@ -400,12 +340,16 @@ const Ranger = (props: DateRangerProps) => {
                             }
                           }}
                           placement="right"
+                          {...tooltipProps}
                           overlayStyle={{
                             maxWidth: 'none',
+                            ...tooltipProps?.overlayStyle,
                           }}
                           overlayInnerStyle={{
                             background: '#fff',
                             maxHeight: 'none',
+                            margin: 16,
+                            ...tooltipProps?.overlayInnerStyle,
                           }}
                           title={
                             <InternalPickerPanel
@@ -428,7 +372,6 @@ const Ranger = (props: DateRangerProps) => {
                               }}
                             />
                           }
-                          {...tooltipProps}
                         >
                           <Space size={8} style={isPlay ? {} : { width: 310 }}>
                             <span className={`${prefix}-label`}>{item.rangeLabel}</span>
