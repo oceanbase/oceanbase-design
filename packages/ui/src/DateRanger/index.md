@@ -7,7 +7,7 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="交互一"></code>
+<code src="./demo/basic.tsx" title="交互一"></code> <code src="./demo/basic2.tsx" title="交互二"></code>
 
 <!-- <code src="./demo/with-form.tsx" title="配合 Form 使用"></code>
 
