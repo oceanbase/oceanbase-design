@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, DatePicker, Dropdown, Radio, Space, Tooltip, theme } from '@oceanbase/design';
-import type { TooltipProps } from '@oceanbase/design';
+import type { TooltipProps, FormItemProps } from '@oceanbase/design';
 import {
   LeftOutlined,
   PauseOutlined,
@@ -31,7 +31,7 @@ import {
   LAST_3_DAYS,
 } from './constant';
 import type { RangeOption } from './typing';
-import InternalPickerPanel from './PickerPanel';
+import InternalPickerPanel, { Rule } from './PickerPanel';
 import zhCN from './locale/zh-CN';
 import './index.less';
 
@@ -55,9 +55,13 @@ export interface DateRangerProps
   hasNow?: boolean;
   hasForward?: boolean;
   hasZoomOut?: boolean;
+  // 时间选择提示
+  tip?: string;
+  rules?: Rule[];
   /** 是否只允许选择过去时间 */
   pastOnly?: boolean;
-  //固定rangeName
+  isMoment?: boolean;
+  //固定 rangeName
   stickRangeName?: boolean;
   value?: RangeValue;
   defaultValue?: RangeValue;
@@ -94,6 +98,9 @@ const Ranger = (props: DateRangerProps) => {
     //固定 rangeName
     stickRangeName = false,
     tooltipProps,
+    isMoment: isMomentProps,
+    rules,
+    tip,
     ...rest
   } = props;
 
@@ -104,7 +111,8 @@ const Ranger = (props: DateRangerProps) => {
     moment.isMoment(defaultValue?.[0]) ||
     moment.isMoment(defaultValue?.[1]) ||
     moment.isMoment(value?.[0]) ||
-    moment.isMoment(value?.[1]);
+    moment.isMoment(value?.[1]) ||
+    isMomentProps;
 
   const defaultRangeName =
     value || defaultValue ? CUSTOMIZE : defaultQuickValue ?? selects?.[0]?.name;
@@ -118,8 +126,8 @@ const Ranger = (props: DateRangerProps) => {
         ?.range(isMoment ? moment() : dayjs()) as RangeValue)
   );
 
-  const [open, setOpen] = useState(false);
-  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [open, setOpen] = useState(true);
+  const [tooltipOpen, setTooltipOpen] = useState(true);
   const refState = useRef({
     tooltipOpen,
   });
@@ -342,7 +350,7 @@ const Ranger = (props: DateRangerProps) => {
                           placement="right"
                           {...tooltipProps}
                           overlayStyle={{
-                            maxWidth: 'none',
+                            maxWidth: 336,
                             ...tooltipProps?.overlayStyle,
                           }}
                           overlayInnerStyle={{
@@ -356,7 +364,9 @@ const Ranger = (props: DateRangerProps) => {
                               defaultValue={innerValue}
                               // @ts-ignore
                               locale={locale.rcPicker}
+                              tip={tip}
                               isMoment={isMoment}
+                              rules={rules}
                               onOk={vList => {
                                 setIsPlay(false);
                                 rangeChange(
@@ -457,18 +467,6 @@ const Ranger = (props: DateRangerProps) => {
               <LeftOutlined />
             </Radio.Button>
           )}
-          {/* {hasPlay && (
-            <Radio.Button
-              value={'play'}
-              style={{ paddingInline: 8 }}
-              onClick={() => {
-                const newPlay = !isPlay;
-                setIsPlay(newPlay);
-              }}
-            >
-              {isPlay ? <PauseOutlined /> : <CaretRightOutlined />}
-            </Radio.Button>
-          )} */}
           {hasForward && (
             <Radio.Button
               value="stepForward"

@@ -1,23 +1,48 @@
 import type { Dayjs } from 'dayjs';
 import type { Moment } from 'moment';
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import dayjsGenerateConfig from 'rc-picker/es/generate/dayjs';
 import momentGenerateConfig from 'rc-picker/es/generate/moment';
 import useCSSVarCls from 'antd/es/config-provider/hooks/useCSSVarCls';
 import useStyle from 'antd/es/date-picker/style/index';
 import { PickerPanel } from 'rc-picker';
 import classNames from 'classnames';
-import { Button, Col, Divider, Form, Input, Row, Space, TimePicker } from '@oceanbase/design';
+import {
+  Alert,
+  Button,
+  Col,
+  Divider,
+  Form,
+  Input,
+  Row,
+  Space,
+  TimePicker,
+} from '@oceanbase/design';
+import type { FormItemProps } from '@oceanbase/design';
 import { noop } from 'lodash';
 import moment from 'moment';
 import dayjs from 'dayjs';
 import { useUpdate } from 'ahooks';
+import { toArray } from '@oceanbase/util';
 
 type RangeValue = [Moment, Moment] | [Dayjs, Dayjs];
+type ValidateTrigger = 'submit' | 'valueChange';
+
+type MaybeArray<T> = T | T[];
+type ErrorType = 'endDate' | 'startDate' | 'endTime' | 'startTime';
+
+export type Rule = {
+  message: string;
+  validate: (value: string) => MaybeArray<ErrorType>;
+};
 
 export interface PickerPanelProps {
   value?: RangeValue;
   defaultValue?: RangeValue;
+  tip?: string;
+  require?: boolean;
+  rules?: Rule[];
+  validateTrigger: ValidateTrigger;
   onCancel: () => void;
   onOk: (v: RangeValue) => void;
   isMoment: boolean;
@@ -29,7 +54,16 @@ const DATE_FORMAT = 'YYYY-MM-DD';
 const TIME_FORMAT = 'HH:mm:ss';
 
 const InternalPickerPanel = (props: PickerPanelProps) => {
-  const { defaultValue = [], isMoment, locale, onOk = noop, onCancel = noop } = props;
+  const {
+    defaultValue = [],
+    isMoment,
+    locale,
+    tip,
+    rules,
+    require = true,
+    onOk = noop,
+    onCancel = noop,
+  } = props;
   const rootCls = useCSSVarCls(prefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
 
@@ -37,6 +71,13 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   const [calendarValue, setCalendarValue] = React.useState(defaultValue);
   const [internalHoverValues, setInternalHoverValues] = React.useState(null);
   const [activeIndex, setActiveIndex] = React.useState(0);
+
+  const getDateInstance = useCallback(
+    (v?: string | Dayjs | Moment) => {
+      return isMoment ? moment(v as Moment) : dayjs(v as Dayjs);
+    },
+    [isMoment]
+  );
 
   const hoverValues = React.useMemo(() => {
     return internalHoverValues || calendarValue;
@@ -57,6 +98,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     setInternalHoverValues(date ? fillCalendarValue(date, activeIndex) : null);
   };
 
+  // 对日期进行排序
   const formatValues = [...calendarValue]
     .sort((a, b) => {
       return a?.valueOf() - b?.valueOf();
@@ -66,20 +108,125 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     });
 
   const [form] = Form.useForm();
-  const [s, e] = formatValues;
-  useEffect(() => {
+  const [_sDate, _eDate] = formatValues;
+  const setFormatDateToForm = () => {
     form.setFieldsValue({
-      startDate: s,
-      endDate: e,
+      startDate: _sDate,
+      endDate: _eDate,
     });
-  }, [s, e]);
+  };
+
+  useEffect(() => {
+    setFormatDateToForm();
+  }, [_sDate, _eDate]);
 
   const defaultTime = useMemo(() => {
-    return isMoment ? moment() : dayjs();
+    return getDateInstance();
   }, []);
+
+  const [errorMessage, setErrorMessage] = useState('');
+  const [errorTypeList, setErrorTypeList] = useState([]);
+  const errorTypeMap = errorTypeList.reduce((pre, errorKey) => {
+    pre[errorKey] = 'error';
+    return pre;
+  }, {});
+
+  const validateInputDate = e => {
+    const v = e.target.value;
+    const date = getDateInstance(v);
+    return date.isValid() ? date.format(DATE_FORMAT) : null;
+  };
+
+  // TODO:待实现
+  // validateTrigger 支持 submit 和 valueChange，默认支持 submit
+  // require 默认为 true
 
   return (
     <div>
+      <Space direction="vertical" size={12} style={{ margin: '12px 0' }}>
+        {tip && <Alert message={tip} type="info" showIcon></Alert>}
+        <Form
+          layout="vertical"
+          autoComplete="off"
+          requiredMark={false}
+          style={{ width: 280 }}
+          form={form}
+        >
+          <Row gutter={12}>
+            <Col span={15}>
+              <Form.Item
+                name="startDate"
+                label="开始日期"
+                validateStatus={errorTypeMap['startDate']}
+                style={{ marginBottom: 8 }}
+              >
+                <Input
+                  size="middle"
+                  onBlur={e => {
+                    const v = validateInputDate(e);
+                    if (v) {
+                      form.setFieldValue('startDate', v);
+                      setCalendarValue(([, eDate]) => {
+                        return [getDateInstance(v), eDate];
+                      });
+                    } else {
+                      setFormatDateToForm();
+                    }
+                  }}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={9} style={{ paddingRight: 0 }}>
+              <Form.Item
+                name="startTime"
+                label="开始时间"
+                style={{ marginBottom: 8 }}
+                validateStatus={errorTypeMap['startTime']}
+                initialValue={defaultS || defaultTime}
+              >
+                <TimePicker suffixIcon={null} style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={12}>
+            <Col span={15}>
+              <Form.Item
+                name="endDate"
+                label="结束日期"
+                style={{ marginBottom: 0 }}
+                validateStatus={errorTypeMap['endDate']}
+              >
+                <Input
+                  onBlur={e => {
+                    const v = validateInputDate(e);
+                    if (v) {
+                      form.setFieldValue('endDate', v);
+                      setCalendarValue(([sDate]) => {
+                        return [sDate, getDateInstance(v)];
+                      });
+                    } else {
+                      setFormatDateToForm();
+                    }
+                  }}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={9} style={{ paddingRight: 0 }}>
+              <Form.Item
+                name="endTime"
+                label="结束时间"
+                style={{ marginBottom: 0 }}
+                validateStatus={errorTypeMap['endTime']}
+                initialValue={defaultE || defaultTime}
+              >
+                <TimePicker suffixIcon={null} style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+        {errorMessage && <Alert message={errorMessage} type="error" showIcon></Alert>}
+      </Space>
       {wrapCSSVar(
         <div
           className={classNames('ant-picker-dropdown', hashId, cssVarCls, rootCls)}
@@ -92,33 +239,33 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             prefixCls={prefixCls}
             // @ts-ignore
             generateConfig={isMoment ? momentGenerateConfig : dayjsGenerateConfig}
-            onFocus={(...res) => {
-              console.log(res, 'onFocus');
-            }}
-            onBlur={(...res) => {
-              console.log(res, 'onBlur');
-            }}
             onHover={(...res) => {
               onPanelHover(res[0]);
             }}
-            onNow={(...res) => {
-              console.log(res, 'onNow');
-            }}
-            onOk={(...res) => {
-              console.log(res, 'onOk');
-            }}
-            onPanelChange={(...res) => {
-              console.log(res, 'onPanelChange');
-            }}
-            onPickerValueChange={(...res) => {
-              console.log(res, 'onPickerValueChange');
-            }}
-            onPresetHover={(...res) => {
-              console.log(res, 'onPresetHover');
-            }}
-            onPresetSubmit={(...res) => {
-              console.log(res, 'onPresetSubmit');
-            }}
+            // onFocus={(...res) => {
+            //   console.log(res, 'onFocus');
+            // }}
+            // onBlur={(...res) => {
+            //   console.log(res, 'onBlur');
+            // }}
+            // onNow={(...res) => {
+            //   console.log(res, 'onNow');
+            // }}
+            // onOk={(...res) => {
+            //   console.log(res, 'onOk');
+            // }}
+            // onPanelChange={(...res) => {
+            //   console.log(res, 'onPanelChange');
+            // }}
+            // onPickerValueChange={(...res) => {
+            //   console.log(res, 'onPickerValueChange');
+            // }}
+            // onPresetHover={(...res) => {
+            //   console.log(res, 'onPresetHover');
+            // }}
+            // onPresetSubmit={(...res) => {
+            //   console.log(res, 'onPresetSubmit');
+            // }}
             onSelect={(...res) => {
               setCalendarValue(fillCalendarValue(res[0], activeIndex));
               setActiveIndex(index => {
@@ -139,82 +286,6 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           />
         </div>
       )}
-      <div>
-        <Form
-          layout="vertical"
-          autoComplete="off"
-          requiredMark={false}
-          style={{ width: 280, padding: '0 12px' }}
-          form={form}
-        >
-          <Row gutter={12}>
-            <Col span={14}>
-              <Form.Item
-                name="startDate"
-                label="开始日期"
-                style={{ marginBottom: 8 }}
-                rules={[
-                  {
-                    required: true,
-                    message: '请选择开始日期',
-                  },
-                ]}
-              >
-                <Input size="middle" />
-              </Form.Item>
-            </Col>
-            <Col span={10}>
-              <Form.Item
-                name="startTime"
-                label="开始时间"
-                style={{ marginBottom: 8 }}
-                initialValue={defaultS || defaultTime}
-                rules={[
-                  {
-                    required: true,
-                    message: '请选择开始时间',
-                  },
-                ]}
-              >
-                <TimePicker suffixIcon={null} />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={12}>
-            <Col span={14}>
-              <Form.Item
-                name="endDate"
-                label="结束日期"
-                style={{ marginBottom: 8 }}
-                rules={[
-                  {
-                    required: true,
-                    message: '请选择结束日期',
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={10}>
-              <Form.Item
-                name="endTime"
-                label="结束时间"
-                style={{ marginBottom: 8 }}
-                initialValue={defaultE || defaultTime}
-                rules={[
-                  {
-                    required: true,
-                    message: '请选择结束时间',
-                  },
-                ]}
-              >
-                <TimePicker suffixIcon={null} />
-              </Form.Item>
-            </Col>
-          </Row>
-        </Form>
-      </div>
       <Divider style={{ margin: '12px 0' }}></Divider>
       <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
         <Button
@@ -231,11 +302,31 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           onClick={() => {
             form.validateFields().then(values => {
               const { startDate, startTime, endDate, endTime } = values;
+              const start = `${startDate} ${startTime.format(TIME_FORMAT)}`;
+              const end = `${endDate} ${endTime.format(TIME_FORMAT)}`;
+              let errorList = [];
+              let message = '';
 
-              onOk([
-                `${startDate} ${startTime.format(TIME_FORMAT)}`,
-                `${endDate} ${endTime.format(TIME_FORMAT)}`,
-              ]);
+              rules?.some(item => {
+                if (typeof item?.validator === 'function') {
+                  const errorType = item.validator(start, end);
+                  if (errorType) {
+                    errorList = toArray(errorType);
+                    message = item.message;
+                    return true;
+                  }
+                }
+                return false;
+              });
+
+              if (errorList.length > 0) {
+                setErrorTypeList(errorList);
+                setErrorMessage(message);
+              } else {
+                setErrorMessage('');
+                setErrorTypeList([]);
+                onOk([start, end]);
+              }
             });
           }}
         >
