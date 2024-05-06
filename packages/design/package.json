@@ -53,7 +53,7 @@
     "antd-token-previewer": "^2.0.8",
     "rc-select": "^14.13.0",
     "rc-table": "^7.45.4",
-    "rc-tree-select": "^5.19.0"
+    "rc-tree-select": "^5.20.0"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
