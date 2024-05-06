@@ -27,8 +27,8 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(typescript@5.4.5)
       '@ctrl/tinycolor':
-        specifier: ^4.0.3
-        version: 4.0.4
+        specifier: ^4.1.0
+        version: 4.1.0
       '@emotion/babel-preset-css-prop':
         specifier: ^11.11.0
         version: 11.11.0(@babel/core@7.24.4)
@@ -3450,8 +3450,8 @@ packages:
     resolution: {integrity: sha512-SITSV6aIXsuVNV3f3O0f2n/cgyEDWoSqtZMYiAmcsYHydcKrOz3gUxB/iXd/Qf08+IZX4KpgNbvUdMBmWz+kcA==}
     engines: {node: '>=10'}
 
-  /@ctrl/tinycolor@4.0.4:
-    resolution: {integrity: sha512-DIjWxEgyP+YGh7Znx9PjsunmpVsAySYRofMUjZCRWUZ1JVS8GHurry6OebnQD2dPviRUTH9VmiupFivS7Ik9ew==}
+  /@ctrl/tinycolor@4.1.0:
+    resolution: {integrity: sha512-WyOx8cJQ+FQus4Mm4uPIZA64gbk3Wxh0so5Lcii0aJifqwoVOlfFtorjLE0Hen4OYyHZMXDWqMmaQemBhgxFRQ==}
     engines: {node: '>=14'}
     dev: true
 

@@ -48,7 +48,7 @@
     "@babel/cli": "^7.24.1",
     "@babel/preset-env": "^7.24.4",
     "@chenshuai2144/less2cssinjs": "^1.0.7",
-    "@ctrl/tinycolor": "^4.0.3",
+    "@ctrl/tinycolor": "^4.1.0",
     "@emotion/babel-preset-css-prop": "^11.11.0",
     "@emotion/css": "^11.11.2",
     "@emotion/react": "^11.11.4",
