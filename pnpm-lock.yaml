@@ -393,8 +393,8 @@ importers:
         specifier: ^7.45.4
         version: 7.45.4(react-dom@18.2.0)(react@18.2.0)
       rc-tree-select:
-        specifier: ^5.19.0
-        version: 5.19.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^5.20.0
+        version: 5.20.0(react-dom@18.2.0)(react@18.2.0)
 
   packages/icons:
     dependencies:
@@ -20510,6 +20510,21 @@ packages:
       rc-util: 5.39.1(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+
+  /rc-tree-select@5.20.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-zFtkHx5/6PnXSi3oSbBSFbIPiJJQdpSU3qz/joLe75URgvxmTHi989O8MtMgpwyZwrCMOJpGi6L1uy+13uzZPw==}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      '@babel/runtime': 7.24.4
+      classnames: 2.5.1
+      rc-select: 14.13.1(react-dom@18.2.0)(react@18.2.0)
+      rc-tree: 5.8.5(react-dom@18.2.0)(react@18.2.0)
+      rc-util: 5.39.1(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: true
 
   /rc-tree-select@5.5.5(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-k2av7jF6tW9bIO4mQhaVdV4kJ1c54oxV3/hHVU+oD251Gb5JN+m1RbJFTMf1o0rAFqkvto33rxMdpafaGKQRJw==}
