@@ -61,7 +61,7 @@
     "@testing-library/react": "^15.0.5",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.5.2",
-    "@types/lodash": "^4.17.0",
+    "@types/lodash": "^4.17.1",
     "@types/node": "^20.12.5",
     "@types/react": "^18.2.74",
     "@umijs/fabric": "^4.0.1",
