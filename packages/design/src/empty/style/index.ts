@@ -42,15 +42,16 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
       [`${antCls}-steps`]: {
         marginTop: token.margin,
         padding: token.paddingLG,
-        backgroundColor: colorBgLayout,
+        backgroundColor: token.colorFillQuaternary,
         borderRadius: token.borderRadiusLG,
         [`${antCls}-steps-item-container`]: {
           [`${antCls}-steps-item-icon`]: {
             height: token.controlHeightSM,
             width: token.controlHeightSM,
             lineHeight: `${token.controlHeightSM}px`,
-            backgroundColor: colorFill,
-            borderColor: colorFill,
+            backgroundColor: token.colorFillSecondary,
+            // override default border color
+            borderColor: token.colorFillSecondary,
             [`${antCls}-steps-icon`]: {
               color: colorTextSecondary,
               fontSize: token.fontSize,
