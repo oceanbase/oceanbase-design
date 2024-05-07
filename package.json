@@ -44,7 +44,7 @@
   "devDependencies": {
     "@ant-design/colors": "^7.0.2",
     "@ant-design/cssinjs": "^1.19.1",
-    "@ant-design/icons": "^5.3.6",
+    "@ant-design/icons": "^5.3.7",
     "@babel/cli": "^7.24.1",
     "@babel/preset-env": "^7.24.4",
     "@chenshuai2144/less2cssinjs": "^1.0.7",
