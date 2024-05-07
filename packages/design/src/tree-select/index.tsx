@@ -1,6 +1,6 @@
 import { TreeSelect as AntTreeSelect } from 'antd';
 import type { TreeSelectProps as AntTreeSelectProps } from 'antd/es/tree-select';
-import type { TreeNode as AntTreeNode } from 'rc-tree-select';
+import { TreeNode as AntTreeNode } from 'rc-tree-select';
 import type { BaseSelectRef } from 'rc-select';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
@@ -60,7 +60,7 @@ const InternalTreeSelect = React.forwardRef<BaseSelectRef, TreeSelectProps>(
 );
 
 const TreeSelect = InternalTreeSelect as CompoundedComponent;
-const TreeNode = AntTreeSelect.TreeNode;
+const TreeNode = AntTreeSelect.TreeNode as typeof AntTreeNode;
 
 TreeSelect.TreeNode = TreeNode;
 TreeSelect.SHOW_ALL = AntTreeSelect.SHOW_ALL;
