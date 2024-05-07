@@ -78,8 +78,8 @@ importers:
         specifier: ^4.0.1
         version: 4.0.1(postcss@8.4.38)
       '@umijs/test':
-        specifier: ^4.1.8
-        version: 4.1.9(@babel/core@7.24.4)
+        specifier: ^4.1.10
+        version: 4.1.10(@babel/core@7.24.4)
       '@vercel/analytics':
         specifier: ^1.2.2
         version: 1.2.2(react@18.2.0)
@@ -7090,6 +7090,18 @@ packages:
       - supports-color
     dev: true
 
+  /@umijs/bundler-utils@4.1.10:
+    resolution: {integrity: sha512-7PNcOehW9r39cU6T6G9dQjusu88PHS38OoTgyoGJuWj8Xfxxw9wsfN6ZufBuP1f9OCTytaUNDMf/Ky3PdwK7VA==}
+    dependencies:
+      '@umijs/utils': 4.1.10
+      esbuild: 0.17.19
+      regenerate: 1.4.2
+      regenerate-unicode-properties: 10.1.1
+      spdy: 4.0.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /@umijs/bundler-utils@4.1.9:
     resolution: {integrity: sha512-hVf5WWSjvpQ91+jEnAu2f8SAbdPocAHzXGjTMpqN62ribkkcEJj26FNhumRMnTKvyNJ5/72wP/U3h7pVuMp/yw==}
     dependencies:
@@ -7556,6 +7568,22 @@ packages:
       - supports-color
     dev: true
 
+  /@umijs/test@4.1.10(@babel/core@7.24.4):
+    resolution: {integrity: sha512-GGKV1/IY2mfGzR5QpqMdhQLCsMLDOfVdJw80Ln7is9qgoMJjs2pvdXEMODAh/aCQdKigivKLqM/fHDJU88VBYA==}
+    dependencies:
+      '@babel/plugin-transform-modules-commonjs': 7.23.3(@babel/core@7.24.4)
+      '@jest/types': 27.5.1
+      '@umijs/bundler-utils': 4.1.10
+      '@umijs/utils': 4.1.10
+      babel-jest: 29.7.0(@babel/core@7.24.4)
+      esbuild: 0.17.19
+      identity-obj-proxy: 3.0.0
+      isomorphic-unfetch: 4.0.2
+    transitivePeerDependencies:
+      - '@babel/core'
+      - supports-color
+    dev: true
+
   /@umijs/test@4.1.9(@babel/core@7.24.4):
     resolution: {integrity: sha512-IDMyFzKrQBHtV6ijWXgd3yrmLkfgRaWMCvhBc7fwckTcgW3xuYZbMUZlUgCn+OIPuy2/ENzwVpuS+FJTLLJEow==}
     dependencies:
@@ -7582,6 +7610,13 @@ packages:
       react: '*'
     dependencies:
       react: 18.2.0
+
+  /@umijs/utils@4.1.10:
+    resolution: {integrity: sha512-UB64QwwpoqPQt8Nyy3w2kpyVrC7biZSsOxgZR3tx+E4eooutsCL/plDcFnyrPRhs3hxTBgePnE2wNLHBJ6yqAQ==}
+    dependencies:
+      chokidar: 3.5.3
+      pino: 7.11.0
+    dev: true
 
   /@umijs/utils@4.1.9:
     resolution: {integrity: sha512-KQlvqwnJ3/fXeJyN7lp3jYj5WgRYFhGTFoYQqew0YFMtac1cwSAaAnvuQGyGNK5f+NNejwDSLpjwX4I8J4Ka9A==}

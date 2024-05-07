@@ -65,7 +65,7 @@
     "@types/node": "^20.12.5",
     "@types/react": "^18.2.74",
     "@umijs/fabric": "^4.0.1",
-    "@umijs/test": "^4.1.8",
+    "@umijs/test": "^4.1.10",
     "@vercel/analytics": "^1.2.2",
     "antd": "^5.16.1",
     "antd-style": "^3.6.2",
