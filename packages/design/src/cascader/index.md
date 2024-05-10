@@ -18,4 +18,4 @@ demo:
 
 ## API
 
-- 详见 antd InputNumber 文档: https://ant.design/components/input-number-cn
+- 详见 antd Cascader 文档: https://ant.design/components/cascader-cn
