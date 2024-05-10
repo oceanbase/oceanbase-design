@@ -81,6 +81,12 @@ const defaultTheme: ThemeConfig = {
     wireframe: false,
   },
   components: {
+    Breadcrumb: {
+      fontSize: 12,
+      // @ts-ignore
+      // fontHeight is internal token
+      fontHeight: 20,
+    },
     InputNumber: {
       handleVisible: true,
     },

@@ -125,6 +125,10 @@ export default defineConfig({
           ],
         },
         {
+          title: '导航',
+          children: [{ title: 'Breadcrumb 面包屑', link: '/components/breadcrumb' }],
+        },
+        {
           title: '布局',
           children: [
             { title: 'Grid 栅格', link: '/components/grid' },
