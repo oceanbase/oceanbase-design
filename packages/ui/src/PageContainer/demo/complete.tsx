@@ -1,7 +1,16 @@
-import { EllipsisOutlined } from '@oceanbase/icons';
-import { Button, Card, Descriptions, Dropdown, Modal, message, Table } from '@oceanbase/design';
-import { PageContainer } from '@oceanbase/ui';
 import React, { useState } from 'react';
+import {
+  Button,
+  Card,
+  Descriptions,
+  Dropdown,
+  Modal,
+  message,
+  Table,
+  Space,
+} from '@oceanbase/design';
+import { PageContainer } from '@oceanbase/ui';
+import { EllipsisOutlined } from '@oceanbase/icons';
 
 export default () => {
   const [loading, setLoading] = useState(false);
@@ -106,6 +115,7 @@ export default () => {
       loading={loading}
       header={{
         title: '页面标题',
+        onBack: () => {},
         reload: {
           spin: loading,
           onClick: () => {
@@ -174,31 +184,35 @@ export default () => {
       }}
       footer={[<Button>重置</Button>, <Button type="primary">提交</Button>]}
     >
-      <Descriptions>
-        <Descriptions.Item label="创建人">曲丽丽</Descriptions.Item>
-        <Descriptions.Item label="电话号码">1810000000</Descriptions.Item>
-        <Descriptions.Item label="地址">浙江省杭州市西湖区工专路</Descriptions.Item>
-        <Descriptions.Item label="关联表单">
-          <a>421421</a>
-        </Descriptions.Item>
-        <Descriptions.Item label="创建时间">2017-01-10</Descriptions.Item>
-        <Descriptions.Item label="备注">这是备注</Descriptions.Item>
-      </Descriptions>
-      <Card
-        bordered={false}
-        tabList={[
-          {
-            tab: '基本信息',
-            key: 'base',
-          },
-          {
-            tab: '详细信息',
-            key: 'info',
-          },
-        ]}
-      >
-        <Table columns={columns} dataSource={dataSource} />
-      </Card>
+      <Space size={16} direction="vertical">
+        <Card bordered={false}>
+          <Descriptions>
+            <Descriptions.Item label="创建人">曲丽丽</Descriptions.Item>
+            <Descriptions.Item label="电话号码">1810000000</Descriptions.Item>
+            <Descriptions.Item label="地址">浙江省杭州市西湖区工专路</Descriptions.Item>
+            <Descriptions.Item label="关联表单">
+              <a>421421</a>
+            </Descriptions.Item>
+            <Descriptions.Item label="创建时间">2017-01-10</Descriptions.Item>
+            <Descriptions.Item label="备注">这是备注</Descriptions.Item>
+          </Descriptions>
+        </Card>
+        <Card
+          bordered={false}
+          tabList={[
+            {
+              tab: '基本信息',
+              key: 'base',
+            },
+            {
+              tab: '详细信息',
+              key: 'info',
+            },
+          ]}
+        >
+          <Table columns={columns} dataSource={dataSource} />
+        </Card>
+      </Space>
     </PageContainer>
   );
 };

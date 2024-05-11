@@ -59,7 +59,7 @@ const PageContainer = ({
   );
 
   const newSubTitle = (reload || subTitle) && (
-    <Space size={12}>
+    <Space>
       {reload && (
         <Tooltip title={locale.reload}>
           {isObject(reload) && React.isValidElement(reload) ? (
