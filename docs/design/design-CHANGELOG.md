@@ -8,6 +8,13 @@ group: 基础组件
 
 ---
 
+## 0.3.4
+
+`2024-05-11`
+
+- 💄 优化 Empty 步骤提示的背景颜色，以对齐设计规范。[#586](https://github.com/oceanbase/oceanbase-design/pull/587)
+- 💄 将 Breadcrumb 字体大小改为 12px，以对齐设计规范。[#587](https://github.com/oceanbase/oceanbase-design/pull/587)
+
 ## 0.3.3
 
 `2024-04-25`
