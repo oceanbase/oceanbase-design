@@ -3,7 +3,7 @@
  */
 import React, { useState } from 'react';
 import { EllipsisOutlined } from '@oceanbase/icons';
-import { Button, Descriptions, Dropdown, Input, Radio, Tabs, message } from '@oceanbase/design';
+import { Button, Card, Dropdown, Tabs, message } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
 
 export default () => {
@@ -77,19 +77,26 @@ export default () => {
           </Dropdown>,
         ],
       }}
-      footer={[<Button>重置</Button>, <Button type="primary">提交</Button>]}
     >
       <Tabs
         items={[
           {
             key: '1',
             label: 'Tab 1',
-            children: 'This is content of Tab 1',
+            children: (
+              <Card bordered={false} bodyStyle={{ height: '100vh' }}>
+                This is content of Tab 1
+              </Card>
+            ),
           },
           {
             key: '2',
             label: 'Tab 2',
-            children: 'This is content of Tab 2',
+            children: (
+              <Card bordered={false} bodyStyle={{ height: '100vh' }}>
+                This is content of Tab 2
+              </Card>
+            ),
           },
         ]}
         tabBarExtraContent="This is tabBarExtraContent content"
