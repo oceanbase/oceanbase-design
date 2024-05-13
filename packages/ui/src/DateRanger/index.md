@@ -7,13 +7,13 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="交互一"></code>
+<code src="./demo/basic.tsx" title="基本"></code>
 
-<!-- <code src="./demo/with-form.tsx" title="配合 Form 使用"></code>
+<code src="./demo/with-form.tsx" title="配合 Form 使用"></code>
 
 <code src="./demo/selected.tsx" title="时间范围快捷选项"></code>
 
-<code src="./demo/default-value.tsx" title="指定默认值"></code> -->
+<code src="./demo/default-value.tsx" title="指定默认值"></code>
 
 ## API
 
@@ -26,7 +26,6 @@ nav:
 | defaultQuickValue | 快速选择的默认值（优先级低于 value/defaultValue） | string | - | - |
 | hasRewind | 后退按钮 | boolean | true | - |
 | hasForward | 前进按钮 | boolean | true | - |
-| hasZoomOut | 缩小按钮（跨大时间范围） | boolean | true | - |
 | hasNow | 当前按钮 | boolean | true | - |
 | pastOnly | 只能选择过去时间 | boolean | false | - |
 | disabledDate | 不可选择的日期 | (currentDate: Dayjs \| Moment) => boolean | - | - |

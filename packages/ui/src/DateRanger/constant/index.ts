@@ -13,7 +13,6 @@ export const CUSTOMIZE = 'customize';
 const DAY_UNIT = 'day';
 const WEEK_UNIT = 'week';
 const MONTH_UNIT = 'month';
-const QUARTER_UNIT = 'quarter';
 const YEAR_UNIT = 'year';
 
 export const YEAR_DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm';
@@ -178,36 +177,6 @@ export const LAST_MONTH: RangeOption = {
     current.clone().endOf(MONTH_UNIT).add(-1, MONTH_UNIT),
   ],
 };
-
-// export const THIS_QUARTER: RangeOption = {
-//   label: '本季度',
-//   rangeLabel: '1q',
-//   name: 'THIS_QUARTER',
-//   range: (current: Moment | Dayjs = moment()) => [
-//     current.clone().startOf(QUARTER_UNIT),
-//     current.clone().endOf(QUARTER_UNIT),
-//   ],
-// };
-
-// export const LAST_QUARTER: RangeOption = {
-//   label: '上季度',
-//   rangeLabel: '1q',
-//   name: 'LAST_QUARTER',
-//   range: (current: Moment | Dayjs = moment()) => [
-//     current.clone().startOf(QUARTER_UNIT).add(-1, QUARTER_UNIT),
-//     current.clone().endOf(QUARTER_UNIT).add(-1, QUARTER_UNIT),
-//   ],
-// };
-
-// export const NEXT_QUARTER: RangeOption = {
-//   label: '下季度',
-//   rangeLabel: '1q',
-//   name: 'NEXT_QUARTER',
-//   range: (current: Moment | Dayjs = moment()) => [
-//     current.clone().startOf(QUARTER_UNIT).add(1, QUARTER_UNIT),
-//     current.clone().endOf(QUARTER_UNIT).add(1, QUARTER_UNIT),
-//   ],
-// };
 
 export const THIS_YEAR: RangeOption = {
   label: '今年',
