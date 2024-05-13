@@ -42,10 +42,11 @@ export interface PickerPanelProps {
   tip?: string;
   require?: boolean;
   rules?: Rule[];
-  validateTrigger: ValidateTrigger;
+  validateTrigger?: ValidateTrigger;
   onCancel: () => void;
   onOk: (v: RangeValue) => void;
   isMoment: boolean;
+  disabledDate: any;
   locale: any;
 }
 
@@ -63,6 +64,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     require = true,
     onOk = noop,
     onCancel = noop,
+    disabledDate,
   } = props;
   const rootCls = useCSSVarCls(prefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
@@ -137,10 +139,6 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     return date.isValid() ? date.format(DATE_FORMAT) : null;
   };
 
-  // TODO:待实现
-  // validateTrigger 支持 submit 和 valueChange，默认支持 submit
-  // require 默认为 true
-
   return (
     <div>
       <Space direction="vertical" size={12} style={{ margin: '12px 0' }}>
@@ -156,7 +154,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             <Col span={15}>
               <Form.Item
                 name="startDate"
-                label="开始日期"
+                label={locale.startDate}
                 validateStatus={errorTypeMap['startDate']}
                 style={{ marginBottom: 8 }}
               >
@@ -179,7 +177,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             <Col span={9} style={{ paddingRight: 0 }}>
               <Form.Item
                 name="startTime"
-                label="开始时间"
+                label={locale.startTime}
                 style={{ marginBottom: 8 }}
                 validateStatus={errorTypeMap['startTime']}
                 initialValue={defaultS || defaultTime}
@@ -193,7 +191,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             <Col span={15}>
               <Form.Item
                 name="endDate"
-                label="结束日期"
+                label={locale.endDate}
                 style={{ marginBottom: 0 }}
                 validateStatus={errorTypeMap['endDate']}
               >
@@ -215,7 +213,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             <Col span={9} style={{ paddingRight: 0 }}>
               <Form.Item
                 name="endTime"
-                label="结束时间"
+                label={locale.endTime}
                 style={{ marginBottom: 0 }}
                 validateStatus={errorTypeMap['endTime']}
                 initialValue={defaultE || defaultTime}
@@ -239,33 +237,10 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             prefixCls={prefixCls}
             // @ts-ignore
             generateConfig={isMoment ? momentGenerateConfig : dayjsGenerateConfig}
+            disabledDate={disabledDate}
             onHover={(...res) => {
               onPanelHover(res[0]);
             }}
-            // onFocus={(...res) => {
-            //   console.log(res, 'onFocus');
-            // }}
-            // onBlur={(...res) => {
-            //   console.log(res, 'onBlur');
-            // }}
-            // onNow={(...res) => {
-            //   console.log(res, 'onNow');
-            // }}
-            // onOk={(...res) => {
-            //   console.log(res, 'onOk');
-            // }}
-            // onPanelChange={(...res) => {
-            //   console.log(res, 'onPanelChange');
-            // }}
-            // onPickerValueChange={(...res) => {
-            //   console.log(res, 'onPickerValueChange');
-            // }}
-            // onPresetHover={(...res) => {
-            //   console.log(res, 'onPresetHover');
-            // }}
-            // onPresetSubmit={(...res) => {
-            //   console.log(res, 'onPresetSubmit');
-            // }}
             onSelect={(...res) => {
               setCalendarValue(fillCalendarValue(res[0], activeIndex));
               setActiveIndex(index => {
@@ -279,7 +254,6 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             internalMode="date"
             picker="date"
             locale={locale}
-            presets={[]}
             showNow={false}
             range={true}
             needConfirm={false}
@@ -294,7 +268,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             onCancel();
           }}
         >
-          取消
+          {locale.cancel}
         </Button>
         <Button
           size="small"
@@ -304,33 +278,35 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
               const { startDate, startTime, endDate, endTime } = values;
               const start = `${startDate} ${startTime.format(TIME_FORMAT)}`;
               const end = `${endDate} ${endTime.format(TIME_FORMAT)}`;
-              let errorList = [];
-              let message = '';
 
-              rules?.some(item => {
-                if (typeof item?.validator === 'function') {
-                  const errorType = item.validator(start, end);
-                  if (errorType) {
-                    errorList = toArray(errorType);
-                    message = item.message;
-                    return true;
-                  }
-                }
-                return false;
-              });
+              onOk([start, end]);
 
-              if (errorList.length > 0) {
-                setErrorTypeList(errorList);
-                setErrorMessage(message);
-              } else {
-                setErrorMessage('');
-                setErrorTypeList([]);
-                onOk([start, end]);
-              }
+              // let errorList = [];
+              // let message = '';
+              // rules?.some(item => {
+              //   if (typeof item?.validator === 'function') {
+              //     const errorType = item.validator(start, end);
+              //     if (errorType) {
+              //       errorList = toArray(errorType);
+              //       message = item.message;
+              //       return true;
+              //     }
+              //   }
+              //   return false;
+              // });
+
+              // if (errorList.length > 0) {
+              //   setErrorTypeList(errorList);
+              //   setErrorMessage(message);
+              // } else {
+              //   setErrorMessage('');
+              //   setErrorTypeList([]);
+              //   onOk([start, end]);
+              // }
             });
           }}
         >
-          确定
+          {locale.confirm}
         </Button>
       </Space>
     </div>

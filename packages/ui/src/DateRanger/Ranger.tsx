@@ -33,6 +33,7 @@ import {
 import type { RangeOption } from './typing';
 import InternalPickerPanel, { Rule } from './PickerPanel';
 import zhCN from './locale/zh-CN';
+import enUS from './locale/en-US';
 import './index.less';
 
 export type RangeName = 'customize' | string;
@@ -67,6 +68,7 @@ export interface DateRangerProps
   defaultValue?: RangeValue;
   size?: 'small' | 'large' | 'middle';
   tooltipProps?: TooltipProps;
+  locale: any;
 }
 
 const prefix = getPrefix('date-ranger');
@@ -104,6 +106,7 @@ const Ranger = (props: DateRangerProps) => {
     ...rest
   } = props;
 
+  console.log(locale, 'locale');
   const { token } = theme.useToken();
 
   // 是否为 moment 时间对象
@@ -126,8 +129,8 @@ const Ranger = (props: DateRangerProps) => {
         ?.range(isMoment ? moment() : dayjs()) as RangeValue)
   );
 
-  const [open, setOpen] = useState(true);
-  const [tooltipOpen, setTooltipOpen] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
   const refState = useRef({
     tooltipOpen,
   });
@@ -194,17 +197,12 @@ const Ranger = (props: DateRangerProps) => {
   const differenceDays = endTime?.diff(startTime as any, 'days');
   const differenceWeeks = endTime?.diff(startTime as any, 'weeks');
   const differenceMonths = endTime?.diff(startTime as any, 'months');
-  // const differenceQuarters = endTime?.diff(startTime as any, 'quarters');
   const differenceYears = endTime?.diff(startTime as any, 'years');
 
   const getCustomizeRangeLabel = () => {
     if (differenceYears > 0) {
       return `${differenceYears}y`;
     }
-
-    // if (differenceQuarters > 0) {
-    //   return `${differenceQuarters}q`;
-    // }
 
     if (differenceMonths > 0) {
       return `${differenceMonths}mon`;
@@ -327,8 +325,8 @@ const Ranger = (props: DateRangerProps) => {
                 ...selects,
                 {
                   name: CUSTOMIZE,
-                  rangeLabel: '自定义',
-                  label: '自定义时间',
+                  rangeLabel: locale.customize,
+                  label: locale.customTime,
                 },
               ]
                 .filter(item => {
@@ -363,7 +361,8 @@ const Ranger = (props: DateRangerProps) => {
                             <InternalPickerPanel
                               defaultValue={innerValue}
                               // @ts-ignore
-                              locale={locale.rcPicker}
+                              locale={locale}
+                              disabledDate={pastOnly ? disabledFuture : disabledDate}
                               tip={tip}
                               isMoment={isMoment}
                               rules={rules}
@@ -425,7 +424,6 @@ const Ranger = (props: DateRangerProps) => {
                   pointerEvents: 'none',
                   border: 0,
                 }}
-                disabledDate={pastOnly ? disabledFuture : disabledDate}
                 format={v => {
                   // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
                   return isThisYear ? v.format(DATE_TIME_FORMAT) : v.format(YEAR_DATE_TIME_FORMAT);
