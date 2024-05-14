@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/codemod",
-  "version": "0.2.16",
+  "version": "0.3.3",
   "description": "Codemod for OceanBase Design upgrade",
   "keywords": [
     "oceanbase",
@@ -23,25 +23,26 @@
     "build": "father build"
   },
   "dependencies": {
+    "@oceanbase/design": "workspace:^",
     "chalk": "^3.0.0",
     "command-exists": "^1.2.9",
     "execa": "^5.1.1",
     "find-up": "^7.0.0",
-    "glob": "^10.3.10",
+    "glob": "^10.3.12",
     "is-directory": "^0.3.1",
     "is-git-clean": "^1.1.0",
-    "jscodeshift": "^0.15.1",
+    "jscodeshift": "^0.15.2",
     "lodash": "^4.17.21",
-    "postcss": "^8.4.33",
+    "postcss": "^8.4.38",
     "postcss-less": "^6.0.0",
-    "prettier": "^3.2.4",
+    "prettier": "^3.2.5",
     "read-pkg-up": "^10.1.0",
-    "semver": "^7.5.4",
+    "semver": "^7.6.0",
     "update-check": "^1.5.4",
     "yargs-parser": "^21.1.1"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.10",
+    "@types/jest": "^29.5.12",
     "@types/jscodeshift": "^0.11.11",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2"

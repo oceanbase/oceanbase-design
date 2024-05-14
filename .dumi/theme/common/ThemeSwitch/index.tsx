@@ -3,8 +3,9 @@ import { CompactTheme, DarkTheme, Motion } from 'antd-token-previewer/es/icons';
 import { FormattedMessage } from 'dumi';
 import React from 'react';
 import ThemeIcon from './ThemeIcon';
+import { FontColorsOutlined } from '@ant-design/icons';
 
-export type ThemeName = 'light' | 'dark' | 'compact' | 'motion-off';
+export type ThemeName = 'light' | 'dark' | 'compact' | 'motion-off' | 'custom-font';
 
 export type ThemeSwitchProps = {
   value?: ThemeName[];
@@ -14,6 +15,7 @@ export type ThemeSwitchProps = {
 const ThemeSwitch: React.FC<ThemeSwitchProps> = (props: ThemeSwitchProps) => {
   const { value = ['light'], onChange } = props;
   const isMotionOff = value.includes('motion-off');
+  const isCustomFont = value.includes('custom-font');
 
   return (
     <FloatButton.Group trigger="click" icon={<ThemeIcon />}>
@@ -54,6 +56,22 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = (props: ThemeSwitchProps) => {
         tooltip={
           <FormattedMessage
             id={isMotionOff ? 'app.theme.switch.motion.off' : 'app.theme.switch.motion.on'}
+          />
+        }
+      />
+      <FloatButton
+        icon={<FontColorsOutlined />}
+        type={isCustomFont ? 'primary' : 'default'}
+        onClick={() => {
+          if (isCustomFont) {
+            onChange(value.filter(theme => theme !== 'custom-font'));
+          } else {
+            onChange([...value, 'custom-font']);
+          }
+        }}
+        tooltip={
+          <FormattedMessage
+            id={isCustomFont ? 'app.theme.switch.font.custom' : 'app.theme.switch.font.default'}
           />
         }
       />

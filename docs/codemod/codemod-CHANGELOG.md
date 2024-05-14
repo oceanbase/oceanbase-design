@@ -8,6 +8,24 @@ group: 自动化迁移工具
 
 ---
 
+## 0.3.1
+
+`2024-04-12`
+
+- ⭐️ 支持 @oceanbase/design 颜色值到 Design Token 的自动改写。[#539](https://github.com/oceanbase/oceanbase-design/pull/539)
+
+## 0.3.0
+
+`2024-03-22`
+
+- ⭐️ 支持更多颜色值到 Design Token 的自动改写。[#511](https://github.com/oceanbase/oceanbase-design/pull/511) [#519](https://github.com/oceanbase/oceanbase-design/pull/519)
+  - `rgb(250,250,250)` => `colorBgLayout`
+  - `rgb(255 255 255 / 100%)` => `colorBgContainer`
+  - `rgb(0 0 0 / 85%)` => `colorText`
+  - `rgb(0 0 0 / 65%)` => `colorTextSecondary`
+  - `rgb(0 0 0 / 45%)` => `colorTextTertiary`
+  - `rgb(0 0 0 / 25%)` => `colorTextQuaternary`
+
 ## 0.2.10
 
 `2023-11-09`

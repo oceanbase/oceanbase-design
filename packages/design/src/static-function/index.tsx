@@ -18,7 +18,11 @@ const { defaultAlgorithm, defaultSeed, useToken } = theme;
 const mapToken = {
   ...defaultAlgorithm(defaultSeed),
   ...defaultTheme.token,
-  override: {},
+  // 需要覆盖部分 Alias Token 的值
+  override: {
+    boxShadow: defaultTheme.token.boxShadow,
+    boxShadowSecondary: defaultTheme.token.boxShadowSecondary,
+  },
 };
 let token = formatToken(mapToken);
 
@@ -31,6 +35,9 @@ let notification: NotificationInstance & {
 let modal: Omit<ModalStaticFunctions, 'warn'> & {
   useModal: typeof AntModal.useModal;
 } = AntModal;
+
+// injected static function or not
+let injectedStaticFunction = false;
 
 export default () => {
   // 自动注入 useToken，避免每次使用都要声明一遍，比较繁琐
@@ -50,7 +57,8 @@ export default () => {
     ...staticFunction.modal,
     useModal: AntModal.useModal,
   };
+  injectedStaticFunction = true;
   return null;
 };
 
-export { token, message, notification, modal };
+export { token, message, notification, modal, injectedStaticFunction };

@@ -26,10 +26,9 @@ export default () => {
     },
   ];
   const config1 = {
+    isProgress: true,
     xField: 'value',
     yField: 'type',
-    isProgress: true,
-
     meta: {
       value: {
         alias: '比赛进度',

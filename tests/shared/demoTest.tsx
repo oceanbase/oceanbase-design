@@ -46,8 +46,8 @@ function baseText(
       () => {
         resetWarned();
 
-        Date.now = jest.fn(() => new Date('2016-11-22').getTime());
-        jest.useFakeTimers().setSystemTime(new Date('2016-11-22'));
+        Date.now = vi.fn(() => new Date('2016-11-22').getTime());
+        vi.useFakeTimers().setSystemTime(new Date('2016-11-22'));
 
         // eslint-disable-next-line
         let Demo = require(`../../${file}`).default;
@@ -76,7 +76,7 @@ function baseText(
           // expect({ type: 'demo', html }).toMatchSnapshot();
         }
 
-        jest.clearAllTimers();
+        vi.clearAllTimers();
 
         // Snapshot of warning info
         if (doInject) {
@@ -92,7 +92,7 @@ function baseText(
         }
       }
     );
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 }
 

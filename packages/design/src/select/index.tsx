@@ -1,14 +1,23 @@
 import { Select as AntSelect } from 'antd';
 import type { SelectProps as AntSelectProps, RefSelectProps } from 'antd/es/select';
+import type { Locale as AntLocale } from 'antd/es/locale';
 import type { OptGroup, Option } from 'rc-select';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
+import type { ConfigConsumerProps } from '../config-provider';
+import defaultLocale from '../locale/en-US';
 import useStyle from './style';
 
 export * from 'antd/es/select';
 
-export type SelectProps = AntSelectProps;
+export type SelectLocale = AntLocale['Select'] & {
+  placeholder?: string;
+};
+
+export interface SelectProps extends AntSelectProps {
+  locale?: SelectLocale;
+}
 
 type CompoundedComponent = React.ForwardRefExoticComponent<
   SelectProps & React.RefAttributes<RefSelectProps>
@@ -20,14 +29,30 @@ type CompoundedComponent = React.ForwardRefExoticComponent<
 };
 
 const InternalSelect = React.forwardRef<RefSelectProps, SelectProps>(
-  ({ prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
-    const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  ({ locale: customLocale, prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
+    const { locale: contextLocale, getPrefixCls } = useContext<ConfigConsumerProps>(
+      ConfigProvider.ConfigContext
+    );
+    const selectLocale: SelectLocale = {
+      ...defaultLocale.global,
+      ...contextLocale?.global,
+      ...defaultLocale.Select,
+      ...contextLocale?.Select,
+      ...customLocale,
+    };
+
     const prefixCls = getPrefixCls('select', customizePrefixCls);
     const { wrapSSR } = useStyle(prefixCls);
-
     const selectCls = classNames(className);
+
     return wrapSSR(
-      <AntSelect ref={ref} prefixCls={customizePrefixCls} className={selectCls} {...restProps} />
+      <AntSelect
+        ref={ref}
+        placeholder={selectLocale.placeholder}
+        prefixCls={customizePrefixCls}
+        className={selectCls}
+        {...restProps}
+      />
     );
   }
 );

@@ -125,6 +125,10 @@ export default defineConfig({
           ],
         },
         {
+          title: '导航',
+          children: [{ title: 'Breadcrumb 面包屑', link: '/components/breadcrumb' }],
+        },
+        {
           title: '布局',
           children: [
             { title: 'Grid 栅格', link: '/components/grid' },
@@ -134,9 +138,13 @@ export default defineConfig({
         {
           title: '数据录入',
           children: [
+            { title: 'Cascader 级联选择', link: '/components/cascader' },
             { title: 'Form 表单', link: '/components/form' },
+            { title: 'Input 输入框', link: '/components/input' },
             { title: 'InputNumber 数字输入框', link: '/components/input-number' },
+            { title: 'Radio 单选框', link: '/components/radio' },
             { title: 'Select 选择器', link: '/components/select' },
+            { title: 'TreeSelect 树选择', link: '/components/tree-select' },
           ],
         },
         {
@@ -144,6 +152,7 @@ export default defineConfig({
           children: [
             { title: 'Card 卡片', link: '/components/card' },
             { title: 'Descriptions 描述列表', link: '/components/descriptions' },
+            { title: 'Empty 空状态', link: '/components/empty' },
             { title: 'List 列表', link: '/components/list' },
             { title: 'Table 表格', link: '/components/table' },
             { title: 'Tabs 标签页', link: '/components/tabs' },
@@ -163,6 +172,7 @@ export default defineConfig({
             { title: 'Modal 对话框', link: '/components/modal' },
             { title: 'Drawer 抽屉', link: '/components/drawer' },
             { title: 'Notification 通知提醒框', link: '/components/notification' },
+            { title: 'Result 结果', link: '/components/result' },
             { title: 'Spin 加载中', link: '/components/spin' },
             { title: 'Badge 徽标数', link: '/components/badge' },
           ],
@@ -178,10 +188,18 @@ export default defineConfig({
           children: [
             { title: 'BasicLayout 导航和布局', link: '/biz-components/basic-layout' },
             { title: 'PageContainer 页容器', link: '/biz-components/page-container' },
+            { title: 'PageLoading 页面级加载', link: '/biz-components/page-loading' },
             { title: 'FooterToolbar 底部操作栏', link: '/biz-components/footer-toolbar' },
             { title: 'Login 登录页', link: '/biz-components/login' },
             // { title: 'NavMenu', link: '/biz-components/nav-menu' },
             { title: 'Welcome 欢迎页', link: '/biz-components/welcome' },
+          ],
+        },
+        {
+          title: 'ProComponents 组件',
+          children: [
+            { title: 'ProTable 高级表格', link: '/biz-components/pro-table' },
+            { title: 'LightFilter 轻量筛选', link: '/biz-components/light-filter' },
           ],
         },
         {
@@ -252,12 +270,12 @@ export default defineConfig({
               link: '/charts/histogram',
             },
             {
-              title: 'Pie 饼图&环图',
-              link: '/charts/pie',
-            },
-            {
               title: 'DualAxes 双轴图',
               link: '/charts/dual-axes',
+            },
+            {
+              title: 'Pie 饼图&环图',
+              link: '/charts/pie',
             },
             {
               title: 'Gauge 仪表盘',

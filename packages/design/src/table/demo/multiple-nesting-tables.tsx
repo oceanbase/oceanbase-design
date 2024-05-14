@@ -145,9 +145,6 @@ const App: React.FC = () => {
             setSelectedRowKeys(keys);
           },
         }}
-        pagination={{
-          showTotal: total => `共 ${total} 条`,
-        }}
       />
     </>
   );

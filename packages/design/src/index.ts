@@ -24,7 +24,7 @@ export { default as Card } from './card';
 export type { CardProps } from './card';
 
 export { default as ConfigProvider } from './config-provider';
-export type { ConfigProviderProps } from './config-provider';
+export type { ConfigProviderProps, ConfigConsumerProps, ThemeConfig } from './config-provider';
 
 export { default as Descriptions } from './descriptions';
 export type {
@@ -32,6 +32,9 @@ export type {
   DescriptionsItemType,
   DescriptionsItemProps,
 } from './descriptions';
+
+export { default as Empty } from './empty';
+export type { EmptyProps } from './empty';
 
 export { default as Form } from './form';
 export type { FormProps, FormItemProps } from './form';
@@ -56,8 +59,17 @@ export type { TabsProps } from './tabs';
 export { default as Tag } from './tag';
 export type { TagProps } from './tag';
 
+export { default as Input } from './input';
+export type { InputProps } from './input';
+
+export { default as InputNumber } from './input-number';
+export type { InputNumberProps } from './input-number';
+
 export { default as Select } from './select';
 export type { SelectProps } from './select';
+
+export { default as TreeSelect } from './tree-select';
+export type { TreeSelectProps } from './tree-select';
 
 export { default as Tooltip } from './tooltip';
 export type { TooltipProps } from './tooltip';
@@ -67,6 +79,9 @@ export type { SegmentedProps } from './segmented';
 
 export { default as Breadcrumb } from './breadcrumb';
 export type { BreadcrumbProps, BreadcrumbItemProps } from './breadcrumb';
+
+export { default as Result } from './result';
+export type { ResultProps, ResultType, ResultStatusType } from './result';
 
 export { default as Spin } from './spin';
 export type { SpinProps } from './spin';

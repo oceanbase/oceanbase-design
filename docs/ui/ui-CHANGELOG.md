@@ -8,6 +8,43 @@ group: 业务组件
 
 ---
 
+## 0.3.4
+
+`2024-05-11`
+
+- 💄 调整 PageContainer 刷新图标的大小和间距，以对齐设计规范。[#588](https://github.com/oceanbase/oceanbase-design/pull/588)
+
+## 0.3.3
+
+`2024-04-25`
+
+- ⭐️ Boundary 组件支持 `className` 属性，并且根据不同组件内置 ob-boundary-error、ob-boundary-403 和 ob-boundary-404 类名，便于上层判断异常类型。[#571](https://github.com/oceanbase/oceanbase-design/pull/571)
+
+## 0.3.2
+
+`2024-04-12`
+
+- 💄 优化 LightFilter 圆角、内间距、背景色等样式，以对齐设计规范。[#554](https://github.com/oceanbase/oceanbase-design/pull/554)
+- ProTable [#549](https://github.com/oceanbase/oceanbase-design/pull/549)
+  - 🐞 修复 ProTable 没有继承 Table 样式的问题。
+  - 🐞 修复 ProTable 查询表单带有 `requiredMark` 可选样式的问题。
+  - 💄 ProTable 分页器配置默认改为 `{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '50', '100'], showTotal: total => \`共 ${total} 条\` }`。
+
+## 0.3.1
+
+`2024-03-29`
+
+- 🌐 国际化:
+  - 优化 Ranger 的 `en-US` 翻译。[#533](https://github.com/oceanbase/oceanbase-design/pull/533)
+
+## 0.3.0
+
+`2024-03-22`
+
+- 🆕 新增 PageLoading 页面级加载组件。[#497](https://github.com/oceanbase/oceanbase-design/pull/497)
+- 🐞 修复 Password 部分英文文案不正确的问题。[#469](https://github.com/oceanbase/oceanbase-design/pull/469)
+- 💄 优化 PageContainer 加载样式，保证页面内垂直居中。[#497](https://github.com/oceanbase/oceanbase-design/pull/497)
+
 ## 0.2.38
 
 `2024-01-30`

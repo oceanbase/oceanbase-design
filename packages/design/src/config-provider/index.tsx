@@ -6,16 +6,18 @@ import type {
   ThemeConfig as AntThemeConfig,
 } from 'antd/es/config-provider';
 import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
+import type { PaginationConfig } from 'antd/es/pagination';
 import type { SpinIndicator } from 'antd/es/spin';
 import { StyleProvider } from '@ant-design/cssinjs';
 import type { StyleProviderProps } from '@ant-design/cssinjs';
 import StyleContext from '@ant-design/cssinjs/es/StyleContext';
 import type { StyleContextProps } from '@ant-design/cssinjs/es/StyleContext';
 import { merge } from 'lodash';
-import StaticFunction from '../static-function';
+import StaticFunction, { injectedStaticFunction } from '../static-function';
 import themeConfig from '../theme';
 import defaultTheme from '../theme/default';
 import darkTheme from '../theme/dark';
+import DefaultRenderEmpty from './DefaultRenderEmpty';
 import type { NavigateFunction } from './navigate';
 import type { Locale } from '../locale';
 
@@ -27,6 +29,8 @@ export * from 'antd/es/config-provider';
 
 export interface ThemeConfig extends AntThemeConfig {
   isDark?: boolean;
+  /* use custom font or not */
+  customFont?: boolean;
 }
 
 export type SpinConfig = ComponentStyleConfig & {
@@ -49,11 +53,13 @@ export interface ConfigConsumerProps extends AntConfigConsumerProps {
 
 export interface ConfigProviderProps extends AntConfigProviderProps {
   theme?: ThemeConfig;
+  locale?: Locale;
   // set global route navigate function
   // for react-router-dom v5: history.push
   // for react-router-dom v6: navigate
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
+  pagination?: PaginationConfig;
   spin?: SpinConfig;
   table?: TableConfig;
   // inject static function to consume ConfigProvider
@@ -72,8 +78,6 @@ const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
   hideOnSinglePage: false,
 });
 
-const { defaultSeed } = themeConfig;
-
 export type ConfigProviderType = React.FC<ConfigProviderProps> & {
   ExtendedConfigContext: typeof ExtendedConfigContext;
 } & {
@@ -86,12 +90,14 @@ export type ConfigProviderType = React.FC<ConfigProviderProps> & {
 const ConfigProvider: ConfigProviderType = ({
   children,
   theme,
+  locale,
   navigate,
   hideOnSinglePage,
+  form,
   spin,
   table,
   tabs,
-  injectStaticFunction = true,
+  injectStaticFunction = !injectedStaticFunction,
   styleProviderProps,
   ...restProps
 }) => {
@@ -101,6 +107,9 @@ const ConfigProvider: ConfigProviderType = ({
     React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
   const mergedTheme = merge(parentContext.theme, theme);
   const currentTheme = mergedTheme?.isDark ? darkTheme : defaultTheme;
+  const { token } = themeConfig.useToken();
+  const fontFamily = mergedTheme.token?.fontFamily || token.fontFamily;
+  const customFont = mergedTheme.customFont;
 
   // inherit from parent StyleProvider
   const parentStyleContext = React.useContext<StyleContextProps>(StyleContext);
@@ -108,6 +117,14 @@ const ConfigProvider: ConfigProviderType = ({
 
   return (
     <AntConfigProvider
+      locale={merge(parentContext.locale, locale)}
+      form={merge(
+        {
+          requiredMark: 'optional',
+        },
+        parentContext.form,
+        form
+      )}
       spin={merge(parentContext.spin, spin)}
       table={merge(parentContext.table, table)}
       tabs={merge(
@@ -117,16 +134,18 @@ const ConfigProvider: ConfigProviderType = ({
         parentContext.tabs,
         tabs
       )}
-      theme={merge(
-        {
-          token: {
-            ...defaultSeed,
-            ...currentTheme.token,
-          },
-          components: currentTheme.components,
+      theme={merge(currentTheme, mergedTheme, {
+        token: {
+          fontFamily:
+            customFont && !fontFamily.startsWith(`'Source Sans Pro'`)
+              ? `'Source Sans Pro', ${fontFamily}`
+              : fontFamily,
         },
-        mergedTheme
-      )}
+      })}
+      renderEmpty={
+        parentContext.renderEmpty ||
+        (componentName => <DefaultRenderEmpty componentName={componentName} />)
+      }
       {...restProps}
     >
       <ExtendedConfigContext.Provider

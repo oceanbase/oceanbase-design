@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Form Form hideRequiredMark should be priority over ConfigProvider form.requiredMark 1`] = `
+exports[`Form > Form hideRequiredMark should be priority over ConfigProvider form.requiredMark 1`] = `
 <form
   class="ant-form ant-form-horizontal ant-form-hide-required-mark"
 >
@@ -34,6 +34,7 @@ exports[`Form Form hideRequiredMark should be priority over ConfigProvider form.
               aria-required="true"
               class="ant-input ant-input-outlined"
               id="name"
+              placeholder="Please enter"
               type="text"
               value=""
             />
@@ -71,6 +72,7 @@ exports[`Form Form hideRequiredMark should be priority over ConfigProvider form.
             <input
               class="ant-input ant-input-outlined"
               id="address"
+              placeholder="Please enter"
               type="text"
               value=""
             />
@@ -82,7 +84,7 @@ exports[`Form Form hideRequiredMark should be priority over ConfigProvider form.
 </form>
 `;
 
-exports[`Form requiredMark could be changed 1`] = `
+exports[`Form > requiredMark could be changed 1`] = `
 <form
   class="ant-form ant-form-horizontal"
 >
@@ -116,6 +118,7 @@ exports[`Form requiredMark could be changed 1`] = `
               aria-required="true"
               class="ant-input ant-input-outlined"
               id="name"
+              placeholder="Please enter"
               type="text"
               value=""
             />
@@ -153,6 +156,7 @@ exports[`Form requiredMark could be changed 1`] = `
             <input
               class="ant-input ant-input-outlined"
               id="address"
+              placeholder="Please enter"
               type="text"
               value=""
             />
@@ -164,7 +168,7 @@ exports[`Form requiredMark could be changed 1`] = `
 </form>
 `;
 
-exports[`Form requiredMark could be changed by ConfigProvider 1`] = `
+exports[`Form > requiredMark could be changed by ConfigProvider 1`] = `
 <form
   class="ant-form ant-form-horizontal"
 >
@@ -198,6 +202,7 @@ exports[`Form requiredMark could be changed by ConfigProvider 1`] = `
               aria-required="true"
               class="ant-input ant-input-outlined"
               id="name"
+              placeholder="Please enter"
               type="text"
               value=""
             />
@@ -235,6 +240,7 @@ exports[`Form requiredMark could be changed by ConfigProvider 1`] = `
             <input
               class="ant-input ant-input-outlined"
               id="address"
+              placeholder="Please enter"
               type="text"
               value=""
             />
@@ -246,7 +252,7 @@ exports[`Form requiredMark could be changed by ConfigProvider 1`] = `
 </form>
 `;
 
-exports[`Form requiredMark should be optional by default 1`] = `
+exports[`Form > requiredMark should be optional by default 1`] = `
 <form
   class="ant-form ant-form-horizontal"
 >
@@ -280,6 +286,7 @@ exports[`Form requiredMark should be optional by default 1`] = `
               aria-required="true"
               class="ant-input ant-input-outlined"
               id="name"
+              placeholder="Please enter"
               type="text"
               value=""
             />
@@ -323,6 +330,7 @@ exports[`Form requiredMark should be optional by default 1`] = `
             <input
               class="ant-input ant-input-outlined"
               id="address"
+              placeholder="Please enter"
               type="text"
               value=""
             />

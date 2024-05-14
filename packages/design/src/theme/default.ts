@@ -1,6 +1,9 @@
 import type { ThemeConfig } from 'antd';
 import { formatTheme } from './util/format';
 
+// Calculated by colorBorder and getWeakenBorderColor()
+const tagColorBorder = '#cdd5e466';
+
 const defaultTheme: ThemeConfig = {
   token: {
     colorPrimaryBg: '#EAF1FF',
@@ -9,6 +12,7 @@ const defaultTheme: ThemeConfig = {
     colorPrimaryBorder: '#b3ccff',
     colorPrimaryBorderHover: '#5189FB',
     colorPrimaryHover: '#5189fb',
+    colorPrimaryActive: '#004CE6',
     colorPrimaryTextHover: '#5189FB',
     colorPrimaryText: '#006AFF',
     colorPrimaryTextActive: '#004CE6',
@@ -53,41 +57,51 @@ const defaultTheme: ThemeConfig = {
     colorInfoText: '#006AFF',
     colorInfoTextActive: '#004CE6',
     colorTextBase: '#132039',
-    colorBgBase: '#ffffff',
     colorText: '#132039',
-    colorTextSecondary: '#5C6B8A',
-    colorTextQuaternary: '#ABB7CF',
+    colorTextSecondary: '#5c6b8a',
+    colorTextQuaternary: '#c1cbe0',
     colorTextTertiary: '#8592AD',
+    colorBgBase: '#ffffff',
     colorBgContainer: '#ffffff',
-    colorBgLayout: '#F8FAFE',
-    colorBgSpotlight: 'rgba(19, 32, 57, 0.8)',
-    colorBgMask: 'rgba(19, 32, 57,  0.6)',
+    colorBgLayout: '#f3f6fc',
+    colorBgSpotlight: '#132039',
     colorBorder: '#CDD5E4',
     colorBorderSecondary: '#E2E8F3',
     colorFillQuaternary: '#F8FAFE',
-    colorFillTertiary: '#F8FAFE',
-    colorFillSecondary: '#F3F6FC',
-    colorFill: '#E2E8F3',
+    colorFillTertiary: '#f3f6fc',
+    colorFillSecondary: '#e2e8f3',
+    colorFill: '#cdd5e4',
+    colorBgMask: 'rgba(19, 32, 57, 0.45)',
+    colorBgElevated: '#ffffff',
     boxShadowSecondary:
       '0 6px 16px 0 rgba(54, 69, 99, 0.08), 0 3px 6px -4px rgba(54, 69, 99, 0.12), 0 9px 28px 8px rgba(54, 69, 99, 0.05)',
     boxShadow:
       '0 1px 2px 0 rgba(54, 69, 99, 0.03), 0 1px 6px -1px rgba(54, 69, 99, 0.02), 0 2px 4px 0 rgba(54, 69, 99, 0.02)',
     borderRadius: 6,
     wireframe: false,
-    colorPrimaryActive: '#004CE6',
   },
   components: {
-    Segmented: {
-      itemColor: '#5C6B8A',
-      itemHoverColor: '#132039',
-      itemHoverBg: '#ffffff',
-    },
-    Rate: {
-      colorFillContent: '#E2E8F3',
-      colorText: '#F20000',
+    Breadcrumb: {
+      fontSize: 12,
+      // @ts-ignore
+      // fontHeight is internal token
+      fontHeight: 20,
     },
     InputNumber: {
       handleVisible: true,
+    },
+    Radio: {
+      // temporarily fix style for checked disabled Radio.Button
+      controlItemBgActiveDisabled: '#e2e8f3',
+    },
+    Select: {
+      // work for all multiple select component, including Select, TreeSelect and Cascader and so on
+      multipleItemBg: '#F8FAFE',
+      multipleItemBorderColor: tagColorBorder,
+      multipleItemBorderColorDisabled: tagColorBorder,
+    },
+    Tag: {
+      colorBorder: tagColorBorder,
     },
     Table: {
       cellPaddingBlock: 12,

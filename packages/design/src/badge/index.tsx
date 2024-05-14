@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { Badge as AntBadge, Space } from 'antd';
+import { Badge as AntBadge } from 'antd';
 import type { BadgeProps as AntBadgeProps } from 'antd/es/badge';
 import {
   CloseCircleFilled,
   CheckCircleFilled,
   Loading3QuartersOutlined,
-  StopFilled,
-  ClockCircleFilled,
+  MinusCircleFilled,
+  EllipsisCircleFilled,
 } from '@oceanbase/icons';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
@@ -25,7 +25,7 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     const { wrapSSR, hashId } = useStyle(prefixCls);
 
     const iconMap = {
-      default: <StopFilled />,
+      default: <MinusCircleFilled rotate={45} />,
       processing: (
         <Loading3QuartersOutlined
           style={{
@@ -36,7 +36,7 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       ),
       success: <CheckCircleFilled />,
       error: <CloseCircleFilled />,
-      warning: <ClockCircleFilled />,
+      warning: <EllipsisCircleFilled />,
     };
 
     return wrapSSR(

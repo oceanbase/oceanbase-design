@@ -13,6 +13,7 @@ import Typography from '../typography';
 import enUS from '../locale/en-US';
 import useStyle from './style';
 import type { AnyObject } from '../_util/type';
+import useDefaultPagination from './hooks/useDefaultPagination';
 
 export * from 'antd/es/table';
 
@@ -39,7 +40,7 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
   const {
     locale: customLocale,
     columns,
-    pagination,
+    pagination: customPagination,
     rowSelection,
     toolAlertRender,
     toolOptionsRender,
@@ -50,6 +51,7 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
     className,
   } = props;
   const extendedContext = useContext(ConfigProvider.ExtendedConfigContext);
+  const pagination = useDefaultPagination(customPagination);
 
   const { batchOperationBar, ...restLocale } = {
     ...customLocale,
@@ -244,4 +246,6 @@ export default Object.assign(ForwardTable, {
   Column: AntTable.Column,
   ColumnGroup: AntTable.ColumnGroup,
   Summary: AntTable.Summary as typeof Summary,
+  useStyle,
+  useDefaultPagination,
 });

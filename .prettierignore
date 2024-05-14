@@ -15,4 +15,5 @@ dist
 /server
 /public
 __testfixtures__
+packages/design/src/spin/assets
 

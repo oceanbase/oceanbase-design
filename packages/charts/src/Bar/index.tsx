@@ -57,8 +57,6 @@ const Bar = forwardRef<unknown, BarConfig>(
       isPercent,
       isRange,
       seriesField,
-      maxBarWidth: themeConfig.barWidth,
-      minBarWidth: themeConfig.barWidth,
       meta: isProgress
         ? {
             ...meta,
@@ -101,12 +99,12 @@ const Bar = forwardRef<unknown, BarConfig>(
             isRange
               ? 2
               : !isStack ||
-                (isStack &&
-                  seriesField &&
-                  // 堆叠条形图仅最后一段末端展示 2px 圆角
-                  datum[seriesField] === lastStackValue)
-              ? [2, 2, 0, 0]
-              : [],
+                  (isStack &&
+                    seriesField &&
+                    // 堆叠条形图仅最后一段末端展示 2px 圆角
+                    datum[seriesField] === lastStackValue)
+                ? [2, 2, 0, 0]
+                : [],
         };
       },
       xAxis: {

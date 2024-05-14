@@ -8,6 +8,81 @@ group: 基础组件
 
 ---
 
+## 0.3.4
+
+`2024-05-11`
+
+- 💄 优化 Empty 步骤提示的背景颜色，以对齐设计规范。[#586](https://github.com/oceanbase/oceanbase-design/pull/587)
+- 💄 将 Breadcrumb 字体大小改为 12px，以对齐设计规范。[#587](https://github.com/oceanbase/oceanbase-design/pull/587)
+
+## 0.3.3
+
+`2024-04-25`
+
+- ConfigProvider
+  - 🐞 修复 ConfigProvider 开启 `theme.customFont` 并且多次嵌套后 `fontFamily` 不正确的问题。[#572](https://github.com/oceanbase/oceanbase-design/pull/572)
+  - 🐞 修复 ConfigProvider 自定义 `theme.token.fontFamily` 不生效的问题。[#573](https://github.com/oceanbase/oceanbase-design/pull/573)
+  - 🐞 修复 ConfigProvider 多次使用会默认多次注入 StaticFunction，导致 Modal、message 和 notification 静态方法不会正常展示的问题。[#574](https://github.com/oceanbase/oceanbase-design/pull/574)
+- 🐞 修复主题 Token `boxShadowSecondary` 通过静态 token 对象和 less 变量访问时值不正确的问题。[#569](https://github.com/oceanbase/oceanbase-design/pull/569)
+- 💄 优化 Radio.Button 选中置灰态的背景颜色，避免和字体颜色区分不清。[#570](https://github.com/oceanbase/oceanbase-design/pull/570)
+
+## 0.3.2
+
+`2024-04-12`
+
+- 📢 Input `placeholder` 默认为 `请输入`。[#540](https://github.com/oceanbase/oceanbase-design/pull/540)
+- 📢 InputNumber `placeholder` 默认为 `请输入`。[#548](https://github.com/oceanbase/oceanbase-design/pull/548)
+- 📢 Select `placeholder` 默认为 `请选择`。[#546](https://github.com/oceanbase/oceanbase-design/pull/546)
+- 📢 TreeSelect `placeholder` 默认为 `请选择`。[#547](https://github.com/oceanbase/oceanbase-design/pull/547)
+- ConfigProvider
+  - 🆕 ConfigProvider 新增 `locale.Input.placeholder` 属性，用于配置 Input 的默认 placeholder。[#540](https://github.com/oceanbase/oceanbase-design/pull/540)
+  - 🆕 ConfigProvider 新增 `locale.global.inputPlaceholder` 和 `locale.InputNumber.placeholder` 属性，用于配置 InputNumber 的默认 placeholder。[#548](https://github.com/oceanbase/oceanbase-design/pull/548)
+  - 🆕 ConfigProvider 新增 `locale.Select.placeholder` 属性，用于配置 Select 的默认 placeholder。[#546](https://github.com/oceanbase/oceanbase-design/pull/546)
+  - 🆕 ConfigProvider 新增 `locale.TreeSelect.placeholder` 属性，用于配置 Select 的默认 `placeholder`。[#547](https://github.com/oceanbase/oceanbase-design/pull/547)
+- 🐞 修复主题 Token `boxShadow` 和 `boxShadowSecondary` 通过静态 token 对象和 less 变量访问时值不正确的问题。[#552](https://github.com/oceanbase/oceanbase-design/pull/552)
+- 💄 优化 Select、TreeSelect 和 Cascader 多选项的背景色和边框色，以对齐设计规范。[#553](https://github.com/oceanbase/oceanbase-design/pull/553)
+- 💄 Table 分页器配置默认改为 `{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '50', '100'], showTotal: total => \`共 ${total} 条\` }`。
+
+## 0.3.1
+
+`2024-03-29`
+
+- ConfigProvider
+  - 🆕 新增 `theme.customFont` 属性，用于开启 `Source Sans Pro` 定制字体以提升展示效果，仅支持线上应用和英文环境。[#536](https://github.com/oceanbase/oceanbase-design/pull/536)
+  - 🐞 ConfigProvider `form.requiredMark` 属性的默认值改为 `optional`，以修复可选样式在 ProForm 没有默认开启的问题。[#535](https://github.com/oceanbase/oceanbase-design/pull/535)
+- Empty
+  - ⭐️ Empty 新增 `PRESENTED_IMAGE_GUIDE` 内置图片，用于功能开通等引导类场景。[#532](https://github.com/oceanbase/oceanbase-design/pull/532)
+  - 🐞 修复 Empty `style` 属性不生效的问题。[#529](https://github.com/oceanbase/oceanbase-design/pull/529)
+- 📢 Form `preserve` 属性的默认值改为 `false`。[#534](https://github.com/oceanbase/oceanbase-design/pull/534)
+- Modal
+  - 📢 Modal `destroyOnClose` 属性的默认值改为 `true`。[#530](https://github.com/oceanbase/oceanbase-design/pull/530)
+  - 🐞 修复 Modal `footer` 为 `false` 时未去掉页脚 DOM 的问题。[#531](https://github.com/oceanbase/oceanbase-design/pull/531)
+
+## 0.3.0
+
+`2024-03-22`
+
+- ⭐️ 去掉所有组件的重置样式，避免被 Tooltip、Popover、Space、Dropdown 等组件包裹时字体大小、颜色被覆盖。[#450](https://github.com/oceanbase/oceanbase-design/pull/450)
+- ⭐️ 组件的样式加载顺序改为 -900，保证自定义样式的优先级高于 antd。[#464](https://github.com/oceanbase/oceanbase-design/pull/464)
+- 🌈 更新中性色板，包括 Design Token 以及 less 主题变量。[#484](https://github.com/oceanbase/oceanbase-design/pull/484)
+- 🔥 新版 Empty 组件 [#465](https://github.com/oceanbase/oceanbase-design/pull/465)
+  - 💄 定制插图、主题和样式，以符合 OceanBase Design 设计规范。
+  - 🆕 新增 `title` 属性，用于设置空状态标题。
+  - 🆕 新增 `steps` 属性，用于设置步骤提示。
+  - 🆕 新增 `layout` 属性，用于设置空状态布局，默认为 vertical。
+  - 🆕 通过 ConfigProvider `renderEmpty` 定制全局组件的空状态。[#467](https://github.com/oceanbase/oceanbase-design/pull/467)
+- 🔥 新版 Result 组件 [#476](https://github.com/oceanbase/oceanbase-design/pull/476)
+  - 💄 定制插图、主题和样式，以符合 OceanBase Design 设计规范。
+  - 🆕 `status` 属性新增 `processing` 枚举值，用于设置进行中的状态。
+- Spin
+  - 💄 更新 Spin 的加载动画，包括灰色和彩色动画。[#512](https://github.com/oceanbase/oceanbase-design/pull/512)
+  - 💄 Spin 的默认加载指示符从彩色动画改为灰色动画。[#491](https://github.com/oceanbase/oceanbase-design/pull/491)
+- Table
+  - 🐞 修复 Table 的 loading 动画没有水平和垂直居中的问题。[#518](https://github.com/oceanbase/oceanbase-design/pull/518)
+  - 💄 Table 处于 `loading` 时隐藏空状态。[#518](https://github.com/oceanbase/oceanbase-design/pull/518)
+- 💄 优化 Badge default 状态的颜色，并更新 default 状态和 warning 状态的图标。[#500](https://github.com/oceanbase/oceanbase-design/pull/500)
+- [Icon] 🆕 新增 `EllipsisCircleFilled` 图标。[#499](https://github.com/oceanbase/oceanbase-design/pull/499)
+
 ## 0.2.37
 
 `2024-01-30`

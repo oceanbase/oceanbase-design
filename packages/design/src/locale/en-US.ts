@@ -3,6 +3,18 @@ import type { Locale } from '.';
 
 export default {
   ...enUS,
+  global: {
+    ...enUS.global,
+    inputPlaceholder: 'Please enter',
+  },
+  Pagination: {
+    ...enUS.Pagination,
+    total: '${total} in Total',
+  },
+  Drawer: {
+    okText: 'OK',
+    cancelText: 'Cancel',
+  },
   Table: {
     ...enUS.Table,
     batchOperationBar: {
@@ -12,9 +24,5 @@ export default {
       collapse: 'Collapse',
       open: 'Open',
     },
-  },
-  Drawer: {
-    okText: 'OK',
-    cancelText: 'Cancel',
   },
 } as Locale;
