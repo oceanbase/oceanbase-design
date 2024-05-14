@@ -165,7 +165,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                     if (v) {
                       form.setFieldValue('startDate', v);
                       setCalendarValue(([, eDate]) => {
-                        return [getDateInstance(v), eDate];
+                        return [getDateInstance(v), eDate] as [Dayjs, Dayjs];
                       });
                     } else {
                       setFormatDateToForm();
@@ -201,7 +201,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                     if (v) {
                       form.setFieldValue('endDate', v);
                       setCalendarValue(([sDate]) => {
-                        return [sDate, getDateInstance(v)];
+                        return [sDate, getDateInstance(v)] as [Dayjs, Dayjs];
                       });
                     } else {
                       setFormatDateToForm();
