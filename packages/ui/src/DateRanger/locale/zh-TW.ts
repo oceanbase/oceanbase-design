@@ -9,5 +9,6 @@ export default {
   endTime: '結束時間',
   cancel: '取消',
   confirm: '確定',
+  current: '當前',
   ...zh_TW,
 };

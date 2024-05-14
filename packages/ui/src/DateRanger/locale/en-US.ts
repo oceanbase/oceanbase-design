@@ -9,5 +9,6 @@ export default {
   endTime: 'End time',
   cancel: 'cancel',
   confirm: 'confirm',
+  current: 'current',
   ...en_US,
 };

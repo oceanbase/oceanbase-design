@@ -496,7 +496,7 @@ const Ranger = (props: DateRangerProps) => {
             setNow();
           }}
         >
-          当前
+          {locale.current}
         </Button>
       )}
       {hasZoomOut && (
