@@ -53,15 +53,16 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
   const extendedContext = useContext(ConfigProvider.ExtendedConfigContext);
   const pagination = useDefaultPagination(customPagination);
 
+  const { getPrefixCls, locale, table } = useContext(ConfigProvider.ConfigContext);
   const { batchOperationBar, ...restLocale } = {
+    ...locale.Table,
     ...customLocale,
     batchOperationBar: {
-      ...enUS.Table?.batchOperationBar,
+      ...locale.Table?.batchOperationBar,
       ...customLocale?.batchOperationBar,
     },
   };
 
-  const { getPrefixCls, table } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('table', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
   const tableCls = classNames(
