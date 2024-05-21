@@ -14,6 +14,7 @@ import useStyle from './style';
 import type { AnyObject } from '../_util/type';
 import useDefaultPagination from './hooks/useDefaultPagination';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
+import enUS from '../locale/en-US';
 
 export * from 'antd/es/table';
 
@@ -61,10 +62,12 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
 
   const { getPrefixCls, locale, table } = useContext(ConfigProvider.ConfigContext);
   const { batchOperationBar, ...restLocale } = {
-    ...locale.Table,
+    ...enUS.Table,
+    ...locale?.Table,
     ...customLocale,
     batchOperationBar: {
-      ...locale.Table?.batchOperationBar,
+      ...enUS.Table?.batchOperationBar,
+      ...locale?.Table?.batchOperationBar,
       ...customLocale?.batchOperationBar,
     },
   };
