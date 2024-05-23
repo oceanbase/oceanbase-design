@@ -10,10 +10,11 @@ import type { ReactElement, ReactNode } from 'react';
 import React, { useContext, useEffect, useState } from 'react';
 import ConfigProvider from '../config-provider';
 import Typography from '../typography';
-import enUS from '../locale/en-US';
 import useStyle from './style';
 import type { AnyObject } from '../_util/type';
 import useDefaultPagination from './hooks/useDefaultPagination';
+import useMergedState from 'rc-util/lib/hooks/useMergedState';
+import enUS from '../locale/en-US';
 
 export * from 'antd/es/table';
 
@@ -29,6 +30,9 @@ export interface TableLocale extends AntTableLocale {
 
 export interface TableProps<T> extends AntTableProps<T> {
   columns?: ColumnsType<T>;
+  cancelText?: string;
+  collapseText?: string;
+  openText?: string;
   hiddenCancelBtn?: boolean;
   toolOptionsRender?: (selectedRowKeys, selectedRows) => ReactNode[];
   toolAlertRender?: false | ((selectedRowKeys, selectedRows) => ReactNode);
@@ -45,6 +49,9 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
     toolAlertRender,
     toolOptionsRender,
     toolSelectedContent,
+    cancelText,
+    collapseText,
+    openText,
     expandable,
     hiddenCancelBtn = false,
     prefixCls: customizePrefixCls,
@@ -53,15 +60,18 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
   const extendedContext = useContext(ConfigProvider.ExtendedConfigContext);
   const pagination = useDefaultPagination(customPagination);
 
+  const { getPrefixCls, locale, table } = useContext(ConfigProvider.ConfigContext);
   const { batchOperationBar, ...restLocale } = {
+    ...enUS.Table,
+    ...locale?.Table,
     ...customLocale,
     batchOperationBar: {
       ...enUS.Table?.batchOperationBar,
+      ...locale?.Table?.batchOperationBar,
       ...customLocale?.batchOperationBar,
     },
   };
 
-  const { getPrefixCls, table } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('table', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
   const tableCls = classNames(
@@ -72,7 +82,11 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
   );
 
   const [openPopover, setOpenPopover] = useState<boolean>(false);
-  const [currentSelectedRowKeys, setCurrentSelectedRowKeys] = useState<any[]>();
+  const [currentSelectedRowKeys, setCurrentSelectedRowKeys] = useMergedState([], {
+    value: rowSelection?.selectedRowKeys,
+    defaultValue: rowSelection?.defaultSelectedRowKeys,
+  });
+
   const [currentSelectedRows, setCurrentSelectedRows] = useState<any[]>([]);
   const [currentSelectedInfo, setCurrentSelectedInfo] = useState<any>({});
 
@@ -157,7 +171,9 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
                 <span>{batchOperationBar?.object}</span>
               </span>
             )}
-            {!hiddenCancelBtn && <a onClick={handleOptionsCancel}>{batchOperationBar?.cancel}</a>}
+            {!hiddenCancelBtn && (
+              <a onClick={handleOptionsCancel}>{cancelText ?? batchOperationBar?.cancel}</a>
+            )}
             {toolSelectedContent && (
               <Popover
                 placement="top"
@@ -167,7 +183,9 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
                 open={openPopover}
               >
                 <a onClick={() => setOpenPopover(!openPopover)}>
-                  {openPopover ? batchOperationBar?.collapse : batchOperationBar?.open}
+                  {openPopover
+                    ? collapseText ?? batchOperationBar?.collapse
+                    : openText ?? batchOperationBar?.open}
                 </a>
               </Popover>
             )}

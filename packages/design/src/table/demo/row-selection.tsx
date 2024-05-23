@@ -2,7 +2,7 @@ import { Button, Table } from '@oceanbase/design';
 import React, { useState } from 'react';
 
 const App: React.FC = () => {
-  const [selectedRowKeys, setSelectedRowKeys] = useState<any[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<any[]>(['4', '5']);
   const dataSource = [
     {
       key: '1',
