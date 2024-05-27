@@ -73,6 +73,9 @@ export type { PasswordProps } from './Password';
 export { default as Ranger } from './Ranger';
 export type { RangerProps } from './Ranger';
 
+export { default as DateRanger } from './DateRanger';
+export type { DateRangerProps } from './DateRanger';
+
 export { default as SideTip } from './SideTip';
 export type { SideTipProps } from './SideTip';
 

@@ -95,3 +95,15 @@ export function downloadFile(
   a.click();
   a.remove();
 }
+
+/**
+ * 接收一个 value 转换为数组
+ * @param {any | any[]}  value
+ */
+export function toArray<T>(value?: T | T[] | null): T[] {
+  if (value === undefined || value === null) {
+    return [];
+  }
+
+  return Array.isArray(value) ? value : [value];
+}

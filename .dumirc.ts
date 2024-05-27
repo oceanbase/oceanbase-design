@@ -222,6 +222,7 @@ export default defineConfig({
               link: '/biz-components/content-with-icon',
             },
             { title: 'Ranger 日期快速选择', link: '/biz-components/ranger' },
+            { title: 'New Ranger 日期快速选择', link: '/biz-components/date-ranger' },
             { title: 'TreeSearch 树搜索', link: '/biz-components/tree-search' },
             { title: 'Password 密码输入框', link: '/biz-components/password' },
             { title: 'Boundary 错误兜底', link: '/biz-components/boundary' },
