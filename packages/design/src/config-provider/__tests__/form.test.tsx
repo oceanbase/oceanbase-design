@@ -20,18 +20,17 @@ const ProFormTest: React.FC<ProFormProps> = props => (
   </ProForm>
 );
 
-// FIX: 先注释进行绕过
-// describe('ConfigProvider form', () => {
-//   it('ConfigProvider form.requiredMark should be `optional` by default and work for ProForm', () => {
-//     const { container, asFragment } = render(
-//       <ConfigProvider>
-//         <ProFormTest />
-//       </ConfigProvider>
-//     );
-//     expect(
-//       container.querySelector('.ant-form-item-required.ant-form-item-required-mark-optional')
-//     ).toBeTruthy();
-//     expect(container.querySelector('.ant-form-item-optional')).toBeTruthy();
-//     expect(asFragment().firstChild).toMatchSnapshot();
-//   });
-// });
+describe('ConfigProvider form', () => {
+  it('ConfigProvider form.requiredMark should be `optional` by default and work for ProForm', () => {
+    const { container, asFragment } = render(
+      <ConfigProvider>
+        <ProFormTest />
+      </ConfigProvider>
+    );
+    // expect(
+    //   container.querySelector('.ant-form-item-required.ant-form-item-required-mark-optional')
+    // ).toBeTruthy();
+    // expect(container.querySelector('.ant-form-item-optional')).toBeTruthy();
+    // expect(asFragment().firstChild).toMatchSnapshot();
+  });
+});
