@@ -338,8 +338,9 @@ const Ranger = (props: DateRangerProps) => {
                     label:
                       item.name === CUSTOMIZE ? (
                         <Tooltip
+                          overlayClassName={`${prefix}-panel-wrapper`}
                           open={tooltipOpen}
-                          arrow={false}
+                          arrow={true}
                           onOpenChange={o => {
                             if (o) {
                               setTooltipOpen(true);
@@ -352,9 +353,6 @@ const Ranger = (props: DateRangerProps) => {
                             ...tooltipProps?.overlayStyle,
                           }}
                           overlayInnerStyle={{
-                            background: '#fff',
-                            maxHeight: 'none',
-                            margin: 16,
                             ...tooltipProps?.overlayInnerStyle,
                           }}
                           title={
@@ -400,14 +398,7 @@ const Ranger = (props: DateRangerProps) => {
             }}
           >
             <Space size={0}>
-              <span
-                className={`${prefix}-label`}
-                style={{
-                  marginLeft: 8,
-                }}
-              >
-                {rangeLabel}
-              </span>
+              <div className={`${prefix}-label`}>{rangeLabel}</div>
               {isPlay && <div className={`${prefix}-play`}>{label}</div>}
             </Space>
           </Dropdown>
