@@ -8,6 +8,7 @@
     border-radius: 4px 0 0 4px;
     box-sizing: border-box;
     display: flex;
+
     // FIXED: 存在不生效情况
     .@{prefix}-picker {
       padding-left: 0px;
@@ -41,28 +42,9 @@
       z-index: 1;
     }
   }
-}
-
-.@{prefix}-show-range {
-  .@{prefix}-quick-picker.@{prefix}-quick-picker-select {
-    margin-right: -1px;
-
-    .@{prefixCls}-select-selector {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-
-      &:hover {
-        z-index: 1;
-      }
-    }
-
-    .@{prefixCls}-select-arrow {
-      z-index: 1;
-    }
-  }
 
   .@{prefix}-playback-control {
-    margin-left: 8px;
+    display: flex;
 
     .@{prefixCls}-radio-button-wrapper {
       padding-inline: 8px;
@@ -70,12 +52,30 @@
   }
 }
 
+.@{prefix}-panel-wrapper {
+  .ant-tooltip-arrow {
+    margin-inline: 16px;
+    &:before {
+      background-color: #fff;
+    }
+  }
+  .ant-tooltip-inner {
+    background: #fff;
+    margin: 16px;
+    max-height: none;
+  }
+}
+
 .@{prefix}-label {
   background-color: rgb(226, 229, 237);
   display: inline-block;
   width: 60px;
+  margin-left: 8px;
   padding: 4px 0;
   border-radius: 4px;
   line-height: 1;
   text-align: center;
+}
+.@{prefix}-play {
+  white-space: nowrap;
 }
