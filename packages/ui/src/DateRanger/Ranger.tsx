@@ -421,6 +421,7 @@ const Ranger = (props: DateRangerProps) => {
                 }}
                 // @ts-ignore
                 value={innerValue}
+                // @ts-ignore
                 onChange={datePickerChange}
                 allowClear={false}
                 size={size}
