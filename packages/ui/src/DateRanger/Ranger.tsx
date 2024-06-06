@@ -106,7 +106,6 @@ const Ranger = (props: DateRangerProps) => {
     ...rest
   } = props;
 
-  console.log(locale, 'locale');
   const { token } = theme.useToken();
 
   // 是否为 moment 时间对象
@@ -124,9 +123,10 @@ const Ranger = (props: DateRangerProps) => {
   const [innerValue, setInnerValue] = useState<RangeValue>(
     value ??
       defaultValue ??
-      (selects
-        .find(item => item.name === defaultRangeName)
-        ?.range(isMoment ? moment() : dayjs()) as RangeValue)
+      // 兼容一下匹配不上 defaultRangeName
+      ((selects.find(item => item.name === defaultRangeName) || selects[0])?.range(
+        isMoment ? moment() : dayjs()
+      ) as RangeValue)
   );
 
   const [open, setOpen] = useState(false);
