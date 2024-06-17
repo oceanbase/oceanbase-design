@@ -1,18 +1,18 @@
 {
   "@oceanbase/design": {
-    "version": "^0.2.0"
+    "version": "^0.3.0"
   },
   "@oceanbase/icons": {
-    "version": "^0.2.0"
+    "version": "^0.3.0"
   },
   "@oceanbase/ui": {
-    "version": "^0.2.0"
+    "version": "^0.3.0"
   },
   "@oceanbase/charts": {
-    "version": "^0.2.0"
+    "version": "^0.3.0"
   },
   "@oceanbase/util": {
-    "version": "^0.2.0"
+    "version": "^0.3.0"
   },
   "react": {
     "version": "^16.9.0"
