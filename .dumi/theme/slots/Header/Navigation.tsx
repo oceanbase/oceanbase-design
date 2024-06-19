@@ -18,6 +18,7 @@ const useStyle = () => {
   return {
     nav: css`
       height: 100%;
+      line-height: 100%;
       font-size: 14px;
       font-family: Avenir, ${fontFamily}, sans-serif;
       border: 0;
