@@ -24,9 +24,9 @@ export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) =
   };
 };
 
-export default (prefixCls: string) => {
+export default (prefixCls: string, isAliyun: boolean) => {
   const useStyle = genComponentStyleHook('Button', token => {
-    return [genButtonStyle(token as ButtonToken)];
+    return isAliyun ? [] : [genButtonStyle(token as ButtonToken)];
   });
   return useStyle(prefixCls);
 };
