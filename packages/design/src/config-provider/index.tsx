@@ -139,6 +139,7 @@ const ConfigProvider: ConfigProviderType = ({
       spin={merge({}, parentContext.spin, spin)}
       table={merge({}, parentContext.table, table)}
       tabs={merge(
+        {},
         {
           indicatorSize: origin => (origin >= 24 ? origin - 16 : origin),
         },
