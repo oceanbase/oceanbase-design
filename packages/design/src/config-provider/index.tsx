@@ -108,14 +108,14 @@ const ConfigProvider: ConfigProviderType = ({
   const parentExtendedContext =
     React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
   const { isDark, isAliyun } = merge({}, parentContext.theme, theme);
-  const currentTheme = isAliyun
-    ? aliyunTheme
-    : isDark
-      ? darkTheme
-      : parentContext.theme
-        ? {}
-        : defaultTheme;
-  const mergedTheme = merge({}, parentContext.theme, currentTheme, theme);
+  const customTheme = isAliyun ? aliyunTheme : isDark ? darkTheme : undefined;
+  const mergedTheme = merge(
+    {},
+    customTheme ? {} : defaultTheme,
+    parentContext.theme,
+    customTheme,
+    theme
+  );
 
   const { token } = themeConfig.useToken();
   const fontFamily = mergedTheme.token?.fontFamily || token.fontFamily;

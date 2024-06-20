@@ -109,4 +109,37 @@ describe('ConfigProvider theme', () => {
       </ConfigProvider>
     );
   });
+
+  it('isAliyun', () => {
+    const Child1 = () => {
+      const { token } = useToken();
+      expect(token.colorPrimary).toBe(defaultTheme.token.colorPrimary);
+      return <div />;
+    };
+    const Child2 = () => {
+      const { token } = useToken();
+      expect(token.colorPrimary).toBe('#0064c8');
+      return <div />;
+    };
+    const Child3 = () => {
+      const { token } = useToken();
+      expect(token.colorPrimary).toBe('#0064c8');
+      return <div />;
+    };
+    render(
+      <ConfigProvider>
+        <Child1 />
+        <ConfigProvider
+          theme={{
+            isAliyun: true,
+          }}
+        >
+          <Child2 />
+          <ConfigProvider>
+            <Child3 />
+          </ConfigProvider>
+        </ConfigProvider>
+      </ConfigProvider>
+    );
+  });
 });
