@@ -60,7 +60,7 @@ const InternalTreeSelect = React.forwardRef<BaseSelectRef, TreeSelectProps>(
 );
 
 const TreeSelect = InternalTreeSelect as CompoundedComponent;
-const TreeNode = AntTreeSelect.TreeNode;
+const TreeNode = AntTreeSelect.TreeNode as typeof AntTreeNode;
 
 TreeSelect.TreeNode = TreeNode;
 TreeSelect.SHOW_ALL = AntTreeSelect.SHOW_ALL;
