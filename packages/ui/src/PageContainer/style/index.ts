@@ -1,8 +1,9 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { PageContainerToken } from '@ant-design/pro-layout/es/components/PageContainer/style';
+import { genLargeStyle } from '@oceanbase/design';
 import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
-import { genOperationStyle, genFooterToolbarStyle } from '../../FooterToolbar/style';
+import { genFooterToolbarStyle } from '../../FooterToolbar/style';
 
 export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
   token: PageContainerToken
@@ -51,7 +52,7 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
           lineHeight,
           marginBlock: 0,
           // extra operation style
-          ...genOperationStyle(token),
+          ...genLargeStyle(token),
         },
         [`${antCls}-page-header-footer`]: {
           marginBlockStart: 0,

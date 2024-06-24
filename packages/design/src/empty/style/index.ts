@@ -1,6 +1,7 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genLargeStyle } from '../../_util/genStyle';
 
 export type EmptyToken = FullToken<'Badge'>;
 
@@ -38,6 +39,7 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
       },
       [`${componentCls}-footer`]: {
         marginTop: token.marginLG,
+        ...genLargeStyle(token),
       },
       [`${antCls}-steps`]: {
         marginTop: token.margin,
