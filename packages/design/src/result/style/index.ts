@@ -1,6 +1,7 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genLargeStyle } from '../../_util/genStyle';
 
 export type ResultToken = FullToken<'Result'>;
 
@@ -8,6 +9,12 @@ export const genResultStyle: GenerateStyle<ResultToken> = (token: ResultToken): 
   const { componentCls } = token;
   return {
     [`${componentCls}`]: {
+      [`${componentCls}-title`]: {
+        fontWeight: token.fontWeightStrong,
+      },
+      [`${componentCls}-extra`]: {
+        ...genLargeStyle(token),
+      },
       [`${componentCls}-content`]: {
         padding: token.paddingLG,
         borderRadius: token.borderRadiusLG,
