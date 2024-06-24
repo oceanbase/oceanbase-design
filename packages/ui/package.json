@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.19.1",
-    "@ant-design/pro-components": "^2.7.0",
+    "@ant-design/pro-components": "^2.7.10",
     "@antv/g6": "3.4.10",
     "@oceanbase/design": "workspace:^",
     "@oceanbase/icons": "workspace:^",
