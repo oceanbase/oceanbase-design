@@ -9,6 +9,7 @@ nav:
 - 💄 定制插图、主题和样式，以符合 OceanBase Design 设计规范。
 - 📢 不再区分默认图片和简单图片，即 PRESENTED_IMAGE_DEFAULT 和 PRESENTED_IMAGE_SIMPLE 图片相同。
 - ⭐️ 新增 PRESENTED_IMAGE_COLORED 内置图片，用于页面和区块级的空状态场景。
+- ⭐️ 新增 PRESENTED_IMAGE_DATABASE 内置图片，用于数据库实例的空状态场景。
 - ⭐️ 新增 PRESENTED_IMAGE_GUIDE 内置图片，用于功能开通等引导类场景。
 - 🆕 新增 `title` 属性，用于设置空状态标题。
 - 🆕 新增 `steps` 属性，用于设置步骤提示。
@@ -18,15 +19,17 @@ nav:
 
 <code src="./demo/basic.tsx" title="默认" description="简单展示"></code>
 
-<code src="./demo/complete.tsx" title="完整版" description="图片设置为 Empty.PRESENTED_IMAGE_COLORED，包含标题、描述和操作"></code>
+<code src="./demo/complete.tsx" title="完整使用" description="图片为 Empty.PRESENTED_IMAGE_COLORED，包含标题、描述和操作"></code>
 
-<code src="./demo/complete-debug.tsx" title="完整版 debug" description="图片设置为 Empty.PRESENTED_IMAGE_COLORED，包含标题、描述和操作" debug></code>
+<code src="./demo/complete-debug.tsx" title="完整使用 debug" description="图片为 Empty.PRESENTED_IMAGE_COLORED，包含标题、描述和操作" debug></code>
+
+<code src="./demo/database.tsx" title="数据库实例插图" description="图片为 Empty.PRESENTED_IMAGE_DATABASE"></code>
 
 <code src="./demo/image.tsx" title="自定义图片" description="可设置图片链接或 ReactNode"></code>
 
 <code src="./demo/steps.tsx" title="步骤提示"></code>
 
-<code src="./demo/horizontal.tsx" title="横向布局" description="图片设置为 PRESENTED_IMAGE_GUIDE，常用于功能开通等引导类场景"></code>
+<code src="./demo/horizontal.tsx" title="横向布局" description="图片为 PRESENTED_IMAGE_GUIDE，常用于功能开通等引导类场景"></code>
 
 <code src="./demo/with-page-container.tsx" title="和页容器搭配使用"></code>
 
@@ -50,7 +53,11 @@ nav:
 
 - PRESENTED_IMAGE_COLORED
 
-<p><div><img src="https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*eDOqTIaukyQAAAAAAAAAAAAADmfOAQ/original" /></div></p>
+<p><div><img src="https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*o6sCSpTYXgUAAAAAAAAAAAAADmfOAQ/original" /></div></p>
+
+- PRESENTED_IMAGE_DATABASE
+
+<p><div><img src="https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*i5OYS7RTQLcAAAAAAAAAAAAADmfOAQ/original" /></div></p>
 
 - PRESENTED_IMAGE_GUIDE
 
