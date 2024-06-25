@@ -24,6 +24,8 @@ nav:
 
 <code src="./demo/tabs.tsx" title="带页签的卡片" description="页签可设置选项卡后面的标签。"></code>
 
+<code src="./demo/config-provider.tsx" title="ConfigProvider" description="用于调试内部的 ConfigProvider 是否表现正常，需要连续触发 2 次及以上，观察第二个弹窗是否正常展示" debug></code>
+
 <code src="../table/demo/card-table.tsx" title="和 Table 组合使用"></code>
 
 ## API
