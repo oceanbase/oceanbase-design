@@ -12,39 +12,31 @@ const App: React.FC = () => (
       description="Detailed description and advice about successful copywriting."
       type="success"
       showIcon
-      action={
-        <Button type="primary" size="small">
-          Detail
-        </Button>
-      }
+      closable
+      action={<Button size="small">Detail</Button>}
     />
     <Alert
       message="Informational Notes"
       description="Additional description and information about copywriting."
       type="info"
       showIcon
-      action={
-        <Button type="primary" size="small">
-          Detail
-        </Button>
-      }
+      closable
+      action={<Button size="small">Detail</Button>}
     />
     <Alert
       message="Warning"
       description="This is a warning notice about copywriting."
       type="warning"
       showIcon
-      action={
-        <Button type="primary" size="small">
-          Detail
-        </Button>
-      }
+      closable
+      action={<Button size="small">Detail</Button>}
     />
     <Alert
       message="Error"
       description="This is an error message about copywriting."
       type="error"
       showIcon
+      closable
       action={
         <Button size="small" danger>
           Detail
