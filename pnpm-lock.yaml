@@ -42,8 +42,8 @@ importers:
         specifier: ^11.11.0
         version: 11.11.0(@emotion/css@11.11.2)
       '@qixian.cs/github-contributors-list':
-        specifier: ^2.0.1
-        version: 2.0.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^2.0.2
+        version: 2.0.2(react-dom@18.2.0)(react@18.2.0)
       '@rc-component/trigger':
         specifier: ^2.0.0
         version: 2.0.0(react-dom@18.2.0)(react@18.2.0)
@@ -5065,8 +5065,8 @@ packages:
       '@babel/runtime': 7.24.5
     dev: false
 
-  /@qixian.cs/github-contributors-list@2.0.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-HeOPcdl/GOLUmtzPAwPltOHpEabeIWlIF46QPmIT6Z3/FuI3eGNAUMgaeTaWtfOsa25uarIrY3D8Ry68/W0kRw==}
+  /@qixian.cs/github-contributors-list@2.0.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-KRHnJIQ8bPoL4+0g2crAcdeyyN00A98qY6dI/KlN23FKoZ15rv70ay/ew9ackh3AFJMp/W7pfRmsyY6ow0IXdw==}
     peerDependencies:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
