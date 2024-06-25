@@ -5,7 +5,14 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 export type SelectToken = FullToken<'Select'>;
 
 export const genSelectStyle: GenerateStyle<SelectToken> = (token: SelectToken): CSSObject => {
-  return {};
+  const { componentCls } = token;
+  return {
+    [`${componentCls}`]: {
+      [`${componentCls}-arrow${componentCls}-arrow-loading`]: {
+        color: token.colorTextTertiary,
+      },
+    },
+  };
 };
 
 export default (prefixCls: string) => {

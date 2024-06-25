@@ -20,16 +20,14 @@ const App: React.FC = () => {
         <Button type="primary" loading={loading}>
           Loading
         </Button>
-        <Button type="primary" icon={<PoweroffOutlined />} loading={loading}>
-          Loading
-        </Button>
-        <Button type="primary" icon={<PoweroffOutlined />} loading={loading} />
+        <Button loading={loading}>Loading</Button>
+        <Button loading={loading} />
       </Space>
       <Space>
         <Button type="primary" danger loading={loading}>
           Loading
         </Button>
-        <Button type="primary" danger ghost loading={loading}>
+        <Button danger ghost loading={loading}>
           Loading
         </Button>
         <Button type="link" loading={loading}>
