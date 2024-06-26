@@ -1,4 +1,5 @@
 @import '../variable.less';
+@import '~@oceanbase/design/es/theme/index.less';
 
 @prefix: ob-date-ranger;
 
@@ -52,6 +53,12 @@
   }
 }
 
+.@{prefix}-status-error {
+  .@{prefix}-wrapper {
+    border-color: @colorError;
+  }
+}
+
 .@{prefix}-panel-wrapper {
   .ant-tooltip-arrow {
     margin-inline: 16px;
@@ -63,6 +70,17 @@
     background: #fff;
     margin: 16px;
     max-height: none;
+  }
+  .ant-picker-cell-today {
+    .ant-picker-cell-inner {
+      border: 0;
+    }
+  }
+}
+
+.@{prefix}-time-wrapper {
+  .ant-picker-ok {
+    display: none;
   }
 }
 

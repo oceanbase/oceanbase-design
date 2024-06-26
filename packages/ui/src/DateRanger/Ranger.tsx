@@ -32,6 +32,9 @@ import {
 } from './constant';
 import type { RangeOption } from './typing';
 import InternalPickerPanel, { Rule } from './PickerPanel';
+import { getMergedStatus, getStatusClassNames } from 'antd/es/_util/statusUtils';
+import { FormItemInputContext } from 'antd/es/form/context';
+
 import zhCN from './locale/zh-CN';
 import enUS from './locale/en-US';
 import './index.less';
@@ -103,10 +106,15 @@ const Ranger = (props: DateRangerProps) => {
     isMoment: isMomentProps,
     rules,
     tip,
+    status: customStatus,
     ...rest
   } = props;
 
   const { token } = theme.useToken();
+
+  // =================== Form =====================
+  const { status: contextStatus, hasFeedback } = React.useContext(FormItemInputContext);
+  const mergedStatus = getMergedStatus(contextStatus, customStatus);
 
   // 是否为 moment 时间对象
   const isMoment =
@@ -295,7 +303,10 @@ const Ranger = (props: DateRangerProps) => {
       : selects[rangeNameIndex + 1];
 
   return (
-    <Space className={classNames(prefix)} style={rest.style}>
+    <Space
+      className={classNames(prefix, getStatusClassNames(prefix, mergedStatus, hasFeedback))}
+      style={rest.style}
+    >
       <Space size={0}>
         <div className={`${prefix}-wrapper`}>
           <Dropdown
