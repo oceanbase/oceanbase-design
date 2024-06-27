@@ -100,3 +100,4 @@ const { useToken } = theme;
 export { useToken };
 
 export type { PresetStatusColorType } from 'antd/es/_util/colors';
+export { genLargeStyle } from './_util/genStyle';

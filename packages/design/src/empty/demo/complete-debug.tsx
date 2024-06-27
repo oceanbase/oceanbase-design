@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Empty, Form, Switch } from '@oceanbase/design';
+import { Button, Empty, Form, Space, Switch } from '@oceanbase/design';
 
 export default () => {
   const [title, setTitle] = useState(true);
@@ -47,7 +47,12 @@ export default () => {
         title={title && 'Create Your Cluster'}
         description={description ? 'There is no cluster, welcome to create one!' : ''}
       >
-        {children && <Button type="primary">Create</Button>}
+        {children && (
+          <Space>
+            <Button type="primary">Primary</Button>
+            <Button>Second</Button>
+          </Space>
+        )}
       </Empty>
     </>
   );

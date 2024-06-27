@@ -69,6 +69,7 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
     [`${componentCls}`]: {
       // vertical align to flex-start
       alignItems: 'flex-start !important',
+      paddingRight: token.padding,
       [`${componentCls}-icon`]: {
         height,
       },
@@ -81,14 +82,25 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
         },
       },
     },
+    [`${componentCls}:not(${componentCls}-with-description)`]: {
+      paddingLeft: token.padding,
+    },
     [`${componentCls}${componentCls}-with-description`]: {
       paddingBlock: token.padding,
       [`${componentCls}-message`]: {
+        fontWeight: 500,
         marginBottom: token.marginXXS,
+      },
+      [`${componentCls}-description`]: {
+        color: token.colorTextSecondary,
       },
       [`${componentCls}-icon`]: {
         fontSize: token.fontSizeHeading4,
         height: token.fontSizeHeading3,
+        marginInlineEnd: token.margin,
+      },
+      [`${componentCls}-action`]: {
+        marginInlineStart: token.marginXS,
       },
     },
     [`${componentCls}:not(${componentCls}-banner):not(${componentCls}-ghost)`]: {

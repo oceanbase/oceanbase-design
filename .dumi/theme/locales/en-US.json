@@ -1,6 +1,7 @@
 {
   "app.theme.switch.dark": "Dark theme",
   "app.theme.switch.compact": "Compact theme",
+  "app.theme.switch.aliyun": "Aliyun theme",
   "app.theme.switch.motion.on": "Motion On",
   "app.theme.switch.motion.off": "Motion Off",
   "app.theme.switch.font.default": "Default Font",

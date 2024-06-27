@@ -8,6 +8,24 @@ group: 基础组件
 
 ---
 
+## 0.3.5
+
+`2024-06-27`
+
+- 🆕 ConfigProvider 新增 theme.isAliyun 属性，用于开启阿里云主题。[#602](https://github.com/oceanbase/oceanbase-design/pull/602)
+- 🐞 修复 Modal, message, notification 静态函数无法触发的问题。[#606](https://github.com/oceanbase/oceanbase-design/pull/606)
+- Table
+  - 🐞 修复 Table 批量操作栏未关联 `rowSelection` 的问题。[#591](https://github.com/oceanbase/oceanbase-design/pull/591)
+  - 🐞 修复 Table 批量操作栏国际化不生效的问题。[#591](https://github.com/oceanbase/oceanbase-design/pull/591)
+  - 💄 优化 Table 在无间距卡片内的展示样式，包括第一列和卡片标题对齐、最后一列和卡片操作区对齐、分页器左右增加间距。[#618](https://github.com/oceanbase/oceanbase-design/pull/618)
+- 💄 优化 Alert 的间距样式，以对齐设计规范。[#615](https://github.com/oceanbase/oceanbase-design/pull/615)
+- Empty
+  - ⭐️ Empty 新增 PRESENTED_IMAGE_DATABASE 插图，用于数据库实例的空状态场景。[#607](https://github.com/oceanbase/oceanbase-design/pull/607)
+  - 💄 更新 Empty 的 PRESENTED_IMAGE_COLORED 插图。[#607](https://github.com/oceanbase/oceanbase-design/pull/607)
+  - 💄 优化 Empty 操作区的按钮样式，加大行高和圆角。[#608](https://github.com/oceanbase/oceanbase-design/pull/608)
+- 💄 优化 Result 样式，包括标题加粗、加大操作区的按钮行高和圆角。[#609](https://github.com/oceanbase/oceanbase-design/pull/609)
+- 💄 优化 Select 加载器的颜色，使其更具识别度。[#616](https://github.com/oceanbase/oceanbase-design/pull/616)
+
 ## 0.3.4
 
 `2024-05-11`

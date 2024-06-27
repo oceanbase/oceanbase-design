@@ -11,7 +11,7 @@ import {
   Table,
   Tabs,
 } from '@oceanbase/design';
-import { SizeType } from '@oceanbase/design/es/config-provider';
+import type { SizeType } from '@oceanbase/design/es/config-provider';
 import React, { useState } from 'react';
 
 const { TabPane } = Tabs;

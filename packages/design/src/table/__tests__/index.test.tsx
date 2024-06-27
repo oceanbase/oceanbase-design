@@ -60,6 +60,20 @@ describe('Table', () => {
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 
+  it('row selection should work', () => {
+    const { container, asFragment } = render(
+      <TableTest
+        rowSelection={{
+          selectedRowKeys: ['1', '2'],
+        }}
+      />
+    );
+    // selection column
+    expect(container.querySelector('.ant-table-selection-column')).toBeTruthy();
+    // batch operation bar
+    expect(container.querySelector('.ant-table-batch-operation-bar')).toBeTruthy();
+  });
+
   it('default pagination should work', () => {
     const { container, asFragment } = render(<TableTest />);
     // pagination.showTotal

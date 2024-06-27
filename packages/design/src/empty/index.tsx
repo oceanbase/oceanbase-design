@@ -7,6 +7,7 @@ import ConfigProvider from '../config-provider';
 import { useLocale } from '../locale';
 import DefaultEmptyImg from './default';
 import ColoredEmptyImg from './colored';
+import DatabaseEmptyImg from './database';
 import GuideEmptyImg from './guide';
 import useStyle from './style';
 
@@ -17,6 +18,7 @@ const defaultEmptyImg = <DefaultEmptyImg />;
 // To be compatible with antd API
 const simpleEmptyImg = <DefaultEmptyImg />;
 const coloredEmptyImg = <ColoredEmptyImg />;
+const databaseEmptyImg = <DatabaseEmptyImg />;
 const guideEmptyImg = <GuideEmptyImg />;
 
 export interface EmptyProps extends AntEmptyProps {
@@ -29,6 +31,7 @@ type CompoundedComponent = React.FC<EmptyProps> & {
   PRESENTED_IMAGE_DEFAULT: React.ReactNode;
   PRESENTED_IMAGE_SIMPLE: React.ReactNode;
   PRESENTED_IMAGE_COLORED: React.ReactNode;
+  PRESENTED_IMAGE_DATABASE: React.ReactNode;
   PRESENTED_IMAGE_GUIDE: React.ReactNode;
 };
 
@@ -88,6 +91,7 @@ const Empty: CompoundedComponent = props => {
 Empty.PRESENTED_IMAGE_DEFAULT = defaultEmptyImg;
 Empty.PRESENTED_IMAGE_SIMPLE = simpleEmptyImg;
 Empty.PRESENTED_IMAGE_COLORED = coloredEmptyImg;
+Empty.PRESENTED_IMAGE_DATABASE = databaseEmptyImg;
 Empty.PRESENTED_IMAGE_GUIDE = guideEmptyImg;
 
 if (process.env.NODE_ENV !== 'production') {

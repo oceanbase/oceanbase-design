@@ -31,6 +31,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       tabList,
       prefixCls: customizePrefixCls,
       bodyStyle,
+      styles,
       className,
       ...restProps
     },
@@ -41,8 +42,11 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     const tabsPrefixCls = getPrefixCls('tabs', customizePrefixCls);
     const { wrapSSR } = useStyle(prefixCls, tabsPrefixCls);
 
+    const zeroPaddingList = [0, '0', '0px'];
     // card body has no padding
-    const noBodyPadding = [0, '0', '0px'].includes(bodyStyle?.padding);
+    const noBodyPadding =
+      zeroPaddingList.includes(bodyStyle?.padding) ||
+      zeroPaddingList.includes(styles?.body?.padding);
 
     const cardCls = classNames(
       {
@@ -88,6 +92,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
           tabList={newTabList}
           prefixCls={customizePrefixCls}
           bodyStyle={bodyStyle}
+          styles={styles}
           className={cardCls}
           {...restProps}
         >

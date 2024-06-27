@@ -125,6 +125,7 @@ export default ({
                     ? action.props.disabled
                     : getDefaultDisabled(action.key as string));
                 return (
+                  // @ts-ignore
                   <Menu.Item
                     key={(actionKey as string) ?? index.toString()}
                     onClick={action.props.onClick}

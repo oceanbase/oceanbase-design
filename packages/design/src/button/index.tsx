@@ -11,9 +11,9 @@ export type ButtonProps = AntButtonProps;
 
 const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
   ({ prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
-    const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+    const { theme, getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('btn', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const { wrapSSR } = useStyle(prefixCls, theme?.isAliyun);
     const buttonCls = classNames(className);
     return wrapSSR(
       <AntButton ref={ref} prefixCls={customizePrefixCls} className={buttonCls} {...restProps} />

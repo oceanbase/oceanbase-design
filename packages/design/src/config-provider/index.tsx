@@ -13,10 +13,11 @@ import type { StyleProviderProps } from '@ant-design/cssinjs';
 import StyleContext from '@ant-design/cssinjs/es/StyleContext';
 import type { StyleContextProps } from '@ant-design/cssinjs/es/StyleContext';
 import { merge } from 'lodash';
-import StaticFunction, { injectedStaticFunction } from '../static-function';
+import StaticFunction from '../static-function';
 import themeConfig from '../theme';
 import defaultTheme from '../theme/default';
 import darkTheme from '../theme/dark';
+import aliyunTheme from '@oceanbase/aliyun-theme';
 import DefaultRenderEmpty from './DefaultRenderEmpty';
 import type { NavigateFunction } from './navigate';
 import type { Locale } from '../locale';
@@ -29,6 +30,7 @@ export * from 'antd/es/config-provider';
 
 export interface ThemeConfig extends AntThemeConfig {
   isDark?: boolean;
+  isAliyun?: boolean;
   /* use custom font or not */
   customFont?: boolean;
 }
@@ -97,7 +99,7 @@ const ConfigProvider: ConfigProviderType = ({
   spin,
   table,
   tabs,
-  injectStaticFunction = !injectedStaticFunction,
+  injectStaticFunction = true,
   styleProviderProps,
   ...restProps
 }) => {
@@ -105,36 +107,46 @@ const ConfigProvider: ConfigProviderType = ({
   const parentContext = React.useContext<ConfigConsumerProps>(AntConfigProvider.ConfigContext);
   const parentExtendedContext =
     React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
-  const mergedTheme = merge(parentContext.theme, theme);
-  const currentTheme = mergedTheme?.isDark ? darkTheme : defaultTheme;
+  const { isDark, isAliyun } = merge({}, parentContext.theme, theme);
+  const customTheme = isAliyun ? aliyunTheme : isDark ? darkTheme : undefined;
+  const mergedTheme = merge(
+    {},
+    customTheme ? {} : defaultTheme,
+    parentContext.theme,
+    customTheme,
+    theme
+  );
+
   const { token } = themeConfig.useToken();
   const fontFamily = mergedTheme.token?.fontFamily || token.fontFamily;
   const customFont = mergedTheme.customFont;
 
   // inherit from parent StyleProvider
   const parentStyleContext = React.useContext<StyleContextProps>(StyleContext);
-  const mergedStyleProviderProps = merge(parentStyleContext, styleProviderProps);
+  const mergedStyleProviderProps = merge({}, parentStyleContext, styleProviderProps);
 
   return (
     <AntConfigProvider
-      locale={merge(parentContext.locale, locale)}
+      locale={merge({}, parentContext.locale, locale)}
       form={merge(
+        {},
         {
           requiredMark: 'optional',
         },
         parentContext.form,
         form
       )}
-      spin={merge(parentContext.spin, spin)}
-      table={merge(parentContext.table, table)}
+      spin={merge({}, parentContext.spin, spin)}
+      table={merge({}, parentContext.table, table)}
       tabs={merge(
+        {},
         {
           indicatorSize: origin => (origin >= 24 ? origin - 16 : origin),
         },
         parentContext.tabs,
         tabs
       )}
-      theme={merge(currentTheme, mergedTheme, {
+      theme={merge({}, mergedTheme, {
         token: {
           fontFamily:
             customFont && !fontFamily.startsWith(`'Source Sans Pro'`)

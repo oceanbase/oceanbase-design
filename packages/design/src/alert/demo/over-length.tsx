@@ -18,13 +18,13 @@ const App: React.FC = () => (
       message="Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips."
       type="success"
       showIcon
-      closable
-      closeIcon={<span>Close</span>}
+      action={<a>Detail</a>}
     />
     <Alert
       message="Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips."
       type="success"
       showIcon
+      closable
       action={<a>Detail</a>}
     />
     <Alert
@@ -32,19 +32,15 @@ const App: React.FC = () => (
       description="Detailed description and advice about successful copywriting. Detailed description and advice about successful copywriting. Detailed description and advice about successful copywriting. Detailed description and advice about successful copywriting. Detailed description and advice about successful copywriting."
       type="success"
       showIcon
-      closable
-      onClose={onClose}
+      action={<Button size="small">Detail</Button>}
     />
     <Alert
       message="Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips. Success Tips."
       description="Detailed description and advice about successful copywriting. Detailed description and advice about successful copywriting. Detailed description and advice about successful copywriting. Detailed description and advice about successful copywriting. Detailed description and advice about successful copywriting."
       type="success"
       showIcon
-      action={
-        <Button type="primary" size="small">
-          Detail
-        </Button>
-      }
+      closable
+      action={<Button size="small">Detail</Button>}
     />
   </Space>
 );

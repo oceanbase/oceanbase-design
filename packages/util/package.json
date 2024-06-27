@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/util",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "The Util Library for OceanBase",
   "keywords": [
     "oceanbase",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "ahooks": "^2.10.14",
-    "filesize": "^10.1.1",
+    "filesize": "^10.1.2",
     "is-url": "^1.2.4",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
