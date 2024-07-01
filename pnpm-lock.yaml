@@ -121,7 +121,7 @@ importers:
         version: 5.1.1
       father:
         specifier: ^4.4.4
-        version: 4.4.4(@babel/core@7.24.7)(@types/node@20.14.6)(styled-components@6.1.11)(webpack@5.92.1)
+        version: 4.4.4(@babel/core@7.24.7)(@types/node@20.14.6)(styled-components@5.3.11)(webpack@5.92.1)
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
@@ -210,8 +210,8 @@ importers:
         specifier: ^6.6.8
         version: 6.6.8(react@18.3.1)(typescript@5.4.5)
       react-router-dom:
-        specifier: ^6.23.1
-        version: 6.23.1(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^6.24.0
+        version: 6.24.0(react-dom@18.3.1)(react@18.3.1)
       runscript:
         specifier: ^1.6.0
         version: 1.6.0
@@ -5920,8 +5920,8 @@ packages:
       - immer
     dev: true
 
-  /@remix-run/router@1.16.1:
-    resolution: {integrity: sha512-es2g3dq6Nb07iFxGk5GuHN20RwBZOsuDQN7izWIisUcv9r+d2C5jQxqmgkdebXgReWfiyUabcki6Fg77mSNrig==}
+  /@remix-run/router@1.17.0:
+    resolution: {integrity: sha512-2D6XaHEVvkCn682XBnipbJjgZUU7xjLtA4dGJRBVUKpEaDYOZMENZoZjAOSb7qirxt5RupjzZxz4fK2FO+EFPw==}
     engines: {node: '>=14.0.0'}
     dev: true
 
@@ -13067,7 +13067,7 @@ packages:
     dependencies:
       reusify: 1.0.4
 
-  /father@4.4.4(@babel/core@7.24.7)(@types/node@20.14.6)(styled-components@6.1.11)(webpack@5.92.1):
+  /father@4.4.4(@babel/core@7.24.7)(@types/node@20.14.6)(styled-components@5.3.11)(webpack@5.92.1):
     resolution: {integrity: sha512-PGB3D7ckEbVsIFvsZij3rB/vfAWetGDUmqgD3aPCMquKGe3Yu63qJW+si80P94Xqbiwz/dWODpdiH7WKNZBZIQ==}
     hasBin: true
     dependencies:
@@ -21919,17 +21919,17 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /react-router-dom@6.23.1(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-utP+K+aSTtEdbWpC+4gxhdlPFwuEfDKq8ZrPFU65bbRJY+l706qjR7yaidBpo3MSeA/fzwbXWbKBI6ftOnP3OQ==}
+  /react-router-dom@6.24.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-960sKuau6/yEwS8e+NVEidYQb1hNjAYM327gjEyXlc6r3Skf2vtwuJ2l7lssdegD2YjoKG5l8MsVyeTDlVeY8g==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
-      '@remix-run/router': 1.16.1
+      '@remix-run/router': 1.17.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-router: 6.23.1(react@18.3.1)
+      react-router: 6.24.0(react@18.3.1)
     dev: true
 
   /react-router-dom@6.3.0(react-dom@18.3.1)(react@18.3.1):
@@ -21944,13 +21944,13 @@ packages:
       react-router: 6.3.0(react@18.3.1)
     dev: true
 
-  /react-router@6.23.1(react@18.3.1):
-    resolution: {integrity: sha512-fzcOaRF69uvqbbM7OhvQyBTFDVrrGlsFdS3AL+1KfIBtGETibHzi3FkoTRyiDJnWNc2VxrfvR+657ROHjaNjqQ==}
+  /react-router@6.24.0(react@18.3.1):
+    resolution: {integrity: sha512-sQrgJ5bXk7vbcC4BxQxeNa5UmboFm35we1AFK0VvQaz9g0LzxEIuLOhHIoZ8rnu9BO21ishGeL9no1WB76W/eg==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
     dependencies:
-      '@remix-run/router': 1.16.1
+      '@remix-run/router': 1.17.0
       react: 18.3.1
     dev: true
 
