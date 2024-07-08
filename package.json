@@ -109,7 +109,7 @@
     "react-dom": "^18.3.1",
     "react-fast-marquee": "^1.6.4",
     "react-intl": "^6.6.8",
-    "react-router-dom": "^6.23.1",
+    "react-router-dom": "^6.24.1",
     "runscript": "^1.6.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
