@@ -6,6 +6,6 @@ export default {
   about: '關於',
   version: '版本號',
   releaseTime: '發佈日期',
-  company: '螞蟻集團',
+  company: '北京奧星貝斯科技有限公司',
   right: '版權所有',
 };
