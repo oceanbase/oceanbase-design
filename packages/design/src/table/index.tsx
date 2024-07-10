@@ -62,8 +62,6 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
 
   const { getPrefixCls, locale, table } = useContext(ConfigProvider.ConfigContext);
   const { batchOperationBar, ...restLocale } = {
-    ...enUS.Table,
-    ...locale?.Table,
     ...customLocale,
     batchOperationBar: {
       ...enUS.Table?.batchOperationBar,
