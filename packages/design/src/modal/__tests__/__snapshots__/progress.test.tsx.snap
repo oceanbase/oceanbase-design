@@ -190,6 +190,8 @@ exports[`Modal.Progress > render with progress.percent 1`] = `
                 class="ant-modal-body"
               >
                 <div
+                  aria-valuemax="100"
+                  aria-valuemin="0"
                   aria-valuenow="60"
                   class="ant-progress ant-progress-status-normal ant-progress-circle ant-progress-show-info"
                   role="progressbar"
@@ -337,6 +339,8 @@ exports[`Modal.Progress > render with progress.status 1`] = `
                 class="ant-modal-body"
               >
                 <div
+                  aria-valuemax="100"
+                  aria-valuemin="0"
                   aria-valuenow="0"
                   class="ant-progress ant-progress-status-exception ant-progress-circle ant-progress-show-info"
                   role="progressbar"
@@ -502,6 +506,8 @@ exports[`Modal.Progress > render without description 1`] = `
                 class="ant-modal-body"
               >
                 <div
+                  aria-valuemax="100"
+                  aria-valuemin="0"
                   aria-valuenow="0"
                   class="ant-progress ant-progress-status-normal ant-progress-circle ant-progress-show-info"
                   role="progressbar"

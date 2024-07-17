@@ -421,7 +421,7 @@ exports[`PageContainer > extra and footer 1`] = `
                   aria-invalid="false"
                   autocomplete="off"
                   date-range="start"
-                  placeholder="Start date"
+                  placeholder="开始日期"
                   size="12"
                   value=""
                 />
@@ -461,14 +461,14 @@ exports[`PageContainer > extra and footer 1`] = `
                   aria-invalid="false"
                   autocomplete="off"
                   date-range="end"
-                  placeholder="End date"
+                  placeholder="结束日期"
                   size="12"
                   value=""
                 />
               </div>
               <div
                 class="ant-picker-active-bar"
-                style="position: absolute; width: 0px; left: 0px;"
+                style="position: absolute; width: 0px;"
               />
               <span
                 class="ant-picker-suffix"

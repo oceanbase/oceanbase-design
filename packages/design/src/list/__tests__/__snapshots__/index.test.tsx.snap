@@ -81,7 +81,7 @@ exports[`List > hideOnSinglePage could be changed 1`] = `
     </div>
   </div>
   <div
-    class="ant-list-pagination ant-list-pagination-align-end"
+    class="ant-list-pagination"
   />
 </div>
 `;
@@ -167,7 +167,7 @@ exports[`List > hideOnSinglePage should be false by default 1`] = `
     </div>
   </div>
   <div
-    class="ant-list-pagination ant-list-pagination-align-end"
+    class="ant-list-pagination"
   >
     <ul
       class="ant-pagination"
@@ -333,7 +333,7 @@ exports[`List > render 1`] = `
     </div>
   </div>
   <div
-    class="ant-list-pagination ant-list-pagination-align-end"
+    class="ant-list-pagination"
   >
     <ul
       class="ant-pagination"
