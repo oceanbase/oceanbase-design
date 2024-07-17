@@ -31,7 +31,7 @@
     "glob": "^10.4.2",
     "is-directory": "^0.3.1",
     "is-git-clean": "^1.1.0",
-    "jscodeshift": "^0.15.2",
+    "jscodeshift": "^0.16.1",
     "lodash": "^4.17.21",
     "postcss": "^8.4.38",
     "postcss-less": "^6.0.0",
