@@ -27,10 +27,10 @@ describe('ConfigProvider form', () => {
         <ProFormTest />
       </ConfigProvider>
     );
-    // expect(
-    //   container.querySelector('.ant-form-item-required.ant-form-item-required-mark-optional')
-    // ).toBeTruthy();
-    // expect(container.querySelector('.ant-form-item-optional')).toBeTruthy();
-    // expect(asFragment().firstChild).toMatchSnapshot();
+    expect(
+      container.querySelector('.ant-form-item-required.ant-form-item-required-mark-optional')
+    ).toBeTruthy();
+    expect(container.querySelector('.ant-form-item-optional')).toBeTruthy();
+    expect(asFragment().firstChild).toMatchSnapshot();
   });
 });
