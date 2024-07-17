@@ -83,6 +83,13 @@ describe('Table', () => {
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 
+  it('default empty should work', () => {
+    const { container, asFragment } = render(<TableTest dataSource={[]} />);
+    expect(container.querySelector('.ant-empty-image')).toBeTruthy();
+    expect(container.querySelector('.ant-empty-description')).toBeTruthy();
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
+
   it('ConfigProvider pagination should work', () => {
     const { container, asFragment } = render(
       <ConfigProvider
