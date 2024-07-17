@@ -23,7 +23,7 @@ Or clone locally:
 
 ```bash
 $ git clone git@github.com:oceanbase/oceanbase-design.git
-$ cd design
+$ cd oceanbase-design
 $ npm install -g pnpm
 $ pnpm install
 $ pnpm run start
