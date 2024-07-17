@@ -1,4 +1,4 @@
-import { Button, Dropdown, Menu, Space, Tooltip, Typography } from '@oceanbase/design';
+import { Button, Dropdown, Space, Tooltip, Typography } from '@oceanbase/design';
 import { EllipsisOutlined, LoadingOutlined } from '@oceanbase/icons';
 import { isBoolean, max, omit } from 'lodash';
 import React from 'react';
@@ -111,36 +111,36 @@ export default ({
       {ellipsisActions.length > 0 && (
         <Dropdown
           placement={dropDownPlacement}
-          overlay={
-            <Menu>
-              {ellipsisActions.map((action, index) => {
-                const actionKey = action.key;
-                let disabled = false;
-                if (isBoolean(action.props.disabled)) disabled = action.props.disabled;
-                else if (shouldDisabled) disabled = shouldDisabled(action.key as string);
-                // 当用户传入loading 或者 传入 disabled 的情况都要禁用按钮
-                const actionDisabled =
-                  action.props.loading ||
-                  (isBoolean(action.props.disabled)
-                    ? action.props.disabled
-                    : getDefaultDisabled(action.key as string));
-                return (
-                  // @ts-ignore
-                  <Menu.Item
+          menu={{
+            items: ellipsisActions.map((action, index) => {
+              const actionKey = action.key;
+              let disabled = false;
+              if (isBoolean(action.props.disabled)) disabled = action.props.disabled;
+              else if (shouldDisabled) disabled = shouldDisabled(action.key as string);
+              // 当用户传入loading 或者 传入 disabled 的情况都要禁用按钮
+              const actionDisabled =
+                action.props.loading ||
+                (isBoolean(action.props.disabled)
+                  ? action.props.disabled
+                  : getDefaultDisabled(action.key as string));
+              return {
+                key: (actionKey as string) ?? index.toString(),
+                disabled: actionDisabled,
+                label: (
+                  <div
                     key={(actionKey as string) ?? index.toString()}
-                    onClick={action.props.onClick}
-                    style={{ minWidth: 120 }}
-                    {...omit(action.props, 'disabled')}
-                    disabled={actionDisabled}
+                    {...omit(action.props, 'disabled', 'onClick')}
+                    style={{ minWidth: 120, cursor: actionDisabled ? 'not-allowed' : 'pointer' }}
                   >
                     <Tooltip title={action.props.tooltip}>
                       {action.props.loading && <LoadingOutlined />} {action.props.children}
                     </Tooltip>
-                  </Menu.Item>
-                );
-              })}
-            </Menu>
-          }
+                  </div>
+                ),
+                onClick: actionDisabled ? () => {} : action.props.onClick,
+              };
+            }),
+          }}
         >
           {moreDom}
         </Dropdown>
