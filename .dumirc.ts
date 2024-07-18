@@ -151,6 +151,7 @@ export default defineConfig({
             { title: 'Input 输入框', link: '/components/input' },
             { title: 'InputNumber 数字输入框', link: '/components/input-number' },
             { title: 'Radio 单选框', link: '/components/radio' },
+            { title: 'Switch 开关', link: '/components/switch' },
             { title: 'Select 选择器', link: '/components/select' },
             { title: 'TreeSelect 树选择', link: '/components/tree-select' },
           ],
