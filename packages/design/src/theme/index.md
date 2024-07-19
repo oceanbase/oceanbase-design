@@ -86,11 +86,17 @@ export const taskStatusList = [
 }
 ```
 
+- 如果需要使用特定主题的 less 文件，可以在全局样式中设置 `@theme` 主题变量:
+
+```less
+@theme: default | dark | compact | aliyun;
+```
+
 - 在 VSCode 中安装 [Less IntelliSense](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-less) 插件，可支持变量提示和补全。
 
-![](https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*t3tmTLWo5UUAAAAAAAAAAAAADvSFAQ/original)
+![](https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*_37-QqtQGQUAAAAAAAAAAAAADmfOAQ/original)
 
-## 暗色和紧凑主题
+## 暗色主题
 
 ```ts | pure
 import {  ConfigProvider } from '@oceanbase/design';
@@ -99,10 +105,44 @@ export default () {
   return (
     <ConfigProvider
       theme={{
-        // 暗色主题
+        isDark: true,
         algorithm: theme.darkAlgorithm,
-        // 紧凑主题
-        // algorithm: theme.compactAlgorithm
+      }}
+    >
+      {...}
+    </ConfigProvider>
+  );
+};
+```
+
+## 紧凑主题
+
+```ts | pure
+import {  ConfigProvider } from '@oceanbase/design';
+
+export default () {
+  return (
+    <ConfigProvider
+      theme={{
+        algorithm: theme.compactAlgorithm
+      }}
+    >
+      {...}
+    </ConfigProvider>
+  );
+};
+```
+
+## 阿里云主题
+
+```ts | pure
+import {  ConfigProvider } from '@oceanbase/design';
+
+export default () {
+  return (
+    <ConfigProvider
+      theme={{
+        isAliyun: true,
       }}
     >
       {...}
