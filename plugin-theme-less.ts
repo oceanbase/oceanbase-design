@@ -1,5 +1,6 @@
 import fs from 'fs';
 import type { IApi } from 'dumi';
+import { isNil, omitBy } from 'lodash';
 // umi 插件只能 import 支持 CommonJS 语法库和文件，因此需要使用 lib 产物
 import formatToken from 'antd/lib/theme/util/alias';
 // @ts-ignore
@@ -8,6 +9,8 @@ import theme from './.dumi/tmp/plugin-theme-less/index.js';
 import defaultTheme from './.dumi/tmp/plugin-theme-less/default.js';
 // @ts-ignore
 import darkTheme from './.dumi/tmp/plugin-theme-less/dark.js';
+// @ts-ignore
+import aliyunTheme from './.dumi/tmp/plugin-theme-less/aliyun.js';
 
 export default (api: IApi) => {
   // 生成 default.less、dark.less 和 compact.less 主题文件
@@ -29,6 +32,11 @@ export default (api: IApi) => {
         algorithm: compactAlgorithm,
         // 使用 defaultTheme token
         token: defaultTheme.token,
+      },
+      {
+        theme: 'aliyun',
+        algorithm: defaultAlgorithm,
+        token: aliyunTheme.token,
       },
     ];
 
@@ -57,10 +65,13 @@ export default (api: IApi) => {
           item.theme === 'dark'
             ? {}
             : // 对于非暗色主题，需要覆盖部分 Alias Token 的值
-              {
-                boxShadow: item.token.boxShadow,
-                boxShadowSecondary: item.token.boxShadowSecondary,
-              },
+              omitBy(
+                {
+                  boxShadow: item.token.boxShadow,
+                  boxShadowSecondary: item.token.boxShadowSecondary,
+                },
+                isNil
+              ),
       };
       const aliasToken = formatToken(mapToken);
 
