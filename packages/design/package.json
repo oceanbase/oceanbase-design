@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.21.0",
-    "@oceanbase/aliyun-theme": "^0.1.2",
+    "@oceanbase/aliyun-theme": "^0.1.4",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
