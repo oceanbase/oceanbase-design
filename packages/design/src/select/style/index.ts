@@ -7,11 +7,7 @@ export type SelectToken = FullToken<'Select'>;
 export const genSelectStyle: GenerateStyle<SelectToken> = (token: SelectToken): CSSObject => {
   const { componentCls } = token;
   return {
-    [`${componentCls}`]: {
-      [`${componentCls}-arrow${componentCls}-arrow-loading`]: {
-        color: token.colorTextTertiary,
-      },
-    },
+    [`${componentCls}`]: {},
   };
 };
 
