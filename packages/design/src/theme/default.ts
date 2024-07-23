@@ -64,7 +64,6 @@ const defaultTheme: ThemeConfig = {
     colorBgBase: '#ffffff',
     colorBgContainer: '#ffffff',
     colorBgLayout: '#f3f6fc',
-    colorBgSpotlight: '#132039',
     colorBorder: '#CDD5E4',
     colorBorderSecondary: '#E2E8F3',
     colorFillQuaternary: '#F8FAFE',
@@ -73,6 +72,7 @@ const defaultTheme: ThemeConfig = {
     colorFill: '#cdd5e4',
     colorBgMask: 'rgba(19, 32, 57, 0.45)',
     colorBgElevated: '#ffffff',
+    colorBgSpotlight: '#ffffff',
     boxShadowSecondary:
       '0 6px 16px 0 rgba(54, 69, 99, 0.08), 0 3px 6px -4px rgba(54, 69, 99, 0.12), 0 9px 28px 8px rgba(54, 69, 99, 0.05)',
     boxShadow:
@@ -107,6 +107,10 @@ const defaultTheme: ThemeConfig = {
       cellPaddingBlock: 12,
       cellPaddingBlockMD: 8,
       cellPaddingBlockSM: 4,
+    },
+    Tooltip: {
+      colorBgSpotlight: '#ffffff',
+      colorTextLightSolid: '#132039',
     },
   },
 };

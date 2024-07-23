@@ -7,9 +7,6 @@ const App: React.FC = () => {
       <Tooltip title="This is prompt text">
         <Button>Default</Button>
       </Tooltip>
-      <Tooltip title="This is prompt text" type="light">
-        <Button>Light</Button>
-      </Tooltip>
       <Tooltip title="This is prompt text" type="info">
         <Button>Info</Button>
       </Tooltip>
