@@ -421,7 +421,7 @@ exports[`PageContainer > extra and footer 1`] = `
                   aria-invalid="false"
                   autocomplete="off"
                   date-range="start"
-                  placeholder="Start date"
+                  placeholder="开始日期"
                   size="12"
                   value=""
                 />
@@ -461,7 +461,7 @@ exports[`PageContainer > extra and footer 1`] = `
                   aria-invalid="false"
                   autocomplete="off"
                   date-range="end"
-                  placeholder="End date"
+                  placeholder="结束日期"
                   size="12"
                   value=""
                 />
