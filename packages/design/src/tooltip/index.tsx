@@ -3,10 +3,9 @@ import type {
   TooltipPropsWithTitle as AntTooltipPropsWithTitle,
   TooltipRef,
 } from 'antd/es/tooltip';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { CloseOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
-import { isNil } from 'lodash';
 import MouseTooltip from './MouseTooltip';
 import ConfigProvider from '../config-provider';
 import useStyle from './style';

@@ -7611,11 +7611,7 @@ packages:
     resolution: {integrity: sha512-l1TXZ/w8t6rm48kkYvYJgWo/0k5Nf9kkSbfMm9/E70dewt0G9gE5APo7TCIYVFg9DOHDVpTnKUNwQti+khgMXw==}
     dependencies:
       '@umijs/bundler-utils': 4.3.9
-      '@umijs/mako': 0.7.3
       chalk: 4.1.2
-      compression: 1.7.4
-      connect-history-api-fallback: 2.0.0
-      cors: 2.8.5
       express: 4.19.2
       get-tsconfig: 4.7.5
       lodash: 4.17.21
