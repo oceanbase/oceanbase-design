@@ -11,9 +11,11 @@ const App: React.FC = () => {
       <Tabs.TabPane key="1" tab="Tab 1" tag={22}>
         Content of Tab Pane 1
       </Tabs.TabPane>
+      <Tabs.TabPane divider={true} />
       <Tabs.TabPane key="2" tab="Tab 2" tag={99}>
         Content of Tab Pane 2
       </Tabs.TabPane>
+      <Tabs.TabPane divider={true} />
       <Tabs.TabPane key="3" tab="Tab 3" tag={0}>
         Content of Tab Pane 3
       </Tabs.TabPane>

@@ -8,6 +8,7 @@
     "esModuleInterop": true,
     "types": ["node", "vitest/globals"],
     "declaration": true,
+    "strict": true,
     // TS 编译时跳过对 node_modules 依赖的检查
     "skipLibCheck": true,
     "resolveJsonModule": true,
