@@ -29,8 +29,8 @@ export const genSpaceStyle: GenerateStyle<SpaceToken> = (token: SpaceToken): CSS
 };
 
 export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Space', (token: SpaceToken) => {
-    return [genSpaceStyle(token)];
+  const useStyle = genComponentStyleHook('Space', token => {
+    return [genSpaceStyle(token as SpaceToken)];
   });
   return useStyle(prefixCls);
 };

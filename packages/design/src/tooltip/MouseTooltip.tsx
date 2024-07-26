@@ -1,6 +1,7 @@
 import { useMouse, useSize } from 'ahooks';
 import type { TooltipPropsWithTitle as AntTooltipPropsWithTitle } from 'antd/es/tooltip';
 import React, { useRef, useState } from 'react';
+// @ts-ignore
 import ReactStickyMouseTooltip from 'react-sticky-mouse-tooltip';
 import theme from '../theme';
 

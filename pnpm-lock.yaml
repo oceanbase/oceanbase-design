@@ -118,7 +118,7 @@ importers:
         version: 5.1.1
       father:
         specifier: ^4.4.5
-        version: 4.4.5(@babel/core@7.24.9)(@types/node@20.14.12)(styled-components@6.1.12)(webpack@5.93.0)
+        version: 4.4.5(@babel/core@7.24.9)(@types/node@20.14.12)(styled-components@5.3.11)(webpack@5.93.0)
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
@@ -506,7 +506,7 @@ importers:
     dependencies:
       ahooks:
         specifier: ^2.10.14
-        version: 2.10.14(react@18.3.1)
+        version: 2.10.14(react@17.0.2)
       filesize:
         specifier: ^10.1.4
         version: 10.1.4
@@ -524,13 +524,27 @@ importers:
         version: 9.1.0
       react:
         specifier: '>=16.9.0'
-        version: 18.3.1
+        version: 17.0.2
+    devDependencies:
+      '@types/is-url':
+        specifier: ^1.2.32
+        version: 1.2.32
 
 packages:
 
   /@adobe/css-tools@4.4.0:
     resolution: {integrity: sha512-Ff9+ksdQQB3rMncgqDK78uLznstjyfIf2Arnh22pW8kBpLs6rpKDwgnZT46hin5Hl1WzazzK64DOrhSwYpS7bQ==}
     dev: true
+
+  /@ahooksjs/use-request@2.8.15(react@17.0.2):
+    resolution: {integrity: sha512-xhVaM4fyIiAMdVFuuU5i3CFUdFa/IblF+fvITVMFaUEO3w/V5tVCAF6WIA3T03n1/RPuzRkA7Ao1PFtSGtGelw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0
+    dependencies:
+      lodash.debounce: 4.0.8
+      lodash.throttle: 4.1.1
+      react: 17.0.2
+    dev: false
 
   /@ahooksjs/use-request@2.8.15(react@18.3.1):
     resolution: {integrity: sha512-xhVaM4fyIiAMdVFuuU5i3CFUdFa/IblF+fvITVMFaUEO3w/V5tVCAF6WIA3T03n1/RPuzRkA7Ao1PFtSGtGelw==}
@@ -7116,6 +7130,10 @@ packages:
     resolution: {integrity: sha512-oh/6byDPnL1zeNXFrDXFLyZjkr1MsBG667IM792caf1L2UPOOMf65NFzjUH/ltyfwjAGfs1rsX1eftK0jC/KIg==}
     dev: true
 
+  /@types/is-url@1.2.32:
+    resolution: {integrity: sha512-46VLdbWI8Sc+hPexQ6NLNR2YpoDyDZIpASHkJQ2Yr+Kf9Giw6LdCTkwOdsnHKPQeh7xTjTmSnxbE8qpxYuCiHA==}
+    dev: true
+
   /@types/istanbul-lib-coverage@2.0.6:
     resolution: {integrity: sha512-2QF/t/auWm0lsy8XtKVPG19v3sSOQlJe/YHZgfjb/KBBHOGSV+J2q/S671rcq9uTBrLAXmZpqJiaQbMT+zNU1w==}
     dev: true
@@ -8521,6 +8539,25 @@ packages:
     dependencies:
       clean-stack: 2.2.0
       indent-string: 4.0.0
+
+  /ahooks@2.10.14(react@17.0.2):
+    resolution: {integrity: sha512-axWa7VoAgu7bxA56dDl0CXW4rvaQmDBiov/d3tAy0x1YNYywYMKokL8TdLgJ5zO/oXGiWmG7BxlGOQGkqE/zkQ==}
+    engines: {node: '>=8.0.0'}
+    peerDependencies:
+      react: ^16.8.6 || ^17.0
+    dependencies:
+      '@ahooksjs/use-request': 2.8.15(react@17.0.2)
+      '@types/js-cookie': 2.2.7
+      dayjs: 1.11.12
+      intersection-observer: 0.7.0
+      js-cookie: 2.2.1
+      lodash.debounce: 4.0.8
+      lodash.isequal: 4.5.0
+      lodash.throttle: 4.1.1
+      react: 17.0.2
+      resize-observer-polyfill: 1.5.1
+      screenfull: 5.2.0
+    dev: false
 
   /ahooks@2.10.14(react@18.3.1):
     resolution: {integrity: sha512-axWa7VoAgu7bxA56dDl0CXW4rvaQmDBiov/d3tAy0x1YNYywYMKokL8TdLgJ5zO/oXGiWmG7BxlGOQGkqE/zkQ==}
@@ -13123,7 +13160,7 @@ packages:
     dependencies:
       reusify: 1.0.4
 
-  /father@4.4.5(@babel/core@7.24.9)(@types/node@20.14.12)(styled-components@6.1.12)(webpack@5.93.0):
+  /father@4.4.5(@babel/core@7.24.9)(@types/node@20.14.12)(styled-components@5.3.11)(webpack@5.93.0):
     resolution: {integrity: sha512-G//OioIkqLWeB7YKNMyN0nUYUI41KDoO0zxqaitBgBSMJth5o0QqvMgZH4x2I0bblj3o1UwoxXLTIFBZkW39mQ==}
     hasBin: true
     dependencies:
@@ -21894,6 +21931,14 @@ packages:
       throttle-debounce: 3.0.1
       ts-easing: 0.2.0
       tslib: 2.6.3
+    dev: false
+
+  /react@17.0.2:
+    resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
     dev: false
 
   /react@18.3.1:

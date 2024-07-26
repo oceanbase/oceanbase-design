@@ -23,7 +23,7 @@ export interface LottieProps extends Omit<AnimationConfig, 'container'> {
 }
 
 export interface LottieRef {
-  animation: AnimationItem;
+  animation?: AnimationItem;
 }
 
 const Lottie = React.forwardRef<LottieRef, LottieProps>(
@@ -31,13 +31,13 @@ const Lottie = React.forwardRef<LottieRef, LottieProps>(
     const { iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
 
     const [animation, setAnimation] = useState<AnimationItem>();
-    const containerRef = useRef<HTMLDivElement>();
+    const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
       if (!animation) {
         // ref: https://github.com/airbnb/lottie-web/blob/master/index.d.ts#L129
         const newAnimation = lottie.loadAnimation({
-          container: containerRef.current,
+          container: containerRef.current as HTMLDivElement,
           renderer: 'svg',
           loop,
           ...restProps,

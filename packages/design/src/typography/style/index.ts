@@ -23,8 +23,8 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
 };
 
 export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Typography', (token: TypographyToken) => {
-    return [genTypographyStyle(token)];
+  const useStyle = genComponentStyleHook('Typography', token => {
+    return [genTypographyStyle(token as TypographyToken)];
   });
   return useStyle(prefixCls);
 };

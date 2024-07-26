@@ -45,8 +45,8 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     const zeroPaddingList = [0, '0', '0px'];
     // card body has no padding
     const noBodyPadding =
-      zeroPaddingList.includes(bodyStyle?.padding) ||
-      zeroPaddingList.includes(styles?.body?.padding);
+      zeroPaddingList.includes(bodyStyle?.padding as string | number) ||
+      zeroPaddingList.includes(styles?.body?.padding as string | number);
 
     const cardCls = classNames(
       {
