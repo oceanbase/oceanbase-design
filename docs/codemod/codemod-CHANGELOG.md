@@ -8,6 +8,13 @@ group: 自动化迁移工具
 
 ---
 
+## 0.3.6
+
+`2024-07-26`
+
+- ⭐️ 新增 `rgba(0,0,0,xx%)` 颜色值到 Design Token 的自动改写。[#656](https://github.com/oceanbase/oceanbase-design/pull/656)
+- ⭐️ 支持 `#000000xx` 等颜色值到 Design Token 的自动改写。[#639](https://github.com/oceanbase/oceanbase-design/pull/639)
+
 ## 0.3.4
 
 `2024-06-27`

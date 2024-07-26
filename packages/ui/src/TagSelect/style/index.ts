@@ -137,7 +137,7 @@ export const genTagSelectStyle: GenerateStyle<TagSelectToken> = (
     [`${componentCls}-checked:not(${componentCls}-disabled).multiple`]: {
       [`${componentCls}-inner`]: genMultipleStyle(token.colorPrimary, token),
     },
-  };
+  } as CSSObject;
 };
 
 export default (prefixCls: string) => {

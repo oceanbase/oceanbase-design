@@ -8,6 +8,16 @@ group: 基础组件
 
 ---
 
+## 0.3.7
+
+`2024-07-26`
+
+- 📖 补充 Button、Input 和 Switch 的示例和文档。[#640](https://github.com/oceanbase/oceanbase-design/pull/640) [#657](https://github.com/oceanbase/oceanbase-design/pull/657) [#658](https://github.com/oceanbase/oceanbase-design/pull/658)
+- 📖 新增阿里云和 less 主题使用文档，优化暗色主题使用文档。[#644](https://github.com/oceanbase/oceanbase-design/pull/644)
+- ⭐️ 新增阿里云主题的 less 变量文件，方便在 less 中使用。[#643](https://github.com/oceanbase/oceanbase-design/pull/643)
+- 💄 更新 Design Token `colorBgBase` 的颜色值 `#132039` => `#000000`。[#642](https://github.com/oceanbase/oceanbase-design/pull/642)
+- 💄 优化 Table 表头的字体颜色，以对齐设计规范。[#641](https://github.com/oceanbase/oceanbase-design/pull/641)
+
 ## 0.3.6
 
 `2024-07-10`
