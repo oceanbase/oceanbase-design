@@ -56,7 +56,7 @@ const defaultTheme: ThemeConfig = {
     colorInfoTextHover: '#5189FB',
     colorInfoText: '#006AFF',
     colorInfoTextActive: '#004CE6',
-    colorTextBase: '#132039',
+    colorTextBase: '#000000',
     colorText: '#132039',
     colorTextSecondary: '#5c6b8a',
     colorTextQuaternary: '#c1cbe0',

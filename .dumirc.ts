@@ -36,6 +36,14 @@ export default defineConfig({
   analytics: {
     ga_v2: 'G-81Y5XPZY2E',
   },
+  headScripts: [
+    // Microsoft clarity script
+    `(function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "n5kn7gme0s");`,
+  ],
   metas: [
     {
       property: 'og:site_name',
@@ -143,6 +151,7 @@ export default defineConfig({
             { title: 'Input 输入框', link: '/components/input' },
             { title: 'InputNumber 数字输入框', link: '/components/input-number' },
             { title: 'Radio 单选框', link: '/components/radio' },
+            { title: 'Switch 开关', link: '/components/switch' },
             { title: 'Select 选择器', link: '/components/select' },
             { title: 'TreeSelect 树选择', link: '/components/tree-select' },
           ],

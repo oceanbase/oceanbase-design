@@ -53,7 +53,6 @@
     "@emotion/css": "^11.13.0",
     "@emotion/react": "^11.13.0",
     "@emotion/server": "^11.11.0",
-    "@oceanbase/aliyun-theme": "^0.1.4",
     "@qixian.cs/github-contributors-list": "^2.0.2",
     "@rc-component/trigger": "^2.2.0",
     "@stackblitz/sdk": "^1.11.0",
