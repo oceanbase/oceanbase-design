@@ -1,10 +1,7 @@
-import { isNullValue } from '@oceanbase/util';
-import { Space, Tag } from 'antd';
 import warning from 'antd/es/_util/warning';
-import type { Tab } from 'rc-tabs/lib/interface';
 import toArray from 'rc-util/lib/Children/toArray';
 import * as React from 'react';
-import type { TabsProps } from '..';
+import type { TabsProps, Tab } from '..';
 import type { TabPaneProps } from '../TabPane';
 
 function filter<T>(items: (T | null)[]): T[] {
@@ -12,11 +9,7 @@ function filter<T>(items: (T | null)[]): T[] {
 }
 
 // ref: https://github.com/ant-design/ant-design/blob/master/components/tabs/hooks/useLegacyItems.ts
-export default function useLegacyItems(
-  items?: TabsProps['items'],
-  children?: React.ReactNode,
-  prefixCls?: string
-) {
+export default function useLegacyItems(items?: TabsProps['items'], children?: React.ReactNode) {
   if (items) {
     return items;
   }
@@ -26,21 +19,12 @@ export default function useLegacyItems(
   const childrenItems = toArray(children).map((node: React.ReactElement<TabPaneProps>) => {
     if (React.isValidElement(node)) {
       const { key, props } = node;
-      const { tab, tag, ...restProps } = props || {};
+      const { tab, ...restProps } = props || {};
 
       const item: Tab = {
-        key,
+        key: key as string,
         ...restProps,
-        label: isNullValue(tag) ? (
-          tab
-        ) : (
-          <Space size={4}>
-            {tab}
-            <Tag bordered={false} className={`${prefixCls}-tab-tag`}>
-              {tag}
-            </Tag>
-          </Space>
-        ),
+        label: tab,
       };
       return item;
     }
