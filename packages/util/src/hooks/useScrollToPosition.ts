@@ -84,8 +84,8 @@ export const useScrollToPosition = (target?: TargetType, options?: OptionsType) 
       sessionStorage.setItem(leftId, toString(scroll?.left));
     } else {
       const parsed = queryString.parse(location.search);
-      parsed.scrollTop = scroll?.top;
-      parsed.scrollLeft = scroll?.left;
+      parsed.scrollTop = toString(scroll?.top);
+      parsed.scrollLeft = toString(scroll?.left);
       const stringified = queryString.stringify(parsed);
       // 往 state 中注入 scrollTop 和 scrollLeft, pushState 不会刷新页面，但浏览器回退的时候会保留值
       window.history.pushState({}, '', `${location.origin}${location.pathname}?${stringified}`);
@@ -107,11 +107,11 @@ export const useScrollToPosition = (target?: TargetType, options?: OptionsType) 
     }
   };
 
-  const getScrollEle = ele => {
+  const getScrollEle = (ele: TargetElement) => {
     if (ele === document) {
-      return document.scrollingElement || {};
+      return document.scrollingElement;
     }
-    return ele;
+    return ele as Element;
   };
 
   const setScroll = (direction: Direction = 'top') => {
@@ -126,11 +126,11 @@ export const useScrollToPosition = (target?: TargetType, options?: OptionsType) 
     const left = mode === 'query' ? parsed.scrollLeft : sessionStorage.getItem(leftId);
     const dom = getScrollEle(ele);
 
-    if (direction === 'top' && top) {
+    if (direction === 'top' && top && dom) {
       dom.scrollTop = toNumber(top);
     }
 
-    if (direction === 'left' && left) {
+    if (direction === 'left' && left && dom) {
       dom.scrollLeft = toNumber(left);
     }
     clearScroll();

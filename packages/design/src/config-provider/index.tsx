@@ -141,7 +141,7 @@ const ConfigProvider: ConfigProviderType = ({
       tabs={merge(
         {},
         {
-          indicatorSize: origin => (origin >= 24 ? origin - 16 : origin),
+          indicatorSize: (origin: number) => (origin >= 24 ? origin - 16 : origin),
         },
         parentContext.tabs,
         tabs

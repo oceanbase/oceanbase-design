@@ -25,7 +25,8 @@ const InternalInputNumber = React.forwardRef<HTMLInputElement, InputNumberProps>
   ({ locale: customLocale, ...restProps }, ref) => {
     const { locale: contextLocale } = useContext<ConfigConsumerProps>(ConfigProvider.ConfigContext);
     const inputNumberLocale: InputNumberLocale = {
-      placeholder: contextLocale?.global?.inputPlaceholder || defaultLocale.global.inputPlaceholder,
+      placeholder:
+        contextLocale?.global?.inputPlaceholder || defaultLocale.global?.inputPlaceholder,
       ...defaultLocale.InputNumber,
       ...contextLocale?.InputNumber,
       ...customLocale,

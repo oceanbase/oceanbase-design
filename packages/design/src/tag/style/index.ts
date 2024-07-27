@@ -66,14 +66,14 @@ export const genTagStyle: GenerateStyle<TagToken> = (token: TagToken): CSSObject
 };
 
 export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Tag', (token: TagToken) => {
+  const useStyle = genComponentStyleHook('Tag', token => {
     return [
-      genTagStyle(token),
-      genPresetStyle(token),
-      genTagPresetStatusStyle(token, 'success'),
-      genTagPresetStatusStyle(token, 'error'),
-      genTagPresetStatusStyle(token, 'processing'),
-      genTagPresetStatusStyle(token, 'warning'),
+      genTagStyle(token as TagToken),
+      genPresetStyle(token as TagToken),
+      genTagPresetStatusStyle(token as TagToken, 'success'),
+      genTagPresetStatusStyle(token as TagToken, 'error'),
+      genTagPresetStatusStyle(token as TagToken, 'processing'),
+      genTagPresetStatusStyle(token as TagToken, 'warning'),
     ];
   });
   return useStyle(prefixCls);
