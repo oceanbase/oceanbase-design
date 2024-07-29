@@ -83,7 +83,7 @@
     "gh-pages": "^6.1.1",
     "glob": "^10.4.5",
     "html2sketch": "^1.0.2",
-    "husky": "^9.1.1",
+    "husky": "^9.1.4",
     "identity-obj-proxy": "^3.0.0",
     "isomorphic-fetch": "^3.0.0",
     "jest-environment-jsdom": "^29.7.0",
