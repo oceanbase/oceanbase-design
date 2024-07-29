@@ -116,6 +116,6 @@
     "vitest": "^1.6.0",
     "vitest-canvas-mock": "^0.3.3",
     "vitest-fetch-mock": "^0.2.2",
-    "web-vitals": "^3.5.2"
+    "web-vitals": "^4.2.2"
   }
 }
