@@ -6,6 +6,6 @@ export default {
   about: '关于',
   version: '版本号',
   releaseTime: '发布日期',
-  company: '蚂蚁集团',
+  company: '北京奥星贝斯科技有限公司',
   right: '版权所有',
 };

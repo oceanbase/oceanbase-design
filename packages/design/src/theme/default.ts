@@ -56,7 +56,7 @@ const defaultTheme: ThemeConfig = {
     colorInfoTextHover: '#5189FB',
     colorInfoText: '#006AFF',
     colorInfoTextActive: '#004CE6',
-    colorTextBase: '#132039',
+    colorTextBase: '#000000',
     colorText: '#132039',
     colorTextSecondary: '#5c6b8a',
     colorTextQuaternary: '#c1cbe0',
@@ -64,7 +64,6 @@ const defaultTheme: ThemeConfig = {
     colorBgBase: '#ffffff',
     colorBgContainer: '#ffffff',
     colorBgLayout: '#f3f6fc',
-    colorBgSpotlight: '#132039',
     colorBorder: '#CDD5E4',
     colorBorderSecondary: '#E2E8F3',
     colorFillQuaternary: '#F8FAFE',
@@ -73,6 +72,7 @@ const defaultTheme: ThemeConfig = {
     colorFill: '#cdd5e4',
     colorBgMask: 'rgba(19, 32, 57, 0.45)',
     colorBgElevated: '#ffffff',
+    colorBgSpotlight: '#ffffff',
     boxShadowSecondary:
       '0 6px 16px 0 rgba(54, 69, 99, 0.08), 0 3px 6px -4px rgba(54, 69, 99, 0.12), 0 9px 28px 8px rgba(54, 69, 99, 0.05)',
     boxShadow:
@@ -108,16 +108,20 @@ const defaultTheme: ThemeConfig = {
       cellPaddingBlockMD: 8,
       cellPaddingBlockSM: 4,
     },
+    Tooltip: {
+      colorBgSpotlight: '#ffffff',
+      colorTextLightSolid: '#132039',
+    },
   },
 };
 
 defaultTheme.token = {
   ...defaultTheme.token,
   // preset colors below should be same with semantic colors
-  blue: defaultTheme.token.colorInfo,
-  green: defaultTheme.token.colorSuccess,
-  yellow: defaultTheme.token.colorWarning,
-  red: defaultTheme.token.colorError,
+  blue: defaultTheme?.token?.colorInfo,
+  green: defaultTheme?.token?.colorSuccess,
+  yellow: defaultTheme?.token?.colorWarning,
+  red: defaultTheme?.token?.colorError,
 };
 
 export default formatTheme(defaultTheme);

@@ -19,8 +19,8 @@ export interface DrawerLocale {
 }
 
 export interface DrawerProps extends AntDrawerProps {
-  onOk?: (e) => void;
-  onCancel?: (e) => void;
+  onOk?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onCancel?: (e: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>) => void;
   confirmLoading?: boolean;
   footer?: React.ReactNode | boolean;
   // only work for default footer
@@ -66,7 +66,7 @@ const Drawer: CompoundedComponent = ({
   const prefixCls = getPrefixCls('drawer', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
 
-  const [contentElment, setContentElement] = useState<HTMLDivElement>();
+  const [contentElment, setContentElement] = useState<HTMLDivElement | null>(null);
   // useSize for re-render when contentElment change size
   useSize(contentElment);
   // useScroll for re-render when scroll
@@ -77,8 +77,11 @@ const Drawer: CompoundedComponent = ({
   // Determine if an element has been totally scrolled
   // ref: https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight#determine_if_an_element_has_been_totally_scrolled
   const isTotalScroll =
-    Math.abs(contentElment?.scrollHeight - contentElment?.clientHeight - contentElment?.scrollTop) <
-    1;
+    Math.abs(
+      (contentElment?.scrollHeight || 0) -
+        (contentElment?.clientHeight || 0) -
+        (contentElment?.scrollTop || 0)
+    ) < 1;
 
   const handleCancel = onCancel || onClose;
   const showFooter = !!(footer || onOk) && footer !== false && footer !== null;

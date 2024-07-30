@@ -11,8 +11,8 @@ export const genTreeSelectStyle: GenerateStyle<TreeSelectToken> = (
 };
 
 export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('TreeSelect', (token: TreeSelectToken) => {
-    return [genTreeSelectStyle(token)];
+  const useStyle = genComponentStyleHook('TreeSelect', token => {
+    return [genTreeSelectStyle(token as TreeSelectToken)];
   });
   return useStyle(prefixCls);
 };

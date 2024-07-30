@@ -5,7 +5,7 @@ import type { TooltipPlacement } from '../tooltip';
 
 export type Ellipsis = boolean | EllipsisConfig;
 
-export function getEllipsisConfig(ellipsis?: Ellipsis, children?: ReactNode): Ellipsis {
+export function getEllipsisConfig(ellipsis?: Ellipsis, children?: ReactNode): Ellipsis | undefined {
   const childrenType = (children as ReactElement)?.type as any;
   return typeof ellipsis === 'object'
     ? {

@@ -6,6 +6,6 @@ export default {
   about: 'About',
   version: 'Version',
   releaseTime: 'Release date',
-  company: 'Ant Group',
+  company: 'Beijing OceanBase Technology Co., Ltd.',
   right: 'All Rights Reserved',
 };

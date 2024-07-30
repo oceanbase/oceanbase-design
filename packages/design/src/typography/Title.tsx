@@ -10,7 +10,7 @@ export * from 'antd/es/typography/Title';
 
 export interface TitleProps extends AntTitleProps {}
 
-const Title = React.forwardRef<HTMLDivElement, TitleProps>(
+const Title = React.forwardRef<HTMLElement, TitleProps>(
   ({ prefixCls: customizePrefixCls, children, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography', customizePrefixCls);

@@ -8,13 +8,11 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
   const {
     antCls,
     componentCls,
-    colorTextBase,
+    colorText,
     colorBgBase,
     colorTextSecondary,
-    colorTextTertiary,
     colorFillQuaternary,
     colorPrimaryBg,
-    colorPrimaryBgHover,
     colorLink,
     borderRadiusLG,
     colorBorderSecondary,
@@ -28,14 +26,14 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
   return {
     // 表格通用样式
     [`${componentCls}-wrapper ${componentCls}`]: {
-      color: colorTextBase,
+      color: colorText,
       backgroundColor: colorBgBase,
       borderRadius: borderRadiusLG,
       // head 样式
       [`${componentCls}-thead > tr`]: {
         ['td, th']: {
           // 弱化列标题
-          color: colorTextTertiary,
+          color: colorTextSecondary,
           fontWeight: 'normal',
           backgroundColor: colorBgBase,
         },
@@ -64,11 +62,11 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         // hover 行样式
         [`tr:not(${componentCls}-placeholder):not(${componentCls}-expanded-row):not(${antCls}-descriptions-row):hover > td`]:
           {
-            backgroundColor: `${colorPrimaryBgHover} !important`,
+            backgroundColor: `${colorPrimaryBg} !important`,
           },
         // 选中行样式
         [`tr${componentCls}-row-selected > td`]: {
-          backgroundColor: colorPrimaryBg,
+          backgroundColor: `${colorPrimaryBg} !important`,
         },
         // 展开行样式
         [`${componentCls}-expanded-row > td`]: {
@@ -148,7 +146,7 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
               },
               ['&:hover']: {
                 td: {
-                  backgroundColor: colorPrimaryBgHover,
+                  backgroundColor: colorPrimaryBg,
                 },
               },
             },

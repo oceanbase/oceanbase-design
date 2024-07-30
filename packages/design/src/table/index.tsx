@@ -34,13 +34,13 @@ export interface TableProps<T> extends AntTableProps<T> {
   collapseText?: string;
   openText?: string;
   hiddenCancelBtn?: boolean;
-  toolOptionsRender?: (selectedRowKeys, selectedRows) => ReactNode[];
-  toolAlertRender?: false | ((selectedRowKeys, selectedRows) => ReactNode);
-  toolSelectedContent?: (selectedRowKeys, selectedRows) => ReactNode;
+  toolOptionsRender?: (selectedRowKeys: React.Key[], selectedRows: T[]) => ReactNode[];
+  toolAlertRender?: false | ((selectedRowKeys: React.Key[], selectedRows: T[]) => ReactNode);
+  toolSelectedContent?: (selectedRowKeys: React.Key[], selectedRows: T[]) => ReactNode;
   locale?: TableLocale;
 }
 
-function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
+function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.Ref<Reference>) {
   const {
     locale: customLocale,
     columns,
@@ -62,8 +62,6 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
 
   const { getPrefixCls, locale, table } = useContext(ConfigProvider.ConfigContext);
   const { batchOperationBar, ...restLocale } = {
-    ...enUS.Table,
-    ...locale?.Table,
     ...customLocale,
     batchOperationBar: {
       ...enUS.Table?.batchOperationBar,
@@ -101,7 +99,7 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
                 showTitle: false,
                 ...item.ellipsis,
               },
-        render: (text, record, index) => {
+        render: (text: any, record: T, index: number) => {
           const element = (
             item.render ? item.render(text, record, index) : record[(item as any).dataIndex]
           ) as ReactElement | undefined;
@@ -127,14 +125,14 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
     return item;
   });
 
-  const handleSelectedData = (selectedRowKeys, selectedRows, info) => {
+  const handleSelectedData = (selectedRowKeys: React.Key[], selectedRows: T[], info: any) => {
     setCurrentSelectedRowKeys(selectedRowKeys);
     setCurrentSelectedRows(selectedRows);
     setCurrentSelectedInfo(info);
   };
 
   const handleOptionsCancel = () => {
-    rowSelection?.onChange([], [], currentSelectedInfo);
+    rowSelection?.onChange?.([], [], currentSelectedInfo);
     handleSelectedData([], [], currentSelectedInfo);
   };
 
@@ -184,8 +182,8 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
               >
                 <a onClick={() => setOpenPopover(!openPopover)}>
                   {openPopover
-                    ? collapseText ?? batchOperationBar?.collapse
-                    : openText ?? batchOperationBar?.open}
+                    ? (collapseText ?? batchOperationBar?.collapse)
+                    : (openText ?? batchOperationBar?.open)}
                 </a>
               </Popover>
             )}
@@ -223,7 +221,7 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
                 }
               ) => {
                 handleSelectedData(selectedRowKeys, selectedRows, info);
-                rowSelection?.onChange(selectedRowKeys, selectedRows, info);
+                rowSelection?.onChange?.(selectedRowKeys, selectedRows, info);
               },
             }
           : undefined

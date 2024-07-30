@@ -10,7 +10,7 @@ export * from 'antd/es/typography/Paragraph';
 
 export interface ParagraphProps extends AntParagraphProps {}
 
-const Paragraph = React.forwardRef<HTMLDivElement, ParagraphProps>(
+const Paragraph = React.forwardRef<HTMLElement, ParagraphProps>(
   ({ prefixCls: customizePrefixCls, children, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography', customizePrefixCls);

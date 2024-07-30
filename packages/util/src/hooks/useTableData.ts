@@ -38,10 +38,16 @@ const defaultAsnycFnOfUseTableData = () => {
  * 获取表格数据，内置后端分页、筛选和排序的请求逻辑，同时支持条件请求
  * TODO: 后续需要补全 TS 类型定义
  */
-export function useTableData({ fn, params = {}, condition = [], refreshDeps = [], options = {} }) {
+export function useTableData({
+  fn = noop,
+  params = {},
+  condition = [],
+  refreshDeps = [],
+  options = {},
+}) {
   const { pagePropName = 'page', sizePropName = 'size', ...restOptions } = options as any;
   const newOptions = {
-    formatResult: res => {
+    formatResult: (res: any) => {
       const { data } = (res || {}) as any;
       // 接口请求出错时，后端返回的 res.data 可能为 undefined。避免前端解析错误导致页面崩溃，这里需要做健壮性处理
       const { page: { totalElements = 0 } = {}, contents = [] } = data || DEFAULT_LIST_DATA;
@@ -56,7 +62,7 @@ export function useTableData({ fn, params = {}, condition = [], refreshDeps = []
 
   const serviceFn = some(condition, item => isNullValue(item))
     ? defaultAsnycFnOfUseTableData
-    : ({ current, pageSize, sorter = {}, filters = {} }) => {
+    : ({ current, pageSize, sorter = {}, filters = {} }: any) => {
         // eslint-disable-next-line
         let newFilters = {} as any;
         Object.keys(filters).forEach(key => {

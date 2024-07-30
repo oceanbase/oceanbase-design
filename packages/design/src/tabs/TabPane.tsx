@@ -4,6 +4,7 @@ import type React from 'react';
 
 export interface TabPaneProps extends AntTabPaneProps {
   tag?: React.ReactNode;
+  divider?: boolean;
 }
 
 export default AntTabs.TabPane as React.FC<TabPaneProps>;
