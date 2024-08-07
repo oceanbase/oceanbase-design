@@ -4,6 +4,8 @@ import { formatTheme } from './util/format';
 // Calculated by colorBorder and getWeakenBorderColor()
 const tagColorBorder = '#cdd5e466';
 
+const colorIcon = '#5c6b8a';
+
 const defaultTheme: ThemeConfig = {
   token: {
     colorPrimaryBg: '#EAF1FF',
@@ -59,8 +61,8 @@ const defaultTheme: ThemeConfig = {
     colorTextBase: '#000000',
     colorText: '#132039',
     colorTextSecondary: '#5c6b8a',
-    colorTextQuaternary: '#c1cbe0',
     colorTextTertiary: '#8592AD',
+    colorTextQuaternary: '#c1cbe0',
     colorBgBase: '#ffffff',
     colorBgContainer: '#ffffff',
     colorBgLayout: '#f3f6fc',
@@ -70,6 +72,7 @@ const defaultTheme: ThemeConfig = {
     colorFillTertiary: '#f3f6fc',
     colorFillSecondary: '#e2e8f3',
     colorFill: '#cdd5e4',
+    colorIcon,
     colorBgMask: 'rgba(19, 32, 57, 0.45)',
     colorBgElevated: '#ffffff',
     colorBgSpotlight: '#ffffff',
@@ -87,8 +90,20 @@ const defaultTheme: ThemeConfig = {
       // fontHeight is internal token
       fontHeight: 20,
     },
+    ColorPicker: {
+      // customize icon color
+      colorTextQuaternary: colorIcon,
+    },
+    Input: {
+      // customize icon color
+      colorTextQuaternary: colorIcon,
+    },
     InputNumber: {
       handleVisible: true,
+    },
+    Mentions: {
+      // customize icon color
+      colorTextQuaternary: colorIcon,
     },
     Radio: {
       // temporarily fix style for checked disabled Radio.Button
@@ -99,6 +114,8 @@ const defaultTheme: ThemeConfig = {
       multipleItemBg: '#F8FAFE',
       multipleItemBorderColor: tagColorBorder,
       multipleItemBorderColorDisabled: tagColorBorder,
+      // customize icon color
+      colorTextQuaternary: colorIcon,
     },
     Tag: {
       colorBorder: tagColorBorder,
