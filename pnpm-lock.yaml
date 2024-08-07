@@ -465,8 +465,8 @@ importers:
         specifier: ^2.30.1
         version: 2.30.1
       path-to-regexp:
-        specifier: ^6.2.2
-        version: 6.2.2
+        specifier: ^7.1.0
+        version: 7.1.0
       randexp:
         specifier: ^0.5.3
         version: 0.5.3
@@ -19359,8 +19359,9 @@ packages:
   /path-to-regexp@2.4.0:
     resolution: {integrity: sha512-G6zHoVqC6GGTQkZwF4lkuEyMbVOjoBKAEybQUypI1WTkqinCOrq2x6U2+phkJ1XsEMTy4LjtwPI7HW+NVrRR2w==}
 
-  /path-to-regexp@6.2.2:
-    resolution: {integrity: sha512-GQX3SSMokngb36+whdpRXE+3f9V8UzyAorlYvOGx87ufGHehNTn5lCxrKtLyZ4Yl/wEKnNnr98ZzOwwDZV5ogw==}
+  /path-to-regexp@7.1.0:
+    resolution: {integrity: sha512-ZToe+MbUF4lBqk6dV8GKot4DKfzrxXsplOddH8zN3YK+qw9/McvP7+4ICjZvOne0jQhN4eJwHsX6tT0Ns19fvw==}
+    engines: {node: '>=16'}
     dev: false
 
   /path-type@3.0.0:
