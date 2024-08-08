@@ -15,6 +15,8 @@ nav:
 
 <code src="./demo/default-value.tsx" title="指定默认值"></code>
 
+<code src="./demo/default-quick-value.tsx" title="指定快速选择的默认值"></code>
+
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |

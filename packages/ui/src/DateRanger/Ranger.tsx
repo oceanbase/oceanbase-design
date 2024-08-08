@@ -32,6 +32,9 @@ import {
 } from './constant';
 import type { RangeOption } from './typing';
 import InternalPickerPanel, { Rule } from './PickerPanel';
+import { getMergedStatus, getStatusClassNames } from 'antd/es/_util/statusUtils';
+import { FormItemInputContext } from 'antd/es/form/context';
+
 import zhCN from './locale/zh-CN';
 import enUS from './locale/en-US';
 import './index.less';
@@ -103,11 +106,15 @@ const Ranger = (props: DateRangerProps) => {
     isMoment: isMomentProps,
     rules,
     tip,
+    status: customStatus,
     ...rest
   } = props;
 
-  console.log(locale, 'locale');
   const { token } = theme.useToken();
+
+  // =================== Form =====================
+  const { status: contextStatus, hasFeedback } = React.useContext(FormItemInputContext);
+  const mergedStatus = getMergedStatus(contextStatus, customStatus);
 
   // 是否为 moment 时间对象
   const isMoment =
@@ -124,9 +131,10 @@ const Ranger = (props: DateRangerProps) => {
   const [innerValue, setInnerValue] = useState<RangeValue>(
     value ??
       defaultValue ??
-      (selects
-        .find(item => item.name === defaultRangeName)
-        ?.range(isMoment ? moment() : dayjs()) as RangeValue)
+      // 兼容一下匹配不上 defaultRangeName
+      ((selects.find(item => item.name === defaultRangeName) || selects[0])?.range(
+        isMoment ? moment() : dayjs()
+      ) as RangeValue)
   );
 
   const [open, setOpen] = useState(false);
@@ -295,7 +303,10 @@ const Ranger = (props: DateRangerProps) => {
       : selects[rangeNameIndex + 1];
 
   return (
-    <Space className={classNames(prefix)} style={rest.style}>
+    <Space
+      className={classNames(prefix, getStatusClassNames(prefix, mergedStatus, hasFeedback))}
+      style={rest.style}
+    >
       <Space size={0}>
         <div className={`${prefix}-wrapper`}>
           <Dropdown
@@ -338,8 +349,9 @@ const Ranger = (props: DateRangerProps) => {
                     label:
                       item.name === CUSTOMIZE ? (
                         <Tooltip
+                          overlayClassName={`${prefix}-panel-wrapper`}
                           open={tooltipOpen}
-                          arrow={false}
+                          arrow={true}
                           onOpenChange={o => {
                             if (o) {
                               setTooltipOpen(true);
@@ -352,9 +364,6 @@ const Ranger = (props: DateRangerProps) => {
                             ...tooltipProps?.overlayStyle,
                           }}
                           overlayInnerStyle={{
-                            background: '#fff',
-                            maxHeight: 'none',
-                            margin: 16,
                             ...tooltipProps?.overlayInnerStyle,
                           }}
                           title={
@@ -400,14 +409,7 @@ const Ranger = (props: DateRangerProps) => {
             }}
           >
             <Space size={0}>
-              <span
-                className={`${prefix}-label`}
-                style={{
-                  marginLeft: 8,
-                }}
-              >
-                {rangeLabel}
-              </span>
+              <div className={`${prefix}-label`}>{rangeLabel}</div>
               {isPlay && <div className={`${prefix}-play`}>{label}</div>}
             </Space>
           </Dropdown>
@@ -430,6 +432,7 @@ const Ranger = (props: DateRangerProps) => {
                 }}
                 // @ts-ignore
                 value={innerValue}
+                // @ts-ignore
                 onChange={datePickerChange}
                 allowClear={false}
                 size={size}

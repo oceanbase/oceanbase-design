@@ -168,12 +168,15 @@ const Ranger = (props: RangerProps) => {
         />
       )}
       {showRange && (
-        // @ts-ignore
         <DatePicker.RangePicker
+          // @ts-ignore
           disabledDate={pastOnly ? disabledFuture : disabledDate}
           format={DATE_TIME_FORMAT}
+          // @ts-ignore
           defaultValue={defaultValue as [Dayjs, Dayjs]}
+          // @ts-ignore
           value={(innerValue || defaultInternalValue) as [Dayjs, Dayjs]}
+          // @ts-ignore
           onChange={datePickerChange}
           showTime={true}
           className={`${prefix}-range-picker`}
