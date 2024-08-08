@@ -170,7 +170,7 @@ exports[`List > hideOnSinglePage should be false by default 1`] = `
     class="ant-list-pagination"
   >
     <ul
-      class="ant-pagination"
+      class="ant-pagination ant-pagination-end"
     >
       <li
         aria-disabled="true"
@@ -336,7 +336,7 @@ exports[`List > render 1`] = `
     class="ant-list-pagination"
   >
     <ul
-      class="ant-pagination"
+      class="ant-pagination ant-pagination-end"
     >
       <li
         aria-disabled="true"
