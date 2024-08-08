@@ -40,7 +40,7 @@
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.19.2",
+    "antd": "^5.20.0",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
     "lottie-web": "^5.12.2",
@@ -49,12 +49,12 @@
     "react-sticky-mouse-tooltip": "^0.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.7",
-    "@babel/preset-env": "^7.24.7",
+    "@babel/cli": "^7.24.8",
+    "@babel/preset-env": "^7.25.3",
     "antd-token-previewer": "^2.0.8",
-    "rc-select": "^14.15.0",
+    "rc-select": "^14.15.1",
     "rc-table": "^7.47.1",
-    "rc-tree-select": "^5.22.0"
+    "rc-tree-select": "^5.22.1"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
