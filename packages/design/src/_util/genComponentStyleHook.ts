@@ -26,7 +26,9 @@ export const genCustomFontStyle = (token: FullToken<any>): CSSObject[] => {
 export function genComponentStyleHook(
   componentName: ComponentName,
   styleFn: GenerateStyle<FullToken<ComponentName>>,
-  getDefaultToken?: FullToken<ComponentName> | ((token: GlobalToken) => FullToken<ComponentName>)
+  getDefaultToken?:
+    | Partial<FullToken<ComponentName>>
+    | ((token: GlobalToken) => Partial<FullToken<ComponentName>>)
 ) {
   return (prefixCls: string) => {
     const { theme: themeConfig } = useContext(ConfigProvider.ConfigContext);
