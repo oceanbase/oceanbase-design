@@ -139,8 +139,10 @@ const Sidebar: React.FC = () => {
         components: {
           Menu: {
             itemBg: colorBgContainer,
+            subMenuItemBg: colorBgContainer,
             itemHoverBg: colorBgTextHover,
             darkItemBg: colorBgContainer,
+            darkSubMenuItemBg: colorBgContainer,
             darkItemHoverBg: colorBgTextHover,
           },
         },

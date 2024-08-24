@@ -23,19 +23,37 @@ const GlobalStyle: React.FC = () => {
           line-height: 1.5;
         }
 
+        // 非段落图片最大宽度: 100% - 32px
         .markdown img {
           max-width: calc(100% - 32px);
           max-height: 100%;
         }
 
+        // 段落图片最大宽度: 100%
         .markdown p > img {
-          margin: 34px 0;
-          box-shadow: 0 8px 20px rgba(143, 168, 191, 0.35);
+          max-width: 100%;
         }
 
-        .markdown p > img.markdown-inline-image {
-          margin: 0;
-          box-shadow: none;
+        // 暂时去掉段落图片的阴影
+        // .markdown p > img {
+        //   margin: 24px 0;
+        //   box-shadow: 0 8px 20px rgba(143, 168, 191, 0.35);
+        // }
+
+        // .markdown p > img.markdown-inline-image {
+        //   margin: 0;
+        //   box-shadow: none;
+        // }
+
+        .markdown .image-description {
+          color: ${token.colorTextDescription};
+          margin-right: 16px;
+        }
+
+        .markdown .image-description-center {
+          color: ${token.colorTextDescription};
+          margin-right: 16px;
+          text-align: center;
         }
 
         .markdown h1 {
@@ -43,9 +61,9 @@ const GlobalStyle: React.FC = () => {
           margin-bottom: 20px;
           color: ${token.colorTextHeading};
           font-weight: 500;
-          font-size: 30px;
+          font-size: 24px;
           font-family: Avenir, ${token.fontFamily}, sans-serif;
-          line-height: 38px;
+          line-height: 32px;
 
           .subtitle {
             margin-left: 12px;
@@ -53,8 +71,8 @@ const GlobalStyle: React.FC = () => {
         }
 
         .markdown h2 {
-          font-size: 24px;
-          line-height: 32px;
+          font-size: 20px;
+          line-height: 28px;
         }
 
         .markdown h2,
@@ -305,12 +323,18 @@ const GlobalStyle: React.FC = () => {
             border: 1px solid ${token.colorSplit};
             border-collapse: collapse;
             border-spacing: 0;
+            width: 100%;
 
             th,
             td {
               padding: 12px 24px;
               text-align: left;
               border: 1px solid ${token.colorSplit};
+              vertical-align: top;
+
+              img {
+                max-width: 100%;
+              }
 
               &:first-child {
                 border-left: 1px solid ${token.colorSplit};
@@ -319,20 +343,10 @@ const GlobalStyle: React.FC = () => {
               &:last-child {
                 border-right: 1px solid ${token.colorSplit};
               }
-
-              img {
-                max-width: unset;
-              }
-            }
-
-            td {
-              &:nth-child(3) {
-                color: ${token.magenta7};
-              }
             }
 
             th {
-              color: #5c6b77;
+              color: ${token.colorTextSecondary};
               font-weight: 500;
               white-space: nowrap;
               background: rgba(0, 0, 0, 0.02);
