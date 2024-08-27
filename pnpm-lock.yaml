@@ -111,8 +111,8 @@ importers:
         specifier: ^2.4.7
         version: 2.4.7(@babel/core@7.24.9)(@types/node@22.1.0)(@types/react@18.3.3)(eslint@8.57.0)(prettier@3.3.3)(react-dom@18.3.1)(react@18.3.1)(stylelint@14.16.1)(typescript@5.5.4)(webpack@5.93.0)
       eslint-plugin-jest:
-        specifier: ^28.6.0
-        version: 28.6.0(eslint@8.57.0)(typescript@5.5.4)
+        specifier: ^28.8.0
+        version: 28.8.0(eslint@8.57.0)(typescript@5.5.4)
       execa:
         specifier: ^5.1.1
         version: 5.1.1
@@ -12676,11 +12676,11 @@ packages:
       - typescript
     dev: true
 
-  /eslint-plugin-jest@28.6.0(eslint@8.57.0)(typescript@5.5.4):
-    resolution: {integrity: sha512-YG28E1/MIKwnz+e2H7VwYPzHUYU4aMa19w0yGcwXnnmJH6EfgHahTJ2un3IyraUxNfnz/KUhJAFXNNwWPo12tg==}
+  /eslint-plugin-jest@28.8.0(eslint@8.57.0)(typescript@5.5.4):
+    resolution: {integrity: sha512-Tubj1hooFxCl52G4qQu0edzV/+EZzPUeN8p2NnW5uu4fbDs+Yo7+qDVDc4/oG3FbCqEBmu/OC3LSsyiU22oghw==}
     engines: {node: ^16.10.0 || ^18.12.0 || >=20.0.0}
     peerDependencies:
-      '@typescript-eslint/eslint-plugin': ^6.0.0 || ^7.0.0
+      '@typescript-eslint/eslint-plugin': ^6.0.0 || ^7.0.0 || ^8.0.0
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
       jest: '*'
     peerDependenciesMeta:
