@@ -1,8 +1,7 @@
 import React from 'react';
-import { Alert, Button, theme, Tooltip } from '@oceanbase/design';
+import { Alert, Button, token, Tooltip } from '@oceanbase/design';
 
-function Demo1() {
-  const { token } = theme.useToken();
+function getComponent1() {
   const tokenList = [token.colorTextTertiary, token.colorInfo, token.colorBgLayout];
   return (
     (<div>
@@ -13,8 +12,7 @@ function Demo1() {
   );
 };
 
-const Demo2 = () => {
-  const { token } = theme.useToken();
+const getComponent2 = () => {
   const tokenList = [token.colorTextTertiary, token.colorInfo, token.colorBgLayout];
   return (
     (<div>
@@ -25,4 +23,15 @@ const Demo2 = () => {
   );
 };
 
-export { Demo1, Demo2 };
+export default () => {
+  const tokenList = [token.colorTextTertiary, token.colorInfo, token.colorBgLayout];
+  return (
+    (<div>
+      <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBorder}` }} />
+      <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
+      <Tooltip color={token.colorBgContainer} backgroundColor={token.colorErrorBg} borderColor={token.colorBgLayout} border={`1px solid ${token.colorBgLayout}`} />
+    </div>)
+  );
+};
+
+export { getComponent1, getComponent2 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, Button, theme, Tooltip } from '@oceanbase/design';
 
-function Demo1() {
+function useComponent1 () {
   const { token } = theme.useToken();
   const tokenList = [token.colorTextTertiary, token.colorInfo, token.colorBgLayout];
   return (
@@ -13,7 +13,7 @@ function Demo1() {
   );
 };
 
-const Demo2 = () => {
+const useComponent2 = () => {
   const { token } = theme.useToken();
   const tokenList = [token.colorTextTertiary, token.colorInfo, token.colorBgLayout];
   return (
@@ -25,4 +25,4 @@ const Demo2 = () => {
   );
 };
 
-export { Demo1, Demo2 };
+export { useComponent1, useComponent2 };
