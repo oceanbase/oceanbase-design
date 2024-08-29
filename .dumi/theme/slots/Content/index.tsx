@@ -83,7 +83,7 @@ const useStyle = () => {
     `,
     articleWrapper: css`
       padding: 0 200px 32px 48px;
-      max-width: 1280px;
+      max-width: 1100px;
       min-height: calc(100vh - 242px);
       margin: 0 auto;
 
