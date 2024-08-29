@@ -29,6 +29,7 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
         (acc, item) => {
           const { previewerProps } = item;
           const { debug } = previewerProps;
+          console.log(debug);
 
           if (debug && !showDebug) return acc;
 
@@ -37,8 +38,6 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
             previewerProps: {
               ...previewerProps,
               expand: expandAll,
-              // always override debug property, because dumi will hide debug demo in production
-              debug: false,
               /**
                * extra marker for the original debug
                */
