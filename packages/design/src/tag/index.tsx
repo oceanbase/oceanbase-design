@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useLayoutEffect } from 'react';
 import { Tag as AntTag } from 'antd';
 import type { TagProps as AntTagProps } from 'antd/es/tag';
 import classNames from 'classnames';
@@ -7,7 +7,6 @@ import Typography from '../typography';
 import useStyle from './style';
 import { getEllipsisConfig } from '../_util/getEllipsisConfig';
 import type { Ellipsis } from '../_util/getEllipsisConfig';
-import { TooltipPlacement } from '../tooltip';
 
 export * from 'antd/es/tag';
 
@@ -20,6 +19,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
     {
       children,
       prefixCls: customizePrefixCls,
+      icon,
       className,
       ellipsis = {
         tooltip: {
@@ -35,7 +35,6 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
     const { wrapSSR } = useStyle(prefixCls);
 
     const ellipsisConfig = getEllipsisConfig(ellipsis, children);
-
     const tagCls = classNames(
       {
         [`${prefixCls}-ellipsis`]: !!ellipsisConfig,
@@ -43,10 +42,21 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
       className
     );
 
+    const realIcon = icon ? <span style={{ marginRight: 7 }}>{icon}</span> : null;
+
     return wrapSSR(
-      <AntTag ref={ref} prefixCls={customizePrefixCls} className={tagCls} {...restProps}>
+      <AntTag
+        ref={ref}
+        prefixCls={customizePrefixCls}
+        className={tagCls}
+        icon={ellipsisConfig ? null : icon}
+        {...restProps}
+      >
         {ellipsisConfig ? (
-          <Typography.Text ellipsis={ellipsisConfig}>{children}</Typography.Text>
+          <Typography.Text ellipsis={ellipsisConfig}>
+            {realIcon}
+            {children}
+          </Typography.Text>
         ) : (
           children
         )}
