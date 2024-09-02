@@ -21,5 +21,5 @@ const useStyle = () => {
 export default function Do({}: DonotProps) {
   const styles = useStyle();
 
-  return <span css={styles.do}>Don't</span>;
+  return <div css={styles.do}>Don't</div>;
 }

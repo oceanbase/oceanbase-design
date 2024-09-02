@@ -21,5 +21,5 @@ const useStyle = () => {
 export default function Do({}: DoProps) {
   const styles = useStyle();
 
-  return <span css={styles.do}>Do</span>;
+  return <div css={styles.do}>Do</div>;
 }

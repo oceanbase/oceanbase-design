@@ -41,17 +41,11 @@ title: Navigation 导航
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/o8v_T6FNihkAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Do></Do>
-
-合理控制同一功能组菜单数量</div>
-
+    <div class="image-description"><Do></Do>合理控制同一功能组菜单数量</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/wCzzSJ3_c0MAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Donot></Donot>
-
-避免同级图标风格不一致</div>
-
+    <div class="image-description"><Donot></Donot>避免同级图标风格不一致</div>
   </div>
 </div>
 
@@ -62,17 +56,11 @@ title: Navigation 导航
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/DOeESIUB-zMAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Do></Do>
-
-合理控制同一功能组菜单数量</div>
-
+    <div class="image-description"><Do></Do>合理控制同一功能组菜单数量</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/UDh6Qrxxf_8AAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Donot></Donot>
-
-避免同一功能组菜单项数量超过7个</div>
-
+    <div class="image-description"><Donot></Donot>避免同一功能组菜单项数量超过7个</div>
   </div>
 </div>
 
@@ -83,17 +71,11 @@ title: Navigation 导航
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/SW_SR6GjFNEAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Do></Do>
-
-精简的导航菜单文案</div>
-
+    <div class="image-description"><Do></Do>精简的导航菜单文案</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/fIukQZotwSkAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Donot></Donot>
-
-导航菜单文案最多不可超过2个词</div>
-
+    <div class="image-description"><Donot></Donot>导航菜单文案最多不可超过2个词</div>
   </div>
 </div>
 
@@ -104,17 +86,11 @@ title: Navigation 导航
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/Bxr8Ro4RB4MAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Do></Do>
-
-重要/高频功能提供快捷入口，提升可发现性和便捷性</div>
-
+    <div class="image-description"><Do></Do>重要/高频功能提供快捷入口，提升可发现性和便捷性</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/NPSxRIuigi0AAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Donot></Donot>
-
-信息层级深导致功能可发现性低、操作路径过长</div>
-
+    <div class="image-description"><Donot></Donot>信息层级深导致功能可发现性低、操作路径过长</div>
   </div>
 </div>
 
@@ -152,17 +128,11 @@ title: Navigation 导航
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/DwU1RLRCrIMAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Do></Do>
-
-产品内面包屑显示规则保持一致</div>
-
+    <div class="image-description"><Do></Do>产品内面包屑显示规则保持一致</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/9Hf6SIyYUpEAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Donot></Donot>
-
-避免同一产品内面包屑时有时无</div>
-
+    <div class="image-description"><Donot></Donot>避免同一产品内面包屑时有时无</div>
   </div>
 </div>
 

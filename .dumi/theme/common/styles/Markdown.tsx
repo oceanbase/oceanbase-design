@@ -23,15 +23,13 @@ const GlobalStyle: React.FC = () => {
           line-height: 1.5;
         }
 
-        // 非段落图片最大宽度: 100% - 32px
         .markdown img {
-          max-width: calc(100% - 32px);
+          max-width: 100%;
           max-height: 100%;
         }
 
-        // 段落图片最大宽度: 100%
-        .markdown p > img {
-          max-width: 100%;
+        .markdown > div[style^='display: flex'] {
+          gap: 32px;
         }
 
         // 暂时去掉段落图片的阴影
@@ -47,12 +45,10 @@ const GlobalStyle: React.FC = () => {
 
         .markdown .image-description {
           color: ${token.colorTextDescription};
-          margin-right: 16px;
         }
 
         .markdown .image-description-center {
           color: ${token.colorTextDescription};
-          margin-right: 16px;
           text-align: center;
         }
 
@@ -186,6 +182,7 @@ const GlobalStyle: React.FC = () => {
         .markdown strong,
         .markdown b {
           font-weight: 500;
+          color: ${token.colorErrorText};
         }
 
         .markdown .dumi-default-source-code {
@@ -350,15 +347,15 @@ const GlobalStyle: React.FC = () => {
               font-weight: 500;
               white-space: nowrap;
               background: rgba(0, 0, 0, 0.02);
-              border-width: 1px 1px 2px;
+              border-width: 1px 1px 1px;
             }
 
             tbody tr {
               transition: all 0.3s;
 
-              &:hover {
-                background: rgba(60, 90, 100, 0.04);
-              }
+              // &:hover {
+              //   background: rgba(60, 90, 100, 0.04);
+              // }
             }
           }
 
@@ -373,7 +370,7 @@ const GlobalStyle: React.FC = () => {
             border-width: 0 1px;
 
             th {
-              border-width: 1px 0 2px;
+              border-width: 1px 0 1px;
             }
 
             td {

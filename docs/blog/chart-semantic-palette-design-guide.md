@@ -22,13 +22,13 @@ title: 图表语义色板设计推导
 
 由于 OBUI 功能色饱和度明度偏高，不适合用在图表中，因此将颜色的饱和度收敛至65-75范围内，使色彩更加柔和；中性色本身属于灰色范畴，不需要在此环节调整饱和度。
 
-![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/HjITR6ncSUkAAAAAAAAAAAAADv3-AQBr/original)
+<img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/HjITR6ncSUkAAAAAAAAAAAAADv3-AQBr/original" style="width: 432px" />
 
 ## 生成色阶
 
 将上述颜色作为基准色，用 ColorLab 工具生成10色色阶，可得出如下色板：
 
-![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/GbdgQagxaNMAAAAAAAAAAAAADv3-AQBr/original)
+<img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/GbdgQagxaNMAAAAAAAAAAAAADv3-AQBr/original" style="width: 432px" />
 
 ## 定义色板
 
@@ -39,12 +39,12 @@ title: 图表语义色板设计推导
 | 语义色板 | 色值 | 名称 | 色号 | 语义 | 表达含义 |
 | --- | --- | --- | --- | --- | --- |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/A1UUTqdajt0AAAAAAAAAAAAADv3-AQBr/original) | 9DAAC6 | 灰 | 4 | 中性的 | 表示：默认的、其他、剩余、失效的 |
-| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/JF3UQLMU4z4AAAAAAAAAAAAADv3-AQBr/original) | 3983ED | 蓝 | 7 |  | 表示：常规的、常态的、默认的 |
+| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/JF3UQLMU4z4AAAAAAAAAAAAADv3-AQBr/original) | 3983ED | 蓝 | 7 | 中性的 | 表示：常规的、常态的、默认的 |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/LJwkRqOXqckAAAAAAAAAAAAADv3-AQBr/original) | 42C79B | 绿 | 7 | 正向的 | 表示：成功的、安全的、可行的、可获得的 |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/pspsSqsFZVwAAAAAAAAAAAAADv3-AQBr/original) | F9B048 | 黄 | 7 | 负向的 | 表示：提醒、注意、警示、低风险（严重等级 1） |
-| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/MPigSIef6nEAAAAAAAAAAAAADv3-AQBr/original) | F97A3B | 橙 | 7 |  | 表示：警告、严重、中风险（严重等级 2） |
-| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/xbRkS4Dl-XoAAAAAAAAAAAAADv3-AQBr/original) | E5363B | 红 | 7 |  | 表示：危险、失败、严重、错误（严重等级 3） |
-| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/Q0JxTLe8LyIAAAAAAAAAAAAADv3-AQBr/original) | 89273F | 紫红 | 7 |  | 表示：非常严重、高风险、停服（严重等级 4） |
+| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/MPigSIef6nEAAAAAAAAAAAAADv3-AQBr/original) | F97A3B | 橙 | 7 | 负向的 | 表示：警告、严重、中风险（严重等级 2） |
+| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/xbRkS4Dl-XoAAAAAAAAAAAAADv3-AQBr/original) | E5363B | 红 | 7 | 负向的 | 表示：危险、失败、严重、错误（严重等级 3） |
+| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/Q0JxTLe8LyIAAAAAAAAAAAAADv3-AQBr/original) | 89273F | 紫红 | 7 | 负向的 | 表示：非常严重、高风险、停服（严重等级 4） |
 
 ## 应用效果
 
@@ -53,23 +53,29 @@ title: 图表语义色板设计推导
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/VTN5QIxxOBQAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">兼容性概览</div>
+    <div class="image-description-center">兼容性概览</div>
   </div>
+</div>
+
+<div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/9VjQS451mokAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">慢 SQL 指标</div>
+    <div class="image-description-center">慢 SQL 指标</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/UyA2RYne-mwAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">资源水位</div>
+    <div class="image-description-center">资源水位</div>
   </div>
+</div>
+
+<div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/A0EURoKFHY0AAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">备份任务状态</div>
+    <div class="image-description-center">备份任务状态</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/AvhzQYaFvGQAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">迁移任务状态</div>
+    <div class="image-description-center">迁移任务状态</div>
   </div>
 </div>
 
@@ -78,21 +84,23 @@ title: 图表语义色板设计推导
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/C58-RbypfJcAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">异常数据点标记</div>
+    <div class="image-description-center">异常数据点标记</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/MtSZTY-YrLcAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">异常检测标记</div>
+    <div class="image-description-center">异常检测标记</div>
   </div>
 </div>
 
-![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/KrdvS7IctOoAAAAAAAAAAAAADv3-AQBr/original)
+<div>
+  <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/KrdvS7IctOoAAAAAAAAAAAAADv3-AQBr/original" />
+  <div class="image-description-center">CPU 使用率</div>
+</div>
 
-CPU 使用率
-
-![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/wfgeSJlUTqMAAAAAAAAAAAAADv3-AQBr/original)
-
-CPU 消耗比
+<div>
+  <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/wfgeSJlUTqMAAAAAAAAAAAAADv3-AQBr/original" />
+  <div class="image-description-center">CPU 消耗比</div>
+</div>
 
 <style>
 table tr td img {
