@@ -19,17 +19,17 @@ title: Product graphic 产品缺省图
 OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮廓包裹插画，由品牌蓝及延展色组成单色图标，配合中性色，实现不同场景的层级区分。
 
 <div style="display: flex">
-  <div>
+  <div style="flex: 1">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/fHvtTZt2CAAAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description-center">彩色</div>
   </div>
-  <div>
+  <div style="flex: 1">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/x2rgQpuL5hcAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description-center">单色</div>
   </div>
-  <div>
+  <div style="flex: 1">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/99y1QoX71J8AAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">中性色</div>
+    <div class="image-description-center">中性色</div>
   </div>
 </div>
 
@@ -51,14 +51,14 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/Sx37SYdKEDEAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center">方形:160px*160px</div>
+    <div class="image-description-center">方形：160px*160px</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/6I0pQbKqMkkAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center">圆形:176px*176px</div>
+    <div class="image-description-center">圆形：176px*176px</div>
   </div>
 </div>
-
+<br />
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/8WjIQYF5jGEAAAAAAAAAAAAADv3-AQBr/original" />
@@ -143,7 +143,7 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/XVOmSpey1B4AAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">点缀色</div>
+    <div class="image-description-center">点缀色</div>
   </div>
 </div>
 
@@ -152,16 +152,16 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
 无内容提示的底色轮廓边界为176px\*176px，插画内容可超出轮廓范围，不可超出画板范围。
 
 <div style="display: flex">
-  <div>
+  <div style="flex: 1">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/rk7iSrKf7-8AAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description-center">轮廓尺寸</div>
   </div>
-  <div>
+  <div style="flex: 1">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/ooBHSZbdnwAAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description-center">插画内容</div>
   </div>
 </div>
-
+<br />
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/5Q6KSpC1iCMAAAAAAAAAAAAADv3-AQBr/original" />
@@ -179,7 +179,7 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
 
 ##### 结果反馈
 
-底色轮廓尺寸为144px*128px，图标外轮廓尺寸为176px*176px，需在直径为88px-96px圆内绘制，两者重合后整体尺寸为160px\*144px。
+底色轮廓尺寸为144px\*128px，图标外轮廓尺寸为176px\*176px，需在直径为88px-96px圆内绘制，两者重合后整体尺寸为160px\*144px。
 
 <div style="display: flex">
   <div>
@@ -195,7 +195,7 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
     <div class="image-description-center">整体尺寸</div>
   </div>
 </div>
-
+<br />
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/x6XvSZz4kvwAAAAAAAAAAAAADv3-AQBr/original" />
@@ -207,13 +207,13 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/jnsiTYPvmboAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">示例</div>
+    <div class="image-description-center">示例</div>
   </div>
 </div>
 
 ##### 暂无数据
 
-底色轮廓尺寸为144px*128px，图标外轮廓尺寸为176px*176px，需在直径为88px-96px 圆内绘制，
+底色轮廓尺寸为 144px\*128px，图标外轮廓尺寸为 176px\*176px，需在直径为 88px-96px 圆内绘制，
 
 两者重合后整体尺寸为160px\*160px。
 
@@ -231,7 +231,7 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
     <div class="image-description-center">整体尺寸</div>
   </div>
 </div>
-
+<br />
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/tDtASrJbgBAAAAAAAAAAAAAADv3-AQBr/original" />
@@ -243,7 +243,7 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/rE9_Q4HbG3QAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">示例</div>
+    <div class="image-description-center">示例</div>
   </div>
 </div>
 
@@ -255,7 +255,7 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
   <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/8oIgQaklSUgAAAAAAAAAAAAADv3-AQBr/original" />
   <div class="image-description-center">插画尺寸</div>
 </div>
-
+<br />
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/uqwoQZAr-CAAAAAAAAAAAAAADv3-AQBr/original" />
@@ -271,7 +271,7 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
 
 ![缺省图规范2-63.jpg](https://mdn.alipayobjects.com/oceanbase_design/afts/img/Y1UIRJCjFnEAAAAAAAAAAAAADv3-AQBr/original)
 
-##### **颜色规范**
+##### 颜色规范
 
 单色图标插画主色为品牌蓝【0181FD】（占比20-30%），点缀色为品牌蓝的延展色以及白色（占比70-80%）
 
@@ -286,9 +286,9 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
   </div>
 </div>
 
-##### **绘制规范**
+##### 绘制规范
 
-主体高度为 144px，主体宽度需在 144px - 120px的范围内绘制；图标轮廓尺寸为176px\*176px，需在直径为 88-96px 的圆内绘制。为保证缺省图插画，整体大小层级的视觉统一，建议绘制完成后根据实际情况需要等比缩放至70%左右大小使用。
+主体高度为 144px，主体宽度需在 144px - 120px 的范围内绘制；图标轮廓尺寸为 176px\*176px，需在直径为 88-96px 的圆内绘制。为保证缺省图插画，整体大小层级的视觉统一，建议绘制完成后根据实际情况需要 **等比缩放至 70% 左右** 大小使用。
 
 <div style="display: flex">
   <div>
@@ -304,7 +304,7 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
     <div class="image-description-center">整体尺寸</div>
   </div>
 </div>
-
+<br />
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/QoqIQqI7uiYAAAAAAAAAAAAADv3-AQBr/original" />
@@ -324,7 +324,7 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
 
 ![缺省图规范2-64.jpg](https://mdn.alipayobjects.com/oceanbase_design/afts/img/UT-zRJLbDQoAAAAAAAAAAAAADv3-AQBr/original)
 
-##### **颜色规范**
+##### 颜色规范
 
 图标主色为中性色「F8FAFE」，可根据情况向上延展两个色阶使用（占比90%），点缀色为品牌蓝以及白色（占比10%）。
 
@@ -339,9 +339,9 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
   </div>
 </div>
 
-##### **绘制规范**
+##### 绘制规范
 
-主体高度为144px，主体宽度需在140px-112px 的范围内绘制。为保证缺省图插画，整体大小层级的视觉统一，建议绘制完成后根据实际情况可等比缩放至50%左右大小使用。
+主体高度为 144px，主体宽度需在 140px-112px 的范围内绘制。为保证缺省图插画，整体大小层级的视觉统一，建议绘制完成后根据实际情况可 **等比缩放至 50% 左右** 大小使用。
 
 <div style="display: flex">
   <div>
@@ -353,7 +353,7 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
     <div class="image-description-center">插画主体尺寸</div>
   </div>
 </div>
-
+<br />
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/ZF8tSJUaAHcAAAAAAAAAAAAADv3-AQBr/original" />

@@ -63,12 +63,15 @@ function rehypeAntd(): UnifiedTransformer<HastRoot> {
         if (!node.properties) return;
         node.properties.className ??= [];
         (node.properties.className as string[]).push('component-api-table');
+      } else if (node.type === 'element' && (node.tagName === 'Link' || node.tagName === 'a')) {
+        const href = (node.properties?.href || node.properties?.to) as string;
+        // 外部链接新开标签页跳转
+        if (href?.startsWith('http')) {
+          node.properties!.target = '_blank';
+        }
+        // node.properties!.sourceType = tagName;
+        // node.tagName = 'LocaleLink';
       }
-      // else if (node.type === 'element' && (node.tagName === 'Link' || node.tagName === 'a')) {
-      //   const { tagName } = node;
-      //   node.properties!.sourceType = tagName;
-      //   node.tagName = 'LocaleLink';
-      // }
       // else if (node.type === 'element' && node.tagName === 'video') {
       //   node.tagName = 'VideoPlayer';
       // }

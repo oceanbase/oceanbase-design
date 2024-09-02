@@ -10,7 +10,7 @@ title: Product icon 产品图标
 
 以直观、精炼的图形语言引导用户操作，同时作为品牌识别的视觉标志，融入统一的设计美学，加深用户对品牌的认知与记忆，共同构建出既实用又具辨识度的产品界面。
 
-##### ![111.jpg](https://mdn.alipayobjects.com/oceanbase_design/afts/img/UpAFSpSwXqEAAAAAAAAAAAAADv3-AQBr/original)
+![111.jpg](https://mdn.alipayobjects.com/oceanbase_design/afts/img/UpAFSpSwXqEAAAAAAAAAAAAADv3-AQBr/original)
 
 ## 网格规范
 
@@ -37,7 +37,7 @@ title: Product icon 产品图标
     <div class="image-description-center">圆形：28px*28px</div>
   </div>
 </div>
-
+<br />
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/KLtyRYYHYBAAAAAAAAAAAAAADv3-AQBr/original" />
@@ -105,13 +105,16 @@ title: Product icon 产品图标
 
 ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/uQoeQL66iRIAAAAAAAAAAAAADv3-AQBr/original)
 
-#### 颜色规范
+### 颜色规范
 
 线性图标颜色全部保持一致。
 
-<div><img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/r45pRZ4WgEEAAAAAAAAAAAAADv3-AQBr/original" /><div class="image-description">中性色 Gray7</div></div>
+<div style="width: 40%">
+  <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/r45pRZ4WgEEAAAAAAAAAAAAADv3-AQBr/original" />
+  <div class="image-description-center">中性色 Gray7</div>
+</div>
 
-#### 图标剖析
+### 图标剖析
 
 ![123-3.jpg](https://mdn.alipayobjects.com/oceanbase_design/afts/img/v1d7Q7Ul-r8AAAAAAAAAAAAADv3-AQBr/original)
 
@@ -119,7 +122,7 @@ title: Product icon 产品图标
 2. 描边
 3. 间距
 
-##### 描边
+#### 描边
 
 <div style="display: flex">
   <div>
@@ -132,7 +135,7 @@ title: Product icon 产品图标
   </div>
 </div>
 
-##### 间距
+#### 间距
 
 <div style="display: flex">
   <div>
@@ -145,17 +148,17 @@ title: Product icon 产品图标
   </div>
 </div>
 
-#### 延展方式
+### 延展方式
 
 为更好继承面性图标特征，以下介绍两种主要延展方式。
 
-##### 直接描边
+#### 直接描边
 
 将面形图标的色块直接转换为内描边处理，保留相同的圆角，**所有描边宽度为2px**。
 
 ![2344-14.jpg](https://mdn.alipayobjects.com/oceanbase_design/afts/img/9CnVQKwg2k8AAAAAAAAAAAAADv3-AQBr/original)
 
-##### 色块焊接
+#### 色块焊接
 
 部分图标双色色块间隙可转换为线条,将两个形状连接。
 
@@ -163,13 +166,13 @@ title: Product icon 产品图标
 
 ## 如何绘制
 
-#### 点
+### 点
 
 点是很多图形中都会出现的元素。在一套图标中挖掘同一元素的规律，同时对其进行克制的运用。我们对于点的尺寸选择上会保持2的倍数这一原则。
 
 ![15.jpg](https://mdn.alipayobjects.com/oceanbase_design/afts/img/GB4OT7j2E4sAAAAAAAAAAAAADv3-AQBr/original)
 
-#### 线
+### 线
 
 线条分为两种情况：（1）在图形图标中所有的线以 2px 呈现；（2）在字体图标中，根据字母数量不同，可根据实际视觉重量选择线条宽度（2～5px）。
 
@@ -184,19 +187,19 @@ title: Product icon 产品图标
   </div>
 </div>
 
-#### 圆角
+### 圆角
 
 绘制时，只在外轮廓进行1px的圆角，**轮廓内部形状和线条不进行圆角处理。**
 
 ![圆角.jpg](https://mdn.alipayobjects.com/oceanbase_design/afts/img/Cq5wTYhxCFwAAAAAAAAAAAAADv3-AQBr/original)
 
-#### 角度
+### 角度
 
 日常设计中，多数系统图标的角度都可以从5的倍数出发，根据实际情况进行灵活的应用。
 
 ![17.jpg](https://mdn.alipayobjects.com/oceanbase_design/afts/img/TyRST7Zdq5sAAAAAAAAAAAAADv3-AQBr/original)
 
-#### 圆角
+### 圆角
 
 图标内部空间的圆角保持直角的处理方式。
 
@@ -211,7 +214,7 @@ title: Product icon 产品图标
   </div>
 </div>
 
-#### 连接线
+### 连接线
 
 不同形状间用连接线表达连接、传递、过渡等关系，但连接线不可与面断开。
 
@@ -226,7 +229,7 @@ title: Product icon 产品图标
   </div>
 </div>
 
-#### 双色
+### 双色
 
 当绘制双色图标时，为保证边界清晰的识别度，主色与次级色应避免直接接触。
 
@@ -243,23 +246,26 @@ title: Product icon 产品图标
 
 ## 图标总览
 
-#### 面性
+### 面性
 
-<div style="display: flex">
-  <div>
-    <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/cP-XTKAbnQMAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center">彩色</div>
-  </div>
-  <div>
-    <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/b84ORJtt6JAAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center">中性色</div>
-  </div>
+<div>
+  <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/cP-XTKAbnQMAAAAAAAAAAAAADv3-AQBr/original" />
+  <div class="image-description-center">彩色</div>
 </div>
 
-<div><img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/5NCoTbanq0YAAAAAAAAAAAAADv3-AQBr/original" /><div class="image-description">单色</div></div>
+<div>
+  <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/b84ORJtt6JAAAAAAAAAAAAAADv3-AQBr/original" />
+  <div class="image-description-center">中性色</div>
+</div>
 
-#### 线性
+<div>
+  <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/5NCoTbanq0YAAAAAAAAAAAAADv3-AQBr/original" />
+  <div class="image-description-center">单色</div>
+</div>
 
-<div><img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/kQJ6QZj-x3MAAAAAAAAAAAAADv3-AQBr/original" /><div class="image-description">中性色</div></div>
+### 线性
 
-#
+<div>
+  <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/kQJ6QZj-x3MAAAAAAAAAAAAADv3-AQBr/original" />
+  <div class="image-description-center">中性色</div>
+</div>

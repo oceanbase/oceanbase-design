@@ -30,17 +30,11 @@ title: PageContainer 页容器
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/Rl5kSZqDL78AAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Do></Do>
-
-存在较多3级以上信息层级时使用面包屑</div>
-
+    <div class="image-description"><Do></Do>存在较多3级以上信息层级时使用面包屑</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/1XkRS41yhVQAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Caution></Caution>
-
-信息层级较浅时不推荐使用</div>
-
+    <div class="image-description"><Caution></Caution>信息层级较浅时不推荐使用</div>
   </div>
 </div>
 
@@ -51,17 +45,11 @@ title: PageContainer 页容器
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/-FbfRoXHa7cAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Do></Do>
-
-保留页标题，确保导航信息展示的清晰性</div>
-
+    <div class="image-description"><Do></Do>保留页标题，确保导航信息展示的清晰性</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/mdpdSJFZKi0AAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Donot></Donot>
-
-非必要不要隐藏页标题区</div>
-
+    <div class="image-description"><Donot></Donot>非必要不要隐藏页标题区</div>
   </div>
 </div>
 
@@ -72,17 +60,11 @@ title: PageContainer 页容器
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/VujlQbz8lVsAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Do></Do>
-
-各页签均为单卡片信息区块时使用内容区块级Tab</div>
-
+    <div class="image-description"><Do></Do>各页签均为单卡片信息区块时使用内容区块级Tab</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/QtvqTb_p-TEAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Caution></Caution>
-
-不推荐使用页面级页签</div>
-
+    <div class="image-description"><Caution></Caution>不推荐使用页面级页签</div>
   </div>
 </div>
 
@@ -93,17 +75,11 @@ title: PageContainer 页容器
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/ERzITJRm8_QAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Do></Do>
-
-页头同时只存在1个操作区</div>
-
+    <div class="image-description"><Do></Do>页头同时只存在1个操作区</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/M280SpDCkAsAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><Donot></Donot>
-
-避免同时存在页面级操作和子页面级操作区</div>
-
+    <div class="image-description"><Donot></Donot>避免同时存在页面级操作和子页面级操作区</div>
   </div>
 </div>
 
