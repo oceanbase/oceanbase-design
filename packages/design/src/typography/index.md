@@ -17,4 +17,4 @@ nav:
 
 ## API
 
-- 详见 antd Segmented 文档: https://ant.design/components/segmented-cn
+- 详见 antd Typography 文档: https://ant.design/components/typography-cn
