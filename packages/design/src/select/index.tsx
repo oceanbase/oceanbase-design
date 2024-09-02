@@ -15,7 +15,7 @@ export type SelectLocale = AntLocale['Select'] & {
   placeholder?: string;
 };
 
-export interface SelectProps extends AntSelectProps {
+export interface SelectProps<T> extends AntSelectProps<T> {
   locale?: SelectLocale;
 }
 
