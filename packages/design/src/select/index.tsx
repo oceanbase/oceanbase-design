@@ -1,5 +1,10 @@
 import { Select as AntSelect } from 'antd';
-import type { SelectProps as AntSelectProps, RefSelectProps } from 'antd/es/select';
+import type {
+  SelectProps as AntSelectProps,
+  RefSelectProps,
+  BaseOptionType,
+  DefaultOptionType,
+} from 'antd/es/select';
 import type { Locale as AntLocale } from 'antd/es/locale';
 import type { OptGroup, Option } from 'rc-select';
 import classNames from 'classnames';
@@ -15,12 +20,15 @@ export type SelectLocale = AntLocale['Select'] & {
   placeholder?: string;
 };
 
-export interface SelectProps<T> extends AntSelectProps<T> {
+export interface SelectProps<
+  ValueType = any,
+  OptionType extends BaseOptionType | DefaultOptionType = DefaultOptionType,
+> extends AntSelectProps<ValueType, OptionType> {
   locale?: SelectLocale;
 }
 
 type CompoundedComponent = React.ForwardRefExoticComponent<
-  SelectProps & React.RefAttributes<RefSelectProps>
+  SelectProps<any, any> & React.RefAttributes<RefSelectProps>
 > & {
   // need to use Option and OptGroup from rc-select to avoid ts error
   Option: typeof Option;
@@ -28,7 +36,7 @@ type CompoundedComponent = React.ForwardRefExoticComponent<
   _InternalPanelDoNotUseOrYouWillBeFired: typeof AntSelect._InternalPanelDoNotUseOrYouWillBeFired;
 };
 
-const InternalSelect = React.forwardRef<RefSelectProps, SelectProps>(
+const InternalSelect = React.forwardRef<RefSelectProps, SelectProps<any, any>>(
   ({ locale: customLocale, prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
     const { locale: contextLocale, getPrefixCls } = useContext<ConfigConsumerProps>(
       ConfigProvider.ConfigContext
