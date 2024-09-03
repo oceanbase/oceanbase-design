@@ -42,7 +42,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
       className
     );
 
-    const realIcon = icon ? <span style={{ marginRight: 7 }}>{icon}</span> : null;
+    const realIcon = icon ? <span className="inner-icon">{icon}</span> : null;
 
     return wrapSSR(
       <AntTag
