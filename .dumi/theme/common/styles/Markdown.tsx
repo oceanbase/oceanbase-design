@@ -182,7 +182,6 @@ const GlobalStyle: React.FC = () => {
         .markdown strong,
         .markdown b {
           font-weight: 500;
-          color: ${token.colorErrorText};
         }
 
         .markdown .dumi-default-source-code {

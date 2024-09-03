@@ -67,7 +67,7 @@ OB Charts 的颜色定义旨在传递 OceanBase科技且富有生机的品牌调
 
 基础色板共 10 色，当图例数量 <= 10 个时，使用基础色板，并按照色板顺序展示图表，色板参数如下：
 
-| 序号 | 颜色 | 名称 | 色值 | 色值 |
+| 序号 | 颜色 | 名称 | HEX 色值 | HSL 色值 |
 | --- | --- | --- | --- | --- |
 | 1 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/kYiURIajuBYAAAAAAAAAAAAADv3-AQBr/original) | 蔚蓝色 | #3D88F2 | H:215 S:75 B:95 |
 | 2 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/iDTDRpmJo8QAAAAAAAAAAAAADv3-AQBr/original) | 翡翠绿 | #41D9A6 | H:160 S:70 B:85 |
@@ -84,7 +84,7 @@ OB Charts 的颜色定义旨在传递 OceanBase科技且富有生机的品牌调
 
 图表中如果有超过 10 个图例的场景，则需要用到延伸色板，延伸色板共 20 色，是在基础色基础上调整 60% 不透明度的实色，穿插在基础色中使用，从而实现明暗交替；当图例数量 > 10 个时，需使用延伸色板，并按照色板顺序展示图表，色板参数如下：
 
-| 序号 | 颜色 | 名称 | 色值 | 色值 |
+| 序号 | 颜色 | 名称 | HEX 色值 | HSL 色值 |
 | --- | --- | --- | --- | --- |
 | 1 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/egkJRL9xU3wAAAAAAAAAAAAADv3-AQBr/original) | 蔚蓝色 | #3D88F2 | H:215 S:75 B:95 |
 | 2 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/FlaZT5y4R_YAAAAAAAAAAAAADv3-AQBr/original) | 浅蔚蓝 | #8BB8F7 | H:215 S:44 B:97 |

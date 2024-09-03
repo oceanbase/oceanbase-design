@@ -101,7 +101,7 @@ OBCharts 色板设计的过程可以分为以下几个步骤：① 确定主题�
 
 为了传递出科技、专业和可靠的感受，OceanBase 的 logo 确定了 3 个品牌色「橙」「蓝」「绿」，「蓝色」代表科技，「绿色」代表生活或生机，「橙色」代表希望和美好的未来。
 
-![1-最终确定版.jpg](https://mdn.alipayobjects.com/oceanbase_design/afts/img/44APQahoJX4AAAAAAAAAAAAADv3-AQBr/original)
+![1-最终确定版.jpg](https://mdn.alipayobjects.com/oceanbase_design/afts/img/o9ueQYIDjnkAAAAAAAAAAAAADv3-AQBr/original)
 
 OBUI 主题色是在 logo 品牌色的基础上做了微调，以便于适应工具产品的复杂场景。OBCharts 是 OBUI 生长出来的可视化图表，为了让图表和界面更好的融合，图表色板会采用 OBUI 的 3 个主题色。
 
