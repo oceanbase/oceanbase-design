@@ -30,7 +30,7 @@ OBUI 主题色包含渐变色和信息色两部分内容。
 
 渐变色为双色渐变色，应用于主按钮，默认渐变色为 1 号色（Gradient1），Hex 值为#002BFF～#0080FF；
 
-| 颜色 | 色值 |  | 应用场景 |
+| 颜色 | HEX 色值 | HSL 色值 | 应用场景 |
 | --- | --- | --- | --- |
 | ![截屏2023-03-29 上午10.58.06.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/4v89Q47F968AAAAAAAAAAAAADv3-AQBr/original)-Gradient1 | #002BFF～#0080FF | H：230 S：100 L：50～H：210 S：100 L：50 | 默认（default） |
 | ![截屏2023-03-29 上午11.04.00.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/BM3nS6POGiAAAAAAAAAAAAAADv3-AQBr/original)-Gradient2 | #1AA0FF～#1A53FF | H：205 S：100 L：55～H：225 S：100 L：55 | 悬浮（hover） |
@@ -41,7 +41,7 @@ OBUI 主题色包含渐变色和信息色两部分内容。
 
 信息色为单色，是产品中最核心、使用最高频的颜色。用于强调信息、引导操作，在很大程度上决定了产品整体的基调和风格。应用于文字按钮、页签、单选等场景，OBUI 的默认信息色为 Blue-5，Hex值为 #006AFF。
 
-| 颜色 | 色值 |  | 应用场景 |
+| 颜色 | HEX 色值 | HSL 色值 | 应用场景 |
 | --- | --- | --- | --- |
 | ![截屏2023-03-27 下午5.34.23.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/gV39T6JHJFoAAAAAAAAAAAAADv3-AQBr/original)-Blue1 | #EAF1FF | H：220 S：100 L：96 | 填充（fill） |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/V1q9S4Kx_vUAAAAAAAAAAAAADv3-AQBr/original)-Blue2 | #D6E4FF | H：220 S：100 L：92 | 标签描边（tag border） |
@@ -74,7 +74,7 @@ OBUI 主题色包含渐变色和信息色两部分内容。
 
 ### 成功色
 
-| 颜色 | 色值 |  | 应用场景 |
+| 颜色 | HEX 色值 | HSL 色值 | 应用场景 |
 | --- | --- | --- | --- |
 | ![截屏2023-03-28 下午4.05.17.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/kEjtRp3QpAkAAAAAAAAAAAAADv3-AQBr/original)-Green1 | #EEF8F5 | H：160 S：40 L：95 | 填充（fill） |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/5RpyQJkbsnQAAAAAAAAAAAAADv3-AQBr/original)-Green2 | #DBF0E9 | H：160 S：40 L：90 | 标签描边（tag border） |
@@ -85,7 +85,7 @@ OBUI 主题色包含渐变色和信息色两部分内容。
 
 ### 警告色-低风险
 
-| 颜色 | 色值 |  | 应用场景 |
+| 颜色 | HEX 色值 | HSL 色值 | 应用场景 |
 | --- | --- | --- | --- |
 | ![截屏2023-03-28 下午4.13.42.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/LQ1wTZRsNlgAAAAAAAAAAAAADv3-AQBr/original)-Gold 1 | #FFF5E5 | H：36 S：100 L：95 | 填充（fill） |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/PTaERp_POuMAAAAAAAAAAAAADv3-AQBr/original)-Gold 2 | #FFE7C2 | H：36 S：100 L：88 | 标签描边（tag border） |
@@ -96,7 +96,7 @@ OBUI 主题色包含渐变色和信息色两部分内容。
 
 ### 警告色-中风险
 
-| 颜色 | 色值 |  | 应用场景 |
+| 颜色 | HEX 色值 | HSL 色值 | 应用场景 |
 | --- | --- | --- | --- |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/pPI0S4_S3REAAAAAAAAAAAAADv3-AQBr/original)-Orange1 | #FFEEE5 | H：20 S：100 L：95 | 填充（fill） |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/9c1rSYbGxZ8AAAAAAAAAAAAADv3-AQBr/original)-Orange2 | #FFDDCC | H：20 S：100 L：90 | 标签描边（tag border） |
@@ -107,7 +107,7 @@ OBUI 主题色包含渐变色和信息色两部分内容。
 
 ### 错误色-高风险
 
-| 颜色 | 色值 |  | 应用场景 |
+| 颜色 | HEX 色值 | HSL 色值 | 应用场景 |
 | --- | --- | --- | --- |
 | ![截屏2023-03-28 下午4.19.56.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/hxHqT77y5X0AAAAAAAAAAAAADv3-AQBr/original)-Red1 | #FFEBEB | H：360 S：100 L：96 | 填充（fill） |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/0rcXR7MoVqMAAAAAAAAAAAAADv3-AQBr/original)-Red2 | #FFD6D6 | H：360 S：100 L：92 | 标签描边（tag border） |
@@ -118,7 +118,7 @@ OBUI 主题色包含渐变色和信息色两部分内容。
 
 ### 错误色-非常严重
 
-| 颜色 | 色值 |  | 应用场景 |
+| 颜色 | HEX 色值 | HSL 色值 | 应用场景 |
 | --- | --- | --- | --- |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/_C33RKlNM4EAAAAAAAAAAAAADv3-AQBr/original)-Fuchsia1 | #FAEBEF | H：345 S：58 L：95 | 填充（fill） |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/J_dyQKh98-cAAAAAAAAAAAAADv3-AQBr/original)-Fuchsia2 | #F4D7DE | H：345 S：58 L：90 | 标签描边（tag border） |
@@ -131,11 +131,11 @@ OBUI 主题色包含渐变色和信息色两部分内容。
 
 为了使界面的品牌调性、色彩感受和谐统一，OBUI 的中性色融入品牌蓝，主要应用于背景填充色、组件边框色、暗文提示色以及默认文本色等。
 
-<img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/xk5jSr8PcggAAAAAAAAAAAAADv3-AQBr/original" style="width: 420px">
+<img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/xk5jSr8PcggAAAAAAAAAAAAADv3-AQBr/original" style="width: 350px">
 
 ### 文本色
 
-| 颜色 | 色值 |  | 应用场景 |
+| 颜色 | HEX 色值 | HSL 色值 | 应用场景 |
 | --- | --- | --- | --- |
 | ![截屏2023-03-28 下午4.39.05.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/vv79S4DauLIAAAAAAAAAAAAADv3-AQBr/original)-Gray8 | #132039 | H：220 S：50 L：15 | 一级文本：页容器一、二级标题、表单标题、正文 |
 | ![截屏2023-03-28 下午4.35.51.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/KaV6TZqf5eQAAAAAAAAAAAAADv3-AQBr/original)-Gray7 | #5C6B8A | H：220 S：20 L：45 | 二级文本：表头文字、Tab 未选中、基础信息标题文本 |
@@ -144,28 +144,28 @@ OBUI 主题色包含渐变色和信息色两部分内容。
 
 ### 边框色
 
-| 颜色 | 色值 |  | 应用场景 |
+| 颜色 | HEX 色值 | HSL 色值 | 应用场景 |
 | --- | --- | --- | --- |
 | ![截屏2023-03-28 下午4.34.00.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/1UmESq56mWQAAAAAAAAAAAAADv3-AQBr/original)-Gray4 | #CDD5E4 | H：220 S：30 L：85 | 一级边框色：按钮描边、组件边框 |
 | ![截屏2023-03-28 下午4.31.51.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/j8qnRJIYt-0AAAAAAAAAAAAADv3-AQBr/original)-Gray3 | #E2E8F3 | H：220 S：40 L：92 | 二级边框色：分割线 |
 
 ### 填充色
 
-| 颜色 | 色值 |  | 应用场景 |
+| 颜色 | HEX 色值 | HSL 色值 | 应用场景 |
 | --- | --- | --- | --- |
 | ![截屏2023-03-28 下午4.35.51.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/tlrpTKZdXocAAAAAAAAAAAAADv3-AQBr/original)-Gray7 | #5C6B8A | H：220 S：20 L：45 | 线性图标色 |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/d1CmQ4x_RWsAAAAAAAAAAAAADv3-AQBr/original)-Gray6 | #8592AD | H：220 S：20 L：60 | 开关关闭色 |
-| ![截屏2023-03-28 下午4.31.51.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/kotzR7tCCm4AAAAAAAAAAAAADv3-AQBr/original)-Gray3 | #E2E8F3 | H：220 S：40 L：92 | 进度条、滑动条、步骤条默认色、评分默认色、骨架屏 |
-| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/XCLtRqqlBkMAAAAAAAAAAAAADv3-AQBr/original)-Gray2 | #F3F6FC | H：220 S：60 L：97 | 页面底色、组件禁用态（除开关）、下拉菜单悬停、分段控制器 |
+| ![截屏2023-03-28 下午4.31.51.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/kotzR7tCCm4AAAAAAAAAAAAADv3-AQBr/original)-Gray3 | #E2E8F3 | H：220 S：40 L：92 | 进度条、滑动条、步骤条默认色、<br />评分默认色、骨架屏 |
+| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/XCLtRqqlBkMAAAAAAAAAAAAADv3-AQBr/original)-Gray2 | #F3F6FC | H：220 S：60 L：97 | 页面底色、组件禁用态（除开关）、<br />下拉菜单悬停、分段控制器 |
 | ![截屏2023-03-28 下午4.26.57.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/Gj5hT5AKYAoAAAAAAAAAAAAADv3-AQBr/original)-Gray1 | #F8FAFE | H：220 S：75 L：98 | 表格斑马格、页签未选中态 |
 
 ### 背景色
 
-| 颜色 | 色值 |  | 应用场景 |
+| 颜色 | HEX 色值 | HSL 色值 | 应用场景 |
 | --- | --- | --- | --- |
 | ![截屏2023-03-28 下午4.39.05.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/31ySR7XgIjIAAAAAAAAAAAAADv3-AQBr/original)-Gray8 | #132039(60%) | H：220 S：50 L：15 Alpha：60 | 弹窗、抽屉等组件的底部蒙层 |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/kb9FR6ginHQAAAAAAAAAAAAADv3-AQBr/original)-Gray2 | #F3F6FC | H：220 S：60 L：97 | 页面底色 |
-| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/VtrdSa-pXbIAAAAAAAAAAAAADv3-AQBr/original)-White | #FFFFFF | H：0 S：0 L：100 | 组件、容器背景色 |
+| <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/VtrdSa-pXbIAAAAAAAAAAAAADv3-AQBr/original" style="border: 1px solid #E2E8F3; border-radius: 4px" />-White | #FFFFFF | H：0 S：0 L：100 | 组件、容器背景色 |
 
 ## 使用案例
 
@@ -185,7 +185,7 @@ OceanBase 产品中的具体应用案例。
     <div class="image-description">主按钮禁用态不可使用 Gradient4，Gradient4是加载中状态色</div>
   </div>
 </div>
-
+<br />
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/7KOySZf07NcAAAAAAAAAAAAADv3-AQBr/original" />
@@ -340,11 +340,11 @@ OceanBase 产品中的具体应用案例。
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/JvnTQYD53n4AAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">品牌图标默认为该品牌定义默认色，禁用色为 Gray 4</div>
+    <div class="image-description" style="margin-top: 16px">品牌图标默认为该品牌定义默认色，禁用色为 Gray 4</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/NRInSIVQoPUAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">避免直接调整透明度表达禁用状态</div>
+    <div class="image-description" style="margin-top: 16px">避免直接调整透明度表达禁用状态</div>
   </div>
 </div>
 

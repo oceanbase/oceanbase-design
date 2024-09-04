@@ -21,5 +21,5 @@ const useStyle = () => {
 export default function Caution({}: CautionProps) {
   const styles = useStyle();
 
-  return <span css={styles.do}>Caution</span>;
+  return <div css={styles.do}>Caution</div>;
 }

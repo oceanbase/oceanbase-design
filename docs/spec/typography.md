@@ -9,7 +9,7 @@ order: 3
 
 OBUI 字体选择的原则主要分为三点。
 
-#### 细节清晰
+### 细节清晰
 
 选择字体时，注意相似字形的区分，如字母“I”“l”和数字“1”，以免影响可读性。
 
@@ -24,7 +24,7 @@ OBUI 字体选择的原则主要分为三点。
   </div>
 </div>
 
-#### 多种字重和样式
+### 多种字重和样式
 
 拥有多种字重、样式、宽度的字体能给设计师更多灵活性，实际应用时便于区分信息层级。
 
@@ -39,7 +39,7 @@ OBUI 字体选择的原则主要分为三点。
   </div>
 </div>
 
-#### 等宽字体
+### 等宽字体
 
 涉及到数据展示，尽量使用等宽字体，可以保证页面的整洁和可读性。
 
@@ -58,7 +58,7 @@ OBUI 字体选择的原则主要分为三点。
 
 OBUI 字体家族中的中文主字体选用系统默认字体；英文主字体选用开源字体 Inter。Inter 拥有干净的线条和优秀的可读性，是一种可变字体，能够适应不同屏幕尺寸和分辨率。
 
-#### 中文字体家族
+### 中文字体家族
 
 主字体苹方(苹果系统字体)
 
@@ -68,7 +68,7 @@ OBUI 字体家族中的中文主字体选用系统默认字体；英文主字体
 
     -apple-system, Noto Sans, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 
-#### 英文字体家族
+### 英文字体家族
 
 主字体 Inter
 
@@ -96,7 +96,7 @@ OBUI 字体家族中的中文主字体选用系统默认字体；英文主字体
   </div>
 </div>
 
-#### 代码字体家族
+### 代码字体家族
 
 主字体Consolas
 
@@ -106,7 +106,7 @@ OBUI 字体家族中的中文主字体选用系统默认字体；英文主字体
 
     Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace；
 
-#### 数字字体
+### 数字字体
 
 数据表格为主要场景。为了更方便用户对比数据，采用等宽字体 Helvetica Neue 进行展示。
 
@@ -131,19 +131,19 @@ OBUI 字体家族中的中文主字体选用系统默认字体；英文主字体
 
 由于中英文字体差异，字重也有所区别。
 
-#### 中文
+### 中文
 
 使用 regular 以及 medium 的两种字重，分别对应代码中的 400 和 500。
 
 ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/y4ZVT5bljk4AAAAAAAAAAAAADv3-AQBr/original)
 
-#### 英文
+### 英文
 
 使用 regular 以及 semibold 两种字重，分别对应代码中的 400 和 600。
 
 ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/mF9SQbdAMdkAAAAAAAAAAAAADv3-AQBr/original)
 
-#### 数字
+### 数字
 
 主应用场景为数据表，不涉及信息层级的区分，只使用一种字重 regular，对应代码中的400。
 
@@ -153,7 +153,7 @@ OBUI 字体家族中的中文主字体选用系统默认字体；英文主字体
 
 提供产品中字号和字重的最佳实践。
 
-#### 一级标题
+### 一级标题
 
 <div style="display: flex">
   <div>
@@ -166,7 +166,7 @@ OBUI 字体家族中的中文主字体选用系统默认字体；英文主字体
   </div>
 </div>
 
-#### 二级标题
+### 二级标题
 
 <div style="display: flex">
   <div>
@@ -179,7 +179,7 @@ OBUI 字体家族中的中文主字体选用系统默认字体；英文主字体
   </div>
 </div>
 
-#### 表格标题
+### 表格标题
 
 <div style="display: flex">
   <div>

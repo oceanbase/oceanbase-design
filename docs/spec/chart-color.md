@@ -16,7 +16,7 @@ OB Charts 的颜色定义旨在传递 OceanBase科技且富有生机的品牌调
 
 色板配色考虑品牌调性、界面和谐度、色彩辨识度、视障人群的可读性、复杂数据场景的灵活度等因素。在设计色板时需满足以下几个原则：
 
-**色彩和谐：**界面中会出现大面积图表，图表颜色饱和度过高，容易让用户产生疲劳感、不适合长时间阅读，因此图表配色需要柔和与均衡。
+**色彩和谐：** 界面中会出现大面积图表，图表颜色饱和度过高，容易让用户产生疲劳感、不适合长时间阅读，因此图表配色需要柔和与均衡。
 
 <div style="display: flex">
   <div>
@@ -29,7 +29,7 @@ OB Charts 的颜色定义旨在传递 OceanBase科技且富有生机的品牌调
   </div>
 </div>
 
-**色彩辨识度：**色彩辨识度是指颜色和颜色之间的区分度，在配色数量少的情况下很容易做到，但当颜色数量大于等于 10 时，相近的颜色会变多不容易辨别，可以通过拉开色相差距和拉开明暗差距两种方式来提高色彩辨识度。
+**色彩辨识度：** 色彩辨识度是指颜色和颜色之间的区分度，在配色数量少的情况下很容易做到，但当颜色数量大于等于 10 时，相近的颜色会变多不容易辨别，可以通过拉开色相差距和拉开明暗差距两种方式来提高色彩辨识度。
 
 在 CIELab 色彩空间中，L值一般在 35-85 之间，L值过高颜色太亮，L值过低颜色太暗，都不利于用户阅读。
 
@@ -44,7 +44,7 @@ OB Charts 的颜色定义旨在传递 OceanBase科技且富有生机的品牌调
   </div>
 </div>
 
-**视障可读：**视障人群无法准确的识别色相，主要依靠色彩的明暗去区分不同的颜色，可以借助工具 ColorLab 模拟视障显示效果来验证色板的可读性。
+**视障可读：** 视障人群无法准确的识别色相，主要依靠色彩的明暗去区分不同的颜色，可以借助工具 ColorLab 模拟视障显示效果来验证色板的可读性。
 
 <div style="display: flex">
   <div>
@@ -67,7 +67,7 @@ OB Charts 的颜色定义旨在传递 OceanBase科技且富有生机的品牌调
 
 基础色板共 10 色，当图例数量 <= 10 个时，使用基础色板，并按照色板顺序展示图表，色板参数如下：
 
-| **序号** | **颜色** | **名称** | **色值** |  |
+| 序号 | 颜色 | 名称 | HEX 色值 | HSL 色值 |
 | --- | --- | --- | --- | --- |
 | 1 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/kYiURIajuBYAAAAAAAAAAAAADv3-AQBr/original) | 蔚蓝色 | #3D88F2 | H:215 S:75 B:95 |
 | 2 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/iDTDRpmJo8QAAAAAAAAAAAAADv3-AQBr/original) | 翡翠绿 | #41D9A6 | H:160 S:70 B:85 |
@@ -84,7 +84,7 @@ OB Charts 的颜色定义旨在传递 OceanBase科技且富有生机的品牌调
 
 图表中如果有超过 10 个图例的场景，则需要用到延伸色板，延伸色板共 20 色，是在基础色基础上调整 60% 不透明度的实色，穿插在基础色中使用，从而实现明暗交替；当图例数量 > 10 个时，需使用延伸色板，并按照色板顺序展示图表，色板参数如下：
 
-| **序号** | **颜色** | **名称** | **色值** |  |
+| 序号 | 颜色 | 名称 | HEX 色值 | HSL 色值 |
 | --- | --- | --- | --- | --- |
 | 1 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/egkJRL9xU3wAAAAAAAAAAAAADv3-AQBr/original) | 蔚蓝色 | #3D88F2 | H:215 S:75 B:95 |
 | 2 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/FlaZT5y4R_YAAAAAAAAAAAAADv3-AQBr/original) | 浅蔚蓝 | #8BB8F7 | H:215 S:44 B:97 |
@@ -132,15 +132,15 @@ OB Charts 的颜色定义旨在传递 OceanBase科技且富有生机的品牌调
 
 灰色和蓝色表示“中性的”，用于“默认”“常规”“剩余”等状态；绿色表示“负向的”，用于“成功”“安全”等状态；其他颜色表示“负向的”，用于“警告”“失败”“风险”等状态。
 
-| **颜色** | **色值** | **名称** | **色号** | **语义** | **表达含义** |
+| 颜色 | 色值 | 名称 | 色号 | 语义 | 表达含义 |
 | --- | --- | --- | --- | --- | --- |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/0ojQTK5yz3cAAAAAAAAAAAAADv3-AQBr/original) | #9DAAC6 | 灰 | 5 | 中性的 | 表示：默认的、其他、剩余、失效的 |
-| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/IHG_QLpD1_QAAAAAAAAAAAAADv3-AQBr/original) | #3983ED | 蓝 | 7 |  | 表示：常规的、常态的、默认的 |
+| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/IHG_QLpD1_QAAAAAAAAAAAAADv3-AQBr/original) | #3983ED | 蓝 | 7 | 中性的 | 表示：常规的、常态的、默认的 |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/_-wlQKl6mLcAAAAAAAAAAAAADv3-AQBr/original) | #42C79B | 绿 | 7 | 正向的 | 表示：成功的、安全的、可行的、可获得的 |
 | ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/220QSbkaJH0AAAAAAAAAAAAADv3-AQBr/original) | #F9B048 | 黄 | 7 | 负向的 | 表示：提醒、注意、警示、低风险（严重等级 1） |
-| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/FjDZRL2dzQYAAAAAAAAAAAAADv3-AQBr/original) | #F97A3B | 橙 | 7 |  | 表示：警告、严重、中风险（严重等级 2） |
-| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/HgB5Sq3oMl0AAAAAAAAAAAAADv3-AQBr/original) | #E5363B | 红 | 7 |  | 表示：危险、失败、严重、错误（严重等级 3） |
-| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/xWm_TosZTAYAAAAAAAAAAAAADv3-AQBr/original) | #89273F | 紫红 | 7 |  | 表示：非常严重、高风险、停服（严重等级 4） |
+| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/FjDZRL2dzQYAAAAAAAAAAAAADv3-AQBr/original) | #F97A3B | 橙 | 7 | 负向的 | 表示：警告、严重、中风险（严重等级 2） |
+| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/HgB5Sq3oMl0AAAAAAAAAAAAADv3-AQBr/original) | #E5363B | 红 | 7 | 负向的 | 表示：危险、失败、严重、错误（严重等级 3） |
+| ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/xWm_TosZTAYAAAAAAAAAAAAADv3-AQBr/original) | #89273F | 紫红 | 7 | 负向的 | 表示：非常严重、高风险、停服（严重等级 4） |
 
 ### 延伸色板
 

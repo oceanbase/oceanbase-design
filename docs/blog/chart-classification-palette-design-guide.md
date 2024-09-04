@@ -20,21 +20,16 @@ title: 图表分类色板设计方法
 
 ### 常用配色方法
 
-常用的色环配色法，有「邻近色配色法」「对比色配色法」「互补色配色法」「分裂互补色」「三角配色」「四分配色」等等。:::tips
+常用的色环配色法，有「邻近色配色法」「对比色配色法」「互补色配色法」「分裂互补色」「三角配色」「四分配色」等等。
 
 - 邻近色：在色相环中，相差 15°的颜色为邻近色，凡在 60°范围内的颜色都属于邻近色的范围。邻近色之间往往是我中有你，你中有我，色彩之间比较和谐。
 - 对比色：在色相环中，角度相差 120°-180°之间的色彩。
 - 互补色：在色相环中成 180°角的两种颜色，互为补色，当这两种颜色彼此相邻放置时，它们会为这两种特定颜色创造最强烈的对比度。
-- 分裂互补色：也叫等腰三角形配色，以互补色为中心，左右15°- 60°区间内的颜色。:::
+- 分裂互补色：也叫等腰三角形配色，以互补色为中心，左右15°- 60°区间内的颜色。
 
-<div style="display: flex; justify-content: space-between">
-  <div>
-    <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/5-Z9QIRe6nsAAAAAAAAAAAAADv3-AQBr/original" />
-  </div>
-  <div>
-    <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/ZtKwRZNGQKMAAAAAAAAAAAAADv3-AQBr/original" />
-  </div>
-</div>
+![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/5-Z9QIRe6nsAAAAAAAAAAAAADv3-AQBr/original)
+
+![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/ZtKwRZNGQKMAAAAAAAAAAAAADv3-AQBr/original)
 
 竞品的颜色色相会根据自身的业务特性和要传递的品牌调性选择合适的配色方法，除了「Grafana」是比较标准的邻近色配色，其他竞品没有严谨的规律可寻，但可以找到大致的配色方向，比如：「AntV」和「Tableau」更像是分裂互补色配色，「Echarts」更偏向于四分法配色。
 
@@ -42,9 +37,10 @@ title: 图表分类色板设计方法
 
 配色方案除了设计师发挥自身的经验价值，还可以利用配色工具让方案更加科学，这里推荐给大家两个好用的配色工具，分别是[「Adobe Color」](https://color.adobe.com/zh/create/color-wheel)和[「Paletton」](http://paletton.com/#uid=703101kl6lPhAQkk2vSnjcbop3Ykm9lG3nsycJpjuWi1Sde2klzD09LrHgcwwq1NJuaXxkOmeQNQ7rAgfrX0m9T0Cn)。「Adobe Color」支持的配色方法很多，覆盖了上述所有配色方法，「Paletton」支持的方法相对基础，目前有邻近色、对比色和四分色三个配色模式，如：分裂互补色、三角配色等可以通过手动调节来完成。
 
-![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/n0GjRaGBMuYAAAAAAAAAAAAADv3-AQBr/original)
-
-Adobe Color 配色方法
+<div>
+  <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/n0GjRaGBMuYAAAAAAAAAAAAADv3-AQBr/original" />
+  <div class="image-description">Adobe Color 配色方法</div>
+</div>
 
 ## 图表配色原则
 
@@ -105,7 +101,7 @@ OBCharts 色板设计的过程可以分为以下几个步骤：① 确定主题�
 
 为了传递出科技、专业和可靠的感受，OceanBase 的 logo 确定了 3 个品牌色「橙」「蓝」「绿」，「蓝色」代表科技，「绿色」代表生活或生机，「橙色」代表希望和美好的未来。
 
-![1-最终确定版.jpg](https://mdn.alipayobjects.com/oceanbase_design/afts/img/44APQahoJX4AAAAAAAAAAAAADv3-AQBr/original)
+![1-最终确定版.jpg](https://mdn.alipayobjects.com/oceanbase_design/afts/img/o9ueQYIDjnkAAAAAAAAAAAAADv3-AQBr/original)
 
 OBUI 主题色是在 logo 品牌色的基础上做了微调，以便于适应工具产品的复杂场景。OBCharts 是 OBUI 生长出来的可视化图表，为了让图表和界面更好的融合，图表色板会采用 OBUI 的 3 个主题色。
 
@@ -198,11 +194,13 @@ OBUI 主题色是在 logo 品牌色的基础上做了微调，以便于适应工
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/p36BSIBT32sAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">图2
-
-橙红色与警告色相近，避免产生歧义，可将橙红色明度饱和度降低作为新的颜色（图3）；为了能拉开色彩差距，让色相分布更均匀，再插入了一个色相为320的颜色（图4），可得到完整色板。</div>
-
+    <div class="image-description">图2</div>
   </div>
+</div>
+
+橙红色与警告色相近，避免产生歧义，可将橙红色明度饱和度降低作为新的颜色（图3）；为了能拉开色彩差距，让色相分布更均匀，再插入了一个色相为320的颜色（图4），可得到完整色板。
+
+<div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/e7CvTocrTR8AAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description">图3</div>
@@ -213,9 +211,10 @@ OBUI 主题色是在 logo 品牌色的基础上做了微调，以便于适应工
   </div>
 </div>
 
-![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/9_VNRJmASNIAAAAAAAAAAAAADv3-AQBr/original)
-
-完整色板
+<div>
+  <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/9_VNRJmASNIAAAAAAAAAAAAADv3-AQBr/original" />
+  <div class="image-description">完整色板</div>
+</div>
 
 ### 可读性验证
 
@@ -223,17 +222,21 @@ OBUI 主题色是在 logo 品牌色的基础上做了微调，以便于适应工
 
 通过工具 ColorLab 进行验证，在 LAB 色彩空间下，基本符合明暗交替原则。
 
-![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/Y2tpTKyEwaIAAAAAAAAAAAAADv3-AQBr/original)
+<img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/Y2tpTKyEwaIAAAAAAAAAAAAADv3-AQBr/original" style="width: 415px" />
 
 #### 视障可读
 
 符合明暗交替的原则，视障人群（色弱色盲人群）可辨别色板颜色。
 
-![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/bpNMSIQMNqMAAAAAAAAAAAAADv3-AQBr/original)
-
-1.普通人群视觉效果
-
-2.色弱人群视觉效果
+<div style="display: flex">
+  <div style="flex: 1">
+    <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/bpNMSIQMNqMAAAAAAAAAAAAADv3-AQBr/original" />
+  </div>
+  <div class="image-description" style="width: 130px">
+    <div style="margin-bottom: 16px">1.普通人群视觉效果</div>
+    <div>2.色弱人群视觉效果</div>
+  </div>
+</div>
 
 #### 欧氏距离
 
@@ -250,35 +253,42 @@ OBUI 主题色是在 logo 品牌色的基础上做了微调，以便于适应工
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/HXrOT6BRa7sAAAAAAAAAAAAADv3-AQBr/original" />
   </div>
+</div>
+<br />
+<div style="display: flex; justify-content: space-between">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/L4DBTqhAUbAAAAAAAAAAAAAADv3-AQBr/original" />
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/I55rTpNNSDMAAAAAAAAAAAAADv3-AQBr/original" />
   </div>
+</div>
+<br />
+<div style="display: flex; justify-content: space-between">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/Mqy9SqIKnLgAAAAAAAAAAAAADv3-AQBr/original" />
   </div>
+  <div>
+    <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/QY9mToqPEAUAAAAAAAAAAAAADv3-AQBr/original" />
+  </div>
 </div>
 
-![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/QY9mToqPEAUAAAAAAAAAAAAADv3-AQBr/original)
+## 参考文档
 
-**参考文档**
+Material 色彩与设计科学 https://material.io/blog/science-of-color-design
 
-Material 色彩与设计科学 <https://material.io/blog/science-of-color-design>
+Material 色彩体系 https://m3.material.io/styles/color/the-color-system/key-colors-tones
 
-Material 色彩体系 <https://m3.material.io/styles/color/the-color-system/key-colors-tones>
+京东色彩构建 https://www.uisdc.com/color-system
 
-京东色彩构建 <https://www.uisdc.com/color-system>
+Adobe 调色板 https://color.adobe.com/zh/explore?page=7
 
-Adobe 调色板 <https://color.adobe.com/zh/explore?page=7>
+Paletton 配色工具 http://paletton.com/#uid=54e1a0kr0pdobS5pLzuq+enoy6j
 
-Paletton 配色工具 <http://paletton.com/#uid=54e1a0kr0pdobS5pLzuq+enoy6j>
+Tableau 博客 https://www.tableau.com/blog/colors-upgrade-tableau-10-56782
 
-Tableau 博客 <https://www.tableau.com/blog/colors-upgrade-tableau-10-56782>
+色相环比较 http://www.handprint.com/HP/WCL/vismixmap.html#harris
 
-色相环比较 <http://www.handprint.com/HP/WCL/vismixmap.html#harris>
+色彩空间 http://www.handprint.com/HP/WCL/color7.html#CIELAB
 
-色彩空间 <http://www.handprint.com/HP/WCL/color7.html#CIELAB>
-
-色彩体验 <http://www.handprint.com/CE/book.html>
+色彩体验 http://www.handprint.com/CE/book.html

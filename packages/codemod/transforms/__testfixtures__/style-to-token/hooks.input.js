@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, Button, Tooltip } from '@oceanbase/design';
 
-function Demo1() {
+function useComponent1 () {
   const tokenList = ['rgb(0 0 0 / 45%)', '#006AFF', '#f3f6fc'];
   return (
     <div>
@@ -12,7 +12,7 @@ function Demo1() {
   );
 };
 
-const Demo2 = () => {
+const useComponent2 = () => {
   const tokenList = ['rgb(0 0 0 / 45%)', '#006AFF', '#f3f6fc'];
   return (
     <div>
@@ -23,4 +23,4 @@ const Demo2 = () => {
   );
 };
 
-export { Demo1, Demo2 };
+export { useComponent1, useComponent2 };
