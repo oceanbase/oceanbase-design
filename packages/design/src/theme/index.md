@@ -96,7 +96,9 @@ export const taskStatusList = [
 
 ![](https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*_37-QqtQGQUAAAAAAAAAAAAADmfOAQ/original)
 
-## 暗色主题
+## 内置主题
+
+### 暗色主题
 
 ```ts | pure
 import {  ConfigProvider } from '@oceanbase/design';
@@ -115,7 +117,7 @@ export default () {
 };
 ```
 
-## 紧凑主题
+### 紧凑主题
 
 ```ts | pure
 import {  ConfigProvider } from '@oceanbase/design';
@@ -133,7 +135,7 @@ export default () {
 };
 ```
 
-## 阿里云主题
+### 阿里云主题
 
 ```ts | pure
 import {  ConfigProvider } from '@oceanbase/design';
@@ -151,10 +153,28 @@ export default () {
 };
 ```
 
-## 更多用法
-
-- 主题的更多用法，请参考 antd 文档: https://ant.design/docs/react/customize-theme-cn
-
 ## 主题预览
 
 <code src="./demo/previewer.tsx"></code>
+
+## API
+
+### SeedToken
+
+<TokenTable type="seed"></TokenTable>
+
+### MapToken
+
+> 继承所有 SeedToken 的属性
+
+<TokenTable type="map"></TokenTable>
+
+### AliasToken
+
+> 继承所有 SeedToken 和 MapToken 的属性
+
+<TokenTable type="alias"></TokenTable>
+
+## 更多用法
+
+- 主题的更多用法，请参考 antd 文档: https://ant.design/docs/react/customize-theme-cn
