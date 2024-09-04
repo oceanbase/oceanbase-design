@@ -21,7 +21,7 @@ Use Gitpod, a free online dev environment for GitHub.
 
 Or clone locally:
 
-```bash
+```console
 $ git clone git@github.com:oceanbase/oceanbase-design.git
 $ cd oceanbase-design
 $ npm install -g pnpm
