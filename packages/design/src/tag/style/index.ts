@@ -49,7 +49,7 @@ export const genTagStyle: GenerateStyle<TagToken> = (token: TagToken): CSSObject
       fontSize: token.fontSizeSM,
       [`${antCls}-typography`]: {
         fontSize: token.fontSizeSM,
-        [`.inner-icon`]: {
+        [`${componentCls}-icon`]: {
           marginInlineEnd: paddingInline,
         },
       },

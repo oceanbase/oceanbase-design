@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect } from 'react';
+import React, { useContext } from 'react';
 import { Tag as AntTag } from 'antd';
 import type { TagProps as AntTagProps } from 'antd/es/tag';
 import classNames from 'classnames';
@@ -42,7 +42,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
       className
     );
 
-    const realIcon = icon ? <span className="inner-icon">{icon}</span> : null;
+    const realIcon = icon ? <span className={`${prefixCls}-icon`}>{icon}</span> : null;
 
     return wrapSSR(
       <AntTag
