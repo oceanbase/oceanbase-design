@@ -56,24 +56,24 @@ title: 图表语义色板设计推导
     <div class="image-description-center">兼容性概览</div>
   </div>
 </div>
-
-<div style="display: flex">
-  <div>
+<br />
+<div style="display: flex;">
+  <div style="flex: 48">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/9VjQS451mokAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description-center">慢 SQL 指标</div>
   </div>
-  <div>
+  <div style="flex: 27">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/UyA2RYne-mwAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description-center">资源水位</div>
   </div>
 </div>
-
-<div style="display: flex">
-  <div>
+<br />
+<div style="display: flex;">
+  <div style="flex: 29">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/A0EURoKFHY0AAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description-center">备份任务状态</div>
   </div>
-  <div>
+  <div style="flex: 48">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/AvhzQYaFvGQAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description-center">迁移任务状态</div>
   </div>
@@ -91,13 +91,13 @@ title: 图表语义色板设计推导
     <div class="image-description-center">异常检测标记</div>
   </div>
 </div>
-
+<br />
 <div>
   <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/KrdvS7IctOoAAAAAAAAAAAAADv3-AQBr/original" />
   <div class="image-description-center">CPU 使用率</div>
 </div>
-
-<div>
+<br />
+<div style="width: 50%">
   <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/wfgeSJlUTqMAAAAAAAAAAAAADv3-AQBr/original" />
   <div class="image-description-center">CPU 消耗比</div>
 </div>

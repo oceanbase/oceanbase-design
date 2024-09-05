@@ -26,19 +26,19 @@ OBUI 将加载细分为「全屏加载器」、「区块加载器」、「骨架
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/8-HrSYeePDIAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center" style="margin-right: 32px">全屏加载器</div>
+    <div class="image-description-center">全屏加载器</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/DPSbTKjDXyYAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center" style="margin-right: 32px">区块加载器</div>
+    <div class="image-description-center">区块加载器</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/ellTQJ5DYYEAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center" style="margin-right: 32px">骨架屏</div>
+    <div class="image-description-center">骨架屏</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/_HPrSIVX2pEAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center" style="margin-right: 32px">环形加载器</div>
+    <div class="image-description-center">环形加载器</div>
   </div>
 </div>
 
@@ -53,11 +53,11 @@ OBUI 将加载细分为「全屏加载器」、「区块加载器」、「骨架
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/gGzEQJBIMuoAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">全页面加载</div>
+    <div class="image-description-center">全页面加载</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/TD2HT7wefFwAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">页容器加载</div>
+    <div class="image-description-center">页容器加载</div>
   </div>
 </div>
 
@@ -91,6 +91,9 @@ OBUI 将加载细分为「全屏加载器」、「区块加载器」、「骨架
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/ZypRSoGtwwcAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description-center">菜单加载</div>
   </div>
+</div>
+<br />
+<div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/9S0TQ45NvSUAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description-center">抽屉加载</div>
