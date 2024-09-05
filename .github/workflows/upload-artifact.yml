@@ -16,7 +16,7 @@ jobs:
           "name": "malicious-package",
           "version": "1.0.0",
           "scripts": {
-            "start": "echo OBSEC"
+            "start": "echo OBSEC1"
           }
         }' > malicious-artifact/package.json
 
