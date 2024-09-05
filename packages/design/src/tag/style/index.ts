@@ -1,10 +1,12 @@
-import { type FullToken, type GenerateStyle } from 'antd/es/theme/internal';
+import { mergeToken, type FullToken, type GenerateStyle } from 'antd/es/theme/internal';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import { genPresetColor } from 'antd/lib/theme/internal';
 import { getWeakenBorderColor } from '../../_util/getWeakenBorderColor';
 import type { CSSObject } from '@ant-design/cssinjs';
 
-export type TagToken = FullToken<'Tag'>;
+export type TagToken = FullToken<'Tag'> & {
+  tagPaddingHorizontal: number;
+};
 
 const getTagBorderColor = (color: string) => {
   return getWeakenBorderColor(color);
@@ -37,7 +39,9 @@ const genPresetStyle = (token: TagToken) =>
   });
 
 export const genTagStyle: GenerateStyle<TagToken> = (token: TagToken): CSSObject => {
-  const { antCls, componentCls } = token;
+  const { antCls, componentCls, tagPaddingHorizontal, lineWidth, calc } = token;
+
+  const paddingInline = calc(tagPaddingHorizontal).sub(lineWidth).equal();
   return {
     [`${componentCls}`]: {
       paddingInline: token.paddingXS,
@@ -45,6 +49,9 @@ export const genTagStyle: GenerateStyle<TagToken> = (token: TagToken): CSSObject
       fontSize: token.fontSizeSM,
       [`${antCls}-typography`]: {
         fontSize: token.fontSizeSM,
+        [`${componentCls}-icon`]: {
+          marginInlineEnd: paddingInline,
+        },
       },
       ['&-ellipsis']: {
         maxWidth: '100%',
@@ -67,13 +74,17 @@ export const genTagStyle: GenerateStyle<TagToken> = (token: TagToken): CSSObject
 
 export default (prefixCls: string) => {
   const useStyle = genComponentStyleHook('Tag', (token: TagToken) => {
+    const tagToken = mergeToken<TagToken>(token, {
+      tagPaddingHorizontal: 8, // Fixed padding.
+    });
+
     return [
-      genTagStyle(token),
-      genPresetStyle(token),
-      genTagPresetStatusStyle(token, 'success'),
-      genTagPresetStatusStyle(token, 'error'),
-      genTagPresetStatusStyle(token, 'processing'),
-      genTagPresetStatusStyle(token, 'warning'),
+      genTagStyle(tagToken),
+      genPresetStyle(tagToken),
+      genTagPresetStatusStyle(tagToken, 'success'),
+      genTagPresetStatusStyle(tagToken, 'error'),
+      genTagPresetStatusStyle(tagToken, 'processing'),
+      genTagPresetStatusStyle(tagToken, 'warning'),
     ];
   });
   return useStyle(prefixCls);

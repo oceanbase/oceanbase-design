@@ -7,7 +7,6 @@ import Typography from '../typography';
 import useStyle from './style';
 import { getEllipsisConfig } from '../_util/getEllipsisConfig';
 import type { Ellipsis } from '../_util/getEllipsisConfig';
-import { TooltipPlacement } from '../tooltip';
 
 export * from 'antd/es/tag';
 
@@ -20,6 +19,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
     {
       children,
       prefixCls: customizePrefixCls,
+      icon,
       className,
       ellipsis = {
         tooltip: {
@@ -35,7 +35,6 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
     const { wrapSSR } = useStyle(prefixCls);
 
     const ellipsisConfig = getEllipsisConfig(ellipsis, children);
-
     const tagCls = classNames(
       {
         [`${prefixCls}-ellipsis`]: !!ellipsisConfig,
@@ -43,10 +42,22 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
       className
     );
 
+    const realIcon = icon ? <span className={`${prefixCls}-icon`}>{icon}</span> : null;
+
     return wrapSSR(
-      <AntTag ref={ref} prefixCls={customizePrefixCls} className={tagCls} {...restProps}>
+      <AntTag
+        ref={ref}
+        prefixCls={customizePrefixCls}
+        className={tagCls}
+        icon={ellipsisConfig ? null : icon}
+        {...restProps}
+      >
         {ellipsisConfig ? (
-          <Typography.Text ellipsis={ellipsisConfig}>{children}</Typography.Text>
+          <Typography.Text ellipsis={ellipsisConfig}>
+            {/* Typography.Text 存在 ellipsis 配置时 ，将 icon 放在 Typography.Text 内部，避免溢出时与 icon 发生样式冲突。这里保留 Typography.Text 主要为了使用 Typography.Text 的判断内容溢出展示 Tooltip 的能力，自定义实现成本过大 */}
+            {realIcon}
+            {children}
+          </Typography.Text>
         ) : (
           children
         )}
