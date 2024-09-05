@@ -263,7 +263,7 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/U-Z-QqCbrQ8AAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">示例</div>
+    <div class="image-description-center">示例</div>
   </div>
 </div>
 
@@ -316,7 +316,7 @@ OB 缺省图的差异与触感体现在物体颜色的划分上，使用外轮�
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/iD5SQqxo0qgAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">示例</div>
+    <div class="image-description-center">示例</div>
   </div>
 </div>
 
