@@ -1,6 +1,6 @@
 import { defineTest } from 'jscodeshift/src/testUtils';
 
-const testUnit = 'page-container-to-oceanbase-ui';
+const testUnit = 'techui-and-pro-components-to-oceanbase-ui';
 const tests = ['techui', 'pro-components'];
 
 describe(testUnit, () => {
