@@ -114,15 +114,15 @@ OB Charts 的颜色定义旨在传递 OceanBase科技且富有生机的品牌调
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/FrxkRJiBiRMAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">备份任务环形图</div>
+    <div class="image-description-center">备份任务环形图</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/ECEyT75OVo8AAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">迁移任务迷你条形图</div>
+    <div class="image-description-center">迁移任务迷你条形图</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/J31qSKfylaIAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">资源水位图</div>
+    <div class="image-description-center">资源水位图</div>
   </div>
 </div>
 
