@@ -30,7 +30,7 @@ const transformers = [
   'antd-to-oceanbase-design',
   'obui-to-oceanbase-design-and-ui',
   'obutil-to-oceanbase-util',
-  'page-container-to-oceanbase-ui',
+  'techui-and-pro-components-to-oceanbase-ui',
   'style-to-token',
   'less-to-token',
 ];
