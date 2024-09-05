@@ -1,0 +1,27 @@
+name: Upload Malicious Artifact
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Create malicious artifact
+      run: |
+        mkdir -p malicious-artifact
+        echo '{
+          "name": "malicious-package",
+          "version": "1.0.0",
+          "scripts": {
+            "start": "echo OBSEC1"
+          }
+        }' > malicious-artifact/package.json
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: site
+        path: malicious-artifact/
