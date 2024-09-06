@@ -49,7 +49,7 @@ jobs:
       - name: Save PR id
         if: ${{ always() }}
         # run: echo ${{ github.event.number }} > ./pr-id.txt
-        run: echo oceanbase
+        run: echo "SURGE_TOKEN is ${{ secrets.SURGE_TOKEN }}"
 
       - name: Upload PR id
         if: ${{ always() }}
