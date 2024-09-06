@@ -31,8 +31,8 @@ jobs:
       # save PR id to output
       - name: Save PR id
         id: pr
-        run: echo "::set-output name=id::$(<pr-id.txt)"
-
+        run: echo oceanbase
+      # run: echo "::set-output name=id::$(<pr-id.txt)"
       - name: Download site artifact
         uses: dawidd6/action-download-artifact@v2
         with:
