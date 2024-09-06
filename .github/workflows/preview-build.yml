@@ -48,7 +48,8 @@ jobs:
       # Upload PR id for next workflow use
       - name: Save PR id
         if: ${{ always() }}
-        run: echo ${{ github.event.number }} > ./pr-id.txt
+        # run: echo ${{ github.event.number }} > ./pr-id.txt
+        run: echo oceanbase
 
       - name: Upload PR id
         if: ${{ always() }}
