@@ -1,4 +1,5 @@
 import { Button, Dropdown, Menu, Space, Tooltip, Typography } from '@oceanbase/design';
+import type { ButtonSize } from '@oceanbase/design/es/button';
 import { EllipsisOutlined, LoadingOutlined } from '@oceanbase/icons';
 import { isBoolean, max, omit } from 'lodash';
 import React from 'react';
@@ -18,7 +19,8 @@ export interface GroupProps {
   shouldDisabled?: (key: string) => boolean;
   enableLoading?: boolean;
   /** 更多操作的自定义展示 */
-  moreText?: string | React.ReactElement;
+  moreText?: React.ReactNode;
+  buttonSize?: ButtonSize;
 }
 
 type ellipsisType = 'default' | 'link';
@@ -43,6 +45,7 @@ export default ({
   shouldDisabled,
   enableLoading,
   moreText,
+  buttonSize,
 }: GroupProps) => {
   const visibleActions = Array.isArray(children)
     ? children.filter(c => {
@@ -84,7 +87,7 @@ export default ({
 
   if (ellipsisType === 'default') {
     moreDom = (
-      <Button type={ellipsisType}>
+      <Button type={ellipsisType} size={buttonSize}>
         {moreText ?? <EllipsisOutlined style={{ cursor: 'pointer' }} />}
       </Button>
     );
@@ -100,6 +103,8 @@ export default ({
     <Space size={8}>
       {mainActions.map(action => {
         return React.cloneElement(action, {
+          // size should be covered by action props
+          size: buttonSize,
           ...action.props,
           key: action.key,
           enableLoading: enableLoading,
