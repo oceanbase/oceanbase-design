@@ -36,11 +36,11 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.21.0",
-    "@oceanbase/aliyun-theme": "^0.1.4",
+    "@oceanbase/aliyun-theme": "^0.1.6",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.19.3",
+    "antd": "^5.20.0",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
     "lottie-web": "^5.12.2",

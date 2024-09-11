@@ -15,7 +15,7 @@ demo:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本用法" description="一个简单的 loading 状态"></code>
-<code src="./demo/size.tsx" title="各种大小" description="小的用于文本加载，默认用于卡片容器级加载，大的用于**页面级**加载"></code>
+<code src="./demo/size.tsx" title="各种大小" description="小的用于文本加载，默认用于卡片容器级加载，大的用于页面级加载"></code>
 <code src="./demo/colored.tsx" title="彩色的加载指示符"></code>
 <code src="./demo/inside.tsx" title="放入一个容器中"></code>
 <code src="./demo/nested.tsx" title="卡片加载中" description="可以直接把内容内嵌到 `Spin` 中，将现有容器变为加载状态"></code>

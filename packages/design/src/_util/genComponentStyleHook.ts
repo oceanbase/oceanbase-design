@@ -1,16 +1,15 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { ComponentTokenMap } from 'antd/es/theme/interface';
-import type { DerivativeToken, FullToken, GenerateStyle } from 'antd/es/theme/internal';
+import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
 import { genComponentStyleHook as antGenComponentStyleHook } from 'antd/es/theme/internal';
 import type { GlobalToken } from 'antd/es/theme/interface';
-import type { OverrideTokenWithoutDerivative } from 'antd/es/theme/util/genComponentStyleHook';
 import { useContext } from 'react';
 import ConfigProvider from '../config-provider';
 import theme from '../theme';
 
 export type ComponentName = keyof ComponentTokenMap;
 
-export const genCustomFontStyle = (token: DerivativeToken): CSSObject[] => {
+export const genCustomFontStyle = (token: FullToken<any>): CSSObject[] => {
   return [
     {
       ['@font-face']: {
@@ -28,8 +27,8 @@ export function genComponentStyleHook(
   componentName: ComponentName,
   styleFn: GenerateStyle<FullToken<ComponentName>>,
   getDefaultToken?:
-    | OverrideTokenWithoutDerivative[ComponentName]
-    | ((token: GlobalToken) => OverrideTokenWithoutDerivative[ComponentName])
+    | Partial<FullToken<ComponentName>>
+    | ((token: GlobalToken) => Partial<FullToken<ComponentName>>)
 ) {
   return (prefixCls: string) => {
     const { theme: themeConfig } = useContext(ConfigProvider.ConfigContext);

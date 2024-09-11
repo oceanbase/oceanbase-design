@@ -1,3 +1,4 @@
+import { CheckCircleOutlined } from '@oceanbase/icons';
 import { Tag } from '@oceanbase/design';
 import React from 'react';
 
@@ -10,6 +11,7 @@ const App: React.FC = () => (
       excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.
     </Tag>
     <Tag
+      icon={<CheckCircleOutlined />}
       ellipsis={{
         tooltip: {
           placement: 'topLeft',

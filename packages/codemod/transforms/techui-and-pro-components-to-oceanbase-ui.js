@@ -1,4 +1,5 @@
 const importComponent = require('./utils/import-component');
+const { proComponents } = require('./utils/config');
 
 module.exports = (file, api, options) => {
   return importComponent(file, api, {
@@ -7,8 +8,8 @@ module.exports = (file, api, options) => {
     toPkgList: [
       {
         name: '@oceanbase/ui',
-        components: ['PageContainer'],
-        types: ['PageContainerProps'],
+        paths: ['/locale/', '/locale/'],
+        ...proComponents,
       },
     ],
   });

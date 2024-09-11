@@ -52,7 +52,7 @@ const useStyle = () => {
       top: 8px;
       inset-inline-end: 0;
       right: 0;
-      width: 160px;
+      width: 180px;
       margin: 12px 0;
       padding: 8px 0;
       padding-inline: 4px 8px;
@@ -82,8 +82,10 @@ const useStyle = () => {
       }
     `,
     articleWrapper: css`
-      padding: 0 170px 32px 64px;
+      padding: 0 200px 32px 48px;
+      max-width: 1100px;
       min-height: calc(100vh - 242px);
+      margin: 0 auto;
 
       &.rtl {
         padding: 0 64px 144px 170px;
@@ -230,7 +232,7 @@ const Content: React.FC<{ children: ReactNode }> = ({ children }) => {
         </Affix>
         <article css={styles.articleWrapper} className={classNames({ rtl: isRTL })}>
           {meta.frontmatter?.title ? (
-            <Typography.Title style={{ fontSize: 30 }}>
+            <Typography.Title style={{ fontSize: 24 }}>
               {meta.frontmatter?.title}
               {meta.frontmatter.subtitle && (
                 <span style={{ marginLeft: 12 }}>{meta.frontmatter.subtitle}</span>

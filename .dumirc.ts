@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { defineConfig } from 'dumi';
 import AntdAliasWebpackPlugin from './antd-alias-webpack-plugin';
+import rehypePlugin from './.dumi/rehypePlugin';
+import remarkPlugin from './.dumi/remarkPlugin';
 
 export default defineConfig({
   mfsu: {
@@ -19,6 +21,8 @@ export default defineConfig({
   sitemap: {
     hostname: 'https://design.oceanbase.com',
   },
+  extraRehypePlugins: [rehypePlugin],
+  extraRemarkPlugins: [remarkPlugin],
   extraBabelPresets: [require.resolve('@emotion/babel-preset-css-prop')],
   chainWebpack: config => {
     const esPath = path.join(__dirname, 'packages/design/es');
