@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import { render } from '@testing-library/react';
-import { ConfigProvider, useToken, theme } from '@oceanbase/design';
-import defaultTheme from '../../theme/default';
-
-const antToken = theme.getDesignToken();
+import { ConfigProvider, useToken } from '@oceanbase/design';
+import defaultTheme, { fontFamilyEn } from '../../theme/default';
+import enUS from '../../locale/en-US';
 
 describe('ConfigProvider theme', () => {
   it('token', () => {
@@ -41,11 +40,10 @@ describe('ConfigProvider theme', () => {
     );
   });
 
-  // test order should before customFont to avoid be affected
   it('token.fontFamily', () => {
     const Child1 = () => {
       const { token } = useToken();
-      expect(token.fontFamily).toBe(antToken.fontFamily);
+      expect(token.fontFamily).toBe(defaultTheme.token.fontFamily);
       return <div />;
     };
     const Child2 = () => {
@@ -56,6 +54,16 @@ describe('ConfigProvider theme', () => {
     const Child3 = () => {
       const { token } = useToken();
       expect(token.fontFamily).toBe(`'Custom Font'`);
+      return <div />;
+    };
+    const Child4 = () => {
+      const { token } = useToken();
+      expect(token.fontFamily).toBe(fontFamilyEn);
+      return <div />;
+    };
+    const Child5 = () => {
+      const { token } = useToken();
+      expect(token.fontFamily).toBe(fontFamilyEn);
       return <div />;
     };
     render(
@@ -73,44 +81,17 @@ describe('ConfigProvider theme', () => {
             <Child3 />
           </ConfigProvider>
         </ConfigProvider>
-      </ConfigProvider>
-    );
-  });
-
-  it('customFont', () => {
-    const Child1 = () => {
-      const { token } = useToken();
-      expect(token.fontFamily).toBe(antToken.fontFamily);
-      return <div />;
-    };
-    const Child2 = () => {
-      const { token } = useToken();
-      expect(token.fontFamily).toBe(`'Source Sans Pro', ${antToken.fontFamily}`);
-      return <div />;
-    };
-    const Child3 = () => {
-      const { token } = useToken();
-      expect(token.fontFamily).toBe(`'Source Sans Pro', ${antToken.fontFamily}`);
-      return <div />;
-    };
-    render(
-      <ConfigProvider>
-        <Child1 />
-        <ConfigProvider
-          theme={{
-            customFont: true,
-          }}
-        >
-          <Child2 />
+        <ConfigProvider locale={enUS}>
+          <Child4 />
           <ConfigProvider>
-            <Child3 />
+            <Child5 />
           </ConfigProvider>
         </ConfigProvider>
       </ConfigProvider>
     );
   });
 
-  it('isAliyun', () => {
+  it('theme.isAliyun', () => {
     const Child1 = () => {
       const { token } = useToken();
       expect(token.colorPrimary).toBe(defaultTheme.token.colorPrimary);

@@ -4,8 +4,12 @@ import { formatTheme } from './util/format';
 // Calculated by colorBorder and getWeakenBorderColor()
 const tagColorBorder = '#cdd5e466';
 
+export const fontFamilyEn = `Inter, 'Noto sans', sans-serif, Roboto, 'Open Sans', 'Segoe UI', 'Helvetica Neue', 'Helvetica, Arial', 'Apple Color Emoji'`;
+
 const defaultTheme: ThemeConfig = {
   token: {
+    fontFamily: `-apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
+    fontFamilyCode: `Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace`,
     colorPrimaryBg: '#EAF1FF',
     colorPrimary: '#006AFF',
     colorPrimaryBgHover: '#EAF1FF',

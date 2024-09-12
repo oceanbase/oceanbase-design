@@ -66,7 +66,7 @@ OBUI 字体家族中的中文主字体选用系统默认字体；英文主字体
 
 替代字体（若主字体不支持时，按以下字体顺序进行替换）
 
-    -apple-system, Noto Sans, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    -apple-system, Noto Sans, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 
 ### 英文字体家族
 
@@ -76,7 +76,7 @@ OBUI 字体家族中的中文主字体选用系统默认字体；英文主字体
 
 替代字体（若主字体不支持时，按以下字体顺序进行替换）
 
-    Inter,Noto sans，sans-serif,Roboto,Open Sans,Segoe UI,Helvetica Neue,Helvetica,Arial,Apple Color Emoji;
+    Inter, Noto sans, sans-serif, Roboto,Open Sans, Segoe UI, Helvetica Neue, Helvetica, Arial, Apple Color Emoji;
 
 <div style="display: flex; justify-content: space-between">
   <div>
@@ -98,13 +98,13 @@ OBUI 字体家族中的中文主字体选用系统默认字体；英文主字体
 
 ### 代码字体家族
 
-主字体Consolas
+主字体 Consolas
 
 ![image.png](https://mdn.alipayobjects.com/oceanbase_design/afts/img/ug8JQL9l8s8AAAAAAAAAAAAADv3-AQBr/original)
 
 替代字体（若主字体不支持时，按以下字体顺序进行替换）
 
-    Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace；
+    Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
 
 ### 数字字体
 
