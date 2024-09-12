@@ -143,6 +143,7 @@ export default defineConfig({
         {
           title: '布局',
           children: [
+            { title: 'Divider 分割线', link: '/components/divider' },
             { title: 'Grid 栅格', link: '/components/grid' },
             { title: 'Space 间距', link: '/components/space' },
           ],
