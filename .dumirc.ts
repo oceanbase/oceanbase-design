@@ -187,6 +187,7 @@ export default defineConfig({
             { title: 'Drawer 抽屉', link: '/components/drawer' },
             { title: 'Notification 通知提醒框', link: '/components/notification' },
             { title: 'Result 结果', link: '/components/result' },
+            { title: 'Skeleton 骨架屏', link: '/components/skeleton' },
             { title: 'Spin 加载中', link: '/components/spin' },
             { title: 'Badge 徽标数', link: '/components/badge' },
           ],

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider } from 'antd';
+import { Divider } from '@oceanbase/design';
 
 const App: React.FC = () => (
   <>
