@@ -11,9 +11,11 @@ nav:
 
 ## 代码演示
 
+<code src="./demo/title.tsx" title="标题"></code>
+
 <code src="./demo/text.tsx" title="文本与超链接"></code>
 
-<code src="./demo/inner.tsx" title="和其他组件组合使用"></code>
+<code src="./demo/inner.tsx" title="和其他组件组合使用" debug></code>
 
 ## API
 
