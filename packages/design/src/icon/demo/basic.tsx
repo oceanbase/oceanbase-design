@@ -1,21 +1,22 @@
 import React from 'react';
 import {
-  HomeOutlined,
-  LoadingOutlined,
-  SettingFilled,
-  SmileOutlined,
-  SyncOutlined,
+  DatabaseRadiusOutlined,
+  HourglassHalfOutlined,
+  OceanbaseFilled,
+  DouyinFilled,
+  OceanbaseColored,
+  ObClusterColored,
 } from '@oceanbase/icons';
-import { Space } from '@oceanbase/design';
+import { Divider, Space } from '@oceanbase/design';
 
 const App: React.FC = () => (
   <Space>
-    <HomeOutlined />
-    <SettingFilled />
-    <SmileOutlined />
-    <SyncOutlined spin />
-    <SmileOutlined rotate={180} />
-    <LoadingOutlined />
+    <DatabaseRadiusOutlined />
+    <HourglassHalfOutlined spin />
+    <OceanbaseFilled />
+    <DouyinFilled style={{ color: 'hotpink' }} />
+    <OceanbaseColored style={{ fontSize: 24 }} />
+    <ObClusterColored />
   </Space>
 );
 

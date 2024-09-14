@@ -1,12 +1,12 @@
 // DON NOT EDIT IT MANUALLY
 import * as React from 'react';
-import DrilldownOutlinedSvg from '../asn/DrilldownOutlined';
+import DrillDownOutlinedSvg from '../asn/DrillDownOutlined';
 import AntdIcon, { AntdIconProps } from '../components/AntdIcon';
 
-const DrilldownOutlined = (
+const DrillDownOutlined = (
   props: AntdIconProps,
   ref: React.ForwardedRef<HTMLSpanElement>,
-) => <AntdIcon {...props} ref={ref} icon={DrilldownOutlinedSvg} />;
+) => <AntdIcon {...props} ref={ref} icon={DrillDownOutlinedSvg} />;
 
-DrilldownOutlined.displayName = 'DrilldownOutlined';
-export default React.forwardRef<HTMLSpanElement, AntdIconProps>(DrilldownOutlined);
+DrillDownOutlined.displayName = 'DrillDownOutlined';
+export default React.forwardRef<HTMLSpanElement, AntdIconProps>(DrillDownOutlined);

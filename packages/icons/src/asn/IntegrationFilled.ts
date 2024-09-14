@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const IntegrationFilled: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"0 0 14 14","focusable":"false"},"children":[{"tag":"defs","attrs":{},"children":[{"tag":"path","attrs":{"d":"M0 0h6v6.013H0z","id":"icon-filled-integration-a"}},{"tag":"path","attrs":{"d":"M0 0h6v6.013H0z","id":"icon-filled-integration-b"}},{"tag":"path","attrs":{"d":"M0 0h6v6.014H0z","id":"icon-filled-integration-c"}}]},{"tag":"g","attrs":{"fill-rule":"evenodd","fill":"none"},"children":[{"tag":"path","attrs":{"d":"M-1-1h16v16H-1z"}},{"tag":"path","attrs":{"d":"M9.817 2.156L11.455.622a.475.475 0 01.663.013l1.245 1.26a.475.475 0 010 .669l-1.57 1.582 1.558 1.55a.474.474 0 01-.335.811h-5.04a.475.475 0 01-.476-.474V.996c0-.423.51-.635.81-.337z","fill":"#8592AD"}},{"tag":"path","attrs":{"d":"M4.183 2.156L2.545.622a.475.475 0 00-.663.013L.637 1.895a.475.475 0 000 .669l1.57 1.582L.65 5.696a.474.474 0 00.335.811h5.04a.475.475 0 00.475-.474V.996a.475.475 0 00-.81-.337zM9.817 11.844l1.638 1.533c.188.176.482.17.663-.013l1.245-1.26a.475.475 0 000-.668l-1.57-1.582 1.558-1.55a.475.475 0 00-.335-.812h-5.04a.475.475 0 00-.476.475v5.037c0 .423.51.635.81.337zM4.183 11.844l-1.638 1.533a.475.475 0 01-.663-.013l-1.245-1.26a.475.475 0 010-.668l1.57-1.582L.65 8.304a.475.475 0 01.334-.812h5.04c.264 0 .476.213.476.475v5.037c0 .422-.51.635-.81.337z","fill":"#5C6B8A"}}]}]},"name":"integration","theme":"filled"};
+
+export default IntegrationFilled;

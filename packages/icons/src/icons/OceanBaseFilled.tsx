@@ -1,12 +1,12 @@
 // DON NOT EDIT IT MANUALLY
 import * as React from 'react';
-import OceanBaseFilledSvg from '../asn/OceanBaseFilled';
+import OceanbaseFilledSvg from '../asn/OceanbaseFilled';
 import AntdIcon, { AntdIconProps } from '../components/AntdIcon';
 
-const OceanBaseFilled = (
+const OceanbaseFilled = (
   props: AntdIconProps,
   ref: React.ForwardedRef<HTMLSpanElement>,
-) => <AntdIcon {...props} ref={ref} icon={OceanBaseFilledSvg} />;
+) => <AntdIcon {...props} ref={ref} icon={OceanbaseFilledSvg} />;
 
-OceanBaseFilled.displayName = 'OceanBaseFilled';
-export default React.forwardRef<HTMLSpanElement, AntdIconProps>(OceanBaseFilled);
+OceanbaseFilled.displayName = 'OceanbaseFilled';
+export default React.forwardRef<HTMLSpanElement, AntdIconProps>(OceanbaseFilled);

@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const DoubleSecurityColored: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"64 64 896 896","focusable":"false"},"children":[{"tag":"defs","attrs":{},"children":[{"tag":"path","attrs":{"d":"M0 0h620.654v686.828H0z","id":"icon-colored-double-security-a"}},{"tag":"path","attrs":{"d":"M0 0h541.654v577.996H0z","id":"icon-colored-double-security-b"}}]},{"tag":"g","attrs":{"fill-rule":"evenodd","fill":"none"},"children":[{"tag":"path","attrs":{"d":"M0 0h1024v1024H0z"}},{"tag":"path","attrs":{"d":"M82.127 347.302l285.766-77.566a24.553 24.553 0 0112.868 0l285.766 77.566a24.56 24.56 0 0118.127 23.704v240.885c0 194.768-124.989 282.247-310.282 343.816C189.029 894.139 64 806.621 64 611.805V371.006a24.56 24.56 0 0118.127-23.704","fill":"#006AFF"}},{"tag":"path","attrs":{"d":"M944.179 136.735L694.787 69.042a21.435 21.435 0 00-11.23 0l-249.392 67.693a21.436 21.436 0 00-15.82 20.687v56.276l330.309 90.879v307.314a481.4 481.4 0 01-1.235 34.399c129.128-52.931 212.58-129.971 212.58-278.645V157.421a21.436 21.436 0 00-15.82-20.687","fill":"#0AC185"}},{"tag":"path","attrs":{"d":"M324.019 702.007l-85.842-85.842a8 8 0 010-11.313l33.94-33.942a7.999 7.999 0 0111.315 0l63.214 63.215 118.576-118.577a8 8 0 0111.314 0l33.94 33.942a8 8 0 010 11.314L369.275 702.007c-12.497 12.497-32.758 12.497-45.255 0","fill":"#FFF"}}]}]},"name":"double-security","theme":"colored"};
+
+export default DoubleSecurityColored;
