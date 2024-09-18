@@ -78,8 +78,8 @@ importers:
         specifier: ^4.0.1
         version: 4.0.1(postcss@8.4.45)
       '@umijs/test':
-        specifier: ^4.3.11
-        version: 4.3.11(@babel/core@7.25.2)
+        specifier: ^4.3.20
+        version: 4.3.20(@babel/core@7.25.2)
       '@vercel/analytics':
         specifier: ^1.3.1
         version: 1.3.1(react@18.3.1)
@@ -5753,7 +5753,7 @@ packages:
       '@octokit/request-error': 3.0.3
       '@octokit/types': 9.3.2
       is-plain-object: 5.0.0
-      node-fetch: 2.6.7
+      node-fetch: 2.7.0
       universal-user-agent: 6.0.1
     transitivePeerDependencies:
       - encoding
@@ -7594,18 +7594,6 @@ packages:
       - supports-color
     dev: true
 
-  /@umijs/bundler-utils@4.3.11:
-    resolution: {integrity: sha512-P725tEWixiCJGGEQked2cbefsJipJ7hZ177mT5kR3fyA61+cOtJDdD3i2pw2IOCvIySosBupfbV3QLjqMjcxbw==}
-    dependencies:
-      '@umijs/utils': 4.3.11
-      esbuild: 0.21.4
-      regenerate: 1.4.2
-      regenerate-unicode-properties: 10.1.1
-      spdy: 4.0.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /@umijs/bundler-utils@4.3.20:
     resolution: {integrity: sha512-lb7xueV6mVHGkZVeYQTOS4I13F+biezhDHttCAWfSpH5ug42TCX8Ykdk/DOUk6XzLZGfu5gNmk3gfsz5HYuLkw==}
     dependencies:
@@ -8164,22 +8152,6 @@ packages:
       - supports-color
     dev: true
 
-  /@umijs/test@4.3.11(@babel/core@7.25.2):
-    resolution: {integrity: sha512-7vOW7MCBJ3oNE2L9BBIQ6wAUvCm4etbfVcMFujKm6DyEXKE8iwnNfZh6EfeMkd9e55af38JnWbbUZE308vNfEw==}
-    dependencies:
-      '@babel/plugin-transform-modules-commonjs': 7.23.3(@babel/core@7.25.2)
-      '@jest/types': 27.5.1
-      '@umijs/bundler-utils': 4.3.11
-      '@umijs/utils': 4.3.11
-      babel-jest: 29.7.0(@babel/core@7.25.2)
-      esbuild: 0.21.4
-      identity-obj-proxy: 3.0.0
-      isomorphic-unfetch: 4.0.2
-    transitivePeerDependencies:
-      - '@babel/core'
-      - supports-color
-    dev: true
-
   /@umijs/test@4.3.20(@babel/core@7.25.2):
     resolution: {integrity: sha512-Lc/uK85Y3Whn42DA2NcEmb+8aczcJkvRwMBQqFam5bab26fyVtLHlyMD3FVTO1OGpYcr/9q39IUc7jAR0Jzb0A==}
     dependencies:
@@ -8206,13 +8178,6 @@ packages:
       react: '*'
     dependencies:
       react: 18.3.1
-
-  /@umijs/utils@4.3.11:
-    resolution: {integrity: sha512-wybP+3ItAOMfArXYgCpCBoIQDLc/HGdJgofSQneFT/RUEZHr3WXVgMvRGDESIAfupZPkRoLq4W8/vcUbd4MZCA==}
-    dependencies:
-      chokidar: 3.5.3
-      pino: 7.11.0
-    dev: true
 
   /@umijs/utils@4.3.20:
     resolution: {integrity: sha512-VXEkQaAQWcm/rss0ggAqwDX9HujMWKRI+DK4GMvPgSzLLBBxqadViBZ248r2Gs5R7TkDVztgRwxT9U5DTc5krA==}
