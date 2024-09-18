@@ -295,8 +295,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0
       jscodeshift:
-        specifier: ^0.16.1
-        version: 0.16.1(@babel/preset-env@7.25.4)
+        specifier: ^17.0.0
+        version: 17.0.0(@babel/preset-env@7.25.4)
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -6374,7 +6374,7 @@ packages:
       postcss: '>=7.0.0'
       postcss-syntax: '>=0.36.2'
     dependencies:
-      '@babel/core': 7.23.6
+      '@babel/core': 7.25.2
       postcss: 8.4.45
       postcss-syntax: 0.36.2(postcss@8.4.45)
     transitivePeerDependencies:
@@ -16048,8 +16048,9 @@ packages:
     resolution: {integrity: sha512-4bYVV3aAMtDTTu4+xsDYa6sy9GyJ69/amsu9sYF2zqjiEoZA5xJi3BrfX3uY+/IekIu7MwdObdbDWpoZdBv3/A==}
     dev: true
 
-  /jscodeshift@0.16.1(@babel/preset-env@7.25.4):
-    resolution: {integrity: sha512-oMQXySazy63awNBzMpXbbVv73u3irdxTeX2L5ueRyFRxi32qb9uzdZdOY5fTBYADBG19l5M/wnGknZSV1dzCdA==}
+  /jscodeshift@17.0.0(@babel/preset-env@7.25.4):
+    resolution: {integrity: sha512-Af+MFsNwLSVO+t4kKjJdJKh6iNbNHfDfFGdyltJ2wUFN3furgbvHguJmB85iou+fY7wbHgI8eiEKpp6doGgtKg==}
+    engines: {node: '>=16'}
     hasBin: true
     peerDependencies:
       '@babel/preset-env': ^7.1.6
@@ -16068,12 +16069,11 @@ packages:
       '@babel/preset-flow': 7.24.7(@babel/core@7.25.2)
       '@babel/preset-typescript': 7.24.7(@babel/core@7.25.2)
       '@babel/register': 7.24.6(@babel/core@7.25.2)
-      chalk: 4.1.2
       flow-parser: 0.245.2
       graceful-fs: 4.2.11
       micromatch: 4.0.8
       neo-async: 2.6.2
-      node-dir: 0.1.17
+      picocolors: 1.1.0
       recast: 0.23.9
       temp: 0.9.4
       write-file-atomic: 5.0.1
@@ -18101,7 +18101,7 @@ packages:
       array-differ: 3.0.0
       array-union: 2.1.0
       arrify: 2.0.1
-      minimatch: 3.0.5
+      minimatch: 3.1.2
     dev: true
 
   /multipipe@1.0.2:
@@ -18248,13 +18248,6 @@ packages:
     resolution: {integrity: sha512-mmcei9JghVNDYydghQmeDX8KoAm0FAiYyIcUt/N4nhyAipB17pllZQDOJD2fotxABnt4Mdz+dKTO7eftLg4d0A==}
     dev: true
     optional: true
-
-  /node-dir@0.1.17:
-    resolution: {integrity: sha512-tmPX422rYgofd4epzrNoOXiE8XFZYOcCq1vD7MAXCDO+O+zndlA2ztdKKMa+EeuBG5tHETpr4ml4RGgpqDCCAg==}
-    engines: {node: '>= 0.10.5'}
-    dependencies:
-      minimatch: 3.1.2
-    dev: false
 
   /node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
