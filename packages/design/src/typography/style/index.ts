@@ -14,10 +14,12 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
     [`span${componentCls}`]: {
       lineHeight: 'inherit',
       color: 'inherit',
+      fontSize: 'inherit',
     },
     [`div${componentCls}`]: {
       lineHeight: 'inherit',
       color: 'inherit',
+      fontSize: 'inherit',
     },
   };
 };
