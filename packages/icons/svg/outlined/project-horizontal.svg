@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon" viewBox="0 0 1024 1024">
+  <defs><path id="a" d="M0 0 768 0 768 766.0909 0 766.0909z" /></defs>
+  <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+    <g transform="translate(128 128.955)">
+      <mask id="b" fill="#fff"><use xlink:href="#a" /></mask>
+      <path fill="#181818" d="M736 0H32C14.327 0 0 14.327 0 32v702.091c0 17.673 14.327 32 32 32h704c17.673 0 32-14.327 32-32V32c0-17.673-14.327-32-32-32M64 702.091h640V64H64z" />
+    </g>
+    <path fill="#181818" d="M696 351.545H456a8 8 0 0 1-8-8v-48a8 8 0 0 1 8-8h240a8 8 0 0 1 8 8v48a8 8 0 0 1-8 8M696 543.545H456a8 8 0 0 1-8-8v-48a8 8 0 0 1 8-8h240a8 8 0 0 1 8 8v48a8 8 0 0 1-8 8M696 737.829H456a8 8 0 0 1-8-8v-48a8 8 0 0 1 8-8h240a8 8 0 0 1 8 8v48a8 8 0 0 1-8 8M376 351.545h-48a8 8 0 0 1-8-8v-48a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v48a8 8 0 0 1-8 8M376 543.545h-48a8 8 0 0 1-8-8v-48a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v48a8 8 0 0 1-8 8M376 737.829h-48a8 8 0 0 1-8-8v-48a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v48a8 8 0 0 1-8 8" />
+  </g>
+</svg>

@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const DatafoldColored: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"0 0 54 54","focusable":"false"},"children":[{"tag":"g","attrs":{"fill-rule":"evenodd","fill":"none"},"children":[{"tag":"path","attrs":{"d":"M0 0h54v54H0z"}},{"tag":"path","attrs":{"d":"M47.125 22.153a.87.87 0 00.71-.366.89.89 0 00.12-.795L45.33 13.06a.88.88 0 00-.486-.531L38.72 9.885h0q-.006-.001-.01-.004a.87.87 0 00-.953.19l-4.444 4.476-5.216-12.996a.88.88 0 00-.804-.55h-.008a.87.87 0 00-.805.536L21.168 14.15 8.368 1.258a.873.873 0 00-1.492.623v25.56a.89.89 0 00.241.608l9.28 9.814L6.176 51.59a.886.886 0 00.43 1.367.87.87 0 00.546-.002l18.375-6.17h0a.9.9 0 00.342-.213l13.125-13.22a.88.88 0 00.256-.623V20.584l7.703 1.551a1 1 0 00.172.018M37.5 30.6l-8.825-8.89 8.825-8.888zM24.556 43.937L9.376 27.883l17.116-5.008zm2.71-39.753l4.703 11.717-4.532 4.564-4.934-4.97zm-1.518 17.073l-17.123 5.01V4.009zm-8.128 17.9l6.046 6.395-14.41 4.838zm8.725 4.443l1.828-19.9 8.965 9.029zM39.25 18.786v-6.754l4.544 1.961 2.024 6.116z","fill-rule":"nonzero","fill":"#3D75FF","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"1.219","stroke":"#3D75FF"}}]}]},"name":"datafold","theme":"colored"};
+
+export default DatafoldColored;

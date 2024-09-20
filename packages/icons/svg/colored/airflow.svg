@@ -1,0 +1,70 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 54 54">
+  <defs>
+    <radialGradient id="radialGradient-1" cx="0%" cy="100%" r="120.116%" fx="0%" fy="100%" gradientTransform="scale(.8325 1)">
+      <stop offset="0%" stop-color="#00C812" />
+      <stop offset="100%" stop-color="#006E00" />
+    </radialGradient>
+    <radialGradient id="radialGradient-2" cx="0%" cy="0%" r="120.116%" fx="0%" fy="0%" gradientTransform="scale(1 .8325)rotate(90)">
+      <stop offset="0%" stop-color="#56AFFD" />
+      <stop offset="100%" stop-color="#04A3FF" />
+    </radialGradient>
+    <radialGradient id="radialGradient-3" cx="100%" cy="0%" r="120.116%" fx="100%" fy="0%" gradientTransform="matrix(-.8325 0 0 -1 1.833 0)">
+      <stop offset="0%" stop-color="#DF1F00" />
+      <stop offset="100%" stop-color="#560D00" />
+    </radialGradient>
+    <radialGradient id="radialGradient-4" cx="100%" cy="100.001%" r="120.116%" fx="100%" fy="100.001%" gradientTransform="matrix(0 -.8325 1 0 0 1.833)">
+      <stop offset="0%" stop-color="#00FFFD" />
+      <stop offset="100%" stop-color="#00DAFF" />
+    </radialGradient>
+    <radialGradient id="radialGradient-5" cx="0%" cy="100%" r="100%" fx="0%" fy="100%" gradientTransform="matrix(1 0 0 .5731 0 .427)">
+      <stop offset="0%" stop-color="#008200" />
+      <stop offset="100%" stop-color="#007500" />
+    </radialGradient>
+    <radialGradient id="radialGradient-6" cx="0%" cy="0%" r="100%" fx="0%" fy="0%" gradientTransform="scale(.5731 1)rotate(90)">
+      <stop offset="0%" stop-color="#3166D4" />
+      <stop offset="100%" stop-color="#1A509E" />
+    </radialGradient>
+    <radialGradient id="radialGradient-7" cx="100%" cy="0%" r="100%" fx="100%" fy="0%" gradientTransform="matrix(-1 0 0 -.5731 2 0)">
+      <stop offset="0%" stop-color="#8E1400" />
+      <stop offset="100%" stop-color="#4B0B00" />
+    </radialGradient>
+    <radialGradient id="radialGradient-8" cx="100%" cy="100.001%" r="99.999%" fx="100%" fy="100.001%" gradientTransform="matrix(0 -1 .5731 0 .427 2)">
+      <stop offset="0%" stop-color="#0090C4" />
+      <stop offset="100%" stop-color="#005D8C" />
+    </radialGradient>
+    <radialGradient id="radialGradient-9" cx="0%" cy="99.999%" r="100%" fx="0%" fy="99.999%" gradientTransform="matrix(1 0 0 .6791 0 .32)">
+      <stop offset="0%" stop-color="#00CD1C" />
+      <stop offset="100%" stop-color="#00E950" />
+    </radialGradient>
+    <radialGradient id="radialGradient-10" cx="0%" cy="0%" r="100%" fx="0%" fy="0%" gradientTransform="scale(.6791 1)rotate(90)">
+      <stop offset="0%" stop-color="#B1C8FD" />
+      <stop offset="100%" stop-color="#7EC3FD" />
+    </radialGradient>
+    <radialGradient id="radialGradient-11" cx="100%" cy="0%" r="100%" fx="100%" fy="0%" gradientTransform="matrix(-1 0 0 -.6791 2 0)">
+      <stop offset="0%" stop-color="#E12A00" />
+      <stop offset="100%" stop-color="#B62F00" />
+    </radialGradient>
+    <radialGradient id="radialGradient-12" cx="100%" cy="100%" r="99.998%" fx="100%" fy="100%" gradientTransform="matrix(0 -1 .6791 0 .32 2)">
+      <stop offset="0%" stop-color="#00B6DD" />
+      <stop offset="100%" stop-color="#0FF" />
+    </radialGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+    <g fill-rule="nonzero">
+      <path fill="url(#radialGradient-1)" d="M37.8 48.6H54L28.08 27c-.356 7.845 3.098 15.52 9.72 21.6" />
+      <path fill="url(#radialGradient-2)" d="M5.4 37.8V54L27 28.08a24 24 0 0 0-1.102-.025c-7.459 0-14.704 3.434-20.498 9.745" />
+      <path fill="url(#radialGradient-3)" d="M0 5.4 25.92 27c.356-7.845-3.098-15.52-9.72-21.6z" />
+      <path fill="url(#radialGradient-4)" d="M48.6 0 27 25.92c7.845.356 15.52-3.098 21.6-9.72z" />
+      <path fill="url(#radialGradient-5)" d="M27 27c-2.421 6.276-2.056 12.674 1.08 18.9 3.24 1.62 5.94 2.7 9.72 2.7-6.622-6.08-10.076-13.755-9.72-21.6z" />
+      <path fill="url(#radialGradient-6)" d="M8.1 28.08c-1.62 3.24-2.7 5.94-2.7 9.72 6.079-6.622 13.755-10.076 21.6-9.72V27c-2.73-1.053-5.483-1.58-8.235-1.58-3.575.001-7.147.888-10.665 2.66" />
+      <path fill="url(#radialGradient-7)" d="M25.92 27H27c2.421-6.276 2.056-12.675-1.08-18.9-3.24-1.62-5.94-2.7-9.72-2.7 6.622 6.08 10.076 13.755 9.72 21.6" />
+      <path fill="url(#radialGradient-8)" d="M27 25.92V27c6.276 2.421 12.674 2.055 18.9-1.08 1.62-3.24 2.7-5.94 2.7-9.72-6.08 6.622-13.755 10.076-21.6 9.72" />
+      <path fill="url(#radialGradient-9)" d="m15.12 35.1 12.96 10.8C24.944 39.674 24.579 33.276 27 27a4.1 4.1 0 0 0-1.299-.185c-3.712 0-10.103 3.51-10.581 8.285" />
+      <path fill="url(#radialGradient-10)" d="M8.1 28.08C14.326 24.944 20.724 24.579 27 27c1.08-3.24-2.7-11.34-8.1-11.88z" />
+      <path fill="url(#radialGradient-11)" d="M27 27c3.24 1.08 11.34-2.7 11.88-8.1L25.92 8.1C29.056 14.325 29.421 20.724 27 27" />
+      <path fill="url(#radialGradient-12)" d="M27 27c-1.08 3.24 2.7 11.34 8.1 11.88l10.8-12.96C39.674 29.055 33.276 29.42 27 27" />
+      <path fill="#000" d="M27 25.65a1.35 1.35 0 1 1 0 2.7 1.35 1.35 0 0 1 0-2.7" />
+    </g>
+  </g>
+</svg>

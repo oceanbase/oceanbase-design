@@ -37,7 +37,8 @@
   "dependencies": {
     "@ant-design/colors": "^7.1.0",
     "@ant-design/icons": "^5.4.0",
-    "@oceanbase/icons-svg": "^1.0.6"
+    "@oceanbase/icons-svg": "^1.0.10",
+    "lodash.camelcase": "^4.3.0"
   },
   "peerDependencies": {
     "react": ">=16.9.0",

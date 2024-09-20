@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon" viewBox="0 0 630 630">
+  <defs>
+    <linearGradient id="linearGradient-1" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#EBBB14" />
+      <stop offset="100%" stop-color="#B25400" />
+    </linearGradient>
+    <linearGradient id="linearGradient-2" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#F9E583" />
+      <stop offset="100%" stop-color="#DE9800" />
+    </linearGradient>
+    <path id="path-3" d="M346 604v26H153c-14.36 0-26-11.64-26-26V183c0-14.36 11.64-26 26-26h167c14.36 0 26 11.64 26 26z" />
+    <filter id="filter-4" width="136.5%" height="116.9%" x="-9.1%" y="-6.3%" filterUnits="objectBoundingBox">
+      <feOffset dx="20" dy="10" in="SourceAlpha" result="icon-colored-powerbi-shadowOffsetOuter1" />
+      <feGaussianBlur in="icon-colored-powerbi-shadowOffsetOuter1" result="icon-colored-powerbi-shadowBlurOuter1" stdDeviation="10" />
+      <feColorMatrix in="icon-colored-powerbi-shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.0530211976 0" />
+    </filter>
+    <linearGradient id="linearGradient-5" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#F9E68B" />
+      <stop offset="100%" stop-color="#F3CD32" />
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+    <g transform="translate(77.5)">
+      <rect width="219" height="630" x="256" y="0" fill="url(#linearGradient-1)" rx="26" />
+      <g>
+        <use xlink:href="#path-3" fill="#000" filter="url(#filter-4)" />
+        <use xlink:href="#path-3" fill="url(#linearGradient-2)" />
+      </g>
+      <path fill="url(#linearGradient-5)" d="M219 604v26H26c-14.36 0-26-11.64-26-26V341c0-14.36 11.64-26 26-26h167c14.36 0 26 11.64 26 26z" />
+    </g>
+  </g>
+</svg>
