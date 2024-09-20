@@ -1,6 +1,6 @@
 export interface AbstractNode {
-  tag: string;
-  attrs: {
+  tag?: string;
+  attrs?: {
     [key: string]: string;
   };
   children?: AbstractNode[];
