@@ -25,8 +25,8 @@ npm install --save @oceanbase/icons
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx">新增图标</code>
-<code src="./demo/antd.tsx" description="继承 antd 的所有图标">antd 图标</code>
+<code src="./demo/basic.tsx">基本</code>
+<code src="./demo/antd.tsx">antd 图标</code>
 
 ## API
 
