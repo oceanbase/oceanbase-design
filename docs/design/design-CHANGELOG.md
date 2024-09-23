@@ -8,6 +8,16 @@ group: 基础组件
 
 ---
 
+## 0.3.8
+
+`2024-09-23`
+
+- 🔥 新增 `设计` 和 `博客` 模块，并上线 10 篇设计规范文档和 2 篇博客。[#682](https://github.com/oceanbase/oceanbase-design/pull/682)
+- 📖 主题文档新增 Design Token 列表，便于开发侧查阅。[#701](https://github.com/oceanbase/oceanbase-design/pull/701)
+- 💄 升级 [@oceanbase/aliyun-theme](https://www.npmjs.com/package/@oceanbase/aliyun-theme) 主题包，并更新阿里云主题的 less 样式文件。[#668](https://github.com/oceanbase/oceanbase-design/pull/668)
+- 🐞 修复 Space 在新版浏览器下可能出现的间距抖动问题。[#722](https://github.com/oceanbase/oceanbase-design/pull/722)
+- 🐞 修复 Tag 同时设置 `icon` 和 `ellipsis` 时省略样式异常的问题。[#687](https://github.com/oceanbase/oceanbase-design/pull/687) [@linhf123](https://github.com/linhf123)
+
 ## 0.3.7
 
 `2024-07-26`

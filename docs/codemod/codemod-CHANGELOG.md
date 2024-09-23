@@ -8,6 +8,14 @@ group: 自动化迁移工具
 
 ---
 
+## 0.3.7
+
+`2024-09-23`
+
+- 🆕 新增 `techui-and-pro-components-to-oceanbase-ui` 迁移能力。[#706](https://github.com/oceanbase/oceanbase-design/pull/706)
+- ⭐️ 支持从 `pro-components` 和 `tech-ui` 迁移更多的组件和类型。[#718](https://github.com/oceanbase/oceanbase-design/pull/718)
+- 🐞 修复普通函数和匿名函数自动改写成 Design Token 时，应该使用 `token` 对象而不是 `useToken()` 的问题。[#685](https://github.com/oceanbase/oceanbase-design/pull/685)
+
 ## 0.3.6
 
 `2024-07-26`
