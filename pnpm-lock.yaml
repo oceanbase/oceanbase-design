@@ -54,8 +54,8 @@ importers:
         specifier: ^10.4.0
         version: 10.4.0
       '@testing-library/jest-dom':
-        specifier: ^6.4.8
-        version: 6.4.8
+        specifier: ^6.5.0
+        version: 6.5.0
       '@testing-library/react':
         specifier: ^14.3.1
         version: 14.3.1(react-dom@18.3.1)(react@18.3.1)
@@ -76,7 +76,7 @@ importers:
         version: 18.3.3
       '@umijs/fabric':
         specifier: ^4.0.1
-        version: 4.0.1(postcss@8.4.41)
+        version: 4.0.1(postcss@8.4.47)
       '@umijs/test':
         specifier: ^4.3.20
         version: 4.3.20(@babel/core@7.25.2)
@@ -6564,7 +6564,7 @@ packages:
     dependencies:
       '@babel/core': 7.23.6
       postcss: 8.4.41
-      postcss-syntax: 0.36.2(postcss@8.4.41)
+      postcss-syntax: 0.36.2(postcss@8.4.47)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6869,12 +6869,11 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/jest-dom@6.4.8:
-    resolution: {integrity: sha512-JD0G+Zc38f5MBHA4NgxQMR5XtO5Jx9g86jqturNTt2WUfRmLDIY7iKkWHDCCTiDuFMre6nxAD5wHw9W5kI4rGw==}
+  /@testing-library/jest-dom@6.5.0:
+    resolution: {integrity: sha512-xGGHpBXYSHUUr6XsKBfs85TWlYKpTc37cSBBVrXcib2MkHLboWlkClhWF37JKlDb9KEq3dHs+f2xR7XJEWGBxA==}
     engines: {node: '>=14', npm: '>=6', yarn: '>=1'}
     dependencies:
       '@adobe/css-tools': 4.4.0
-      '@babel/runtime': 7.25.6
       aria-query: 5.3.2
       chalk: 3.0.0
       css.escape: 1.5.1
@@ -8033,7 +8032,7 @@ packages:
       '@umijs/es-module-parser-win32-x64-msvc': 0.0.7
     dev: true
 
-  /@umijs/fabric@4.0.1(postcss@8.4.41):
+  /@umijs/fabric@4.0.1(postcss@8.4.47):
     resolution: {integrity: sha512-P1irl1syZ3tXCUdsF88Nr8whFcjiBrtkdA4M9+WW2FBgyh1Ch6SBwSk9uMI4mpdfnG4pGl3JtaWaoBnImrsjeg==}
     hasBin: true
     dependencies:
@@ -8057,7 +8056,7 @@ packages:
       eslint-plugin-unicorn: 47.0.0(eslint@8.57.1)
       fast-glob: 3.3.2
       os-locale: 5.0.0
-      postcss-less: 6.0.0(postcss@8.4.41)
+      postcss-less: 6.0.0(postcss@8.4.47)
       prettier: 2.8.8
       prettier-plugin-organize-imports: 3.2.4(prettier@2.8.8)(typescript@5.5.4)
       prettier-plugin-two-style-order: 1.0.1(prettier@2.8.8)
@@ -8095,7 +8094,7 @@ packages:
       eslint-plugin-react: 7.33.2(eslint@8.57.1)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.57.1)
       postcss: 8.4.41
-      postcss-syntax: 0.36.2(postcss@8.4.41)
+      postcss-syntax: 0.36.2(postcss@8.4.47)
       stylelint-config-standard: 25.0.0(stylelint@14.16.1)
     transitivePeerDependencies:
       - eslint
@@ -20063,6 +20062,15 @@ packages:
     dependencies:
       postcss: 8.4.41
 
+  /postcss-less@6.0.0(postcss@8.4.47):
+    resolution: {integrity: sha512-FPX16mQLyEjLzEuuJtxA8X3ejDLNGGEG503d2YGZR5Ask1SpDN8KmZUMpzCvyalWRywAn1n1VOA5dcqfCLo5rg==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      postcss: ^8.3.5
+    dependencies:
+      postcss: 8.4.47
+    dev: true
+
   /postcss-logical@5.0.4(postcss@8.4.41):
     resolution: {integrity: sha512-RHXxplCeLh9VjinvMrZONq7im4wjWGlRJAqmAVLXyZaXwfDWP73/oq4NdIp+OZwhQUMj0zjqDfM5Fj7qby+B4g==}
     engines: {node: ^12 || ^14 || >=16}
@@ -20267,6 +20275,15 @@ packages:
       postcss: 8.4.41
     dev: true
 
+  /postcss-safe-parser@6.0.0(postcss@8.4.47):
+    resolution: {integrity: sha512-FARHN8pwH+WiS2OPCxJI8FuRJpTVnn6ZNFiqAM2aeW2LwTHWWmWgIyKC6cUo0L8aeKiF/14MNvnpls6R2PBeMQ==}
+    engines: {node: '>=12.0'}
+    peerDependencies:
+      postcss: ^8.3.3
+    dependencies:
+      postcss: 8.4.47
+    dev: true
+
   /postcss-selector-not@5.0.0(postcss@8.4.41):
     resolution: {integrity: sha512-/2K3A4TCP9orP4TNS7u3tGdRFVKqz/E6pX3aGnriPG0jU78of8wsUcqE4QAhWEU0d+WnMSF93Ah3F//vUtK+iQ==}
     peerDependencies:
@@ -20299,7 +20316,7 @@ packages:
       postcss: 5.2.18
     dev: true
 
-  /postcss-syntax@0.36.2(postcss@8.4.41):
+  /postcss-syntax@0.36.2(postcss@8.4.47):
     resolution: {integrity: sha512-nBRg/i7E3SOHWxF3PpF5WnJM/jQ1YpY9000OaVXlAQj6Zp/kIqJxEDWIZ67tAd7NLuk7zqN4yqe9nc0oNAOs1w==}
     peerDependencies:
       postcss: '>=5.0.0'
@@ -20320,7 +20337,7 @@ packages:
       postcss-scss:
         optional: true
     dependencies:
-      postcss: 8.4.41
+      postcss: 8.4.47
     dev: true
 
   /postcss-value-parser@4.2.0:
@@ -24300,10 +24317,10 @@ packages:
       micromatch: 4.0.8
       normalize-path: 3.0.0
       picocolors: 1.1.0
-      postcss: 8.4.41
+      postcss: 8.4.47
       postcss-media-query-parser: 0.2.3
       postcss-resolve-nested-selector: 0.1.6
-      postcss-safe-parser: 6.0.0(postcss@8.4.41)
+      postcss-safe-parser: 6.0.0(postcss@8.4.47)
       postcss-selector-parser: 6.1.2
       postcss-value-parser: 4.2.0
       resolve-from: 5.0.0
