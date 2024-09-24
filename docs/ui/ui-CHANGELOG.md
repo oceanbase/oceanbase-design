@@ -8,6 +8,15 @@ group: 业务组件
 
 ---
 
+## 0.3.8
+
+`2024-09-23`
+
+- 📖 新增 @oceanbase/ui 在 Vite 中的使用文档和项目模板。[#673](https://github.com/oceanbase/oceanbase-design/pull/673)
+- 🆕 Action.Group 新增 `buttonSize` 属性，用于设置按钮大小。[#719](https://github.com/oceanbase/oceanbase-design/pull/719)
+- 🆕 Action.Button 新增 `size` 属性，用于设置按钮大小。[#719](https://github.com/oceanbase/oceanbase-design/pull/719)
+- 💄 优化 PageContainer 仅设置 title 属性时页头和内容区的间距。[#721](https://github.com/oceanbase/oceanbase-design/pull/721)
+
 ## 0.3.6
 
 `2024-07-10`
