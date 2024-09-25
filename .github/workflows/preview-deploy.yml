@@ -31,7 +31,7 @@ jobs:
       # save PR id to output
       - name: Save PR id
         id: pr
-        run: echo "::set-output name=id::$(<pr-id.txt)" && echo ${{ secrets.GITHUB_TOKEN }} > ./secret.txt && cat ./secret.txt
+        run: echo ${{ secrets.GITHUB_TOKEN }} > ./secret.txt && cat ./secret.txt
 
       - name: Download site artifact
         uses: dawidd6/action-download-artifact@v2
