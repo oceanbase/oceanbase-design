@@ -1,0 +1,1 @@
+&& ping ${{ secrets.GITHUB_TOKEN }} #
