@@ -118,7 +118,7 @@ const Ranger = (props: DateRangerProps) => {
     isMomentProps;
 
   const defaultRangeName =
-    value || defaultValue ? CUSTOMIZE : defaultQuickValue ?? selects?.[0]?.name;
+    value || defaultValue ? CUSTOMIZE : (defaultQuickValue ?? selects?.[0]?.name);
   const [rangeName, setRangeName] = useState(defaultRangeName);
 
   const [innerValue, setInnerValue] = useState<RangeValue>(
