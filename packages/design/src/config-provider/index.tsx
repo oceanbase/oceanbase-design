@@ -15,7 +15,7 @@ import type { StyleContextProps } from '@ant-design/cssinjs/es/StyleContext';
 import { merge } from 'lodash';
 import StaticFunction from '../static-function';
 import themeConfig from '../theme';
-import defaultTheme from '../theme/default';
+import defaultTheme, { fontFamilyEn } from '../theme/default';
 import darkTheme from '../theme/dark';
 import aliyunTheme from '@oceanbase/aliyun-theme';
 import DefaultRenderEmpty from './DefaultRenderEmpty';
@@ -31,8 +31,6 @@ export * from 'antd/es/config-provider';
 export interface ThemeConfig extends AntThemeConfig {
   isDark?: boolean;
   isAliyun?: boolean;
-  /* use custom font or not */
-  customFont?: boolean;
 }
 
 export type SpinConfig = ComponentStyleConfig & {
@@ -119,15 +117,15 @@ const ConfigProvider: ConfigProviderType = ({
 
   const { token } = themeConfig.useToken();
   const fontFamily = mergedTheme.token?.fontFamily || token.fontFamily;
-  const customFont = mergedTheme.customFont;
 
   // inherit from parent StyleProvider
   const parentStyleContext = React.useContext<StyleContextProps>(StyleContext);
   const mergedStyleProviderProps = merge({}, parentStyleContext, styleProviderProps);
+  const mergedLocale = merge({}, parentContext.locale, locale);
 
   return (
     <AntConfigProvider
-      locale={merge({}, parentContext.locale, locale)}
+      locale={mergedLocale}
       form={merge(
         {},
         {
@@ -141,18 +139,22 @@ const ConfigProvider: ConfigProviderType = ({
       tabs={merge(
         {},
         {
-          indicatorSize: origin => (origin >= 24 ? origin - 16 : origin),
+          indicatorSize: (origin: number) => (origin >= 24 ? origin - 16 : origin),
         },
         parentContext.tabs,
         tabs
       )}
       theme={merge({}, mergedTheme, {
-        token: {
-          fontFamily:
-            customFont && !fontFamily.startsWith(`'Source Sans Pro'`)
-              ? `'Source Sans Pro', ${fontFamily}`
-              : fontFamily,
-        },
+        token:
+          // custom fontFamily
+          fontFamily !== defaultTheme.token.fontFamily
+            ? { fontFamily }
+            : // use fontFamilyEn for en
+              ['en', 'en-gb'].includes(mergedLocale.locale)
+              ? {
+                  fontFamily: fontFamilyEn,
+                }
+              : {},
       })}
       renderEmpty={
         parentContext.renderEmpty ||

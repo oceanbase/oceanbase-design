@@ -10,7 +10,7 @@ export * from 'antd/es/typography/Link';
 
 export interface LinkProps extends AntLinkProps {}
 
-const Link = React.forwardRef<HTMLDivElement, LinkProps>(
+const Link = React.forwardRef<HTMLElement, LinkProps>(
   ({ prefixCls: customizePrefixCls, children, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography', customizePrefixCls);

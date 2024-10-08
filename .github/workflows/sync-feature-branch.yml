@@ -26,6 +26,6 @@ jobs:
       # `feature` branch will be deployed auto in Vercel after sync success
       - name: Sync feature branch
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
         run: |
-          git push -f https://dengfuping:$GITHUB_TOKEN@github.com/dengfuping/oceanbase-design feature:feature
+          git push -f https://dengfuping:$SYNC_TOKEN@github.com/dengfuping/oceanbase-design feature:feature

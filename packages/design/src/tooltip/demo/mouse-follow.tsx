@@ -15,7 +15,6 @@ const App: React.FC = () => {
             }}
           >
             <Radio.Button value="default">default</Radio.Button>
-            <Radio.Button value="light">light</Radio.Button>
             <Radio.Button value="success">success</Radio.Button>
             <Radio.Button value="info">info</Radio.Button>
             <Radio.Button value="warning">warning</Radio.Button>

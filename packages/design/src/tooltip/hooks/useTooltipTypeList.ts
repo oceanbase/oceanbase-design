@@ -4,11 +4,6 @@ export const useTooltipTypeList = () => {
   const { token } = theme.useToken();
   return [
     {
-      type: 'light',
-      color: token.colorText,
-      backgroundColor: token.colorBgElevated,
-    },
-    {
       type: 'success',
       color: token.colorSuccess,
       backgroundColor: token.colorSuccessBg,

@@ -66,6 +66,7 @@ export const useQuery = <T extends SearchValues>(
   const searches = useRef(queryString.parse(location?.search) ?? {});
 
   const initialQueryValues = useRef(
+    // @ts-ignore
     queryParameters.reduce((collection, parameter) => {
       const key = typeof parameter === 'string' ? parameter : parameter.key;
       const defaultValue = typeof parameter === 'string' ? undefined : parameter.defaultValue;
@@ -86,8 +87,10 @@ export const useQuery = <T extends SearchValues>(
         ...collection,
         [key]:
           typeof parameter !== 'string' && typeof parameter.query2Search === 'function'
-            ? parameter.query2Search(initialQueryValues.current[parameter.key])
-            : format2Search(initialQueryValues.current[key], parameter as QueryParameter),
+            ? // @ts-ignore
+              parameter.query2Search(initialQueryValues.current[parameter.key])
+            : // @ts-ignore
+              format2Search(initialQueryValues.current[key], parameter as QueryParameter),
       };
     }, {} as T)
   );

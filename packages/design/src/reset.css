@@ -1,0 +1,10 @@
+/* 引入 antd/dist/reset.css，以重置基本样式，保证原生元素遵从 antd 规范样式 */
+/* ref: https://ant.design/docs/react/migration-v5-cn#%E6%8A%80%E6%9C%AF%E8%B0%83%E6%95%B4 */
+@import '~antd/dist/reset.css';
+
+pre,
+code,
+kbd,
+samp {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}

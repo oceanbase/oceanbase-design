@@ -3,6 +3,8 @@ title: Icon 图标
 nav:
   title: 基础组件
   path: /components
+demo:
+  cols: 2
 ---
 
 - 🔥 完全继承 antd [Icon](https://ant.design/components/button-cn) 的能力和 API，可无缝切换。
@@ -23,7 +25,8 @@ npm install --save @oceanbase/icons
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/new.tsx">新增图标</code>
+<code src="./demo/basic.tsx">基本</code>
+<code src="./demo/antd.tsx">antd 图标</code>
 
 ## API
 

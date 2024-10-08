@@ -35,12 +35,12 @@
     "postbuild": "cp src/style/reset.css dist/"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.21.0",
+    "@ant-design/cssinjs": "^1.21.1",
     "@oceanbase/aliyun-theme": "^0.1.6",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.20.0",
+    "antd": "^5.20.6",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
     "lottie-web": "^5.12.2",
@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.24.8",
-    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-env": "^7.25.4",
     "antd-token-previewer": "^2.0.8",
     "rc-select": "^14.15.1",
     "rc-table": "^7.47.1",
