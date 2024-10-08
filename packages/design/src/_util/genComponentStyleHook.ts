@@ -3,7 +3,7 @@ import type { ComponentTokenMap } from 'antd/es/theme/interface';
 import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
 import { genComponentStyleHook as antGenComponentStyleHook } from 'antd/es/theme/internal';
 import type { GlobalToken } from 'antd/es/theme/interface';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
 import theme from '../theme';
 
