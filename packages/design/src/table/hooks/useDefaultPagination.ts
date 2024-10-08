@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import type { TablePaginationConfig } from 'antd';
 import ConfigProvider from '../../config-provider';
 import type { ConfigConsumerProps } from '../../config-provider';

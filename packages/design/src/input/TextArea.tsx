@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { Input as AntInput } from 'antd';
 import type { TextAreaProps as AntTextAreaProps } from 'antd/es/input/TextArea';
 import type { InputLocale, InputRef } from './Input';

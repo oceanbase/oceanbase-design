@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { ConfigProvider, theme } from '@oceanbase/design';
 
 const { useToken } = theme;
