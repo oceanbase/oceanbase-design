@@ -1,3 +1,4 @@
+import React from 'react';
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { ComponentTokenMap } from 'antd/es/theme/interface';
 import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';

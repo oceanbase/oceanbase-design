@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { Input as AntInput } from 'antd';
 import type { SearchProps as AntSearchProps } from 'antd/es/input/Search';
 import type { InputLocale, InputRef } from './Input';

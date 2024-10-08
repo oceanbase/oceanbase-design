@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { Input as AntInput } from 'antd';
 import type { PasswordProps as AntPasswordProps } from 'antd/es/input/Password';
 import type { InputLocale, InputRef } from './Input';

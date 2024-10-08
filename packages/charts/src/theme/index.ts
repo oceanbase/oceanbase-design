@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import ChartProvider from '../ChartProvider';
 import type { Theme } from '../ChartProvider';
 import lightTheme from './light';
