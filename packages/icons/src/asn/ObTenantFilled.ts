@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const ObTenantFilled: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"64 64 896 896","xmlns:xlink":"http://www.w3.org/1999/xlink","focusable":"false"},"children":[{"tag":"defs","attrs":{},"children":[{"tag":"path","attrs":{"d":"M117.73 321.565l196.212 114.932v187.44l198.056 114.15 198.055-114.15-.001-187.44 196.216-114.931.001 399.24a31.999 31.999 0 01-15.607 27.482l-.411.24-362.269 208.849a32.002 32.002 0 01-31.964 0L133.749 748.529a31.999 31.999 0 01-16.018-27.723zm394.268 38.217l134.055 77.263v149.91L511.998 664.22l-134.055-77.263V437.045zm-15.98-293.158a31.997 31.997 0 0131.964 0l346.184 199.575L677.58 381.347l-165.582-95.434-165.584 95.434-196.581-115.15z","id":"icon-filled-ob-tenant-a"}}]},{"tag":"g","attrs":{"fill-rule":"evenodd","fill":"none"},"children":[{"tag":"use","attrs":{"fill":"#5C6B8A","xlink:href":"#icon-filled-ob-tenant-a"}},{"tag":"path","attrs":{"d":"M532 480l374.269-170.122v-6.684c0-11.44-6.107-22.01-16.018-27.723L527.98 66.624a31.997 31.997 0 00-31.963 0l-362.27 208.847c-9.7 5.592-15.717 15.845-15.97 27.006z","fill":"#8592AD"}},{"tag":"path","attrs":{"d":"M377.942 578.52V445.48a16 16 0 018.01-13.863l118.056-68.042a16 16 0 0115.98 0l118.054 68.042a15.998 15.998 0 018.011 13.862V578.52a15.997 15.997 0 01-8.01 13.862l-118.056 68.042a16 16 0 01-15.979 0l-118.056-68.042a15.998 15.998 0 01-8.01-13.862","fill":"#5C6B8A"}}]}]},"name":"ob-tenant","theme":"filled"};
+
+export default ObTenantFilled;

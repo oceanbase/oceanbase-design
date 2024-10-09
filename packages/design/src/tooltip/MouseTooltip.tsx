@@ -1,6 +1,7 @@
 import { useMouse, useSize } from 'ahooks';
 import type { TooltipPropsWithTitle as AntTooltipPropsWithTitle } from 'antd/es/tooltip';
 import React, { useRef, useState } from 'react';
+// @ts-ignore
 import ReactStickyMouseTooltip from 'react-sticky-mouse-tooltip';
 import theme from '../theme';
 
@@ -81,8 +82,11 @@ const MouseTooltip: React.FC<MouseTooltipProps> = ({
             padding: '6px 8px',
             boxShadow: token.boxShadowSecondary,
             borderRadius: token.borderRadius,
-            color: textColor || token.colorTextLightSolid,
-            backgroundColor: backgroundColor || token.colorBgSpotlight,
+            // @ts-ignore
+            color: textColor || token.Tooltip.colorTextLightSolid || token.colorTextLightSolid,
+            backgroundColor:
+              // @ts-ignore
+              backgroundColor || token.Tooltip.colorBgSpotlight || token.colorBgSpotlight,
             left: isOverWidth ? clientX - tooltipWidth - offset : clientX + offset,
             top: isOverHeight ? clientY - tooltipHeight - offset : clientY + offset,
             ...restOverlayInnerStyle,

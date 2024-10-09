@@ -14,7 +14,11 @@ export type FindByValueType = string | number | boolean | null | undefined;
 /**
  * 找到任意属性 key 对应的值和目标值相等的数组对象
  */
-export function findBy<T>(array: T[], key: string, value: FindByValueType) {
+export function findBy<T extends Record<string, any>>(
+  array: T[],
+  key: string,
+  value: FindByValueType
+) {
   return find(array, item => item && item[key] === value) || ({} as T);
 }
 
@@ -94,4 +98,16 @@ export function downloadFile(
   a.href = blobUrl;
   a.click();
   a.remove();
+}
+
+/**
+ * 接收一个 value 转换为数组
+ * @param {any | any[]}  value
+ */
+export function toArray<T>(value?: T | T[] | null): T[] {
+  if (value === undefined || value === null) {
+    return [];
+  }
+
+  return Array.isArray(value) ? value : [value];
 }

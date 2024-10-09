@@ -143,6 +143,7 @@ export default defineConfig({
         {
           title: '布局',
           children: [
+            { title: 'Divider 分割线', link: '/components/divider' },
             { title: 'Grid 栅格', link: '/components/grid' },
             { title: 'Space 间距', link: '/components/space' },
           ],
@@ -186,6 +187,7 @@ export default defineConfig({
             { title: 'Drawer 抽屉', link: '/components/drawer' },
             { title: 'Notification 通知提醒框', link: '/components/notification' },
             { title: 'Result 结果', link: '/components/result' },
+            { title: 'Skeleton 骨架屏', link: '/components/skeleton' },
             { title: 'Spin 加载中', link: '/components/spin' },
             { title: 'Badge 徽标数', link: '/components/badge' },
           ],
@@ -235,6 +237,7 @@ export default defineConfig({
               link: '/biz-components/content-with-icon',
             },
             { title: 'Ranger 日期快速选择', link: '/biz-components/ranger' },
+            { title: 'DateRanger 日期快速选择', link: '/biz-components/date-ranger' },
             { title: 'TreeSearch 树搜索', link: '/biz-components/tree-search' },
             { title: 'Password 密码输入框', link: '/biz-components/password' },
             { title: 'Boundary 错误兜底', link: '/biz-components/boundary' },

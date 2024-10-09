@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { Input as AntInput } from 'antd';
 import type { TextAreaProps as AntTextAreaProps } from 'antd/es/input/TextArea';
 import type { InputLocale, InputRef } from './Input';
@@ -16,7 +16,8 @@ const TextArea = forwardRef<InputRef, TextAreaProps>(
   ({ locale: customLocale, ...restProps }, ref) => {
     const { locale: contextLocale } = useContext<ConfigConsumerProps>(ConfigProvider.ConfigContext);
     const inputLocale: InputLocale = {
-      placeholder: contextLocale?.global?.inputPlaceholder || defaultLocale.global.inputPlaceholder,
+      placeholder:
+        contextLocale?.global?.inputPlaceholder || defaultLocale.global?.inputPlaceholder,
       ...defaultLocale.Input,
       ...contextLocale?.Input,
       ...customLocale,

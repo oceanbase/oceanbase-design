@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { Input as AntInput } from 'antd';
 import type { InputProps as AntInputProps, InputRef } from 'antd';
 import ConfigProvider from '../config-provider';
@@ -18,7 +18,7 @@ export interface InputProps extends AntInputProps {
 const Input = forwardRef<InputRef, InputProps>(({ locale: customLocale, ...restProps }, ref) => {
   const { locale: contextLocale } = useContext<ConfigConsumerProps>(ConfigProvider.ConfigContext);
   const inputLocale: InputLocale = {
-    placeholder: contextLocale?.global?.inputPlaceholder || defaultLocale.global.inputPlaceholder,
+    placeholder: contextLocale?.global?.inputPlaceholder || defaultLocale.global?.inputPlaceholder,
     ...defaultLocale.Input,
     ...contextLocale?.Input,
     ...customLocale,

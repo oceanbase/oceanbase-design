@@ -3,6 +3,10 @@ import { css, Global } from '@emotion/react';
 import React from 'react';
 import useSiteToken from '../../../hooks/useSiteToken';
 
+console.log(new TinyColor('#8592AD').getAlpha());
+
+console.log(new TinyColor('#5c6b8a').toRgb());
+
 const GlobalStyle: React.FC = () => {
   const { token } = useSiteToken();
 

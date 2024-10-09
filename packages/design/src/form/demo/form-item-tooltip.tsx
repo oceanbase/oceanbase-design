@@ -43,7 +43,6 @@ const App: React.FC = () => {
         name="password"
         rules={[{ required: true, message: 'Please input your password!' }]}
         tooltip={{
-          type: 'light',
           title: 'This is password',
         }}
       >

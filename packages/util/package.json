@@ -40,5 +40,8 @@
   },
   "peerDependencies": {
     "react": ">=16.9.0"
+  },
+  "devDependencies": {
+    "@types/is-url": "^1.2.32"
   }
 }

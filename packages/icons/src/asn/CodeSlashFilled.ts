@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const CodeSlashFilled: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"0 0 1024 1024","focusable":"false"},"children":[{"tag":"defs","attrs":{},"children":[{"tag":"path","attrs":{"d":"M0 0h319.397v623.547H0z","id":"icon-filled-code-slash-a"}}]},{"tag":"g","attrs":{"fill-rule":"evenodd","fill":"none"},"children":[{"tag":"path","attrs":{"d":"M621.492 217.454l-218.984 589.09","fill":"#FFF"}},{"tag":"path","attrs":{"d":"M447.5 823.27l-89.983-33.45a8 8 0 01-4.711-10.287l213.409-574.091a8 8 0 0110.286-4.712l89.983 33.45a8 8 0 014.712 10.285l-213.41 574.094a8 8 0 01-10.286 4.71","fill":"#8592AD"}},{"tag":"path","attrs":{"d":"M265.832 773.81a8 8 0 01-11.312.193L25.084 552.267a55.995 55.995 0 010-80.536L254.52 249.996a8 8 0 0111.312.193l66.714 69.03a8 8 0 01-.193 11.312l-187.77 181.47 187.77 181.468a8 8 0 01.193 11.312zm492.336 0l-66.714-69.03a8 8 0 01.193-11.312l187.77-181.469-187.77-181.469a8 8 0 01-.193-11.312l66.714-69.03a8 8 0 0111.312-.193l229.436 221.736a55.995 55.995 0 010 80.536L769.48 774.003a8 8 0 01-11.312-.193","fill":"#5C6B8A"}}]}]},"name":"code-slash","theme":"filled"};
+
+export default CodeSlashFilled;

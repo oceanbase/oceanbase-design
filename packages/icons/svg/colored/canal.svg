@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 54 54">
+  <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+    <g>
+      <rect width="54" height="54" x="0" y="0" fill="#006AFF" rx="27" />
+      <text fill="#FFF" font-family="SourceSansPro-Bold, Source Sans Pro" font-size="17" font-weight="bold">
+        <tspan x="6" y="33">Canal</tspan>
+      </text>
+    </g>
+  </g>
+</svg>

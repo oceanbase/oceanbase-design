@@ -37,7 +37,7 @@ export const genFooterToolbarStyle: GenerateStyle<FooterToolBarToken> = (
       borderBlockStart: 'none',
       ...genLargeStyle(token),
     },
-  };
+  } as CSSObject;
 };
 
 export default (prefixCls: string) => {

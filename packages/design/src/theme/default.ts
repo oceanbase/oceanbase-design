@@ -4,8 +4,22 @@ import { formatTheme } from './util/format';
 // Calculated by colorBorder and getWeakenBorderColor()
 const tagColorBorder = '#cdd5e466';
 
+export const fontFamilyEn = `Inter, 'Noto sans', sans-serif, Roboto, 'Open Sans', 'Segoe UI', 'Helvetica Neue', 'Helvetica, Arial', 'Apple Color Emoji'`;
+
 const defaultTheme: ThemeConfig = {
   token: {
+    fontFamily: `-apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
+    fontFamilyCode: `Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace`,
+    fontSizeHeading1: 32,
+    fontSizeHeading2: 24,
+    fontSizeHeading3: 20,
+    fontSizeHeading4: 16,
+    fontSizeHeading5: 14,
+    lineHeightHeading1: 40 / 32,
+    lineHeightHeading2: 32 / 24,
+    lineHeightHeading3: 28 / 20,
+    lineHeightHeading4: 24 / 16,
+    lineHeightHeading5: 22 / 14,
     colorPrimaryBg: '#EAF1FF',
     colorPrimary: '#006AFF',
     colorPrimaryBgHover: '#EAF1FF',
@@ -64,7 +78,6 @@ const defaultTheme: ThemeConfig = {
     colorBgBase: '#ffffff',
     colorBgContainer: '#ffffff',
     colorBgLayout: '#f3f6fc',
-    colorBgSpotlight: '#132039',
     colorBorder: '#CDD5E4',
     colorBorderSecondary: '#E2E8F3',
     colorFillQuaternary: '#F8FAFE',
@@ -73,6 +86,7 @@ const defaultTheme: ThemeConfig = {
     colorFill: '#cdd5e4',
     colorBgMask: 'rgba(19, 32, 57, 0.45)',
     colorBgElevated: '#ffffff',
+    colorBgSpotlight: '#ffffff',
     boxShadowSecondary:
       '0 6px 16px 0 rgba(54, 69, 99, 0.08), 0 3px 6px -4px rgba(54, 69, 99, 0.12), 0 9px 28px 8px rgba(54, 69, 99, 0.05)',
     boxShadow:
@@ -101,6 +115,7 @@ const defaultTheme: ThemeConfig = {
       multipleItemBorderColorDisabled: tagColorBorder,
     },
     Tag: {
+      defaultColor: '#5c6b8a',
       colorBorder: tagColorBorder,
     },
     Table: {
@@ -108,16 +123,20 @@ const defaultTheme: ThemeConfig = {
       cellPaddingBlockMD: 8,
       cellPaddingBlockSM: 4,
     },
+    Tooltip: {
+      colorBgSpotlight: '#ffffff',
+      colorTextLightSolid: '#132039',
+    },
   },
 };
 
 defaultTheme.token = {
   ...defaultTheme.token,
   // preset colors below should be same with semantic colors
-  blue: defaultTheme.token.colorInfo,
-  green: defaultTheme.token.colorSuccess,
-  yellow: defaultTheme.token.colorWarning,
-  red: defaultTheme.token.colorError,
+  blue: defaultTheme?.token?.colorInfo,
+  green: defaultTheme?.token?.colorSuccess,
+  yellow: defaultTheme?.token?.colorWarning,
+  red: defaultTheme?.token?.colorError,
 };
 
 export default formatTheme(defaultTheme);

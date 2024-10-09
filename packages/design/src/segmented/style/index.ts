@@ -15,8 +15,8 @@ export const genSegmentedStyle: GenerateStyle<SegmentedToken> = (
 };
 
 export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Segmented', (token: SegmentedToken) => {
-    return [genSegmentedStyle(token)];
+  const useStyle = genComponentStyleHook('Segmented', token => {
+    return [genSegmentedStyle(token as SegmentedToken)];
   });
   return useStyle(prefixCls);
 };

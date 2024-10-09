@@ -13,17 +13,17 @@ const children2Items = (children?: React.ReactNode) => {
       if (React.isValidElement(node)) {
         const { key, props } = node;
         return {
-          key,
+          key: key as string,
           ...props,
         };
       }
       return null;
     })
-    .filter(node => node);
+    .filter(node => !!node);
   return childrenItems;
 };
 
-function convertItem(props?: DescriptionsItemType, bordered?: boolean) {
+function convertItem(props: DescriptionsItemType, bordered?: boolean) {
   const { children: itemChildren, contentProps, ...restItemProps } = props;
   const defaultEllipsis = {
     tooltip: {

@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const ObProxyFilled: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"64 64 896 896","focusable":"false"},"children":[{"tag":"g","attrs":{"fill-rule":"evenodd","fill":"none"},"children":[{"tag":"path","attrs":{"d":"M825.933 153.925l45.247 45.263-672.113 671.887-45.247-45.263z","fill-rule":"nonzero","fill":"#8592AD"}},{"tag":"path","attrs":{"d":"M199.127 153.873l672 672-45.254 45.254-672-672z","fill-rule":"nonzero","fill":"#8592AD"}},{"tag":"path","attrs":{"d":"M768.5 160.5c0-53.019 42.981-96 96-96s96 42.981 96 96-42.981 96-96 96-96-42.981-96-96","fill":"#5C6B8A"}},{"tag":"path","attrs":{"d":"M63.5 159.5c0-53.019 42.981-96 96-96s96 42.981 96 96-42.981 96-96 96-96-42.981-96-96","fill":"#8592AD"}},{"tag":"path","attrs":{"d":"M64.5 864.5c0-53.019 42.981-96 96-96s96 42.981 96 96-42.981 96-96 96-96-42.981-96-96","fill":"#5C6B8A"}},{"tag":"path","attrs":{"d":"M768.5 864.5c0-53.019 42.981-96 96-96s96 42.981 96 96-42.981 96-96 96-96-42.981-96-96","fill":"#8592AD"}},{"tag":"path","attrs":{"d":"M320.5 512.5c0-106.039 85.961-192 192-192s192 85.961 192 192-85.961 192-192 192-192-85.961-192-192","fill":"#5C6B8A"}}]}]},"name":"ob-proxy","theme":"filled"};
+
+export default ObProxyFilled;
