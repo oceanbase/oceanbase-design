@@ -115,6 +115,7 @@ const defaultTheme: ThemeConfig = {
       multipleItemBorderColorDisabled: tagColorBorder,
     },
     Tag: {
+      defaultColor: '#5c6b8a',
       colorBorder: tagColorBorder,
     },
     Table: {
