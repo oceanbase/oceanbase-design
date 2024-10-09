@@ -1,5 +1,5 @@
 ---
-title: DateRanger 新日期快速选择
+title: DateRanger 新版日期时间选择
 nav:
   title: 业务组件
   path: /biz-components
