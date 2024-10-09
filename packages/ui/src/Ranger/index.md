@@ -1,5 +1,5 @@
 ---
-title: Ranger 日期快速选择
+title: Ranger 日期时间选择
 nav:
   title: 业务组件
   path: /biz-components

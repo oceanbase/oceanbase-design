@@ -8,6 +8,28 @@ group: 基础组件
 
 ---
 
+## 0.4.0
+
+`2024-10-09`
+
+- 📖 新增 Skeleton 的文档和示例。[#724](https://github.com/oceanbase/oceanbase-design/pull/724)
+- 📖 新增 Divider 的示例和文档。[#723](https://github.com/oceanbase/oceanbase-design/pull/723)
+- 支持 Next.js:
+  - 📖 新增 @oceanbase/design 在 Nextjs 中的 [使用文档](https://design.oceanbase.com/docs/design-use-with-nextjs) 和 [项目模板](https://stackblitz.com/edit/nextjs-oceanbase-design)。[#785](https://github.com/oceanbase/oceanbase-design/pull/785)
+  - 🔨 lottie-web 改为懒加载，以支持 Next.js 的 SSR 服务端渲染。[#751](https://github.com/oceanbase/oceanbase-design/pull/751)
+  - 🔨 所有组件均显式引入 React，以适配 Next.js 构建。[#783](https://github.com/oceanbase/oceanbase-design/pull/783)
+- Design Token 更新:
+  - 🌈 更新 `fontSizeHeading` 和 `lineHeightHeading`，减小标题的字体大小和行高。[#727](https://github.com/oceanbase/oceanbase-design/pull/727)
+  - 🌈 更新 Tag `defaultColor` 为 `#5c6b8a`，弱化字体颜色。[#786](https://github.com/oceanbase/oceanbase-design/pull/786)
+  - 🌈 更新 Tooltip `colorBgSpotlight` 为 `#ffffff`、`colorTextLightSolid` 为 `#132039`，将默认背景改为白色、默认字体改为黑色。[#653](https://github.com/oceanbase/oceanbase-design/pull/653)
+- 字体更新:
+  - ⭐️ 更新默认字体、英文字体和代码字体，并且会根据语言设置自动切换默认字体和英文字体。[#726](https://github.com/oceanbase/oceanbase-design/pull/726)
+  - ⭐️ 内置 `Inter`、`Consolas` 和 `Helvetica Neue` 字体，保证字体效果一致性。[#732](https://github.com/oceanbase/oceanbase-design/pull/732)
+- 图标更新:
+  - 🔥 新增 36 个线框图标、37 个实底图标和 76 个彩色图标。[#733](https://github.com/oceanbase/oceanbase-design/pull/733)
+- 🆕 Tabs `items` 和 `TabPane` 新增 `divider` 属性，用于设置选项卡为分割线。[#659](https://github.com/oceanbase/oceanbase-design/pull/659)
+- 🐞 将 `@theme` less 变量改为延迟加载，修复其无法被覆盖的问题。[#725](https://github.com/oceanbase/oceanbase-design/pull/725)
+
 ## 0.3.8
 
 `2024-09-23`
