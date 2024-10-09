@@ -15,6 +15,8 @@ nav:
 
 <code src="./demo/basic.tsx" title="基本"></code>
 
+<code src="./demo/vertical.tsx" title="垂直"></code>
+
 <code src="./demo/disabled.tsx" title="不可用"></code>
 
 <code src="./demo/size.tsx" title="三种大小"></code>
