@@ -112,7 +112,7 @@
     "runscript": "^1.6.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2",
-    "vanilla-jsoneditor": "^0.23.8",
+    "vanilla-jsoneditor": "^1.0.8",
     "vitest": "^2.1.1",
     "vitest-canvas-mock": "^0.3.3",
     "vitest-fetch-mock": "^0.2.2",
