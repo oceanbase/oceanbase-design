@@ -114,10 +114,10 @@ const defaultTheme: ThemeConfig = {
 defaultTheme.token = {
   ...defaultTheme.token,
   // preset colors below should be same with semantic colors
-  blue: defaultTheme.token.colorInfo,
-  green: defaultTheme.token.colorSuccess,
-  yellow: defaultTheme.token.colorWarning,
-  red: defaultTheme.token.colorError,
+  blue: defaultTheme.token?.colorInfo,
+  green: defaultTheme.token?.colorSuccess,
+  yellow: defaultTheme.token?.colorWarning,
+  red: defaultTheme.token?.colorError,
 };
 
 export default formatTheme(defaultTheme);
