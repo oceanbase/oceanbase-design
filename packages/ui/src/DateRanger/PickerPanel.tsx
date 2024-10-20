@@ -379,6 +379,8 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             prefixCls={prefixCls}
             // @ts-ignore
             generateConfig={isMoment ? momentGenerateConfig : dayjsGenerateConfig}
+            // @ts-ignore
+            value={calendarValue}
             disabledDate={disabledDate}
             onHover={(...res) => {
               onPanelHover(res[0]);
