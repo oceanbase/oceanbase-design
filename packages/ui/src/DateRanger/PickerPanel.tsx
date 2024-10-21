@@ -24,6 +24,7 @@ import moment from 'moment';
 import dayjs from 'dayjs';
 import { useUpdate } from 'ahooks';
 import { toArray } from '@oceanbase/util';
+import { getPrefix } from '../_util';
 
 type RangeValue = [Moment, Moment] | [Dayjs, Dayjs];
 type ValidateTrigger = 'submit' | 'valueChange';
@@ -49,6 +50,8 @@ export interface PickerPanelProps {
   disabledDate: any;
   locale: any;
 }
+
+const prefix = getPrefix('ranger-picker-panel');
 
 const prefixCls = 'ant-picker';
 const DATE_FORMAT = 'YYYY-MM-DD';
@@ -238,7 +241,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   };
 
   return (
-    <div>
+    <div className={classNames(prefix)}>
       <Space direction="vertical" size={12} style={{ margin: '12px 0' }}>
         {tip && <Alert message={tip} type="info" showIcon></Alert>}
         <Form
