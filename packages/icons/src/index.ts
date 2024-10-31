@@ -176,7 +176,6 @@ export { default as UnfoldOutlined } from './icons/UnfoldOutlined';
 export { default as UserGroupOutlined } from './icons/UserGroupOutlined';
 export { default as UserSettingsOutlined } from './icons/UserSettingsOutlined';
 export { default as UserSquareOutlined } from './icons/UserSquareOutlined';
-export { default as UserOutlined } from './icons/UserOutlined';
 export { default as VariableOutlined } from './icons/VariableOutlined';
 export { default as WorkbenchOutlined } from './icons/WorkbenchOutlined';
 export { default as WorkspaceOutlined } from './icons/WorkspaceOutlined';
