@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, DatePicker, Dropdown, Radio, Space, Tooltip, theme } from '@oceanbase/design';
+import { Button, DatePicker, Divider, Dropdown, Radio, Space, theme } from '@oceanbase/design';
 import type { TooltipProps, FormItemProps } from '@oceanbase/design';
 import {
   LeftOutlined,
@@ -311,8 +311,46 @@ const Ranger = (props: DateRangerProps) => {
 
               setOpen(o);
             }}
+            dropdownRender={originNode => {
+              return (
+                <div className={`${prefix}-dropdown-picker`}>
+                  {originNode}
+                  <Divider type="vertical" style={{ height: 'auto', margin: '0px 4px 0px 0px' }} />
+                  <InternalPickerPanel
+                    defaultValue={innerValue}
+                    // @ts-ignore
+                    locale={locale}
+                    disabledDate={pastOnly ? disabledFuture : disabledDate}
+                    tip={tip}
+                    isMoment={isMoment}
+                    rules={rules}
+                    onOk={vList => {
+                      setIsPlay(false);
+                      handleNameChange(CUSTOMIZE);
+                      rangeChange(
+                        vList.map(v => {
+                          return isMoment ? moment(v) : dayjs(v);
+                        }) as RangeValue
+                      );
+
+                      closeTooltip();
+                    }}
+                    onCancel={() => {
+                      closeTooltip();
+                    }}
+                  />
+                </div>
+              );
+            }}
             menu={{
+              selectable: true,
+              defaultSelectedKeys: [rangeName],
               onClick: ({ key, domEvent }) => {
+                if (key === CUSTOMIZE) {
+                  refState.current.tooltipOpen = true;
+                } else {
+                  refState.current.tooltipOpen = false;
+                }
                 const selected = NEAR_TIME_LIST.find(_item => _item.name === key);
                 // 存在快捷选项切换为极简模式
                 if (selected?.range) {
@@ -335,66 +373,13 @@ const Ranger = (props: DateRangerProps) => {
                 .map(item => {
                   return {
                     key: item.name,
-                    label:
-                      item.name === CUSTOMIZE ? (
-                        <Tooltip
-                          open={tooltipOpen}
-                          arrow={false}
-                          onOpenChange={o => {
-                            if (o) {
-                              setTooltipOpen(true);
-                            }
-                          }}
-                          placement="right"
-                          {...tooltipProps}
-                          overlayStyle={{
-                            maxWidth: 336,
-                            ...tooltipProps?.overlayStyle,
-                          }}
-                          overlayInnerStyle={{
-                            background: '#fff',
-                            maxHeight: 'none',
-                            margin: 16,
-                            ...tooltipProps?.overlayInnerStyle,
-                          }}
-                          title={
-                            <InternalPickerPanel
-                              defaultValue={innerValue}
-                              // @ts-ignore
-                              locale={locale}
-                              disabledDate={pastOnly ? disabledFuture : disabledDate}
-                              tip={tip}
-                              isMoment={isMoment}
-                              rules={rules}
-                              onOk={vList => {
-                                setIsPlay(false);
-                                rangeChange(
-                                  vList.map(v => {
-                                    return isMoment ? moment(v) : dayjs(v);
-                                  }) as RangeValue
-                                );
-
-                                closeTooltip();
-                              }}
-                              onCancel={() => {
-                                closeTooltip();
-                              }}
-                            />
-                          }
-                        >
-                          <Space size={8} style={isPlay ? {} : { width: 310 }}>
-                            <span className={`${prefix}-label`}>{item.rangeLabel}</span>
-                            {/* @ts-ignore */}
-                            {locale[item.label] || item.label}
-                          </Space>
-                        </Tooltip>
-                      ) : (
-                        <Space size={8} style={isPlay ? {} : { width: 310 }}>
-                          <span className={`${prefix}-label`}>{item.rangeLabel}</span>
-                          {/* @ts-ignore */}
-                          {locale[item.label] || item.label}
-                        </Space>
-                      ),
+                    label: (
+                      <Space size={8}>
+                        <span className={`${prefix}-label`}>{item.rangeLabel}</span>
+                        {/* @ts-ignore */}
+                        {locale[item.label] || item.label}
+                      </Space>
+                    ),
                   };
                 }),
             }}
