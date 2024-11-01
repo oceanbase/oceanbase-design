@@ -2,7 +2,9 @@
 
 exports[`Segmented > render options 1`] = `
 <div
+  aria-label="segmented control"
   class="ant-segmented"
+  role="listbox"
 >
   <div
     class="ant-segmented-group"
@@ -16,7 +18,9 @@ exports[`Segmented > render options 1`] = `
         type="radio"
       />
       <div
+        aria-selected="true"
         class="ant-segmented-item-label"
+        role="option"
         title="Daily"
       >
         Daily
@@ -30,7 +34,9 @@ exports[`Segmented > render options 1`] = `
         type="radio"
       />
       <div
+        aria-selected="false"
         class="ant-segmented-item-label"
+        role="option"
         title="Weekly"
       >
         Weekly
@@ -44,7 +50,9 @@ exports[`Segmented > render options 1`] = `
         type="radio"
       />
       <div
+        aria-selected="false"
         class="ant-segmented-item-label"
+        role="option"
         title="Monthly"
       >
         Monthly
@@ -58,7 +66,9 @@ exports[`Segmented > render options 1`] = `
         type="radio"
       />
       <div
+        aria-selected="false"
         class="ant-segmented-item-label"
+        role="option"
         title="Quarterly"
       >
         Quarterly
@@ -72,7 +82,9 @@ exports[`Segmented > render options 1`] = `
         type="radio"
       />
       <div
+        aria-selected="false"
         class="ant-segmented-item-label"
+        role="option"
         title="Yearly"
       >
         Yearly
@@ -84,7 +96,9 @@ exports[`Segmented > render options 1`] = `
 
 exports[`Segmented > render options with ellipsis 1`] = `
 <div
+  aria-label="segmented control"
   class="ant-segmented ant-segmented-block"
+  role="listbox"
 >
   <div
     class="ant-segmented-group"
@@ -98,7 +112,9 @@ exports[`Segmented > render options with ellipsis 1`] = `
         type="radio"
       />
       <div
+        aria-selected="true"
         class="ant-segmented-item-label"
+        role="option"
         title="123"
       >
         123
@@ -112,7 +128,9 @@ exports[`Segmented > render options with ellipsis 1`] = `
         type="radio"
       />
       <div
+        aria-selected="false"
         class="ant-segmented-item-label"
+        role="option"
         title="456"
       >
         456
@@ -126,7 +144,9 @@ exports[`Segmented > render options with ellipsis 1`] = `
         type="radio"
       />
       <div
+        aria-selected="false"
         class="ant-segmented-item-label"
+        role="option"
       >
         <span
           class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
