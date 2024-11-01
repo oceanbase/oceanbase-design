@@ -138,7 +138,10 @@ export default defineConfig({
         },
         {
           title: '导航',
-          children: [{ title: 'Breadcrumb 面包屑', link: '/components/breadcrumb' }],
+          children: [
+            { title: 'Breadcrumb 面包屑', link: '/components/breadcrumb' },
+            { title: 'Dropdown 下拉菜单', link: '/components/dropdown' },
+          ],
         },
         {
           title: '布局',
