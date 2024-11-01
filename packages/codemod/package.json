@@ -33,7 +33,7 @@
     "is-git-clean": "^1.1.0",
     "jscodeshift": "^0.16.1",
     "lodash": "^4.17.21",
-    "postcss": "^8.4.41",
+    "postcss": "^8.4.47",
     "postcss-less": "^6.0.0",
     "prettier": "^3.3.3",
     "read-pkg-up": "^10.1.0",
@@ -42,7 +42,7 @@
     "yargs-parser": "^21.1.1"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
+    "@types/jest": "^29.5.14",
     "@types/jscodeshift": "^0.11.11",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2"
