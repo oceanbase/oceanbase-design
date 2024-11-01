@@ -1,5 +1,6 @@
 import React from 'react';
-import { Dropdown, Space } from '@oceanbase/design';
+import { Button, Dropdown, Space, message } from '@oceanbase/design';
+import type { MenuProps } from '@oceanbase/design';
 import { DownOutlined } from '@oceanbase/icons';
 
 const items = [
@@ -17,29 +18,34 @@ const items = [
   },
 ];
 
+const handleMenuClick: MenuProps['onClick'] = e => {
+  message.info('Click on menu item.');
+  console.log('click', e);
+};
+
+const menuProps = {
+  items,
+  onClick: handleMenuClick,
+};
+
 const App: React.FC = () => (
-  <Space>
-    <Dropdown.Button
-      menu={{
-        items,
-        onClick: e => {
-          console.log('click', e);
-        },
-      }}
-    >
-      Dropdown
-    </Dropdown.Button>
-    <Dropdown.Button
-      menu={{
-        items,
-        onClick: e => {
-          console.log('click', e);
-        },
-      }}
-      icon={<DownOutlined />}
-    >
-      Dropdown
-    </Dropdown.Button>
+  <Space wrap>
+    <Dropdown menu={menuProps}>
+      <Button>
+        <Space>
+          Button
+          <DownOutlined />
+        </Space>
+      </Button>
+    </Dropdown>
+    <Dropdown menu={menuProps}>
+      <Button type="primary">
+        <Space>
+          Button
+          <DownOutlined />
+        </Space>
+      </Button>
+    </Dropdown>
   </Space>
 );
 
