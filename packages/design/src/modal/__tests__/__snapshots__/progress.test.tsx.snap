@@ -21,13 +21,8 @@ exports[`Modal.Progress > render with loading 1`] = `
           style="width: 567px;"
         >
           <div
-            aria-hidden="true"
-            style="width: 0px; height: 0px; overflow: hidden; outline: none;"
-            tabindex="0"
-          />
-          <div
             style="outline: none;"
-            tabindex="-1"
+            tabindex="0"
           >
             <div
               class="ant-modal-content"
@@ -103,7 +98,6 @@ exports[`Modal.Progress > render with loading 1`] = `
             </div>
           </div>
           <div
-            aria-hidden="true"
             style="width: 0px; height: 0px; overflow: hidden; outline: none;"
             tabindex="0"
           />
@@ -135,13 +129,8 @@ exports[`Modal.Progress > render with progress.percent 1`] = `
           style="width: 567px;"
         >
           <div
-            aria-hidden="true"
-            style="width: 0px; height: 0px; overflow: hidden; outline: none;"
-            tabindex="0"
-          />
-          <div
             style="outline: none;"
-            tabindex="-1"
+            tabindex="0"
           >
             <div
               class="ant-modal-content"
@@ -252,7 +241,6 @@ exports[`Modal.Progress > render with progress.percent 1`] = `
             </div>
           </div>
           <div
-            aria-hidden="true"
             style="width: 0px; height: 0px; overflow: hidden; outline: none;"
             tabindex="0"
           />
@@ -284,13 +272,8 @@ exports[`Modal.Progress > render with progress.status 1`] = `
           style="width: 567px;"
         >
           <div
-            aria-hidden="true"
-            style="width: 0px; height: 0px; overflow: hidden; outline: none;"
-            tabindex="0"
-          />
-          <div
             style="outline: none;"
-            tabindex="-1"
+            tabindex="0"
           >
             <div
               class="ant-modal-content"
@@ -419,7 +402,6 @@ exports[`Modal.Progress > render with progress.status 1`] = `
             </div>
           </div>
           <div
-            aria-hidden="true"
             style="width: 0px; height: 0px; overflow: hidden; outline: none;"
             tabindex="0"
           />
@@ -451,13 +433,8 @@ exports[`Modal.Progress > render without description 1`] = `
           style="width: 567px;"
         >
           <div
-            aria-hidden="true"
-            style="width: 0px; height: 0px; overflow: hidden; outline: none;"
-            tabindex="0"
-          />
-          <div
             style="outline: none;"
-            tabindex="-1"
+            tabindex="0"
           >
             <div
               class="ant-modal-content"
@@ -563,7 +540,6 @@ exports[`Modal.Progress > render without description 1`] = `
             </div>
           </div>
           <div
-            aria-hidden="true"
             style="width: 0px; height: 0px; overflow: hidden; outline: none;"
             tabindex="0"
           />

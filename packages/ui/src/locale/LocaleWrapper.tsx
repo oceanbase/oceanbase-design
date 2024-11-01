@@ -32,6 +32,7 @@ export default ({ componentName, defaultLocale }: LocaleWrapperInput) =>
         };
 
         return (
+          // @ts-ignore
           <BaseComponent
             ref={forwardedRef}
             theme={{
@@ -47,6 +48,7 @@ export default ({ componentName, defaultLocale }: LocaleWrapperInput) =>
     // 高阶组件需要转发ref
     // 参考: https://zh-hans.reactjs.org/docs/forwarding-refs.html#forwarding-refs-in-higher-order-components
     const ForwardComponent = React.forwardRef<typeof BaseComponent, BaseProps>(
+      // @ts-ignore
       (props: BaseProps, ref) => <Hoc {...(props as BaseProps)} forwardedRef={ref} />
     );
 
