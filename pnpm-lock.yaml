@@ -393,8 +393,8 @@ importers:
         specifier: ^14.15.1
         version: 14.15.1(react-dom@18.3.1)(react@18.3.1)
       rc-table:
-        specifier: ^7.47.1
-        version: 7.47.1(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^7.48.1
+        version: 7.48.1(react-dom@18.3.1)(react@18.3.1)
       rc-tree-select:
         specifier: ^5.22.1
         version: 5.22.1(react-dom@18.3.1)(react@18.3.1)
@@ -21750,8 +21750,8 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  /rc-table@7.47.1(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-b1/9ACNOA+qxJeuznJHrBBj3eVwuYsymSN9yzjuu72uiqDIA24nlCHh7FjCXIPkzytLAEH4k7JgdUHIiTYyqNA==}
+  /rc-table@7.48.1(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-Z4mDKjWg+xz/Ezdw6ivWcbqRpaJ0QfCORRoRrlrw65KSGZLK8OcTdacH22/fyGb8L4It/0/9qcMm8VrVAk/WBw==}
     engines: {node: '>=8.x'}
     peerDependencies:
       react: '>=16.9.0'
