@@ -31,6 +31,7 @@ nav:
 | disabledDate | 不可选择的日期 | (currentDate: Dayjs \| Moment) => boolean | - | - |
 | simpleMode | 是否启用极简模式 | boolean | false | - |
 | hideYear | 当时间范围在本年时，隐藏年份 | boolean | false | - |
+| hideSecond | 隐藏"秒” | boolean | false | - |
 | 其他 antd/RangePicker 的 `props` | [antd-RangePicker](https://ant.design/components/date-picker-cn/#RangePicker) | - | - | - |
 
 ### RangeOption
