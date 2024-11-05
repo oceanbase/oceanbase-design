@@ -243,7 +243,6 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   return (
     <div className={classNames(prefix)}>
       <Space direction="vertical" size={12} style={{ margin: '12px 0' }}>
-        {tip && <Alert message={tip} type="info" showIcon></Alert>}
         <Form
           layout="vertical"
           autoComplete="off"
@@ -368,7 +367,6 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             </Col>
           </Row>
         </Form>
-        {errorMessage && <Alert message={errorMessage} type="error" showIcon></Alert>}
       </Space>
       {wrapCSSVar(
         <div
@@ -408,6 +406,12 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
         </div>
       )}
       <Divider style={{ margin: '8px 0' }}></Divider>
+      {tip && !errorMessage && (
+        <Alert message={tip} type="info" style={{ marginBottom: 8 }} showIcon></Alert>
+      )}
+      {errorMessage && (
+        <Alert message={errorMessage} type="error" style={{ marginBottom: 8 }} showIcon></Alert>
+      )}
       <Space style={{ width: '100%', justifyContent: 'flex-end', padding: '0 12px 4px 0' }}>
         <Button
           size="small"
