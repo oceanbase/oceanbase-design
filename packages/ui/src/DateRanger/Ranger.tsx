@@ -63,6 +63,8 @@ export interface DateRangerProps
   pastOnly?: boolean;
   // 是否启用极简模式
   simpleMode?: boolean;
+  // 当时间范围在本年时，隐藏年份
+  hideYear?: boolean;
   isMoment?: boolean;
   //固定 rangeName
   stickRangeName?: boolean;
@@ -96,6 +98,7 @@ const Ranger = (props: DateRangerProps) => {
     hasZoomOut = false,
     pastOnly = false,
     simpleMode = false,
+    hideYear = false,
     onChange = noop,
     disabledDate,
     locale,
@@ -414,7 +417,9 @@ const Ranger = (props: DateRangerProps) => {
                 }}
                 format={v => {
                   // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
-                  return isThisYear ? v.format(DATE_TIME_FORMAT) : v.format(YEAR_DATE_TIME_FORMAT);
+                  return hideYear && isThisYear
+                    ? v.format(DATE_TIME_FORMAT)
+                    : v.format(YEAR_DATE_TIME_FORMAT);
                 }}
                 // @ts-ignore
                 value={innerValue}
