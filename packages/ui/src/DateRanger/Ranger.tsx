@@ -72,6 +72,8 @@ export interface DateRangerProps
   hideYear?: boolean;
   // 隐藏 秒
   hideSecond?: boolean;
+  // 自动计算时间范围并回显到选择器tag
+  autoCalcRange?: boolean;
   isMoment?: boolean;
   //固定 rangeName
   stickRangeName?: boolean;
@@ -108,6 +110,7 @@ const Ranger = (props: DateRangerProps) => {
     simpleMode = false,
     hideYear = false,
     hideSecond = false,
+    autoCalcRange = false,
     onChange = noop,
     disabledDate,
     locale,
@@ -215,6 +218,10 @@ const Ranger = (props: DateRangerProps) => {
   const differenceYears = endTime?.diff(startTime as any, 'years');
 
   const getCustomizeRangeLabel = () => {
+    if (!autoCalcRange) {
+      return locale.customize;
+    }
+
     if (differenceYears > 0) {
       return `${differenceYears}y`;
     }
@@ -374,14 +381,7 @@ const Ranger = (props: DateRangerProps) => {
                   rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
                 }
               },
-              items: [
-                ...selects,
-                {
-                  name: CUSTOMIZE,
-                  rangeLabel: locale.customize,
-                  label: locale.customTime,
-                },
-              ]
+              items: selects
                 .filter(item => {
                   return !!item;
                 })

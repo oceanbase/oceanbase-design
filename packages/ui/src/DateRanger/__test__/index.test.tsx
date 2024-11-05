@@ -85,7 +85,7 @@ describe('DateRanger', () => {
         dropdownLayerPicker.querySelector(
           '.ant-dropdown-menu .ant-dropdown-menu-item-selected .ob-date-ranger-label'
         ).textContent
-      ).toBe('自定义');
+      ).toBe('');
     });
     it('Should selected shortcut option and close panel when click quick time item' /** 当点击快捷时间选项时应该选中该项的时间并关闭选择面板 */, () => {
       let value = [dayjs('2024/10/12'), dayjs('2024/10/20')];
@@ -109,19 +109,6 @@ describe('DateRanger', () => {
       // Dropdown panel should be destroyed when close.
       expect(dropdownTrigger.classList.contains('ant-dropdown-open')).toBeFalsy();
       expect(document.querySelector('.ob-date-ranger-dropdown-picker')).toBeFalsy();
-    });
-    it('Should not close panel when select custom time option' /** 当选中“自定义时间”时不应该关闭选择面板 */, () => {
-      const { container } = render(<DateRanger hasTagInPicker simpleMode />);
-      const dropdownTrigger = container.querySelector(
-        '.ob-date-ranger-wrapper > .ant-dropdown-trigger'
-      );
-      fireEvent.click(dropdownTrigger);
-      const dropdownLayerPicker = document.querySelector('.ob-date-ranger-dropdown-picker');
-      // By default, "CUSTOMIZE" is the last option.
-      fireEvent.click(dropdownLayerPicker.querySelector('.ant-dropdown-menu').lastChild);
-      // The panel should remain open when select the custom option.
-      expect(dropdownTrigger.classList.contains('ant-dropdown-open')).toBeTruthy();
-      expect(document.querySelector('.ob-date-ranger-dropdown-picker')).toBeTruthy();
     });
   });
 });

@@ -33,6 +33,7 @@ nav:
 | simpleMode | 是否启用极简模式 | boolean | false | - |
 | hideYear | 当时间范围在本年时，隐藏年份 | boolean | false | - |
 | hideSecond | 隐藏"秒” | boolean | false | - |
+| autoCalcRange | 自动计算时间范围并回显到选择器tag | boolean | false | - |
 | 其他 antd/RangePicker 的 `props` | [antd-RangePicker](https://ant.design/components/date-picker-cn/#RangePicker) | - | - | - |
 
 ### RangeOption
