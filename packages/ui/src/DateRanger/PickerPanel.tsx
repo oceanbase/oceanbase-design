@@ -251,8 +251,8 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           style={{ width: 280 }}
           form={form}
         >
-          <Row gutter={12}>
-            <Col span={15}>
+          <Row gutter={12} style={{ marginBottom: 4 }}>
+            <Col span={12} style={{ paddingLeft: 12 }}>
               <Form.Item
                 name="startDate"
                 label={locale.startDate}
@@ -281,7 +281,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 />
               </Form.Item>
             </Col>
-            <Col span={9} style={{ paddingRight: 0 }}>
+            <Col span={12} style={{ paddingRight: 8 }}>
               <Form.Item
                 name="startTime"
                 label={locale.startTime}
@@ -311,7 +311,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           </Row>
 
           <Row gutter={12}>
-            <Col span={15}>
+            <Col span={12} style={{ paddingLeft: 12 }}>
               <Form.Item
                 name="endDate"
                 label={locale.endDate}
@@ -339,7 +339,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 />
               </Form.Item>
             </Col>
-            <Col span={9} style={{ paddingRight: 0 }}>
+            <Col span={12} style={{ paddingRight: 8 }}>
               <Form.Item
                 name="endTime"
                 label={locale.endTime}
@@ -407,8 +407,8 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           />
         </div>
       )}
-      <Divider style={{ margin: '12px 0' }}></Divider>
-      <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
+      <Divider style={{ margin: '8px 0' }}></Divider>
+      <Space style={{ width: '100%', justifyContent: 'flex-end', padding: '0 12px 4px 0' }}>
         <Button
           size="small"
           onClick={() => {
