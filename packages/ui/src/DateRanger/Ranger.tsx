@@ -7,6 +7,7 @@ import {
   CaretRightOutlined,
   RightOutlined,
   ZoomOutOutlined,
+  SyncOutlined,
 } from '@oceanbase/icons';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
@@ -55,7 +56,7 @@ export interface DateRangerProps
   // ui 相关
   hasRewind?: boolean;
   hasPlay?: boolean;
-  hasNow?: boolean;
+  hasSync?: boolean;
   hasForward?: boolean;
   hasZoomOut?: boolean;
   // 时间选择提示
@@ -97,7 +98,7 @@ const Ranger = (props: DateRangerProps) => {
     defaultQuickValue,
     hasRewind = true,
     hasPlay = false,
-    hasNow = true,
+    hasSync = true,
     hasForward = true,
     hasZoomOut = false,
     pastOnly = false,
@@ -492,14 +493,14 @@ const Ranger = (props: DateRangerProps) => {
           )}
         </Radio.Group>
       </Space>
-      {hasNow && (
+      {hasSync && (
         <Button
           style={{ paddingInline: 8 }}
           onClick={() => {
             setNow();
           }}
         >
-          {locale.current}
+          <SyncOutlined />
         </Button>
       )}
       {hasZoomOut && (

@@ -26,7 +26,7 @@ nav:
 | defaultQuickValue | 快速选择的默认值（优先级低于 value/defaultValue） | string | - | - |
 | hasRewind | 后退按钮 | boolean | true | - |
 | hasForward | 前进按钮 | boolean | true | - |
-| hasNow | 当前按钮 | boolean | true | - |
+| hasSync | 刷新按钮 | boolean | true | - |
 | pastOnly | 只能选择过去时间 | boolean | false | - |
 | disabledDate | 不可选择的日期 | (currentDate: Dayjs \| Moment) => boolean | - | - |
 | simpleMode | 是否启用极简模式 | boolean | false | - |
