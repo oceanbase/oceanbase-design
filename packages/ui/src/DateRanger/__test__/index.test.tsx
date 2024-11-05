@@ -84,8 +84,8 @@ describe('DateRanger', () => {
       expect(
         dropdownLayerPicker.querySelector(
           '.ant-dropdown-menu .ant-dropdown-menu-item-selected .ob-date-ranger-label'
-        ).textContent
-      ).toBe('');
+        )
+      ).toBeFalsy();
     });
     it('Should selected shortcut option and close panel when click quick time item' /** 当点击快捷时间选项时应该选中该项的时间并关闭选择面板 */, () => {
       let value = [dayjs('2024/10/12'), dayjs('2024/10/20')];
