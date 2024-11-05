@@ -27,6 +27,7 @@ nav:
 | hasRewind | 后退按钮 | boolean | true | - |
 | hasForward | 前进按钮 | boolean | true | - |
 | hasSync | 刷新按钮 | boolean | true | - |
+| hasTagInPicker | 在选项面板中是否展示Tag | boolean | false | - |
 | pastOnly | 只能选择过去时间 | boolean | false | - |
 | disabledDate | 不可选择的日期 | (currentDate: Dayjs \| Moment) => boolean | - | - |
 | simpleMode | 是否启用极简模式 | boolean | false | - |

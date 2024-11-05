@@ -59,6 +59,8 @@ export interface DateRangerProps
   hasSync?: boolean;
   hasForward?: boolean;
   hasZoomOut?: boolean;
+  // 是否在选项面板中展示Tag
+  hasTagInPicker?: boolean;
   // 时间选择提示
   tip?: string;
   rules?: Rule[];
@@ -101,6 +103,7 @@ const Ranger = (props: DateRangerProps) => {
     hasSync = true,
     hasForward = true,
     hasZoomOut = false,
+    hasTagInPicker = false,
     pastOnly = false,
     simpleMode = false,
     hideYear = false,
@@ -386,8 +389,10 @@ const Ranger = (props: DateRangerProps) => {
                   return {
                     key: item.name,
                     label: (
-                      <Space size={8}>
-                        <span className={`${prefix}-label`}>{item.rangeLabel}</span>
+                      <Space size={8} style={{ minWidth: 100 }}>
+                        {hasTagInPicker && (
+                          <span className={`${prefix}-label`}>{item.rangeLabel}</span>
+                        )}
                         {/* @ts-ignore */}
                         {locale[item.label] || item.label}
                       </Space>
