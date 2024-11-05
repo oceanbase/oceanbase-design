@@ -61,6 +61,8 @@ export interface DateRangerProps
   rules?: Rule[];
   /** 是否只允许选择过去时间 */
   pastOnly?: boolean;
+  // 是否启用极简模式
+  simpleMode?: boolean;
   isMoment?: boolean;
   //固定 rangeName
   stickRangeName?: boolean;
@@ -93,6 +95,7 @@ const Ranger = (props: DateRangerProps) => {
     hasForward = true,
     hasZoomOut = false,
     pastOnly = false,
+    simpleMode = false,
     onChange = noop,
     disabledDate,
     locale,
@@ -393,10 +396,10 @@ const Ranger = (props: DateRangerProps) => {
               >
                 {rangeLabel}
               </span>
-              {isPlay && <div className={`${prefix}-play`}>{label}</div>}
+              {simpleMode && isPlay && <div className={`${prefix}-play`}>{label}</div>}
             </Space>
           </Dropdown>
-          {!isPlay && (
+          {(!simpleMode || !isPlay) && (
             <span
               onClick={() => {
                 setOpen(true);

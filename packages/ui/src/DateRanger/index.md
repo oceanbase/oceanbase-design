@@ -29,6 +29,7 @@ nav:
 | hasNow | 当前按钮 | boolean | true | - |
 | pastOnly | 只能选择过去时间 | boolean | false | - |
 | disabledDate | 不可选择的日期 | (currentDate: Dayjs \| Moment) => boolean | - | - |
+| simpleMode | 是否启用极简模式 | boolean | false | - |
 | 其他 antd/RangePicker 的 `props` | [antd-RangePicker](https://ant.design/components/date-picker-cn/#RangePicker) | - | - | - |
 
 ### RangeOption
