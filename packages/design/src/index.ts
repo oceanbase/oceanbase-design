@@ -66,6 +66,9 @@ export type { InputNumberProps } from './input-number';
 export { default as Radio } from './radio';
 export type { RadioProps } from './radio';
 
+export { default as Checkbox } from './checkbox';
+export type { CheckboxProps } from './checkbox';
+
 export { default as Select } from './select';
 export type { SelectProps } from './select';
 
