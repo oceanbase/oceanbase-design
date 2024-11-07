@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@ant-design/pro-form": "^2.29.0",
-    "@ant-design/pro-layout": "^7.19.12"
+    "@ant-design/pro-layout": "^7.21.1"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
