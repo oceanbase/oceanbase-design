@@ -354,7 +354,7 @@ importers:
         version: 2.10.14(react@18.3.1)
       antd:
         specifier: ^5.21.6
-        version: 5.21.6(moment@2.30.1)(react-dom@18.3.1)(react@18.3.1)
+        version: 5.21.6
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -378,7 +378,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       react-sticky-mouse-tooltip:
         specifier: ^0.0.1
-        version: 0.0.1(react-dom@18.3.1)(react@18.3.1)
+        version: 0.0.1
     devDependencies:
       '@babel/cli':
         specifier: ^7.25.9
@@ -388,16 +388,19 @@ importers:
         version: 7.26.0(@babel/core@7.26.0)
       antd-token-previewer:
         specifier: ^2.0.8
-        version: 2.0.8(@babel/core@7.26.0)(@types/react@18.3.12)(antd@5.21.6)(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)
+        version: 2.0.8(@babel/core@7.26.0)(@types/react@18.3.12)(antd@5.21.6)(react-is@18.3.1)
       rc-select:
         specifier: ^14.16.2
-        version: 14.16.2(react-dom@18.3.1)(react@18.3.1)
+        version: 14.16.2
+      rc-slider:
+        specifier: ^11.1.7
+        version: 11.1.7(react-dom@18.3.1)(react@18.3.1)
       rc-table:
         specifier: ^7.48.1
-        version: 7.48.1(react-dom@18.3.1)(react@18.3.1)
+        version: 7.48.1
       rc-tree-select:
         specifier: ^5.24.3
-        version: 5.24.3(react-dom@18.3.1)(react@18.3.1)
+        version: 5.24.3
 
   packages/icons:
     dependencies:
@@ -5121,7 +5124,7 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.26.0
       hoist-non-react-statics: 3.3.2
       react: 18.3.1
       react-is: 16.13.1
@@ -8125,7 +8128,7 @@ packages:
   /@umijs/history@5.3.1:
     resolution: {integrity: sha512-/e0cEGrR2bIWQD7pRl3dl9dcyRGeC9hoW0OCvUTT/hjY0EfUrkd6G8ZanVghPMpDuY5usxq9GVcvrT8KNXLWvA==}
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.26.0
       query-string: 6.14.1
     dev: true
 
@@ -9019,6 +9022,33 @@ packages:
       - react-is
     dev: true
 
+  /antd-token-previewer@2.0.8(@babel/core@7.26.0)(@types/react@18.3.12)(antd@5.21.6)(react-is@18.3.1):
+    resolution: {integrity: sha512-Dp5a1thv8lHTJdmJAog75Mt8ZXQ9NYXX7WxRy49UeYVeR+kDKbolww+aIQlO974jQBF+swtL/jL0MMgIUg0WKg==}
+    peerDependencies:
+      antd: ^5.5.0
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
+    dependencies:
+      '@ant-design/colors': 6.0.0
+      '@ant-design/cssinjs': 1.21.1(react-dom@18.3.1)(react@18.3.1)
+      '@ant-design/icons': 5.5.1(react-dom@18.3.1)(react@18.3.1)
+      '@arvinxu/layout-kit': 1.4.0(@babel/core@7.26.0)(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)
+      '@babel/runtime': 7.26.0
+      '@ctrl/tinycolor': 3.6.1
+      antd: 5.21.6
+      classnames: 2.5.1
+      rc-util: 5.43.0(react-dom@18.3.1)(react@18.3.1)
+      react-colorful: 5.6.1(react-dom@18.3.1)(react@18.3.1)
+      reactflow: 11.11.4(@types/react@18.3.12)(react-dom@18.3.1)(react@18.3.1)
+      use-debouncy: 4.3.1(react@18.3.1)
+      vanilla-jsoneditor: 0.16.1
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/react'
+      - immer
+      - react-is
+    dev: true
+
   /antd@4.24.16(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-zZrK4UYxHtU6tGOOf0uG/kBRx1kTvypfuSB3GqE/SBQxFhZ/TZ+yj7Z1qwI8vGfMtUUJdLeuoCAqGDa1zPsXnQ==}
     peerDependencies:
@@ -9071,6 +9101,66 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
       scroll-into-view-if-needed: 2.2.31
     dev: false
+
+  /antd@5.21.6:
+    resolution: {integrity: sha512-EviOde/VEu+OsIKH5t6YXTMmmNeg9R85m0W5zXAo+Np8Latg9q10691JvAqOTMpnrRmbdeKUQL1Krp69Bzbe/g==}
+    peerDependencies:
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+    dependencies:
+      '@ant-design/colors': 7.1.0
+      '@ant-design/cssinjs': 1.21.1(react-dom@18.3.1)(react@18.3.1)
+      '@ant-design/cssinjs-utils': 1.1.1(react-dom@18.3.1)(react@18.3.1)
+      '@ant-design/icons': 5.5.1(react-dom@18.3.1)(react@18.3.1)
+      '@ant-design/react-slick': 1.1.2(react@18.3.1)
+      '@babel/runtime': 7.26.0
+      '@ctrl/tinycolor': 3.6.1
+      '@rc-component/color-picker': 2.0.1(react-dom@18.3.1)(react@18.3.1)
+      '@rc-component/mutate-observer': 1.1.0(react-dom@18.3.1)(react@18.3.1)
+      '@rc-component/qrcode': 1.0.0(react-dom@18.3.1)(react@18.3.1)
+      '@rc-component/tour': 1.15.1(react-dom@18.3.1)(react@18.3.1)
+      '@rc-component/trigger': 2.2.3(react-dom@18.3.1)(react@18.3.1)
+      classnames: 2.5.1
+      copy-to-clipboard: 3.3.3
+      dayjs: 1.11.13
+      rc-cascader: 3.28.2(react-dom@18.3.1)(react@18.3.1)
+      rc-checkbox: 3.3.0(react-dom@18.3.1)(react@18.3.1)
+      rc-collapse: 3.8.0(react-dom@18.3.1)(react@18.3.1)
+      rc-dialog: 9.6.0(react-dom@18.3.1)(react@18.3.1)
+      rc-drawer: 7.2.0(react-dom@18.3.1)(react@18.3.1)
+      rc-dropdown: 4.2.0(react-dom@18.3.1)(react@18.3.1)
+      rc-field-form: 2.4.0(react-dom@18.3.1)(react@18.3.1)
+      rc-image: 7.11.0(react-dom@18.3.1)(react@18.3.1)
+      rc-input: 1.6.3(react-dom@18.3.1)(react@18.3.1)
+      rc-input-number: 9.2.0(react-dom@18.3.1)(react@18.3.1)
+      rc-mentions: 2.16.1(react-dom@18.3.1)(react@18.3.1)
+      rc-menu: 9.15.1(react-dom@18.3.1)(react@18.3.1)
+      rc-motion: 2.9.3(react-dom@18.3.1)(react@18.3.1)
+      rc-notification: 5.6.2(react-dom@18.3.1)(react@18.3.1)
+      rc-pagination: 4.3.0(react-dom@18.3.1)(react@18.3.1)
+      rc-picker: 4.6.15(dayjs@1.11.13)
+      rc-progress: 4.0.0(react-dom@18.3.1)(react@18.3.1)
+      rc-rate: 2.13.0(react-dom@18.3.1)(react@18.3.1)
+      rc-resize-observer: 1.4.0(react-dom@18.3.1)(react@18.3.1)
+      rc-segmented: 2.5.0(react-dom@18.3.1)(react@18.3.1)
+      rc-select: 14.15.2(react-dom@18.3.1)(react@18.3.1)
+      rc-slider: 11.1.7(react-dom@18.3.1)(react@18.3.1)
+      rc-steps: 6.0.1(react-dom@18.3.1)(react@18.3.1)
+      rc-switch: 4.1.0(react-dom@18.3.1)(react@18.3.1)
+      rc-table: 7.47.5(react-dom@18.3.1)(react@18.3.1)
+      rc-tabs: 15.3.0(react-dom@18.3.1)(react@18.3.1)
+      rc-textarea: 1.8.2(react-dom@18.3.1)(react@18.3.1)
+      rc-tooltip: 6.2.1(react-dom@18.3.1)(react@18.3.1)
+      rc-tree: 5.9.0(react-dom@18.3.1)(react@18.3.1)
+      rc-tree-select: 5.23.0(react-dom@18.3.1)(react@18.3.1)
+      rc-upload: 4.8.1(react-dom@18.3.1)(react@18.3.1)
+      rc-util: 5.43.0(react-dom@18.3.1)(react@18.3.1)
+      scroll-into-view-if-needed: 3.1.0
+      throttle-debounce: 5.0.2
+    transitivePeerDependencies:
+      - date-fns
+      - luxon
+      - moment
 
   /antd@5.21.6(moment@2.30.1)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-EviOde/VEu+OsIKH5t6YXTMmmNeg9R85m0W5zXAo+Np8Latg9q10691JvAqOTMpnrRmbdeKUQL1Krp69Bzbe/g==}
@@ -14871,7 +14961,7 @@ packages:
   /history@5.3.0:
     resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.26.0
     dev: true
 
   /hmac-drbg@1.0.1:
@@ -21406,6 +21496,34 @@ packages:
       shallowequal: 1.1.0
     dev: false
 
+  /rc-picker@4.6.15(dayjs@1.11.13):
+    resolution: {integrity: sha512-OWZ1yrMie+KN2uEUfYCfS4b2Vu6RC1FWwNI0s+qypsc3wRt7g+peuZKVIzXCTaJwyyZruo80+akPg2+GmyiJjw==}
+    engines: {node: '>=8.x'}
+    peerDependencies:
+      date-fns: '>= 2.x'
+      dayjs: '>= 1.x'
+      luxon: '>= 3.x'
+      moment: '>= 2.x'
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+    peerDependenciesMeta:
+      date-fns:
+        optional: true
+      dayjs:
+        optional: true
+      luxon:
+        optional: true
+      moment:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.26.0
+      '@rc-component/trigger': 2.2.3(react-dom@18.3.1)(react@18.3.1)
+      classnames: 2.5.1
+      dayjs: 1.11.13
+      rc-overflow: 1.3.2(react-dom@18.3.1)(react@18.3.1)
+      rc-resize-observer: 1.4.0(react-dom@18.3.1)(react@18.3.1)
+      rc-util: 5.43.0(react-dom@18.3.1)(react@18.3.1)
+
   /rc-picker@4.6.15(dayjs@1.11.13)(moment@2.30.1)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-OWZ1yrMie+KN2uEUfYCfS4b2Vu6RC1FWwNI0s+qypsc3wRt7g+peuZKVIzXCTaJwyyZruo80+akPg2+GmyiJjw==}
     engines: {node: '>=8.x'}
@@ -21610,7 +21728,7 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  /rc-select@14.16.2(react-dom@18.3.1)(react@18.3.1):
+  /rc-select@14.16.2:
     resolution: {integrity: sha512-fWLSCcmTcjl1rXNJgEqLcp0EtcaUuYwutOcUvumfCIPAINFjzqH9PALvO1tvdJ/vS4iJJBEImNbplJ+sQd03Kg==}
     engines: {node: '>=8.x'}
     peerDependencies:
@@ -21624,8 +21742,6 @@ packages:
       rc-overflow: 1.3.2(react-dom@18.3.1)(react@18.3.1)
       rc-util: 5.43.0(react-dom@18.3.1)(react@18.3.1)
       rc-virtual-list: 3.14.8(react-dom@18.3.1)(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
     dev: true
 
   /rc-slider@10.0.1(react-dom@18.3.1)(react@18.3.1):
@@ -21740,7 +21856,7 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  /rc-table@7.48.1(react-dom@18.3.1)(react@18.3.1):
+  /rc-table@7.48.1:
     resolution: {integrity: sha512-Z4mDKjWg+xz/Ezdw6ivWcbqRpaJ0QfCORRoRrlrw65KSGZLK8OcTdacH22/fyGb8L4It/0/9qcMm8VrVAk/WBw==}
     engines: {node: '>=8.x'}
     peerDependencies:
@@ -21753,8 +21869,6 @@ packages:
       rc-resize-observer: 1.4.0(react-dom@18.3.1)(react@18.3.1)
       rc-util: 5.43.0(react-dom@18.3.1)(react@18.3.1)
       rc-virtual-list: 3.14.8(react-dom@18.3.1)(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
     dev: true
 
   /rc-tabs@12.15.0(react-dom@18.3.1)(react@18.3.1):
@@ -21896,7 +22010,7 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  /rc-tree-select@5.24.3(react-dom@18.3.1)(react@18.3.1):
+  /rc-tree-select@5.24.3:
     resolution: {integrity: sha512-AoAVV8sk8YDwHddvR6a4XGw8MWSd/7nTZRnvAnJOd7Zlw5VQ1bULKffv8H5E1yKMVa4X0+Rl7IEnnHsX2Hh/Eg==}
     peerDependencies:
       react: '*'
@@ -21904,11 +22018,9 @@ packages:
     dependencies:
       '@babel/runtime': 7.26.0
       classnames: 2.5.1
-      rc-select: 14.16.2(react-dom@18.3.1)(react@18.3.1)
+      rc-select: 14.16.2
       rc-tree: 5.10.1(react-dom@18.3.1)(react@18.3.1)
       rc-util: 5.43.0(react-dom@18.3.1)(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
     dev: true
 
   /rc-tree-select@5.5.5(react-dom@18.3.1)(react@18.3.1):
@@ -22190,7 +22302,7 @@ packages:
       react: ^16.6.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.6.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.26.0
       invariant: 2.2.4
       prop-types: 15.8.1
       react: 18.3.1
@@ -22353,14 +22465,11 @@ packages:
       react-style-proptype: 3.2.2
     dev: false
 
-  /react-sticky-mouse-tooltip@0.0.1(react-dom@18.3.1)(react@18.3.1):
+  /react-sticky-mouse-tooltip@0.0.1:
     resolution: {integrity: sha512-nuKyvolX3Zsu48uoGXkEvEE8oAwl7jaUvJrA/SxCSmBmbzmECNBQp03Z60L6/1ImLUzLFUHh2Wul3GpkEffrPw==}
     peerDependencies:
       react: ^16.1.0
       react-dom: ^16.1.0
-    dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /react-style-proptype@3.2.2:

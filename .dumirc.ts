@@ -163,6 +163,7 @@ export default defineConfig({
             { title: 'Switch 开关', link: '/components/switch' },
             { title: 'Select 选择器', link: '/components/select' },
             { title: 'TreeSelect 树选择', link: '/components/tree-select' },
+            { title: 'Slider 滑动输入条', link: '/components/slider' },
           ],
         },
         {

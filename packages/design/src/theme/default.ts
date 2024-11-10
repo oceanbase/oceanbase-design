@@ -104,6 +104,14 @@ const defaultTheme: ThemeConfig = {
       multipleItemBorderColor: tagColorBorder,
       multipleItemBorderColorDisabled: tagColorBorder,
     },
+    Slider: {
+      trackBg: '#006AFF',
+      trackHoverBg: '#5189fb',
+      trackBgDisabled: '#b3ccff',
+      handleColor: '#006AFF',
+      handleActiveColor: '#5189fb',
+      handleColorDisabled: '#b3ccff',
+    },
     Tag: {
       defaultColor: '#5c6b8a',
       colorBorder: tagColorBorder,

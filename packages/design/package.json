@@ -53,6 +53,7 @@
     "@babel/preset-env": "^7.26.0",
     "antd-token-previewer": "^2.0.8",
     "rc-select": "^14.16.2",
+    "rc-slider": "^11.1.7",
     "rc-table": "^7.48.1",
     "rc-tree-select": "^5.24.3"
   },
