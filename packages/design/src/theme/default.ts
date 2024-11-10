@@ -90,6 +90,7 @@ const defaultTheme: ThemeConfig = {
       // @ts-ignore
       // fontHeight is internal token
       fontHeight: 20,
+      lastItemColor: '#5c6b8a',
     },
     InputNumber: {
       handleVisible: true,
