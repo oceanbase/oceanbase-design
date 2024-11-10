@@ -75,6 +75,9 @@ export type { SelectProps } from './select';
 export { default as TreeSelect } from './tree-select';
 export type { TreeSelectProps } from './tree-select';
 
+export { default as Slider } from './slider';
+export type { SliderSingleProps, SliderRangeProps } from './slider';
+
 export { default as Tooltip } from './tooltip';
 export type { TooltipProps } from './tooltip';
 
