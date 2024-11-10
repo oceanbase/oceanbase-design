@@ -106,7 +106,6 @@ const Ranger = (props: DateRangerProps) => {
     ...rest
   } = props;
 
-  console.log(locale, 'locale');
   const { token } = theme.useToken();
 
   // 是否为 moment 时间对象
