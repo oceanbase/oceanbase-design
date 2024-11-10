@@ -82,6 +82,13 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
             borderRadius: borderRadiusLG,
           },
         },
+        // empty wrapper style
+        [`${componentCls}-empty-wrapper`]: {
+          minHeight: 360,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
         // 嵌套子表格样式
         [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
           // 调整嵌套子表格的间距
@@ -99,6 +106,10 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
             ['td:first-child, td:last-child']: {
               borderRadius: borderRadiusLG,
             },
+          },
+          // empty wrapper style
+          [`${componentCls}-empty-wrapper`]: {
+            minHeight: 'auto',
           },
         },
       },

@@ -42,6 +42,8 @@ nav:
 
 <code src="./demo/card-table.tsx" title="和 Card 组合使用"></code>
 
+<code src="./demo/empty.tsx" title="空状态"></code>
+
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
