@@ -63,6 +63,11 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
         padding: `0 ${paddingSM}px ${paddingSM}px ${paddingSM}px`,
       },
     },
+    [`${componentCls}-small${componentCls}-contain-tabs >${componentCls}-head`]: {
+      [`${componentCls}-head-title, ${componentCls}-head-extra`]: {
+        paddingTop: token.paddingXS,
+      },
+    },
     [`${componentCls}${componentCls}-contain-tabs`]: {
       [`${componentCls}-head`]: genTagStyle({
         ...token,
