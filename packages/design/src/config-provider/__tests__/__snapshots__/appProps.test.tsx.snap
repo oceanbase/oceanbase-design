@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ConfigProvider appProps > ConfigProvider styleProviderProps.component 1`] = `
+<DocumentFragment>
+  <div>
+    Child 1
+  </div>
+  <div
+    class="ant-app"
+  >
+    <div>
+      Child 2
+    </div>
+  </div>
+</DocumentFragment>
+`;

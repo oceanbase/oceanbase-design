@@ -16,6 +16,7 @@ nav:
 <Alert type="warning" showIcon={true} message="📢 注意: 如果有多个 ConfigProvider，建议在最顶层的 ConfigProvider 开启 `injectStaticFunction` 即可，其他 ConfigProvider 则需要关闭该配置，否则静态方法可能会有冲突。"></Alert>
 
 - 🆕 新增 `styleProviderProps` 属性，一般用于配置 [StyleProvider](https://github.com/ant-design/cssinjs#styleprovider) 的 `hashPriority` 和 `transformers` 属性实现样式降级，来兼容 Chrome 88 以下的低版本浏览器，详见 [antd v5 样式兼容说明](https://ant-design.antgroup.com/docs/react/compatible-style-cn)。
+- 🆕 新增 `appProps` 属性，用于配置内嵌的 [App 组件属性](https://ant-design.antgroup.com/components/app-cn#app)。
 
 ## 代码演示
 
@@ -55,5 +56,6 @@ export default App;
 | table | Table 全局配置 | `{ selectionColumnWidth?: width; className?: string; style?: React.CSSProperties; }` | - | - |
 | injectStaticFunction | 用于配置 `message`, `notification` 和 `Modal` 静态方法是否可以消费全局配置 <Alert type="warning" showIcon={true} message="📢 注意: 如果有多个 ConfigProvider，建议在最顶层的 ConfigProvider 开启 `injectStaticFunction` 即可，其他 ConfigProvider 则需要关闭该配置，否则静态方法可能会有冲突。"></Alert> | boolean | true | - |
 | styleProviderProps | [StyleProvider 配置](https://github.com/ant-design/cssinjs#styleprovider)，一般用于配置 `hashPriority` 和 `transformers` 属性实现样式降级 | [StyleProviderProps](https://github.com/ant-design/cssinjs/blob/master/src/StyleContext.tsx#L88) | - | - |
+| appProps | 内嵌的 App 组件属性 | [AppProps](https://ant-design.antgroup.com/components/app-cn#app) | - | - |
 
 - 更多 API 详见 antd ConfigProvider 文档: https://ant.design/components/config-provider-cn
