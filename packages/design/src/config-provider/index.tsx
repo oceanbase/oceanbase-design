@@ -6,6 +6,7 @@ import type {
   ThemeConfig as AntThemeConfig,
 } from 'antd/es/config-provider';
 import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
+import type { AppProps } from 'antd/es/app';
 import type { PaginationConfig } from 'antd/es/pagination';
 import type { SpinIndicator } from 'antd/es/spin';
 import { StyleProvider } from '@ant-design/cssinjs';
@@ -66,6 +67,7 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   injectStaticFunction?: boolean;
   // StyleProvider props
   styleProviderProps?: StyleProviderProps;
+  appProps?: AppProps;
 }
 
 export interface ExtendedConfigConsumerProps {
@@ -99,6 +101,7 @@ const ConfigProvider: ConfigProviderType = ({
   tabs,
   injectStaticFunction = true,
   styleProviderProps,
+  appProps,
   ...restProps
 }) => {
   // inherit from parent ConfigProvider
@@ -175,7 +178,7 @@ const ConfigProvider: ConfigProviderType = ({
         <StyleProvider {...mergedStyleProviderProps}>
           {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
           {/* ref: https://ant.design/components/app */}
-          <App component={false}>
+          <App component={false} {...appProps}>
             {children}
             {injectStaticFunction && <StaticFunction />}
           </App>
