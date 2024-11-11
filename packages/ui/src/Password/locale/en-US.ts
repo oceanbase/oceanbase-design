@@ -7,7 +7,7 @@ export default {
   placeholder: 'Please enter the password',
   generatePlaceholder: 'Enter or randomly generate',
   randomlyGenerate: 'Randomly generate',
-  pleaseRememberYourPassword: 'Please remember and keep your password properly.',
+  pleaseRememberYourPassword: 'Please remember and keep your password.',
   copySuccessfully: 'Copied',
   copyPassword: 'Copy Password',
 };
