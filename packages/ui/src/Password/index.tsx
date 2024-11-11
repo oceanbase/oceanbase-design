@@ -1,9 +1,9 @@
-import { Button, Input, message, Popover } from '@oceanbase/design';
+import { Button, Input, message, Popover, Space, Typography } from '@oceanbase/design';
 import type { PasswordProps as InputPasswordProps } from '@oceanbase/design/es/input';
 import RandExp from 'randexp';
 import React, { useState } from 'react';
 import { theme } from '@oceanbase/design';
-import CopyToClipboard from 'react-copy-to-clipboard';
+import { CheckOutlined, CopyOutlined } from '@oceanbase/icons';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import type { Validator } from './Content';
@@ -17,10 +17,9 @@ export interface PasswordLocale {
   placeholder: string;
   generatePlaceholder: string;
   randomlyGenerate: string;
-  pleaseKeepYourPasswordIn: string;
+  pleaseRememberYourPassword: string;
   copySuccessfully: string;
   copyPassword: string;
-  andKeepItProperly: string;
 }
 
 export interface PasswordProps extends LocaleWrapperProps, Omit<InputPasswordProps, 'onChange'> {
@@ -45,6 +44,7 @@ const Password: React.FC<PasswordProps> = ({
   const [fieldError, setFieldError] = useState<string[]>([]);
   const [isValidating, setIsValidating] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
+  const [copyHover, setCopyHover] = useState(false);
 
   const defaultRules: Validator[] = [
     {
@@ -102,6 +102,11 @@ const Password: React.FC<PasswordProps> = ({
         <Popover
           trigger="click"
           placement="right"
+          // ref: https://github.com/ant-design/ant-design/issues/5899
+          // @ts-ignore
+          popupAlign={{
+            offset: [48, 0],
+          }}
           content={
             <Content
               isTouched={isTouched}
@@ -112,6 +117,9 @@ const Password: React.FC<PasswordProps> = ({
             />
           }
           overlayStyle={{ maxWidth: 400 }}
+          overlayInnerStyle={{
+            padding: `${token.padding / 2}px ${token.padding}px ${token.padding}px ${token.padding}px`,
+          }}
         >
           <Input.Password
             value={value}
@@ -140,18 +148,27 @@ const Password: React.FC<PasswordProps> = ({
             fontSize: 14,
             color: token.colorTextTertiary,
             lineHeight: '22px',
+            marginTop: token.marginXXS,
           }}
         >
-          {locale.pleaseKeepYourPasswordIn}
-          <CopyToClipboard
-            text={value}
-            onCopy={() => {
-              message.success(locale.copySuccessfully);
+          {locale.pleaseRememberYourPassword}
+          <Typography.Text
+            copyable={{
+              text: value,
+              icon: [
+                <Space key="copy" size={token.marginXXS}>
+                  <CopyOutlined />
+                  <a>{locale.copyPassword}</a>
+                </Space>,
+                <Space key="copy-success" size={token.marginXXS}>
+                  <CheckOutlined />
+                  <a>{locale.copyPassword}</a>
+                </Space>,
+              ],
+              tooltips: ['', locale.copySuccessfully],
             }}
-          >
-            <a>{locale.copyPassword}</a>
-          </CopyToClipboard>
-          {locale.andKeepItProperly}
+            style={{ marginLeft: token.marginXS }}
+          />
         </div>
       )}
     </>
