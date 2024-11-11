@@ -45,6 +45,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   const {
     locale: customLocale,
     columns,
+    footer,
     pagination: customPagination,
     rowSelection,
     toolAlertRender,
@@ -80,6 +81,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   const tableCls = classNames(
     {
       [`${prefixCls}-expandable`]: !isEmpty(expandable),
+      [`${prefixCls}-has-footer`]: !!footer,
     },
     className
   );
@@ -238,6 +240,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
             }
           : undefined
       }
+      footer={footer}
       pagination={
         pagination === false
           ? false
