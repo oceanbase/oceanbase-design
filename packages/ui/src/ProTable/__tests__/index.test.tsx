@@ -51,6 +51,11 @@ describe('ProTable', () => {
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 
+  it('render empty', () => {
+    const { container } = render(<ProTableTest dataSource={[]} />);
+    expect(container.querySelector('.ant-table-empty-wrapper')).toBeTruthy();
+  });
+
   it('default pagination should work', () => {
     const { container, asFragment } = render(<ProTableTest />);
     // pagination.showTotal
