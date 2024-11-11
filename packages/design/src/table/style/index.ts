@@ -122,6 +122,7 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
     [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
       {
         borderBottom: `1px solid ${colorBorderSecondary}`,
+        borderRadius: 0,
       },
 
     // 滚动表格样式
