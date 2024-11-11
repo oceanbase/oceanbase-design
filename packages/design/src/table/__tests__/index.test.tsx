@@ -39,6 +39,11 @@ describe('Table', () => {
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 
+  it('render empty', () => {
+    const { container } = render(<TableTest dataSource={[]} />);
+    expect(container.querySelector('.ant-table-empty-wrapper')).toBeTruthy();
+  });
+
   it('hideOnSinglePage should be false by default', () => {
     const { container, asFragment } = render(<TableTest dataSource={dataSource.slice(0, 10)} />);
     expect(container.querySelector('.ant-pagination')).toBeTruthy();
