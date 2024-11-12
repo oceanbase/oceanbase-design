@@ -495,51 +495,72 @@ exports[`Table > default empty should work 1`] = `
                     colspan="3"
                   >
                     <div
-                      class="ant-empty ant-empty-normal"
+                      class="ant-table-empty-wrapper"
                     >
                       <div
-                        class="ant-empty-image"
+                        class="ant-empty ant-empty ant-empty-small"
                       >
-                        <svg
-                          height="41"
-                          viewBox="0 0 64 41"
-                          width="64"
-                          xmlns="http://www.w3.org/2000/svg"
+                        <div
+                          class="ant-empty-image"
                         >
-                          <title>
-                            Simple Empty
-                          </title>
-                          <g
-                            fill="none"
-                            fill-rule="evenodd"
-                            transform="translate(0 1)"
+                          <svg
+                            height="56px"
+                            version="1.1"
+                            viewBox="0 0 56 56"
+                            width="56px"
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <ellipse
-                              cx="32"
-                              cy="33"
-                              fill="#f5f5f5"
-                              rx="32"
-                              ry="7"
-                            />
                             <g
-                              fill-rule="nonzero"
-                              stroke="#d9d9d9"
+                              fill="none"
+                              fill-rule="evenodd"
+                              stroke="none"
+                              stroke-width="1"
                             >
-                              <path
-                                d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"
-                              />
-                              <path
-                                d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z"
-                                fill="#fafafa"
-                              />
+                              <g
+                                fill-rule="nonzero"
+                                transform="translate(4.2, 4.2)"
+                              >
+                                <rect
+                                  fill="#CDD5E4"
+                                  height="29.176"
+                                  rx="4.03"
+                                  width="37.121"
+                                  x="5.495"
+                                  y="0"
+                                />
+                                <rect
+                                  fill="#F8F8F8"
+                                  height="1.652"
+                                  rx="0.826"
+                                  width="25.046"
+                                  x="11.452"
+                                  y="5.257"
+                                />
+                                <rect
+                                  fill="#F8F8F8"
+                                  height="1.652"
+                                  rx="0.826"
+                                  width="16.681"
+                                  x="11.452"
+                                  y="10.997"
+                                />
+                                <path
+                                  d="M45.143,48.083 L2.821,48.083 C1.267,48.083 0,46.823 0,45.262 L0,21.028 C0,19.474 1.26,18.207 2.821,18.207 L19.264,18.207 C20.216,18.207 21.098,18.683 21.623,19.481 L23.149,21.798 C23.667,22.589 24.556,23.072 25.508,23.072 L45.15,23.072 C46.704,23.072 47.971,24.332 47.971,25.893 L47.971,45.262 C47.971,46.816 46.711,48.083 45.15,48.083 L45.143,48.083 Z"
+                                  fill="#F3F6FC"
+                                />
+                              </g>
                             </g>
-                          </g>
-                        </svg>
-                      </div>
-                      <div
-                        class="ant-empty-description"
-                      >
-                        No data
+                          </svg>
+                        </div>
+                        <div
+                          class="ant-empty-description"
+                        >
+                          <div
+                            class="ant-empty-description-content"
+                          >
+                            No data
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </td>

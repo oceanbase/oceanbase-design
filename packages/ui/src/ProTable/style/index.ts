@@ -4,7 +4,17 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import type { OBToken } from '../../_util/genComponentStyleHook';
 
 export const genProTableStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObject => {
-  return {};
+  const { antCls, componentCls, proComponentsCls } = token;
+  return {
+    [`${componentCls}`]: {
+      [`${proComponentsCls}-query-filter-actions`]: {
+        // reverse position for button group and expand element
+        [`${antCls}-space${antCls}-space-horizontal${antCls}-space-align-center`]: {
+          flexDirection: 'row-reverse',
+        },
+      },
+    },
+  };
 };
 
 export default (prefixCls: string) => {

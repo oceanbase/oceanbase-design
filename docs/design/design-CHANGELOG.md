@@ -8,6 +8,29 @@ group: 基础组件
 
 ---
 
+## 0.4.1
+
+`2024-11-11`
+
+- 📖 新增 Checkbox 的文档和示例。[#812](https://github.com/oceanbase/oceanbase-design/pull/812)
+- 📖 新增 Dropdown 的文档和示例。[#803](https://github.com/oceanbase/oceanbase-design/pull/803)
+- 📖 新增 Slider 的文档和示例。[#815](https://github.com/oceanbase/oceanbase-design/pull/815)
+- ⭐️ ConfigProvider 新增 `appProps` 属性，用于控制内嵌 App 是否渲染组件、以便让被包裹元素继承 `.ant-app` 样式。[#824](https://github.com/oceanbase/oceanbase-design/pull/824)
+- 🐞 去掉自定义的 Design Token `fontSizeHeading` 和 `lineHeightHeading`，修复标题大小错误的问题。[#813](https://github.com/oceanbase/oceanbase-design/pull/813)
+- 🐞 修复 Dropdown.Button 为主按钮时分割线超出和背景色不正确的问题。[#803](https://github.com/oceanbase/oceanbase-design/pull/803)
+- 🐞 [图标] 删除自定义的 UserOutlined 图标，避免和 `@ant-design/icons` 图标冲突以及在 Login 组件中的展示异常。[#802](https://github.com/oceanbase/oceanbase-design/pull/802)
+- 💄 弱化 Breadcrumb 最后一项的字体颜色，将其改为 `#5c6b8a`。[#816](https://github.com/oceanbase/oceanbase-design/pull/816)
+- Card
+  - 💄 优化小尺寸 Card 带页签时的头部间距样式。[#821](https://github.com/oceanbase/oceanbase-design/pull/821)
+  - 💄 优化 Card 无分割线时的底部间距。[#819](https://github.com/oceanbase/oceanbase-design/pull/819)
+- 💄 优化 Checkbox 超长内容的垂直对齐样式，从居中对齐改为顶部对齐。[#812](https://github.com/oceanbase/oceanbase-design/pull/812)
+- 💄 更新 Empty 的默认插图。[#814](https://github.com/oceanbase/oceanbase-design/pull/814)
+- 💄 优化 Radio 超长内容的垂直对齐样式，从居中对齐改为顶部对齐。[#811](https://github.com/oceanbase/oceanbase-design/pull/811)
+- 💄 优化 Slider 轨道覆盖部分的颜色，以及左右两端的标签对齐样式。[#815](https://github.com/oceanbase/oceanbase-design/pull/815)
+- Table
+  - 💄 优化 Table 底部分割线的展示逻辑，无分页器时也应该展示。[#822](https://github.com/oceanbase/oceanbase-design/pull/822)
+  - 💄 将非嵌套 Table 的空状态最小高度设为 `360px`。[#818](https://github.com/oceanbase/oceanbase-design/pull/818)
+
 ## 0.4.0
 
 `2024-10-09`

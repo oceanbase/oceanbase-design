@@ -138,7 +138,10 @@ export default defineConfig({
         },
         {
           title: '导航',
-          children: [{ title: 'Breadcrumb 面包屑', link: '/components/breadcrumb' }],
+          children: [
+            { title: 'Breadcrumb 面包屑', link: '/components/breadcrumb' },
+            { title: 'Dropdown 下拉菜单', link: '/components/dropdown' },
+          ],
         },
         {
           title: '布局',
@@ -156,9 +159,11 @@ export default defineConfig({
             { title: 'Input 输入框', link: '/components/input' },
             { title: 'InputNumber 数字输入框', link: '/components/input-number' },
             { title: 'Radio 单选框', link: '/components/radio' },
+            { title: 'Checkbox 多选框', link: '/components/checkbox' },
             { title: 'Switch 开关', link: '/components/switch' },
             { title: 'Select 选择器', link: '/components/select' },
             { title: 'TreeSelect 树选择', link: '/components/tree-select' },
+            { title: 'Slider 滑动输入条', link: '/components/slider' },
           ],
         },
         {

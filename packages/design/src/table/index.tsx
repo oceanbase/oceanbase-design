@@ -10,6 +10,7 @@ import type { ReactElement, ReactNode } from 'react';
 import React, { useContext, useEffect, useState } from 'react';
 import ConfigProvider from '../config-provider';
 import Typography from '../typography';
+import Empty from '../empty';
 import useStyle from './style';
 import type { AnyObject } from '../_util/type';
 import useDefaultPagination from './hooks/useDefaultPagination';
@@ -44,6 +45,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   const {
     locale: customLocale,
     columns,
+    footer,
     pagination: customPagination,
     rowSelection,
     toolAlertRender,
@@ -61,7 +63,11 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   const pagination = useDefaultPagination(customPagination);
 
   const { getPrefixCls, locale, table } = useContext(ConfigProvider.ConfigContext);
-  const { batchOperationBar, ...restLocale } = {
+  const {
+    batchOperationBar,
+    emptyText = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />,
+    ...restLocale
+  } = {
     ...customLocale,
     batchOperationBar: {
       ...enUS.Table?.batchOperationBar,
@@ -75,6 +81,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   const tableCls = classNames(
     {
       [`${prefixCls}-expandable`]: !isEmpty(expandable),
+      [`${prefixCls}-has-footer`]: !!footer,
     },
     className
   );
@@ -206,7 +213,14 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
       ref={ref}
       prefixCls={customizePrefixCls}
       className={tableCls}
-      locale={restLocale}
+      locale={{
+        ...restLocale,
+        emptyText: (
+          <div className={`${prefixCls}-empty-wrapper`}>
+            {typeof emptyText === 'function' ? emptyText() : emptyText}
+          </div>
+        ),
+      }}
       columns={newColumns}
       rowSelection={
         rowSelection
@@ -226,6 +240,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
             }
           : undefined
       }
+      footer={footer}
       pagination={
         pagination === false
           ? false

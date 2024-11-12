@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, DatePicker, Dropdown, Radio, Space, Tooltip, theme } from '@oceanbase/design';
+import { Button, DatePicker, Divider, Dropdown, Radio, Space, theme } from '@oceanbase/design';
 import type { TooltipProps, FormItemProps } from '@oceanbase/design';
 import {
   LeftOutlined,
@@ -7,6 +7,7 @@ import {
   CaretRightOutlined,
   RightOutlined,
   ZoomOutOutlined,
+  SyncOutlined,
 } from '@oceanbase/icons';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
@@ -29,6 +30,8 @@ import {
   NEAR_TIME_LIST,
   YEAR_DATE_TIME_FORMAT,
   LAST_3_DAYS,
+  DATE_TIME_SECOND_FORMAT,
+  YEAR_DATE_TIME_SECOND_FORMAT,
 } from './constant';
 import type { RangeOption } from './typing';
 import InternalPickerPanel, { Rule } from './PickerPanel';
@@ -53,14 +56,24 @@ export interface DateRangerProps
   // ui 相关
   hasRewind?: boolean;
   hasPlay?: boolean;
-  hasNow?: boolean;
+  hasSync?: boolean;
   hasForward?: boolean;
   hasZoomOut?: boolean;
+  // 是否在选项面板中展示Tag
+  hasTagInPicker?: boolean;
   // 时间选择提示
   tip?: string;
   rules?: Rule[];
   /** 是否只允许选择过去时间 */
   pastOnly?: boolean;
+  // 是否启用极简模式
+  simpleMode?: boolean;
+  // 当时间范围在本年时，隐藏年份
+  hideYear?: boolean;
+  // 隐藏 秒
+  hideSecond?: boolean;
+  // 自动计算时间范围并回显到选择器tag
+  autoCalcRange?: boolean;
   isMoment?: boolean;
   //固定 rangeName
   stickRangeName?: boolean;
@@ -89,10 +102,15 @@ const Ranger = (props: DateRangerProps) => {
     defaultQuickValue,
     hasRewind = true,
     hasPlay = false,
-    hasNow = true,
+    hasSync = true,
     hasForward = true,
     hasZoomOut = false,
+    hasTagInPicker = false,
     pastOnly = false,
+    simpleMode = false,
+    hideYear = false,
+    hideSecond = false,
+    autoCalcRange = false,
     onChange = noop,
     disabledDate,
     locale,
@@ -106,7 +124,6 @@ const Ranger = (props: DateRangerProps) => {
     ...rest
   } = props;
 
-  console.log(locale, 'locale');
   const { token } = theme.useToken();
 
   // 是否为 moment 时间对象
@@ -200,6 +217,10 @@ const Ranger = (props: DateRangerProps) => {
   const differenceYears = endTime?.diff(startTime as any, 'years');
 
   const getCustomizeRangeLabel = () => {
+    if (!autoCalcRange) {
+      return locale.customize;
+    }
+
     if (differenceYears > 0) {
       return `${differenceYears}y`;
     }
@@ -311,8 +332,46 @@ const Ranger = (props: DateRangerProps) => {
 
               setOpen(o);
             }}
+            dropdownRender={originNode => {
+              return (
+                <div className={`${prefix}-dropdown-picker`}>
+                  {originNode}
+                  <Divider type="vertical" style={{ height: 'auto', margin: '0px 4px 0px 0px' }} />
+                  <InternalPickerPanel
+                    defaultValue={innerValue}
+                    // @ts-ignore
+                    locale={locale}
+                    disabledDate={pastOnly ? disabledFuture : disabledDate}
+                    tip={tip}
+                    isMoment={isMoment}
+                    rules={rules}
+                    onOk={vList => {
+                      setIsPlay(false);
+                      handleNameChange(CUSTOMIZE);
+                      rangeChange(
+                        vList.map(v => {
+                          return isMoment ? moment(v) : dayjs(v);
+                        }) as RangeValue
+                      );
+
+                      closeTooltip();
+                    }}
+                    onCancel={() => {
+                      closeTooltip();
+                    }}
+                  />
+                </div>
+              );
+            }}
             menu={{
+              selectable: true,
+              defaultSelectedKeys: [rangeName],
               onClick: ({ key, domEvent }) => {
+                if (key === CUSTOMIZE) {
+                  refState.current.tooltipOpen = true;
+                } else {
+                  refState.current.tooltipOpen = false;
+                }
                 const selected = NEAR_TIME_LIST.find(_item => _item.name === key);
                 // 存在快捷选项切换为极简模式
                 if (selected?.range) {
@@ -321,80 +380,22 @@ const Ranger = (props: DateRangerProps) => {
                   rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
                 }
               },
-              items: [
-                ...selects,
-                {
-                  name: CUSTOMIZE,
-                  rangeLabel: locale.customize,
-                  label: locale.customTime,
-                },
-              ]
+              items: selects
                 .filter(item => {
                   return !!item;
                 })
                 .map(item => {
                   return {
                     key: item.name,
-                    label:
-                      item.name === CUSTOMIZE ? (
-                        <Tooltip
-                          open={tooltipOpen}
-                          arrow={false}
-                          onOpenChange={o => {
-                            if (o) {
-                              setTooltipOpen(true);
-                            }
-                          }}
-                          placement="right"
-                          {...tooltipProps}
-                          overlayStyle={{
-                            maxWidth: 336,
-                            ...tooltipProps?.overlayStyle,
-                          }}
-                          overlayInnerStyle={{
-                            background: '#fff',
-                            maxHeight: 'none',
-                            margin: 16,
-                            ...tooltipProps?.overlayInnerStyle,
-                          }}
-                          title={
-                            <InternalPickerPanel
-                              defaultValue={innerValue}
-                              // @ts-ignore
-                              locale={locale}
-                              disabledDate={pastOnly ? disabledFuture : disabledDate}
-                              tip={tip}
-                              isMoment={isMoment}
-                              rules={rules}
-                              onOk={vList => {
-                                setIsPlay(false);
-                                rangeChange(
-                                  vList.map(v => {
-                                    return isMoment ? moment(v) : dayjs(v);
-                                  }) as RangeValue
-                                );
-
-                                closeTooltip();
-                              }}
-                              onCancel={() => {
-                                closeTooltip();
-                              }}
-                            />
-                          }
-                        >
-                          <Space size={8} style={isPlay ? {} : { width: 310 }}>
-                            <span className={`${prefix}-label`}>{item.rangeLabel}</span>
-                            {/* @ts-ignore */}
-                            {locale[item.label] || item.label}
-                          </Space>
-                        </Tooltip>
-                      ) : (
-                        <Space size={8} style={isPlay ? {} : { width: 310 }}>
+                    label: (
+                      <Space size={8} style={{ minWidth: 100 }}>
+                        {hasTagInPicker && (
                           <span className={`${prefix}-label`}>{item.rangeLabel}</span>
-                          {/* @ts-ignore */}
-                          {locale[item.label] || item.label}
-                        </Space>
-                      ),
+                        )}
+                        {/* @ts-ignore */}
+                        {locale[item.label] || item.label}
+                      </Space>
+                    ),
                   };
                 }),
             }}
@@ -408,10 +409,10 @@ const Ranger = (props: DateRangerProps) => {
               >
                 {rangeLabel}
               </span>
-              {isPlay && <div className={`${prefix}-play`}>{label}</div>}
+              {simpleMode && isPlay && <div className={`${prefix}-play`}>{label}</div>}
             </Space>
           </Dropdown>
-          {!isPlay && (
+          {(!simpleMode || !isPlay) && (
             <span
               onClick={() => {
                 setOpen(true);
@@ -426,7 +427,14 @@ const Ranger = (props: DateRangerProps) => {
                 }}
                 format={v => {
                   // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
-                  return isThisYear ? v.format(DATE_TIME_FORMAT) : v.format(YEAR_DATE_TIME_FORMAT);
+                  if (hideYear && isThisYear) {
+                    return hideSecond
+                      ? v.format(DATE_TIME_FORMAT)
+                      : v.format(DATE_TIME_SECOND_FORMAT);
+                  }
+                  return hideSecond
+                    ? v.format(YEAR_DATE_TIME_FORMAT)
+                    : v.format(YEAR_DATE_TIME_SECOND_FORMAT);
                 }}
                 // @ts-ignore
                 value={innerValue}
@@ -489,14 +497,14 @@ const Ranger = (props: DateRangerProps) => {
           )}
         </Radio.Group>
       </Space>
-      {hasNow && (
+      {hasSync && (
         <Button
           style={{ paddingInline: 8 }}
           onClick={() => {
             setNow();
           }}
         >
-          {locale.current}
+          <SyncOutlined />
         </Button>
       )}
       {hasZoomOut && (

@@ -29,6 +29,9 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
       color: colorText,
       backgroundColor: colorBgBase,
       borderRadius: borderRadiusLG,
+      [`${componentCls}-footer`]: {
+        borderBottom: `1px solid ${colorBorderSecondary}`,
+      },
       // head 样式
       [`${componentCls}-thead > tr`]: {
         ['td, th']: {
@@ -82,6 +85,13 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
             borderRadius: borderRadiusLG,
           },
         },
+        // empty wrapper style
+        [`${componentCls}-empty-wrapper`]: {
+          minHeight: 360,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
         // 嵌套子表格样式
         [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
           // 调整嵌套子表格的间距
@@ -100,9 +110,20 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
               borderRadius: borderRadiusLG,
             },
           },
+          // empty wrapper style
+          [`${componentCls}-empty-wrapper`]: {
+            minHeight: 'auto',
+          },
         },
       },
     },
+
+    // 非可展开表格、带 footer 表格、空表格、带边框表格: 底部添加分隔线
+    [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
+      {
+        borderBottom: `1px solid ${colorBorderSecondary}`,
+        borderRadius: 0,
+      },
 
     // 滚动表格样式
     // 由于滚动表格会在 tbody 下最前面多一个 tr 元素，因此需要设置相反的斑马条样式
@@ -152,12 +173,6 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
             },
         },
       },
-      // Remove pagination borderTop for expandable Table
-      [`${componentCls}-pagination`]: {
-        [`&${antCls}-pagination`]: {
-          borderTop: 'none',
-        },
-      },
     },
 
     // loading style
@@ -176,7 +191,6 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         [`&${antCls}-pagination`]: {
           padding: `${padding}px 0`,
           margin: '0 !important',
-          borderTop: `1px solid ${colorBorderSecondary}`,
         },
         // 批量操作栏样式
         [`${componentCls}-batch-operation-bar`]: {
@@ -191,14 +205,6 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
               margin: `0 ${marginXS}px`,
               color: colorLink,
             },
-          },
-        },
-      },
-      // Remove pagination borderTop for bordered Table
-      [`${componentCls}${componentCls}-bordered`]: {
-        [`&+${componentCls}-pagination`]: {
-          [`&${antCls}-pagination`]: {
-            borderTop: 'none',
           },
         },
       },

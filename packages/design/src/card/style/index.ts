@@ -55,12 +55,17 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
     },
     [`${componentCls}${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
       [`${componentCls}-body`]: {
-        padding: `0 ${paddingLG}px ${padding}px ${paddingLG}px`,
+        padding: `0 ${paddingLG}px ${paddingLG}px ${paddingLG}px`,
       },
     },
     [`${componentCls}-small${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
       [`${componentCls}-body`]: {
-        padding: `0 ${paddingSM}px 12px ${paddingSM}px`,
+        padding: `0 ${paddingSM}px ${paddingSM}px ${paddingSM}px`,
+      },
+    },
+    [`${componentCls}-small${componentCls}-contain-tabs >${componentCls}-head`]: {
+      [`${componentCls}-head-title, ${componentCls}-head-extra`]: {
+        paddingTop: token.paddingXS,
       },
     },
     [`${componentCls}${componentCls}-contain-tabs`]: {

@@ -10,16 +10,6 @@ const defaultTheme: ThemeConfig = {
   token: {
     fontFamily: `-apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
     fontFamilyCode: `Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace`,
-    fontSizeHeading1: 32,
-    fontSizeHeading2: 24,
-    fontSizeHeading3: 20,
-    fontSizeHeading4: 16,
-    fontSizeHeading5: 14,
-    lineHeightHeading1: 40 / 32,
-    lineHeightHeading2: 32 / 24,
-    lineHeightHeading3: 28 / 20,
-    lineHeightHeading4: 24 / 16,
-    lineHeightHeading5: 22 / 14,
     colorPrimaryBg: '#EAF1FF',
     colorPrimary: '#006AFF',
     colorPrimaryBgHover: '#EAF1FF',
@@ -100,6 +90,7 @@ const defaultTheme: ThemeConfig = {
       // @ts-ignore
       // fontHeight is internal token
       fontHeight: 20,
+      lastItemColor: '#5c6b8a',
     },
     InputNumber: {
       handleVisible: true,
@@ -113,6 +104,14 @@ const defaultTheme: ThemeConfig = {
       multipleItemBg: '#F8FAFE',
       multipleItemBorderColor: tagColorBorder,
       multipleItemBorderColorDisabled: tagColorBorder,
+    },
+    Slider: {
+      trackBg: '#006AFF',
+      trackHoverBg: '#5189fb',
+      trackBgDisabled: '#b3ccff',
+      handleColor: '#006AFF',
+      handleActiveColor: '#5189fb',
+      handleColorDisabled: '#b3ccff',
     },
     Tag: {
       defaultColor: '#5c6b8a',

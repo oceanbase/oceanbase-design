@@ -24,6 +24,7 @@ import moment from 'moment';
 import dayjs from 'dayjs';
 import { useUpdate } from 'ahooks';
 import { toArray } from '@oceanbase/util';
+import { getPrefix } from '../_util';
 
 type RangeValue = [Moment, Moment] | [Dayjs, Dayjs];
 type ValidateTrigger = 'submit' | 'valueChange';
@@ -50,6 +51,8 @@ export interface PickerPanelProps {
   locale: any;
 }
 
+const prefix = getPrefix('ranger-picker-panel');
+
 const prefixCls = 'ant-picker';
 const DATE_FORMAT = 'YYYY-MM-DD';
 const TIME_FORMAT = 'HH:mm:ss';
@@ -75,8 +78,12 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   const [activeIndex, setActiveIndex] = React.useState(0);
 
   const getDateInstance = useCallback(
-    (v?: string | Dayjs | Moment) => {
-      return isMoment ? moment(v as Moment) : dayjs(v as Dayjs);
+    (
+      v?: string | Dayjs | Moment,
+      format?: typeof DATE_FORMAT | typeof TIME_FORMAT,
+      strict?: boolean
+    ) => {
+      return isMoment ? moment(v as Moment, format, strict) : dayjs(v as Dayjs, format, strict);
     },
     [isMoment]
   );
@@ -135,14 +142,107 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
 
   const validateInputDate = e => {
     const v = e.target.value;
-    const date = getDateInstance(v);
+    const date = getDateInstance(v, DATE_FORMAT, true);
     return date.isValid() ? date.format(DATE_FORMAT) : null;
+  };
+  const validateInputTime = e => {
+    const v: string = e.target.value;
+    const [h, m, s] = v?.split(':') ?? [];
+    if (!(h && m && s)) return null;
+    if (!(h.length === 2 && m.length === 2 && s.length === 2)) return null;
+    const date = getDateInstance(v, TIME_FORMAT, true);
+    return date.isValid() ? date.format(TIME_FORMAT) : null;
+  };
+
+  const selectDateInputRange = (inputDomRef: HTMLInputElement) => {
+    if (!inputDomRef) return;
+    // year
+    if (inputDomRef.selectionStart >= 0 && inputDomRef.selectionStart <= 4) {
+      inputDomRef.setSelectionRange(0, 4);
+    }
+    // month
+    if (inputDomRef.selectionStart > 4 && inputDomRef.selectionStart <= 7) {
+      inputDomRef.setSelectionRange(5, 7);
+    }
+    // day
+    if (inputDomRef.selectionStart > 7 && inputDomRef.selectionStart <= 10) {
+      inputDomRef.setSelectionRange(8, 10);
+    }
+  };
+
+  const selectTimeInputRange = (inputDomRef: HTMLInputElement) => {
+    if (!inputDomRef) return;
+    // hour
+    if (inputDomRef.selectionStart >= 0 && inputDomRef.selectionStart <= 2) {
+      inputDomRef.setSelectionRange(0, 2);
+    }
+    // minute
+    if (inputDomRef.selectionStart > 2 && inputDomRef.selectionStart <= 5) {
+      inputDomRef.setSelectionRange(3, 5);
+    }
+    // second
+    if (inputDomRef.selectionStart > 5 && inputDomRef.selectionStart <= 8) {
+      inputDomRef.setSelectionRange(6, 8);
+    }
+  };
+
+  const handleDateInputKeyDown = (
+    inputDomRef: HTMLInputElement,
+    e: React.KeyboardEvent<HTMLElement>
+  ) => {
+    if (!inputDomRef) return;
+    if (e.key === 'Enter') {
+      inputDomRef.blur();
+      return;
+    }
+    if (e.key === 'ArrowLeft') {
+      const curIndex = inputDomRef.selectionStart;
+      inputDomRef.setSelectionRange(curIndex - 1, curIndex - 1);
+    }
+    if (e.key === 'ArrowRight') {
+      const curIndex = inputDomRef.selectionEnd;
+      inputDomRef.setSelectionRange(curIndex + 1, curIndex + 1);
+    }
+    // NOTE: onKeyDown事件执行时，由于TimePicker需要执行受控逻辑，这会引起React rerender，
+    // 导致onKeyDown事件中拿到的Event还未更新，将下述校验逻辑放入requestIdleCallback确保其跟在React fiber调用栈后执行，这可取到最新的Event对象。
+    requestIdleCallback(() => {
+      // 校验
+      if (validateInputDate(e)) {
+        selectDateInputRange(inputDomRef);
+      }
+    });
+  };
+
+  const handleTimeInputKeyDown = (
+    inputDomRef: HTMLInputElement,
+    e: React.KeyboardEvent<HTMLElement>
+  ) => {
+    if (!inputDomRef) return;
+    if (e.key === 'Enter') {
+      inputDomRef.blur();
+      return;
+    }
+    if (e.key === 'ArrowLeft') {
+      const curIndex = inputDomRef.selectionStart;
+      inputDomRef.setSelectionRange(curIndex - 1, curIndex - 1);
+    }
+    if (e.key === 'ArrowRight') {
+      const curIndex = inputDomRef.selectionEnd;
+      inputDomRef.setSelectionRange(curIndex + 1, curIndex + 1);
+    }
+    // NOTE: onKeyDown事件执行时，由于TimePicker需要执行受控逻辑，这会引起React rerender，
+    // 导致onKeyDown事件中拿到的Event还未更新，将下述校验逻辑放入requestIdleCallback确保其跟在React fiber调用栈后执行，这可取到最新的Event对象。
+    requestIdleCallback(() => {
+      // 校验
+      if (validateInputTime(e)) {
+        selectTimeInputRange(inputDomRef);
+      }
+    });
   };
 
   return (
-    <div>
+    <div className={classNames(prefix)}>
       <Space direction="vertical" size={12} style={{ margin: '12px 0' }}>
-        {tip && <Alert message={tip} type="info" showIcon></Alert>}
         <Form
           layout="vertical"
           autoComplete="off"
@@ -150,8 +250,8 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           style={{ width: 280 }}
           form={form}
         >
-          <Row gutter={12}>
-            <Col span={15}>
+          <Row gutter={12} style={{ marginBottom: 4 }}>
+            <Col span={12} style={{ paddingLeft: 12 }}>
               <Form.Item
                 name="startDate"
                 label={locale.startDate}
@@ -171,10 +271,16 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                       setFormatDateToForm();
                     }
                   }}
+                  onClick={() => {
+                    selectDateInputRange(form.getFieldInstance('startDate').nativeElement);
+                  }}
+                  onKeyDown={e => {
+                    handleDateInputKeyDown(form.getFieldInstance('startDate').nativeElement, e);
+                  }}
                 />
               </Form.Item>
             </Col>
-            <Col span={9} style={{ paddingRight: 0 }}>
+            <Col span={12} style={{ paddingRight: 8 }}>
               <Form.Item
                 name="startTime"
                 label={locale.startTime}
@@ -182,13 +288,29 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 validateStatus={errorTypeMap['startTime']}
                 initialValue={defaultS || defaultTime}
               >
-                <TimePicker suffixIcon={null} style={{ width: '100%' }} />
+                <TimePicker
+                  suffixIcon={null}
+                  needConfirm={false}
+                  getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    selectTimeInputRange(
+                      form.getFieldInstance('startTime').nativeElement.querySelector('input')
+                    );
+                  }}
+                  onKeyDown={e => {
+                    handleTimeInputKeyDown(
+                      form.getFieldInstance('startTime').nativeElement.querySelector('input'),
+                      e
+                    );
+                  }}
+                />
               </Form.Item>
             </Col>
           </Row>
 
           <Row gutter={12}>
-            <Col span={15}>
+            <Col span={12} style={{ paddingLeft: 12 }}>
               <Form.Item
                 name="endDate"
                 label={locale.endDate}
@@ -207,10 +329,16 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                       setFormatDateToForm();
                     }
                   }}
+                  onClick={() => {
+                    selectDateInputRange(form.getFieldInstance('endDate').nativeElement);
+                  }}
+                  onKeyDown={e => {
+                    handleDateInputKeyDown(form.getFieldInstance('endDate').nativeElement, e);
+                  }}
                 />
               </Form.Item>
             </Col>
-            <Col span={9} style={{ paddingRight: 0 }}>
+            <Col span={12} style={{ paddingRight: 8 }}>
               <Form.Item
                 name="endTime"
                 label={locale.endTime}
@@ -218,12 +346,27 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 validateStatus={errorTypeMap['endTime']}
                 initialValue={defaultE || defaultTime}
               >
-                <TimePicker suffixIcon={null} style={{ width: '100%' }} />
+                <TimePicker
+                  suffixIcon={null}
+                  needConfirm={false}
+                  getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    selectTimeInputRange(
+                      form.getFieldInstance('endTime').nativeElement.querySelector('input')
+                    );
+                  }}
+                  onKeyDown={e => {
+                    handleTimeInputKeyDown(
+                      form.getFieldInstance('endTime').nativeElement.querySelector('input'),
+                      e
+                    );
+                  }}
+                />
               </Form.Item>
             </Col>
           </Row>
         </Form>
-        {errorMessage && <Alert message={errorMessage} type="error" showIcon></Alert>}
       </Space>
       {wrapCSSVar(
         <div
@@ -237,6 +380,8 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             prefixCls={prefixCls}
             // @ts-ignore
             generateConfig={isMoment ? momentGenerateConfig : dayjsGenerateConfig}
+            // @ts-ignore
+            value={calendarValue}
             disabledDate={disabledDate}
             onHover={(...res) => {
               onPanelHover(res[0]);
@@ -260,8 +405,14 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           />
         </div>
       )}
-      <Divider style={{ margin: '12px 0' }}></Divider>
-      <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
+      <Divider style={{ margin: '8px 0' }}></Divider>
+      {tip && !errorMessage && (
+        <Alert message={tip} type="info" style={{ marginBottom: 8 }} showIcon></Alert>
+      )}
+      {errorMessage && (
+        <Alert message={errorMessage} type="error" style={{ marginBottom: 8 }} showIcon></Alert>
+      )}
+      <Space style={{ width: '100%', justifyContent: 'flex-end', padding: '0 12px 4px 0' }}>
         <Button
           size="small"
           onClick={() => {
