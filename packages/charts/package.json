@@ -27,7 +27,7 @@
     "build": "NODE_OPTIONS=--max_old_space_size=4096 father build"
   },
   "dependencies": {
-    "@ant-design/charts": "^1.4.3",
+    "@ant-design/charts": "^2.2.3",
     "@oceanbase/util": "workspace:^",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
