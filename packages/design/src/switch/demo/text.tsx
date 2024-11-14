@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { CheckOutlined, CloseOutlined } from '@oceanbase/icons';
 import { Space, Switch } from '@oceanbase/design';
 
 const App: React.FC = () => (
