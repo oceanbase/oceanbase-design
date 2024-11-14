@@ -9,10 +9,10 @@ export const genSliderStyle: GenerateStyle<SliderToken> = (token: SliderToken): 
   return {
     [`${componentCls}${componentCls}-horizontal`]: {
       [`${componentCls}-mark`]: {
-        [`${componentCls}-mark-text[style^="left: 0%; transform: translateX(-50%);"]`]: {
+        [`${componentCls}-mark-text[style*="left: 0%;"]`]: {
           transform: `translateX(calc(0% - ${dotSize / 2}px)) !important`,
         },
-        [`${componentCls}-mark-text[style^="left: 100%; transform: translateX(-50%);"]`]: {
+        [`${componentCls}-mark-text[style*="left: 100%;"]`]: {
           transform: `translateX(calc(-100% + ${dotSize / 2}px)) !important`,
         },
       },
