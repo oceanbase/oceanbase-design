@@ -1,6 +1,6 @@
 import React from 'react';
 import { Badge, Space } from '@oceanbase/design';
-import { NotificationOutlined } from '@ant-design/icons';
+import { NotificationOutlined } from '@oceanbase/icons';
 
 const App: React.FC = () => (
   <Space>
