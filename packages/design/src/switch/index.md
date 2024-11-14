@@ -17,6 +17,7 @@ demo:
 <code src="./demo/size.tsx" title="大小"></code>
 <code src="./demo/disabled.tsx" title="禁用"></code>
 <code src="./demo/loading.tsx" title="加载中"></code>
+<code src="./demo/text.tsx" title="文字和图标"></code>
 
 ## API
 
