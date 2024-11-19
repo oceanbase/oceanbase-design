@@ -6,15 +6,7 @@ import { genLargeStyle } from '../../_util/genStyle';
 export type EmptyToken = FullToken<'Badge'>;
 
 export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSSObject => {
-  const {
-    antCls,
-    componentCls,
-    colorTextTertiary,
-    colorBgLayout,
-    colorFill,
-    colorText,
-    colorTextSecondary,
-  } = token;
+  const { antCls, componentCls, colorTextTertiary, colorText, colorTextSecondary } = token;
 
   return {
     [`${componentCls}`]: {
@@ -34,48 +26,52 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
         },
         [`${componentCls}-description-content`]: {
           color: colorTextTertiary,
+          maxWidth: 600,
           marginTop: token.marginXS,
+          margin: '0px auto',
+        },
+        [`${antCls}-steps`]: {
+          maxWidth: 1000,
+          margin: '0px auto',
+          marginTop: token.margin,
+          padding: token.paddingLG,
+          backgroundColor: token.colorFillQuaternary,
+          borderRadius: token.borderRadiusLG,
+          [`${antCls}-steps-item-container`]: {
+            [`${antCls}-steps-item-icon`]: {
+              height: token.controlHeightSM,
+              width: token.controlHeightSM,
+              lineHeight: `${token.controlHeightSM}px`,
+              backgroundColor: token.colorFillSecondary,
+              // override default border color
+              borderColor: token.colorFillSecondary,
+              [`${antCls}-steps-icon`]: {
+                color: colorTextSecondary,
+                fontSize: token.fontSize,
+              },
+            },
+            [`${antCls}-steps-item-content`]: {
+              [`${antCls}-steps-item-title`]: {
+                color: colorText,
+                fontSize: token.fontSize,
+                fontWeight: token.fontWeightStrong,
+                lineHeight: `${token.controlHeightSM}px`,
+                '&::after': {
+                  top: token.controlHeightSM / 2,
+                },
+              },
+              [`${antCls}-steps-item-description`]: {
+                color: colorTextTertiary,
+                fontSize: token.fontSizeSM,
+                marginTop: token.marginXS,
+              },
+            },
+          },
         },
       },
       [`${componentCls}-footer`]: {
         marginTop: token.marginLG,
         ...genLargeStyle(token),
-      },
-      [`${antCls}-steps`]: {
-        marginTop: token.margin,
-        padding: token.paddingLG,
-        backgroundColor: token.colorFillQuaternary,
-        borderRadius: token.borderRadiusLG,
-        [`${antCls}-steps-item-container`]: {
-          [`${antCls}-steps-item-icon`]: {
-            height: token.controlHeightSM,
-            width: token.controlHeightSM,
-            lineHeight: `${token.controlHeightSM}px`,
-            backgroundColor: token.colorFillSecondary,
-            // override default border color
-            borderColor: token.colorFillSecondary,
-            [`${antCls}-steps-icon`]: {
-              color: colorTextSecondary,
-              fontSize: token.fontSize,
-            },
-          },
-          [`${antCls}-steps-item-content`]: {
-            [`${antCls}-steps-item-title`]: {
-              color: colorText,
-              fontSize: token.fontSize,
-              fontWeight: token.fontWeightStrong,
-              lineHeight: `${token.controlHeightSM}px`,
-              '&::after': {
-                top: token.controlHeightSM / 2,
-              },
-            },
-            [`${antCls}-steps-item-description`]: {
-              color: colorTextTertiary,
-              fontSize: token.fontSizeSM,
-              marginTop: token.marginXS,
-            },
-          },
-        },
       },
     },
 
