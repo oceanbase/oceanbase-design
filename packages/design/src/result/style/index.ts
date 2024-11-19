@@ -12,10 +12,17 @@ export const genResultStyle: GenerateStyle<ResultToken> = (token: ResultToken): 
       [`${componentCls}-title`]: {
         fontWeight: token.fontWeightStrong,
       },
+      [`${componentCls}-subtitle`]: {
+        maxWidth: 600,
+        margin: '0px auto',
+      },
       [`${componentCls}-extra`]: {
         ...genLargeStyle(token),
       },
       [`${componentCls}-content`]: {
+        maxWidth: 1000,
+        margin: '0px auto',
+        marginTop: token.marginLG,
         padding: token.paddingLG,
         borderRadius: token.borderRadiusLG,
       },
