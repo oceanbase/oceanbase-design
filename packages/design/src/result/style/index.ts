@@ -11,6 +11,8 @@ export const genResultStyle: GenerateStyle<ResultToken> = (token: ResultToken): 
     [`${componentCls}`]: {
       [`${componentCls}-title`]: {
         fontWeight: token.fontWeightStrong,
+        fontSize: token.fontSizeHeading4,
+        lineHeight: token.lineHeightHeading4,
       },
       [`${componentCls}-subtitle`]: {
         maxWidth: 600,
