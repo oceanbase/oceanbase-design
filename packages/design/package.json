@@ -35,12 +35,12 @@
     "postbuild": "cp src/style/reset.css dist/"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.21.1",
+    "@ant-design/cssinjs": "^1.22.0",
     "@oceanbase/aliyun-theme": "^0.1.6",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.21.6",
+    "antd": "^5.22.1",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
     "lottie-web": "^5.12.2",
@@ -55,7 +55,7 @@
     "rc-select": "^14.16.3",
     "rc-slider": "^11.1.7",
     "rc-table": "^7.48.1",
-    "rc-tree-select": "^5.24.3"
+    "rc-tree-select": "^5.24.4"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
