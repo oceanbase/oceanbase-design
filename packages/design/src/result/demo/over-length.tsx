@@ -5,9 +5,9 @@ export default () => {
   const { token } = theme.useToken();
   return (
     <Result
-      status="error"
-      title="任务执行失败"
-      subTitle="这是一段关于任务执行失败的描述"
+      status="success"
+      title="任务执行成功"
+      subTitle="这是一段关于任务执行成功的描述。这是一段关于任务执行成功的描述。这是一段关于任务执行成功的描述。这是一段关于任务执行成功的描述。这是一段关于任务执行成功的描述。这是一段关于任务执行成功的描述。这是一段关于任务执行成功的描述。这是一段关于任务执行成功的描述。这是一段关于任务执行成功的描述。这是一段关于任务执行成功的描述。"
       extra={[
         <Button type="primary" key="console">
           主操作
