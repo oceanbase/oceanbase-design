@@ -83,6 +83,8 @@ const defaultTheme: ThemeConfig = {
       '0 1px 2px 0 rgba(54, 69, 99, 0.03), 0 1px 6px -1px rgba(54, 69, 99, 0.02), 0 2px 4px 0 rgba(54, 69, 99, 0.02)',
     borderRadius: 6,
     wireframe: false,
+    // Remove focus outline
+    lineWidthFocus: 0,
   },
   components: {
     Breadcrumb: {
