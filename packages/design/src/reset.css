@@ -8,3 +8,11 @@ kbd,
 samp {
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
+
+* {
+  scrollbar-color: #e2e8f3 transparent;
+}
+
+.rc-virtual-list-scrollbar-thumb {
+  background: #e2e8f3 !important;
+}
