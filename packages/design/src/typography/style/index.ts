@@ -41,16 +41,27 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
         marginTop: -marginOffset,
         marginBottom: `calc(1em - ${marginOffset}px)`,
       },
+      'span&:hover': {
+        display: 'inline-block',
+        height: token.controlHeight,
+        marginTop: -marginOffset,
+        marginBottom: -marginOffset,
+      },
       'h1&:hover, h2&:hover, h3&:hover, h4&:hover, h5&:hover': {
         marginTop: `${-marginOffset}px !important`,
         marginBottom: `${-marginOffset}px !important`,
       },
     },
     [`${componentCls}${componentCls}-edit-content`]: {
-      'div&': {
+      [`${componentCls}-div&`]: {
         insetInlineStart: -token.paddingSM,
         marginTop: -marginOffset,
         marginBottom: `calc(1em - ${marginOffset}px)`,
+      },
+      [`${componentCls}-span&`]: {
+        insetInlineStart: -token.paddingSM,
+        marginTop: -marginOffset,
+        marginBottom: -marginOffset,
       },
       [`${componentCls}-h1&, ${componentCls}-h2&, ${componentCls}-h3&, ${componentCls}-h4&, ${componentCls}-h5&`]:
         {

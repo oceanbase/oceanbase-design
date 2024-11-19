@@ -4,7 +4,6 @@ import classNames from 'classnames';
 
 const useClassName = (prefixCls: string, className: string, editable?: BlockProps['editable']) => {
   const typographyCls = classNames(
-    prefixCls,
     {
       [`${prefixCls}-editable-text`]:
         typeof editable === 'object' && editable?.triggerType?.includes('text'),
