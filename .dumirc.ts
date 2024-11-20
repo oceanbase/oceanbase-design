@@ -160,6 +160,7 @@ export default defineConfig({
             { title: 'InputNumber 数字输入框', link: '/components/input-number' },
             { title: 'Radio 单选框', link: '/components/radio' },
             { title: 'Checkbox 多选框', link: '/components/checkbox' },
+            { title: 'DatePicker 日期选择框', link: '/components/date-picker' },
             { title: 'Switch 开关', link: '/components/switch' },
             { title: 'Select 选择器', link: '/components/select' },
             { title: 'TreeSelect 树选择', link: '/components/tree-select' },
