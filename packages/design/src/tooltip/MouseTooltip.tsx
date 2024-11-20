@@ -83,10 +83,10 @@ const MouseTooltip: React.FC<MouseTooltipProps> = ({
             boxShadow: token.boxShadowSecondary,
             borderRadius: token.borderRadius,
             // @ts-ignore
-            color: textColor || token.Tooltip.colorTextLightSolid || token.colorTextLightSolid,
+            color: textColor || token.Tooltip?.colorTextLightSolid || token.colorTextLightSolid,
             backgroundColor:
               // @ts-ignore
-              backgroundColor || token.Tooltip.colorBgSpotlight || token.colorBgSpotlight,
+              backgroundColor || token.Tooltip?.colorBgSpotlight || token.colorBgSpotlight,
             left: isOverWidth ? clientX - tooltipWidth - offset : clientX + offset,
             top: isOverHeight ? clientY - tooltipHeight - offset : clientY + offset,
             ...restOverlayInnerStyle,
