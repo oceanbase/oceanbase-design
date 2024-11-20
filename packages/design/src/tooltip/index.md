@@ -16,7 +16,7 @@ nav:
 
 <code src="./demo/basic.tsx" title="基本"></code>
 
-<code src="./demo/over-length.tsx" title="超长内容"></code>
+<code src="./demo/over-length.tsx" title="超长内容" description="浮层的最大宽度为 300px、最大高度为 250px，内容超出时横向折行、纵向滚动"></code>
 
 <code src="./demo/close-icon.tsx" title="关闭按钮" description="Tooltip 可以通过设置 closeIcon 变为可关闭 Tooltip, 并支持自定义关闭按钮，设置为 true 时将使用默认关闭按钮。可关闭 Tooltip 具有 onClose 事件"></code>
 

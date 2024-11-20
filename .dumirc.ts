@@ -173,6 +173,7 @@ export default defineConfig({
             { title: 'Descriptions 描述列表', link: '/components/descriptions' },
             { title: 'Empty 空状态', link: '/components/empty' },
             { title: 'List 列表', link: '/components/list' },
+            { title: 'Popover 气泡卡片', link: '/components/popover' },
             { title: 'Table 表格', link: '/components/table' },
             { title: 'Tabs 标签页', link: '/components/tabs' },
             { title: 'Tag 标签', link: '/components/tag' },
