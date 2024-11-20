@@ -21,6 +21,10 @@ export const genTooltipStyle: GenerateStyle<TooltipToken> = (token: TooltipToken
         wordBreak: 'break-all',
         [`${componentCls}-close-icon`]: {
           cursor: 'pointer',
+          color: token.colorIcon,
+          '&:hover': {
+            color: token.colorIconHover,
+          },
         },
       },
     },
