@@ -13,8 +13,8 @@ demo:
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx" title="选择器"></code> 
-<code src="./demo/ranger-picker.tsx" title="范围选择器"></code>
+<code src="./demo/basic.tsx" title="基本"></code> 
+<code src="./demo/range-picker.tsx" title="范围选择器"></code>
 
 ## API
 
