@@ -1,4 +1,4 @@
-import enUS from '@oceanbase/design/es/locale/en-US';
+import enUS from '@oceanbase/design/locale/en-US';
 import BasicLayout from '../BasicLayout/locale/en-US';
 import BatchOperationBar from '../BatchOperationBar/locale/en-US';
 import Boundary from '../Boundary/locale/en-US';

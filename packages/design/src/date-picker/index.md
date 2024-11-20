@@ -15,6 +15,8 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code> 
 <code src="./demo/range-picker.tsx" title="范围选择器"></code>
+<code src="./demo/format.tsx" title="日期格式" description="通过 `format` 属性进行设置，支持数组。"></code>
+<code src="./demo/global-format.tsx" title="全局设置日期格式" description="通过 ConfigProvider `locale` 属性进行设置。"></code>
 
 ## API
 
