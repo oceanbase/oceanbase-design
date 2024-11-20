@@ -1,5 +1,5 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken, AliasToken, GenerateStyle } from 'antd/es/theme/internal';
+import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type TooltipToken = FullToken<'Tooltip'>;
@@ -9,6 +9,11 @@ export const genTooltipStyle: GenerateStyle<TooltipToken> = (token: TooltipToken
 
   return {
     [componentCls]: {
+      maxWidth: 300,
+      [`${componentCls}-inner`]: {
+        maxHeight: 250,
+        overflow: 'auto',
+      },
       [`${componentCls}-close-icon-wrap`]: {
         display: 'flex',
         justifyContent: 'space-between',
