@@ -192,6 +192,7 @@ export default defineConfig({
             { title: 'Modal 对话框', link: '/components/modal' },
             { title: 'Drawer 抽屉', link: '/components/drawer' },
             { title: 'Notification 通知提醒框', link: '/components/notification' },
+            { title: 'Popconfirm 气泡确认框', link: '/components/popconfirm' },
             { title: 'Progress 进度条', link: '/components/progress' },
             { title: 'Result 结果', link: '/components/result' },
             { title: 'Skeleton 骨架屏', link: '/components/skeleton' },
