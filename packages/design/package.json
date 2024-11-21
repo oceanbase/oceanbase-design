@@ -31,8 +31,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "father build",
-    "postbuild": "cp src/style/reset.css dist/"
+    "build": "father build && cp src/style/reset.css dist/"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.22.0",
