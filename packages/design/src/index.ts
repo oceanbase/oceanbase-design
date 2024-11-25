@@ -1,4 +1,4 @@
-import './reset.css';
+import './global.css';
 
 export * from 'antd';
 export { version } from '../package.json';
