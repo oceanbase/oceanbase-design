@@ -85,6 +85,9 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
             borderRadius: borderRadiusLG,
           },
         },
+        [`${componentCls}-tbody-virtual-scrollbar ${componentCls}-tbody-virtual-scrollbar-thumb`]: {
+          background: `${token.colorFillSecondary} !important`,
+        },
         // empty wrapper style
         [`${componentCls}-empty-wrapper`]: {
           minHeight: 360,
