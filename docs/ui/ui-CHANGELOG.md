@@ -8,6 +8,12 @@ group: 业务组件
 
 ---
 
+## 0.4.2
+
+`2024-11-29`
+
+- 💄 DateRanger 组件对外透出 `updateCurrentTime` 函数，用于更新当前时间。[#862](https://github.com/oceanbase/oceanbase-design/pull/862) [@18735185652](https://github.com/18735185652)
+
 ## 0.4.1
 
 `2024-11-11`

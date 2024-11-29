@@ -8,6 +8,39 @@ group: 基础组件
 
 ---
 
+## 0.4.2
+
+`2024-11-29`
+
+- 📖 新增 DatePicker 的文档和示例。[#852](https://github.com/oceanbase/oceanbase-design/pull/852)
+- 📖 新增 TimePicker 的文档和示例。[#853](https://github.com/oceanbase/oceanbase-design/pull/853)
+- 📖 新增 Popconfirm 的文档和示例。[#851](https://github.com/oceanbase/oceanbase-design/pull/851)
+- 📖 新增 Popover 的文档和示例。[#850](https://github.com/oceanbase/oceanbase-design/pull/850)
+- 📖 新增 Progress 的文档和示例。[#834](https://github.com/oceanbase/oceanbase-design/pull/834)
+- 🌈 将 Design Token lineWidthFocus 设为 0，以去掉组件聚焦时的线条样式。[#841](https://github.com/oceanbase/oceanbase-design/pull/841)
+- ⭐️ 优先从系统加载 `Inter`、`Consolas` 和 `Helvetica Neue` 字体。[#861](https://github.com/oceanbase/oceanbase-design/pull/861)
+- 🐞 修复 Slider 两端标签的对齐样式在部分场景下不生效的问题。[#832](https://github.com/oceanbase/oceanbase-design/pull/832)
+- 💄 将全局的滚动条颜色改为 `#e2e8f3`。[#846](https://github.com/oceanbase/oceanbase-design/pull/846)
+- Empty
+  - 💄 Empty 主标题的字体大小从 24px 调整为 20px。[#845](https://github.com/oceanbase/oceanbase-design/pull/845)
+  - 💄 优化 Empty 超长内容的样式，限制描述区的最大宽度为 600px、步骤区的最大宽度为 1000px。[#844](https://github.com/oceanbase/oceanbase-design/pull/844)
+- Result
+  - 💄 Result 主标题的字体大小从 24px 调整为 20px。[#845](https://github.com/oceanbase/oceanbase-design/pull/845)
+  - 💄 优化 Result 超长内容的样式，限制副标题的最大宽度为 600px、内容区的最大宽度为 1000px。[#842](https://github.com/oceanbase/oceanbase-design/pull/842)
+- 💄 优化 Switch 未选中态的背景色，和置灰态的背景色进行区分。[#833](https://github.com/oceanbase/oceanbase-design/pull/833)
+- Table
+  - 💄 优化 Table 嵌套子表格和可展开内容的样式，以对齐最新的设计规范。[#865](https://github.com/oceanbase/oceanbase-design/pull/865)
+  - 💄 将 Table 虚拟滚动条的颜色改为 `#e2e8f3`，和全局滚动条保持一致。[#864](https://github.com/oceanbase/oceanbase-design/pull/864)
+- Tooltip
+  - 🐞 修复 Tooltip 开启 `mouseFollow` 后没有继承 `.ant-tooltip` 类名和样式的问题。[#849](https://github.com/oceanbase/oceanbase-design/pull/849)
+  - 💄 优化 Tooltip 可关闭图标的颜色样式。[#848](https://github.com/oceanbase/oceanbase-design/pull/848)
+  - 💄 限制 Tooltip 的最大宽度为 300px、最大高度为 250px，内容超出时横向折行、纵向滚动。[#847](https://github.com/oceanbase/oceanbase-design/pull/847)
+- Typography
+  - 💄 Typography 编辑模式文本触发器增加 hover 边框，以提示用户可以点击进行编辑。[#839](https://github.com/oceanbase/oceanbase-design/pull/839)
+  - 💄 优化 Typography 编辑模式样式，避免只读态和编辑态之间切换时出现抖动。[#839](https://github.com/oceanbase/oceanbase-design/pull/839)
+- 🔨 打包后的 `dist` 目录增加 `reset.css` 样式文件，以对齐 antd。[#855](https://github.com/oceanbase/oceanbase-design/pull/855)
+- 🔨 适配 CodeSandbox 环境下编译报错、无法预览的问题。[#855](https://github.com/oceanbase/oceanbase-design/pull/855)
+
 ## 0.4.1
 
 `2024-11-11`
