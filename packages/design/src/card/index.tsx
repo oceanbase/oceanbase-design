@@ -74,31 +74,18 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     });
 
     return wrapSSR(
-      <ConfigProvider
-        injectStaticFunction={false}
-        table={
-          noBodyPadding
-            ? {
-                // expand selection column width for larger padding-left
-                // related to .ant-card-no-body-padding style
-                selectionColumnWidth: size === 'small' ? 36 : 48,
-              }
-            : {}
-        }
+      <AntCard
+        ref={ref}
+        size={size}
+        tabList={newTabList}
+        prefixCls={customizePrefixCls}
+        bodyStyle={bodyStyle}
+        styles={styles}
+        className={cardCls}
+        {...restProps}
       >
-        <AntCard
-          ref={ref}
-          size={size}
-          tabList={newTabList}
-          prefixCls={customizePrefixCls}
-          bodyStyle={bodyStyle}
-          styles={styles}
-          className={cardCls}
-          {...restProps}
-        >
-          {children}
-        </AntCard>
-      </ConfigProvider>
+        {children}
+      </AntCard>
     );
   }
 );
