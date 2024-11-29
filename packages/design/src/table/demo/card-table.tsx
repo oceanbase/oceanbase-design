@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Form, Radio, Switch, Table, theme } from '@oceanbase/design';
+import { Card, Form, Switch, Table, theme } from '@oceanbase/design';
 
 const App: React.FC = () => {
   const { token } = theme.useToken();
@@ -7,6 +7,8 @@ const App: React.FC = () => {
   const [hasBorder, setHasBorder] = useState(true);
   const [hasTitle, setHasTitle] = useState(true);
   const [hasPadding, setHasPadding] = useState(true);
+  const [expandable, setExpandable] = useState(true);
+  const [selectable, setSelectable] = useState(true);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
   const columns = [
@@ -77,6 +79,24 @@ const App: React.FC = () => {
             }}
           />
         </Form.Item>
+        <Form.Item label="Table expandable" required={true}>
+          <Switch
+            size="small"
+            value={expandable}
+            onChange={value => {
+              setExpandable(value);
+            }}
+          />
+        </Form.Item>
+        <Form.Item label="Table selectable" required={true}>
+          <Switch
+            size="small"
+            value={selectable}
+            onChange={value => {
+              setSelectable(value);
+            }}
+          />
+        </Form.Item>
       </Form>
       <Card
         bordered={hasBorder}
@@ -93,12 +113,23 @@ const App: React.FC = () => {
           columns={columns}
           dataSource={dataSource}
           rowKey={record => record.key}
-          rowSelection={{
-            selectedRowKeys: selectedRowKeys,
-            onChange: (keys: React.Key[]) => {
-              setSelectedRowKeys(keys);
-            },
-          }}
+          expandable={
+            expandable
+              ? {
+                  expandedRowRender: () => <div>This is expanded content</div>,
+                }
+              : undefined
+          }
+          rowSelection={
+            selectable
+              ? {
+                  selectedRowKeys: selectedRowKeys,
+                  onChange: (keys: React.Key[]) => {
+                    setSelectedRowKeys(keys);
+                  },
+                }
+              : undefined
+          }
           pagination={{
             pageSize: 5,
           }}

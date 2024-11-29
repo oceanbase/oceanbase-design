@@ -81,6 +81,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   const tableCls = classNames(
     {
       [`${prefixCls}-expandable`]: !isEmpty(expandable),
+      [`${prefixCls}-selectable`]: !!rowSelection,
       [`${prefixCls}-has-footer`]: !!footer,
     },
     className
@@ -222,6 +223,14 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
         ),
       }}
       columns={newColumns}
+      expandable={
+        expandable
+          ? {
+              columnWidth: 32,
+              ...expandable,
+            }
+          : undefined
+      }
       rowSelection={
         rowSelection
           ? {
