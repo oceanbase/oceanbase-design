@@ -76,7 +76,9 @@ for (let i = 1; i <= 10; i++) {
   });
 }
 
-const defaultExpandable = { expandedRowRender: (record: DataType) => <p>{record.description}</p> };
+const defaultExpandable = {
+  expandedRowRender: (record: DataType) => <div>{record.description}</div>,
+};
 const defaultTitle = () => 'Here is title';
 const defaultFooter = () => 'Here is footer';
 

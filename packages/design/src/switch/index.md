@@ -8,7 +8,7 @@ demo:
 ---
 
 - 🔥 完全继承 antd [Switch](https://ant.design/components/switch-cn) 的能力和 API，可无缝切换。
-- 💄 定制主题和样式，符合 OceanBase Design 设计规范，比如总是展示上下箭头。
+- 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 
 ## 代码演示
 
@@ -17,6 +17,7 @@ demo:
 <code src="./demo/size.tsx" title="大小"></code>
 <code src="./demo/disabled.tsx" title="禁用"></code>
 <code src="./demo/loading.tsx" title="加载中"></code>
+<code src="./demo/text.tsx" title="文字和图标"></code>
 
 ## API
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useImperativeHandle } from 'react';
 import { Button, DatePicker, Divider, Dropdown, Radio, Space, theme } from '@oceanbase/design';
 import type { TooltipProps, FormItemProps } from '@oceanbase/design';
 import {
@@ -86,7 +86,7 @@ export interface DateRangerProps
 
 const prefix = getPrefix('date-ranger');
 
-const Ranger = (props: DateRangerProps) => {
+const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   const {
     selects = [
       NEAR_1_MINUTES,
@@ -138,13 +138,18 @@ const Ranger = (props: DateRangerProps) => {
     value || defaultValue ? CUSTOMIZE : (defaultQuickValue ?? selects?.[0]?.name);
   const [rangeName, setRangeName] = useState(defaultRangeName);
 
-  const [innerValue, setInnerValue] = useState<RangeValue>(
-    value ??
+  const [innerValue, setInnerValue] = useState<RangeValue>(() => {
+    const initValue =
+      value ??
       defaultValue ??
       (selects
         .find(item => item.name === defaultRangeName)
-        ?.range(isMoment ? moment() : dayjs()) as RangeValue)
-  );
+        ?.range(isMoment ? moment() : dayjs()) as RangeValue);
+    if (onChange) {
+      onChange(initValue);
+    }
+    return initValue;
+  });
 
   const [open, setOpen] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
@@ -290,6 +295,10 @@ const Ranger = (props: DateRangerProps) => {
       rangeChange([(eTime as Dayjs)?.clone().subtract(differenceMs), eTime] as RangeValue);
     }
   };
+
+  useImperativeHandle(ref, () => ({
+    updateCurrentTime: setNow,
+  }));
 
   const rangeLabel =
     rangeName === CUSTOMIZE
@@ -455,7 +464,11 @@ const Ranger = (props: DateRangerProps) => {
           {hasRewind && (
             <Radio.Button
               value="stepBack"
-              style={{ paddingInline: 8, borderInlineStart: 0, borderRadius: 0 }}
+              style={{
+                paddingInline: 8,
+                borderInlineStart: 0,
+                borderRadius: 0,
+              }}
               onClick={() => {
                 if (isPlay) {
                   setIsPlay(false);
@@ -523,7 +536,7 @@ const Ranger = (props: DateRangerProps) => {
       )}
     </Space>
   );
-};
+});
 
 export default LocaleWrapper({
   componentName: 'DateRanger',

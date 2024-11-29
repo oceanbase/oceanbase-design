@@ -1,4 +1,4 @@
-import './reset.css';
+import './global.css';
 
 export * from 'antd';
 export { version } from '../package.json';
@@ -68,6 +68,9 @@ export type { RadioProps } from './radio';
 
 export { default as Checkbox } from './checkbox';
 export type { CheckboxProps } from './checkbox';
+
+export { default as Switch } from './switch';
+export type { SwitchProps } from './switch';
 
 export { default as Select } from './select';
 export type { SelectProps } from './select';

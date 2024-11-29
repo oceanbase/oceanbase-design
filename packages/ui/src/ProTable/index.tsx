@@ -12,6 +12,7 @@ export { ProTableProps };
 const ProTable: typeof AntProTable = ({
   form,
   expandable,
+  rowSelection,
   pagination: customPagination,
   footer,
   locale,
@@ -29,6 +30,7 @@ const ProTable: typeof AntProTable = ({
   const tableCls = classNames(
     {
       [`${tablePrefixCls}-expandable`]: !isEmpty(expandable),
+      [`${tablePrefixCls}-selectable`]: !!rowSelection,
       [`${tablePrefixCls}-has-footer`]: !!footer,
     },
     tableClassName
@@ -56,7 +58,15 @@ const ProTable: typeof AntProTable = ({
             requiredMark: false,
             ...form,
           }}
-          expandable={expandable}
+          expandable={
+            expandable
+              ? {
+                  columnWidth: 32,
+                  ...expandable,
+                }
+              : undefined
+          }
+          rowSelection={rowSelection}
           pagination={pagination}
           footer={footer}
           locale={{

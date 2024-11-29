@@ -19,7 +19,7 @@ const InternalRadio = React.forwardRef<RadioRef, AntRadioProps>(
   }
 );
 
-const Radio = InternalRadio as typeof Radio;
+const Radio = InternalRadio as typeof AntRadio;
 
 Radio.Button = AntRadio.Button;
 Radio.Group = AntRadio.Group;

@@ -1,0 +1,48 @@
+@import 'antd/dist/reset.css';
+
+@font-face {
+  font-family: 'Inter';
+  /* load priority: local font > remote font > self-hosting font */
+  src:
+    local('Inter'),
+    url('https://mdn.alipayobjects.com/huamei_fhnyvh/afts/file/A*2aG4RJIdUGYAAAAAAAAAAAAADmfOAQ/Inter.woff2')
+      format('woff2'),
+    url('./fonts/Inter.woff2') format('woff2');
+  /* load strategy: use default font as fallback */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Consolas';
+  src:
+    local('Consolas'),
+    url('https://mdn.alipayobjects.com/huamei_fhnyvh/afts/file/A*R8bMTqAdGWgAAAAAAAAAAAAADmfOAQ/Consolas.woff2')
+      format('woff2'),
+    url('./fonts/Consolas.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src:
+    local('Helvetica Neue'),
+    url('https://mdn.alipayobjects.com/huamei_fhnyvh/afts/file/A*3EzqR6aYJMkAAAAAAAAAAAAADmfOAQ/HelveticaNeue.woff2')
+      format('woff2'),
+    url('./fonts/HelveticaNeue.woff2') format('woff2');
+  font-display: swap;
+}
+
+pre,
+code,
+kbd,
+samp {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+* {
+  scrollbar-color: #e2e8f3 transparent;
+}
+
+.rc-virtual-list-scrollbar-thumb {
+  background: #e2e8f3 !important;
+}

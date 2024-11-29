@@ -15,6 +15,8 @@ nav:
 
 <code src="./demo/default-value.tsx" title="指定默认值"></code>
 
+<code src="./demo/updateCurrentTime.tsx" title="更新当前时间"></code>
+
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
@@ -34,6 +36,8 @@ nav:
 | hideYear | 当时间范围在本年时，隐藏年份 | boolean | false | - |
 | hideSecond | 隐藏"秒” | boolean | false | - |
 | autoCalcRange | 自动计算时间范围并回显到选择器tag | boolean | false | - |
+| ref | updateCurrentTime 手动更新当前时间 | function | - | - |
+
 | 其他 antd/RangePicker 的 `props` | [antd-RangePicker](https://ant.design/components/date-picker-cn/#RangePicker) | - | - | - |
 
 ### RangeOption
