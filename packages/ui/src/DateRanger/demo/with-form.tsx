@@ -12,7 +12,21 @@ export default () => {
 
   return (
     <Form form={form} onValuesChange={handleChange}>
-      <Form.Item name="range" initialValue={[dayjs('2021/01/01'), dayjs('2021/05/01')]}>
+      <Form.Item
+        name="range"
+        initialValue={[dayjs('2021/01/01'), dayjs('2021/05/01')]}
+        rules={[
+          {
+            validator(rule, value, callback) {
+              if (Math.abs(value[0].diff(value[1])) > 24 * 60 * 60 * 1000) {
+                callback('时间跨度不能超过一天');
+              } else {
+                callback();
+              }
+            },
+          },
+        ]}
+      >
         <DateRanger />
       </Form.Item>
     </Form>

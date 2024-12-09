@@ -29,6 +29,7 @@ export default ({ componentName, defaultLocale }: LocaleWrapperInput) =>
         const localeData = {
           ...defaultLocale,
           ...(localeFromContext || {}),
+          locale: antLocale.locale,
         };
 
         return (
