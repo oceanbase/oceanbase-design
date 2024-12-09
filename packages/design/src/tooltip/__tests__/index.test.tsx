@@ -179,4 +179,17 @@ describe('Tooltip', () => {
     expect(isTooltipOpen()).toBeFalsy();
     expect(container.querySelector('.ant-tooltip-open')).toBeNull();
   });
+
+  it('mouseFollow Tooltip should inherit `.ant-tooltip` className', async () => {
+    const { container } = render(
+      <Tooltip title="This is prompt text" mouseFollow={true}>
+        <div id="hello">Hello world!</div>
+      </Tooltip>
+    );
+
+    const divElement = container.querySelector('#hello');
+    fireEvent.mouseEnter(divElement!);
+    await waitFakeTimer();
+    expect(container.querySelector('.ant-tooltip')).not.toBeNull();
+  });
 });

@@ -1,5 +1,3 @@
-import './index.less';
-
 export * from '@ant-design/charts';
 
 export { version } from '../package.json';

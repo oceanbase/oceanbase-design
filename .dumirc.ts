@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { defineConfig } from 'dumi';
 import AntdAliasWebpackPlugin from './antd-alias-webpack-plugin';
+import rehypePlugin from './.dumi/rehypePlugin';
+import remarkPlugin from './.dumi/remarkPlugin';
 
 export default defineConfig({
   mfsu: {
@@ -19,6 +21,8 @@ export default defineConfig({
   sitemap: {
     hostname: 'https://design.oceanbase.com',
   },
+  extraRehypePlugins: [rehypePlugin],
+  extraRemarkPlugins: [remarkPlugin],
   extraBabelPresets: [require.resolve('@emotion/babel-preset-css-prop')],
   chainWebpack: config => {
     const esPath = path.join(__dirname, 'packages/design/es');
@@ -134,11 +138,15 @@ export default defineConfig({
         },
         {
           title: '导航',
-          children: [{ title: 'Breadcrumb 面包屑', link: '/components/breadcrumb' }],
+          children: [
+            { title: 'Breadcrumb 面包屑', link: '/components/breadcrumb' },
+            { title: 'Dropdown 下拉菜单', link: '/components/dropdown' },
+          ],
         },
         {
           title: '布局',
           children: [
+            { title: 'Divider 分割线', link: '/components/divider' },
             { title: 'Grid 栅格', link: '/components/grid' },
             { title: 'Space 间距', link: '/components/space' },
           ],
@@ -151,9 +159,13 @@ export default defineConfig({
             { title: 'Input 输入框', link: '/components/input' },
             { title: 'InputNumber 数字输入框', link: '/components/input-number' },
             { title: 'Radio 单选框', link: '/components/radio' },
+            { title: 'Checkbox 多选框', link: '/components/checkbox' },
             { title: 'Switch 开关', link: '/components/switch' },
             { title: 'Select 选择器', link: '/components/select' },
             { title: 'TreeSelect 树选择', link: '/components/tree-select' },
+            { title: 'Slider 滑动输入条', link: '/components/slider' },
+            { title: 'DatePicker 日期选择框', link: '/components/date-picker' },
+            { title: 'TimePicker 时间选择器', link: '/components/time-picker' },
           ],
         },
         {
@@ -163,6 +175,7 @@ export default defineConfig({
             { title: 'Descriptions 描述列表', link: '/components/descriptions' },
             { title: 'Empty 空状态', link: '/components/empty' },
             { title: 'List 列表', link: '/components/list' },
+            { title: 'Popover 气泡卡片', link: '/components/popover' },
             { title: 'Table 表格', link: '/components/table' },
             { title: 'Tabs 标签页', link: '/components/tabs' },
             { title: 'Tag 标签', link: '/components/tag' },
@@ -181,7 +194,10 @@ export default defineConfig({
             { title: 'Modal 对话框', link: '/components/modal' },
             { title: 'Drawer 抽屉', link: '/components/drawer' },
             { title: 'Notification 通知提醒框', link: '/components/notification' },
+            { title: 'Popconfirm 气泡确认框', link: '/components/popconfirm' },
+            { title: 'Progress 进度条', link: '/components/progress' },
             { title: 'Result 结果', link: '/components/result' },
+            { title: 'Skeleton 骨架屏', link: '/components/skeleton' },
             { title: 'Spin 加载中', link: '/components/spin' },
             { title: 'Badge 徽标数', link: '/components/badge' },
           ],
@@ -230,8 +246,8 @@ export default defineConfig({
               title: 'ContentWithIcon 文字旁提示',
               link: '/biz-components/content-with-icon',
             },
-            { title: 'Ranger 日期快速选择', link: '/biz-components/ranger' },
-            { title: 'New Ranger 日期快速选择', link: '/biz-components/date-ranger' },
+            { title: 'Ranger 日期时间选择', link: '/biz-components/ranger' },
+            { title: 'DateRanger 新版日期时间选择', link: '/biz-components/date-ranger' },
             { title: 'TreeSearch 树搜索', link: '/biz-components/tree-search' },
             { title: 'Password 密码输入框', link: '/biz-components/password' },
             { title: 'Boundary 错误兜底', link: '/biz-components/boundary' },

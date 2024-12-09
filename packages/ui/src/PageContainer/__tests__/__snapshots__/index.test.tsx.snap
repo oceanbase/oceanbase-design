@@ -30,7 +30,7 @@ exports[`PageContainer > basic 1`] = `
             class="ant-space-item"
           >
             <button
-              class="ant-btn ant-btn-default"
+              class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
               type="button"
             >
               <span>
@@ -42,7 +42,7 @@ exports[`PageContainer > basic 1`] = `
             class="ant-space-item"
           >
             <button
-              class="ant-btn ant-btn-primary"
+              class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
               type="button"
             >
               <span>
@@ -54,7 +54,7 @@ exports[`PageContainer > basic 1`] = `
             class="ant-space-item"
           >
             <button
-              class="ant-btn ant-btn-default ant-dropdown-trigger"
+              class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-dropdown-trigger"
               style="padding: 0px 8px;"
               type="button"
             >
@@ -593,7 +593,7 @@ exports[`PageContainer > extra and footer 1`] = `
                   class="ant-input-group-addon"
                 >
                   <button
-                    class="ant-btn ant-btn-default ant-btn-lg ant-btn-icon-only ant-input-search-button"
+                    class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-lg ant-btn-icon-only ant-input-search-button"
                     type="button"
                   >
                     <span
@@ -635,30 +635,34 @@ exports[`PageContainer > extra and footer 1`] = `
                 class="ant-select-selector"
               >
                 <span
-                  class="ant-select-selection-search"
+                  class="ant-select-selection-wrap"
                 >
-                  <input
-                    aria-autocomplete="list"
-                    aria-controls="rc_select_TEST_OR_SSR_list"
-                    aria-expanded="false"
-                    aria-haspopup="listbox"
-                    aria-owns="rc_select_TEST_OR_SSR_list"
-                    autocomplete="off"
-                    class="ant-select-selection-search-input"
-                    id="rc_select_TEST_OR_SSR"
-                    readonly=""
-                    role="combobox"
-                    style="opacity: 0;"
-                    type="search"
-                    unselectable="on"
-                    value=""
-                  />
-                </span>
-                <span
-                  class="ant-select-selection-item"
-                  title="large"
-                >
-                  large
+                  <span
+                    class="ant-select-selection-search"
+                  >
+                    <input
+                      aria-autocomplete="list"
+                      aria-controls="rc_select_TEST_OR_SSR_list"
+                      aria-expanded="false"
+                      aria-haspopup="listbox"
+                      aria-owns="rc_select_TEST_OR_SSR_list"
+                      autocomplete="off"
+                      class="ant-select-selection-search-input"
+                      id="rc_select_TEST_OR_SSR"
+                      readonly=""
+                      role="combobox"
+                      style="opacity: 0;"
+                      type="search"
+                      unselectable="on"
+                      value=""
+                    />
+                  </span>
+                  <span
+                    class="ant-select-selection-item"
+                    title="large"
+                  >
+                    large
+                  </span>
                 </span>
               </div>
               <span
@@ -759,7 +763,7 @@ exports[`PageContainer > extra and footer 1`] = `
             class="ant-space-item"
           >
             <button
-              class="ant-btn ant-btn-primary ant-btn-lg"
+              class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-lg"
               type="button"
             >
               <span>
@@ -771,7 +775,7 @@ exports[`PageContainer > extra and footer 1`] = `
             class="ant-space-item"
           >
             <button
-              class="ant-btn ant-btn-default ant-btn-lg ant-dropdown-trigger"
+              class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-lg ant-dropdown-trigger"
               style="padding: 0px 8px;"
               type="button"
             >
@@ -818,6 +822,220 @@ exports[`PageContainer > extra and footer 1`] = `
             <div
               class="ant-descriptions"
             >
+              <div
+                class="ant-descriptions-view"
+              >
+                <table>
+                  <tbody>
+                    <tr
+                      class="ant-descriptions-row"
+                    >
+                      <td
+                        class="ant-descriptions-item"
+                        colspan="1"
+                      >
+                        <div
+                          class="ant-descriptions-item-container"
+                        >
+                          <span
+                            class="ant-descriptions-item-label"
+                          >
+                            创建人
+                          </span>
+                          <span
+                            class="ant-descriptions-item-content"
+                          >
+                            <span
+                              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+                            >
+                              曲丽丽
+                            </span>
+                          </span>
+                        </div>
+                      </td>
+                      <td
+                        class="ant-descriptions-item"
+                        colspan="1"
+                      >
+                        <div
+                          class="ant-descriptions-item-container"
+                        >
+                          <span
+                            class="ant-descriptions-item-label"
+                          >
+                            电话号码
+                          </span>
+                          <span
+                            class="ant-descriptions-item-content"
+                          >
+                            <span
+                              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+                            >
+                              1810000000
+                            </span>
+                          </span>
+                        </div>
+                      </td>
+                      <td
+                        class="ant-descriptions-item"
+                        colspan="1"
+                      >
+                        <div
+                          class="ant-descriptions-item-container"
+                        >
+                          <span
+                            class="ant-descriptions-item-label"
+                          >
+                            地址
+                          </span>
+                          <span
+                            class="ant-descriptions-item-content"
+                          >
+                            <span
+                              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+                            >
+                              浙江省杭州市西湖区工专路
+                            </span>
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr
+                      class="ant-descriptions-row"
+                    >
+                      <td
+                        class="ant-descriptions-item"
+                        colspan="1"
+                      >
+                        <div
+                          class="ant-descriptions-item-container"
+                        >
+                          <span
+                            class="ant-descriptions-item-label"
+                          >
+                            关联表单
+                          </span>
+                          <span
+                            class="ant-descriptions-item-content"
+                          >
+                            <span
+                              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+                            >
+                              <a>
+                                421421
+                              </a>
+                            </span>
+                          </span>
+                        </div>
+                      </td>
+                      <td
+                        class="ant-descriptions-item"
+                        colspan="1"
+                      >
+                        <div
+                          class="ant-descriptions-item-container"
+                        >
+                          <span
+                            class="ant-descriptions-item-label"
+                          >
+                            创建时间
+                          </span>
+                          <span
+                            class="ant-descriptions-item-content"
+                          >
+                            <span
+                              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+                            >
+                              2017-01-10
+                            </span>
+                          </span>
+                        </div>
+                      </td>
+                      <td
+                        class="ant-descriptions-item"
+                        colspan="1"
+                      >
+                        <div
+                          class="ant-descriptions-item-container"
+                        >
+                          <span
+                            class="ant-descriptions-item-label"
+                          >
+                            备注
+                          </span>
+                          <span
+                            class="ant-descriptions-item-content"
+                          >
+                            <span
+                              class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+                            >
+                              这是备注
+                            </span>
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PageContainer > title 1`] = `
+<div
+  class="ant-pro-page-container ant-pro-page-container-with-footer"
+>
+  <div
+    class="ant-page-header ant-pro-page-container-warp-page-header ant-page-header-ghost"
+  >
+    <div
+      class="ant-page-header-heading "
+    >
+      <div
+        class="ant-page-header-heading-left"
+      >
+        <span
+          class="ant-page-header-heading-title"
+          title="页面标题"
+        >
+          页面标题
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-pro-grid-content"
+  >
+    <div
+      class="ant-pro-grid-content-children"
+    >
+      <div
+        class="ant-pro-page-container-children-container"
+      >
+        <div
+          class="ant-card"
+        >
+          <div
+            class="ant-card-body"
+          >
+            <div
+              class="ant-descriptions"
+            >
+              <div
+                class="ant-descriptions-header"
+              >
+                <div
+                  class="ant-descriptions-title"
+                >
+                  基本信息
+                </div>
+              </div>
               <div
                 class="ant-descriptions-view"
               >

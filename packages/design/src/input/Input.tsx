@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { Input as AntInput } from 'antd';
 import type { InputProps as AntInputProps, InputRef } from 'antd';
 import ConfigProvider from '../config-provider';

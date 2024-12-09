@@ -3,9 +3,9 @@ import { Switch } from '@oceanbase/design';
 
 const App: React.FC = () => (
   <>
-    <Switch defaultChecked />
+    <Switch />
     <br />
-    <Switch defaultChecked size="small" />
+    <Switch size="small" />
   </>
 );
 

@@ -8,6 +8,54 @@ group: 业务组件
 
 ---
 
+## 0.4.3
+
+`2024-12-02`
+
+- 🐞 修复引入的 @oceanbase/design 国际化语言路径不正确、导致运行报错的问题。[#870](https://github.com/oceanbase/oceanbase-design/pull/870)
+
+## 0.4.2
+
+`2024-11-29`
+
+- 💄 DateRanger 组件对外透出 `updateCurrentTime` 函数，用于更新当前时间。[#862](https://github.com/oceanbase/oceanbase-design/pull/862) [@18735185652](https://github.com/18735185652)
+
+## 0.4.1
+
+`2024-11-11`
+
+- ⭐️ 大幅优化 DateRanger 的交互和样式: [#810](https://github.com/oceanbase/oceanbase-design/pull/810) [#795](https://github.com/oceanbase/oceanbase-design/pull/795)
+  - 调整布局和样式
+  - 日期和时间输入框支持快捷选中
+  - 修复手动输入日期时日历面板不更新的问题
+  - 默认关闭极简模式
+  - 默认展示年份和秒
+  - 使用刷新图标 替换 `当前` 按钮
+  - 移除快捷选项的 tag
+  - 信息提示和报错信息移到面板底部
+  - 自定义时间默认不自动计算时间跨度，并移除自定义选项
+- 🆕 Ranger 支持透传属性到 QuickPicker 组件。[#799](https://github.com/oceanbase/oceanbase-design/pull/799)
+- 💄 去掉 PageContainer 页头的上内间距，让页面布局更加紧凑。[#817](https://github.com/oceanbase/oceanbase-design/pull/817)
+- ProTable
+  - 💄 对齐 Table 的可展开、空状态和 `footer` 样式。[#825](https://github.com/oceanbase/oceanbase-design/pull/825)
+  - 💄 优化查询表单样式，将搜索&重置按钮组和展开收起互换位置。[#801](https://github.com/oceanbase/oceanbase-design/pull/801)
+- 💄 优化 Password 的多处样式，以对齐设计规范。[#820](https://github.com/oceanbase/oceanbase-design/pull/820)
+
+## 0.4.0
+
+`2024-10-09`
+
+- 🔥 新增 DateRanger 新版日期时间选择组件。[#295](https://github.com/oceanbase/oceanbase-design/pull/295)
+
+## 0.3.8
+
+`2024-09-23`
+
+- 📖 新增 @oceanbase/ui 在 Vite 中的使用文档和项目模板。[#673](https://github.com/oceanbase/oceanbase-design/pull/673)
+- 🆕 Action.Group 新增 `buttonSize` 属性，用于设置按钮大小。[#719](https://github.com/oceanbase/oceanbase-design/pull/719)
+- 🆕 Action.Button 新增 `size` 属性，用于设置按钮大小。[#719](https://github.com/oceanbase/oceanbase-design/pull/719)
+- 💄 优化 PageContainer 仅设置 title 属性时页头和内容区的间距。[#721](https://github.com/oceanbase/oceanbase-design/pull/721)
+
 ## 0.3.6
 
 `2024-07-10`

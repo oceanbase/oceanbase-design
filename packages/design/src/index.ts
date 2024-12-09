@@ -1,6 +1,4 @@
-// 引入 antd/dist/reset.css，以重置基本样式，保证原生元素遵从 antd 规范样式
-// ref: https://ant.design/docs/react/migration-v5-cn#%E6%8A%80%E6%9C%AF%E8%B0%83%E6%95%B4
-import 'antd/dist/reset.css';
+import './global.css';
 
 export * from 'antd';
 export { version } from '../package.json';
@@ -65,11 +63,23 @@ export type { InputProps } from './input';
 export { default as InputNumber } from './input-number';
 export type { InputNumberProps } from './input-number';
 
+export { default as Radio } from './radio';
+export type { RadioProps } from './radio';
+
+export { default as Checkbox } from './checkbox';
+export type { CheckboxProps } from './checkbox';
+
+export { default as Switch } from './switch';
+export type { SwitchProps } from './switch';
+
 export { default as Select } from './select';
 export type { SelectProps } from './select';
 
 export { default as TreeSelect } from './tree-select';
 export type { TreeSelectProps } from './tree-select';
+
+export { default as Slider } from './slider';
+export type { SliderSingleProps, SliderRangeProps } from './slider';
 
 export { default as Tooltip } from './tooltip';
 export type { TooltipProps } from './tooltip';

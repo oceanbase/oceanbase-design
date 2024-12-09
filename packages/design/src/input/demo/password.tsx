@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Space } from 'antd';
+import { Input, Space } from '@oceanbase/design';
 
 const App: React.FC = () => {
   return (

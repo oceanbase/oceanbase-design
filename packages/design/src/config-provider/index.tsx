@@ -6,6 +6,7 @@ import type {
   ThemeConfig as AntThemeConfig,
 } from 'antd/es/config-provider';
 import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
+import type { AppProps } from 'antd/es/app';
 import type { PaginationConfig } from 'antd/es/pagination';
 import type { SpinIndicator } from 'antd/es/spin';
 import { StyleProvider } from '@ant-design/cssinjs';
@@ -15,7 +16,7 @@ import type { StyleContextProps } from '@ant-design/cssinjs/es/StyleContext';
 import { merge } from 'lodash';
 import StaticFunction from '../static-function';
 import themeConfig from '../theme';
-import defaultTheme from '../theme/default';
+import defaultTheme, { fontFamilyEn } from '../theme/default';
 import darkTheme from '../theme/dark';
 import aliyunTheme from '@oceanbase/aliyun-theme';
 import DefaultRenderEmpty from './DefaultRenderEmpty';
@@ -31,8 +32,6 @@ export * from 'antd/es/config-provider';
 export interface ThemeConfig extends AntThemeConfig {
   isDark?: boolean;
   isAliyun?: boolean;
-  /* use custom font or not */
-  customFont?: boolean;
 }
 
 export type SpinConfig = ComponentStyleConfig & {
@@ -68,6 +67,7 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   injectStaticFunction?: boolean;
   // StyleProvider props
   styleProviderProps?: StyleProviderProps;
+  appProps?: AppProps;
 }
 
 export interface ExtendedConfigConsumerProps {
@@ -101,6 +101,7 @@ const ConfigProvider: ConfigProviderType = ({
   tabs,
   injectStaticFunction = true,
   styleProviderProps,
+  appProps,
   ...restProps
 }) => {
   // inherit from parent ConfigProvider
@@ -119,15 +120,15 @@ const ConfigProvider: ConfigProviderType = ({
 
   const { token } = themeConfig.useToken();
   const fontFamily = mergedTheme.token?.fontFamily || token.fontFamily;
-  const customFont = mergedTheme.customFont;
 
   // inherit from parent StyleProvider
   const parentStyleContext = React.useContext<StyleContextProps>(StyleContext);
   const mergedStyleProviderProps = merge({}, parentStyleContext, styleProviderProps);
+  const mergedLocale = merge({}, parentContext.locale, locale);
 
   return (
     <AntConfigProvider
-      locale={merge({}, parentContext.locale, locale)}
+      locale={mergedLocale}
       form={merge(
         {},
         {
@@ -147,12 +148,16 @@ const ConfigProvider: ConfigProviderType = ({
         tabs
       )}
       theme={merge({}, mergedTheme, {
-        token: {
-          fontFamily:
-            customFont && !fontFamily.startsWith(`'Source Sans Pro'`)
-              ? `'Source Sans Pro', ${fontFamily}`
-              : fontFamily,
-        },
+        token:
+          // custom fontFamily
+          fontFamily !== defaultTheme.token.fontFamily
+            ? { fontFamily }
+            : // use fontFamilyEn for en
+              ['en', 'en-gb'].includes(mergedLocale.locale)
+              ? {
+                  fontFamily: fontFamilyEn,
+                }
+              : {},
       })}
       renderEmpty={
         parentContext.renderEmpty ||
@@ -173,7 +178,7 @@ const ConfigProvider: ConfigProviderType = ({
         <StyleProvider {...mergedStyleProviderProps}>
           {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
           {/* ref: https://ant.design/components/app */}
-          <App component={false}>
+          <App component={false} {...appProps}>
             {children}
             {injectStaticFunction && <StaticFunction />}
           </App>

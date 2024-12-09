@@ -18,7 +18,7 @@ import {
 } from './constant';
 import './index.less';
 import zhCN from './locale/zh-CN';
-import type { QuickType } from './QuickPicker';
+import type { QuickPickerProps, QuickType } from './QuickPicker';
 import QuickPicker from './QuickPicker';
 import type { RangeOption } from './typing';
 
@@ -46,6 +46,7 @@ export interface RangerProps
   value?: RangeValue;
   defaultValue?: RangeValue;
   size?: 'small' | 'large' | 'middle';
+  quickPickerProps?: QuickPickerProps;
 }
 
 const prefix = getPrefix('ranger');
@@ -65,6 +66,7 @@ const Ranger = (props: RangerProps) => {
     size,
     //固定rangeName
     stickRangeName = false,
+    quickPickerProps = {},
     ...rest
   } = props;
   // 是否为 moment 时间对象
@@ -77,7 +79,7 @@ const Ranger = (props: RangerProps) => {
   const [innerValue, setInnerValue] = useState<RangeValue>(value ?? defaultValue);
 
   const [rangeName, setRangeName] = useState(
-    value || defaultValue ? CUSTOMIZE : defaultQuickValue ?? selects?.[0]?.name
+    value || defaultValue ? CUSTOMIZE : (defaultQuickValue ?? selects?.[0]?.name)
   );
 
   const defaultInternalValue = useMemo(() => {
@@ -165,6 +167,7 @@ const Ranger = (props: RangerProps) => {
           locale={locale}
           isMoment={isMoment}
           size={size}
+          {...quickPickerProps}
         />
       )}
       {showRange && (

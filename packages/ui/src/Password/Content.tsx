@@ -28,16 +28,15 @@ const Content: React.FC<{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          width: 14,
-          height: 22,
+          height: token.fontSize * token.lineHeight,
         }}
       >
         <div
           style={{
-            width: 6,
-            height: 6,
-            backgroundColor: token.colorTextTertiary,
-            borderRadius: 4,
+            width: 8,
+            height: 8,
+            backgroundColor: token.colorFillSecondary,
+            borderRadius: '50%',
           }}
         />
       </div>
@@ -65,36 +64,33 @@ const Content: React.FC<{
 
   return (
     <div>
-      <Progress
-        percent={value ? percent : 0}
-        strokeColor={strokeColor}
-        showInfo={false}
-        size="small"
-      />
+      <Progress percent={value ? percent : 0} strokeColor={strokeColor} showInfo={false} />
       <ul style={{ margin: 0, marginTop: '10px', listStyle: 'none', padding: '0' }}>
-        {rules?.map((rule, index) => {
-          const isError = fieldError.includes(rule.message);
-          let status: ValidateStatus = 'wait';
-          if (isError) {
-            status = rule.optional ? 'wait' : 'error';
-          } else {
-            status = 'success';
-          }
-          if (!value) {
-            status = 'error';
-          }
-          if (!isTouched) {
-            status = 'wait';
-          }
-          return (
-            <li key={index}>
-              <Space align="start">
-                {isValidating ? <LoadingOutlined /> : statusIconMap[status]}
-                <span style={{ color: token.colorTextSecondary }}>{rule.message}</span>
-              </Space>
-            </li>
-          );
-        })}
+        <Space size={4} direction="vertical">
+          {rules?.map(rule => {
+            const isError = fieldError.includes(rule.message);
+            let status: ValidateStatus = 'wait';
+            if (isError) {
+              status = rule.optional ? 'wait' : 'error';
+            } else {
+              status = 'success';
+            }
+            if (!value) {
+              status = 'error';
+            }
+            if (!isTouched) {
+              status = 'wait';
+            }
+            return (
+              <li key={`${rule.message}`}>
+                <Space size={status === 'wait' ? 14 : 8} align="start">
+                  {isValidating ? <LoadingOutlined /> : statusIconMap[status]}
+                  <span>{rule.message}</span>
+                </Space>
+              </li>
+            );
+          })}
+        </Space>
       </ul>
     </div>
   );

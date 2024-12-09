@@ -42,6 +42,50 @@
       z-index: 1;
     }
   }
+}
+
+.@{prefix}-dropdown-picker {
+  display: flex;
+  padding: 4px;
+  gap: 4px;
+  background-color: #ffffff;
+  background-clip: padding-box;
+  border-radius: 8px;
+  outline: none;
+  box-shadow:
+    0 6px 16px 0 rgba(54, 69, 99, 0.08),
+    0 3px 6px -4px rgba(54, 69, 99, 0.12),
+    0 9px 28px 8px rgba(54, 69, 99, 0.05);
+
+  .@{prefixCls}-dropdown-menu {
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .@{prefixCls}-picker-time-panel-container {
+    .@{prefixCls}-picker-content {
+      height: 148px;
+    }
+  }
+}
+
+.@{prefix}-show-range {
+  .@{prefix}-quick-picker.@{prefix}-quick-picker-select {
+    margin-right: -1px;
+
+    .@{prefixCls}-select-selector {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+
+      &:hover {
+        z-index: 1;
+      }
+    }
+
+    .@{prefixCls}-select-arrow {
+      z-index: 1;
+    }
+  }
 
   .@{prefix}-playback-control {
     display: flex;

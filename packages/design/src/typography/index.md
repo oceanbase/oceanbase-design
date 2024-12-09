@@ -11,10 +11,16 @@ nav:
 
 ## 代码演示
 
+<code src="./demo/title.tsx" title="标题"></code>
+
 <code src="./demo/text.tsx" title="文本与超链接"></code>
 
-<code src="./demo/inner.tsx" title="和其他组件组合使用"></code>
+<code src="./demo/editable.tsx" title="可编辑"></code>
+
+<code src="./demo/font-family.tsx" title="字体" description="详见 [字体设计规范](/docs/spec/typography)。"></code>
+
+<code src="./demo/inner.tsx" title="和其他组件组合使用" debug></code>
 
 ## API
 
-- 详见 antd Segmented 文档: https://ant.design/components/segmented-cn
+- 详见 antd Typography 文档: https://ant.design/components/typography-cn

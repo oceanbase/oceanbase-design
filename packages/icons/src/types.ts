@@ -1,9 +1,10 @@
 export interface AbstractNode {
-  tag: string;
-  attrs: {
+  tag?: string;
+  attrs?: {
     [key: string]: string;
   };
   children?: AbstractNode[];
+  text?: string;
 }
 
 export interface IconDefinition {
@@ -12,5 +13,7 @@ export interface IconDefinition {
   icon: ((primaryColor: string, secondaryColor: string) => AbstractNode) | AbstractNode;
 }
 
-export type ThemeType = 'filled' | 'outlined' | 'twotone' | 'colored' | 'svg';
-export type ThemeTypeUpperCase = 'Filled' | 'Outlined' | 'TwoTone' | 'Colored' | 'Svg';
+export const themeTypeList = ['filled', 'outlined', 'twotone', 'colored', 'svg'];
+
+export type ThemeType = 'outlined' | 'filled' | 'twotone' | 'colored' | 'svg';
+export type ThemeTypeUpperCase = 'Outlined' | 'Filled' | 'TwoTone' | 'Colored' | 'Svg';

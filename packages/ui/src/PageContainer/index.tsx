@@ -33,6 +33,8 @@ export interface PageContainerProps extends AntPageContainerProps {
 const PageContainer = ({
   prefixCls: customizePrefixCls,
   className,
+  /* compatible with title prop */
+  title,
   header,
   content,
   extraContent,
@@ -83,6 +85,7 @@ const PageContainer = ({
     },
   };
   const noHasHeader =
+    !title &&
     ['title', 'subTitle', 'extra', 'tags', 'avatar', 'backIcon', 'breadcrumb'].every(
       item => !newHeader?.[item]
     ) &&
@@ -102,6 +105,7 @@ const PageContainer = ({
     <AntPageContainer
       prefixCls={customizePrefixCls}
       className={pageContainerCls}
+      title={title}
       header={newHeader}
       content={content}
       extraContent={extraContent}

@@ -64,7 +64,6 @@ const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
         />
         <Space>
           <span css={title}>OceanBase Design</span>
-          <Badge count="BETA" color="purple" />
         </Space>
       </Link>
     </h1>

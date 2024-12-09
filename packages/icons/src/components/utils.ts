@@ -2,6 +2,7 @@ import React from 'react';
 // import { insertCss } from 'insert-css';
 import { generate as generateColor } from '@ant-design/colors';
 // import warn from 'rc-util/lib/warning';
+import camelCase from 'lodash.camelcase';
 import { AbstractNode, IconDefinition } from '../types';
 
 export function warning(valid: boolean, message: string) {
@@ -29,7 +30,7 @@ export function normalizeAttrs(attrs: Attrs = {}): Attrs {
         delete acc.class;
         break;
       default:
-        acc[key] = val;
+        acc[camelCase(key)] = val;
     }
     return acc;
   }, {});
@@ -44,6 +45,9 @@ export function generate(
   key: string,
   rootProps?: { [key: string]: any } | false
 ): any {
+  if ((node.children?.length || 0) === 0 && node.text) {
+    return node.text;
+  }
   if (!rootProps) {
     return React.createElement(
       node.tag,

@@ -16,12 +16,9 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
     colorLink,
     borderRadiusLG,
     colorBorderSecondary,
-    paddingSM,
     padding,
-    paddingLG,
     marginLG,
     marginXS,
-    marginSM,
   } = token;
   return {
     // 表格通用样式
@@ -29,19 +26,33 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
       color: colorText,
       backgroundColor: colorBgBase,
       borderRadius: borderRadiusLG,
+      [`${componentCls}-footer`]: {
+        borderBottom: `1px solid ${colorBorderSecondary}`,
+      },
+      // 单元格通用样式
+      [`${componentCls}-thead, ${componentCls}-tbody`]: {
+        ['td, th']: {
+          [`&${componentCls}-row-expand-icon-cell`]: {
+            backgroundColor: colorBgBase,
+            padding: `${token.paddingSM}px ${token.paddingXS}px`,
+          },
+          // 内容第一列，左侧间距减小为 8px
+          [`&:not(:first-child):not(${componentCls}-selection-column):not(${componentCls}-row-expand-icon-cell)`]:
+            {
+              paddingLeft: token.paddingXS,
+            },
+        },
+      },
       // head 样式
       [`${componentCls}-thead > tr`]: {
-        ['td, th']: {
+        ['th']: {
           // 弱化列标题
           color: colorTextSecondary,
           fontWeight: 'normal',
           backgroundColor: colorBgBase,
         },
-        [`td${componentCls}-row-expand-icon-cell`]: {
-          backgroundColor: colorBgBase,
-        },
         // 去掉排序列表头的灰色背景
-        [`th${componentCls}-column-sort`]: {
+        [`th${componentCls}-column-has-sorters`]: {
           backgroundColor: colorBgBase,
         },
         [`${componentCls}-cell-scrollbar`]: {
@@ -68,41 +79,58 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         [`tr${componentCls}-row-selected > td`]: {
           backgroundColor: `${colorPrimaryBg} !important`,
         },
-        // 展开行样式
-        [`${componentCls}-expanded-row > td`]: {
-          padding: `${paddingSM}px ${paddingLG}px ${paddingSM}px ${
-            padding + paddingLG
-          }px !important`,
-          backgroundColor: colorBgBase,
-          // 除内嵌子表格外，设置其他内嵌元素样式
-          [`& > *:not(${componentCls}-wrapper)`]: {
-            marginTop: -marginSM,
-            padding: `${paddingSM}px ${padding}px`,
-            backgroundColor: colorFillQuaternary,
-            borderRadius: borderRadiusLG,
+        [`${componentCls}-tbody-virtual-scrollbar ${componentCls}-tbody-virtual-scrollbar-thumb`]: {
+          background: `${token.colorFillSecondary} !important`,
+        },
+        // 去掉可展开行在展开时的底部 border
+        [`tr > td:has(${componentCls}-row-expand-icon-expanded)`]: {
+          borderBottom: 'none',
+          [`& ~ td`]: {
+            borderBottom: 'none',
           },
+        },
+        // 为了避免行展开/收起时出现 border 动画，覆盖 antd 默认配置，仅设置背景色动画
+        [`tr > td`]: {
+          transition: `background ${token.motionDurationMid}`,
+        },
+        // empty style
+        [`${componentCls}-placeholder td`]: {
+          borderBottom: 'none',
+        },
+        [`${componentCls}-empty-wrapper`]: {
+          minHeight: 360,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         },
         // 嵌套子表格样式
         [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-          // 调整嵌套子表格的间距
-          marginBlock: '0 !important',
-          marginInline: '0 !important',
-          // 设置嵌套子表格的单元格背景色
+          borderBottom: 'none',
+          // 设置嵌套子表格的表头背景色
           [`${componentCls}-thead > tr > th`]: {
-            backgroundColor: `${colorFillQuaternary} !important`,
+            backgroundColor: token.colorFillQuaternary,
           },
-          [`${componentCls}-tbody ${componentCls}-row td`]: {
-            backgroundColor: `${colorFillQuaternary} !important`,
+          // 去掉表头左右单元格的圆角
+          [`${componentCls}-thead > tr:first-child > th:first-child`]: {
+            borderRadius: 0,
           },
-          // 设置最后一行左右两列的圆角
-          [`${componentCls}-tbody > tr:last-child`]: {
-            ['td:first-child, td:last-child']: {
-              borderRadius: borderRadiusLG,
-            },
+          [`${componentCls}-thead > tr:first-child > th:last-child`]: {
+            borderRadius: 0,
+          },
+          // empty wrapper style
+          [`${componentCls}-empty-wrapper`]: {
+            minHeight: 'auto',
           },
         },
       },
     },
+
+    // 非可展开表格、带 footer 表格、空表格、带边框表格: 底部添加分隔线
+    [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
+      {
+        borderBottom: `1px solid ${colorBorderSecondary}`,
+        borderRadius: 0,
+      },
 
     // 滚动表格样式
     // 由于滚动表格会在 tbody 下最前面多一个 tr 元素，因此需要设置相反的斑马条样式
@@ -123,17 +151,6 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         },
       },
 
-    // 去掉非展开表格的边框
-    [`${componentCls}-wrapper:not(${componentCls}-expandable)`]: {
-      [`${componentCls}:not(${componentCls}-bordered)`]: {
-        [`${componentCls}-tbody`]: {
-          [`tr:not(${componentCls}-measure-row) > td`]: {
-            border: 'none',
-          },
-        },
-      },
-    },
-
     // 可展开表格样式
     [`${componentCls}-wrapper${componentCls}-expandable`]: {
       [`${componentCls}`]: {
@@ -150,12 +167,44 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
                 },
               },
             },
+          // 嵌套子表格和父表格第一列对齐
+          [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
+            marginLeft: token.marginXS + token.lineWidth * 2,
+          },
         },
       },
-      // Remove pagination borderTop for expandable Table
-      [`${componentCls}-pagination`]: {
-        [`&${antCls}-pagination`]: {
-          borderTop: 'none',
+      [`${componentCls}-middle, ${componentCls}-small`]: {
+        [`${componentCls}-tbody`]: {
+          // 嵌套子表格和父表格第一列对齐
+          [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
+            marginLeft: token.marginXS + token.lineWidth * 2 + token.margin,
+          },
+        },
+      },
+    },
+
+    // 可展开表格 + 可选择表格样式
+    [`${componentCls}-wrapper${componentCls}-expandable${componentCls}-selectable`]: {
+      [`${componentCls}`]: {
+        [`${componentCls}-tbody`]: {
+          [`${componentCls}-expanded-row > td`]: {
+            // 除内嵌子表格外，设置其他内嵌元素样式
+            [`& > *:not(${componentCls}-wrapper)`]: {
+              marginLeft: token.marginLG + token.marginXL + token.lineWidth * 2,
+            },
+          },
+          // 嵌套子表格和父表格第一列对齐
+          [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
+            marginLeft: token.marginXS + token.marginXL + token.lineWidth * 2,
+          },
+        },
+      },
+      [`${componentCls}-middle, ${componentCls}-small`]: {
+        [`${componentCls}-tbody`]: {
+          // 嵌套子表格和父表格第一列对齐
+          [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
+            marginLeft: token.marginXS + token.marginXL + token.lineWidth * 2 + token.margin,
+          },
         },
       },
     },
@@ -176,7 +225,6 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         [`&${antCls}-pagination`]: {
           padding: `${padding}px 0`,
           margin: '0 !important',
-          borderTop: `1px solid ${colorBorderSecondary}`,
         },
         // 批量操作栏样式
         [`${componentCls}-batch-operation-bar`]: {
@@ -191,14 +239,6 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
               margin: `0 ${marginXS}px`,
               color: colorLink,
             },
-          },
-        },
-      },
-      // Remove pagination borderTop for bordered Table
-      [`${componentCls}${componentCls}-bordered`]: {
-        [`&+${componentCls}-pagination`]: {
-          [`&${antCls}-pagination`]: {
-            borderTop: 'none',
           },
         },
       },

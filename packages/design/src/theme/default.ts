@@ -4,8 +4,12 @@ import { formatTheme } from './util/format';
 // Calculated by colorBorder and getWeakenBorderColor()
 const tagColorBorder = '#cdd5e466';
 
+export const fontFamilyEn = `Inter, 'Noto sans', sans-serif, Roboto, 'Open Sans', 'Segoe UI', 'Helvetica Neue', 'Helvetica, Arial', 'Apple Color Emoji'`;
+
 const defaultTheme: ThemeConfig = {
   token: {
+    fontFamily: `-apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
+    fontFamilyCode: `Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace`,
     colorPrimaryBg: '#EAF1FF',
     colorPrimary: '#006AFF',
     colorPrimaryBgHover: '#EAF1FF',
@@ -79,6 +83,8 @@ const defaultTheme: ThemeConfig = {
       '0 1px 2px 0 rgba(54, 69, 99, 0.03), 0 1px 6px -1px rgba(54, 69, 99, 0.02), 0 2px 4px 0 rgba(54, 69, 99, 0.02)',
     borderRadius: 6,
     wireframe: false,
+    // Remove focus outline
+    lineWidthFocus: 0,
   },
   components: {
     Breadcrumb: {
@@ -86,6 +92,7 @@ const defaultTheme: ThemeConfig = {
       // @ts-ignore
       // fontHeight is internal token
       fontHeight: 20,
+      lastItemColor: '#5c6b8a',
     },
     InputNumber: {
       handleVisible: true,
@@ -100,7 +107,16 @@ const defaultTheme: ThemeConfig = {
       multipleItemBorderColor: tagColorBorder,
       multipleItemBorderColorDisabled: tagColorBorder,
     },
+    Slider: {
+      trackBg: '#006AFF',
+      trackHoverBg: '#5189fb',
+      trackBgDisabled: '#b3ccff',
+      handleColor: '#006AFF',
+      handleActiveColor: '#5189fb',
+      handleColorDisabled: '#b3ccff',
+    },
     Tag: {
+      defaultColor: '#5c6b8a',
       colorBorder: tagColorBorder,
     },
     Table: {

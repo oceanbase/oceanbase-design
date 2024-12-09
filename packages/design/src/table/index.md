@@ -42,14 +42,16 @@ nav:
 
 <code src="./demo/card-table.tsx" title="和 Card 组合使用"></code>
 
+<code src="./demo/empty.tsx" title="空状态"></code>
+
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
 | pagination | 分页配置 | ReactNode | {} | - |
-| cancelText | 选择表格中 取消 按钮文案 | ReactNode | - | - |
-| collapseText | 选择表格中 收起 按钮文案 | ReactNode | - | - |
-| openText | 选择表格中 展开 按钮文案 | ReactNode | - | - |
+| cancelText | 选择表格中 `取消` 按钮文案 | ReactNode | - | - |
+| collapseText | 选择表格中 `收起` 按钮文案 | ReactNode | - | - |
+| openText | 选择表格中 `展开` 按钮文案 | ReactNode | - | - |
 | hiddenCancelBtn | 选择表格中是否隐藏取消按钮 | boolean | false | - |
 | locale | Table 默认文案设置，目前包括排序、过滤、空数据文案 | object | [默认值](https://github.com/ant-design/ant-design/blob/6dae4a7e18ad1ba193aedd5ab6867e1d823e2aa4/components/locale/zh_CN.tsx#L20-L37) | - |
 | toolOptionsRender | 渲染工具栏，支持返回一个 dom 数组，会自动增加 margin | (selectedRowKeys, selectedRows) => ReactNode[] | - | - |

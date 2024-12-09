@@ -59,7 +59,8 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>(
     const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
     const { wrapSSR, hashId } = useStyle(prefixCls);
 
-    const tooltipCls = classNames(className, hashId);
+    const tooltipCls = classNames(className);
+    const mouseTooltipCls = classNames(prefixCls, className, hashId);
     const [innerOpen, setInnerOpen] = useState(open ?? visible ?? defaultOpen ?? defaultVisible);
 
     // 同步 ant-design noTitle 逻辑
@@ -108,7 +109,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>(
             color: typeItem?.color,
             ...overlayInnerStyle,
           }}
-          className={tooltipCls}
+          className={mouseTooltipCls}
           overlay={overlay}
           {...restProps}
         >

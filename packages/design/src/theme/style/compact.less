@@ -19,10 +19,8 @@
 @colorLink: #006aff;
 @colorTextBase: #000000;
 @colorBgBase: #ffffff;
-@fontFamily: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-'Noto Color Emoji';
-@fontFamilyCode: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+@fontFamily: -apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+@fontFamilyCode: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 @fontSize: 12;
 @lineWidth: 1;
 @lineType: solid;
@@ -314,6 +312,9 @@
 @colorFillSecondary: #e2e8f3;
 @colorFillTertiary: #f3f6fc;
 @colorFillQuaternary: #f8fafe;
+@colorBgSolid: rgb(0, 0, 0);
+@colorBgSolidHover: rgba(0, 0, 0, 0.75);
+@colorBgSolidActive: rgba(0, 0, 0, 0.95);
 @colorBgLayout: #f3f6fc;
 @colorBgContainer: #ffffff;
 @colorBgElevated: #ffffff;
@@ -341,6 +342,7 @@
 @colorSuccessTextActive: #00b378;
 @colorErrorBg: #ffebeb;
 @colorErrorBgHover: #ffd6d6;
+@colorErrorBgFilledHover: #ffd7d3;
 @colorErrorBgActive: #ffbcb5;
 @colorErrorBorder: #ffb3b3;
 @colorErrorBorderHover: #ff7575;
@@ -412,6 +414,7 @@
 @borderRadiusOuter: 4;
 @boxShadowSecondary: 0 6px 16px 0 rgba(54, 69, 99, 0.08), 0 3px 6px -4px rgba(54, 69, 99, 0.12), 0 9px 28px 8px rgba(54, 69, 99, 0.05);
 @boxShadow: 0 1px 2px 0 rgba(54, 69, 99, 0.03), 0 1px 6px -1px rgba(54, 69, 99, 0.02), 0 2px 4px 0 rgba(54, 69, 99, 0.02);
+@lineWidthFocus: 3;
 @colorFillContent: #e2e8f3;
 @colorFillContentHover: #cdd5e4;
 @colorFillAlter: #f8fafe;
@@ -432,7 +435,6 @@
 @colorErrorOutline: rgba(255, 5, 5, 0.08);
 @colorWarningOutline: rgba(255, 164, 19, 0.11);
 @fontSizeIcon: 10;
-@lineWidthFocus: 4;
 @controlOutlineWidth: 2;
 @controlInteractiveSize: 14;
 @controlItemBgHover: #f3f6fc;

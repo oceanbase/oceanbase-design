@@ -1,21 +1,18 @@
 import { LoadingOutlined } from '@oceanbase/icons';
 import { Button, Tooltip, Typography } from '@oceanbase/design';
+import type { ButtonProps } from '@oceanbase/design';
 import React from 'react';
 
-export interface BaseProps {
+export interface BaseProps extends ButtonProps {
   /** 是否显示 */
   visible?: boolean;
-  disabled?: boolean;
+  /** 固定展示、不会被折叠 */
+  fixed?: boolean;
   onClick?: () => Promise<void> | void;
   children?: React.ReactElement | string;
-  type?: 'default' | 'primary';
-  className?: string;
   enableLoading?: boolean;
   tooltip?: string;
   loading?: boolean;
-  danger?: boolean;
-  /** 不会被隐藏 */
-  fixed?: boolean;
 }
 
 export class ActionButton extends React.PureComponent<BaseProps> {
@@ -24,25 +21,11 @@ export class ActionButton extends React.PureComponent<BaseProps> {
     loading: false,
   };
   render() {
-    const {
-      type,
-      disabled,
-      children,
-      onClick,
-      enableLoading = true,
-      className,
-      tooltip,
-      loading,
-      danger,
-    } = this.props;
+    const { children, onClick, enableLoading = true, tooltip, loading, ...restProps } = this.props;
     return (
       <Tooltip placement="top" title={tooltip}>
         <Button
-          className={className}
           loading={enableLoading && (loading || this.state.loading)}
-          type={type}
-          danger={danger}
-          disabled={disabled}
           onClick={_ => {
             const handle = onClick?.();
 
@@ -54,6 +37,7 @@ export class ActionButton extends React.PureComponent<BaseProps> {
               });
             }
           }}
+          {...restProps}
         >
           {children}
         </Button>
@@ -73,15 +57,16 @@ export class ActionLink extends React.PureComponent<BaseProps> {
       disabled,
       onClick,
       children,
-      className,
       enableLoading = true,
       tooltip,
       loading,
+      type,
+      style,
+      ...restProps
     } = this.props;
     return (
       <Typography.Link
-        className={className}
-        style={{ padding: 0 }}
+        style={{ padding: 0, ...style }}
         disabled={loading || disabled || this.state.disabled}
         onClick={_ => {
           const handle = onClick?.();
@@ -94,6 +79,7 @@ export class ActionLink extends React.PureComponent<BaseProps> {
             });
           }
         }}
+        {...restProps}
       >
         <Tooltip placement="top" title={tooltip}>
           {loading || this.state.disabled ? <LoadingOutlined /> : ''} {children}

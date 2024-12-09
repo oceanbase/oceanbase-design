@@ -1,5 +1,5 @@
 ---
-title: Ranger 日期快速选择
+title: Ranger 日期时间选择
 nav:
   title: 业务组件
   path: /biz-components
@@ -31,6 +31,7 @@ nav:
 | mode | 渲染类型 | default \| mini | default | - |
 | pastOnly | 只能选择过去时间 | boolean | false | - |
 | disabledDate | 不可选择的日期 | (currentDate: Dayjs \| Moment) => boolean | - | - |
+| quickPickerProps | QuickPicker props | QuickPickerProps | - | - |
 | 其他 antd/RangePicker 的 `props` | [antd-RangePicker](https://ant.design/components/date-picker-cn/#RangePicker) | - | - | - |
 
 ### QuickPicker

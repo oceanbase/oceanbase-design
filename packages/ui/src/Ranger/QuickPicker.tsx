@@ -22,7 +22,7 @@ interface SelectProps {
 
 export type QuickType = 'select' | 'dropdown';
 
-interface QuickPickerProps extends LocaleWrapperProps {
+export interface QuickPickerProps extends LocaleWrapperProps {
   selects: RangeOption[];
   type?: QuickType;
   onChange: (range: RangeValue) => void;
@@ -36,7 +36,14 @@ interface QuickPickerProps extends LocaleWrapperProps {
 
 const prefix = getPrefix('ranger-quick-picker');
 
-const RangeDropdown = ({ selects, onChange, value, customable, locale = {} }: SelectProps) => {
+const RangeDropdown = ({
+  selects,
+  onChange,
+  value,
+  customable,
+  locale = {},
+  ...rest
+}: SelectProps) => {
   const menu = (
     <Menu
       onClick={e => {
@@ -54,7 +61,7 @@ const RangeDropdown = ({ selects, onChange, value, customable, locale = {} }: Se
   const match = selects.find(item => item.name === value);
 
   return (
-    <Dropdown overlay={menu}>
+    <Dropdown overlay={menu} {...rest}>
       <Space style={{ cursor: 'pointer' }} className={classnames(prefix, `${prefix}-dropdown`)}>
         <ClockCircleOutlined />
         {locale[match?.name] || match?.name}
@@ -64,7 +71,15 @@ const RangeDropdown = ({ selects, onChange, value, customable, locale = {} }: Se
   );
 };
 
-const RangeSelect = ({ selects, onChange, value, customable, locale = {}, size }: SelectProps) => {
+const RangeSelect = ({
+  selects,
+  onChange,
+  value,
+  customable,
+  locale = {},
+  size,
+  ...rest
+}: SelectProps) => {
   const handleChange = (nextValue: string) => {
     onChange(nextValue);
   };
@@ -75,6 +90,7 @@ const RangeSelect = ({ selects, onChange, value, customable, locale = {}, size }
       onSelect={handleChange}
       value={value}
       size={size}
+      {...rest}
     >
       {selects.map(item => {
         return (

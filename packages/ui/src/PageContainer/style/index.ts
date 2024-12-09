@@ -38,6 +38,10 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
           // overwritten pro-components style
           paddingBlockStart: 0,
         },
+        // remove paddingBlockStart for page header
+        [`${antCls}-page-header-heading`]: {
+          paddingBlockStart: 0,
+        },
         [`${antCls}-page-header-heading-title`]: {
           fontSize: fontSizeHeading3,
           marginInlineEnd: token.marginXS,
@@ -66,12 +70,6 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         [`& > ${antCls}-tabs-top:not(${antCls}-tabs-card):first-child`]: {
           // equal to page header paddingBlockEnd
           marginTop: -padding,
-        },
-      },
-      // remove paddingBlockStart for page header without breadcrumb
-      [`${antCls}-page-header:not(${antCls}-page-header-has-breadcrumb)`]: {
-        [`${antCls}-page-header-heading`]: {
-          paddingBlockStart: 0,
         },
       },
     },

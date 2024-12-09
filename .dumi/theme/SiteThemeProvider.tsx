@@ -10,6 +10,28 @@ import SiteContext from './slots/SiteContext';
 import zhCN from '../../packages/design/src/locale/zh-CN';
 import useSiteToken from '../hooks/useSiteToken';
 
+interface NewToken {
+  bannerHeight: number;
+  headerHeight: number;
+  menuItemBorder: number;
+  mobileMaxWidth: number;
+  siteMarkdownCodeBg: string;
+  antCls: string;
+  iconCls: string;
+  marginFarXS: number;
+  marginFarSM: number;
+  marginFar: number;
+  codeFamily: string;
+  contentMarginTop: number;
+  anchorTop: number;
+}
+
+// 通过给 antd-style 扩展 CustomToken 对象类型定义，可以为 useTheme 中增加相应的 token 对象
+declare module 'antd-style' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  export interface CustomToken extends NewToken {}
+}
+
 const SiteThemeProvider: FC<
   ThemeProviderProps<any> & {
     theme: ThemeConfig;

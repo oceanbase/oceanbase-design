@@ -5,8 +5,7 @@ export default {
   placeholder: '請輸入密碼',
   generatePlaceholder: '請輸入或隨機生成',
   randomlyGenerate: '隨機生成',
-  pleaseKeepYourPasswordIn: '請牢記密碼，也可',
+  pleaseRememberYourPassword: '請牢記並妥善保存密碼',
   copySuccessfully: '複製成功',
   copyPassword: '複製密碼',
-  andKeepItProperly: '並妥善保存',
 };

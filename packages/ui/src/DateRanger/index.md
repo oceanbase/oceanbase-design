@@ -1,5 +1,5 @@
 ---
-title: DateRanger 新日期快速选择
+title: DateRanger 新版日期时间选择
 nav:
   title: 业务组件
   path: /biz-components
@@ -15,7 +15,7 @@ nav:
 
 <code src="./demo/default-value.tsx" title="指定默认值"></code>
 
-<code src="./demo/default-quick-value.tsx" title="指定快速选择的默认值"></code>
+<code src="./demo/updateCurrentTime.tsx" title="更新当前时间"></code>
 
 ## API
 
@@ -28,9 +28,16 @@ nav:
 | defaultQuickValue | 快速选择的默认值（优先级低于 value/defaultValue） | string | - | - |
 | hasRewind | 后退按钮 | boolean | true | - |
 | hasForward | 前进按钮 | boolean | true | - |
-| hasNow | 当前按钮 | boolean | true | - |
+| hasSync | 刷新按钮 | boolean | true | - |
+| hasTagInPicker | 在选项面板中是否展示Tag | boolean | false | - |
 | pastOnly | 只能选择过去时间 | boolean | false | - |
 | disabledDate | 不可选择的日期 | (currentDate: Dayjs \| Moment) => boolean | - | - |
+| simpleMode | 是否启用极简模式 | boolean | false | - |
+| hideYear | 当时间范围在本年时，隐藏年份 | boolean | false | - |
+| hideSecond | 隐藏"秒” | boolean | false | - |
+| autoCalcRange | 自动计算时间范围并回显到选择器tag | boolean | false | - |
+| ref | updateCurrentTime 手动更新当前时间 | function | - | - |
+
 | 其他 antd/RangePicker 的 `props` | [antd-RangePicker](https://ant.design/components/date-picker-cn/#RangePicker) | - | - | - |
 
 ### RangeOption

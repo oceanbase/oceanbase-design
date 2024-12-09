@@ -24,7 +24,7 @@ export default () => {
             margin: 3px 0;
             padding: 10px 0 0;
             overflow: hidden;
-            color: #555;
+            color: ${token.colorIcon};
             text-align: center;
             list-style: none;
             background-color: inherit;
@@ -72,8 +72,9 @@ export default () => {
               }
             }
 
-            &.TwoTone:hover {
-              background-color: #8ecafe;
+            &.TwoTone:hover,
+            &.Colored:hover {
+              background-color: ${token.colorPrimaryHover};
             }
 
             &.copied:hover {
