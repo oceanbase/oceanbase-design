@@ -125,13 +125,6 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
       },
     },
 
-    // 非可展开表格、带 footer 表格、空表格、带边框表格: 底部添加分隔线
-    [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
-      {
-        borderBottom: `1px solid ${colorBorderSecondary}`,
-        borderRadius: 0,
-      },
-
     // 滚动表格样式
     // 由于滚动表格会在 tbody 下最前面多一个 tr 元素，因此需要设置相反的斑马条样式
     // .ant-table-scroll-horizontal: 水平滚动
@@ -150,6 +143,24 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
             },
         },
       },
+
+    // 非可展开表格、不带 footer 表格、非空表格、不带边框表格: 底部添加分隔线
+    [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
+      {
+        borderBottom: `1px solid ${colorBorderSecondary}`,
+        borderRadius: 0,
+      },
+
+    // 去掉非展开表格的边框
+    [`${componentCls}-wrapper:not(${componentCls}-expandable)`]: {
+      [`${componentCls}:not(${componentCls}-bordered)`]: {
+        [`${componentCls}-tbody`]: {
+          [`tr:not(${componentCls}-measure-row) > td`]: {
+            border: 'none',
+          },
+        },
+      },
+    },
 
     // 可展开表格样式
     [`${componentCls}-wrapper${componentCls}-expandable`]: {
