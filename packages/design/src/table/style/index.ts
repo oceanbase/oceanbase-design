@@ -28,6 +28,7 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
       borderRadius: borderRadiusLG,
       [`${componentCls}-footer`]: {
         borderBottom: `1px solid ${colorBorderSecondary}`,
+        borderRadius: 0,
       },
       // 单元格通用样式
       [`${componentCls}-thead, ${componentCls}-tbody`]: {
@@ -141,6 +142,31 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
             {
               backgroundColor: colorBgBase,
             },
+        },
+      },
+
+    // 带边框的表格样式
+    [`${componentCls}-wrapper ${componentCls}${componentCls}-bordered`]: {
+      [`${componentCls}-footer`]: {
+        borderRadius: `0px 0px ${token.borderRadiusLG}px ${token.borderRadiusLG}px`,
+      },
+    },
+
+    // 带边框但不带 footer 的表格样式
+    [`${componentCls}-wrapper:not(${componentCls}-has-footer) ${componentCls}${componentCls}-bordered`]:
+      {
+        // 表格容器设置圆角
+        [`${componentCls}-container`]: {
+          borderRadius: token.borderRadiusLG,
+        },
+        [`${componentCls}-tbody`]: {
+          // 最后一行左右单元格增加圆角
+          [`tr:last-child >*:first-child`]: {
+            borderEndStartRadius: token.borderRadiusLG,
+          },
+          [`tr:last-child >*:last-child`]: {
+            borderEndEndRadius: token.borderRadiusLG,
+          },
         },
       },
 
