@@ -172,6 +172,7 @@ export default defineConfig({
           title: '数据展示',
           children: [
             { title: 'Card 卡片', link: '/components/card' },
+            { title: 'Collapse 折叠面板', link: '/components/collapse' },
             { title: 'Descriptions 描述列表', link: '/components/descriptions' },
             { title: 'Empty 空状态', link: '/components/empty' },
             { title: 'List 列表', link: '/components/list' },
