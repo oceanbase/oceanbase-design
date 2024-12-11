@@ -94,6 +94,9 @@ const defaultTheme: ThemeConfig = {
       fontHeight: 20,
       lastItemColor: '#5c6b8a',
     },
+    Collapse: {
+      colorBorder: '#E2E8F3',
+    },
     InputNumber: {
       handleVisible: true,
     },
