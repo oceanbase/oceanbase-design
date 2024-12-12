@@ -1,5 +1,14 @@
 import React, { useEffect, useRef, useState, useImperativeHandle } from 'react';
-import { Button, DatePicker, Divider, Dropdown, Radio, Space, theme } from '@oceanbase/design';
+import {
+  Button,
+  DatePicker,
+  Divider,
+  Dropdown,
+  Radio,
+  Space,
+  Tooltip,
+  theme,
+} from '@oceanbase/design';
 import type { TooltipProps, FormItemProps } from '@oceanbase/design';
 import {
   LeftOutlined,
@@ -472,53 +481,63 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
           buttonStyle="solid"
         >
           {hasRewind && (
-            <Radio.Button
-              value="stepBack"
-              style={{
-                paddingInline: 8,
-                borderInlineStart: 0,
-                borderRadius: 0,
-              }}
-              onMouseEnter={() => setBackRadioFocused(true)}
-              onMouseLeave={() => setBackRadioFocused(false)}
-              onClick={() => {
-                if (isPlay) {
-                  setIsPlay(false);
-                }
-
-                if (startTime && endTime) {
-                  const newStartTime = (startTime as Dayjs)
-                    .clone()
-                    .subtract(differenceMs, 'milliseconds');
-                  const newEndTime = startTime?.clone() as Dayjs;
-                  rangeChange([newStartTime, newEndTime]);
-                }
-              }}
+            <Tooltip
+              title={locale.jumpBack}
+              getPopupContainer={trigger => trigger.parentNode as HTMLElement}
             >
-              <LeftOutlined />
-            </Radio.Button>
+              <Radio.Button
+                value="stepBack"
+                style={{
+                  paddingInline: 8,
+                  borderInlineStart: 0,
+                  borderRadius: 0,
+                }}
+                onMouseEnter={() => setBackRadioFocused(true)}
+                onMouseLeave={() => setBackRadioFocused(false)}
+                onClick={() => {
+                  if (isPlay) {
+                    setIsPlay(false);
+                  }
+
+                  if (startTime && endTime) {
+                    const newStartTime = (startTime as Dayjs)
+                      .clone()
+                      .subtract(differenceMs, 'milliseconds');
+                    const newEndTime = startTime?.clone() as Dayjs;
+                    rangeChange([newStartTime, newEndTime]);
+                  }
+                }}
+              >
+                <LeftOutlined />
+              </Radio.Button>
+            </Tooltip>
           )}
           {hasForward && (
-            <Radio.Button
-              value="stepForward"
-              style={{ paddingInline: 8 }}
-              // disabled={isPlay}
-              onClick={() => {
-                if (startTime && endTime) {
-                  const newStartTime = endTime.clone() as Dayjs;
-                  const newEndTime = (endTime as Dayjs).clone().add(differenceMs);
-
-                  if (newEndTime.isBefore(new Date())) {
-                    rangeChange([newStartTime, newEndTime]);
-                  } else {
-                    setIsPlay(true);
-                    setNow();
-                  }
-                }
-              }}
+            <Tooltip
+              title={locale.jumpForward}
+              getPopupContainer={trigger => trigger.parentNode as HTMLElement}
             >
-              <RightOutlined />
-            </Radio.Button>
+              <Radio.Button
+                value="stepForward"
+                style={{ paddingInline: 8 }}
+                // disabled={isPlay}
+                onClick={() => {
+                  if (startTime && endTime) {
+                    const newStartTime = endTime.clone() as Dayjs;
+                    const newEndTime = (endTime as Dayjs).clone().add(differenceMs);
+
+                    if (newEndTime.isBefore(new Date())) {
+                      rangeChange([newStartTime, newEndTime]);
+                    } else {
+                      setIsPlay(true);
+                      setNow();
+                    }
+                  }
+                }}
+              >
+                <RightOutlined />
+              </Radio.Button>
+            </Tooltip>
           )}
         </Radio.Group>
       </Space>
