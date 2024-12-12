@@ -41,6 +41,10 @@ import {
   LAST_3_DAYS,
   DATE_TIME_SECOND_FORMAT,
   YEAR_DATE_TIME_SECOND_FORMAT,
+  DATE_TIME_FORMAT_CN,
+  DATE_TIME_SECOND_FORMAT_CN,
+  YEAR_DATE_TIME_FORMAT_CN,
+  YEAR_DATE_TIME_SECOND_FORMAT_CN,
 } from './constant';
 import type { RangeOption } from './typing';
 import type { Rule } from './PickerPanel';
@@ -135,6 +139,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   } = props;
 
   const { token } = theme.useToken();
+  const isCn = locale.locale === 'zh_CN';
 
   // 是否为 moment 时间对象
   const isMoment =
@@ -456,12 +461,14 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
                   if (hideYear && isThisYear) {
                     return hideSecond
-                      ? v.format(DATE_TIME_FORMAT)
-                      : v.format(DATE_TIME_SECOND_FORMAT);
+                      ? v.format(isCn ? DATE_TIME_FORMAT_CN : DATE_TIME_FORMAT)
+                      : v.format(isCn ? DATE_TIME_SECOND_FORMAT_CN : DATE_TIME_SECOND_FORMAT);
                   }
                   return hideSecond
-                    ? v.format(YEAR_DATE_TIME_FORMAT)
-                    : v.format(YEAR_DATE_TIME_SECOND_FORMAT);
+                    ? v.format(isCn ? YEAR_DATE_TIME_FORMAT_CN : YEAR_DATE_TIME_FORMAT)
+                    : v.format(
+                        isCn ? YEAR_DATE_TIME_SECOND_FORMAT_CN : YEAR_DATE_TIME_SECOND_FORMAT
+                      );
                 }}
                 // @ts-ignore
                 value={innerValue}
