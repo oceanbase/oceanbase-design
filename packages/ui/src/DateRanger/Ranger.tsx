@@ -154,6 +154,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
 
   const [open, setOpen] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [backRadioFocused, setBackRadioFocused] = useState(false);
   const refState = useRef({
     tooltipOpen,
   });
@@ -326,7 +327,14 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
       : selects[rangeNameIndex + 1];
 
   return (
-    <Space className={classNames([prefix, `${prefix}-show-range`])} style={rest.style}>
+    <Space
+      className={classNames({
+        [prefix]: true,
+        [`${prefix}-show-range`]: true,
+        [`${prefix}-back-radio-focused`]: backRadioFocused,
+      })}
+      style={rest.style}
+    >
       <Space size={0}>
         <div className={`${prefix}-wrapper`}>
           <Dropdown
@@ -471,6 +479,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                 borderInlineStart: 0,
                 borderRadius: 0,
               }}
+              onMouseEnter={() => setBackRadioFocused(true)}
+              onMouseLeave={() => setBackRadioFocused(false)}
               onClick={() => {
                 if (isPlay) {
                   setIsPlay(false);

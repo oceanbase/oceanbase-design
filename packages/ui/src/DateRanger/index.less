@@ -9,6 +9,7 @@
     border-radius: 4px 0 0 4px;
     box-sizing: border-box;
     display: flex;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     // FIXED: 存在不生效情况
     .@{prefix}-picker {
       padding-left: 0px;
@@ -17,6 +18,10 @@
       input {
         text-align: center;
       }
+    }
+
+    &:hover {
+      border-color: @colorPrimaryBorderHover;
     }
   }
 
@@ -91,6 +96,15 @@
     .@{prefixCls}-radio-button-wrapper {
       padding-inline: 8px;
       color: @colorTextSecondary;
+      transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+      &:hover {
+        border-color: @colorPrimaryBorderHover;
+
+        &::before {
+          background-color: @colorPrimaryBorderHover;
+        }
+      }
     }
   }
 }
@@ -104,4 +118,18 @@
   border-radius: 4px;
   line-height: 1;
   text-align: center;
+}
+
+.@{prefix}-back-radio-focused {
+  .@{prefix}-wrapper {
+    border-right-color: @colorPrimaryBorderHover;
+  }
+
+  .@{prefix}-playback-control {
+    .@{prefixCls}-radio-button-wrapper:first-child {
+      + .@{prefixCls}-radio-button-wrapper::before {
+        background-color: @colorPrimaryBorderHover;
+      }
+    }
+  }
 }
