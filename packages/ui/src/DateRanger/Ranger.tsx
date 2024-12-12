@@ -470,6 +470,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                 paddingInline: 8,
                 borderInlineStart: 0,
                 borderRadius: 0,
+                color: token.colorTextSecondary,
               }}
               onClick={() => {
                 if (isPlay) {
@@ -491,8 +492,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
           {hasForward && (
             <Radio.Button
               value="stepForward"
-              style={{ paddingInline: 8 }}
-              disabled={isPlay}
+              style={{ paddingInline: 8, color: token.colorTextSecondary }}
+              // disabled={isPlay}
               onClick={() => {
                 if (startTime && endTime) {
                   const newStartTime = endTime.clone() as Dayjs;
@@ -514,7 +515,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
       </Space>
       {hasSync && (
         <Button
-          style={{ paddingInline: 8 }}
+          style={{ paddingInline: 8, color: token.colorTextSecondary }}
           onClick={() => {
             setNow();
           }}
@@ -525,6 +526,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
       {hasZoomOut && (
         <Button
           disabled={!nextRangeItem}
+          style={{ color: token.colorTextSecondary }}
           onClick={() => {
             setIsPlay(true);
             if (nextRangeItem) {
