@@ -513,7 +513,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
           )}
         </Radio.Group>
       </Space>
-      {hasSync && (
+      {hasSync && rangeName !== CUSTOMIZE && (
         <Button
           style={{ paddingInline: 8, color: token.colorTextSecondary }}
           onClick={() => {
