@@ -34,7 +34,8 @@ import {
   YEAR_DATE_TIME_SECOND_FORMAT,
 } from './constant';
 import type { RangeOption } from './typing';
-import InternalPickerPanel, { Rule } from './PickerPanel';
+import type { Rule } from './PickerPanel';
+import InternalPickerPanel from './PickerPanel';
 import zhCN from './locale/zh-CN';
 import enUS from './locale/en-US';
 import './index.less';
@@ -450,6 +451,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                 onChange={datePickerChange}
                 allowClear={false}
                 size={size}
+                suffixIcon={null}
                 // 透传 props 到 antd Ranger
                 {...omit(rest, 'value', 'onChange')}
               />
