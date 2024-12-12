@@ -326,7 +326,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
       : selects[rangeNameIndex + 1];
 
   return (
-    <Space className={classNames(prefix)} style={rest.style}>
+    <Space className={classNames([prefix, `${prefix}-show-range`])} style={rest.style}>
       <Space size={0}>
         <div className={`${prefix}-wrapper`}>
           <Dropdown
@@ -470,7 +470,6 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                 paddingInline: 8,
                 borderInlineStart: 0,
                 borderRadius: 0,
-                color: token.colorTextSecondary,
               }}
               onClick={() => {
                 if (isPlay) {
@@ -492,7 +491,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
           {hasForward && (
             <Radio.Button
               value="stepForward"
-              style={{ paddingInline: 8, color: token.colorTextSecondary }}
+              style={{ paddingInline: 8 }}
               // disabled={isPlay}
               onClick={() => {
                 if (startTime && endTime) {
