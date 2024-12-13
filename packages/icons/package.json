@@ -30,6 +30,7 @@
     "README.md",
     "LICENSE"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "npm run generate && father build",
     "generate": "rm -rf src && ts-node scripts/generate.ts"
