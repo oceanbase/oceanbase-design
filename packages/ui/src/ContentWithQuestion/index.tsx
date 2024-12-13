@@ -1,29 +1,29 @@
 import { QuestionCircleOutlined } from '@oceanbase/icons';
-import { ConfigProvider, Space, Tooltip, TooltipProps } from '@oceanbase/design';
+import { ConfigProvider, Space, Tooltip } from '@oceanbase/design';
+import type { TooltipProps } from '@oceanbase/design';
 import classNames from 'classnames';
 import React, { useContext, isValidElement } from 'react';
 import useStyle from './style';
 
-export interface ContentWithQuestionProps {
+export interface ContentWithQuestionProps
+  extends Omit<React.HTMLProps<HTMLSpanElement>, 'content'> {
   content?: React.ReactNode;
   tooltip?: TooltipProps;
   prefixIcon?: React.ReactNode | boolean;
   suffixIcon?: React.ReactNode | boolean;
-  className?: string;
-  style?: React.CSSProperties;
-  onClick?: (e: React.SyntheticEvent) => void;
+  prefixCls?: string;
 }
 
 const ContentWithQuestion: React.FC<ContentWithQuestionProps> = ({
-  prefixCls: customizePrefixCls,
   content,
   tooltip,
   prefixIcon = null,
   suffixIcon = true,
+  prefixCls: customizePrefixCls,
   className,
   children,
   ...restProps
-}: any) => {
+}) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('content-with-question', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
@@ -41,26 +41,9 @@ const ContentWithQuestion: React.FC<ContentWithQuestionProps> = ({
   };
 
   return wrapSSR(
-    <span
-      className={classNames({
-        [`${prefixCls}-item`]: true,
-        [className]: !!className,
-      })}
-      {...restProps}
-    >
+    <span className={classNames(`${prefixCls}-item`, className)} {...restProps}>
       <Space>
-        {getIcon(
-          prefixIcon === true ? (
-            <QuestionCircleOutlined
-              className={`${prefixCls}-help`}
-              style={{
-                marginRight: 4,
-              }}
-            />
-          ) : (
-            prefixIcon
-          )
-        )}
+        {getIcon(prefixIcon)}
         <span data-testid="content">{content ?? children}</span>
         {getIcon(suffixIcon)}
       </Space>
