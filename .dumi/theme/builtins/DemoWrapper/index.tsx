@@ -29,7 +29,6 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
         (acc, item) => {
           const { previewerProps } = item;
           const { debug } = previewerProps;
-          console.log(debug);
 
           if (debug && !showDebug) return acc;
 
@@ -37,7 +36,7 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
             ...item,
             previewerProps: {
               ...previewerProps,
-              expand: expandAll,
+              defaultShowCode: expandAll,
               /**
                * extra marker for the original debug
                */
@@ -66,7 +65,9 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
         </Tooltip>
         <Tooltip
           title={
-            <FormattedMessage id={`app.component.examples.${showDebug ? 'hide' : 'visible'}`} />
+            <FormattedMessage
+              id={showDebug ? 'app.component.examples.hide' : 'app.component.examples.visible'}
+            />
           }
         >
           {showDebug ? (
