@@ -30,6 +30,11 @@
     "README.md",
     "LICENSE"
   ],
+  "sideEffects": [
+    "**/*.less",
+    "**/*.css",
+    "es/index.js"
+  ],
   "scripts": {
     "build": "NODE_OPTIONS=--max_old_space_size=4096 father build"
   },
