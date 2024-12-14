@@ -133,7 +133,10 @@ export default ({
                   // @ts-ignore
                   <Menu.Item
                     key={(actionKey as string) ?? index.toString()}
-                    onClick={action.props.onClick}
+                    // @ts-ignore
+                    onClick={({ domEvent }) => {
+                      action.props.onClick?.(domEvent as React.MouseEvent<HTMLElement, MouseEvent>);
+                    }}
                     style={{ minWidth: 120 }}
                     {...omit(action.props, 'disabled')}
                     disabled={actionDisabled}
