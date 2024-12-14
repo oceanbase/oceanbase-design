@@ -287,6 +287,15 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         padding: 0,
       },
     },
+
+    // Popover、Tooltip 等弹出层中的表格空状态高度设为自动，避免高度过大撑高弹出层
+    [`${antCls}-popover, ${antCls}-tooltip`]: {
+      [`${componentCls} ${componentCls}-tbody`]: {
+        [`${componentCls}-empty-wrapper`]: {
+          minHeight: 'auto',
+        },
+      },
+    },
   };
 };
 
