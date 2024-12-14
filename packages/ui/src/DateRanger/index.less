@@ -4,11 +4,13 @@
 
 .@{prefix} {
   cursor: pointer;
+
   .@{prefix}-wrapper {
     border: 1px solid @colorBorder;
-    border-radius: 4px 0 0 4px;
     box-sizing: border-box;
     display: flex;
+    border-radius: ~'@{borderRadius}px';
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     // FIXED: 存在不生效情况
     .@{prefix}-picker {
       padding-left: 0px;
@@ -18,6 +20,15 @@
         text-align: center;
       }
     }
+
+    &:hover {
+      border-color: @colorPrimaryBorderHover;
+    }
+  }
+
+  .@{prefix}-wrapper-has-jumper {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
   }
 
   .@{prefix}-play {
@@ -88,20 +99,43 @@
   }
 
   .@{prefix}-playback-control {
-    margin-left: 8px;
-
     .@{prefixCls}-radio-button-wrapper {
       padding-inline: 8px;
+      color: @colorTextSecondary;
+      transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+      &:hover {
+        border-color: @colorPrimaryBorderHover;
+
+        &::before {
+          background-color: @colorPrimaryBorderHover;
+        }
+      }
     }
   }
 }
 
 .@{prefix}-label {
-  background-color: rgb(226, 229, 237);
+  background-color: @colorFillSecondary;
+  color: @colorTextSecondary;
   display: inline-block;
   width: 60px;
   padding: 4px 0;
   border-radius: 4px;
   line-height: 1;
   text-align: center;
+}
+
+.@{prefix}-back-radio-focused {
+  .@{prefix}-wrapper {
+    border-right-color: @colorPrimaryBorderHover;
+  }
+
+  .@{prefix}-playback-control {
+    .@{prefixCls}-radio-button-wrapper:first-child {
+      + .@{prefixCls}-radio-button-wrapper::before {
+        background-color: @colorPrimaryBorderHover;
+      }
+    }
+  }
 }

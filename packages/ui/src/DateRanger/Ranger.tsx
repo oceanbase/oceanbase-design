@@ -1,5 +1,14 @@
 import React, { useEffect, useRef, useState, useImperativeHandle } from 'react';
-import { Button, DatePicker, Divider, Dropdown, Radio, Space, theme } from '@oceanbase/design';
+import {
+  Button,
+  DatePicker,
+  Divider,
+  Dropdown,
+  Radio,
+  Space,
+  Tooltip,
+  theme,
+} from '@oceanbase/design';
 import type { TooltipProps, FormItemProps } from '@oceanbase/design';
 import {
   LeftOutlined,
@@ -32,9 +41,14 @@ import {
   LAST_3_DAYS,
   DATE_TIME_SECOND_FORMAT,
   YEAR_DATE_TIME_SECOND_FORMAT,
+  DATE_TIME_FORMAT_CN,
+  DATE_TIME_SECOND_FORMAT_CN,
+  YEAR_DATE_TIME_FORMAT_CN,
+  YEAR_DATE_TIME_SECOND_FORMAT_CN,
 } from './constant';
 import type { RangeOption } from './typing';
-import InternalPickerPanel, { Rule } from './PickerPanel';
+import type { Rule } from './PickerPanel';
+import InternalPickerPanel from './PickerPanel';
 import zhCN from './locale/zh-CN';
 import enUS from './locale/en-US';
 import './index.less';
@@ -125,6 +139,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   } = props;
 
   const { token } = theme.useToken();
+  const isCn = locale.locale === 'zh_CN';
 
   // 是否为 moment 时间对象
   const isMoment =
@@ -153,6 +168,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
 
   const [open, setOpen] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [backRadioFocused, setBackRadioFocused] = useState(false);
   const refState = useRef({
     tooltipOpen,
   });
@@ -325,9 +341,20 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
       : selects[rangeNameIndex + 1];
 
   return (
-    <Space className={classNames(prefix)} style={rest.style}>
+    <Space
+      className={classNames({
+        [prefix]: true,
+        [`${prefix}-show-range`]: true,
+        [`${prefix}-back-radio-focused`]: backRadioFocused,
+      })}
+      style={rest.style}
+    >
       <Space size={0}>
-        <div className={`${prefix}-wrapper`}>
+        <div
+          className={classNames(`${prefix}-wrapper`, {
+            [`${prefix}-wrapper-has-jumper`]: hasRewind || hasForward,
+          })}
+        >
           <Dropdown
             trigger={['click']}
             open={open}
@@ -429,7 +456,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
             >
               {/* @ts-ignore  */}
               <DatePicker.RangePicker
-                className={`${prefix}-picker`}
+                className={classNames(`${prefix}-picker`)}
                 style={{
                   pointerEvents: 'none',
                   border: 0,
@@ -438,18 +465,21 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
                   if (hideYear && isThisYear) {
                     return hideSecond
-                      ? v.format(DATE_TIME_FORMAT)
-                      : v.format(DATE_TIME_SECOND_FORMAT);
+                      ? v.format(isCn ? DATE_TIME_FORMAT_CN : DATE_TIME_FORMAT)
+                      : v.format(isCn ? DATE_TIME_SECOND_FORMAT_CN : DATE_TIME_SECOND_FORMAT);
                   }
                   return hideSecond
-                    ? v.format(YEAR_DATE_TIME_FORMAT)
-                    : v.format(YEAR_DATE_TIME_SECOND_FORMAT);
+                    ? v.format(isCn ? YEAR_DATE_TIME_FORMAT_CN : YEAR_DATE_TIME_FORMAT)
+                    : v.format(
+                        isCn ? YEAR_DATE_TIME_SECOND_FORMAT_CN : YEAR_DATE_TIME_SECOND_FORMAT
+                      );
                 }}
                 // @ts-ignore
                 value={innerValue}
                 onChange={datePickerChange}
                 allowClear={false}
                 size={size}
+                suffixIcon={null}
                 // 透传 props 到 antd Ranger
                 {...omit(rest, 'value', 'onChange')}
               />
@@ -462,57 +492,75 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
           buttonStyle="solid"
         >
           {hasRewind && (
-            <Radio.Button
-              value="stepBack"
-              style={{
-                paddingInline: 8,
-                borderInlineStart: 0,
-                borderRadius: 0,
-              }}
-              onClick={() => {
-                if (isPlay) {
-                  setIsPlay(false);
-                }
-
-                if (startTime && endTime) {
-                  const newStartTime = (startTime as Dayjs)
-                    .clone()
-                    .subtract(differenceMs, 'milliseconds');
-                  const newEndTime = startTime?.clone() as Dayjs;
-                  rangeChange([newStartTime, newEndTime]);
-                }
-              }}
+            <Tooltip
+              title={locale.jumpBack}
+              getPopupContainer={trigger => trigger.parentNode as HTMLElement}
             >
-              <LeftOutlined />
-            </Radio.Button>
+              <Radio.Button
+                value="stepBack"
+                style={{
+                  paddingInline: 8,
+                  borderInlineStart: 0,
+                  borderTopLeftRadius: 0,
+                  borderBottomLeftRadius: 0,
+                }}
+                onMouseEnter={() => setBackRadioFocused(true)}
+                onMouseLeave={() => setBackRadioFocused(false)}
+                onClick={() => {
+                  if (isPlay) {
+                    setIsPlay(false);
+                  }
+
+                  if (startTime && endTime) {
+                    const newStartTime = (startTime as Dayjs)
+                      .clone()
+                      .subtract(differenceMs, 'milliseconds');
+                    const newEndTime = startTime?.clone() as Dayjs;
+                    rangeChange([newStartTime, newEndTime]);
+                  }
+                }}
+              >
+                <LeftOutlined />
+              </Radio.Button>
+            </Tooltip>
           )}
           {hasForward && (
-            <Radio.Button
-              value="stepForward"
-              style={{ paddingInline: 8 }}
-              disabled={isPlay}
-              onClick={() => {
-                if (startTime && endTime) {
-                  const newStartTime = endTime.clone() as Dayjs;
-                  const newEndTime = (endTime as Dayjs).clone().add(differenceMs);
-
-                  if (newEndTime.isBefore(new Date())) {
-                    rangeChange([newStartTime, newEndTime]);
-                  } else {
-                    setIsPlay(true);
-                    setNow();
-                  }
-                }
-              }}
+            <Tooltip
+              title={locale.jumpForward}
+              getPopupContainer={trigger => trigger.parentNode as HTMLElement}
             >
-              <RightOutlined />
-            </Radio.Button>
+              <Radio.Button
+                value="stepForward"
+                style={{
+                  paddingInline: 8,
+                  borderInlineStart: 0,
+                  borderTopLeftRadius: 0,
+                  borderBottomLeftRadius: 0,
+                }}
+                // disabled={isPlay}
+                onClick={() => {
+                  if (startTime && endTime) {
+                    const newStartTime = endTime.clone() as Dayjs;
+                    const newEndTime = (endTime as Dayjs).clone().add(differenceMs);
+
+                    if (newEndTime.isBefore(new Date())) {
+                      rangeChange([newStartTime, newEndTime]);
+                    } else {
+                      setIsPlay(true);
+                      setNow();
+                    }
+                  }
+                }}
+              >
+                <RightOutlined />
+              </Radio.Button>
+            </Tooltip>
           )}
         </Radio.Group>
       </Space>
-      {hasSync && (
+      {hasSync && rangeName !== CUSTOMIZE && (
         <Button
-          style={{ paddingInline: 8 }}
+          style={{ paddingInline: 8, color: token.colorTextSecondary }}
           onClick={() => {
             setNow();
           }}
@@ -523,6 +571,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
       {hasZoomOut && (
         <Button
           disabled={!nextRangeItem}
+          style={{ color: token.colorTextSecondary }}
           onClick={() => {
             setIsPlay(true);
             if (nextRangeItem) {
