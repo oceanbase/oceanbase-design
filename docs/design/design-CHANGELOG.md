@@ -8,6 +8,22 @@ group: 基础组件
 
 ---
 
+## 0.4.3
+
+`2024-12-14`
+
+- 📖 修复 demo 展开全部代码不生效的问题。[#888](https://github.com/oceanbase/oceanbase-design/pull/888)
+- 📖 修复部分组件不展示 demo 操作栏的问题。[#888](https://github.com/oceanbase/oceanbase-design/pull/888)
+- ⚡ 设置 `sideEffects`，以支持 tree shaking。[#886](https://github.com/oceanbase/oceanbase-design/pull/886)
+- Collapse [#882](https://github.com/oceanbase/oceanbase-design/pull/882)
+  - 📖 新增 Collapse 的文档和示例。
+  - 💄 将 Collapse 默认展开图标改为实心箭头。
+  - 💄 弱化 Collapse 边框，将边框颜色改为 `#E2E8F3`。
+- Table
+  - 🐞 修复普通 Table 的单元格出现底部边框的问题。[#879](https://github.com/oceanbase/oceanbase-design/pull/879)
+  - 💄 优化 Table 带边框时的底部圆角样式。[#880](https://github.com/oceanbase/oceanbase-design/pull/880)
+  - 💄 优化 Table 空状态在 Popover、Tooltip 下的高度。[#891](https://github.com/oceanbase/oceanbase-design/pull/891)
+
 ## 0.4.2
 
 `2024-11-29`
