@@ -1,10 +1,11 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken, GenerateStyle } from '@oceanbase/design/es/theme';
+import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import type { OBToken } from '../../_util/genComponentStyleHook';
 
-export type ContentWithQuestionToken = FullToken<'App'>;
+export type ContentWithQuestionToken = OBToken;
 
-export const genContentWithQuestionStyle: GenerateStyle<any> = (
+export const genContentWithQuestionStyle: GenerateStyle<ContentWithQuestionToken> = (
   token: ContentWithQuestionToken
 ): CSSObject => {
   const { componentCls } = token;
