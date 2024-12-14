@@ -350,7 +350,11 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
       style={rest.style}
     >
       <Space size={0}>
-        <div className={`${prefix}-wrapper`}>
+        <div
+          className={classNames(`${prefix}-wrapper`, {
+            [`${prefix}-wrapper-has-jumper`]: hasRewind || hasForward,
+          })}
+        >
           <Dropdown
             trigger={['click']}
             open={open}
@@ -452,7 +456,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
             >
               {/* @ts-ignore  */}
               <DatePicker.RangePicker
-                className={`${prefix}-picker`}
+                className={classNames(`${prefix}-picker`)}
                 style={{
                   pointerEvents: 'none',
                   border: 0,
@@ -497,7 +501,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                 style={{
                   paddingInline: 8,
                   borderInlineStart: 0,
-                  borderRadius: 0,
+                  borderTopLeftRadius: 0,
+                  borderBottomLeftRadius: 0,
                 }}
                 onMouseEnter={() => setBackRadioFocused(true)}
                 onMouseLeave={() => setBackRadioFocused(false)}
@@ -526,7 +531,12 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
             >
               <Radio.Button
                 value="stepForward"
-                style={{ paddingInline: 8 }}
+                style={{
+                  paddingInline: 8,
+                  borderInlineStart: 0,
+                  borderTopLeftRadius: 0,
+                  borderBottomLeftRadius: 0,
+                }}
                 // disabled={isPlay}
                 onClick={() => {
                   if (startTime && endTime) {

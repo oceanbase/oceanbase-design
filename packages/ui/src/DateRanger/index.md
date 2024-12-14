@@ -15,7 +15,7 @@ nav:
 
 <code src="./demo/default-value.tsx" title="指定默认值"></code>
 
-<code src="./demo/updateCurrentTime.tsx" title="更新当前时间"></code>
+<code src="./demo/updateCurrentTime.tsx" title="从外部更新时间"></code>
 
 ## API
 

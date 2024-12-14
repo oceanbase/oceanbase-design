@@ -4,13 +4,12 @@
 
 .@{prefix} {
   cursor: pointer;
-  min-width: 1120px;
 
   .@{prefix}-wrapper {
     border: 1px solid @colorBorder;
-    border-radius: 4px 0 0 4px;
     box-sizing: border-box;
     display: flex;
+    border-radius: ~'@{borderRadius}px';
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     // FIXED: 存在不生效情况
     .@{prefix}-picker {
@@ -25,6 +24,11 @@
     &:hover {
       border-color: @colorPrimaryBorderHover;
     }
+  }
+
+  .@{prefix}-wrapper-has-jumper {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
   }
 
   .@{prefix}-play {
