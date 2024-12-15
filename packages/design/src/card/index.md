@@ -12,21 +12,15 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="典型卡片" description="包含标题、内容、操作区域。"></code>
-
 <code src="./demo/border-less.tsx" title="无边框" description="带有阴影，通常位于灰色背景之上。"></code>
-
 <code src="./demo/no-divider.tsx" title="无分割线" description="去掉卡片头部和内容区的分割线。"></code>
-
 <code src="./demo/inner.tsx" title="嵌套卡片" description="多层级展示，支持多种内部卡片样式。"></code>
-
 <code src="./demo/grid.tsx" title="网格型内嵌卡片"></code>
-
 <code src="./demo/tabs.tsx" title="带页签的卡片" description="页签可设置选项卡后面的标签。"></code>
-
-<code src="./demo/config-provider.tsx" title="ConfigProvider" description="用于调试内部的 ConfigProvider 是否表现正常，需要连续触发 2 次及以上，观察第二个弹窗是否正常展示" debug></code>
-
 <code src="../table/demo/card-table.tsx" title="和 Table 组合使用"></code>
+<code src="./demo/config-provider.tsx" title="ConfigProvider" description="用于调试内部的 ConfigProvider 是否表现正常，需要连续触发 2 次及以上，观察第二个弹窗是否正常展示" debug></code>
 
 ## API
 

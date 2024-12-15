@@ -10,5 +10,7 @@ export default {
   cancel: '取消',
   confirm: '确定',
   current: '当前',
+  jumpBack: '向前跳转一个时间区间',
+  jumpForward: '向后跳转一个时间区间',
   ...zh_CN,
 };

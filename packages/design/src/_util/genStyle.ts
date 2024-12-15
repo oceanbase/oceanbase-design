@@ -74,6 +74,10 @@ export const genLargeStyle = (token: FullToken<any>): CSSObject => {
         fontSize,
       },
     },
+    [`${antCls}-select-multiple ${antCls}-select-selection-wrap`]: {
+      // ref: https://github.com/oceanbase/oceanbase-design/pull/881
+      height: '100%',
+    },
     // Input
     [`${antCls}-input-wrapper`]: {
       fontSize,

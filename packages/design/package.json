@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/design",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "The Design System of OceanBase",
   "keywords": [
     "oceanbase",
@@ -29,6 +29,11 @@
     "package.json",
     "README.md",
     "LICENSE"
+  ],
+  "sideEffects": [
+    "**/*.less",
+    "**/*.css",
+    "es/index.js"
   ],
   "scripts": {
     "build": "father build && cp src/style/reset.css dist/"

@@ -13,12 +13,13 @@ import { StyleProvider } from '@ant-design/cssinjs';
 import type { StyleProviderProps } from '@ant-design/cssinjs';
 import StyleContext from '@ant-design/cssinjs/es/StyleContext';
 import type { StyleContextProps } from '@ant-design/cssinjs/es/StyleContext';
+import { CaretRightOutlined } from '@oceanbase/icons';
+import aliyunTheme from '@oceanbase/aliyun-theme';
 import { merge } from 'lodash';
 import StaticFunction from '../static-function';
 import themeConfig from '../theme';
 import defaultTheme, { fontFamilyEn } from '../theme/default';
 import darkTheme from '../theme/dark';
-import aliyunTheme from '@oceanbase/aliyun-theme';
 import DefaultRenderEmpty from './DefaultRenderEmpty';
 import type { NavigateFunction } from './navigate';
 import type { Locale } from '../locale';
@@ -95,6 +96,7 @@ const ConfigProvider: ConfigProviderType = ({
   locale,
   navigate,
   hideOnSinglePage,
+  collapse,
   form,
   spin,
   table,
@@ -129,11 +131,19 @@ const ConfigProvider: ConfigProviderType = ({
   return (
     <AntConfigProvider
       locale={mergedLocale}
+      collapse={merge(
+        {},
+        {
+          expandIcon: ({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />,
+        } as ConfigProviderProps['collapse'],
+        parentContext.collapse,
+        collapse
+      )}
       form={merge(
         {},
         {
           requiredMark: 'optional',
-        },
+        } as ConfigProviderProps['form'],
         parentContext.form,
         form
       )}
@@ -143,7 +153,7 @@ const ConfigProvider: ConfigProviderType = ({
         {},
         {
           indicatorSize: (origin: number) => (origin >= 24 ? origin - 16 : origin),
-        },
+        } as ConfigProviderProps['tabs'],
         parentContext.tabs,
         tabs
       )}
@@ -158,7 +168,7 @@ const ConfigProvider: ConfigProviderType = ({
                   fontFamily: fontFamilyEn,
                 }
               : {},
-      })}
+      } as ConfigProviderProps['theme']['token'])}
       renderEmpty={
         parentContext.renderEmpty ||
         (componentName => <DefaultRenderEmpty componentName={componentName} />)

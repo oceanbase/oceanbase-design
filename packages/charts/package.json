@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/charts",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "The Chart library for OceanBase",
   "homepage": "https://github.com/oceanbase/oceanbase-design/packages/charts",
   "repository": {
@@ -22,6 +22,11 @@
     "package.json",
     "README.md",
     "LICENSE"
+  ],
+  "sideEffects": [
+    "**/*.less",
+    "**/*.css",
+    "es/index.js"
   ],
   "scripts": {
     "build": "NODE_OPTIONS=--max_old_space_size=4096 father build"

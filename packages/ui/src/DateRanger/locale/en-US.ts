@@ -10,5 +10,7 @@ export default {
   cancel: 'cancel',
   confirm: 'confirm',
   current: 'current',
+  jumpBack: 'Previous Interval',
+  jumpForward: 'Next Interval',
   ...en_US,
 };

@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/icons",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "The Icon Library for OceanBase",
   "keywords": [
     "oceanbase",
@@ -30,6 +30,7 @@
     "README.md",
     "LICENSE"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "npm run generate && father build",
     "generate": "rm -rf src && ts-node scripts/generate.ts"

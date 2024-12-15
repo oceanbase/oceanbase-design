@@ -289,6 +289,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 initialValue={defaultS || defaultTime}
               >
                 <TimePicker
+                  allowClear={false}
                   suffixIcon={null}
                   needConfirm={false}
                   getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
@@ -347,6 +348,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 initialValue={defaultE || defaultTime}
               >
                 <TimePicker
+                  allowClear={false}
                   suffixIcon={null}
                   needConfirm={false}
                   getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}

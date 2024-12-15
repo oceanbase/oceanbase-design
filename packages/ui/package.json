@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/ui",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "The UI library based on OceanBase Design",
   "keywords": [
     "oceanbase",
@@ -29,6 +29,11 @@
     "package.json",
     "README.md",
     "LICENSE"
+  ],
+  "sideEffects": [
+    "**/*.less",
+    "**/*.css",
+    "es/index.js"
   ],
   "scripts": {
     "build": "NODE_OPTIONS=--max_old_space_size=4096 father build"

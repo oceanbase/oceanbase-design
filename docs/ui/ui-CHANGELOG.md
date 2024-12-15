@@ -8,6 +8,26 @@ group: 业务组件
 
 ---
 
+## 0.4.4
+
+`2024-12-14`
+
+- ⚡ 设置 `sideEffects`，以支持 tree shaking。[#886](https://github.com/oceanbase/oceanbase-design/pull/886)
+- ⚡ TaskGraph 依赖的 `@antv/g6` 改为动态加载，以提升加载性能。[#884](https://github.com/oceanbase/oceanbase-design/pull/884)
+- ⭐️ 优化 DateRanger 的交互和样式: [#885](https://github.com/oceanbase/oceanbase-design/pull/885) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - 移除时间 icon
+  - 不再禁用后退时间按钮
+  - 刷新时间按钮在选中自定义时间时隐藏
+  - 时间组件添加 hover 样式、优化
+  - 前进/后退时间按钮添加 tooltip
+  - 时间选择组件不支持清空值
+  - 优化选择框圆角、按钮组边框和快速选项的字体颜色
+  - 支持英文格式日期时间
+  - 优化 DateRanger 的鼠标样式 [#883](https://github.com/oceanbase/oceanbase-design/pull/883)
+- 🆕 Action 组件 `onClick` 函数增加 event 参数。[#874](https://github.com/oceanbase/oceanbase-design/pull/874)
+- 🐞 修复 PageContainer 右上角操作区 Select 多选框没有垂直居中的问题。[#881](https://github.com/oceanbase/oceanbase-design/pull/881)
+- 💄 优化 ContentWithQuestion 问号图标的颜色。[#887](https://github.com/oceanbase/oceanbase-design/pull/887)
+
 ## 0.4.3
 
 `2024-12-02`

@@ -10,6 +10,7 @@ type TimeRangeRef = {
 export default () => {
   const ref = useRef<TimeRangeRef>();
   const [timeRange, setTimeRange] = useState([]);
+  const format = 'YYYY-MM-DD HH:mm:ss';
   return (
     <div>
       <Flex gap="middle" align="center">
@@ -19,17 +20,14 @@ export default () => {
             ref.current.updateCurrentTime();
           }}
         >
-          更新最新时间
+          从外部更新时间
         </Button>
         {timeRange.length && (
           <span>
-            {`${dayjs(timeRange[0]).format('YYYY-MM-DD HH:mm:ss')} ~ ${dayjs(timeRange[1]).format(
-              'YYYY-MM-DD HH:mm:ss'
-            )}`}
+            {`${dayjs(timeRange[0]).format(format)} ~ ${dayjs(timeRange[1]).format(format)}`}
           </span>
         )}
       </Flex>
-
       <Divider children="preview" />
       <DateRanger
         ref={ref}

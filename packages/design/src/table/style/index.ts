@@ -28,6 +28,7 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
       borderRadius: borderRadiusLG,
       [`${componentCls}-footer`]: {
         borderBottom: `1px solid ${colorBorderSecondary}`,
+        borderRadius: 0,
       },
       // 单元格通用样式
       [`${componentCls}-thead, ${componentCls}-tbody`]: {
@@ -125,13 +126,6 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
       },
     },
 
-    // 非可展开表格、带 footer 表格、空表格、带边框表格: 底部添加分隔线
-    [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
-      {
-        borderBottom: `1px solid ${colorBorderSecondary}`,
-        borderRadius: 0,
-      },
-
     // 滚动表格样式
     // 由于滚动表格会在 tbody 下最前面多一个 tr 元素，因此需要设置相反的斑马条样式
     // .ant-table-scroll-horizontal: 水平滚动
@@ -150,6 +144,49 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
             },
         },
       },
+
+    // 带边框的表格样式
+    [`${componentCls}-wrapper ${componentCls}${componentCls}-bordered`]: {
+      [`${componentCls}-footer`]: {
+        borderRadius: `0px 0px ${token.borderRadiusLG}px ${token.borderRadiusLG}px`,
+      },
+    },
+
+    // 带边框但不带 footer 的表格样式
+    [`${componentCls}-wrapper:not(${componentCls}-has-footer) ${componentCls}${componentCls}-bordered`]:
+      {
+        // 表格容器设置圆角
+        [`${componentCls}-container`]: {
+          borderRadius: token.borderRadiusLG,
+        },
+        [`${componentCls}-tbody`]: {
+          // 最后一行左右单元格增加圆角
+          [`tr:last-child >*:first-child`]: {
+            borderEndStartRadius: token.borderRadiusLG,
+          },
+          [`tr:last-child >*:last-child`]: {
+            borderEndEndRadius: token.borderRadiusLG,
+          },
+        },
+      },
+
+    // 非可展开表格、不带 footer 表格、非空表格、不带边框表格: 底部添加分隔线
+    [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
+      {
+        borderBottom: `1px solid ${colorBorderSecondary}`,
+        borderRadius: 0,
+      },
+
+    // 去掉非展开表格的边框
+    [`${componentCls}-wrapper:not(${componentCls}-expandable)`]: {
+      [`${componentCls}:not(${componentCls}-bordered)`]: {
+        [`${componentCls}-tbody`]: {
+          [`tr:not(${componentCls}-measure-row) > td`]: {
+            border: 'none',
+          },
+        },
+      },
+    },
 
     // 可展开表格样式
     [`${componentCls}-wrapper${componentCls}-expandable`]: {
@@ -248,6 +285,15 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
     [`${antCls}-popover${componentCls}-batch-operation-selection-popover`]: {
       [`${antCls}-popover-inner`]: {
         padding: 0,
+      },
+    },
+
+    // Popover、Tooltip 等弹出层中的表格空状态高度设为自动，避免高度过大撑高弹出层
+    [`${antCls}-popover, ${antCls}-tooltip`]: {
+      [`${componentCls} ${componentCls}-tbody`]: {
+        [`${componentCls}-empty-wrapper`]: {
+          minHeight: 'auto',
+        },
       },
     },
   };
