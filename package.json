@@ -51,7 +51,7 @@
     "@ctrl/tinycolor": "^4.1.0",
     "@emotion/babel-preset-css-prop": "^11.12.0",
     "@emotion/css": "^11.13.4",
-    "@emotion/react": "^11.13.3",
+    "@emotion/react": "^11.14.0",
     "@emotion/server": "^11.11.0",
     "@qixian.cs/github-contributors-list": "^2.0.2",
     "@rc-component/trigger": "^2.2.6",
