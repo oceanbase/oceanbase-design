@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/design",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "The Design System of OceanBase",
   "keywords": [
     "oceanbase",
@@ -39,27 +39,27 @@
     "build": "father build && cp src/style/reset.css dist/"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.22.0",
+    "@ant-design/cssinjs": "^1.22.1",
     "@oceanbase/aliyun-theme": "^0.1.6",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.22.1",
+    "antd": "^5.22.5",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
     "lottie-web": "^5.12.2",
     "prop-types": "^15.8.1",
-    "rc-util": "^5.43.0",
+    "rc-util": "^5.44.2",
     "react-sticky-mouse-tooltip": "^0.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.25.9",
     "@babel/preset-env": "^7.26.0",
     "antd-token-previewer": "^2.0.8",
-    "rc-select": "^14.16.3",
+    "rc-select": "^14.16.4",
     "rc-slider": "^11.1.7",
-    "rc-table": "^7.48.1",
-    "rc-tree-select": "^5.24.4"
+    "rc-table": "^7.49.0",
+    "rc-tree-select": "^5.25.0"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
