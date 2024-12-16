@@ -34,6 +34,7 @@ export default defineConfig({
       '**/DualAxes/__tests__/ref.test.tsx',
       '**/Line/__tests__/ref.test.tsx',
       '**/Pie/__tests__/donut.test.tsx',
+      '**/ChartProvider/__tests__/theme.test.tsx',
     ],
     deps: {
       optimizer: {
