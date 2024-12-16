@@ -8,6 +8,12 @@ group: 基础组件
 
 ---
 
+## 0.4.4
+
+`2024-12-16`
+
+- 🐞 修复 antd 重置样式的引入路径 `antd/dist/reset.css` => `~antd/dist/reset.css`，以适配 Umi 3 和 Bigfish 3 的解析逻辑。[#894](https://github.com/oceanbase/oceanbase-design/pull/894)
+
 ## 0.4.3
 
 `2024-12-14`
