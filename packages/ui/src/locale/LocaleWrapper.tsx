@@ -29,7 +29,8 @@ export default ({ componentName, defaultLocale }: LocaleWrapperInput) =>
         const localeData = {
           ...defaultLocale,
           ...(localeFromContext || {}),
-          locale: antLocale?.locale,
+          // 这里使用 antLocale，不能直接顶掉 locale 属性，有些组件内部会维护一个 locale 去做特殊判断
+          antLocale: antLocale?.locale || 'zh-cn',
         };
 
         return (

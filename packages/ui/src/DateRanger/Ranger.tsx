@@ -132,8 +132,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   } = props;
 
   const { token } = theme.useToken();
-  const isCn = locale.locale === 'zh-cn';
-  const isEN = locale.locale === 'en';
+  const isCn = locale.antLocale === 'zh-cn';
+  const isEN = locale.antLocale === 'en';
 
   // 是否为 moment 时间对象
   const isMoment =
