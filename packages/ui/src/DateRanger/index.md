@@ -15,6 +15,8 @@ nav:
 
 <code src="./demo/default-value.tsx" title="指定默认值"></code>
 
+<code src="./demo/locale.tsx" title="国际化"></code>
+
 <code src="./demo/updateCurrentTime.tsx" title="从外部更新时间"></code>
 
 ## API
@@ -26,6 +28,7 @@ nav:
 | onChange | value 变化时的回调函数 | (range: Dayjs[] \| Moment[]) => void | noop | - |
 | defaultValue | DatePicker 控件的默认值 | Dayjs[] \| Moment[] | - | - |
 | defaultQuickValue | 快速选择的默认值（优先级低于 value/defaultValue） | string | - | - |
+| isMoment | 是否使用 moment.js 作为时间插件 | boolean | - | - |
 | hasRewind | 后退按钮 | boolean | true | - |
 | hasForward | 前进按钮 | boolean | true | - |
 | hasSync | 刷新按钮 | boolean | true | - |

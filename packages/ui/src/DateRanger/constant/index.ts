@@ -26,6 +26,7 @@ export const DATE_TIME_FORMAT_CN = 'MM-DD HH:mm';
 
 export const NEAR_1_MINUTES: RangeOption = {
   label: '近 1 分钟',
+  enLabel: 'Nearly 1 minute',
   rangeLabel: '1m',
   name: 'NEAR_1_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
@@ -36,6 +37,7 @@ export const NEAR_1_MINUTES: RangeOption = {
 
 export const NEAR_5_MINUTES: RangeOption = {
   label: '近 5 分钟',
+  enLabel: 'Nearly 5 minutes',
   rangeLabel: '5m',
   name: 'NEAR_5_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
@@ -46,6 +48,7 @@ export const NEAR_5_MINUTES: RangeOption = {
 
 export const NEAR_10_MINUTES: RangeOption = {
   label: '近 10 分钟',
+  enLabel: 'Nearly 10 minutes',
   rangeLabel: '10m',
   name: 'NEAR_10_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
@@ -56,6 +59,7 @@ export const NEAR_10_MINUTES: RangeOption = {
 
 export const NEAR_20_MINUTES: RangeOption = {
   label: '近 20 分钟',
+  enLabel: 'Nearly 20 minutes',
   rangeLabel: '20m',
   name: 'NEAR_20_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
@@ -66,6 +70,7 @@ export const NEAR_20_MINUTES: RangeOption = {
 
 export const NEAR_30_MINUTES: RangeOption = {
   label: '近 30 分钟',
+  enLabel: 'Nearly 30 minutes',
   rangeLabel: '30m',
   name: 'NEAR_30_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
@@ -76,6 +81,7 @@ export const NEAR_30_MINUTES: RangeOption = {
 
 export const NEAR_1_HOURS: RangeOption = {
   label: '近 1 小时',
+  enLabel: 'Nearly 1 hour',
   rangeLabel: '1h',
   name: 'NEAR_1_HOURS',
   range: (current: Moment | Dayjs = moment()) => [
@@ -86,6 +92,7 @@ export const NEAR_1_HOURS: RangeOption = {
 
 export const NEAR_2_HOURS: RangeOption = {
   label: '近 2 小时',
+  enLabel: 'Nearly 2 hours',
   rangeLabel: '2h',
   name: 'NEAR_2_HOURS',
   range: (current: Moment | Dayjs = moment()) => [
@@ -96,6 +103,7 @@ export const NEAR_2_HOURS: RangeOption = {
 
 export const NEAR_3_HOURS: RangeOption = {
   label: '近 3 小时',
+  enLabel: 'Nearly 3 hours',
   rangeLabel: '3h',
   name: 'NEAR_3_HOURS',
   range: (current: Moment | Dayjs = moment()) => [
@@ -106,6 +114,7 @@ export const NEAR_3_HOURS: RangeOption = {
 
 export const NEAR_6_HOURS: RangeOption = {
   label: '近 6 小时',
+  enLabel: 'Nearly 6 hours',
   rangeLabel: '6h',
   name: 'NEAR_6_HOURS',
   range: (current: Moment | Dayjs = moment()) => [
@@ -116,6 +125,7 @@ export const NEAR_6_HOURS: RangeOption = {
 
 export const TODAY: RangeOption = {
   label: '今天',
+  enLabel: 'Today',
   rangeLabel: '1d',
   name: 'TODAY',
   range: (current: Moment | Dayjs = moment()) => [
@@ -126,6 +136,7 @@ export const TODAY: RangeOption = {
 
 export const YESTERDAY: RangeOption = {
   label: '昨天',
+  enLabel: 'Yesterday',
   rangeLabel: '1d',
   name: 'YESTERDAY',
   range: (current: Moment | Dayjs = moment()) => [
@@ -136,6 +147,7 @@ export const YESTERDAY: RangeOption = {
 
 export const LAST_3_DAYS: RangeOption = {
   label: '近 3 天',
+  enLabel: 'Nearly 3 days',
   rangeLabel: '3d',
   name: 'LAST_3_DAYS',
   range: (current: Moment | Dayjs = moment()) => [
@@ -146,6 +158,7 @@ export const LAST_3_DAYS: RangeOption = {
 
 export const THIS_WEEK: RangeOption = {
   label: '近一周',
+  enLabel: 'Nearly a week',
   rangeLabel: '1w',
   name: 'THIS_WEEK',
   range: (current: Moment | Dayjs = moment()) => [
@@ -156,6 +169,7 @@ export const THIS_WEEK: RangeOption = {
 
 export const LAST_WEEK: RangeOption = {
   label: '上周',
+  enLabel: 'Last week',
   rangeLabel: 'last week',
   name: 'LAST_WEEK',
   range: (current: Moment | Dayjs = moment()) => [
@@ -166,6 +180,7 @@ export const LAST_WEEK: RangeOption = {
 
 export const THIS_MONTH: RangeOption = {
   label: '本月',
+  enLabel: 'This month',
   rangeLabel: '1mo',
   name: 'THIS_MONTH',
   range: (current: Moment | Dayjs = moment()) => [
@@ -176,6 +191,7 @@ export const THIS_MONTH: RangeOption = {
 
 export const LAST_MONTH: RangeOption = {
   label: '上月',
+  enLabel: 'Last month',
   rangeLabel: '1mo',
   name: 'LAST_MONTH',
   range: (current: Moment | Dayjs = moment()) => [
@@ -186,6 +202,7 @@ export const LAST_MONTH: RangeOption = {
 
 export const THIS_YEAR: RangeOption = {
   label: '今年',
+  enLabel: 'This year',
   rangeLabel: '1y',
   name: 'THIS_YEAR',
   range: (current: Moment | Dayjs = moment()) => [
@@ -196,6 +213,7 @@ export const THIS_YEAR: RangeOption = {
 
 export const LAST_YEAR: RangeOption = {
   label: '去年',
+  enLabel: 'Last year',
   rangeLabel: '1y',
   name: 'LAST_YEAR',
   range: (current: Moment | Dayjs = moment()) => [
@@ -206,6 +224,7 @@ export const LAST_YEAR: RangeOption = {
 
 export const NEXT_YEAR: RangeOption = {
   label: '明年',
+  enLabel: 'Next year',
   rangeLabel: '1y',
   name: 'NEXT_YEAR',
   range: (current: Moment | Dayjs = moment()) => [
@@ -227,6 +246,8 @@ export const NEAR_TIME_LIST = [
   LAST_3_DAYS,
   TODAY,
   YESTERDAY,
+  THIS_WEEK,
+  LAST_WEEK,
   THIS_MONTH,
   LAST_MONTH,
   THIS_YEAR,

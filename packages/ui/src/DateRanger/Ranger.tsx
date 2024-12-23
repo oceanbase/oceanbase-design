@@ -9,15 +9,8 @@ import {
   Tooltip,
   theme,
 } from '@oceanbase/design';
-import type { TooltipProps, FormItemProps } from '@oceanbase/design';
-import {
-  LeftOutlined,
-  PauseOutlined,
-  CaretRightOutlined,
-  RightOutlined,
-  ZoomOutOutlined,
-  SyncOutlined,
-} from '@oceanbase/icons';
+import type { TooltipProps } from '@oceanbase/design';
+import { LeftOutlined, RightOutlined, ZoomOutOutlined, SyncOutlined } from '@oceanbase/icons';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
@@ -139,7 +132,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   } = props;
 
   const { token } = theme.useToken();
-  const isCn = locale.locale === 'zh_CN';
+  const isCn = locale.locale === 'zh-cn';
+  const isEN = locale.locale === 'en';
 
   // 是否为 moment 时间对象
   const isMoment =
@@ -271,34 +265,26 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
 
   const getCustomizeLabel = () => {
     if (differenceYears > 0) {
-      return `近 ${differenceYears} 年`;
+      return isEN ? `Nearly ${differenceYears} years` : `近 ${differenceYears} 年`;
     }
 
-    // if (differenceQuarters > 0) {
-    //   return `近 ${differenceQuarters} 季度`;
-    // }
-
     if (differenceMonths > 0) {
-      return `近 ${differenceMonths} 月`;
+      return isEN ? `Nearly ${differenceMonths} months` : `近 ${differenceMonths} 月`;
     }
 
     if (differenceWeeks > 0) {
-      return `近 ${differenceWeeks} 周`;
-    }
-
-    if (differenceDays > 0) {
-      return `近 ${differenceDays} 天`;
+      return isEN ? `Nearly ${differenceWeeks} weeks` : `近 ${differenceWeeks} 周`;
     }
 
     if (differenceHours > 0) {
-      return `近 ${differenceHours} 时`;
+      return isEN ? `Nearly ${differenceHours} hours` : `近 ${differenceHours} 小时`;
     }
 
     if (differenceMinutes > 0) {
-      return `近 ${differenceMinutes} 分`;
+      return isEN ? `Nearly ${differenceMinutes} minutes` : `近 ${differenceMinutes} 分`;
     }
 
-    return `近 ${differenceSeconds} 秒`;
+    return isEN ? `Nearly ${differenceSeconds} seconds` : `近 ${differenceSeconds} 秒`;
   };
 
   const setNow = () => {
@@ -316,15 +302,15 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     updateCurrentTime: setNow,
   }));
 
-  const rangeLabel =
-    rangeName === CUSTOMIZE
-      ? getCustomizeRangeLabel()
-      : selects.find(_item => _item.name === rangeName)?.rangeLabel;
+  const currentRange = selects.find(_item => _item.name === rangeName);
+  const rangeLabel = rangeName === CUSTOMIZE ? getCustomizeRangeLabel() : currentRange?.rangeLabel;
 
   const label =
     rangeName === CUSTOMIZE
       ? getCustomizeLabel()
-      : selects.find(_item => _item.name === rangeName)?.label;
+      : isEN
+        ? currentRange.enLabel || currentRange.label
+        : currentRange.label;
 
   const thisYear = new Date().getFullYear();
   const isThisYear = startTime?.year() === thisYear && endTime?.year() === thisYear;
@@ -428,8 +414,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                         {hasTagInPicker && (
                           <span className={`${prefix}-label`}>{item.rangeLabel}</span>
                         )}
-                        {/* @ts-ignore */}
-                        {locale[item.label] || item.label}
+                        {isEN ? item.enLabel || item.label : item.label}
                       </Space>
                     ),
                   };
