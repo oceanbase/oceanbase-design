@@ -20,19 +20,6 @@ jobs:
     if: ${{ github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success' }}
 
     steps:
-      # get PR id first
-      - name: Download pr artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: ${{ github.event.workflow_run.workflow_id }}
-          run_id: ${{ github.event.workflow_run.id }}
-          name: pr
-
-      # save PR id to output
-      - name: Save PR id
-        id: pr
-        run: echo "::set-output name=id::$(<pr-id.txt)"
-
       - name: Download site artifact
         uses: dawidd6/action-download-artifact@v2
         with:
@@ -43,7 +30,7 @@ jobs:
       - name: Upload surge service
         id: deploy
         run: |
-          export DEPLOY_DOMAIN=https://preview-${{ steps.pr.outputs.id }}-oceanbase-design.surge.sh
+          export DEPLOY_DOMAIN=https://preview-${{ github.event.number }}-oceanbase-design.surge.sh
           npx surge --project ./ --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
 
       - name: Update status comment
@@ -51,12 +38,12 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
-            <a href="https://preview-${{ steps.pr.outputs.id }}-oceanbase-design.surge.sh" target="_blank">
+            <a href="https://preview-${{ github.event.number }}-oceanbase-design.surge.sh" target="_blank">
               <img width="360" src="https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*biIGSYhvfOQAAAAAAAAAAAAADvSFAQ/original">
             </a>
             <!-- AUTO_PREVIEW_HOOK -->
           body-include: '<!-- AUTO_PREVIEW_HOOK -->'
-          number: ${{ steps.pr.outputs.id }}
+          number: ${{ github.event.number }}
 
       - name: The job has failed
         if: ${{ failure() }}
@@ -68,7 +55,7 @@ jobs:
             <img width="300" src="https://user-images.githubusercontent.com/507615/90250824-4e066700-de6f-11ea-8230-600ecc3d6a6b.png">
             <!-- AUTO_PREVIEW_HOOK -->
           body-include: '<!-- AUTO_PREVIEW_HOOK -->'
-          number: ${{ steps.pr.outputs.id }}
+          number: ${{ github.event.number }}
 
   build-site-failed:
     permissions:
@@ -80,19 +67,6 @@ jobs:
     if: ${{ github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'failure' }}
 
     steps:
-      # get PR id first
-      - name: Download pr artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: ${{ github.event.workflow_run.workflow_id }}
-          run_id: ${{ github.event.workflow_run.id }}
-          name: pr
-
-      # Save PR id to output
-      - name: Save PR id
-        id: pr
-        run: echo "::set-output name=id::$(<pr-id.txt)"
-
       - name: The job has failed
         uses: actions-cool/maintain-one-comment@v3
         with:
@@ -101,4 +75,4 @@ jobs:
             <img width="534" src="https://user-images.githubusercontent.com/5378891/75333447-1e63a280-58c1-11ea-975d-235367fd1522.png">
             <!-- AUTO_PREVIEW_HOOK -->
           body-include: '<!-- AUTO_PREVIEW_HOOK -->'
-          number: ${{ steps.pr.outputs.id }}
+          number: ${{ github.event.number }}
