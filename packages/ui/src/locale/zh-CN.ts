@@ -1,4 +1,4 @@
-import zhCN from '@oceanbase/design/locale/zh-CN';
+import zhCN from '@oceanbase/design/es/locale/zh-CN';
 import BasicLayout from '../BasicLayout/locale/zh-CN';
 import BatchOperationBar from '../BatchOperationBar/locale/zh-CN';
 import Dialog from '../Dialog/locale/zh-CN';

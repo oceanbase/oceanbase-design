@@ -1,4 +1,4 @@
-import zhTW from '@oceanbase/design/locale/zh-TW';
+import zhTW from '@oceanbase/design/es/locale/zh-TW';
 import BasicLayout from '../BasicLayout/locale/zh-TW';
 import BatchOperationBar from '../BatchOperationBar/locale/zh-TW';
 import Dialog from '../Dialog/locale/zh-TW';
