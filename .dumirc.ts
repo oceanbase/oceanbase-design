@@ -111,9 +111,10 @@ export default defineConfig({
     codeBlockMode: 'passive',
   },
   alias: {
-    '@oceanbase/design': path.join(__dirname, 'packages/design/src'),
+    // 需要将子路径前移，否则会优先匹配到父路径导致子路径匹配异常
     '@oceanbase/design/es': path.join(__dirname, 'packages/design/src'),
     '@oceanbase/design/locale': path.join(__dirname, 'packages/design/src/locale'),
+    '@oceanbase/design': path.join(__dirname, 'packages/design/src'),
     // for @import in less
     '~@oceanbase/design/es': path.join(__dirname, 'packages/design/src'),
     '@oceanbase/icons': path.join(__dirname, 'packages/icons/src'),
