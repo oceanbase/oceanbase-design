@@ -75,7 +75,7 @@
     "copy-to-clipboard": "^3.3.3",
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.13",
-    "dumi": "^2.4.16",
+    "dumi": "^2.4.17",
     "eslint-plugin-jest": "^28.9.0",
     "execa": "^5.1.1",
     "father": "^4.5.1",
