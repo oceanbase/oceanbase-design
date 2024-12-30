@@ -27,7 +27,8 @@ nav:
 | shouldVisible | 通过函数对 action 是否展示的处理 | (key: string) => boolean | - |
 | shouldDisabled | 通过函数对 action 是否禁用的处理 | (key: string) => boolean | - |
 | enableLoading | 是否展示 loading 状态 | boolean | true |
-| moreText | 更多操作的自定义展示 | ReactNode | - |
+| moreText | 设置更多操作的文案 | ReactNode | - |
+| moreType | 设置更多操作的元素类型 | button \| link | - |
 
 ### Action.Link
 
