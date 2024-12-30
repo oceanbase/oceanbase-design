@@ -8,6 +8,18 @@ group: 业务组件
 
 ---
 
+## 0.4.6
+
+`2024-12-30`
+
+- DateRanger:
+  - 🌐 快捷选项支持国际化。[#903](https://github.com/oceanbase/oceanbase-design/pull/903)
+  - 🆕 `selects` 新增 `enLabel` 属性，用于设置快捷选项的英文文案。[#903](https://github.com/oceanbase/oceanbase-design/pull/903)
+- Action
+  - 🆕 新增 `moreType` 属性，用于设置更多操作的元素类型。[#911](https://github.com/oceanbase/oceanbase-design/pull/911)
+  - 💄 优化 Action 更多操作元素类型的判断逻辑。[#911](https://github.com/oceanbase/oceanbase-design/pull/911)
+  - 📖 Action 新增带 Tooltip 和 Popconfirm 的示例。[#902](https://github.com/oceanbase/oceanbase-design/pull/902)
+
 ## 0.4.4
 
 `2024-12-14`
