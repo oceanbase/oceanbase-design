@@ -399,8 +399,8 @@ importers:
         specifier: ^7.49.0
         version: 7.49.0(react-dom@18.3.1)(react@18.3.1)
       rc-tree-select:
-        specifier: ^5.25.0
-        version: 5.25.0(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^5.25.2
+        version: 5.25.2(react-dom@18.3.1)(react@18.3.1)
 
   packages/icons:
     dependencies:
@@ -22054,8 +22054,8 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  /rc-tree-select@5.25.0(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-o9BOwebyX76EFYLfgy9/pEpJeslde/FOluWgkolmeHuORIJPfZSogDdEqhCsVrFNxzUW13eP0eYXPgK6MR5qWg==}
+  /rc-tree-select@5.25.2(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-910ZlFVwn0BXpw4YJs03tZiFePyih5t8GzlX0WYWWevPKZ3E/gvodJFNWiPgmcB45461YM27JPWdr1gb8bh3HQ==}
     peerDependencies:
       react: '*'
       react-dom: '*'
