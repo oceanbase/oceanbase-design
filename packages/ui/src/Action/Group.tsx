@@ -18,12 +18,12 @@ export interface GroupProps {
   shouldVisible?: (key: string) => boolean;
   shouldDisabled?: (key: string) => boolean;
   enableLoading?: boolean;
-  /** 更多操作的自定义展示 */
+  // 设置更多操作的文案
   moreText?: React.ReactNode;
+  // 设置更多操作的元素类型
+  moreType?: 'button' | 'link';
   buttonSize?: ButtonSize;
 }
-
-type ellipsisType = 'default' | 'link';
 
 const getOrder = ({ type, fixed }: { type?: string; fixed?: boolean }) => {
   const ORDER_SET = { primary: 3, fixed: 2, default: 0 };
@@ -45,6 +45,7 @@ export default ({
   shouldDisabled,
   enableLoading,
   moreText,
+  moreType,
   buttonSize,
 }: GroupProps) => {
   const visibleActions = Array.isArray(children)
@@ -74,20 +75,27 @@ export default ({
   const mainActions = visibleActionsSort.slice(0, realSize);
   const ellipsisActions = visibleActionsSort.slice(realSize);
 
-  let ellipsisType: ellipsisType = 'link';
+  let ellipsisType = 'link';
 
   // @ts-ignore
-  if (visibleActionsSort.every(action => action.type.__DISPLAY_NAME === 'button')) {
-    ellipsisType = 'default';
+  if (visibleActionsSort.some(action => action.type.__DISPLAY_NAME === 'button')) {
+    ellipsisType = 'button';
   }
+
+  // @ts-ignore
+  if (visibleActionsSort.some(action => action.type.__DISPLAY_NAME === 'link')) {
+    ellipsisType = 'link';
+  }
+
+  ellipsisType = moreType ?? ellipsisType;
 
   const getDefaultDisabled = (key: string) => shouldDisabled?.(key as string) ?? false;
 
   let moreDom: string | React.ReactElement;
 
-  if (ellipsisType === 'default') {
+  if (ellipsisType === 'button') {
     moreDom = (
-      <Button type={ellipsisType} size={buttonSize}>
+      <Button size={buttonSize}>
         {moreText ?? <EllipsisOutlined style={{ cursor: 'pointer' }} />}
       </Button>
     );

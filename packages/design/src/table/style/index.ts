@@ -30,20 +30,6 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         borderBottom: `1px solid ${colorBorderSecondary}`,
         borderRadius: 0,
       },
-      // 单元格通用样式
-      [`${componentCls}-thead, ${componentCls}-tbody`]: {
-        ['td, th']: {
-          [`&${componentCls}-row-expand-icon-cell`]: {
-            backgroundColor: colorBgBase,
-            padding: `${token.paddingSM}px ${token.paddingXS}px`,
-          },
-          // 内容第一列，左侧间距减小为 8px
-          [`&:not(:first-child):not(${componentCls}-selection-column):not(${componentCls}-row-expand-icon-cell)`]:
-            {
-              paddingLeft: token.paddingXS,
-            },
-        },
-      },
       // head 样式
       [`${componentCls}-thead > tr`]: {
         ['th']: {
@@ -152,23 +138,43 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
       },
     },
 
-    // 带边框但不带 footer 的表格样式
-    [`${componentCls}-wrapper:not(${componentCls}-has-footer) ${componentCls}${componentCls}-bordered`]:
-      {
-        // 表格容器设置圆角
-        [`${componentCls}-container`]: {
-          borderRadius: token.borderRadiusLG,
-        },
-        [`${componentCls}-tbody`]: {
-          // 最后一行左右单元格增加圆角
-          [`tr:last-child >*:first-child`]: {
-            borderEndStartRadius: token.borderRadiusLG,
+    // 不带边框的表格样式
+    [`${componentCls}-wrapper ${componentCls}:not(${componentCls}-bordered)`]: {
+      // 单元格通用样式
+      [`${componentCls}-thead, ${componentCls}-tbody`]: {
+        ['td, th']: {
+          [`&${componentCls}-row-expand-icon-cell`]: {
+            backgroundColor: colorBgBase,
+            padding: `${token.paddingSM}px ${token.paddingXS}px`,
           },
-          [`tr:last-child >*:last-child`]: {
-            borderEndEndRadius: token.borderRadiusLG,
+          // 紧跟在选择列或展开列后的第一列，左侧间距减小为 8px
+          [`&${componentCls}-selection-column, &${componentCls}-row-expand-icon-cell`]: {
+            [`& + td, & + th`]: {
+              paddingLeft: token.paddingXS,
+            },
           },
         },
       },
+    },
+
+    // 以下样式在 https://design.oceanbase.com/components/table#table-demo-rowspan 场景下还存在问题，先注释掉
+    // 带边框、不带 footer、没有行列合并的表格样式
+    // [`${componentCls}-wrapper:not(${componentCls}-has-footer):not(${componentCls}-has-on-cell) ${componentCls}${componentCls}-bordered`]:
+    //   {
+    //     // 表格容器设置圆角
+    //     [`${componentCls}-container`]: {
+    //       borderRadius: token.borderRadiusLG,
+    //     },
+    //     [`${componentCls}-tbody`]: {
+    //       // 最后一行左右单元格增加圆角
+    //       [`tr:last-child >*:first-child`]: {
+    //         borderEndStartRadius: token.borderRadiusLG,
+    //       },
+    //       [`tr:last-child >*:last-child`]: {
+    //         borderEndEndRadius: token.borderRadiusLG,
+    //       },
+    //     },
+    //   },
 
     // 非可展开表格、不带 footer 表格、非空表格、不带边框表格: 底部添加分隔线
     [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:

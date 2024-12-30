@@ -44,15 +44,3 @@ jobs:
           name: site
           path: site/
           retention-days: 5
-
-      # Upload PR id for next workflow use
-      - name: Save PR id
-        if: ${{ always() }}
-        run: echo ${{ github.event.number }} > ./pr-id.txt
-
-      - name: Upload PR id
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: pr
-          path: ./pr-id.txt

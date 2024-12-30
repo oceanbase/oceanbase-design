@@ -12,7 +12,9 @@ export default defineConfig({
   },
   // 默认重定向到子包的 src 文件夹
   // ref: https://d.umijs.org/config#monoreporedirect
-  monorepoRedirect: {},
+  monorepoRedirect: {
+    useRootProject: true,
+  },
   // umi.server.js build error, disable it for now
   // ssr: process.env.NODE_ENV === 'production' ? {} : false,
   hash: true,
@@ -109,9 +111,10 @@ export default defineConfig({
     codeBlockMode: 'passive',
   },
   alias: {
-    '@oceanbase/design': path.join(__dirname, 'packages/design/src'),
+    // 需要将子路径前移，否则会优先匹配到父路径导致子路径匹配异常
     '@oceanbase/design/es': path.join(__dirname, 'packages/design/src'),
     '@oceanbase/design/locale': path.join(__dirname, 'packages/design/src/locale'),
+    '@oceanbase/design': path.join(__dirname, 'packages/design/src'),
     // for @import in less
     '~@oceanbase/design/es': path.join(__dirname, 'packages/design/src'),
     '@oceanbase/icons': path.join(__dirname, 'packages/icons/src'),

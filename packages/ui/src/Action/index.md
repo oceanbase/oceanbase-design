@@ -7,14 +7,12 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/link.tsx" title="Action.Link"></code>
-
 <code src="./demo/button.tsx" title="Action.Button"></code>
-
 <code src="./demo/loading.tsx" title="loading 状态"></code>
-
+<code src="./demo/with-tooltip-popconfirm.tsx" title="带 Tooltip 和 Popconfirm"></code>
 <code src="./demo/fixed.tsx" title="固定展示、不被折叠的 Action"></code>
-
 <code src="./demo/groupControl.tsx" title="整体控制状态"></code>
 
 ## API
@@ -29,7 +27,8 @@ nav:
 | shouldVisible | 通过函数对 action 是否展示的处理 | (key: string) => boolean | - |
 | shouldDisabled | 通过函数对 action 是否禁用的处理 | (key: string) => boolean | - |
 | enableLoading | 是否展示 loading 状态 | boolean | true |
-| moreText | 更多操作的自定义展示 | ReactNode | - |
+| moreText | 设置更多操作的文案 | ReactNode | - |
+| moreType | 设置更多操作的元素类型 | button \| link | - |
 
 ### Action.Link
 
