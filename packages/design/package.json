@@ -59,7 +59,7 @@
     "rc-select": "^14.16.4",
     "rc-slider": "^11.1.7",
     "rc-table": "^7.49.0",
-    "rc-tree-select": "^5.25.0"
+    "rc-tree-select": "^5.25.2"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
