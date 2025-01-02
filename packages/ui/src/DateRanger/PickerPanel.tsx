@@ -54,7 +54,6 @@ export interface PickerPanelProps {
 const prefix = getPrefix('ranger-picker-panel');
 
 const prefixCls = 'ant-picker';
-const DATE_FORMAT = 'YYYY-MM-DD';
 const TIME_FORMAT = 'HH:mm:ss';
 
 const InternalPickerPanel = (props: PickerPanelProps) => {
@@ -76,6 +75,8 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   const [calendarValue, setCalendarValue] = React.useState(defaultValue);
   const [internalHoverValues, setInternalHoverValues] = React.useState(null);
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const isEn = locale?.locale === 'en_US';
+  const DATE_FORMAT = isEn ? 'MM/DD/YYYY' : 'YYYY-MM-DD';
 
   const getDateInstance = useCallback(
     (
@@ -239,7 +240,6 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
       }
     });
   };
-
   return (
     <div className={classNames(prefix)}>
       <Space direction="vertical" size={12} style={{ margin: '12px 0' }}>
@@ -414,7 +414,13 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
       {errorMessage && (
         <Alert message={errorMessage} type="error" style={{ marginBottom: 8 }} showIcon></Alert>
       )}
-      <Space style={{ width: '100%', justifyContent: 'flex-end', padding: '0 12px 4px 0' }}>
+      <Space
+        style={{
+          width: '100%',
+          justifyContent: 'flex-end',
+          padding: '0 12px 4px 0',
+        }}
+      >
         <Button
           size="small"
           onClick={() => {

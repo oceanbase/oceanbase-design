@@ -26,7 +26,7 @@ export const DATE_TIME_FORMAT_CN = 'MM-DD HH:mm';
 
 export const NEAR_1_MINUTES: RangeOption = {
   label: '近 1 分钟',
-  enLabel: 'Nearly 1 minute',
+  enLabel: 'Last 1 Minute',
   rangeLabel: '1m',
   name: 'NEAR_1_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
@@ -37,7 +37,7 @@ export const NEAR_1_MINUTES: RangeOption = {
 
 export const NEAR_5_MINUTES: RangeOption = {
   label: '近 5 分钟',
-  enLabel: 'Nearly 5 minutes',
+  enLabel: 'Last 5 Minutes',
   rangeLabel: '5m',
   name: 'NEAR_5_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
@@ -48,7 +48,7 @@ export const NEAR_5_MINUTES: RangeOption = {
 
 export const NEAR_10_MINUTES: RangeOption = {
   label: '近 10 分钟',
-  enLabel: 'Nearly 10 minutes',
+  enLabel: 'Last 10 Minutes',
   rangeLabel: '10m',
   name: 'NEAR_10_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
@@ -59,7 +59,7 @@ export const NEAR_10_MINUTES: RangeOption = {
 
 export const NEAR_20_MINUTES: RangeOption = {
   label: '近 20 分钟',
-  enLabel: 'Nearly 20 minutes',
+  enLabel: 'Last 20 Minutes',
   rangeLabel: '20m',
   name: 'NEAR_20_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
@@ -70,7 +70,7 @@ export const NEAR_20_MINUTES: RangeOption = {
 
 export const NEAR_30_MINUTES: RangeOption = {
   label: '近 30 分钟',
-  enLabel: 'Nearly 30 minutes',
+  enLabel: 'Last 30 Minutes',
   rangeLabel: '30m',
   name: 'NEAR_30_MINUTES',
   range: (current: Moment | Dayjs = moment()) => [
@@ -81,7 +81,7 @@ export const NEAR_30_MINUTES: RangeOption = {
 
 export const NEAR_1_HOURS: RangeOption = {
   label: '近 1 小时',
-  enLabel: 'Nearly 1 hour',
+  enLabel: 'Last 1 Hour',
   rangeLabel: '1h',
   name: 'NEAR_1_HOURS',
   range: (current: Moment | Dayjs = moment()) => [
@@ -92,7 +92,7 @@ export const NEAR_1_HOURS: RangeOption = {
 
 export const NEAR_2_HOURS: RangeOption = {
   label: '近 2 小时',
-  enLabel: 'Nearly 2 hours',
+  enLabel: 'Last 2 Hours',
   rangeLabel: '2h',
   name: 'NEAR_2_HOURS',
   range: (current: Moment | Dayjs = moment()) => [
@@ -103,7 +103,7 @@ export const NEAR_2_HOURS: RangeOption = {
 
 export const NEAR_3_HOURS: RangeOption = {
   label: '近 3 小时',
-  enLabel: 'Nearly 3 hours',
+  enLabel: 'Last 3 Hours',
   rangeLabel: '3h',
   name: 'NEAR_3_HOURS',
   range: (current: Moment | Dayjs = moment()) => [
@@ -114,7 +114,7 @@ export const NEAR_3_HOURS: RangeOption = {
 
 export const NEAR_6_HOURS: RangeOption = {
   label: '近 6 小时',
-  enLabel: 'Nearly 6 hours',
+  enLabel: 'Last 6 Hours',
   rangeLabel: '6h',
   name: 'NEAR_6_HOURS',
   range: (current: Moment | Dayjs = moment()) => [
@@ -147,7 +147,7 @@ export const YESTERDAY: RangeOption = {
 
 export const LAST_3_DAYS: RangeOption = {
   label: '近 3 天',
-  enLabel: 'Nearly 3 days',
+  enLabel: 'Last 3 Days',
   rangeLabel: '3d',
   name: 'LAST_3_DAYS',
   range: (current: Moment | Dayjs = moment()) => [
