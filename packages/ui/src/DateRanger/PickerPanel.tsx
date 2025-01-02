@@ -75,7 +75,8 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   const [calendarValue, setCalendarValue] = React.useState(defaultValue);
   const [internalHoverValues, setInternalHoverValues] = React.useState(null);
   const [activeIndex, setActiveIndex] = React.useState(0);
-  const isEn = locale?.locale === 'en_US';
+  const isEn = locale?.antLocale === 'en';
+
   const DATE_FORMAT = isEn ? 'MM/DD/YYYY' : 'YYYY-MM-DD';
 
   const getDateInstance = useCallback(
