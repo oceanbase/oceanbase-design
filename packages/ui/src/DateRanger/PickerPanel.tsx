@@ -25,7 +25,7 @@ import dayjs from 'dayjs';
 import { useUpdate } from 'ahooks';
 import { toArray } from '@oceanbase/util';
 import { getPrefix } from '../_util';
-
+import { DATE_TIME_MONTH_FORMAT, DATE_TIME_MONTH_FORMAT_CN } from './constant';
 type RangeValue = [Moment, Moment] | [Dayjs, Dayjs];
 type ValidateTrigger = 'submit' | 'valueChange';
 
@@ -77,7 +77,8 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const isEn = locale?.antLocale === 'en';
 
-  const DATE_FORMAT = isEn ? 'MM/DD/YYYY' : 'YYYY-MM-DD';
+  //
+  const DATE_FORMAT = isEn ? DATE_TIME_MONTH_FORMAT : DATE_TIME_MONTH_FORMAT_CN;
 
   const getDateInstance = useCallback(
     (

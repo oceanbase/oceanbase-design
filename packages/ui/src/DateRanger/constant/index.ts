@@ -19,8 +19,12 @@ export const YEAR_DATE_TIME_SECOND_FORMAT = 'MM/DD/YYYY HH:mm:ss';
 export const YEAR_DATE_TIME_FORMAT = 'MM/DD/YYYY HH:mm';
 export const DATE_TIME_SECOND_FORMAT = 'MM/DD HH:mm:ss';
 export const DATE_TIME_FORMAT = 'MM/DD HH:mm';
+export const DATE_TIME_MONTH_FORMAT = 'MM/DD/YYYY';
+
 export const YEAR_DATE_TIME_SECOND_FORMAT_CN = 'YYYY-MM-DD HH:mm:ss';
 export const YEAR_DATE_TIME_FORMAT_CN = 'YYYY-MM-DD HH:mm';
+export const DATE_TIME_MONTH_FORMAT_CN = 'YYYY-MM-DD';
+
 export const DATE_TIME_SECOND_FORMAT_CN = 'MM-DD HH:mm:ss';
 export const DATE_TIME_FORMAT_CN = 'MM-DD HH:mm';
 
