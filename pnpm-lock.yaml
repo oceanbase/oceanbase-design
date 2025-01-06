@@ -393,8 +393,8 @@ importers:
         specifier: ^14.16.4
         version: 14.16.4(react-dom@18.3.1)(react@18.3.1)
       rc-slider:
-        specifier: ^11.1.7
-        version: 11.1.7(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^11.1.8
+        version: 11.1.8(react-dom@18.3.1)(react@18.3.1)
       rc-table:
         specifier: ^7.49.0
         version: 7.49.0(react-dom@18.3.1)(react@18.3.1)
@@ -9242,7 +9242,7 @@ packages:
       rc-resize-observer: 1.4.1(react-dom@18.3.1)(react@18.3.1)
       rc-segmented: 2.5.0(react-dom@18.3.1)(react@18.3.1)
       rc-select: 14.16.4(react-dom@18.3.1)(react@18.3.1)
-      rc-slider: 11.1.7(react-dom@18.3.1)(react@18.3.1)
+      rc-slider: 11.1.8(react-dom@18.3.1)(react@18.3.1)
       rc-steps: 6.0.1(react-dom@18.3.1)(react@18.3.1)
       rc-switch: 4.1.0(react-dom@18.3.1)(react@18.3.1)
       rc-table: 7.49.0(react-dom@18.3.1)(react@18.3.1)
@@ -21786,8 +21786,8 @@ packages:
       shallowequal: 1.1.0
     dev: false
 
-  /rc-slider@11.1.7(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-ytYbZei81TX7otdC0QvoYD72XSlxvTihNth5OeZ6PMXyEDq/vHdWFulQmfDGyXK1NwKwSlKgpvINOa88uT5g2A==}
+  /rc-slider@11.1.8(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-2gg/72YFSpKP+Ja5AjC5DPL1YnV8DEITDQrcc1eASrUYjl0esptaBVJBh5nLTXCCp15eD8EuGjwezVGSHhs9tQ==}
     engines: {node: '>=8.x'}
     peerDependencies:
       react: '>=16.9.0'
