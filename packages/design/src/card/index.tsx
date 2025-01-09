@@ -7,7 +7,7 @@ import type {
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
-import useStyle from './style';
+import useStyle, { genTableStyle } from './style';
 
 export * from 'antd/es/card/Card';
 export * from 'antd/es/card';
@@ -97,4 +97,5 @@ if (process.env.NODE_ENV !== 'production') {
 export default Object.assign(Card, {
   Grid: AntCard.Grid,
   Meta: AntCard.Meta,
+  genTableStyle,
 });

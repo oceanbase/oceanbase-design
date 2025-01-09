@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Card, Form, Switch, Table, theme } from '@oceanbase/design';
+import { Form, Switch, Table, theme } from '@oceanbase/design';
+import { ProCard } from '@oceanbase/ui';
 
 const App: React.FC = () => {
   const { token } = theme.useToken();
 
   const [hasBorder, setHasBorder] = useState(true);
   const [hasTitle, setHasTitle] = useState(true);
-  const [hasDivider, setHasDivider] = useState(true);
   const [hasPadding, setHasPadding] = useState(false);
   const [expandable, setExpandable] = useState(true);
   const [selectable, setSelectable] = useState(true);
@@ -71,15 +71,6 @@ const App: React.FC = () => {
             }}
           />
         </Form.Item>
-        <Form.Item label="Card divided" required={true}>
-          <Switch
-            size="small"
-            value={hasDivider}
-            onChange={value => {
-              setHasDivider(value);
-            }}
-          />
-        </Form.Item>
         <Form.Item label="Card body padding" required={true}>
           <Switch
             size="small"
@@ -110,17 +101,10 @@ const App: React.FC = () => {
           />
         </Form.Item>
       </Form>
-      <Card
+      <ProCard
         bordered={hasBorder}
-        divided={hasDivider}
         title={hasTitle ? 'Title' : ''}
-        bodyStyle={
-          hasPadding
-            ? {}
-            : {
-                padding: 0,
-              }
-        }
+        bodyStyle={hasPadding ? { padding: 24 } : { padding: 0 }}
       >
         <Table
           columns={columns}
@@ -147,7 +131,7 @@ const App: React.FC = () => {
             pageSize: 5,
           }}
         />
-      </Card>
+      </ProCard>
     </div>
   );
 };
