@@ -23,7 +23,7 @@ export function genComponentStyleHook(componentName: string, styleFn: GenerateSt
     const rootPrefixCls = getPrefixCls();
     const componentCls = `.${prefixCls}`;
 
-    return useStyle(componentName, token => {
+    return useStyle(`OB-${componentName}`, token => {
       const mergedToken = {
         ...token,
         componentCls,

@@ -8,7 +8,7 @@ export type CardToken = FullToken<'Card'> & {
   tabsPrefixCls: string;
 };
 
-export const genTableStyle = (padding: number, token: CardToken): CSSObject => {
+export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSObject => {
   const { antCls } = token;
   const tableComponentCls = `${antCls}-table`;
   return {

@@ -227,6 +227,7 @@ export default defineConfig({
         {
           title: 'ProComponents 组件',
           children: [
+            { title: 'ProCard 高级卡片', link: '/biz-components/pro-card' },
             { title: 'ProTable 高级表格', link: '/biz-components/pro-table' },
             { title: 'LightFilter 轻量筛选', link: '/biz-components/light-filter' },
           ],
