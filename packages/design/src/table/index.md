@@ -15,11 +15,12 @@ nav:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
 <code src="./demo/bordered.tsx" title="带边框" description="添加表格边框线"></code>
+<code src="./demo/ellipsis.tsx" title="单元格自动省略" description="设置 `column.ellipsis` 可以让单元格内容根据宽度自动省略，并使用 Tooltip 展示全部内容。`说明`: 列头缩略暂不支持和排序筛选一起使用。"></code>
 <code src="./demo/fixed-columns-header-tables.tsx" title="固定头和列"></code>
 <code src="./demo/row-selection.tsx" title="选择和操作"></code>
+<code src="./demo/expandable.tsx" title="可展开"></code>
 <code src="./demo/nesting-tables.tsx" title="嵌套子表格"></code>
 <code src="./demo/multiple-nesting-tables.tsx" title="可选择的嵌套子表格"></code>
-<code src="./demo/ellipsis.tsx" title="单元格自动省略" description="设置 `column.ellipsis` 可以让单元格内容根据宽度自动省略，并使用 Tooltip 展示全部内容。`说明`: 列头缩略暂不支持和排序筛选一起使用。"></code>
 <code src="./demo/tree-table.tsx" title="树形表格" description="当数据中有 `children` 字段时会自动展示为树形表格，如果不需要或配置为其他字段可以用 childrenColumnName 进行配置。可以通过设置 indentSize 以控制每一层的缩进宽度。"></code>
 <code src="./demo/grouping-columns.tsx" title="表头分组" description="columns 可以通过嵌套 children，实现表头分组。"></code>
 <code src="./demo/rowspan.tsx" title="行合并" description="通过 onCell 设置单元格属性 rowSpan，可以实现行合并。"></code>

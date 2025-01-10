@@ -69,6 +69,10 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         [`${componentCls}-tbody-virtual-scrollbar ${componentCls}-tbody-virtual-scrollbar-thumb`]: {
           background: `${token.colorFillSecondary} !important`,
         },
+        // expandRowByClick 行样式
+        [`tr${componentCls}-expand-row-by-click`]: {
+          cursor: 'pointer',
+        },
         // 去掉可展开行在展开时的底部 border
         [`tr > td:has(${componentCls}-row-expand-icon-expanded)`]: {
           borderBottom: 'none',
