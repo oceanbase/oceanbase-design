@@ -48,6 +48,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
     footer,
     pagination: customPagination,
     rowSelection,
+    rowClassName,
     toolAlertRender,
     toolOptionsRender,
     toolSelectedContent,
@@ -223,6 +224,14 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
         ),
       }}
       columns={newColumns}
+      rowClassName={(...args) => {
+        return classNames(
+          typeof rowClassName === 'function' ? rowClassName(...args) : rowClassName,
+          {
+            [`${prefixCls}-expand-row-by-click`]: expandable?.expandRowByClick,
+          }
+        );
+      }}
       expandable={
         expandable
           ? {
