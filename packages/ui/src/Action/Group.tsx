@@ -108,7 +108,7 @@ export default ({
   }
 
   return (
-    <Space size={8}>
+    <Space size={ellipsisType === 'button' ? 8 : 16}>
       {mainActions.map(action => {
         return React.cloneElement(action, {
           // size should be covered by action props
