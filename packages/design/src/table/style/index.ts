@@ -145,7 +145,8 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         ['td, th']: {
           [`&${componentCls}-row-expand-icon-cell`]: {
             backgroundColor: colorBgBase,
-            padding: `${token.paddingSM}px ${token.paddingXS}px`,
+            // 去掉展开列的 padding，其宽度由 expandable.columnWidth 进行控制，其高度跟随其他列
+            padding: 0,
           },
           // 紧跟在选择列或展开列后的第一列，左侧间距减小为 8px
           [`&${componentCls}-selection-column, &${componentCls}-row-expand-icon-cell`]: {
