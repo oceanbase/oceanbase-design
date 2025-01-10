@@ -8,9 +8,10 @@ nav:
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/link.tsx" title="Action.Link"></code>
 <code src="./demo/button.tsx" title="Action.Button"></code>
+<code src="./demo/link.tsx" title="Action.Link"></code>
 <code src="./demo/loading.tsx" title="loading 状态"></code>
+<code src="./demo/more-text.tsx" title="自定义更多操作"></code>
 <code src="./demo/with-tooltip-popconfirm.tsx" title="带 Tooltip 和 Popconfirm"></code>
 <code src="./demo/fixed.tsx" title="固定展示、不被折叠的 Action"></code>
 <code src="./demo/groupControl.tsx" title="整体控制状态"></code>
@@ -30,18 +31,6 @@ nav:
 | moreText | 设置更多操作的文案 | ReactNode | - |
 | moreType | 设置更多操作的元素类型 | button \| link | - |
 
-### Action.Link
-
-| 参数 | 说明 | 类型 | 默认值 |
-| :-- | :-- | :-- | :-- |
-| visible | 是否可见 | boolean | true |
-| loading | 设置加载状态 | boolean | false |
-| tooltip | 设置提示文案 | string | - |
-| disabled | 是否禁用 | boolean | false |
-| fixed | 固定展示、不被折叠 | boolean | false |
-| onClick | 点击链接的回调 | async (event: React.MouseEvent<HTMLElement, MouseEvent>) => void \| (event: React.MouseEvent<HTMLElement, MouseEvent>) => void | - |
-| className | 设置 link 的样式名 | string | - |
-
 ### Action.Button
 
 | 参数 | 说明 | 类型 | 默认值 |
@@ -56,3 +45,15 @@ nav:
 | fixed | 固定展示、不被折叠 | boolean | false |
 | onClick | 点击链接的回调 | async (event: React.MouseEvent<HTMLElement, MouseEvent>) => void \| (event: React.MouseEvent<HTMLElement, MouseEvent>) => void | - |
 | className | 设置按钮的样式名 | string | - |
+
+### Action.Link
+
+| 参数 | 说明 | 类型 | 默认值 |
+| :-- | :-- | :-- | :-- |
+| visible | 是否可见 | boolean | true |
+| loading | 设置加载状态 | boolean | false |
+| tooltip | 设置提示文案 | string | - |
+| disabled | 是否禁用 | boolean | false |
+| fixed | 固定展示、不被折叠 | boolean | false |
+| onClick | 点击链接的回调 | async (event: React.MouseEvent<HTMLElement, MouseEvent>) => void \| (event: React.MouseEvent<HTMLElement, MouseEvent>) => void | - |
+| className | 设置 link 的样式名 | string | - |
