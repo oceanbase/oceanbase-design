@@ -26,6 +26,7 @@ export default () => {
       </Flex>
       <Divider children="preview" />
       <DateRanger
+        allowClear={true}
         hasForward={getValue('hasForward')}
         hasRewind={getValue('hasRewind')}
         hasNow={getValue('hasNow')}

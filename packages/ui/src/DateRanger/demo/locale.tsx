@@ -33,7 +33,7 @@ export default () => {
       </div>
       <ConfigProvider locale={locale}>
         <Space direction="vertical">
-          <DateRanger />
+          <DateRanger allowClear />
           <DateRanger simpleMode />
         </Space>
       </ConfigProvider>

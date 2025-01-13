@@ -18,15 +18,12 @@ import {
   Space,
   TimePicker,
 } from '@oceanbase/design';
-import type { FormItemProps } from '@oceanbase/design';
 import { noop } from 'lodash';
 import moment from 'moment';
 import dayjs from 'dayjs';
-import { useUpdate } from 'ahooks';
-import { toArray } from '@oceanbase/util';
 import { getPrefix } from '../_util';
 import { DATE_TIME_MONTH_FORMAT, DATE_TIME_MONTH_FORMAT_CN } from './constant';
-type RangeValue = [Moment, Moment] | [Dayjs, Dayjs];
+import type { RangeValue } from './Ranger';
 type ValidateTrigger = 'submit' | 'valueChange';
 
 type MaybeArray<T> = T | T[];
@@ -58,7 +55,7 @@ const TIME_FORMAT = 'HH:mm:ss';
 
 const InternalPickerPanel = (props: PickerPanelProps) => {
   const {
-    defaultValue = [],
+    defaultValue,
     isMoment,
     locale,
     tip,
@@ -259,6 +256,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 label={locale.startDate}
                 validateStatus={errorTypeMap['startDate']}
                 style={{ marginBottom: 8 }}
+                rules={[{ required: true }]}
               >
                 <Input
                   size="middle"
@@ -289,6 +287,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 style={{ marginBottom: 8 }}
                 validateStatus={errorTypeMap['startTime']}
                 initialValue={defaultS || defaultTime}
+                rules={[{ required: true }]}
               >
                 <TimePicker
                   allowClear={false}
@@ -319,6 +318,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 label={locale.endDate}
                 style={{ marginBottom: 0 }}
                 validateStatus={errorTypeMap['endDate']}
+                rules={[{ required: true }]}
               >
                 <Input
                   onBlur={e => {
@@ -348,6 +348,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 style={{ marginBottom: 0 }}
                 validateStatus={errorTypeMap['endTime']}
                 initialValue={defaultE || defaultTime}
+                rules={[{ required: true }]}
               >
                 <TimePicker
                   allowClear={false}
