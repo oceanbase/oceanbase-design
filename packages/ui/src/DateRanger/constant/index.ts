@@ -127,6 +127,17 @@ export const NEAR_6_HOURS: RangeOption = {
   ],
 };
 
+export const NEAR_12_HOURS: RangeOption = {
+  label: '近 12 小时',
+  enLabel: 'Last 12 Hours',
+  rangeLabel: '12h',
+  name: 'NEAR_12_HOURS',
+  range: (current: Moment | Dayjs = moment()) => [
+    current.clone().subtract(12, 'hour'),
+    current.clone(),
+  ],
+};
+
 export const TODAY: RangeOption = {
   label: '今天',
   enLabel: 'Today',
@@ -146,6 +157,17 @@ export const YESTERDAY: RangeOption = {
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(DAY_UNIT).add(-1, DAY_UNIT),
     current.clone().endOf(DAY_UNIT).add(-1, DAY_UNIT),
+  ],
+};
+
+export const LAST_1_DAY: RangeOption = {
+  label: '近 1 天',
+  enLabel: 'Last 1 Day',
+  rangeLabel: '1d',
+  name: 'LAST_1_DAY',
+  range: (current: Moment | Dayjs = moment()) => [
+    current.clone().subtract(1, 'days'),
+    current.clone(),
   ],
 };
 
@@ -247,6 +269,8 @@ export const NEAR_TIME_LIST = [
   NEAR_2_HOURS,
   NEAR_3_HOURS,
   NEAR_6_HOURS,
+  NEAR_12_HOURS,
+  LAST_1_DAY,
   LAST_3_DAYS,
   TODAY,
   YESTERDAY,
