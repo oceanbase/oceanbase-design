@@ -9,7 +9,7 @@ export interface BaseProps extends ButtonProps {
   /** 固定展示、不会被折叠 */
   fixed?: boolean;
   onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => Promise<void> | void;
-  children?: React.ReactElement | string;
+  children?: React.ReactElement | React.ReactNode | string;
   enableLoading?: boolean;
   tooltip?: string;
   loading?: boolean;

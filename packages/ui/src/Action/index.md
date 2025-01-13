@@ -14,7 +14,8 @@ nav:
 <code src="./demo/more-text.tsx" title="自定义更多操作"></code>
 <code src="./demo/with-tooltip-popconfirm.tsx" title="带 Tooltip 和 Popconfirm"></code>
 <code src="./demo/fixed.tsx" title="固定展示、不被折叠的 Action"></code>
-<code src="./demo/groupControl.tsx" title="整体控制状态"></code>
+<code src="./demo/group-control.tsx" title="整体控制状态"></code>
+<code src="./demo/children-wrapper.tsx" title="子元素间接嵌套"></code>
 
 ## API
 

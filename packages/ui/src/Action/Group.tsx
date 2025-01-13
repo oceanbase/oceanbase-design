@@ -1,11 +1,22 @@
-import { Button, Dropdown, Menu, Space, Tooltip, Typography } from '@oceanbase/design';
+import React, { useContext } from 'react';
+import {
+  Button,
+  Dropdown,
+  Menu,
+  Space,
+  Tooltip,
+  Typography,
+  ConfigProvider,
+} from '@oceanbase/design';
 import type { ButtonSize } from '@oceanbase/design/es/button';
 import { EllipsisOutlined, LoadingOutlined } from '@oceanbase/icons';
+import classNames from 'classnames';
 import { isBoolean, max, omit } from 'lodash';
-import React from 'react';
 import type { BaseProps } from './Item';
+import useStyle from './style';
 
 export interface GroupProps {
+  prefixCls?: string;
   size?: number;
   dropDownPlacement?:
     | 'topLeft'
@@ -38,6 +49,7 @@ const getOrder = ({ type, fixed }: { type?: string; fixed?: boolean }) => {
 };
 
 export default ({
+  prefixCls: customizePrefixCls,
   size = 3,
   children,
   dropDownPlacement,
@@ -48,6 +60,11 @@ export default ({
   moreType,
   buttonSize,
 }: GroupProps) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+
+  const prefixCls = getPrefixCls('action', customizePrefixCls);
+  const { wrapSSR } = useStyle(prefixCls);
+
   const visibleActions = Array.isArray(children)
     ? children.filter(c => {
         if (isBoolean(c.props.visible) && shouldVisible)
@@ -107,7 +124,7 @@ export default ({
     );
   }
 
-  return (
+  return wrapSSR(
     <Space size={ellipsisType === 'button' ? 8 : 16}>
       {mainActions.map(action => {
         return React.cloneElement(action, {
@@ -125,7 +142,7 @@ export default ({
         <Dropdown
           placement={dropDownPlacement}
           overlay={
-            <Menu>
+            <Menu className={`${prefixCls}-more-menu`}>
               {ellipsisActions.map((action, index) => {
                 const actionKey = action.key;
                 let disabled = false;
@@ -150,7 +167,8 @@ export default ({
                     disabled={actionDisabled}
                   >
                     <Tooltip title={action.props.tooltip}>
-                      {action.props.loading && <LoadingOutlined />} {action.props.children}
+                      {action.props.loading && <LoadingOutlined />}{' '}
+                      {action.props.children || action}
                     </Tooltip>
                   </Menu.Item>
                 );
