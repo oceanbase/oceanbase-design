@@ -26,6 +26,13 @@ export default () => {
       </Flex>
       <Divider children="preview" />
       <DateRanger
+        onChange={value => {
+          if (value) {
+            console.log(value[0].format(), value[1].format());
+          } else {
+            console.log(value);
+          }
+        }}
         allowClear={true}
         hasForward={getValue('hasForward')}
         hasRewind={getValue('hasRewind')}
