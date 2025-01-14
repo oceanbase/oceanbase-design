@@ -27,8 +27,9 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     {
       children,
       size,
-      divided = true,
+      title,
       tabList,
+      divided = true,
       prefixCls: customizePrefixCls,
       bodyStyle,
       styles,
@@ -50,6 +51,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 
     const cardCls = classNames(
       {
+        [`${prefixCls}-has-title`]: !!title,
         [`${prefixCls}-no-divider`]: !divided,
         [`${prefixCls}-no-body-padding`]: noBodyPadding,
       },
@@ -77,6 +79,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <AntCard
         ref={ref}
         size={size}
+        title={title}
         tabList={newTabList}
         prefixCls={customizePrefixCls}
         bodyStyle={bodyStyle}

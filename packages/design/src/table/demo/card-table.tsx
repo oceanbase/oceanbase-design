@@ -4,10 +4,15 @@ import { Card, Form, Switch, Table, theme } from '@oceanbase/design';
 const App: React.FC = () => {
   const { token } = theme.useToken();
 
+  // card
   const [hasBorder, setHasBorder] = useState(true);
   const [hasTitle, setHasTitle] = useState(true);
+  const [hasTabs, setHasTabs] = useState(false);
   const [hasDivider, setHasDivider] = useState(true);
   const [hasPadding, setHasPadding] = useState(false);
+
+  // table
+  const [bordered, setBordered] = useState(false);
   const [expandable, setExpandable] = useState(true);
   const [selectable, setSelectable] = useState(true);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -71,6 +76,15 @@ const App: React.FC = () => {
             }}
           />
         </Form.Item>
+        <Form.Item label="Card tabs" required={true}>
+          <Switch
+            size="small"
+            value={hasTabs}
+            onChange={value => {
+              setHasTabs(value);
+            }}
+          />
+        </Form.Item>
         <Form.Item label="Card divided" required={true}>
           <Switch
             size="small"
@@ -91,6 +105,15 @@ const App: React.FC = () => {
         </Form.Item>
       </Form>
       <Form layout="inline" style={{ marginBottom: 16 }}>
+        <Form.Item label="Table bordered" required={true}>
+          <Switch
+            size="small"
+            value={bordered}
+            onChange={value => {
+              setBordered(value);
+            }}
+          />
+        </Form.Item>
         <Form.Item label="Table expandable" required={true}>
           <Switch
             size="small"
@@ -114,6 +137,24 @@ const App: React.FC = () => {
         bordered={hasBorder}
         divided={hasDivider}
         title={hasTitle ? 'Title' : ''}
+        tabList={
+          hasTabs
+            ? [
+                {
+                  key: '1',
+                  tab: 'tab1',
+                },
+                {
+                  key: '2',
+                  tab: 'tab2',
+                },
+                {
+                  key: '3',
+                  tab: 'tab3',
+                },
+              ]
+            : undefined
+        }
         bodyStyle={
           hasPadding
             ? {}
@@ -123,6 +164,7 @@ const App: React.FC = () => {
         }
       >
         <Table
+          bordered={bordered}
           columns={columns}
           dataSource={dataSource}
           rowKey={record => record.key}
