@@ -7,16 +7,13 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-
+<code src="./demo/simple-mode.tsx" title="极简模式"></code>
 <code src="./demo/with-form.tsx" title="配合 Form 使用"></code>
-
 <code src="./demo/selected.tsx" title="时间范围快捷选项"></code>
-
 <code src="./demo/default-value.tsx" title="指定默认值"></code>
-
 <code src="./demo/locale.tsx" title="国际化"></code>
-
 <code src="./demo/updateCurrentTime.tsx" title="从外部更新时间"></code>
 
 ## API
@@ -36,6 +33,7 @@ nav:
 | pastOnly | 只能选择过去时间 | boolean | false | - |
 | disabledDate | 不可选择的日期 | (currentDate: Dayjs \| Moment) => boolean | - | - |
 | simpleMode | 是否启用极简模式 | boolean | false | - |
+| allowClear | 允许清空，仅普通模式支持，极简模式下不生效 | boolean | false | - |
 | hideYear | 当时间范围在本年时，隐藏年份 | boolean | false | - |
 | hideSecond | 隐藏"秒” | boolean | false | - |
 | autoCalcRange | 自动计算时间范围并回显到选择器tag | boolean | false | - |
