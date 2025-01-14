@@ -112,8 +112,11 @@ export default ({
 
   if (ellipsisType === 'button') {
     moreDom = (
-      <Button size={buttonSize}>
-        {moreText ?? <EllipsisOutlined style={{ cursor: 'pointer' }} />}
+      <Button
+        size={buttonSize}
+        icon={moreText ? undefined : <EllipsisOutlined style={{ cursor: 'pointer' }} />}
+      >
+        {moreText}
       </Button>
     );
   } else {
@@ -162,7 +165,6 @@ export default ({
                     onClick={({ domEvent }) => {
                       action.props.onClick?.(domEvent as React.MouseEvent<HTMLElement, MouseEvent>);
                     }}
-                    style={{ minWidth: 120 }}
                     {...omit(action.props, 'disabled')}
                     disabled={actionDisabled}
                   >
