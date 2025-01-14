@@ -14,10 +14,18 @@
     // FIXED: 存在不生效情况
     .@{prefix}-picker {
       padding-left: 0px;
+      padding-right: 16px;
       border: 0px;
-      pointer-events: none;
       input {
         text-align: center;
+      }
+      // 覆盖默认 antd 样式，定制出 RangerPicker 整体的感觉
+      .@{prefixCls}-picker-active-bar {
+        height: 0;
+      }
+
+      .@{prefixCls}-picker-input > input {
+        cursor: pointer;
       }
     }
 
