@@ -118,6 +118,9 @@ const defaultTheme: ThemeConfig = {
       handleActiveColor: '#5189fb',
       handleColorDisabled: '#b3ccff',
     },
+    Tabs: {
+      horizontalItemGutter: 24,
+    },
     Tag: {
       defaultColor: '#5c6b8a',
       colorBorder: tagColorBorder,

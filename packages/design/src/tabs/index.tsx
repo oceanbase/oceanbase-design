@@ -83,7 +83,6 @@ const Tabs = ({
       items={newItems as AntTabsProps['items']}
       type={type}
       tabPosition={tabPosition}
-      tabBarGutter={!type || type === 'line' ? (isHorizontal ? 24 : 0) : undefined}
       prefixCls={customizePrefixCls}
       className={tabsCls}
       {...restProps}
