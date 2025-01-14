@@ -54,22 +54,6 @@ export const genTagStyle: GenerateStyle<TabsToken | CardToken> = (
         borderRadius: '1px',
       },
     },
-    [`${componentCls}:not(${componentCls}-card)`]: {
-      [`&${componentCls}-top, &${componentCls}-bottom`]: {
-        [`${componentCls}-nav`]: {
-          [`${componentCls}-tab`]: {
-            padding: `${token.paddingXS}px 0px`,
-          },
-        },
-        [`&${componentCls}-small`]: {
-          [`${componentCls}-nav`]: {
-            [`${componentCls}-tab`]: {
-              padding: `${token.paddingXS - token.lineWidth * 2}px 0px`,
-            },
-          },
-        },
-      },
-    },
   };
 };
 
