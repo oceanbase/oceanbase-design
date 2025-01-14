@@ -9,7 +9,7 @@ export type CardToken = FullToken<'Card'> & {
 };
 
 export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSObject => {
-  const { antCls } = token;
+  const { componentCls, antCls } = token;
   const tableComponentCls = `${antCls}-table`;
   return {
     [`${tableComponentCls}-wrapper`]: {
@@ -36,11 +36,19 @@ export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSOb
         },
       },
     },
+    [`&${componentCls}-has-title${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
+      [`${componentCls}-body`]: {
+        [`& > ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
+          {
+            marginTop: -token.marginSM,
+          },
+      },
+    },
   };
 };
 
 export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObject => {
-  const { componentCls, tabsComponentCls, tabsPrefixCls, padding, paddingSM, paddingLG } = token;
+  const { componentCls, tabsComponentCls, tabsPrefixCls, paddingSM, paddingLG } = token;
   return {
     [`${componentCls}`]: {
       // nested Card style
@@ -50,7 +58,8 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
     },
     [`${componentCls}${componentCls}-no-divider`]: {
       [`${componentCls}-head`]: {
-        borderBottom: 'none',
+        // should not remove border-bottom to avoid tabs inkbar display correctly
+        borderBottomColor: 'transparent',
       },
     },
     [`${componentCls}${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {

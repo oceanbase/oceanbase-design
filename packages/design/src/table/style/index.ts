@@ -149,8 +149,8 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         ['td, th']: {
           [`&${componentCls}-row-expand-icon-cell`]: {
             backgroundColor: colorBgBase,
-            // 去掉展开列的 padding，其宽度由 expandable.columnWidth 进行控制，其高度跟随其他列
-            padding: 0,
+            // 设置 paddingRight 即可
+            paddingRight: token.paddingXS,
           },
           // 紧跟在选择列或展开列后的第一列，左侧间距减小为 8px
           [`&${componentCls}-selection-column, &${componentCls}-row-expand-icon-cell`]: {
@@ -215,9 +215,15 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
                 },
               },
             },
+          [`${componentCls}-expanded-row > td`]: {
+            // 除内嵌子表格外，设置其他内嵌元素样式
+            [`& > *:not(${componentCls}-wrapper)`]: {
+              marginLeft: token.marginXL + token.lineWidth * 2,
+            },
+          },
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.marginXS + token.lineWidth * 2,
+            marginLeft: token.margin + token.lineWidth * 2,
           },
         },
       },
@@ -225,7 +231,7 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         [`${componentCls}-tbody`]: {
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.marginXS + token.lineWidth * 2 + token.margin,
+            marginLeft: token.margin + token.lineWidth * 2 + token.margin,
           },
         },
       },
@@ -238,12 +244,12 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
           [`${componentCls}-expanded-row > td`]: {
             // 除内嵌子表格外，设置其他内嵌元素样式
             [`& > *:not(${componentCls}-wrapper)`]: {
-              marginLeft: token.marginLG + token.marginXL + token.lineWidth * 2,
+              marginLeft: token.marginXL + token.marginXL + token.lineWidth * 2,
             },
           },
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.marginXS + token.marginXL + token.lineWidth * 2,
+            marginLeft: token.margin + token.marginXL + token.lineWidth * 2,
           },
         },
       },
@@ -251,7 +257,7 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         [`${componentCls}-tbody`]: {
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.marginXS + token.marginXL + token.lineWidth * 2 + token.margin,
+            marginLeft: token.margin + token.marginXL + token.lineWidth * 2 + token.margin,
           },
         },
       },

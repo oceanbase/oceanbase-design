@@ -9,6 +9,9 @@ export { ProCardProps };
 
 // @ts-ignore
 const ProCard: typeof AntProCard = ({
+  title,
+  tabs,
+  headerBordered,
   bodyStyle,
   prefixCls: customizePrefixCls,
   className,
@@ -25,7 +28,10 @@ const ProCard: typeof AntProCard = ({
 
   const proCardCls = classNames(
     {
+      [`${prefixCls}-has-title`]: !!title,
       [`${prefixCls}-no-body-padding`]: noBodyPadding,
+      [`${prefixCls}-no-divider`]: !headerBordered,
+      [`${prefixCls}-contain-tabs`]: !!tabs,
     },
     className
   );
@@ -33,6 +39,9 @@ const ProCard: typeof AntProCard = ({
   return wrapSSR(
     <AntProCard
       prefixCls={customizePrefixCls}
+      title={title}
+      tabs={tabs}
+      headerBordered={headerBordered}
       bodyStyle={bodyStyle}
       className={proCardCls}
       {...restProps}
