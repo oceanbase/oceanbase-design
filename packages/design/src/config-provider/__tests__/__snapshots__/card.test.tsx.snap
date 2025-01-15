@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ConfigProvider card > divided 1`] = `
+<div
+  class="ant-card ant-card-bordered ant-card-has-title"
+>
+  <div
+    class="ant-card-head"
+  >
+    <div
+      class="ant-card-head-wrapper"
+    >
+      <div
+        class="ant-card-head-title"
+      >
+        Title
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-card-body"
+  >
+    Content
+  </div>
+</div>
+`;

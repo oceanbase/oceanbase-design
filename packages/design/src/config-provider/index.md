@@ -9,6 +9,7 @@ nav:
 - 🌈 定制全局主题和空状态，以符合 OceanBase Design 设计规范。
 - 🆕 默认内嵌 [App 包裹组件](https://ant.design/components/app-cn)，支持 message, notification 和 Modal 等静态方法消费 ConfigProvider 配置。
 - 🆕 新增 `theme.isAliyun` 属性，用于开启阿里云主题。
+- 🆕 新增 `card.divided` 属性，用于配置 Card 是否展示分割线。
 - 🆕 新增 `locale.Input.placeholder` 属性，用于配置 Input 的默认 `placeholder`。
 - 🆕 新增 `table.selectionColumnWidth` 属性，用于配置表格的展开列宽度。
 - 🆕 新增 `injectStaticFunction` 属性，用于配置 `message`, `notification` 和 `Modal` 静态方法是否可以消费全局配置，默认开启。
@@ -25,6 +26,7 @@ nav:
 <code src="./demo/size.tsx" title="尺寸"></code>
 <code src="./demo/theme.tsx" title="主题"></code>
 <code src="./demo/spin.tsx" title="Spin"></code>
+<code src="./demo/card.tsx" title="Card"></code>
 <code src="../empty/demo/config-provider.tsx" title="空状态"></code>
 
 ### 样式前缀
@@ -52,6 +54,7 @@ export default App;
 | :-- | :-- | :-- | :-- | :-- |
 | theme.isAliyun | 用于开启阿里云主题 | boolean | - | 0.3.5 |
 | locale.Input.placeholder | 用于配置 Input 的默认 `placeholder` | string | - | 0.3.2 |
+| card | Card 全局配置 | `{ divided?: boolean; classNames?: Record<string, string>; styles?: Record<string, React.CSSProperties>; }` | - | - |
 | spin | Spin 全局配置 | `{ indicator?: ReactNode; className?: string; style?: React.CSSProperties; }` | - | - |
 | table | Table 全局配置 | `{ selectionColumnWidth?: width; className?: string; style?: React.CSSProperties; }` | - | - |
 | injectStaticFunction | 用于配置 `message`, `notification` 和 `Modal` 静态方法是否可以消费全局配置 <Alert type="warning" showIcon={true} message="📢 注意: 如果有多个 ConfigProvider，建议在最顶层的 ConfigProvider 开启 `injectStaticFunction` 即可，其他 ConfigProvider 则需要关闭该配置，否则静态方法可能会有冲突。"></Alert> | boolean | true | - |
