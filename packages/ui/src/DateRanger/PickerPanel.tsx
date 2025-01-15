@@ -25,6 +25,7 @@ import { getPrefix } from '../_util';
 import { DATE_TIME_MONTH_FORMAT, DATE_TIME_MONTH_FORMAT_CN } from './constant';
 import type { RangeValue } from './Ranger';
 type ValidateTrigger = 'submit' | 'valueChange';
+import './index.less';
 
 type MaybeArray<T> = T | T[];
 type ErrorType = 'endDate' | 'startDate' | 'endTime' | 'startTime';
@@ -46,6 +47,9 @@ export interface PickerPanelProps {
   isMoment: boolean;
   disabledDate: any;
   locale: any;
+  styles?: {
+    pickerPanel: React.CSSProperties;
+  };
 }
 
 const prefix = getPrefix('ranger-picker-panel');
@@ -64,6 +68,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     onOk = noop,
     onCancel = noop,
     disabledDate,
+    styles,
   } = props;
   const rootCls = useCSSVarCls(prefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
@@ -239,15 +244,16 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
       }
     });
   };
+
   return (
-    <div className={classNames(prefix)}>
-      <Space direction="vertical" size={12} style={{ margin: '12px 0' }}>
+    <div className={classNames(prefix)} style={{ width: 300, ...styles?.pickerPanel }}>
+      <Space direction="vertical" size={12} style={{ margin: '12px 0', width: '100%' }}>
         <Form
+          form={form}
           layout="vertical"
           autoComplete="off"
           requiredMark={false}
-          style={{ width: 280 }}
-          form={form}
+          style={{ paddingRight: 8 }}
         >
           <Row gutter={12} style={{ marginBottom: 4 }}>
             <Col span={12} style={{ paddingLeft: 12 }}>
