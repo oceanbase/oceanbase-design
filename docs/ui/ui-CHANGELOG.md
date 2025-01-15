@@ -8,6 +8,27 @@ group: 业务组件
 
 ---
 
+## 0.4.7
+
+`2025-01-15`
+
+- Action
+  - 🆕 Action 支持子元素间接嵌套。[#928](https://github.com/oceanbase/oceanbase-design/pull/928)
+  - 💄 Action.Link 之间的间隔改为 16px。[#926](https://github.com/oceanbase/oceanbase-design/pull/926)
+  - 💄 优化 Action 更多按钮的宽度，并去掉下拉菜单的最小宽度。[#931](https://github.com/oceanbase/oceanbase-design/pull/931)
+- DateRanger
+  - 🆕 DateRanger 新增 `rules` 属性，用于设置起止时间的校验规则。[#940](https://github.com/oceanbase/oceanbase-design/pull/940) [@linhf123](https://github.com/linhf123)
+  - 🆕 DateRanger 新增 `NEAR_12_HOURS` 和 `LAST_1_DAY` 快捷选项。[#927](https://github.com/oceanbase/oceanbase-design/pull/927) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - 🌐 优化 DateRanger 的英文文案和日期格式。[#918](https://github.com/oceanbase/oceanbase-design/pull/918) [@18735185652](https://github.com/18735185652)
+  - 🐞 修复 DateRanger `allowClear` 不生效的问题。[#929](https://github.com/oceanbase/oceanbase-design/pull/929) [@linhf123](https://github.com/linhf123)
+  - 💄 去掉 DateRanger `focus` 时的阴影样式。[#934](https://github.com/oceanbase/oceanbase-design/pull/934)
+  - 💄 DateRanger 横向空间不足时，切换按钮不换行。[#920](https://github.com/oceanbase/oceanbase-design/pull/920) [@wzc520pyfm](https://github.com/wzc520pyfm)
+- ProCard
+  - 📖 新增 ProCard 的文档和示例。[#923](https://github.com/oceanbase/oceanbase-design/pull/923)
+  - 💄 优化 ProCard 在无间距时的头部样式。[#923](https://github.com/oceanbase/oceanbase-design/pull/923)
+  - 💄 优化 ProCard 的圆角、阴影和内间距，以对齐 Card 样式。[#938](https://github.com/oceanbase/oceanbase-design/pull/938)
+  - 💄 优化 ProCard 页标签样式，以对齐 Card 页标签样式。[#937](https://github.com/oceanbase/oceanbase-design/pull/937)
+
 ## 0.4.6
 
 `2024-12-30`
