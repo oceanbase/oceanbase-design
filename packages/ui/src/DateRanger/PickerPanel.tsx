@@ -27,18 +27,20 @@ import type { RangeValue } from './Ranger';
 type ValidateTrigger = 'submit' | 'valueChange';
 
 type MaybeArray<T> = T | T[];
-type ErrorType = 'endDate' | 'startDate' | 'endTime' | 'startTime';
+type ErrorType = 'endDate' | 'startDate' | 'endTime' | 'startTime' | 'all';
+
+const ALL_ERROR_TYPE_LIST = ['endDate', 'startDate', 'endTime', 'startTime'];
 
 export type Rule = {
   message: string;
-  validate: (value: string) => MaybeArray<ErrorType>;
+  validator: (value: [string, string] | []) => MaybeArray<ErrorType> | null | undefined;
 };
 
 export interface PickerPanelProps {
   value?: RangeValue;
   defaultValue?: RangeValue;
   tip?: string;
-  require?: boolean;
+  required?: boolean;
   rules?: Rule[];
   validateTrigger?: ValidateTrigger;
   onCancel: () => void;
@@ -60,7 +62,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     locale,
     tip,
     rules,
-    require = true,
+    required = true,
     onOk = noop,
     onCancel = noop,
     disabledDate,
@@ -441,30 +443,28 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
               const start = `${startDate} ${startTime.format(TIME_FORMAT)}`;
               const end = `${endDate} ${endTime.format(TIME_FORMAT)}`;
 
-              onOk([start, end]);
+              let errorList = [];
+              let message = '';
+              rules?.some(item => {
+                if (typeof item?.validator === 'function') {
+                  const errorType = item.validator([start, end]);
+                  if (errorType) {
+                    errorList = Array.isArray(errorType) ? errorType : [errorType];
+                    message = item.message;
+                    return true;
+                  }
+                }
+                return false;
+              });
 
-              // let errorList = [];
-              // let message = '';
-              // rules?.some(item => {
-              //   if (typeof item?.validator === 'function') {
-              //     const errorType = item.validator(start, end);
-              //     if (errorType) {
-              //       errorList = toArray(errorType);
-              //       message = item.message;
-              //       return true;
-              //     }
-              //   }
-              //   return false;
-              // });
-
-              // if (errorList.length > 0) {
-              //   setErrorTypeList(errorList);
-              //   setErrorMessage(message);
-              // } else {
-              //   setErrorMessage('');
-              //   setErrorTypeList([]);
-              //   onOk([start, end]);
-              // }
+              if (errorList.length > 0) {
+                setErrorTypeList(errorList.includes('all') ? ALL_ERROR_TYPE_LIST : errorList);
+                setErrorMessage(message);
+              } else {
+                setErrorMessage('');
+                setErrorTypeList([]);
+                onOk([start, end]);
+              }
             });
           }}
         >
