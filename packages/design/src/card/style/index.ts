@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
-import { genTagStyle } from '../../tabs/style';
+import { genTabsStyle } from '../../tabs/style';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type CardToken = FullToken<'Card'> & {
@@ -78,11 +78,11 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       },
     },
     [`${componentCls}${componentCls}-contain-tabs`]: {
-      [`${componentCls}-head`]: genTagStyle({
+      [`${componentCls}-head`]: genTabsStyle({
         ...token,
         componentCls: tabsComponentCls,
         prefixCls: tabsPrefixCls,
-      } as CardToken),
+      }),
     },
     [`${componentCls}${componentCls}-contain-grid`]: {
       [`${componentCls}-head`]: {

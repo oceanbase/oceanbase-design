@@ -40,7 +40,14 @@ const ProCard: typeof AntProCard = ({
     <AntProCard
       prefixCls={customizePrefixCls}
       title={title}
-      tabs={tabs}
+      tabs={
+        typeof tabs === 'object'
+          ? {
+              size: 'large',
+              ...tabs,
+            }
+          : tabs
+      }
       headerBordered={headerBordered}
       bodyStyle={bodyStyle}
       className={proCardCls}

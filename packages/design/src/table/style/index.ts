@@ -4,7 +4,7 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type TableToken = FullToken<'Table'>;
 
-export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSSObject => {
+export const genTableStyle = (token: TableToken): CSSObject => {
   const {
     antCls,
     componentCls,
