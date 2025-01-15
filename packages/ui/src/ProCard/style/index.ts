@@ -9,6 +9,25 @@ export const genProCardStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObje
   const tabsComponentCls = `${antCls}-tabs`;
   const tabsPrefixCls = `${prefixCls}-tabs`;
   return {
+    // follow Card style
+    // need add `div` to make style work
+    [`div${componentCls}`]: {
+      borderRadius: token.borderRadiusLG,
+    },
+    [`${componentCls}:not(${componentCls}-border)`]: {
+      boxShadow:
+        '0 1px 2px 0 rgba(0, 0, 0, 0.03),0 1px 6px -1px rgba(0, 0, 0, 0.02),0 2px 4px 0 rgba(0, 0, 0, 0.02)',
+    },
+    [`${componentCls}:not(${componentCls}-size-small)`]: {
+      [`${componentCls}-body`]: {
+        paddingBlock: token.paddingLG,
+      },
+      [`&${componentCls}-has-title${componentCls}-no-divider`]: {
+        [`${componentCls}-body`]: {
+          paddingBlockStart: token.padding,
+        },
+      },
+    },
     // no body padding card
     [`${componentCls}${componentCls}-no-body-padding:not(${componentCls}-contain-tabs)`]: {
       [`${componentCls}-header`]: {

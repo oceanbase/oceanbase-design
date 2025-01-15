@@ -51,7 +51,7 @@ const App: React.FC = () => {
         hasBorder
           ? {}
           : {
-              backgroundColor: token.colorFillContent,
+              backgroundColor: token.colorBgLayout,
               padding: '40px 24px',
               margin: '-40px -24px',
             }
