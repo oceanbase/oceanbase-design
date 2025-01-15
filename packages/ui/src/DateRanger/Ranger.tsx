@@ -56,7 +56,7 @@ export type RangeDateValue = {
 };
 
 export interface DateRangerProps
-  extends Omit<RangePickerProps, 'mode' | 'picker' | 'value' | 'defaultValue'> {
+  extends Omit<RangePickerProps, 'mode' | 'picker' | 'value' | 'defaultValue' | 'styles'> {
   // 数据相关
   selects?: RangeOption[];
   defaultQuickValue?: string;
