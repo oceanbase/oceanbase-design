@@ -12,6 +12,7 @@ nav:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
+<code src="../../../design/src/table/demo/pro-card-table.tsx" title="和 Table 组合使用"></code>
 
 ## API
 

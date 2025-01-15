@@ -1,13 +1,10 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
+import type { FullToken } from 'antd/es/theme/internal';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type TabsToken = FullToken<'Tabs'>;
-export type CardToken = FullToken<'Card'>;
 
-export const genTagStyle: GenerateStyle<TabsToken | CardToken> = (
-  token: TabsToken | CardToken
-): CSSObject => {
+export const genTabsStyle = (token: Partial<TabsToken>): CSSObject => {
   const { antCls, componentCls, colorInfo, colorInfoBg, colorTextSecondary } = token;
   return {
     [componentCls]: {
@@ -59,7 +56,7 @@ export const genTagStyle: GenerateStyle<TabsToken | CardToken> = (
 
 export default (prefixCls: string) => {
   const useStyle = genComponentStyleHook('Tabs', token => {
-    return [genTagStyle(token as TabsToken)];
+    return [genTabsStyle(token as TabsToken)];
   });
   return useStyle(prefixCls);
 };

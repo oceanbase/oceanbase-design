@@ -6,7 +6,7 @@ import type { Tab as AntTab } from 'rc-tabs/es/interface';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import useLegacyItems from './hooks/useLegacyItems';
-import useStyle from './style';
+import useStyle, { genTabsStyle } from './style';
 import TabPane from './TabPane';
 import type { TabPaneProps } from './TabPane';
 
@@ -91,6 +91,7 @@ const Tabs = ({
 };
 
 Tabs.TabPane = TabPane;
+Tabs.genTabsStyle = genTabsStyle;
 
 if (process.env.NODE_ENV !== 'production') {
   Tabs.displayName = AntTabs.displayName;
