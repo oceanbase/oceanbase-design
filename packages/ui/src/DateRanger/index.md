@@ -53,11 +53,11 @@ nav:
 
 ### Rule
 
-| 参数      | 说明                 | 类型                                        | 默认值 | 版本 |
-| :-------- | :------------------- | :------------------------------------------ | :----- | :--- |
-| validator | 自定义校验，返回报错 | (value) => RuleErrorType \| RuleErrorType[] | -      | -    |
-| message   | 错误信息             | string                                      | -      | -    |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| :-- | :-- | :-- | :-- | :-- |
+| validator | 自定义校验，存在返回值时，会将对应位置标红并展示错误信息 | (value) => RuleErrorType \| RuleErrorType[] \| undefined | - | - |
+| message | 错误信息 | string | - | - |
 
 ### RuleErrorType
 
-`'all' | 'endDate' | 'startDate' | 'endTime' | 'startTime'`
+`'all' | 'startDate' |  'startTime' | 'endDate' |   'endTime' |`
