@@ -17,7 +17,7 @@ import React, { useState } from 'react';
 const { TabPane } = Tabs;
 
 const App: React.FC = () => {
-  const [componentSize, setComponentSize] = useState<SizeType>('small');
+  const [componentSize, setComponentSize] = useState<SizeType>('middle');
 
   return (
     <>

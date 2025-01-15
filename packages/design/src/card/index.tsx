@@ -29,7 +29,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       size,
       title,
       tabList,
-      divided = true,
+      divided: outerDivided,
       prefixCls: customizePrefixCls,
       bodyStyle,
       styles,
@@ -38,7 +38,9 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     },
     ref
   ) => {
-    const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+    const { getPrefixCls, card: contextCard } = useContext(ConfigProvider.ConfigContext);
+    const divided = outerDivided ?? contextCard?.divided ?? true;
+
     const prefixCls = getPrefixCls('card', customizePrefixCls);
     const tabsPrefixCls = getPrefixCls('tabs', customizePrefixCls);
     const { wrapSSR } = useStyle(prefixCls, tabsPrefixCls);
