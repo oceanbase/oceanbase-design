@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
-import { Form, Switch } from '@oceanbase/design';
+import { Form, Switch, theme } from '@oceanbase/design';
 import { ProCard } from '@oceanbase/ui';
 
 export default () => {
+  const { token } = theme.useToken();
+  const [hasHeader, setHasHeader] = useState(true);
   const [headerBordered, setHeaderBordered] = useState(false);
   const [hasPadding, setHasPadding] = useState(true);
   const bodyStyle: React.CSSProperties = hasPadding ? {} : { padding: 0 };
   return (
     <>
       <Form layout="inline" style={{ marginBottom: 16 }}>
+        <Form.Item label="has header" required={true}>
+          <Switch
+            size="small"
+            value={hasHeader}
+            onChange={value => {
+              setHasHeader(value);
+            }}
+          />
+        </Form.Item>
         <Form.Item label="header bordered" required={true}>
           <Switch
             size="small"
@@ -31,9 +42,9 @@ export default () => {
       <ProCard
         bordered
         headerBordered={headerBordered}
-        title="默认尺寸"
-        extra="extra"
-        tooltip="这是提示"
+        title={hasHeader && '默认尺寸'}
+        extra={hasHeader && 'extra'}
+        tooltip={hasHeader && '这是提示'}
         style={{ width: 300 }}
         bodyStyle={bodyStyle}
       >
@@ -42,24 +53,12 @@ export default () => {
         <div>Card content</div>
       </ProCard>
       <ProCard
-        headerBordered={headerBordered}
-        boxShadow
-        title="带卡片阴影"
-        extra="extra"
-        tooltip="这是提示"
-        style={{ width: 300, marginBlockStart: 24 }}
-        bodyStyle={bodyStyle}
-      >
-        <div>Card content</div>
-        <div>Card content</div>
-        <div>Card content</div>
-      </ProCard>
-      <ProCard
+        bordered
         headerBordered={headerBordered}
         size="small"
-        title="小尺寸卡片"
-        extra="extra"
-        tooltip="这是提示"
+        title={hasHeader && '小尺寸'}
+        extra={hasHeader && 'extra'}
+        tooltip={hasHeader && '这是提示'}
         style={{ width: 300, marginBlockStart: 24 }}
         bodyStyle={bodyStyle}
       >
@@ -67,6 +66,27 @@ export default () => {
         <div>Card content</div>
         <div>Card content</div>
       </ProCard>
+      <div
+        style={{
+          marginBlockStart: 24,
+          padding: 24,
+          borderRadius: 8,
+          background: token.colorBgLayout,
+        }}
+      >
+        <ProCard
+          headerBordered={headerBordered}
+          title={hasHeader && '无边框'}
+          extra={hasHeader && 'extra'}
+          tooltip={hasHeader && '这是提示'}
+          style={{ width: 300 }}
+          bodyStyle={bodyStyle}
+        >
+          <div>Card content</div>
+          <div>Card content</div>
+          <div>Card content</div>
+        </ProCard>
+      </div>
     </>
   );
 };

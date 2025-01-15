@@ -3,9 +3,9 @@ import React from 'react';
 
 const App: React.FC = () => (
   <Card divided={false} title="Card title" extra={<a>More</a>} style={{ width: 300 }}>
-    <p>Card content</p>
-    <p>Card content</p>
-    <p>Card content</p>
+    <div>Card content</div>
+    <div>Card content</div>
+    <div>Card content</div>
   </Card>
 );
 
