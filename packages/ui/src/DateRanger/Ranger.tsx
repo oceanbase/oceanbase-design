@@ -88,7 +88,7 @@ export interface DateRangerProps
   defaultValue?: RangeValue;
   size?: 'small' | 'large' | 'middle';
   tooltipProps?: TooltipProps;
-  locale: any;
+  locale?: any;
 }
 
 const prefix = getPrefix('date-ranger');
@@ -574,4 +574,4 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
 export default LocaleWrapper({
   componentName: 'DateRanger',
   defaultLocale: zhCN,
-})(Ranger);
+})(Ranger) as typeof Ranger;
