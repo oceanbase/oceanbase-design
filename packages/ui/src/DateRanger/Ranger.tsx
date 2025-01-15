@@ -56,7 +56,7 @@ export type RangeDateValue = {
 };
 
 export interface DateRangerProps
-  extends Omit<RangePickerProps, 'mode' | 'picker' | 'value' | 'defaultValue'> {
+  extends Omit<RangePickerProps, 'mode' | 'picker' | 'value' | 'defaultValue' | 'styles'> {
   // 数据相关
   selects?: RangeOption[];
   defaultQuickValue?: string;
@@ -79,6 +79,9 @@ export interface DateRangerProps
   hideYear?: boolean;
   // 隐藏 秒
   hideSecond?: boolean;
+  styles?: {
+    pickerPanel: React.CSSProperties;
+  };
   // 自动计算时间范围并回显到选择器tag
   autoCalcRange?: boolean;
   isMoment?: boolean;
@@ -358,6 +361,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   {originNode}
                   <Divider type="vertical" style={{ height: 'auto', margin: '0px 4px 0px 0px' }} />
                   <InternalPickerPanel
+                    styles={rest.styles}
                     defaultValue={innerValue || []}
                     // @ts-ignore
                     locale={locale}

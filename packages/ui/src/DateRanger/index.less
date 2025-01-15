@@ -1,6 +1,7 @@
 @import '../variable.less';
 
 @prefix: ob-date-ranger;
+@pick-prefix: ob-ranger-picker-panel;
 
 .@{prefix} {
   cursor: pointer;
@@ -151,6 +152,14 @@
       + .@{prefixCls}-radio-button-wrapper::before {
         background-color: @colorPrimaryBorderHover;
       }
+    }
+  }
+}
+
+.@{pick-prefix} {
+  .@{prefixCls}-picker-dropdown {
+    .@{prefixCls}-picker-date-panel {
+      width: 100%;
     }
   }
 }

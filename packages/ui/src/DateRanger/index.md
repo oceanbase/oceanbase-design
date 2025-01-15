@@ -13,6 +13,7 @@ nav:
 <code src="./demo/with-form.tsx" title="配合 Form 使用"></code>
 <code src="./demo/selected.tsx" title="时间范围快捷选项"></code>
 <code src="./demo/default-value.tsx" title="指定默认值"></code>
+<code src="./demo/custom-panel-style.tsx" title="定制弹层的右侧 Panel 样式"></code>
 <code src="./demo/locale.tsx" title="国际化"></code>
 <code src="./demo/updateCurrentTime.tsx" title="从外部更新时间"></code>
 
@@ -38,7 +39,7 @@ nav:
 | hideSecond | 隐藏"秒” | boolean | false | - |
 | autoCalcRange | 自动计算时间范围并回显到选择器tag | boolean | false | - |
 | ref | updateCurrentTime 手动更新当前时间 | function | - | - |
-
+| styles | 配置内置模块的 style | Record<string, CSSProperties> | - | - |
 | 其他 antd/RangePicker 的 `props` | [antd-RangePicker](https://ant.design/components/date-picker-cn/#RangePicker) | - | - | - |
 
 ### RangeOption
