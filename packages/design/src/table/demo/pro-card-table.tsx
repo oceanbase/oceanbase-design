@@ -13,6 +13,7 @@ const App: React.FC = () => {
 
   // table
   const [bordered, setBordered] = useState(false);
+  const [pagination, setPagination] = useState(true);
   const [expandable, setExpandable] = useState(true);
   const [selectable, setSelectable] = useState(true);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -36,7 +37,7 @@ const App: React.FC = () => {
   ];
 
   const dataSource = [];
-  for (let i = 1; i < 100; i++) {
+  for (let i = 1; i <= 5; i++) {
     dataSource.push({
       key: i,
       name: '胡彦斌' + i,
@@ -102,6 +103,15 @@ const App: React.FC = () => {
             value={bordered}
             onChange={value => {
               setBordered(value);
+            }}
+          />
+        </Form.Item>
+        <Form.Item label="Table pagination" required={true}>
+          <Switch
+            size="small"
+            value={pagination}
+            onChange={value => {
+              setPagination(value);
             }}
           />
         </Form.Item>
@@ -174,9 +184,13 @@ const App: React.FC = () => {
                 }
               : undefined
           }
-          pagination={{
-            pageSize: 5,
-          }}
+          pagination={
+            pagination
+              ? {
+                  pageSize: 5,
+                }
+              : false
+          }
         />
       </ProCard>
     </div>
