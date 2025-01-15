@@ -66,10 +66,9 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                       <span
                         class="ant-input-suffix"
                       >
-                        <span
+                        <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                          role="button"
-                          tabindex="-1"
+                          type="button"
                         >
                           <span
                             aria-label="close-circle"
@@ -91,7 +90,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                               />
                             </svg>
                           </span>
-                        </span>
+                        </button>
                       </span>
                     </span>
                   </div>
@@ -147,10 +146,9 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                       <span
                         class="ant-input-suffix"
                       >
-                        <span
+                        <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                          role="button"
-                          tabindex="-1"
+                          type="button"
                         >
                           <span
                             aria-label="close-circle"
@@ -172,7 +170,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                               />
                             </svg>
                           </span>
-                        </span>
+                        </button>
                       </span>
                     </span>
                   </div>
@@ -224,10 +222,9 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                     <span
                       class="ant-input-suffix"
                     >
-                      <span
+                      <button
                         class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                        role="button"
-                        tabindex="-1"
+                        type="button"
                       >
                         <span
                           aria-label="close-circle"
@@ -249,7 +246,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                             />
                           </svg>
                         </span>
-                      </span>
+                      </button>
                     </span>
                   </span>
                 </div>
@@ -955,10 +952,9 @@ exports[`ProTable > default pagination should work 1`] = `
                       <span
                         class="ant-input-suffix"
                       >
-                        <span
+                        <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                          role="button"
-                          tabindex="-1"
+                          type="button"
                         >
                           <span
                             aria-label="close-circle"
@@ -980,7 +976,7 @@ exports[`ProTable > default pagination should work 1`] = `
                               />
                             </svg>
                           </span>
-                        </span>
+                        </button>
                       </span>
                     </span>
                   </div>
@@ -1036,10 +1032,9 @@ exports[`ProTable > default pagination should work 1`] = `
                       <span
                         class="ant-input-suffix"
                       >
-                        <span
+                        <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                          role="button"
-                          tabindex="-1"
+                          type="button"
                         >
                           <span
                             aria-label="close-circle"
@@ -1061,7 +1056,7 @@ exports[`ProTable > default pagination should work 1`] = `
                               />
                             </svg>
                           </span>
-                        </span>
+                        </button>
                       </span>
                     </span>
                   </div>
@@ -1113,10 +1108,9 @@ exports[`ProTable > default pagination should work 1`] = `
                     <span
                       class="ant-input-suffix"
                     >
-                      <span
+                      <button
                         class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                        role="button"
-                        tabindex="-1"
+                        type="button"
                       >
                         <span
                           aria-label="close-circle"
@@ -1138,7 +1132,7 @@ exports[`ProTable > default pagination should work 1`] = `
                             />
                           </svg>
                         </span>
-                      </span>
+                      </button>
                     </span>
                   </span>
                 </div>
@@ -1916,10 +1910,9 @@ exports[`ProTable > render 1`] = `
                       <span
                         class="ant-input-suffix"
                       >
-                        <span
+                        <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                          role="button"
-                          tabindex="-1"
+                          type="button"
                         >
                           <span
                             aria-label="close-circle"
@@ -1941,7 +1934,7 @@ exports[`ProTable > render 1`] = `
                               />
                             </svg>
                           </span>
-                        </span>
+                        </button>
                       </span>
                     </span>
                   </div>
@@ -1997,10 +1990,9 @@ exports[`ProTable > render 1`] = `
                       <span
                         class="ant-input-suffix"
                       >
-                        <span
+                        <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                          role="button"
-                          tabindex="-1"
+                          type="button"
                         >
                           <span
                             aria-label="close-circle"
@@ -2022,7 +2014,7 @@ exports[`ProTable > render 1`] = `
                               />
                             </svg>
                           </span>
-                        </span>
+                        </button>
                       </span>
                     </span>
                   </div>
@@ -2074,10 +2066,9 @@ exports[`ProTable > render 1`] = `
                     <span
                       class="ant-input-suffix"
                     >
-                      <span
+                      <button
                         class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                        role="button"
-                        tabindex="-1"
+                        type="button"
                       >
                         <span
                           aria-label="close-circle"
@@ -2099,7 +2090,7 @@ exports[`ProTable > render 1`] = `
                             />
                           </svg>
                         </span>
-                      </span>
+                      </button>
                     </span>
                   </span>
                 </div>
