@@ -12,8 +12,13 @@ export interface LocaleWrapperInput {
   defaultLocale: any;
 }
 
+type CTR<T> =
+  T extends React.ForwardRefExoticComponent<object & React.RefAttributes<infer R>> ? R : never;
+
 export default ({ componentName, defaultLocale }: LocaleWrapperInput) =>
-  <BaseProps extends LocaleWrapperProps>(BaseComponent: React.ComponentType<BaseProps>) => {
+  <BaseProps extends LocaleWrapperProps>(
+    BaseComponent: React.ForwardRefExoticComponent<BaseProps> | React.ComponentType<BaseProps>
+  ) => {
     type WrappedComponentProps = BaseProps & { forwardedRef: Ref<typeof BaseComponent> };
 
     class Hoc extends React.Component<WrappedComponentProps> {
@@ -49,7 +54,7 @@ export default ({ componentName, defaultLocale }: LocaleWrapperInput) =>
 
     // 高阶组件需要转发ref
     // 参考: https://zh-hans.reactjs.org/docs/forwarding-refs.html#forwarding-refs-in-higher-order-components
-    const ForwardComponent = React.forwardRef<typeof BaseComponent, BaseProps>(
+    const ForwardComponent = React.forwardRef<CTR<typeof BaseComponent>, BaseProps>(
       // @ts-ignore
       (props: BaseProps, ref) => <Hoc {...(props as BaseProps)} forwardedRef={ref} />
     );

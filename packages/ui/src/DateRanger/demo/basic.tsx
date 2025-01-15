@@ -7,7 +7,7 @@ export default () => {
   const options = [
     { label: 'hasRewind', value: 'hasRewind' },
     { label: 'hasForward', value: 'hasForward' },
-    { label: 'hasNow', value: 'hasNow' },
+    { label: 'hasSync', value: 'hasSync' },
   ];
 
   const [state, setState] = useState(options.map(item => item.value));
@@ -36,7 +36,7 @@ export default () => {
         allowClear={true}
         hasForward={getValue('hasForward')}
         hasRewind={getValue('hasRewind')}
-        hasNow={getValue('hasNow')}
+        hasSync={getValue('hasSync')}
       />
     </div>
   );

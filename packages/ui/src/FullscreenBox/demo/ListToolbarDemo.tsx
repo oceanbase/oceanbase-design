@@ -8,7 +8,7 @@ import { SimpleTable } from './SimpleTable';
 
 export default () => {
   const [fullscreen, setFullscreen] = useState(false);
-  const boxRef = useRef<typeof FullscreenBox>();
+  const boxRef = useRef<React.ElementRef<typeof FullscreenBox>>();
 
   function handleFullscreenChange(fs) {
     setFullscreen(fs);
