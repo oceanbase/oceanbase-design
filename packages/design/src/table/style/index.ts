@@ -181,11 +181,12 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     //     },
     //   },
 
-    // 非可展开表格、不带 footer 表格、非空表格、不带边框表格: 底部添加分隔线
+    // 非可展开表格、不带 footer 表格、非空表格、不带边框表格: 底部添加分隔线，并去掉底部圆角
     [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
       {
         borderBottom: `1px solid ${colorBorderSecondary}`,
-        borderRadius: 0,
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
       },
 
     // 去掉非展开表格的边框
