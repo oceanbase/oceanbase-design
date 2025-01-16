@@ -42,9 +42,7 @@ const genImgCoverStyle = (width: string, height: string): CSSObject => {
   };
 };
 
-export const genTagSelectStyle: GenerateStyle<TagSelectToken> = (
-  token: TagSelectToken
-): CSSObject => {
+export const genTagSelectStyle = (token: TagSelectToken): CSSObject => {
   const { componentCls } = token;
 
   return {

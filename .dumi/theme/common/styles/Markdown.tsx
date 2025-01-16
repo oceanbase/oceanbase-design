@@ -518,6 +518,10 @@ const GlobalStyle: React.FC = () => {
           }
         }
 
+        .dumi-default-previewer-demo {
+          padding: 24px 24px;
+        }
+
         [id='components-grid-demo-playground'],
         [id='components-grid-demo-gutter'] {
           > .code-box-demo ${antCls}-row > div {

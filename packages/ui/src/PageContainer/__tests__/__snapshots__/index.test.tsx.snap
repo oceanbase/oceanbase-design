@@ -555,16 +555,15 @@ exports[`PageContainer > extra and footer 1`] = `
                   <input
                     class="ant-input"
                     placeholder="placeholder"
-                    type="text"
+                    type="search"
                     value=""
                   />
                   <span
                     class="ant-input-suffix"
                   >
-                    <span
+                    <button
                       class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                      role="button"
-                      tabindex="-1"
+                      type="button"
                     >
                       <span
                         aria-label="close-circle"
@@ -586,7 +585,7 @@ exports[`PageContainer > extra and footer 1`] = `
                           />
                         </svg>
                       </span>
-                    </span>
+                    </button>
                   </span>
                 </span>
                 <span
@@ -734,6 +733,7 @@ exports[`PageContainer > extra and footer 1`] = `
                 >
                   <input
                     class="ant-radio-button-input"
+                    name="test-id"
                     type="radio"
                     value="input"
                   />
@@ -754,6 +754,7 @@ exports[`PageContainer > extra and footer 1`] = `
                   <input
                     checked=""
                     class="ant-radio-button-input"
+                    name="test-id"
                     type="radio"
                     value="search"
                   />
@@ -773,6 +774,7 @@ exports[`PageContainer > extra and footer 1`] = `
                 >
                   <input
                     class="ant-radio-button-input"
+                    name="test-id"
                     type="radio"
                     value="addon"
                   />

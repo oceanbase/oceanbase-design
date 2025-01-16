@@ -48,7 +48,7 @@ import './index.less';
 
 export type RangeName = 'customize' | string;
 
-export type RangeValue = [Moment, Moment] | [Dayjs, Dayjs];
+export type RangeValue = [Moment, Moment] | [Dayjs, Dayjs] | [] | null;
 
 export type RangeDateValue = {
   name: RangeName;
@@ -88,7 +88,7 @@ export interface DateRangerProps
   defaultValue?: RangeValue;
   size?: 'small' | 'large' | 'middle';
   tooltipProps?: TooltipProps;
-  locale: any;
+  locale?: any;
 }
 
 const prefix = getPrefix('date-ranger');
@@ -212,7 +212,6 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     rangeChange(range);
     setRangeName(CUSTOMIZE);
   };
-
   const disabledFuture = (current: Moment | Dayjs) => {
     const futureDay = moment.isMoment(current) ? moment().endOf('day') : dayjs().endOf('day');
     // 禁止选择未来日期
@@ -304,7 +303,6 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
 
   const currentRange = selects.find(_item => _item.name === rangeName);
   const rangeLabel = rangeName === CUSTOMIZE ? getCustomizeRangeLabel() : currentRange?.rangeLabel;
-
   const label =
     rangeName === CUSTOMIZE
       ? getCustomizeLabel()
@@ -360,7 +358,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   {originNode}
                   <Divider type="vertical" style={{ height: 'auto', margin: '0px 4px 0px 0px' }} />
                   <InternalPickerPanel
-                    defaultValue={innerValue}
+                    defaultValue={innerValue || []}
                     // @ts-ignore
                     locale={locale}
                     disabledDate={pastOnly ? disabledFuture : disabledDate}
@@ -443,7 +441,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
               <DatePicker.RangePicker
                 className={classNames(`${prefix}-picker`)}
                 style={{
-                  pointerEvents: 'none',
+                  // pointerEvents: 'none',
                   border: 0,
                 }}
                 format={v => {
@@ -467,6 +465,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                 suffixIcon={null}
                 // 透传 props 到 antd Ranger
                 {...omit(rest, 'value', 'onChange')}
+                open={false}
               />
             </span>
           )}
@@ -575,4 +574,4 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
 export default LocaleWrapper({
   componentName: 'DateRanger',
   defaultLocale: zhCN,
-})(Ranger);
+})(Ranger) as typeof Ranger;

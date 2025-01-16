@@ -4,7 +4,7 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type TableToken = FullToken<'Table'>;
 
-export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSSObject => {
+export const genTableStyle = (token: TableToken): CSSObject => {
   const {
     antCls,
     componentCls,
@@ -68,6 +68,10 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         },
         [`${componentCls}-tbody-virtual-scrollbar ${componentCls}-tbody-virtual-scrollbar-thumb`]: {
           background: `${token.colorFillSecondary} !important`,
+        },
+        // expandRowByClick 行样式
+        [`tr${componentCls}-expand-row-by-click`]: {
+          cursor: 'pointer',
         },
         // 去掉可展开行在展开时的底部 border
         [`tr > td:has(${componentCls}-row-expand-icon-expanded)`]: {
@@ -145,7 +149,8 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         ['td, th']: {
           [`&${componentCls}-row-expand-icon-cell`]: {
             backgroundColor: colorBgBase,
-            padding: `${token.paddingSM}px ${token.paddingXS}px`,
+            // 设置 paddingRight 即可
+            paddingRight: token.paddingXS,
           },
           // 紧跟在选择列或展开列后的第一列，左侧间距减小为 8px
           [`&${componentCls}-selection-column, &${componentCls}-row-expand-icon-cell`]: {
@@ -176,11 +181,12 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
     //     },
     //   },
 
-    // 非可展开表格、不带 footer 表格、非空表格、不带边框表格: 底部添加分隔线
+    // 非可展开表格、不带 footer 表格、非空表格、不带边框表格: 底部添加分隔线，并去掉底部圆角
     [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
       {
         borderBottom: `1px solid ${colorBorderSecondary}`,
-        borderRadius: 0,
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
       },
 
     // 去掉非展开表格的边框
@@ -210,9 +216,15 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
                 },
               },
             },
+          [`${componentCls}-expanded-row > td`]: {
+            // 除内嵌子表格外，设置其他内嵌元素样式
+            [`& > *:not(${componentCls}-wrapper)`]: {
+              marginLeft: token.marginXL + token.lineWidth * 2,
+            },
+          },
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.marginXS + token.lineWidth * 2,
+            marginLeft: token.margin + token.lineWidth * 2,
           },
         },
       },
@@ -220,7 +232,7 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         [`${componentCls}-tbody`]: {
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.marginXS + token.lineWidth * 2 + token.margin,
+            marginLeft: token.margin + token.lineWidth * 2 + token.margin,
           },
         },
       },
@@ -233,12 +245,12 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
           [`${componentCls}-expanded-row > td`]: {
             // 除内嵌子表格外，设置其他内嵌元素样式
             [`& > *:not(${componentCls}-wrapper)`]: {
-              marginLeft: token.marginLG + token.marginXL + token.lineWidth * 2,
+              marginLeft: token.marginXL + token.marginXL + token.lineWidth * 2,
             },
           },
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.marginXS + token.marginXL + token.lineWidth * 2,
+            marginLeft: token.margin + token.marginXL + token.lineWidth * 2,
           },
         },
       },
@@ -246,7 +258,7 @@ export const genTableStyle: GenerateStyle<TableToken> = (token: TableToken): CSS
         [`${componentCls}-tbody`]: {
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.marginXS + token.marginXL + token.lineWidth * 2 + token.margin,
+            marginLeft: token.margin + token.marginXL + token.lineWidth * 2 + token.margin,
           },
         },
       },

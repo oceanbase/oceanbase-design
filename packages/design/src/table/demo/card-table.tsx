@@ -4,9 +4,16 @@ import { Card, Form, Switch, Table, theme } from '@oceanbase/design';
 const App: React.FC = () => {
   const { token } = theme.useToken();
 
+  // card
   const [hasBorder, setHasBorder] = useState(true);
   const [hasTitle, setHasTitle] = useState(true);
-  const [hasPadding, setHasPadding] = useState(true);
+  const [hasTabs, setHasTabs] = useState(false);
+  const [hasDivider, setHasDivider] = useState(true);
+  const [hasPadding, setHasPadding] = useState(false);
+
+  // table
+  const [bordered, setBordered] = useState(false);
+  const [pagination, setPagination] = useState(true);
   const [expandable, setExpandable] = useState(true);
   const [selectable, setSelectable] = useState(true);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -30,7 +37,7 @@ const App: React.FC = () => {
   ];
 
   const dataSource = [];
-  for (let i = 1; i < 100; i++) {
+  for (let i = 1; i <= 5; i++) {
     dataSource.push({
       key: i,
       name: '胡彦斌' + i,
@@ -45,13 +52,13 @@ const App: React.FC = () => {
         hasBorder
           ? {}
           : {
-              backgroundColor: token.colorFillContent,
+              backgroundColor: token.colorBgLayout,
               padding: '40px 24px',
               margin: '-40px -24px',
             }
       }
     >
-      <Form layout="inline" style={{ marginBottom: 24 }}>
+      <Form layout="inline">
         <Form.Item label="Card bordered" required={true}>
           <Switch
             size="small"
@@ -70,12 +77,50 @@ const App: React.FC = () => {
             }}
           />
         </Form.Item>
+        <Form.Item label="Card tabs" required={true}>
+          <Switch
+            size="small"
+            value={hasTabs}
+            onChange={value => {
+              setHasTabs(value);
+            }}
+          />
+        </Form.Item>
+        <Form.Item label="Card divided" required={true}>
+          <Switch
+            size="small"
+            value={hasDivider}
+            onChange={value => {
+              setHasDivider(value);
+            }}
+          />
+        </Form.Item>
         <Form.Item label="Card body padding" required={true}>
           <Switch
             size="small"
             value={hasPadding}
             onChange={value => {
               setHasPadding(value);
+            }}
+          />
+        </Form.Item>
+      </Form>
+      <Form layout="inline" style={{ marginBottom: 16 }}>
+        <Form.Item label="Table bordered" required={true}>
+          <Switch
+            size="small"
+            value={bordered}
+            onChange={value => {
+              setBordered(value);
+            }}
+          />
+        </Form.Item>
+        <Form.Item label="Table pagination" required={true}>
+          <Switch
+            size="small"
+            value={pagination}
+            onChange={value => {
+              setPagination(value);
             }}
           />
         </Form.Item>
@@ -100,7 +145,26 @@ const App: React.FC = () => {
       </Form>
       <Card
         bordered={hasBorder}
+        divided={hasDivider}
         title={hasTitle ? 'Title' : ''}
+        tabList={
+          hasTabs
+            ? [
+                {
+                  key: '1',
+                  tab: 'tab1',
+                },
+                {
+                  key: '2',
+                  tab: 'tab2',
+                },
+                {
+                  key: '3',
+                  tab: 'tab3',
+                },
+              ]
+            : undefined
+        }
         bodyStyle={
           hasPadding
             ? {}
@@ -110,6 +174,7 @@ const App: React.FC = () => {
         }
       >
         <Table
+          bordered={bordered}
           columns={columns}
           dataSource={dataSource}
           rowKey={record => record.key}
@@ -130,9 +195,13 @@ const App: React.FC = () => {
                 }
               : undefined
           }
-          pagination={{
-            pageSize: 5,
-          }}
+          pagination={
+            pagination
+              ? {
+                  pageSize: 5,
+                }
+              : false
+          }
         />
       </Card>
     </div>

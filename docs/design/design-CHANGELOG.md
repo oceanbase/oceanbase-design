@@ -8,6 +8,19 @@ group: 基础组件
 
 ---
 
+## 0.4.6
+
+`2025-01-15`
+
+- 🌈 自定义 Tabs `horizontalItemGutter` token 值，全局设置页标签间隙。[#935](https://github.com/oceanbase/oceanbase-design/pull/935)
+- 🆕 ConfigProvider 新增 `card.divided` 属性，用于配置 Card 是否展示分割线。[#939](https://github.com/oceanbase/oceanbase-design/pull/939)
+- Table
+  - 🐞 修复中小尺寸的可展开 Table 单元格高度不正确的问题。[#924](https://github.com/oceanbase/oceanbase-design/pull/924)
+  - 💄 Table 点击行可展开时，设置行样式为 `cursor: pointer`。[#925](https://github.com/oceanbase/oceanbase-design/pull/925)
+  - 💄 优化 Table 在无分割线 Card 和 ProCard 内的间距。[#933](https://github.com/oceanbase/oceanbase-design/pull/933)
+  - 💄 优化 Table 在无间距 ProCard 内的样式，包括第一列和卡片标题对齐、最后一列和卡片操作区对齐、分页器左右增加间距。[#923](https://github.com/oceanbase/oceanbase-design/pull/923)
+  - 💄 优化 Table 顶部圆角的样式。[#941](https://github.com/oceanbase/oceanbase-design/pull/941)
+
 ## 0.4.5
 
 `2024-12-30`
@@ -144,7 +157,7 @@ group: 基础组件
 
 `2024-06-27`
 
-- 🆕 ConfigProvider 新增 theme.isAliyun 属性，用于开启阿里云主题。[#602](https://github.com/oceanbase/oceanbase-design/pull/602)
+- 🆕 ConfigProvider 新增 `theme.isAliyun` 属性，用于开启阿里云主题。[#602](https://github.com/oceanbase/oceanbase-design/pull/602)
 - 🐞 修复 Modal, message, notification 静态函数无法触发的问题。[#606](https://github.com/oceanbase/oceanbase-design/pull/606)
 - Table
   - 🐞 修复 Table 批量操作栏未关联 `rowSelection` 的问题。[#591](https://github.com/oceanbase/oceanbase-design/pull/591)
@@ -251,7 +264,7 @@ group: 基础组件
 
 `2024-01-18`
 
-- 🆕 ConfigProvider 新增 table.selectionColumnWidth 属性，用于配置表格的展开列宽度。[#421](https://github.com/oceanbase/oceanbase-design/pull/421)
+- 🆕 ConfigProvider 新增 `table.selectionColumnWidth` 属性，用于配置表格的展开列宽度。[#421](https://github.com/oceanbase/oceanbase-design/pull/421)
 - Table
   - 🐞 修复 Table 可展开时底部出现重复边框的问题。[#420](https://github.com/oceanbase/oceanbase-design/pull/420)
   - 💄 优化 Table 在无间距卡片内的展示样式，包括第一列和卡片标题对齐、最后一列和卡片操作区对齐、分页器左右增加间距。[#422](https://github.com/oceanbase/oceanbase-design/pull/422)

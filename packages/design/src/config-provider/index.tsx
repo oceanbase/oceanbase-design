@@ -5,7 +5,10 @@ import type {
   ConfigConsumerProps as AntConfigConsumerProps,
   ThemeConfig as AntThemeConfig,
 } from 'antd/es/config-provider';
-import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
+import type {
+  ComponentStyleConfig,
+  CardConfig as AntCardConfig,
+} from 'antd/es/config-provider/context';
 import type { AppProps } from 'antd/es/app';
 import type { PaginationConfig } from 'antd/es/pagination';
 import type { SpinIndicator } from 'antd/es/spin';
@@ -35,6 +38,10 @@ export interface ThemeConfig extends AntThemeConfig {
   isAliyun?: boolean;
 }
 
+export type CardConfig = AntCardConfig & {
+  divided?: boolean;
+};
+
 export type SpinConfig = ComponentStyleConfig & {
   indicator?: SpinIndicator;
 };
@@ -47,6 +54,7 @@ export interface ConfigConsumerProps extends AntConfigConsumerProps {
   theme?: ThemeConfig;
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
+  card?: CardConfig;
   spin?: SpinConfig;
   table?: TableConfig;
   builtInApp?: boolean;
@@ -61,6 +69,7 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   // for react-router-dom v6: navigate
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
+  card?: CardConfig;
   pagination?: PaginationConfig;
   spin?: SpinConfig;
   table?: TableConfig;
@@ -96,6 +105,7 @@ const ConfigProvider: ConfigProviderType = ({
   locale,
   navigate,
   hideOnSinglePage,
+  card,
   collapse,
   form,
   spin,
@@ -131,6 +141,7 @@ const ConfigProvider: ConfigProviderType = ({
   return (
     <AntConfigProvider
       locale={mergedLocale}
+      card={merge({}, parentContext.card, card)}
       collapse={merge(
         {},
         {
