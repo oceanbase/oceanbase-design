@@ -581,4 +581,4 @@ const Ranger = React.forwardRef<DateRangerHandle, DateRangerProps>((props, ref) 
 export default LocaleWrapper({
   componentName: 'DateRanger',
   defaultLocale: zhCN,
-})(Ranger) as typeof Ranger;
+})(Ranger);
