@@ -7,7 +7,13 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/tagSelect-base.tsx" title="基本"></code> <code src="./demo/tagSelect-group.tsx" title="标签选择器组合"></code> <code src="./demo/tagSelect-radio" title="单选"></code> <code src="./demo/tagSelect-multiple" title="多选"></code> <code src="./demo/tagSelect-img" title="图片标签"></code> <code src="./demo/tagSelect-size" title="尺寸"></code>
+<!-- prettier-ignore -->
+<code src="./demo/tagSelect-base.tsx" title="基本"></code>
+<code src="./demo/tagSelect-group.tsx" title="标签选择器组合"></code>
+<code src="./demo/tagSelect-radio" title="单选"></code>
+<code src="./demo/tagSelect-multiple" title="多选"></code>
+<code src="./demo/tagSelect-img" title="图片标签"></code>
+<code src="./demo/tagSelect-size" title="尺寸"></code>
 
 ## API
 

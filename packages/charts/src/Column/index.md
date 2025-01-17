@@ -7,14 +7,11 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基础柱状图"></code>
-
 <code src="./demo/stack.tsx" title="堆叠柱状图"></code>
-
 <code src="./demo/group.tsx" title="分组柱状图"></code>
-
 <code src="./demo/percent.tsx" title="百分比柱状图"></code>
-
 <code src="./demo/range.tsx" title="区间柱状图"></code>
 
 ## API

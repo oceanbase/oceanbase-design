@@ -7,12 +7,10 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/circle.tsx" title="圆形水波图"></code>
-
 <code src="./demo/rect.tsx" title="矩形水波图"></code>
-
 <code src="./demo/horizontal.tsx" title="水平布局的水波图"></code>
-
 <code src="./demo/decimal.tsx" title="数据精度" description="默认最多保留两位有效小数，可通过 `decimal` 进行设置。"></code>
 
 ## API

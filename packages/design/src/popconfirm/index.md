@@ -10,8 +10,8 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-
 <code src="./demo/promise.tsx" title="基于 Promise 的异步关闭" description="点击确定后异步关闭气泡确认框。"></code>
 
 ## API
