@@ -351,7 +351,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
     </form>
   </div>
   <div
-    class="ant-pro-card"
+    class="ant-pro-card ant-pro-card-has-title ant-pro-card-no-divider ant-pro-card-no-padding"
   >
     <div
       class="ant-pro-card-body"
@@ -1237,7 +1237,7 @@ exports[`ProTable > default pagination should work 1`] = `
     </form>
   </div>
   <div
-    class="ant-pro-card"
+    class="ant-pro-card ant-pro-card-has-title ant-pro-card-no-divider ant-pro-card-no-padding"
   >
     <div
       class="ant-pro-card-body"
@@ -2195,7 +2195,7 @@ exports[`ProTable > render 1`] = `
     </form>
   </div>
   <div
-    class="ant-pro-card"
+    class="ant-pro-card ant-pro-card-has-title ant-pro-card-no-divider ant-pro-card-no-padding"
   >
     <div
       class="ant-pro-card-body"
