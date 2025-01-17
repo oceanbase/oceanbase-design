@@ -30,7 +30,37 @@ import InternalRanger from './Ranger';
 export * from './QuickPicker';
 export * from './Ranger';
 
-const Ranger = InternalRanger;
+type InternalRangerType = typeof InternalRanger;
+
+export interface RangerInstance extends InternalRangerType {
+  QuickPicker: typeof QuickPicker;
+  NEAR_1_MINUTES: typeof NEAR_1_MINUTES;
+  NEAR_5_MINUTES: typeof NEAR_5_MINUTES;
+  NEAR_10_MINUTES: typeof NEAR_10_MINUTES;
+  NEAR_20_MINUTES: typeof NEAR_20_MINUTES;
+  NEAR_30_MINUTES: typeof NEAR_30_MINUTES;
+  NEAR_1_HOURS: typeof NEAR_1_HOURS;
+  NEAR_2_HOURS: typeof NEAR_2_HOURS;
+  NEAR_3_HOURS: typeof NEAR_3_HOURS;
+  NEAR_6_HOURS: typeof NEAR_6_HOURS;
+  TODAY: typeof TODAY;
+  YESTERDAY: typeof YESTERDAY;
+  TOMORROW: typeof TOMORROW;
+  THIS_WEEK: typeof THIS_WEEK;
+  LAST_WEEK: typeof LAST_WEEK;
+  NEXT_WEEK: typeof NEXT_WEEK;
+  THIS_MONTH: typeof THIS_MONTH;
+  LAST_MONTH: typeof LAST_MONTH;
+  NEXT_MONTH: typeof NEXT_MONTH;
+  THIS_QUARTER: typeof THIS_QUARTER;
+  LAST_QUARTER: typeof LAST_QUARTER;
+  NEXT_QUARTER: typeof NEXT_QUARTER;
+  THIS_YEAR: typeof THIS_YEAR;
+  LAST_YEAR: typeof LAST_YEAR;
+  NEXT_YEAR: typeof NEXT_YEAR;
+}
+
+const Ranger = InternalRanger as RangerInstance;
 
 // 内置 ranges
 Ranger.NEAR_1_MINUTES = NEAR_1_MINUTES;
