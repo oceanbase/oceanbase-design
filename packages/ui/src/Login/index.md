@@ -7,20 +7,14 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-
 <code src="./demo/bg-image.tsx" title="背景图片"></code>
-
 <code src="./demo/board.tsx" title="顶部公告"></code>
-
 <code src="./demo/otherLogin.tsx" title="第三方登录"></code>
-
 <code src="./demo/with-alert.tsx" title="警告提示"></code>
-
 <code src="./demo/activate.tsx" title="用户激活"></code>
-
 <code src="./demo/authCode.tsx" title="登录验证码"></code>
-
 <code src="./demo/is-mobile.tsx" title="移动端支持" iframe="600"></code>
 
 ## API

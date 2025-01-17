@@ -11,7 +11,10 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="基础使用"></code> <code src="./demo/customColor.tsx" title="自定义颜色和单位"></code> <code src="./demo/customThreshold.tsx" title="自定义阈值"></code>
+<!-- prettier-ignore -->
+<code src="./demo/basic.tsx" title="基础使用"></code>
+<code src="./demo/customColor.tsx" title="自定义颜色和单位"></code>
+<code src="./demo/customThreshold.tsx" title="自定义阈值"></code>
 
 ## API
 

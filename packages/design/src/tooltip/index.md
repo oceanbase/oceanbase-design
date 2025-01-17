@@ -14,14 +14,11 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-
 <code src="./demo/over-length.tsx" title="超长内容" description="1、浮层默认的最大宽度为 300px、最大高度为 250px，内容超出时横向折行、纵向滚动。<br/>2、可以通过 `overlayStyle={{ maxWidth: 'xxx' }}` 设置最大宽度，`overlayInnerStyle={{ maxHeight: 'xxx' }}` 设置最大高度。"></code>
-
 <code src="./demo/close-icon.tsx" title="关闭按钮" description="Tooltip 可以通过设置 closeIcon 变为可关闭 Tooltip, 并支持自定义关闭按钮，设置为 true 时将使用默认关闭按钮。可关闭 Tooltip 具有 onClose 事件"></code>
-
 <code src="./demo/type.tsx" title="Tooltip 类型" description="Tooltip 有五种类型：default、info、success、warning 和 error，以满足不同场景的提示需求。"></code>
-
 <code src="./demo/mouse-follow.tsx" title="鼠标跟随" description="设置 `mouseFollow: true` 可开启鼠标跟随，此时会去掉箭头，并且 `placement`、`open` 和 `trigger` 等属性也将失效。"></code>
 
 ## API

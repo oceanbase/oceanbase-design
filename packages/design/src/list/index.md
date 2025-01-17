@@ -10,8 +10,8 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/simple.tsx" title="简单列表"></code>
-
 <code src="./demo/basic.tsx" title="基础列表"></code>
 
 ## API

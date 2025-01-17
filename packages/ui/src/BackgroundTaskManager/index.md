@@ -7,6 +7,7 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/NotificationCenterDemo.tsx"></code>
 
 ## API

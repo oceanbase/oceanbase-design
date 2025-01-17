@@ -155,6 +155,7 @@ export default () {
 
 ## 主题预览
 
+<!-- prettier-ignore -->
 <code src="./demo/previewer.tsx"></code>
 
 ## API
