@@ -15,6 +15,7 @@ nav:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
+<code src="./demo/form.tsx" title="Form 表单"></code>
 <code src="./demo/max-height.tsx" title="高度限制" description="超出指定高度可设置滚动"></code>
 <code src="./demo/progress.tsx" title="带百分比的进度对话框" description="可用于异步任务或耗时较长的场景"></code>
 <code src="./demo/progress-with-loading.tsx" title="不带百分比的进度对话框" description="无法获取具体进度时，会展示 loading 态"></code>
