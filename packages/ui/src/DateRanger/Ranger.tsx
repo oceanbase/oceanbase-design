@@ -287,7 +287,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   };
 
   const setNow = () => {
-    const selected = NEAR_TIME_LIST.find(item => item.name === rangeName);
+    const selected = selects.find(item => item.name === rangeName);
     if (selected?.range) {
       rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
     }
@@ -392,7 +392,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                 } else {
                   refState.current.tooltipOpen = false;
                 }
-                const selected = NEAR_TIME_LIST.find(_item => _item.name === key);
+                const selected = selects.find(_item => _item.name === key);
                 // 存在快捷选项切换为极简模式
                 if (selected?.range) {
                   handleNameChange(key);
