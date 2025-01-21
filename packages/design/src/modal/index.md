@@ -5,6 +5,8 @@ nav:
   path: /components
 ---
 
+## 组件说明
+
 - 🔥 完全继承 antd [Modal](https://ant.design/components/modal-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 - 📢 `destroyOnClose` 属性的默认值为 `true`。

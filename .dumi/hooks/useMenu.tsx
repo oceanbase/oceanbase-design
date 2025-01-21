@@ -1,7 +1,8 @@
 import type { MenuProps } from '@oceanbase/design';
-import { Tag, theme } from '@oceanbase/design';
+import { Tag } from '@oceanbase/design';
 import { Link, useFullSidebarData, useSidebarData } from 'dumi';
 import React, { useMemo } from 'react';
+import queryString from 'query-string';
 import useLocation from './useLocation';
 import useSiteToken from './useSiteToken';
 import { ISidebarGroup } from 'dumi/dist/client/theme-api/types';
@@ -13,7 +14,10 @@ export interface UseMenuOptions {
 
 const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => {
   const fullData = useFullSidebarData();
-  const { pathname, search } = useLocation();
+  const { pathname, search: allSearch } = useLocation();
+  const { theme } = queryString.parse(allSearch);
+  // sync theme query only when click menu
+  const search = allSearch ? `?${queryString.stringify({ theme })}` : '';
   const sidebarData = useSidebarData();
   const { before, after } = options;
   const { token } = useSiteToken();
@@ -91,8 +95,6 @@ const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => 
       });
       return childItems;
     };
-
-    console.log(sidebarItems);
 
     return (
       sidebarItems?.reduce<Exclude<MenuProps['items'], undefined>>((result, group) => {
@@ -195,7 +197,6 @@ const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => 
       }, []) ?? []
     );
   }, [sidebarData, fullData, pathname, search, options]);
-  console.log(menuItems);
 
   return [menuItems, pathname];
 };

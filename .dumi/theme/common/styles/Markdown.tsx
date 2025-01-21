@@ -15,7 +15,7 @@ const GlobalStyle: React.FC = () => {
       styles={css`
         .markdown {
           color: ${token.colorText};
-          font-size: 14px;
+          font-size: ${token.fontSize}px;
           line-height: 2;
         }
 
@@ -524,6 +524,25 @@ const GlobalStyle: React.FC = () => {
             margin-top: 0;
             margin-bottom: 0;
           }
+        }
+
+        .dumi-default-container.markdown[data-type='info'] {
+          padding: ${token.padding}px ${token.paddingLG}px;
+          background: ${token.colorBgLayout};
+          > svg {
+            display: none;
+          }
+          > h4 {
+            display: none;
+          }
+          > section {
+            font-size: ${token.fontSize}px;
+            color: ${token.colorTextSecondary};
+          }
+        }
+
+        .dumi-default-container.markdown:not(:last-child) {
+          margin-top: ${token.marginLG}px;
         }
       `}
     />
