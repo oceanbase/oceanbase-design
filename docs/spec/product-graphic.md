@@ -1,7 +1,8 @@
 ---
-group: Icongraphy 图形
-order: 2
+group: Design Foundation 设计基础
+subGroup: Icongraphy 图形
 title: Product graphic 产品缺省图
+order: 12
 ---
 
 产品缺省图是页面数据或内容缺失时的填充内容，配合文字引导用户操作，传达品牌形象，并保持用户体验的连续性。

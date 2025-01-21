@@ -1,7 +1,8 @@
 ---
-group: Layout 布局
-order: 1
+group: Design Foundation 设计基础
+subGroup: Layout 布局
 title: Navigation 导航
+order: 13
 ---
 
 导航是界面中的地图和路标，便于用户明确自己在系统中的位置，并能轻松找到所需功能。
