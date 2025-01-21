@@ -440,8 +440,16 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           onClick={() => {
             form.validateFields().then(values => {
               const { startDate, startTime, endDate, endTime } = values;
-              const start = `${startDate} ${startTime.format(TIME_FORMAT)}`;
-              const end = `${endDate} ${endTime.format(TIME_FORMAT)}`;
+              // 日期同一天时对时间进行排序，保证开始时间在结束时间之前
+              const [sTime, eTime] =
+                startDate === endDate
+                  ? [startTime, endTime].sort((a, b) => {
+                      return a?.valueOf() - b?.valueOf();
+                    })
+                  : [startTime, endTime];
+
+              const start = `${startDate} ${sTime.format(TIME_FORMAT)}`;
+              const end = `${endDate} ${eTime.format(TIME_FORMAT)}`;
 
               let errorList = [];
               let message = '';
