@@ -51,6 +51,10 @@ const useStyle = () => {
           > ${antCls}-menu-item-group
           > ${antCls}-menu-item-group-list
           > ${antCls}-menu-item,
+          > ${antCls}-menu-item-group
+          > ${antCls}-menu-item-group-list
+          > ${antCls}-menu-submenu
+          > ${antCls}-menu-submenu-title,
           &${antCls}-menu-inline
           > ${antCls}-menu-item-group
           > ${antCls}-menu-item-group-list
