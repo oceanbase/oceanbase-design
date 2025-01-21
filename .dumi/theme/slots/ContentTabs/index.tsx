@@ -6,7 +6,7 @@ import { useRouteMeta } from 'dumi';
 import type { IContentTabsProps } from 'dumi/theme-default/slots/ContentTabs';
 import type { TabsProps } from 'rc-tabs';
 
-const titleMap: Record<string, string> = {
+const titleMap: Record<string, ReactNode> = {
   design: '设计',
 };
 
@@ -23,33 +23,28 @@ const ContentTabs: FC<IContentTabsProps> = ({ tabs, tabKey, onChange }) => {
 
   const items: TabsProps['items'] = [
     {
-      label: (
-        <span>
-          <CodeOutlined />
-          开发
-        </span>
-      ),
       key: 'development',
+      label: '开发',
+      icon: <CodeOutlined />,
     },
   ];
+
   tabs?.forEach(tab => {
     items.push({
-      label: (
-        <span>
-          {iconMap[tab.key]}
-          {titleMap[tab.key]}
-        </span>
-      ),
       key: tab.key,
+      label: titleMap[tab.key],
+      icon: iconMap[tab.key],
     });
   });
 
   return (
     <Tabs
+      size="large"
       items={items}
       activeKey={tabKey || 'development'}
-      onChange={key => onChange(tabs.find(tab => tab.key === key))}
-      style={{ margin: '32px 0 -16px' }}
+      onChange={key => onChange(tabs?.find(tab => tab.key === key))}
+      // style={{ margin: '32px 0 -16px' }}
+      style={{ marginBottom: -16 }}
     />
   );
 };
