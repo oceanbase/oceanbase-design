@@ -16,7 +16,7 @@ const App: React.FC = () => {
       <Divider orientation="left" plain>
         Preview
       </Divider>
-      <Space>
+      <Space wrap>
         <Button type="primary" icon={<PlusOutlined />} iconPosition={position}>
           Primary
         </Button>

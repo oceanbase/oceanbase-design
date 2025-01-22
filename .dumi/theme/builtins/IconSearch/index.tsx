@@ -27,6 +27,7 @@ const useStyle = () => ({
     display: flex;
     transition: all 0.3s;
     justify-content: space-between;
+    flex-wrap: wrap;
   `,
 });
 

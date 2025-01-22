@@ -82,6 +82,7 @@ export function preLoad(list: string[]) {
 
 export const useCarouselStyle = () => ({
   carousel: css`
+    margin-bottom: 48px;
     .slick-dots.slick-dots-bottom {
       bottom: -22px;
       li {
