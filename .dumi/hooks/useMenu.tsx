@@ -158,9 +158,11 @@ const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => 
                   <Link to={`${item.link}${search}`}>
                     {before}
                     <span key="english">{item?.title}</span>
-                    <span className="chinese" key="chinese">
-                      {(item.frontmatter as any)?.subtitle}
-                    </span>
+                    {(item.frontmatter as any)?.subtitle && (
+                      <span className="chinese" key="chinese">
+                        {(item.frontmatter as any)?.subtitle}
+                      </span>
+                    )}
                     {(item.frontmatter as any)?.tag && (
                       <Tag color="warning" style={{ marginInlineStart: token.marginXS }}>
                         {(item.frontmatter as any)?.tag}

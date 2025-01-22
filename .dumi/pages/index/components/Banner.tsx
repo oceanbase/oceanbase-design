@@ -72,7 +72,7 @@ export default function Banner({ children }: BannerProps) {
     >
       {/* Image Bottom Right */}
       <img
-        style={{ position: 'absolute', right: 0, top: 240, width: 240 }}
+        style={{ display: 'none', position: 'absolute', right: 0, top: 240, width: 240 }}
         src="https://gw.alipayobjects.com/zos/bmw-prod/b3b8dc41-dce8-471f-9d81-9a0204f27d03.svg"
         alt="OceanBase Design"
       />
