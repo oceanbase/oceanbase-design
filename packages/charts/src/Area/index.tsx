@@ -23,10 +23,7 @@ const Area = forwardRef<unknown, AreaConfig>(
 
     const chartRef = useRef(null);
     const mergedRef = composeRef(ref, chartRef);
-    const tooltipConfig = useTooltipScrollable(
-      tooltip,
-      chartRef.current?.getChart()?.chart?.height
-    );
+    const tooltipConfig = useTooltipScrollable(tooltip, chartRef?.chart?.height);
 
     const newConfig: AreaConfig = {
       data:
@@ -39,7 +36,7 @@ const Area = forwardRef<unknown, AreaConfig>(
       line: {
         ...line,
         style: {
-          lineWidth: themeConfig.styleSheet.lineBorder,
+          lineWidth: themeConfig.line.lineWidth,
           ...line?.style,
         },
       },
@@ -57,8 +54,8 @@ const Area = forwardRef<unknown, AreaConfig>(
                 line: {
                   ...xAxis?.grid?.line,
                   style: {
-                    lineWidth: themeConfig.styleSheet.axisGridBorder,
-                    stroke: themeConfig.styleSheet.axisGridBorderColor,
+                    lineWidth: themeConfig.axis.gridLineWidth,
+                    stroke: themeConfig.axis.gridStroke,
                     lineDash: [4, 4],
                     ...xAxis?.grid?.line?.style,
                   },

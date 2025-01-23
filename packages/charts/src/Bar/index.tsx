@@ -129,8 +129,8 @@ const Bar = forwardRef<unknown, BarConfig>(
           line: {
             ...yAxis?.grid?.line,
             style: {
-              lineWidth: themeConfig.styleSheet.axisGridBorder,
-              stroke: themeConfig.styleSheet.axisGridBorderColor,
+              lineWidth: themeConfig.axis.gridLineWidth,
+              stroke: themeConfig.axis.gridStroke,
               lineDash: [4, 4],
               ...yAxis?.grid?.line?.style,
             },

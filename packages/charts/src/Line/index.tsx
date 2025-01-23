@@ -9,24 +9,21 @@ import { useTheme } from '../theme';
 import type { Theme } from '../theme';
 import { customMemo } from '../util/custom-memo';
 
-export interface LineConfig extends AntLineConfig {
+export interface LineConfig extends Omit<AntLineConfig, 'tooltip'> {
   tooltip?: false | Tooltip;
   theme?: Theme;
 }
 
 const Line = forwardRef<unknown, LineConfig>(
-  (
-    { data, stepType, xField, xAxis, yAxis, tooltip, legend, interactions, theme, ...restConfig },
-    ref
-  ) => {
+  ({ data, stepType, axis, xField, tooltip, legend, interaction, theme, ...restConfig }, ref) => {
     const themeConfig = useTheme(theme);
 
     const chartRef = useRef(null);
     const mergedRef = composeRef(ref, chartRef);
-    const tooltipConfig = useTooltipScrollable(
-      tooltip,
-      chartRef.current?.getChart()?.chart?.height
-    );
+    const tooltipConfig = useTooltipScrollable(tooltip, chartRef?.chart?.height);
+
+    const xAxis = axis?.x;
+    const yAxis = axis?.y;
 
     const newConfig: LineConfig = {
       data:
@@ -37,34 +34,36 @@ const Line = forwardRef<unknown, LineConfig>(
           : data,
       stepType,
       xField,
-      xAxis: xAxis !== false && {
-        // type 为 time 时需要关闭自动美化，否则 X 轴两侧会留白
-        // issue: https://github.com/antvis/G2Plot/issues/1951
-        nice: xAxis?.type === 'time' ? false : undefined,
-        ...xAxis,
-        // x 方向增加虚线网格
-        grid:
-          xAxis?.grid === null
-            ? null
-            : {
-                ...xAxis?.grid,
-                line: {
-                  ...xAxis?.grid?.line,
-                  style: {
-                    lineWidth: themeConfig.styleSheet.axisGridBorder,
-                    stroke: themeConfig.styleSheet.axisGridBorderColor,
-                    lineDash: [4, 4],
-                    ...xAxis?.grid?.line?.style,
+      axis: {
+        x: xAxis !== false && {
+          // type 为 time 时需要关闭自动美化，否则 X 轴两侧会留白
+          // issue: https://github.com/antvis/G2Plot/issues/1951
+          nice: xAxis?.type === 'time' ? false : undefined,
+          ...xAxis,
+          // x 方向增加虚线网格
+          grid:
+            xAxis?.grid === null
+              ? null
+              : {
+                  ...xAxis?.grid,
+                  line: {
+                    ...xAxis?.grid?.line,
+                    style: {
+                      lineWidth: themeConfig.axis.gridLineWidth,
+                      stroke: themeConfig.axis.gridStroke,
+                      lineDash: [4, 4],
+                      ...xAxis?.grid?.line?.style,
+                    },
                   },
                 },
-              },
-      },
-      yAxis: yAxis !== false && {
-        // 避免超出 Y 轴刻度线
-        nice: true,
-        // Y 轴方向默认展示 5 个刻度线
-        tickCount: 5,
-        ...yAxis,
+        },
+        y: yAxis !== false && {
+          // 避免超出 Y 轴刻度线
+          nice: true,
+          // Y 轴方向默认展示 5 个刻度线
+          tickCount: 5,
+          ...yAxis,
+        },
       },
       tooltip: tooltipConfig,
       legend: legend !== false && {
@@ -77,11 +76,11 @@ const Line = forwardRef<unknown, LineConfig>(
         },
       },
       // 默认开启 x 方向框选
-      interactions: interactions || [
-        {
-          type: 'brush-x',
-        },
-      ],
+      // interaction: interaction || [
+      //   {
+      //     type: 'brush-x',
+      //   },
+      // ],
       theme: themeConfig.theme,
       ...restConfig,
     };

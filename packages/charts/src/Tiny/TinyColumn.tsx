@@ -1,11 +1,13 @@
 import React, { forwardRef } from 'react';
 import type { TinyColumnConfig as AntTinyColumnConfig } from '@ant-design/charts';
-import { TinyColumn as AntTinyColumn } from '@ant-design/charts';
+import { Tiny } from '@ant-design/charts';
 // @ts-ignore
 import type { Label } from '@antv/g2plot/esm/types/label';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
 import { customMemo } from '../util/custom-memo';
+
+const AntTinyColumn = Tiny.Column;
 
 export interface TinyColumnConfig extends AntTinyColumnConfig {
   theme?: Theme;

@@ -154,7 +154,7 @@ const Pie = forwardRef<unknown, PieConfig>(
           style: {
             fontSize: `${titleFontSize}px`,
             fontFamily: 'Avenir-Heavy',
-            color: themeConfig.styleSheet.annotationTextFillColor,
+            color: themeConfig.text.text.fill,
             ...statistic?.title?.style,
           },
         },
@@ -185,7 +185,7 @@ const Pie = forwardRef<unknown, PieConfig>(
           style: {
             fontSize: `${contentFontSize}px`,
             fontFamily: 'PingFangSC',
-            color: themeConfig.styleSheet.annotationTextFillColor,
+            color: themeConfig.text.text.fill,
             ...statistic?.content?.style,
           },
         },

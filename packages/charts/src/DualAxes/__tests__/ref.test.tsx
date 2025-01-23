@@ -7,8 +7,8 @@ describe('DualAxes ref', () => {
     const DemoDualAxes = () => {
       const ref = useRef(null);
       useEffect(() => {
-        expect(ref.current).not.toBeNull();
-        expect(typeof ref.current?.getChart).toBe('function');
+        expect(ref).not.toBeNull();
+        expect(typeof ref?.chart).toBe('object');
       }, []);
       const config = {
         data: [[], []],

@@ -9,7 +9,7 @@ export default (tooltip?: false | Tooltip, height?: number) => {
   if (typeof tooltip === 'object') {
     const { scrollable, domStyles, ...restTooltip } = tooltip || {};
     return scrollable
-      ? {
+      ? ({
           follow: true,
           shared: true,
           enterable: true,
@@ -24,7 +24,7 @@ export default (tooltip?: false | Tooltip, height?: number) => {
               ...domStyles?.['g2-tooltip'],
             },
           },
-        }
+        } as Tooltip)
       : tooltip;
   }
   // when tooltip is undefined, should return {} to ensure that crosshairs could display normally

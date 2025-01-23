@@ -91,8 +91,8 @@ const Column = forwardRef<unknown, ColumnConfig>(
                 line: {
                   ...xAxis?.grid?.line,
                   style: {
-                    lineWidth: themeConfig.styleSheet.axisGridBorder,
-                    stroke: themeConfig.styleSheet.axisGridBorderColor,
+                    lineWidth: themeConfig.axis.gridLineWidth,
+                    stroke: themeConfig.axis.gridStroke,
                     lineDash: [4, 4],
                     ...xAxis?.grid?.line?.style,
                   },

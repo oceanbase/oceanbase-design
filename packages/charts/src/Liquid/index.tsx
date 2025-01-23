@@ -133,7 +133,7 @@ const Liquid = forwardRef<unknown, LiquidConfig>(
         >
           <span
             style={{
-              color: color || themeConfig.styleSheet.axisLabelFillColor,
+              color: color || themeConfig.axis.labelFill,
               lineHeight: 1,
               ...titleStyle,
             }}
@@ -177,7 +177,7 @@ const Liquid = forwardRef<unknown, LiquidConfig>(
         {title && (
           <div
             style={{
-              color: color || themeConfig.styleSheet.axisLabelFillColor,
+              color: color || themeConfig.axis.labelFill,
               marginTop: 4,
               ...titleStyle,
             }}

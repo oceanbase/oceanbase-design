@@ -1,9 +1,11 @@
 import React, { forwardRef } from 'react';
 import type { TinyLineConfig as AntTinyLineConfig } from '@ant-design/charts';
-import { TinyLine as AntTinyLine } from '@ant-design/charts';
+import { Tiny } from '@ant-design/charts';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
 import { customMemo } from '../util/custom-memo';
+
+const AntTinyLine = Tiny.Line;
 
 export interface TinyLineConfig extends AntTinyLineConfig {
   theme?: Theme;

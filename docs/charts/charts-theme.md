@@ -17,7 +17,7 @@ export default () {
   // 主题色
   console.log(themeConfig.defaultColor);
   // 折线图线宽
-  console.log(themeConfig.styleSheet.lineBorder);
+  console.log(themeConfig.line.lineWidth);
   // 设置主题
   return (
     <>

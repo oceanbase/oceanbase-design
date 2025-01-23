@@ -1,6 +1,7 @@
 import { G2 } from '@ant-design/charts';
+import { merge } from 'lodash';
 
-const { registerTheme } = G2;
+const { register } = G2;
 
 // 分类色板
 const COLORS_10 = [
@@ -69,12 +70,10 @@ const AXIS_LINE_WIDTH = 0.5;
 const lightTheme = {
   theme: 'light',
   // 主题色
-  defaultColor: COLORS_10[0],
+  colorDefault: COLORS_10[0],
   // 分类色
-  colors10: COLORS_10,
-  colors20: COLORS_20,
-  // 背景色
-  backgroundColor: '#ffffff',
+  category10: COLORS_10,
+  category20: COLORS_20,
   // 图表辅助色
   subColor: '#F8FAFE',
   // 语义色
@@ -96,68 +95,69 @@ const lightTheme = {
   semanticDarkRedGradient: 'l(270) 0:rgba(137,39,63,0) 1:rgba(137,39,63,0.2)',
   semanticGrayGradient: 'l(270) 0:rgba(171,184,213,0) 1:rgba(171,184,213,0.2)',
   barBackgroundColor: AXIS_LINE_COLOR,
-  styleSheet: {
-    /** 默认颜色 */
-    brandColor: COLORS_10[0],
-    /** 坐标轴线颜色 */
-    axisLineBorderColor: AXIS_LINE_COLOR,
-    /** 坐标轴线粗细 */
-    axisLineBorder: AXIS_LINE_WIDTH,
-
-    /** 坐标轴刻度线颜色 */
-    axisTickLineBorderColor: AXIS_LINE_COLOR,
-    /** 坐标轴刻度线粗细 */
-    axisTickLineBorder: AXIS_LINE_WIDTH,
-
-    /** 坐标轴次刻度线颜色 */
-    axisSubTickLineBorderColor: AXIS_LINE_COLOR,
-    /** 坐标轴次刻度线粗细 */
-    axisSubTickLineBorder: AXIS_LINE_WIDTH,
-
-    /** 坐标轴刻度文本颜色 */
-    axisLabelFillColor: BLACK_COLORS[45],
-
-    /** 坐标轴网格线颜色 */
-    axisGridBorderColor: AXIS_LINE_COLOR,
+  // -------------------- axis 坐标轴 --------------------
+  axis: {
     /** 坐标轴网格线粗细 */
-    axisGridBorder: AXIS_LINE_WIDTH,
-
-    // -------------------- Legend 图例 --------------------
+    gridLineWidth: AXIS_LINE_WIDTH,
+    /** 坐标轴网格线颜色 */
+    gridStroke: AXIS_LINE_COLOR,
+    gridStrokeOpacity: 1,
+    /** 坐标轴刻度文本颜色 */
+    labelFill: BLACK_COLORS[45],
+    /** 坐标轴线粗细 */
+    lineLineWidth: AXIS_LINE_WIDTH,
+    /** 坐标轴线颜色 */
+    lineStroke: AXIS_LINE_COLOR,
+    labelOpacity: 1,
+    /** 坐标轴刻度线粗细 */
+    tickLineWidth: AXIS_LINE_WIDTH,
+    /** 坐标轴刻度线颜色 */
+    tickStroke: AXIS_LINE_COLOR,
+    tickOpacity: 1,
+  },
+  // -------------------- Legend 图例 --------------------
+  legendCategory: {
     /** 图例与图表绘图区域的偏移距离  */
-    legendPadding: [16, 16, 16, 16],
+    padding: [16, 16, 16, 16],
     /** 水平布局的图例与绘图区域偏移距离 */
-    legendHorizontalPadding: [16, 0, 0, 0],
+    rowPadding: [16, 0, 0, 0],
     /** 垂直布局的图例与绘图区域偏移距离 */
-    legendVerticalPadding: [0, 16, 0, 16],
-
+    colPadding: [0, 16, 0, 16],
     /** 图例项文本颜色 */
-    legendItemNameFillColor: BLACK_COLORS[85],
-
-    // -------------------- Geometry 图形样式--------------------
-
+    itemLabelFill: BLACK_COLORS[85],
+    itemLabelFillOpacity: 1,
+  },
+  // -------------------- Line --------------------
+  line: {
     /** 线图粗细 */
-    lineBorder: LINE_WIDTH,
-
+    lineWidth: LINE_WIDTH,
+    /* not work */
     /** 线图 Active 状态下粗细 */
     lineActiveBorder: 2.5,
-
     /** 线图 selected 状态下粗细 */
     lineSelectedBorder: 2.5,
-
     /** 线图 inactive 状态下透明度 */
     lineInactiveBorderOpacity: 0.3,
-
-    // -------------------- Geometry labels --------------------
+  },
+  // -------------------- Label --------------------
+  label: {
     /** label 文本颜色 */
-    labelFillColor: BLACK_COLORS[85],
-
-    // -------------------- Annotation，图形标注 --------------------
-    /** text 图形标注文本颜色 */
-    annotationTextFillColor: BLACK_COLORS[85],
+    fill: BLACK_COLORS[85],
+    fillOpacity: 1,
+  },
+  text: {
+    text: {
+      /** text 图形标注文本颜色 */
+      fill: BLACK_COLORS[85],
+    },
   },
 };
 
+export const Light = (options?) => {
+  return merge({}, G2.Light(), lightTheme, options);
+};
+
 // 注册浅色主题
-registerTheme('light', lightTheme);
+register('theme.light', () => Light());
 
 export default lightTheme;

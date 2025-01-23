@@ -29,10 +29,7 @@ const DualAxes = forwardRef<unknown, DualAxesConfig>(
 
     const chartRef = useRef(null);
     const mergedRef = composeRef(ref, chartRef);
-    const tooltipConfig = useTooltipScrollable(
-      tooltip,
-      chartRef.current?.getChart()?.chart?.height
-    );
+    const tooltipConfig = useTooltipScrollable(tooltip, chartRef?.chart?.height);
 
     const yField1 = yField?.[0];
     const yField2 = yField?.[1];
@@ -65,8 +62,8 @@ const DualAxes = forwardRef<unknown, DualAxesConfig>(
                 line: {
                   ...xAxis?.grid?.line,
                   style: {
-                    lineWidth: themeConfig.styleSheet.axisGridBorder,
-                    stroke: themeConfig.styleSheet.axisGridBorderColor,
+                    lineWidth: themeConfig.axis.gridLineWidth,
+                    stroke: themeConfig.axis.gridStroke,
                     lineDash: [4, 4],
                     ...xAxis?.grid?.line?.style,
                   },

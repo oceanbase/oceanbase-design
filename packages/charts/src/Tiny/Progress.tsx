@@ -1,11 +1,13 @@
 import React, { forwardRef } from 'react';
 import type { ProgressConfig as AntProgressConfig } from '@ant-design/charts';
-import { Progress as AntProgress } from '@ant-design/charts';
+import { Tiny } from '@ant-design/charts';
 import useResizeObserver from 'use-resize-observer';
 import { toPercent } from '../util/number';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
 import { customMemo } from '../util/custom-memo';
+
+const AntProgress = Tiny.Area;
 
 export interface ProgressConfig extends AntProgressConfig {
   maxColumnWidth?: number;
@@ -85,7 +87,7 @@ const Progress = forwardRef<unknown, ProgressConfig>(
               textAlign: 'left',
               // 避免换行
               whiteSpace: 'nowrap',
-              color: color || themeConfig.styleSheet.axisLabelFillColor,
+              color: color || themeConfig.axis.labelFill,
             }}
           >
             {title}

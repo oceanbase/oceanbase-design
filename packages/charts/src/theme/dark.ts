@@ -2,7 +2,7 @@ import { G2 } from '@ant-design/charts';
 import { merge } from 'lodash';
 import lightTheme from './light';
 
-const { registerTheme } = G2;
+const { register } = G2;
 
 // 分类色板
 const COLORS_10 = [
@@ -166,6 +166,6 @@ const darkTheme = merge({}, lightTheme, {
 }) as typeof lightTheme;
 
 // 注册暗色主题
-registerTheme('dark', darkTheme);
+register('theme.dark', () => darkTheme);
 
 export default darkTheme;
