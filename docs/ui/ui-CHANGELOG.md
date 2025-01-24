@@ -8,6 +8,15 @@ group: 业务组件
 
 ---
 
+## 0.4.8
+
+`2025-01-24`
+
+- DateRanger
+  - 🆕 DateRanger 支持自定义快捷选项。[#952](https://github.com/oceanbase/oceanbase-design/pull/952)
+  - ⭐️ DateRanger 支持自动校验和交换起止时间。[#953](https://github.com/oceanbase/oceanbase-design/pull/953)
+- 💄 优化 ProTable 间距，以对齐 Table 在 Card 中的样式。[#948](https://github.com/oceanbase/oceanbase-design/pull/948)
+
 ## 0.4.7
 
 `2025-01-15`
