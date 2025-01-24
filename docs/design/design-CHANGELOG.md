@@ -8,6 +8,16 @@ group: 基础组件
 
 ---
 
+## 0.4.7
+
+`2025-01-24`
+
+- 🔥 新增 11 篇设计规范文档，包括 5 篇设计原则、6 篇设计基础。[#954](https://github.com/oceanbase/oceanbase-design/pull/954)
+- 🔥 新增 6 篇组件规范文档，包括 Alert、Button、Tabs、Table、Modal 和 DateRanger。[#955](https://github.com/oceanbase/oceanbase-design/pull/955)
+- 📖 优化官网在移动端的样式和访问体验。[#956](https://github.com/oceanbase/oceanbase-design/pull/956)
+- 💄 默认去掉 Form.Item 包裹 Switch 时的可选样式。[#949](https://github.com/oceanbase/oceanbase-design/pull/949)
+- 💄 优化 Table 空状态的高度，大中小尺寸分别为 360px、260px 和 160px。[#947](https://github.com/oceanbase/oceanbase-design/pull/947)
+
 ## 0.4.6
 
 `2025-01-15`
