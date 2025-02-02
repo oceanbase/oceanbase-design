@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { getPrefix } from '../_util';
-import React, { ReactNode, useMemo, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import TagSelectContext from './TagSelectContext';
 import Item from './Item';
 import useStyle from './style';
@@ -21,11 +22,11 @@ export interface TagSelectGroupProps {
   disabled?: boolean;
   className?: string;
   multiple?: boolean;
-  defaultValue?: TagSelectValueType | Array<TagSelectValueType>;
-  value?: TagSelectValueType | Array<TagSelectValueType>;
+  defaultValue?: TagSelectValueType | TagSelectValueType[];
+  value?: TagSelectValueType | TagSelectValueType[];
   size?: string;
-  options?: Array<TagSelectOptionType | string | number>;
-  onChange?: (value: Array<TagSelectValueType> | TagSelectValueType) => void;
+  options?: (TagSelectOptionType | string | number)[];
+  onChange?: (value: TagSelectValueType[] | TagSelectValueType) => void;
 }
 
 function toArray(value) {
@@ -50,10 +51,10 @@ const Group: React.FC<TagSelectGroupProps> = ({
 }) => {
   const prefix = getPrefix('tag-select');
   const { wrapSSR, hashId } = useStyle(prefix);
-  const [value, setValue] = useState<Array<TagSelectValueType>>(
+  const [value, setValue] = useState<TagSelectValueType[]>(
     toArray(defaultValue || restProps.value)
   );
-  const [registeredValues, setRegisteredValues] = React.useState<Array<TagSelectValueType>>([]);
+  const [registeredValues, setRegisteredValues] = React.useState<TagSelectValueType[]>([]);
 
   const registerValue = (val: TagSelectValueType) => {
     setRegisteredValues(prev => [...prev, val]);

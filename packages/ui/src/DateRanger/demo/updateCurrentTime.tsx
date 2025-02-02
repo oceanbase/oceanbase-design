@@ -8,7 +8,7 @@ type TimeRangeRef = {
 };
 
 export default () => {
-  const ref = useRef<TimeRangeRef>();
+  const ref = useRef<TimeRangeRef>(null);
   const [timeRange, setTimeRange] = useState([]);
   const format = 'YYYY-MM-DD HH:mm:ss';
   return (
