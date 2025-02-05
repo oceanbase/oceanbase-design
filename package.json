@@ -79,7 +79,7 @@
     "eslint-plugin-jest": "^28.9.0",
     "execa": "^5.1.1",
     "father": "^4.5.1",
-    "fs-extra": "^11.2.0",
+    "fs-extra": "^11.3.0",
     "gh-pages": "^6.3.0",
     "glob": "^11.0.0",
     "html2sketch": "^1.0.2",
