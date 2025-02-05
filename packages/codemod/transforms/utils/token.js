@@ -121,6 +121,7 @@ const TOKEN_MAP = {
   '#f5f8fe': 'colorBgLayout',
   '#f5f7fa': 'colorBgLayout',
   'rgba(140,140,140,0.1)': 'colorBgLayout',
+  'rgb(240,242,245)': 'colorBgLayout',
   '#132039': 'colorText',
   '#364563': 'colorTextSecondary',
   '#8592ad': 'colorTextTertiary',

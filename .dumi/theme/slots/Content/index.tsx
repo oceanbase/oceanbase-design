@@ -97,6 +97,12 @@ const useStyle = () => {
           padding: 0 48px;
         }
       }
+      @media only screen and (max-width: ${token.screenXS}px) {
+        &,
+        &.rtl {
+          padding: 0 32px;
+        }
+      }
     `,
   };
 };

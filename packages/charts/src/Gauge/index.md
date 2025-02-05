@@ -7,12 +7,10 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基础仪表盘"></code>
-
 <code src="./demo/custom-color.tsx" title="多色仪表盘"></code>
-
 <code src="./demo/meter.tsx" title="米轨仪表盘"></code>
-
 <code src="./demo/without-indicator.tsx" title="无指针和刻度仪表盘"></code>
 
 ## API

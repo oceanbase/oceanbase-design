@@ -11,11 +11,17 @@ export { ProTableProps };
 
 const ProTable: typeof AntProTable = ({
   form,
+  headerTitle,
+  options,
+  optionsRender,
+  toolbar,
+  toolBarRender,
   expandable,
   rowSelection,
   pagination: customPagination,
   footer,
   locale,
+  cardProps: outerCardProps,
   prefixCls: customizePrefixCls,
   tableClassName,
   className,
@@ -47,6 +53,9 @@ const ProTable: typeof AntProTable = ({
   const { emptyText = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />, ...restLocale } =
     locale || {};
 
+  const cardProps = typeof outerCardProps === 'boolean' ? {} : outerCardProps;
+  const proCardCls = getPrefixCls('pro-card', customizePrefixCls);
+
   return tableWrapSSR(
     lightFilterWrapSSR(
       wrapSSR(
@@ -57,6 +66,29 @@ const ProTable: typeof AntProTable = ({
             // query form should remove required mark
             requiredMark: false,
             ...form,
+          }}
+          headerTitle={headerTitle}
+          options={options}
+          optionsRender={optionsRender}
+          toolbar={toolbar}
+          toolBarRender={toolBarRender}
+          cardProps={{
+            ...cardProps,
+            className: classNames(
+              {
+                [`${proCardCls}-has-title`]:
+                  !!headerTitle ||
+                  options ||
+                  options === undefined ||
+                  optionsRender ||
+                  toolbar ||
+                  toolBarRender,
+                [`${proCardCls}-no-divider`]: !cardProps?.headerBordered,
+                [`${proCardCls}-no-padding`]: true,
+                [`${proCardCls}-contain-tabs`]: !!cardProps?.tabs,
+              },
+              cardProps?.className
+            ),
           }}
           expandable={
             expandable

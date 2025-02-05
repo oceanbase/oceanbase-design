@@ -1,6 +1,7 @@
 ---
+group: Design Foundation 设计基础
 title: Shadow 投影
-order: 2
+order: 8
 ---
 
 阴影提供关于深度、运动方向和表面边缘的线索，一个表面的阴影是由它的高度和与其他表面的关系决定的。

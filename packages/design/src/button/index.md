@@ -7,6 +7,8 @@ demo:
   cols: 2
 ---
 
+## 组件说明
+
 - 🔥 完全继承 antd [Button](https://ant.design/components/button-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 

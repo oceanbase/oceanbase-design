@@ -23,6 +23,7 @@ return (
 
 ## 使用示例
 
+<!-- prettier-ignore -->
 <code src="../../packages/design/src/locale/demo/basic.tsx"></code>
 
 ## 目前支持语言

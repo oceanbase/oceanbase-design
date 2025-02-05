@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import React from 'react';
 import type { TooltipProps } from '../tooltip';
 import { useTooltipTypeList } from '../tooltip/hooks/useTooltipTypeList';
+import { isPlainObject } from 'lodash';
 
 const AntFormItem = AntForm.Item;
 
@@ -34,7 +35,13 @@ const Item: React.FC<FormItemProps> = ({ children, tooltip, ...restProps }) => {
   }
 
   return (
-    <AntFormItem tooltip={tooltip} {...restProps}>
+    <AntFormItem
+      tooltip={tooltip}
+      // auto set required for Switch children to hide optional mark
+      // @ts-ignore
+      required={isPlainObject(children) && children.type?.__ANT_SWITCH ? true : undefined}
+      {...restProps}
+    >
       {children}
     </AntFormItem>
   );

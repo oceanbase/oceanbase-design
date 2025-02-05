@@ -89,7 +89,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           borderBottom: 'none',
         },
         [`${componentCls}-empty-wrapper`]: {
-          minHeight: 360,
+          minHeight: 360 - token.paddingSM * 2,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -112,6 +112,24 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           [`${componentCls}-empty-wrapper`]: {
             minHeight: 'auto',
           },
+        },
+      },
+    },
+
+    // middle 表格样式
+    [`${componentCls}-wrapper ${componentCls}${componentCls}-middle`]: {
+      [`${componentCls}-tbody`]: {
+        [`${componentCls}-empty-wrapper`]: {
+          minHeight: 260 - token.paddingXS * 2,
+        },
+      },
+    },
+
+    // small 表格样式
+    [`${componentCls}-wrapper ${componentCls}${componentCls}-small`]: {
+      [`${componentCls}-tbody`]: {
+        [`${componentCls}-empty-wrapper`]: {
+          minHeight: 160 - token.paddingXXS * 2,
         },
       },
     },

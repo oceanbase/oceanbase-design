@@ -1,7 +1,8 @@
 ---
-group: Icongraphy 图形
-order: 1
+group: Design Foundation 设计基础
+subGroup: Icongraphy 图形
 title: Product icon 产品图标
+order: 11
 ---
 
 产品图标是一种高度概括和象征性的图形元素，用于在不同数字平台上快速传达信息、指示功能或代表应用。通过视觉简化交互过程，提升用户体验，并作为品牌识别的一部分，增强界面的美学与统一性。

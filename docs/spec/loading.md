@@ -1,7 +1,8 @@
 ---
-group: Interaction 交互
-order: 1
+group: Design Foundation 设计基础
+subGroup: Interaction 交互
 title: Loading 系统加载
+order: 17
 ---
 
 Loading 加载动画是加载数据或执行操作过程中的一种可视化表现方式，合适的加载动效有助于缓解用户的等待焦虑。

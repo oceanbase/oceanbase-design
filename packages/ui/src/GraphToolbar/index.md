@@ -9,6 +9,7 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="../TaskGraph/demo/basic.tsx" title="基本"></code>
 
 ## API

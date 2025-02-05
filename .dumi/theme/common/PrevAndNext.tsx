@@ -1,25 +1,36 @@
 import { LeftOutlined, RightOutlined } from '@oceanbase/icons';
 import { css } from '@emotion/react';
 import type { MenuProps } from '@oceanbase/design';
-import type { MenuItemType } from '@oceanbase/design/es/menu';
+import type { MenuItemType } from '@oceanbase/design/es/menu/interface';
 import React, { useMemo } from 'react';
 import useMenu from '../../hooks/useMenu';
 import useSiteToken from '../../hooks/useSiteToken';
+import SiteContext from '../../theme/slots/SiteContext';
 
 const useStyle = () => {
   const { token } = useSiteToken();
   const { colorSplit, iconCls, fontSizeIcon } = token;
+  const { isMobile } = React.useContext(SiteContext);
 
   return {
-    prevNextNav: css`
-      width: calc(100% - 234px);
-      margin-inline-end: 170px;
-      margin-inline-start: 64px;
-      overflow: hidden;
-      font-size: 14px;
-      border-top: 1px solid ${colorSplit};
-      display: flex;
-    `,
+    prevNextNav: isMobile
+      ? css`
+          width: calc(100% - 64px);
+          margin-inline: 32px;
+          overflow: hidden;
+          font-size: 14px;
+          border-top: 1px solid ${colorSplit};
+          display: flex;
+        `
+      : css`
+          width: calc(100% - 234px);
+          margin-inline-end: 170px;
+          margin-inline-start: 64px;
+          overflow: hidden;
+          font-size: 14px;
+          border-top: 1px solid ${colorSplit};
+          display: flex;
+        `,
     pageNav: css`
       flex: 1;
       height: 72px;

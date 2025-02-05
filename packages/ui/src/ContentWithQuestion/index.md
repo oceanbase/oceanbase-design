@@ -7,10 +7,9 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-
 <code src="./demo/custom.tsx" title="自定义图标"></code>
-
 <code src="./demo/prefix.tsx" title="图标前置"></code>
 
 ## API
