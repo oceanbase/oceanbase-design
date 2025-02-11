@@ -68,7 +68,7 @@
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/e6tzTJwFPgsAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">图标含义和按钮文案行为有歧义</div>
+    <div class="image-description">避免使用与按钮文案行为有歧义的图标</div>
   </div>
 </div>
 
@@ -83,7 +83,7 @@
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/sH5BT4d0iPMAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">正常情况下图标按钮使用非灰色</div>
+    <div class="image-description">避免在默认场景下使用非灰色图标按钮</div>
   </div>
 </div>
 
@@ -98,7 +98,7 @@
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/7gtKQ41HJWMAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">图标含义明确，再加上文案后信息冗余</div>
+    <div class="image-description">避免在图标含义明确的场景下，为其增加冗余文案</div>
   </div>
 </div>
 

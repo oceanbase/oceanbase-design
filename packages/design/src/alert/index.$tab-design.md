@@ -182,12 +182,12 @@
 
 默认宽度 600px, 实际宽度应与应用页面规则保持一致，可自行调小、调大。
 
-<div style="display: flex; height: 200px">
-  <div>
-    <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/O8SCT5suEtIAAAAAAAAAAAAADv3-AQBr/original" />
+<div style="display: flex">
+  <div style="width: 50%">
+    <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/vyh_R5lQdPYAAAAAAAAAAAAAev3-AQBr/original" />
     <div class="image-description-center">自适应与表格居中对齐</div>
   </div>
-  <div>
+  <div style="width: 50%">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/tCbxTY-OjxIAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description-center">与表单一致，保持左侧对齐，不需要占满卡片</div>
   </div>

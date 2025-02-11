@@ -133,7 +133,7 @@
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/Fjd5RblQ9tcAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description">需节约空间，确保高密度信息展示时，使用文字按钮，例如紧凑表格、小尺寸表格</div>
   </div>
-  <div>
+  <div style="visibility: hidden">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/Fjd5RblQ9tcAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description">需节约空间，确保高密度信息展示时，使用文字按钮，例如紧凑表格、小尺寸表格</div>
   </div>
