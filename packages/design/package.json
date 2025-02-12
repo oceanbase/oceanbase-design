@@ -49,8 +49,7 @@
     "lodash": "^4.17.21",
     "lottie-web": "^5.12.2",
     "prop-types": "^15.8.1",
-    "rc-util": "^5.44.3",
-    "react-sticky-mouse-tooltip": "^0.0.1"
+    "rc-util": "^5.44.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.25.9",
