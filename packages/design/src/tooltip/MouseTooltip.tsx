@@ -37,7 +37,11 @@ const MouseTooltip: React.FC<MouseTooltipProps> = ({
   };
 
   // 获取鼠标位置
-  const { clientX = 0, clientY = 0 } = useMouse();
+  const mouseInfo = useMouse();
+  // clientX and clientY maybe NaN, should use 0 as fallback value
+  // ref: https://github.com/oceanbase/oceanbase-design/pull/968
+  const clientX = mouseInfo?.clientX || 0;
+  const clientY = mouseInfo?.clientY || 0;
   const ref = useRef<HTMLDivElement>(null);
   const size = useSize(ref);
   // tooltip 宽高，由于 ref 是设置在内容区上的，因此还需要加上外部的 padding
