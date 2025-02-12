@@ -3,6 +3,10 @@ title: Alert 警告提示
 nav:
   title: 基础组件
   path: /components
+markdown: |
+  以横幅形式显示突出的信息和相关的可选操作。
+
+  ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/3jjcQ6Q0uIIAAAAAAAAAAAAADv3-AQBr/original)
 ---
 
 ## 组件说明

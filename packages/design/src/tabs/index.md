@@ -3,6 +3,10 @@ title: Tabs 标签页
 nav:
   title: 基础组件
   path: /components
+markdown: |
+  用于承载处于同一层级的不同内容，方便用户在同一页面框架下快速切换查看。
+
+  ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/jEzrQ5xuvC4AAAAAAAAAAAAADv3-AQBr/original)
 ---
 
 ## 组件说明

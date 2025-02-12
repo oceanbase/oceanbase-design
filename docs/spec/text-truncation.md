@@ -38,12 +38,12 @@ order: 21
 邮件无法显示完整时，使用中间截断的方式，为用户显示完整的域名信息。
 
 <div style="display: flex">
-  <div>
+  <div style="width: 50%">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/6-v3SauTLhcAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Do></Do></div>
     <div class="image-description">截断时保留完整的邮件域名</div>
   </div>
-  <div>
+  <div style="width: 50%">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/oLOsRaGTO6UAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Donot></Donot></div>
     <div class="image-description">避免截断邮件域名</div>
@@ -67,7 +67,7 @@ order: 21
   <div style="width: 50%">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/q361Q7TioPUAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Donot></Donot></div>
-    <div class="image-description">避免将“ demo1.internal-el6.satellite ”截断为“ de…</div>
+    <div class="image-description">避免将 “demo1.internal-el6.satellite” 截断为 “de…”</div>
   </div>
 </div>
 

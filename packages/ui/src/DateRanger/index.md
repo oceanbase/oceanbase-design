@@ -3,6 +3,10 @@ title: DateRanger 新版日期时间选择
 nav:
   title: 业务组件
   path: /biz-components
+markdown: |
+  用于指定日期和时间范围，并可以通过快捷操作向前、向后跳转时段或刷新当前时间。
+
+  ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/hyMcRrWR4j0AAAAAAAAAAAAADv3-AQBr/original)
 ---
 
 ## 代码演示

@@ -5,6 +5,10 @@ nav:
   path: /components
 demo:
   cols: 2
+markdown: |
+  用于开始一个即时操作。
+
+  ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/v_MeQYfUImYAAAAAAAAAAAAADv3-AQBr/original)
 ---
 
 ## 组件说明

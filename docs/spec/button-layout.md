@@ -111,11 +111,11 @@ Z 模式多用在反馈类容器和筛选卡片容器中。
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/QqxeQpARApMAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">用户浏览路径为从左到右时，按钮组置于操作对象右侧。</div>
+    <div class="image-description">用户浏览路径为从左到右时，按钮组置于操作对象右侧</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/38UbRJPA7VcAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">用户浏览路径为从上到下时，按钮组置于操作对象下方。</div>
+    <div class="image-description">用户浏览路径为从上到下时，按钮组置于操作对象下方</div>
   </div>
 </div>
 
@@ -126,11 +126,11 @@ Z 模式多用在反馈类容器和筛选卡片容器中。
 <div style="display: flex">
   <div style="width: 50%">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/vES1SKp1cpMAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><strong>主按钮居左。</strong>按钮组中按钮之间不存在逻辑关系时，默认主按钮居左。</div>
+    <div class="image-description"><strong>主按钮居左。</strong>按钮组中按钮之间不存在逻辑关系时，默认主按钮居左</div>
   </div>
   <div style="width: 50%">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/WC5UTotcdDsAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description"><strong>主按钮根据按钮逻辑顺序排列。</strong>当按钮组中按钮存在逻辑关系时，可以根据逻辑关系进行排序，其中推荐的操作按钮作为主按钮。</div>
+    <div class="image-description"><strong>主按钮根据按钮逻辑顺序排列。</strong>当按钮组中按钮存在逻辑关系时，可以根据逻辑关系进行排序，其中推荐的操作按钮作为主按钮</div>
   </div>
 </div>
 
