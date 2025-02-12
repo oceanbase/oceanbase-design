@@ -1,7 +1,3 @@
-用于承载处于同一层级的不同内容，方便用户在同一页面框架下快速切换查看。
-
-![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/jEzrQ5xuvC4AAAAAAAAAAAAADv3-AQBr/original)
-
 ## 何时使用
 
 当同一层级不同类型内容平铺展示时。

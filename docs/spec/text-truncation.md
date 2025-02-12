@@ -67,7 +67,7 @@ order: 21
   <div style="width: 50%">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/q361Q7TioPUAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Donot></Donot></div>
-    <div class="image-description">避免将“ demo1.internal-el6.satellite ”截断为“ de…</div>
+    <div class="image-description">避免将 “demo1.internal-el6.satellite” 截断为 “de…”</div>
   </div>
 </div>
 

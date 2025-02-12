@@ -1,7 +1,3 @@
-以横幅形式显示突出的信息和相关的可选操作。
-
-![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/3jjcQ6Q0uIIAAAAAAAAAAAAADv3-AQBr/original)
-
 ## 何时使用
 
 用于显示重要、简洁的消息，为用户提供处理(或取消)的操作。告警是持久且非模态的，允许用户在任何时候忽略或与其交互，一次只能显示一条告警。

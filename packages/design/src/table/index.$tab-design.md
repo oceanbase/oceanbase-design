@@ -1,7 +1,3 @@
-以二维表格格式呈现数据，以矩形形式按行（每行显示一个行项目）和列排列。行项目可以包含任何类型的数据，也可以包含交互式控件，例如编辑数据、查看详情或触发行项目相关操作。
-
-![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/H0SVSZSjbisAAAAAAAAAAAAADv3-AQBr/original)
-
 ## 何时使用
 
 - 当有大量结构化的数据需要展现

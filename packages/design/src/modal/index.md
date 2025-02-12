@@ -3,6 +3,10 @@ title: Modal 对话框
 nav:
   title: 基础组件
   path: /components
+markdown: |
+  模态对话框是在当前页面上方以遮罩叠加居中浮层的形式显示内容，底层页面内容被遮盖且无法访问，直到用户完成任务或关闭模态对话框。该模式可将用户注意力集中在当前任务上，适用于需用户集中注意力快速完成某任务的场景。
+
+  ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/lI3EQ6WmlxgAAAAAAAAAAAAADv3-AQBr/original)
 ---
 
 ## 组件说明

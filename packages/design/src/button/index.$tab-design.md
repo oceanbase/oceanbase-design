@@ -1,9 +1,3 @@
-用于开始一个即时操作。
-
-<div>
-  <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/v_MeQYfUImYAAAAAAAAAAAAADv3-AQBr/original" />
-</div>
-
 ## 何时使用
 
 用于页面中的行动点，即用户触发动作的起点。
