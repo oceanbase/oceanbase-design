@@ -65,7 +65,8 @@
   },
   "devDependencies": {
     "@ant-design/pro-form": "^2.31.3",
-    "@ant-design/pro-layout": "^7.22.0"
+    "@ant-design/pro-layout": "^7.22.0",
+    "@types/hoist-non-react-statics": "^3.3.6"
   },
   "peerDependencies": {
     "react": ">=16.9.0",

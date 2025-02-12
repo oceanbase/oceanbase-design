@@ -1,3 +1,4 @@
+import type { ElementRef } from 'react';
 import React, { useEffect, useRef, useState, useImperativeHandle } from 'react';
 import {
   Button,
@@ -91,9 +92,15 @@ export interface DateRangerProps
   locale?: any;
 }
 
+export type DateRangerHandle = {
+  updateCurrentTime: () => void;
+};
+
+export type DateRangerHandleRef = ElementRef<typeof Ranger>;
+
 const prefix = getPrefix('date-ranger');
 
-const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
+const Ranger = React.forwardRef<DateRangerHandle, DateRangerProps>((props, ref) => {
   const {
     selects = [
       NEAR_1_MINUTES,
@@ -574,4 +581,4 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
 export default LocaleWrapper({
   componentName: 'DateRanger',
   defaultLocale: zhCN,
-})(Ranger) as typeof Ranger;
+})(Ranger);
