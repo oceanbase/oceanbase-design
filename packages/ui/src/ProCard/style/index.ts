@@ -14,11 +14,11 @@ export const genProCardStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObje
     [`div${componentCls}`]: {
       borderRadius: token.borderRadiusLG,
     },
-    [`${componentCls}:not(${componentCls}-border)`]: {
+    [`${componentCls}:not(${componentCls}-border):not(${componentCls}-ghost)`]: {
       boxShadow:
         '0 1px 2px 0 rgba(0, 0, 0, 0.03),0 1px 6px -1px rgba(0, 0, 0, 0.02),0 2px 4px 0 rgba(0, 0, 0, 0.02)',
     },
-    [`${componentCls}:not(${componentCls}-size-small)`]: {
+    [`${componentCls}:not(${componentCls}-size-small):not(${componentCls}-ghost)`]: {
       [`${componentCls}-body`]: {
         paddingBlock: token.paddingLG,
       },
@@ -26,6 +26,16 @@ export const genProCardStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObje
         [`${componentCls}-body`]: {
           paddingBlockStart: token.padding,
         },
+      },
+    },
+    // need to handle style for small and ghost ProCard
+    [`${componentCls}${componentCls}-size-small${componentCls}-ghost`]: {
+      [`${componentCls}-header`]: {
+        paddingInline: 0,
+      },
+      [`${componentCls}-body`]: {
+        paddingBlock: 0,
+        paddingInline: 0,
       },
     },
     // no body padding card
