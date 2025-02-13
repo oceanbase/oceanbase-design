@@ -37,6 +37,7 @@ exports[`Descriptions > contentProps should work for Descriptions.Item 1`] = `
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   This is long long long long long long long long long long long Link
@@ -88,6 +89,7 @@ exports[`Descriptions > contentProps should work for items 1`] = `
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   This is long long long long long long long long long long long Link
@@ -180,6 +182,7 @@ exports[`Descriptions > remove colon for vertical layout by default for Descript
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   Zhou Maomao
@@ -198,6 +201,7 @@ exports[`Descriptions > remove colon for vertical layout by default for Descript
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   1810000000
@@ -216,6 +220,7 @@ exports[`Descriptions > remove colon for vertical layout by default for Descript
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   Hangzhou, Zhejiang
@@ -270,6 +275,7 @@ exports[`Descriptions > remove colon for vertical layout by default for Descript
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   empty
@@ -288,6 +294,7 @@ exports[`Descriptions > remove colon for vertical layout by default for Descript
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
@@ -380,6 +387,7 @@ exports[`Descriptions > remove colon for vertical layout by default for items 1`
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   Zhou Maomao
@@ -398,6 +406,7 @@ exports[`Descriptions > remove colon for vertical layout by default for items 1`
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   1810000000
@@ -416,6 +425,7 @@ exports[`Descriptions > remove colon for vertical layout by default for items 1`
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   Hangzhou, Zhejiang
@@ -470,6 +480,7 @@ exports[`Descriptions > remove colon for vertical layout by default for items 1`
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   empty
@@ -488,6 +499,7 @@ exports[`Descriptions > remove colon for vertical layout by default for items 1`
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
@@ -539,6 +551,7 @@ exports[`Descriptions > render for Descriptions.Item 1`] = `
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   Zhou Maomao
@@ -562,6 +575,7 @@ exports[`Descriptions > render for Descriptions.Item 1`] = `
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   1810000000
@@ -585,6 +599,7 @@ exports[`Descriptions > render for Descriptions.Item 1`] = `
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   Hangzhou, Zhejiang
@@ -612,6 +627,7 @@ exports[`Descriptions > render for Descriptions.Item 1`] = `
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   empty
@@ -635,6 +651,7 @@ exports[`Descriptions > render for Descriptions.Item 1`] = `
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
@@ -686,6 +703,7 @@ exports[`Descriptions > render for items 1`] = `
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   Zhou Maomao
@@ -709,6 +727,7 @@ exports[`Descriptions > render for items 1`] = `
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   1810000000
@@ -732,6 +751,7 @@ exports[`Descriptions > render for items 1`] = `
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   Hangzhou, Zhejiang
@@ -759,6 +779,7 @@ exports[`Descriptions > render for items 1`] = `
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   empty
@@ -782,6 +803,7 @@ exports[`Descriptions > render for items 1`] = `
                 class="ant-descriptions-item-content"
               >
                 <span
+                  aria-describedby="test-id"
                   class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                 >
                   No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China

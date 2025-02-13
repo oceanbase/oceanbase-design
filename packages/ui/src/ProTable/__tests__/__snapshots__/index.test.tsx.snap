@@ -378,6 +378,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
               >
                 <span>
                   <span
+                    aria-describedby="test-id"
                     aria-label="reload"
                     class="anticon anticon-reload"
                     role="img"
@@ -403,6 +404,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
               >
                 <span>
                   <span
+                    aria-describedby="test-id"
                     aria-label="column-height"
                     class="anticon anticon-column-height ant-dropdown-trigger"
                     role="img"
@@ -428,6 +430,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                 class="ant-pro-table-list-toolbar-setting-item"
               >
                 <span
+                  aria-describedby="test-id"
                   aria-label="setting"
                   class="anticon anticon-setting"
                   role="img"
@@ -1264,6 +1267,7 @@ exports[`ProTable > default pagination should work 1`] = `
               >
                 <span>
                   <span
+                    aria-describedby="test-id"
                     aria-label="reload"
                     class="anticon anticon-reload"
                     role="img"
@@ -1289,6 +1293,7 @@ exports[`ProTable > default pagination should work 1`] = `
               >
                 <span>
                   <span
+                    aria-describedby="test-id"
                     aria-label="column-height"
                     class="anticon anticon-column-height ant-dropdown-trigger"
                     role="img"
@@ -1314,6 +1319,7 @@ exports[`ProTable > default pagination should work 1`] = `
                 class="ant-pro-table-list-toolbar-setting-item"
               >
                 <span
+                  aria-describedby="test-id"
                   aria-label="setting"
                   class="anticon anticon-setting"
                   role="img"
@@ -2222,6 +2228,7 @@ exports[`ProTable > render 1`] = `
               >
                 <span>
                   <span
+                    aria-describedby="test-id"
                     aria-label="reload"
                     class="anticon anticon-reload"
                     role="img"
@@ -2247,6 +2254,7 @@ exports[`ProTable > render 1`] = `
               >
                 <span>
                   <span
+                    aria-describedby="test-id"
                     aria-label="column-height"
                     class="anticon anticon-column-height ant-dropdown-trigger"
                     role="img"
@@ -2272,6 +2280,7 @@ exports[`ProTable > render 1`] = `
                 class="ant-pro-table-list-toolbar-setting-item"
               >
                 <span
+                  aria-describedby="test-id"
                   aria-label="setting"
                   class="anticon anticon-setting"
                   role="img"
