@@ -89,6 +89,8 @@ export interface DateRangerProps
   size?: 'small' | 'large' | 'middle';
   tooltipProps?: TooltipProps;
   autoAdjustOverflow?: boolean;
+  overlayClassName?: string;
+  overlayStyle?: React.CSSProperties;
   locale?: any;
 }
 
@@ -130,6 +132,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     rules,
     tip,
     autoAdjustOverflow,
+    overlayClassName,
+    overlayStyle,
     ...rest
   } = props;
 
@@ -358,7 +362,10 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
             }}
             dropdownRender={originNode => {
               return (
-                <div className={`${prefix}-dropdown-picker`}>
+                <div
+                  className={classNames(`${prefix}-dropdown-picker`, overlayClassName)}
+                  style={overlayStyle}
+                >
                   {originNode}
                   <Divider type="vertical" style={{ height: 'auto', margin: '0px 4px 0px 0px' }} />
                   <InternalPickerPanel

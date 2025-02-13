@@ -43,6 +43,9 @@ markdown: |
 | hideYear | 当时间范围在本年时，隐藏年份 | boolean | false | - |
 | hideSecond | 隐藏"秒” | boolean | false | - |
 | autoCalcRange | 自动计算时间范围并回显到选择器tag | boolean | false | - |
+| autoAdjustOverflow | 选择面板被遮挡时自动调整位置 | boolean | true | - |
+| overlayClassName | 选择面板根元素的类名称 | string | - | - |
+| overlayStyle | 选择面板根元素的样式 | CSSProperties | - | - |
 | ref | updateCurrentTime 手动更新当前时间 | function | - | - |
 | 其他 antd/RangePicker 的 `props` | [antd-RangePicker](https://ant.design/components/date-picker-cn/#RangePicker) | - | - | - |
 
