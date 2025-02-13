@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.23.0",
+    "@ctrl/tinycolor": "^4.1.0",
     "@oceanbase/aliyun-theme": "^0.1.6",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
