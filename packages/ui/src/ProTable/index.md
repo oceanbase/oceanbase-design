@@ -5,7 +5,7 @@ nav:
   path: /biz-components
 ---
 
-- 🔥 完全继承 pro-components [ProTable](https://procomponents.ant.design/components/pro-table) 的能力和 API，可无缝切换。
+- 🔥 完全继承 pro-components [ProTable](https://procomponents.ant.design/components/table) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 - 📢 ProTable 的默认尺寸改为 `large`。
 
@@ -23,4 +23,4 @@ nav:
 | :---------- | :------- | :----------------------------- | :------ | :--- |
 | defaultSize | 默认尺寸 | `large` \| `middle` \| `small` | `large` | -    |
 
-- 更多 API 详见 pro-components ProTable 文档: https://procomponents.ant.design/components/pro-table
+- 更多 API 详见 pro-components ProTable 文档: https://procomponents.ant.design/components/table

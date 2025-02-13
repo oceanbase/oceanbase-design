@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/icons",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "The Icon Library for OceanBase",
   "keywords": [
     "oceanbase",
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@ant-design/colors": "^7.2.0",
-    "@ant-design/icons": "^5.5.2",
+    "@ant-design/icons": "^5.6.1",
     "@oceanbase/icons-svg": "^1.0.10",
     "lodash.camelcase": "^4.3.0"
   },

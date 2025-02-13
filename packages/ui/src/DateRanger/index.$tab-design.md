@@ -1,7 +1,3 @@
-用于指定日期和时间范围，并可以通过快捷操作向前、向后跳转时段或刷新当前时间。
-
-![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/hyMcRrWR4j0AAAAAAAAAAAAADv3-AQBr/original)
-
 ## 何时使用
 
 当需要快速完成日期范围选择，同时需要高频切换日期范围时使用。

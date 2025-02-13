@@ -88,6 +88,9 @@ export interface DateRangerProps
   defaultValue?: RangeValue;
   size?: 'small' | 'large' | 'middle';
   tooltipProps?: TooltipProps;
+  autoAdjustOverflow?: boolean;
+  overlayClassName?: string;
+  overlayStyle?: React.CSSProperties;
   locale?: any;
 }
 
@@ -128,6 +131,9 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     isMoment: isMomentProps,
     rules,
     tip,
+    autoAdjustOverflow,
+    overlayClassName,
+    overlayStyle,
     ...rest
   } = props;
 
@@ -342,6 +348,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
           <Dropdown
             trigger={['click']}
             open={open}
+            placement={rest.placement}
+            autoAdjustOverflow={autoAdjustOverflow}
             // 关闭后进行销毁，才可以将 Tooltip 进行同步关闭
             destroyPopupOnHide={true}
             // 存在缓存，会锁死里面的值
@@ -354,7 +362,10 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
             }}
             dropdownRender={originNode => {
               return (
-                <div className={`${prefix}-dropdown-picker`}>
+                <div
+                  className={classNames(`${prefix}-dropdown-picker`, overlayClassName)}
+                  style={overlayStyle}
+                >
                   {originNode}
                   <Divider type="vertical" style={{ height: 'auto', margin: '0px 4px 0px 0px' }} />
                   <InternalPickerPanel

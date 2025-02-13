@@ -8,13 +8,22 @@ group: 业务组件
 
 ---
 
+## 0.4.9
+
+`2025-02-13`
+
+- DateRanger
+  - 🆕 DateRanger 新增 `autoAdjustOverflow` 属性，用于控制弹出面板是否自动调整位置。[#972](https://github.com/oceanbase/oceanbase-design/pull/972) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - 🆕 DateRanger 新增 `overlayClassName` 和 `overlayStyle` 属性，用于设置弹出面板的样式。[#970](https://github.com/oceanbase/oceanbase-design/pull/970) [@wzc520pyfm](https://github.com/wzc520pyfm)
+- 🐞 修复 ProCard `ghost` 模式下卡片阴影和内容区 padding 不正确的问题。[#967](https://github.com/oceanbase/oceanbase-design/pull/967)
+
 ## 0.4.8
 
 `2025-02-05`
 
 - DateRanger
-  - 🆕 DateRanger 支持自定义快捷选项。[#952](https://github.com/oceanbase/oceanbase-design/pull/952)
-  - ⭐️ DateRanger 支持自动校验和交换起止时间。[#953](https://github.com/oceanbase/oceanbase-design/pull/953)
+  - 🆕 DateRanger 支持自定义快捷选项。[#952](https://github.com/oceanbase/oceanbase-design/pull/952) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - ⭐️ DateRanger 支持自动校验和交换起止时间。[#953](https://github.com/oceanbase/oceanbase-design/pull/953) [@linhf123](https://github.com/linhf123)
 - 💄 优化 ProTable 间距，以对齐 Table 在 Card 中的样式。[#948](https://github.com/oceanbase/oceanbase-design/pull/948)
 
 ## 0.4.7

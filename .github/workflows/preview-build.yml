@@ -39,7 +39,7 @@ jobs:
           rm -rf site/~demos/:id
 
       - name: Upload site artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: site
           path: site/

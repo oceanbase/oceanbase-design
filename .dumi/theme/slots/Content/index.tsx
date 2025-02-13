@@ -7,6 +7,7 @@ import DayJS from 'dayjs';
 import { FormattedMessage, useIntl, useRouteMeta, useTabMeta } from 'dumi';
 import type { ReactNode } from 'react';
 import React, { useContext, useLayoutEffect, useMemo, useState } from 'react';
+import Markdown from 'react-markdown';
 import useLayoutState from '../../../hooks/useLayoutState';
 import useLocation from '../../../hooks/useLocation';
 import useSiteToken from '../../../hooks/useSiteToken';
@@ -251,6 +252,7 @@ const Content: React.FC<{ children: ReactNode }> = ({ children }) => {
               )}
             </Typography.Title>
           ) : null}
+          <Markdown className="markdown">{meta.frontmatter?.markdown}</Markdown>
           {/* 添加作者、时间等信息 */}
           {meta.frontmatter.date || meta.frontmatter.author ? (
             <Typography.Paragraph>

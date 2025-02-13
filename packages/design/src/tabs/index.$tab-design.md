@@ -1,7 +1,3 @@
-用于承载处于同一层级的不同内容，方便用户在同一页面框架下快速切换查看。
-
-![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/jEzrQ5xuvC4AAAAAAAAAAAAADv3-AQBr/original)
-
 ## 何时使用
 
 当同一层级不同类型内容平铺展示时。
@@ -29,8 +25,8 @@
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/t22SQb58NjAAAAAAAAAAAAAADv3-AQBr/original" />
     <ul class="image-description">
-      <li>显示超过 7 个中文字符（ 14 个英文字符）</li>
-      <li>加标点符号</li>
+      <li>避免显示超过 7 个中文字符（ 14 个英文字符）</li>
+      <li>避免加标点符号</li>
     </ul>
   </div>
 </div>
@@ -42,7 +38,7 @@
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/WpcaSYr8sakAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">随意选中一个选项卡作为默认选中项</div>
+    <div class="image-description">避免随意选中一个选项卡作为默认选中项</div>
   </div>
 </div>
 
@@ -83,8 +79,8 @@
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/8fJLRpSEY6IAAAAAAAAAAAAADv3-AQBr/original" />
     <ul class="image-description">
-      <li>选中的卡片分割线闭合</li>
-      <li>分割线没有延长</li>
+      <li>避免将选中的选项卡卡片分割线闭合</li>
+      <li>避免不将分割线延长</li>
     </ul>
   </div>
 </div>
@@ -95,11 +91,34 @@
 
 提供有大、小 2 种尺寸。
 
-|  | <strong>用途</strong> | <strong>类型</strong> | <strong>尺寸说明</strong> | <strong>字号</strong> |
-| --- | --- | --- | --- | --- |
-| <strong>大尺寸</strong> | 用在卡片、抽屉容器中 | 基础选项卡 | ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/VTDiRqYmCvMAAAAAAAAAAAAADv3-AQBr/original) | 16px |
-|  |  | 卡片式选项卡 | ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/6KaZRoo4iwAAAAAAAAAAAAAADv3-AQBr/original) | 16px |
-| <strong>小尺寸</strong> | 用在页容器中 | 基础选项卡 | ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/N_TTT7pljkgAAAAAAAAAAAAADv3-AQBr/original) | 14px |
+<table>
+  <tr>
+    <th></th>
+    <th><strong>用途</strong></th>
+    <th><strong>类型</strong></th>
+    <th><strong>尺寸说明</strong></th>
+    <th><strong>字号</strong></th>
+  </tr>
+  <tr>
+    <td rowspan="2" style="vertical-align: middle"><strong>大尺寸</strong></td>
+    <td rowspan="2" style="vertical-align: middle">用在卡片、抽屉容器中</td>
+    <td>基础选项卡</td>
+    <td><img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/VTDiRqYmCvMAAAAAAAAAAAAADv3-AQBr/original" style="width: 300px" /></td>
+    <td>16px</td>
+  </tr>
+  <tr>
+    <td>卡片式选项卡</td>
+    <td><img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/6KaZRoo4iwAAAAAAAAAAAAAADv3-AQBr/original" style="width: 300px" /></td>
+    <td>16px</td>
+  </tr>
+  <tr>
+    <td><strong>小尺寸</strong></td>
+    <td>用在页容器中</td>
+    <td>基础选项卡</td>
+    <td><img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/N_TTT7pljkgAAAAAAAAAAAAADv3-AQBr/original" style="width: 300px" /></td>
+    <td>14px</td>
+  </tr>
+</table>
 
 ### 状态
 
@@ -112,7 +131,7 @@
 
 ### 层级
 
-基础选项卡层级优先于卡片式选项卡。
+优先选择基础选项卡作为第一级选项卡，卡片式选项卡作为二级选项卡。
 
 <div style="display: flex">
   <div>
@@ -139,7 +158,7 @@
 
 ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/okwcQpKPlHIAAAAAAAAAAAAADv3-AQBr/original)
 
-### 卡片容器外
+### 页容器内
 
 当选项卡包含的内容为整个页面，且单一页面中存在多张卡片时，选项卡放置在页容器上。
 
