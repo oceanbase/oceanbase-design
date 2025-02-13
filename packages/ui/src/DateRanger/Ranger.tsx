@@ -88,6 +88,7 @@ export interface DateRangerProps
   defaultValue?: RangeValue;
   size?: 'small' | 'large' | 'middle';
   tooltipProps?: TooltipProps;
+  autoAdjustOverflow?: boolean;
   locale?: any;
 }
 
@@ -128,6 +129,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     isMoment: isMomentProps,
     rules,
     tip,
+    autoAdjustOverflow,
     ...rest
   } = props;
 
@@ -342,6 +344,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
           <Dropdown
             trigger={['click']}
             open={open}
+            placement={rest.placement}
+            autoAdjustOverflow={autoAdjustOverflow}
             // 关闭后进行销毁，才可以将 Tooltip 进行同步关闭
             destroyPopupOnHide={true}
             // 存在缓存，会锁死里面的值
