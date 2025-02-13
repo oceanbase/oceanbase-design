@@ -340,6 +340,9 @@ importers:
       '@ant-design/cssinjs':
         specifier: ^1.23.0
         version: 1.23.0(react-dom@18.3.1)(react@18.3.1)
+      '@ctrl/tinycolor':
+        specifier: ^4.1.0
+        version: 4.1.0
       '@oceanbase/aliyun-theme':
         specifier: ^0.1.6
         version: 0.1.6
@@ -3576,7 +3579,6 @@ packages:
   /@ctrl/tinycolor@4.1.0:
     resolution: {integrity: sha512-WyOx8cJQ+FQus4Mm4uPIZA64gbk3Wxh0so5Lcii0aJifqwoVOlfFtorjLE0Hen4OYyHZMXDWqMmaQemBhgxFRQ==}
     engines: {node: '>=14'}
-    dev: true
 
   /@dagrejs/graphlib@2.1.4:
     resolution: {integrity: sha512-QCg9sL4uhjn468FDEsb/S9hS2xUZSrv/+dApb1Ze5VKO96pTXKNJZ6MGhIpgWkc1TVhbVGH9/7rq/Mf8/jWicw==}
