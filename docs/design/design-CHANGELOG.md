@@ -8,6 +8,16 @@ group: 基础组件
 
 ---
 
+## 0.4.8
+
+`2025-02-13`
+
+- 📖 优化设计基础、设计原则和组件设计文档的内容和样式。[#966](https://github.com/oceanbase/oceanbase-design/pull/966)
+- 🐞 修复 `@ctrl/tinycolor` 依赖缺失的问题。[#973](https://github.com/oceanbase/oceanbase-design/pull/973)
+- Tooltip:
+  - 🔨 去掉 Tooltip `mouseFollow` 模式下控制台出现的 NaN 告警。[#968](https://github.com/oceanbase/oceanbase-design/pull/968)
+  - 🔨 将 [react-sticky-mouse-tooltip](https://github.com/marlo22/react-sticky-mouse-tooltip) 代码内置到 Tooltip，避免控制台告警和错误都指向 `MouseTooltip.jsx`、干扰问题排查。[#969](https://github.com/oceanbase/oceanbase-design/pull/969)
+
 ## 0.4.7
 
 `2025-02-05`
