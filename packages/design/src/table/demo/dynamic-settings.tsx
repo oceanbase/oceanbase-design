@@ -158,12 +158,12 @@ const App: React.FC = () => {
     scroll.y = 240;
   }
   if (xScroll) {
-    scroll.x = '100vw';
+    scroll.x = '1000px';
   }
 
   const tableColumns = columns.map(item => ({ ...item, ellipsis }));
   if (xScroll === 'fixed') {
-    tableColumns[0].fixed = true;
+    tableColumns[0].fixed = 'left';
     tableColumns[tableColumns.length - 1].fixed = 'right';
   }
 

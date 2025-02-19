@@ -44,6 +44,7 @@ export interface TableProps<T> extends AntTableProps<T> {
 function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.Ref<Reference>) {
   const {
     locale: customLocale,
+    size,
     columns,
     footer,
     pagination: customPagination,
@@ -223,6 +224,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
           </div>
         ),
       }}
+      size={size}
       columns={newColumns}
       rowClassName={(...args) => {
         return classNames(
@@ -235,7 +237,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
       expandable={
         expandable
           ? {
-              columnWidth: 32,
+              columnWidth: !size || size === 'large' ? 40 : 32,
               ...expandable,
             }
           : undefined
