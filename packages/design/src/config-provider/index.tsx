@@ -73,8 +73,6 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   pagination?: PaginationConfig;
   spin?: SpinConfig;
   table?: TableConfig;
-  // inject static function to consume ConfigProvider
-  injectStaticFunction?: boolean;
   // StyleProvider props
   styleProviderProps?: StyleProviderProps;
   appProps?: AppProps;
@@ -83,11 +81,14 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
 export interface ExtendedConfigConsumerProps {
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
+  // inject static function to ConfigProvider
+  injectStaticFunction?: boolean;
 }
 
 const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
   navigate: undefined,
   hideOnSinglePage: false,
+  injectStaticFunction: true,
 });
 
 export type ConfigProviderType = React.FC<ConfigProviderProps> & {
@@ -111,7 +112,6 @@ const ConfigProvider: ConfigProviderType = ({
   spin,
   table,
   tabs,
-  injectStaticFunction = true,
   styleProviderProps,
   appProps,
   ...restProps
@@ -194,6 +194,8 @@ const ConfigProvider: ConfigProviderType = ({
             : hideOnSinglePage !== undefined
               ? hideOnSinglePage
               : parentExtendedContext.hideOnSinglePage,
+          // inject static function to outermost ConfigProvider only
+          injectStaticFunction: false,
         }}
       >
         <StyleProvider {...mergedStyleProviderProps}>
@@ -201,7 +203,7 @@ const ConfigProvider: ConfigProviderType = ({
           {/* ref: https://ant.design/components/app */}
           <App component={false} {...appProps}>
             {children}
-            {injectStaticFunction && <StaticFunction />}
+            {parentExtendedContext.injectStaticFunction && <StaticFunction />}
           </App>
         </StyleProvider>
       </ExtendedConfigContext.Provider>
