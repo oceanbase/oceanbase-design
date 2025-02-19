@@ -16,6 +16,7 @@ const ProTable: typeof AntProTable = ({
   optionsRender,
   toolbar,
   toolBarRender,
+  size,
   expandable,
   rowSelection,
   pagination: customPagination,
@@ -62,6 +63,7 @@ const ProTable: typeof AntProTable = ({
         <AntProTable
           // default size change to `large` as same as Table
           defaultSize="large"
+          size={size}
           form={{
             // query form should remove required mark
             requiredMark: false,
@@ -93,7 +95,7 @@ const ProTable: typeof AntProTable = ({
           expandable={
             expandable
               ? {
-                  columnWidth: 32,
+                  columnWidth: !size || size === 'large' ? 40 : 32,
                   ...expandable,
                 }
               : undefined
