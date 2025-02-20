@@ -92,6 +92,15 @@
 
 ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/jWqVQYI08FAAAAAAAAAAAAAADv3-AQBr/original)
 
+### 高亮显示
+
+表格中需要重点关注的单元格/行/列高亮 3s 进行提示，默认使用绿色背景色，需要警示的场景使用黄色背景色。
+
+|  | 默认 | 警示 |
+| --- | --- | --- |
+| <div style="width: 50px;">单元格</div> | ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/2wCFQpBar1AAAAAAAAAAAAAAev3-AQBr/original) | ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/dH8NS6ZNAkIAAAAAAAAAAAAAev3-AQBr/original) |
+| 行或列 | ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/_hGoTIBSoaIAAAAAAAAAAAAAev3-AQBr/original) | ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/CjLKT4TdhJ4AAAAAAAAAAAAAev3-AQBr/original) |
+
 ### 操作列
 
 支持「次按钮」和「文字按钮」两种类型，默认使用次按钮。
