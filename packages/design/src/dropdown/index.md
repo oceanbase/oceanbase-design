@@ -14,7 +14,8 @@ demo:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-<code src="./demo/dropdown-button.tsx" title="带下拉框的按钮"></code>
+<code src="./demo/dropdown-button.tsx" title="Dropdown.Button 下拉菜单按钮"></code>
+<code src="./demo/dropdown-with-button.tsx" title="带下拉框的按钮"></code>
 
 ## API
 
