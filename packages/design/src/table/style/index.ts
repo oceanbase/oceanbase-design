@@ -223,7 +223,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       [`${componentCls}`]: {
         [`${componentCls}-tbody`]: {
           // 去掉斑马纹
-          [`tr:nth-child(2n):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${componentCls}-expanded-row)`]:
+          [`tr:nth-child(n):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${componentCls}-expanded-row)`]:
             {
               ['& > td']: {
                 backgroundColor: colorBgBase,
