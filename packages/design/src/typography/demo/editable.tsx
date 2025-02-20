@@ -134,19 +134,19 @@ const App: React.FC = () => {
         {lengthLimitedStr}
       </Paragraph>
       <Typography.Title editable={{ triggerType: chooseTrigger }} level={1} style={{ margin: 0 }}>
-        h1. Ant Design
+        h1. OceanBase Design
       </Typography.Title>
       <Typography.Title editable={{ triggerType: chooseTrigger }} level={2} style={{ margin: 0 }}>
-        h2. Ant Design
+        h2. OceanBase Design
       </Typography.Title>
       <Typography.Title editable={{ triggerType: chooseTrigger }} level={3} style={{ margin: 0 }}>
-        h3. Ant Design
+        h3. OceanBase Design
       </Typography.Title>
       <Typography.Title editable={{ triggerType: chooseTrigger }} level={4} style={{ margin: 0 }}>
-        h4. Ant Design
+        h4. OceanBase Design
       </Typography.Title>
       <Typography.Title editable={{ triggerType: chooseTrigger }} level={5} style={{ margin: 0 }}>
-        h5. Ant Design
+        h5. OceanBase Design
       </Typography.Title>
     </>
   );
