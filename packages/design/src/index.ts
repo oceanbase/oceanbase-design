@@ -90,6 +90,9 @@ export type { SegmentedProps } from './segmented';
 export { default as Breadcrumb } from './breadcrumb';
 export type { BreadcrumbProps, BreadcrumbItemProps } from './breadcrumb';
 
+export { default as Dropdown } from './dropdown';
+export type { DropdownProps, DropdownButtonProps, DropdownButtonType } from './dropdown';
+
 export { default as Result } from './result';
 export type { ResultProps, ResultType, ResultStatusType } from './result';
 
