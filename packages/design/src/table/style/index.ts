@@ -223,7 +223,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       [`${componentCls}`]: {
         [`${componentCls}-tbody`]: {
           // 去掉斑马纹
-          [`tr:nth-child(2n):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${componentCls}-expanded-row)`]:
+          [`tr:nth-child(n):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${componentCls}-expanded-row)`]:
             {
               ['& > td']: {
                 backgroundColor: colorBgBase,
@@ -236,8 +236,11 @@ export const genTableStyle = (token: TableToken): CSSObject => {
             },
           [`${componentCls}-expanded-row > td`]: {
             // 除内嵌子表格外，设置其他内嵌元素样式
-            [`& > *:not(${componentCls}-wrapper)`]: {
+            [`& > *:not(${componentCls}-wrapper):not(${componentCls}-expanded-row-fixed)`]: {
               marginLeft: token.marginXL + token.lineWidth * 2,
+            },
+            [`& > *${componentCls}-expanded-row-fixed`]: {
+              paddingLeft: token.marginXL + token.lineWidth * 2 + token.padding,
             },
           },
           // 嵌套子表格和父表格第一列对齐
@@ -262,8 +265,11 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         [`${componentCls}-tbody`]: {
           [`${componentCls}-expanded-row > td`]: {
             // 除内嵌子表格外，设置其他内嵌元素样式
-            [`& > *:not(${componentCls}-wrapper)`]: {
+            [`& > *:not(${componentCls}-wrapper):not(${componentCls}-expanded-row-fixed)`]: {
               marginLeft: token.marginXL + token.marginXL + token.lineWidth * 2,
+            },
+            [`& > *${componentCls}-expanded-row-fixed`]: {
+              paddingLeft: token.marginXL + token.marginXL + token.lineWidth * 2 + token.padding,
             },
           },
           // 嵌套子表格和父表格第一列对齐
