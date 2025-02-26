@@ -63,7 +63,7 @@ const IconBase: IconBaseComponent<IconProps> = props => {
 
   // useInsertStyles();
 
-  warning(isIconDefinition(icon), `icon should be icon definiton, but got ${icon}`);
+  warning(isIconDefinition(icon), `icon should be icon definition, but got ${icon}`);
 
   if (!isIconDefinition(icon)) {
     return null;

@@ -68,7 +68,7 @@ export default () => {
             <Alert
               type="error"
               showIcon={true}
-              message="Please fix errors or try agin later"
+              message="Please fix errors or try again later"
               description="This is error message. This is error message. This is error message. This is error message."
             />
           ) : (

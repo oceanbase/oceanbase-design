@@ -17,8 +17,8 @@ async function getTaskById({ id }) {
 }
 
 function sleep(time) {
-  return new Promise(reslove => {
-    setTimeout(reslove, time);
+  return new Promise(resolve => {
+    setTimeout(resolve, time);
   });
 }
 
