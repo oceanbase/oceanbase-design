@@ -28,7 +28,7 @@ interface IconBaseComponent<Props>
 
 const Icon = React.forwardRef<HTMLSpanElement, IconComponentProps>((props, ref) => {
   const {
-    // affect outter <i>...</i>
+    // affect outer <i>...</i>
     className,
 
     // affect inner <svg>...</svg>

@@ -25,7 +25,7 @@ const configs = [
   {
     language: 'go',
     text: 'Go',
-    code: 'package main\n\nimport "fmt"\n\nfunc main() {\n    ch := make(chan float64)\n    ch <- 1.0e10    // magic number\n    x, ok := <- ch\n    defer fmt.Println(`exitting now\\`)\n    go println(len("hello world!"))\n    return\n}',
+    code: 'package main\n\nimport "fmt"\n\nfunc main() {\n    ch := make(chan float64)\n    ch <- 1.0e10    // magic number\n    x, ok := <- ch\n    defer fmt.Println(`exiting now\\`)\n    go println(len("hello world!"))\n    return\n}',
   },
   {
     language: 'groovy',
