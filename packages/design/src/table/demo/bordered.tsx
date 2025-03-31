@@ -48,14 +48,6 @@ const data: DataType[] = [
   },
 ];
 
-const App: React.FC = () => (
-  <Table
-    columns={columns}
-    dataSource={data}
-    bordered
-    title={() => 'Header'}
-    footer={() => 'Footer'}
-  />
-);
+const App: React.FC = () => <Table columns={columns} dataSource={data} bordered />;
 
 export default App;

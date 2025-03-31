@@ -3,7 +3,13 @@ title: Table 表格
 nav:
   title: 基础组件
   path: /components
+markdown: |
+  以二维表格格式呈现数据，以矩形形式按行（每行显示一个行项目）和列排列。行项目可以包含任何类型的数据，也可以包含交互式控件，例如编辑数据、查看详情或触发行项目相关操作。
+
+  ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/H0SVSZSjbisAAAAAAAAAAAAADv3-AQBr/original)
 ---
+
+## 组件说明
 
 - 🔥 完全继承 antd [Alert](https://ant.design/components/alert-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
@@ -12,36 +18,24 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-
 <code src="./demo/bordered.tsx" title="带边框" description="添加表格边框线"></code>
-
-<code src="./demo/fixed-columns-header-tables.tsx" title="固定头和列"></code>
-
-<code src="./demo/row-selection.tsx" title="选择和操作"></code>
-
-<code src="./demo/nesting-tables.tsx" title="嵌套子表格"></code>
-
-<code src="./demo/multiple-nesting-tables.tsx" title="可选择的嵌套子表格"></code>
-
 <code src="./demo/ellipsis.tsx" title="单元格自动省略" description="设置 `column.ellipsis` 可以让单元格内容根据宽度自动省略，并使用 Tooltip 展示全部内容。`说明`: 列头缩略暂不支持和排序筛选一起使用。"></code>
-
+<code src="./demo/fixed-columns-header-tables.tsx" title="固定头和列"></code>
+<code src="./demo/row-selection.tsx" title="选择和操作"></code>
+<code src="./demo/expandable.tsx" title="可展开"></code>
+<code src="./demo/nesting-tables.tsx" title="嵌套子表格"></code>
+<code src="./demo/multiple-nesting-tables.tsx" title="可选择的嵌套子表格"></code>
 <code src="./demo/tree-table.tsx" title="树形表格" description="当数据中有 `children` 字段时会自动展示为树形表格，如果不需要或配置为其他字段可以用 childrenColumnName 进行配置。可以通过设置 indentSize 以控制每一层的缩进宽度。"></code>
-
 <code src="./demo/grouping-columns.tsx" title="表头分组" description="columns 可以通过嵌套 children，实现表头分组。"></code>
-
 <code src="./demo/rowspan.tsx" title="行合并" description="通过 onCell 设置单元格属性 rowSpan，可以实现行合并。"></code>
-
 <code src="./demo/colspan-rowspan.tsx" title="行列合并" description="表头只支持列合并，使用 column 里的 colSpan 进行设置。\n表格支持行/列合并，使用 render 里的单元格属性 colSpan 或者 rowSpan 设值为 0 时，设置的表格不会渲染。"></code>
-
 <code src="./demo/edit-row.tsx" title="可编辑行" description="带行编辑功能的表格。"></code>
-
 <code src="./demo/virtual.tsx" title="虚拟滚动" description="通过 `virtual` 开启虚拟滚动，要求设置 `scroll.x` 和 `scroll.y` 且必须为 number 类型。"></code>
-
 <code src="./demo/dynamic-settings.tsx" title="动态控制表格属性" description="选择不同配置组合查看效果。"></code>
-
 <code src="./demo/card-table.tsx" title="和 Card 组合使用"></code>
-
+<code src="./demo/pro-card-table.tsx" title="和 ProCard 组合使用" debug></code>
 <code src="./demo/empty.tsx" title="空状态"></code>
 
 ## API

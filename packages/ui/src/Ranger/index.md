@@ -7,16 +7,12 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-
 <code src="./demo/with-form.tsx" title="配合 Form 使用"></code>
-
 <code src="./demo/selected.tsx" title="时间范围快捷选项"></code>
-
 <code src="./demo/default-value.tsx" title="指定默认值"></code>
-
 <code src="./demo/mini.tsx" title="mini 模式"></code>
-
 <code src="./demo/quick-picker.tsx" title="单独使用"></code>
 
 ## API

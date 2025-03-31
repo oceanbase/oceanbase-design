@@ -17,6 +17,7 @@ const App: React.FC = () => (
     <Card.Grid style={gridStyle}>Content</Card.Grid>
     <Card.Grid style={gridStyle}>Content</Card.Grid>
     <Card.Grid style={gridStyle}>Content</Card.Grid>
+    <Card.Grid style={gridStyle}>Content</Card.Grid>
   </Card>
 );
 

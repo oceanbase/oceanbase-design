@@ -7,12 +7,10 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/line.tsx" title="迷你折线图"></code>
-
 <code src="./demo/area.tsx" title="迷你面积图"></code>
-
 <code src="./demo/column.tsx" title="迷你柱状图"></code>
-
 <code src="./demo/progress.tsx" title="进度条图"></code>
 
 ## API

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Space, Tooltip, Typography } from '@oceanbase/design';
 
 const App: React.FC = () => (
-  <Space size={16}>
+  <Space size={16} wrap>
     Typography Text
     <Button type="primary">
       <Typography.Text>Typography Text</Typography.Text>

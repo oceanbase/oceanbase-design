@@ -1,5 +1,4 @@
 import type { Graph } from '@antv/g6';
-import G6 from '@antv/g6';
 import type { GraphData } from '@antv/g6/lib/types';
 import { findByValue } from '@oceanbase/util';
 import { Dropdown, Menu, Typography } from '@oceanbase/design';
@@ -12,7 +11,6 @@ import LocaleWrapper from '../locale/LocaleWrapper';
 import { getPrefix } from '../_util';
 import zhCN from './locale/zh-CN';
 import type { StatusItem } from './register';
-import register from './register';
 
 import './graph.less';
 
@@ -90,9 +88,11 @@ class TaskGraph extends React.PureComponent<TaskGraphProps, TaskGraphState> {
   public componentDidMount() {
     const { assetsPath = '/assets' } = this.props;
     const { statusList } = this.state;
-    register(statusList, assetsPath);
-    this.menu = document.getElementById('menu');
-    this.drawGraph();
+    import('./register').then(register => {
+      register.default(statusList, assetsPath);
+      this.menu = document.getElementById('menu');
+      this.drawGraph();
+    });
   }
 
   public componentDidUpdate(prevProps: TaskGraphProps) {
@@ -114,79 +114,82 @@ class TaskGraph extends React.PureComponent<TaskGraphProps, TaskGraphState> {
       // 高度优先级: 元素本身的高度 => 分隔面板的高度 => 500
       // 还需要减去下方的 log 条的最小高度 56px
       const height = ((this.main && this.main.scrollHeight) || splitPane.scrollHeight || 500) - 65;
-      const graph = new G6.Graph({
-        container: 'container',
-        width,
-        height,
-        minZoom: 0.2,
-        maxZoom: 2,
-        layout: {
-          type: 'dagre',
-          nodesep: 90,
-          ranksep: 40,
-          controlPoints: false,
-        },
-
-        defaultNode: {
-          type: 'subTaskNode',
-          anchorPoints: [
-            [0.5, 0],
-            [0.5, 1],
-          ],
-        },
-        defaultEdge: {
-          type: 'subTaskEdge',
-        },
-        nodeStateStyles: {
-          hover: {
-            lineWidth: 2,
-            stroke: token.colorPrimary,
-            fill: '#e6f7ff',
-          },
-        },
-        modes: {
-          default: ['drag-canvas', 'zoom-canvas', 'click-select'],
-        },
-      });
-
-      const canvas = graph.get('canvas');
-      // 关闭局部渲染，避免渲染出现拖影
-      canvas.set('localRefresh', false);
-      graph.data(data);
-      graph.render();
-      graph.fitView();
-
-      // 监听 moreGroup 的 click 事件
-      canvas.on('moreGroup:click', e => {
-        const subTaskNode = e.currentTarget && e.currentTarget.getParent();
-        const model = subTaskNode && subTaskNode.get('item') && subTaskNode.get('item').getModel();
-        this.setState(
-          {
-            currentSubTask: model,
+      import('@antv/g6').then(G6 => {
+        const graph = new G6.Graph({
+          container: 'container',
+          width,
+          height,
+          minZoom: 0.2,
+          maxZoom: 2,
+          layout: {
+            type: 'dagre',
+            nodesep: 90,
+            ranksep: 40,
+            controlPoints: false,
           },
 
-          () => {
-            if (!this.menu) {
-              this.menu = document.getElementById('menu');
+          defaultNode: {
+            type: 'subTaskNode',
+            anchorPoints: [
+              [0.5, 0],
+              [0.5, 1],
+            ],
+          },
+          defaultEdge: {
+            type: 'subTaskEdge',
+          },
+          nodeStateStyles: {
+            hover: {
+              lineWidth: 2,
+              stroke: token.colorPrimary,
+              fill: '#e6f7ff',
+            },
+          },
+          modes: {
+            default: ['drag-canvas', 'zoom-canvas', 'click-select'],
+          },
+        });
+
+        const canvas = graph.get('canvas');
+        // 关闭局部渲染，避免渲染出现拖影
+        canvas.set('localRefresh', false);
+        graph.data(data);
+        graph.render();
+        graph.fitView();
+
+        // 监听 moreGroup 的 click 事件
+        canvas.on('moreGroup:click', e => {
+          const subTaskNode = e.currentTarget && e.currentTarget.getParent();
+          const model =
+            subTaskNode && subTaskNode.get('item') && subTaskNode.get('item').getModel();
+          this.setState(
+            {
+              currentSubTask: model,
+            },
+
+            () => {
+              if (!this.menu) {
+                this.menu = document.getElementById('menu');
+              }
+              this.menu.style.left = `${e.x}px`;
+              // y 坐标减去高度，并再往上 5px
+              this.menu.style.top = `${e.y - height - 5}px`;
             }
-            this.menu.style.left = `${e.x}px`;
-            // y 坐标减去高度，并再往上 5px
-            this.menu.style.top = `${e.y - height - 5}px`;
+          );
+        });
+
+        // 监听节点的 mouseleave 事件
+        (graph as any).on('node:mouseleave', () => {
+          if (!this.menu) {
+            this.menu = document.getElementById('menu');
           }
-        );
-      });
+          this.menu.style.left = '-1500px';
+        });
 
-      // 监听节点的 mouseleave 事件
-      (graph as any).on('node:mouseleave', () => {
-        if (!this.menu) {
-          this.menu = document.getElementById('menu');
-        }
-        this.menu.style.left = '-1500px';
+        this.graph = graph;
+        // 强制更新一次视图，否则 this.graph 不会更新
+        this.forceUpdate();
       });
-
-      this.graph = graph;
-      // 强制更新一次视图，否则 this.graph 不会更新
-      this.forceUpdate();
     }
   };
 

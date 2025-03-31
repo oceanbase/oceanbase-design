@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button, Dropdown, message, Space, Tooltip } from '@oceanbase/design';
+import { Dropdown, message, Space, Tooltip } from '@oceanbase/design';
 import type { MenuProps } from '@oceanbase/design';
-import { DownOutlined, UserOutlined } from '@oceanbase/icons';
+import { UserOutlined } from '@oceanbase/icons';
 
 const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
   message.info('Click on left button.');
@@ -72,22 +72,6 @@ const App: React.FC = () => (
     <Dropdown.Button menu={menuProps} onClick={handleButtonClick} danger>
       Danger
     </Dropdown.Button>
-    <Dropdown menu={menuProps}>
-      <Button>
-        <Space>
-          Button
-          <DownOutlined />
-        </Space>
-      </Button>
-    </Dropdown>
-    <Dropdown menu={menuProps}>
-      <Button type="primary">
-        <Space>
-          Button
-          <DownOutlined />
-        </Space>
-      </Button>
-    </Dropdown>
   </Space>
 );
 

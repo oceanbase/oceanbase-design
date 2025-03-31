@@ -1,18 +1,9 @@
 import React from 'react';
-import { Space } from '@oceanbase/design';
 import { Action } from '@oceanbase/ui';
-import { DownOutlined } from '@oceanbase/icons';
 
 export default () => {
   return (
-    <Action.Group
-      moreText={
-        <Space size={4}>
-          更多
-          <DownOutlined />
-        </Space>
-      }
-    >
+    <Action.Group>
       <Action.Link visible={false}>action1</Action.Link>
       <Action.Link disabled tooltip={'禁用展示tooltip'}>
         禁用提示

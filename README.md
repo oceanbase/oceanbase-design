@@ -40,3 +40,9 @@ Open your browser and visit http://127.0.0.1:8000.
 ## ⚖️ License
 
 MIT © [OceanBase](https://github.com/oceanbase)
+
+## Contributors
+
+<a href="https://github.com/oceanbase/oceanbase-design/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=oceanbase/oceanbase-design" />
+</a>

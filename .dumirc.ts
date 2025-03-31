@@ -12,7 +12,9 @@ export default defineConfig({
   },
   // 默认重定向到子包的 src 文件夹
   // ref: https://d.umijs.org/config#monoreporedirect
-  monorepoRedirect: {},
+  monorepoRedirect: {
+    useRootProject: true,
+  },
   // umi.server.js build error, disable it for now
   // ssr: process.env.NODE_ENV === 'production' ? {} : false,
   hash: true,
@@ -109,9 +111,10 @@ export default defineConfig({
     codeBlockMode: 'passive',
   },
   alias: {
-    '@oceanbase/design': path.join(__dirname, 'packages/design/src'),
+    // 需要将子路径前移，否则会优先匹配到父路径导致子路径匹配异常
     '@oceanbase/design/es': path.join(__dirname, 'packages/design/src'),
     '@oceanbase/design/locale': path.join(__dirname, 'packages/design/src/locale'),
+    '@oceanbase/design': path.join(__dirname, 'packages/design/src'),
     // for @import in less
     '~@oceanbase/design/es': path.join(__dirname, 'packages/design/src'),
     '@oceanbase/icons': path.join(__dirname, 'packages/icons/src'),
@@ -164,15 +167,19 @@ export default defineConfig({
             { title: 'Select 选择器', link: '/components/select' },
             { title: 'TreeSelect 树选择', link: '/components/tree-select' },
             { title: 'Slider 滑动输入条', link: '/components/slider' },
+            { title: 'DatePicker 日期选择框', link: '/components/date-picker' },
+            { title: 'TimePicker 时间选择器', link: '/components/time-picker' },
           ],
         },
         {
           title: '数据展示',
           children: [
             { title: 'Card 卡片', link: '/components/card' },
+            { title: 'Collapse 折叠面板', link: '/components/collapse' },
             { title: 'Descriptions 描述列表', link: '/components/descriptions' },
             { title: 'Empty 空状态', link: '/components/empty' },
             { title: 'List 列表', link: '/components/list' },
+            { title: 'Popover 气泡卡片', link: '/components/popover' },
             { title: 'Table 表格', link: '/components/table' },
             { title: 'Tabs 标签页', link: '/components/tabs' },
             { title: 'Tag 标签', link: '/components/tag' },
@@ -191,6 +198,7 @@ export default defineConfig({
             { title: 'Modal 对话框', link: '/components/modal' },
             { title: 'Drawer 抽屉', link: '/components/drawer' },
             { title: 'Notification 通知提醒框', link: '/components/notification' },
+            { title: 'Popconfirm 气泡确认框', link: '/components/popconfirm' },
             { title: 'Progress 进度条', link: '/components/progress' },
             { title: 'Result 结果', link: '/components/result' },
             { title: 'Skeleton 骨架屏', link: '/components/skeleton' },
@@ -219,6 +227,7 @@ export default defineConfig({
         {
           title: 'ProComponents 组件',
           children: [
+            { title: 'ProCard 高级卡片', link: '/biz-components/pro-card' },
             { title: 'ProTable 高级表格', link: '/biz-components/pro-table' },
             { title: 'LightFilter 轻量筛选', link: '/biz-components/light-filter' },
           ],
@@ -242,8 +251,8 @@ export default defineConfig({
               title: 'ContentWithIcon 文字旁提示',
               link: '/biz-components/content-with-icon',
             },
-            { title: 'Ranger 日期时间选择', link: '/biz-components/ranger' },
             { title: 'DateRanger 新版日期时间选择', link: '/biz-components/date-ranger' },
+            { title: 'Ranger 日期时间选择', link: '/biz-components/ranger' },
             { title: 'TreeSearch 树搜索', link: '/biz-components/tree-search' },
             { title: 'Password 密码输入框', link: '/biz-components/password' },
             { title: 'Boundary 错误兜底', link: '/biz-components/boundary' },

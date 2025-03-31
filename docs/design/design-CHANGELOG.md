@@ -8,6 +8,113 @@ group: 基础组件
 
 ---
 
+## 0.4.9
+
+`2025-02-20`
+
+- 📖 Table 设计文档新增 高亮显式 规范。[#986](https://github.com/oceanbase/oceanbase-design/pull/986)
+- 📖 Typography 新增可复制和在 Modal 中编辑的示例。[#985](https://github.com/oceanbase/oceanbase-design/pull/985)
+- ⭐️ ConfigProvider 移除 `injectStaticFunction` 属性，改为自动判断是否注入可消费全局配置的静态方法。[#981](https://github.com/oceanbase/oceanbase-design/pull/981)
+- Table
+  - 🐞 修复 Table 可展开&固定列时的间距问题。[#982](https://github.com/oceanbase/oceanbase-design/pull/982)
+  - 🐞 修复 Table 可展开&可滚动时不应该展示斑马条的问题。[#983](https://github.com/oceanbase/oceanbase-design/pull/983)
+- 💄 Alert 改为使用线性图标，以对齐最新的设计规范。[#987](https://github.com/oceanbase/oceanbase-design/pull/987)
+- 💄 Dropdown.Button 默认图标改为 `DownOutlined` 向下箭头。[#984](https://github.com/oceanbase/oceanbase-design/pull/984)
+
+## 0.4.8
+
+`2025-02-13`
+
+- 📖 优化设计基础、设计原则和组件设计文档的内容和样式。[#966](https://github.com/oceanbase/oceanbase-design/pull/966)
+- 🐞 修复 `@ctrl/tinycolor` 依赖缺失的问题。[#973](https://github.com/oceanbase/oceanbase-design/pull/973)
+- Tooltip:
+  - 🔨 去掉 Tooltip `mouseFollow` 模式下控制台出现的 NaN 告警。[#968](https://github.com/oceanbase/oceanbase-design/pull/968)
+  - 🔨 将 [react-sticky-mouse-tooltip](https://github.com/marlo22/react-sticky-mouse-tooltip) 代码内置到 Tooltip，避免控制台告警和错误都指向 `MouseTooltip.jsx`、干扰问题排查。[#969](https://github.com/oceanbase/oceanbase-design/pull/969)
+
+## 0.4.7
+
+`2025-02-05`
+
+- 🔥 新增 11 篇设计规范文档，包括 5 篇设计原则、6 篇设计基础。[#954](https://github.com/oceanbase/oceanbase-design/pull/954)
+- 🔥 新增 6 篇组件规范文档，包括 Alert、Button、Tabs、Table、Modal 和 DateRanger。[#955](https://github.com/oceanbase/oceanbase-design/pull/955)
+- 📖 优化官网在移动端的样式和访问体验。[#956](https://github.com/oceanbase/oceanbase-design/pull/956)
+- 💄 默认去掉 Form.Item 包裹 Switch 时的可选样式。[#949](https://github.com/oceanbase/oceanbase-design/pull/949)
+- 💄 优化 Table 空状态的高度，大中小尺寸分别为 360px、260px 和 160px。[#947](https://github.com/oceanbase/oceanbase-design/pull/947)
+
+## 0.4.6
+
+`2025-01-15`
+
+- 🌈 自定义 Tabs `horizontalItemGutter` token 值，全局设置页标签间隙。[#935](https://github.com/oceanbase/oceanbase-design/pull/935)
+- 🆕 ConfigProvider 新增 `card.divided` 属性，用于配置 Card 是否展示分割线。[#939](https://github.com/oceanbase/oceanbase-design/pull/939)
+- Table
+  - 🐞 修复中小尺寸的可展开 Table 单元格高度不正确的问题。[#924](https://github.com/oceanbase/oceanbase-design/pull/924)
+  - 💄 Table 点击行可展开时，设置行样式为 `cursor: pointer`。[#925](https://github.com/oceanbase/oceanbase-design/pull/925)
+  - 💄 优化 Table 在无分割线 Card 和 ProCard 内的间距。[#933](https://github.com/oceanbase/oceanbase-design/pull/933)
+  - 💄 优化 Table 在无间距 ProCard 内的样式，包括第一列和卡片标题对齐、最后一列和卡片操作区对齐、分页器左右增加间距。[#923](https://github.com/oceanbase/oceanbase-design/pull/923)
+  - 💄 优化 Table 顶部圆角的样式。[#941](https://github.com/oceanbase/oceanbase-design/pull/941)
+
+## 0.4.5
+
+`2024-12-30`
+
+- 🐞 修复 Table 底部圆角和列左侧内间距不正确的问题。[#910](https://github.com/oceanbase/oceanbase-design/pull/910)
+
+## 0.4.4
+
+`2024-12-16`
+
+- 🐞 修复 antd 重置样式的引入路径 `antd/dist/reset.css` => `~antd/dist/reset.css`，以适配 Umi 3 和 Bigfish 3 的解析逻辑。[#894](https://github.com/oceanbase/oceanbase-design/pull/894)
+
+## 0.4.3
+
+`2024-12-14`
+
+- 📖 修复 demo 展开全部代码不生效的问题。[#888](https://github.com/oceanbase/oceanbase-design/pull/888)
+- 📖 修复部分组件不展示 demo 操作栏的问题。[#888](https://github.com/oceanbase/oceanbase-design/pull/888)
+- ⚡ 设置 `sideEffects`，以支持 tree shaking。[#886](https://github.com/oceanbase/oceanbase-design/pull/886)
+- Collapse [#882](https://github.com/oceanbase/oceanbase-design/pull/882)
+  - 📖 新增 Collapse 的文档和示例。
+  - 💄 将 Collapse 默认展开图标改为实心箭头。
+  - 💄 弱化 Collapse 边框，将边框颜色改为 `#E2E8F3`。
+- Table
+  - 🐞 修复普通 Table 的单元格出现底部边框的问题。[#879](https://github.com/oceanbase/oceanbase-design/pull/879)
+  - 💄 优化 Table 带边框时的底部圆角样式。[#880](https://github.com/oceanbase/oceanbase-design/pull/880)
+  - 💄 优化 Table 空状态在 Popover、Tooltip 下的高度。[#891](https://github.com/oceanbase/oceanbase-design/pull/891)
+
+## 0.4.2
+
+`2024-11-29`
+
+- 📖 新增 DatePicker 的文档和示例。[#852](https://github.com/oceanbase/oceanbase-design/pull/852)
+- 📖 新增 TimePicker 的文档和示例。[#853](https://github.com/oceanbase/oceanbase-design/pull/853)
+- 📖 新增 Popconfirm 的文档和示例。[#851](https://github.com/oceanbase/oceanbase-design/pull/851)
+- 📖 新增 Popover 的文档和示例。[#850](https://github.com/oceanbase/oceanbase-design/pull/850)
+- 📖 新增 Progress 的文档和示例。[#834](https://github.com/oceanbase/oceanbase-design/pull/834)
+- 🌈 将 Design Token lineWidthFocus 设为 0，以去掉组件聚焦时的线条样式。[#841](https://github.com/oceanbase/oceanbase-design/pull/841)
+- ⭐️ 优先从系统加载 `Inter`、`Consolas` 和 `Helvetica Neue` 字体。[#861](https://github.com/oceanbase/oceanbase-design/pull/861)
+- 🐞 修复 Slider 两端标签的对齐样式在部分场景下不生效的问题。[#832](https://github.com/oceanbase/oceanbase-design/pull/832)
+- 💄 将全局的滚动条颜色改为 `#e2e8f3`。[#846](https://github.com/oceanbase/oceanbase-design/pull/846)
+- Empty
+  - 💄 Empty 主标题的字体大小从 24px 调整为 20px。[#845](https://github.com/oceanbase/oceanbase-design/pull/845)
+  - 💄 优化 Empty 超长内容的样式，限制描述区的最大宽度为 600px、步骤区的最大宽度为 1000px。[#844](https://github.com/oceanbase/oceanbase-design/pull/844)
+- Result
+  - 💄 Result 主标题的字体大小从 24px 调整为 20px。[#845](https://github.com/oceanbase/oceanbase-design/pull/845)
+  - 💄 优化 Result 超长内容的样式，限制副标题的最大宽度为 600px、内容区的最大宽度为 1000px。[#842](https://github.com/oceanbase/oceanbase-design/pull/842)
+- 💄 优化 Switch 未选中态的背景色，和置灰态的背景色进行区分。[#833](https://github.com/oceanbase/oceanbase-design/pull/833)
+- Table
+  - 💄 优化 Table 嵌套子表格和可展开内容的样式，以对齐最新的设计规范。[#865](https://github.com/oceanbase/oceanbase-design/pull/865)
+  - 💄 将 Table 虚拟滚动条的颜色改为 `#e2e8f3`，和全局滚动条保持一致。[#864](https://github.com/oceanbase/oceanbase-design/pull/864)
+- Tooltip
+  - 🐞 修复 Tooltip 开启 `mouseFollow` 后没有继承 `.ant-tooltip` 类名和样式的问题。[#849](https://github.com/oceanbase/oceanbase-design/pull/849)
+  - 💄 优化 Tooltip 可关闭图标的颜色样式。[#848](https://github.com/oceanbase/oceanbase-design/pull/848)
+  - 💄 限制 Tooltip 的最大宽度为 300px、最大高度为 250px，内容超出时横向折行、纵向滚动。[#847](https://github.com/oceanbase/oceanbase-design/pull/847)
+- Typography
+  - 💄 Typography 编辑模式文本触发器增加 hover 边框，以提示用户可以点击进行编辑。[#839](https://github.com/oceanbase/oceanbase-design/pull/839)
+  - 💄 优化 Typography 编辑模式样式，避免只读态和编辑态之间切换时出现抖动。[#839](https://github.com/oceanbase/oceanbase-design/pull/839)
+- 🔨 打包后的 `dist` 目录增加 `reset.css` 样式文件，以对齐 antd。[#855](https://github.com/oceanbase/oceanbase-design/pull/855)
+- 🔨 适配 CodeSandbox 环境下编译报错、无法预览的问题。[#855](https://github.com/oceanbase/oceanbase-design/pull/855)
+
 ## 0.4.1
 
 `2024-11-11`
@@ -83,7 +190,7 @@ group: 基础组件
 
 `2024-06-27`
 
-- 🆕 ConfigProvider 新增 theme.isAliyun 属性，用于开启阿里云主题。[#602](https://github.com/oceanbase/oceanbase-design/pull/602)
+- 🆕 ConfigProvider 新增 `theme.isAliyun` 属性，用于开启阿里云主题。[#602](https://github.com/oceanbase/oceanbase-design/pull/602)
 - 🐞 修复 Modal, message, notification 静态函数无法触发的问题。[#606](https://github.com/oceanbase/oceanbase-design/pull/606)
 - Table
   - 🐞 修复 Table 批量操作栏未关联 `rowSelection` 的问题。[#591](https://github.com/oceanbase/oceanbase-design/pull/591)
@@ -190,7 +297,7 @@ group: 基础组件
 
 `2024-01-18`
 
-- 🆕 ConfigProvider 新增 table.selectionColumnWidth 属性，用于配置表格的展开列宽度。[#421](https://github.com/oceanbase/oceanbase-design/pull/421)
+- 🆕 ConfigProvider 新增 `table.selectionColumnWidth` 属性，用于配置表格的展开列宽度。[#421](https://github.com/oceanbase/oceanbase-design/pull/421)
 - Table
   - 🐞 修复 Table 可展开时底部出现重复边框的问题。[#420](https://github.com/oceanbase/oceanbase-design/pull/420)
   - 💄 优化 Table 在无间距卡片内的展示样式，包括第一列和卡片标题对齐、最后一列和卡片操作区对齐、分页器左右增加间距。[#422](https://github.com/oceanbase/oceanbase-design/pull/422)

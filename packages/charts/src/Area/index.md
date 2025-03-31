@@ -7,12 +7,10 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基础面积图"></code>
-
 <code src="./demo/stack.tsx" title="堆叠面积图"></code>
-
 <code src="./demo/percent.tsx" title="百分比面积图"></code>
-
 <code src="./demo/tooltip-scrollable.tsx" title="Tooltip 可滚动" description="适用于 Tooltip 项较多、超出图表的场景，可通过 `tooltip.scrollable: true` 配置进行开启。"></code>
 
 ## API

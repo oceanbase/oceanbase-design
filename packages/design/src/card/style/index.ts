@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
-import { genTagStyle } from '../../tabs/style';
+import { genTabsStyle } from '../../tabs/style';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type CardToken = FullToken<'Card'> & {
@@ -8,8 +8,8 @@ export type CardToken = FullToken<'Card'> & {
   tabsPrefixCls: string;
 };
 
-export const genTableStyle = (padding: number, token: CardToken): CSSObject => {
-  const { antCls } = token;
+export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSObject => {
+  const { componentCls, antCls } = token;
   const tableComponentCls = `${antCls}-table`;
   return {
     [`${tableComponentCls}-wrapper`]: {
@@ -36,11 +36,19 @@ export const genTableStyle = (padding: number, token: CardToken): CSSObject => {
         },
       },
     },
+    [`&${componentCls}-has-title${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
+      [`${componentCls}-body`]: {
+        [`& > ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
+          {
+            marginTop: -token.marginSM,
+          },
+      },
+    },
   };
 };
 
 export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObject => {
-  const { componentCls, tabsComponentCls, tabsPrefixCls, padding, paddingSM, paddingLG } = token;
+  const { componentCls, tabsComponentCls, tabsPrefixCls, paddingSM, paddingLG } = token;
   return {
     [`${componentCls}`]: {
       // nested Card style
@@ -50,7 +58,8 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
     },
     [`${componentCls}${componentCls}-no-divider`]: {
       [`${componentCls}-head`]: {
-        borderBottom: 'none',
+        // should not remove border-bottom to avoid tabs inkbar display correctly
+        borderBottomColor: 'transparent',
       },
     },
     [`${componentCls}${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
@@ -69,11 +78,11 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       },
     },
     [`${componentCls}${componentCls}-contain-tabs`]: {
-      [`${componentCls}-head`]: genTagStyle({
+      [`${componentCls}-head`]: genTabsStyle({
         ...token,
         componentCls: tabsComponentCls,
         prefixCls: tabsPrefixCls,
-      } as CardToken),
+      }),
     },
     [`${componentCls}${componentCls}-contain-grid`]: {
       [`${componentCls}-head`]: {

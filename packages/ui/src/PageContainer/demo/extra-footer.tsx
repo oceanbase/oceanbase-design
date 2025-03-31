@@ -21,7 +21,7 @@ import { EllipsisOutlined, LikeOutlined, CommentOutlined, StarOutlined } from '@
 
 export default () => {
   const [loading, setLoading] = useState(false);
-  const [size, setSize] = useState<SizeType>('large');
+  const [size, setSize] = useState<SizeType>('middle');
   const [inputType, setInputType] = useState('search');
 
   const mockRequest = () => {
@@ -79,11 +79,11 @@ export default () => {
           <Select
             key="5"
             size={size}
-            defaultValue="large"
+            value={size}
+            allowClear={true}
             options={[
               { value: 'large', label: 'large' },
               { value: 'middle', label: 'middle' },
-              // { value: 'small', label: 'small' },
             ]}
             onChange={value => {
               setSize(value);
@@ -150,7 +150,7 @@ export default () => {
         <Space.Compact>
           <Button size={size} icon={<LikeOutlined />} />
           <Button size={size} icon={<CommentOutlined />} />
-          <Button icon={<StarOutlined />} />
+          <Button size={size} icon={<StarOutlined />} />
         </Space.Compact>,
         <Button size={size}>重置</Button>,
         <Button size={size} type="primary">

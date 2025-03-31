@@ -11,10 +11,18 @@ export { ProTableProps };
 
 const ProTable: typeof AntProTable = ({
   form,
+  headerTitle,
+  options,
+  optionsRender,
+  toolbar,
+  toolBarRender,
+  size,
   expandable,
+  rowSelection,
   pagination: customPagination,
   footer,
   locale,
+  cardProps: outerCardProps,
   prefixCls: customizePrefixCls,
   tableClassName,
   className,
@@ -29,6 +37,7 @@ const ProTable: typeof AntProTable = ({
   const tableCls = classNames(
     {
       [`${tablePrefixCls}-expandable`]: !isEmpty(expandable),
+      [`${tablePrefixCls}-selectable`]: !!rowSelection,
       [`${tablePrefixCls}-has-footer`]: !!footer,
     },
     tableClassName
@@ -45,18 +54,53 @@ const ProTable: typeof AntProTable = ({
   const { emptyText = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />, ...restLocale } =
     locale || {};
 
+  const cardProps = typeof outerCardProps === 'boolean' ? {} : outerCardProps;
+  const proCardCls = getPrefixCls('pro-card', customizePrefixCls);
+
   return tableWrapSSR(
     lightFilterWrapSSR(
       wrapSSR(
         <AntProTable
           // default size change to `large` as same as Table
           defaultSize="large"
+          size={size}
           form={{
             // query form should remove required mark
             requiredMark: false,
             ...form,
           }}
-          expandable={expandable}
+          headerTitle={headerTitle}
+          options={options}
+          optionsRender={optionsRender}
+          toolbar={toolbar}
+          toolBarRender={toolBarRender}
+          cardProps={{
+            ...cardProps,
+            className: classNames(
+              {
+                [`${proCardCls}-has-title`]:
+                  !!headerTitle ||
+                  options ||
+                  options === undefined ||
+                  optionsRender ||
+                  toolbar ||
+                  toolBarRender,
+                [`${proCardCls}-no-divider`]: !cardProps?.headerBordered,
+                [`${proCardCls}-no-padding`]: true,
+                [`${proCardCls}-contain-tabs`]: !!cardProps?.tabs,
+              },
+              cardProps?.className
+            ),
+          }}
+          expandable={
+            expandable
+              ? {
+                  columnWidth: !size || size === 'large' ? 40 : 32,
+                  ...expandable,
+                }
+              : undefined
+          }
+          rowSelection={rowSelection}
           pagination={pagination}
           footer={footer}
           locale={{

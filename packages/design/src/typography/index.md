@@ -11,12 +11,13 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/title.tsx" title="标题"></code>
-
 <code src="./demo/text.tsx" title="文本与超链接"></code>
-
+<code src="./demo/copyable.tsx" title="可复制"></code>
+<code src="./demo/editable.tsx" title="可编辑"></code>
+<code src="./demo/editable-modal.tsx" title="在 Modal 中编辑"></code>
 <code src="./demo/font-family.tsx" title="字体" description="详见 [字体设计规范](/docs/spec/typography)。"></code>
-
 <code src="./demo/inner.tsx" title="和其他组件组合使用" debug></code>
 
 ## API

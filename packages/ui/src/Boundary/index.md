@@ -7,14 +7,11 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/Function.tsx" title="业务功能兜底展示" ></code>
-
 <code src="./demo/403Code.tsx" title="403 错误码兜底" ></code>
-
 <code src="./demo/404Code.tsx" title="404 错误码兜底"></code>
-
 <code src="./demo/ErrorException.tsx" title="JS Error 兜底报错" description="Exception 使用时只需用该组件将需要兜底的页面包裹,然后子组件报错即可触发"></code>
-
 <code src="./demo/CompatibleException.tsx" title="兼容性报错" title="Exception 使用时只需用该组件将需要兜底的页面包裹,应用判断是否存在兼容性问题传值即可"></code>
 
 ## API

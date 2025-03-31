@@ -66,10 +66,9 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                       <span
                         class="ant-input-suffix"
                       >
-                        <span
+                        <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                          role="button"
-                          tabindex="-1"
+                          type="button"
                         >
                           <span
                             aria-label="close-circle"
@@ -91,7 +90,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                               />
                             </svg>
                           </span>
-                        </span>
+                        </button>
                       </span>
                     </span>
                   </div>
@@ -147,10 +146,9 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                       <span
                         class="ant-input-suffix"
                       >
-                        <span
+                        <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                          role="button"
-                          tabindex="-1"
+                          type="button"
                         >
                           <span
                             aria-label="close-circle"
@@ -172,7 +170,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                               />
                             </svg>
                           </span>
-                        </span>
+                        </button>
                       </span>
                     </span>
                   </div>
@@ -224,10 +222,9 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                     <span
                       class="ant-input-suffix"
                     >
-                      <span
+                      <button
                         class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                        role="button"
-                        tabindex="-1"
+                        type="button"
                       >
                         <span
                           aria-label="close-circle"
@@ -249,7 +246,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                             />
                           </svg>
                         </span>
-                      </span>
+                      </button>
                     </span>
                   </span>
                 </div>
@@ -354,7 +351,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
     </form>
   </div>
   <div
-    class="ant-pro-card"
+    class="ant-pro-card ant-pro-card-has-title ant-pro-card-no-divider ant-pro-card-no-padding"
   >
     <div
       class="ant-pro-card-body"
@@ -381,6 +378,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
               >
                 <span>
                   <span
+                    aria-describedby="test-id"
                     aria-label="reload"
                     class="anticon anticon-reload"
                     role="img"
@@ -406,6 +404,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
               >
                 <span>
                   <span
+                    aria-describedby="test-id"
                     aria-label="column-height"
                     class="anticon anticon-column-height ant-dropdown-trigger"
                     role="img"
@@ -431,6 +430,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                 class="ant-pro-table-list-toolbar-setting-item"
               >
                 <span
+                  aria-describedby="test-id"
                   aria-label="setting"
                   class="anticon anticon-setting"
                   role="img"
@@ -955,10 +955,9 @@ exports[`ProTable > default pagination should work 1`] = `
                       <span
                         class="ant-input-suffix"
                       >
-                        <span
+                        <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                          role="button"
-                          tabindex="-1"
+                          type="button"
                         >
                           <span
                             aria-label="close-circle"
@@ -980,7 +979,7 @@ exports[`ProTable > default pagination should work 1`] = `
                               />
                             </svg>
                           </span>
-                        </span>
+                        </button>
                       </span>
                     </span>
                   </div>
@@ -1036,10 +1035,9 @@ exports[`ProTable > default pagination should work 1`] = `
                       <span
                         class="ant-input-suffix"
                       >
-                        <span
+                        <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                          role="button"
-                          tabindex="-1"
+                          type="button"
                         >
                           <span
                             aria-label="close-circle"
@@ -1061,7 +1059,7 @@ exports[`ProTable > default pagination should work 1`] = `
                               />
                             </svg>
                           </span>
-                        </span>
+                        </button>
                       </span>
                     </span>
                   </div>
@@ -1113,10 +1111,9 @@ exports[`ProTable > default pagination should work 1`] = `
                     <span
                       class="ant-input-suffix"
                     >
-                      <span
+                      <button
                         class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                        role="button"
-                        tabindex="-1"
+                        type="button"
                       >
                         <span
                           aria-label="close-circle"
@@ -1138,7 +1135,7 @@ exports[`ProTable > default pagination should work 1`] = `
                             />
                           </svg>
                         </span>
-                      </span>
+                      </button>
                     </span>
                   </span>
                 </div>
@@ -1243,7 +1240,7 @@ exports[`ProTable > default pagination should work 1`] = `
     </form>
   </div>
   <div
-    class="ant-pro-card"
+    class="ant-pro-card ant-pro-card-has-title ant-pro-card-no-divider ant-pro-card-no-padding"
   >
     <div
       class="ant-pro-card-body"
@@ -1270,6 +1267,7 @@ exports[`ProTable > default pagination should work 1`] = `
               >
                 <span>
                   <span
+                    aria-describedby="test-id"
                     aria-label="reload"
                     class="anticon anticon-reload"
                     role="img"
@@ -1295,6 +1293,7 @@ exports[`ProTable > default pagination should work 1`] = `
               >
                 <span>
                   <span
+                    aria-describedby="test-id"
                     aria-label="column-height"
                     class="anticon anticon-column-height ant-dropdown-trigger"
                     role="img"
@@ -1320,6 +1319,7 @@ exports[`ProTable > default pagination should work 1`] = `
                 class="ant-pro-table-list-toolbar-setting-item"
               >
                 <span
+                  aria-describedby="test-id"
                   aria-label="setting"
                   class="anticon anticon-setting"
                   role="img"
@@ -1785,28 +1785,32 @@ exports[`ProTable > default pagination should work 1`] = `
                     class="ant-select-selector"
                   >
                     <span
-                      class="ant-select-selection-search"
+                      class="ant-select-selection-wrap"
                     >
-                      <input
-                        aria-autocomplete="list"
-                        aria-controls="rc_select_TEST_OR_SSR_list"
-                        aria-expanded="false"
-                        aria-haspopup="listbox"
-                        aria-label="页码"
-                        aria-owns="rc_select_TEST_OR_SSR_list"
-                        autocomplete="off"
-                        class="ant-select-selection-search-input"
-                        id="rc_select_TEST_OR_SSR"
-                        role="combobox"
-                        type="search"
-                        value=""
-                      />
-                    </span>
-                    <span
-                      class="ant-select-selection-item"
-                      title="10 条/页"
-                    >
-                      10 条/页
+                      <span
+                        class="ant-select-selection-search"
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          aria-controls="rc_select_TEST_OR_SSR_list"
+                          aria-expanded="false"
+                          aria-haspopup="listbox"
+                          aria-label="页码"
+                          aria-owns="rc_select_TEST_OR_SSR_list"
+                          autocomplete="off"
+                          class="ant-select-selection-search-input"
+                          id="rc_select_TEST_OR_SSR"
+                          role="combobox"
+                          type="search"
+                          value=""
+                        />
+                      </span>
+                      <span
+                        class="ant-select-selection-item"
+                        title="10 条/页"
+                      >
+                        10 条/页
+                      </span>
                     </span>
                   </div>
                   <span
@@ -1912,10 +1916,9 @@ exports[`ProTable > render 1`] = `
                       <span
                         class="ant-input-suffix"
                       >
-                        <span
+                        <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                          role="button"
-                          tabindex="-1"
+                          type="button"
                         >
                           <span
                             aria-label="close-circle"
@@ -1937,7 +1940,7 @@ exports[`ProTable > render 1`] = `
                               />
                             </svg>
                           </span>
-                        </span>
+                        </button>
                       </span>
                     </span>
                   </div>
@@ -1993,10 +1996,9 @@ exports[`ProTable > render 1`] = `
                       <span
                         class="ant-input-suffix"
                       >
-                        <span
+                        <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                          role="button"
-                          tabindex="-1"
+                          type="button"
                         >
                           <span
                             aria-label="close-circle"
@@ -2018,7 +2020,7 @@ exports[`ProTable > render 1`] = `
                               />
                             </svg>
                           </span>
-                        </span>
+                        </button>
                       </span>
                     </span>
                   </div>
@@ -2070,10 +2072,9 @@ exports[`ProTable > render 1`] = `
                     <span
                       class="ant-input-suffix"
                     >
-                      <span
+                      <button
                         class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                        role="button"
-                        tabindex="-1"
+                        type="button"
                       >
                         <span
                           aria-label="close-circle"
@@ -2095,7 +2096,7 @@ exports[`ProTable > render 1`] = `
                             />
                           </svg>
                         </span>
-                      </span>
+                      </button>
                     </span>
                   </span>
                 </div>
@@ -2200,7 +2201,7 @@ exports[`ProTable > render 1`] = `
     </form>
   </div>
   <div
-    class="ant-pro-card"
+    class="ant-pro-card ant-pro-card-has-title ant-pro-card-no-divider ant-pro-card-no-padding"
   >
     <div
       class="ant-pro-card-body"
@@ -2227,6 +2228,7 @@ exports[`ProTable > render 1`] = `
               >
                 <span>
                   <span
+                    aria-describedby="test-id"
                     aria-label="reload"
                     class="anticon anticon-reload"
                     role="img"
@@ -2252,6 +2254,7 @@ exports[`ProTable > render 1`] = `
               >
                 <span>
                   <span
+                    aria-describedby="test-id"
                     aria-label="column-height"
                     class="anticon anticon-column-height ant-dropdown-trigger"
                     role="img"
@@ -2277,6 +2280,7 @@ exports[`ProTable > render 1`] = `
                 class="ant-pro-table-list-toolbar-setting-item"
               >
                 <span
+                  aria-describedby="test-id"
                   aria-label="setting"
                   class="anticon anticon-setting"
                   role="img"
@@ -2742,28 +2746,32 @@ exports[`ProTable > render 1`] = `
                     class="ant-select-selector"
                   >
                     <span
-                      class="ant-select-selection-search"
+                      class="ant-select-selection-wrap"
                     >
-                      <input
-                        aria-autocomplete="list"
-                        aria-controls="rc_select_TEST_OR_SSR_list"
-                        aria-expanded="false"
-                        aria-haspopup="listbox"
-                        aria-label="页码"
-                        aria-owns="rc_select_TEST_OR_SSR_list"
-                        autocomplete="off"
-                        class="ant-select-selection-search-input"
-                        id="rc_select_TEST_OR_SSR"
-                        role="combobox"
-                        type="search"
-                        value=""
-                      />
-                    </span>
-                    <span
-                      class="ant-select-selection-item"
-                      title="10 条/页"
-                    >
-                      10 条/页
+                      <span
+                        class="ant-select-selection-search"
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          aria-controls="rc_select_TEST_OR_SSR_list"
+                          aria-expanded="false"
+                          aria-haspopup="listbox"
+                          aria-label="页码"
+                          aria-owns="rc_select_TEST_OR_SSR_list"
+                          autocomplete="off"
+                          class="ant-select-selection-search-input"
+                          id="rc_select_TEST_OR_SSR"
+                          role="combobox"
+                          type="search"
+                          value=""
+                        />
+                      </span>
+                      <span
+                        class="ant-select-selection-item"
+                        title="10 条/页"
+                      >
+                        10 条/页
+                      </span>
                     </span>
                   </div>
                   <span

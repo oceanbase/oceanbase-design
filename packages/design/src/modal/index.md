@@ -3,7 +3,13 @@ title: Modal 对话框
 nav:
   title: 基础组件
   path: /components
+markdown: |
+  模态对话框是在当前页面上方以遮罩叠加居中浮层的形式显示内容，底层页面内容被遮盖且无法访问，直到用户完成任务或关闭模态对话框。该模式可将用户注意力集中在当前任务上，适用于需用户集中注意力快速完成某任务的场景。
+
+  ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/lI3EQ6WmlxgAAAAAAAAAAAAADv3-AQBr/original)
 ---
+
+## 组件说明
 
 - 🔥 完全继承 antd [Modal](https://ant.design/components/modal-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
@@ -15,6 +21,7 @@ nav:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
+<code src="./demo/form.tsx" title="Form 表单"></code>
 <code src="./demo/max-height.tsx" title="高度限制" description="超出指定高度可设置滚动"></code>
 <code src="./demo/progress.tsx" title="带百分比的进度对话框" description="可用于异步任务或耗时较长的场景"></code>
 <code src="./demo/progress-with-loading.tsx" title="不带百分比的进度对话框" description="无法获取具体进度时，会展示 loading 态"></code>

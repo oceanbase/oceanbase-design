@@ -83,6 +83,8 @@ const defaultTheme: ThemeConfig = {
       '0 1px 2px 0 rgba(54, 69, 99, 0.03), 0 1px 6px -1px rgba(54, 69, 99, 0.02), 0 2px 4px 0 rgba(54, 69, 99, 0.02)',
     borderRadius: 6,
     wireframe: false,
+    // Remove focus outline
+    lineWidthFocus: 0,
   },
   components: {
     Breadcrumb: {
@@ -91,6 +93,9 @@ const defaultTheme: ThemeConfig = {
       // fontHeight is internal token
       fontHeight: 20,
       lastItemColor: '#5c6b8a',
+    },
+    Collapse: {
+      colorBorder: '#E2E8F3',
     },
     InputNumber: {
       handleVisible: true,
@@ -112,6 +117,9 @@ const defaultTheme: ThemeConfig = {
       handleColor: '#006AFF',
       handleActiveColor: '#5189fb',
       handleColorDisabled: '#b3ccff',
+    },
+    Tabs: {
+      horizontalItemGutter: 24,
     },
     Tag: {
       defaultColor: '#5c6b8a',

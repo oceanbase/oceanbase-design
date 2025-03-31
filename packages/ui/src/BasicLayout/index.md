@@ -7,20 +7,14 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-
 <code src="./demo/menu-over-length.tsx" title="菜单项内容超长" description="自动省略 + tooltip"></code>
-
 <code src="./demo/banner.tsx" title="带顶部 banner"></code>
-
 <code src="./demo/topHeader-icon.tsx" title="顶部导航 icon 模式"></code>
-
 <code src="./demo/topHeader-title.tsx" title="带顶部标题"></code>
-
 <code src="./demo/subSideMenu.tsx" title="带子侧边栏的二级导航"></code>
-
 <code src="./demo/no-sider-and-custom-header.tsx" title="无侧边导航 & 自定义顶部导航"></code>
-
 <code src="./demo/welcome.tsx" title="和欢迎页搭配使用"></code>
 
 ## 与路由搭配使用

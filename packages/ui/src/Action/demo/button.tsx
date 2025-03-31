@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { Form, Radio, Space } from '@oceanbase/design';
+import { Form, Radio } from '@oceanbase/design';
 import { ButtonSize } from '@oceanbase/design/es/button';
 import { Action } from '@oceanbase/ui';
-import { DownOutlined } from '@oceanbase/icons';
 
 export default () => {
   const [buttonSize, setButtonSize] = useState<ButtonSize>('middle');
   return (
     <>
-      <Form layout="inline" requiredMark={false} style={{ marginBottom: 24 }}>
+      <Form layout="inline" requiredMark={false} style={{ marginBottom: 16 }}>
         <Form.Item label="buttonSize">
           <Radio.Group
             value={buttonSize}
@@ -22,15 +21,7 @@ export default () => {
           </Radio.Group>
         </Form.Item>
       </Form>
-      <Action.Group
-        buttonSize={buttonSize}
-        moreText={
-          <Space size={4}>
-            更多
-            <DownOutlined />
-          </Space>
-        }
-      >
+      <Action.Group buttonSize={buttonSize}>
         <Action.Button type="primary">action1</Action.Button>
         <Action.Button danger>危险按钮</Action.Button>
         <Action.Button>action3</Action.Button>

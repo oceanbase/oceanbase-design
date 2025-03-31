@@ -8,6 +8,12 @@ group: 自动化迁移工具
 
 ---
 
+## 0.4.7
+
+`2025-02-05`
+
+- ⭐️ 支持颜色值 `rgb(240,242,245)` 到 `colorBgLayout` 的自动改写。[#946](https://github.com/oceanbase/oceanbase-design/pull/946)
+
 ## 0.4.0
 
 `2024-10-09`

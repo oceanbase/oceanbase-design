@@ -99,10 +99,11 @@ const useStyle = () => {
       width: 16px;
     `,
     popoverMenu: {
-      width: 300,
-
       [`${token.antCls}-popover-inner-content`]: {
         padding: 0,
+        [`${token.antCls}-menu-item`]: {
+          paddingInlineStart: '16px !important',
+        },
       },
     },
   };

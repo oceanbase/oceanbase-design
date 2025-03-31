@@ -1,7 +1,8 @@
 ---
-group: Color 色彩
-order: 1
+group: Design Foundation 设计基础
+subGroup: Color 色彩
 title: System color 系统色彩
+order: 9
 ---
 
 色彩在产品中可以帮助用户建立品牌心智，也可以起到区分信息层级、传递信息状态、构建一致性的作用。

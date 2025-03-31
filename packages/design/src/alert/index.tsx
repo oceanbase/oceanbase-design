@@ -1,7 +1,13 @@
+import React, { useContext } from 'react';
 import { Alert as AntAlert } from 'antd';
 import type { AlertProps as AntAlertProps } from 'antd/es/alert';
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  ExclamationCircleOutlined,
+  InfoCircleOutlined,
+} from '@oceanbase/icons';
 import classNames from 'classnames';
-import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
 import useStyle from './style';
 
@@ -12,7 +18,15 @@ export interface AlertProps extends AntAlertProps {
   colored?: boolean;
 }
 
+const iconMapOutlined = {
+  success: <CheckCircleOutlined />,
+  info: <InfoCircleOutlined />,
+  error: <CloseCircleOutlined />,
+  warning: <ExclamationCircleOutlined />,
+};
+
 const Alert = ({
+  type,
   ghost,
   colored,
   prefixCls: customizePrefixCls,
@@ -29,7 +43,15 @@ const Alert = ({
     },
     className
   );
-  return wrapSSR(<AntAlert prefixCls={customizePrefixCls} className={alertCls} {...restProps} />);
+  return wrapSSR(
+    <AntAlert
+      type={type}
+      icon={iconMapOutlined[type]}
+      prefixCls={customizePrefixCls}
+      className={alertCls}
+      {...restProps}
+    />
+  );
 };
 
 Alert.ErrorBoundary = AntAlert.ErrorBoundary;

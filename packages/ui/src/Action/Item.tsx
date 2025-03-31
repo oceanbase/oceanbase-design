@@ -8,8 +8,8 @@ export interface BaseProps extends ButtonProps {
   visible?: boolean;
   /** 固定展示、不会被折叠 */
   fixed?: boolean;
-  onClick?: () => Promise<void> | void;
-  children?: React.ReactElement | string;
+  onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => Promise<void> | void;
+  children?: React.ReactElement | React.ReactNode | string;
   enableLoading?: boolean;
   tooltip?: string;
   loading?: boolean;
@@ -26,8 +26,8 @@ export class ActionButton extends React.PureComponent<BaseProps> {
       <Tooltip placement="top" title={tooltip}>
         <Button
           loading={enableLoading && (loading || this.state.loading)}
-          onClick={_ => {
-            const handle = onClick?.();
+          onClick={e => {
+            const handle = onClick?.(e);
 
             if (enableLoading && (handle as Promise<void>)?.then) {
               this.setState({ loading: true });
@@ -68,8 +68,8 @@ export class ActionLink extends React.PureComponent<BaseProps> {
       <Typography.Link
         style={{ padding: 0, ...style }}
         disabled={loading || disabled || this.state.disabled}
-        onClick={_ => {
-          const handle = onClick?.();
+        onClick={e => {
+          const handle = onClick?.(e);
 
           if (enableLoading && (handle as Promise<void>)?.then) {
             this.setState({ loading: true, disabled: true });

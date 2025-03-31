@@ -5,7 +5,13 @@ nav:
   path: /components
 demo:
   cols: 2
+markdown: |
+  用于开始一个即时操作。
+
+  ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/v_MeQYfUImYAAAAAAAAAAAAADv3-AQBr/original)
 ---
+
+## 组件说明
 
 - 🔥 完全继承 antd [Button](https://ant.design/components/button-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。

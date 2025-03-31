@@ -44,10 +44,12 @@ export interface TableProps<T> extends AntTableProps<T> {
 function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.Ref<Reference>) {
   const {
     locale: customLocale,
+    size,
     columns,
     footer,
     pagination: customPagination,
     rowSelection,
+    rowClassName,
     toolAlertRender,
     toolOptionsRender,
     toolSelectedContent,
@@ -81,6 +83,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   const tableCls = classNames(
     {
       [`${prefixCls}-expandable`]: !isEmpty(expandable),
+      [`${prefixCls}-selectable`]: !!rowSelection,
       [`${prefixCls}-has-footer`]: !!footer,
     },
     className
@@ -221,7 +224,24 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
           </div>
         ),
       }}
+      size={size}
       columns={newColumns}
+      rowClassName={(...args) => {
+        return classNames(
+          typeof rowClassName === 'function' ? rowClassName(...args) : rowClassName,
+          {
+            [`${prefixCls}-expand-row-by-click`]: expandable?.expandRowByClick,
+          }
+        );
+      }}
+      expandable={
+        expandable
+          ? {
+              columnWidth: !size || size === 'large' ? 40 : 32,
+              ...expandable,
+            }
+          : undefined
+      }
       rowSelection={
         rowSelection
           ? {

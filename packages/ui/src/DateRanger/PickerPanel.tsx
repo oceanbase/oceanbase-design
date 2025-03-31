@@ -18,30 +18,29 @@ import {
   Space,
   TimePicker,
 } from '@oceanbase/design';
-import type { FormItemProps } from '@oceanbase/design';
 import { noop } from 'lodash';
 import moment from 'moment';
 import dayjs from 'dayjs';
-import { useUpdate } from 'ahooks';
-import { toArray } from '@oceanbase/util';
 import { getPrefix } from '../_util';
-
-type RangeValue = [Moment, Moment] | [Dayjs, Dayjs];
+import { DATE_TIME_MONTH_FORMAT, DATE_TIME_MONTH_FORMAT_CN } from './constant';
+import type { RangeValue } from './Ranger';
 type ValidateTrigger = 'submit' | 'valueChange';
 
 type MaybeArray<T> = T | T[];
-type ErrorType = 'endDate' | 'startDate' | 'endTime' | 'startTime';
+type ErrorType = 'endDate' | 'startDate' | 'endTime' | 'startTime' | 'all';
+
+const ALL_ERROR_TYPE_LIST = ['endDate', 'startDate', 'endTime', 'startTime'];
 
 export type Rule = {
   message: string;
-  validate: (value: string) => MaybeArray<ErrorType>;
+  validator: (value: [string, string] | []) => MaybeArray<ErrorType> | null | undefined;
 };
 
 export interface PickerPanelProps {
   value?: RangeValue;
   defaultValue?: RangeValue;
   tip?: string;
-  require?: boolean;
+  required?: boolean;
   rules?: Rule[];
   validateTrigger?: ValidateTrigger;
   onCancel: () => void;
@@ -54,17 +53,16 @@ export interface PickerPanelProps {
 const prefix = getPrefix('ranger-picker-panel');
 
 const prefixCls = 'ant-picker';
-const DATE_FORMAT = 'YYYY-MM-DD';
 const TIME_FORMAT = 'HH:mm:ss';
 
 const InternalPickerPanel = (props: PickerPanelProps) => {
   const {
-    defaultValue = [],
+    defaultValue,
     isMoment,
     locale,
     tip,
     rules,
-    require = true,
+    required = true,
     onOk = noop,
     onCancel = noop,
     disabledDate,
@@ -76,6 +74,10 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   const [calendarValue, setCalendarValue] = React.useState(defaultValue);
   const [internalHoverValues, setInternalHoverValues] = React.useState(null);
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const isEn = locale?.antLocale === 'en';
+
+  //
+  const DATE_FORMAT = isEn ? DATE_TIME_MONTH_FORMAT : DATE_TIME_MONTH_FORMAT_CN;
 
   const getDateInstance = useCallback(
     (
@@ -239,7 +241,6 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
       }
     });
   };
-
   return (
     <div className={classNames(prefix)}>
       <Space direction="vertical" size={12} style={{ margin: '12px 0' }}>
@@ -257,6 +258,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 label={locale.startDate}
                 validateStatus={errorTypeMap['startDate']}
                 style={{ marginBottom: 8 }}
+                rules={[{ required: true }]}
               >
                 <Input
                   size="middle"
@@ -287,8 +289,10 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 style={{ marginBottom: 8 }}
                 validateStatus={errorTypeMap['startTime']}
                 initialValue={defaultS || defaultTime}
+                rules={[{ required: true }]}
               >
                 <TimePicker
+                  allowClear={false}
                   suffixIcon={null}
                   needConfirm={false}
                   getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
@@ -316,6 +320,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 label={locale.endDate}
                 style={{ marginBottom: 0 }}
                 validateStatus={errorTypeMap['endDate']}
+                rules={[{ required: true }]}
               >
                 <Input
                   onBlur={e => {
@@ -345,8 +350,10 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 style={{ marginBottom: 0 }}
                 validateStatus={errorTypeMap['endTime']}
                 initialValue={defaultE || defaultTime}
+                rules={[{ required: true }]}
               >
                 <TimePicker
+                  allowClear={false}
                   suffixIcon={null}
                   needConfirm={false}
                   getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
@@ -412,7 +419,13 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
       {errorMessage && (
         <Alert message={errorMessage} type="error" style={{ marginBottom: 8 }} showIcon></Alert>
       )}
-      <Space style={{ width: '100%', justifyContent: 'flex-end', padding: '0 12px 4px 0' }}>
+      <Space
+        style={{
+          width: '100%',
+          justifyContent: 'flex-end',
+          padding: '0 12px 4px 0',
+        }}
+      >
         <Button
           size="small"
           onClick={() => {
@@ -427,33 +440,39 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           onClick={() => {
             form.validateFields().then(values => {
               const { startDate, startTime, endDate, endTime } = values;
-              const start = `${startDate} ${startTime.format(TIME_FORMAT)}`;
-              const end = `${endDate} ${endTime.format(TIME_FORMAT)}`;
+              // 日期同一天时对时间进行排序，保证开始时间在结束时间之前
+              const [sTime, eTime] =
+                startDate === endDate
+                  ? [startTime, endTime].sort((a, b) => {
+                      return a?.valueOf() - b?.valueOf();
+                    })
+                  : [startTime, endTime];
 
-              onOk([start, end]);
+              const start = `${startDate} ${sTime.format(TIME_FORMAT)}`;
+              const end = `${endDate} ${eTime.format(TIME_FORMAT)}`;
 
-              // let errorList = [];
-              // let message = '';
-              // rules?.some(item => {
-              //   if (typeof item?.validator === 'function') {
-              //     const errorType = item.validator(start, end);
-              //     if (errorType) {
-              //       errorList = toArray(errorType);
-              //       message = item.message;
-              //       return true;
-              //     }
-              //   }
-              //   return false;
-              // });
+              let errorList = [];
+              let message = '';
+              rules?.some(item => {
+                if (typeof item?.validator === 'function') {
+                  const errorType = item.validator([start, end]);
+                  if (errorType) {
+                    errorList = Array.isArray(errorType) ? errorType : [errorType];
+                    message = item.message;
+                    return true;
+                  }
+                }
+                return false;
+              });
 
-              // if (errorList.length > 0) {
-              //   setErrorTypeList(errorList);
-              //   setErrorMessage(message);
-              // } else {
-              //   setErrorMessage('');
-              //   setErrorTypeList([]);
-              //   onOk([start, end]);
-              // }
+              if (errorList.length > 0) {
+                setErrorTypeList(errorList.includes('all') ? ALL_ERROR_TYPE_LIST : errorList);
+                setErrorMessage(message);
+              } else {
+                setErrorMessage('');
+                setErrorTypeList([]);
+                onOk([start, end]);
+              }
             });
           }}
         >

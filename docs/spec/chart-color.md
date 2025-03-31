@@ -1,7 +1,8 @@
 ---
-group: Color 色彩
-order: 2
+group: Design Foundation 设计基础
+subGroup: Color 色彩
 title: Chart color 图表色彩
+order: 10
 ---
 
 图表是用户与复杂数据交流的可视化工具，图表可以通过颜色来区分不同数据类型或突出关键信息。

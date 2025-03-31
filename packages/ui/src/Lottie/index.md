@@ -7,10 +7,9 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-
 <code src="./demo/speed.tsx" title="播放速度"></code>
-
 <code src="./demo/control.tsx" title="播放控制"></code>
 
 ## API

@@ -1,11 +1,22 @@
-import { Button, Dropdown, Menu, Space, Tooltip, Typography } from '@oceanbase/design';
+import React, { useContext } from 'react';
+import {
+  Button,
+  Dropdown,
+  Menu,
+  Space,
+  Tooltip,
+  Typography,
+  ConfigProvider,
+} from '@oceanbase/design';
 import type { ButtonSize } from '@oceanbase/design/es/button';
 import { EllipsisOutlined, LoadingOutlined } from '@oceanbase/icons';
+import classNames from 'classnames';
 import { isBoolean, max, omit } from 'lodash';
-import React from 'react';
 import type { BaseProps } from './Item';
+import useStyle from './style';
 
 export interface GroupProps {
+  prefixCls?: string;
   size?: number;
   dropDownPlacement?:
     | 'topLeft'
@@ -18,12 +29,12 @@ export interface GroupProps {
   shouldVisible?: (key: string) => boolean;
   shouldDisabled?: (key: string) => boolean;
   enableLoading?: boolean;
-  /** 更多操作的自定义展示 */
+  // 设置更多操作的文案
   moreText?: React.ReactNode;
+  // 设置更多操作的元素类型
+  moreType?: 'button' | 'link';
   buttonSize?: ButtonSize;
 }
-
-type ellipsisType = 'default' | 'link';
 
 const getOrder = ({ type, fixed }: { type?: string; fixed?: boolean }) => {
   const ORDER_SET = { primary: 3, fixed: 2, default: 0 };
@@ -38,6 +49,7 @@ const getOrder = ({ type, fixed }: { type?: string; fixed?: boolean }) => {
 };
 
 export default ({
+  prefixCls: customizePrefixCls,
   size = 3,
   children,
   dropDownPlacement,
@@ -45,8 +57,14 @@ export default ({
   shouldDisabled,
   enableLoading,
   moreText,
+  moreType,
   buttonSize,
 }: GroupProps) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+
+  const prefixCls = getPrefixCls('action', customizePrefixCls);
+  const { wrapSSR } = useStyle(prefixCls);
+
   const visibleActions = Array.isArray(children)
     ? children.filter(c => {
         if (isBoolean(c.props.visible) && shouldVisible)
@@ -74,21 +92,31 @@ export default ({
   const mainActions = visibleActionsSort.slice(0, realSize);
   const ellipsisActions = visibleActionsSort.slice(realSize);
 
-  let ellipsisType: ellipsisType = 'link';
+  let ellipsisType = 'link';
 
   // @ts-ignore
-  if (visibleActionsSort.every(action => action.type.__DISPLAY_NAME === 'button')) {
-    ellipsisType = 'default';
+  if (visibleActionsSort.some(action => action.type.__DISPLAY_NAME === 'button')) {
+    ellipsisType = 'button';
   }
+
+  // @ts-ignore
+  if (visibleActionsSort.some(action => action.type.__DISPLAY_NAME === 'link')) {
+    ellipsisType = 'link';
+  }
+
+  ellipsisType = moreType ?? ellipsisType;
 
   const getDefaultDisabled = (key: string) => shouldDisabled?.(key as string) ?? false;
 
   let moreDom: string | React.ReactElement;
 
-  if (ellipsisType === 'default') {
+  if (ellipsisType === 'button') {
     moreDom = (
-      <Button type={ellipsisType} size={buttonSize}>
-        {moreText ?? <EllipsisOutlined style={{ cursor: 'pointer' }} />}
+      <Button
+        size={buttonSize}
+        icon={moreText ? undefined : <EllipsisOutlined style={{ cursor: 'pointer' }} />}
+      >
+        {moreText}
       </Button>
     );
   } else {
@@ -99,8 +127,8 @@ export default ({
     );
   }
 
-  return (
-    <Space size={8}>
+  return wrapSSR(
+    <Space size={ellipsisType === 'button' ? 8 : 16}>
       {mainActions.map(action => {
         return React.cloneElement(action, {
           // size should be covered by action props
@@ -117,7 +145,7 @@ export default ({
         <Dropdown
           placement={dropDownPlacement}
           overlay={
-            <Menu>
+            <Menu className={`${prefixCls}-more-menu`}>
               {ellipsisActions.map((action, index) => {
                 const actionKey = action.key;
                 let disabled = false;
@@ -133,13 +161,16 @@ export default ({
                   // @ts-ignore
                   <Menu.Item
                     key={(actionKey as string) ?? index.toString()}
-                    onClick={action.props.onClick}
-                    style={{ minWidth: 120 }}
+                    // @ts-ignore
+                    onClick={({ domEvent }) => {
+                      action.props.onClick?.(domEvent as React.MouseEvent<HTMLElement, MouseEvent>);
+                    }}
                     {...omit(action.props, 'disabled')}
                     disabled={actionDisabled}
                   >
                     <Tooltip title={action.props.tooltip}>
-                      {action.props.loading && <LoadingOutlined />} {action.props.children}
+                      {action.props.loading && <LoadingOutlined />}{' '}
+                      {action.props.children || action}
                     </Tooltip>
                   </Menu.Item>
                 );

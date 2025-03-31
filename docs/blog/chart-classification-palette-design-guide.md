@@ -190,11 +190,11 @@ OBUI 主题色是在 logo 品牌色的基础上做了微调，以便于适应工
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/7JofT7KW6IQAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">图1</div>
+    <div class="image-description-center">图1</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/p36BSIBT32sAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">图2</div>
+    <div class="image-description-center">图2</div>
   </div>
 </div>
 
@@ -203,17 +203,17 @@ OBUI 主题色是在 logo 品牌色的基础上做了微调，以便于适应工
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/e7CvTocrTR8AAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">图3</div>
+    <div class="image-description-center">图3</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/gBD9SK5xcjAAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description">图4</div>
+    <div class="image-description-center">图4</div>
   </div>
 </div>
-
+<br />
 <div>
   <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/9_VNRJmASNIAAAAAAAAAAAAADv3-AQBr/original" />
-  <div class="image-description">完整色板</div>
+  <div class="image-description-center">完整色板</div>
 </div>
 
 ### 可读性验证

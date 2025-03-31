@@ -3,10 +3,6 @@ import { css, Global } from '@emotion/react';
 import React from 'react';
 import useSiteToken from '../../../hooks/useSiteToken';
 
-console.log(new TinyColor('#8592AD').getAlpha());
-
-console.log(new TinyColor('#5c6b8a').toRgb());
-
 const GlobalStyle: React.FC = () => {
   const { token } = useSiteToken();
 
@@ -19,7 +15,7 @@ const GlobalStyle: React.FC = () => {
       styles={css`
         .markdown {
           color: ${token.colorText};
-          font-size: 14px;
+          font-size: ${token.fontSize}px;
           line-height: 2;
         }
 
@@ -518,12 +514,35 @@ const GlobalStyle: React.FC = () => {
           }
         }
 
+        .dumi-default-previewer-demo {
+          padding: 24px 24px;
+        }
+
         [id='components-grid-demo-playground'],
         [id='components-grid-demo-gutter'] {
           > .code-box-demo ${antCls}-row > div {
             margin-top: 0;
             margin-bottom: 0;
           }
+        }
+
+        .dumi-default-container.markdown[data-type='info'] {
+          padding: ${token.padding}px ${token.paddingLG}px;
+          background: ${token.colorBgLayout};
+          > svg {
+            display: none;
+          }
+          > h4 {
+            display: none;
+          }
+          > section {
+            font-size: ${token.fontSize}px;
+            color: ${token.colorTextSecondary};
+          }
+        }
+
+        .dumi-default-container.markdown:not(:last-child) {
+          margin-top: ${token.marginLG}px;
         }
       `}
     />

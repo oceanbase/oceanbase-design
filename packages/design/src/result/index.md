@@ -11,22 +11,16 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/success.tsx" title="成功"></code>
-
 <code src="./demo/error.tsx" title="失败"></code>
-
 <code src="./demo/warning.tsx" title="警告"></code>
-
 <code src="./demo/processing.tsx" title="进行中"></code>
-
-<code src="./demo/403.tsx" title="403" description="无访问权限"></code>
-
-<code src="./demo/404.tsx" title="404" description="页面未找到"></code>
-
-<code src="./demo/500.tsx" title="500" description="服务器发生了错误"></code>
-
+<code src="./demo/403.tsx" title="403" description="无访问权限。"></code>
+<code src="./demo/404.tsx" title="404" description="页面未找到。"></code>
+<code src="./demo/500.tsx" title="500" description="服务器发生了错误。"></code>
 <code src="./demo/icon.tsx" title="自定义 icon"></code>
-
+<code src="./demo/over-length.tsx" title="超长内容" description="为了避免无限拉伸，限制副标题的最大宽度为 600px、内容区的最大宽度为 1000px。"></code>
 <code src="./demo/with-page-container.tsx" title="和页容器搭配使用"></code>
 
 ## API

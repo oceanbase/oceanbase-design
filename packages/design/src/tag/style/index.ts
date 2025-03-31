@@ -38,7 +38,7 @@ const genPresetStyle = (token: TagToken) =>
     };
   });
 
-export const genTagStyle: GenerateStyle<TagToken> = (token: TagToken): CSSObject => {
+export const genTagStyle = (token: TagToken): CSSObject => {
   const { antCls, componentCls, tagPaddingHorizontal, lineWidth, calc } = token;
 
   const paddingInline = calc(tagPaddingHorizontal).sub(lineWidth).equal();

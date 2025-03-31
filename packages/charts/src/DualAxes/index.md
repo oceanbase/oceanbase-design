@@ -7,14 +7,11 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/dual-line.tsx" title="双折线双轴图"></code>
-
 <code src="./demo/multi-line.tsx" title="多折线双轴图"></code>
-
 <code src="./demo/column-line.tsx" title="柱线混合双轴图"></code>
-
 <code src="./demo/column-multi-line.tsx" title="柱线混合双轴图-多折线"></code>
-
 <code src="./demo/tooltip-scrollable.tsx" title="Tooltip 可滚动" description="适用于 Tooltip 项较多、超出图表的场景，可通过 `tooltip.scrollable: true` 配置进行开启。"></code>
 
 ## API

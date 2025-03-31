@@ -1,7 +1,8 @@
 ---
-group: Layout 布局
-order: 2
+group: Design Foundation 设计基础
+subGroup: Layout 布局
 title: PageContainer 页容器
+order: 14
 ---
 
 页容器是框架中承载内容的唯一容器，与导航构成应用整体框架。
