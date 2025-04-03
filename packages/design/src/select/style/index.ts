@@ -12,6 +12,15 @@ export const genSelectStyle: GenerateStyle<SelectToken> = (token: SelectToken): 
         color: token.colorTextTertiary,
       },
     },
+    [`${componentCls}-text`]: {
+      [`${componentCls}-selector`]: {
+        background: 'none !important',
+        border: 'none !important',
+      },
+      [`${componentCls}-selector:hover`]: {
+        background: `${token.colorInfoBgHover} !important`,
+      },
+    },
   };
 };
 

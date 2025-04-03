@@ -23,8 +23,9 @@ export type SelectLocale = AntLocale['Select'] & {
 export interface SelectProps<
   ValueType = any,
   OptionType extends BaseOptionType | DefaultOptionType = DefaultOptionType,
-> extends AntSelectProps<ValueType, OptionType> {
+> extends Omit<AntSelectProps<ValueType, OptionType>, 'variant'> {
   locale?: SelectLocale;
+  variant?: AntSelectProps['variant'] | 'text';
 }
 
 type CompoundedComponent = React.ForwardRefExoticComponent<
@@ -37,7 +38,10 @@ type CompoundedComponent = React.ForwardRefExoticComponent<
 };
 
 const InternalSelect = React.forwardRef<RefSelectProps, SelectProps<any, any>>(
-  ({ locale: customLocale, prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
+  (
+    { locale: customLocale, prefixCls: customizePrefixCls, className, variant, ...restProps },
+    ref
+  ) => {
     const { locale: contextLocale, getPrefixCls } = useContext<ConfigConsumerProps>(
       ConfigProvider.ConfigContext
     );
@@ -51,7 +55,9 @@ const InternalSelect = React.forwardRef<RefSelectProps, SelectProps<any, any>>(
 
     const prefixCls = getPrefixCls('select', customizePrefixCls);
     const { wrapSSR } = useStyle(prefixCls);
-    const selectCls = classNames(className);
+    const selectCls = classNames(className, {
+      [`${prefixCls}-text`]: variant === 'text',
+    });
 
     return wrapSSR(
       <AntSelect
@@ -59,6 +65,7 @@ const InternalSelect = React.forwardRef<RefSelectProps, SelectProps<any, any>>(
         placeholder={selectLocale.placeholder}
         prefixCls={customizePrefixCls}
         className={selectCls}
+        variant={variant === 'text' ? undefined : variant}
         {...restProps}
       />
     );
