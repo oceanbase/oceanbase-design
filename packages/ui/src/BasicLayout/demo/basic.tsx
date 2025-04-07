@@ -90,6 +90,7 @@ export default () => {
       defaultSelectedKeys={['/~demos/basiclayout-basic/overview']}
       topHeader={{
         welcomePath: '/welcome',
+        versionNoticePath: '/docs/index.html',
         docsPath: '/docs/index.html',
         pdfPath: '/docs/index.html',
         username: 'admin',
