@@ -110,6 +110,7 @@ const App = () => {
 | showLabel | 顶部导航是否展开, true 为展开 形态：Icon + 文案；fales 为关闭 形态：Icon | boolean | true | - |
 | title | 顶部标题 | ReactNode | - | - |
 | welcomePath | 欢迎页对应的 path 路径，需要与路由配置一致，为空则不展示欢迎页菜单 | string | - | - |
+| versionNoticePath | 版本公告对应的 path 路径，为空则不展示版本公告菜单 | string | - | 0.4.12 |
 | docsPath | 帮助文档首页对应的 path 路径，为空则不展示文档菜单 | string | - | - |
 | pdfPath | 帮助文档下载对应的 path 路径，默认优先使用路径中的文件名 | string | - | - |
 | showLocale | 是否展示国际化切换入口 | boolean | false | - |
