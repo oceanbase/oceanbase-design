@@ -11,6 +11,7 @@ import {
   Alert,
   Button,
   Col,
+  DatePicker,
   Divider,
   Form,
   Input,
@@ -122,8 +123,8 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   const [_sDate, _eDate] = formatValues;
   const setFormatDateToForm = () => {
     form.setFieldsValue({
-      startDate: _sDate,
-      endDate: _eDate,
+      startDate: getDateInstance(_sDate),
+      endDate: getDateInstance(_eDate),
     });
   };
 
@@ -142,105 +143,15 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     return pre;
   }, {});
 
-  const validateInputDate = e => {
-    const v = e.target.value;
+  const formatDate = (v: Moment | Dayjs) => {
     const date = getDateInstance(v, DATE_FORMAT, true);
     return date.isValid() ? date.format(DATE_FORMAT) : null;
   };
-  const validateInputTime = e => {
-    const v: string = e.target.value;
-    const [h, m, s] = v?.split(':') ?? [];
-    if (!(h && m && s)) return null;
-    if (!(h.length === 2 && m.length === 2 && s.length === 2)) return null;
-    const date = getDateInstance(v, TIME_FORMAT, true);
-    return date.isValid() ? date.format(TIME_FORMAT) : null;
+  const validateInputDate = e => {
+    const v = e.target.value;
+    return formatDate(v);
   };
 
-  const selectDateInputRange = (inputDomRef: HTMLInputElement) => {
-    if (!inputDomRef) return;
-    // year
-    if (inputDomRef.selectionStart >= 0 && inputDomRef.selectionStart <= 4) {
-      inputDomRef.setSelectionRange(0, 4);
-    }
-    // month
-    if (inputDomRef.selectionStart > 4 && inputDomRef.selectionStart <= 7) {
-      inputDomRef.setSelectionRange(5, 7);
-    }
-    // day
-    if (inputDomRef.selectionStart > 7 && inputDomRef.selectionStart <= 10) {
-      inputDomRef.setSelectionRange(8, 10);
-    }
-  };
-
-  const selectTimeInputRange = (inputDomRef: HTMLInputElement) => {
-    if (!inputDomRef) return;
-    // hour
-    if (inputDomRef.selectionStart >= 0 && inputDomRef.selectionStart <= 2) {
-      inputDomRef.setSelectionRange(0, 2);
-    }
-    // minute
-    if (inputDomRef.selectionStart > 2 && inputDomRef.selectionStart <= 5) {
-      inputDomRef.setSelectionRange(3, 5);
-    }
-    // second
-    if (inputDomRef.selectionStart > 5 && inputDomRef.selectionStart <= 8) {
-      inputDomRef.setSelectionRange(6, 8);
-    }
-  };
-
-  const handleDateInputKeyDown = (
-    inputDomRef: HTMLInputElement,
-    e: React.KeyboardEvent<HTMLElement>
-  ) => {
-    if (!inputDomRef) return;
-    if (e.key === 'Enter') {
-      inputDomRef.blur();
-      return;
-    }
-    if (e.key === 'ArrowLeft') {
-      const curIndex = inputDomRef.selectionStart;
-      inputDomRef.setSelectionRange(curIndex - 1, curIndex - 1);
-    }
-    if (e.key === 'ArrowRight') {
-      const curIndex = inputDomRef.selectionEnd;
-      inputDomRef.setSelectionRange(curIndex + 1, curIndex + 1);
-    }
-    // NOTE: onKeyDown事件执行时，由于TimePicker需要执行受控逻辑，这会引起React rerender，
-    // 导致onKeyDown事件中拿到的Event还未更新，将下述校验逻辑放入requestIdleCallback确保其跟在React fiber调用栈后执行，这可取到最新的Event对象。
-    requestIdleCallback(() => {
-      // 校验
-      if (validateInputDate(e)) {
-        selectDateInputRange(inputDomRef);
-      }
-    });
-  };
-
-  const handleTimeInputKeyDown = (
-    inputDomRef: HTMLInputElement,
-    e: React.KeyboardEvent<HTMLElement>
-  ) => {
-    if (!inputDomRef) return;
-    if (e.key === 'Enter') {
-      inputDomRef.blur();
-      return;
-    }
-    if (e.key === 'ArrowLeft') {
-      const curIndex = inputDomRef.selectionStart;
-      inputDomRef.setSelectionRange(curIndex - 1, curIndex - 1);
-    }
-    if (e.key === 'ArrowRight') {
-      const curIndex = inputDomRef.selectionEnd;
-      inputDomRef.setSelectionRange(curIndex + 1, curIndex + 1);
-    }
-    // NOTE: onKeyDown事件执行时，由于TimePicker需要执行受控逻辑，这会引起React rerender，
-    // 导致onKeyDown事件中拿到的Event还未更新，将下述校验逻辑放入requestIdleCallback确保其跟在React fiber调用栈后执行，这可取到最新的Event对象。
-    requestIdleCallback(() => {
-      // 校验
-      if (validateInputTime(e)) {
-        selectTimeInputRange(inputDomRef);
-      }
-    });
-  };
   return (
     <div className={classNames(prefix)}>
       <Space direction="vertical" size={12} style={{ margin: '12px 0' }}>
@@ -260,24 +171,25 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 style={{ marginBottom: 8 }}
                 rules={[{ required: true }]}
               >
-                <Input
-                  size="middle"
+                <DatePicker
+                  format={{
+                    format: 'YYYY-MM-DD',
+                    type: 'mask',
+                  }}
+                  style={{ width: 128 }}
+                  open={false}
+                  suffixIcon={null}
+                  allowClear={false}
                   onBlur={e => {
                     const v = validateInputDate(e);
                     if (v) {
-                      form.setFieldValue('startDate', v);
+                      form.setFieldValue('startDate', getDateInstance(v));
                       setCalendarValue(([, eDate]) => {
                         return [getDateInstance(v), eDate] as [Dayjs, Dayjs];
                       });
                     } else {
                       setFormatDateToForm();
                     }
-                  }}
-                  onClick={() => {
-                    selectDateInputRange(form.getFieldInstance('startDate').nativeElement);
-                  }}
-                  onKeyDown={e => {
-                    handleDateInputKeyDown(form.getFieldInstance('startDate').nativeElement, e);
                   }}
                 />
               </Form.Item>
@@ -297,16 +209,9 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                   needConfirm={false}
                   getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
                   style={{ width: '100%' }}
-                  onClick={() => {
-                    selectTimeInputRange(
-                      form.getFieldInstance('startTime').nativeElement.querySelector('input')
-                    );
-                  }}
-                  onKeyDown={e => {
-                    handleTimeInputKeyDown(
-                      form.getFieldInstance('startTime').nativeElement.querySelector('input'),
-                      e
-                    );
+                  format={{
+                    format: 'HH:mm:ss',
+                    type: 'mask',
                   }}
                 />
               </Form.Item>
@@ -322,23 +227,25 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 validateStatus={errorTypeMap['endDate']}
                 rules={[{ required: true }]}
               >
-                <Input
+                <DatePicker
+                  format={{
+                    format: 'YYYY-MM-DD',
+                    type: 'mask',
+                  }}
+                  style={{ width: 128 }}
+                  open={false}
+                  suffixIcon={null}
+                  allowClear={false}
                   onBlur={e => {
                     const v = validateInputDate(e);
                     if (v) {
-                      form.setFieldValue('endDate', v);
+                      form.setFieldValue('endDate', getDateInstance(v));
                       setCalendarValue(([sDate]) => {
                         return [sDate, getDateInstance(v)] as [Dayjs, Dayjs];
                       });
                     } else {
                       setFormatDateToForm();
                     }
-                  }}
-                  onClick={() => {
-                    selectDateInputRange(form.getFieldInstance('endDate').nativeElement);
-                  }}
-                  onKeyDown={e => {
-                    handleDateInputKeyDown(form.getFieldInstance('endDate').nativeElement, e);
                   }}
                 />
               </Form.Item>
@@ -358,16 +265,9 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                   needConfirm={false}
                   getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
                   style={{ width: '100%' }}
-                  onClick={() => {
-                    selectTimeInputRange(
-                      form.getFieldInstance('endTime').nativeElement.querySelector('input')
-                    );
-                  }}
-                  onKeyDown={e => {
-                    handleTimeInputKeyDown(
-                      form.getFieldInstance('endTime').nativeElement.querySelector('input'),
-                      e
-                    );
+                  format={{
+                    format: 'HH:mm:ss',
+                    type: 'mask',
                   }}
                 />
               </Form.Item>
@@ -441,15 +341,14 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             form.validateFields().then(values => {
               const { startDate, startTime, endDate, endTime } = values;
               // 日期同一天时对时间进行排序，保证开始时间在结束时间之前
-              const [sTime, eTime] =
-                startDate === endDate
-                  ? [startTime, endTime].sort((a, b) => {
-                      return a?.valueOf() - b?.valueOf();
-                    })
-                  : [startTime, endTime];
+              const [sTime, eTime] = startDate.isSame(endDate)
+                ? [startTime, endTime].sort((a, b) => {
+                    return a?.valueOf() - b?.valueOf();
+                  })
+                : [startTime, endTime];
 
-              const start = `${startDate} ${sTime.format(TIME_FORMAT)}`;
-              const end = `${endDate} ${eTime.format(TIME_FORMAT)}`;
+              const start = `${formatDate(startDate)} ${sTime.format(TIME_FORMAT)}`;
+              const end = `${formatDate(endDate)} ${eTime.format(TIME_FORMAT)}`;
 
               let errorList = [];
               let message = '';
