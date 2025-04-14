@@ -14,7 +14,7 @@ demo:
 
 <!-- prettier-ignore -->
 <code src="./demo/horizontal.tsx" title="默认为水平分割线"></code>
-<code src="./demo/vertical.tsx" title="垂直分割线" description='通过 `type="vertical"` 设置为垂直分割线'></code>
+<code src="./demo/vertical.tsx" title="垂直分割线" description='通过 `type="vertical"` 设置为垂直分割线。'></code>
 
 ## API
 
