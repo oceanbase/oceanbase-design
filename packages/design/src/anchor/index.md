@@ -12,7 +12,7 @@ nav:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本" iframe="200"></code>
-<code src="./demo/horizontal.tsx" title="横向" iframe="250"></code>
+<code src="./demo/horizontal.tsx" title="横向锚点" iframe="250"></code>
 
 ## API
 
