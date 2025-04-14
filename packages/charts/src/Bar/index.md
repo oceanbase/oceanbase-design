@@ -12,7 +12,7 @@ nav:
 <code src="./demo/stack.tsx" title="堆叠条形图"></code>
 <code src="./demo/group.tsx" title="分组条形图"></code>
 <code src="./demo/percent.tsx" title="百分比条形图"></code>
-<code src="./demo/progress.tsx" title="进度条形图" description="展示百分比，支持设置警告水位线、危险水位线"></code>
+<code src="./demo/progress.tsx" title="进度条形图" description="展示百分比，支持设置警告水位线、危险水位线。"></code>
 <code src="./demo/range.tsx" title="区间条形图"></code>
 
 ## API

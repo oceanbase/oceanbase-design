@@ -23,12 +23,12 @@ nav:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基础抽屉" description="默认包含标题、内容。"></code>
 <code src="./demo/footer.tsx" title="开启页脚" description="内容较短时，页脚跟随内容展示；可通过 `onOk` 或 `footer` 开启页脚。"></code>
-<code src="./demo/footerExtra.tsx" title="设置默认页脚的额外内容" description="通过 `footerExtra` 设置，仅默认页脚生效"></code>
+<code src="./demo/footerExtra.tsx" title="设置默认页脚的额外内容" description="通过 `footerExtra` 设置，仅默认页脚生效。"></code>
 <code src="./demo/custom-footer.tsx" title="自定义页脚"></code>
 <code src="./demo/confirmLoading.tsx" title="确定按钮 loading"></code>
 <code src="./demo/form-drawer.tsx" title="用于 Form 表单" description="与 Form 表单合用，用于收集数据。"></code>
-<code src="./demo/descriptions.tsx" title="用于详情展示" description="与 Descriptions 合用，用于详情展示"></code>
-<code src="./demo/over-height.tsx" title="内容超出" description="支持滚动；内容较长时页脚置底展示"></code>
+<code src="./demo/descriptions.tsx" title="用于详情展示" description="与 Descriptions 合用，用于详情展示。"></code>
+<code src="./demo/over-height.tsx" title="内容超出" description="支持滚动；内容较长时页脚置底展示。"></code>
 
 ## API
 

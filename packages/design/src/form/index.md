@@ -14,8 +14,8 @@ nav:
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx" title="基本" description="默认为可选样式"></code>
-<code src="./demo/requiredMark-same-with-antd.tsx" title="设置为必选样式" description="可以通过全局或局部设置 `requiredMark`，让必选样式和 `antd` 保持一致"></code>
+<code src="./demo/basic.tsx" title="基本" description="默认为可选样式。"></code>
+<code src="./demo/requiredMark-same-with-antd.tsx" title="设置为必选样式" description="可以通过全局或局部设置 `requiredMark`，让必选样式和 `antd` 保持一致。"></code>
 <code src="./demo/form-item-tooltip.tsx" title="配置提示信息"></code>
 <code src="./demo/hideRequiredMark.tsx" title="hideRequiredMark" debug></code>
 <code src="./demo/pro-form.tsx" title="ProForm" debug></code>

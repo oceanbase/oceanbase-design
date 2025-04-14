@@ -23,8 +23,8 @@ markdown: |
 <code src="./demo/size.tsx" title="大小"></code>
 <code src="./demo/position.tsx" title="位置"></code>
 <code src="./demo/divider.tsx" title="分割线"></code>
-<code src="./demo/tag.tsx" title="标签" description="可设置选项卡后面的标签"></code>
-<code src="./demo/tab-pane.tsx" title="TabPane 语法糖（不推荐使用）" description="即将废弃的 API，不推荐使用，详见 antd [文档](https://4x.ant.design/components/tabs-cn/#4.23.0-%E7%94%A8%E6%B3%95%E5%8D%87%E7%BA%A7)"></code>
+<code src="./demo/tag.tsx" title="标签" description="可设置选项卡后面的标签。"></code>
+<code src="./demo/tab-pane.tsx" title="TabPane 语法糖（不推荐使用）" description="即将废弃的 API，不推荐使用，详见 antd [文档](https://4x.ant.design/components/tabs-cn/#4.23.0-%E7%94%A8%E6%B3%95%E5%8D%87%E7%BA%A7)。"></code>
 
 ## API
 

@@ -14,13 +14,13 @@ nav:
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx" title="基本" description="包含标题、操作区、内容区、页脚"></code>
-<code src="./demo/complete.tsx" iframe="600" title="完整使用" description="包含面包屑、页面返回、reload 刷新等，并支持页面滚动"></code>
+<code src="./demo/basic.tsx" title="基本" description="包含标题、操作区、内容区、页脚。"></code>
+<code src="./demo/complete.tsx" iframe="600" title="完整使用" description="包含面包屑、页面返回、reload 刷新等，并支持页面滚动。"></code>
 <code src="./demo/with-tabs.tsx" iframe="600" title="和 Tabs 组合使用"></code>
-<code src="./demo/header-less.tsx" iframe="600" title="无 PageHeader" description="头部内容为空"></code>
+<code src="./demo/header-less.tsx" iframe="600" title="无 PageHeader" description="头部内容为空。"></code>
 <code src="./demo/empty.tsx" title="空页面"></code>
 <code src="./demo/extra-footer.tsx" title="页头和页脚操作区" description="位于页头和页脚操作区的组件尺寸为 `large`，字体大小为 `middle`。" debug></code>
-<code src="./demo/title.tsx" title="title 属性" description="样式需要符合预期" debug></code>
+<code src="./demo/title.tsx" title="title 属性" description="样式需要符合预期。" debug></code>
 
 ## 与路由搭配使用
 

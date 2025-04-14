@@ -9,7 +9,7 @@ nav:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-<code src="./demo/menu-over-length.tsx" title="菜单项内容超长" description="自动省略 + tooltip"></code>
+<code src="./demo/menu-over-length.tsx" title="菜单项内容超长" description="自动省略 + tooltip。"></code>
 <code src="./demo/banner.tsx" title="带顶部 banner"></code>
 <code src="./demo/topHeader-icon.tsx" title="顶部导航 icon 模式"></code>
 <code src="./demo/topHeader-title.tsx" title="带顶部标题"></code>

@@ -16,10 +16,10 @@ demo:
 
 <!-- prettier-ignore -->
 <code src="./demo/count.tsx" title="数字徽标"></code>
-<code src="./demo/count-independent.tsx" title="独立使用的数字徽标" description="不包裹任何元素"></code>
+<code src="./demo/count-independent.tsx" title="独立使用的数字徽标" description="不包裹任何元素。"></code>
 <code src="./demo/dot.tsx" title="徽标点"></code>
-<code src="./demo/status.tsx" title="状态点" description="用于表示状态的小圆点"></code>
-<code src="./demo/status-icon.tsx" title="状态图标" description="使用图标标识状态，增强感知"></code>
+<code src="./demo/status.tsx" title="状态点" description="用于表示状态的小圆点。"></code>
+<code src="./demo/status-icon.tsx" title="状态图标" description="使用图标标识状态，增强感知。"></code>
 <code src="./demo/status-custom-icon.tsx" title="自定义状态图标"></code>
 <code src="./demo/status-inner.tsx" title="状态点和状态图标和其他组件组合使用"></code>
 <code src="./demo/ribbon.tsx" title="缎带徽标"></code>
