@@ -174,6 +174,7 @@ export default defineConfig({
             { title: 'Slider 滑动输入条', link: '/components/slider' },
             { title: 'DatePicker 日期选择框', link: '/components/date-picker' },
             { title: 'TimePicker 时间选择器', link: '/components/time-picker' },
+            { title: 'Upload 上传', link: '/components/upload' },
           ],
         },
         {
