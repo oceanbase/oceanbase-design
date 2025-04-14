@@ -51,6 +51,29 @@ export interface PickerPanelProps {
   locale: any;
 }
 
+/**
+ * 点击交互/时间选择交互
+ *  - 首次点击时，开始时间和结束时间都置为所点击的时间
+ *  - 第二次点击时，根据点击的时间，判断是开始时间还是结束时间进行赋值
+ *  - 新一轮交互开始...
+ */
+const CLICK_STATE = {
+  START: 'START',
+  END: 'END',
+};
+
+const useClickFSA = () => {
+  const [state, setState] = useState(CLICK_STATE.END);
+
+  const next = () => {
+    setState(ps => {
+      return ps === CLICK_STATE.START ? CLICK_STATE.END : CLICK_STATE.START;
+    });
+  };
+
+  return [state, next] as const;
+};
+
 const prefix = getPrefix('ranger-picker-panel');
 
 const prefixCls = 'ant-picker';
@@ -70,6 +93,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   } = props;
   const rootCls = useCSSVarCls(prefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
+  const [clickFSA, clickFSANext] = useClickFSA();
 
   const [defaultS, defaultE] = defaultValue;
   const [calendarValue, setCalendarValue] = React.useState(defaultValue);
@@ -107,7 +131,9 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   }
 
   const onPanelHover = date => {
-    setInternalHoverValues(date ? fillCalendarValue(date, activeIndex) : null);
+    setInternalHoverValues(
+      date && clickFSA === CLICK_STATE.START ? fillCalendarValue(date, activeIndex) : null
+    );
   };
 
   // 对日期进行排序
@@ -294,7 +320,12 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
               onPanelHover(res[0]);
             }}
             onSelect={(...res) => {
-              setCalendarValue(fillCalendarValue(res[0], activeIndex));
+              clickFSANext();
+              if (clickFSA === CLICK_STATE.END) {
+                setCalendarValue([res[0], res[0]]);
+              } else {
+                setCalendarValue(fillCalendarValue(res[0], activeIndex));
+              }
               setActiveIndex(index => {
                 return index + 1 === 2 ? 0 : index + 1;
               });
