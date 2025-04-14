@@ -145,6 +145,7 @@ export default defineConfig({
             { title: 'Anchor 锚点', link: '/components/anchor' },
             { title: 'Breadcrumb 面包屑', link: '/components/breadcrumb' },
             { title: 'Dropdown 下拉菜单', link: '/components/dropdown' },
+            { title: 'Steps 步骤条', link: '/components/steps' },
           ],
         },
         {
