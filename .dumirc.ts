@@ -157,6 +157,7 @@ export default defineConfig({
         {
           title: '数据录入',
           children: [
+            { title: 'AutoComplete 自动完成', link: '/components/auto-complete' },
             { title: 'Cascader 级联选择', link: '/components/cascader' },
             { title: 'Form 表单', link: '/components/form' },
             { title: 'Input 输入框', link: '/components/input' },

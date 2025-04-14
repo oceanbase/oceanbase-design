@@ -74,10 +74,14 @@ nav:
 
 <code src="./demo/tooltip.tsx"></code>
 
+### 禁止拖拽
+
+<code src="./demo/draggable.tsx"></code>
+
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
-| :-- | :-- | :-- | :-- | :-- | --- |
+| :-- | :-- | :-- | :-- | :-- |
 | type | 设置按钮类型，可选值为 `primary` 或者不设 | string | - | - |
 | hideable | 设置是否可隐藏 | boolean | true | - |
 | size | 设置按钮尺寸 | small \| default | default | - |
@@ -93,5 +97,6 @@ nav:
 | onDragStart | 开始拖动的方法回调 | () => void | - | - |
 | onDragEnd | 结束拖动的方法回调 | () => void | - | - |
 | onDrag | 拖动中的方法回调 | (offset: {right: number, bottom: number}) => void | - | - |
-| buttonStyle | 按钮的样式 | React.CSSProperties | - | 2.10.3 | - |
-| buttonClassName | 按钮的类 | string | - | 2.10.3 | - |
+| buttonStyle | 按钮的样式 | React.CSSProperties | - | - |
+| buttonClassName | 按钮的类 | string | - | - |
+| draggable | 是否可拖拽 | boolean | true | 0.4.11 |

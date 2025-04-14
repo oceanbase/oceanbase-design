@@ -8,6 +8,12 @@ group: 业务组件
 
 ---
 
+## 0.4.11
+
+`2024-03-31`
+
+- 🆕 SideTip 组件新增 `draggable` 属性，可关闭拖拽功能 [#999](https://github.com/oceanbase/oceanbase-design/pull/999)
+
 ## 0.4.9
 
 `2025-02-13`

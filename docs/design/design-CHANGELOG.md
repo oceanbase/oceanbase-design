@@ -12,7 +12,7 @@ group: 基础组件
 
 `2025-02-20`
 
-- 📖 Table 设计文档新增 高亮显式 规范。[#986](https://github.com/oceanbase/oceanbase-design/pull/986)
+- 📖 Table 设计文档新增 `高亮显式` 规范。[#986](https://github.com/oceanbase/oceanbase-design/pull/986)
 - 📖 Typography 新增可复制和在 Modal 中编辑的示例。[#985](https://github.com/oceanbase/oceanbase-design/pull/985)
 - ⭐️ ConfigProvider 移除 `injectStaticFunction` 属性，改为自动判断是否注入可消费全局配置的静态方法。[#981](https://github.com/oceanbase/oceanbase-design/pull/981)
 - Table

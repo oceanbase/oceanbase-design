@@ -32,6 +32,7 @@ interface DraggableProps {
   id?: string;
   getPopupContainer?: () => HTMLElement;
   children?: any;
+  draggable?: boolean;
 }
 
 interface DraggableState {
@@ -94,8 +95,9 @@ class Draggable extends React.Component<DraggableProps, DraggableState> {
   };
 
   componentDidMount() {
+    const { draggable = true } = this.props;
     window.addEventListener('resize', this.handleResize, false);
-    window.addEventListener('mousemove', this.handleMouseMove, false);
+    if (draggable) window.addEventListener('mousemove', this.handleMouseMove, false);
     window.addEventListener('mouseup', this.handleMouseUp, false);
     window.addEventListener('load', this.overlapDetection, false);
 
@@ -106,8 +108,9 @@ class Draggable extends React.Component<DraggableProps, DraggableState> {
   }
 
   componentWillUnmount() {
+    const { draggable = true } = this.props;
     window.removeEventListener('load', this.overlapDetection, false);
-    window.removeEventListener('mousemove', this.handleMouseMove, false);
+    if (draggable) window.removeEventListener('mousemove', this.handleMouseMove, false);
     window.removeEventListener('mouseup', this.handleMouseUp, false);
     window.removeEventListener('resize', this.handleResize, false);
   }
