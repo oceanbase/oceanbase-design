@@ -5,7 +5,7 @@ import {
   InfoCircleFilled,
   InfoCircleOutlined,
   QuestionCircleOutlined,
-} from '@ant-design/icons';
+} from '@oceanbase/icons';
 import classNames from 'classnames';
 import { getPrefix } from '../_util';
 import './index.less';
