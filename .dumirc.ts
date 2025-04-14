@@ -184,6 +184,7 @@ export default defineConfig({
             { title: 'Tabs 标签页', link: '/components/tabs' },
             { title: 'Tag 标签', link: '/components/tag' },
             { title: 'Tooltip 文字提示', link: '/components/tooltip' },
+            { title: 'Tour 漫游式引导', link: '/components/tour' },
             {
               title: 'Segmented 分段控制器',
               link: '/components/segmented',

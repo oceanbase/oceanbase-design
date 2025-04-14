@@ -84,6 +84,9 @@ export type { SliderSingleProps, SliderRangeProps } from './slider';
 export { default as Tooltip } from './tooltip';
 export type { TooltipProps } from './tooltip';
 
+export { default as Tour } from './tour';
+export type { TourProps, TourStepProps } from './tour';
+
 export { default as Segmented } from './segmented';
 export type { SegmentedProps } from './segmented';
 
