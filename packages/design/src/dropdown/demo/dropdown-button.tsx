@@ -49,7 +49,7 @@ const App: React.FC = () => (
     <Dropdown.Button menu={menuProps} onClick={handleButtonClick}>
       Dropdown
     </Dropdown.Button>
-    <Dropdown.Button menu={menuProps} placement="bottom" icon={<UserOutlined />}>
+    <Dropdown.Button menu={menuProps} icon={<UserOutlined />}>
       Dropdown
     </Dropdown.Button>
     <Dropdown.Button menu={menuProps} onClick={handleButtonClick} disabled>
