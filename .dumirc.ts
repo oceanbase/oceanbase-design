@@ -142,6 +142,7 @@ export default defineConfig({
         {
           title: '导航',
           children: [
+            { title: 'Anchor 锚点', link: '/components/anchor' },
             { title: 'Breadcrumb 面包屑', link: '/components/breadcrumb' },
             { title: 'Dropdown 下拉菜单', link: '/components/dropdown' },
           ],
