@@ -146,6 +146,7 @@ export default defineConfig({
             { title: 'Breadcrumb 面包屑', link: '/components/breadcrumb' },
             { title: 'Dropdown 下拉菜单', link: '/components/dropdown' },
             { title: 'Menu 导航菜单', link: '/components/menu' },
+            { title: 'Pagination 分页', link: '/components/pagination' },
             { title: 'Steps 步骤条', link: '/components/steps' },
           ],
         },
