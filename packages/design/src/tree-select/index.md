@@ -16,5 +16,8 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
 <code src="./demo/multiple.tsx" title="多选"></code>
+<code src="./demo/checkable.tsx" title="勾选" description="使用勾选框实现多选功能。"></code>
+<code src="./demo/load-data.tsx" title="异步加载数据" description="使用勾选框实现多选功能。"></code>
+<code src="./demo/line.tsx" title="连接线"></code>
 
 - 详见 antd TreeSelect 文档: https://ant.design/components/tree-select-cn/
