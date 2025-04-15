@@ -18,8 +18,8 @@ importers:
         specifier: ^5.6.1
         version: 5.6.1(react-dom@18.3.1)(react@18.3.1)
       '@babel/cli':
-        specifier: ^7.25.9
-        version: 7.25.9
+        specifier: ^7.27.0
+        version: 7.27.0
       '@babel/preset-env':
         specifier: ^7.26.9
         version: 7.26.9(@babel/core@7.26.0)
@@ -375,8 +375,8 @@ importers:
         version: 5.44.4(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@babel/cli':
-        specifier: ^7.25.9
-        version: 7.25.9
+        specifier: ^7.27.0
+        version: 7.27.0
       '@babel/preset-env':
         specifier: ^7.26.9
         version: 7.26.9(@babel/core@7.26.0)
@@ -1757,8 +1757,8 @@ packages:
       - react-is
     dev: true
 
-  /@babel/cli@7.25.9:
-    resolution: {integrity: sha512-I+02IfrTiSanpxJBlZQYb18qCxB6c2Ih371cVpfgIrPQrjAYkf45XxomTJOG8JBWX5GY35/+TmhCMdJ4ZPkL8Q==}
+  /@babel/cli@7.27.0:
+    resolution: {integrity: sha512-bZfxn8DRxwiVzDO5CEeV+7IqXeCkzI4yYnrQbpwjT76CUyossQc6RYE7n+xfm0/2k40lPaCpW0FhxYs7EBAetw==}
     engines: {node: '>=6.9.0'}
     hasBin: true
     peerDependencies:
@@ -10347,11 +10347,11 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /chokidar@4.0.1:
-    resolution: {integrity: sha512-n8enUVCED/KVRQlab1hr3MVpcVMvxtZjmEa956u+4YijlmQED223XMSYj2tLuKvr4jcCTzNNMpQDUer72MMmzA==}
+  /chokidar@4.0.3:
+    resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
     engines: {node: '>= 14.16.0'}
     dependencies:
-      readdirp: 4.0.2
+      readdirp: 4.1.2
     dev: true
 
   /chownr@1.1.4:
@@ -22360,9 +22360,9 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /readdirp@4.0.2:
-    resolution: {integrity: sha512-yDMz9g+VaZkqBYS/ozoBJwaBhTbZo3UNYQHNRw1D3UFQB8oHB4uS/tAODO+ZLjGWmUbKnIlOWO+aaIiAxrUWHA==}
-    engines: {node: '>= 14.16.0'}
+  /readdirp@4.1.2:
+    resolution: {integrity: sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==}
+    engines: {node: '>= 14.18.0'}
     dev: true
 
   /real-require@0.1.0:
@@ -23067,7 +23067,7 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
-      chokidar: 4.0.1
+      chokidar: 4.0.3
       immutable: 5.0.2
       source-map-js: 1.2.1
     optionalDependencies:
