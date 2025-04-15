@@ -119,7 +119,6 @@ export { default as DirectoryTreeOutlined } from './icons/DirectoryTreeOutlined'
 export { default as DistributedTransactionOutlined } from './icons/DistributedTransactionOutlined';
 export { default as DoubleFolderOutlined } from './icons/DoubleFolderOutlined';
 export { default as DoubleSecurityOutlined } from './icons/DoubleSecurityOutlined';
-export { default as DragOutlined } from './icons/DragOutlined';
 export { default as DrillDownOutlined } from './icons/DrillDownOutlined';
 export { default as ExecuteOutlined } from './icons/ExecuteOutlined';
 export { default as FoldOutlined } from './icons/FoldOutlined';
