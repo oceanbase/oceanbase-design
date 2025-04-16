@@ -31,6 +31,8 @@ const items: DescriptionsProps['items'] = [
   },
 ];
 
-const App: React.FC = () => <Descriptions title="User Info" layout="vertical" items={items} />;
+const App: React.FC = () => (
+  <Descriptions title="User Info" layout="vertical" items={items} column={1} />
+);
 
 export default App;

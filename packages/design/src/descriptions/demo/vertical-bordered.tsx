@@ -2,7 +2,7 @@ import React from 'react';
 import { Badge, Descriptions } from '@oceanbase/design';
 
 export default () => (
-  <Descriptions title="User Info" bordered>
+  <Descriptions title="User Info" layout="vertical" bordered>
     <Descriptions.Item label="Product">Cloud Database</Descriptions.Item>
     <Descriptions.Item label="Billing Mode">Prepaid</Descriptions.Item>
     <Descriptions.Item label="Renewal">YES</Descriptions.Item>

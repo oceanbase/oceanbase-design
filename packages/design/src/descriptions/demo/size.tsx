@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Descriptions, Radio } from '@oceanbase/design';
-import type { DescriptionsProps, RadioChangeEvent } from '@oceanbase/design';
+import { Descriptions, Form, Radio } from '@oceanbase/design';
+import type { DescriptionsProps } from '@oceanbase/design';
 
 const borderedItems: DescriptionsProps['items'] = [
   {
@@ -38,11 +38,11 @@ const borderedItems: DescriptionsProps['items'] = [
     label: 'Config Info',
     children: (
       <>
-        Data disk type: MongoDB
+        Data disk type: OceanBase
         <br />
         Database version: 3.4
         <br />
-        Package: dds.mongo.mid
+        Package: dds.oceanbase.mid
         <br />
         Storage space: 10 GB
         <br />
@@ -89,25 +89,56 @@ const items: DescriptionsProps['items'] = [
 ];
 
 const App: React.FC = () => {
+  const [layout, setLayout] = useState<'horizontal' | 'vertical'>('horizontal');
   const [size, setSize] = useState<'default' | 'middle' | 'small'>('default');
-
-  const onChange = (e: RadioChangeEvent) => {
-    console.log('size checked', e.target.value);
-    setSize(e.target.value);
-  };
 
   return (
     <div>
-      <Radio.Group onChange={onChange} value={size}>
-        <Radio value="default">default</Radio>
-        <Radio value="middle">middle</Radio>
-        <Radio value="small">small</Radio>
-      </Radio.Group>
+      <Form layout="inline">
+        <Form.Item label="layout" required={true}>
+          <Radio.Group
+            value={layout}
+            onChange={e => {
+              setLayout(e.target.value);
+            }}
+          >
+            <Radio.Button value="horizontal">horizontal</Radio.Button>
+            <Radio.Button value="vertical">vertical</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+        <Form.Item label="size" required={true}>
+          <Radio.Group
+            value={size}
+            onChange={e => {
+              setSize(e.target.value);
+            }}
+          >
+            <Radio.Button value="default">default</Radio.Button>
+            <Radio.Button value="middle">middle</Radio.Button>
+            <Radio.Button value="small">small</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+      </Form>
       <br />
-      <br />
-      <Descriptions title="Custom Size" size={size} items={items} />
-      <br />
-      <Descriptions bordered title="Custom Size" size={size} items={borderedItems} />
+      {layout === 'horizontal' ? (
+        <>
+          <Descriptions title="Custom Size" size={size} items={items} />
+          <br />
+          <Descriptions bordered title="Custom Size" size={size} items={borderedItems} />
+        </>
+      ) : (
+        <>
+          <Descriptions title="Custom Size" size={size} items={items} layout="vertical" />
+          <br />
+          <Descriptions
+            title="Custom Size"
+            size={size}
+            items={items}
+            layout="vertical"
+            column={1}
+          />
+        </>
+      )}
     </div>
   );
 };
