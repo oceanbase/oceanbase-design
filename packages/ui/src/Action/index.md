@@ -42,8 +42,9 @@ nav:
 | danger | 设置危险按钮 | boolean | false |
 | disabled | 是否禁用 | boolean | false |
 | loading | 设置加载状态 | boolean | false |
-| tooltip | 设置提示文案 | string | - |
 | fixed | 固定展示、不被折叠 | boolean | false |
+| divider | 位于下拉菜单内时是否带分割线 | boolean | false |
+| tooltip | 设置提示文案 | string | - |
 | onClick | 点击链接的回调 | async (event: React.MouseEvent<HTMLElement, MouseEvent>) => void \| (event: React.MouseEvent<HTMLElement, MouseEvent>) => void | - |
 | className | 设置按钮的样式名 | string | - |
 
@@ -53,8 +54,9 @@ nav:
 | :-- | :-- | :-- | :-- |
 | visible | 是否可见 | boolean | true |
 | loading | 设置加载状态 | boolean | false |
-| tooltip | 设置提示文案 | string | - |
 | disabled | 是否禁用 | boolean | false |
+| divider | 位于下拉菜单内时是否带分割线 | boolean | false |
 | fixed | 固定展示、不被折叠 | boolean | false |
+| tooltip | 设置提示文案 | string | - |
 | onClick | 点击链接的回调 | async (event: React.MouseEvent<HTMLElement, MouseEvent>) => void \| (event: React.MouseEvent<HTMLElement, MouseEvent>) => void | - |
 | className | 设置 link 的样式名 | string | - |
