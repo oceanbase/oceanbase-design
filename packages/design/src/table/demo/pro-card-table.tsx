@@ -86,7 +86,7 @@ const App: React.FC = () => {
             }}
           />
         </Form.Item>
-        <Form.Item label="Card body padding" required={true}>
+        <Form.Item label="Card body horizontal padding" required={true}>
           <Switch
             size="small"
             value={hasPadding}

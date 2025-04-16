@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { ProCard as AntProCard } from '@ant-design/pro-components';
 import type { ProCardProps } from '@ant-design/pro-components';
 import { ConfigProvider } from '@oceanbase/design';
+import { isHorizontalPaddingZero } from '@oceanbase/design/es/_util';
 import classNames from 'classnames';
 import useStyle from './style';
 
@@ -23,14 +24,13 @@ const ProCard: typeof AntProCard = ({
   const prefixCls = getPrefixCls('pro-card', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
 
-  const zeroPaddingList = [0, '0', '0px'];
-  // ProCard body has no padding
-  const noBodyPadding = zeroPaddingList.includes(bodyStyle?.padding as string | number) || ghost;
+  // ProCard body no horizontal padding
+  const noBodyHorizontalPadding = isHorizontalPaddingZero(bodyStyle?.padding) || ghost;
 
   const proCardCls = classNames(
     {
       [`${prefixCls}-has-title`]: !!title,
-      [`${prefixCls}-no-body-padding`]: noBodyPadding,
+      [`${prefixCls}-no-body-horizontal-padding`]: noBodyHorizontalPadding,
       [`${prefixCls}-no-divider`]: !headerBordered,
       [`${prefixCls}-contain-tabs`]: !!tabs,
     },

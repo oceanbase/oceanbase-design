@@ -6,6 +6,7 @@ import type { OBToken } from '../../_util/genComponentStyleHook';
 
 export const genProCardStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObject => {
   const { componentCls, antCls, prefixCls } = token;
+  const tableComponentCls = `${antCls}-table`;
   const tabsComponentCls = `${antCls}-tabs`;
   const tabsPrefixCls = `${prefixCls}-tabs`;
   return {
@@ -38,15 +39,25 @@ export const genProCardStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObje
         paddingInline: 0,
       },
     },
-    // no body padding card
-    [`${componentCls}${componentCls}-no-body-padding:not(${componentCls}-contain-tabs)`]: {
-      [`${componentCls}-header`]: {
-        paddingBlockEnd: token.padding,
+    // reduce margin between card title and table
+    [`&${componentCls}-has-title${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
+      [`${componentCls}-body`]: {
+        [`& > ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
+          {
+            marginTop: -token.marginSM,
+          },
       },
-      ...Card.genTableStyle(token.paddingLG, token),
     },
-    // no body padding small card
-    [`${componentCls}${componentCls}-no-body-padding${componentCls}-size-small:not(${componentCls}-contain-tabs)`]:
+    // no body horizontal padding card
+    [`${componentCls}${componentCls}-no-body-horizontal-padding:not(${componentCls}-contain-tabs)`]:
+      {
+        [`${componentCls}-header`]: {
+          paddingBlockEnd: token.padding,
+        },
+        ...Card.genTableStyle(token.paddingLG, token),
+      },
+    // no body horizontal padding small card
+    [`${componentCls}${componentCls}-no-body-horizontal-padding${componentCls}-size-small:not(${componentCls}-contain-tabs)`]:
       {
         [`${componentCls}-header`]: {
           paddingBlockEnd: token.paddingXS,
