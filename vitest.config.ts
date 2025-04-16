@@ -6,7 +6,9 @@ const pkgList = fs
   .readdirSync(path.join(__dirname, './packages'))
   .filter((pkg: string) => pkg.charAt(0) !== '.');
 
-const alias = {};
+const alias = {
+  '@oceanbase/design/es/_util': path.join(__dirname, `./packages/design/src/_util`),
+};
 
 pkgList.forEach((shortName: string) => {
   const name = `@oceanbase/${shortName}`;

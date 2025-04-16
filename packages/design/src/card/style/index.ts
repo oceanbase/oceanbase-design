@@ -9,7 +9,7 @@ export type CardToken = FullToken<'Card'> & {
 };
 
 export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSObject => {
-  const { componentCls, antCls } = token;
+  const { antCls } = token;
   const tableComponentCls = `${antCls}-table`;
   return {
     [`${tableComponentCls}-wrapper`]: {
@@ -36,19 +36,12 @@ export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSOb
         },
       },
     },
-    [`&${componentCls}-has-title${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
-      [`${componentCls}-body`]: {
-        [`& > ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
-          {
-            marginTop: -token.marginSM,
-          },
-      },
-    },
   };
 };
 
 export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObject => {
-  const { componentCls, tabsComponentCls, tabsPrefixCls, paddingSM, paddingLG } = token;
+  const { componentCls, antCls, tabsComponentCls, tabsPrefixCls, paddingSM, paddingLG } = token;
+  const tableComponentCls = `${antCls}-table`;
   return {
     [`${componentCls}`]: {
       // nested Card style
@@ -96,13 +89,20 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
         marginBottom: 0,
       },
     },
-    // no body padding card
-    [`${componentCls}${componentCls}-no-body-padding`]: genTableStyle(paddingLG, token),
-    // no body padding small card
-    [`${componentCls}${componentCls}-no-body-padding${componentCls}-small`]: genTableStyle(
-      paddingSM,
-      token
-    ),
+    // reduce margin between card title and table
+    [`&${componentCls}-has-title${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
+      [`${componentCls}-body`]: {
+        [`& > ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
+          {
+            marginTop: -token.marginSM,
+          },
+      },
+    },
+    // no body horizontal padding card
+    [`${componentCls}${componentCls}-no-body-horizontal-padding`]: genTableStyle(paddingLG, token),
+    // no body horizontal padding small card
+    [`${componentCls}${componentCls}-no-body-horizontal-padding${componentCls}-small`]:
+      genTableStyle(paddingSM, token),
   };
 };
 
