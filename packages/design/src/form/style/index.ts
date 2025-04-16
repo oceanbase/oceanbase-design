@@ -9,11 +9,8 @@ export const genFormStyle: GenerateStyle<FormToken> = (token: FormToken): CSSObj
   return {
     [`${componentCls}`]: {
       [`${componentCls}-item`]: {
-        [`${componentCls}-item-extra`]: {
+        [`${componentCls}-item-additional`]: {
           marginTop: token.marginXXS,
-        },
-        [`${componentCls}-item-explain + ${componentCls}-item-extra`]: {
-          marginTop: 0,
         },
       },
     },
