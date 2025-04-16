@@ -13,22 +13,23 @@ const onFinishFailed = (errorInfo: any) => {
 const App: React.FC = () => (
   <Form
     name="basic"
-    labelCol={{ span: 6 }}
-    wrapperCol={{ span: 10 }}
+    layout="horizontal"
     onFinish={onFinish}
     onFinishFailed={onFinishFailed}
+    style={{ maxWidth: 400 }}
   >
     <Form.Item
       label="Username"
       name="username"
+      action={<a>Action</a>}
       rules={[{ required: true, message: 'Please input your username!' }]}
     >
       <Input />
     </Form.Item>
-    <Form.Item label="Address" name="address">
+    <Form.Item label="Address" name="address" action={<a>Action</a>}>
       <Input />
     </Form.Item>
-    <Form.Item wrapperCol={{ offset: 6, span: 10 }}>
+    <Form.Item>
       <Button type="primary" htmlType="submit">
         Submit
       </Button>

@@ -17,6 +17,7 @@ nav:
 <code src="./demo/basic.tsx" title="基本" description="默认为可选样式。"></code>
 <code src="./demo/requiredMark-same-with-antd.tsx" title="设置为必选样式" description="通过 `requiredMark` 进行设置。"></code>
 <code src="./demo/form-item-tooltip.tsx" title="设置提示信息" description="可在 `Form.Item` 上设置 `tooltip` 和 `extra` 提示信息。"></code>
+<code src="./demo/form-item-action.tsx" title="操作项" description="可在 `Form.Item` 上设置 `action` 操作项，仅垂直布局生效。"></code>
 <code src="./demo/layout.tsx" title="表单布局"></code>
 <code src="./demo/multiple-layout.tsx" title="表单混合布局"></code>
 <code src="./demo/hideRequiredMark.tsx" title="hideRequiredMark" debug></code>
@@ -28,5 +29,11 @@ nav:
 | :-- | :-- | :-- | :-- | :-- |
 | preserve | 当字段被删除时保留字段值。你可以通过 `getFieldsValue(true)` 来获取保留字段值 | boolean | false | 0.3.1 |
 | requiredMark | 设置必选或可选样式。此为 Form 配置，Form.Item 无法单独配置 | boolean \| `optional` \| ((label: ReactNode, info: { required: boolean }) => ReactNode) | `optional` | - |
+
+### Form.Item
+
+| 参数   | 说明                   | 类型      | 默认值 | 版本   |
+| :----- | :--------------------- | :-------- | :----- | :----- |
+| action | 操作项，仅垂直布局生效 | ReactNode | -      | 0.4.10 |
 
 - 更多 API 详见 antd Form 文档: https://ant.design/components/form-cn
