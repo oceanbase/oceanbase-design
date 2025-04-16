@@ -13,6 +13,7 @@ export interface BaseProps extends ButtonProps {
   enableLoading?: boolean;
   tooltip?: string;
   loading?: boolean;
+  divider?: boolean;
 }
 
 export class ActionButton extends React.PureComponent<BaseProps> {
