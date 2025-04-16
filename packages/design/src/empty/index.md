@@ -21,6 +21,7 @@ nav:
 <code src="./demo/basic.tsx" title="默认" description="简单展示。"></code>
 <code src="./demo/complete.tsx" title="完整使用" description="图片为 Empty.PRESENTED_IMAGE_COLORED，包含标题、描述和操作。"></code>
 <code src="./demo/complete-debug.tsx" title="完整使用 debug" description="图片为 Empty.PRESENTED_IMAGE_COLORED，包含标题、描述和操作" debug></code>
+<code src="./demo/tab-switch.tsx" title="Tab 切换" debug></code>
 <code src="./demo/database.tsx" title="数据库实例插图" description="图片为 Empty.PRESENTED_IMAGE_DATABASE。"></code>
 <code src="./demo/image.tsx" title="自定义图片" description="可设置图片链接或 ReactNode。"></code>
 <code src="./demo/steps.tsx" title="步骤提示"></code>
