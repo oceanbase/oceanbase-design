@@ -26,6 +26,7 @@ export default defineConfig({
   extraRehypePlugins: [rehypePlugin],
   extraRemarkPlugins: [remarkPlugin],
   extraBabelPresets: [require.resolve('@emotion/babel-preset-css-prop')],
+  extraBabelPlugins: ['react-inline-svg-unique-id'],
   chainWebpack: config => {
     const esPath = path.join(__dirname, 'packages/design/es');
     const libPath = path.join(__dirname, 'packages/design/es');
