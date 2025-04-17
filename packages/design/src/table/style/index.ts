@@ -155,6 +155,11 @@ export const genTableStyle = (token: TableToken): CSSObject => {
 
     // 带边框的表格样式
     [`${componentCls}-wrapper ${componentCls}${componentCls}-bordered`]: {
+      [`${componentCls}-thead > tr`]: {
+        ['th']: {
+          backgroundColor: colorFillQuaternary,
+        },
+      },
       [`${componentCls}-footer`]: {
         borderRadius: `0px 0px ${token.borderRadiusLG}px ${token.borderRadiusLG}px`,
       },
