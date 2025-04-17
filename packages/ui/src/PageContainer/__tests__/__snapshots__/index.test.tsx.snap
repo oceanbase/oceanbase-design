@@ -99,7 +99,7 @@ exports[`PageContainer > basic 1`] = `
             class="ant-card-body"
           >
             <div
-              class="ant-descriptions"
+              class="ant-descriptions ant-descriptions-horizontal"
             >
               <div
                 class="ant-descriptions-header"
@@ -570,6 +570,7 @@ exports[`PageContainer > extra and footer 1`] = `
                   >
                     <button
                       class="ant-input-clear-icon ant-input-clear-icon-hidden"
+                      tabindex="-1"
                       type="button"
                     >
                       <span
@@ -862,7 +863,7 @@ exports[`PageContainer > extra and footer 1`] = `
             class="ant-card-body"
           >
             <div
-              class="ant-descriptions"
+              class="ant-descriptions ant-descriptions-horizontal"
             >
               <div
                 class="ant-descriptions-view"
@@ -1073,7 +1074,7 @@ exports[`PageContainer > title 1`] = `
             class="ant-card-body"
           >
             <div
-              class="ant-descriptions"
+              class="ant-descriptions ant-descriptions-horizontal"
             >
               <div
                 class="ant-descriptions-header"

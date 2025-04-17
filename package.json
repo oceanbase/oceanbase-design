@@ -116,8 +116,8 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "vanilla-jsoneditor": "^0.23.8",
+    "vi-canvas-mock": "^1.0.0",
     "vitest": "^2.1.9",
-    "vitest-canvas-mock": "^0.3.3",
     "vitest-fetch-mock": "^0.2.2",
     "web-vitals": "^3.5.2"
   }

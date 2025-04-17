@@ -38,24 +38,6 @@ export default defineConfig({
       '**/Pie/__tests__/donut.test.tsx',
       '**/ChartProvider/__tests__/theme.test.tsx',
     ],
-    deps: {
-      optimizer: {
-        web: {
-          // ref: https://github.com/wobsoriano/vitest-canvas-mock
-          include: ['vitest-canvas-mock'],
-        },
-      },
-    },
-    poolOptions: {
-      threads: {
-        singleThread: true,
-      },
-    },
-    environmentOptions: {
-      jsdom: {
-        resources: 'usable',
-      },
-    },
     sequence: {
       // 按顺序调用钩子，和 jest 行为保持一致
       // ref: https://cn.vitest.dev/guide/migration.html#%E9%92%A9%E5%AD%90

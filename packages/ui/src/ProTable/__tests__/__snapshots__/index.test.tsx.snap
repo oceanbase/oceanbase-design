@@ -35,7 +35,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                 style="flex: 0 0 80px;"
               >
                 <label
-                  class=""
+                  class="ant-form-item-required-mark-hidden"
                   for="name"
                   title="Name"
                 >
@@ -68,6 +68,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                       >
                         <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
+                          tabindex="-1"
                           type="button"
                         >
                           <span
@@ -115,7 +116,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                 style="flex: 0 0 80px;"
               >
                 <label
-                  class=""
+                  class="ant-form-item-required-mark-hidden"
                   for="age"
                   title="Age"
                 >
@@ -148,6 +149,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                       >
                         <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
+                          tabindex="-1"
                           type="button"
                         >
                           <span
@@ -191,7 +193,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
               style="flex: 0 0 80px;"
             >
               <label
-                class=""
+                class="ant-form-item-required-mark-hidden"
                 for="address"
                 title="Address"
               >
@@ -224,6 +226,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                     >
                       <button
                         class="ant-input-clear-icon ant-input-clear-icon-hidden"
+                        tabindex="-1"
                         type="button"
                       >
                         <span
@@ -268,7 +271,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                 class="ant-col ant-form-item-label"
               >
                 <label
-                  class="ant-form-item-no-colon"
+                  class="ant-form-item-required-mark-hidden ant-form-item-no-colon"
                   title=" "
                 >
                    
@@ -924,7 +927,7 @@ exports[`ProTable > default pagination should work 1`] = `
                 style="flex: 0 0 80px;"
               >
                 <label
-                  class=""
+                  class="ant-form-item-required-mark-hidden"
                   for="name"
                   title="Name"
                 >
@@ -957,6 +960,7 @@ exports[`ProTable > default pagination should work 1`] = `
                       >
                         <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
+                          tabindex="-1"
                           type="button"
                         >
                           <span
@@ -1004,7 +1008,7 @@ exports[`ProTable > default pagination should work 1`] = `
                 style="flex: 0 0 80px;"
               >
                 <label
-                  class=""
+                  class="ant-form-item-required-mark-hidden"
                   for="age"
                   title="Age"
                 >
@@ -1037,6 +1041,7 @@ exports[`ProTable > default pagination should work 1`] = `
                       >
                         <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
+                          tabindex="-1"
                           type="button"
                         >
                           <span
@@ -1080,7 +1085,7 @@ exports[`ProTable > default pagination should work 1`] = `
               style="flex: 0 0 80px;"
             >
               <label
-                class=""
+                class="ant-form-item-required-mark-hidden"
                 for="address"
                 title="Address"
               >
@@ -1113,6 +1118,7 @@ exports[`ProTable > default pagination should work 1`] = `
                     >
                       <button
                         class="ant-input-clear-icon ant-input-clear-icon-hidden"
+                        tabindex="-1"
                         type="button"
                       >
                         <span
@@ -1157,7 +1163,7 @@ exports[`ProTable > default pagination should work 1`] = `
                 class="ant-col ant-form-item-label"
               >
                 <label
-                  class="ant-form-item-no-colon"
+                  class="ant-form-item-required-mark-hidden ant-form-item-no-colon"
                   title=" "
                 >
                    
@@ -1885,7 +1891,7 @@ exports[`ProTable > render 1`] = `
                 style="flex: 0 0 80px;"
               >
                 <label
-                  class=""
+                  class="ant-form-item-required-mark-hidden"
                   for="name"
                   title="Name"
                 >
@@ -1918,6 +1924,7 @@ exports[`ProTable > render 1`] = `
                       >
                         <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
+                          tabindex="-1"
                           type="button"
                         >
                           <span
@@ -1965,7 +1972,7 @@ exports[`ProTable > render 1`] = `
                 style="flex: 0 0 80px;"
               >
                 <label
-                  class=""
+                  class="ant-form-item-required-mark-hidden"
                   for="age"
                   title="Age"
                 >
@@ -1998,6 +2005,7 @@ exports[`ProTable > render 1`] = `
                       >
                         <button
                           class="ant-input-clear-icon ant-input-clear-icon-hidden"
+                          tabindex="-1"
                           type="button"
                         >
                           <span
@@ -2041,7 +2049,7 @@ exports[`ProTable > render 1`] = `
               style="flex: 0 0 80px;"
             >
               <label
-                class=""
+                class="ant-form-item-required-mark-hidden"
                 for="address"
                 title="Address"
               >
@@ -2074,6 +2082,7 @@ exports[`ProTable > render 1`] = `
                     >
                       <button
                         class="ant-input-clear-icon ant-input-clear-icon-hidden"
+                        tabindex="-1"
                         type="button"
                       >
                         <span
@@ -2118,7 +2127,7 @@ exports[`ProTable > render 1`] = `
                 class="ant-col ant-form-item-label"
               >
                 <label
-                  class="ant-form-item-no-colon"
+                  class="ant-form-item-required-mark-hidden ant-form-item-no-colon"
                   title=" "
                 >
                    
