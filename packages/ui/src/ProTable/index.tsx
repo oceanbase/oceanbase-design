@@ -1,15 +1,19 @@
 import React, { useContext } from 'react';
 import { ProTable as AntProTable } from '@ant-design/pro-components';
-import type { ProTableProps } from '@ant-design/pro-components';
+import type { ProTableProps as AntProTableProps } from '@ant-design/pro-components';
 import { ConfigProvider, Empty, Table } from '@oceanbase/design';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 import useLightFilterStyle from '../LightFilter/style';
 import useStyle from './style';
 
-export { ProTableProps };
+export interface ProTableProps<T, U, ValueType> extends AntProTableProps<T, U, ValueType> {
+  innerBordered?: boolean;
+}
 
-const ProTable: typeof AntProTable = ({
+// type CompoundedComponent = React.FC<ProTableProps<T, U, ValueType>> & typeof AntProTable;
+
+function ProTable<T, U, ValueType>({
   form,
   headerTitle,
   options,
@@ -17,6 +21,8 @@ const ProTable: typeof AntProTable = ({
   toolbar,
   toolBarRender,
   size,
+  bordered,
+  innerBordered,
   expandable,
   rowSelection,
   pagination: customPagination,
@@ -27,7 +33,7 @@ const ProTable: typeof AntProTable = ({
   tableClassName,
   className,
   ...restProps
-}) => {
+}: ProTableProps<T, U, ValueType>) {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
 
   // customize Table style
@@ -39,6 +45,7 @@ const ProTable: typeof AntProTable = ({
       [`${tablePrefixCls}-expandable`]: !isEmpty(expandable),
       [`${tablePrefixCls}-selectable`]: !!rowSelection,
       [`${tablePrefixCls}-has-footer`]: !!footer,
+      [`${tablePrefixCls}-inner-bordered`]: innerBordered,
     },
     tableClassName
   );
@@ -64,6 +71,7 @@ const ProTable: typeof AntProTable = ({
           // default size change to `large` as same as Table
           defaultSize="large"
           size={size}
+          bordered={bordered || innerBordered}
           form={{
             // query form should remove required mark
             requiredMark: false,
@@ -119,7 +127,7 @@ const ProTable: typeof AntProTable = ({
       )
     )
   );
-};
+}
 
 ProTable.Summary = AntProTable.Summary;
 
