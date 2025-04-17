@@ -166,10 +166,10 @@ transform fixed style to antd v5 design token.
 -       <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '1px solid #d9d9d9' }} />
 -       <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4d4f' }}></Button>
 -     </div>
-+     (<div>
++     <div>
 +       <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBorder}` }} />
 +       <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
-+     </div>)
++     </div>
     );
   };
 
@@ -196,11 +196,11 @@ export default Demo;
 -         <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4d4f' }}></Button>
 -         <div color="#fafafa" border="1px solid #fafafa" />
 -       </div>
-+       (<div>
++       <div>
 +         <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBgLayout}` }} />
 +         <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
 +         <div color={token.colorBgLayout} border={`1px solid ${token.colorBgLayout}`} />
-+       </div>)
++       </div>
       );
     }
   }
