@@ -13,6 +13,7 @@ const App: React.FC = () => {
 
   // table
   const [bordered, setBordered] = useState(false);
+  const [innerBordered, setInnerBordered] = useState(false);
   const [pagination, setPagination] = useState(true);
   const [expandable, setExpandable] = useState(true);
   const [selectable, setSelectable] = useState(true);
@@ -115,6 +116,15 @@ const App: React.FC = () => {
             }}
           />
         </Form.Item>
+        <Form.Item label="Table inner bordered" required={true}>
+          <Switch
+            size="small"
+            value={innerBordered}
+            onChange={value => {
+              setInnerBordered(value);
+            }}
+          />
+        </Form.Item>
         <Form.Item label="Table pagination" required={true}>
           <Switch
             size="small"
@@ -175,6 +185,7 @@ const App: React.FC = () => {
       >
         <Table
           bordered={bordered}
+          innerBordered={innerBordered}
           columns={columns}
           dataSource={dataSource}
           rowKey={record => record.key}

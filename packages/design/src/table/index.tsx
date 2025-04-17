@@ -30,6 +30,7 @@ export interface TableLocale extends AntTableLocale {
 }
 
 export interface TableProps<T> extends AntTableProps<T> {
+  innerBordered?: boolean;
   columns?: ColumnsType<T>;
   cancelText?: string;
   collapseText?: string;
@@ -45,6 +46,8 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   const {
     locale: customLocale,
     size,
+    bordered,
+    innerBordered,
     columns,
     footer,
     pagination: customPagination,
@@ -85,6 +88,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
       [`${prefixCls}-expandable`]: !isEmpty(expandable),
       [`${prefixCls}-selectable`]: !!rowSelection,
       [`${prefixCls}-has-footer`]: !!footer,
+      [`${prefixCls}-inner-bordered`]: innerBordered,
     },
     className
   );
@@ -225,6 +229,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
         ),
       }}
       size={size}
+      bordered={bordered || innerBordered}
       columns={newColumns}
       rowClassName={(...args) => {
         return classNames(

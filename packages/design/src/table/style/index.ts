@@ -165,6 +165,19 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       },
     },
 
+    // 带边框的表格样式
+    [`${componentCls}-wrapper${componentCls}-inner-bordered ${componentCls}-bordered`]: {
+      [`${componentCls}-container`]: {
+        borderInlineStart: 'none',
+        borderTop: 'none',
+        [`${componentCls}-thead > tr > th, ${componentCls}-tbody > tr > td`]: {
+          ['&:last-child']: {
+            borderInlineEnd: 'none',
+          },
+        },
+      },
+    },
+
     // 不带边框的表格样式
     [`${componentCls}-wrapper ${componentCls}:not(${componentCls}-bordered)`]: {
       // 单元格通用样式
