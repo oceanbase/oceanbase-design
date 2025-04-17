@@ -112,4 +112,10 @@ describe('Table', () => {
     expect(container.querySelector('.ant-pagination-options')).toBeFalsy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
+
+  it('innerBordered should work', () => {
+    const { container, asFragment } = render(<TableTest innerBordered={true} />);
+    expect(container.querySelector('.ant-table-inner-bordered .ant-table-bordered')).toBeTruthy();
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
 });
