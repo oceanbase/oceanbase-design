@@ -61,8 +61,13 @@ export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
           [`${typographyComponentCls}-edit-content`]: {
             insetInlineStart: 0,
             marginTop: 0,
+            marginBottom: 0,
           },
         },
+      },
+      [`${componentCls}-item-container:has(${`${typographyComponentCls}-edit-content`})`]: {
+        alignItems: 'center',
+        height: token.fontSize * token.lineHeight,
       },
     },
     [`${componentCls}${componentCls}-middle`]: genVerticalStyle('middle', token),
