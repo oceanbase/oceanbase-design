@@ -16,18 +16,15 @@ export const genVerticalStyle = (
   const paddingMap = {
     default: {
       paddingIn: token.paddingXS,
-      paddingOut: token.padding,
-      paddingOutColumn1: token.paddingLG,
+      paddingOut: token.paddingLG,
     },
     middle: {
       paddingIn: token.paddingXXS,
-      paddingOut: token.paddingSM,
-      paddingOutColumn1: token.padding,
+      paddingOut: token.padding,
     },
     small: {
       paddingIn: token.paddingXXS,
-      paddingOut: token.paddingXS,
-      paddingOutColumn1: token.paddingSM,
+      paddingOut: token.paddingSM,
     },
   };
   const paddingConfig = paddingMap[size];
@@ -39,20 +36,9 @@ export const genVerticalStyle = (
           paddingBottom: paddingConfig.paddingIn,
         },
       },
-      // vertical Descriptions = 1 column: mock readonly Form style
-      [`&${componentCls}-column-1`]: {
-        [`${componentCls}-row:nth-child(2n)`]: {
-          [`& > th, & > td`]: {
-            paddingBottom: paddingConfig.paddingOutColumn1,
-          },
-        },
-      },
-      // vertical Descriptions > 1 column
-      [`&:not(${componentCls}-column-1)`]: {
-        [`${componentCls}-row:nth-child(2n)`]: {
-          [`& > th, & > td`]: {
-            paddingBottom: paddingConfig.paddingOut,
-          },
+      [`${componentCls}-row:nth-child(2n)`]: {
+        [`& > th, & > td`]: {
+          paddingBottom: paddingConfig.paddingOut,
         },
       },
     },
