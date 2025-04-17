@@ -8,6 +8,28 @@ group: 基础组件
 
 ---
 
+## 0.4.10
+
+`2024-04-18`
+
+- 📖 新增 AutoComplete 的示例和文档。[#1012](https://github.com/oceanbase/oceanbase-design/pull/1012)
+- 📖 新增 Anchor 的文档和示例。[#1013](https://github.com/oceanbase/oceanbase-design/pull/1013)
+- 📖 新增 Steps 的文档和示例。[#1014](https://github.com/oceanbase/oceanbase-design/pull/1014)
+- 📖 新增 Menu 的文档和示例。[#1015](https://github.com/oceanbase/oceanbase-design/pull/1015)
+- 📖 新增 Pagination 的文档和示例。[#1016](https://github.com/oceanbase/oceanbase-design/pull/1016)
+- 📖 新增 Upload 的文档和示例。[#1017](https://github.com/oceanbase/oceanbase-design/pull/1017)
+- 📖 新增 Tree 的文档和示例。[#1018](https://github.com/oceanbase/oceanbase-design/pull/1018)
+- 📖 新增 TreeSelect 的文档和示例。[#1019](https://github.com/oceanbase/oceanbase-design/pull/1019)
+- 📖 [图标] 展示更多的图标。[#1024](https://github.com/oceanbase/oceanbase-design/pull/1024)
+- 🆕 Form.Item 新增 `action` 属性，用于设置操作项。[#1028](https://github.com/oceanbase/oceanbase-design/pull/1028)
+- Table
+  - 🆕 Table 新增 `innerBordered` 属性，用于设置内部边框。[#1036](https://github.com/oceanbase/oceanbase-design/pull/1036)
+  - 💄 优化 Table 在无水平间距卡片内的样式，包括第一列和卡片标题对齐、最后一列和卡片操作区对齐、分页器左右增加间距。[#1030](https://github.com/oceanbase/oceanbase-design/pull/1030)
+  - 💄 带边框 Table 的表头改为灰底。[#1035](https://github.com/oceanbase/oceanbase-design/pull/1035)
+- 🐞 修复多个 Empty 同时出现时 svg id 冲突导致插图展示异常的问题。[#1027](https://github.com/oceanbase/oceanbase-design/pull/1027)
+- 🐞 修复编辑态的 Typography 在 Descriptions 内被遮挡和没有垂直居中的问题。[#1033](https://github.com/oceanbase/oceanbase-design/pull/1033)
+- 💄 优化 Descriptions 在垂直布局下的间距，并且多列垂直和单列垂直的间距不同。[#1031](https://github.com/oceanbase/oceanbase-design/pull/1031) [#1032](https://github.com/oceanbase/oceanbase-design/pull/1032)
+
 ## 0.4.9
 
 `2025-02-20`
