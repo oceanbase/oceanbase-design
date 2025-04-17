@@ -29,8 +29,9 @@ type CompoundedComponent = React.FC<DescriptionsProps> & {
 const Descriptions: CompoundedComponent = ({
   children,
   bordered,
-  layout,
+  layout = 'horizontal',
   colon = layout === 'vertical' ? false : undefined,
+  column = 3,
   items,
   prefixCls: customizePrefixCls,
   className,
@@ -40,7 +41,11 @@ const Descriptions: CompoundedComponent = ({
   const prefixCls = getPrefixCls('descriptions', customizePrefixCls);
   const typographyPrefixCls = getPrefixCls('typography', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls, typographyPrefixCls);
-  const descriptionsCls = classNames(className);
+  const descriptionsCls = classNames(className, {
+    [`${prefixCls}-vertical`]: layout === 'vertical',
+    [`${prefixCls}-horizontal`]: layout === 'horizontal',
+    [`${prefixCls}-column-${column}`]: true,
+  });
 
   const newItems = useItems(items, children, bordered);
 
@@ -48,6 +53,7 @@ const Descriptions: CompoundedComponent = ({
     <AntDescriptions
       layout={layout}
       colon={colon}
+      column={column}
       bordered={bordered}
       items={newItems}
       prefixCls={customizePrefixCls}
