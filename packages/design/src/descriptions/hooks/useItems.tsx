@@ -31,14 +31,30 @@ function convertItem(props: DescriptionsItemType, bordered?: boolean) {
       title: itemChildren,
     },
   };
-  const { ellipsis = defaultEllipsis, ...restContentProps } = contentProps || {};
+  const { ellipsis = defaultEllipsis, editable, ...restContentProps } = contentProps || {};
   return {
     ...restItemProps,
     // 仅无边框时定制 children
     children: bordered ? (
       itemChildren
     ) : (
-      <Typography.Text {...restContentProps} ellipsis={getEllipsisConfig(ellipsis, itemChildren)}>
+      <Typography.Text
+        {...restContentProps}
+        ellipsis={getEllipsisConfig(ellipsis, itemChildren)}
+        editable={
+          // disable autoSize by default to avoid over height
+          typeof editable === 'object'
+            ? {
+                autoSize: false,
+                ...editable,
+              }
+            : editable === true
+              ? {
+                  autoSize: false,
+                }
+              : editable
+        }
+      >
         {itemChildren}
       </Typography.Text>
     ),

@@ -10,7 +10,6 @@ import {
 } from '@oceanbase/design';
 import type { ButtonSize } from '@oceanbase/design/es/button';
 import { EllipsisOutlined, LoadingOutlined } from '@oceanbase/icons';
-import classNames from 'classnames';
 import { isBoolean, max, omit } from 'lodash';
 import type { BaseProps } from './Item';
 import useStyle from './style';
@@ -158,21 +157,25 @@ export default ({
                     ? action.props.disabled
                     : getDefaultDisabled(action.key as string));
                 return (
-                  // @ts-ignore
-                  <Menu.Item
-                    key={(actionKey as string) ?? index.toString()}
-                    // @ts-ignore
-                    onClick={({ domEvent }) => {
-                      action.props.onClick?.(domEvent as React.MouseEvent<HTMLElement, MouseEvent>);
-                    }}
-                    {...omit(action.props, 'disabled')}
-                    disabled={actionDisabled}
-                  >
-                    <Tooltip title={action.props.tooltip}>
-                      {action.props.loading && <LoadingOutlined />}{' '}
-                      {action.props.children || action}
-                    </Tooltip>
-                  </Menu.Item>
+                  <>
+                    <Menu.Item
+                      key={(actionKey as string) ?? index.toString()}
+                      // @ts-ignore
+                      onClick={({ domEvent }) => {
+                        action.props.onClick?.(
+                          domEvent as React.MouseEvent<HTMLElement, MouseEvent>
+                        );
+                      }}
+                      {...omit(action.props, ['disabled'])}
+                      disabled={actionDisabled}
+                    >
+                      <Tooltip title={action.props.tooltip}>
+                        {action.props.loading && <LoadingOutlined />}{' '}
+                        {action.props.children || action}
+                      </Tooltip>
+                    </Menu.Item>
+                    {action.props.divider && <Menu.Divider />}
+                  </>
                 );
               })}
             </Menu>

@@ -29,7 +29,7 @@ for (let i = 1; i < 100; i++) {
   });
 }
 
-export const ProTableTest: React.FC<ProTableProps<any, any>> = props => (
+export const ProTableTest: React.FC<ProTableProps<any, any, any>> = props => (
   <ProTable dataSource={dataSource} columns={columns} {...props} />
 );
 
@@ -80,6 +80,12 @@ describe('ProTable', () => {
     expect(container.querySelector('.ant-pagination-total-text')).toBeFalsy();
     // pagination.showSizeChanger
     expect(container.querySelector('.ant-pagination-options')).toBeFalsy();
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
+
+  it('innerBordered should work', () => {
+    const { container, asFragment } = render(<ProTableTest innerBordered={true} />);
+    expect(container.querySelector('.ant-table-inner-bordered .ant-table-bordered')).toBeTruthy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 });

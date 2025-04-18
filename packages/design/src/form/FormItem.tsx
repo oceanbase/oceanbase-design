@@ -1,10 +1,14 @@
-import { Form as AntForm } from 'antd';
-import type { FormItemProps as AntFormItemProps } from 'antd/es/form';
+import React, { useContext } from 'react';
 import type { ReactNode } from 'react';
-import React from 'react';
+import { Form as AntForm } from 'antd';
+import { FormContext } from 'antd/es/form/context';
+import type { FormItemProps as AntFormItemProps } from 'antd/es/form';
+import { isPlainObject } from 'lodash';
+import classNames from 'classnames';
+import ConfigProvider from '../config-provider';
 import type { TooltipProps } from '../tooltip';
 import { useTooltipTypeList } from '../tooltip/hooks/useTooltipTypeList';
-import { isPlainObject } from 'lodash';
+import useStyle from './style';
 
 const AntFormItem = AntForm.Item;
 
@@ -16,9 +20,31 @@ export type LabelTooltipType = WrapperTooltipProps | React.ReactNode;
 
 export interface FormItemProps extends AntFormItemProps {
   tooltip?: WrapperTooltipProps | ReactNode;
+  action?: ReactNode;
 }
 
-const Item: React.FC<FormItemProps> = ({ children, tooltip, ...restProps }) => {
+type CompoundedComponent = React.FC<FormItemProps> & {
+  useStatus: typeof AntFormItem.useStatus;
+};
+
+const FormItem: CompoundedComponent = ({
+  children,
+  label,
+  tooltip,
+  action,
+  layout,
+  prefixCls: customizePrefixCls,
+  className,
+  ...restProps
+}) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+
+  const prefixCls = getPrefixCls('form', customizePrefixCls);
+  const { wrapSSR } = useStyle(prefixCls);
+  const formItemCls = classNames(className);
+
+  const { vertical } = useContext(FormContext);
+
   const typeList = useTooltipTypeList();
   // tooltip config
   if (typeof tooltip === 'object' && !React.isValidElement(tooltip)) {
@@ -34,20 +60,30 @@ const Item: React.FC<FormItemProps> = ({ children, tooltip, ...restProps }) => {
     };
   }
 
-  return (
+  return wrapSSR(
     <AntFormItem
+      label={
+        action && (vertical || layout === 'vertical') ? (
+          <>
+            {label}
+            {action && <span className={`${prefixCls}-item-action`}>{action}</span>}
+          </>
+        ) : (
+          label
+        )
+      }
       tooltip={tooltip}
       // auto set required for Switch children to hide optional mark
       // @ts-ignore
       required={isPlainObject(children) && children.type?.__ANT_SWITCH ? true : undefined}
+      prefixCls={customizePrefixCls}
+      className={formItemCls}
       {...restProps}
     >
       {children}
     </AntFormItem>
   );
 };
-
-const FormItem = Item as typeof AntFormItem;
 
 FormItem.useStatus = AntFormItem.useStatus;
 

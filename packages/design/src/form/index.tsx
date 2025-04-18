@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { Form as AntForm } from 'antd';
 import type { FormProps as AntFormProps } from 'antd/es/form';
+import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import Item from './FormItem';
+import useStyle from './style';
 
 export * from 'antd/es/form';
 export type { FormItemProps } from './FormItem';
@@ -20,9 +22,19 @@ type CompoundedComponent = React.FC<FormProps> & {
   create: typeof AntForm.create;
 };
 
-const Form: CompoundedComponent = ({ hideRequiredMark, ...restProps }) => {
-  const { form: contextForm } = useContext(ConfigProvider.ConfigContext);
-  return (
+const Form: CompoundedComponent = ({
+  hideRequiredMark,
+  prefixCls: customizePrefixCls,
+  className,
+  ...restProps
+}) => {
+  const { getPrefixCls, form: contextForm } = useContext(ConfigProvider.ConfigContext);
+
+  const prefixCls = getPrefixCls('form', customizePrefixCls);
+  const { wrapSSR } = useStyle(prefixCls);
+  const formCls = classNames(className);
+
+  return wrapSSR(
     // @ts-ignore to ignore children type error
     <AntForm
       requiredMark={
@@ -35,6 +47,8 @@ const Form: CompoundedComponent = ({ hideRequiredMark, ...restProps }) => {
       }
       hideRequiredMark={hideRequiredMark}
       preserve={false}
+      prefixCls={customizePrefixCls}
+      className={formCls}
       {...restProps}
     />
   );

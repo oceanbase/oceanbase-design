@@ -505,6 +505,9 @@ const GlobalStyle: React.FC = () => {
         .dumi-default-previewer-meta,
         .dumi-default-previewer-desc > .markdown {
           border-color: ${token.colorBorderSecondary};
+          p {
+            margin: 0px;
+          }
         }
 
         .dumi-default-previewer-desc > h5 {

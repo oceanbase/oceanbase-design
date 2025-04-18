@@ -11,7 +11,7 @@ nav:
 <code src="./demo/basic.tsx" title="基础折线图"></code>
 <code src="./demo/step.tsx" title="阶梯折线图"></code>
 <code src="./demo/multiple.tsx" title="多折线图"></code>
-<code src="./demo/auto-fit.tsx" title="自适应容器高度" description="调整浏览器窗口高度即可验证"></code>
+<code src="./demo/auto-fit.tsx" title="自适应容器高度" description="调整浏览器窗口高度即可验证。"></code>
 <code src="./demo/tooltip-scrollable.tsx" title="Tooltip 可滚动" description="适用于 Tooltip 项较多、超出图表的场景，可通过 `tooltip.scrollable: true` 配置进行开启。"></code>
 
 ## API

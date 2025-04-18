@@ -26,6 +26,7 @@ export default defineConfig({
   extraRehypePlugins: [rehypePlugin],
   extraRemarkPlugins: [remarkPlugin],
   extraBabelPresets: [require.resolve('@emotion/babel-preset-css-prop')],
+  extraBabelPlugins: ['react-inline-svg-unique-id'],
   chainWebpack: config => {
     const esPath = path.join(__dirname, 'packages/design/es');
     const libPath = path.join(__dirname, 'packages/design/es');
@@ -142,8 +143,12 @@ export default defineConfig({
         {
           title: '导航',
           children: [
+            { title: 'Anchor 锚点', link: '/components/anchor' },
             { title: 'Breadcrumb 面包屑', link: '/components/breadcrumb' },
             { title: 'Dropdown 下拉菜单', link: '/components/dropdown' },
+            { title: 'Menu 导航菜单', link: '/components/menu' },
+            { title: 'Pagination 分页', link: '/components/pagination' },
+            { title: 'Steps 步骤条', link: '/components/steps' },
           ],
         },
         {
@@ -157,6 +162,7 @@ export default defineConfig({
         {
           title: '数据录入',
           children: [
+            { title: 'AutoComplete 自动完成', link: '/components/auto-complete' },
             { title: 'Cascader 级联选择', link: '/components/cascader' },
             { title: 'Form 表单', link: '/components/form' },
             { title: 'Input 输入框', link: '/components/input' },
@@ -165,10 +171,11 @@ export default defineConfig({
             { title: 'Checkbox 多选框', link: '/components/checkbox' },
             { title: 'Switch 开关', link: '/components/switch' },
             { title: 'Select 选择器', link: '/components/select' },
-            { title: 'TreeSelect 树选择', link: '/components/tree-select' },
             { title: 'Slider 滑动输入条', link: '/components/slider' },
             { title: 'DatePicker 日期选择框', link: '/components/date-picker' },
             { title: 'TimePicker 时间选择器', link: '/components/time-picker' },
+            { title: 'TreeSelect 树选择', link: '/components/tree-select' },
+            { title: 'Upload 上传', link: '/components/upload' },
           ],
         },
         {
@@ -180,14 +187,15 @@ export default defineConfig({
             { title: 'Empty 空状态', link: '/components/empty' },
             { title: 'List 列表', link: '/components/list' },
             { title: 'Popover 气泡卡片', link: '/components/popover' },
-            { title: 'Table 表格', link: '/components/table' },
-            { title: 'Tabs 标签页', link: '/components/tabs' },
-            { title: 'Tag 标签', link: '/components/tag' },
-            { title: 'Tooltip 文字提示', link: '/components/tooltip' },
             {
               title: 'Segmented 分段控制器',
               link: '/components/segmented',
             },
+            { title: 'Table 表格', link: '/components/table' },
+            { title: 'Tabs 标签页', link: '/components/tabs' },
+            { title: 'Tag 标签', link: '/components/tag' },
+            { title: 'Tooltip 文字提示', link: '/components/tooltip' },
+            { title: 'Tree 树形控件', link: '/components/tree' },
           ],
         },
         {

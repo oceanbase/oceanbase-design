@@ -7,6 +7,7 @@ import type {
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
+import { isHorizontalPaddingZero } from '../_util';
 import useStyle, { genTableStyle } from './style';
 
 export * from 'antd/es/card/Card';
@@ -45,17 +46,14 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     const tabsPrefixCls = getPrefixCls('tabs', customizePrefixCls);
     const { wrapSSR } = useStyle(prefixCls, tabsPrefixCls);
 
-    const zeroPaddingList = [0, '0', '0px'];
-    // card body has no padding
-    const noBodyPadding =
-      zeroPaddingList.includes(bodyStyle?.padding as string | number) ||
-      zeroPaddingList.includes(styles?.body?.padding as string | number);
-
+    // card body no horizontal padding
+    const noBodyHorizontalPadding =
+      isHorizontalPaddingZero(bodyStyle?.padding) || isHorizontalPaddingZero(styles?.body?.padding);
     const cardCls = classNames(
       {
         [`${prefixCls}-has-title`]: !!title,
         [`${prefixCls}-no-divider`]: !divided,
-        [`${prefixCls}-no-body-padding`]: noBodyPadding,
+        [`${prefixCls}-no-body-horizontal-padding`]: noBodyHorizontalPadding,
       },
       className
     );

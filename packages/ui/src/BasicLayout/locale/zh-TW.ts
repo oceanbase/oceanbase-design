@@ -1,6 +1,7 @@
 export default {
   help: '幫助',
   welcome: '歡迎頁',
+  versionNotice: '版本公告',
   viewDocs: '查看用戶手冊',
   downloadDocs: '下載用戶手冊',
   about: '關於',

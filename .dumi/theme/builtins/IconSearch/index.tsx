@@ -12,7 +12,7 @@ import difference from 'lodash/difference';
 import Category from './Category';
 import { FilledIcon, OutlinedIcon, TwoToneIcon, ColoredIcon } from './themeIcons';
 import type { CategoriesKeys } from './fields';
-import { categories } from './fields';
+import { categories, displayIconNames } from './fields';
 import useSiteToken from '../../../hooks/useSiteToken';
 
 export enum ThemeType {
@@ -67,7 +67,12 @@ const IconSearch: React.FC = () => {
     theme: ThemeType.Outlined,
   });
 
-  const newIconNames: string[] = difference(Object.keys(AllIcons), Object.keys(AntdIcons));
+  const newIconNames: string[] = difference(
+    Object.keys(AllIcons),
+    Object.keys(AntdIcons).filter(
+      item => !displayIconNames.includes(item.replace(/(Outlined|Filled|TwoTone|Colored)$/, ''))
+    )
+  );
 
   const handleSearchIcon = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
     setDisplayState(prevState => ({ ...prevState, searchKey: e.target.value }));

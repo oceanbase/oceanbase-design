@@ -8,6 +8,23 @@ group: 业务组件
 
 ---
 
+## 0.4.12
+
+`2024-04-18`
+
+- 🆕 Action.Button 和 Action.Link 新增 `divider` 属性，用于设置位于下拉菜单内时是否带分割线。[#1029](https://github.com/oceanbase/oceanbase-design/pull/1029)
+- 🆕 BasicLayout 新增 `topHeader.versionNoticePath` 属性，用于设置顶部导航栏的版本公告。[#1008](https://github.com/oceanbase/oceanbase-design/pull/1008) [@zousongxia](https://github.com/zousongxia)
+- 🆕 ProTable 新增 `innerBordered` 属性，用于设置内部边框。[#1037](https://github.com/oceanbase/oceanbase-design/pull/1037)
+- DateRanger
+  - ⭐️ 日期格式改为 `mask`，自动对齐日期和时间格式。[#1010](https://github.com/oceanbase/oceanbase-design/pull/1010) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - 💄 优化日期选择面板交互，降低二次选择的复杂性和视觉干扰。[#1006](https://github.com/oceanbase/oceanbase-design/pull/1006) [@wzc520pyfm](https://github.com/wzc520pyfm)
+
+## 0.4.11
+
+`2024-03-31`
+
+- 🆕 SideTip 组件新增 `draggable` 属性，可关闭拖拽功能 [#999](https://github.com/oceanbase/oceanbase-design/pull/999)
+
 ## 0.4.9
 
 `2025-02-13`

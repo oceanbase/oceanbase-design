@@ -14,7 +14,7 @@ exports[`Form > Form hideRequiredMark should be priority over ConfigProvider for
         class="ant-col ant-form-item-label"
       >
         <label
-          class="ant-form-item-required"
+          class="ant-form-item-required ant-form-item-required-mark-hidden"
           for="name"
           title="Name"
         >
@@ -53,7 +53,7 @@ exports[`Form > Form hideRequiredMark should be priority over ConfigProvider for
         class="ant-col ant-form-item-label"
       >
         <label
-          class=""
+          class="ant-form-item-required-mark-hidden"
           for="address"
           title="Address"
         >

@@ -2,7 +2,7 @@
 
 exports[`Descriptions > contentProps should work for Descriptions.Item 1`] = `
 <div
-  class="ant-descriptions"
+  class="ant-descriptions ant-descriptions-horizontal"
 >
   <div
     class="ant-descriptions-header"
@@ -54,7 +54,7 @@ exports[`Descriptions > contentProps should work for Descriptions.Item 1`] = `
 
 exports[`Descriptions > contentProps should work for items 1`] = `
 <div
-  class="ant-descriptions"
+  class="ant-descriptions ant-descriptions-horizontal"
 >
   <div
     class="ant-descriptions-header"
@@ -106,7 +106,7 @@ exports[`Descriptions > contentProps should work for items 1`] = `
 
 exports[`Descriptions > remove colon for vertical layout by default for Descriptions.Item 1`] = `
 <div
-  class="ant-descriptions"
+  class="ant-descriptions ant-descriptions-vertical"
 >
   <div
     class="ant-descriptions-header"
@@ -311,7 +311,7 @@ exports[`Descriptions > remove colon for vertical layout by default for Descript
 
 exports[`Descriptions > remove colon for vertical layout by default for items 1`] = `
 <div
-  class="ant-descriptions"
+  class="ant-descriptions ant-descriptions-vertical"
 >
   <div
     class="ant-descriptions-header"
@@ -516,7 +516,7 @@ exports[`Descriptions > remove colon for vertical layout by default for items 1`
 
 exports[`Descriptions > render for Descriptions.Item 1`] = `
 <div
-  class="ant-descriptions"
+  class="ant-descriptions ant-descriptions-horizontal"
 >
   <div
     class="ant-descriptions-header"
@@ -668,7 +668,7 @@ exports[`Descriptions > render for Descriptions.Item 1`] = `
 
 exports[`Descriptions > render for items 1`] = `
 <div
-  class="ant-descriptions"
+  class="ant-descriptions ant-descriptions-horizontal"
 >
   <div
     class="ant-descriptions-header"

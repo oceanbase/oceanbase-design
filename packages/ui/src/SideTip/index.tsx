@@ -160,6 +160,12 @@ export interface SideTipProps extends LocaleWrapperProps {
    */
   getPopupContainer?: () => HTMLElement;
   children?: any;
+  /**
+   * @title 是否可拖拽
+   * @description 是否可拖拽
+   * @default true
+   */
+  draggable?: boolean;
 }
 
 export interface SideTipState {
@@ -197,6 +203,7 @@ const SideTip: React.FC<SideTipProps> = props => {
     id,
     hideable = true,
     disabled = false,
+    draggable = true,
     getPopupContainer,
   } = props;
 
@@ -350,6 +357,7 @@ const SideTip: React.FC<SideTipProps> = props => {
       onDrag={onDrag}
       getPopupContainer={getPopupContainer}
       className={className}
+      draggable={draggable}
     >
       {tooltip && tooltip.title ? (
         <Tooltip {...tooltip} getPopupContainer={() => buttonRef.current}>
