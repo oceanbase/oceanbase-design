@@ -13,7 +13,7 @@ const onFinishFailed = (errorInfo: any) => {
 const App: React.FC = () => (
   <Form
     name="basic"
-    layout="horizontal"
+    layout="vertical"
     onFinish={onFinish}
     onFinishFailed={onFinishFailed}
     style={{ maxWidth: 400 }}
