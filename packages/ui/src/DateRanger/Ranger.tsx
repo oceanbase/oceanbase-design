@@ -475,7 +475,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                 size={size}
                 suffixIcon={null}
                 // 透传 props 到 antd Ranger
-                {...omit(rest, 'value', 'onChange')}
+                {...omit(rest, 'value', 'onChange', 'style')}
                 open={false}
               />
             </span>
