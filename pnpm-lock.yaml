@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@ant-design/colors':
-        specifier: ^7.2.0
-        version: 7.2.0
+        specifier: ^8.0.0
+        version: 8.0.0
       '@ant-design/cssinjs':
         specifier: ^1.23.0
         version: 1.23.0(react-dom@18.3.1)(react@18.3.1)
@@ -405,8 +405,8 @@ importers:
   packages/icons:
     dependencies:
       '@ant-design/colors':
-        specifier: ^7.2.0
-        version: 7.2.0
+        specifier: ^8.0.0
+        version: 8.0.0
       '@ant-design/icons':
         specifier: ^5.6.1
         version: 5.6.1(react-dom@18.3.1)(react@18.3.1)
@@ -587,6 +587,11 @@ packages:
     dependencies:
       '@ant-design/fast-color': 2.0.6
 
+  /@ant-design/colors@8.0.0:
+    resolution: {integrity: sha512-6YzkKCw30EI/E9kHOIXsQDHmMvTllT8STzjMb4K2qzit33RW2pqCJP0sk+hidBntXxE+Vz4n1+RvCTfBw6OErw==}
+    dependencies:
+      '@ant-design/fast-color': 3.0.0
+
   /@ant-design/cssinjs-utils@1.1.3(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-nOoQMLW1l+xR1Co8NFVYiP8pZp3VjIIzqV6D6ShYF2ljtdwWJn5WSsH+7kvCktXL/yhEtWURKOfH5Xz/gzlwsg==}
     peerDependencies:
@@ -620,6 +625,10 @@ packages:
     engines: {node: '>=8.x'}
     dependencies:
       '@babel/runtime': 7.27.0
+
+  /@ant-design/fast-color@3.0.0:
+    resolution: {integrity: sha512-eqvpP7xEDm2S7dUzl5srEQCBTXZMmY3ekf97zI+M2DHOYyKdJGH0qua0JACHTqbkRnD/KHFQP9J1uMJ/XWVzzA==}
+    engines: {node: '>=8.x'}
 
   /@ant-design/flowchart@1.2.2(@ant-design/icons@5.6.1)(antd@5.24.8)(classnames@2.5.1)(lodash@4.17.21)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-bzHZ81qqHjWIrXcCMInDB6eMTzbswaVCOAdUTCQJ+B45aybkVsU9LMCKquyOwRM7U7PWNfPC9S/lAlx2i2BvBQ==}
