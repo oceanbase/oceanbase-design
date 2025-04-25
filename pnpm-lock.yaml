@@ -237,8 +237,8 @@ importers:
         specifier: ^2.1.9
         version: 2.1.9(@types/node@22.14.1)
       vitest-fetch-mock:
-        specifier: ^0.2.2
-        version: 0.2.2(vitest@2.1.9)
+        specifier: ^0.4.5
+        version: 0.4.5(vitest@2.1.9)
       web-vitals:
         specifier: ^3.5.2
         version: 3.5.2
@@ -10688,6 +10688,7 @@ packages:
       node-fetch: 2.7.0
     transitivePeerDependencies:
       - encoding
+    dev: false
 
   /cross-spawn-async@2.2.5:
     resolution: {integrity: sha512-snteb3aVrxYYOX9e8BabYFK9WhCDhTlw1YQktfTthBogxri4/2r9U2nQc0ffY73ZAxezDc+U8gvHAeU1wy1ubQ==}
@@ -24598,16 +24599,13 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest-fetch-mock@0.2.2(vitest@2.1.9):
-    resolution: {integrity: sha512-XmH6QgTSjCWrqXoPREIdbj40T7i1xnGmAsTAgfckoO75W1IEHKR8hcPCQ7SO16RsdW1t85oUm6pcQRLeBgjVYQ==}
-    engines: {node: '>=14.14.0'}
+  /vitest-fetch-mock@0.4.5(vitest@2.1.9):
+    resolution: {integrity: sha512-nhWdCQIGtaSEUVl96pMm0WggyDGPDv5FUy/Q9Hx3cs2RGmh3Q/uRsLClGbdG3kXBkJ3br5yTUjB2MeW25TwdOA==}
+    engines: {node: '>=18.0.0'}
     peerDependencies:
-      vitest: '>=0.16.0'
+      vitest: '>=2.0.0'
     dependencies:
-      cross-fetch: 3.2.0
       vitest: 2.1.9(@types/node@22.14.1)
-    transitivePeerDependencies:
-      - encoding
     dev: true
 
   /vitest@2.1.9(@types/node@22.14.1):
