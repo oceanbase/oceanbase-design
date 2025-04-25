@@ -46,7 +46,7 @@
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.24.7",
+    "antd": "^5.24.8",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
     "lottie-web": "^5.12.2",
