@@ -5,7 +5,8 @@ import {
   UserOutlined,
 } from '@oceanbase/icons';
 import { Alert, Button, Form, Input, Space } from '@oceanbase/design';
-import type { FormProps, InputProps, FormItemProps } from '@oceanbase/design';
+import type { FormProps, InputProps } from '@oceanbase/design';
+import type { PasswordProps } from '@oceanbase/design/es/input';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { theme } from '@oceanbase/design';
@@ -30,7 +31,7 @@ export interface ILoginFormProps extends FormProps {
   passwordOptional?: boolean;
   componentProps?: {
     username: InputProps;
-    password: typeof Input.Password;
+    password: PasswordProps;
     authCode: InputProps;
   };
 }

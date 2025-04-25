@@ -31,9 +31,7 @@ export default () => {
         onFinish: values => {
           message.success(`登录：用户名: ${values.username} 密码: ${values.password}`);
         },
-        passwordOptional: true,
         initialValues: { username: 'root' },
-        // 定制组件 props
         componentProps: {
           username: {
             disabled: true,
