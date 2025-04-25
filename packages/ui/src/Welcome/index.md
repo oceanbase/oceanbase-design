@@ -7,8 +7,8 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-
 <code src="./demo/with-card-type.tsx" title="stepType 类型"></code>
 
 ## API

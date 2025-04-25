@@ -1,3 +1,4 @@
+const { upperFirst } = require('lodash');
 const { addSubmoduleImport } = require('./utils');
 const { tokenParse } = require('./utils/token');
 const { printOptions } = require('./utils/config');
@@ -29,6 +30,10 @@ function isTopIdentifier(path) {
     path = path.parentPath;
   }
   return isTop;
+}
+
+function isFirstUpperCase(str) {
+  return upperFirst(str) === str;
 }
 
 function importComponent(j, root, options) {
@@ -72,14 +77,24 @@ function importComponent(j, root, options) {
               name: name => name.includes('useToken'),
             }).length > 0;
           const parentType = path.parentPath.value?.type;
-          // React function component
-          if (includeJSXElement && parentType !== 'ClassMethod') {
+          const functionName =
+            parentType === 'FunctionDeclaration'
+              ? path.parentPath.value?.id?.name
+              : parentType === 'ArrowFunctionExpression'
+                ? path.parentPath.parentPath?.value?.id?.name
+                : undefined;
+          if (
+            includeJSXElement &&
+            functionName &&
+            // React function component or React hooks
+            (isFirstUpperCase(functionName) || functionName.startsWith('use'))
+          ) {
             // avoid duplicate insert when it's existed
             if (!includeUseTokenStatement) {
               const insertString = 'const { token } = theme.useToken()';
               // insert `const { token } = theme.useToken()`
               path.get('body').value.unshift(j.expressionStatement(j.identifier(insertString)));
-              // import theme from @oceanbase/design
+              // import `theme` from @oceanbase/design
               addSubmoduleImport(j, root, {
                 moduleName: '@oceanbase/design',
                 importedName: 'theme',
@@ -88,7 +103,7 @@ function importComponent(j, root, options) {
             }
           } else {
             // React class component and static file (not react component)
-            // import token from @oceanbase/design
+            // import `token` from @oceanbase/design
             addSubmoduleImport(j, root, {
               moduleName: '@oceanbase/design',
               importedName: 'token',
@@ -102,7 +117,7 @@ function importComponent(j, root, options) {
       .find(j.Identifier)
       .filter(path => isTopIdentifier(path) && path.value.name?.includes('token.'))
       .forEach(() => {
-        // import token from @oceanbase/design
+        // import `token` from @oceanbase/design
         addSubmoduleImport(j, root, {
           moduleName: '@oceanbase/design',
           importedName: 'token',

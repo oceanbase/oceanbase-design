@@ -39,6 +39,11 @@ describe('Table', () => {
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 
+  it('render empty', () => {
+    const { container } = render(<TableTest dataSource={[]} />);
+    expect(container.querySelector('.ant-table-empty-wrapper')).toBeTruthy();
+  });
+
   it('hideOnSinglePage should be false by default', () => {
     const { container, asFragment } = render(<TableTest dataSource={dataSource.slice(0, 10)} />);
     expect(container.querySelector('.ant-pagination')).toBeTruthy();
@@ -105,6 +110,12 @@ describe('Table', () => {
     expect(container.querySelector('.ant-pagination-total-text').textContent).toBe('');
     // pagination.showSizeChanger
     expect(container.querySelector('.ant-pagination-options')).toBeFalsy();
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
+
+  it('innerBordered should work', () => {
+    const { container, asFragment } = render(<TableTest innerBordered={true} />);
+    expect(container.querySelector('.ant-table-inner-bordered .ant-table-bordered')).toBeTruthy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 });

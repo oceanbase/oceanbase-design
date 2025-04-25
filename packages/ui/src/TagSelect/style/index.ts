@@ -1,5 +1,5 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
+import type { FullToken, GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type TagSelectToken = FullToken<any>;
@@ -42,9 +42,7 @@ const genImgCoverStyle = (width: string, height: string): CSSObject => {
   };
 };
 
-export const genTagSelectStyle: GenerateStyle<TagSelectToken> = (
-  token: TagSelectToken
-): CSSObject => {
+export const genTagSelectStyle = (token: TagSelectToken): CSSObject => {
   const { componentCls } = token;
 
   return {

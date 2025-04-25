@@ -1,23 +1,29 @@
 import { isNullValue } from '@oceanbase/util';
-import { Space, Tabs as AntTabs, Tag } from 'antd';
+import { Divider, Space, Tabs as AntTabs, Tag } from 'antd';
 import React, { useContext } from 'react';
 import type { TabsProps as AntTabsProps, TabsPosition as AntTabsPosition } from 'antd/es/tabs';
 import type { Tab as AntTab } from 'rc-tabs/es/interface';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import useLegacyItems from './hooks/useLegacyItems';
-import useStyle from './style';
+import useStyle, { genTabsStyle } from './style';
 import TabPane from './TabPane';
+import type { TabPaneProps } from './TabPane';
 
 export * from 'antd/es/tabs';
+export type { TabPaneProps };
 
-export type { TabPaneProps } from './TabPane';
-
-export interface Tab extends AntTab {
-  tag?: React.ReactNode;
+export interface AntTabOptional extends Omit<AntTab, 'key' | 'label'> {
+  key?: string;
+  label?: React.ReactNode;
 }
 
-export interface TabsProps extends AntTabsProps {
+export type Tab = {
+  tag?: React.ReactNode;
+  divider?: boolean;
+} & (AntTab | AntTabOptional);
+
+export interface TabsProps extends Omit<AntTabsProps, 'items'> {
   items?: Tab[];
 }
 
@@ -38,9 +44,25 @@ const Tabs = ({
   const tabsCls = classNames(className);
 
   const isHorizontal = !tabPosition || tabPosition === 'top' || tabPosition === 'bottom';
+  const dividerList = items?.filter(item => item.divider) || [];
 
-  let newItems = items?.map(item => {
-    if (!isNullValue(item.tag)) {
+  let newItems = useLegacyItems(items, children);
+
+  newItems = newItems?.map(item => {
+    if (!isNullValue(item.divider)) {
+      return {
+        ...item,
+        key: `divider-${dividerList?.indexOf(item)}`,
+        label: (
+          <Divider
+            // horizontal tabs => vertical divider
+            type={isHorizontal ? 'vertical' : 'horizontal'}
+            className={`${prefixCls}-divider`}
+          />
+        ),
+        disabled: true,
+      };
+    } else if (!isNullValue(item.tag)) {
       return {
         ...item,
         label: (
@@ -56,14 +78,11 @@ const Tabs = ({
     return item;
   });
 
-  newItems = useLegacyItems(newItems, children, prefixCls);
-
   return wrapSSR(
     <AntTabs
-      items={newItems}
+      items={newItems as AntTabsProps['items']}
       type={type}
       tabPosition={tabPosition}
-      tabBarGutter={!type || type === 'line' ? (isHorizontal ? 24 : 0) : undefined}
       prefixCls={customizePrefixCls}
       className={tabsCls}
       {...restProps}
@@ -72,6 +91,7 @@ const Tabs = ({
 };
 
 Tabs.TabPane = TabPane;
+Tabs.genTabsStyle = genTabsStyle;
 
 if (process.env.NODE_ENV !== 'production') {
   Tabs.displayName = AntTabs.displayName;

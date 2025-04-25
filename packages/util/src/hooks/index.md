@@ -86,7 +86,7 @@ QueryParameter
   - 降序排序: {field},desc
 
 ```jsx
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useTableData } from '@oceanbase/util';
 
 const [name, setName] = useState('');

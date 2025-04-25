@@ -6,7 +6,9 @@ const pkgList = fs
   .readdirSync(path.join(__dirname, './packages'))
   .filter((pkg: string) => pkg.charAt(0) !== '.');
 
-const alias = {};
+const alias = {
+  '@oceanbase/design/es/_util': path.join(__dirname, `./packages/design/src/_util`),
+};
 
 pkgList.forEach((shortName: string) => {
   const name = `@oceanbase/${shortName}`;
@@ -34,25 +36,8 @@ export default defineConfig({
       '**/DualAxes/__tests__/ref.test.tsx',
       '**/Line/__tests__/ref.test.tsx',
       '**/Pie/__tests__/donut.test.tsx',
+      '**/ChartProvider/__tests__/theme.test.tsx',
     ],
-    deps: {
-      optimizer: {
-        web: {
-          // ref: https://github.com/wobsoriano/vitest-canvas-mock
-          include: ['vitest-canvas-mock'],
-        },
-      },
-    },
-    poolOptions: {
-      threads: {
-        singleThread: true,
-      },
-    },
-    environmentOptions: {
-      jsdom: {
-        resources: 'usable',
-      },
-    },
     sequence: {
       // 按顺序调用钩子，和 jest 行为保持一致
       // ref: https://cn.vitest.dev/guide/migration.html#%E9%92%A9%E5%AD%90

@@ -1,5 +1,5 @@
-import { Button, Form, Input, message } from '@oceanbase/design';
 import React from 'react';
+import { Button, Form, Input, message } from '@oceanbase/design';
 
 const onFinish = (values: any) => {
   message.success('Success');
@@ -7,7 +7,6 @@ const onFinish = (values: any) => {
 };
 
 const onFinishFailed = (errorInfo: any) => {
-  message.error('Failed');
   console.log(errorInfo);
 };
 

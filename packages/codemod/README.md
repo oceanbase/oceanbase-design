@@ -78,18 +78,18 @@ import components and types from `antd` to `@oceanbase/design` and `@oceanbase/u
   export default Demo;
 ```
 
-### `page-container-to-oceanbase-ui`
+### `techui-and-pro-components-to-oceanbase-ui`
 
-import `PageContainer` from `@alipay/tech-ui` to `@ant-design/pro-components` and `@oceanbase/ui`.
+import `PageContainer` from `@alipay/tech-ui` and `@ant-design/pro-components` to `@oceanbase/ui`.
 
 ```diff
   import React from 'react';
 - import { PageContainer, ProTable, WelcomeCard } from '@alipay/tech-ui';
 - import type { PageContainerProps, ProTableProps, WelcomeCardProps } from '@alipay/tech-ui';
-+ import { ProTable, WelcomeCard } from '@alipay/tech-ui';
-+ import { PageContainer } from '@oceanbase/ui';
-+ import type { ProTableProps, WelcomeCardProps } from '@alipay/tech-ui';
-+ import type { PageContainerProps } from '@oceanbase/ui';
++ import { WelcomeCard } from '@alipay/tech-ui';
++ import { PageContainer, ProTable } from '@oceanbase/ui';
++ import type { WelcomeCardProps } from '@alipay/tech-ui';
++ import type { PageContainerProps, ProTableProps } from '@oceanbase/ui';
 
   const Demo = () => {
     return <div />;
@@ -166,10 +166,10 @@ transform fixed style to antd v5 design token.
 -       <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '1px solid #d9d9d9' }} />
 -       <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4d4f' }}></Button>
 -     </div>
-+     (<div>
++     <div>
 +       <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBorder}` }} />
 +       <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
-+     </div>)
++     </div>
     );
   };
 
@@ -196,11 +196,11 @@ export default Demo;
 -         <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4d4f' }}></Button>
 -         <div color="#fafafa" border="1px solid #fafafa" />
 -       </div>
-+       (<div>
++       <div>
 +         <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBgLayout}` }} />
 +         <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
 +         <div color={token.colorBgLayout} border={`1px solid ${token.colorBgLayout}`} />
-+       </div>)
++       </div>
       );
     }
   }

@@ -7,11 +7,10 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/DialogDemo.tsx" title="基本" description="点击 Help 按钮打开 Dialog"></code>
-
-<code src="./demo/EmbdedDialogDemo.tsx" title="嵌入" description="点击 Help 按钮打开嵌入版 Dialog"></code>
-
-<code src="./demo/EmbdedDialogAndNormalDemo.tsx" title="动态切换" description="点击 Help 按钮打开嵌入版和普通版自动切换 Dialog"></code>
+<!-- prettier-ignore -->
+<code src="./demo/DialogDemo.tsx" title="基本" description="点击 Help 按钮打开 Dialog。"></code>
+<code src="./demo/EmbdedDialogDemo.tsx" title="嵌入" description="点击 Help 按钮打开嵌入版 Dialog。"></code>
+<code src="./demo/EmbdedDialogAndNormalDemo.tsx" title="动态切换" description="点击 Help 按钮打开嵌入版和普通版自动切换 Dialog。"></code>
 
 ## API
 

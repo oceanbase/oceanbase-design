@@ -1,0 +1,296 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Form.Item with Switch > dynamic Switch 1`] = `
+<form
+  class="ant-form ant-form-horizontal"
+>
+  <div
+    class="ant-form-item"
+  >
+    <div
+      class="ant-row ant-form-item-row"
+    >
+      <div
+        class="ant-col ant-form-item-label"
+      >
+        <label
+          class="ant-form-item-required ant-form-item-required-mark-optional"
+          for="switch"
+          title="Switch"
+        >
+          Switch
+        </label>
+      </div>
+      <div
+        class="ant-col ant-form-item-control"
+      >
+        <div
+          class="ant-form-item-control-input"
+        >
+          <div
+            class="ant-form-item-control-input-content"
+          >
+            <button
+              aria-checked="false"
+              aria-required="true"
+              class="ant-switch"
+              id="switch"
+              role="switch"
+              type="button"
+            >
+              <div
+                class="ant-switch-handle"
+              />
+              <span
+                class="ant-switch-inner"
+              >
+                <span
+                  class="ant-switch-inner-checked"
+                />
+                <span
+                  class="ant-switch-inner-unchecked"
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+`;
+
+exports[`Form.Item with Switch > nested Switch 1`] = `
+<form
+  class="ant-form ant-form-horizontal"
+>
+  <div
+    class="ant-form-item"
+  >
+    <div
+      class="ant-row ant-form-item-row"
+    >
+      <div
+        class="ant-col ant-form-item-label"
+      >
+        <label
+          class="ant-form-item-required-mark-optional"
+          for="switch"
+          title="Switch"
+        >
+          Switch
+          <span
+            class="ant-form-item-optional"
+            title=""
+          >
+            (optional)
+          </span>
+        </label>
+      </div>
+      <div
+        class="ant-col ant-form-item-control"
+      >
+        <div
+          class="ant-form-item-control-input"
+        >
+          <div
+            class="ant-form-item-control-input-content"
+          >
+            <span
+              id="switch"
+            >
+              <button
+                aria-checked="false"
+                class="ant-switch"
+                role="switch"
+                type="button"
+              >
+                <div
+                  class="ant-switch-handle"
+                />
+                <span
+                  class="ant-switch-inner"
+                >
+                  <span
+                    class="ant-switch-inner-checked"
+                  />
+                  <span
+                    class="ant-switch-inner-unchecked"
+                  />
+                </span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+`;
+
+exports[`Form.Item with Switch > normal Switch 1`] = `
+<form
+  class="ant-form ant-form-horizontal"
+>
+  <div
+    class="ant-form-item"
+  >
+    <div
+      class="ant-row ant-form-item-row"
+    >
+      <div
+        class="ant-col ant-form-item-label"
+      >
+        <label
+          class="ant-form-item-required ant-form-item-required-mark-optional"
+          for="switch"
+          title="Switch"
+        >
+          Switch
+        </label>
+      </div>
+      <div
+        class="ant-col ant-form-item-control"
+      >
+        <div
+          class="ant-form-item-control-input"
+        >
+          <div
+            class="ant-form-item-control-input-content"
+          >
+            <button
+              aria-checked="false"
+              aria-required="true"
+              class="ant-switch"
+              id="switch"
+              role="switch"
+              type="button"
+            >
+              <div
+                class="ant-switch-handle"
+              />
+              <span
+                class="ant-switch-inner"
+              >
+                <span
+                  class="ant-switch-inner-checked"
+                />
+                <span
+                  class="ant-switch-inner-unchecked"
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+`;
+
+exports[`Form.Item with Switch > renderProps Switch 1`] = `
+<form
+  class="ant-form ant-form-horizontal"
+>
+  <div
+    class="ant-form-item"
+  >
+    <div
+      class="ant-row ant-form-item-row"
+    >
+      <div
+        class="ant-col ant-form-item-label"
+      >
+        <label
+          class="ant-form-item-required-mark-optional"
+          for="switch"
+          title="Switch"
+        >
+          Switch
+          <span
+            class="ant-form-item-optional"
+            title=""
+          >
+            (optional)
+          </span>
+        </label>
+      </div>
+      <div
+        class="ant-col ant-form-item-control"
+      >
+        <div
+          class="ant-form-item-control-input"
+        >
+          <div
+            class="ant-form-item-control-input-content"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+`;
+
+exports[`Form.Item with Switch > sub component Switch 1`] = `
+<form
+  class="ant-form ant-form-horizontal"
+>
+  <div
+    class="ant-form-item"
+  >
+    <div
+      class="ant-row ant-form-item-row"
+    >
+      <div
+        class="ant-col ant-form-item-label"
+      >
+        <label
+          class="ant-form-item-required-mark-optional"
+          for="switch"
+          title="Switch"
+        >
+          Switch
+          <span
+            class="ant-form-item-optional"
+            title=""
+          >
+            (optional)
+          </span>
+        </label>
+      </div>
+      <div
+        class="ant-col ant-form-item-control"
+      >
+        <div
+          class="ant-form-item-control-input"
+        >
+          <div
+            class="ant-form-item-control-input-content"
+          >
+            <button
+              aria-checked="false"
+              class="ant-switch"
+              role="switch"
+              type="button"
+            >
+              <div
+                class="ant-switch-handle"
+              />
+              <span
+                class="ant-switch-inner"
+              >
+                <span
+                  class="ant-switch-inner-checked"
+                />
+                <span
+                  class="ant-switch-inner-unchecked"
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+`;

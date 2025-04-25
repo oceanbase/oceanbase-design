@@ -36,9 +36,7 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
             ...item,
             previewerProps: {
               ...previewerProps,
-              expand: expandAll,
-              // always override debug property, because dumi will hide debug demo in production
-              debug: false,
+              defaultShowCode: expandAll,
               /**
                * extra marker for the original debug
                */
@@ -67,7 +65,9 @@ const DemoWrapper: typeof DumiDemoGrid = ({ items }) => {
         </Tooltip>
         <Tooltip
           title={
-            <FormattedMessage id={`app.component.examples.${showDebug ? 'hide' : 'visible'}`} />
+            <FormattedMessage
+              id={showDebug ? 'app.component.examples.hide' : 'app.component.examples.visible'}
+            />
           }
         >
           {showDebug ? (

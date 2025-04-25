@@ -157,7 +157,11 @@ export default ({
 
   const items: MenuProps['items'] = [
     {
-      label: <Link to="/docs/design-introduce">使用文档</Link>,
+      label: <Link to="/docs/spec/system-color">设计</Link>,
+      key: 'docs/spec',
+    },
+    {
+      label: <Link to="/docs/design-introduce">研发</Link>,
       key: 'docs',
     },
     {
@@ -171,6 +175,10 @@ export default ({
     {
       label: <Link to="/charts/stat">可视化图表</Link>,
       key: 'charts',
+    },
+    {
+      label: <Link to="/docs/blog/chart-classification-palette-design-guide">博客</Link>,
+      key: 'docs/blog',
     },
     ...(additional ?? []),
   ];

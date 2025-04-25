@@ -7,10 +7,9 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="基本" description="常用于 `dynamicImport` 的加载动画"></code>
-
-<code src="./demo/with-page-container.tsx" title="页容器加载" description="已内置到 PageContainer，通过 loading 属性控制即可"></code>
-
+<!-- prettier-ignore -->
+<code src="./demo/basic.tsx" title="基本" description="常用于 `dynamicImport` 的加载动画。"></code>
+<code src="./demo/with-page-container.tsx" title="页容器加载" description="已内置到 PageContainer，通过 loading 属性控制即可。"></code>
 <code src="./demo/matchWrapperHeight.tsx" title="固定高度的容器内加载"></code>
 
 ## API

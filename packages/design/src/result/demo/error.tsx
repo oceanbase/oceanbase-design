@@ -1,5 +1,5 @@
 import React from 'react';
-import { Result, Button, theme, Typography } from '@oceanbase/design';
+import { Result, Button, Typography, theme } from '@oceanbase/design';
 
 export default () => {
   const { token } = theme.useToken();

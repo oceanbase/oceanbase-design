@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { Input as AntInput } from 'antd';
 import type { SearchProps as AntSearchProps } from 'antd/es/input/Search';
 import type { InputLocale, InputRef } from './Input';
@@ -15,7 +15,7 @@ export interface SearchProps extends AntSearchProps {
 const Search = forwardRef<InputRef, SearchProps>(({ locale: customLocale, ...restProps }, ref) => {
   const { locale: contextLocale } = useContext<ConfigConsumerProps>(ConfigProvider.ConfigContext);
   const inputLocale: InputLocale = {
-    placeholder: contextLocale?.global?.inputPlaceholder || defaultLocale.global.inputPlaceholder,
+    placeholder: contextLocale?.global?.inputPlaceholder || defaultLocale.global?.inputPlaceholder,
     ...defaultLocale.Input,
     ...contextLocale?.Input,
     ...customLocale,

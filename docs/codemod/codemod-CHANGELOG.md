@@ -8,6 +8,33 @@ group: 自动化迁移工具
 
 ---
 
+## 0.4.7
+
+`2025-02-05`
+
+- ⭐️ 支持颜色值 `rgb(240,242,245)` 到 `colorBgLayout` 的自动改写。[#946](https://github.com/oceanbase/oceanbase-design/pull/946)
+
+## 0.4.0
+
+`2024-10-09`
+
+- 📢 自动化升级的目标版本更新为 `^0.4.0`。[#784](https://github.com/oceanbase/oceanbase-design/pull/784)
+
+## 0.3.7
+
+`2024-09-23`
+
+- 🆕 新增 `techui-and-pro-components-to-oceanbase-ui` 迁移能力。[#706](https://github.com/oceanbase/oceanbase-design/pull/706)
+- ⭐️ 支持从 `pro-components` 和 `tech-ui` 迁移更多的组件和类型。[#718](https://github.com/oceanbase/oceanbase-design/pull/718)
+- 🐞 修复普通函数和匿名函数自动改写成 Design Token 时，应该使用 `token` 对象而不是 `useToken()` 的问题。[#685](https://github.com/oceanbase/oceanbase-design/pull/685)
+
+## 0.3.6
+
+`2024-07-26`
+
+- ⭐️ 新增 `rgba(0,0,0,xx%)` 颜色值到 Design Token 的自动改写。[#656](https://github.com/oceanbase/oceanbase-design/pull/656)
+- ⭐️ 支持 `#000000xx` 等颜色值到 Design Token 的自动改写。[#639](https://github.com/oceanbase/oceanbase-design/pull/639)
+
 ## 0.3.4
 
 `2024-06-27`

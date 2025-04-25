@@ -7,6 +7,7 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基础数字统计"></code>
 
 ## API

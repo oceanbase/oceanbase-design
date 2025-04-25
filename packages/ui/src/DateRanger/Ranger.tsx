@@ -1,13 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Button, DatePicker, Dropdown, Radio, Space, Tooltip, theme } from '@oceanbase/design';
-import type { TooltipProps, FormItemProps } from '@oceanbase/design';
+import React, { useEffect, useRef, useState, useImperativeHandle } from 'react';
 import {
-  LeftOutlined,
-  PauseOutlined,
-  CaretRightOutlined,
-  RightOutlined,
-  ZoomOutOutlined,
-} from '@oceanbase/icons';
+  Button,
+  DatePicker,
+  Divider,
+  Dropdown,
+  Radio,
+  Space,
+  Tooltip,
+  theme,
+} from '@oceanbase/design';
+import type { TooltipProps } from '@oceanbase/design';
+import { LeftOutlined, RightOutlined, ZoomOutOutlined, SyncOutlined } from '@oceanbase/icons';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
@@ -29,16 +32,23 @@ import {
   NEAR_TIME_LIST,
   YEAR_DATE_TIME_FORMAT,
   LAST_3_DAYS,
+  DATE_TIME_SECOND_FORMAT,
+  YEAR_DATE_TIME_SECOND_FORMAT,
+  DATE_TIME_FORMAT_CN,
+  DATE_TIME_SECOND_FORMAT_CN,
+  YEAR_DATE_TIME_FORMAT_CN,
+  YEAR_DATE_TIME_SECOND_FORMAT_CN,
 } from './constant';
 import type { RangeOption } from './typing';
-import InternalPickerPanel, { Rule } from './PickerPanel';
+import type { Rule } from './PickerPanel';
+import InternalPickerPanel from './PickerPanel';
 import zhCN from './locale/zh-CN';
 import enUS from './locale/en-US';
 import './index.less';
 
 export type RangeName = 'customize' | string;
 
-export type RangeValue = [Moment, Moment] | [Dayjs, Dayjs];
+export type RangeValue = [Moment, Moment] | [Dayjs, Dayjs] | [] | null;
 
 export type RangeDateValue = {
   name: RangeName;
@@ -53,14 +63,24 @@ export interface DateRangerProps
   // ui 相关
   hasRewind?: boolean;
   hasPlay?: boolean;
-  hasNow?: boolean;
+  hasSync?: boolean;
   hasForward?: boolean;
   hasZoomOut?: boolean;
+  // 是否在选项面板中展示Tag
+  hasTagInPicker?: boolean;
   // 时间选择提示
   tip?: string;
   rules?: Rule[];
   /** 是否只允许选择过去时间 */
   pastOnly?: boolean;
+  // 是否启用极简模式
+  simpleMode?: boolean;
+  // 当时间范围在本年时，隐藏年份
+  hideYear?: boolean;
+  // 隐藏 秒
+  hideSecond?: boolean;
+  // 自动计算时间范围并回显到选择器tag
+  autoCalcRange?: boolean;
   isMoment?: boolean;
   //固定 rangeName
   stickRangeName?: boolean;
@@ -68,12 +88,15 @@ export interface DateRangerProps
   defaultValue?: RangeValue;
   size?: 'small' | 'large' | 'middle';
   tooltipProps?: TooltipProps;
-  locale: any;
+  autoAdjustOverflow?: boolean;
+  overlayClassName?: string;
+  overlayStyle?: React.CSSProperties;
+  locale?: any;
 }
 
 const prefix = getPrefix('date-ranger');
 
-const Ranger = (props: DateRangerProps) => {
+const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   const {
     selects = [
       NEAR_1_MINUTES,
@@ -89,10 +112,15 @@ const Ranger = (props: DateRangerProps) => {
     defaultQuickValue,
     hasRewind = true,
     hasPlay = false,
-    hasNow = true,
+    hasSync = true,
     hasForward = true,
     hasZoomOut = false,
+    hasTagInPicker = false,
     pastOnly = false,
+    simpleMode = false,
+    hideYear = false,
+    hideSecond = false,
+    autoCalcRange = false,
     onChange = noop,
     disabledDate,
     locale,
@@ -103,11 +131,15 @@ const Ranger = (props: DateRangerProps) => {
     isMoment: isMomentProps,
     rules,
     tip,
+    autoAdjustOverflow,
+    overlayClassName,
+    overlayStyle,
     ...rest
   } = props;
 
-  console.log(locale, 'locale');
   const { token } = theme.useToken();
+  const isCn = locale.antLocale === 'zh-cn';
+  const isEN = locale.antLocale === 'en';
 
   // 是否为 moment 时间对象
   const isMoment =
@@ -118,19 +150,25 @@ const Ranger = (props: DateRangerProps) => {
     isMomentProps;
 
   const defaultRangeName =
-    value || defaultValue ? CUSTOMIZE : defaultQuickValue ?? selects?.[0]?.name;
+    value || defaultValue ? CUSTOMIZE : (defaultQuickValue ?? selects?.[0]?.name);
   const [rangeName, setRangeName] = useState(defaultRangeName);
 
-  const [innerValue, setInnerValue] = useState<RangeValue>(
-    value ??
+  const [innerValue, setInnerValue] = useState<RangeValue>(() => {
+    const initValue =
+      value ??
       defaultValue ??
       (selects
         .find(item => item.name === defaultRangeName)
-        ?.range(isMoment ? moment() : dayjs()) as RangeValue)
-  );
+        ?.range(isMoment ? moment() : dayjs()) as RangeValue);
+    if (onChange) {
+      onChange(initValue);
+    }
+    return initValue;
+  });
 
   const [open, setOpen] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [backRadioFocused, setBackRadioFocused] = useState(false);
   const refState = useRef({
     tooltipOpen,
   });
@@ -180,7 +218,6 @@ const Ranger = (props: DateRangerProps) => {
     rangeChange(range);
     setRangeName(CUSTOMIZE);
   };
-
   const disabledFuture = (current: Moment | Dayjs) => {
     const futureDay = moment.isMoment(current) ? moment().endOf('day') : dayjs().endOf('day');
     // 禁止选择未来日期
@@ -200,6 +237,10 @@ const Ranger = (props: DateRangerProps) => {
   const differenceYears = endTime?.diff(startTime as any, 'years');
 
   const getCustomizeRangeLabel = () => {
+    if (!autoCalcRange) {
+      return locale.customize;
+    }
+
     if (differenceYears > 0) {
       return `${differenceYears}y`;
     }
@@ -229,38 +270,30 @@ const Ranger = (props: DateRangerProps) => {
 
   const getCustomizeLabel = () => {
     if (differenceYears > 0) {
-      return `近 ${differenceYears} 年`;
+      return isEN ? `Nearly ${differenceYears} years` : `近 ${differenceYears} 年`;
     }
 
-    // if (differenceQuarters > 0) {
-    //   return `近 ${differenceQuarters} 季度`;
-    // }
-
     if (differenceMonths > 0) {
-      return `近 ${differenceMonths} 月`;
+      return isEN ? `Nearly ${differenceMonths} months` : `近 ${differenceMonths} 月`;
     }
 
     if (differenceWeeks > 0) {
-      return `近 ${differenceWeeks} 周`;
-    }
-
-    if (differenceDays > 0) {
-      return `近 ${differenceDays} 天`;
+      return isEN ? `Nearly ${differenceWeeks} weeks` : `近 ${differenceWeeks} 周`;
     }
 
     if (differenceHours > 0) {
-      return `近 ${differenceHours} 时`;
+      return isEN ? `Nearly ${differenceHours} hours` : `近 ${differenceHours} 小时`;
     }
 
     if (differenceMinutes > 0) {
-      return `近 ${differenceMinutes} 分`;
+      return isEN ? `Nearly ${differenceMinutes} minutes` : `近 ${differenceMinutes} 分`;
     }
 
-    return `近 ${differenceSeconds} 秒`;
+    return isEN ? `Nearly ${differenceSeconds} seconds` : `近 ${differenceSeconds} 秒`;
   };
 
   const setNow = () => {
-    const selected = NEAR_TIME_LIST.find(item => item.name === rangeName);
+    const selected = selects.find(item => item.name === rangeName);
     if (selected?.range) {
       rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
     }
@@ -270,15 +303,18 @@ const Ranger = (props: DateRangerProps) => {
     }
   };
 
-  const rangeLabel =
-    rangeName === CUSTOMIZE
-      ? getCustomizeRangeLabel()
-      : selects.find(_item => _item.name === rangeName)?.rangeLabel;
+  useImperativeHandle(ref, () => ({
+    updateCurrentTime: setNow,
+  }));
 
+  const currentRange = selects.find(_item => _item.name === rangeName);
+  const rangeLabel = rangeName === CUSTOMIZE ? getCustomizeRangeLabel() : currentRange?.rangeLabel;
   const label =
     rangeName === CUSTOMIZE
       ? getCustomizeLabel()
-      : selects.find(_item => _item.name === rangeName)?.label;
+      : isEN
+        ? currentRange.enLabel || currentRange.label
+        : currentRange.label;
 
   const thisYear = new Date().getFullYear();
   const isThisYear = startTime?.year() === thisYear && endTime?.year() === thisYear;
@@ -295,12 +331,25 @@ const Ranger = (props: DateRangerProps) => {
       : selects[rangeNameIndex + 1];
 
   return (
-    <Space className={classNames(prefix)} style={rest.style}>
+    <Space
+      className={classNames(rest.className, {
+        [prefix]: true,
+        [`${prefix}-show-range`]: true,
+        [`${prefix}-back-radio-focused`]: backRadioFocused,
+      })}
+      style={rest.style}
+    >
       <Space size={0}>
-        <div className={`${prefix}-wrapper`}>
+        <div
+          className={classNames(`${prefix}-wrapper`, {
+            [`${prefix}-wrapper-has-jumper`]: hasRewind || hasForward,
+          })}
+        >
           <Dropdown
             trigger={['click']}
             open={open}
+            placement={rest.placement}
+            autoAdjustOverflow={autoAdjustOverflow}
             // 关闭后进行销毁，才可以将 Tooltip 进行同步关闭
             destroyPopupOnHide={true}
             // 存在缓存，会锁死里面的值
@@ -311,9 +360,50 @@ const Ranger = (props: DateRangerProps) => {
 
               setOpen(o);
             }}
+            dropdownRender={originNode => {
+              return (
+                <div
+                  className={classNames(`${prefix}-dropdown-picker`, overlayClassName)}
+                  style={overlayStyle}
+                >
+                  {originNode}
+                  <Divider type="vertical" style={{ height: 'auto', margin: '0px 4px 0px 0px' }} />
+                  <InternalPickerPanel
+                    defaultValue={innerValue || []}
+                    // @ts-ignore
+                    locale={locale}
+                    disabledDate={pastOnly ? disabledFuture : disabledDate}
+                    tip={tip}
+                    isMoment={isMoment}
+                    rules={rules}
+                    onOk={vList => {
+                      setIsPlay(false);
+                      handleNameChange(CUSTOMIZE);
+                      rangeChange(
+                        vList.map(v => {
+                          return isMoment ? moment(v) : dayjs(v);
+                        }) as RangeValue
+                      );
+
+                      closeTooltip();
+                    }}
+                    onCancel={() => {
+                      closeTooltip();
+                    }}
+                  />
+                </div>
+              );
+            }}
             menu={{
+              selectable: true,
+              defaultSelectedKeys: [rangeName],
               onClick: ({ key, domEvent }) => {
-                const selected = NEAR_TIME_LIST.find(_item => _item.name === key);
+                if (key === CUSTOMIZE) {
+                  refState.current.tooltipOpen = true;
+                } else {
+                  refState.current.tooltipOpen = false;
+                }
+                const selected = selects.find(_item => _item.name === key);
                 // 存在快捷选项切换为极简模式
                 if (selected?.range) {
                   handleNameChange(key);
@@ -321,80 +411,21 @@ const Ranger = (props: DateRangerProps) => {
                   rangeChange(selected.range(isMoment ? moment() : dayjs()) as RangeValue);
                 }
               },
-              items: [
-                ...selects,
-                {
-                  name: CUSTOMIZE,
-                  rangeLabel: locale.customize,
-                  label: locale.customTime,
-                },
-              ]
+              items: selects
                 .filter(item => {
                   return !!item;
                 })
                 .map(item => {
                   return {
                     key: item.name,
-                    label:
-                      item.name === CUSTOMIZE ? (
-                        <Tooltip
-                          open={tooltipOpen}
-                          arrow={false}
-                          onOpenChange={o => {
-                            if (o) {
-                              setTooltipOpen(true);
-                            }
-                          }}
-                          placement="right"
-                          {...tooltipProps}
-                          overlayStyle={{
-                            maxWidth: 336,
-                            ...tooltipProps?.overlayStyle,
-                          }}
-                          overlayInnerStyle={{
-                            background: '#fff',
-                            maxHeight: 'none',
-                            margin: 16,
-                            ...tooltipProps?.overlayInnerStyle,
-                          }}
-                          title={
-                            <InternalPickerPanel
-                              defaultValue={innerValue}
-                              // @ts-ignore
-                              locale={locale}
-                              disabledDate={pastOnly ? disabledFuture : disabledDate}
-                              tip={tip}
-                              isMoment={isMoment}
-                              rules={rules}
-                              onOk={vList => {
-                                setIsPlay(false);
-                                rangeChange(
-                                  vList.map(v => {
-                                    return isMoment ? moment(v) : dayjs(v);
-                                  }) as RangeValue
-                                );
-
-                                closeTooltip();
-                              }}
-                              onCancel={() => {
-                                closeTooltip();
-                              }}
-                            />
-                          }
-                        >
-                          <Space size={8} style={isPlay ? {} : { width: 310 }}>
-                            <span className={`${prefix}-label`}>{item.rangeLabel}</span>
-                            {/* @ts-ignore */}
-                            {locale[item.label] || item.label}
-                          </Space>
-                        </Tooltip>
-                      ) : (
-                        <Space size={8} style={isPlay ? {} : { width: 310 }}>
+                    label: (
+                      <Space size={8} style={{ minWidth: 100 }}>
+                        {hasTagInPicker && (
                           <span className={`${prefix}-label`}>{item.rangeLabel}</span>
-                          {/* @ts-ignore */}
-                          {locale[item.label] || item.label}
-                        </Space>
-                      ),
+                        )}
+                        {isEN ? item.enLabel || item.label : item.label}
+                      </Space>
+                    ),
                   };
                 }),
             }}
@@ -408,10 +439,10 @@ const Ranger = (props: DateRangerProps) => {
               >
                 {rangeLabel}
               </span>
-              {isPlay && <div className={`${prefix}-play`}>{label}</div>}
+              {simpleMode && isPlay && <div className={`${prefix}-play`}>{label}</div>}
             </Space>
           </Dropdown>
-          {!isPlay && (
+          {(!simpleMode || !isPlay) && (
             <span
               onClick={() => {
                 setOpen(true);
@@ -419,22 +450,33 @@ const Ranger = (props: DateRangerProps) => {
             >
               {/* @ts-ignore  */}
               <DatePicker.RangePicker
-                className={`${prefix}-picker`}
+                className={classNames(`${prefix}-picker`)}
                 style={{
-                  pointerEvents: 'none',
+                  // pointerEvents: 'none',
                   border: 0,
                 }}
                 format={v => {
                   // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
-                  return isThisYear ? v.format(DATE_TIME_FORMAT) : v.format(YEAR_DATE_TIME_FORMAT);
+                  if (hideYear && isThisYear) {
+                    return hideSecond
+                      ? v.format(isCn ? DATE_TIME_FORMAT_CN : DATE_TIME_FORMAT)
+                      : v.format(isCn ? DATE_TIME_SECOND_FORMAT_CN : DATE_TIME_SECOND_FORMAT);
+                  }
+                  return hideSecond
+                    ? v.format(isCn ? YEAR_DATE_TIME_FORMAT_CN : YEAR_DATE_TIME_FORMAT)
+                    : v.format(
+                        isCn ? YEAR_DATE_TIME_SECOND_FORMAT_CN : YEAR_DATE_TIME_SECOND_FORMAT
+                      );
                 }}
                 // @ts-ignore
                 value={innerValue}
                 onChange={datePickerChange}
                 allowClear={false}
                 size={size}
+                suffixIcon={null}
                 // 透传 props 到 antd Ranger
-                {...omit(rest, 'value', 'onChange')}
+                {...omit(rest, 'value', 'onChange', 'style', 'className')}
+                open={false}
               />
             </span>
           )}
@@ -445,63 +487,86 @@ const Ranger = (props: DateRangerProps) => {
           buttonStyle="solid"
         >
           {hasRewind && (
-            <Radio.Button
-              value="stepBack"
-              style={{ paddingInline: 8, borderInlineStart: 0, borderRadius: 0 }}
-              onClick={() => {
-                if (isPlay) {
-                  setIsPlay(false);
-                }
-
-                if (startTime && endTime) {
-                  const newStartTime = (startTime as Dayjs)
-                    .clone()
-                    .subtract(differenceMs, 'milliseconds');
-                  const newEndTime = startTime?.clone() as Dayjs;
-                  rangeChange([newStartTime, newEndTime]);
-                }
-              }}
+            <Tooltip
+              title={locale.jumpBack}
+              getPopupContainer={trigger => trigger.parentNode as HTMLElement}
             >
-              <LeftOutlined />
-            </Radio.Button>
+              <Radio.Button
+                value="stepBack"
+                style={{
+                  paddingInline: 8,
+                  borderInlineStart: 0,
+                  borderTopLeftRadius: 0,
+                  borderBottomLeftRadius: 0,
+                }}
+                onMouseEnter={() => setBackRadioFocused(true)}
+                onMouseLeave={() => setBackRadioFocused(false)}
+                onClick={() => {
+                  if (isPlay) {
+                    setIsPlay(false);
+                  }
+
+                  if (startTime && endTime) {
+                    const newStartTime = (startTime as Dayjs)
+                      .clone()
+                      .subtract(differenceMs, 'milliseconds');
+                    const newEndTime = startTime?.clone() as Dayjs;
+                    rangeChange([newStartTime, newEndTime]);
+                  }
+                }}
+              >
+                <LeftOutlined />
+              </Radio.Button>
+            </Tooltip>
           )}
           {hasForward && (
-            <Radio.Button
-              value="stepForward"
-              style={{ paddingInline: 8 }}
-              disabled={isPlay}
-              onClick={() => {
-                if (startTime && endTime) {
-                  const newStartTime = endTime.clone() as Dayjs;
-                  const newEndTime = (endTime as Dayjs).clone().add(differenceMs);
-
-                  if (newEndTime.isBefore(new Date())) {
-                    rangeChange([newStartTime, newEndTime]);
-                  } else {
-                    setIsPlay(true);
-                    setNow();
-                  }
-                }
-              }}
+            <Tooltip
+              title={locale.jumpForward}
+              getPopupContainer={trigger => trigger.parentNode as HTMLElement}
             >
-              <RightOutlined />
-            </Radio.Button>
+              <Radio.Button
+                value="stepForward"
+                style={{
+                  paddingInline: 8,
+                  borderInlineStart: 0,
+                  borderTopLeftRadius: 0,
+                  borderBottomLeftRadius: 0,
+                }}
+                // disabled={isPlay}
+                onClick={() => {
+                  if (startTime && endTime) {
+                    const newStartTime = endTime.clone() as Dayjs;
+                    const newEndTime = (endTime as Dayjs).clone().add(differenceMs);
+
+                    if (newEndTime.isBefore(new Date())) {
+                      rangeChange([newStartTime, newEndTime]);
+                    } else {
+                      setIsPlay(true);
+                      setNow();
+                    }
+                  }
+                }}
+              >
+                <RightOutlined />
+              </Radio.Button>
+            </Tooltip>
           )}
         </Radio.Group>
       </Space>
-      {hasNow && (
+      {hasSync && rangeName !== CUSTOMIZE && (
         <Button
-          style={{ paddingInline: 8 }}
+          style={{ paddingInline: 8, color: token.colorTextSecondary }}
           onClick={() => {
             setNow();
           }}
         >
-          {locale.current}
+          <SyncOutlined />
         </Button>
       )}
       {hasZoomOut && (
         <Button
           disabled={!nextRangeItem}
+          style={{ color: token.colorTextSecondary }}
           onClick={() => {
             setIsPlay(true);
             if (nextRangeItem) {
@@ -515,9 +580,9 @@ const Ranger = (props: DateRangerProps) => {
       )}
     </Space>
   );
-};
+});
 
 export default LocaleWrapper({
   componentName: 'DateRanger',
   defaultLocale: zhCN,
-})(Ranger);
+})(Ranger) as typeof Ranger;

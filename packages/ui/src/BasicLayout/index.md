@@ -7,20 +7,14 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-
-<code src="./demo/menu-over-length.tsx" title="菜单项内容超长" description="自动省略 + tooltip"></code>
-
+<code src="./demo/menu-over-length.tsx" title="菜单项内容超长" description="自动省略 + tooltip。"></code>
 <code src="./demo/banner.tsx" title="带顶部 banner"></code>
-
 <code src="./demo/topHeader-icon.tsx" title="顶部导航 icon 模式"></code>
-
 <code src="./demo/topHeader-title.tsx" title="带顶部标题"></code>
-
 <code src="./demo/subSideMenu.tsx" title="带子侧边栏的二级导航"></code>
-
 <code src="./demo/no-sider-and-custom-header.tsx" title="无侧边导航 & 自定义顶部导航"></code>
-
 <code src="./demo/welcome.tsx" title="和欢迎页搭配使用"></code>
 
 ## 与路由搭配使用
@@ -116,6 +110,7 @@ const App = () => {
 | showLabel | 顶部导航是否展开, true 为展开 形态：Icon + 文案；fales 为关闭 形态：Icon | boolean | true | - |
 | title | 顶部标题 | ReactNode | - | - |
 | welcomePath | 欢迎页对应的 path 路径，需要与路由配置一致，为空则不展示欢迎页菜单 | string | - | - |
+| versionNoticePath | 版本公告对应的 path 路径，为空则不展示版本公告菜单 | string | - | 0.4.12 |
 | docsPath | 帮助文档首页对应的 path 路径，为空则不展示文档菜单 | string | - | - |
 | pdfPath | 帮助文档下载对应的 path 路径，默认优先使用路径中的文件名 | string | - | - |
 | showLocale | 是否展示国际化切换入口 | boolean | false | - |

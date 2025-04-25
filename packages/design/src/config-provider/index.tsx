@@ -5,19 +5,24 @@ import type {
   ConfigConsumerProps as AntConfigConsumerProps,
   ThemeConfig as AntThemeConfig,
 } from 'antd/es/config-provider';
-import type { ComponentStyleConfig } from 'antd/es/config-provider/context';
+import type {
+  ComponentStyleConfig,
+  CardConfig as AntCardConfig,
+} from 'antd/es/config-provider/context';
+import type { AppProps } from 'antd/es/app';
 import type { PaginationConfig } from 'antd/es/pagination';
 import type { SpinIndicator } from 'antd/es/spin';
 import { StyleProvider } from '@ant-design/cssinjs';
 import type { StyleProviderProps } from '@ant-design/cssinjs';
 import StyleContext from '@ant-design/cssinjs/es/StyleContext';
 import type { StyleContextProps } from '@ant-design/cssinjs/es/StyleContext';
+import { CaretRightOutlined } from '@oceanbase/icons';
+import aliyunTheme from '@oceanbase/aliyun-theme';
 import { merge } from 'lodash';
 import StaticFunction from '../static-function';
 import themeConfig from '../theme';
-import defaultTheme from '../theme/default';
+import defaultTheme, { fontFamilyEn } from '../theme/default';
 import darkTheme from '../theme/dark';
-import aliyunTheme from '@oceanbase/aliyun-theme';
 import DefaultRenderEmpty from './DefaultRenderEmpty';
 import type { NavigateFunction } from './navigate';
 import type { Locale } from '../locale';
@@ -31,9 +36,11 @@ export * from 'antd/es/config-provider';
 export interface ThemeConfig extends AntThemeConfig {
   isDark?: boolean;
   isAliyun?: boolean;
-  /* use custom font or not */
-  customFont?: boolean;
 }
+
+export type CardConfig = AntCardConfig & {
+  divided?: boolean;
+};
 
 export type SpinConfig = ComponentStyleConfig & {
   indicator?: SpinIndicator;
@@ -47,6 +54,7 @@ export interface ConfigConsumerProps extends AntConfigConsumerProps {
   theme?: ThemeConfig;
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
+  card?: CardConfig;
   spin?: SpinConfig;
   table?: TableConfig;
   builtInApp?: boolean;
@@ -61,23 +69,26 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   // for react-router-dom v6: navigate
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
+  card?: CardConfig;
   pagination?: PaginationConfig;
   spin?: SpinConfig;
   table?: TableConfig;
-  // inject static function to consume ConfigProvider
-  injectStaticFunction?: boolean;
   // StyleProvider props
   styleProviderProps?: StyleProviderProps;
+  appProps?: AppProps;
 }
 
 export interface ExtendedConfigConsumerProps {
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
+  // inject static function to ConfigProvider
+  injectStaticFunction?: boolean;
 }
 
 const ExtendedConfigContext = React.createContext<ExtendedConfigConsumerProps>({
   navigate: undefined,
   hideOnSinglePage: false,
+  injectStaticFunction: true,
 });
 
 export type ConfigProviderType = React.FC<ConfigProviderProps> & {
@@ -95,12 +106,14 @@ const ConfigProvider: ConfigProviderType = ({
   locale,
   navigate,
   hideOnSinglePage,
+  card,
+  collapse,
   form,
   spin,
   table,
   tabs,
-  injectStaticFunction = true,
   styleProviderProps,
+  appProps,
   ...restProps
 }) => {
   // inherit from parent ConfigProvider
@@ -119,20 +132,29 @@ const ConfigProvider: ConfigProviderType = ({
 
   const { token } = themeConfig.useToken();
   const fontFamily = mergedTheme.token?.fontFamily || token.fontFamily;
-  const customFont = mergedTheme.customFont;
 
   // inherit from parent StyleProvider
   const parentStyleContext = React.useContext<StyleContextProps>(StyleContext);
   const mergedStyleProviderProps = merge({}, parentStyleContext, styleProviderProps);
+  const mergedLocale = merge({}, parentContext.locale, locale);
 
   return (
     <AntConfigProvider
-      locale={merge({}, parentContext.locale, locale)}
+      locale={mergedLocale}
+      card={merge({}, parentContext.card, card)}
+      collapse={merge(
+        {},
+        {
+          expandIcon: ({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />,
+        } as ConfigProviderProps['collapse'],
+        parentContext.collapse,
+        collapse
+      )}
       form={merge(
         {},
         {
           requiredMark: 'optional',
-        },
+        } as ConfigProviderProps['form'],
         parentContext.form,
         form
       )}
@@ -141,19 +163,23 @@ const ConfigProvider: ConfigProviderType = ({
       tabs={merge(
         {},
         {
-          indicatorSize: origin => (origin >= 24 ? origin - 16 : origin),
-        },
+          indicatorSize: (origin: number) => (origin >= 24 ? origin - 16 : origin),
+        } as ConfigProviderProps['tabs'],
         parentContext.tabs,
         tabs
       )}
       theme={merge({}, mergedTheme, {
-        token: {
-          fontFamily:
-            customFont && !fontFamily.startsWith(`'Source Sans Pro'`)
-              ? `'Source Sans Pro', ${fontFamily}`
-              : fontFamily,
-        },
-      })}
+        token:
+          // custom fontFamily
+          fontFamily !== defaultTheme.token.fontFamily
+            ? { fontFamily }
+            : // use fontFamilyEn for en
+              ['en', 'en-gb'].includes(mergedLocale.locale)
+              ? {
+                  fontFamily: fontFamilyEn,
+                }
+              : {},
+      } as ConfigProviderProps['theme']['token'])}
       renderEmpty={
         parentContext.renderEmpty ||
         (componentName => <DefaultRenderEmpty componentName={componentName} />)
@@ -168,14 +194,16 @@ const ConfigProvider: ConfigProviderType = ({
             : hideOnSinglePage !== undefined
               ? hideOnSinglePage
               : parentExtendedContext.hideOnSinglePage,
+          // inject static function to outermost ConfigProvider only
+          injectStaticFunction: false,
         }}
       >
         <StyleProvider {...mergedStyleProviderProps}>
           {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
           {/* ref: https://ant.design/components/app */}
-          <App component={false}>
+          <App component={false} {...appProps}>
             {children}
-            {injectStaticFunction && <StaticFunction />}
+            {parentExtendedContext.injectStaticFunction && <StaticFunction />}
           </App>
         </StyleProvider>
       </ExtendedConfigContext.Provider>

@@ -45,7 +45,6 @@ const App: React.FC = () => {
         key: 'operation',
         render: () => (
           <Space size="middle">
-            <a>Pause</a>
             <a>Stop</a>
             <Dropdown menu={{ items }}>
               <a>
@@ -94,7 +93,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <Form style={{ marginBottom: 24 }}>
+      <Form style={{ marginBottom: 16 }}>
         <Form.Item label="Size" required={true}>
           <Radio.Group
             value={size}

@@ -1,9 +1,11 @@
 import type { MenuProps } from '@oceanbase/design';
-import { Tag, theme } from '@oceanbase/design';
+import { Tag } from '@oceanbase/design';
 import { Link, useFullSidebarData, useSidebarData } from 'dumi';
 import React, { useMemo } from 'react';
+import queryString from 'query-string';
 import useLocation from './useLocation';
 import useSiteToken from './useSiteToken';
+import { ISidebarGroup } from 'dumi/dist/client/theme-api/types';
 
 export interface UseMenuOptions {
   before?: React.ReactNode;
@@ -12,7 +14,10 @@ export interface UseMenuOptions {
 
 const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => {
   const fullData = useFullSidebarData();
-  const { pathname, search } = useLocation();
+  const { pathname, search: allSearch } = useLocation();
+  const { theme } = queryString.parse(allSearch);
+  // sync theme query only when click menu
+  const search = allSearch ? `?${queryString.stringify({ theme })}` : '';
   const sidebarData = useSidebarData();
   const { before, after } = options;
   const { token } = useSiteToken();
@@ -44,6 +49,53 @@ const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => 
       }
     }
 
+    const getChildItems = (group: ISidebarGroup) => {
+      const childrenGroup = group.children.reduce<
+        Record<string, ReturnType<typeof useSidebarData>[number]['children']>
+      >((childrenResult, child) => {
+        const type = (child.frontmatter as any).type ?? 'default';
+        if (!childrenResult[type]) {
+          childrenResult[type] = [];
+        }
+        childrenResult[type].push(child);
+        return childrenResult;
+      }, {});
+      const childItems = [];
+      childItems.push(
+        ...(childrenGroup.default?.map(item => ({
+          label: (
+            <Link to={`${item.link}${search}`}>
+              {before}
+              {item?.title}
+              {after}
+            </Link>
+          ),
+          key: item.link.replace(/(-cn$)/g, ''),
+        })) ?? [])
+      );
+      Object.entries(childrenGroup).forEach(([type, children]) => {
+        if (type !== 'default') {
+          childItems.push({
+            type: 'group',
+            label: type,
+            key: type,
+            children: children?.map(item => ({
+              label: (
+                <Link to={`${item.link}${search}`}>
+                  {before}
+                  {item?.title}
+                  {after}
+                </Link>
+              ),
+              key: item.link.replace(/(-cn$)/g, ''),
+              children: getChildItems(item),
+            })),
+          });
+        }
+      });
+      return childItems;
+    };
+
     return (
       sidebarItems?.reduce<Exclude<MenuProps['items'], undefined>>((result, group) => {
         if (group?.title) {
@@ -52,11 +104,11 @@ const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => 
             const childrenGroup = group.children.reduce<
               Record<string, ReturnType<typeof useSidebarData>[number]['children']>
             >((childrenResult, child) => {
-              const type = (child.frontmatter as any).type ?? 'default';
-              if (!childrenResult[type]) {
-                childrenResult[type] = [];
+              const subGroup = (child.frontmatter as any).subGroup ?? 'default';
+              if (!childrenResult[subGroup]) {
+                childrenResult[subGroup] = [];
               }
-              childrenResult[type].push(child);
+              childrenResult[subGroup].push(child);
               return childrenResult;
             }, {});
             const childItems = [];
@@ -72,12 +124,11 @@ const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => 
                 key: item.link.replace(/(-cn$)/g, ''),
               })) ?? [])
             );
-            Object.entries(childrenGroup).forEach(([type, children]) => {
-              if (type !== 'default') {
+            Object.entries(childrenGroup).forEach(([subGroup, children]) => {
+              if (subGroup !== 'default') {
                 childItems.push({
-                  type: 'group',
-                  label: type,
-                  key: type,
+                  label: subGroup,
+                  key: subGroup,
                   children: children?.map(item => ({
                     label: (
                       <Link to={`${item.link}${search}`}>
@@ -92,6 +143,7 @@ const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => 
               }
             });
             result.push({
+              type: 'group',
               label: group?.title,
               key: group?.title,
               children: childItems,
@@ -106,9 +158,11 @@ const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => 
                   <Link to={`${item.link}${search}`}>
                     {before}
                     <span key="english">{item?.title}</span>
-                    <span className="chinese" key="chinese">
-                      {(item.frontmatter as any)?.subtitle}
-                    </span>
+                    {(item.frontmatter as any)?.subtitle && (
+                      <span className="chinese" key="chinese">
+                        {(item.frontmatter as any)?.subtitle}
+                      </span>
+                    )}
                     {(item.frontmatter as any)?.tag && (
                       <Tag color="warning" style={{ marginInlineStart: token.marginXS }}>
                         {(item.frontmatter as any)?.tag}

@@ -7,8 +7,8 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基础直方图"></code>
-
 <code src="./demo/stack.tsx" title="堆叠直方图"></code>
 
 ## API

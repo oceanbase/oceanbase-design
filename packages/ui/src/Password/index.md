@@ -7,12 +7,10 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="基本" description="使用内置的校验规则"></code>
-
+<!-- prettier-ignore -->
+<code src="./demo/basic.tsx" title="基本" description="使用内置的校验规则。"></code>
 <code src="./demo/custom-rules.tsx" title="自定义校验规则"></code>
-
 <code src="./demo/random-generate-password.tsx" title="生成随机密码"></code>
-
 <code src="./demo/custom-rules-and-random-generate.tsx" title="自定义校验规则 + 生成随机密码"></code>
 
 ## API

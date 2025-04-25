@@ -8,6 +8,142 @@ group: 业务组件
 
 ---
 
+## 0.4.12
+
+`2024-04-18`
+
+- 🆕 Action.Button 和 Action.Link 新增 `divider` 属性，用于设置位于下拉菜单内时是否带分割线。[#1029](https://github.com/oceanbase/oceanbase-design/pull/1029)
+- 🆕 BasicLayout 新增 `topHeader.versionNoticePath` 属性，用于设置顶部导航栏的版本公告。[#1008](https://github.com/oceanbase/oceanbase-design/pull/1008) [@zousongxia](https://github.com/zousongxia)
+- 🆕 ProTable 新增 `innerBordered` 属性，用于设置内部边框。[#1037](https://github.com/oceanbase/oceanbase-design/pull/1037)
+- DateRanger
+  - ⭐️ 日期格式改为 `mask`，自动对齐日期和时间格式。[#1010](https://github.com/oceanbase/oceanbase-design/pull/1010) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - 💄 优化日期选择面板交互，降低二次选择的复杂性和视觉干扰。[#1006](https://github.com/oceanbase/oceanbase-design/pull/1006) [@wzc520pyfm](https://github.com/wzc520pyfm)
+
+## 0.4.11
+
+`2024-03-31`
+
+- 🆕 SideTip 组件新增 `draggable` 属性，可关闭拖拽功能 [#999](https://github.com/oceanbase/oceanbase-design/pull/999)
+
+## 0.4.9
+
+`2025-02-13`
+
+- DateRanger
+  - 🆕 DateRanger 新增 `autoAdjustOverflow` 属性，用于控制弹出面板是否自动调整位置。[#972](https://github.com/oceanbase/oceanbase-design/pull/972) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - 🆕 DateRanger 新增 `overlayClassName` 和 `overlayStyle` 属性，用于设置弹出面板的样式。[#970](https://github.com/oceanbase/oceanbase-design/pull/970) [@wzc520pyfm](https://github.com/wzc520pyfm)
+- 🐞 修复 ProCard `ghost` 模式下卡片阴影和内容区 padding 不正确的问题。[#967](https://github.com/oceanbase/oceanbase-design/pull/967)
+
+## 0.4.8
+
+`2025-02-05`
+
+- DateRanger
+  - 🆕 DateRanger 支持自定义快捷选项。[#952](https://github.com/oceanbase/oceanbase-design/pull/952) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - ⭐️ DateRanger 支持自动校验和交换起止时间。[#953](https://github.com/oceanbase/oceanbase-design/pull/953) [@linhf123](https://github.com/linhf123)
+- 💄 优化 ProTable 间距，以对齐 Table 在 Card 中的样式。[#948](https://github.com/oceanbase/oceanbase-design/pull/948)
+
+## 0.4.7
+
+`2025-01-15`
+
+- Action
+  - 🆕 Action 支持子元素间接嵌套。[#928](https://github.com/oceanbase/oceanbase-design/pull/928)
+  - 💄 Action.Link 之间的间隔改为 16px。[#926](https://github.com/oceanbase/oceanbase-design/pull/926)
+  - 💄 优化 Action 更多按钮的宽度，并去掉下拉菜单的最小宽度。[#931](https://github.com/oceanbase/oceanbase-design/pull/931)
+- DateRanger
+  - 🆕 DateRanger 新增 `rules` 属性，用于设置起止时间的校验规则。[#940](https://github.com/oceanbase/oceanbase-design/pull/940) [@linhf123](https://github.com/linhf123)
+  - 🆕 DateRanger 新增 `NEAR_12_HOURS` 和 `LAST_1_DAY` 快捷选项。[#927](https://github.com/oceanbase/oceanbase-design/pull/927) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - 🌐 优化 DateRanger 的英文文案和日期格式。[#918](https://github.com/oceanbase/oceanbase-design/pull/918) [@18735185652](https://github.com/18735185652)
+  - 🐞 修复 DateRanger `allowClear` 不生效的问题。[#929](https://github.com/oceanbase/oceanbase-design/pull/929) [@linhf123](https://github.com/linhf123)
+  - 💄 去掉 DateRanger `focus` 时的阴影样式。[#934](https://github.com/oceanbase/oceanbase-design/pull/934)
+  - 💄 DateRanger 横向空间不足时，切换按钮不换行。[#920](https://github.com/oceanbase/oceanbase-design/pull/920) [@wzc520pyfm](https://github.com/wzc520pyfm)
+- ProCard
+  - 📖 新增 ProCard 的文档和示例。[#923](https://github.com/oceanbase/oceanbase-design/pull/923)
+  - 💄 优化 ProCard 在无间距时的头部样式。[#923](https://github.com/oceanbase/oceanbase-design/pull/923)
+  - 💄 优化 ProCard 的圆角、阴影和内间距，以对齐 Card 样式。[#938](https://github.com/oceanbase/oceanbase-design/pull/938)
+  - 💄 优化 ProCard 页标签样式，以对齐 Card 页标签样式。[#937](https://github.com/oceanbase/oceanbase-design/pull/937)
+
+## 0.4.6
+
+`2024-12-30`
+
+- DateRanger:
+  - 🌐 快捷选项支持国际化。[#903](https://github.com/oceanbase/oceanbase-design/pull/903)
+  - 🆕 `selects` 新增 `enLabel` 属性，用于设置快捷选项的英文文案。[#903](https://github.com/oceanbase/oceanbase-design/pull/903)
+- Action
+  - 🆕 新增 `moreType` 属性，用于设置更多操作的元素类型。[#911](https://github.com/oceanbase/oceanbase-design/pull/911)
+  - 💄 优化 Action 更多操作元素类型的判断逻辑。[#911](https://github.com/oceanbase/oceanbase-design/pull/911)
+  - 📖 Action 新增带 Tooltip 和 Popconfirm 的示例。[#902](https://github.com/oceanbase/oceanbase-design/pull/902)
+
+## 0.4.4
+
+`2024-12-14`
+
+- ⚡ 设置 `sideEffects`，以支持 tree shaking。[#886](https://github.com/oceanbase/oceanbase-design/pull/886)
+- ⚡ TaskGraph 依赖的 `@antv/g6` 改为动态加载，以提升加载性能。[#884](https://github.com/oceanbase/oceanbase-design/pull/884)
+- ⭐️ 优化 DateRanger 的交互和样式: [#885](https://github.com/oceanbase/oceanbase-design/pull/885) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - 移除时间 icon
+  - 不再禁用后退时间按钮
+  - 刷新时间按钮在选中自定义时间时隐藏
+  - 时间组件添加 hover 样式、优化
+  - 前进/后退时间按钮添加 tooltip
+  - 时间选择组件不支持清空值
+  - 优化选择框圆角、按钮组边框和快速选项的字体颜色
+  - 支持英文格式日期时间
+  - 优化 DateRanger 的鼠标样式 [#883](https://github.com/oceanbase/oceanbase-design/pull/883)
+- 🆕 Action 组件 `onClick` 函数增加 event 参数。[#874](https://github.com/oceanbase/oceanbase-design/pull/874)
+- 🐞 修复 PageContainer 右上角操作区 Select 多选框没有垂直居中的问题。[#881](https://github.com/oceanbase/oceanbase-design/pull/881)
+- 💄 优化 ContentWithQuestion 问号图标的颜色。[#887](https://github.com/oceanbase/oceanbase-design/pull/887)
+
+## 0.4.3
+
+`2024-12-02`
+
+- 🐞 修复引入的 @oceanbase/design 国际化语言路径不正确、导致运行报错的问题。[#870](https://github.com/oceanbase/oceanbase-design/pull/870)
+
+## 0.4.2
+
+`2024-11-29`
+
+- 💄 DateRanger 组件对外透出 `updateCurrentTime` 函数，用于更新当前时间。[#862](https://github.com/oceanbase/oceanbase-design/pull/862) [@18735185652](https://github.com/18735185652)
+
+## 0.4.1
+
+`2024-11-11`
+
+- ⭐️ 大幅优化 DateRanger 的交互和样式: [#810](https://github.com/oceanbase/oceanbase-design/pull/810) [#795](https://github.com/oceanbase/oceanbase-design/pull/795)
+  - 调整布局和样式
+  - 日期和时间输入框支持快捷选中
+  - 修复手动输入日期时日历面板不更新的问题
+  - 默认关闭极简模式
+  - 默认展示年份和秒
+  - 使用刷新图标 替换 `当前` 按钮
+  - 移除快捷选项的 tag
+  - 信息提示和报错信息移到面板底部
+  - 自定义时间默认不自动计算时间跨度，并移除自定义选项
+- 🆕 Ranger 支持透传属性到 QuickPicker 组件。[#799](https://github.com/oceanbase/oceanbase-design/pull/799)
+- 💄 去掉 PageContainer 页头的上内间距，让页面布局更加紧凑。[#817](https://github.com/oceanbase/oceanbase-design/pull/817)
+- ProTable
+  - 💄 对齐 Table 的可展开、空状态和 `footer` 样式。[#825](https://github.com/oceanbase/oceanbase-design/pull/825)
+  - 💄 优化查询表单样式，将搜索&重置按钮组和展开收起互换位置。[#801](https://github.com/oceanbase/oceanbase-design/pull/801)
+- 💄 优化 Password 的多处样式，以对齐设计规范。[#820](https://github.com/oceanbase/oceanbase-design/pull/820)
+
+## 0.4.0
+
+`2024-10-09`
+
+- 🔥 新增 DateRanger 新版日期时间选择组件。[#295](https://github.com/oceanbase/oceanbase-design/pull/295)
+
+## 0.3.8
+
+`2024-09-23`
+
+- 📖 新增 @oceanbase/ui 在 Vite 中的使用文档和项目模板。[#673](https://github.com/oceanbase/oceanbase-design/pull/673)
+- 🆕 Action.Group 新增 `buttonSize` 属性，用于设置按钮大小。[#719](https://github.com/oceanbase/oceanbase-design/pull/719)
+- 🆕 Action.Button 新增 `size` 属性，用于设置按钮大小。[#719](https://github.com/oceanbase/oceanbase-design/pull/719)
+- 💄 优化 PageContainer 仅设置 title 属性时页头和内容区的间距。[#721](https://github.com/oceanbase/oceanbase-design/pull/721)
+
 ## 0.3.6
 
 `2024-07-10`

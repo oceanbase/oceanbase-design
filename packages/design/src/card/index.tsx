@@ -7,7 +7,8 @@ import type {
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
-import useStyle from './style';
+import { isHorizontalPaddingZero } from '../_util';
+import useStyle, { genTableStyle } from './style';
 
 export * from 'antd/es/card/Card';
 export * from 'antd/es/card';
@@ -27,8 +28,9 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     {
       children,
       size,
-      divided = true,
+      title,
       tabList,
+      divided: outerDivided,
       prefixCls: customizePrefixCls,
       bodyStyle,
       styles,
@@ -37,21 +39,21 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     },
     ref
   ) => {
-    const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+    const { getPrefixCls, card: contextCard } = useContext(ConfigProvider.ConfigContext);
+    const divided = outerDivided ?? contextCard?.divided ?? true;
+
     const prefixCls = getPrefixCls('card', customizePrefixCls);
     const tabsPrefixCls = getPrefixCls('tabs', customizePrefixCls);
     const { wrapSSR } = useStyle(prefixCls, tabsPrefixCls);
 
-    const zeroPaddingList = [0, '0', '0px'];
-    // card body has no padding
-    const noBodyPadding =
-      zeroPaddingList.includes(bodyStyle?.padding) ||
-      zeroPaddingList.includes(styles?.body?.padding);
-
+    // card body no horizontal padding
+    const noBodyHorizontalPadding =
+      isHorizontalPaddingZero(bodyStyle?.padding) || isHorizontalPaddingZero(styles?.body?.padding);
     const cardCls = classNames(
       {
+        [`${prefixCls}-has-title`]: !!title,
         [`${prefixCls}-no-divider`]: !divided,
-        [`${prefixCls}-no-body-padding`]: noBodyPadding,
+        [`${prefixCls}-no-body-horizontal-padding`]: noBodyHorizontalPadding,
       },
       className
     );
@@ -74,31 +76,19 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     });
 
     return wrapSSR(
-      <ConfigProvider
-        injectStaticFunction={false}
-        table={
-          noBodyPadding
-            ? {
-                // expand selection column width for larger padding-left
-                // related to .ant-card-no-body-padding style
-                selectionColumnWidth: size === 'small' ? 36 : 48,
-              }
-            : {}
-        }
+      <AntCard
+        ref={ref}
+        size={size}
+        title={title}
+        tabList={newTabList}
+        prefixCls={customizePrefixCls}
+        bodyStyle={bodyStyle}
+        styles={styles}
+        className={cardCls}
+        {...restProps}
       >
-        <AntCard
-          ref={ref}
-          size={size}
-          tabList={newTabList}
-          prefixCls={customizePrefixCls}
-          bodyStyle={bodyStyle}
-          styles={styles}
-          className={cardCls}
-          {...restProps}
-        >
-          {children}
-        </AntCard>
-      </ConfigProvider>
+        {children}
+      </AntCard>
     );
   }
 );
@@ -110,4 +100,5 @@ if (process.env.NODE_ENV !== 'production') {
 export default Object.assign(Card, {
   Grid: AntCard.Grid,
   Meta: AntCard.Meta,
+  genTableStyle,
 });

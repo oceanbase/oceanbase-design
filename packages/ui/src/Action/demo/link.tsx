@@ -1,8 +1,9 @@
+import React from 'react';
 import { Action } from '@oceanbase/ui';
 
 export default () => {
   return (
-    <Action.Group moreText={'更多操作'}>
+    <Action.Group>
       <Action.Link visible={false}>action1</Action.Link>
       <Action.Link disabled tooltip={'禁用展示tooltip'}>
         禁用提示
@@ -12,7 +13,7 @@ export default () => {
           console.log('hello~~');
         }}
       >
-        action3
+        action2
       </Action.Link>
       <Action.Link
         onClick={async () => {
@@ -24,9 +25,12 @@ export default () => {
           });
         }}
       >
+        action3
+      </Action.Link>
+      <Action.Link disabled divider={true}>
         action4
       </Action.Link>
-      <Action.Link disabled>action5</Action.Link>
+      <Action.Link>action5</Action.Link>
     </Action.Group>
   );
 };

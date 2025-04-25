@@ -31,6 +31,7 @@ export type OverlayFunc = () => React.ReactElement;
 export interface HeaderLocale {
   help: string;
   welcome: string;
+  versionNotice?: string;
   viewDocs: string;
   downloadDocs?: string;
   about: string;
@@ -57,6 +58,7 @@ export interface HeaderProps extends LocaleWrapperProps {
   extra?: React.ReactNode;
   pathname?: string;
   welcomePath?: string;
+  versionNoticePath?: string;
   docsPath?: string;
   pdfPath?: string;
   iconUrl?: string;
@@ -85,6 +87,7 @@ const Header: React.FC<HeaderProps> = ({
   extra,
   pathname,
   welcomePath,
+  versionNoticePath,
   docsPath,
   pdfPath,
   iconUrl,
@@ -117,6 +120,8 @@ const Header: React.FC<HeaderProps> = ({
       onClick={({ key }) => {
         if (key === 'welcome') {
           navigate?.(welcomePath);
+        } else if (key === 'versionNotice') {
+          directTo(versionNoticePath);
         } else if (key === 'viewDocs') {
           directTo(docsPath);
         } else if (key === 'downloadDocs') {
@@ -131,6 +136,7 @@ const Header: React.FC<HeaderProps> = ({
       }}
     >
       {welcomePath && <Menu.Item key="welcome">{locale.welcome}</Menu.Item>}
+      {versionNoticePath && <Menu.Item key="versionNotice">{locale.versionNotice}</Menu.Item>}
       {docsPath && <Menu.Item key="viewDocs">{locale.viewDocs}</Menu.Item>}
       {pdfPath && <Menu.Item key="downloadDocs">{locale.downloadDocs}</Menu.Item>}
       <Menu.Item key="about">{`${locale.about}${

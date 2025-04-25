@@ -38,7 +38,7 @@ const App: React.FC = () => {
         </Col>
         <Col span={12}>
           <Tooltip
-            title="This is prompt text. This is prompt text. This is prompt text. This is prompt text."
+            title="This is prompt text. This is prompt text. This is prompt text. This is prompt text. This is prompt text."
             type={type}
             mouseFollow={true}
           >

@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/icons",
-  "version": "0.3.2",
+  "version": "0.4.6",
   "description": "The Icon Library for OceanBase",
   "keywords": [
     "oceanbase",
@@ -30,14 +30,16 @@
     "README.md",
     "LICENSE"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "npm run generate && father build",
     "generate": "rm -rf src && ts-node scripts/generate.ts"
   },
   "dependencies": {
-    "@ant-design/colors": "^7.0.2",
-    "@ant-design/icons": "^5.3.7",
-    "@oceanbase/icons-svg": "^1.0.6"
+    "@ant-design/colors": "^7.2.0",
+    "@ant-design/icons": "^5.6.1",
+    "@oceanbase/icons-svg": "^1.0.10",
+    "lodash.camelcase": "^4.3.0"
   },
   "peerDependencies": {
     "react": ">=16.9.0",

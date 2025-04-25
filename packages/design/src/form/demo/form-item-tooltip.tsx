@@ -7,7 +7,6 @@ const onFinish = (values: any) => {
 };
 
 const onFinishFailed = (errorInfo: any) => {
-  message.error('Failed');
   console.log(errorInfo);
 };
 
@@ -35,6 +34,7 @@ const App: React.FC = () => {
         tooltip={{
           title: 'This is username',
         }}
+        extra="This is extra text."
       >
         <Input />
       </Form.Item>

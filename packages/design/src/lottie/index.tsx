@@ -1,7 +1,6 @@
-import type { AnimationConfig, AnimationItem } from 'lottie-web';
-import lottie from 'lottie-web';
 import React, { useState, useEffect, useRef, useImperativeHandle, useContext } from 'react';
 import { ConfigProvider } from '@oceanbase/design';
+import type { AnimationConfig, AnimationItem } from 'lottie-web';
 import { useUpdateEffect } from 'ahooks';
 import classNames from 'classnames';
 
@@ -23,7 +22,7 @@ export interface LottieProps extends Omit<AnimationConfig, 'container'> {
 }
 
 export interface LottieRef {
-  animation: AnimationItem;
+  animation?: AnimationItem;
 }
 
 const Lottie = React.forwardRef<LottieRef, LottieProps>(
@@ -31,18 +30,20 @@ const Lottie = React.forwardRef<LottieRef, LottieProps>(
     const { iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
 
     const [animation, setAnimation] = useState<AnimationItem>();
-    const containerRef = useRef<HTMLDivElement>();
+    const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
       if (!animation) {
-        // ref: https://github.com/airbnb/lottie-web/blob/master/index.d.ts#L129
-        const newAnimation = lottie.loadAnimation({
-          container: containerRef.current,
-          renderer: 'svg',
-          loop,
-          ...restProps,
+        import('lottie-web').then(lottie => {
+          // ref: https://github.com/airbnb/lottie-web/blob/master/index.d.ts#L129
+          const newAnimation = lottie.default.loadAnimation({
+            container: containerRef.current,
+            renderer: 'svg',
+            loop,
+            ...restProps,
+          });
+          setAnimation(newAnimation);
         });
-        setAnimation(newAnimation);
       }
     }, []);
 

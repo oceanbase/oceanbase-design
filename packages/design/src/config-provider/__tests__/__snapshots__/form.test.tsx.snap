@@ -48,10 +48,10 @@ exports[`ConfigProvider form > ConfigProvider form.requiredMark should be \`opti
               <span
                 class="ant-input-suffix"
               >
-                <span
+                <button
                   class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                  role="button"
                   tabindex="-1"
+                  type="button"
                 >
                   <span
                     aria-label="close-circle"
@@ -73,7 +73,7 @@ exports[`ConfigProvider form > ConfigProvider form.requiredMark should be \`opti
                       />
                     </svg>
                   </span>
-                </span>
+                </button>
               </span>
             </span>
           </div>
@@ -126,10 +126,10 @@ exports[`ConfigProvider form > ConfigProvider form.requiredMark should be \`opti
               <span
                 class="ant-input-suffix"
               >
-                <span
+                <button
                   class="ant-input-clear-icon ant-input-clear-icon-hidden"
-                  role="button"
                   tabindex="-1"
+                  type="button"
                 >
                   <span
                     aria-label="close-circle"
@@ -151,7 +151,7 @@ exports[`ConfigProvider form > ConfigProvider form.requiredMark should be \`opti
                       />
                     </svg>
                   </span>
-                </span>
+                </button>
               </span>
             </span>
           </div>
@@ -163,7 +163,7 @@ exports[`ConfigProvider form > ConfigProvider form.requiredMark should be \`opti
     style="display: flex; gap: 8px; align-items: center;"
   >
     <button
-      class="ant-btn ant-btn-default"
+      class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -171,7 +171,7 @@ exports[`ConfigProvider form > ConfigProvider form.requiredMark should be \`opti
       </span>
     </button>
     <button
-      class="ant-btn ant-btn-primary"
+      class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       type="button"
     >
       <span>

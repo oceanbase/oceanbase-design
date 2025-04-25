@@ -7,14 +7,11 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-
 <code src="./demo/with-table.tsx" title="配合 Table 使用"></code>
-
 <code src="./demo/with-multiple-table.tsx" title="配合多个 Table 使用"></code>
-
 <code src="./demo/with-drawer.tsx" title="在 Drawer 中使用"></code>
-
 <code src="./demo/with-multiple-drawer-table.tsx" title="在 Drawer 中配合多个 Table 使用"></code>
 
 ## API

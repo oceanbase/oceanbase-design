@@ -1,6 +1,7 @@
 export default {
   help: 'Help',
   welcome: 'Welcome page',
+  versionNotice: 'version notice',
   viewDocs: 'Check the user manual',
   downloadDocs: 'Download the user manual',
   about: 'About',

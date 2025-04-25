@@ -7,10 +7,9 @@ nav:
 
 ## 代码演示
 
+<!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-
 <code src="./demo/customTitle.tsx" title="自定义节点 title"></code>
-
 <code src="./demo/virtual.tsx" title="虚拟滚动"></code>
 
 ## API

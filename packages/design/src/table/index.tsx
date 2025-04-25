@@ -10,6 +10,7 @@ import type { ReactElement, ReactNode } from 'react';
 import React, { useContext, useEffect, useState } from 'react';
 import ConfigProvider from '../config-provider';
 import Typography from '../typography';
+import Empty from '../empty';
 import useStyle from './style';
 import type { AnyObject } from '../_util/type';
 import useDefaultPagination from './hooks/useDefaultPagination';
@@ -29,23 +30,29 @@ export interface TableLocale extends AntTableLocale {
 }
 
 export interface TableProps<T> extends AntTableProps<T> {
+  innerBordered?: boolean;
   columns?: ColumnsType<T>;
   cancelText?: string;
   collapseText?: string;
   openText?: string;
   hiddenCancelBtn?: boolean;
-  toolOptionsRender?: (selectedRowKeys, selectedRows) => ReactNode[];
-  toolAlertRender?: false | ((selectedRowKeys, selectedRows) => ReactNode);
-  toolSelectedContent?: (selectedRowKeys, selectedRows) => ReactNode;
+  toolOptionsRender?: (selectedRowKeys: React.Key[], selectedRows: T[]) => ReactNode[];
+  toolAlertRender?: false | ((selectedRowKeys: React.Key[], selectedRows: T[]) => ReactNode);
+  toolSelectedContent?: (selectedRowKeys: React.Key[], selectedRows: T[]) => ReactNode;
   locale?: TableLocale;
 }
 
-function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
+function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.Ref<Reference>) {
   const {
     locale: customLocale,
+    size,
+    bordered,
+    innerBordered,
     columns,
+    footer,
     pagination: customPagination,
     rowSelection,
+    rowClassName,
     toolAlertRender,
     toolOptionsRender,
     toolSelectedContent,
@@ -61,7 +68,11 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
   const pagination = useDefaultPagination(customPagination);
 
   const { getPrefixCls, locale, table } = useContext(ConfigProvider.ConfigContext);
-  const { batchOperationBar, ...restLocale } = {
+  const {
+    batchOperationBar,
+    emptyText = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />,
+    ...restLocale
+  } = {
     ...customLocale,
     batchOperationBar: {
       ...enUS.Table?.batchOperationBar,
@@ -75,6 +86,9 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
   const tableCls = classNames(
     {
       [`${prefixCls}-expandable`]: !isEmpty(expandable),
+      [`${prefixCls}-selectable`]: !!rowSelection,
+      [`${prefixCls}-has-footer`]: !!footer,
+      [`${prefixCls}-inner-bordered`]: innerBordered,
     },
     className
   );
@@ -99,7 +113,7 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
                 showTitle: false,
                 ...item.ellipsis,
               },
-        render: (text, record, index) => {
+        render: (text: any, record: T, index: number) => {
           const element = (
             item.render ? item.render(text, record, index) : record[(item as any).dataIndex]
           ) as ReactElement | undefined;
@@ -125,14 +139,14 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
     return item;
   });
 
-  const handleSelectedData = (selectedRowKeys, selectedRows, info) => {
+  const handleSelectedData = (selectedRowKeys: React.Key[], selectedRows: T[], info: any) => {
     setCurrentSelectedRowKeys(selectedRowKeys);
     setCurrentSelectedRows(selectedRows);
     setCurrentSelectedInfo(info);
   };
 
   const handleOptionsCancel = () => {
-    rowSelection?.onChange([], [], currentSelectedInfo);
+    rowSelection?.onChange?.([], [], currentSelectedInfo);
     handleSelectedData([], [], currentSelectedInfo);
   };
 
@@ -182,8 +196,8 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
               >
                 <a onClick={() => setOpenPopover(!openPopover)}>
                   {openPopover
-                    ? collapseText ?? batchOperationBar?.collapse
-                    : openText ?? batchOperationBar?.open}
+                    ? (collapseText ?? batchOperationBar?.collapse)
+                    : (openText ?? batchOperationBar?.open)}
                 </a>
               </Popover>
             )}
@@ -206,8 +220,33 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
       ref={ref}
       prefixCls={customizePrefixCls}
       className={tableCls}
-      locale={restLocale}
+      locale={{
+        ...restLocale,
+        emptyText: (
+          <div className={`${prefixCls}-empty-wrapper`}>
+            {typeof emptyText === 'function' ? emptyText() : emptyText}
+          </div>
+        ),
+      }}
+      size={size}
+      bordered={bordered || innerBordered}
       columns={newColumns}
+      rowClassName={(...args) => {
+        return classNames(
+          typeof rowClassName === 'function' ? rowClassName(...args) : rowClassName,
+          {
+            [`${prefixCls}-expand-row-by-click`]: expandable?.expandRowByClick,
+          }
+        );
+      }}
+      expandable={
+        expandable
+          ? {
+              columnWidth: !size || size === 'large' ? 40 : 32,
+              ...expandable,
+            }
+          : undefined
+      }
       rowSelection={
         rowSelection
           ? {
@@ -221,11 +260,12 @@ function Table<T>(props: TableProps<T>, ref: React.Ref<Reference>) {
                 }
               ) => {
                 handleSelectedData(selectedRowKeys, selectedRows, info);
-                rowSelection?.onChange(selectedRowKeys, selectedRows, info);
+                rowSelection?.onChange?.(selectedRowKeys, selectedRows, info);
               },
             }
           : undefined
       }
+      footer={footer}
       pagination={
         pagination === false
           ? false

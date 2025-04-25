@@ -12,14 +12,12 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="基本" description="简单展示"></code>
-
+<!-- prettier-ignore -->
+<code src="./demo/basic.tsx" title="基本" description="简单展示。"></code>
 <code src="./demo/content.tsx" title="内容展示" description="内容超长自动省略，并展示 `Tooltip`。同时通过 `contentProps` 可设置省略、编辑、复制等内容属性。"></code>
-
-<code src="./demo/vertical.tsx" title="垂直列表" description="默认去掉冒号"></code>
-
+<code src="./demo/vertical.tsx" title="垂直" description="默认去掉冒号。"></code>
 <code src="./demo/bordered.tsx" title="带边框"></code>
-
+<code src="./demo/vertical-bordered.tsx" title="垂直带边框"></code>
 <code src="./demo/size.tsx" title="不同尺寸"></code>
 
 ## API

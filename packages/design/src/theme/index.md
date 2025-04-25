@@ -86,11 +86,19 @@ export const taskStatusList = [
 }
 ```
 
+- 如果需要使用特定主题的 less 文件，可以在全局样式中设置 `@theme` 主题变量:
+
+```less
+@theme: default | dark | compact | aliyun;
+```
+
 - 在 VSCode 中安装 [Less IntelliSense](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-less) 插件，可支持变量提示和补全。
 
-![](https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*t3tmTLWo5UUAAAAAAAAAAAAADvSFAQ/original)
+![](https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*_37-QqtQGQUAAAAAAAAAAAAADmfOAQ/original)
 
-## 暗色和紧凑主题
+## 内置主题
+
+### 暗色主题
 
 ```ts | pure
 import {  ConfigProvider } from '@oceanbase/design';
@@ -99,10 +107,8 @@ export default () {
   return (
     <ConfigProvider
       theme={{
-        // 暗色主题
+        isDark: true,
         algorithm: theme.darkAlgorithm,
-        // 紧凑主题
-        // algorithm: theme.compactAlgorithm
       }}
     >
       {...}
@@ -111,10 +117,65 @@ export default () {
 };
 ```
 
-## 更多用法
+### 紧凑主题
 
-- 主题的更多用法，请参考 antd 文档: https://ant.design/docs/react/customize-theme-cn
+```ts | pure
+import {  ConfigProvider } from '@oceanbase/design';
+
+export default () {
+  return (
+    <ConfigProvider
+      theme={{
+        algorithm: theme.compactAlgorithm
+      }}
+    >
+      {...}
+    </ConfigProvider>
+  );
+};
+```
+
+### 阿里云主题
+
+```ts | pure
+import {  ConfigProvider } from '@oceanbase/design';
+
+export default () {
+  return (
+    <ConfigProvider
+      theme={{
+        isAliyun: true,
+      }}
+    >
+      {...}
+    </ConfigProvider>
+  );
+};
+```
 
 ## 主题预览
 
+<!-- prettier-ignore -->
 <code src="./demo/previewer.tsx"></code>
+
+## API
+
+### SeedToken
+
+<TokenTable type="seed"></TokenTable>
+
+### MapToken
+
+> 继承所有 SeedToken 的属性
+
+<TokenTable type="map"></TokenTable>
+
+### AliasToken
+
+> 继承所有 SeedToken 和 MapToken 的属性
+
+<TokenTable type="alias"></TokenTable>
+
+## 更多用法
+
+- 主题的更多用法，请参考 antd 文档: https://ant.design/docs/react/customize-theme-cn

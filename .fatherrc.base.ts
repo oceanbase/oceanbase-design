@@ -19,4 +19,5 @@ export default defineConfig({
       'react-dom': 'ReactDOM',
     },
   },
+  extraBabelPlugins: ['react-inline-svg-unique-id'],
 });

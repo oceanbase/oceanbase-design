@@ -7,6 +7,7 @@ import DayJS from 'dayjs';
 import { FormattedMessage, useIntl, useRouteMeta, useTabMeta } from 'dumi';
 import type { ReactNode } from 'react';
 import React, { useContext, useLayoutEffect, useMemo, useState } from 'react';
+import Markdown from 'react-markdown';
 import useLayoutState from '../../../hooks/useLayoutState';
 import useLocation from '../../../hooks/useLocation';
 import useSiteToken from '../../../hooks/useSiteToken';
@@ -52,7 +53,7 @@ const useStyle = () => {
       top: 8px;
       inset-inline-end: 0;
       right: 0;
-      width: 160px;
+      width: 180px;
       margin: 12px 0;
       padding: 8px 0;
       padding-inline: 4px 8px;
@@ -82,8 +83,10 @@ const useStyle = () => {
       }
     `,
     articleWrapper: css`
-      padding: 0 170px 32px 64px;
+      padding: 0 200px 32px 48px;
+      max-width: 1100px;
       min-height: calc(100vh - 242px);
+      margin: 0 auto;
 
       &.rtl {
         padding: 0 64px 144px 170px;
@@ -93,6 +96,12 @@ const useStyle = () => {
         &,
         &.rtl {
           padding: 0 48px;
+        }
+      }
+      @media only screen and (max-width: ${token.screenXS}px) {
+        &,
+        &.rtl {
+          padding: 0 32px;
         }
       }
     `,
@@ -230,7 +239,7 @@ const Content: React.FC<{ children: ReactNode }> = ({ children }) => {
         </Affix>
         <article css={styles.articleWrapper} className={classNames({ rtl: isRTL })}>
           {meta.frontmatter?.title ? (
-            <Typography.Title style={{ fontSize: 30 }}>
+            <Typography.Title style={{ fontSize: 24 }}>
               {meta.frontmatter?.title}
               {meta.frontmatter.subtitle && (
                 <span style={{ marginLeft: 12 }}>{meta.frontmatter.subtitle}</span>
@@ -243,6 +252,7 @@ const Content: React.FC<{ children: ReactNode }> = ({ children }) => {
               )}
             </Typography.Title>
           ) : null}
+          <Markdown className="markdown">{meta.frontmatter?.markdown}</Markdown>
           {/* 添加作者、时间等信息 */}
           {meta.frontmatter.date || meta.frontmatter.author ? (
             <Typography.Paragraph>

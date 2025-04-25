@@ -1,15 +1,14 @@
 import { css } from '@emotion/react';
-import { Col, ConfigProvider, Menu } from '@oceanbase/design';
+import { Col, ConfigProvider, Drawer, FloatButton, Menu } from '@oceanbase/design';
 import { useSidebarData } from 'dumi';
-import MobileMenu from 'rc-drawer';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import useMenu from '../../../hooks/useMenu';
 import useSiteToken from '../../../hooks/useSiteToken';
 import SiteContext from '../SiteContext';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
 const useStyle = () => {
   const { token } = useSiteToken();
-
   const { antCls, fontFamily, colorSplit } = token;
 
   return {
@@ -51,6 +50,10 @@ const useStyle = () => {
           > ${antCls}-menu-item-group
           > ${antCls}-menu-item-group-list
           > ${antCls}-menu-item,
+          > ${antCls}-menu-item-group
+          > ${antCls}-menu-item-group-list
+          > ${antCls}-menu-submenu
+          > ${antCls}-menu-submenu-title,
           &${antCls}-menu-inline
           > ${antCls}-menu-item-group
           > ${antCls}-menu-item-group-list
@@ -133,14 +136,18 @@ const Sidebar: React.FC = () => {
     token: { colorBgContainer, colorBgTextHover },
   } = useSiteToken();
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const menuChild = (
     <ConfigProvider
       theme={{
         components: {
           Menu: {
             itemBg: colorBgContainer,
+            subMenuItemBg: colorBgContainer,
             itemHoverBg: colorBgTextHover,
             darkItemBg: colorBgContainer,
+            darkSubMenuItemBg: colorBgContainer,
             darkItemHoverBg: colorBgTextHover,
           },
         },
@@ -154,12 +161,36 @@ const Sidebar: React.FC = () => {
         theme={isDark ? 'dark' : 'light'}
         selectedKeys={[selectedKey]}
         defaultOpenKeys={sidebarData?.map(({ title }) => title).filter(item => item) as string[]}
+        onClick={() => {
+          setMobileMenuOpen(false);
+        }}
       />
     </ConfigProvider>
   );
 
   return isMobile ? (
-    <MobileMenu key="Mobile-menu">{menuChild}</MobileMenu>
+    <>
+      <FloatButton
+        type={mobileMenuOpen ? 'primary' : 'default'}
+        icon={mobileMenuOpen ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+        onClick={() => {
+          setMobileMenuOpen(true);
+        }}
+        style={{ insetInlineStart: 24 }}
+      />
+      <Drawer
+        key="Mobile-menu"
+        placement="left"
+        width={250}
+        bodyStyle={{ padding: 0 }}
+        open={mobileMenuOpen}
+        onCancel={() => {
+          setMobileMenuOpen(false);
+        }}
+      >
+        {menuChild}
+      </Drawer>
+    </>
   ) : (
     <Col xxl={4} xl={5} lg={6} md={6} sm={24} xs={24} css={styles.mainMenu}>
       <section className="main-menu-inner">{menuChild}</section>

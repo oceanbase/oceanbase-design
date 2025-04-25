@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
-# Cancel prev CI if new commit come
+# Cancel previous CI if the PR is updated.
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
@@ -39,20 +39,8 @@ jobs:
           rm -rf site/~demos/:id
 
       - name: Upload site artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: site
           path: site/
           retention-days: 5
-
-      # Upload PR id for next workflow use
-      - name: Save PR id
-        if: ${{ always() }}
-        run: echo ${{ github.event.number }} > ./pr-id.txt
-
-      - name: Upload PR id
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: pr
-          path: ./pr-id.txt

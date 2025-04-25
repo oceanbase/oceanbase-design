@@ -17,12 +17,10 @@
 @colorError: #f93939;
 @colorInfo: #006aff;
 @colorLink: #006aff;
-@colorTextBase: #132039;
+@colorTextBase: #000000;
 @colorBgBase: #ffffff;
-@fontFamily: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-'Noto Color Emoji';
-@fontFamilyCode: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+@fontFamily: -apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+@fontFamilyCode: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 @fontSize: 12;
 @lineWidth: 1;
 @lineType: solid;
@@ -314,10 +312,13 @@
 @colorFillSecondary: #e2e8f3;
 @colorFillTertiary: #f3f6fc;
 @colorFillQuaternary: #f8fafe;
+@colorBgSolid: rgb(0,0,0);
+@colorBgSolidHover: rgba(0,0,0,0.75);
+@colorBgSolidActive: rgba(0,0,0,0.95);
 @colorBgLayout: #f3f6fc;
 @colorBgContainer: #ffffff;
 @colorBgElevated: #ffffff;
-@colorBgSpotlight: #132039;
+@colorBgSpotlight: #ffffff;
 @colorBgBlur: transparent;
 @colorBorder: #cdd5e4;
 @colorBorderSecondary: #e2e8f3;
@@ -341,6 +342,7 @@
 @colorSuccessTextActive: #00b378;
 @colorErrorBg: #ffebeb;
 @colorErrorBgHover: #ffd6d6;
+@colorErrorBgFilledHover: #ffd7d3;
 @colorErrorBgActive: #ffbcb5;
 @colorErrorBorder: #ffb3b3;
 @colorErrorBorderHover: #ff7575;
@@ -412,12 +414,13 @@
 @borderRadiusOuter: 4;
 @boxShadowSecondary: 0 6px 16px 0 rgba(54, 69, 99, 0.08), 0 3px 6px -4px rgba(54, 69, 99, 0.12), 0 9px 28px 8px rgba(54, 69, 99, 0.05);
 @boxShadow: 0 1px 2px 0 rgba(54, 69, 99, 0.03), 0 1px 6px -1px rgba(54, 69, 99, 0.02), 0 2px 4px 0 rgba(54, 69, 99, 0.02);
+@lineWidthFocus: 3;
 @colorFillContent: #e2e8f3;
 @colorFillContentHover: #cdd5e4;
 @colorFillAlter: #f8fafe;
 @colorBgContainerDisabled: #f3f6fc;
 @colorBorderBg: #ffffff;
-@colorSplit: rgba(13, 63, 155, 0.12);
+@colorSplit: rgba(13,63,155,0.12);
 @colorTextPlaceholder: #c1cbe0;
 @colorTextDisabled: #c1cbe0;
 @colorTextHeading: #132039;
@@ -429,10 +432,9 @@
 @colorBgTextActive: #cdd5e4;
 @colorIcon: #8592ad;
 @colorIconHover: #132039;
-@colorErrorOutline: rgba(255, 5, 5, 0.08);
-@colorWarningOutline: rgba(255, 164, 19, 0.11);
+@colorErrorOutline: rgba(255,5,5,0.08);
+@colorWarningOutline: rgba(255,164,19,0.11);
 @fontSizeIcon: 10;
-@lineWidthFocus: 4;
 @controlOutlineWidth: 2;
 @controlInteractiveSize: 14;
 @controlItemBgHover: #f3f6fc;
@@ -440,7 +442,7 @@
 @controlItemBgActiveHover: #eaf1ff;
 @controlItemBgActiveDisabled: #cdd5e4;
 @controlTmpOutline: #f8fafe;
-@controlOutline: rgba(22, 99, 255, 0.09);
+@controlOutline: rgba(22,99,255,0.09);
 @fontWeightStrong: 600;
 @opacityLoading: 0.65;
 @linkDecoration: none;
@@ -493,9 +495,9 @@
 @screenXXLMin: 1600;
 @boxShadowPopoverArrow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 @boxShadowCard: 
-      0 1px 2px -2px rgba(0, 0, 0, 0.16),
-      0 3px 6px 0 rgba(0, 0, 0, 0.12),
-      0 5px 12px 4px rgba(0, 0, 0, 0.09)
+      0 1px 2px -2px rgba(0,0,0,0.16),
+      0 3px 6px 0 rgba(0,0,0,0.12),
+      0 5px 12px 4px rgba(0,0,0,0.09)
     ;
 @boxShadowDrawerRight: 
       -6px 0 16px 0 rgba(0, 0, 0, 0.08),

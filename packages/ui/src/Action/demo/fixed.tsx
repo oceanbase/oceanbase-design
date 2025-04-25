@@ -1,3 +1,4 @@
+import React from 'react';
 import { Action } from '@oceanbase/ui';
 
 export default () => {

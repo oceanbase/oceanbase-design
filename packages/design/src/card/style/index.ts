@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
-import { genTagStyle } from '../../tabs/style';
+import { genTabsStyle } from '../../tabs/style';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type CardToken = FullToken<'Card'> & {
@@ -8,7 +8,7 @@ export type CardToken = FullToken<'Card'> & {
   tabsPrefixCls: string;
 };
 
-export const genTableStyle = (padding: number, token: CardToken): CSSObject => {
+export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSObject => {
   const { antCls } = token;
   const tableComponentCls = `${antCls}-table`;
   return {
@@ -40,7 +40,8 @@ export const genTableStyle = (padding: number, token: CardToken): CSSObject => {
 };
 
 export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObject => {
-  const { componentCls, tabsComponentCls, tabsPrefixCls, padding, paddingSM, paddingLG } = token;
+  const { componentCls, antCls, tabsComponentCls, tabsPrefixCls, paddingSM, paddingLG } = token;
+  const tableComponentCls = `${antCls}-table`;
   return {
     [`${componentCls}`]: {
       // nested Card style
@@ -50,25 +51,31 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
     },
     [`${componentCls}${componentCls}-no-divider`]: {
       [`${componentCls}-head`]: {
-        borderBottom: 'none',
+        // should not remove border-bottom to avoid tabs inkbar display correctly
+        borderBottomColor: 'transparent',
       },
     },
     [`${componentCls}${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
       [`${componentCls}-body`]: {
-        padding: `0 ${paddingLG}px ${padding}px ${paddingLG}px`,
+        padding: `0 ${paddingLG}px ${paddingLG}px ${paddingLG}px`,
       },
     },
     [`${componentCls}-small${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
       [`${componentCls}-body`]: {
-        padding: `0 ${paddingSM}px 12px ${paddingSM}px`,
+        padding: `0 ${paddingSM}px ${paddingSM}px ${paddingSM}px`,
+      },
+    },
+    [`${componentCls}-small${componentCls}-contain-tabs >${componentCls}-head`]: {
+      [`${componentCls}-head-title, ${componentCls}-head-extra`]: {
+        paddingTop: token.paddingXS,
       },
     },
     [`${componentCls}${componentCls}-contain-tabs`]: {
-      [`${componentCls}-head`]: genTagStyle({
+      [`${componentCls}-head`]: genTabsStyle({
         ...token,
         componentCls: tabsComponentCls,
         prefixCls: tabsPrefixCls,
-      } as CardToken),
+      }),
     },
     [`${componentCls}${componentCls}-contain-grid`]: {
       [`${componentCls}-head`]: {
@@ -82,13 +89,20 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
         marginBottom: 0,
       },
     },
-    // no body padding card
-    [`${componentCls}${componentCls}-no-body-padding`]: genTableStyle(paddingLG, token),
-    // no body padding small card
-    [`${componentCls}${componentCls}-no-body-padding${componentCls}-small`]: genTableStyle(
-      paddingSM,
-      token
-    ),
+    // reduce margin between card title and table
+    [`&${componentCls}-has-title${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
+      [`${componentCls}-body`]: {
+        [`& > ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
+          {
+            marginTop: -token.marginSM,
+          },
+      },
+    },
+    // no body horizontal padding card
+    [`${componentCls}${componentCls}-no-body-horizontal-padding`]: genTableStyle(paddingLG, token),
+    // no body horizontal padding small card
+    [`${componentCls}${componentCls}-no-body-horizontal-padding${componentCls}-small`]:
+      genTableStyle(paddingSM, token),
   };
 };
 

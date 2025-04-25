@@ -19,10 +19,8 @@
 @colorLink: #035ddc;
 @colorTextBase: #fff;
 @colorBgBase: #000;
-@fontFamily: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-'Noto Color Emoji';
-@fontFamilyCode: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+@fontFamily: -apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+@fontFamilyCode: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 @fontSize: 14;
 @lineWidth: 1;
 @lineType: solid;
@@ -306,19 +304,22 @@
 @lime9: #e4f88b;
 @lime-10: #f0fab5;
 @lime10: #f0fab5;
-@colorText: rgba(255, 255, 255, 0.85);
-@colorTextSecondary: rgba(255, 255, 255, 0.65);
-@colorTextTertiary: rgba(255, 255, 255, 0.45);
-@colorTextQuaternary: rgba(255, 255, 255, 0.25);
-@colorFill: rgba(255, 255, 255, 0.18);
-@colorFillSecondary: rgba(255, 255, 255, 0.12);
-@colorFillTertiary: rgba(255, 255, 255, 0.08);
-@colorFillQuaternary: rgba(255, 255, 255, 0.04);
+@colorText: rgba(255,255,255,0.85);
+@colorTextSecondary: rgba(255,255,255,0.65);
+@colorTextTertiary: rgba(255,255,255,0.45);
+@colorTextQuaternary: rgba(255,255,255,0.25);
+@colorFill: rgba(255,255,255,0.18);
+@colorFillSecondary: rgba(255,255,255,0.12);
+@colorFillTertiary: rgba(255,255,255,0.08);
+@colorFillQuaternary: rgba(255,255,255,0.04);
+@colorBgSolid: rgba(255,255,255,0.95);
+@colorBgSolidHover: rgb(255,255,255);
+@colorBgSolidActive: rgba(255,255,255,0.9);
 @colorBgLayout: #000000;
 @colorBgContainer: #141414;
 @colorBgElevated: #1f1f1f;
 @colorBgSpotlight: #424242;
-@colorBgBlur: rgba(255, 255, 255, 0.04);
+@colorBgBlur: rgba(255,255,255,0.04);
 @colorBorder: #424242;
 @colorBorderSecondary: #303030;
 @colorPrimaryBg: #111a2c;
@@ -341,6 +342,7 @@
 @colorSuccessTextActive: #0e845d;
 @colorErrorBg: #2b1416;
 @colorErrorBgHover: #44191a;
+@colorErrorBgFilledHover: #421a1b;
 @colorErrorBgActive: #591f1f;
 @colorErrorBorder: #591f1f;
 @colorErrorBorderHover: #7b2525;
@@ -369,7 +371,7 @@
 @colorInfoTextActive: #074cad;
 @colorLinkHover: #0b3b7e;
 @colorLinkActive: #074cad;
-@colorBgMask: rgba(0, 0, 0, 0.45);
+@colorBgMask: rgba(0,0,0,0.45);
 @colorWhite: #fff;
 @fontSizeSM: 12;
 @fontSizeLG: 16;
@@ -410,35 +412,35 @@
 @borderRadiusSM: 4;
 @borderRadiusLG: 8;
 @borderRadiusOuter: 4;
-@colorFillContent: rgba(255, 255, 255, 0.12);
-@colorFillContentHover: rgba(255, 255, 255, 0.18);
-@colorFillAlter: rgba(255, 255, 255, 0.04);
-@colorBgContainerDisabled: rgba(255, 255, 255, 0.08);
+@colorFillContent: rgba(255,255,255,0.12);
+@colorFillContentHover: rgba(255,255,255,0.18);
+@colorFillAlter: rgba(255,255,255,0.04);
+@colorBgContainerDisabled: rgba(255,255,255,0.08);
 @colorBorderBg: #141414;
-@colorSplit: rgba(253, 253, 253, 0.12);
-@colorTextPlaceholder: rgba(255, 255, 255, 0.25);
-@colorTextDisabled: rgba(255, 255, 255, 0.25);
-@colorTextHeading: rgba(255, 255, 255, 0.85);
-@colorTextLabel: rgba(255, 255, 255, 0.65);
-@colorTextDescription: rgba(255, 255, 255, 0.45);
+@colorSplit: rgba(253,253,253,0.12);
+@colorTextPlaceholder: rgba(255,255,255,0.25);
+@colorTextDisabled: rgba(255,255,255,0.25);
+@colorTextHeading: rgba(255,255,255,0.85);
+@colorTextLabel: rgba(255,255,255,0.65);
+@colorTextDescription: rgba(255,255,255,0.45);
 @colorTextLightSolid: #fff;
 @colorHighlight: #d73333;
-@colorBgTextHover: rgba(255, 255, 255, 0.12);
-@colorBgTextActive: rgba(255, 255, 255, 0.18);
-@colorIcon: rgba(255, 255, 255, 0.45);
-@colorIconHover: rgba(255, 255, 255, 0.85);
-@colorErrorOutline: rgba(250, 20, 40, 0.1);
-@colorWarningOutline: rgba(180, 93, 0, 0.15);
+@colorBgTextHover: rgba(255,255,255,0.12);
+@colorBgTextActive: rgba(255,255,255,0.18);
+@colorIcon: rgba(255,255,255,0.45);
+@colorIconHover: rgba(255,255,255,0.85);
+@colorErrorOutline: rgba(250,20,40,0.1);
+@colorWarningOutline: rgba(180,93,0,0.15);
 @fontSizeIcon: 12;
-@lineWidthFocus: 4;
+@lineWidthFocus: 3;
 @controlOutlineWidth: 2;
 @controlInteractiveSize: 16;
-@controlItemBgHover: rgba(255, 255, 255, 0.08);
+@controlItemBgHover: rgba(255,255,255,0.08);
 @controlItemBgActive: #111a2c;
 @controlItemBgActiveHover: #0f2445;
-@controlItemBgActiveDisabled: rgba(255, 255, 255, 0.18);
-@controlTmpOutline: rgba(255, 255, 255, 0.04);
-@controlOutline: rgba(0, 60, 180, 0.15);
+@controlItemBgActiveDisabled: rgba(255,255,255,0.18);
+@controlTmpOutline: rgba(255,255,255,0.04);
+@controlOutline: rgba(0,60,180,0.15);
 @fontWeightStrong: 600;
 @opacityLoading: 0.65;
 @linkDecoration: none;
@@ -501,9 +503,9 @@
 @screenXXLMin: 1600;
 @boxShadowPopoverArrow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 @boxShadowCard: 
-      0 1px 2px -2px rgba(0, 0, 0, 0.16),
-      0 3px 6px 0 rgba(0, 0, 0, 0.12),
-      0 5px 12px 4px rgba(0, 0, 0, 0.09)
+      0 1px 2px -2px rgba(0,0,0,0.16),
+      0 3px 6px 0 rgba(0,0,0,0.12),
+      0 5px 12px 4px rgba(0,0,0,0.09)
     ;
 @boxShadowDrawerRight: 
       -6px 0 16px 0 rgba(0, 0, 0, 0.08),

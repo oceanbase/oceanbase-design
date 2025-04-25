@@ -11,6 +11,7 @@ import {
   Alert,
   Button,
   Col,
+  DatePicker,
   Divider,
   Form,
   Input,
@@ -18,29 +19,29 @@ import {
   Space,
   TimePicker,
 } from '@oceanbase/design';
-import type { FormItemProps } from '@oceanbase/design';
 import { noop } from 'lodash';
 import moment from 'moment';
 import dayjs from 'dayjs';
-import { useUpdate } from 'ahooks';
-import { toArray } from '@oceanbase/util';
-
-type RangeValue = [Moment, Moment] | [Dayjs, Dayjs];
+import { getPrefix } from '../_util';
+import { DATE_TIME_MONTH_FORMAT, DATE_TIME_MONTH_FORMAT_CN } from './constant';
+import type { RangeValue } from './Ranger';
 type ValidateTrigger = 'submit' | 'valueChange';
 
 type MaybeArray<T> = T | T[];
-type ErrorType = 'endDate' | 'startDate' | 'endTime' | 'startTime';
+type ErrorType = 'endDate' | 'startDate' | 'endTime' | 'startTime' | 'all';
+
+const ALL_ERROR_TYPE_LIST = ['endDate', 'startDate', 'endTime', 'startTime'];
 
 export type Rule = {
   message: string;
-  validate: (value: string) => MaybeArray<ErrorType>;
+  validator: (value: [string, string] | []) => MaybeArray<ErrorType> | null | undefined;
 };
 
 export interface PickerPanelProps {
   value?: RangeValue;
   defaultValue?: RangeValue;
   tip?: string;
-  require?: boolean;
+  required?: boolean;
   rules?: Rule[];
   validateTrigger?: ValidateTrigger;
   onCancel: () => void;
@@ -50,33 +51,66 @@ export interface PickerPanelProps {
   locale: any;
 }
 
+/**
+ * 点击交互/时间选择交互
+ *  - 首次点击时，开始时间和结束时间都置为所点击的时间
+ *  - 第二次点击时，根据点击的时间，判断是开始时间还是结束时间进行赋值
+ *  - 新一轮交互开始...
+ */
+const CLICK_STATE = {
+  START: 'START',
+  END: 'END',
+};
+
+const useClickFSA = () => {
+  const [state, setState] = useState(CLICK_STATE.END);
+
+  const next = () => {
+    setState(ps => {
+      return ps === CLICK_STATE.START ? CLICK_STATE.END : CLICK_STATE.START;
+    });
+  };
+
+  return [state, next] as const;
+};
+
+const prefix = getPrefix('ranger-picker-panel');
+
 const prefixCls = 'ant-picker';
-const DATE_FORMAT = 'YYYY-MM-DD';
 const TIME_FORMAT = 'HH:mm:ss';
 
 const InternalPickerPanel = (props: PickerPanelProps) => {
   const {
-    defaultValue = [],
+    defaultValue,
     isMoment,
     locale,
     tip,
     rules,
-    require = true,
+    required = true,
     onOk = noop,
     onCancel = noop,
     disabledDate,
   } = props;
   const rootCls = useCSSVarCls(prefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
+  const [clickFSA, clickFSANext] = useClickFSA();
 
   const [defaultS, defaultE] = defaultValue;
   const [calendarValue, setCalendarValue] = React.useState(defaultValue);
   const [internalHoverValues, setInternalHoverValues] = React.useState(null);
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const isEn = locale?.antLocale === 'en';
+
+  //
+  const DATE_FORMAT = isEn ? DATE_TIME_MONTH_FORMAT : DATE_TIME_MONTH_FORMAT_CN;
 
   const getDateInstance = useCallback(
-    (v?: string | Dayjs | Moment) => {
-      return isMoment ? moment(v as Moment) : dayjs(v as Dayjs);
+    (
+      v?: string | Dayjs | Moment,
+      format?: typeof DATE_FORMAT | typeof TIME_FORMAT,
+      strict?: boolean
+    ) => {
+      return isMoment ? moment(v as Moment, format, strict) : dayjs(v as Dayjs, format, strict);
     },
     [isMoment]
   );
@@ -97,7 +131,9 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   }
 
   const onPanelHover = date => {
-    setInternalHoverValues(date ? fillCalendarValue(date, activeIndex) : null);
+    setInternalHoverValues(
+      date && clickFSA === CLICK_STATE.START ? fillCalendarValue(date, activeIndex) : null
+    );
   };
 
   // 对日期进行排序
@@ -113,8 +149,8 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   const [_sDate, _eDate] = formatValues;
   const setFormatDateToForm = () => {
     form.setFieldsValue({
-      startDate: _sDate,
-      endDate: _eDate,
+      startDate: getDateInstance(_sDate),
+      endDate: getDateInstance(_eDate),
     });
   };
 
@@ -133,16 +169,18 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     return pre;
   }, {});
 
+  const formatDate = (v: Moment | Dayjs) => {
+    const date = getDateInstance(v, DATE_FORMAT, true);
+    return date.isValid() ? date.format(DATE_FORMAT) : null;
+  };
   const validateInputDate = e => {
     const v = e.target.value;
-    const date = getDateInstance(v);
-    return date.isValid() ? date.format(DATE_FORMAT) : null;
+    return formatDate(v);
   };
 
   return (
-    <div>
+    <div className={classNames(prefix)}>
       <Space direction="vertical" size={12} style={{ margin: '12px 0' }}>
-        {tip && <Alert message={tip} type="info" showIcon></Alert>}
         <Form
           layout="vertical"
           autoComplete="off"
@@ -150,20 +188,28 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           style={{ width: 280 }}
           form={form}
         >
-          <Row gutter={12}>
-            <Col span={15}>
+          <Row gutter={12} style={{ marginBottom: 4 }}>
+            <Col span={12} style={{ paddingLeft: 12 }}>
               <Form.Item
                 name="startDate"
                 label={locale.startDate}
                 validateStatus={errorTypeMap['startDate']}
                 style={{ marginBottom: 8 }}
+                rules={[{ required: true }]}
               >
-                <Input
-                  size="middle"
+                <DatePicker
+                  format={{
+                    format: 'YYYY-MM-DD',
+                    type: 'mask',
+                  }}
+                  style={{ width: 128 }}
+                  open={false}
+                  suffixIcon={null}
+                  allowClear={false}
                   onBlur={e => {
                     const v = validateInputDate(e);
                     if (v) {
-                      form.setFieldValue('startDate', v);
+                      form.setFieldValue('startDate', getDateInstance(v));
                       setCalendarValue(([, eDate]) => {
                         return [getDateInstance(v), eDate] as [Dayjs, Dayjs];
                       });
@@ -174,32 +220,52 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 />
               </Form.Item>
             </Col>
-            <Col span={9} style={{ paddingRight: 0 }}>
+            <Col span={12} style={{ paddingRight: 8 }}>
               <Form.Item
                 name="startTime"
                 label={locale.startTime}
                 style={{ marginBottom: 8 }}
                 validateStatus={errorTypeMap['startTime']}
                 initialValue={defaultS || defaultTime}
+                rules={[{ required: true }]}
               >
-                <TimePicker suffixIcon={null} style={{ width: '100%' }} />
+                <TimePicker
+                  allowClear={false}
+                  suffixIcon={null}
+                  needConfirm={false}
+                  getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
+                  style={{ width: '100%' }}
+                  format={{
+                    format: 'HH:mm:ss',
+                    type: 'mask',
+                  }}
+                />
               </Form.Item>
             </Col>
           </Row>
 
           <Row gutter={12}>
-            <Col span={15}>
+            <Col span={12} style={{ paddingLeft: 12 }}>
               <Form.Item
                 name="endDate"
                 label={locale.endDate}
                 style={{ marginBottom: 0 }}
                 validateStatus={errorTypeMap['endDate']}
+                rules={[{ required: true }]}
               >
-                <Input
+                <DatePicker
+                  format={{
+                    format: 'YYYY-MM-DD',
+                    type: 'mask',
+                  }}
+                  style={{ width: 128 }}
+                  open={false}
+                  suffixIcon={null}
+                  allowClear={false}
                   onBlur={e => {
                     const v = validateInputDate(e);
                     if (v) {
-                      form.setFieldValue('endDate', v);
+                      form.setFieldValue('endDate', getDateInstance(v));
                       setCalendarValue(([sDate]) => {
                         return [sDate, getDateInstance(v)] as [Dayjs, Dayjs];
                       });
@@ -210,20 +276,30 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 />
               </Form.Item>
             </Col>
-            <Col span={9} style={{ paddingRight: 0 }}>
+            <Col span={12} style={{ paddingRight: 8 }}>
               <Form.Item
                 name="endTime"
                 label={locale.endTime}
                 style={{ marginBottom: 0 }}
                 validateStatus={errorTypeMap['endTime']}
                 initialValue={defaultE || defaultTime}
+                rules={[{ required: true }]}
               >
-                <TimePicker suffixIcon={null} style={{ width: '100%' }} />
+                <TimePicker
+                  allowClear={false}
+                  suffixIcon={null}
+                  needConfirm={false}
+                  getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
+                  style={{ width: '100%' }}
+                  format={{
+                    format: 'HH:mm:ss',
+                    type: 'mask',
+                  }}
+                />
               </Form.Item>
             </Col>
           </Row>
         </Form>
-        {errorMessage && <Alert message={errorMessage} type="error" showIcon></Alert>}
       </Space>
       {wrapCSSVar(
         <div
@@ -237,12 +313,19 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             prefixCls={prefixCls}
             // @ts-ignore
             generateConfig={isMoment ? momentGenerateConfig : dayjsGenerateConfig}
+            // @ts-ignore
+            value={calendarValue}
             disabledDate={disabledDate}
             onHover={(...res) => {
               onPanelHover(res[0]);
             }}
             onSelect={(...res) => {
-              setCalendarValue(fillCalendarValue(res[0], activeIndex));
+              clickFSANext();
+              if (clickFSA === CLICK_STATE.END) {
+                setCalendarValue([res[0], res[0]]);
+              } else {
+                setCalendarValue(fillCalendarValue(res[0], activeIndex));
+              }
               setActiveIndex(index => {
                 return index + 1 === 2 ? 0 : index + 1;
               });
@@ -260,8 +343,20 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           />
         </div>
       )}
-      <Divider style={{ margin: '12px 0' }}></Divider>
-      <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
+      <Divider style={{ margin: '8px 0' }}></Divider>
+      {tip && !errorMessage && (
+        <Alert message={tip} type="info" style={{ marginBottom: 8 }} showIcon></Alert>
+      )}
+      {errorMessage && (
+        <Alert message={errorMessage} type="error" style={{ marginBottom: 8 }} showIcon></Alert>
+      )}
+      <Space
+        style={{
+          width: '100%',
+          justifyContent: 'flex-end',
+          padding: '0 12px 4px 0',
+        }}
+      >
         <Button
           size="small"
           onClick={() => {
@@ -276,33 +371,38 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           onClick={() => {
             form.validateFields().then(values => {
               const { startDate, startTime, endDate, endTime } = values;
-              const start = `${startDate} ${startTime.format(TIME_FORMAT)}`;
-              const end = `${endDate} ${endTime.format(TIME_FORMAT)}`;
+              // 日期同一天时对时间进行排序，保证开始时间在结束时间之前
+              const [sTime, eTime] = startDate.isSame(endDate)
+                ? [startTime, endTime].sort((a, b) => {
+                    return a?.valueOf() - b?.valueOf();
+                  })
+                : [startTime, endTime];
 
-              onOk([start, end]);
+              const start = `${formatDate(startDate)} ${sTime.format(TIME_FORMAT)}`;
+              const end = `${formatDate(endDate)} ${eTime.format(TIME_FORMAT)}`;
 
-              // let errorList = [];
-              // let message = '';
-              // rules?.some(item => {
-              //   if (typeof item?.validator === 'function') {
-              //     const errorType = item.validator(start, end);
-              //     if (errorType) {
-              //       errorList = toArray(errorType);
-              //       message = item.message;
-              //       return true;
-              //     }
-              //   }
-              //   return false;
-              // });
+              let errorList = [];
+              let message = '';
+              rules?.some(item => {
+                if (typeof item?.validator === 'function') {
+                  const errorType = item.validator([start, end]);
+                  if (errorType) {
+                    errorList = Array.isArray(errorType) ? errorType : [errorType];
+                    message = item.message;
+                    return true;
+                  }
+                }
+                return false;
+              });
 
-              // if (errorList.length > 0) {
-              //   setErrorTypeList(errorList);
-              //   setErrorMessage(message);
-              // } else {
-              //   setErrorMessage('');
-              //   setErrorTypeList([]);
-              //   onOk([start, end]);
-              // }
+              if (errorList.length > 0) {
+                setErrorTypeList(errorList.includes('all') ? ALL_ERROR_TYPE_LIST : errorList);
+                setErrorMessage(message);
+              } else {
+                setErrorMessage('');
+                setErrorTypeList([]);
+                onOk([start, end]);
+              }
             });
           }}
         >

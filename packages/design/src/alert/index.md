@@ -3,7 +3,13 @@ title: Alert 警告提示
 nav:
   title: 基础组件
   path: /components
+markdown: |
+  以横幅形式显示突出的信息和相关的可选操作。
+
+  ![](https://mdn.alipayobjects.com/oceanbase_design/afts/img/3jjcQ6Q0uIIAAAAAAAAAAAAADv3-AQBr/original)
 ---
+
+## 组件说明
 
 - 🔥 完全继承 antd [Alert](https://ant.design/components/alert-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。

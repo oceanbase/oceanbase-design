@@ -1,5 +1,5 @@
 import React from 'react';
-import { Descriptions } from '@oceanbase/design';
+import { Descriptions, Divider } from '@oceanbase/design';
 import type { DescriptionsProps } from '@oceanbase/design';
 
 const items: DescriptionsProps['items'] = [

@@ -7,7 +7,8 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/DocDialogDemo.tsx" title="基本" description="点击 Help 按钮打开 Dialog"></code>
+<!-- prettier-ignore -->
+<code src="./demo/DocDialogDemo.tsx" title="基本" description="点击 Help 按钮打开 Dialog。"></code>
 
 ## API
 
