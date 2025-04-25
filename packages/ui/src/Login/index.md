@@ -15,6 +15,7 @@ nav:
 <code src="./demo/with-alert.tsx" title="警告提示"></code>
 <code src="./demo/activate.tsx" title="用户激活"></code>
 <code src="./demo/authCode.tsx" title="登录验证码"></code>
+<code src="./demo/item-props.tsx" title="定制组件 Props"></code>
 <code src="./demo/is-mobile.tsx" title="移动端支持" iframe="600"></code>
 
 ## API

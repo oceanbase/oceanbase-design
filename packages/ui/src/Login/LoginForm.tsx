@@ -5,7 +5,7 @@ import {
   UserOutlined,
 } from '@oceanbase/icons';
 import { Alert, Button, Form, Input, Space } from '@oceanbase/design';
-import type { FormProps } from '@oceanbase/design/es/form';
+import type { FormProps, InputProps, FormItemProps } from '@oceanbase/design';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { theme } from '@oceanbase/design';
@@ -27,6 +27,12 @@ export interface ILoginFormProps extends FormProps {
   authCodeImg?: string;
   otherLoginProps?: any;
   onAuthCodeImgChange?: () => void;
+  passwordOptional?: boolean;
+  componentProps?: {
+    username: InputProps;
+    password: typeof Input.Password;
+    authCode: InputProps;
+  };
 }
 
 const prefix = getPrefix('login');
@@ -40,6 +46,8 @@ const Login: React.FC<ILoginFormProps> = ({
   authCodeImg,
   otherLoginProps,
   onAuthCodeImgChange,
+  componentProps,
+  passwordOptional = false,
   ...restProps
 }) => {
   const { token } = theme.useToken();
@@ -57,6 +65,7 @@ const Login: React.FC<ILoginFormProps> = ({
       {errorMessage && (
         <Alert type="error" showIcon={true} className={`${prefix}-alert`} message={errorMessage} />
       )}
+      {/* @ts-ignore  */}
       <Form.Item
         name="username"
         rules={[
@@ -78,16 +87,22 @@ const Login: React.FC<ILoginFormProps> = ({
           className={classNames({
             [`${prefix}-focus-input`]: focusInput === 'username',
           })}
+          {...(componentProps?.username || {})}
         />
       </Form.Item>
+      {/* @ts-ignore  */}
       <Form.Item
         name="password"
-        rules={[
-          {
-            required: true,
-            message: locale.passwordMessage,
-          },
-        ]}
+        rules={
+          passwordOptional
+            ? []
+            : [
+                {
+                  required: true,
+                  message: locale.passwordMessage,
+                },
+              ]
+        }
       >
         <Input.Password
           visibilityToggle={true}
@@ -101,10 +116,12 @@ const Login: React.FC<ILoginFormProps> = ({
             setFocusInput('');
           }}
           className={focusInput === 'password' ? `${prefix}-focus-input` : ''}
+          {...(componentProps?.password || {})}
         />
       </Form.Item>
       {showAuthCode && (
         <Space className={`${prefix}-auth-code`}>
+          {/* @ts-ignore  */}
           <Form.Item
             name="authCode"
             rules={[
@@ -126,6 +143,7 @@ const Login: React.FC<ILoginFormProps> = ({
               className={classNames({
                 [`${prefix}-focus-input`]: focusInput === 'authCode',
               })}
+              {...(componentProps?.authCode || {})}
             />
           </Form.Item>
           <div className={classNames(`${prefix}-code-btn`)}>
