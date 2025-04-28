@@ -117,7 +117,7 @@
     "typescript": "^5.8.3",
     "vanilla-jsoneditor": "^0.23.8",
     "vi-canvas-mock": "^1.0.0",
-    "vitest": "^2.1.9",
+    "vitest": "^3.1.2",
     "vitest-fetch-mock": "^0.4.5",
     "web-vitals": "^3.5.2"
   }
