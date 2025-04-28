@@ -8,6 +8,16 @@ group: 业务组件
 
 ---
 
+## 0.4.13
+
+`2024-04-28`
+
+- Login
+  - 🆕 Login 新增 `passwordOptional` 属性，用于设置是否允许密码为空。[#1046](https://github.com/oceanbase/oceanbase-design/pull/1046) [@linhf123](https://github.com/linhf123)
+  - 🆕 Login 新增 `componentProps` 属性，用于设置各个组件属性。[#1046](https://github.com/oceanbase/oceanbase-design/pull/1046) [@linhf123](https://github.com/linhf123)
+- 🐞 修复 DateRanger `style` 和 `className` 应该仅对根组件生效、不应该对 RangePicker 生效的问题。[#1040](https://github.com/oceanbase/oceanbase-design/pull/1040) [@wzc520pyfm](https://github.com/wzc520pyfm)
+- 💄 优化 Boundary 描述文案的间距和操作按钮的字体颜色。[#1047](https://github.com/oceanbase/oceanbase-design/pull/1047)
+
 ## 0.4.12
 
 `2024-04-18`

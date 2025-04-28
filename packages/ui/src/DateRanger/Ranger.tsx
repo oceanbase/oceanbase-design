@@ -332,7 +332,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
 
   return (
     <Space
-      className={classNames({
+      className={classNames(rest.className, {
         [prefix]: true,
         [`${prefix}-show-range`]: true,
         [`${prefix}-back-radio-focused`]: backRadioFocused,
@@ -475,7 +475,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                 size={size}
                 suffixIcon={null}
                 // 透传 props 到 antd Ranger
-                {...omit(rest, 'value', 'onChange')}
+                {...omit(rest, 'value', 'onChange', 'style', 'className')}
                 open={false}
               />
             </span>
