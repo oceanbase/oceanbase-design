@@ -3,7 +3,7 @@ import { formatTheme } from './util/format';
 
 // Calculated by colorBorder and getWeakenBorderColor()
 const tagColorBorder = '#cdd5e466';
-
+const colorIcon = '#5c6b8a';
 export const fontFamilyEn = `Inter, 'Noto sans', sans-serif, Roboto, 'Open Sans', 'Segoe UI', 'Helvetica Neue', 'Helvetica, Arial', 'Apple Color Emoji'`;
 
 const defaultTheme: ThemeConfig = {
@@ -63,8 +63,8 @@ const defaultTheme: ThemeConfig = {
     colorTextBase: '#000000',
     colorText: '#132039',
     colorTextSecondary: '#5c6b8a',
-    colorTextQuaternary: '#c1cbe0',
     colorTextTertiary: '#8592AD',
+    colorTextQuaternary: '#c1cbe0',
     colorBgBase: '#ffffff',
     colorBgContainer: '#ffffff',
     colorBgLayout: '#f3f6fc',
@@ -74,6 +74,7 @@ const defaultTheme: ThemeConfig = {
     colorFillTertiary: '#f3f6fc',
     colorFillSecondary: '#e2e8f3',
     colorFill: '#cdd5e4',
+    colorIcon,
     colorBgMask: 'rgba(19, 32, 57, 0.45)',
     colorBgElevated: '#ffffff',
     colorBgSpotlight: '#ffffff',
@@ -97,8 +98,20 @@ const defaultTheme: ThemeConfig = {
     Collapse: {
       colorBorder: '#E2E8F3',
     },
+    ColorPicker: {
+      // customize icon color
+      colorTextQuaternary: colorIcon,
+    },
+    Input: {
+      // customize icon color
+      colorTextQuaternary: colorIcon,
+    },
     InputNumber: {
       handleVisible: true,
+    },
+    Mentions: {
+      // customize icon color
+      colorTextQuaternary: colorIcon,
     },
     Radio: {
       // temporarily fix style for checked disabled Radio.Button
@@ -109,6 +122,8 @@ const defaultTheme: ThemeConfig = {
       multipleItemBg: '#F8FAFE',
       multipleItemBorderColor: tagColorBorder,
       multipleItemBorderColorDisabled: tagColorBorder,
+      // customize icon color
+      colorTextQuaternary: colorIcon,
     },
     Slider: {
       trackBg: '#006AFF',
