@@ -5,37 +5,29 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  span {
-    color: @colorTextTertiary;
-    font-size: 14px;
-    text-align: center;
-  }
-  .@{prefixCls}-btn-primary {
-    span {
-      color: #fff;
-    }
-  }
+
   .empty {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding-bottom: 60px;
-    img {
+    > img {
       height: 102px;
       margin-bottom: 24px;
     }
-    h4 {
+    > h4 {
       margin: 0;
-      margin-bottom: 8px;
       font-size: 18px;
     }
-    button {
+    > span {
+      margin-top: 8px;
+      color: @colorTextTertiary;
+      font-size: 14px;
+      text-align: center;
+    }
+    > button {
       margin-top: 24px;
-      span {
-        padding: 0 6px;
-        font-size: 14px;
-      }
     }
   }
 }
