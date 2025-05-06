@@ -129,8 +129,8 @@ importers:
         specifier: ^6.3.0
         version: 6.3.0
       glob:
-        specifier: ^11.0.1
-        version: 11.0.1
+        specifier: ^11.0.2
+        version: 11.0.2
       html2sketch:
         specifier: ^1.0.2
         version: 1.0.2
@@ -289,8 +289,8 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0
       glob:
-        specifier: ^11.0.1
-        version: 11.0.1
+        specifier: ^11.0.2
+        version: 11.0.2
       is-directory:
         specifier: ^0.3.1
         version: 0.3.1
@@ -13752,8 +13752,8 @@ packages:
       path-scurry: 1.11.1
     dev: true
 
-  /glob@11.0.1:
-    resolution: {integrity: sha512-zrQDm8XPnYEKawJScsnM0QzobJxlT/kHOOlRTio8IH/GrmxRE5fjllkzdaHclIuNjUQTJYH2xHNIGfdpJkDJUw==}
+  /glob@11.0.2:
+    resolution: {integrity: sha512-YT7U7Vye+t5fZ/QMkBFrTJ7ZQxInIUjwyAjVj84CYXqgBdv30MFUPGnBR6sQaVq6Is15wYJUsnzTuWaGRBhBAQ==}
     engines: {node: 20 || >=22}
     hasBin: true
     dependencies:
@@ -17778,7 +17778,7 @@ packages:
       array-differ: 3.0.0
       array-union: 2.1.0
       arrify: 2.0.1
-      minimatch: 3.0.5
+      minimatch: 3.1.2
     dev: true
 
   /multipipe@1.0.2:
