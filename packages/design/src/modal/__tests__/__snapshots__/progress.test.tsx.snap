@@ -33,6 +33,7 @@ exports[`Modal.Progress > render with loading 1`] = `
                 type="button"
               >
                 <span
+                  aria-label="Close"
                   class="ant-modal-close-x"
                 >
                   <span
@@ -141,6 +142,7 @@ exports[`Modal.Progress > render with progress.percent 1`] = `
                 type="button"
               >
                 <span
+                  aria-label="Close"
                   class="ant-modal-close-x"
                 >
                   <span
@@ -284,6 +286,7 @@ exports[`Modal.Progress > render with progress.status 1`] = `
                 type="button"
               >
                 <span
+                  aria-label="Close"
                   class="ant-modal-close-x"
                 >
                   <span
@@ -445,6 +448,7 @@ exports[`Modal.Progress > render without description 1`] = `
                 type="button"
               >
                 <span
+                  aria-label="Close"
                   class="ant-modal-close-x"
                 >
                   <span

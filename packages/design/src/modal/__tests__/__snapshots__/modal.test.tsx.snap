@@ -33,6 +33,7 @@ exports[`Modal > should hide footer dom when footer is false 1`] = `
                 type="button"
               >
                 <span
+                  aria-label="Close"
                   class="ant-modal-close-x"
                 >
                   <span
@@ -116,6 +117,7 @@ exports[`Modal > should hide footer dom when footer is null 1`] = `
                 type="button"
               >
                 <span
+                  aria-label="Close"
                   class="ant-modal-close-x"
                 >
                   <span
