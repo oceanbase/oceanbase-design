@@ -216,8 +216,8 @@ importers:
         specifier: ^10.1.0
         version: 10.1.0(@types/react@18.3.20)(react@18.3.1)
       react-router-dom:
-        specifier: ^6.30.0
-        version: 6.30.0(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^7.6.0
+        version: 7.6.0(react-dom@18.3.1)(react@18.3.1)
       runscript:
         specifier: ^1.6.0
         version: 1.6.0
@@ -6275,11 +6275,6 @@ packages:
       - immer
     dev: true
 
-  /@remix-run/router@1.23.0:
-    resolution: {integrity: sha512-O3rHJzAQKamUz1fvE0Qaw0xSFqsA/yafi2iqeE0pvdFtCO1viYx8QL6f3Ln/aCCTLxs68SLf0KPM9eSeM8yBnA==}
-    engines: {node: '>=14.0.0'}
-    dev: true
-
   /@replit/codemirror-indentation-markers@6.5.3(@codemirror/language@6.11.0)(@codemirror/state@6.5.2)(@codemirror/view@6.36.5):
     resolution: {integrity: sha512-hL5Sfvw3C1vgg7GolLe/uxX5T3tmgOA3ZzqlMv47zjU1ON51pzNWiVbS22oh6crYhtVhv8b3gdXwoYp++2ilHw==}
     peerDependencies:
@@ -10528,6 +10523,11 @@ packages:
   /cookie@0.7.1:
     resolution: {integrity: sha512-6DnInpx7SJ2AK3+CTUE/ZM0vWTUboZCegxhC2xiIydHR9jNuTAASBrfEpHhiGOZw/nX51bHt6YQl8jsGo4y/0w==}
     engines: {node: '>= 0.6'}
+    dev: true
+
+  /cookie@1.0.2:
+    resolution: {integrity: sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==}
+    engines: {node: '>=18'}
     dev: true
 
   /copy-anything@2.0.6:
@@ -15855,8 +15855,8 @@ packages:
     resolution: {integrity: sha512-Ne7wqW7/9Cz54PDt4I3tcV+hAyat8ypyOGzYRJQfdxnnjeWsTxt1cy8pjvvKeI5kfXuyvULyeeAvwvvtAX3ayQ==}
     dev: true
 
-  /known-css-properties@0.35.0:
-    resolution: {integrity: sha512-a/RAk2BfKk+WFGhhOCAYqSiFLc34k8Mt/6NWRI4joER0EYUzXIcFivjjnoD3+XU1DggLn/tZc3DOAgke7l8a4A==}
+  /known-css-properties@0.36.0:
+    resolution: {integrity: sha512-A+9jP+IUmuQsNdsLdcg6Yt7voiMF/D4K83ew0OpJtpu+l34ef7LaohWV0Rc6KNvzw6ZDizkqfyB5JznZnzuKQA==}
     dev: true
     optional: true
 
@@ -20996,17 +20996,16 @@ packages:
       react-router: 6.3.0(react@18.3.1)
     dev: true
 
-  /react-router-dom@6.30.0(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-x30B78HV5tFk8ex0ITwzC9TTZMua4jGyA9IUlH1JLQYQTFyxr/ZxwOJq7evg1JX1qGVUcvhsmQSKdPncQrjTgA==}
-    engines: {node: '>=14.0.0'}
+  /react-router-dom@7.6.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-DYgm6RDEuKdopSyGOWZGtDfSm7Aofb8CCzgkliTjtu/eDuB0gcsv6qdFhhi8HdtmA+KHkt5MfZ5K2PdzjugYsA==}
+    engines: {node: '>=20.0.0'}
     peerDependencies:
-      react: '>=16.8'
-      react-dom: '>=16.8'
+      react: '>=18'
+      react-dom: '>=18'
     dependencies:
-      '@remix-run/router': 1.23.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-router: 6.30.0(react@18.3.1)
+      react-router: 7.6.0(react-dom@18.3.1)(react@18.3.1)
     dev: true
 
   /react-router@6.3.0(react@18.3.1):
@@ -21018,14 +21017,20 @@ packages:
       react: 18.3.1
     dev: true
 
-  /react-router@6.30.0(react@18.3.1):
-    resolution: {integrity: sha512-D3X8FyH9nBcTSHGdEKurK7r8OYE1kKFn3d/CF+CoxbSHkxU7o37+Uh7eAHRXr6k2tSExXYO++07PeXJtA/dEhQ==}
-    engines: {node: '>=14.0.0'}
+  /react-router@7.6.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-GGufuHIVCJDbnIAXP3P9Sxzq3UUsddG3rrI3ut1q6m0FI6vxVBF3JoPQ38+W/blslLH4a5Yutp8drkEpXoddGQ==}
+    engines: {node: '>=20.0.0'}
     peerDependencies:
-      react: '>=16.8'
+      react: '>=18'
+      react-dom: '>=18'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
     dependencies:
-      '@remix-run/router': 1.23.0
+      cookie: 1.0.2
       react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      set-cookie-parser: 2.7.1
     dev: true
 
   /react-simple-code-editor@0.13.1(react-dom@18.3.1)(react@18.3.1):
@@ -22059,6 +22064,10 @@ packages:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
     dev: true
 
+  /set-cookie-parser@2.7.1:
+    resolution: {integrity: sha512-IOc8uWeOZgnb3ptbCURJWNjWUPcO3ZnTTdzsurqERrP6nPyv+paC55vJM0LpOlT2ne+Ix+9+CRG1MNLlyZ4GjQ==}
+    dev: true
+
   /set-function-length@1.2.2:
     resolution: {integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==}
     engines: {node: '>= 0.4'}
@@ -22889,7 +22898,7 @@ packages:
     dependencies:
       stylelint: 15.11.0(typescript@5.8.3)
     optionalDependencies:
-      stylelint-scss: 6.11.1(stylelint@15.11.0)
+      stylelint-scss: 6.12.0(stylelint@15.11.0)
     dev: true
 
   /stylelint-config-prettier@9.0.5(stylelint@15.11.0):
@@ -22942,8 +22951,8 @@ packages:
       stylelint: 15.11.0(typescript@5.8.3)
     dev: true
 
-  /stylelint-scss@6.11.1(stylelint@15.11.0):
-    resolution: {integrity: sha512-e4rYo0UY+BIMtGeGanghrvHTjcryxgZbyFxUedp8dLFqC4P70aawNdYjRrQxbnKhu3BNr4+lt5e/53tcKXiwFA==}
+  /stylelint-scss@6.12.0(stylelint@15.11.0):
+    resolution: {integrity: sha512-U7CKhi1YNkM1pXUXl/GMUXi8xKdhl4Ayxdyceie1nZ1XNIdaUgMV6OArpooWcDzEggwgYD0HP/xIgVJo9a655w==}
     engines: {node: '>=18.12.0'}
     requiresBuild: true
     peerDependencies:
@@ -22951,7 +22960,7 @@ packages:
     dependencies:
       css-tree: 3.1.0
       is-plain-object: 5.0.0
-      known-css-properties: 0.35.0
+      known-css-properties: 0.36.0
       mdn-data: 2.21.0
       postcss-media-query-parser: 0.2.3
       postcss-resolve-nested-selector: 0.1.6
