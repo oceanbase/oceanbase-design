@@ -31,7 +31,7 @@
     "glob": "^11.0.2",
     "is-directory": "^0.3.1",
     "is-git-clean": "^1.1.0",
-    "jscodeshift": "^0.16.1",
+    "jscodeshift": "^17.3.0",
     "lodash": "^4.17.21",
     "postcss": "^8.5.3",
     "postcss-less": "^6.0.0",
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/jscodeshift": "^0.11.11",
+    "@types/jscodeshift": "^17.3.0",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2"
   }
