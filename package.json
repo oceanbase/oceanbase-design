@@ -96,7 +96,7 @@
     "mockdate": "^3.0.5",
     "prettier": "^3.5.3",
     "prismjs": "^1.30.0",
-    "query-string": "^9.1.1",
+    "query-string": "^9.1.2",
     "rc-checkbox": "^3.5.0",
     "rc-drawer": "^8.0.0",
     "rc-footer": "^0.6.8",
