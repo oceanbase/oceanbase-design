@@ -265,6 +265,20 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
             marginLeft: token.margin + token.lineWidth * 2,
           },
+          // 为嵌套内表格设置斑马纹
+          [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
+            [`${componentCls}-tbody`]: {
+              // 斑马纹样式
+              [`tr:nth-child(2n + 1):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${antCls}-descriptions-row) > td`]:
+                {
+                  backgroundColor: colorBgBase,
+                },
+              [`tr:nth-child(2n):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${componentCls}-expanded-row):not(${antCls}-descriptions-row) > td`]:
+                {
+                  backgroundColor: colorFillQuaternary,
+                },
+            },
+          },
         },
       },
       [`${componentCls}-middle, ${componentCls}-small`]: {
