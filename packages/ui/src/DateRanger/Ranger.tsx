@@ -376,6 +376,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                     tip={tip}
                     isMoment={isMoment}
                     rules={rules}
+                    hideSecond={hideSecond}
                     onOk={vList => {
                       setIsPlay(false);
                       handleNameChange(CUSTOMIZE);
