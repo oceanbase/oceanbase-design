@@ -1,6 +1,6 @@
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef, useCallback, useMemo, useRef } from 'react';
 import { sortByMoment } from '@oceanbase/util';
-import type { LineConfig as AntLineConfig } from '@ant-design/charts';
+import type { LineConfig as AntLineConfig, Datum } from '@ant-design/charts';
 import { Line as AntLine } from '@ant-design/charts';
 import { composeRef } from 'rc-util/es/ref';
 import type { Tooltip } from '../hooks/useTooltipScrollable';
@@ -8,15 +8,33 @@ import useTooltipScrollable from '../hooks/useTooltipScrollable';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
 import { customMemo } from '../util/custom-memo';
+import { groupBy } from 'lodash';
 
 export interface LineConfig extends AntLineConfig {
   tooltip?: false | Tooltip;
   theme?: Theme;
+  area?: AntLineConfig['area'] & {
+    /** 开启渐变色填充 */
+    gradientFill?: boolean;
+  };
 }
 
 const Line = forwardRef<unknown, LineConfig>(
   (
-    { data, stepType, xField, xAxis, yAxis, tooltip, legend, interactions, theme, ...restConfig },
+    {
+      data,
+      stepType,
+      xField,
+      xAxis,
+      yAxis,
+      tooltip,
+      legend,
+      interactions,
+      seriesField,
+      area,
+      theme,
+      ...restConfig
+    },
     ref
   ) => {
     const themeConfig = useTheme(theme);
@@ -28,6 +46,29 @@ const Line = forwardRef<unknown, LineConfig>(
       chartRef.current?.getChart()?.chart?.height
     );
 
+    const legendEnumBySeriesField = useMemo(() => {
+      return Object.keys(groupBy(data, seriesField));
+    }, [data, seriesField]);
+
+    const getLGradientAreaConf = useCallback(
+      (datum: Datum) => {
+        const dataLegendIndex = legendEnumBySeriesField.findIndex(
+          lgd => lgd === datum[seriesField]
+        );
+        const colors =
+          legendEnumBySeriesField.length > themeConfig.colors10.length
+            ? themeConfig.colors20
+            : themeConfig.colors10;
+        const color = seriesField ? colors[dataLegendIndex] : colors[0];
+
+        return {
+          fill: `l(270) 0:#ffffff 0.5:${color}77 1:${color}`,
+          fillOpacity: 0.15,
+        };
+      },
+      [legendEnumBySeriesField, seriesField, themeConfig.colors10, themeConfig.colors20]
+    );
+
     const newConfig: LineConfig = {
       data:
         // xAxis.type 为时间轴时，需要对 data 进行排序
@@ -37,6 +78,7 @@ const Line = forwardRef<unknown, LineConfig>(
           : data,
       stepType,
       xField,
+      seriesField,
       xAxis: xAxis !== false && {
         // type 为 time 时需要关闭自动美化，否则 X 轴两侧会留白
         // issue: https://github.com/antvis/G2Plot/issues/1951
@@ -83,6 +125,17 @@ const Line = forwardRef<unknown, LineConfig>(
         },
       ],
       theme: themeConfig.theme,
+      area: area
+        ? {
+            ...area,
+            style: datum => {
+              return {
+                ...(area.gradientFill ? getLGradientAreaConf(datum) : {}),
+                ...(typeof area?.style === 'function' ? area?.style(datum) : (area?.style ?? {})),
+              };
+            },
+          }
+        : undefined,
       ...restConfig,
     };
     return <AntLine {...newConfig} ref={mergedRef} />;
