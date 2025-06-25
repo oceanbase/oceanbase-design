@@ -12,6 +12,7 @@ nav:
 <code src="./demo/step.tsx" title="阶梯折线图"></code>
 <code src="./demo/multiple.tsx" title="多折线图"></code>
 <code src="./demo/auto-fit.tsx" title="自适应容器高度" description="调整浏览器窗口高度即可验证。"></code>
+<code src="./demo/mul-gradient-fill.tsx" title="渐变填充" description="开启渐变填充以增强对比"></code>
 <code src="./demo/tooltip-scrollable.tsx" title="Tooltip 可滚动" description="适用于 Tooltip 项较多、超出图表的场景，可通过 `tooltip.scrollable: true` 配置进行开启。"></code>
 
 ## API
@@ -25,5 +26,6 @@ nav:
 | yField | y 方向字段名 | string | - | - |
 | seriesField | 分类字段名 | string | - | - |
 | stepType | 阶梯折线图类型，配置后 smooth 无效。 h 和 v 分别指 horizontal 和 vertical，因此 vh 意为起始点先竖直方向，然后水平方向 | string | - | - |
+| area | 同[ant-design-charts line area](https://ant-design-charts.antgroup.com/components/plots/line#%E6%A6%82%E8%A7%88), 新增了gradientFill用于开启渐变填充 | { gradientFill: boolean } & [area](https://ant-design-charts.antgroup.com/components/plots/line#%E6%A6%82%E8%A7) | - | - |
 
 - 更多 API 详见 Ant Design Charts 文档：https://charts.ant.design/zh/examples/line/basic#line
