@@ -42,6 +42,10 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         [`th${componentCls}-column-has-sorters`]: {
           backgroundColor: colorBgBase,
         },
+        // 保留排序列表头分割线
+        [`th${componentCls}-column-sort:before`]: {
+          backgroundColor: `${colorBorderSecondary} !important`,
+        },
         [`${componentCls}-cell-scrollbar`]: {
           boxShadow: `0 1px 0 1px ${colorBgBase}`,
         },
