@@ -48,7 +48,7 @@
     "ahooks": "^2.10.14",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.13",
-    "diff": "^5.2.0",
+    "diff": "^8.0.2",
     "highlight.js": "^11.11.1",
     "highlightjs-solidity": "^2.0.6",
     "hoist-non-react-statics": "^3.3.2",
