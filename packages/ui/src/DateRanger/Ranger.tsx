@@ -134,6 +134,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     autoAdjustOverflow,
     overlayClassName,
     overlayStyle,
+    getPopupContainer,
     ...rest
   } = props;
 
@@ -350,6 +351,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
             open={open}
             placement={rest.placement}
             autoAdjustOverflow={autoAdjustOverflow}
+            getPopupContainer={getPopupContainer}
             // 关闭后进行销毁，才可以将 Tooltip 进行同步关闭
             destroyOnHidden={true}
             // 存在缓存，会锁死里面的值
