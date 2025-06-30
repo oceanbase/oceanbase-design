@@ -171,8 +171,8 @@ importers:
         specifier: ^1.30.0
         version: 1.30.0
       query-string:
-        specifier: ^9.1.1
-        version: 9.1.1
+        specifier: ^9.2.1
+        version: 9.2.1
       rc-checkbox:
         specifier: ^3.5.0
         version: 3.5.0(react-dom@18.3.1)(react@18.3.1)
@@ -514,8 +514,8 @@ importers:
         specifier: ^2.30.1
         version: 2.30.1
       query-string:
-        specifier: ^9.1.1
-        version: 9.1.1
+        specifier: ^9.2.1
+        version: 9.2.1
     devDependencies:
       '@types/is-url':
         specifier: ^1.2.32
@@ -20258,8 +20258,8 @@ packages:
       strict-uri-encode: 2.0.0
     dev: true
 
-  /query-string@9.1.1:
-    resolution: {integrity: sha512-MWkCOVIcJP9QSKU52Ngow6bsAWAPlPK2MludXvcrS2bGZSl+T1qX9MZvRIkqUIkGLJquMJHWfsT6eRqUpp4aWg==}
+  /query-string@9.2.1:
+    resolution: {integrity: sha512-3jTGGLRzlhu/1ws2zlr4Q+GVMLCQTLFOj8CMX5x44cdZG9FQE07x2mQhaNxaKVPNmIDu0mvJ/cEwtY7Pim7hqA==}
     engines: {node: '>=18'}
     dependencies:
       decode-uri-component: 0.4.1
@@ -23159,7 +23159,7 @@ packages:
     dependencies:
       stylelint: 15.11.0(typescript@5.8.3)
     optionalDependencies:
-      stylelint-scss: 6.12.0(stylelint@15.11.0)
+      stylelint-scss: 6.12.1(stylelint@15.11.0)
     dev: true
 
   /stylelint-config-prettier@9.0.5(stylelint@15.11.0):
@@ -23212,8 +23212,8 @@ packages:
       stylelint: 15.11.0(typescript@5.8.3)
     dev: true
 
-  /stylelint-scss@6.12.0(stylelint@15.11.0):
-    resolution: {integrity: sha512-U7CKhi1YNkM1pXUXl/GMUXi8xKdhl4Ayxdyceie1nZ1XNIdaUgMV6OArpooWcDzEggwgYD0HP/xIgVJo9a655w==}
+  /stylelint-scss@6.12.1(stylelint@15.11.0):
+    resolution: {integrity: sha512-UJUfBFIvXfly8WKIgmqfmkGKPilKB4L5j38JfsDd+OCg2GBdU0vGUV08Uw82tsRZzd4TbsUURVVNGeOhJVF7pA==}
     engines: {node: '>=18.12.0'}
     requiresBuild: true
     peerDependencies:
