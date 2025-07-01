@@ -50,10 +50,9 @@ export default () => {
           generatePasswordRegex={
             /^(?=(.*[a-z]){2,})(?=(.*[A-Z]){2,})(?=(.*\d){2,})(?=(.*[._+@#$%]){2,})[A-Za-z\d._+@#$%]{8,32}$/
           }
-          generatePassword={value => {
-            const newPassword = value.replace(/.{10}$/g, 'generatePassword');
-            console.log('generatePassword', newPassword);
-            return newPassword;
+          generatePassword={() => {
+            // your custom password generate logic
+            return 'aaAA11__';
           }}
           onValidate={setPassed}
         />
