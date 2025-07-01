@@ -8,6 +8,12 @@ group: 可视化图表
 
 ---
 
+## 0.4.6
+
+`2025-07-01`
+
+- 🆕 Line 新增 `area.gradientFill` 属性，用于设置渐变面积图。[#1078](https://github.com/oceanbase/oceanbase-design/pull/1078) [@wzc520pyfm](https://github.com/wzc520pyfm)
+
 ## 0.4.0
 
 `2024-10-09`
