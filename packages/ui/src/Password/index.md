@@ -11,6 +11,7 @@ nav:
 <code src="./demo/basic.tsx" title="基本" description="使用内置的校验规则。"></code>
 <code src="./demo/custom-rules.tsx" title="自定义校验规则"></code>
 <code src="./demo/random-generate-password.tsx" title="生成随机密码"></code>
+<code src="./demo/random-generate-on-generate.tsx" title="生成随机密码 + onGenerate"></code>
 <code src="./demo/custom-rules-and-random-generate.tsx" title="自定义校验规则 + 生成随机密码"></code>
 
 ## API
@@ -22,6 +23,7 @@ nav:
 | value | 密码框内容 | string | - | - |
 | onChange | 密码框内容变化的回调 | (value?: string) => void | - | - |
 | onValidate | 密码框内容变化触发校验的回调 | (passed: boolean) => void | - | - |
+| onGenerate | 随机生成密码后的回调 | (randomPassword: string) => string | - | - |
 
 ### Validator
 

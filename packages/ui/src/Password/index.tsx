@@ -25,6 +25,7 @@ export interface PasswordLocale {
 export interface PasswordProps extends LocaleWrapperProps, Omit<InputPasswordProps, 'onChange'> {
   value?: string;
   onChange?: (value?: string) => void;
+  onGenerate?: (value?: string) => void;
   rules?: Validator[];
   onValidate?: (passed: boolean) => void;
   generatePasswordRegex?: RegExp;
@@ -36,6 +37,7 @@ const Password: React.FC<PasswordProps> = ({
   locale,
   rules,
   onChange,
+  onGenerate,
   onValidate,
   generatePasswordRegex,
   ...restProps
@@ -134,7 +136,13 @@ const Password: React.FC<PasswordProps> = ({
         {generatePasswordRegex && (
           <Button
             onClick={() => {
-              handleChange(getRandomPassword());
+              const randomPassword = getRandomPassword();
+              if (onGenerate instanceof Function) {
+                const newRandomPassword = onGenerate(randomPassword);
+                handleChange(newRandomPassword);
+              } else {
+                handleChange(randomPassword);
+              }
             }}
             style={{ marginLeft: 8 }}
           >
