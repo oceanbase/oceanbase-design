@@ -8,9 +8,16 @@ group: 基础组件
 
 ---
 
+## 0.4.11
+
+`2025-07-01`
+
+- 🐞 修复 Form.Item `layout` 属性不生效的问题。[#1085](https://github.com/oceanbase/oceanbase-design/pull/1085)
+- 🐞 修复 Table 已排序列头的分割线丢失的问题。[#1076](https://github.com/oceanbase/oceanbase-design/pull/1076) [@wzc520pyfm](https://github.com/wzc520pyfm)
+
 ## 0.4.10
 
-`2024-04-18`
+`2025-04-18`
 
 - 📖 新增 AutoComplete 的示例和文档。[#1012](https://github.com/oceanbase/oceanbase-design/pull/1012)
 - 📖 新增 Anchor 的文档和示例。[#1013](https://github.com/oceanbase/oceanbase-design/pull/1013)

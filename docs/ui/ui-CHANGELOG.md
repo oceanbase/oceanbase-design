@@ -8,9 +8,19 @@ group: 业务组件
 
 ---
 
+## 0.4.14
+
+`2025-07-01`
+
+- DateRanger
+  - 🆕 新增 `getPopupContainer` 属性，用于设置弹出面板的挂载容器。[#1072](https://github.com/oceanbase/oceanbase-design/pull/1072) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - 🐞 修复 DataRanger 设置 hideSecond 没有隐藏面板内秒数信息的问题。[#1071](https://github.com/oceanbase/oceanbase-design/pull/1071) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - 🐞 修复下拉面板出现额外阴影的问题。[#1074](https://github.com/oceanbase/oceanbase-design/pull/1074) [@wzc520pyfm](https://github.com/wzc520pyfm)
+- 🆕 Password 新增 `generatePassword` 属性，用于自定义生成密码。[#1084](https://github.com/oceanbase/oceanbase-design/pull/1084) [@Hx-xiang](https://github.com/Hx-xiang)
+
 ## 0.4.13
 
-`2024-04-28`
+`2025-04-28`
 
 - Login
   - 🆕 Login 新增 `passwordOptional` 属性，用于设置是否允许密码为空。[#1046](https://github.com/oceanbase/oceanbase-design/pull/1046) [@linhf123](https://github.com/linhf123)
@@ -20,7 +30,7 @@ group: 业务组件
 
 ## 0.4.12
 
-`2024-04-18`
+`2025-04-18`
 
 - 🆕 Action.Button 和 Action.Link 新增 `divider` 属性，用于设置位于下拉菜单内时是否带分割线。[#1029](https://github.com/oceanbase/oceanbase-design/pull/1029)
 - 🆕 BasicLayout 新增 `topHeader.versionNoticePath` 属性，用于设置顶部导航栏的版本公告。[#1008](https://github.com/oceanbase/oceanbase-design/pull/1008) [@zousongxia](https://github.com/zousongxia)
@@ -31,7 +41,7 @@ group: 业务组件
 
 ## 0.4.11
 
-`2024-03-31`
+`2025-03-31`
 
 - 🆕 SideTip 组件新增 `draggable` 属性，可关闭拖拽功能 [#999](https://github.com/oceanbase/oceanbase-design/pull/999)
 
