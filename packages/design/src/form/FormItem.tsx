@@ -62,6 +62,7 @@ const FormItem: CompoundedComponent = ({
 
   return wrapSSR(
     <AntFormItem
+      layout={layout}
       label={
         action && (vertical || layout === 'vertical') ? (
           <>
