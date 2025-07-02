@@ -134,6 +134,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     autoAdjustOverflow,
     overlayClassName,
     overlayStyle,
+    getPopupContainer,
     ...rest
   } = props;
 
@@ -350,8 +351,9 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
             open={open}
             placement={rest.placement}
             autoAdjustOverflow={autoAdjustOverflow}
+            getPopupContainer={getPopupContainer}
             // 关闭后进行销毁，才可以将 Tooltip 进行同步关闭
-            destroyPopupOnHide={true}
+            destroyOnHidden={true}
             // 存在缓存，会锁死里面的值
             onOpenChange={o => {
               if (o === false && refState.current.tooltipOpen) {
@@ -360,7 +362,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
 
               setOpen(o);
             }}
-            dropdownRender={originNode => {
+            popupRender={originNode => {
               return (
                 <div
                   className={classNames(`${prefix}-dropdown-picker`, overlayClassName)}
@@ -376,6 +378,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                     tip={tip}
                     isMoment={isMoment}
                     rules={rules}
+                    hideSecond={hideSecond}
                     onOk={vList => {
                       setIsPlay(false);
                       handleNameChange(CUSTOMIZE);

@@ -48,6 +48,7 @@ export interface PickerPanelProps {
   onOk: (v: RangeValue) => void;
   isMoment: boolean;
   disabledDate: any;
+  hideSecond?: boolean;
   locale: any;
 }
 
@@ -90,6 +91,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     onOk = noop,
     onCancel = noop,
     disabledDate,
+    hideSecond,
   } = props;
   const rootCls = useCSSVarCls(prefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
@@ -236,7 +238,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                   getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
                   style={{ width: '100%' }}
                   format={{
-                    format: 'HH:mm:ss',
+                    format: hideSecond ? 'HH:mm' : 'HH:mm:ss',
                     type: 'mask',
                   }}
                 />
@@ -292,7 +294,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                   getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
                   style={{ width: '100%' }}
                   format={{
-                    format: 'HH:mm:ss',
+                    format: hideSecond ? 'HH:mm' : 'HH:mm:ss',
                     type: 'mask',
                   }}
                 />

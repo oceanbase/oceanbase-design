@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/design",
-  "version": "0.4.10",
+  "version": "0.4.11",
   "description": "The Design System of OceanBase",
   "keywords": [
     "oceanbase",
@@ -46,7 +46,7 @@
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.24.8",
+    "antd": "^5.25.0",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
     "lottie-web": "^5.12.2",
@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.27.2",
-    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-env": "^7.27.2",
     "antd-token-previewer": "^2.0.8",
     "rc-select": "^14.16.7",
     "rc-slider": "^11.1.8",
