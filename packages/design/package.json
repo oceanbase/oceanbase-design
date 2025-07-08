@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.27.2",
-    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-env": "^7.28.0",
     "antd-token-previewer": "^2.0.8",
     "rc-select": "^14.16.7",
     "rc-slider": "^11.1.8",
