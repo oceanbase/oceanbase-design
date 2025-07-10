@@ -69,6 +69,7 @@ export default (api: IApi) => {
                 {
                   boxShadow: item.token.boxShadow,
                   boxShadowSecondary: item.token.boxShadowSecondary,
+                  boxShadowTertiary: item.token.boxShadowTertiary,
                 },
                 isNil
               ),
