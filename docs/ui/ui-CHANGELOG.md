@@ -8,6 +8,13 @@ group: 业务组件
 
 ---
 
+## 0.4.15
+
+`2025-07-10`
+
+- 💄 Login 的背景图片居中展示。[#1094](https://github.com/oceanbase/oceanbase-design/pull/1094)
+- 💄 将 DateRanger 快捷选项的背景色从透明调整为白色。[#1095](https://github.com/oceanbase/oceanbase-design/pull/1095) [@wzc520pyfm](https://github.com/wzc520pyfm)
+
 ## 0.4.14
 
 `2025-07-01`

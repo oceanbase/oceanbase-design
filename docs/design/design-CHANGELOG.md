@@ -8,6 +8,13 @@ group: 基础组件
 
 ---
 
+## 0.4.12
+
+`2025-07-10`
+
+- 🐞 修复 `boxShadow` 相关 Design Token 不正确的问题。[#1096](https://github.com/oceanbase/oceanbase-design/pull/1096)
+- 💄 更新 boxShadowTertiary token 的值。[#1097](https://github.com/oceanbase/oceanbase-design/pull/1097)
+
 ## 0.4.11
 
 `2025-07-01`
