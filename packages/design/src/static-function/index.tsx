@@ -22,6 +22,7 @@ const mapToken = {
   override: {
     boxShadow: defaultTheme.token?.boxShadow,
     boxShadowSecondary: defaultTheme.token?.boxShadowSecondary,
+    boxShadowTertiary: defaultTheme.token?.boxShadowTertiary,
   },
 };
 let token = formatToken(mapToken);
