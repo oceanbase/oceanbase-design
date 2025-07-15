@@ -219,8 +219,8 @@ importers:
         specifier: ^6.30.1
         version: 6.30.1(react-dom@18.3.1)(react@18.3.1)
       runscript:
-        specifier: ^1.6.0
-        version: 1.6.0
+        specifier: ^2.0.1
+        version: 2.0.1
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@24.0.10)(typescript@5.8.3)
@@ -15183,10 +15183,6 @@ packages:
       ci-info: 3.9.0
     dev: true
 
-  /is-class-hotfix@0.0.6:
-    resolution: {integrity: sha512-0n+pzCC6ICtVr/WXnN2f03TK/3BfXY7me4cjCAqT8TYXEl0+JBRoqBo94JJHXcyDSLUeWbNX8Fvy5g5RJdAstQ==}
-    dev: true
-
   /is-core-module@2.16.1:
     resolution: {integrity: sha512-UfoeMA6fIJ8wTYFEUjelnaGI67v6+N7qXJEvQuIGa99l4xsCruSYOVSQ0uPANn4dAzm8lkYPaKLrrijLq7x23w==}
     engines: {node: '>= 0.4'}
@@ -15520,12 +15516,8 @@ packages:
       text-extensions: 1.9.0
     dev: true
 
-  /is-type-of@1.4.0:
-    resolution: {integrity: sha512-EddYllaovi5ysMLMEN7yzHEKh8A850cZ7pykrY1aNRQGn/CDjRDE9qEWbIdt7xGEVJmjBXzU/fNnC4ABTm8tEQ==}
-    dependencies:
-      core-util-is: 1.0.3
-      is-class-hotfix: 0.0.6
-      isstream: 0.1.2
+  /is-type-of@2.2.0:
+    resolution: {integrity: sha512-72axShMJMnMy5HSU/jLGNOonZD5rWM0MwJSCYpKCTQCbggQZBJO/CLMMVP5HgS8kPSYFBkTysJexsD6NMvGKDQ==}
     dev: true
 
   /is-typed-array@1.1.15:
@@ -22292,11 +22284,11 @@ packages:
     dependencies:
       queue-microtask: 1.2.3
 
-  /runscript@1.6.0:
-    resolution: {integrity: sha512-lI0ybcwtdC5Wz3aiVtMAK6U5jcTDeLseEBSXcz6ABtQeMmQGpj35dmzpmpy2C9Bn0k2wTjTRLZoya0NFt8Mxsg==}
-    engines: {node: '>=4.2.3'}
+  /runscript@2.0.1:
+    resolution: {integrity: sha512-CjlpKusSKpE943TsCLkqU1dBDfC2nWwaaiaVlXu3IG3FvSa4IqSn7dMGT16Q6wDNUJX/51IO4mifbEipXnMKDA==}
+    engines: {node: '>=16.0.0'}
     dependencies:
-      is-type-of: 1.4.0
+      is-type-of: 2.2.0
     dev: true
 
   /rw@1.3.3:
