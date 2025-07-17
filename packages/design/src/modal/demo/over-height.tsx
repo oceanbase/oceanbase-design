@@ -13,10 +13,11 @@ export default () => {
           setOpen(true);
         }}
       >
-        Open max height Modal
+        Open over height Modal
       </Button>
       <Modal
-        title="Max height Modal"
+        centered
+        title="Over height Modal"
         open={open}
         onOk={() => {
           setOpen(false);
@@ -25,14 +26,12 @@ export default () => {
           setOpen(false);
         }}
         bodyStyle={{
-          maxHeight: 400,
-          overflow: 'auto',
           borderRadius: token.borderRadius,
         }}
       >
         <div
           style={{
-            height: 800,
+            height: 1000,
             background: token.colorBgLayout,
             padding: 12,
           }}

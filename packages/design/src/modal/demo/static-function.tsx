@@ -7,13 +7,7 @@ export default () => (
       onClick={() => {
         Modal.confirm({
           title: 'This is a confirm modal',
-          content: (
-            <div>
-              <p>some messages...some messages...</p>
-              <p>some messages...some messages...</p>
-            </div>
-          ),
-          onOk() {},
+          content: 'some messages...some messages...',
         });
       }}
     >
@@ -23,13 +17,7 @@ export default () => (
       onClick={() => {
         Modal.info({
           title: 'This is a info message',
-          content: (
-            <div>
-              <p>some messages...some messages...</p>
-              <p>some messages...some messages...</p>
-            </div>
-          ),
-          onOk() {},
+          content: 'some messages...some messages...',
         });
       }}
     >
@@ -39,12 +27,7 @@ export default () => (
       onClick={() => {
         Modal.success({
           title: 'This is a success message',
-          content: (
-            <div>
-              <p>some messages...some messages...</p>
-              <p>some messages...some messages...</p>
-            </div>
-          ),
+          content: 'some messages...some messages...',
         });
       }}
     >

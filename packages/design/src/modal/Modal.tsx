@@ -1,7 +1,8 @@
+import React, { useContext, useRef } from 'react';
 import { Modal as AntModal } from 'antd';
 import type { ModalFuncProps, ModalProps } from 'antd/es/modal';
 import classNames from 'classnames';
-import React, { useContext } from 'react';
+import { useSize } from 'ahooks';
 import ConfigProvider from '../config-provider';
 import { modal } from '../static-function';
 import useStyle from './style';
@@ -12,8 +13,14 @@ const Modal = ({ footer, prefixCls: customizePrefixCls, className, ...restProps 
   const { wrapSSR } = useStyle(prefixCls);
   const modalCls = classNames(className);
 
+  const panelRef = useRef<HTMLDivElement>(null);
+  const panelSize = useSize(panelRef);
+  console.log(panelRef);
+  console.log(panelSize);
+
   return wrapSSR(
     <AntModal
+      panelRef={panelRef}
       destroyOnClose={true}
       // convert false to null to hide .ant-modal-footer dom
       // ref: https://github.com/ant-design/ant-design/blob/master/components/modal/Modal.tsx#L105
