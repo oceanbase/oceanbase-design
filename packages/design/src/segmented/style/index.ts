@@ -10,33 +10,27 @@ export const genSegmentedStyle: GenerateStyle<SegmentedToken> = (
   const { componentCls, antCls, colorFill, colorFillSecondary } = token;
 
   return {
-    [`${componentCls}`]: {
-      [`${componentCls}-group`]: {
-        [`>${componentCls}-item`]: {
-          [`>${componentCls}-item-label`]: {
-            [`&[aria-selected='false']`]: {
-              ['&:hover']: {
-                [`${antCls}-badge`]: {
-                  [`>${antCls}-badge-count`]: {
-                    backgroundColor: colorFill,
-                  },
-                },
-              },
-              ['&:active']: {
-                [`${antCls}-badge`]: {
-                  [`>${antCls}-badge-count`]: {
-                    backgroundColor: colorFillSecondary,
-                  },
-                },
-              },
+    [`${componentCls} >${componentCls}-group`]: {
+      [`&:not(:has(${componentCls}-thumb)) >${componentCls}-item`]: {
+        [`&:not(.ant-segmented-item-selected) >${componentCls}-item-label`]: {
+          ['&:hover']: {
+            [`${antCls}-badge >${antCls}-badge-count`]: {
+              backgroundColor: colorFill,
             },
-            [`${antCls}-badge`]: {
-              [`>${antCls}-badge-count`]: {
-                backgroundColor: colorFillSecondary,
-                color: 'inherit',
-                boxShadow: 'none',
-              },
+          },
+          ['&:active']: {
+            [`${antCls}-badge >${antCls}-badge-count`]: {
+              backgroundColor: colorFillSecondary,
             },
+          },
+        },
+      },
+      [`>${componentCls}-item`]: {
+        [`>${componentCls}-item-label`]: {
+          [`${antCls}-badge >${antCls}-badge-count`]: {
+            backgroundColor: colorFillSecondary,
+            color: 'inherit',
+            boxShadow: 'none',
           },
         },
       },
