@@ -10,13 +10,13 @@ export default () => {
         {
           value: 456,
           label: 456,
-          // 直接书写badge内容
+          // badge content
           badge: 11,
         },
         {
           value: 789,
           label: 789,
-          // 等价于 badge: 25
+          // same as `badge: 25`
           badge: {
             count: 25,
           },
@@ -24,13 +24,13 @@ export default () => {
         {
           value: 999,
           label: 999,
-          // 自定义
+          // custom badge
           badge: {
             count: 0,
             showZero: true,
           },
         },
-        // 超长文本
+        // mock very long text
         {
           value: 'longtext1',
           label:
