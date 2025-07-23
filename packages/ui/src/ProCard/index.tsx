@@ -3,8 +3,10 @@ import { ProCard as AntProCard } from '@ant-design/pro-components';
 import type { ProCardProps } from '@ant-design/pro-components';
 import { ConfigProvider } from '@oceanbase/design';
 import { isHorizontalPaddingZero } from '@oceanbase/design/es/_util';
+import { theme } from '@oceanbase/design';
 import classNames from 'classnames';
 import useStyle from './style';
+import { CaretRightFilled } from '@oceanbase/icons';
 
 export { ProCardProps };
 
@@ -23,6 +25,7 @@ const ProCard: typeof AntProCard = ({
 
   const prefixCls = getPrefixCls('pro-card', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
+  const { token } = theme.useToken();
 
   // ProCard body no horizontal padding
   const noBodyHorizontalPadding = isHorizontalPaddingZero(bodyStyle?.padding) || ghost;
@@ -53,6 +56,18 @@ const ProCard: typeof AntProCard = ({
       headerBordered={headerBordered}
       bodyStyle={bodyStyle}
       className={proCardCls}
+      collapsibleIconRender={({ collapsed }) => {
+        return (
+          <CaretRightFilled
+            className={`anticon anticon-right ${prefixCls}-collapsible-icon`}
+            style={{
+              transition: 'transform 0.2s',
+              transform: collapsed ? undefined : 'rotate(90deg)',
+              color: token.colorTextSecondary,
+            }}
+          />
+        );
+      }}
       {...restProps}
     />
   );
