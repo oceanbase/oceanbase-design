@@ -54,7 +54,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/server": "^11.11.0",
     "@qixian.cs/github-contributors-list": "^2.0.2",
-    "@rc-component/trigger": "^2.2.7",
+    "@rc-component/trigger": "^2.3.0",
     "@stackblitz/sdk": "^1.11.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
