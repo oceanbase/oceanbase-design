@@ -19,11 +19,12 @@ nav:
 <code src="./demo/size.tsx" title="三种大小"></code>
 <code src="./demo/block.tsx" title="block" description="block 属性使其撑满父元素宽度。"></code>
 <code src="./demo/ellipsis.tsx" title="省略" description="需要同时配置分段器的 block 和选项的 ellipsis 属性。"></code>
+<code src="./demo/badge.tsx" title="带徽标" description="展示徽标"></code>
 
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
-| options | 选项列表 | string[] \| number[] \| { label: ReactNode; value: string; icon?: ReactNode; disabled?: boolean; ellipsis?: [EllipsisConfig](https://ant.design/components/typography-cn#ellipsis); className?: string }[] | [] | - |
+| options | 选项列表 | string[] \| number[] \| { label: ReactNode; value: string; icon?: ReactNode; disabled?: boolean; ellipsis?: [EllipsisConfig](https://ant.design/components/typography-cn#ellipsis); badge?: ReactNode \| [BadgeProps](https://ant.design/components/badge-cn#badge); className?: string }[] | [] | - |
 
 - 更多 API 详见 antd Segmented 文档: https://ant.design/components/segmented-cn
