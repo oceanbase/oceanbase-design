@@ -8,6 +8,12 @@ group: 业务组件
 
 ---
 
+## 0.4.16
+
+`2025-07-27`
+
+- 💄 ProCard 折叠图标使用实心箭头、图标颜色改为二级文本色。[#1111](https://github.com/oceanbase/oceanbase-design/pull/1111) [@wzc520pyfm](https://github.com/wzc520pyfm)
+
 ## 0.4.15
 
 `2025-07-10`
