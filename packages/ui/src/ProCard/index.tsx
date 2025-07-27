@@ -21,7 +21,7 @@ const ProCard: typeof AntProCard = ({
   className,
   ...restProps
 }) => {
-  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const { getPrefixCls, iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
 
   const prefixCls = getPrefixCls('pro-card', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
@@ -59,7 +59,7 @@ const ProCard: typeof AntProCard = ({
       collapsibleIconRender={({ collapsed }) => {
         return (
           <CaretRightFilled
-            className={`anticon anticon-right ${prefixCls}-collapsible-icon`}
+            className={`${iconPrefixCls} ${iconPrefixCls}-right ${prefixCls}-collapsible-icon`}
             style={{
               transition: 'transform 0.2s',
               transform: collapsed ? undefined : 'rotate(90deg)',
