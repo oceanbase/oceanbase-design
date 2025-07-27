@@ -1,17 +1,21 @@
 import { isNullValue } from '@oceanbase/util';
 import { Divider, Space, Tabs as AntTabs, Tag } from 'antd';
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import type { TabsProps as AntTabsProps, TabsPosition as AntTabsPosition } from 'antd/es/tabs';
 import type { Tab as AntTab } from 'rc-tabs/es/interface';
 import classNames from 'classnames';
+import Badge from '../badge';
 import ConfigProvider from '../config-provider';
 import useLegacyItems from './hooks/useLegacyItems';
 import useStyle, { genTabsStyle } from './style';
 import TabPane from './TabPane';
 import type { TabPaneProps } from './TabPane';
+import type { BadgeProps } from '../badge';
 
 export * from 'antd/es/tabs';
 export type { TabPaneProps };
+
+type BadgeType = BadgeProps | BadgeProps['count'];
 
 export interface AntTabOptional extends Omit<AntTab, 'key' | 'label'> {
   key?: string;
@@ -19,8 +23,10 @@ export interface AntTabOptional extends Omit<AntTab, 'key' | 'label'> {
 }
 
 export type Tab = {
+  /** @deprecated please use `badge` instead */
   tag?: React.ReactNode;
   divider?: boolean;
+  badge?: BadgeType;
 } & (AntTab | AntTabOptional);
 
 export interface TabsProps extends Omit<AntTabsProps, 'items'> {
@@ -28,6 +34,10 @@ export interface TabsProps extends Omit<AntTabsProps, 'items'> {
 }
 
 export type TabsPosition = AntTabsPosition;
+
+const isReactNode = (item: BadgeType): item is React.ReactNode => {
+  return React.isValidElement(item);
+};
 
 const Tabs = ({
   children,
@@ -46,6 +56,18 @@ const Tabs = ({
   const isHorizontal = !tabPosition || tabPosition === 'top' || tabPosition === 'bottom';
   const dividerList = items?.filter(item => item.divider) || [];
 
+  const renderBadge = useCallback(
+    (badge: BadgeType) => {
+      if (typeof badge === 'object' && !isReactNode(badge)) {
+        return (
+          <Badge {...badge} className={classNames(`${prefixCls}-tab-badge`, badge.className)} />
+        );
+      }
+      return <Badge className={`${prefixCls}-tab-badge`} count={badge} />;
+    },
+    [prefixCls]
+  );
+
   let newItems = useLegacyItems(items, children);
 
   newItems = newItems?.map(item => {
@@ -62,15 +84,18 @@ const Tabs = ({
         ),
         disabled: true,
       };
-    } else if (!isNullValue(item.tag)) {
+    } else if (!isNullValue(item.tag) || !isNullValue(item.badge)) {
       return {
         ...item,
         label: (
           <Space size={4}>
             {item.label}
-            <Tag bordered={false} className={`${prefixCls}-tab-tag`}>
-              {item.tag}
-            </Tag>
+            {item.badge && renderBadge(item.badge)}
+            {!isNullValue(item.tag) && (
+              <Tag bordered={false} className={`${prefixCls}-tab-tag`}>
+                {item.tag}
+              </Tag>
+            )}
           </Space>
         ),
       };

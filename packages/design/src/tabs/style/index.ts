@@ -5,7 +5,8 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 export type TabsToken = FullToken<'Tabs'>;
 
 export const genTabsStyle = (token: Partial<TabsToken>): CSSObject => {
-  const { antCls, componentCls, colorInfo, colorInfoBg, colorTextSecondary } = token;
+  const { antCls, componentCls, colorInfo, colorInfoBg, colorTextSecondary, colorFillQuaternary } =
+    token;
   return {
     [componentCls]: {
       [`&${componentCls}-top, &${componentCls}-bottom`]: {
@@ -15,6 +16,7 @@ export const genTabsStyle = (token: Partial<TabsToken>): CSSObject => {
         },
       },
       [`${componentCls}-tab`]: {
+        /** @deprecated */
         [`${componentCls}-tab-tag`]: {
           color: colorTextSecondary,
           fontFamily: 'PingFangSC',
@@ -23,9 +25,21 @@ export const genTabsStyle = (token: Partial<TabsToken>): CSSObject => {
           marginInlineEnd: 0,
           height: 20,
         },
+        [`${componentCls}-tab-badge`]: {
+          [`>${antCls}-badge-count`]: {
+            color: colorTextSecondary,
+            backgroundColor: colorFillQuaternary,
+          },
+          borderRadius: 12,
+        },
       },
       [`${componentCls}-tab-active`]: {
+        /** @deprecated */
         [`${componentCls}-tab-tag`]: {
+          color: colorInfo,
+          backgroundColor: colorInfoBg,
+        },
+        [`${componentCls}-tab-badge >${antCls}-badge-count`]: {
           color: colorInfo,
           backgroundColor: colorInfoBg,
         },
