@@ -14,6 +14,7 @@ nav:
 <code src="./demo/basic.tsx" title="基本"></code>
 <code src="./demo/marks.tsx" title="带标签的滑块"></code>
 <code src="./demo/vertical.tsx" title="垂直方向的滑块"></code>
+<code src="./demo/min-equals-max.tsx" title="最小值和最大值相同" debug></code>
 
 ## API
 

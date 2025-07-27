@@ -150,12 +150,17 @@ exports[`Segmented > render options with ellipsis 1`] = `
         aria-selected="false"
         class="ant-segmented-item-label"
       >
-        <span
-          aria-describedby="test-id"
-          class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+        <div
+          class="ant-flex ant-flex-align-center ant-flex-justify-center"
+          style="gap: 4px;"
         >
-          longtext
-        </span>
+          <span
+            aria-describedby="test-id"
+            class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+          >
+            longtext
+          </span>
+        </div>
       </div>
     </label>
   </div>

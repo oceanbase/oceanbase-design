@@ -7,10 +7,34 @@ export type SegmentedToken = FullToken<'Segmented'>;
 export const genSegmentedStyle: GenerateStyle<SegmentedToken> = (
   token: SegmentedToken
 ): CSSObject => {
-  const { componentCls } = token;
+  const { componentCls, antCls, colorFill, colorFillSecondary } = token;
 
   return {
-    [`${componentCls}`]: {},
+    [`${componentCls} >${componentCls}-group`]: {
+      [`&:not(:has(${componentCls}-thumb)) >${componentCls}-item`]: {
+        [`&:not(.ant-segmented-item-selected) >${componentCls}-item-label`]: {
+          ['&:hover']: {
+            [`${antCls}-badge >${antCls}-badge-count`]: {
+              backgroundColor: colorFill,
+            },
+          },
+          ['&:active']: {
+            [`${antCls}-badge >${antCls}-badge-count`]: {
+              backgroundColor: colorFillSecondary,
+            },
+          },
+        },
+      },
+      [`>${componentCls}-item`]: {
+        [`>${componentCls}-item-label`]: {
+          [`${antCls}-badge >${antCls}-badge-count`]: {
+            backgroundColor: colorFillSecondary,
+            color: 'inherit',
+            boxShadow: 'none',
+          },
+        },
+      },
+    },
   };
 };
 

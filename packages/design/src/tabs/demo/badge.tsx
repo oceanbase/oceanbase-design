@@ -11,19 +11,27 @@ const items: TabsProps['items'] = [
     key: '1',
     label: `Tab 1`,
     children: `Content of Tab Pane 1`,
-    tag: 22,
+    // badge content
+    badge: 22,
   },
   {
     key: '2',
     label: `Tab 2`,
     children: `Content of Tab Pane 2`,
-    tag: 99,
+    // same as `badge: 33`
+    badge: {
+      count: 33,
+    },
   },
   {
     key: '3',
     label: `Tab 3`,
     children: `Content of Tab Pane 3`,
-    tag: 0,
+    // custom badge
+    badge: {
+      count: 0,
+      showZero: true,
+    },
   },
 ];
 

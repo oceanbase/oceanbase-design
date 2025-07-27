@@ -8,6 +8,14 @@ group: 基础组件
 
 ---
 
+## 0.4.13
+
+`2025-07-27`
+
+- 🆕 Segmented `options` 新增 `badge` 属性，用于设置选项卡后面的徽标。[#1100](https://github.com/oceanbase/oceanbase-design/pull/1100) [@wzc520pyfm](https://github.com/wzc520pyfm)
+- 🆕 Tabs `options` 新增 `badge` 属性，用于设置选项卡后面的徽标。原 `tag` 属性标记为即将废弃，后续不推荐使用。[#1110](https://github.com/oceanbase/oceanbase-design/pull/1110) [@wzc520pyfm](https://github.com/wzc520pyfm)
+- 💄 优化 Slider 在最大值和最小值相等时的 `marks` 样式。[#1105](https://github.com/oceanbase/oceanbase-design/pull/1105)
+
 ## 0.4.12
 
 `2025-07-10`
