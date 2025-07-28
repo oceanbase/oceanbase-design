@@ -240,8 +240,8 @@ importers:
         specifier: ^0.4.5
         version: 0.4.5(vitest@2.1.9)
       web-vitals:
-        specifier: ^3.5.2
-        version: 3.5.2
+        specifier: ^5.0.3
+        version: 5.0.3
 
   packages/charts:
     dependencies:
@@ -25368,8 +25368,8 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /web-vitals@3.5.2:
-    resolution: {integrity: sha512-c0rhqNcHXRkY/ogGDJQxZ9Im9D19hDihbzSQJrsioex+KnFgmMzBiy57Z1EjkhX/+OjyBpclDCzz2ITtjokFmg==}
+  /web-vitals@5.0.3:
+    resolution: {integrity: sha512-4KmOFYxj7qT6RAdCH0SWwq8eKeXNhAFXR4PmgF6nrWFmrJ41n7lq3UCA6UK0GebQ4uu+XP8e8zGjaDO3wZlqTg==}
     dev: true
 
   /web-worker-helper@0.0.3:
