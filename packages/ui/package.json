@@ -64,7 +64,7 @@
     "screenfull": "^6.0.2"
   },
   "devDependencies": {
-    "@ant-design/pro-form": "^2.31.9",
+    "@ant-design/pro-form": "^2.32.0",
     "@ant-design/pro-layout": "^7.22.6"
   },
   "peerDependencies": {
