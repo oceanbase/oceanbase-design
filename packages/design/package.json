@@ -39,7 +39,7 @@
     "build": "father build && cp src/style/reset.css dist/"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.23.0",
+    "@ant-design/cssinjs": "^1.24.0",
     "@ctrl/tinycolor": "^4.1.0",
     "@inline-svg-unique-id/react": "^1.2.3",
     "@oceanbase/aliyun-theme": "^0.1.6",
