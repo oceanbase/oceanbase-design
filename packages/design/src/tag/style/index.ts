@@ -48,7 +48,6 @@ export const genTagStyle = (token: TagToken): CSSObject => {
       borderColor: getTagBorderColor(token.colorBorder),
       fontSize: token.fontSizeSM,
       [`${antCls}-typography`]: {
-        fontSize: token.fontSizeSM,
         [`${componentCls}-icon`]: {
           marginInlineEnd: paddingInline,
         },
