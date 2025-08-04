@@ -502,8 +502,8 @@ importers:
         specifier: ^2.10.14
         version: 2.10.14(react@18.3.1)
       filesize:
-        specifier: ^10.1.6
-        version: 10.1.6
+        specifier: ^11.0.2
+        version: 11.0.2
       is-url:
         specifier: ^1.2.4
         version: 1.2.4
@@ -13546,8 +13546,8 @@ packages:
       trim-repeated: 1.0.0
     dev: true
 
-  /filesize@10.1.6:
-    resolution: {integrity: sha512-sJslQKU2uM33qH5nqewAwVB2QgR6w1aMNsYUp3aN5rMRyXEwJGmZvaWzeJFNTOXWlHQyBFCWrdj3fV/fsTOX8w==}
+  /filesize@11.0.2:
+    resolution: {integrity: sha512-s/iAeeWLk5BschUIpmdrF8RA8lhFZ/xDZgKw1Tan72oGws1/dFGB06nYEiyyssWUfjKNQTNRlrwMVjO9/hvXDw==}
     engines: {node: '>= 10.4.0'}
     dev: false
 
