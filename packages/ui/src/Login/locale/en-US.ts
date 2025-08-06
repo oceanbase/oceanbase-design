@@ -4,6 +4,7 @@ export default {
   passwordPlaceholder: 'Please input password',
   passwordMessage: 'Password is required',
   loginText: 'Login',
+  otherLoginText: 'Third-party Login',
   isLoadingWarn: 'In progress',
   usernameLabel: 'Username',
   switchLoginLabel: 'Already have an account',
