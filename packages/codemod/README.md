@@ -19,12 +19,30 @@ npx -p @oceanbase/codemod codemod src
 # options
 # --transformer=t1,t2     // run specify transformers
 # --disablePrettier       // disable prettier
+# --ignore-config         // ignore config file
 ```
 
 Run specific transformers:
 
 ```shell
 npx -p @oceanbase/codemod codemod src --transformer=style-to-token,less-to-token
+```
+
+Ignore config file:
+
+```shell
+npx -p @oceanbase/codemod codemod src --ignore-config=.codemodignore
+```
+
+- `.codemodignore`:
+
+```bash
+node_modules
+*.css
+*.json
+.umi
+.umi-production
+.umi-test
 ```
 
 ## Codemod transformers introduction
