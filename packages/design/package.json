@@ -39,14 +39,14 @@
     "build": "father build && cp src/style/reset.css dist/"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.23.0",
+    "@ant-design/cssinjs": "^1.24.0",
     "@ctrl/tinycolor": "^4.1.0",
     "@inline-svg-unique-id/react": "^1.2.3",
     "@oceanbase/aliyun-theme": "^0.1.6",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.26.4",
+    "antd": "^5.26.7",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
     "lottie-web": "^5.13.0",
