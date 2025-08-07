@@ -36,6 +36,12 @@ function isFirstUpperCase(str) {
   return upperFirst(str) === str;
 }
 
+// ref: https://github.com/facebook/jscodeshift/issues/403#issuecomment-991759561
+function shorthandProperty(property) {
+  property.shorthand = true;
+  return property;
+}
+
 function importComponent(j, root, options) {
   let hasChanged = false;
 
@@ -83,6 +89,7 @@ function importComponent(j, root, options) {
               : parentType === 'ArrowFunctionExpression'
                 ? path.parentPath.parentPath?.value?.id?.name
                 : undefined;
+          const calleeName = path.parentPath.parentPath?.parentPath?.value?.callee?.name;
           if (
             includeJSXElement &&
             functionName &&
@@ -100,6 +107,45 @@ function importComponent(j, root, options) {
                 importedName: 'theme',
                 importKind: 'value',
               });
+            }
+          }
+          // antd-style createStyles
+          else if (parentType === 'ArrowFunctionExpression' && calleeName === 'createStyles') {
+            const arrowFunc = path.parentPath?.parentPath?.value?.[0];
+            if (arrowFunc && arrowFunc.type === 'ArrowFunctionExpression') {
+              let hasToken = false;
+              if (arrowFunc.params.length > 0) {
+                const param = arrowFunc.params[0];
+                if (param.type === 'ObjectPattern') {
+                  hasToken = param.properties.some(
+                    p => p.type === 'ObjectProperty' && p.key && p.key.name === 'token'
+                  );
+                  // 如果参数对象中没有 token 属性，则插入 token 属性
+                  if (!hasToken) {
+                    param.properties.push(
+                      shorthandProperty(
+                        j.property('init', j.identifier('token'), j.identifier('token'))
+                      )
+                    );
+                  }
+                } else {
+                  // 如果参数不是对象结构，则替换为 { token }
+                  arrowFunc.params[0] = j.objectPattern([
+                    shorthandProperty(
+                      j.property('init', j.identifier('token'), j.identifier('token'))
+                    ),
+                  ]);
+                }
+              } else {
+                // 如果没有参数，则插入 { token }
+                arrowFunc.params = [
+                  j.objectPattern([
+                    shorthandProperty(
+                      j.property('init', j.identifier('token'), j.identifier('token'))
+                    ),
+                  ]),
+                ];
+              }
             }
           } else {
             // React class component and static file (not react component)
