@@ -14,6 +14,7 @@ markdown: |
 - 🔥 完全继承 antd [Modal](https://ant.design/components/modal-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 - 📢 `destroyOnClose` 属性的默认值为 `true`。
+- 🆕 Modal 新增 `extra` 属性，用于设置底部额外内容。
 - 🆕 新增 `Modal.Progress` 组件，可用于异步任务或耗时较长的场景。
 - 🆕 `Modal.method()` 静态方法，支持消费 `ConfigProvider` 全局配置。
 
@@ -21,6 +22,7 @@ markdown: |
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
+<code src="./demo/extra.tsx" title="底部额外内容" description="可通过 `extra` 属性进行设置。"></code>
 <code src="./demo/form.tsx" title="Form 表单"></code>
 <code src="./demo/max-height.tsx" title="高度限制" description="超出指定高度可设置滚动。"></code>
 <code src="./demo/progress.tsx" title="带百分比的进度对话框" description="可用于异步任务或耗时较长的场景。"></code>
@@ -49,6 +51,7 @@ markdown: |
 | progress | 进度条属性 | [ProgressProps](https://ant-design.antgroup.com/components/progress-cn#api) | `{ type: 'circle', size: 150  }` | - |
 | description | 描述 | ReactNode | - | - |
 | footer | 底部内容 | ReactNode | null | - |
+| extra | 底部额外内容 | ReactNode | null | - |
 
 - 更多 API 详见 antd Modal 文档: https://ant.design/components/modal-cn#api
 
