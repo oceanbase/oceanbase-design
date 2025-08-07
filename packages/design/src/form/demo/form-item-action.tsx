@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Form, Input, message } from '@oceanbase/design';
+import { Button, Dropdown, Form, Input, Space, message } from '@oceanbase/design';
+import { DownOutlined } from '@oceanbase/icons';
 
 const onFinish = (values: any) => {
   message.success('Success');
@@ -26,7 +27,39 @@ const App: React.FC = () => (
     >
       <Input />
     </Form.Item>
-    <Form.Item label="Address" name="address" action={<a>Action</a>}>
+    <Form.Item
+      label="Address"
+      name="address"
+      action={
+        <Dropdown
+          menu={{
+            items: [
+              {
+                key: '1',
+                label: 'Menu 1',
+              },
+              {
+                key: '2',
+                label: 'Menu 2',
+              },
+            ],
+          }}
+        >
+          <Button
+            size="small"
+            style={{
+              // same with label height to avoid overflow
+              height: 22,
+            }}
+          >
+            <Space>
+              Button
+              <DownOutlined />
+            </Space>
+          </Button>
+        </Dropdown>
+      }
+    >
       <Input />
     </Form.Item>
     <Form.Item>
