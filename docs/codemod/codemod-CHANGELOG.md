@@ -8,6 +8,13 @@ group: 自动化迁移工具
 
 ---
 
+## 0.4.14
+
+`2025-08-07`
+
+- 🆕 `style-to-token` 工具支持改写 antd-style `createStyles`。[#1131](https://github.com/oceanbase/oceanbase-design/pull/1131)
+- 🆕 新增 `--ignore-config` 命令行参数，用于指定 `ignore` 配置文件。[#1132](https://github.com/oceanbase/oceanbase-design/pull/1132)
+
 ## 0.4.7
 
 `2025-02-05`

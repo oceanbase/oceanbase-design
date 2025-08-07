@@ -8,6 +8,13 @@ group: 基础组件
 
 ---
 
+## 0.4.14
+
+`2025-08-07`
+
+- 🆕 Modal 新增 `extra` 属性，用于设置底部额外内容。[#1130](https://github.com/oceanbase/oceanbase-design/pull/1121)
+- 🐞 修复 Tag 设置 `font-size` 样式不生效的问题。[#1121](https://github.com/oceanbase/oceanbase-design/pull/1121)
+
 ## 0.4.13
 
 `2025-07-27`
