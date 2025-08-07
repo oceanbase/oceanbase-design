@@ -28,6 +28,16 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
       },
       [`${componentCls}-footer`]: {
         marginTop: marginLG,
+        [`${componentCls}-footer-content`]: {
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          [`${componentCls}-footer-extra`]: {
+            marginInlineEnd: token.margin,
+            // make extra align to start
+            textAlign: 'start',
+          },
+        },
       },
     },
     /* Modal.Progress */

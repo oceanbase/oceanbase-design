@@ -94,7 +94,7 @@ function getRunnerArgs(transformerPath, parser = 'babylon', options = {}) {
     extensions: ['js', 'jsx', 'ts', 'tsx'].join(','),
     transform: transformerPath,
     ignorePattern: '**/node_modules',
-    ignoreConfig,
+    ignoreConfig: options.ignoreConfig || ignoreConfig,
   };
 
   return args;
@@ -257,6 +257,7 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
  * --cpus=1              // specify cpus cores to use
  * --disablePrettier     // disable prettier
  * --transformer=t1,t2   // specify target transformer
+ * --ignore-config       // ignore config file
  */
 
 async function bootstrap() {

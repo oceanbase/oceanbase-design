@@ -1,12 +1,23 @@
 import { Modal as AntModal } from 'antd';
-import type { ModalFuncProps, ModalProps } from 'antd/es/modal';
+import type { ModalFuncProps, ModalProps as AntModalProps } from 'antd/es/modal';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
+import Space from '../space';
 import { modal } from '../static-function';
 import useStyle from './style';
 
-const Modal = ({ footer, prefixCls: customizePrefixCls, className, ...restProps }: ModalProps) => {
+export interface ModalProps extends AntModalProps {
+  extra?: React.ReactNode;
+}
+
+const Modal = ({
+  extra,
+  footer,
+  prefixCls: customizePrefixCls,
+  className,
+  ...restProps
+}: ModalProps) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('modal', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
@@ -17,7 +28,18 @@ const Modal = ({ footer, prefixCls: customizePrefixCls, className, ...restProps 
       destroyOnClose={true}
       // convert false to null to hide .ant-modal-footer dom
       // ref: https://github.com/ant-design/ant-design/blob/master/components/modal/Modal.tsx#L105
-      footer={footer === false ? null : footer}
+      footer={
+        footer === false
+          ? null
+          : extra
+            ? originNode => (
+                <div className={`${prefixCls}-footer-content`}>
+                  <div className={`${prefixCls}-footer-extra`}>{extra}</div>
+                  <Space>{originNode}</Space>
+                </div>
+              )
+            : footer
+      }
       prefixCls={customizePrefixCls}
       className={modalCls}
       {...restProps}

@@ -11,6 +11,7 @@ const tests = [
   'existed-useToken',
   'top-identifier',
   'case-insensitive',
+  'antd-style',
 ];
 
 describe(testUnit, () => {

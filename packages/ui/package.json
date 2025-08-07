@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/ui",
-  "version": "0.4.16",
+  "version": "0.4.17",
   "description": "The UI library based on OceanBase Design",
   "keywords": [
     "oceanbase",
@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.24.0",
-    "@ant-design/pro-components": "^2.8.9",
+    "@ant-design/pro-components": "^2.8.10",
     "@antv/g6": "3.4.10",
     "@oceanbase/design": "workspace:^",
     "@oceanbase/icons": "workspace:^",
@@ -65,7 +65,7 @@
   },
   "devDependencies": {
     "@ant-design/pro-form": "^2.32.0",
-    "@ant-design/pro-layout": "^7.22.6"
+    "@ant-design/pro-layout": "^7.22.7"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
