@@ -45,8 +45,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2(react-dom@18.3.1)(react@18.3.1)
       '@rc-component/trigger':
-        specifier: ^2.3.0
-        version: 2.3.0(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^3.5.2
+        version: 3.5.2(react-dom@18.3.1)(react@18.3.1)
       '@stackblitz/sdk':
         specifier: ^1.11.0
         version: 1.11.0
@@ -6280,6 +6280,18 @@ packages:
     dependencies:
       '@babel/runtime': 7.28.2
 
+  /@rc-component/motion@1.1.4(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-rz3+kqQ05xEgIAB9/UKQZKCg5CO/ivGNU78QWYKVfptmbjJKynZO4KXJ7pJD3oMxE9aW94LD/N3eppXWeysTjw==}
+    peerDependencies:
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+    dependencies:
+      '@rc-component/util': 1.2.2(react-dom@18.3.1)(react@18.3.1)
+      classnames: 2.5.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: true
+
   /@rc-component/mutate-observer@1.1.0(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-QjrOsDXQusNwGZPf4/qRQasg7UFEj06XiCJ8iuiq/Io7CrHrgVi6Uuetw60WAMG1799v+aM8kyc+1L/GBbHSlw==}
     engines: {node: '>=8.x'}
@@ -6306,6 +6318,19 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
+  /@rc-component/portal@2.0.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-337ADhBfgH02S8OujUl33OT+8zVJ67eyuUq11j/dE71rXKYNihMsggW8R2VfI2aL3SciDp8gAFsmPVoPkxLUGw==}
+    engines: {node: '>=12.x'}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+    dependencies:
+      '@rc-component/util': 1.2.2(react-dom@18.3.1)(react@18.3.1)
+      classnames: 2.5.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: true
+
   /@rc-component/qrcode@1.0.0(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-L+rZ4HXP2sJ1gHMGHjsg9jlYBX/SLN2D6OxP9Zn3qgtpMWtO2vUfxVFwiogHpAIqs54FnALxraUy/BCO1yRIgg==}
     engines: {node: '>=8.x'}
@@ -6318,6 +6343,18 @@ packages:
       rc-util: 5.44.4(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+
+  /@rc-component/resize-observer@1.0.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-inR8Ka87OOwtrDJzdVp2VuEVlc5nK20lHolvkwFUnXwV50p+nLhKny1NvNTCKvBmS/pi/rTn/1Hvsw10sRRnXA==}
+    peerDependencies:
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+    dependencies:
+      '@rc-component/util': 1.2.2(react-dom@18.3.1)(react@18.3.1)
+      classnames: 2.5.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: true
 
   /@rc-component/tour@1.15.1(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-Tr2t7J1DKZUpfJuDZWHxyxWpfmj8EZrqSgyMZ+BCdvKZ6r1UDsfU46M/iWAAFBy961Ssfom2kv5f3UcjIL2CmQ==}
@@ -6366,6 +6403,34 @@ packages:
       rc-util: 5.44.4(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+
+  /@rc-component/trigger@3.5.2(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-LcJQa6G5RiGIlCz3TxkkwUjNlYpI5IGpcA5O35QzV8u+qzd0WzyyBB6aVPDkq7ZImGrLGU+jCTByM0q80HxPPA==}
+    engines: {node: '>=8.x'}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+    dependencies:
+      '@rc-component/motion': 1.1.4(react-dom@18.3.1)(react@18.3.1)
+      '@rc-component/portal': 2.0.0(react-dom@18.3.1)(react@18.3.1)
+      '@rc-component/resize-observer': 1.0.0(react-dom@18.3.1)(react@18.3.1)
+      '@rc-component/util': 1.2.2(react-dom@18.3.1)(react@18.3.1)
+      classnames: 2.5.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: true
+
+  /@rc-component/util@1.2.2(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-p3zQr9Wu8BKncqmuW23olzBoAFsN8PYMS9FaI4JwJLwknH7DvfHAr1fwbfl9aAWw4Jva64ucpenbgG4fznLUSw==}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+    dependencies:
+      is-mobile: 5.0.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-is: 18.3.1
+    dev: true
 
   /@reactflow/background@11.3.14(@types/react@18.3.23)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-Gewd7blEVT5Lh6jqrvOgd4G6Qk17eGKQfsDXgyRSqM+CTwDqRldG2LsWN4sNeno6sbqVIC2fZ+rAUBFA9ZEUDA==}
@@ -15465,6 +15530,10 @@ packages:
   /is-map@2.0.3:
     resolution: {integrity: sha512-1Qed0/Hr2m+YqxnM09CjA2d/i6YZNfF6R2oRAOj36eUdS6qIV/huPJNSEpKbupewFs+ZsJlxsjjPbc0/afW6Lw==}
     engines: {node: '>= 0.4'}
+
+  /is-mobile@5.0.0:
+    resolution: {integrity: sha512-Tz/yndySvLAEXh+Uk8liFCxOwVH6YutuR74utvOcu7I9Di+DwM0mtdPVZNaVvvBUM2OXxne/NhOs1zAO7riusQ==}
+    dev: true
 
   /is-negative-zero@2.0.3:
     resolution: {integrity: sha512-5KoIu2Ngpyek75jXodFvnafB6DJgr3u8uuK0LEZJjrU19DrMD3EVERaR8sjz8CCGgpZvxPl9SuE1GMVPFHx1mw==}
