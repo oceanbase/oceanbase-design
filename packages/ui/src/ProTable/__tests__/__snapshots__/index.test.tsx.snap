@@ -27,7 +27,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
             style="padding-left: 12px; padding-right: 12px;"
           >
             <div
-              class="ant-form-item"
+              class="ant-form-item ant-form-item-horizontal"
               style="flex-wrap: nowrap;"
             >
               <div
@@ -108,7 +108,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
             style="padding-left: 12px; padding-right: 12px;"
           >
             <div
-              class="ant-form-item"
+              class="ant-form-item ant-form-item-horizontal"
               style="flex-wrap: nowrap;"
             >
               <div
@@ -185,7 +185,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
             </div>
           </div>
           <div
-            class="ant-form-item ant-form-item-hidden"
+            class="ant-form-item ant-form-item-hidden ant-form-item-horizontal"
             style="flex-wrap: nowrap;"
           >
             <div
@@ -265,7 +265,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
             style="padding-left: 12px; padding-right: 12px; text-align: end;"
           >
             <div
-              class="ant-form-item ant-pro-query-filter-actions"
+              class="ant-form-item ant-pro-query-filter-actions ant-form-item-horizontal"
             >
               <div
                 class="ant-row ant-form-item-row"
@@ -923,7 +923,7 @@ exports[`ProTable > default pagination should work 1`] = `
             style="padding-left: 12px; padding-right: 12px;"
           >
             <div
-              class="ant-form-item"
+              class="ant-form-item ant-form-item-horizontal"
               style="flex-wrap: nowrap;"
             >
               <div
@@ -1004,7 +1004,7 @@ exports[`ProTable > default pagination should work 1`] = `
             style="padding-left: 12px; padding-right: 12px;"
           >
             <div
-              class="ant-form-item"
+              class="ant-form-item ant-form-item-horizontal"
               style="flex-wrap: nowrap;"
             >
               <div
@@ -1081,7 +1081,7 @@ exports[`ProTable > default pagination should work 1`] = `
             </div>
           </div>
           <div
-            class="ant-form-item ant-form-item-hidden"
+            class="ant-form-item ant-form-item-hidden ant-form-item-horizontal"
             style="flex-wrap: nowrap;"
           >
             <div
@@ -1161,7 +1161,7 @@ exports[`ProTable > default pagination should work 1`] = `
             style="padding-left: 12px; padding-right: 12px; text-align: end;"
           >
             <div
-              class="ant-form-item ant-pro-query-filter-actions"
+              class="ant-form-item ant-pro-query-filter-actions ant-form-item-horizontal"
             >
               <div
                 class="ant-row ant-form-item-row"
@@ -1891,7 +1891,7 @@ exports[`ProTable > innerBordered should work 1`] = `
             style="padding-left: 12px; padding-right: 12px;"
           >
             <div
-              class="ant-form-item"
+              class="ant-form-item ant-form-item-horizontal"
               style="flex-wrap: nowrap;"
             >
               <div
@@ -1972,7 +1972,7 @@ exports[`ProTable > innerBordered should work 1`] = `
             style="padding-left: 12px; padding-right: 12px;"
           >
             <div
-              class="ant-form-item"
+              class="ant-form-item ant-form-item-horizontal"
               style="flex-wrap: nowrap;"
             >
               <div
@@ -2049,7 +2049,7 @@ exports[`ProTable > innerBordered should work 1`] = `
             </div>
           </div>
           <div
-            class="ant-form-item ant-form-item-hidden"
+            class="ant-form-item ant-form-item-hidden ant-form-item-horizontal"
             style="flex-wrap: nowrap;"
           >
             <div
@@ -2129,7 +2129,7 @@ exports[`ProTable > innerBordered should work 1`] = `
             style="padding-left: 12px; padding-right: 12px; text-align: end;"
           >
             <div
-              class="ant-form-item ant-pro-query-filter-actions"
+              class="ant-form-item ant-pro-query-filter-actions ant-form-item-horizontal"
             >
               <div
                 class="ant-row ant-form-item-row"
@@ -2859,7 +2859,7 @@ exports[`ProTable > render 1`] = `
             style="padding-left: 12px; padding-right: 12px;"
           >
             <div
-              class="ant-form-item"
+              class="ant-form-item ant-form-item-horizontal"
               style="flex-wrap: nowrap;"
             >
               <div
@@ -2940,7 +2940,7 @@ exports[`ProTable > render 1`] = `
             style="padding-left: 12px; padding-right: 12px;"
           >
             <div
-              class="ant-form-item"
+              class="ant-form-item ant-form-item-horizontal"
               style="flex-wrap: nowrap;"
             >
               <div
@@ -3017,7 +3017,7 @@ exports[`ProTable > render 1`] = `
             </div>
           </div>
           <div
-            class="ant-form-item ant-form-item-hidden"
+            class="ant-form-item ant-form-item-hidden ant-form-item-horizontal"
             style="flex-wrap: nowrap;"
           >
             <div
@@ -3097,7 +3097,7 @@ exports[`ProTable > render 1`] = `
             style="padding-left: 12px; padding-right: 12px; text-align: end;"
           >
             <div
-              class="ant-form-item ant-pro-query-filter-actions"
+              class="ant-form-item ant-pro-query-filter-actions ant-form-item-horizontal"
             >
               <div
                 class="ant-row ant-form-item-row"
