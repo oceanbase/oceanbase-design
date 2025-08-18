@@ -1,6 +1,7 @@
 import {
   LAST_1_DAY,
   LAST_3_DAYS,
+  LAST_7_DAYS,
   LAST_MONTH,
   LAST_WEEK,
   LAST_YEAR,
@@ -39,6 +40,7 @@ const DateRanger = Object.assign(InternalDateRanger, {
   TODAY,
   LAST_1_DAY,
   LAST_3_DAYS,
+  LAST_7_DAYS,
   YESTERDAY,
   THIS_WEEK,
   LAST_WEEK,

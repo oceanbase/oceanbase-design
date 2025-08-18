@@ -182,6 +182,17 @@ export const LAST_3_DAYS: RangeOption = {
   ],
 };
 
+export const LAST_7_DAYS: RangeOption = {
+  label: '近 7 天',
+  enLabel: 'Last 7 Days',
+  rangeLabel: '7d',
+  name: 'LAST_7_DAYS',
+  range: (current: Moment | Dayjs = moment()) => [
+    current.clone().subtract(7, 'days'),
+    current.clone(),
+  ],
+};
+
 export const THIS_WEEK: RangeOption = {
   label: '近一周',
   enLabel: 'Nearly a week',
