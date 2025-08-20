@@ -1,16 +1,24 @@
-import React, { useEffect, useState, useImperativeHandle, useRef } from 'react';
+import React, { useEffect, useRef, useState, useImperativeHandle, useMemo } from 'react';
 import {
   Button,
   DatePicker,
   Divider,
   Dropdown,
+  Flex,
+  Menu,
   Radio,
   Space,
   Tooltip,
   theme,
 } from '@oceanbase/design';
 import type { TooltipProps } from '@oceanbase/design';
-import { LeftOutlined, RightOutlined, ZoomOutOutlined, SyncOutlined } from '@oceanbase/icons';
+import {
+  LeftOutlined,
+  RightOutlined,
+  ZoomOutOutlined,
+  SyncOutlined,
+  ArrowLeftOutlined,
+} from '@oceanbase/icons';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
@@ -46,10 +54,13 @@ import zhCN from './locale/zh-CN';
 import enUS from './locale/en-US';
 import './index.less';
 import { useClickAway } from 'ahooks';
+import { useLocalStorageState } from '@oceanbase/util';
 
 export type RangeName = 'customize' | string;
 
 export type RangeValue = [Moment, Moment] | [Dayjs, Dayjs] | [] | null;
+
+export type RangeValueFormat = [string, string] | [] | null;
 
 export type RangeDateValue = {
   name: RangeName;
@@ -67,6 +78,11 @@ export interface DateRangerProps
   hasSync?: boolean;
   hasForward?: boolean;
   hasZoomOut?: boolean;
+  history?:
+    | boolean
+    | {
+        capacity: number;
+      };
   // 是否在选项面板中展示Tag
   hasTagInPicker?: boolean;
   // 时间选择提示
@@ -95,6 +111,8 @@ export interface DateRangerProps
   locale?: any;
 }
 
+const DefaultMaxHistoryCapacity = 20;
+
 const prefix = getPrefix('date-ranger');
 
 const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
@@ -122,6 +140,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     hideYear = false,
     hideSecond = false,
     autoCalcRange = false,
+    history: historyProp = true,
     onChange = noop,
     disabledDate,
     locale,
@@ -178,6 +197,37 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   // 没有 selects 时，回退到普通 RangePicker, 当前时间选项为自定义时，应该显示 RangePicker
   const [isPlay, setIsPlay] = useState(rangeName !== CUSTOMIZE);
 
+  const history = useMemo(() => {
+    if (historyProp) {
+      return {
+        capacity:
+          typeof historyProp === 'object' ? historyProp.capacity : DefaultMaxHistoryCapacity,
+      };
+    }
+    return false;
+  }, [historyProp]);
+  const [rangeHistory, setRangeHistory] = useLocalStorageState<RangeValueFormat[]>(
+    'ob-design-date-ranger-local-storage-range-history-state',
+    { defaultValue: [], listenStorageChange: true }
+  );
+
+  const updateRangeHistory = (range: RangeValue) => {
+    if (range.length < 2 || !history) {
+      return;
+    }
+    const formattedValue: RangeValueFormat = [
+      range[0].format(YEAR_DATE_TIME_SECOND_FORMAT_CN),
+      range[1].format(YEAR_DATE_TIME_SECOND_FORMAT_CN),
+    ];
+    const updatedValue = [
+      formattedValue,
+      ...(rangeHistory.length >= history.capacity
+        ? rangeHistory.slice(0, history.capacity - 1)
+        : rangeHistory),
+    ];
+    setRangeHistory(updatedValue);
+  };
+
   const compare = (m1: RangeValue, m2: RangeValue) => {
     if (Array.isArray(m1) && !Array.isArray(m2)) return false;
     if (Array.isArray(m2) && !Array.isArray(m1)) return false;
@@ -222,6 +272,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   const rangeChange = (range: RangeValue) => {
     setInnerValue(range);
     onChange(range);
+    updateRangeHistory(range);
   };
 
   const datePickerChange = (range: RangeValue) => {
@@ -377,7 +428,45 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   className={classNames(`${prefix}-dropdown-picker`, overlayClassName)}
                   style={overlayStyle}
                 >
-                  {originNode}
+                  <Flex vertical justify="space-between">
+                    <div className="options">{originNode}</div>
+                    {history && (
+                      <div className="history">
+                        <Button type="link" style={{ paddingLeft: 8, color: token.colorTextBase }}>
+                          <ArrowLeftOutlined color={token.colorTextLabel} />
+                          历史记录
+                        </Button>
+                        <Menu
+                          items={rangeHistory.map(range => {
+                            return {
+                              key: String(range),
+                              label: (
+                                <Flex key={String(range)} vertical>
+                                  <span>
+                                    {(isMoment ? moment(range[0]) : dayjs(range[0])).format(
+                                      YEAR_DATE_TIME_SECOND_FORMAT_CN
+                                    )}
+                                    ~
+                                  </span>
+                                  <span>
+                                    {(isMoment ? moment(range[1]) : dayjs(range[1])).format(
+                                      YEAR_DATE_TIME_SECOND_FORMAT_CN
+                                    )}
+                                  </span>
+                                </Flex>
+                              ),
+                            };
+                          })}
+                        />
+                      </div>
+                    )}
+                    {history && (
+                      <Button type="link" style={{ width: 'max-content' }}>
+                        历史记录
+                        <RightOutlined />
+                      </Button>
+                    )}
+                  </Flex>
                   <Divider type="vertical" style={{ height: 'auto', margin: '0px 4px 0px 0px' }} />
                   <InternalPickerPanel
                     defaultValue={innerValue || []}
