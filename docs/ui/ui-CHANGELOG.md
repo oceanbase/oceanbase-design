@@ -8,6 +8,14 @@ group: 业务组件
 
 ---
 
+## 0.4.18
+
+`2025-08-21`
+
+- DateRanger
+  - ⭐️ DateRanger 新增 `近 7 天` 的快捷选项。[#1142](https://github.com/oceanbase/oceanbase-design/pull/1142) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - 🐞 修复 DateRanger 在连续点击时面板会频繁开启、关闭的问题。[#1148](https://github.com/oceanbase/oceanbase-design/pull/1148) [@wzc520pyfm](https://github.com/wzc520pyfm)
+
 ## 0.4.17
 
 `2025-08-07`
