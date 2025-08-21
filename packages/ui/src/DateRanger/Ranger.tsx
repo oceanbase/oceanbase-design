@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useImperativeHandle } from 'react';
+import React, { useEffect, useState, useImperativeHandle, useRef } from 'react';
 import {
   Button,
   DatePicker,
@@ -45,6 +45,7 @@ import InternalPickerPanel from './PickerPanel';
 import zhCN from './locale/zh-CN';
 import enUS from './locale/en-US';
 import './index.less';
+import { useClickAway } from 'ahooks';
 
 export type RangeName = 'customize' | string;
 
@@ -170,10 +171,9 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   const [open, setOpen] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [backRadioFocused, setBackRadioFocused] = useState(false);
-  const refState = useRef({
-    tooltipOpen,
-  });
-  refState.current.tooltipOpen = tooltipOpen;
+  const rangeRef = useRef(null);
+  const popRef = useRef(null);
+  const labelRef = useRef(null);
 
   // 没有 selects 时，回退到普通 RangePicker, 当前时间选项为自定义时，应该显示 RangePicker
   const [isPlay, setIsPlay] = useState(rangeName !== CUSTOMIZE);
@@ -183,6 +183,15 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     if (Array.isArray(m2) && !Array.isArray(m1)) return false;
     return value[0] === innerValue[0] || value[1] === innerValue[1];
   };
+
+  useClickAway(() => {
+    closeTooltip();
+  }, [
+    // 有range输入框时才将其ref引用加入依赖（即极简模式不加入）
+    ...(!simpleMode || !isPlay ? [rangeRef] : []),
+    popRef,
+    labelRef,
+  ]);
 
   useEffect(() => {
     if (isNil(value) && isNil(innerValue)) return;
@@ -354,9 +363,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
             getPopupContainer={getPopupContainer}
             // 关闭后进行销毁，才可以将 Tooltip 进行同步关闭
             destroyOnHidden={true}
-            // 存在缓存，会锁死里面的值
             onOpenChange={o => {
-              if (o === false && refState.current.tooltipOpen) {
+              if (o === false && tooltipOpen) {
                 return;
               }
 
@@ -365,6 +373,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
             popupRender={originNode => {
               return (
                 <div
+                  ref={popRef}
                   className={classNames(`${prefix}-dropdown-picker`, overlayClassName)}
                   style={overlayStyle}
                 >
@@ -401,11 +410,6 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
               selectable: true,
               defaultSelectedKeys: [rangeName],
               onClick: ({ key, domEvent }) => {
-                if (key === CUSTOMIZE) {
-                  refState.current.tooltipOpen = true;
-                } else {
-                  refState.current.tooltipOpen = false;
-                }
                 const selected = selects.find(_item => _item.name === key);
                 // 存在快捷选项切换为极简模式
                 if (selected?.range) {
@@ -433,7 +437,14 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                 }),
             }}
           >
-            <Space size={0}>
+            <Space
+              ref={labelRef}
+              size={0}
+              onClick={() => {
+                setOpen(true);
+                setTooltipOpen(true);
+              }}
+            >
               <span
                 className={`${prefix}-label`}
                 style={{
@@ -447,8 +458,10 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
           </Dropdown>
           {(!simpleMode || !isPlay) && (
             <span
+              ref={rangeRef}
               onClick={() => {
                 setOpen(true);
+                setTooltipOpen(true);
               }}
             >
               {/* @ts-ignore  */}
