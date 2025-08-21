@@ -10,7 +10,7 @@ exports[`ConfigProvider form > ConfigProvider form.requiredMark should be \`opti
     type="text"
   />
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-vertical"
   >
     <div
       class="ant-row ant-form-item-row"
@@ -82,7 +82,7 @@ exports[`ConfigProvider form > ConfigProvider form.requiredMark should be \`opti
     </div>
   </div>
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-vertical"
   >
     <div
       class="ant-row ant-form-item-row"

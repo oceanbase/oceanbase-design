@@ -5,7 +5,7 @@ exports[`Form > Form hideRequiredMark should be priority over ConfigProvider for
   class="ant-form ant-form-horizontal ant-form-hide-required-mark"
 >
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-horizontal"
   >
     <div
       class="ant-row ant-form-item-row"
@@ -44,7 +44,7 @@ exports[`Form > Form hideRequiredMark should be priority over ConfigProvider for
     </div>
   </div>
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-horizontal"
   >
     <div
       class="ant-row ant-form-item-row"
@@ -89,7 +89,7 @@ exports[`Form > requiredMark could be changed 1`] = `
   class="ant-form ant-form-horizontal"
 >
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-horizontal"
   >
     <div
       class="ant-row ant-form-item-row"
@@ -128,7 +128,7 @@ exports[`Form > requiredMark could be changed 1`] = `
     </div>
   </div>
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-horizontal"
   >
     <div
       class="ant-row ant-form-item-row"
@@ -173,7 +173,7 @@ exports[`Form > requiredMark could be changed by ConfigProvider 1`] = `
   class="ant-form ant-form-horizontal"
 >
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-horizontal"
   >
     <div
       class="ant-row ant-form-item-row"
@@ -212,7 +212,7 @@ exports[`Form > requiredMark could be changed by ConfigProvider 1`] = `
     </div>
   </div>
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-horizontal"
   >
     <div
       class="ant-row ant-form-item-row"
@@ -257,7 +257,7 @@ exports[`Form > requiredMark should be optional by default 1`] = `
   class="ant-form ant-form-horizontal"
 >
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-horizontal"
   >
     <div
       class="ant-row ant-form-item-row"
@@ -296,7 +296,7 @@ exports[`Form > requiredMark should be optional by default 1`] = `
     </div>
   </div>
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-horizontal"
   >
     <div
       class="ant-row ant-form-item-row"

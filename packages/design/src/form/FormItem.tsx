@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import type { ReactNode } from 'react';
 import { Form as AntForm } from 'antd';
+import { FormItemLayout } from 'antd/es/form/Form';
 import { FormContext } from 'antd/es/form/context';
 import type { FormItemProps as AntFormItemProps } from 'antd/es/form';
 import { isPlainObject } from 'lodash';
@@ -32,7 +33,7 @@ const FormItem: CompoundedComponent = ({
   label,
   tooltip,
   action,
-  layout,
+  layout: externalLayout,
   prefixCls: customizePrefixCls,
   className,
   ...restProps
@@ -43,7 +44,14 @@ const FormItem: CompoundedComponent = ({
   const { wrapSSR } = useStyle(prefixCls);
   const formItemCls = classNames(className);
 
-  const { vertical } = useContext(FormContext);
+  const {
+    layout: contextLayout,
+    // compatible with vertical for version < antd 27.0.0
+    // ref: https://github.com/ant-design/ant-design/pull/54611
+    // @ts-ignore
+    vertical,
+  } = useContext(FormContext);
+  const layout = externalLayout || (contextLayout as FormItemLayout);
 
   const typeList = useTooltipTypeList();
   // tooltip config
@@ -64,7 +72,7 @@ const FormItem: CompoundedComponent = ({
     <AntFormItem
       layout={layout}
       label={
-        action && (vertical || layout === 'vertical') ? (
+        action && (layout === 'vertical' || vertical) ? (
           <>
             {label}
             {action && <span className={`${prefixCls}-item-action`}>{action}</span>}

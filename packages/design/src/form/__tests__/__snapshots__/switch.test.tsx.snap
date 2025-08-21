@@ -5,7 +5,7 @@ exports[`Form.Item with Switch > dynamic Switch 1`] = `
   class="ant-form ant-form-horizontal"
 >
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-horizontal"
   >
     <div
       class="ant-row ant-form-item-row"
@@ -65,7 +65,7 @@ exports[`Form.Item with Switch > nested Switch 1`] = `
   class="ant-form ant-form-horizontal"
 >
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-horizontal"
   >
     <div
       class="ant-row ant-form-item-row"
@@ -133,7 +133,7 @@ exports[`Form.Item with Switch > normal Switch 1`] = `
   class="ant-form ant-form-horizontal"
 >
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-horizontal"
   >
     <div
       class="ant-row ant-form-item-row"
@@ -193,7 +193,7 @@ exports[`Form.Item with Switch > renderProps Switch 1`] = `
   class="ant-form ant-form-horizontal"
 >
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-horizontal"
   >
     <div
       class="ant-row ant-form-item-row"
@@ -236,7 +236,7 @@ exports[`Form.Item with Switch > sub component Switch 1`] = `
   class="ant-form ant-form-horizontal"
 >
   <div
-    class="ant-form-item"
+    class="ant-form-item ant-form-item-horizontal"
   >
     <div
       class="ant-row ant-form-item-row"
