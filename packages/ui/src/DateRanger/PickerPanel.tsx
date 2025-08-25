@@ -144,7 +144,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
       return a?.valueOf() - b?.valueOf();
     })
     .map(item => {
-      return item.format(DATE_FORMAT);
+      return item?.format(DATE_FORMAT);
     });
 
   const [form] = Form.useForm();
