@@ -79,7 +79,7 @@
     "dumi": "^2.4.21",
     "eslint-plugin-jest": "^29.0.1",
     "execa": "^5.1.1",
-    "father": "^4.6.2",
+    "father": "^4.6.3",
     "fs-extra": "^11.3.1",
     "gh-pages": "^6.3.0",
     "glob": "^11.0.3",
