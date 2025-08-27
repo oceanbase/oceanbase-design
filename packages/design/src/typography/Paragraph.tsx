@@ -11,6 +11,13 @@ export * from 'antd/es/typography/Paragraph';
 
 export interface ParagraphProps extends AntParagraphProps {}
 
+type CompoundedComponent = React.ForwardRefExoticComponent<
+  ParagraphProps & React.RefAttributes<HTMLElement>
+> & {
+  /** @internal */
+  __ANT_TYPOGRAPHY: boolean;
+};
+
 const Paragraph = React.forwardRef<HTMLElement, ParagraphProps>(
   ({ editable, prefixCls: customizePrefixCls, className, children, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -30,10 +37,12 @@ const Paragraph = React.forwardRef<HTMLElement, ParagraphProps>(
       </AntParagraph>
     );
   }
-);
+) as CompoundedComponent;
 
 if (process.env.NODE_ENV !== 'production') {
   Paragraph.displayName = AntParagraph.displayName;
 }
+
+Paragraph.__ANT_TYPOGRAPHY = true;
 
 export default Paragraph;

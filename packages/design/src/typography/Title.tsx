@@ -11,6 +11,13 @@ export * from 'antd/es/typography/Title';
 
 export interface TitleProps extends AntTitleProps {}
 
+type CompoundedComponent = React.ForwardRefExoticComponent<
+  TitleProps & React.RefAttributes<HTMLElement>
+> & {
+  /** @internal */
+  __ANT_TYPOGRAPHY: boolean;
+};
+
 const Title = React.forwardRef<HTMLElement, TitleProps>(
   ({ editable, prefixCls: customizePrefixCls, className, children, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -30,10 +37,12 @@ const Title = React.forwardRef<HTMLElement, TitleProps>(
       </AntTitle>
     );
   }
-);
+) as CompoundedComponent;
 
 if (process.env.NODE_ENV !== 'production') {
   Title.displayName = AntTitle.displayName;
 }
+
+Title.__ANT_TYPOGRAPHY = true;
 
 export default Title;
