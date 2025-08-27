@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: 'Inter';
-  /* load priority: local font > remote font > self-hosting font */
+  /* load priority: local font > self-hosting font > remote font */
   src:
     local('Inter'),
+    url('./fonts/Inter.woff2') format('woff2'),
     url('https://mdn.alipayobjects.com/huamei_fhnyvh/afts/file/A*2aG4RJIdUGYAAAAAAAAAAAAADmfOAQ/Inter.woff2')
-      format('woff2'),
-    url('./fonts/Inter.woff2') format('woff2');
+      format('woff2');
   /* load strategy: use default font as fallback */
   font-display: swap;
 }
@@ -16,9 +16,9 @@
   font-family: 'Consolas';
   src:
     local('Consolas'),
+    url('./fonts/Consolas.woff2') format('woff2'),
     url('https://mdn.alipayobjects.com/huamei_fhnyvh/afts/file/A*R8bMTqAdGWgAAAAAAAAAAAAADmfOAQ/Consolas.woff2')
-      format('woff2'),
-    url('./fonts/Consolas.woff2') format('woff2');
+      format('woff2');
   font-display: swap;
 }
 
@@ -26,9 +26,9 @@
   font-family: 'Helvetica Neue';
   src:
     local('Helvetica Neue'),
+    url('./fonts/HelveticaNeue.woff2') format('woff2'),
     url('https://mdn.alipayobjects.com/huamei_fhnyvh/afts/file/A*3EzqR6aYJMkAAAAAAAAAAAAADmfOAQ/HelveticaNeue.woff2')
-      format('woff2'),
-    url('./fonts/HelveticaNeue.woff2') format('woff2');
+      format('woff2');
   font-display: swap;
 }
 
