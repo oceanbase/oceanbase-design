@@ -56,8 +56,6 @@ export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
       [`${componentCls}-item-container`]: {
         [`${componentCls}-item-content`]: {
           paddingRight: 12,
-          // 为了保证内部的 Text ellipsis 生效
-          overflow: 'hidden',
           [`${typographyComponentCls}-edit-content`]: {
             insetInlineStart: 0,
             marginTop: 0,

@@ -11,6 +11,13 @@ export * from 'antd/es/typography/Text';
 
 export interface TextProps extends AntTextProps {}
 
+type CompoundedComponent = React.ForwardRefExoticComponent<
+  TextProps & React.RefAttributes<HTMLSpanElement>
+> & {
+  /** @internal */
+  __ANT_TYPOGRAPHY: boolean;
+};
+
 const Text = React.forwardRef<HTMLSpanElement, TextProps>(
   ({ editable, prefixCls: customizePrefixCls, className, children, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -30,10 +37,12 @@ const Text = React.forwardRef<HTMLSpanElement, TextProps>(
       </AntText>
     );
   }
-);
+) as CompoundedComponent;
 
 if (process.env.NODE_ENV !== 'production') {
   Text.displayName = AntText.displayName;
 }
+
+Text.__ANT_TYPOGRAPHY = true;
 
 export default Text;

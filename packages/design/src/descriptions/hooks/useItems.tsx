@@ -1,4 +1,4 @@
-import React, { isValidElement } from 'react';
+import React, { isValidElement, ReactElement } from 'react';
 import warning from 'antd/es/_util/warning';
 import toArray from 'rc-util/lib/Children/toArray';
 import type { TooltipPlacement } from 'antd/es/tooltip';
@@ -25,6 +25,7 @@ const children2Items = (children?: React.ReactNode) => {
 
 function convertItem(props: DescriptionsItemType, bordered?: boolean) {
   const { children: itemChildren, contentProps, ...restItemProps } = props;
+  const itemChildrenType = (itemChildren as ReactElement)?.type as any;
   const defaultEllipsis = {
     tooltip: {
       placement: 'topLeft' as TooltipPlacement,
@@ -34,30 +35,31 @@ function convertItem(props: DescriptionsItemType, bordered?: boolean) {
   const { ellipsis = defaultEllipsis, editable, ...restContentProps } = contentProps || {};
   return {
     ...restItemProps,
-    // 仅无边框时定制 children
-    children: bordered ? (
-      itemChildren
-    ) : (
-      <Typography.Text
-        {...restContentProps}
-        ellipsis={getEllipsisConfig(ellipsis, itemChildren)}
-        editable={
-          // disable autoSize by default to avoid over height
-          typeof editable === 'object'
-            ? {
-                autoSize: false,
-                ...editable,
-              }
-            : editable === true
+    // 无边框并且子元素非 Typography 时外面包一层 Typography.Text，以实现自动省略
+    children:
+      bordered || itemChildrenType?.__ANT_TYPOGRAPHY ? (
+        itemChildren
+      ) : (
+        <Typography.Text
+          {...restContentProps}
+          ellipsis={getEllipsisConfig(ellipsis, itemChildren)}
+          editable={
+            // disable autoSize by default to avoid over height
+            typeof editable === 'object'
               ? {
                   autoSize: false,
+                  ...editable,
                 }
-              : editable
-        }
-      >
-        {itemChildren}
-      </Typography.Text>
-    ),
+              : editable === true
+                ? {
+                    autoSize: false,
+                  }
+                : editable
+          }
+        >
+          {itemChildren}
+        </Typography.Text>
+      ),
   };
 }
 
