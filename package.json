@@ -111,7 +111,7 @@
     "react-fast-marquee": "^1.6.5",
     "react-intl": "^7.1.11",
     "react-markdown": "^10.1.0",
-    "react-router-dom": "^7.8.1",
+    "react-router-dom": "^7.8.2",
     "runscript": "^2.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
