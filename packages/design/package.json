@@ -32,8 +32,7 @@
   ],
   "sideEffects": [
     "**/*.less",
-    "**/*.css",
-    "es/index.js"
+    "**/*.css"
   ],
   "scripts": {
     "build": "father build && cp src/style/reset.css dist/"
