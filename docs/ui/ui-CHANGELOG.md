@@ -8,6 +8,15 @@ group: 业务组件
 
 ---
 
+## 0.4.19
+
+`2025-08-29`
+
+- DateRanger
+  - ⭐️ DateRanger 新增 `近 30 天` 的快捷选项。[#1160](https://github.com/oceanbase/oceanbase-design/pull/1160) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🐞 修复 DateRanger `defaultValue` 为空时页面崩溃的问题。[#1152](https://github.com/oceanbase/oceanbase-design/pull/1152) [@linhf123](https://github.com/linhf123)
+- 🐞 修复 `sideEffects` 配置问题，以支持 tree shaking。[#1161](https://github.com/oceanbase/oceanbase-design/pull/1161)
+
 ## 0.4.18
 
 `2025-08-21`
