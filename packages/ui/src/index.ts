@@ -103,3 +103,5 @@ export type {
   ITaskMgrQueue,
   TaskMgrID,
 } from './BackgroundTaskManager';
+
+export { default as Filter } from './Filter';
