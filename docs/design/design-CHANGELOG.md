@@ -13,6 +13,7 @@ group: 基础组件
 `2025-08-29`
 
 - ⭐️ 优化自定义字体的加载顺序为 `系统字体 -> 自托管字体 -> 在线字体`，避免发起网络请求。[#1158](https://github.com/oceanbase/oceanbase-design/pull/1158)
+- 🐞 修复 Descriptions.Item 子元素为 Typography 时复制 tooltip 位置不正确的问题。[#1159](https://github.com/oceanbase/oceanbase-design/pull/1159)
 - 🐞 修复 `sideEffects` 配置问题，以支持 tree shaking。[#1161](https://github.com/oceanbase/oceanbase-design/pull/1161)
 
 ## 0.4.15
