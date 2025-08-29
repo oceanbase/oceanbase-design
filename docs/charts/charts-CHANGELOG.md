@@ -8,6 +8,12 @@ group: 可视化图表
 
 ---
 
+## 0.4.8
+
+`2025-08-29`
+
+- 🐞 修复 `sideEffects` 配置问题，以支持 tree shaking。[#1161](https://github.com/oceanbase/oceanbase-design/pull/1161)
+
 ## 0.4.6
 
 `2025-07-01`

@@ -11,6 +11,13 @@ export * from 'antd/es/typography/Link';
 
 export interface LinkProps extends AntLinkProps {}
 
+type CompoundedComponent = React.ForwardRefExoticComponent<
+  LinkProps & React.RefAttributes<HTMLElement>
+> & {
+  /** @internal */
+  __ANT_TYPOGRAPHY: boolean;
+};
+
 const Link = React.forwardRef<HTMLElement, LinkProps>(
   ({ editable, prefixCls: customizePrefixCls, className, children, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -30,10 +37,12 @@ const Link = React.forwardRef<HTMLElement, LinkProps>(
       </AntLink>
     );
   }
-);
+) as CompoundedComponent;
 
 if (process.env.NODE_ENV !== 'production') {
   Link.displayName = AntLink.displayName;
 }
+
+Link.__ANT_TYPOGRAPHY = true;
 
 export default Link;
