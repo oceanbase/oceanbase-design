@@ -22,7 +22,7 @@ import {
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
-import { findIndex, isNil, noop, omit } from 'lodash';
+import { findIndex, isEqual as _isEqual, isNil, noop, omit } from 'lodash';
 import type { Moment } from 'moment';
 import moment from 'moment';
 import classNames from 'classnames';
@@ -190,6 +190,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   const [open, setOpen] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [backRadioFocused, setBackRadioFocused] = useState(false);
+  const [historyMenuVisible, setHistoryMenuVisible] = useState(false);
   const rangeRef = useRef(null);
   const popRef = useRef(null);
   const labelRef = useRef(null);
@@ -215,16 +216,22 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     if (range.length < 2 || !history) {
       return;
     }
+
     const formattedValue: RangeValueFormat = [
       range[0].format(YEAR_DATE_TIME_SECOND_FORMAT_CN),
       range[1].format(YEAR_DATE_TIME_SECOND_FORMAT_CN),
     ];
-    const updatedValue = [
-      formattedValue,
-      ...(rangeHistory.length >= history.capacity
-        ? rangeHistory.slice(0, history.capacity - 1)
-        : rangeHistory),
-    ];
+
+    if (rangeHistory.find(item => _isEqual(item, formattedValue))) {
+      return;
+    }
+
+    const updatedValue = [formattedValue, ...rangeHistory];
+
+    if (updatedValue.length > history.capacity) {
+      updatedValue.splice(0, history.capacity);
+    }
+
     setRangeHistory(updatedValue);
   };
 
@@ -429,14 +436,29 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   style={overlayStyle}
                 >
                   <Flex vertical justify="space-between">
-                    <div className="options">{originNode}</div>
-                    {history && (
+                    {!historyMenuVisible && <div className="options">{originNode}</div>}
+                    {history && historyMenuVisible && (
                       <div className="history">
-                        <Button type="link" style={{ paddingLeft: 8, color: token.colorTextBase }}>
+                        <Button
+                          type="link"
+                          style={{ paddingLeft: 8, color: token.colorTextBase }}
+                          onClick={e => {
+                            setHistoryMenuVisible(false);
+                            e.stopPropagation();
+                          }}
+                        >
                           <ArrowLeftOutlined color={token.colorTextLabel} />
                           历史记录
                         </Button>
                         <Menu
+                          onClick={({ key: rangeString }) => {
+                            const vList = rangeString.split(',').map(v => v.trim());
+                            rangeChange(
+                              vList.map(v => {
+                                return isMoment ? moment(v) : dayjs(v);
+                              }) as RangeValue
+                            );
+                          }}
                           items={rangeHistory.map(range => {
                             return {
                               key: String(range),
@@ -460,8 +482,15 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                         />
                       </div>
                     )}
-                    {history && (
-                      <Button type="link" style={{ width: 'max-content' }}>
+                    {history && !historyMenuVisible && (
+                      <Button
+                        type="link"
+                        style={{ width: 'max-content' }}
+                        onClick={e => {
+                          setHistoryMenuVisible(true);
+                          e.stopPropagation();
+                        }}
+                      >
                         历史记录
                         <RightOutlined />
                       </Button>
