@@ -75,7 +75,7 @@
     "classnames": "^2.5.1",
     "copy-to-clipboard": "^3.3.3",
     "cross-env": "^10.0.0",
-    "dayjs": "^1.11.13",
+    "dayjs": "^1.11.18",
     "dumi": "^2.4.21",
     "eslint-plugin-jest": "^29.0.1",
     "execa": "^5.1.1",
