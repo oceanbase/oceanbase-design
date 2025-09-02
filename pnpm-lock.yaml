@@ -144,8 +144,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       jest-environment-jsdom:
-        specifier: ^30.0.4
-        version: 30.0.4
+        specifier: ^30.1.2
+        version: 30.1.2
       jsonml-to-react-element:
         specifier: ^1.1.11
         version: 1.1.11
@@ -1777,7 +1777,7 @@ packages:
     resolution: {integrity: sha512-K1A6z8tS3XsmCMM86xoWdn7Fkdn9m6RSVtocUrJYIwZnFVkng/PvkEoWtOWmP+Scc6saYWHWZYbndEEXxl24jw==}
     dependencies:
       '@csstools/css-calc': 2.1.4(@csstools/css-parser-algorithms@3.0.5)(@csstools/css-tokenizer@3.0.4)
-      '@csstools/css-color-parser': 3.0.10(@csstools/css-parser-algorithms@3.0.5)(@csstools/css-tokenizer@3.0.4)
+      '@csstools/css-color-parser': 3.1.0(@csstools/css-parser-algorithms@3.0.5)(@csstools/css-tokenizer@3.0.4)
       '@csstools/css-parser-algorithms': 3.0.5(@csstools/css-tokenizer@3.0.4)
       '@csstools/css-tokenizer': 3.0.4
       lru-cache: 10.4.3
@@ -3366,8 +3366,8 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
 
-  /@csstools/color-helpers@5.0.2:
-    resolution: {integrity: sha512-JqWH1vsgdGcw2RR6VliXXdA0/59LttzlU8UlRT/iUUsEeWfYq8I+K0yhihEUTTHLRm1EXvpsCx3083EU15ecsA==}
+  /@csstools/color-helpers@5.1.0:
+    resolution: {integrity: sha512-S11EXWJyy0Mz5SYvRmY8nJYTFFd1LCNV+7cXyAgQtOOuzb4EsgfqDufL+9esx72/eLhsRdGZwaldu/h+E4t4BA==}
     engines: {node: '>=18'}
     dev: true
 
@@ -3382,14 +3382,14 @@ packages:
       '@csstools/css-tokenizer': 3.0.4
     dev: true
 
-  /@csstools/css-color-parser@3.0.10(@csstools/css-parser-algorithms@3.0.5)(@csstools/css-tokenizer@3.0.4):
-    resolution: {integrity: sha512-TiJ5Ajr6WRd1r8HSiwJvZBiJOqtH86aHpUjq5aEKWHiII2Qfjqd/HCWKPOW8EP4vcspXbHnXrwIDlu5savQipg==}
+  /@csstools/css-color-parser@3.1.0(@csstools/css-parser-algorithms@3.0.5)(@csstools/css-tokenizer@3.0.4):
+    resolution: {integrity: sha512-nbtKwh3a6xNVIp/VRuXV64yTKnb1IjTAEEh3irzS+HkKjAOYLTGNb9pmVNntZ8iVBHcWDA2Dof0QtPgFI1BaTA==}
     engines: {node: '>=18'}
     peerDependencies:
       '@csstools/css-parser-algorithms': ^3.0.5
       '@csstools/css-tokenizer': ^3.0.4
     dependencies:
-      '@csstools/color-helpers': 5.0.2
+      '@csstools/color-helpers': 5.1.0
       '@csstools/css-calc': 2.1.4(@csstools/css-parser-algorithms@3.0.5)(@csstools/css-tokenizer@3.0.4)
       '@csstools/css-parser-algorithms': 3.0.5(@csstools/css-tokenizer@3.0.4)
       '@csstools/css-tokenizer': 3.0.4
@@ -4903,8 +4903,8 @@ packages:
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
     dev: true
 
-  /@jest/environment-jsdom-abstract@30.0.4(jsdom@26.1.0):
-    resolution: {integrity: sha512-pUKfqgr5Nki9kZ/3iV+ubDsvtPq0a0oNL6zqkKLM1tPQI8FBJeuWskvW1kzc5pOvqlgpzumYZveJ4bxhANY0hg==}
+  /@jest/environment-jsdom-abstract@30.1.2(jsdom@26.1.0):
+    resolution: {integrity: sha512-u8kTh/ZBl97GOmnGJLYK/1GuwAruMC4hoP6xuk/kwltmVWsA9u/6fH1/CsPVGt2O+Wn2yEjs8n1B1zZJ62Cx0w==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
     peerDependencies:
       canvas: ^3.0.0
@@ -4913,24 +4913,24 @@ packages:
       canvas:
         optional: true
     dependencies:
-      '@jest/environment': 30.0.4
-      '@jest/fake-timers': 30.0.4
-      '@jest/types': 30.0.1
+      '@jest/environment': 30.1.2
+      '@jest/fake-timers': 30.1.2
+      '@jest/types': 30.0.5
       '@types/jsdom': 21.1.7
       '@types/node': 24.3.0
-      jest-mock: 30.0.2
-      jest-util: 30.0.2
+      jest-mock: 30.0.5
+      jest-util: 30.0.5
       jsdom: 26.1.0
     dev: true
 
-  /@jest/environment@30.0.4:
-    resolution: {integrity: sha512-5NT+sr7ZOb8wW7C4r7wOKnRQ8zmRWQT2gW4j73IXAKp5/PX1Z8MCStBLQDYfIG3n1Sw0NRfYGdp0iIPVooBAFQ==}
+  /@jest/environment@30.1.2:
+    resolution: {integrity: sha512-N8t1Ytw4/mr9uN28OnVf0SYE2dGhaIxOVYcwsf9IInBKjvofAjbFRvedvBBlyTYk2knbJTiEjEJ2PyyDIBnd9w==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
     dependencies:
-      '@jest/fake-timers': 30.0.4
-      '@jest/types': 30.0.1
+      '@jest/fake-timers': 30.1.2
+      '@jest/types': 30.0.5
       '@types/node': 24.3.0
-      jest-mock: 30.0.2
+      jest-mock: 30.0.5
     dev: true
 
   /@jest/expect-utils@30.0.5:
@@ -4940,16 +4940,16 @@ packages:
       '@jest/get-type': 30.0.1
     dev: true
 
-  /@jest/fake-timers@30.0.4:
-    resolution: {integrity: sha512-qZ7nxOcL5+gwBO6LErvwVy5k06VsX/deqo2XnVUSTV0TNC9lrg8FC3dARbi+5lmrr5VyX5drragK+xLcOjvjYw==}
+  /@jest/fake-timers@30.1.2:
+    resolution: {integrity: sha512-Beljfv9AYkr9K+ETX9tvV61rJTY706BhBUtiaepQHeEGfe0DbpvUA5Z3fomwc5Xkhns6NWrcFDZn+72fLieUnA==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
     dependencies:
-      '@jest/types': 30.0.1
+      '@jest/types': 30.0.5
       '@sinonjs/fake-timers': 13.0.5
       '@types/node': 24.3.0
-      jest-message-util: 30.0.2
-      jest-mock: 30.0.2
-      jest-util: 30.0.2
+      jest-message-util: 30.1.0
+      jest-mock: 30.0.5
+      jest-util: 30.0.5
     dev: true
 
   /@jest/get-type@30.0.1:
@@ -4972,18 +4972,11 @@ packages:
       '@sinclair/typebox': 0.27.8
     dev: true
 
-  /@jest/schemas@30.0.1:
-    resolution: {integrity: sha512-+g/1TKjFuGrf1Hh0QPCv0gISwBxJ+MQSNXmG9zjHy7BmFhtoJ9fdNhWJp3qUKRi93AOZHXtdxZgJ1vAtz6z65w==}
-    engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
-    dependencies:
-      '@sinclair/typebox': 0.34.40
-    dev: true
-
   /@jest/schemas@30.0.5:
     resolution: {integrity: sha512-DmdYgtezMkh3cpU8/1uyXakv3tJRcmcXxBOcO0tbaozPwpmh4YMsnWrQm9ZmZMfa5ocbxzbFk6O4bDPEc/iAnA==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
     dependencies:
-      '@sinclair/typebox': 0.34.40
+      '@sinclair/typebox': 0.34.41
     dev: true
 
   /@jest/transform@29.7.0:
@@ -5057,19 +5050,6 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/schemas': 29.6.3
-      '@types/istanbul-lib-coverage': 2.0.6
-      '@types/istanbul-reports': 3.0.4
-      '@types/node': 24.3.0
-      '@types/yargs': 17.0.33
-      chalk: 4.1.2
-    dev: true
-
-  /@jest/types@30.0.1:
-    resolution: {integrity: sha512-HGwoYRVF0QSKJu1ZQX0o5ZrUrrhj0aOOFA8hXrumD7SIzjouevhawbTjmXdwOmURdGluU9DM/XvGm3NyFoiQjw==}
-    engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
-    dependencies:
-      '@jest/pattern': 30.0.1
-      '@jest/schemas': 30.0.1
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
       '@types/node': 24.3.0
@@ -6857,8 +6837,8 @@ packages:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
     dev: true
 
-  /@sinclair/typebox@0.34.40:
-    resolution: {integrity: sha512-gwBNIP8ZAYev/ORDWW0QvxdwPXwxBtLsdsJgSc7eDIRt8ubP+rxUBzPsrwnu16fgEF8Bx4lh/+mvQvJzcTM6Kw==}
+  /@sinclair/typebox@0.34.41:
+    resolution: {integrity: sha512-6gS8pZzSXdyRHTIqoqSVknxolr1kzfy4/CeDnrzsVz8TTIWUbOBr6gnzOmTYJ3eXQNh4IYHIGi5aIL7sOZ2G/g==}
     dev: true
 
   /@sinonjs/commons@3.0.1:
@@ -15891,8 +15871,8 @@ packages:
       pretty-format: 30.0.5
     dev: true
 
-  /jest-environment-jsdom@30.0.4:
-    resolution: {integrity: sha512-9WmS3oyCLFgs6DUJSoMpVb+AbH62Y2Xecw3XClbRgj6/Z+VjNeSLjrhBgVvTZ40njZTWeDHv8unp+6M/z8ADDg==}
+  /jest-environment-jsdom@30.1.2:
+    resolution: {integrity: sha512-LXsfAh5+mDTuXDONGl1ZLYxtJEaS06GOoxJb2arcJTjIfh1adYg8zLD8f6P0df8VmjvCaMrLmc1PgHUI/YUTbg==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
     peerDependencies:
       canvas: ^3.0.0
@@ -15900,8 +15880,8 @@ packages:
       canvas:
         optional: true
     dependencies:
-      '@jest/environment': 30.0.4
-      '@jest/environment-jsdom-abstract': 30.0.4(jsdom@26.1.0)
+      '@jest/environment': 30.1.2
+      '@jest/environment-jsdom-abstract': 30.1.2(jsdom@26.1.0)
       '@types/jsdom': 21.1.7
       '@types/node': 24.3.0
       jsdom: 26.1.0
@@ -15963,21 +15943,6 @@ packages:
       pretty-format: 30.0.5
     dev: true
 
-  /jest-message-util@30.0.2:
-    resolution: {integrity: sha512-vXywcxmr0SsKXF/bAD7t7nMamRvPuJkras00gqYeB1V0WllxZrbZ0paRr3XqpFU2sYYjD0qAaG2fRyn/CGZ0aw==}
-    engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
-    dependencies:
-      '@babel/code-frame': 7.27.1
-      '@jest/types': 30.0.1
-      '@types/stack-utils': 2.0.3
-      chalk: 4.1.2
-      graceful-fs: 4.2.11
-      micromatch: 4.0.8
-      pretty-format: 30.0.2
-      slash: 3.0.0
-      stack-utils: 2.0.6
-    dev: true
-
   /jest-message-util@30.0.5:
     resolution: {integrity: sha512-NAiDOhsK3V7RU0Aa/HnrQo+E4JlbarbmI3q6Pi4KcxicdtjV82gcIUrejOtczChtVQR4kddu1E1EJlW6EN9IyA==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
@@ -15993,13 +15958,19 @@ packages:
       stack-utils: 2.0.6
     dev: true
 
-  /jest-mock@30.0.2:
-    resolution: {integrity: sha512-PnZOHmqup/9cT/y+pXIVbbi8ID6U1XHRmbvR7MvUy4SLqhCbwpkmXhLbsWbGewHrV5x/1bF7YDjs+x24/QSvFA==}
+  /jest-message-util@30.1.0:
+    resolution: {integrity: sha512-HizKDGG98cYkWmaLUHChq4iN+oCENohQLb7Z5guBPumYs+/etonmNFlg1Ps6yN9LTPyZn+M+b/9BbnHx3WTMDg==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
     dependencies:
-      '@jest/types': 30.0.1
-      '@types/node': 24.3.0
-      jest-util: 30.0.2
+      '@babel/code-frame': 7.27.1
+      '@jest/types': 30.0.5
+      '@types/stack-utils': 2.0.3
+      chalk: 4.1.2
+      graceful-fs: 4.2.11
+      micromatch: 4.0.8
+      pretty-format: 30.0.5
+      slash: 3.0.0
+      stack-utils: 2.0.6
     dev: true
 
   /jest-mock@30.0.5:
@@ -16031,18 +16002,6 @@ packages:
       ci-info: 3.9.0
       graceful-fs: 4.2.11
       picomatch: 2.3.1
-    dev: true
-
-  /jest-util@30.0.2:
-    resolution: {integrity: sha512-8IyqfKS4MqprBuUpZNlFB5l+WFehc8bfCe1HSZFHzft2mOuND8Cvi9r1musli+u6F3TqanCZ/Ik4H4pXUolZIg==}
-    engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
-    dependencies:
-      '@jest/types': 30.0.1
-      '@types/node': 24.3.0
-      chalk: 4.1.2
-      ci-info: 4.3.0
-      graceful-fs: 4.2.11
-      picomatch: 4.0.3
     dev: true
 
   /jest-util@30.0.5:
@@ -20409,15 +20368,6 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/schemas': 29.6.3
-      ansi-styles: 5.2.0
-      react-is: 18.3.1
-    dev: true
-
-  /pretty-format@30.0.2:
-    resolution: {integrity: sha512-yC5/EBSOrTtqhCKfLHqoUIAXVRZnukHPwWBJWR7h84Q3Be1DRQZLncwcfLoPA5RPQ65qfiCMqgYwdUuQ//eVpg==}
-    engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
-    dependencies:
-      '@jest/schemas': 30.0.1
       ansi-styles: 5.2.0
       react-is: 18.3.1
     dev: true
