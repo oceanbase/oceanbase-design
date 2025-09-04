@@ -46,7 +46,7 @@
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
     "classnames": "^2.5.1",
-    "dayjs": "^1.11.13",
+    "dayjs": "^1.11.18",
     "diff": "^5.2.0",
     "highlight.js": "^11.11.1",
     "highlightjs-solidity": "^2.0.6",
