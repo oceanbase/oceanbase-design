@@ -1,0 +1,34 @@
+@import '../variable.less';
+
+@prefix: ob-filter;
+
+.@{prefix}-select-item {
+  font-size: 14px;
+  font-family: Inter-Regular;
+  border-radius: 4px;
+  transition: all 0.2s;
+  padding: 5px 12px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: @controlItemBgHover;
+  }
+}
+
+.@{prefix}-clear-circle-container {
+  background: @colorTextPlaceholder;
+  border-radius: 8px;
+  padding: 3px;
+  transition: background 0.3s ease;
+
+  &:hover {
+    cursor: pointer;
+    background: @colorIcon;
+  }
+}
+
+.@{prefix}-clear-circle {
+  font-size: 8px;
+  line-height: 10px;
+  color: #fff;
+}
