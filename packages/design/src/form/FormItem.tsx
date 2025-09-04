@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import type { ReactNode } from 'react';
 import { Form as AntForm } from 'antd';
-import { FormItemLayout } from 'antd/es/form/Form';
+import type { FormItemLayout } from 'antd/es/form/Form';
 import { FormContext } from 'antd/es/form/context';
 import type { FormItemProps as AntFormItemProps } from 'antd/es/form';
 import { isPlainObject } from 'lodash';
@@ -12,6 +12,8 @@ import { useTooltipTypeList } from '../tooltip/hooks/useTooltipTypeList';
 import useStyle from './style';
 
 const AntFormItem = AntForm.Item;
+
+export * from 'antd/es/form/FormItem';
 
 export type WrapperTooltipProps = Omit<TooltipProps, 'mouseFollow'> & {
   icon?: React.ReactElement;
