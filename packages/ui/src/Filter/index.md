@@ -7,7 +7,7 @@ nav:
 
 ## 代码演示
 
-<code src="./demo/basic.tsx" title="基本使用" description="一般用于Table组件的Extra作为筛选组件处理"></code> <code src="./demo/search.tsx" title="开启搜索" description="在筛选面板中对选择项进行搜索"></code>
+<code src="./demo/basic.tsx" title="基本使用" description="一般用于Table组件的Extra作为筛选组件处理"></code> <code src="./demo/search.tsx" title="开启搜索" description="在筛选面板中对选择项进行搜索"></code> <code src="./demo/multiple.tsx" title="开启多选" description="支持选择多个数据"></code>
 
 ## Filter.Cascader API
 

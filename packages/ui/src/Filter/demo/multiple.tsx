@@ -143,6 +143,7 @@ export default () => {
           <Filter.Cascader
             label="City"
             haveValueLabel="Selected City"
+            multiple={true}
             options={cityOptions}
             value={selectedCity}
             onChange={value => {
@@ -151,6 +152,7 @@ export default () => {
             clear={() => {
               setSelectedCity([]);
             }}
+            showSearch={true}
           />
           <Filter.Select
             label="Personnel"
@@ -160,6 +162,7 @@ export default () => {
             clear={() => {
               setSelectedPersonnel('');
             }}
+            showSearch={true}
           />
         </Flex>
         <Table dataSource={handleData()} columns={columns} />

@@ -162,6 +162,7 @@ export default () => {
               setSelectedPersonnel('');
             }}
             showSearch={true}
+            multi={true}
           />
         </Flex>
         <Table dataSource={handleData()} columns={columns} />

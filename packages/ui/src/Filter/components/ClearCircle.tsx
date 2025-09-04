@@ -1,7 +1,9 @@
-import { Flex, theme } from '@oceanbase/design';
+import { Flex } from '@oceanbase/design';
 import { CloseOutlined } from '@oceanbase/icons';
 import type { FC } from 'react';
 import React from 'react';
+import { getPrefix } from '../../_util';
+import '../styles.less';
 
 interface ClearCircleProps {
   clear: () => void;
@@ -12,24 +14,12 @@ interface ClearCircleProps {
  * @param clear 点击清除后的回调函数
  */
 const ClearCircle: FC<ClearCircleProps> = ({ clear }) => {
-  const { token } = theme.useToken();
+  const prefix = getPrefix('filter');
 
   return (
-    <Flex
-      justify="center"
-      align="center"
-      style={{
-        background: token.colorIcon,
-        borderRadius: 8,
-        padding: 3,
-      }}
-    >
+    <Flex justify="center" align="center" className={`${prefix}-clear-circle-container`}>
       <CloseOutlined
-        style={{
-          fontSize: 10,
-          lineHeight: 10,
-          color: '#fff',
-        }}
+        className={`${prefix}-clear-circle`}
         onClick={e => {
           e.stopPropagation();
           clear();

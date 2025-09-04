@@ -1,4 +1,5 @@
-import { Button, Cascader, Flex, Space, theme, CascaderProps } from '@oceanbase/design';
+import { Button, Cascader, Flex, Space, theme } from '@oceanbase/design';
+import type { CascaderProps } from '@oceanbase/design';
 import { DownOutlined } from '@oceanbase/icons';
 import type { FC } from 'react';
 import React, { useState } from 'react';
@@ -36,8 +37,8 @@ const FilterCascader: FC<FilterCascaderProps & CascaderProps<any, string, true>>
   return (
     <Cascader
       options={filteredOptions || []}
-      multiple={true}
       value={value}
+      multiple={false}
       onChange={onChange}
       showCheckedStrategy="SHOW_CHILD"
       dropdownRender={menu => (

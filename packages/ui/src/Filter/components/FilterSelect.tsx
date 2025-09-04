@@ -34,7 +34,8 @@ const PageExtraOperator: FC<PageExtraOperatorProps> = ({
   showSearch = false,
 }) => {
   const [searchOperator, setSearchOperator] = useState<string>('');
-  const prefix = getPrefix('filter-select');
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const prefix = getPrefix('filter');
 
   // 根据搜索条件过滤数据
   const filterOptions = useMemo(() => {
@@ -50,6 +51,8 @@ const PageExtraOperator: FC<PageExtraOperatorProps> = ({
       placement="bottomLeft"
       arrow={false}
       trigger="click"
+      open={isOpen}
+      onOpenChange={setIsOpen}
       content={
         <div>
           {showSearch && <FilterSearch setValue={setSearchOperator} />}
@@ -59,10 +62,11 @@ const PageExtraOperator: FC<PageExtraOperatorProps> = ({
           >
             {filterOptions?.map(item => (
               <div
-                className={`${prefix}-item`}
+                className={`${prefix}-select-item`}
                 key={item.value}
                 onClick={() => {
                   setValue(item.value);
+                  setIsOpen(false);
                 }}
               >
                 {item.label}
