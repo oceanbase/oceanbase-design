@@ -1,6 +1,13 @@
 import type { ThemeConfig } from 'antd';
 import { formatTheme } from './util/format';
 
+const colorPrimary = '#0D6CF2';
+const colorPrimarySecondary = '#598CF3';
+const colorText = '#132039';
+const colorTextSecondary = '#5c6b8a';
+const colorFillSecondary = '#E2E8F3';
+const colorFillQuaternary = '#F8FAFE';
+const colorBorderSecondary = colorFillSecondary;
 // Calculated by colorBorder and getWeakenBorderColor()
 const tagColorBorder = '#cdd5e466';
 
@@ -10,16 +17,11 @@ const defaultTheme: ThemeConfig = {
   token: {
     fontFamily: `-apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
     fontFamilyCode: `Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace`,
-    colorPrimaryBg: '#EAF1FF',
-    colorPrimary: '#006AFF',
-    colorPrimaryBgHover: '#EAF1FF',
-    colorPrimaryBorder: '#b3ccff',
-    colorPrimaryBorderHover: '#5189FB',
-    colorPrimaryHover: '#5189fb',
-    colorPrimaryActive: '#004CE6',
-    colorPrimaryTextHover: '#5189FB',
-    colorPrimaryText: '#006AFF',
-    colorPrimaryTextActive: '#004CE6',
+    borderRadius: 4,
+    fontSize: 13,
+    fontSizeSM: 11,
+    colorPrimary: colorPrimary,
+    colorInfo: colorPrimary,
     colorSuccess: '#0ac185',
     colorSuccessBg: '#EEF8F5',
     colorSuccessBgHover: '#dbf0e9',
@@ -50,29 +52,19 @@ const defaultTheme: ThemeConfig = {
     colorErrorText: '#ff1a1a',
     colorErrorTextActive: '#CC0000',
     colorError: '#F93939',
-    colorInfo: '#006AFF',
-    colorInfoBg: '#EAF1FF',
-    colorInfoBgHover: '#EAF1FF',
-    colorInfoBorder: '#B3CCFF',
-    colorInfoBorderHover: '#5189FB',
-    colorInfoHover: '#5189FB',
-    colorInfoActive: '#004CE6',
-    colorInfoTextHover: '#5189FB',
-    colorInfoText: '#006AFF',
-    colorInfoTextActive: '#004CE6',
     colorTextBase: '#000000',
-    colorText: '#132039',
-    colorTextSecondary: '#5c6b8a',
+    colorText,
+    colorTextSecondary,
     colorTextQuaternary: '#c1cbe0',
     colorTextTertiary: '#8592AD',
     colorBgBase: '#ffffff',
     colorBgContainer: '#ffffff',
-    colorBgLayout: '#f3f6fc',
+    colorBgLayout: colorFillQuaternary,
     colorBorder: '#CDD5E4',
-    colorBorderSecondary: '#E2E8F3',
-    colorFillQuaternary: '#F8FAFE',
+    colorBorderSecondary,
+    colorFillQuaternary,
     colorFillTertiary: '#f3f6fc',
-    colorFillSecondary: '#e2e8f3',
+    colorFillSecondary,
     colorFill: '#cdd5e4',
     colorBgMask: 'rgba(19, 32, 57, 0.45)',
     colorBgElevated: '#ffffff',
@@ -83,40 +75,45 @@ const defaultTheme: ThemeConfig = {
       '0 6px 16px 0 rgba(54, 69, 99, 0.08), 0 3px 6px -4px rgba(54, 69, 99, 0.12), 0 9px 28px 8px rgba(54, 69, 99, 0.05)',
     boxShadowTertiary:
       '0 1px 2px 0 rgba(54, 69, 99, 0.03), 0 1px 6px -1px rgba(54, 69, 99, 0.02), 0 2px 4px 0 rgba(54, 69, 99, 0.02)',
-    borderRadius: 6,
     wireframe: false,
     // Remove focus outline
     lineWidthFocus: 0,
   },
   components: {
+    Badge: {
+      colorInfo: colorPrimarySecondary,
+    },
     Breadcrumb: {
       fontSize: 12,
       // @ts-ignore
       // fontHeight is internal token
       fontHeight: 20,
-      lastItemColor: '#5c6b8a',
+      lastItemColor: colorTextSecondary,
     },
     Collapse: {
-      colorBorder: '#E2E8F3',
+      colorBorder: colorBorderSecondary,
     },
     InputNumber: {
       handleVisible: true,
     },
+    Progress: {
+      defaultColor: colorPrimarySecondary,
+    },
     Radio: {
       // temporarily fix style for checked disabled Radio.Button
-      controlItemBgActiveDisabled: '#e2e8f3',
+      controlItemBgActiveDisabled: colorFillSecondary,
     },
     Select: {
       // work for all multiple select component, including Select, TreeSelect and Cascader and so on
-      multipleItemBg: '#F8FAFE',
+      multipleItemBg: colorFillQuaternary,
       multipleItemBorderColor: tagColorBorder,
       multipleItemBorderColorDisabled: tagColorBorder,
     },
     Slider: {
-      trackBg: '#006AFF',
+      trackBg: colorPrimary,
       trackHoverBg: '#5189fb',
       trackBgDisabled: '#b3ccff',
-      handleColor: '#006AFF',
+      handleColor: colorPrimary,
       handleActiveColor: '#5189fb',
       handleColorDisabled: '#b3ccff',
     },
@@ -124,17 +121,34 @@ const defaultTheme: ThemeConfig = {
       horizontalItemGutter: 24,
     },
     Tag: {
-      defaultColor: '#5c6b8a',
+      defaultColor: colorTextSecondary,
       colorBorder: tagColorBorder,
     },
     Table: {
-      cellPaddingBlock: 12,
-      cellPaddingBlockMD: 8,
+      fontSize: 12,
+      cellPaddingBlock: 8,
+      cellPaddingInline: 12,
+      cellPaddingBlockMD: 6,
       cellPaddingBlockSM: 4,
     },
     Tooltip: {
       colorBgSpotlight: '#ffffff',
-      colorTextLightSolid: '#132039',
+      colorTextLightSolid: colorText,
+    },
+    Card: {
+      borderRadiusLG: 8,
+    },
+    Menu: {
+      paddingContentVertical: 0,
+      itemHeight: 30,
+      itemBorderRadius: 4,
+      // 80 means 50% opacity
+      itemSelectedBg: colorFillSecondary + '80',
+      itemHoverBg: colorFillSecondary + '80',
+      itemColor: '#36496F',
+      itemSelectedColor: colorText,
+      itemMarginBlock: 6,
+      groupTitleFontSize: 11,
     },
   },
 };
