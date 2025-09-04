@@ -52,24 +52,6 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       },
       // body 样式
       [`${componentCls}-tbody`]: {
-        // 斑马纹样式
-        [`tr:nth-child(2n + 1):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${antCls}-descriptions-row) > td`]:
-          {
-            backgroundColor: colorBgBase,
-          },
-        [`tr:nth-child(2n):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${componentCls}-expanded-row):not(${antCls}-descriptions-row) > td`]:
-          {
-            backgroundColor: colorFillQuaternary,
-          },
-        // hover 行样式
-        [`tr:not(${componentCls}-placeholder):not(${componentCls}-expanded-row):not(${antCls}-descriptions-row):hover > td`]:
-          {
-            backgroundColor: `${colorPrimaryBg} !important`,
-          },
-        // 选中行样式
-        [`tr${componentCls}-row-selected > td`]: {
-          backgroundColor: `${colorPrimaryBg} !important`,
-        },
         [`${componentCls}-tbody-virtual-scrollbar ${componentCls}-tbody-virtual-scrollbar-thumb`]: {
           background: `${token.colorFillSecondary} !important`,
         },
@@ -138,32 +120,8 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       },
     },
 
-    // 滚动表格样式
-    // 由于滚动表格会在 tbody 下最前面多一个 tr 元素，因此需要设置相反的斑马条样式
-    // .ant-table-scroll-horizontal: 水平滚动
-    // .ant-table-fixed-header: 垂直滚动
-    [`${componentCls}-wrapper ${componentCls}${componentCls}-scroll-horizontal, ${componentCls}-wrapper ${componentCls}${componentCls}-fixed-header`]:
-      {
-        [`${componentCls}-tbody`]: {
-          // 斑马纹样式
-          [`tr:nth-child(2n + 1):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${antCls}-descriptions-row) > td`]:
-            {
-              backgroundColor: colorFillQuaternary,
-            },
-          [`tr:nth-child(2n):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${componentCls}-expanded-row):not(${antCls}-descriptions-row) > td`]:
-            {
-              backgroundColor: colorBgBase,
-            },
-        },
-      },
-
     // 带边框的表格样式
     [`${componentCls}-wrapper ${componentCls}${componentCls}-bordered`]: {
-      [`${componentCls}-thead > tr`]: {
-        ['th']: {
-          backgroundColor: colorFillQuaternary,
-        },
-      },
       [`${componentCls}-footer`]: {
         borderRadius: `0px 0px ${token.borderRadiusLG}px ${token.borderRadiusLG}px`,
       },
@@ -221,41 +179,17 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     //     },
     //   },
 
-    // 非可展开表格、不带 footer 表格、非空表格、不带边框表格: 底部添加分隔线，并去掉底部圆角
+    // 非可展开表格、不带 footer 表格、非空表格、不带边框表格: 去掉底部圆角
     [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
       {
-        borderBottom: `1px solid ${colorBorderSecondary}`,
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0,
       },
-
-    // 去掉非展开表格的边框
-    [`${componentCls}-wrapper:not(${componentCls}-expandable)`]: {
-      [`${componentCls}:not(${componentCls}-bordered)`]: {
-        [`${componentCls}-tbody`]: {
-          [`tr:not(${componentCls}-measure-row) > td`]: {
-            border: 'none',
-          },
-        },
-      },
-    },
 
     // 可展开表格样式
     [`${componentCls}-wrapper${componentCls}-expandable`]: {
       [`${componentCls}`]: {
         [`${componentCls}-tbody`]: {
-          // 去掉斑马纹
-          [`tr:nth-child(n):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${componentCls}-expanded-row)`]:
-            {
-              ['& > td']: {
-                backgroundColor: colorBgBase,
-              },
-              ['&:hover']: {
-                td: {
-                  backgroundColor: colorPrimaryBg,
-                },
-              },
-            },
           [`${componentCls}-expanded-row > td`]: {
             // 除内嵌子表格外，设置其他内嵌元素样式
             [`& > *:not(${componentCls}-wrapper):not(${componentCls}-expanded-row-fixed)`]: {
