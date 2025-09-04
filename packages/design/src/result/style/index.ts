@@ -1,7 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
-import { genLargeStyle } from '../../_util/genStyle';
 
 export type ResultToken = FullToken<'Result'>;
 
@@ -17,9 +16,6 @@ export const genResultStyle: GenerateStyle<ResultToken> = (token: ResultToken): 
       [`${componentCls}-subtitle`]: {
         maxWidth: 600,
         margin: '0px auto',
-      },
-      [`${componentCls}-extra`]: {
-        ...genLargeStyle(token),
       },
       [`${componentCls}-content`]: {
         maxWidth: 1000,

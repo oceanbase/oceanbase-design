@@ -24,7 +24,6 @@ export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSS
       },
       // icon style
       [`${componentCls}-status-icon`]: {
-        fontSize: token.fontSizeSM,
         // remove dot style
         backgroundColor: 'transparent',
         ['&::after']: {

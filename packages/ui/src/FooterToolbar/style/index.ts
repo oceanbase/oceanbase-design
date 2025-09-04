@@ -1,6 +1,5 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FooterToolBarToken } from '@ant-design/pro-layout/es/components/FooterToolbar/style';
-import { genLargeStyle } from '@oceanbase/design';
 import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
@@ -35,7 +34,6 @@ export const genFooterToolbarStyle: GenerateStyle<FooterToolBarToken> = (
       borderRadius: borderRadius,
       boxShadow: boxShadowSecondary,
       borderBlockStart: 'none',
-      ...genLargeStyle(token),
     },
   } as CSSObject;
 };
