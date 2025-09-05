@@ -9,6 +9,7 @@ import {
   Radio,
   Space,
   Tooltip,
+  message,
   theme,
 } from '@oceanbase/design';
 import type { TooltipProps } from '@oceanbase/design';
@@ -18,6 +19,8 @@ import {
   ZoomOutOutlined,
   SyncOutlined,
   ArrowLeftOutlined,
+  CopyOutlined,
+  DeleteOutlined,
 } from '@oceanbase/icons';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
@@ -232,6 +235,11 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
       updatedValue.splice(0, history.capacity);
     }
 
+    setRangeHistory(updatedValue);
+  };
+
+  const delRangeHistory = (range: RangeValueFormat) => {
+    const updatedValue = rangeHistory.filter(item => !_isEqual(item, range));
     setRangeHistory(updatedValue);
   };
 
@@ -464,7 +472,11 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                             return {
                               key: String(range),
                               label: (
-                                <Flex key={String(range)} vertical>
+                                <Flex
+                                  className={`${prefix}-history-menu-item`}
+                                  key={String(range)}
+                                  vertical
+                                >
                                   <span>
                                     {(isMoment ? moment(range[0]) : dayjs(range[0])).format(
                                       YEAR_DATE_TIME_SECOND_FORMAT_CN
@@ -476,6 +488,37 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                                       YEAR_DATE_TIME_SECOND_FORMAT_CN
                                     )}
                                   </span>
+                                  <Space className={`${prefix}-menu-text-btn-wrapper`}>
+                                    <Button
+                                      className={`${prefix}-menu-text-btn`}
+                                      type="text"
+                                      color="default"
+                                      variant="filled"
+                                      size="small"
+                                      onClick={e => {
+                                        e.stopPropagation();
+                                        const vList = range.map(v => v);
+                                        const text = `${vList.join('~')}`;
+                                        navigator.clipboard.writeText(text);
+                                        message.success(text);
+                                      }}
+                                    >
+                                      <CopyOutlined />
+                                    </Button>
+                                    <Button
+                                      className={`${prefix}-menu-text-btn`}
+                                      type="text"
+                                      color="default"
+                                      variant="filled"
+                                      size="small"
+                                      onClick={e => {
+                                        e.stopPropagation();
+                                        delRangeHistory(range);
+                                      }}
+                                    >
+                                      <DeleteOutlined />
+                                    </Button>
+                                  </Space>
                                 </Flex>
                               ),
                             };
