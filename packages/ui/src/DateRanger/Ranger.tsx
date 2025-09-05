@@ -143,7 +143,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     hideYear = false,
     hideSecond = false,
     autoCalcRange = false,
-    history: historyProp = true,
+    history: historyProp = false,
     onChange = noop,
     disabledDate,
     locale,
