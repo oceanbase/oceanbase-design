@@ -476,6 +476,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                             );
                             handleNameChange(CUSTOMIZE);
                           }}
+                          style={{ maxHeight: 480, overflowY: 'auto' }}
                           items={rangeHistory.map(range => {
                             return {
                               key: String(range),
