@@ -6,6 +6,7 @@ const colorPrimarySecondary = '#598CF3';
 const colorText = '#132039';
 const colorTextSecondary = '#5c6b8a';
 const colorFillSecondary = '#E2E8F3';
+const colorFillTertiary = '#F3F6FC';
 const colorFillQuaternary = '#F8FAFE';
 const colorBorderSecondary = colorFillSecondary;
 // Calculated by colorBorder and getWeakenBorderColor()
@@ -18,6 +19,8 @@ const defaultTheme: ThemeConfig = {
     fontFamily: `-apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
     fontFamilyCode: `Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace`,
     borderRadius: 4,
+    borderRadiusLG: 8,
+    borderRadiusSM: 2,
     fontSize: 13,
     fontSizeSM: 11,
     colorPrimary: colorPrimary,
@@ -63,7 +66,7 @@ const defaultTheme: ThemeConfig = {
     colorBorder: '#CDD5E4',
     colorBorderSecondary,
     colorFillQuaternary,
-    colorFillTertiary: '#f3f6fc',
+    colorFillTertiary,
     colorFillSecondary,
     colorFill: '#cdd5e4',
     colorBgMask: 'rgba(19, 32, 57, 0.45)',
@@ -125,11 +128,15 @@ const defaultTheme: ThemeConfig = {
       colorBorder: tagColorBorder,
     },
     Table: {
-      fontSize: 12,
-      cellPaddingBlock: 8,
-      cellPaddingInline: 12,
-      cellPaddingBlockMD: 6,
+      cellFontSize: 12,
+      headerSplitColor: 'transparent',
+      cellPaddingBlock: 12,
+      cellPaddingInline: 16,
+      cellPaddingBlockMD: 8,
       cellPaddingBlockSM: 4,
+      rowHoverBg: colorFillQuaternary,
+      rowSelectedBg: colorFillQuaternary,
+      rowSelectedHoverBg: colorFillTertiary,
     },
     Tooltip: {
       colorBgSpotlight: '#ffffff',
@@ -145,7 +152,7 @@ const defaultTheme: ThemeConfig = {
       // 80 means 50% opacity
       itemSelectedBg: colorFillSecondary + '80',
       itemHoverBg: colorFillSecondary + '80',
-      itemColor: '#36496F',
+      itemColor: colorTextSecondary,
       itemSelectedColor: colorText,
       itemMarginBlock: 6,
       groupTitleFontSize: 11,

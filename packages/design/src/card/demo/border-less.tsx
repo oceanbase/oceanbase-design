@@ -7,8 +7,8 @@ const App: React.FC = () => {
     <div
       style={{
         backgroundColor: token.colorBgLayout,
-        padding: '40px 24px',
-        margin: '-40px -24px',
+        padding: 24,
+        margin: -24,
       }}
     >
       <Card title="Card title" bordered={false} style={{ width: 300 }}>

@@ -54,8 +54,8 @@ const App: React.FC = () => {
           ? {}
           : {
               backgroundColor: token.colorBgLayout,
-              padding: '40px 24px',
-              margin: '-40px -24px',
+              padding: 24,
+              margin: -24,
             }
       }
     >
