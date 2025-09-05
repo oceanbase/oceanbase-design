@@ -458,6 +458,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                                 return isMoment ? moment(v) : dayjs(v);
                               }) as RangeValue
                             );
+                            handleNameChange(CUSTOMIZE);
                           }}
                           items={rangeHistory.map(range => {
                             return {
