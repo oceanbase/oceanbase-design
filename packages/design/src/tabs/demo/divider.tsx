@@ -1,40 +1,49 @@
-import type { TabsProps } from '@oceanbase/design';
-import { Space, Tabs } from '@oceanbase/design';
-import React from 'react';
+import React, { useState } from 'react';
+import { Form, Switch, Tabs } from '@oceanbase/design';
 
-const onChange = (key: string) => {
-  console.log(key);
+const App: React.FC = () => {
+  const [divider, setDivider] = useState<boolean>(false);
+
+  return (
+    <div>
+      <Form layout="inline">
+        <Form.Item label="divider" required={true}>
+          <Switch
+            checked={divider}
+            onChange={value => {
+              setDivider(value);
+            }}
+          />
+        </Form.Item>
+      </Form>
+      <Tabs
+        defaultActiveKey="1"
+        divider={divider}
+        style={{ marginBottom: 32 }}
+        items={new Array(3).fill(null).map((_, i) => {
+          const id = String(i + 1);
+          return {
+            label: `Tab ${id}`,
+            key: id,
+            children: `Content of tab ${id}`,
+          };
+        })}
+      />
+      <Tabs
+        defaultActiveKey="1"
+        divider={divider}
+        type="card"
+        items={new Array(3).fill(null).map((_, i) => {
+          const id = String(i + 1);
+          return {
+            label: `Card Tab ${id}`,
+            key: id,
+            children: `Content of card tab ${id}`,
+          };
+        })}
+      />
+    </div>
+  );
 };
-
-const items: TabsProps['items'] = [
-  {
-    key: '1',
-    label: `Tab 1`,
-    children: `Content of Tab Pane 1`,
-  },
-  {
-    divider: true,
-  },
-  {
-    key: '2',
-    label: `Tab 2`,
-    children: `Content of Tab Pane 2`,
-  },
-  {
-    divider: true,
-  },
-  {
-    key: '3',
-    label: `Tab 3`,
-    children: `Content of Tab Pane 3`,
-  },
-];
-
-const App: React.FC = () => (
-  <Space direction="vertical" size={32}>
-    <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
-    <Tabs defaultActiveKey="1" items={items} tabPosition="left" onChange={onChange} />
-  </Space>
-);
 
 export default App;
