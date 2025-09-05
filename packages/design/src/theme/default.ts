@@ -122,6 +122,9 @@ const defaultTheme: ThemeConfig = {
     },
     Tabs: {
       horizontalItemGutter: 24,
+      itemActiveColor: colorText,
+      itemSelectedColor: colorText,
+      itemHoverColor: colorText,
     },
     Tag: {
       defaultColor: colorTextSecondary,
