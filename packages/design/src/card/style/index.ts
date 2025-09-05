@@ -53,6 +53,14 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       [`${componentCls}-head`]: {
         // should not remove border-bottom to avoid tabs inkbar display correctly
         borderBottomColor: 'transparent',
+        // remove divider for top and bottom tabs
+        [tabsComponentCls]: {
+          [`&${tabsComponentCls}-top, &${tabsComponentCls}-bottom`]: {
+            [`${tabsComponentCls}-nav::before`]: {
+              border: 'none',
+            },
+          },
+        },
       },
     },
     [`${componentCls}${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {

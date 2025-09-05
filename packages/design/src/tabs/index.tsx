@@ -55,7 +55,7 @@ const Tabs = React.forwardRef<TabsRef, TabsProps>(
   (
     {
       children,
-      divider,
+      divider = false,
       items,
       type,
       tabPosition,
@@ -68,7 +68,9 @@ const Tabs = React.forwardRef<TabsRef, TabsProps>(
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('tabs', customizePrefixCls);
     const { wrapSSR } = useStyle(prefixCls);
-    const tabsCls = classNames(className);
+    const tabsCls = classNames(className, {
+      [`${prefixCls}-no-divider`]: !divider,
+    });
 
     const isHorizontal = !tabPosition || tabPosition === 'top' || tabPosition === 'bottom';
     const dividerList = items?.filter(item => item.divider) || [];
