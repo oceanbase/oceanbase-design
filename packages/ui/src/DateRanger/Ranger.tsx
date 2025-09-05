@@ -215,7 +215,11 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     { defaultValue: [], listenStorageChange: true }
   );
 
-  const updateRangeHistory = (range: RangeValue) => {
+  const updateRangeHistory = (range?: RangeValue) => {
+    if (!range) {
+      return;
+    }
+
     if (range.length < 2 || !history) {
       return;
     }
