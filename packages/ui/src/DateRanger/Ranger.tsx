@@ -368,6 +368,10 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     return isEN ? `Nearly ${differenceSeconds} seconds` : `近 ${differenceSeconds} 秒`;
   };
 
+  const getHistoryTitle = () => {
+    return isEN ? 'History records' : '历史记录';
+  };
+
   const setNow = () => {
     const selected = selects.find(item => item.name === rangeName);
     if (selected?.range) {
@@ -456,7 +460,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                           }}
                         >
                           <ArrowLeftOutlined color={token.colorTextLabel} />
-                          历史记录
+                          {getHistoryTitle()}
                         </Button>
                         <Menu
                           onClick={({ key: rangeString }) => {
@@ -535,7 +539,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                           e.stopPropagation();
                         }}
                       >
-                        历史记录
+                        {getHistoryTitle()}
                         <RightOutlined />
                       </Button>
                     )}
