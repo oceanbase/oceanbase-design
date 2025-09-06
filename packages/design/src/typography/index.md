@@ -18,7 +18,7 @@ nav:
 <code src="./demo/editable.tsx" title="可编辑"></code>
 <code src="./demo/editable-modal.tsx" title="在 Modal 中编辑"></code>
 <code src="./demo/font-family.tsx" title="字体" description="详见 [字体设计规范](/docs/spec/typography)。"></code>
-<code src="./demo/inner.tsx" title="和其他组件组合使用" debug></code>
+<code src="./demo/inner.tsx" title="和其他组件组合使用" description="需要继承父组件的字体样式和行高" debug></code>
 
 ## API
 
