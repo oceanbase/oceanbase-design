@@ -32,6 +32,7 @@ export default defineConfig({
     // exclude part of charts tests for now
     // ref: https://github.com/antvis/L7/issues/2332
     exclude: [
+      '**/node_modules/**',
       '**/Area/__tests__/ref.test.tsx',
       '**/DualAxes/__tests__/ref.test.tsx',
       '**/Line/__tests__/ref.test.tsx',

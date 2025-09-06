@@ -155,3 +155,26 @@
     }
   }
 }
+
+.@{prefix}-history-menu-item {
+  .@{prefix}-menu-text-btn-wrapper {
+    justify-content: space-between;
+    height: 0;
+    transition: height 0.2s;
+    overflow: hidden;
+  }
+  &:hover {
+    .@{prefix}-menu-text-btn-wrapper {
+      height: 22px;
+    }
+  }
+}
+
+.@{prefix}-menu-text-btn {
+  width: 72px;
+
+  background-color: @colorFillSecondary !important;
+  &:hover {
+    background-color: @colorFill !important;
+  }
+}
