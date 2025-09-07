@@ -181,12 +181,12 @@ transform fixed style to antd v5 design token.
 +   const { token } = theme.useToken();
     return (
 -     <div>
--       <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '1px solid #d9d9d9' }} />
--       <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4d4f' }}></Button>
+-       <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '1px solid #d9d9d9', fontSize: 14 }} />
+-       <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4d4f', fontSize: 12 }}></Button>
 -     </div>
 +     <div>
-+       <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBorder}` }} />
-+       <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
++       <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBorder}`, fontSize: token.fontSize }} />
++       <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError, fontSize: token.fontSizeSM }}></Button>
 +     </div>
     );
   };
@@ -210,13 +210,13 @@ export default Demo;
     render() {
       return (
 -       <div>
--         <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '#d9d9d9' }} />
--         <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4d4f' }}></Button>
+-         <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '#d9d9d9', fontSize: 14 }} />
+-         <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4d4f', fontSize: 12 }}></Button>
 -         <div color="#fafafa" border="1px solid #fafafa" />
 -       </div>
 +       <div>
-+         <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBgLayout}` }} />
-+         <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
++         <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBgLayout}`, fontSize: token.fontSize }} />
++         <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError, fontSize: token.fontSizeSM }}></Button>
 +         <div color={token.colorBgLayout} border={`1px solid ${token.colorBgLayout}`} />
 +       </div>
       );
@@ -240,11 +240,13 @@ export default Demo;
 -   warning: '#faad14',
 -   error: '#ff4d4f',
 -   border: '1px solid #d9d9d9',
+-   fontSize: 14,
 +   info: token.colorInfo,
 +   success: token.colorSuccess,
 +   warning: token.colorWarning,
 +   error: token.colorError,
 +   border: `1px solid ${token.colorBorder}`,
++   fontSize: token.fontSize,
   };
 
   function getColorList() {
@@ -274,6 +276,11 @@ export default Demo;
 -       color: '1px solid #d9d9d9',
 +       color: `1px solid ${token.colorBorder}`,
       },
+      {
+        type: 'fontSize',
+-       fontSize: 14,
++       fontSize: token.fontSize,
+      }
     ];
   }
 ```

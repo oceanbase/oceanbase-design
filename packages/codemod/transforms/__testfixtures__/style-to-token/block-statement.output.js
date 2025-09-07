@@ -21,5 +21,9 @@ function getColorList() {
       type: 'border',
       color: `1px solid ${token.colorBorder}`,
     },
+    {
+      type: 'fontSize',
+      fontSize: token.fontSize,
+    },
   ];
 }

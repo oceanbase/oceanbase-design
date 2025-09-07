@@ -158,9 +158,44 @@ function tokenParse(value) {
   };
 }
 
+// 基于属性名和数值的 token 映射
+const PROPERTY_TOKEN_MAP = {
+  fontSize: {
+    11: 'fontSizeSM',
+    12: 'fontSizeSM',
+    13: 'fontSize',
+    14: 'fontSize',
+    15: 'fontSizeLG',
+    16: 'fontSizeLG',
+  },
+};
+
+function propertyTokenParse(propertyName, value) {
+  // 基于属性名和数值的 token 解析
+  const propertyMap = PROPERTY_TOKEN_MAP[propertyName];
+  if (!propertyMap) {
+    return null;
+  }
+
+  const stringValue = String(value);
+  const token = propertyMap[stringValue];
+  if (!token) {
+    return null;
+  }
+
+  return {
+    key: stringValue,
+    token,
+    formattedValue: stringValue,
+    propertyName,
+  };
+}
+
 module.exports = {
   TOKEN_MAP,
   TOKEN_MAP_KEYS,
   tokenParse,
+  PROPERTY_TOKEN_MAP,
+  propertyTokenParse,
   isLower,
 };
