@@ -12,6 +12,23 @@ import darkTheme from './.dumi/tmp/plugin-theme-less/dark.js';
 // @ts-ignore
 import aliyunTheme from './.dumi/tmp/plugin-theme-less/aliyun.js';
 
+function unit(key: string, value: string | number) {
+  if (
+    typeof value === 'number' &&
+    !key.startsWith('lineHeight') &&
+    !key.startsWith('zIndex') &&
+    !key.startsWith('opacity') &&
+    !key.startsWith('motion') &&
+    !key.startsWith('fontWeight')
+  ) {
+    return `${value}px`;
+  }
+  if (typeof value === 'number' && key.startsWith('motion')) {
+    return `${value}s`;
+  }
+  return value;
+}
+
 export default (api: IApi) => {
   // 生成 default.less、dark.less 和 compact.less 主题文件
   api.onGenerateFiles(() => {
@@ -78,7 +95,7 @@ export default (api: IApi) => {
 
       let lessString = '';
       Object.keys(aliasToken).forEach(key => {
-        const value = aliasToken[key];
+        const value = unit(key, aliasToken[key]);
         lessString += `@${key}: ${value};\n`;
       });
 

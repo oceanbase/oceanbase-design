@@ -9,10 +9,12 @@ export const genTabsStyle = (token: Partial<TabsToken>): CSSObject => {
     token;
   return {
     [componentCls]: {
-      [`&${componentCls}-top, &${componentCls}-bottom`]: {
-        [`${componentCls}-nav::before`]: {
-          // 页签位置为 top 和 bottom 时，去掉分割线
-          border: 'none',
+      [`&${componentCls}-no-divider`]: {
+        // divider prop work for top and bottom tabs
+        [`&${componentCls}-top, &${componentCls}-bottom`]: {
+          [`${componentCls}-nav::before`]: {
+            border: 'none',
+          },
         },
       },
       [`${componentCls}-tab`]: {
