@@ -178,7 +178,9 @@ function propertyTokenParse(propertyName, value) {
   }
 
   const stringValue = String(value);
-  const token = propertyMap[stringValue];
+  // 提取数值部分（去掉单位）
+  const numericValue = stringValue.replace(/[^\d.]/g, '');
+  const token = propertyMap[numericValue];
   if (!token) {
     return null;
   }

@@ -3,7 +3,7 @@ const fs = require('fs');
 const postcss = require('postcss');
 const postcssLess = require('postcss-less');
 const isDirectory = require('is-directory');
-const { tokenParse } = require('./utils/token');
+const { tokenParse, propertyTokenParse } = require('./utils/token');
 
 /**
  * 搜索目录下所有的less文件
@@ -42,12 +42,22 @@ async function transform(file) {
   // 遍历 AST
   ast.walk(node => {
     if (node.type === 'decl') {
-      const { key, token, formattedValue } = tokenParse(node.value);
-      if (token) {
-        node.value = formattedValue.replace(key, `@${token}`);
+      // 首先尝试基于属性的 token 转换
+      // 将 CSS 属性名转换为小驼峰写法（如 font-size -> fontSize）
+      const camelCaseProp = node.prop.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
+      const propertyResult = propertyTokenParse(camelCaseProp, node.value);
+      if (propertyResult) {
+        node.value = `@${propertyResult.token}`;
         hasToken = true;
-      } else if (node.value?.includes('@')) {
-        hasToken = true;
+      } else {
+        // 然后尝试基于值的 token 转换
+        const { key, token, formattedValue } = tokenParse(node.value);
+        if (token) {
+          node.value = formattedValue.replace(key, `@${token}`);
+          hasToken = true;
+        } else if (node.value?.includes('@')) {
+          hasToken = true;
+        }
       }
     } else if (node.type === 'atrule' && node.name === 'import') {
       if (node.params === "'~@oceanbase/design/es/theme/index.less'") {
