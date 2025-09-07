@@ -296,19 +296,23 @@ transform fixed less style to antd v5 design token.
 -   background: #52c41a;
 -   background-color: #faad14;
 -   border-color: #ff4d4f;
+-   font-size: 14px;
 +   color: @colorInfo;
 +   background: @colorSuccess;
 +   background-color: @colorWarning;
 +   border-color: @colorError;
++   font-size: @fontSize;
     .content {
 -     color: rgba(0, 0, 0, 0.85);
 -     background: rgba(0, 0, 0,0.65);
 -     background-color: rgba(0,0,0,0.45);
 -     border: 1px solid #d9d9d9;
+-     font-size: 12px;
 +     color: @colorText;
 +     background: @colorTextSecondary;
 +     background-color: @colorTextTertiary;
 +     border: 1px solid @colorBorder;
++     font-size: @fontSizeSM;
     }
   }
 ```
