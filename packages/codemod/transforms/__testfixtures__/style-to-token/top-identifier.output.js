@@ -8,4 +8,5 @@ const colorMap = {
   warning: token.colorWarning,
   error: token.colorError,
   border: `1px solid ${token.colorBorder}`,
+  fontSize: token.fontSize,
 };

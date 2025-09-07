@@ -8,6 +8,7 @@ const useStyle1 = createStyles((
   return {
     main: {
       background: token.colorInfo,
+      fontSize: token.fontSize,
     },
   };
 });
@@ -18,6 +19,7 @@ const useStyle2 = createStyles(({
   return {
     main: {
       background: token.colorInfo,
+      fontSize: token.fontSize,
     },
   };
 });
@@ -26,6 +28,7 @@ const useStyle3 = createStyles(({ token }) => {
   return {
     main: {
       background: token.colorInfo,
+      fontSize: token.fontSize,
     },
   };
 });

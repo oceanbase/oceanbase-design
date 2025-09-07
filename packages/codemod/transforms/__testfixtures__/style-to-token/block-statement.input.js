@@ -20,5 +20,9 @@ function getColorList() {
       type: 'border',
       color: '1px solid #d9d9d9',
     },
+    {
+      type: 'fontSize',
+      fontSize: 14,
+    },
   ];
 }
