@@ -8,6 +8,17 @@ group: 基础组件
 
 ---
 
+## 0.4.17
+
+`2025-09-07`
+
+- Tabs
+  - 🆕 Tabs 新增 `divider` 属性，用于设置分割线。[#1179](https://github.com/oceanbase/oceanbase-design/pull/1179)
+  - 🐞 修复 Tabs `ref` 不生效的问题。[#1178](https://github.com/oceanbase/oceanbase-design/pull/1178)
+- 🐞 修复 Typography Text 和 Paragraph 类名样式 (行高、字体颜色和大小) 不生效的问题。[#1180](https://github.com/oceanbase/oceanbase-design/pull/1180)
+- TypeScript
+  - 🤖 导出 FormItem 类型，以兼容 antd 的类型用法。[#1171](https://github.com/oceanbase/oceanbase-design/pull/1171)
+
 ## 0.4.16
 
 `2025-08-29`
