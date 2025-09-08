@@ -8,6 +8,16 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.0
+
+`2025-09-08`
+
+- 🌈 更新主题色、字体大小、圆角相关的 Design Token。[#1174](https://github.com/oceanbase/oceanbase-design/pull/1174)
+- 💄 去掉 Button 的自定义样式，包括阴影、边框和背景色。[#1173](https://github.com/oceanbase/oceanbase-design/pull/1173)
+- 💄 去掉 Empty 和 Result 的大尺寸样式。[#1175](https://github.com/oceanbase/oceanbase-design/pull/1175)
+- 💄 更新 Table 样式，包括去掉斑马纹、增加行分隔线、调整单元格间距等。[#1176](https://github.com/oceanbase/oceanbase-design/pull/1176)
+- 💄 调整 Tabs 的字体颜色和火柴棍长度。[#1177](https://github.com/oceanbase/oceanbase-design/pull/1177)
+
 ## 0.4.16
 
 `2025-08-29`

@@ -8,6 +8,14 @@ group: 自动化迁移工具
 
 ---
 
+## 1.0.0-alpha.0
+
+`2025-09-08`
+
+- 🆕 `style-to-token` 工具支持改写成 `fontSize` 相关 token。[#1181](https://github.com/oceanbase/oceanbase-design/pull/1181)
+- 🆕 `less-to-token` 工具支持改写成 `fontSize` 相关 token。[#1182](https://github.com/oceanbase/oceanbase-design/pull/1182)
+- 🆕 less 主题文件中的 `token` 值增加单位后缀，便于直接使用，比如 `@fontSize: 14;` => `@fontSize: 14px;`。[#1183](https://github.com/oceanbase/oceanbase-design/pull/1183)
+
 ## 0.4.14
 
 `2025-08-07`
