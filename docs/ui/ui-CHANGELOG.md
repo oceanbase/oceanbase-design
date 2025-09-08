@@ -8,6 +8,12 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.0
+
+`2025-09-08`
+
+- 💄 去掉 FooterToolbar 和 PageContainer 的大尺寸样式。[#1175](https://github.com/oceanbase/oceanbase-design/pull/1175)
+
 ## 0.4.19
 
 `2025-08-29`
