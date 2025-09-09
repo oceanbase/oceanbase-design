@@ -1,16 +1,17 @@
 import React from 'react';
 import { AudioOutlined } from '@oceanbase/icons';
-import { Input, Space } from '@oceanbase/design';
+import { Input, Space, theme } from '@oceanbase/design';
 import type { SearchProps } from '@oceanbase/design/es/input';
 
 const { Search } = Input;
 
 const App: React.FC = () => {
+  const { token } = theme.useToken();
   const suffix = (
     <AudioOutlined
       style={{
         fontSize: 16,
-        color: '#006AFF',
+        color: token.colorInfo,
       }}
     />
   );

@@ -4,10 +4,15 @@ import { formatTheme } from './util/format';
 const colorPrimary = '#0D6CF2';
 const colorPrimarySecondary = '#598CF3';
 const colorText = '#132039';
-const colorTextSecondary = '#5c6b8a';
+const colorTextSecondary = '#5C6B8A';
+const colorTextTertiary = '#8592AD';
+const colorTextQuaternary = '#C1CBE0';
+const colorFill = '#CDD5E4';
 const colorFillSecondary = '#E2E8F3';
 const colorFillTertiary = '#F3F6FC';
 const colorFillQuaternary = '#F8FAFE';
+const colorFillHover = '#EFF3FA';
+const colorFillSelected = '#E2E8F3';
 const colorBorderSecondary = colorFillSecondary;
 // Calculated by colorBorder and getWeakenBorderColor()
 const tagColorBorder = '#cdd5e466';
@@ -19,56 +24,42 @@ const defaultTheme: ThemeConfig = {
     fontFamily: `-apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
     fontFamilyCode: `Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace`,
     borderRadius: 4,
-    borderRadiusLG: 8,
+    borderRadiusLG: 6,
     borderRadiusSM: 2,
     fontSize: 13,
-    fontSizeSM: 11,
+    fontSizeSM: 12,
     colorPrimary: colorPrimary,
     colorInfo: colorPrimary,
-    colorSuccess: '#0ac185',
-    colorSuccessBg: '#EEF8F5',
-    colorSuccessBgHover: '#dbf0e9',
-    colorSuccessBorder: '#B3E6D5',
-    colorSuccessBorderHover: '#4DCCA2',
-    colorSuccessHover: '#4DCCA2',
-    colorSuccessActive: '#00B378',
-    colorSuccessTextHover: '#4DCCA2',
-    colorSuccessText: '#0AC185',
-    colorSuccessTextActive: '#00B378',
-    colorWarning: '#FFA21A',
-    colorWarningBg: '#FFF5E5',
-    colorWarningBgHover: '#ffe7c2',
-    colorWarningBorder: '#FFD699',
-    colorWarningBorderHover: '#FFC166',
-    colorWarningHover: '#FFC166',
-    colorWarningActive: '#FF9700',
-    colorWarningTextHover: '#FFC166',
-    colorWarningText: '#FFA21A',
-    colorWarningTextActive: '#FF9700',
-    colorErrorBg: '#ffebeb',
-    colorErrorBgHover: '#ffd6d6',
-    colorErrorBorder: '#FFB3B3',
-    colorErrorBorderHover: '#ff7575',
-    colorErrorHover: '#ff7575',
-    colorErrorActive: '#CC0000',
-    colorErrorTextHover: '#ff7575',
-    colorErrorText: '#ff1a1a',
-    colorErrorTextActive: '#CC0000',
-    colorError: '#F93939',
+    colorInfoBorder: '#598CF3',
+    colorInfoBg: '#EAF1FF',
+    colorInfoText: '#083E8B',
+    colorSuccess: '#14B781',
+    colorSuccessBorder: '#7ED7BA',
+    colorSuccessBg: '#E8F8F3',
+    colorSuccessText: '#096547',
+    colorWarning: '#F49F25',
+    colorWarningBorder: '#F9CB87',
+    colorWarningBg: '#FEF6E9',
+    colorWarningText: '#5B3600',
+    colorError: '#EF4343',
+    colorErrorBorder: '#F69898',
+    colorErrorBg: '#FDECEC',
+    colorErrorText: '#8A1B1B',
     colorTextBase: '#000000',
     colorText,
     colorTextSecondary,
-    colorTextQuaternary: '#c1cbe0',
-    colorTextTertiary: '#8592AD',
+    colorTextTertiary,
+    colorTextQuaternary,
+    colorIcon: colorTextSecondary,
     colorBgBase: '#ffffff',
     colorBgContainer: '#ffffff',
     colorBgLayout: colorFillQuaternary,
-    colorBorder: '#CDD5E4',
+    colorBorder: colorFill,
     colorBorderSecondary,
-    colorFillQuaternary,
-    colorFillTertiary,
+    colorFill,
     colorFillSecondary,
-    colorFill: '#cdd5e4',
+    colorFillTertiary,
+    colorFillQuaternary,
     colorBgMask: 'rgba(19, 32, 57, 0.45)',
     colorBgElevated: '#ffffff',
     colorBgSpotlight: '#ffffff',
@@ -92,6 +83,10 @@ const defaultTheme: ThemeConfig = {
       // fontHeight is internal token
       fontHeight: 20,
       lastItemColor: colorTextSecondary,
+    },
+    Card: {
+      headerFontSize: 16,
+      borderRadiusLG: 8,
     },
     Collapse: {
       colorBorder: colorBorderSecondary,
@@ -145,17 +140,15 @@ const defaultTheme: ThemeConfig = {
       colorBgSpotlight: '#ffffff',
       colorTextLightSolid: colorText,
     },
-    Card: {
-      borderRadiusLG: 8,
-    },
     Menu: {
       paddingContentVertical: 0,
       itemHeight: 30,
       itemBorderRadius: 4,
       // 80 means 50% opacity
-      itemSelectedBg: colorFillSecondary + '80',
       itemHoverBg: colorFillSecondary + '80',
-      itemColor: colorTextSecondary,
+      itemActiveBg: colorFillSecondary + '80',
+      itemSelectedBg: colorFillSecondary + '80',
+      itemColor: '#36496F',
       itemSelectedColor: colorText,
       itemMarginBlock: 6,
       groupTitleFontSize: 11,
