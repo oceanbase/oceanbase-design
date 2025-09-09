@@ -82,7 +82,7 @@ export const taskStatusList = [
 
 .button {
   color: @colorPrimary;
-  border-radius: ~'@{borderRadius}px';
+  border-radius: @borderRadius;
 }
 ```
 

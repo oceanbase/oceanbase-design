@@ -10,7 +10,7 @@
   font-size: 14px;
   line-height: 1.5714285714285714;
   list-style: none;
-  border-radius: ~'@{borderRadius}px';
+  border-radius: @borderRadius;
 
   &:not(:hover) .@{prefix}-copy {
     visibility: hidden;
@@ -192,7 +192,7 @@
     overflow-x: auto;
     color: #c0c5ce;
     background: #2b303b;
-    border-radius: ~'@{borderRadius}px';
+    border-radius: @borderRadius;
 
     &.@{prefix}-index {
       border-inline-end: 1px solid rgba(255, 255, 255, 0.05);
