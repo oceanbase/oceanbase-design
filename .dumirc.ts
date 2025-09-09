@@ -86,7 +86,7 @@ export default defineConfig({
     },
     {
       name: 'theme-color',
-      content: '#006AFF',
+      content: '#0D6CF2',
     },
     {
       name: 'google-site-verification',

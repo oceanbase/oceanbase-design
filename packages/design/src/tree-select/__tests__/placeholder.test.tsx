@@ -1,9 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { ConfigProvider, TreeSelect } from '@oceanbase/design';
+import { ConfigProvider, TreeSelect, theme } from '@oceanbase/design';
 import type { TreeSelectProps } from '@oceanbase/design';
 
 const TreeSelectTest: React.FC<TreeSelectProps> = props => {
+  const { token } = theme.useToken();
   const treeData = [
     {
       value: 'parent 1',
@@ -29,7 +30,7 @@ const TreeSelectTest: React.FC<TreeSelectProps> = props => {
           children: [
             {
               value: 'leaf3',
-              title: <b style={{ color: '#006AFF' }}>leaf3</b>,
+              title: <b style={{ color: token.colorInfo }}>leaf3</b>,
             },
           ],
         },
