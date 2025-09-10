@@ -8,6 +8,16 @@ group: 自动化迁移工具
 
 ---
 
+## 1.0.0-alpha.1
+
+`2025-09-10`
+
+- style-to-token
+  - ⭐️ 优化 `style-to-token` 对匿名函数组件的改写结果。[#1188](https://github.com/oceanbase/oceanbase-design/pull/1188)
+  - ⭐️ `style-to-token` 工具支持更多 `fontSize` 的改写场景。[#1190](https://github.com/oceanbase/oceanbase-design/pull/1190)
+  - 🐞 修复 `style-to-token` 对单个函数的改写结果错误的问题。[#1189](https://github.com/oceanbase/oceanbase-design/pull/1189)
+- 🐞 修复依赖升级的目标版本不正确的问题。[#1192](https://github.com/oceanbase/oceanbase-design/pull/1192)
+
 ## 1.0.0-alpha.0
 
 `2025-09-08`
