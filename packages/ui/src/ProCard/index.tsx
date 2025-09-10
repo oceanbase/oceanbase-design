@@ -11,7 +11,8 @@ export { ProCardProps };
 
 export type ProCardType = typeof AntProCard;
 
-const ProCard = (({
+// @ts-ignore
+const ProCard: ProCardType = ({
   bordered,
   ghost,
   title,
@@ -85,7 +86,7 @@ const ProCard = (({
       {...restProps}
     />
   );
-}) as ProCardType;
+};
 
 if (process.env.NODE_ENV !== 'production') {
   ProCard.displayName = AntProCard.displayName;

@@ -22,7 +22,6 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
             <table
               style="table-layout: auto;"
             >
-              <colgroup />
               <thead
                 class="ant-table-thead"
               >
@@ -459,7 +458,6 @@ exports[`Table > default empty should work 1`] = `
             <table
               style="table-layout: auto;"
             >
-              <colgroup />
               <thead
                 class="ant-table-thead"
               >
@@ -597,7 +595,6 @@ exports[`Table > default pagination should work 1`] = `
             <table
               style="table-layout: auto;"
             >
-              <colgroup />
               <thead
                 class="ant-table-thead"
               >
@@ -1103,7 +1100,6 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
             <table
               style="table-layout: auto;"
             >
-              <colgroup />
               <thead
                 class="ant-table-thead"
               >
@@ -1363,7 +1359,6 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
             <table
               style="table-layout: auto;"
             >
-              <colgroup />
               <thead
                 class="ant-table-thead"
               >
@@ -1776,7 +1771,6 @@ exports[`Table > innerBordered should work 1`] = `
             <table
               style="table-layout: auto;"
             >
-              <colgroup />
               <thead
                 class="ant-table-thead"
               >
@@ -2282,7 +2276,6 @@ exports[`Table > render 1`] = `
             <table
               style="table-layout: auto;"
             >
-              <colgroup />
               <thead
                 class="ant-table-thead"
               >

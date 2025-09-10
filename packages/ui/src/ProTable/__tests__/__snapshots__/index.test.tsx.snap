@@ -483,7 +483,6 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
                   <table
                     style="table-layout: auto;"
                   >
-                    <colgroup />
                     <thead
                       class="ant-table-thead"
                     >
@@ -1379,7 +1378,6 @@ exports[`ProTable > default pagination should work 1`] = `
                   <table
                     style="table-layout: auto;"
                   >
-                    <colgroup />
                     <thead
                       class="ant-table-thead"
                     >
@@ -2347,7 +2345,6 @@ exports[`ProTable > innerBordered should work 1`] = `
                   <table
                     style="table-layout: auto;"
                   >
-                    <colgroup />
                     <thead
                       class="ant-table-thead"
                     >
@@ -3315,7 +3312,6 @@ exports[`ProTable > render 1`] = `
                   <table
                     style="table-layout: auto;"
                   >
-                    <colgroup />
                     <thead
                       class="ant-table-thead"
                     >
