@@ -3,6 +3,7 @@ import { defineTest } from 'jscodeshift/src/testUtils';
 const testUnit = 'style-to-token';
 const tests = [
   'function-component',
+  'anonymous-function',
   'function',
   'hooks',
   'class-component',
