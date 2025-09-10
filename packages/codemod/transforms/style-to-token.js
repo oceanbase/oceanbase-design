@@ -278,13 +278,14 @@ function importComponent(j, root, options) {
 function processObjectProperties(j, root) {
   let hasChanged = false;
 
-  const objectPropertyList = root.find(j.ObjectProperty, {
+  // 处理数字字面量
+  const numericPropertyList = root.find(j.ObjectProperty, {
     key: { type: 'Identifier' },
     value: { type: 'NumericLiteral' },
   });
 
-  if (objectPropertyList.length > 0) {
-    objectPropertyList.replaceWith(path => {
+  if (numericPropertyList.length > 0) {
+    numericPropertyList.replaceWith(path => {
       const propertyName = path.value.key.name;
       const propertyValue = path.value.value.value;
 
@@ -297,11 +298,33 @@ function processObjectProperties(j, root) {
       }
       return path.value;
     });
+  }
 
-    // 如果发生了替换，需要添加 token 导入
-    if (hasChanged) {
-      addTokenImportsForObjectProperties(j, root);
-    }
+  // 处理字符串字面量（如 fontSize: '14px'）
+  const stringPropertyList = root.find(j.ObjectProperty, {
+    key: { type: 'Identifier' },
+    value: { type: 'StringLiteral' },
+  });
+
+  if (stringPropertyList.length > 0) {
+    stringPropertyList.replaceWith(path => {
+      const propertyName = path.value.key.name;
+      const propertyValue = path.value.value.value;
+
+      const tokenResult = propertyTokenParse(propertyName, propertyValue);
+      if (tokenResult) {
+        hasChanged = true;
+        const isJSXAttribute = path.parentPath.value.type === 'JSXAttribute';
+        const stringValue = wrapJSXValue(`token.${tokenResult.token}`, isJSXAttribute);
+        return j.objectProperty(j.identifier(propertyName), j.identifier(stringValue));
+      }
+      return path.value;
+    });
+  }
+
+  // 如果发生了替换，需要添加 token 导入
+  if (hasChanged) {
+    addTokenImportsForObjectProperties(j, root);
   }
 
   return hasChanged;

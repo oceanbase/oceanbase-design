@@ -13,7 +13,7 @@ const useStyle2 = createStyles(({}) => {
   return {
     main: {
       background: '#1890ff',
-      fontSize: 14,
+      fontSize: '14px',
     },
   };
 });
@@ -22,7 +22,7 @@ const useStyle3 = createStyles(({ token }) => {
   return {
     main: {
       background: '#1890ff',
-      fontSize: 14,
+      fontSize: 12,
     },
   };
 });

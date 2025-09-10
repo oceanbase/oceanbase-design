@@ -28,7 +28,7 @@ const useStyle3 = createStyles(({ token }) => {
   return {
     main: {
       background: token.colorInfo,
-      fontSize: token.fontSize,
+      fontSize: token.fontSizeSM,
     },
   };
 });
