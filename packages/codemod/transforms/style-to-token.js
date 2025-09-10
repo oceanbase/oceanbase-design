@@ -38,13 +38,28 @@ function wrapJSXValue(value, isJSXAttribute) {
 }
 
 // 检查是否为 React 组件或 Hook
-function isReactComponentOrHook(functionName) {
-  return (
-    // 匿名函数也认为是 React 组件或 Hook
-    !functionName ||
-    // 函数名以大写字母开头或以 use 开头
-    (functionName && (isFirstUpperCase(functionName) || functionName.startsWith('use')))
-  );
+function isReactComponentOrHook(functionName, path) {
+  // 如果有函数名，检查是否以大写字母开头或以 use 开头
+  if (functionName) {
+    return isFirstUpperCase(functionName) || functionName.startsWith('use');
+  }
+
+  // 对于匿名函数，检查是否是 export default function () {} 的形式
+  // 而不是 export default () => {} 的形式
+  if (path) {
+    const parentType = path.parentPath.value?.type;
+    if (parentType === 'FunctionDeclaration') {
+      // export default function () {} - 认为是 React 组件
+      return true;
+    }
+    if (parentType === 'ArrowFunctionExpression') {
+      // export default () => {} - 不认为是 React 组件
+      return false;
+    }
+  }
+
+  // 其他情况，默认不认为是 React 组件
+  return false;
 }
 
 // 检查 BlockStatement 中是否包含 token 使用
@@ -127,13 +142,21 @@ function addTokenImportToBlockStatement(j, root, path) {
   const includeJSXElement = j(path).find(j.JSXElement).length > 0;
   const functionName = getFunctionName(path);
 
-  if (includeJSXElement && isReactComponentOrHook(functionName)) {
+  if (includeJSXElement && isReactComponentOrHook(functionName, path)) {
     const insertString = 'const { token } = theme.useToken()';
     path.get('body').value.unshift(j.expressionStatement(j.identifier(insertString)));
     addSubmoduleImport(j, root, {
       moduleName: '@oceanbase/design',
       importedName: 'theme',
       importKind: 'value',
+    });
+  } else if (includeJSXElement) {
+    // 对于非 React 组件的函数，直接导入 token
+    addSubmoduleImport(j, root, {
+      moduleName: '@oceanbase/design',
+      importedName: 'token',
+      importKind: 'value',
+      after: 'react',
     });
   }
 }
