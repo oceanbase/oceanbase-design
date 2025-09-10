@@ -39,7 +39,12 @@ function wrapJSXValue(value, isJSXAttribute) {
 
 // 检查是否为 React 组件或 Hook
 function isReactComponentOrHook(functionName) {
-  return functionName && (isFirstUpperCase(functionName) || functionName.startsWith('use'));
+  return (
+    // 匿名函数也认为是 React 组件或 Hook
+    !functionName ||
+    // 函数名以大写字母开头或以 use 开头
+    (functionName && (isFirstUpperCase(functionName) || functionName.startsWith('use')))
+  );
 }
 
 // 检查 BlockStatement 中是否包含 token 使用
@@ -200,17 +205,6 @@ function processStringLiterals(j, root) {
       hasChanged = true;
       const { key, token, formattedValue } = tokenParse(path.value.value);
       const isJSXAttribute = path.parentPath.value.type === 'JSXAttribute';
-
-      console.log(
-        'Processing string:',
-        path.value.value,
-        'isJSXAttribute:',
-        isJSXAttribute,
-        'formattedValue:',
-        formattedValue,
-        'key:',
-        key
-      );
 
       if (formattedValue === key) {
         // 完全匹配的情况，直接返回 token.xxx
