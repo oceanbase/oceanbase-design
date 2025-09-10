@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/util",
-  "version": "0.4.4",
+  "version": "1.0.0-alpha.0",
   "description": "The Util Library for OceanBase",
   "keywords": [
     "oceanbase",
