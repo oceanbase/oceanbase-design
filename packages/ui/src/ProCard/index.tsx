@@ -1,17 +1,18 @@
 import React, { useContext } from 'react';
 import { ProCard as AntProCard } from '@ant-design/pro-components';
 import type { ProCardProps } from '@ant-design/pro-components';
-import { ConfigProvider } from '@oceanbase/design';
+import { ConfigProvider, theme } from '@oceanbase/design';
 import { isHorizontalPaddingZero } from '@oceanbase/design/es/_util';
-import { theme } from '@oceanbase/design';
+import { CaretRightFilled } from '@oceanbase/icons';
 import classNames from 'classnames';
 import useStyle from './style';
-import { CaretRightFilled } from '@oceanbase/icons';
 
 export { ProCardProps };
 
-// @ts-ignore
-const ProCard: typeof AntProCard = ({
+export type ProCardType = typeof AntProCard;
+
+const ProCard = (({
+  bordered,
   ghost,
   title,
   tabs,
@@ -19,9 +20,14 @@ const ProCard: typeof AntProCard = ({
   bodyStyle,
   prefixCls: customizePrefixCls,
   className,
+  style,
   ...restProps
 }) => {
-  const { getPrefixCls, iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const {
+    getPrefixCls,
+    iconPrefixCls,
+    card: contextCard,
+  } = useContext(ConfigProvider.ConfigContext);
 
   const prefixCls = getPrefixCls('pro-card', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
@@ -37,12 +43,16 @@ const ProCard: typeof AntProCard = ({
       [`${prefixCls}-no-divider`]: !headerBordered,
       [`${prefixCls}-contain-tabs`]: !!tabs,
     },
+    contextCard?.className,
     className
   );
 
   return wrapSSR(
     <AntProCard
       prefixCls={customizePrefixCls}
+      bordered={
+        bordered ?? (contextCard?.variant ? contextCard?.variant === 'outlined' : undefined)
+      }
       ghost={ghost}
       title={title}
       tabs={
@@ -53,9 +63,13 @@ const ProCard: typeof AntProCard = ({
             }
           : tabs
       }
-      headerBordered={headerBordered}
+      headerBordered={headerBordered ?? contextCard?.divided}
       bodyStyle={bodyStyle}
       className={proCardCls}
+      style={{
+        ...contextCard?.style,
+        ...style,
+      }}
       collapsibleIconRender={({ collapsed }) => {
         return (
           <CaretRightFilled
@@ -71,7 +85,7 @@ const ProCard: typeof AntProCard = ({
       {...restProps}
     />
   );
-};
+}) as ProCardType;
 
 if (process.env.NODE_ENV !== 'production') {
   ProCard.displayName = AntProCard.displayName;
