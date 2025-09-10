@@ -5,6 +5,7 @@ const tests = [
   'function-component',
   'anonymous-function',
   'function',
+  'single-function',
   'hooks',
   'class-component',
   'block-statement',
