@@ -15,6 +15,7 @@ nav:
 <code src="./demo/ghost.tsx" title="ghost 模式" description="去掉卡片背景颜色和内容区域的 padding。"></code>
 <code src="./demo/collapsible.tsx" title="卡片可折叠"></code>
 <code src="../../../design/src/table/demo/pro-card-table.tsx" title="和 Table 组合使用"></code>
+<code src="./demo/config-provider.tsx" title="ConfigProvider 全局配置"></code>
 
 ## API
 
