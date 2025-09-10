@@ -8,6 +8,13 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.1
+
+`2025-09-10`
+
+- 🌈 更新主题色、文本色、填充色相关的 Design Token。[#1186](https://github.com/oceanbase/oceanbase-design/pull/1186)
+- 🌈 [图标]更新双色图标的主题色 `#006AFF` => `#0D6CF2`。[#1191](https://github.com/oceanbase/oceanbase-design/pull/1191)
+
 ## 1.0.0-alpha.0
 
 `2025-09-08`

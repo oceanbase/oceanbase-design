@@ -8,6 +8,13 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.1
+
+`2025-09-10`
+
+- 🆕 ProCard 支持 ConfigProvider 全局配置。[#1187](https://github.com/oceanbase/oceanbase-design/pull/1187)
+- 🐞 修复 DateRanger、GraphToolbar 和 Highlight 圆角样式不生效的问题。[#1185](https://github.com/oceanbase/oceanbase-design/pull/1185)
+
 ## 1.0.0-alpha.0
 
 `2025-09-08`
