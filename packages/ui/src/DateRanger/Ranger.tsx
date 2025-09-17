@@ -1,20 +1,31 @@
-import React, { useEffect, useState, useImperativeHandle, useRef } from 'react';
+import React, { useEffect, useRef, useState, useImperativeHandle, useMemo } from 'react';
 import {
   Button,
   DatePicker,
   Divider,
   Dropdown,
+  Flex,
+  Menu,
   Radio,
   Space,
   Tooltip,
+  message,
   theme,
 } from '@oceanbase/design';
 import type { TooltipProps } from '@oceanbase/design';
-import { LeftOutlined, RightOutlined, ZoomOutOutlined, SyncOutlined } from '@oceanbase/icons';
+import {
+  LeftOutlined,
+  RightOutlined,
+  ZoomOutOutlined,
+  SyncOutlined,
+  ArrowLeftOutlined,
+  CopyOutlined,
+  DeleteOutlined,
+} from '@oceanbase/icons';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
-import { findIndex, isNil, noop, omit } from 'lodash';
+import { findIndex, isEqual as _isEqual, isNil, noop, omit } from 'lodash';
 import type { Moment } from 'moment';
 import moment from 'moment';
 import classNames from 'classnames';
@@ -46,10 +57,13 @@ import zhCN from './locale/zh-CN';
 import enUS from './locale/en-US';
 import './index.less';
 import { useClickAway } from 'ahooks';
+import { useLocalStorageState } from '@oceanbase/util';
 
 export type RangeName = 'customize' | string;
 
 export type RangeValue = [Moment, Moment] | [Dayjs, Dayjs] | [] | null;
+
+export type RangeValueFormat = [string, string] | [] | null;
 
 export type RangeDateValue = {
   name: RangeName;
@@ -67,6 +81,11 @@ export interface DateRangerProps
   hasSync?: boolean;
   hasForward?: boolean;
   hasZoomOut?: boolean;
+  history?:
+    | boolean
+    | {
+        capacity: number;
+      };
   // 是否在选项面板中展示Tag
   hasTagInPicker?: boolean;
   // 时间选择提示
@@ -95,6 +114,8 @@ export interface DateRangerProps
   locale?: any;
 }
 
+const DefaultMaxHistoryCapacity = 20;
+
 const prefix = getPrefix('date-ranger');
 
 const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
@@ -122,6 +143,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     hideYear = false,
     hideSecond = false,
     autoCalcRange = false,
+    history: historyProp = false,
     onChange = noop,
     disabledDate,
     locale,
@@ -171,12 +193,59 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   const [open, setOpen] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [backRadioFocused, setBackRadioFocused] = useState(false);
+  const [historyMenuVisible, setHistoryMenuVisible] = useState(false);
   const rangeRef = useRef(null);
   const popRef = useRef(null);
   const labelRef = useRef(null);
 
   // 没有 selects 时，回退到普通 RangePicker, 当前时间选项为自定义时，应该显示 RangePicker
   const [isPlay, setIsPlay] = useState(rangeName !== CUSTOMIZE);
+
+  const history = useMemo(() => {
+    if (historyProp) {
+      return {
+        capacity:
+          typeof historyProp === 'object' ? historyProp.capacity : DefaultMaxHistoryCapacity,
+      };
+    }
+    return false;
+  }, [historyProp]);
+  const [rangeHistory, setRangeHistory] = useLocalStorageState<RangeValueFormat[]>(
+    'ob-design-date-ranger-local-storage-range-history-state',
+    { defaultValue: [], listenStorageChange: true }
+  );
+
+  const updateRangeHistory = (range?: RangeValue) => {
+    if (!range) {
+      return;
+    }
+
+    if (range.length < 2 || !history) {
+      return;
+    }
+
+    const formattedValue: RangeValueFormat = [
+      range[0].format(YEAR_DATE_TIME_SECOND_FORMAT_CN),
+      range[1].format(YEAR_DATE_TIME_SECOND_FORMAT_CN),
+    ];
+
+    if (rangeHistory.find(item => _isEqual(item, formattedValue))) {
+      return;
+    }
+
+    const updatedValue = [formattedValue, ...rangeHistory];
+
+    if (updatedValue.length > history.capacity) {
+      updatedValue.splice(0, history.capacity);
+    }
+
+    setRangeHistory(updatedValue);
+  };
+
+  const delRangeHistory = (range: RangeValueFormat) => {
+    const updatedValue = rangeHistory.filter(item => !_isEqual(item, range));
+    setRangeHistory(updatedValue);
+  };
 
   const compare = (m1: RangeValue, m2: RangeValue) => {
     if (Array.isArray(m1) && !Array.isArray(m2)) return false;
@@ -222,6 +291,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   const rangeChange = (range: RangeValue) => {
     setInnerValue(range);
     onChange(range);
+    updateRangeHistory(range);
   };
 
   const datePickerChange = (range: RangeValue) => {
@@ -302,6 +372,10 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     return isEN ? `Nearly ${differenceSeconds} seconds` : `近 ${differenceSeconds} 秒`;
   };
 
+  const getHistoryTitle = () => {
+    return isEN ? 'History records' : '历史记录';
+  };
+
   const setNow = () => {
     const selected = selects.find(item => item.name === rangeName);
     if (selected?.range) {
@@ -377,7 +451,104 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   className={classNames(`${prefix}-dropdown-picker`, overlayClassName)}
                   style={overlayStyle}
                 >
-                  {originNode}
+                  <Flex vertical justify="space-between">
+                    {!historyMenuVisible && <div className="options">{originNode}</div>}
+                    {history && historyMenuVisible && (
+                      <div className="history">
+                        <Button
+                          type="link"
+                          style={{ paddingLeft: 8, color: token.colorTextBase }}
+                          onClick={e => {
+                            setHistoryMenuVisible(false);
+                            e.stopPropagation();
+                          }}
+                        >
+                          <ArrowLeftOutlined color={token.colorTextLabel} />
+                          {getHistoryTitle()}
+                        </Button>
+                        <Menu
+                          onClick={({ key: rangeString }) => {
+                            const vList = rangeString.split(',').map(v => v.trim());
+                            rangeChange(
+                              vList.map(v => {
+                                return isMoment ? moment(v) : dayjs(v);
+                              }) as RangeValue
+                            );
+                            handleNameChange(CUSTOMIZE);
+                          }}
+                          style={{ maxHeight: 480, overflowY: 'auto' }}
+                          items={rangeHistory.map(range => {
+                            return {
+                              key: String(range),
+                              label: (
+                                <Flex
+                                  className={`${prefix}-history-menu-item`}
+                                  key={String(range)}
+                                  vertical
+                                >
+                                  <span>
+                                    {(isMoment ? moment(range[0]) : dayjs(range[0])).format(
+                                      YEAR_DATE_TIME_SECOND_FORMAT_CN
+                                    )}
+                                    ~
+                                  </span>
+                                  <span>
+                                    {(isMoment ? moment(range[1]) : dayjs(range[1])).format(
+                                      YEAR_DATE_TIME_SECOND_FORMAT_CN
+                                    )}
+                                  </span>
+                                  <Space className={`${prefix}-menu-text-btn-wrapper`}>
+                                    <Button
+                                      className={`${prefix}-menu-text-btn`}
+                                      type="text"
+                                      color="default"
+                                      variant="filled"
+                                      size="small"
+                                      onClick={e => {
+                                        e.stopPropagation();
+                                        const vList = range.map(v => v);
+                                        const text = `${vList.join('~')}`;
+                                        navigator.clipboard.writeText(text);
+                                        message.success(text);
+                                      }}
+                                    >
+                                      <CopyOutlined />
+                                    </Button>
+                                    <Button
+                                      className={`${prefix}-menu-text-btn`}
+                                      type="text"
+                                      color="default"
+                                      variant="filled"
+                                      size="small"
+                                      onClick={e => {
+                                        e.stopPropagation();
+                                        delRangeHistory(range);
+                                      }}
+                                    >
+                                      <DeleteOutlined />
+                                    </Button>
+                                  </Space>
+                                </Flex>
+                              ),
+                            };
+                          })}
+                        />
+                      </div>
+                    )}
+                    {history && !historyMenuVisible && (
+                      <Button
+                        type="link"
+                        style={{ width: 'max-content' }}
+                        onClick={e => {
+                          setHistoryMenuVisible(true);
+                          e.stopPropagation();
+                        }}
+                      >
+                        {getHistoryTitle()}
+                        <RightOutlined />
+                      </Button>
+                    )}
+                  </Flex>
                   <Divider type="vertical" style={{ height: 'auto', margin: '0px 4px 0px 0px' }} />
                   <InternalPickerPanel
                     defaultValue={innerValue || []}
