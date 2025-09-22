@@ -60,9 +60,15 @@ async function transform(file) {
         }
       }
     } else if (node.type === 'atrule' && node.name === 'import') {
-      if (node.params === "'~@oceanbase/design/es/theme/index.less'") {
+      if (
+        node.params?.includes("'~@oceanbase/design/es/theme/index.less'") ||
+        node.params?.includes('"~@oceanbase/design/es/theme/index.less"')
+      ) {
         tokenLessImported = true;
-      } else if (node.params === "'~@alipay/ob-ui/es/theme/index.less'") {
+      } else if (
+        node.params?.includes("'~@alipay/ob-ui/es/theme/index.less'") ||
+        node.params?.includes('"~@alipay/ob-ui/es/theme/index.less"')
+      ) {
         node.remove();
       }
     }

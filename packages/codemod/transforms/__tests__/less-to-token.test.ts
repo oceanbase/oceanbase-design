@@ -9,6 +9,8 @@ const tests = [
   'case-insensitive',
   'mixin',
   'obui-less-token-to-token',
+  'exist-import',
+  'exist-import-url',
 ];
 
 describe(testUnit, () => {
