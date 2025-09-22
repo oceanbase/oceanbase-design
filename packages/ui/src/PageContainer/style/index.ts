@@ -12,13 +12,11 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
     proComponentsCls,
     componentCls,
     colorBgLayout,
-    fontSizeHeading3,
+    fontSizeHeading2,
     controlHeightLG,
     padding,
     paddingLG,
   } = token;
-  const height = controlHeightLG;
-  const lineHeight = `${controlHeightLG}px`;
 
   return {
     [`${componentCls}`]: {
@@ -42,7 +40,7 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
           paddingBlockStart: 0,
         },
         [`${antCls}-page-header-heading-title`]: {
-          fontSize: fontSizeHeading3,
+          fontSize: fontSizeHeading2,
           marginInlineEnd: token.marginXS,
         },
         [`${antCls}-page-header-heading-reload`]: {
@@ -50,9 +48,10 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
           fontSize: token.fontSizeLG,
           marginTop: token.marginXXS,
         },
+        [`${antCls}-page-header-heading-left`]: {
+          marginBlock: 0,
+        },
         [`${antCls}-page-header-heading-extra`]: {
-          height,
-          lineHeight,
           marginBlock: 0,
         },
         [`${antCls}-page-header-footer`]: {
