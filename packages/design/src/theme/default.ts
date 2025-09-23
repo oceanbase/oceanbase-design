@@ -37,7 +37,7 @@ const defaultTheme: ThemeConfig = {
     controlHeight: 28,
     colorPrimary: colorPrimary,
     colorInfo: colorPrimary,
-    colorInfoBorder: '#598CF3',
+    colorInfoBorder: colorBorderSecondary,
     colorInfoBg: '#EAF1FF',
     colorInfoText: '#083E8B',
     colorSuccess: '#14B781',
@@ -81,9 +81,6 @@ const defaultTheme: ThemeConfig = {
     lineWidthFocus: 0,
   },
   components: {
-    Badge: {
-      colorInfo: colorPrimarySecondary,
-    },
     Breadcrumb: {
       fontSize: 12,
       // @ts-ignore
