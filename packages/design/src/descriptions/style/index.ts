@@ -15,7 +15,7 @@ export const genVerticalStyle = (
   const { componentCls } = token;
   const paddingMap = {
     default: {
-      paddingIn: token.paddingXS,
+      paddingIn: token.paddingXXS,
       paddingOut: token.paddingLG,
     },
     middle: {
@@ -39,6 +39,11 @@ export const genVerticalStyle = (
       [`${componentCls}-row:nth-child(2n)`]: {
         [`& > th, & > td`]: {
           paddingBottom: paddingConfig.paddingOut,
+        },
+      },
+      [`${componentCls}-item`]: {
+        [`${componentCls}-item-label`]: {
+          fontSize: token.fontSizeSM,
         },
       },
     },
