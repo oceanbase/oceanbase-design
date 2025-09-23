@@ -98,6 +98,9 @@ const defaultTheme: ThemeConfig = {
     Collapse: {
       colorBorder: colorBorderSecondary,
     },
+    Descriptions: {
+      labelColor: colorTextSecondary,
+    },
     InputNumber: {
       handleVisible: true,
     },
