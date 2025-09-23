@@ -15,6 +15,9 @@ export const genProCardStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObje
     [`div${componentCls}`]: {
       borderRadius: token.borderRadiusLG,
     },
+    [`${componentCls}${componentCls}-border`]: {
+      border: `${token.lineWidth}px solid ${token.colorBorderSecondary}`,
+    },
     [`${componentCls}:not(${componentCls}-border):not(${componentCls}-ghost)`]: {
       boxShadow:
         '0 1px 2px 0 rgba(0, 0, 0, 0.03),0 1px 6px -1px rgba(0, 0, 0, 0.02),0 2px 4px 0 rgba(0, 0, 0, 0.02)',
