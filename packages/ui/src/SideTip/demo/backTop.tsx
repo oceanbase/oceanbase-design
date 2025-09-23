@@ -3,7 +3,7 @@
  * iframe: true
  */
 import React from 'react';
-import { BackTop } from '@oceanbase/design';
+import { FloatButton } from '@oceanbase/design';
 import { SideTip } from '@oceanbase/ui';
 import { ArrowUpOutlined } from '@oceanbase/icons';
 
@@ -17,15 +17,15 @@ export default () => {
       <div>Scroll to bottom</div>
       <div>Scroll to bottom</div>
       <div>Scroll to bottom</div>
-      <BackTop>
+      <FloatButton.BackTop>
         <SideTip
           hideable={false}
           buttonStyle={{ opacity: 0.9 }}
           icon={<ArrowUpOutlined />}
           tooltip={{ title: '返回顶部', placement: 'left', mouseEnterDelay: 0.4 }}
         />
-      </BackTop>
-      <BackTop>
+      </FloatButton.BackTop>
+      <FloatButton.BackTop>
         <SideTip
           hideable={false}
           buttonStyle={{ opacity: 0.9 }}
@@ -34,7 +34,7 @@ export default () => {
           icon={<ArrowUpOutlined />}
           tooltip={{ title: '返回顶部', placement: 'left', mouseEnterDelay: 0.4 }}
         />
-      </BackTop>
+      </FloatButton.BackTop>
     </div>
   );
 };

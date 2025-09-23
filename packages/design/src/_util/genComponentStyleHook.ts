@@ -35,7 +35,7 @@ export function genComponentStyleHook(
     // ref: https://github.com/ant-design/ant-design/blob/master/components/theme/useToken.ts#L80
     const { hashId } = theme.useToken();
     return {
-      wrapSSR,
+      wrapSSR: (node: React.ReactNode) => node,
       hashId,
     };
   };
