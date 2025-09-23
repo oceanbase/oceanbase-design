@@ -135,9 +135,9 @@ const defaultTheme: ThemeConfig = {
     Table: {
       cellFontSize: 12,
       headerSplitColor: 'transparent',
-      cellPaddingBlock: 12,
+      cellPaddingBlock: 8,
       cellPaddingInline: 16,
-      cellPaddingBlockMD: 8,
+      cellPaddingBlockMD: 6,
       cellPaddingBlockSM: 4,
       rowHoverBg: colorFillQuaternary,
       rowSelectedBg: colorFillQuaternary,
