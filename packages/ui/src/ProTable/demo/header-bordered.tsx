@@ -32,9 +32,11 @@ const App: React.FC = () => {
 
   return (
     <ProTable
-      innerBordered={true}
       headerTitle="高级表格"
       cardBordered={true}
+      cardProps={{
+        headerBordered: true,
+      }}
       columns={columns}
       dataSource={dataSource}
     />

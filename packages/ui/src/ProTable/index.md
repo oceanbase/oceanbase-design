@@ -13,10 +13,10 @@ nav:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本" description="卡片带边框"></code>
+<code src="./demo/header-bordered.tsx" title="表格标题区和内容区分隔"></code>
 <code src="./demo/light-filter.tsx" title="轻量筛选"></code>
 <code src="./demo/expandable.tsx" title="可展开表格"></code>
 <code src="./demo/bordered.tsx" title="卡片不带边框、表格带边框"></code>
-<code src="./demo/inner-bordered.tsx" title="表格带内部边框"></code>
 <code src="./demo/empty.tsx" title="空状态"></code>
 
 ## API
