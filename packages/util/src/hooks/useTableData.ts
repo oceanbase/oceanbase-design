@@ -1,5 +1,5 @@
 import { some, isNil, noop, omitBy } from 'lodash';
-import { useAntdTable } from 'ahooks';
+import { useAntdTable } from 'ahooks-v2';
 import { DEFAULT_LIST_DATA } from '../constant';
 import { isNullValue } from '../util';
 

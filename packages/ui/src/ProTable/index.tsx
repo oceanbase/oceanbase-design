@@ -107,6 +107,10 @@ function ProTable<T, U, ValueType>({
               },
               cardProps?.className
             ),
+            bodyStyle: {
+              paddingBlock: 0,
+              ...cardProps?.bodyStyle,
+            },
           }}
           expandable={
             expandable

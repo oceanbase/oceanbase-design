@@ -39,13 +39,13 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.24.0",
-    "@ctrl/tinycolor": "^4.1.0",
+    "@ctrl/tinycolor": "^4.2.0",
     "@inline-svg-unique-id/react": "^1.2.3",
     "@oceanbase/aliyun-theme": "^0.1.6",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.27.3",
+    "antd": "^5.27.4",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
     "lottie-web": "^5.13.0",
@@ -57,8 +57,8 @@
     "@babel/preset-env": "^7.28.3",
     "antd-token-previewer": "^2.0.8",
     "rc-select": "^14.16.8",
-    "rc-slider": "^11.1.8",
-    "rc-table": "^7.53.0",
+    "rc-slider": "^11.1.9",
+    "rc-table": "^7.54.0",
     "rc-tree-select": "^5.27.0"
   },
   "peerDependencies": {

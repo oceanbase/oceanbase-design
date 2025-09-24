@@ -218,7 +218,7 @@ export const THIS_WEEK: RangeOption = {
 export const LAST_WEEK: RangeOption = {
   label: '上周',
   enLabel: 'Last week',
-  rangeLabel: 'last week',
+  rangeLabel: '1w',
   name: 'LAST_WEEK',
   range: (current: Moment | Dayjs = moment()) => [
     current.clone().startOf(WEEK_UNIT).add(-1, WEEK_UNIT),
