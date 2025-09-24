@@ -8,8 +8,9 @@ export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSS
   const { componentCls } = token;
   return {
     [`${componentCls}`]: {
-      // inherit color from parent instead of fixed colorText
+      // make status text inherit parent style
       color: 'inherit',
+      fontSize: 'inherit',
     },
     [`${componentCls}${componentCls}-status`]: {
       // dot style
@@ -44,8 +45,9 @@ export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSS
 
       [`${componentCls}-status-text`]: {
         marginInlineStart: token.marginXS,
-        // inherit color from parent instead of fixed colorText
+        // inherit style from parent
         color: 'inherit',
+        fontSize: 'inherit',
       },
     },
   };

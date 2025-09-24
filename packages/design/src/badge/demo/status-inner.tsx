@@ -9,7 +9,11 @@ const App: React.FC = () => (
     <Button danger={true}>
       <Badge status="success" text="Success" icon={true} />
     </Button>
-    <Tooltip open={true} title={<Badge status="success" text="Success" />}>
+    <Tooltip
+      open={true}
+      title={<Badge status="success" text="Success" />}
+      overlayStyle={{ fontSize: 12 }}
+    >
       <span>Tooltip</span>
     </Tooltip>
   </Space>
