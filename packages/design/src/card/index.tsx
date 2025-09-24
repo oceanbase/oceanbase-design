@@ -30,6 +30,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       size,
       title,
       tabList,
+      tabProps,
       divided: outerDivided,
       prefixCls: customizePrefixCls,
       bodyStyle,
@@ -81,6 +82,10 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         size={size}
         title={title}
         tabList={newTabList}
+        tabProps={{
+          size: 'middle',
+          ...tabProps,
+        }}
         prefixCls={customizePrefixCls}
         bodyStyle={bodyStyle}
         styles={styles}
