@@ -47,6 +47,7 @@ const TOKEN_MAP = {
   '#ff4d4f': 'colorError',
   '#f5222d': 'colorError',
   '#f8636b': 'colorError',
+  '#f93939': 'colorError',
   '#d9d9d9': 'colorBorder',
   '#bfbfbf': 'colorBorder',
   '#e8e8e8': 'colorBorder',
@@ -122,12 +123,12 @@ const TOKEN_MAP = {
   '#cdd5e4': 'colorBorder',
   '#f5f8fe': 'colorBgLayout',
   '#f5f7fa': 'colorBgLayout',
+  '#f8fafe': 'colorBgLayout',
   'rgba(140,140,140,0.1)': 'colorBgLayout',
   'rgb(240,242,245)': 'colorBgLayout',
   '#132039': 'colorText',
   '#364563': 'colorTextSecondary',
   '#8592ad': 'colorTextTertiary',
-  '#f8fafe': 'colorFillQuaternary',
 };
 
 const TOKEN_MAP_KEYS = Object.keys(TOKEN_MAP).map(key => formatValue(key));
