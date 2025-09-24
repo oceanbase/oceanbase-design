@@ -21,11 +21,10 @@ export const genTabsStyle = (token: Partial<TabsToken>): CSSObject => {
         /** @deprecated */
         [`${componentCls}-tab-tag`]: {
           color: colorTextSecondary,
-          fontFamily: 'PingFangSC',
           fontSize: 12,
           borderRadius: 12,
           marginInlineEnd: 0,
-          height: 20,
+          height: token.controlHeightSM,
         },
         [`${componentCls}-tab-badge`]: {
           [`>${antCls}-badge-count`]: {

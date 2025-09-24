@@ -14,6 +14,7 @@ const colorFillQuaternary = '#F8FAFE';
 const colorFillHover = '#EFF3FA';
 const colorFillSelected = '#E2E8F3';
 const colorBorderSecondary = colorFillSecondary;
+const fontSizeSM = 12;
 // Calculated by colorBorder and getWeakenBorderColor()
 const tagColorBorder = '#cdd5e466';
 
@@ -27,7 +28,7 @@ const defaultTheme: ThemeConfig = {
     borderRadiusLG: 8,
     borderRadiusSM: 2,
     fontSize: 13,
-    fontSizeSM: 12,
+    fontSizeSM,
     fontSizeLG: 16,
     fontSizeHeading1: 24,
     fontSizeHeading2: 20,
@@ -82,7 +83,7 @@ const defaultTheme: ThemeConfig = {
   },
   components: {
     Breadcrumb: {
-      fontSize: 12,
+      fontSize: fontSizeSM,
       // @ts-ignore
       // fontHeight is internal token
       fontHeight: 20,
@@ -136,7 +137,7 @@ const defaultTheme: ThemeConfig = {
       colorBorder: tagColorBorder,
     },
     Table: {
-      cellFontSize: 12,
+      cellFontSize: fontSizeSM,
       headerSplitColor: 'transparent',
       cellPaddingBlock: 8,
       cellPaddingInline: 16,
