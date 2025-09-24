@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ProCard as AntProCard } from '@ant-design/pro-components';
 import type { ProCardProps } from '@ant-design/pro-components';
-import { ConfigProvider, theme } from '@oceanbase/design';
+import { ConfigProvider, Skeleton, theme } from '@oceanbase/design';
 import { isHorizontalPaddingZero } from '@oceanbase/design/es/_util';
 import { CaretRightFilled } from '@oceanbase/icons';
 import classNames from 'classnames';
@@ -13,6 +13,7 @@ export type ProCardType = typeof AntProCard;
 
 // @ts-ignore
 const ProCard: ProCardType = ({
+  loading,
   bordered,
   ghost,
   title,
@@ -50,6 +51,9 @@ const ProCard: ProCardType = ({
 
   return wrapSSR(
     <AntProCard
+      loading={
+        loading === true ? <Skeleton active title={false} paragraph={{ rows: 4 }} /> : loading
+      }
       prefixCls={customizePrefixCls}
       bordered={
         bordered ?? (contextCard?.variant ? contextCard?.variant === 'outlined' : undefined)
