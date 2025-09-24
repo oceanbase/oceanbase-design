@@ -8,6 +8,13 @@ group: 自动化迁移工具
 
 ---
 
+## 1.0.0-alpha.2
+
+`2025-09-24`
+
+- ⭐️ 支持 `#f93939` => `colorError` 和 `#f8fafe` => `colorBgLayout` 的 Design Token 自动改写。[#1217](https://github.com/oceanbase/oceanbase-design/pull/1217)
+- 🐞 修复 `less-to-token` 可能重复导入主题文件的问题。[#1199](https://github.com/oceanbase/oceanbase-design/pull/1199)
+
 ## 1.0.0-alpha.1
 
 `2025-09-10`
