@@ -8,6 +8,21 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.2
+
+`2025-09-24`
+
+- PageContainer
+  - 💄 更新 PageContainer 的返回图标。[#1215](https://github.com/oceanbase/oceanbase-design/pull/1215)
+  - 💄 优化 PageContainer 标题和操作区的样式。[#1202](https://github.com/oceanbase/oceanbase-design/pull/1202)
+- ProCard
+  - 🐞 修复 ProCard 边框颜色和 Card 不一致的问题。[#1207](https://github.com/oceanbase/oceanbase-design/pull/1207)
+  - 🐞 修复 ProCard 加载态骨架屏和 Card 不一致的问题。[#1213](https://github.com/oceanbase/oceanbase-design/pull/1213)
+- ProTable
+  - 🐞 修复 ProTable `cardBordered` 和 `cardProps` 不受 ConfigProvider `card` 配置影响的问题。[#1209](https://github.com/oceanbase/oceanbase-design/pull/1209)
+  - 🐞 修复 ProTable `cardProps.headerBordered` 属性不生效的问题。[#1210](https://github.com/oceanbase/oceanbase-design/pull/1210)
+  - 🐞 修复 ProTable 卡片底部间距过大的问题。[#1219](https://github.com/oceanbase/oceanbase-design/pull/1219)
+
 ## 1.0.0-alpha.1
 
 `2025-09-10`

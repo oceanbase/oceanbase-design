@@ -8,6 +8,24 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.2
+
+`2025-09-24`
+
+- Design Token
+  - 🌈 更新 `fontSizeLG` 和 `fontSizeHeading` 字体大小。[#1200](https://github.com/oceanbase/oceanbase-design/pull/1200)
+  - 🌈 更新 `controlHeight` 控件高度 `32` => `28`。[#1201](https://github.com/oceanbase/oceanbase-design/pull/1201)
+  - 🌈 更新 `borderRadiusLG` 大号圆角 `6` => `8`。[#1206](https://github.com/oceanbase/oceanbase-design/pull/1206)
+  - 🌈 更新 Table `cellPaddingBlock` 单元格纵向间距。[#1208](https://github.com/oceanbase/oceanbase-design/pull/1208)
+- Badge
+  - 🐞 修复 Badge 状态文本字体大小不会继承父元素的问题，便于和其他组件组合使用。[#1214](https://github.com/oceanbase/oceanbase-design/pull/1214)
+  - 💄 调整 Badge `processing` 态的颜色和圆点大小。[#1205](https://github.com/oceanbase/oceanbase-design/pull/1205)
+- Card
+  - 💄 Card `tabs` 默认尺寸改为 `middle`。[#1216](https://github.com/oceanbase/oceanbase-design/pull/1216)
+  - 💄 优化 Card 嵌套时的圆角样式，内层卡片的圆角逐级递减。[#1211](https://github.com/oceanbase/oceanbase-design/pull/1211)
+- 💄 优化 Descriptions `label` 的字体颜色和垂直布局下的间距。[#1204](https://github.com/oceanbase/oceanbase-design/pull/1204)
+- 💄 优化 Skeleton 的骨架屏圆角 `2` => `4`。[#1212](https://github.com/oceanbase/oceanbase-design/pull/1212)
+
 ## 1.0.0-alpha.1
 
 `2025-09-10`
