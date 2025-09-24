@@ -8,6 +8,15 @@ group: 业务组件
 
 ---
 
+## 0.4.20
+
+`2025-09-24`
+
+- DateRanger
+  - 🆕 DateRanger 新增历史记录功能。[#1149](https://github.com/oceanbase/oceanbase-design/pull/1149) [@wzc520pyfm](https://github.com/wzc520pyfm)
+  - 🐞 修复 DateRanger `上周` 时间段 label 过长的问题。[#1198](https://github.com/oceanbase/oceanbase-design/pull/1198) [@wzc520pyfm](https://github.com/wzc520pyfm)
+- 🐞 修复 ProTable 卡片底部间距过大的问题。[#1219](https://github.com/oceanbase/oceanbase-design/pull/1219)
+
 ## 0.4.19
 
 `2025-08-29`
