@@ -12,7 +12,7 @@ export default () => {
       title="页面标题"
       footer={[<Button>重置</Button>, <Button type="primary">提交</Button>]}
     >
-      <Card bordered={false}>
+      <Card>
         <Descriptions title="基本信息">
           <Descriptions.Item label="创建人">曲丽丽</Descriptions.Item>
           <Descriptions.Item label="电话号码">1810000000</Descriptions.Item>

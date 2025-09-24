@@ -13,7 +13,6 @@ export default () => {
       }}
     >
       <Card
-        bordered={false}
         style={{
           display: 'flex',
           justifyContent: 'center',

@@ -55,9 +55,7 @@ export default () => {
               ],
             }}
           >
-            <Button key="3" style={{ padding: '0 8px' }}>
-              <EllipsisOutlined />
-            </Button>
+            <Button key="3" icon={<EllipsisOutlined />} />
           </Dropdown>,
         ],
       }}

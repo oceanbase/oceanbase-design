@@ -35,15 +35,13 @@ export default () => {
               ],
             }}
           >
-            <Button key="3" style={{ padding: '0 8px' }}>
-              <EllipsisOutlined />
-            </Button>
+            <Button key="3" icon={<EllipsisOutlined />} />
           </Dropdown>,
         ],
       }}
       footer={[<Button>重置</Button>, <Button type="primary">提交</Button>]}
     >
-      <Card bordered={false}>
+      <Card>
         <Descriptions title="基本信息">
           <Descriptions.Item label="创建人">曲丽丽</Descriptions.Item>
           <Descriptions.Item label="电话号码">1810000000</Descriptions.Item>
