@@ -89,9 +89,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           transition: `background ${token.motionDurationMid}`,
         },
         // empty style
-        [`${componentCls}-placeholder td`]: {
-          borderBottom: 'none',
-        },
+        [`${componentCls}-placeholder td`]: {},
         [`${componentCls}-empty-wrapper`]: {
           minHeight: 360 - token.paddingSM * 2,
           display: 'flex',
@@ -169,7 +167,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       },
     },
 
-    // 带边框的表格样式
+    // 带内部边框的表格样式
     [`${componentCls}-wrapper${componentCls}-inner-bordered ${componentCls}-bordered`]: {
       [`${componentCls}-container`]: {
         borderInlineStart: 'none',
