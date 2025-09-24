@@ -21,7 +21,7 @@ demo:
 <code src="./demo/status.tsx" title="状态点" description="用于表示状态的小圆点。"></code>
 <code src="./demo/status-icon.tsx" title="状态图标" description="使用图标标识状态，增强感知。"></code>
 <code src="./demo/status-custom-icon.tsx" title="自定义状态图标"></code>
-<code src="./demo/status-inner.tsx" title="状态点和状态图标和其他组件组合使用"></code>
+<code src="./demo/status-inner.tsx" title="状态点和状态图标和其他组件组合使用" description="字体大小和颜色应该继承父元素。"></code>
 <code src="./demo/ribbon.tsx" title="缎带徽标"></code>
 
 ## API
