@@ -122,6 +122,9 @@ const defaultTheme: ThemeConfig = {
       handleActiveColor: '#5189fb',
       handleColorDisabled: '#b3ccff',
     },
+    Skeleton: {
+      blockRadius: 4,
+    },
     Tabs: {
       horizontalItemGutter: 24,
       itemActiveColor: colorText,
