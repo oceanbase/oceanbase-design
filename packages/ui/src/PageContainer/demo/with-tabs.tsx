@@ -71,9 +71,7 @@ export default () => {
               ],
             }}
           >
-            <Button key="3" style={{ padding: '0 8px' }}>
-              <EllipsisOutlined />
-            </Button>
+            <Button key="3" icon={<EllipsisOutlined />} />
           </Dropdown>,
         ],
       }}
@@ -83,20 +81,12 @@ export default () => {
           {
             key: '1',
             label: 'Tab 1',
-            children: (
-              <Card bordered={false} bodyStyle={{ height: '100vh' }}>
-                This is content of Tab 1
-              </Card>
-            ),
+            children: <Card bodyStyle={{ height: '100vh' }}>This is content of Tab 1</Card>,
           },
           {
             key: '2',
             label: 'Tab 2',
-            children: (
-              <Card bordered={false} bodyStyle={{ height: '100vh' }}>
-                This is content of Tab 2
-              </Card>
-            ),
+            children: <Card bodyStyle={{ height: '100vh' }}>This is content of Tab 2</Card>,
           },
         ]}
         tabBarExtraContent="This is tabBarExtraContent content"

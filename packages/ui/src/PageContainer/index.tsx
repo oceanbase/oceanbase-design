@@ -1,4 +1,4 @@
-import { SyncOutlined } from '@oceanbase/icons';
+import { ArrowLeftOutlined, SyncOutlined } from '@oceanbase/icons';
 import type { IconComponentProps } from '@oceanbase/icons/es/components/Icon';
 import type {
   PageContainerProps as AntPageContainerProps,
@@ -8,7 +8,7 @@ import { PageContainer as AntPageContainer } from '@ant-design/pro-components';
 import classNames from 'classnames';
 import { isObject } from 'lodash';
 import React, { useContext } from 'react';
-import { ConfigProvider, Space, Tooltip } from '@oceanbase/design';
+import { Button, ConfigProvider, Space, Tooltip, theme } from '@oceanbase/design';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import ItemRender from './ItemRender';
 import PageLoading from '../PageLoading';
@@ -50,7 +50,14 @@ const PageContainer = ({
   const prefixCls = getPrefixCls('pro-page-container', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
 
-  const { reload, subTitle, breadcrumb } = header || {};
+  const { token } = theme.useToken();
+
+  const {
+    reload,
+    subTitle,
+    breadcrumb,
+    backIcon = <Button style={{ fontSize: token.fontSizeLG }} icon={<ArrowLeftOutlined />} />,
+  } = header || {};
   const reloadProps =
     isObject(reload) && !React.isValidElement(reload)
       ? (reload as Omit<IconComponentProps, 'ref'>)
@@ -83,6 +90,7 @@ const PageContainer = ({
       ),
       ...breadcrumb,
     },
+    backIcon,
   };
   const noHasHeader =
     !title &&
