@@ -163,6 +163,7 @@ const defaultTheme: ThemeConfig = {
       itemSelectedColor: colorText,
       itemMarginBlock: 6,
       groupTitleFontSize: 11,
+      groupTitleColor: colorTextSecondary,
     },
   },
 };
