@@ -115,7 +115,7 @@
     "runscript": "^2.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
-    "vanilla-jsoneditor": "^0.23.8",
+    "vanilla-jsoneditor": "^3.10.0",
     "vi-canvas-mock": "^1.0.0",
     "vitest": "^2.1.9",
     "vitest-fetch-mock": "^0.4.5",
