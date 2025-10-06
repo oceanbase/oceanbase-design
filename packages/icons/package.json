@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@ant-design/colors": "^8.0.0",
-    "@ant-design/icons": "^5.6.1",
+    "@ant-design/icons": "^6.1.0",
     "@oceanbase/icons-svg": "^1.0.10",
     "lodash.camelcase": "^4.3.0"
   },
