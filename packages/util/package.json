@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "ahooks": "^2.10.14",
-    "filesize": "^11.0.2",
+    "filesize": "^11.0.13",
     "is-url": "^1.2.4",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
