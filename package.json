@@ -114,7 +114,7 @@
     "react-router-dom": "^7.8.2",
     "runscript": "^2.0.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2",
+    "typescript": "^5.9.3",
     "vanilla-jsoneditor": "^0.23.8",
     "vi-canvas-mock": "^1.0.0",
     "vitest": "^2.1.9",
