@@ -362,7 +362,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
   >
     <div
       class="ant-pro-card-body"
-      style="padding-block-start: 0;"
+      style="padding-block: 0;"
     >
       <div
         class="ant-pro-table-list-toolbar"
@@ -1257,7 +1257,7 @@ exports[`ProTable > default pagination should work 1`] = `
   >
     <div
       class="ant-pro-card-body"
-      style="padding-block-start: 0;"
+      style="padding-block: 0;"
     >
       <div
         class="ant-pro-table-list-toolbar"
@@ -2224,7 +2224,7 @@ exports[`ProTable > innerBordered should work 1`] = `
   >
     <div
       class="ant-pro-card-body"
-      style="padding-block-start: 0;"
+      style="padding-block: 0;"
     >
       <div
         class="ant-pro-table-list-toolbar"
@@ -3191,7 +3191,7 @@ exports[`ProTable > render 1`] = `
   >
     <div
       class="ant-pro-card-body"
-      style="padding-block-start: 0;"
+      style="padding-block: 0;"
     >
       <div
         class="ant-pro-table-list-toolbar"

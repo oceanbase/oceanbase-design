@@ -37,7 +37,7 @@
     "postcss-less": "^6.0.0",
     "prettier": "^3.6.2",
     "read-pkg-up": "^10.1.0",
-    "semver": "^7.7.2",
+    "semver": "^7.7.3",
     "update-check": "^1.5.4",
     "yargs-parser": "^21.1.1"
   },
