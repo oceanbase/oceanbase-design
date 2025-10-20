@@ -48,12 +48,12 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       [`${componentCls}:not(${componentCls}-bordered):not(${componentCls}-type-inner)`]: {
         boxShadow: 'none',
       },
-      // nested Card border radius
-      [`${componentCls}`]: {
+      // nested and bordered Card radius
+      [`${componentCls}${componentCls}-bordered`]: {
         borderRadius: token.borderRadiusLG - 2,
-        [`${componentCls}`]: {
+        [`${componentCls}${componentCls}-bordered`]: {
           borderRadius: token.borderRadius,
-          [`${componentCls}`]: {
+          [`${componentCls}${componentCls}-bordered`]: {
             borderRadius: token.borderRadiusSM,
           },
         },
