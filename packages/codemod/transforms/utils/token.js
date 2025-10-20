@@ -98,6 +98,7 @@ const TOKEN_MAP = {
   'rgba(0,0,0,0.06)': 'colorFillSecondary',
   'rgba(0,0,0,0.04)': 'colorFillTertiary',
   'rgba(0,0,0,0.02)': 'colorFillQuaternary',
+  'rgba(0,0,0,0.03)': 'colorFillQuaternary',
   '#f5f6fa': 'colorBgLayout',
   '#edeff2': 'colorBgLayout',
   // obui legacy style => token
