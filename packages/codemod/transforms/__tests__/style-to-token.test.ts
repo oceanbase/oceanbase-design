@@ -12,6 +12,7 @@ const tests = [
   'nested-block-statement',
   'existed-useToken',
   'top-identifier',
+  'nested-object',
   'case-insensitive',
   'antd-style',
 ];

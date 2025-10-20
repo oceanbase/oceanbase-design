@@ -65,8 +65,8 @@ function isReactComponentOrHook(functionName, path) {
 // 检查 BlockStatement 中是否包含 token 使用
 function hasTokenUsage(j, path) {
   return (
-    j(path).find(j.Identifier, {
-      name: name => name?.includes('token.'),
+    j(path).find(j.MemberExpression, {
+      object: { name: 'token' },
     }).length > 0
   );
 }
@@ -352,8 +352,11 @@ function processObjectProperties(j, root) {
       if (tokenResult) {
         hasChanged = true;
         const isJSXAttribute = path.parentPath.value.type === 'JSXAttribute';
-        const stringValue = wrapJSXValue(`token.${tokenResult.token}`, isJSXAttribute);
-        return j.objectProperty(j.identifier(propertyName), j.identifier(stringValue));
+        const memberExpression = j.memberExpression(
+          j.identifier('token'),
+          j.identifier(tokenResult.token)
+        );
+        return j.objectProperty(j.identifier(propertyName), memberExpression);
       }
       return path.value;
     });
@@ -374,16 +377,14 @@ function processObjectProperties(j, root) {
       if (tokenResult) {
         hasChanged = true;
         const isJSXAttribute = path.parentPath.value.type === 'JSXAttribute';
-        const stringValue = wrapJSXValue(`token.${tokenResult.token}`, isJSXAttribute);
-        return j.objectProperty(j.identifier(propertyName), j.identifier(stringValue));
+        const memberExpression = j.memberExpression(
+          j.identifier('token'),
+          j.identifier(tokenResult.token)
+        );
+        return j.objectProperty(j.identifier(propertyName), memberExpression);
       }
       return path.value;
     });
-  }
-
-  // 如果发生了替换，需要添加 token 导入
-  if (hasChanged) {
-    addTokenImportsForObjectProperties(j, root);
   }
 
   return hasChanged;
@@ -391,6 +392,7 @@ function processObjectProperties(j, root) {
 
 // 为对象属性添加 token 导入
 function addTokenImportsForObjectProperties(j, root) {
+  // 处理 BlockStatement 中的 token 使用
   root
     .find(j.BlockStatement)
     .filter(path => isTopBlockStatement(path))
@@ -403,6 +405,31 @@ function addTokenImportsForObjectProperties(j, root) {
         }
       }
     });
+
+  // 处理顶层导出语句中的 token 使用
+  const hasTokenUsageInRoot =
+    root.find(j.MemberExpression, {
+      object: { name: 'token' },
+    }).length > 0;
+
+  if (hasTokenUsageInRoot) {
+    // 检查是否应该添加顶层 token 导入
+    if (shouldAddTopLevelTokenImport(j, root)) {
+      // 检查是否有 @oceanbase/design 的导入
+      const hasOceanbaseImport =
+        root.find(j.ImportDeclaration, {
+          source: { value: '@oceanbase/design' },
+        }).length > 0;
+
+      if (hasOceanbaseImport) {
+        // 如果有 @oceanbase/design 导入，添加到现有导入
+        addTokenToExistingImport(j, root);
+      } else {
+        // 如果没有 @oceanbase/design 导入，添加顶层 token 导入
+        addTopLevelTokenImport(j, root);
+      }
+    }
+  }
 }
 
 // 检查是否应该添加顶层 token 导入
@@ -482,6 +509,33 @@ module.exports = (file, api, options) => {
   // 处理 createStyles 函数的参数
   if (hasChanged) {
     processCreateStylesParams(j, root);
+  }
+
+  // 为对象属性添加 token 导入（只在没有其他 token 导入逻辑时调用）
+  if (hasChanged) {
+    // 检查是否已经有其他 token 导入逻辑在处理
+    const hasOtherTokenLogic =
+      root.find(j.CallExpression, {
+        callee: { name: 'createStyles' },
+      }).length > 0 ||
+      root.find(j.CallExpression, {
+        callee: {
+          type: 'MemberExpression',
+          object: { name: 'theme' },
+          property: { name: 'useToken' },
+        },
+      }).length > 0 ||
+      root
+        .find(j.ImportDeclaration, {
+          source: { value: '@oceanbase/design' },
+        })
+        .find(j.ImportSpecifier, {
+          imported: { name: 'theme' },
+        }).length > 0;
+
+    if (!hasOtherTokenLogic) {
+      addTokenImportsForObjectProperties(j, root);
+    }
   }
 
   // 如果有变化，检查是否需要添加 token 导入
