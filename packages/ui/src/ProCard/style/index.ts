@@ -1,11 +1,11 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { Card, Tabs } from '@oceanbase/design';
-import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import type { OBToken } from '../../_util/genComponentStyleHook';
 
-export const genProCardStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObject => {
-  const { componentCls, antCls, prefixCls } = token;
+export const genProCardStyle = (token: OBToken, outerComponentCls?: string): CSSObject => {
+  const { componentCls: innerComponentCls, antCls, prefixCls } = token;
+  const componentCls = outerComponentCls || innerComponentCls;
   const tableComponentCls = `${antCls}-table`;
   const tabsComponentCls = `${antCls}-tabs`;
   const tabsPrefixCls = `${prefixCls}-tabs`;
