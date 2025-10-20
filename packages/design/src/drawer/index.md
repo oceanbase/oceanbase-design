@@ -29,6 +29,7 @@ nav:
 <code src="./demo/form-drawer.tsx" title="用于 Form 表单" description="与 Form 表单合用，用于收集数据。"></code>
 <code src="./demo/descriptions.tsx" title="用于详情展示" description="与 Descriptions 合用，用于详情展示。"></code>
 <code src="./demo/over-height.tsx" title="内容超出" description="支持滚动；内容较长时页脚置底展示。"></code>
+<code src="./demo/loading.tsx" title="加载中"></code>
 
 ## API
 
