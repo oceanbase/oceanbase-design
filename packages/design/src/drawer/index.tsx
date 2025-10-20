@@ -38,6 +38,7 @@ type CompoundedComponent = React.FC<DrawerProps> & {
 const Drawer: CompoundedComponent = ({
   locale: customLocale,
   children,
+  loading,
   onOk,
   onClose,
   onCancel,
@@ -71,12 +72,13 @@ const Drawer: CompoundedComponent = ({
   useSize(contentElment);
   // useScroll for re-render when scroll
   const scroll = useScroll(contentElment);
-  const isScroll = contentElment?.scrollHeight !== contentElment?.clientHeight;
+  const isScroll = !loading && contentElment?.scrollHeight !== contentElment?.clientHeight;
   // start scroll
-  const isStartScroll = scroll.top > 0;
+  const isStartScroll = !loading && scroll.top > 0;
   // Determine if an element has been totally scrolled
   // ref: https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight#determine_if_an_element_has_been_totally_scrolled
   const isTotalScroll =
+    !loading &&
     Math.abs(
       (contentElment?.scrollHeight || 0) -
         (contentElment?.clientHeight || 0) -
@@ -88,6 +90,7 @@ const Drawer: CompoundedComponent = ({
   const drawerCls = classNames(
     prefixCls,
     {
+      [`${prefixCls}-loading`]: loading,
       [`${prefixCls}-with-footer`]: showFooter,
     },
     rootClassName
@@ -95,6 +98,7 @@ const Drawer: CompoundedComponent = ({
 
   return wrapSSR(
     <AntDrawer
+      loading={loading}
       destroyOnClose={true}
       onClose={handleCancel}
       rootClassName={drawerCls}
