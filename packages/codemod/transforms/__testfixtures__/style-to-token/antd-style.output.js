@@ -9,6 +9,7 @@ const useStyle1 = createStyles((
     main: {
       background: token.colorInfo,
       fontSize: token.fontSize,
+      boxShadow: `0 1px 2px 0 ${token.colorFillQuaternary}, 0 1px 6px -1px ${token.colorFillQuaternary}, 0 2px 4px 0 ${token.colorFillQuaternary}`,
     },
   };
 });

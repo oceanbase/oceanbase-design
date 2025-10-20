@@ -261,11 +261,70 @@ function processStringLiterals(j, root) {
   return hasChanged;
 }
 
+// 处理模板字符串中的颜色值
+function processTemplateLiterals(j, root) {
+  let hasChanged = false;
+
+  const templateList = root.find(j.TemplateLiteral);
+
+  if (templateList.length > 0) {
+    templateList.forEach(path => {
+      const templateLiteral = path.value;
+      const quasis = templateLiteral.quasis;
+
+      // 检查每个模板字符串片段是否包含需要转换的颜色值
+      for (let i = 0; i < quasis.length; i++) {
+        const quasi = quasis[i];
+        let value = quasi.value.raw;
+        let newValue = value;
+        let valueChanged = false;
+
+        // 查找需要转换的颜色值
+        const colorMatch = newValue.match(
+          /rgba?\([^)]+\)|#[0-9a-fA-F]{3,8}|rgb\([^)]+\)|hsl\([^)]+\)|hsla?\([^)]+\)/g
+        );
+        if (colorMatch) {
+          hasChanged = true;
+          valueChanged = true;
+
+          colorMatch.forEach(match => {
+            const { token } = tokenParse(match);
+            if (token) {
+              newValue = newValue.replace(match, `\${token.${token}}`);
+            }
+          });
+        }
+
+        // 如果值发生了变化，更新模板字符串片段
+        if (valueChanged) {
+          quasi.value.raw = newValue;
+          quasi.value.cooked = newValue;
+        }
+      }
+    });
+
+    // 为包含 token 使用的顶级 BlockStatement 添加导入
+    root
+      .find(j.BlockStatement)
+      .filter(path => isTopBlockStatement(path))
+      .forEach(path => {
+        if (hasTokenUsage(j, path) && !hasUseTokenStatement(j, path)) {
+          addTokenImportToBlockStatement(j, root, path);
+        }
+      });
+  }
+
+  return hasChanged;
+}
+
 function importComponent(j, root, options) {
   let hasChanged = false;
 
   // 处理字符串字面量
   hasChanged = processStringLiterals(j, root) || hasChanged;
+
+  // 处理模板字符串中的颜色值
+  hasChanged = processTemplateLiterals(j, root) || hasChanged;
 
   // 处理对象属性值（如 fontSize: 14）
   const objectPropertyChanged = processObjectProperties(j, root);
