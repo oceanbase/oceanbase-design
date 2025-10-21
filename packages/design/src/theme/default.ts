@@ -29,6 +29,10 @@ const defaultTheme: ThemeConfig = {
     borderRadiusLG: 8,
     borderRadiusSM: 2,
     fontSize: 13,
+    lineHeight: 20 / 13,
+    // @ts-ignore
+    // fontHeight is internal token
+    fontHeight: 20,
     fontSizeSM,
     fontSizeLG: 16,
     fontSizeHeading1: 24,
@@ -37,6 +41,7 @@ const defaultTheme: ThemeConfig = {
     fontSizeHeading4: 16,
     fontSizeHeading5: 13,
     controlHeight: 28,
+    controlHeightSM: 20,
     colorPrimary: colorPrimary,
     colorInfo: colorPrimary,
     colorInfoBorder: '#619EF3',
