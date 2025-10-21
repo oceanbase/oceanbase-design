@@ -3,16 +3,17 @@ import { formatTheme } from './util/format';
 
 const colorPrimary = '#0D6CF2';
 const colorPrimarySecondary = '#598CF3';
+
 const colorText = '#132039';
 const colorTextSecondary = '#5C6B8A';
 const colorTextTertiary = '#8592AD';
-const colorTextQuaternary = '#C1CBE0';
+const colorTextQuaternary = '#B6C0D4';
+
 const colorFill = '#CDD5E4';
 const colorFillSecondary = '#E2E8F3';
-const colorFillTertiary = '#F3F6FC';
-const colorFillQuaternary = '#F8FAFE';
-const colorFillHover = '#EFF3FA';
-const colorFillSelected = '#E2E8F3';
+const colorFillTertiary = '#EFF3FA';
+const colorFillQuaternary = '#F7F9FC';
+
 const colorBorderSecondary = colorFillSecondary;
 const fontSizeSM = 12;
 // Calculated by colorBorder and getWeakenBorderColor()
@@ -38,20 +39,22 @@ const defaultTheme: ThemeConfig = {
     controlHeight: 28,
     colorPrimary: colorPrimary,
     colorInfo: colorPrimary,
-    colorInfoBorder: colorPrimarySecondary,
-    colorInfoBg: '#EAF1FF',
-    colorInfoText: '#083E8B',
-    colorSuccess: '#14B781',
-    colorSuccessBorder: '#7ED7BA',
-    colorSuccessBg: '#E8F8F3',
-    colorSuccessText: '#096547',
+    colorInfoBorder: '#619EF3',
+    colorInfoBg: '#F3F8FE',
+    colorInfoHover: '#0852BB',
+    colorInfoActive: '#0852BB',
+    colorInfoText: '#0D3C80',
+    colorSuccess: '#16B882',
+    colorSuccessBorder: '#79D1B4',
+    colorSuccessBg: '#F5FAF8',
+    colorSuccessText: '#09593F',
     colorWarning: '#F49F25',
-    colorWarningBorder: '#F9CB87',
-    colorWarningBg: '#FEF6E9',
-    colorWarningText: '#5B3600',
-    colorError: '#EF4343',
+    colorWarningBorder: '#FAC373',
+    colorWarningBg: '#FFF9EE',
+    colorWarningText: '#6C4408',
+    colorError: '#EB4242',
     colorErrorBorder: '#F69898',
-    colorErrorBg: '#FDECEC',
+    colorErrorBg: '#FFF2F2',
     colorErrorText: '#8A1B1B',
     colorTextBase: '#000000',
     colorText,
@@ -68,7 +71,8 @@ const defaultTheme: ThemeConfig = {
     colorFillSecondary,
     colorFillTertiary,
     colorFillQuaternary,
-    colorBgMask: 'rgba(19, 32, 57, 0.45)',
+    colorBgContainerDisabled: colorFillTertiary,
+    colorBgMask: 'rgba(19, 32, 57, 0.6)',
     colorBgElevated: '#ffffff',
     colorBgSpotlight: '#ffffff',
     boxShadow:
@@ -108,6 +112,9 @@ const defaultTheme: ThemeConfig = {
     Radio: {
       // temporarily fix style for checked disabled Radio.Button
       controlItemBgActiveDisabled: colorFillSecondary,
+    },
+    Segmented: {
+      trackBg: colorFillTertiary,
     },
     Select: {
       // work for all multiple select component, including Select, TreeSelect and Cascader and so on
