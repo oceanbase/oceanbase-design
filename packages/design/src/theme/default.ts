@@ -46,7 +46,7 @@ const defaultTheme: ThemeConfig = {
     fontSizeHeading3: 18,
     fontSizeHeading4: 16,
     fontSizeHeading5: 13,
-    controlHeightSM: 20,
+    controlHeightSM: 24,
     controlHeight: 28,
     colorPrimary: colorPrimary,
     colorInfo: colorPrimary,

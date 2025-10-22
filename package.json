@@ -22,7 +22,7 @@
     "site:deploy": "gh-pages -d site",
     "postpublish": "npm run sync:other-npm",
     "sync:other-npm": "node -e 'require(\"./scripts/sync-cnpm-and-tnpm\")()'",
-    "test:prepare": "tsc --skipLibCheck packages/design/src/theme/default.ts --outDir packages/design/lib/theme",
+    "test:prepare": "pnpm --filter \"@oceanbase/design\" build",
     "test": "npm run test:prepare && cross-env vitest",
     "test:coverage": "npm run test:prepare && cross-env TEST_LOG=none vitest --coverage",
     "test:update": "npm run test:prepare && cross-env vitest -u",
