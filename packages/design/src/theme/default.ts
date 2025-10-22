@@ -20,11 +20,16 @@ const fontSizeSM = 12;
 const tagColorBorder = '#cdd5e466';
 
 export const fontFamilyEn = `Inter, 'Noto sans', sans-serif, Roboto, 'Open Sans', 'Segoe UI', 'Helvetica Neue', 'Helvetica, Arial', 'Apple Color Emoji'`;
+export const fontWeightEn = 500;
+export const fontWeightStrongEn = 600;
 
 const defaultTheme: ThemeConfig = {
   token: {
     fontFamily: `-apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
     fontFamilyCode: `Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace`,
+    // @ts-ignore
+    fontWeight: 400,
+    fontWeightStrong: 500,
     borderRadius: 4,
     borderRadiusLG: 8,
     borderRadiusSM: 2,
