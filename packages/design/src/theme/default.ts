@@ -106,6 +106,14 @@ const defaultTheme: ThemeConfig = {
       fontHeight: 20,
       lastItemColor: colorTextSecondary,
     },
+    Button: {
+      borderRadiusSM: 4,
+      borderRadius: 4,
+      borderRadiusLG: 4,
+      paddingInlineSM: 8,
+      paddingInline: 12,
+      paddingInlineLG: 12,
+    },
     Card: {
       headerFontSize: 16,
       borderRadiusLG: 8,
