@@ -21,7 +21,7 @@ import aliyunTheme from '@oceanbase/aliyun-theme';
 import { merge } from 'lodash';
 import StaticFunction from '../static-function';
 import themeConfig from '../theme';
-import defaultTheme, { fontFamilyEn } from '../theme/default';
+import defaultTheme, { fontFamilyEn, fontWeightEn, fontWeightStrongEn } from '../theme/default';
 import darkTheme from '../theme/dark';
 import DefaultRenderEmpty from './DefaultRenderEmpty';
 import type { NavigateFunction } from './navigate';
@@ -100,6 +100,19 @@ export type ConfigProviderType = React.FC<ConfigProviderProps> & {
   useConfig: typeof AntConfigProvider.useConfig;
 };
 
+const getLocaleTokenValue = (
+  locale: Locale,
+  tokenKey: string,
+  tokenValue: string | number,
+  tokenValueEn: string | number
+) => {
+  return tokenValue !== defaultTheme.token[tokenKey]
+    ? { [tokenKey]: tokenValue }
+    : ['en', 'en-gb'].includes(locale.locale)
+      ? { [tokenKey]: tokenValueEn }
+      : {};
+};
+
 const ConfigProvider: ConfigProviderType = ({
   children,
   theme,
@@ -132,6 +145,9 @@ const ConfigProvider: ConfigProviderType = ({
 
   const { token } = themeConfig.useToken();
   const fontFamily = mergedTheme.token?.fontFamily || token.fontFamily;
+  // @ts-ignore
+  const fontWeight = mergedTheme.token?.fontWeight || token.fontWeight;
+  const fontWeightStrong = mergedTheme.token?.fontWeightStrong || token.fontWeightStrong;
 
   // inherit from parent StyleProvider
   const parentStyleContext = React.useContext<StyleContextProps>(StyleContext);
@@ -162,16 +178,16 @@ const ConfigProvider: ConfigProviderType = ({
       table={merge({}, parentContext.table, table)}
       tabs={merge({}, parentContext.tabs, tabs)}
       theme={merge({}, mergedTheme, {
-        token:
-          // custom fontFamily
-          fontFamily !== defaultTheme.token.fontFamily
-            ? { fontFamily }
-            : // use fontFamilyEn for en
-              ['en', 'en-gb'].includes(mergedLocale.locale)
-              ? {
-                  fontFamily: fontFamilyEn,
-                }
-              : {},
+        token: {
+          ...getLocaleTokenValue(mergedLocale, 'fontFamily', fontFamily, fontFamilyEn),
+          ...getLocaleTokenValue(mergedLocale, 'fontWeight', fontWeight, fontWeightEn),
+          ...getLocaleTokenValue(
+            mergedLocale,
+            'fontWeightStrong',
+            fontWeightStrong,
+            fontWeightStrongEn
+          ),
+        },
       } as ConfigProviderProps['theme']['token'])}
       renderEmpty={
         parentContext.renderEmpty ||
