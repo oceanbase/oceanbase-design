@@ -1,5 +1,4 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken } from 'antd/es/theme/internal';
 
 export const genCompactStyle = (componentCls: string, subComponentCls: string = ''): CSSObject => {
   return {

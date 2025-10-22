@@ -1,8 +1,8 @@
-import { mergeToken, type FullToken, type GenerateStyle } from 'antd/es/theme/internal';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
-import { genPresetColor } from 'antd/lib/theme/internal';
-import { getWeakenBorderColor } from '../../_util/getWeakenBorderColor';
 import type { CSSObject } from '@ant-design/cssinjs';
+import { mergeToken, genPresetColor } from 'antd/es/theme/internal';
+import type { FullToken } from '../../theme/interface';
+import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { getWeakenBorderColor } from '../../_util/getWeakenBorderColor';
 
 export type TagToken = FullToken<'Tag'> & {
   tagPaddingHorizontal: number;

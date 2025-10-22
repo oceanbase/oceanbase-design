@@ -1,4 +1,4 @@
-import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
+import type { FullToken, GenerateStyle } from '../../theme/interface';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type ButtonToken = FullToken<'Button'>;

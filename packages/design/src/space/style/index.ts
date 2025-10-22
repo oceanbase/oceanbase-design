@@ -1,6 +1,6 @@
-import { type FullToken, type GenerateStyle } from 'antd/es/theme/internal';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import type { CSSObject } from '@ant-design/cssinjs';
+import type { FullToken, GenerateStyle } from '../../theme/interface';
+import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type SpaceToken = FullToken<'Space'>;
 

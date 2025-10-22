@@ -4,13 +4,13 @@ import { isNil, omitBy } from 'lodash';
 // umi 插件只能 import 支持 CommonJS 语法库和文件，因此需要使用 lib 产物
 import formatToken from 'antd/lib/theme/util/alias';
 // @ts-ignore
-import theme from './.dumi/tmp/plugin-theme-less/index.js';
+import theme from './.dumi/tmp/plugin-theme-less/theme/index.js';
 // @ts-ignore
-import defaultTheme from './.dumi/tmp/plugin-theme-less/default.js';
+import defaultTheme from './.dumi/tmp/plugin-theme-less/theme/default.js';
 // @ts-ignore
-import darkTheme from './.dumi/tmp/plugin-theme-less/dark.js';
+import darkTheme from './.dumi/tmp/plugin-theme-less/theme/dark.js';
 // @ts-ignore
-import aliyunTheme from './.dumi/tmp/plugin-theme-less/aliyun.js';
+import aliyunTheme from './.dumi/tmp/plugin-theme-less/theme/aliyun.js';
 
 function unit(key: string, value: string | number) {
   if (

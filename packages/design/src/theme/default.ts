@@ -1,4 +1,4 @@
-import type { ThemeConfig } from 'antd';
+import type { ThemeConfig } from '../config-provider/context';
 import { formatTheme } from './util/format';
 
 const colorPrimary = '#0D6CF2';
@@ -20,6 +20,8 @@ const fontSizeSM = 12;
 const tagColorBorder = '#cdd5e466';
 
 export const fontFamilyEn = `Inter, 'Noto sans', sans-serif, Roboto, 'Open Sans', 'Segoe UI', 'Helvetica Neue', 'Helvetica, Arial', 'Apple Color Emoji'`;
+
+export const fontWeightWeakEn = 400;
 export const fontWeightEn = 500;
 export const fontWeightStrongEn = 600;
 
@@ -27,26 +29,25 @@ const defaultTheme: ThemeConfig = {
   token: {
     fontFamily: `-apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
     fontFamilyCode: `Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace`,
-    // @ts-ignore
+    fontWeightWeak: 400,
     fontWeight: 400,
     fontWeightStrong: 500,
-    borderRadius: 4,
-    borderRadiusLG: 8,
     borderRadiusSM: 2,
+    borderRadius: 4,
+    borderRadiusMD: 6,
+    borderRadiusLG: 8,
+    fontSizeSM,
     fontSize: 13,
     lineHeight: 20 / 13,
-    // @ts-ignore
-    // fontHeight is internal token
     fontHeight: 20,
-    fontSizeSM,
     fontSizeLG: 16,
     fontSizeHeading1: 24,
     fontSizeHeading2: 20,
     fontSizeHeading3: 18,
     fontSizeHeading4: 16,
     fontSizeHeading5: 13,
-    controlHeight: 28,
     controlHeightSM: 20,
+    controlHeight: 28,
     colorPrimary: colorPrimary,
     colorInfo: colorPrimary,
     colorInfoBorder: '#619EF3',
@@ -66,6 +67,10 @@ const defaultTheme: ThemeConfig = {
     colorErrorBorder: '#F69898',
     colorErrorBg: '#FFF2F2',
     colorErrorText: '#8A1B1B',
+    colorFuchsia: '#B04EC4',
+    colorFuchsiaBorder: '#D88EE7',
+    colorFuchsiaBg: '#FAF0FC',
+    colorFuchsiaText: '#580E67',
     colorTextBase: '#000000',
     colorText,
     colorTextSecondary,
@@ -98,8 +103,6 @@ const defaultTheme: ThemeConfig = {
   components: {
     Breadcrumb: {
       fontSize: fontSizeSM,
-      // @ts-ignore
-      // fontHeight is internal token
       fontHeight: 20,
       lastItemColor: colorTextSecondary,
     },

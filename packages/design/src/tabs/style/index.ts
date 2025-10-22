@@ -1,5 +1,5 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken } from 'antd/es/theme/internal';
+import type { FullToken } from '../../theme/interface';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type TabsToken = FullToken<'Tabs'>;
