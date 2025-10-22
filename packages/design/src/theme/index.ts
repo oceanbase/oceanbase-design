@@ -1,8 +1,10 @@
 import { theme } from 'antd';
+import type { Theme } from '@ant-design/cssinjs';
 import { pick } from 'lodash';
 // umi 插件只能 import 支持 CommonJS 语法库和文件，因此需要使用 lib 产物
 import type { SeedToken } from 'antd/lib/theme/interface';
 import defaultTheme from './default';
+import type { GlobalToken, AliasToken } from './interface';
 
 export * from 'antd/lib/theme/internal';
 export * from 'antd/lib/theme';
@@ -30,4 +32,10 @@ export default {
   ...theme,
   defaultSeed,
   defaultConfig,
+} as Omit<typeof theme, 'useToken'> & {
+  useToken: () => {
+    theme: Theme<SeedToken, AliasToken>;
+    token: GlobalToken;
+    hashId: string;
+  };
 };

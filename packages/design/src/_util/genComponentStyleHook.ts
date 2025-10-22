@@ -1,9 +1,8 @@
 import React from 'react';
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { ComponentTokenMap } from 'antd/es/theme/interface';
-import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
-import { genComponentStyleHook as antGenComponentStyleHook } from 'antd/es/theme/internal';
-import type { GlobalToken } from 'antd/es/theme/interface';
+import type { GlobalToken, FullToken, GenerateStyle } from '../theme/interface';
+import { genComponentStyleHook as antGenComponentStyleHook } from '../theme/internal';
 import theme from '../theme';
 
 export type ComponentName = keyof ComponentTokenMap;
@@ -19,7 +18,7 @@ export function genComponentStyleHook(
     const useStyle = antGenComponentStyleHook(
       `OB-${componentName}` as ComponentName,
       token => {
-        return [styleFn(token)];
+        return [styleFn(token as FullToken<ComponentName>)];
       },
       getDefaultToken,
       {
