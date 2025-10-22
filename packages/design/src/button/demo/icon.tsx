@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PlusOutlined } from '@oceanbase/icons';
+import { EllipsisOutlined, PlusOutlined } from '@oceanbase/icons';
 import { Button, Divider, Radio, Space } from '@oceanbase/design';
 
 const App: React.FC = () => {
@@ -27,6 +27,7 @@ const App: React.FC = () => {
           Dashed
         </Button>
         <Button icon={<PlusOutlined />} iconPosition={position} />
+        <Button icon={<EllipsisOutlined />} iconPosition={position} />
       </Space>
     </>
   );
