@@ -20,6 +20,7 @@ markdown: |
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="按钮类型" description="按钮有五种类型：主按钮、次按钮、虚线按钮、文本按钮和链接按钮。主按钮在同一个操作区域最多出现一次。"></code>
+<code src="./demo/color-variant.tsx" title="颜色与变体" description="同时设置 `color` 和 `variant` 属性，可以衍生出更多的变体按钮。"></code>
 <code src="./demo/size.tsx" title="按钮尺寸" description="大、中、小三种尺寸，默认为中尺寸。"></code>
 <code src="./demo/loading.tsx" title="加载中" description="通过 `loading` 属性设置按钮的加载状态。"></code>
 <code src="./demo/disabled.tsx" title="禁用" description="添加 `disabled` 属性即可让按钮处于不可用状态，同时按钮样式也会改变。"></code>
