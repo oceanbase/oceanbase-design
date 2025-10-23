@@ -53,7 +53,6 @@ const Empty: CompoundedComponent = props => {
   const { wrapSSR } = useStyle(prefixCls);
   const isHorizontal = layout === 'horizontal';
   const emptyCls = classNames(
-    prefixCls,
     {
       [`${prefixCls}-horizontal`]: isHorizontal,
       [`${prefixCls}-small`]: image === defaultEmptyImg || image === simpleEmptyImg,
