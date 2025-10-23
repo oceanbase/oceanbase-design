@@ -496,7 +496,7 @@ exports[`Table > default empty should work 1`] = `
                       class="ant-table-empty-wrapper"
                     >
                       <div
-                        class="ant-empty ant-empty ant-empty-small"
+                        class="ant-empty ant-empty-small"
                       >
                         <div
                           class="ant-empty-image"
