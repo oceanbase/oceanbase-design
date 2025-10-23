@@ -23,11 +23,11 @@ export interface ResultProps extends Omit<AntResultProps, 'status'> {
   status?: ResultStatusType;
 }
 
-export interface ResultType extends React.FC<ResultProps> {
+export type ResultType = React.FC<ResultProps> & {
   PRESENTED_IMAGE_403: typeof Image403;
   PRESENTED_IMAGE_404: typeof Image404;
   PRESENTED_IMAGE_500: typeof Image500;
-}
+};
 
 const Result: ResultType = ({ status, prefixCls: customizePrefixCls, ...restProps }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);

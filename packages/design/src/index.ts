@@ -21,6 +21,9 @@ export type { TypographyProps } from './typography';
 export { default as Card } from './card';
 export type { CardProps } from './card';
 
+export { default as App } from './app';
+export type { AppProps } from './app';
+
 export { default as ConfigProvider } from './config-provider';
 export type { ConfigProviderProps, ConfigConsumerProps, ThemeConfig } from './config-provider';
 
