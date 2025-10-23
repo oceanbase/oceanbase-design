@@ -8,6 +8,14 @@ group: 自动化迁移工具
 
 ---
 
+## 1.0.0-alpha.3
+
+`2025-10-23`
+
+- 🐞 修复 `less-to-token` 未正确处理复合值的问题。[#1233](https://github.com/oceanbase/oceanbase-design/pull/1233)
+- 🐞 修复 `less-to-token` 处理嵌套对象时未导入 token 对象的问题。[#1236](https://github.com/oceanbase/oceanbase-design/pull/1236)
+- 🐞 修复 `style-to-token` 未正确处理复合值的问题。[#1234](https://github.com/oceanbase/oceanbase-design/pull/1234)
+
 ## 1.0.0-alpha.2
 
 `2025-09-24`

@@ -8,6 +8,25 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.3
+
+`2025-10-23`
+
+- Design Token
+  - 🌈 更新 `功能色` 和 `中性色` 相关的 Design Token。[#1244](https://github.com/oceanbase/oceanbase-design/pull/1244)
+  - 🌈 更新 `lineHeight` 和 `controlHeightSM` 相关的 Design Token。[#1245](https://github.com/oceanbase/oceanbase-design/pull/1245)
+  - 🌈 更新 controlHeightSM 控件高度 `20` => `24`。[#1249](https://github.com/oceanbase/oceanbase-design/pull/1249)
+  - 🌈 更新 Menu `groupTitleColor` 分组标题颜色 `#8592AD` => `#5C6B8A`。[#1223](https://github.com/oceanbase/oceanbase-design/pull/1223)
+  - 🌈 更新 `fontWeight` 和 `fontWeightStrong` Design Token，并且支持根据中英文切换不同的值。[#1246](https://github.com/oceanbase/oceanbase-design/pull/1246)
+  - 🌈 新增 `fontWeightWeak`、`borderRadiusMD` 和 `colorFuchsia 相关` 的自定义 Design Token。[#1247](https://github.com/oceanbase/oceanbase-design/pull/1247)
+- 🔥 新版 Tag 组件，优化颜色、间距、图标等样式。[#1251](https://github.com/oceanbase/oceanbase-design/pull/1251)
+- 💄 优化 Select, TreeSelect 和 Cascader 中的多选项样式。[#1251](https://github.com/oceanbase/oceanbase-design/pull/1251)
+- Button
+  - 💄 优化 Button 的行内间距和圆角样式。[#1248](https://github.com/oceanbase/oceanbase-design/pull/1248)
+  - 💄 优化小尺寸 Button 的字体大小 `13` => `12`。[#1250](https://github.com/oceanbase/oceanbase-design/pull/1250)
+- 💄 带边框的 Card 嵌套时圆角逐级递减。[#1235](https://github.com/oceanbase/oceanbase-design/pull/1235)
+- 💄 优化 Drawer 加载中的间距样式。[#1238](https://github.com/oceanbase/oceanbase-design/pull/1238)
+
 ## 1.0.0-alpha.2
 
 `2025-09-24`
