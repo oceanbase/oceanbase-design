@@ -16,8 +16,7 @@ const colorFillQuaternary = '#F7F9FC';
 
 const colorBorderSecondary = colorFillSecondary;
 const fontSizeSM = 12;
-// Calculated by colorBorder and getWeakenBorderColor()
-const tagColorBorder = '#cdd5e466';
+const tagColorBorder = colorTextQuaternary;
 
 export const fontFamilyEn = `Inter, 'Noto sans', sans-serif, Roboto, 'Open Sans', 'Segoe UI', 'Helvetica Neue', 'Helvetica, Arial', 'Apple Color Emoji'`;
 
@@ -162,8 +161,8 @@ const defaultTheme: ThemeConfig = {
       itemHoverColor: colorText,
     },
     Tag: {
-      defaultColor: colorTextSecondary,
       colorBorder: tagColorBorder,
+      borderRadiusSM: 4,
     },
     Table: {
       cellFontSize: fontSizeSM,

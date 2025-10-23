@@ -1,55 +1,40 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import { mergeToken, genPresetColor } from 'antd/es/theme/internal';
+import { mergeToken } from 'antd/es/theme/internal';
 import type { FullToken } from '../../theme/interface';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
-import { getWeakenBorderColor } from '../../_util/getWeakenBorderColor';
 
-export type TagToken = FullToken<'Tag'> & {
-  tagPaddingHorizontal: number;
-};
-
-const getTagBorderColor = (color: string) => {
-  return getWeakenBorderColor(color);
-};
+export type TagToken = FullToken<'Tag'>;
 
 const genTagPresetStatusStyle = (
   token: TagToken,
   status: 'success' | 'processing' | 'error' | 'warning'
 ) => {
-  const borderColorMap = {
-    success: token.colorSuccessBorder,
-    processing: token.colorInfoBorder,
-    error: token.colorErrorBorder,
-    warning: token.colorWarningBorder,
+  const colorMap = {
+    success: token.colorSuccessText,
+    processing: token.colorInfoText,
+    error: token.colorErrorText,
+    warning: token.colorWarningText,
   };
   return {
     [`${token.componentCls}${token.componentCls}-${status}`]: {
-      borderColor: getTagBorderColor(borderColorMap[status]),
+      color: colorMap[status],
     },
   };
 };
 
-const genPresetStyle = (token: TagToken) =>
-  genPresetColor(token, (colorKey, { lightBorderColor }) => {
-    return {
-      [`${token.componentCls}${token.componentCls}-${colorKey}`]: {
-        borderColor: getTagBorderColor(lightBorderColor),
-      },
-    };
-  });
-
 export const genTagStyle = (token: TagToken): CSSObject => {
-  const { antCls, componentCls, tagPaddingHorizontal, lineWidth, calc } = token;
+  const { antCls, componentCls, iconCls } = token;
 
-  const paddingInline = calc(tagPaddingHorizontal).sub(lineWidth).equal();
   return {
     [`${componentCls}`]: {
       paddingInline: token.paddingXS,
-      borderColor: getTagBorderColor(token.colorBorder),
       fontSize: token.fontSizeSM,
+      [`${componentCls}-close-icon${iconCls}`]: {
+        marginInlineStart: token.marginXXS,
+      },
       [`${antCls}-typography`]: {
         [`${componentCls}-icon`]: {
-          marginInlineEnd: paddingInline,
+          marginInlineEnd: token.marginXXS,
         },
       },
       ['&-ellipsis']: {
@@ -73,13 +58,10 @@ export const genTagStyle = (token: TagToken): CSSObject => {
 
 export default (prefixCls: string) => {
   const useStyle = genComponentStyleHook('Tag', (token: TagToken) => {
-    const tagToken = mergeToken<TagToken>(token, {
-      tagPaddingHorizontal: 8, // Fixed padding.
-    });
+    const tagToken = mergeToken<TagToken>(token, {});
 
     return [
       genTagStyle(tagToken),
-      genPresetStyle(tagToken),
       genTagPresetStatusStyle(tagToken, 'success'),
       genTagPresetStatusStyle(tagToken, 'error'),
       genTagPresetStatusStyle(tagToken, 'processing'),
