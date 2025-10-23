@@ -29,11 +29,11 @@ export type ResultType = React.FC<ResultProps> & {
   PRESENTED_IMAGE_500: typeof Image500;
 };
 
-const Result: ResultType = ({ status, prefixCls: customizePrefixCls, ...restProps }) => {
+const Result: ResultType = ({ prefixCls: customizePrefixCls, className, status, ...restProps }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('result', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
-  const resultCls = classNames(prefixCls);
+  const resultCls = classNames(className);
 
   const statusMap = {
     success: <Success />,
