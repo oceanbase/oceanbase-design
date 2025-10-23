@@ -1,5 +1,5 @@
 import React from 'react';
-import { App, ConfigProvider as AntConfigProvider } from 'antd';
+import { ConfigProvider as AntConfigProvider } from 'antd';
 import type {
   ConfigProviderProps as AntConfigProviderProps,
   ConfigConsumerProps as AntConfigConsumerProps,
@@ -19,6 +19,7 @@ import type { StyleContextProps } from '@ant-design/cssinjs/es/StyleContext';
 import { CaretRightOutlined } from '@oceanbase/icons';
 import aliyunTheme from '@oceanbase/aliyun-theme';
 import { merge } from 'lodash';
+import App from '../app';
 import StaticFunction from '../static-function';
 import themeConfig from '../theme';
 import defaultTheme, { fontFamilyEn, fontWeightEn, fontWeightStrongEn } from '../theme/default';

@@ -6,13 +6,14 @@ import { genComponentStyleHook as antGenComponentStyleHook } from '../theme/inte
 import theme from '../theme';
 
 // work for Select, TreeSelect, Cascader
-export const genCommonSelectStyle = (
+export const genSelectCommonStyle = (
   token: FullToken<'Select' | 'TreeSelect' | 'Cascader'>
 ): CSSObject => {
-  const { componentCls } = token;
+  const { antCls } = token;
+  const selectComponentCls = `${antCls}-select`;
   return {
-    [`${componentCls}${componentCls}-multiple`]: {
-      [`${componentCls}-selection-item`]: {
+    [`${selectComponentCls}${selectComponentCls}-multiple`]: {
+      [`${selectComponentCls}-selection-item`]: {
         borderRadius: token.borderRadius,
       },
     },
@@ -33,7 +34,7 @@ export function genComponentStyleHook(
       `OB-${componentName}` as ComponentName,
       token => {
         return [
-          genCommonSelectStyle(token as FullToken<'Select' | 'TreeSelect' | 'Cascader'>),
+          genSelectCommonStyle(token as FullToken<'Select' | 'TreeSelect' | 'Cascader'>),
           styleFn(token as FullToken<ComponentName>),
         ];
       },
