@@ -88,7 +88,6 @@ const Drawer: CompoundedComponent = ({
   const handleCancel = onCancel || onClose;
   const showFooter = !!(footer || onOk) && footer !== false && footer !== null;
   const drawerCls = classNames(
-    prefixCls,
     {
       [`${prefixCls}-loading`]: loading,
       [`${prefixCls}-with-footer`]: showFooter,
