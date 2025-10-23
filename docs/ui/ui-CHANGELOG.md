@@ -8,6 +8,12 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.3
+
+`2025-10-23`
+
+- 🐞 修复 ProTable 下的 ProCard 样式不生效的问题。[#1237](https://github.com/oceanbase/oceanbase-design/pull/1237)
+
 ## 1.0.0-alpha.2
 
 `2025-09-24`
