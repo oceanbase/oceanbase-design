@@ -26,6 +26,7 @@ group: 基础组件
   - 💄 优化小尺寸 Button 的字体大小 `13` => `12`。[#1250](https://github.com/oceanbase/oceanbase-design/pull/1250)
 - 💄 带边框的 Card 嵌套时圆角逐级递减。[#1235](https://github.com/oceanbase/oceanbase-design/pull/1235)
 - 💄 优化 Drawer 加载中的间距样式。[#1238](https://github.com/oceanbase/oceanbase-design/pull/1238)
+- 🐞 修复 App、Drawer、Empty 和 Result 组件类名重复的问题。[#1254](https://github.com/oceanbase/oceanbase-design/pull/1254)
 
 ## 1.0.0-alpha.2
 
