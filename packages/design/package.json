@@ -45,7 +45,7 @@
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
-    "antd": "^5.27.5",
+    "antd": "^5.29.1",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
     "lottie-web": "^5.13.0",
@@ -55,7 +55,7 @@
   "devDependencies": {
     "@ant-design/cssinjs-utils": "^1.1.3",
     "@babel/cli": "^7.28.3",
-    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-env": "^7.28.5",
     "antd-token-previewer": "^2.0.8",
     "rc-select": "^14.16.8",
     "rc-slider": "^11.1.9",

@@ -63,6 +63,12 @@ group: 基础组件
 - 💄 更新 Table 样式，包括去掉斑马纹、增加行分隔线、调整单元格间距等。[#1176](https://github.com/oceanbase/oceanbase-design/pull/1176)
 - 💄 调整 Tabs 的字体颜色和火柴棍长度。[#1177](https://github.com/oceanbase/oceanbase-design/pull/1177)
 
+## 0.4.18
+
+`2025-11-24`
+
+- 🌐 新增日语 (ja-JP) 国际化支持。[#1258](https://github.com/oceanbase/oceanbase-design/pull/1258)
+
 ## 0.4.17
 
 `2025-09-24`

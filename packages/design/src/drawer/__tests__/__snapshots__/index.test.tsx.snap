@@ -19,6 +19,7 @@ exports[`Drawer > render correctly 1`] = `
     style="width: 378px;"
   >
     <div
+      aria-labelledby="test-id"
       aria-modal="true"
       class="ant-drawer-content"
       role="dialog"
@@ -57,6 +58,7 @@ exports[`Drawer > render correctly 1`] = `
           </button>
           <div
             class="ant-drawer-title"
+            id="test-id"
           >
             Title
           </div>
@@ -101,6 +103,7 @@ exports[`Drawer > render with confirmLoading and okButtonProps 1`] = `
     style="width: 378px;"
   >
     <div
+      aria-labelledby="test-id"
       aria-modal="true"
       class="ant-drawer-content"
       role="dialog"
@@ -139,6 +142,7 @@ exports[`Drawer > render with confirmLoading and okButtonProps 1`] = `
           </button>
           <div
             class="ant-drawer-title"
+            id="test-id"
           >
             Title
           </div>
@@ -242,6 +246,7 @@ exports[`Drawer > render with custom footer 1`] = `
     style="width: 378px;"
   >
     <div
+      aria-labelledby="test-id"
       aria-modal="true"
       class="ant-drawer-content"
       role="dialog"
@@ -280,6 +285,7 @@ exports[`Drawer > render with custom footer 1`] = `
           </button>
           <div
             class="ant-drawer-title"
+            id="test-id"
           >
             Title
           </div>
@@ -331,6 +337,7 @@ exports[`Drawer > render with default footer 1`] = `
     style="width: 378px;"
   >
     <div
+      aria-labelledby="test-id"
       aria-modal="true"
       class="ant-drawer-content"
       role="dialog"
@@ -369,6 +376,7 @@ exports[`Drawer > render with default footer 1`] = `
           </button>
           <div
             class="ant-drawer-title"
+            id="test-id"
           >
             Title
           </div>
@@ -449,6 +457,7 @@ exports[`Drawer > render with footerExtra and custom footer 1`] = `
     style="width: 378px;"
   >
     <div
+      aria-labelledby="test-id"
       aria-modal="true"
       class="ant-drawer-content"
       role="dialog"
@@ -487,6 +496,7 @@ exports[`Drawer > render with footerExtra and custom footer 1`] = `
           </button>
           <div
             class="ant-drawer-title"
+            id="test-id"
           >
             Title
           </div>
@@ -538,6 +548,7 @@ exports[`Drawer > render with footerExtra and default footer 1`] = `
     style="width: 378px;"
   >
     <div
+      aria-labelledby="test-id"
       aria-modal="true"
       class="ant-drawer-content"
       role="dialog"
@@ -576,6 +587,7 @@ exports[`Drawer > render with footerExtra and default footer 1`] = `
           </button>
           <div
             class="ant-drawer-title"
+            id="test-id"
           >
             Title
           </div>
@@ -657,6 +669,7 @@ exports[`Drawer > render with footerExtra and no footer 1`] = `
     style="width: 378px;"
   >
     <div
+      aria-labelledby="test-id"
       aria-modal="true"
       class="ant-drawer-content"
       role="dialog"
@@ -695,6 +708,7 @@ exports[`Drawer > render with footerExtra and no footer 1`] = `
           </button>
           <div
             class="ant-drawer-title"
+            id="test-id"
           >
             Title
           </div>
@@ -739,6 +753,7 @@ exports[`Drawer > render with okText and cancenText 1`] = `
     style="width: 378px;"
   >
     <div
+      aria-labelledby="test-id"
       aria-modal="true"
       class="ant-drawer-content"
       role="dialog"
@@ -777,6 +792,7 @@ exports[`Drawer > render with okText and cancenText 1`] = `
           </button>
           <div
             class="ant-drawer-title"
+            id="test-id"
           >
             Title
           </div>
@@ -857,6 +873,7 @@ exports[`Drawer > render with onOk 1`] = `
     style="width: 378px;"
   >
     <div
+      aria-labelledby="test-id"
       aria-modal="true"
       class="ant-drawer-content"
       role="dialog"
@@ -895,6 +912,7 @@ exports[`Drawer > render with onOk 1`] = `
           </button>
           <div
             class="ant-drawer-title"
+            id="test-id"
           >
             Title
           </div>

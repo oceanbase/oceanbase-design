@@ -42,6 +42,16 @@ group: 业务组件
 
 - 💄 去掉 FooterToolbar 和 PageContainer 的大尺寸样式。[#1175](https://github.com/oceanbase/oceanbase-design/pull/1175)
 
+## 0.4.21
+
+`2025-11-24`
+
+- Action
+  - 🆕 Action.Button 支持在下拉菜单中设置 `danger` 属性，用于设置危险状态样式。[#1260](https://github.com/oceanbase/oceanbase-design/pull/1260)
+  - 🆕 Action.Button 支持在下拉菜单中嵌套 Popconfirm 和 Tooltip 组件。[#1260](https://github.com/oceanbase/oceanbase-design/pull/1260)
+  - 🐞 修复 Action.Button 在下拉菜单中 Tooltip 显示不正确的问题。[#1260](https://github.com/oceanbase/oceanbase-design/pull/1260)
+- 🌐 新增日语 (ja-JP) 国际化支持。[#1258](https://github.com/oceanbase/oceanbase-design/pull/1258)
+
 ## 0.4.20
 
 `2025-09-24`
