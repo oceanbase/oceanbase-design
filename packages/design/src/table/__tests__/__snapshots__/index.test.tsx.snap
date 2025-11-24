@@ -255,7 +255,7 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
         </div>
       </div>
       <ul
-        class="ant-pagination ant-table-pagination ant-table-pagination-right"
+        class="ant-pagination ant-pagination-end ant-table-pagination"
       >
         <li
           class="ant-pagination-total-text"
@@ -828,7 +828,7 @@ exports[`Table > default pagination should work 1`] = `
         </div>
       </div>
       <ul
-        class="ant-pagination ant-table-pagination ant-table-pagination-right"
+        class="ant-pagination ant-pagination-end ant-table-pagination"
       >
         <li
           class="ant-pagination-total-text"
@@ -1592,7 +1592,7 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
         </div>
       </div>
       <ul
-        class="ant-pagination ant-table-pagination ant-table-pagination-right"
+        class="ant-pagination ant-pagination-end ant-table-pagination"
       >
         <li
           class="ant-pagination-total-text"
@@ -2004,7 +2004,7 @@ exports[`Table > innerBordered should work 1`] = `
         </div>
       </div>
       <ul
-        class="ant-pagination ant-table-pagination ant-table-pagination-right"
+        class="ant-pagination ant-pagination-end ant-table-pagination"
       >
         <li
           class="ant-pagination-total-text"
@@ -2509,7 +2509,7 @@ exports[`Table > render 1`] = `
         </div>
       </div>
       <ul
-        class="ant-pagination ant-table-pagination ant-table-pagination-right"
+        class="ant-pagination ant-pagination-end ant-table-pagination"
       >
         <li
           class="ant-pagination-total-text"
