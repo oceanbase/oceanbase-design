@@ -11,7 +11,6 @@ export const genActionStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObjec
   const margin = `-${paddingVertical}px -${paddingHorizontal}px`;
   return {
     [`${componentCls}-more-menu`]: {
-      background: 'red',
       [`${antCls}-dropdown-menu-item`]: {
         [`${antCls}-typography`]: {
           display: 'block',
@@ -39,6 +38,22 @@ export const genActionStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObjec
           // remove button click animation
           [`${antCls}-wave`]: {
             display: 'none',
+          },
+        },
+        // 确保 danger 状态的样式能够正确显示，不覆盖 Menu.Item 的默认 danger 颜色
+        [`&${antCls}-dropdown-menu-item-danger`]: {
+          [`${antCls}-typography`]: {
+            [`&:not(${antCls}-typography-disabled)`]: {
+              color: 'unset',
+            },
+          },
+          [`${antCls}-btn`]: {
+            [`&:not(:disabled):not(${antCls}-btn-disabled)`]: {
+              color: 'unset',
+              [`&:hover`]: {
+                color: 'unset',
+              },
+            },
           },
         },
       },
