@@ -15,13 +15,15 @@ export interface InputNumberProps extends AntInputNumberProps {
   locale?: InputNumberLocale;
 }
 
+type InputNumberRef = React.ComponentRef<typeof AntInputNumber>;
+
 type CompoundedComponent = React.ForwardRefExoticComponent<
-  InputNumberProps & React.RefAttributes<HTMLInputElement>
+  InputNumberProps & React.RefAttributes<InputNumberRef>
 > & {
   _InternalPanelDoNotUseOrYouWillBeFired: typeof AntInputNumber._InternalPanelDoNotUseOrYouWillBeFired;
 };
 
-const InternalInputNumber = React.forwardRef<HTMLInputElement, InputNumberProps>(
+const InternalInputNumber = React.forwardRef<InputNumberRef, InputNumberProps>(
   ({ locale: customLocale, ...restProps }, ref) => {
     const { locale: contextLocale } = useContext<ConfigConsumerProps>(ConfigProvider.ConfigContext);
     const inputNumberLocale: InputNumberLocale = {
