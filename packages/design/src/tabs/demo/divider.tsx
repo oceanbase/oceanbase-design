@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Switch, Tabs } from '@oceanbase/design';
 
 const App: React.FC = () => {
-  const [divider, setDivider] = useState<boolean>(false);
+  const [divider, setDivider] = useState<boolean>(true);
 
   return (
     <div>

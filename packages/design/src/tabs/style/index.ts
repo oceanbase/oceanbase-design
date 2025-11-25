@@ -17,6 +17,11 @@ export const genTabsStyle = (token: Partial<TabsToken>): CSSObject => {
           },
         },
       },
+      [`&${componentCls}-left, &${componentCls}-right`]: {
+        [`${componentCls}-tab[data-node-key^=divider-]`]: {
+          paddingBlock: 0,
+        },
+      },
       [`${componentCls}-tab`]: {
         /** @deprecated */
         [`${componentCls}-tab-tag`]: {
