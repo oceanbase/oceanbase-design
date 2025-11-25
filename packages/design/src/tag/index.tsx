@@ -12,6 +12,7 @@ export * from 'antd/es/tag';
 
 export interface TagProps extends AntTagProps {
   ellipsis?: Ellipsis;
+  pill?: boolean;
 }
 
 const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
@@ -26,6 +27,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
           title: children,
         },
       },
+      pill,
       ...restProps
     },
     ref
@@ -38,6 +40,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
     const tagCls = classNames(
       {
         [`${prefixCls}-ellipsis`]: !!ellipsisConfig,
+        [`${prefixCls}-pill`]: pill,
       },
       className
     );
