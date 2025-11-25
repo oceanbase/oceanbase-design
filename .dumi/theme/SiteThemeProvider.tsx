@@ -40,8 +40,10 @@ const SiteThemeProvider: FC<
   const { getPrefixCls, iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const rootPrefixCls = getPrefixCls();
 
-  const [_, lang] = useLocale();
-  const { direction } = useContext(SiteContext);
+  // 使用新的 locale 状态，而不是从 URL 路径判断
+  const { direction, locale } = useContext(SiteContext);
+  // 保留 useLocale 用于向后兼容（如果需要）
+  // const [_, lang] = useLocale();
 
   const { token } = useSiteToken();
 
@@ -69,7 +71,7 @@ const SiteThemeProvider: FC<
         {...rest}
         theme={theme as ThemeConfig}
         direction={direction}
-        locale={lang === 'cn' ? zhCN : undefined}
+        locale={locale === 'cn' ? zhCN : undefined}
       >
         <ChartProvider theme={theme.isDark ? 'dark' : 'light'}>{children}</ChartProvider>
       </ConfigProvider>

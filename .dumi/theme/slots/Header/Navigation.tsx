@@ -131,7 +131,7 @@ export default ({
       key: 'github',
     },
     {
-      label: <FormattedMessage id="app.header.lang" />,
+      label: isZhCN ? '中文' : 'English',
       onClick: onLangChange,
       key: 'switch-lang',
     },

@@ -20,6 +20,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     marginLG,
     marginXS,
   } = token;
+  console.log(token.fontWeight);
   return {
     // 表格通用样式
     [`${componentCls}-wrapper ${componentCls}`]: {
@@ -33,9 +34,8 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       // head 样式
       [`${componentCls}-thead > tr`]: {
         ['th']: {
-          // 弱化列标题
           color: colorTextSecondary,
-          fontWeight: 'normal',
+          fontWeight: token.fontWeight,
           backgroundColor: colorBgBase,
         },
         // 去掉排序列表头的灰色背景
@@ -267,7 +267,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           marginRight: marginLG,
           [`${componentCls}-batch-operation-selection`]: {
             color: colorTextSecondary,
-            fontWeight: 500,
+            fontWeight: token.fontWeightStrong,
             [`${componentCls}-batch-operation-selection-count`]: {
               margin: `0 ${marginXS}px`,
               color: colorLink,

@@ -206,7 +206,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               [`${antCls}-menu-item-active, ${antCls}-menu-submenu-active > ${antCls}-menu-submenu-title`]:
                 {
                   color: `${colorText} !important`,
-                  fontWeight: 600,
+                  fontWeight: token.fontWeightStrong,
                   animation: 'activeGradientAnimation 0.1s',
                   // .border-gradient(linear-gradient(to right, #E9EDF6, @colorBgLayout), linear-gradient(90deg, #C6CDD9, @colorBgLayout), 0.5px, solid, 8px 0 0 8px),
                   backgroundImage: `linear-gradient(to right,#E9EDF6, ${colorBgLayout}),linear-gradient(90deg,#C6CDD9,${colorBgLayout})`,
@@ -219,7 +219,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               // 菜单项选中样式
               [`${antCls}-menu-item-selected`]: {
                 color: `${colorPrimary} !important`,
-                fontWeight: 600,
+                fontWeight: token.fontWeightStrong,
                 animation: 'selectedGradientAnimation 0.5s',
                 // .border-gradient(linear-gradient(to right, #E5EEFF, #F4F8FF), linear-gradient(90deg, @colorPrimaryBorder, @colorBgLayout), 0.5px, solid, 8px 0 0 8px),
                 backgroundImage: `linear-gradient(to right,#E5EEFF,#F4F8FF),linear-gradient(90deg,${colorPrimaryBorder},${colorBgLayout})`,
@@ -416,7 +416,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
         },
         [`${antCls}-menu-item-active`]: {
           color: 'colorText !important',
-          fontWeight: 600,
+          fontWeight: token.fontWeightStrong,
           animation: 'activeGradientAnimation 0.1s',
           // .border-gradient(linear-gradient(to right, #E9EDF6, colorBgLayout), linear-gradient(90deg, #C6CDD9, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
           backgroundImage: `linear-gradient(to right, #E9EDF6, ${colorBgLayout}), linear-gradient(90deg, #C6CDD9, ${colorBgLayout})`,
@@ -428,7 +428,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
         },
         [`${antCls}-menu-submenu-active > & ${antCls}-menu-submenu-title`]: {
           color: 'colorText !important',
-          fontWeight: 600,
+          fontWeight: token.fontWeightStrong,
           animation: 'activeGradientAnimation 0.1s',
           // .border-gradient(linear-gradient(to right, #E9EDF6, colorBgLayout), linear-gradient(90deg, #C6CDD9, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
           backgroundImage: `linear-gradient(to right, #E9EDF6, ${colorBgLayout}), linear-gradient(90deg, #C6CDD9, ${colorBgLayout})`,
@@ -441,7 +441,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
 
         [`${antCls}-menu-item-selected`]: {
           color: `${colorPrimary} !important`,
-          fontWeight: 600,
+          fontWeight: token.fontWeightStrong,
           animation: 'selectedGradientAnimation 0.1s',
           // .border-gradient(linear-gradient(to right, #E5EEFF, #F4F8FF), linear-gradient(90deg, @colorPrimaryBorder, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
           backgroundImage: `linear-gradient(to right,#E5EEFF,#F4F8FF),linear-gradient(90deg,${colorPrimaryBorder},${colorBgLayout})`,
