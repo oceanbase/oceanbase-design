@@ -88,7 +88,7 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
     [`${componentCls}${componentCls}-with-description`]: {
       paddingBlock: token.padding,
       [`${componentCls}-message`]: {
-        fontWeight: 500,
+        fontWeight: token.fontWeightStrong,
         marginBottom: token.marginXXS,
       },
       [`${componentCls}-description`]: {

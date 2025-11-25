@@ -5,7 +5,8 @@ import classNames from 'classnames';
 import { useLocation, useSiteData } from 'dumi';
 import DumiSearchBar from 'dumi/theme-default/slots/SearchBar';
 import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import useLocale from '../../../hooks/useLocale';
+// 不再使用 useLocale，改用 SiteContext 中的 locale 状态
+// import useLocale from '../../../hooks/useLocale';
 import useSiteToken from '../../../hooks/useSiteToken';
 import DirectionIcon from '../../common/DirectionIcon';
 import * as utils from '../../utils';
@@ -118,7 +119,8 @@ interface HeaderState {
 // ================================= Header =================================
 const Header: React.FC = () => {
   const [isClient, setIsClient] = React.useState(false);
-  const [, lang] = useLocale();
+  // 不再使用 useLocale，改用 SiteContext 中的 locale 状态
+  // const [, lang] = useLocale();
 
   const { pkg } = useSiteData();
 
@@ -127,7 +129,8 @@ const Header: React.FC = () => {
     windowWidth: 1400,
     searching: false,
   });
-  const { direction, isMobile, updateSiteConfig } = useContext<SiteContextProps>(SiteContext);
+  const { direction, isMobile, locale, updateSiteConfig } =
+    useContext<SiteContextProps>(SiteContext);
   const location = useLocation();
   const { pathname, search } = location;
 
@@ -179,19 +182,25 @@ const Header: React.FC = () => {
   }, []);
 
   const onLangChange = useCallback(() => {
-    const currentProtocol = `${window.location.protocol}//`;
-    const currentHref = window.location.href.slice(currentProtocol.length);
+    // 新的语言切换逻辑：同步到 URL query 参数和 localStorage
+    const newLocale = locale === 'cn' ? 'en' : 'cn';
+    // updateSiteConfig 会自动将 locale 同步到 URL query 参数和 localStorage
+    updateSiteConfig({ locale: newLocale });
 
-    if (utils.isLocalStorageNameSupported()) {
-      localStorage.setItem('locale', utils.isZhCN(pathname) ? 'en-US' : 'zh-CN');
-    }
-    window.location.href =
-      currentProtocol +
-      currentHref.replace(
-        window.location.pathname,
-        utils.getLocalizedPathname(pathname, !utils.isZhCN(pathname), search).pathname
-      );
-  }, [location]);
+    // 原先的逻辑（已注释）：通过修改 URL 路径来切换语言
+    // const currentProtocol = `${window.location.protocol}//`;
+    // const currentHref = window.location.href.slice(currentProtocol.length);
+    //
+    // if (utils.isLocalStorageNameSupported()) {
+    //   localStorage.setItem('locale', utils.isZhCN(pathname) ? 'en-US' : 'zh-CN');
+    // }
+    // window.location.href =
+    //   currentProtocol +
+    //   currentHref.replace(
+    //     window.location.pathname,
+    //     utils.getLocalizedPathname(pathname, !utils.isZhCN(pathname), search).pathname
+    //   );
+  }, [locale, updateSiteConfig]);
 
   const nextDirectionText = useMemo<string>(
     () => (direction !== 'rtl' ? 'RTL' : 'LTR'),
@@ -206,7 +215,8 @@ const Header: React.FC = () => {
   const { menuVisible, windowWidth, searching } = headerState;
 
   const isHome = ['', 'index', 'index-cn'].includes(pathname);
-  const isZhCN = lang === 'cn';
+  // 使用新的 locale 状态，而不是从 URL 路径判断
+  const isZhCN = locale === 'cn';
   const isRTL = direction === 'rtl';
   let responsive: null | 'narrow' | 'crowded' = null;
   if (windowWidth < RESPONSIVE_XS) {
@@ -241,15 +251,15 @@ const Header: React.FC = () => {
   let menu = [
     navigationNode,
     <More key="more" {...sharedProps} />,
-    // <SwitchBtn
-    //   key="lang"
-    //   onClick={onLangChange}
-    //   value={utils.isZhCN(pathname) ? 1 : 2}
-    //   label1="中"
-    //   label2="En"
-    //   tooltip1="中文 / English"
-    //   tooltip2="English / 中文"
-    // />,
+    <SwitchBtn
+      key="lang"
+      onClick={onLangChange}
+      value={locale === 'cn' ? 1 : 2}
+      label1="中"
+      label2="En"
+      tooltip1="中文 / English"
+      tooltip2="English / 中文"
+    />,
     <SwitchBtn
       key="direction"
       onClick={onDirectionChange}
