@@ -47,7 +47,7 @@ export default () => {
       </Space>
       <Drawer
         open={open1}
-        title="Drawer with footer"
+        title="Title"
         onOk={() => {
           handleSubmit();
         }}
@@ -75,7 +75,7 @@ export default () => {
       </Drawer>
       <Drawer
         open={open2}
-        title="Drawer with dynamic content"
+        title="Title"
         onOk={() => {
           handleSubmit();
         }}
@@ -120,6 +120,7 @@ export default () => {
                       message: `item ${item} is required`,
                     },
                   ]}
+                  style={item === 5 ? { marginTop: 24 } : {}}
                 >
                   <Input placeholder={`item ${item}`} />
                 </Form.Item>
@@ -128,7 +129,7 @@ export default () => {
       </Drawer>
       <Drawer
         open={open3}
-        title="Drawer without footer"
+        title="Title"
         onCancel={() => {
           setOpen3(false);
         }}
