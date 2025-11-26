@@ -109,7 +109,7 @@ const getLocaleTokenValue = (
 ) => {
   return tokenValue !== defaultTheme.token[tokenKey]
     ? { [tokenKey]: tokenValue }
-    : ['en', 'en-gb', undefined].includes(locale.locale)
+    : ['en', 'en-gb'].includes(locale.locale)
       ? { [tokenKey]: tokenValueEn }
       : {};
 };

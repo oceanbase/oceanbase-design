@@ -8,6 +8,7 @@ import React, { useContext } from 'react';
 import useLocale from '../hooks/useLocale';
 import SiteContext from './slots/SiteContext';
 import zhCN from '../../packages/design/src/locale/zh-CN';
+import enUS from '../../packages/design/src/locale/en-US';
 import useSiteToken from '../hooks/useSiteToken';
 
 interface NewToken {
@@ -71,7 +72,7 @@ const SiteThemeProvider: FC<
         {...rest}
         theme={theme as ThemeConfig}
         direction={direction}
-        locale={locale === 'cn' ? zhCN : undefined}
+        locale={locale === 'cn' ? zhCN : enUS}
       >
         <ChartProvider theme={theme.isDark ? 'dark' : 'light'}>{children}</ChartProvider>
       </ConfigProvider>
