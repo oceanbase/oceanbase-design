@@ -26,7 +26,7 @@ export default () => {
       </Space>
       <Drawer
         open={open1}
-        title="Enable Drawer footer by onOk"
+        title="Title"
         onOk={() => {
           setOpen1(false);
         }}
@@ -40,7 +40,7 @@ export default () => {
       </Drawer>
       <Drawer
         open={open2}
-        title="Enable Drawer footer by footer"
+        title="Title"
         onOk={() => {
           setOpen2(false);
         }}

@@ -5,8 +5,8 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 export type DrawerToken = FullToken<'Drawer'>;
 
 export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): CSSObject => {
-  const { componentCls, antCls } = token;
-  const contentPadding = `${token.paddingXS}px ${token.paddingLG}px ${token.paddingLG}px ${token.paddingLG}px`;
+  const { componentCls, antCls, fontSizeHeading3, colorSplit } = token;
+  const contentPadding = token.paddingLG;
   const boxShadowBottom =
     '0 2px 4px 0 rgba(54,69,99,0.04), 0 1px 6px -1px rgba(54,69,99,0.04), 0 1px 2px 0 rgba(54,69,99,0.06)';
   const boxShadowTop =
@@ -17,11 +17,28 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
       // should be wrapped by `${componentCls}-content` to overwritten antd style
       [`${componentCls}-content`]: {
         [`${componentCls}-header`]: {
+          position: 'relative',
           padding: `${token.padding}px ${token.paddingLG}px`,
           borderBottom: 'none',
           transition: `box-shadow ${token.motionDurationMid}`,
           // ensure header box-shadow cover body content
           zIndex: 10,
+          [`${componentCls}-title`]: {
+            fontSize: fontSizeHeading3,
+          },
+          // 标题栏底部增加分割线
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '1px',
+            backgroundColor: colorSplit,
+            // 使用负margin让分割线贯通到content边缘
+            marginLeft: `-${token.paddingLG}px`,
+            marginRight: `-${token.paddingLG}px`,
+          },
         },
         [`${componentCls}-header-shadow`]: {
           boxShadow: boxShadowBottom,
@@ -48,6 +65,10 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
             alignItems: 'center',
           },
         },
+        // footer 跟随内容或滚动到底部时，padding-top 设为 0
+        [`${componentCls}-footer-container-no-padding-top`]: {
+          paddingTop: 0,
+        },
         [`${componentCls}-footer-container-shadow`]: {
           boxShadow: boxShadowTop,
         },
@@ -62,7 +83,7 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
       // should be wrapped by `${componentCls}-content` to overwritten antd style
       [`${componentCls}-content`]: {
         [`${componentCls}-body-content`]: {
-          padding: `${token.paddingXS}px ${token.paddingLG}px`,
+          paddingBottom: token.paddingXS,
         },
       },
     },
