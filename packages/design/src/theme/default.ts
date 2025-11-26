@@ -100,6 +100,9 @@ const defaultTheme: ThemeConfig = {
     lineWidthFocus: 0,
   },
   components: {
+    Alert: {
+      borderRadiusLG: 6,
+    },
     Breadcrumb: {
       fontSize: fontSizeSM,
       fontHeight: 20,

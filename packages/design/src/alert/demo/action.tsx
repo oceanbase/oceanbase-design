@@ -3,17 +3,41 @@ import React from 'react';
 
 const App: React.FC = () => (
   <Space direction="vertical" style={{ width: '100%' }}>
-    <Alert message="Success Tips" type="success" showIcon action={<a>Detail</a>} />
-    <Alert message="Informational Notes" type="info" showIcon action={<a>Detail</a>} />
-    <Alert message="Warning" type="warning" showIcon action={<a>Detail</a>} />
-    <Alert message="Error" type="error" showIcon action={<a>Detail</a>} />
+    <Alert
+      message="Success Tips"
+      type="success"
+      showIcon
+      closable
+      action={<Button size="small">Btn</Button>}
+    />
+    <Alert
+      message="Informational Notes"
+      type="info"
+      showIcon
+      closable
+      action={<Button size="small">Btn</Button>}
+    />
+    <Alert
+      message="Warning"
+      type="warning"
+      showIcon
+      closable
+      action={<Button size="small">Btn</Button>}
+    />
+    <Alert
+      message="Error"
+      type="error"
+      showIcon
+      closable
+      action={<Button size="small">Btn</Button>}
+    />
     <Alert
       message="Success Tips"
       description="Detailed description and advice about successful copywriting."
       type="success"
       showIcon
       closable
-      action={<Button size="small">Detail</Button>}
+      action={<Button>Btn</Button>}
     />
     <Alert
       message="Informational Notes"
@@ -21,7 +45,7 @@ const App: React.FC = () => (
       type="info"
       showIcon
       closable
-      action={<Button size="small">Detail</Button>}
+      action={<Button>Btn</Button>}
     />
     <Alert
       message="Warning"
@@ -29,7 +53,7 @@ const App: React.FC = () => (
       type="warning"
       showIcon
       closable
-      action={<Button size="small">Detail</Button>}
+      action={<Button>Btn</Button>}
     />
     <Alert
       message="Error"
@@ -37,11 +61,7 @@ const App: React.FC = () => (
       type="error"
       showIcon
       closable
-      action={
-        <Button size="small" danger>
-          Detail
-        </Button>
-      }
+      action={<Button danger>Btn</Button>}
     />
   </Space>
 );

@@ -15,7 +15,7 @@ export * from 'antd/es/alert';
 
 export interface AlertProps extends AntAlertProps {
   ghost?: boolean;
-  colored?: boolean;
+  mini?: boolean;
 }
 
 const iconMapOutlined = {
@@ -26,26 +26,35 @@ const iconMapOutlined = {
 };
 
 const Alert = ({
-  type,
+  type: typeProp,
+  showIcon = true,
+  closable,
   ghost,
-  colored,
+  mini,
+  banner,
   prefixCls: customizePrefixCls,
   className,
   ...restProps
 }: AlertProps) => {
+  // banner exists and type is empty, use warning type by default for correct icon
+  const type = banner && !typeProp ? 'warning' : typeProp;
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('alert', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
   const alertCls = classNames(
     {
+      [`${prefixCls}-closable`]: closable,
       [`${prefixCls}-ghost`]: ghost,
-      [`${prefixCls}-colored`]: colored,
+      [`${prefixCls}-mini`]: mini,
     },
     className
   );
   return wrapSSR(
     <AntAlert
       type={type}
+      showIcon={showIcon}
+      closable={closable}
+      banner={banner}
       icon={iconMapOutlined[type]}
       prefixCls={customizePrefixCls}
       className={alertCls}
