@@ -103,6 +103,9 @@ const defaultTheme: ThemeConfig = {
     Alert: {
       borderRadiusLG: 6,
     },
+    Badge: {
+      statusSize: 8,
+    },
     Breadcrumb: {
       fontSize: fontSizeSM,
       fontHeight: 20,

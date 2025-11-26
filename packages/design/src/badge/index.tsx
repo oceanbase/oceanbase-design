@@ -20,7 +20,7 @@ export interface BadgeProps extends AntBadgeProps {
 
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   ({ prefixCls: customizePrefixCls, className, status, text, icon, ...restProps }, ref) => {
-    const { getPrefixCls, iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
+    const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('badge', customizePrefixCls);
     const { wrapSSR, hashId } = useStyle(prefixCls);
 
@@ -31,7 +31,7 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
           style={{
             display: 'inline-block',
           }}
-          className={`${iconPrefixCls}-spin`}
+          spin={true}
         />
       ),
       success: <CheckCircleFilled />,

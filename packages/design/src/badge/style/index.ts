@@ -15,9 +15,7 @@ export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSS
     [`${componentCls}${componentCls}-status`]: {
       // dot style
       [`${componentCls}-status-dot`]: {
-        [`&${componentCls}-status-default`]: {
-          backgroundColor: token.colorFill,
-        },
+        [`&${componentCls}-status-default`]: {},
       },
       // icon style
       [`${componentCls}-status-icon`]: {
