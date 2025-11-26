@@ -1,5 +1,11 @@
 import { Modal as AntModal } from 'antd';
 import type { ModalFuncProps, ModalProps as AntModalProps } from 'antd/es/modal';
+import {
+  ExclamationCircleOutlined,
+  CloseCircleOutlined,
+  CheckCircleOutlined,
+  InfoCircleOutlined,
+} from '@oceanbase/icons';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
@@ -49,13 +55,37 @@ const Modal = ({
 
 // 替换 Modal 上的静态方法，支持消费 ConfigProvider 配置
 // 注意: 不能使用 Modal.info = modal.info 进行属性赋值，需要新建函数赋值，否则仍然无法消费 ConfigProvider 配置
-Modal.info = (props: ModalFuncProps) => modal.info(props);
-Modal.success = (props: ModalFuncProps) => modal.success(props);
-Modal.error = (props: ModalFuncProps) => modal.error(props);
-Modal.warning = (props: ModalFuncProps) => modal.warning(props);
-Modal.warn = (props: ModalFuncProps) => modal.warning(props);
-Modal.confirm = (props: ModalFuncProps) => modal.confirm(props);
-
+Modal.info = (props: ModalFuncProps) =>
+  modal.info({
+    // use outlined icon
+    icon: <InfoCircleOutlined />,
+    ...props,
+  });
+Modal.success = (props: ModalFuncProps) =>
+  modal.success({
+    icon: <CheckCircleOutlined />,
+    ...props,
+  });
+Modal.error = (props: ModalFuncProps) =>
+  modal.error({
+    icon: <CloseCircleOutlined />,
+    ...props,
+  });
+Modal.warning = (props: ModalFuncProps) =>
+  modal.warning({
+    icon: <ExclamationCircleOutlined />,
+    ...props,
+  });
+Modal.warn = (props: ModalFuncProps) =>
+  modal.warning({
+    icon: <ExclamationCircleOutlined />,
+    ...props,
+  });
+Modal.confirm = (props: ModalFuncProps) =>
+  modal.confirm({
+    icon: <ExclamationCircleOutlined />,
+    ...props,
+  });
 Modal.useModal = AntModal.useModal;
 Modal.destroyAll = AntModal.destroyAll;
 Modal.config = AntModal.config;
