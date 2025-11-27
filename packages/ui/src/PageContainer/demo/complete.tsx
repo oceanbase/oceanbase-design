@@ -180,7 +180,10 @@ export default () => {
           </Dropdown>,
         ],
       }}
-      footer={[<Button>重置</Button>, <Button type="primary">提交</Button>]}
+      footer={[<Button type="primary">提交</Button>, <Button>重置</Button>]}
+      footerToolBarProps={{
+        extra: 'Some extra message',
+      }}
     >
       <Space size={16} direction="vertical">
         <Card>

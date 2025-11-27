@@ -10,9 +10,15 @@ export const genFooterToolbarStyle: GenerateStyle<FooterToolBarToken> = (
 
   return {
     [`${componentCls}`]: {
+      flexDirection: 'row-reverse',
+      lineHeight: 'initial',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      gap: token.padding,
+      paddingBlock: token.padding,
+      paddingInline: token.paddingXL,
       width: '100%',
       backgroundColor: colorBgBase,
-      borderRadius: borderRadius,
       boxShadow: boxShadowSecondary,
       borderBlockStart: 'none',
     },
