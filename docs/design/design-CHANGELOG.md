@@ -8,6 +8,42 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.4
+
+`2025-11-27`
+
+- 🌐 站点支持中英文语言切换。[#1265](https://github.com/oceanbase/oceanbase-design/pull/1265)
+- 主题
+  - 🌈 更新 Design Token 三级填充色 colorFillTertiary、四级填充色 colorFillQuaternary 的值。[#1273](https://github.com/oceanbase/oceanbase-design/pull/1273)
+  - 🌈 更新 Design Token 布局背景色 `colorBgLayout` 的值。[#1275](https://github.com/oceanbase/oceanbase-design/pull/1275)
+  - 💄 优化字重的样式实现，使用 Design Token `fontWeight` 和 `fontWeightStrong` 替代硬编码值，确保字重随主题变化。[#1265](https://github.com/oceanbase/oceanbase-design/pull/1265)
+- Alert
+  - 🔥 新版 Alert 组件，调整颜色、字体、间距等样式。[#1266](https://github.com/oceanbase/oceanbase-design/pull/1266)
+  - 🆕 新增 `mini` 属性，支持超轻量信息提醒模式，尺寸更紧凑，无边框，宽度自适应内容。[#1266](https://github.com/oceanbase/oceanbase-design/pull/1266)
+  - 🗑️ 移除 `colored` 属性支持。[#1266](https://github.com/oceanbase/oceanbase-design/pull/1266)
+  - 💄 调整操作按钮的位置，将操作按钮从右上角改为内容下方。[#1266](https://github.com/oceanbase/oceanbase-design/pull/1266)
+  - 💄 Alert 优化链接样式，链接默认带下划线，且链接颜色与 message 保持一致。[#1266](https://github.com/oceanbase/oceanbase-design/pull/1266)
+- Badge
+  - 💄 Badge 状态点尺寸改为 `8px`。[#1267](https://github.com/oceanbase/oceanbase-design/pull/1267)
+  - 💄 优化 Badge `default` 状态点的颜色。[#1267](https://github.com/oceanbase/oceanbase-design/pull/1267)
+- Card
+  - 🔥 新版 Card 组件，根据设计规范更新样式，调整标题区、内容区和标签页的间距。[#1270](https://github.com/oceanbase/oceanbase-design/pull/1270)
+  - 🆕 新增 `collapsible` 属性，用于支持内容区展开和收起。[#1270](https://github.com/oceanbase/oceanbase-design/pull/1270)
+- 💄 Collapse 更新展开图标的颜色。[#1274](https://github.com/oceanbase/oceanbase-design/pull/1274)
+- 🔥 新版 Drawer 组件，根据设计规范更新样式，包括标题区增加分割线、标题字体大小 `16px => 18px`、调整内容区间距等。[#1269](https://github.com/oceanbase/oceanbase-design/pull/1269)
+- Form
+  - 🆕 Form.Item 新增 `description` 属性，用于设置表单控件前的描述信息。[#1272](https://github.com/oceanbase/oceanbase-design/pull/1272)
+  - 💄 Form.Item 根据设计规范更新 `extra` 的字体大小和间距。[#1272](https://github.com/oceanbase/oceanbase-design/pull/1272)
+- Modal
+  - 🔥 新版 Modal 组件，根据设计规范更新样式，包括标题区增加分割线、标题字体大小 `16px => 18px`、优化内容区间距等。[#1268](https://github.com/oceanbase/oceanbase-design/pull/1268)
+  - 🐞 修复 Modal 静态方法样式在未使用 `<Modal />` 时不生效的问题，需要在全局配置中注册样式。[#1271](https://github.com/oceanbase/oceanbase-design/pull/1271)
+  - 💄 Modal 静态方法中的面性图标改为线性图标。[#1268](https://github.com/oceanbase/oceanbase-design/pull/1268)
+- 💄 Table 使用 `CaretRightOutlined` 作为展开图标。[#1274](https://github.com/oceanbase/oceanbase-design/pull/1274)
+- 💄 优化 Tabs 垂直模式下选项卡分割线的间距。[#1263](https://github.com/oceanbase/oceanbase-design/pull/1263)
+- Tag
+  - 🆕 Tag 新增 `pill` 属性，用于设置胶囊标签样式。[#1264](https://github.com/oceanbase/oceanbase-design/pull/1264)
+  - 💄 非胶囊 Tag 的字体加粗。[#1264](https://github.com/oceanbase/oceanbase-design/pull/1264)
+
 ## 1.0.0-alpha.3
 
 `2025-10-23`

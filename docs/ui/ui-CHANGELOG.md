@@ -8,6 +8,13 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.4
+
+`2025-11-27`
+
+- 💄 更新 PageContainer 页头区、内容区的间距，以及底部操作栏的位置和间距。[#1276](https://github.com/oceanbase/oceanbase-design/pull/1276)
+- 💄 更新 FooterToolbar 的位置和间距。[#1276](https://github.com/oceanbase/oceanbase-design/pull/1276)
+
 ## 1.0.0-alpha.3
 
 `2025-10-23`
