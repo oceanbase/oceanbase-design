@@ -47,35 +47,35 @@ export default () => {
   const helps = [
     {
       title: '创建新的集群',
-      link: 'https://www.alipay.com',
+      link: 'https://www.oceanbase.com',
     },
     {
       title: '创建新的租户',
-      link: 'https://www.alipay.com',
+      link: 'https://www.oceanbase.com',
     },
     {
       title: '管理集群',
-      link: 'https://www.alipay.com',
+      link: 'https://www.oceanbase.com',
     },
     {
       title: '管理租户',
-      link: 'https://www.alipay.com',
+      link: 'https://www.oceanbase.com',
     },
     {
       title: '查看任务',
-      link: 'https://www.alipay.com',
+      link: 'https://www.oceanbase.com',
     },
     {
       title: '查看告警',
-      link: 'https://www.alipay.com',
+      link: 'https://www.oceanbase.com',
     },
     {
       title: '添加新用户',
-      link: 'https://www.alipay.com',
+      link: 'https://www.oceanbase.com',
     },
     {
       title: '查看更多',
-      link: 'https://www.alipay.com',
+      link: 'https://www.oceanbase.com',
       isMore: true,
     },
   ];

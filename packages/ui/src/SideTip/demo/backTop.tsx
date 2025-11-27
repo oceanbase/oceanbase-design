@@ -1,5 +1,4 @@
 /**
- * title: 回到顶部
  * iframe: true
  */
 import React from 'react';

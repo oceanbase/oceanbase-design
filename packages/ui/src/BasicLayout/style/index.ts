@@ -28,13 +28,35 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
     footerBarStyle[`${componentCls}${componentCls}-sider-${width}`] = {
       [`${proComponentsCls}-footer-bar`]: {
         // footer bar width adapt to sider width of BasicLayout
-        width: width === 0 ? '100%' : `calc(100% - ${width}px - 24px)`,
+        width: width === 0 ? '100%' : `calc(100% - ${width}px - 32px)`,
         transition: `width ${motionDurationSlow}`,
       },
     };
   });
 
   return {
+    '@keyframes activeGradientAnimation': {
+      '0%': {
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '0% 100%',
+      },
+      '100%': {
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100% 100%',
+      },
+    },
+    '@keyframes selectedGradientAnimation': {
+      '0%': {
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '0% 100%',
+        borderRadius: 0,
+      },
+      '100%': {
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100% 100%',
+        borderRadius: 8,
+      },
+    },
     [`${componentCls}-banner-wrapper`]: {
       position: 'fixed',
       top: 0,
@@ -131,32 +153,19 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               backgroundColor: 'transparent',
               borderRight: 'none',
 
-              [`${antCls}-menu-item`]: {
+              [`${antCls}-menu-submenu, ${antCls}-menu-item`]: {
                 width: '100%',
                 marginTop: 0,
                 marginRight: 'auto',
                 marginLeft: 'auto',
                 color: colorText,
                 backgroundColor: 'transparent',
-                [iconCls]: {
+                [`${antCls}-menu-title-content ${iconCls}`]: {
                   // 图标尺寸设为 18px，因为设计侧给到的图标内侧有间距，需要适当加大尺寸
                   width: '18px',
                   height: '18px',
                   fontSize: '18px',
-                },
-              },
-              [`${antCls}-menu-submenu`]: {
-                width: '100%',
-                marginTop: 0,
-                marginRight: 'auto',
-                marginLeft: 'auto',
-                color: colorText,
-                backgroundColor: 'transparent',
-                [iconCls]: {
-                  // 图标尺寸设为 18px，因为设计侧给到的图标内侧有间距，需要适当加大尺寸
-                  width: '18px',
-                  height: '18px',
-                  fontSize: '18px',
+                  marginBottom: 10,
                 },
               },
               [`${antCls}-menu-submenu > ${antCls}-menu-submenu-title`]: {

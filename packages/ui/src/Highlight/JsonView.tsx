@@ -1,12 +1,10 @@
+import { ConfigProvider } from '@oceanbase/design';
 import classNames from 'classnames';
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import ReactJson from 'react-json-view';
-import { getPrefix } from '../_util';
 import type { HighlightProps } from '.';
 import { THEME_DARK } from '.';
 import { useKeyDownCopyEvent } from './useKeyDownCopyEvent';
-// @ts-ignore
-import './index.less';
 
 export interface JsonViewProps extends HighlightProps {
   json: object;
@@ -21,7 +19,8 @@ export default ({
   onCopyChange = () => {},
   copyable = true,
 }: JsonViewProps) => {
-  const prefixCls = getPrefix('highlight');
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('highlight');
 
   const isDarkTheme = theme === THEME_DARK;
 

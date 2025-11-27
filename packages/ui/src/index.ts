@@ -1,5 +1,3 @@
-import './index.less';
-
 export * from '@ant-design/pro-components';
 
 export { version } from '../package.json';

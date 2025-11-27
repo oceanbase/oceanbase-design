@@ -1,12 +1,12 @@
 import { DownOutlined, UpOutlined } from '@oceanbase/icons';
-import { Space } from '@oceanbase/design';
+import { ConfigProvider, Space } from '@oceanbase/design';
 import classnames from 'classnames';
 import { cloneDeep, isEmpty, isEqual, pullAllWith } from 'lodash';
 import type { ReactNode } from 'react';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import './index.less';
+import useStyle from './style';
 import zhCN from './locale/zh-CN';
 
 export interface AlertRenderParams {
@@ -39,9 +39,10 @@ export interface BatchOperationBarProps extends LocaleWrapperProps {
   barStyle?: React.CSSProperties;
 }
 
-const prefix = 'ob-batch-operation-bar';
-
 const BatchOperationBar = (props: BatchOperationBarProps) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('batch-operation-bar');
+  const { wrapSSR } = useStyle(prefixCls);
   const locale = props?.locale;
   const {
     title,
@@ -99,15 +100,15 @@ const BatchOperationBar = (props: BatchOperationBarProps) => {
     return (
       <div
         className={classnames({
-          [`${prefix}-open-btn`]: isOpen,
-          [`${prefix}-close-btn`]: !isOpen,
-          [`${prefix}-display-btn`]: true,
+          [`${prefixCls}-open-btn`]: isOpen,
+          [`${prefixCls}-close-btn`]: !isOpen,
+          [`${prefixCls}-display-btn`]: true,
         })}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span
           className={classnames({
-            [`${prefix}-display-text`]: true,
+            [`${prefixCls}-display-text`]: true,
           })}
         >
           {isOpen ? hiddenText : openText}
@@ -121,28 +122,28 @@ const BatchOperationBar = (props: BatchOperationBarProps) => {
     else setSelectedData(selectedRows);
   }, [selectedRows]);
 
-  return (
+  return wrapSSR(
     <div
       className={classnames({
         [className]: !!className,
-        [prefix]: true,
+        [prefixCls]: true,
       })}
       style={style}
     >
-      <div className={`${prefix}-header`}>
+      <div className={`${prefixCls}-header`}>
         <Space>
           {!!alertRender ? (
             alertRender?.(selectedData)
           ) : (
             <Space>
-              {title && <span className={`${prefix}-title`}>{title}</span>}
+              {title && <span className={`${prefixCls}-title`}>{title}</span>}
               <span>{locale?.alertText?.replace?.(/\$\{\}/, selectedData?.length || 0)}</span>
             </Space>
           )}
           {!!showCancelBtn && (
             <span
               className={classnames({
-                [`${prefix}-cancel`]: true,
+                [`${prefixCls}-cancel`]: true,
               })}
               onClick={() => cleanSelectedRows()}
             >
@@ -163,9 +164,9 @@ const BatchOperationBar = (props: BatchOperationBarProps) => {
       </div>
       <div
         className={classnames({
-          [`${prefix}-content`]: true,
-          [`${prefix}-content-active`]: !!isOpen,
-          [`${prefix}-content-hidden`]: !isOpen,
+          [`${prefixCls}-content`]: true,
+          [`${prefixCls}-content-active`]: !!isOpen,
+          [`${prefixCls}-content-hidden`]: !isOpen,
         })}
       >
         {typeof content === 'function'

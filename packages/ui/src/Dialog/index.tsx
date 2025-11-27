@@ -6,19 +6,16 @@ import {
   MinusOutlined,
 } from '@oceanbase/icons';
 import type { MouseEvent, PointerEvent } from 'react';
-import React from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { ConfigProvider } from '@oceanbase/design';
 import { createPortal } from 'react-dom';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix } from '../_util';
 import { Anchor } from './Anchor';
 import { Dock } from './Dock';
 import { EventProxy } from './EventProxy';
 import zhCN from './locale/zh-CN';
-
-import './index.less';
-
-const prefix = getPrefix('dialog');
+import useStyle from './style';
 
 const DEFAULT_LEFT = 0.1;
 const DEFAULT_TOP = 0.1;
@@ -79,582 +76,611 @@ interface DialogState {
   headerStyle?: Record<string, any>;
 }
 
-class DialogComp extends React.PureComponent<DialogProps, DialogState> {
-  state = {
-    mask: true,
-    width: this.props.width ?? DEFAULT_WIDTH_MEMBER,
-    height: this.props.height ?? DEFAULT_HEIGHT_MEMBER,
-    left:
-      this.props.left ??
-      this.props.clientWidth - (this.props.width ?? DEFAULT_WIDTH_MEMBER) - DEFAULT_BORDER_WIDTH,
-    top:
-      this.props.top ??
-      this.props.clientHeight - (this.props.height ?? DEFAULT_HEIGHT_MEMBER) - DEFAULT_BORDER_WIDTH,
-    moveX: 0,
-    moveY: 0,
-    maximization: this.props.isEmbed,
-    minimize: false,
-    headerStyle: {},
-  };
+// Static container for portal
+let _container: HTMLDivElement | null = null;
 
-  static defaultProps = {
-    min: DEFAULT_MIN,
-    resizable: true,
-    draggable: true,
-    enableMaximization: true,
-    isEmbed: false,
-  };
+const getContainer = (): HTMLDivElement => {
+  if (!_container) {
+    _container = document.createElement('div');
+    document.body.appendChild(_container);
+  }
+  return _container;
+};
 
-  clientX = 0;
+const DialogComp: React.FC<DialogProps> = props => {
+  const {
+    className,
+    visible,
+    children,
+    min = DEFAULT_MIN,
+    max,
+    width,
+    height,
+    left,
+    top,
+    title,
+    onClose,
+    clientWidth,
+    clientHeight,
+    resizable = true,
+    draggable = true,
+    enableMaximization = true,
+    locale,
+    extLink,
+    setRootWidth,
+    isEmbed = false,
+  } = props;
 
-  clientY = 0;
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('dialog');
+  const { wrapSSR } = useStyle(prefixCls);
 
-  protected getDefaultEmbedState = () => {
-    const { clientHeight, clientWidth, width, height, left, top } = this.props;
+  // Refs for instance properties
+  const hostRef = useRef<HTMLDivElement | null>(null);
+  const clientXRef = useRef(0);
+  const clientYRef = useRef(0);
+  const isPointDownRef = useRef(false);
+  const originInfoRef = useRef<Record<string, any>>({});
+
+  // State
+  const [mask, setMask] = useState(true);
+  const [dialogWidth, setDialogWidth] = useState(width ?? DEFAULT_WIDTH_MEMBER);
+  const [dialogHeight, setDialogHeight] = useState(height ?? DEFAULT_HEIGHT_MEMBER);
+  const [dialogLeft, setDialogLeft] = useState(
+    left ?? clientWidth - (width ?? DEFAULT_WIDTH_MEMBER) - DEFAULT_BORDER_WIDTH
+  );
+  const [dialogTop, setDialogTop] = useState(
+    top ?? clientHeight - (height ?? DEFAULT_HEIGHT_MEMBER) - DEFAULT_BORDER_WIDTH
+  );
+  const [moveX, setMoveX] = useState(0);
+  const [moveY, setMoveY] = useState(0);
+  const [maximization, setMaximization] = useState(isEmbed);
+  const [minimize, setMinimize] = useState(false);
+  const [headerStyle, setHeaderStyle] = useState<Record<string, any>>({});
+
+  // Computed values
+  const maxSize = useMemo(() => {
+    if (max) return max;
+    return [clientWidth, clientHeight];
+  }, [max, clientWidth, clientHeight]);
+
+  const minSize = useMemo(() => min, [min]);
+
+  const getDefaultEmbedState = useCallback(() => {
     return {
       width: width ?? DEFAULT_WIDTH_MEMBER,
       height: height ?? DEFAULT_HEIGHT_MEMBER,
       left: left ?? clientWidth - (width ?? DEFAULT_WIDTH_MEMBER) - DEFAULT_BORDER_WIDTH,
       top: top ?? clientHeight - (height ?? DEFAULT_HEIGHT_MEMBER) - DEFAULT_BORDER_WIDTH,
     };
-  };
+  }, [width, height, left, top, clientWidth, clientHeight]);
 
-  protected static _container: HTMLDivElement;
+  const setRootWidthInEmbedMode = useCallback(
+    (newWidth: number) => {
+      const restWidth = !!newWidth ? newWidth + SCROLL_BAR_WIDTH : 0;
+      const rootWidth = (clientWidth - restWidth) / clientWidth;
+      setRootWidth?.(`${rootWidth * 100}%`);
+    },
+    [clientWidth, setRootWidth]
+  );
 
-  public static get container() {
-    if (!this._container) {
-      this._container = document.createElement('div');
-      document.body.appendChild(this._container);
-    }
-    return this._container;
-  }
-
-  host = document.createElement('div');
-
-  componentDidMount() {
-    DialogComp.container.appendChild(this.host);
-  }
-
-  componentDidUpdate(prevProps: Readonly<DialogProps>, _: Readonly<DialogState>): void {
-    const {
-      visible: preVisible,
-      clientWidth: preClientWidth,
-      clientHeight: preClientHeight,
-      isEmbed: preIsEmbed,
-    } = prevProps;
-    const { visible, isEmbed, clientWidth, clientHeight, height, width, top, left } = this.props;
-    // 嵌入式切换非嵌入式，属性重置
-    if (preIsEmbed && !isEmbed) {
-      this.setRootWidthInEmbedMode(0);
-      this.setState({
+  const compatClonedModel = useCallback(
+    (model: any): Record<string, any> => {
+      return {
+        left: DEFAULT_LEFT,
+        top: DEFAULT_TOP,
+        width: DEFAULT_WIDTH_MEMBER / clientWidth,
+        height: DEFAULT_HEIGHT_MEMBER / clientHeight,
         minimize: false,
         maximization: false,
-        ...(height ? { height } : {}),
-        ...(width ? { width } : {}),
-        ...(top ? { top } : {}),
-        ...(left ? { left } : {}),
-      });
-      return;
-    }
-    // 非嵌入式切换嵌入式，属性重置
-    if (!preIsEmbed && isEmbed) {
-      this.setState({
-        minimize: false,
-        maximization: true,
-      });
-    }
-    if (visible) {
-      if (!preVisible || clientWidth !== preClientWidth || clientHeight !== preClientHeight) {
-        const tempState = this.getDefaultEmbedState();
-        this.setState(tempState);
-        this.setRootWidthInEmbedMode(tempState?.width);
-      }
-    } else if (preVisible && !visible) {
-      this.setRootWidthInEmbedMode(0);
-    }
-  }
-
-  componentWillUnmount() {
-    DialogComp.container.removeChild(this.host);
-  }
-
-  get max() {
-    let { max } = this.props;
-    if (!max) {
-      const { clientWidth, clientHeight } = this.props;
-      max = [clientWidth, clientHeight];
-    }
-    return max;
-  }
-
-  get min() {
-    return this.props.min;
-  }
-
-  get hasMask() {
-    return this.state.mask;
-  }
-
-  isPointDown = false;
-
-  onDragStart = (event: PointerEvent) => {
-    if (!this.props.draggable) return;
-    const { maximization } = this.state;
-    if (maximization) return;
-    this.setState({
-      mask: true,
-      ...(this.state.left === undefined ? { left: DEFAULT_LEFT } : {}),
-      ...(this.state.top === undefined ? { top: DEFAULT_TOP } : {}),
-    });
-
-    this.clientX = event.clientX;
-    this.clientY = event.clientY;
-    this.isPointDown = true;
-  };
-
-  onDragMove = (event: PointerEvent) => {
-    if (!this.props.draggable || !this.isPointDown) return;
-    event.preventDefault();
-    this.setState({
-      moveX: event.clientX - this.clientX,
-      moveY: event.clientY - this.clientY,
-    });
-  };
-
-  onDragEnd = () => {
-    const { draggable } = this.props;
-    if (!draggable) return;
-    this.isPointDown = false;
-    if (this.state.moveX === 0 && this.state.moveY === 0) return;
-    this.setState({
-      mask: false,
-      left: this.state.left + this.state.moveX,
-      top: this.state.top + this.state.moveY,
-      moveX: 0,
-      moveY: 0,
-    });
-  };
-
-  renderHeader() {
-    const { locale, title, isEmbed } = this.props;
-    const { headerStyle, minimize } = this.state;
-    const style = {
-      ...headerStyle,
-      ...(minimize ? { boxShadow: '0 2px 20px 0 rgba(4, 1, 30, 0.07)' } : {}),
-      ...(isEmbed ? { cursor: 'initial' } : {}),
-    };
-    return (
-      <header
-        className={`${prefix}-header`}
-        style={style}
-        onPointerDown={this.onDragStart}
-        onDoubleClick={this.toggleMaximization}
-      >
-        <span className={`${prefix}-title`}>{title || locale.helpDocument}</span>
-        {this.renderControls()}
-      </header>
-    );
-  }
-
-  toggleMinimize = () => {
-    this.setState({
-      maximization: false,
-      minimize: !this.state.minimize,
-    });
-  };
-
-  toggleMaximization = () => {
-    // 嵌入模式不支持toggleMaximization
-    const enable = this.props.resizable && this.props.enableMaximization && !this.props.isEmbed;
-    if (!enable) return;
-    this.setState({
-      maximization: !this.state.maximization,
-      minimize: false,
-    });
-  };
-
-  onClose = (event: MouseEvent) => {
-    event.stopPropagation();
-    this.props.onClose?.();
-  };
-
-  renderControlLink() {
-    const { extLink } = this.props;
-    return (
-      <span className={`${prefix}-item`}>
-        <a
-          className={`${prefix}-item-link`}
-          href={extLink?.link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg
-            // t="1679557306532"
-            className="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            // p-id="2545"
-            width="16"
-            height="16"
-          >
-            <path
-              d="M880.0256 912.0256H144.0256a31.9488 31.9488 0 0 1-32.0512-32V144.0256c0-17.7152 14.336-32.0512 32.0512-32.0512h359.936c4.4544 0 8.0384 3.584 8.0384 8.0384v56.0128c0 4.352-3.584 7.9872-7.9872 7.9872h-320v655.9744h655.9744v-320c0-4.4032 3.584-7.9872 8.0384-7.9872h55.9616c4.4032 0 8.0384 3.584 8.0384 7.9872v359.9872c0 17.7152-14.336 32-32 32zM770.8672 199.1168l-52.224-52.224a8.0384 8.0384 0 0 1 4.7104-13.568l179.4048-20.992c5.12-0.6144 9.5232 3.6864 8.9088 8.9088l-20.992 179.4048a8.0384 8.0384 0 0 1-13.6192 4.6592L824.6784 252.928l-256.2048 256.2048c-3.072 3.072-8.192 3.072-11.264 0l-42.4448-42.3936a8.0384 8.0384 0 0 1 0-11.264l256.1024-256.3584z"
-              // p-id="2546"
-            />
-          </svg>
-        </a>
-      </span>
-    );
-  }
-
-  renderControls() {
-    const { maximization, minimize } = this.state;
-    const { enableMaximization, isEmbed } = this.props;
-    if (isEmbed) {
-      return (
-        <span className={`${prefix}-controls`}>
-          {this.renderControlLink()}
-          <span className={`${prefix}-item`} onClick={this.onClose}>
-            <CloseOutlined />
-          </span>
-        </span>
-      );
-    }
-    return (
-      <span className={`${prefix}-controls`}>
-        {this.renderControlLink()}
-        <span className={`${prefix}-item`} onClick={this.toggleMinimize}>
-          {minimize ? <ExpandAltOutlined /> : <MinusOutlined />}
-        </span>
-        {enableMaximization && (
-          <span className={`${prefix}-item`} onClick={this.toggleMaximization}>
-            {maximization ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
-          </span>
-        )}
-        <span className={`${prefix}-item`} onClick={this.onClose}>
-          <CloseOutlined />
-        </span>
-      </span>
-    );
-  }
-
-  renderContent() {
-    const { children } = this.props;
-    return (
-      <main
-        className={`${prefix}-main`}
-        style={this.state.minimize ? { visibility: 'hidden' } : {}}
-      >
-        {this.renderMask()}
-        {children}
-      </main>
-    );
-  }
-
-  renderMask() {
-    if (!this.hasMask) return;
-    return <div className={`${prefix}-mask`} />;
-  }
-
-  getBaseStyle = () => {
-    const { visible } = this.props;
-    // 通过样式控制显隐
-    const baseStyle = {
-      visibility: visible ? 'visible' : 'hidden',
-      opacity: visible ? 1 : 0,
-    };
-    return baseStyle;
-  };
-
-  getStyle = () => {
-    const { maximization, minimize, headerStyle } = this.state;
-    const transform = `translate(${this.state.moveX}px, ${this.state.moveY}px)`;
-    const baseStyle = this.getBaseStyle();
-    if (maximization && !this.props.isEmbed) {
-      return {
-        ...baseStyle,
-        top: 0,
-        bottom: 0,
-        right: 0,
-        width: this.props.width || DEFAULT_WIDTH_MEMBER,
-        height: 'auto',
-        borderRadius: 0,
+        ...model,
       };
-    } else if (minimize) {
-      const { height } = headerStyle as any;
-      return {
-        ...baseStyle,
-        ...this.getCompatAbsPostion(this.state),
-        width: MINIMIZE_WIDTH,
-        height: height || MINIMIZE_HEIGHT,
-        transform,
-      };
-    } else {
-      return {
-        ...baseStyle,
-        ...this.getCompatAbsPostion(this.state),
-        transform,
-      };
-    }
-  };
+    },
+    [clientWidth, clientHeight]
+  );
 
-  // 将比例转换为绝对数值，各个端的渲染依据视口大小会有不同
-  getCompatAbsPostion(info: any) {
-    const compatInfo = this.compatClonedModel(info);
-    const { minimize } = compatInfo;
-    const { clientWidth, clientHeight } = this.props;
-
-    const ret: any = {};
-    ['left', 'width', 'top', 'height'].forEach(key => {
-      ret[key] = compatInfo[key];
-    });
-
-    const { max } = this;
-    const { min } = this;
-    // 最小宽度
-    if (max && ret.width > max[0]) {
-      ret.width = max[0];
-    }
-    if (max && ret.height > max[1]) {
-      ret.height = max[1];
-    }
-    if (min && ret.width < min[0]) {
-      ret.width = min[0];
-    }
-    if (min && ret.height < min[1]) {
-      ret.height = min[1];
-    }
-
-    ret.width = minimize ? MINIMIZE_WIDTH : ret.width;
-    ret.height = minimize ? MINIMIZE_HEIGHT : ret.height;
-
-    if (ret.left + ret.width > clientWidth) {
-      ret.left = clientWidth - ret.width;
-      this.setState({ left: ret.left });
-    }
-    if (ret.left < 0) {
-      this.setState({ left: 0 });
-    }
-    if (ret.top < 0) {
-      this.setState({ top: 0 });
-    }
-    if (ret.top + ret.height > clientHeight) {
-      ret.top = clientHeight - ret.height;
-      this.setState({ top: ret.top });
-    }
-
-    return ret;
-  }
-
-  compatClonedModel = (model: any): Record<string, any> => {
-    return {
-      left: DEFAULT_LEFT,
-      top: DEFAULT_TOP,
-      width: DEFAULT_WIDTH_MEMBER / this.props.clientWidth,
-      height: DEFAULT_HEIGHT_MEMBER / this.props.clientHeight,
-      minimize: false,
-      maximization: false,
-      ...model,
-    };
-  };
-
-  detectPointUp = () => {
-    this.setState({ mask: false });
-  };
-
-  renderDialog() {
-    const style = this.getStyle();
-    const { className, isEmbed } = this.props;
-    return (
-      <React.Fragment>
-        <div
-          className={`${prefix}-container ${className} ${
-            isEmbed ? `${prefix}-container-embed` : ''
-          }`}
-          style={style}
-          {...(this.state.minimize ? {} : { tabIndex: 0 })}
-        >
-          {this.renderHeader()}
-          {this.renderContent()}
-          {isEmbed ? this.renderEmbedBorders() : this.renderBorders()}
-          <EventProxy onPointerMove={this.onDragMove} onPointerUp={this.onDragEnd} />
-          <EventProxy onPointerUp={this.detectPointUp} />
-        </div>
-      </React.Fragment>
-    );
-  }
-
-  originInfo: Record<string, any>;
-
-  setRootWidthInEmbedMode = (newWidth: number) => {
-    const { setRootWidth } = this.props;
-    const restWidth = !!newWidth ? newWidth + SCROLL_BAR_WIDTH : 0;
-    const rootWidth = (this.props.clientWidth - restWidth) / this.props.clientWidth;
-    setRootWidth?.(`${rootWidth * 100}%`);
-  };
-
-  onResizeStart = () => {
-    if (this.state.minimize || !this.props.resizable) return;
-    this.originInfo = this.compatClonedModel(this.state);
-    this.setState({ mask: true });
-  };
-
-  onResizeMove = (event: PointerEvent) => {
-    const { resizable } = this.props;
-    event.preventDefault();
-    if (this.state.minimize || !resizable) return;
-    // 以下PointerEvent没有moveRight属性，通过event传递，所以加上了ts-ignore
-    // @ts-ignore
-    const newWidth = this.originInfo.width + event.moveRight;
-    // @ts-ignore
-    const newHeight = this.originInfo.height + event.moveBottom;
-    const checkResult = this.checkSize(newWidth, newHeight);
-
-    // 只在宽度允许发生改变时设置外部width
-    if (checkResult.widthShouldChange) {
-      this.setRootWidthInEmbedMode(newWidth);
-    }
-
-    this.setState({
-      ...(checkResult.widthShouldChange
-        ? {
-            // @ts-ignore
-            left: this.originInfo.left + event.moveLeft,
-            width: newWidth,
-          }
-        : {}),
-      ...(checkResult.heightShouldChange
-        ? {
-            // @ts-ignore
-            top: this.originInfo.top + event.moveTop,
-            height: newHeight,
-          }
-        : {}),
-    });
-  };
-
-  onResizeEnd = () => {
-    const { mask } = this.state;
-    if (!mask || !this.props.resizable) return;
-    this.setState({ mask: false });
-  };
-
-  /**
-   * width，height 是否在最大最小值的范围内
-   */
-  checkSize(width: number, height: number) {
-    const { max } = this;
-    const { min } = this;
-    const newModel: DialogState = {};
+  const checkSize = (w: number, h: number) => {
+    const newModel: Partial<DialogState> = {};
 
     const result = {
       widthShouldChange: true,
       heightShouldChange: true,
     };
 
-    if (min && width < min[0]) {
-      newModel.width = min[0];
+    if (minSize && w < minSize[0]) {
+      newModel.width = minSize[0];
       result.widthShouldChange = false;
     }
-    if (min && height < min[1]) {
-      newModel.height = min[1];
+    if (minSize && h < minSize[1]) {
+      newModel.height = minSize[1];
       result.heightShouldChange = false;
     }
-    if (max && width > max[0]) {
-      newModel.width = max[0];
+    if (maxSize && w > maxSize[0]) {
+      newModel.width = maxSize[0];
       result.widthShouldChange = false;
     }
-    if (max && height > max[1]) {
-      newModel.height = max[1];
+    if (maxSize && h > maxSize[1]) {
+      newModel.height = maxSize[1];
       result.heightShouldChange = false;
     }
 
     return result;
-  }
+  };
 
-  renderEmbedBorders() {
+  // componentDidMount
+  useEffect(() => {
+    const host = document.createElement('div');
+    hostRef.current = host;
+    getContainer().appendChild(host);
+
+    return () => {
+      if (hostRef.current && getContainer().contains(hostRef.current)) {
+        getContainer().removeChild(hostRef.current);
+      }
+    };
+  }, []);
+
+  // componentDidUpdate
+  useEffect(() => {
+    if (!visible) {
+      setRootWidthInEmbedMode(0);
+      return;
+    }
+
+    const tempState = getDefaultEmbedState();
+    setDialogWidth(tempState.width);
+    setDialogHeight(tempState.height);
+    setDialogLeft(tempState.left);
+    setDialogTop(tempState.top);
+    setRootWidthInEmbedMode(tempState.width);
+  }, [visible, clientWidth, clientHeight, getDefaultEmbedState, setRootWidthInEmbedMode]);
+
+  useEffect(() => {
+    if (isEmbed) {
+      setMinimize(false);
+      setMaximization(true);
+    } else {
+      setMinimize(false);
+      setMaximization(false);
+      if (height) setDialogHeight(height);
+      if (width) setDialogWidth(width);
+      if (top !== undefined) setDialogTop(top);
+      if (left !== undefined) setDialogLeft(left);
+    }
+  }, [isEmbed, height, width, top, left]);
+
+  // Drag handlers
+  const onDragStart = (event: PointerEvent) => {
+    if (!draggable) return;
+    if (maximization) return;
+    setMask(true);
+    if (dialogLeft === undefined) {
+      setDialogLeft(DEFAULT_LEFT);
+    }
+    if (dialogTop === undefined) {
+      setDialogTop(DEFAULT_TOP);
+    }
+
+    clientXRef.current = event.clientX;
+    clientYRef.current = event.clientY;
+    isPointDownRef.current = true;
+  };
+
+  const onDragMove = (event: PointerEvent) => {
+    if (!draggable || !isPointDownRef.current) return;
+    event.preventDefault();
+    setMoveX(event.clientX - clientXRef.current);
+    setMoveY(event.clientY - clientYRef.current);
+  };
+
+  const onDragEnd = () => {
+    if (!draggable) return;
+    isPointDownRef.current = false;
+    if (moveX === 0 && moveY === 0) return;
+    setMask(false);
+    setDialogLeft(prev => (prev ?? 0) + moveX);
+    setDialogTop(prev => (prev ?? 0) + moveY);
+    setMoveX(0);
+    setMoveY(0);
+  };
+
+  const detectPointUp = () => {
+    setMask(false);
+  };
+
+  // Resize handlers
+  const onResizeStart = () => {
+    if (minimize || !resizable) return;
+    originInfoRef.current = compatClonedModel({
+      width: dialogWidth,
+      height: dialogHeight,
+      left: dialogLeft,
+      top: dialogTop,
+      minimize,
+      maximization,
+    });
+    setMask(true);
+  };
+
+  const onResizeMove = (event: PointerEvent) => {
+    event.preventDefault();
+    if (minimize || !resizable) return;
+    // @ts-ignore
+    const newWidth = originInfoRef.current.width + event.moveRight;
+    // @ts-ignore
+    const newHeight = originInfoRef.current.height + event.moveBottom;
+    const checkResult = checkSize(newWidth, newHeight);
+
+    if (checkResult.widthShouldChange) {
+      setRootWidthInEmbedMode(newWidth);
+    }
+
+    if (checkResult.widthShouldChange) {
+      // @ts-ignore
+      setDialogLeft(originInfoRef.current.left + event.moveLeft);
+      setDialogWidth(newWidth);
+    }
+    if (checkResult.heightShouldChange) {
+      // @ts-ignore
+      setDialogTop(originInfoRef.current.top + event.moveTop);
+      setDialogHeight(newHeight);
+    }
+  };
+
+  const onResizeEnd = () => {
+    if (!mask || !resizable) return;
+    setMask(false);
+  };
+
+  // Toggle handlers
+  const toggleMinimize = () => {
+    setMaximization(false);
+    setMinimize(prev => !prev);
+  };
+
+  const toggleMaximization = () => {
+    const enable = resizable && enableMaximization && !isEmbed;
+    if (!enable) return;
+    setMaximization(prev => !prev);
+    setMinimize(false);
+  };
+
+  const handleClose = (event: MouseEvent) => {
+    event.stopPropagation();
+    onClose?.();
+  };
+
+  // Style calculations
+  const getBaseStyle = useCallback(() => {
+    return {
+      visibility: visible ? 'visible' : 'hidden',
+      opacity: visible ? 1 : 0,
+    };
+  }, [visible]);
+
+  const getCompatAbsPostion = useCallback(
+    (info: {
+      width?: number;
+      height?: number;
+      left?: number;
+      top?: number;
+      minimize?: boolean;
+    }) => {
+      const compatInfo = compatClonedModel(info);
+      const { minimize: isMinimize } = compatInfo;
+
+      const ret: any = {};
+      ['left', 'width', 'top', 'height'].forEach(key => {
+        ret[key] = compatInfo[key];
+      });
+
+      // Apply min/max constraints
+      if (maxSize && ret.width > maxSize[0]) {
+        ret.width = maxSize[0];
+      }
+      if (maxSize && ret.height > maxSize[1]) {
+        ret.height = maxSize[1];
+      }
+      if (minSize && ret.width < minSize[0]) {
+        ret.width = minSize[0];
+      }
+      if (minSize && ret.height < minSize[1]) {
+        ret.height = minSize[1];
+      }
+
+      ret.width = isMinimize ? MINIMIZE_WIDTH : ret.width;
+      ret.height = isMinimize ? MINIMIZE_HEIGHT : ret.height;
+
+      // Adjust position if out of bounds (calculate but don't setState here)
+      if (ret.left + ret.width > clientWidth) {
+        ret.left = clientWidth - ret.width;
+      }
+      if (ret.left < 0) {
+        ret.left = 0;
+      }
+      if (ret.top < 0) {
+        ret.top = 0;
+      }
+      if (ret.top + ret.height > clientHeight) {
+        ret.top = clientHeight - ret.height;
+      }
+
+      return ret;
+    },
+    [maxSize, minSize, clientWidth, clientHeight, compatClonedModel]
+  );
+
+  // Adjust position if out of bounds
+  useEffect(() => {
+    if (!visible) return;
+
+    const adjusted = getCompatAbsPostion({
+      width: dialogWidth,
+      height: dialogHeight,
+      left: dialogLeft,
+      top: dialogTop,
+      minimize,
+    });
+
+    if (adjusted.left !== dialogLeft) {
+      setDialogLeft(adjusted.left);
+    }
+    if (adjusted.top !== dialogTop) {
+      setDialogTop(adjusted.top);
+    }
+  }, [dialogWidth, dialogHeight, dialogLeft, dialogTop, minimize, visible, getCompatAbsPostion]);
+
+  const getStyle = useMemo(() => {
+    const transform = `translate(${moveX}px, ${moveY}px)`;
+    const baseStyle = getBaseStyle();
+    if (maximization && !isEmbed) {
+      return {
+        ...baseStyle,
+        top: 0,
+        bottom: 0,
+        right: 0,
+        width: width || DEFAULT_WIDTH_MEMBER,
+        height: 'auto',
+        borderRadius: 0,
+      };
+    } else if (minimize) {
+      const { height: headerHeight } = headerStyle as any;
+      const position = getCompatAbsPostion({
+        width: dialogWidth,
+        height: dialogHeight,
+        left: dialogLeft,
+        top: dialogTop,
+        minimize,
+      });
+      return {
+        ...baseStyle,
+        ...position,
+        width: MINIMIZE_WIDTH,
+        height: headerHeight || MINIMIZE_HEIGHT,
+        transform,
+      };
+    } else {
+      const position = getCompatAbsPostion({
+        width: dialogWidth,
+        height: dialogHeight,
+        left: dialogLeft,
+        top: dialogTop,
+      });
+      return {
+        ...baseStyle,
+        ...position,
+        transform,
+      };
+    }
+  }, [
+    maximization,
+    isEmbed,
+    minimize,
+    moveX,
+    moveY,
+    width,
+    headerStyle,
+    dialogWidth,
+    dialogHeight,
+    dialogLeft,
+    dialogTop,
+    getCompatAbsPostion,
+    getBaseStyle,
+  ]);
+
+  // Render methods
+  const renderControlLink = () => {
+    return (
+      <span className={`${prefixCls}-item`}>
+        <a
+          className={`${prefixCls}-item-link`}
+          href={extLink?.link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg
+            className="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+          >
+            <path d="M880.0256 912.0256H144.0256a31.9488 31.9488 0 0 1-32.0512-32V144.0256c0-17.7152 14.336-32.0512 32.0512-32.0512h359.936c4.4544 0 8.0384 3.584 8.0384 8.0384v56.0128c0 4.352-3.584 7.9872-7.9872 7.9872h-320v655.9744h655.9744v-320c0-4.4032 3.584-7.9872 8.0384-7.9872h55.9616c4.4032 0 8.0384 3.584 8.0384 7.9872v359.9872c0 17.7152-14.336 32-32 32zM770.8672 199.1168l-52.224-52.224a8.0384 8.0384 0 0 1 4.7104-13.568l179.4048-20.992c5.12-0.6144 9.5232 3.6864 8.9088 8.9088l-20.992 179.4048a8.0384 8.0384 0 0 1-13.6192 4.6592L824.6784 252.928l-256.2048 256.2048c-3.072 3.072-8.192 3.072-11.264 0l-42.4448-42.3936a8.0384 8.0384 0 0 1 0-11.264l256.1024-256.3584z" />
+          </svg>
+        </a>
+      </span>
+    );
+  };
+
+  const renderControls = () => {
+    if (isEmbed) {
+      return (
+        <span className={`${prefixCls}-controls`}>
+          {renderControlLink()}
+          <span className={`${prefixCls}-item`} onClick={handleClose}>
+            <CloseOutlined />
+          </span>
+        </span>
+      );
+    }
+    return (
+      <span className={`${prefixCls}-controls`}>
+        {renderControlLink()}
+        <span className={`${prefixCls}-item`} onClick={toggleMinimize}>
+          {minimize ? <ExpandAltOutlined /> : <MinusOutlined />}
+        </span>
+        {enableMaximization && (
+          <span className={`${prefixCls}-item`} onClick={toggleMaximization}>
+            {maximization ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
+          </span>
+        )}
+        <span className={`${prefixCls}-item`} onClick={handleClose}>
+          <CloseOutlined />
+        </span>
+      </span>
+    );
+  };
+
+  const renderHeader = () => {
+    const headerStyleObj = {
+      ...headerStyle,
+      ...(minimize ? { boxShadow: '0 2px 20px 0 rgba(4, 1, 30, 0.07)' } : {}),
+      ...(isEmbed ? { cursor: 'initial' } : {}),
+    };
+    return (
+      <header
+        className={`${prefixCls}-header`}
+        style={headerStyleObj}
+        onPointerDown={onDragStart}
+        onDoubleClick={toggleMaximization}
+      >
+        <span className={`${prefixCls}-title`}>{title || locale?.helpDocument}</span>
+        {renderControls()}
+      </header>
+    );
+  };
+
+  const renderMask = () => {
+    if (!mask) return null;
+    return <div className={`${prefixCls}-mask`} />;
+  };
+
+  const renderContent = () => {
+    return (
+      <main className={`${prefixCls}-main`} style={minimize ? { visibility: 'hidden' } : {}}>
+        {renderMask()}
+        {children}
+      </main>
+    );
+  };
+
+  const renderEmbedBorders = () => {
     return (
       <React.Fragment>
         <Anchor
+          prefixCls={prefixCls}
           dock={Dock.left}
-          onStart={this.onResizeStart}
-          onMove={this.onResizeMove}
-          onEnd={this.onResizeEnd}
+          onStart={onResizeStart}
+          onMove={onResizeMove}
+          onEnd={onResizeEnd}
         />
       </React.Fragment>
     );
-  }
+  };
 
-  renderBorders() {
+  const renderBorders = () => {
     return (
       <React.Fragment>
         <Anchor
+          prefixCls={prefixCls}
           dock={Dock.top}
-          onStart={this.onResizeStart}
-          onMove={this.onResizeMove}
-          onEnd={this.onResizeEnd}
+          onStart={onResizeStart}
+          onMove={onResizeMove}
+          onEnd={onResizeEnd}
         />
 
         <Anchor
+          prefixCls={prefixCls}
           dock={Dock.right}
-          onStart={this.onResizeStart}
-          onMove={this.onResizeMove}
-          onEnd={this.onResizeEnd}
+          onStart={onResizeStart}
+          onMove={onResizeMove}
+          onEnd={onResizeEnd}
         />
 
         <Anchor
+          prefixCls={prefixCls}
           dock={Dock.bottom}
-          onStart={this.onResizeStart}
-          onMove={this.onResizeMove}
-          onEnd={this.onResizeEnd}
+          onStart={onResizeStart}
+          onMove={onResizeMove}
+          onEnd={onResizeEnd}
         />
 
         <Anchor
+          prefixCls={prefixCls}
           dock={Dock.left}
-          onStart={this.onResizeStart}
-          onMove={this.onResizeMove}
-          onEnd={this.onResizeEnd}
+          onStart={onResizeStart}
+          onMove={onResizeMove}
+          onEnd={onResizeEnd}
         />
 
         <Anchor
+          prefixCls={prefixCls}
           dock={Dock.topLeft}
-          onStart={this.onResizeStart}
-          onMove={this.onResizeMove}
-          onEnd={this.onResizeEnd}
+          onStart={onResizeStart}
+          onMove={onResizeMove}
+          onEnd={onResizeEnd}
         />
 
         <Anchor
+          prefixCls={prefixCls}
           dock={Dock.topRight}
-          onStart={this.onResizeStart}
-          onMove={this.onResizeMove}
-          onEnd={this.onResizeEnd}
+          onStart={onResizeStart}
+          onMove={onResizeMove}
+          onEnd={onResizeEnd}
         />
 
         <Anchor
+          prefixCls={prefixCls}
           dock={Dock.bottomLeft}
-          onStart={this.onResizeStart}
-          onMove={this.onResizeMove}
-          onEnd={this.onResizeEnd}
+          onStart={onResizeStart}
+          onMove={onResizeMove}
+          onEnd={onResizeEnd}
         />
 
         <Anchor
+          prefixCls={prefixCls}
           dock={Dock.bottomRight}
-          onStart={this.onResizeStart}
-          onMove={this.onResizeMove}
-          onEnd={this.onResizeEnd}
+          onStart={onResizeStart}
+          onMove={onResizeMove}
+          onEnd={onResizeEnd}
         />
       </React.Fragment>
     );
-  }
+  };
 
-  render() {
-    const { visible, isEmbed } = this.props;
-    // 嵌入模式通过style控制显隐
-    if (!visible && !isEmbed) return <React.Fragment />;
-    return createPortal(this.renderDialog(), DialogComp.container);
-  }
-}
+  const renderDialog = () => {
+    const style = getStyle;
+
+    return wrapSSR(
+      <div
+        className={`${prefixCls}-container ${className || ''} ${isEmbed ? `${prefixCls}-container-embed` : ''}`}
+        style={style}
+        {...(minimize ? {} : { tabIndex: 0 })}
+      >
+        {renderHeader()}
+        {renderContent()}
+        {isEmbed ? renderEmbedBorders() : renderBorders()}
+        <EventProxy onPointerMove={onDragMove} onPointerUp={onDragEnd} />
+        <EventProxy onPointerUp={detectPointUp} />
+      </div>
+    );
+  };
+
+  // 嵌入模式通过style控制显隐
+  if (!visible && !isEmbed) return <React.Fragment />;
+  return createPortal(renderDialog(), getContainer());
+};
 
 export default LocaleWrapper({
   componentName: 'Dialog',

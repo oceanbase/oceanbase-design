@@ -1,5 +1,4 @@
 /**
- * title: 小尺寸
  * iframe: true
  */
 import React, { useState } from 'react';

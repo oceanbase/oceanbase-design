@@ -1,16 +1,15 @@
 //@ts-nocheck
 import { DownOutlined, UpOutlined } from '@oceanbase/icons';
 import type { GraphData } from '@antv/g6/lib/types';
-import { Spin, Tabs } from '@oceanbase/design';
+import { ConfigProvider, Spin, Tabs } from '@oceanbase/design';
 import { find, noop } from 'lodash';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import SplitPane from 'react-split-pane';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix } from '../_util';
+import useStyle from './style';
 import type { TaskGraphLocale } from './Graph';
 import Graph from './Graph';
-import './index.less';
 import zhCN from './locale/zh-CN';
 
 const { TabPane } = Tabs;
@@ -29,8 +28,6 @@ export interface TaskGraphProps extends LocaleWrapperProps {
   locale?: TaskGraphLocale;
 }
 
-const prefix = getPrefix('task-graph');
-
 const TaskGraph: React.FC<TaskGraphProps> = ({
   logLoading = false,
   subTaskLog,
@@ -38,6 +35,9 @@ const TaskGraph: React.FC<TaskGraphProps> = ({
   onTabsEdit = noop,
   ...restProps
 }) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('task-graph');
+  const { wrapSSR } = useStyle(prefixCls);
   const [size, setSize] = useState(DEFAULT_SIZE);
   const [activeKey, setActiveKey] = useState<string | undefined>(undefined);
   const [panes, setPanes] = useState([]);
@@ -92,7 +92,7 @@ const TaskGraph: React.FC<TaskGraphProps> = ({
           setCollapsed(false);
         }
       }}
-      className={`${prefix}-split-pane`}
+      className={`${prefixCls}-split-pane`}
     >
       <div style={{ position: 'absolute', width: '100%' }}>
         <Graph
@@ -110,7 +110,7 @@ const TaskGraph: React.FC<TaskGraphProps> = ({
           {...restProps}
         />
       </div>
-      <div className={`${prefix}-tabs-wrapper`}>
+      <div className={`${prefixCls}-tabs-wrapper`}>
         <Tabs
           type="editable-card"
           hideAdd={true}

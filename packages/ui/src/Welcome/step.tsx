@@ -1,8 +1,7 @@
-import { Col } from '@oceanbase/design';
-import React from 'react';
+import { Col, ConfigProvider } from '@oceanbase/design';
+import React, { useContext } from 'react';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix } from '../_util';
-import './index.less';
+import useStyle from './step/style';
 import zhCN from './locale/zh-CN';
 
 export interface OperationProps {
@@ -23,23 +22,24 @@ export interface WelcomeStepProps {
   locale?: WelcomeStepLocale;
 }
 
-const prefix = getPrefix('welcome-step');
-
 const WelcomeStep: React.FC<WelcomeStepProps> = props => {
   const { title, description, operations, imgUrl, locale } = props;
-  return (
-    <Col span={11} key={title} className={prefix}>
-      <div className={`${prefix}-left`}>
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('welcome-step');
+  const { wrapSSR } = useStyle(prefixCls);
+  return wrapSSR(
+    <Col span={11} key={title} className={prefixCls}>
+      <div className={`${prefixCls}-left`}>
         <img src={imgUrl} alt="" width="60" />
       </div>
-      <div className={`${prefix}-right`}>
-        <h3 className={`${prefix}-title`}>{title}</h3>
-        <p className={`${prefix}-description`}>{description}</p>
+      <div className={`${prefixCls}-right`}>
+        <h3 className={`${prefixCls}-title`}>{title}</h3>
+        <p className={`${prefixCls}-description`}>{description}</p>
         {operations && (
-          <div className={`${prefix}-operations`}>
+          <div className={`${prefixCls}-operations`}>
             {operations?.map((operation, index) => {
               return (
-                <span key={index} onClick={operation.onClick} className={`${prefix}-operation`}>
+                <span key={index} onClick={operation.onClick} className={`${prefixCls}-operation`}>
                   {operation.text || locale.defaultOperation}
                 </span>
               );

@@ -1,5 +1,5 @@
-import React, { isValidElement } from 'react';
-import { Tooltip, Space, Popover } from 'antd';
+import React, { isValidElement, useContext } from 'react';
+import { Tooltip, Space, Popover, ConfigProvider } from 'antd';
 import {
   ExclamationCircleFilled,
   InfoCircleFilled,
@@ -7,8 +7,7 @@ import {
   QuestionCircleOutlined,
 } from '@oceanbase/icons';
 import classNames from 'classnames';
-import { getPrefix } from '../_util';
-import './index.less';
+import useStyle from './style';
 
 export interface ContentWithIconProps {
   content?: React.ReactNode;
@@ -28,8 +27,6 @@ export interface ContentWithIconProps {
   exclamationColor?: string;
 }
 
-const prefix = getPrefix('content-with-question');
-
 const ContentWithIcon: React.FC<ContentWithIconProps> = ({
   content,
   tooltip,
@@ -47,12 +44,15 @@ const ContentWithIcon: React.FC<ContentWithIconProps> = ({
   exclamationColor = '#FAAD14',
   ...restProps
 }: any) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('content-with-icon');
+  const { wrapSSR } = useStyle(prefixCls);
   const defaultIconType = () => {
     if (iconType === 'question') {
       return (
         <QuestionCircleOutlined
           style={{ color: color === 'default' ? '#132039' : color, fontSize: size }}
-          className={`${prefix}-help`}
+          className={`${prefixCls}-help`}
         />
       );
     }
@@ -61,14 +61,14 @@ const ContentWithIcon: React.FC<ContentWithIconProps> = ({
         return (
           <InfoCircleFilled
             style={{ color: infoColor, fontSize: size }}
-            className={`${prefix}-help`}
+            className={`${prefixCls}-help`}
           />
         );
       } else {
         return (
           <InfoCircleOutlined
             style={{ color: '3333333', fontSize: size }}
-            className={`${prefix}-help`}
+            className={`${prefixCls}-help`}
           />
         );
       }
@@ -77,7 +77,7 @@ const ContentWithIcon: React.FC<ContentWithIconProps> = ({
       return (
         <ExclamationCircleFilled
           style={{ color: exclamationColor, fontSize: size }}
-          className={`${prefix}-help`}
+          className={`${prefixCls}-help`}
         />
       );
     }
@@ -108,32 +108,28 @@ const ContentWithIcon: React.FC<ContentWithIconProps> = ({
     ) : null;
   };
 
-  return (
-    <>
-      {
+  return wrapSSR(
+    <span
+      className={classNames({
+        [`${prefixCls}-item`]: true,
+        [className]: !!className,
+      })}
+      {...restProps}
+    >
+      <Space size={4}>
+        {getIcon(
+          //  图标在文字前
+          prefixIcon === true ? defaultIconType() : prefixIcon
+        )}
         <span
-          className={classNames({
-            [`${prefix}-item`]: true,
-            [className]: !!className,
-          })}
-          {...restProps}
+          data-testid="content"
+          style={{ color: color === 'default' ? '#5C6B8A' : color, fontSize: size }}
         >
-          <Space size={4}>
-            {getIcon(
-              //  图标在文字前
-              prefixIcon === true ? defaultIconType() : prefixIcon
-            )}
-            <span
-              data-testid="content"
-              style={{ color: color === 'default' ? '#5C6B8A' : color, fontSize: size }}
-            >
-              {content ?? children}
-            </span>
-            {getIcon(suffixIcon)}
-          </Space>
+          {content ?? children}
         </span>
-      }
-    </>
+        {getIcon(suffixIcon)}
+      </Space>
+    </span>
   );
 };
 
