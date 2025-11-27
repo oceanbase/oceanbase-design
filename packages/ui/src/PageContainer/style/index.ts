@@ -27,9 +27,9 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
       },
       [`${componentCls}-warp-page-header,${componentCls}-wrap-page-header`]: {
         // 减小内容区左右两侧间距
-        paddingInlineStart: `${paddingLG}px !important`,
-        paddingInlineEnd: `${paddingLG}px !important`,
-        paddingBlockStart: `${padding}px !important`,
+        paddingInlineStart: `${token.paddingXL}px !important`,
+        paddingInlineEnd: `${token.paddingXL}px !important`,
+        paddingBlockStart: `${paddingLG}px !important`,
         paddingBlockEnd: `${padding}px !important`,
         [`${antCls}-page-header-breadcrumb`]: {
           // overwritten pro-components style
@@ -59,9 +59,9 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         },
       },
       [`${componentCls}-children-container`]: {
-        paddingInline: paddingLG,
+        paddingInline: token.paddingXL,
         paddingBlockStart: 0,
-        paddingBlockEnd: paddingLG,
+        paddingBlockEnd: padding,
         // set top tabs style when it is PageContainer's first child
         [`& > ${antCls}-tabs-top:not(${antCls}-tabs-card):first-child`]: {
           // equal to page header paddingBlockEnd

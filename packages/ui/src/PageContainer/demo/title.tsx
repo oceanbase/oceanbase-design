@@ -10,7 +10,7 @@ export default () => {
     <PageContainer
       ghost={false}
       title="页面标题"
-      footer={[<Button>重置</Button>, <Button type="primary">提交</Button>]}
+      footer={[<Button type="primary">提交</Button>, <Button>重置</Button>]}
     >
       <Card>
         <Descriptions title="基本信息">
