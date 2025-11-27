@@ -24,6 +24,7 @@ export type LabelTooltipType = WrapperTooltipProps | React.ReactNode;
 export interface FormItemProps extends AntFormItemProps {
   tooltip?: WrapperTooltipProps | ReactNode;
   action?: ReactNode;
+  description?: ReactNode;
 }
 
 type CompoundedComponent = React.FC<FormItemProps> & {
@@ -35,6 +36,7 @@ const FormItem: CompoundedComponent = ({
   label,
   tooltip,
   action,
+  description,
   layout: externalLayout,
   prefixCls: customizePrefixCls,
   className,
@@ -44,7 +46,9 @@ const FormItem: CompoundedComponent = ({
 
   const prefixCls = getPrefixCls('form', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
-  const formItemCls = classNames(className);
+  const formItemCls = classNames(className, {
+    [`${prefixCls}-item-has-description`]: !!description,
+  });
 
   const {
     layout: contextLayout,
@@ -70,6 +74,13 @@ const FormItem: CompoundedComponent = ({
     };
   }
 
+  // description config - only show in vertical layout
+  const isVertical = layout === 'vertical' || vertical;
+  const descriptionContent: ReactNode =
+    description && isVertical ? (
+      <div className={`${prefixCls}-item-description`}>{description}</div>
+    ) : null;
+
   return wrapSSR(
     <AntFormItem
       layout={layout}
@@ -91,7 +102,10 @@ const FormItem: CompoundedComponent = ({
       className={formItemCls}
       {...restProps}
     >
-      {children}
+      <>
+        {descriptionContent}
+        {children}
+      </>
     </AntFormItem>
   );
 };

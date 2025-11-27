@@ -10,13 +10,16 @@ nav:
 - 📢 Form `preserve` 属性的默认值为 `true`。
 - 📢 Form `requiredMark` 默认为 `optional` 可选样式。
 - 🆕 Form.Item `tooltip` 新增 `type` 属性，支持不同类型的 Tooltip 提示，详见 [Tooltip 文档](/components/Tooltip)。
+- 🆕 Form.Item 新增 `description` 属性，用于设置表单控件前的描述信息。
 
 ## 代码演示
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本" description="默认为可选样式。"></code>
 <code src="./demo/requiredMark-same-with-antd.tsx" title="设置为必选样式" description="通过 `requiredMark` 进行设置。"></code>
-<code src="./demo/form-item-tooltip.tsx" title="设置提示信息" description="可在 `Form.Item` 上设置 `tooltip` 和 `extra` 提示信息。"></code>
+<code src="./demo/form-item-description.tsx" title="描述信息" description="可通过 `Form.Item` 的 `description` 属性在表单控件前设置描述信息。"></code>
+<code src="./demo/form-item-extra.tsx" title="额外信息" description="可通过 `Form.Item` 的 `extra` 属性在表单控件后设置额外信息。"></code>
+<code src="./demo/form-item-tooltip.tsx" title="提示信息" description="可通过 `Form.Item` 的 `tooltip` 属性设置提示信息。"></code>
 <code src="./demo/form-item-action.tsx" title="操作项" description="可在 `Form.Item` 上设置 `action` 操作项，仅垂直布局生效。"></code>
 <code src="./demo/layout.tsx" title="表单布局"></code>
 <code src="./demo/multiple-layout.tsx" title="表单混合布局"></code>
@@ -32,8 +35,9 @@ nav:
 
 ### Form.Item
 
-| 参数   | 说明                   | 类型      | 默认值 | 版本   |
-| :----- | :--------------------- | :-------- | :----- | :----- |
-| action | 操作项，仅垂直布局生效 | ReactNode | -      | 0.4.10 |
+| 参数        | 说明                                             | 类型      | 默认值 | 版本   |
+| :---------- | :----------------------------------------------- | :-------- | :----- | :----- |
+| action      | 操作项，仅垂直布局生效                           | ReactNode | -      | 0.4.10 |
+| description | 描述信息，在输入框前显示操作说明，仅垂直布局生效 | ReactNode | -      | -      |
 
 - 更多 API 详见 antd Form 文档: https://ant.design/components/form-cn
