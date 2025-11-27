@@ -78,7 +78,7 @@ const defaultTheme: ThemeConfig = {
     colorIcon: colorTextSecondary,
     colorBgBase: '#ffffff',
     colorBgContainer: '#ffffff',
-    colorBgLayout: colorFillQuaternary,
+    colorBgLayout: '#FBFCFE',
     colorBorder: colorFill,
     colorBorderSecondary,
     colorFill,
