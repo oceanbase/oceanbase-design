@@ -260,6 +260,7 @@ export default defineConfig({
               link: '/biz-components/content-with-icon',
             },
             { title: 'DateRanger 新版日期时间选择', link: '/biz-components/date-ranger' },
+            { title: 'Filter 筛选处理', link: '/biz-components/filter' },
             { title: 'Ranger 日期时间选择', link: '/biz-components/ranger' },
             { title: 'TreeSearch 树搜索', link: '/biz-components/tree-search' },
             { title: 'Password 密码输入框', link: '/biz-components/password' },
