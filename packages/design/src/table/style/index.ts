@@ -144,7 +144,6 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       [`${componentCls}-thead, ${componentCls}-tbody`]: {
         ['td, th']: {
           [`&${componentCls}-row-expand-icon-cell`]: {
-            backgroundColor: colorBgBase,
             // 设置 paddingRight 即可
             paddingRight: token.paddingXS,
           },

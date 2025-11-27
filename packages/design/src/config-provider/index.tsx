@@ -8,6 +8,7 @@ import type {
 import type {
   ComponentStyleConfig,
   CardConfig as AntCardConfig,
+  TableConfig as AntTableConfig,
 } from 'antd/es/config-provider/context';
 import type { AppProps } from 'antd/es/app';
 import type { PaginationConfig } from 'antd/es/pagination';
@@ -47,7 +48,7 @@ export type SpinConfig = ComponentStyleConfig & {
   indicator?: SpinIndicator;
 };
 
-export type TableConfig = ComponentStyleConfig & {
+export type TableConfig = AntTableConfig & {
   selectionColumnWidth?: number;
 };
 
@@ -162,7 +163,14 @@ const ConfigProvider: ConfigProviderType = ({
       collapse={merge(
         {},
         {
-          expandIcon: ({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />,
+          expandIcon: ({ isActive }) => (
+            <CaretRightOutlined
+              rotate={isActive ? 90 : 0}
+              style={{
+                color: mergedTheme.token?.colorIcon || mergedTheme.token?.colorTextSecondary,
+              }}
+            />
+          ),
         } as ConfigProviderProps['collapse'],
         parentContext.collapse,
         collapse
@@ -176,7 +184,28 @@ const ConfigProvider: ConfigProviderType = ({
         form
       )}
       spin={merge({}, parentContext.spin, spin)}
-      table={merge({}, parentContext.table, table)}
+      table={
+        merge(
+          {},
+          {
+            expandable: {
+              expandIcon: ({ expandable, expanded, onExpand, record }) =>
+                expandable && (
+                  <CaretRightOutlined
+                    onClick={e => onExpand(record, e)}
+                    style={{
+                      transition: `transform 0.2s`,
+                      transform: expanded ? 'rotate(90deg)' : undefined,
+                      color: mergedTheme.token?.colorIcon || mergedTheme.token?.colorTextSecondary,
+                    }}
+                  />
+                ),
+            },
+          },
+          parentContext.table,
+          table
+        ) as TableConfig
+      }
       tabs={merge({}, parentContext.tabs, tabs)}
       theme={merge({}, mergedTheme, {
         token: {
