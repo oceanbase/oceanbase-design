@@ -44,6 +44,9 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
   const tableComponentCls = `${antCls}-table`;
   return {
     [`${componentCls}`]: {
+      [`${componentCls}-body`]: {
+        paddingTop: token.padding,
+      },
       // nested Card style
       [`${componentCls}:not(${componentCls}-bordered):not(${componentCls}-type-inner)`]: {
         boxShadow: 'none',
@@ -63,6 +66,8 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       [`${componentCls}-head`]: {
         // should not remove border-bottom to avoid tabs inkbar display correctly
         borderBottomColor: 'transparent',
+        paddingTop: token.paddingLG,
+        paddingBottom: token.padding,
         // remove divider for top and bottom tabs
         [tabsComponentCls]: {
           [`&${tabsComponentCls}-top, &${tabsComponentCls}-bottom`]: {
@@ -78,6 +83,11 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
         padding: `0 ${paddingLG}px ${paddingLG}px ${paddingLG}px`,
       },
     },
+    [`${componentCls}-small`]: {
+      [`${componentCls}-body`]: {
+        paddingTop: token.paddingXS,
+      },
+    },
     [`${componentCls}-small${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
       [`${componentCls}-body`]: {
         padding: `0 ${paddingSM}px ${paddingSM}px ${paddingSM}px`,
@@ -89,11 +99,20 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       },
     },
     [`${componentCls}${componentCls}-contain-tabs`]: {
-      [`${componentCls}-head`]: genTabsStyle({
-        ...token,
-        componentCls: tabsComponentCls,
-        prefixCls: tabsPrefixCls,
-      }),
+      [`${componentCls}-head`]: {
+        ...genTabsStyle({
+          ...token,
+          componentCls: tabsComponentCls,
+          prefixCls: tabsPrefixCls,
+        }),
+        [tabsComponentCls]: {
+          [`&${tabsComponentCls}-top, &${tabsComponentCls}-bottom`]: {
+            [`${tabsComponentCls}-tab`]: {
+              paddingBlock: token.padding,
+            },
+          },
+        },
+      },
     },
     [`${componentCls}${componentCls}-contain-grid`]: {
       [`${componentCls}-head`]: {
@@ -121,6 +140,33 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
     // no body horizontal padding small card
     [`${componentCls}${componentCls}-no-body-horizontal-padding${componentCls}-small`]:
       genTableStyle(paddingSM, token),
+    // collapsible card style
+    [`${componentCls}${componentCls}-collapsible`]: {
+      [`${componentCls}-title-wrapper`]: {
+        userSelect: 'none',
+        [`${componentCls}-collapsible-icon`]: {
+          fontSize: token.fontSizeLG,
+        },
+      },
+      [`${componentCls}-body`]: {
+        overflow: 'hidden',
+      },
+    },
+    [`${componentCls}${componentCls}-collapsible${componentCls}-collapsed`]: {
+      [`${componentCls}-body`]: {
+        maxHeight: 0,
+        paddingTop: 0,
+        paddingBottom: 0,
+        opacity: 0,
+        overflow: 'hidden',
+        border: 'none',
+        margin: 0,
+      },
+      // hide bottom border of head when collapsed, avoid double border
+      [`${componentCls}-head`]: {
+        borderBottom: 'none',
+      },
+    },
   };
 };
 
