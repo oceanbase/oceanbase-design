@@ -91,7 +91,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
             style={{
               transition: `transform ${token.motionDurationMid}`,
               transform: collapsed ? undefined : 'rotate(90deg)',
-              color: token.colorTextSecondary,
+              color: token.colorIcon,
               marginRight: token.marginXS,
             }}
           />
