@@ -11,8 +11,8 @@ const colorTextQuaternary = '#B6C0D4';
 
 const colorFill = '#CDD5E4';
 const colorFillSecondary = '#E2E8F3';
-const colorFillTertiary = '#EFF3FA';
-const colorFillQuaternary = '#F7F9FC';
+const colorFillTertiary = '#EBEFF7';
+const colorFillQuaternary = '#F5F7FC';
 
 const colorBorderSecondary = colorFillSecondary;
 const fontSizeSM = 12;
