@@ -24,7 +24,6 @@
     "LICENSE"
   ],
   "sideEffects": [
-    "**/*.less",
     "**/*.css"
   ],
   "scripts": {
