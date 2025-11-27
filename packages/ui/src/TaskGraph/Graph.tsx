@@ -1,20 +1,27 @@
 import type { Graph } from '@antv/g6';
 import type { GraphData } from '@antv/g6/lib/types';
 import { findByValue } from '@oceanbase/util';
-import { Dropdown, Menu, Typography } from '@oceanbase/design';
+import { ConfigProvider, Dropdown, Menu, Typography } from '@oceanbase/design';
 import { isEqual } from 'lodash';
-import React from 'react';
+import React, { useContext } from 'react';
 import { token } from '@oceanbase/design';
 import GraphToolbar from '../GraphToolbar';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix } from '../_util';
+import useStyle from './Graph/style';
 import zhCN from './locale/zh-CN';
 import type { StatusItem } from './register';
 
-import './graph.less';
-
 const { Text } = Typography;
+
+// Wrapper component to use hooks for styling
+const GraphWrapper: React.FC<{ prefixCls: string; children: React.ReactNode }> = ({
+  prefixCls,
+  children,
+}) => {
+  const { wrapSSR } = useStyle(prefixCls);
+  return wrapSSR(<>{children}</>);
+};
 
 export interface TaskGraphLocale {
   successful: string;
@@ -42,9 +49,9 @@ interface TaskGraphState {
   statusList: StatusItem[];
 }
 
-const prefix = getPrefix('task-graph-item');
-
 class TaskGraph extends React.PureComponent<TaskGraphProps, TaskGraphState> {
+  static contextType = ConfigProvider.ConfigContext;
+
   public main: HTMLElement | null = null;
 
   public menu: HTMLElement | null = null;
@@ -224,6 +231,9 @@ class TaskGraph extends React.PureComponent<TaskGraphProps, TaskGraphState> {
   public render() {
     const { locale } = this.props;
     const { statusList, currentSubTask } = this.state;
+    // @ts-ignore
+    const { getPrefixCls } = this.context || {};
+    const prefixCls = getPrefixCls?.('task-graph-item');
     const operations =
       findByValue(statusList, currentSubTask && currentSubTask.status).operations || [];
     const menus = [
@@ -258,7 +268,8 @@ class TaskGraph extends React.PureComponent<TaskGraphProps, TaskGraphState> {
         {filterMenus.map(item =>
           item.value === 'taskId' ? (
             <div
-              className={`${prefix}-task-id-wrapper`}
+              key="task-id"
+              className={`${prefixCls}-task-id-wrapper`}
               // 下拉菜单数 > 1 时才有下边框
               style={filterMenus.length > 1 ? { borderBottom: '1px solid #e8e8e8' } : {}}
             >
@@ -271,7 +282,7 @@ class TaskGraph extends React.PureComponent<TaskGraphProps, TaskGraphState> {
       </Menu>
     );
     return (
-      <div>
+      <GraphWrapper prefixCls={prefixCls}>
         {this.graph && <GraphToolbar mode="fixed" graph={this.graph} />}
         <div
           id="container"
@@ -284,11 +295,11 @@ class TaskGraph extends React.PureComponent<TaskGraphProps, TaskGraphState> {
           // Support for antd 5.0
           open={true}
           overlay={menu}
-          overlayClassName={`${prefix}-menu`}
+          overlayClassName={`${prefixCls}-menu`}
         >
           <span />
         </Dropdown>
-      </div>
+      </GraphWrapper>
     );
   }
 }

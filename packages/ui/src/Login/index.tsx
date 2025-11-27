@@ -6,7 +6,6 @@ import { message } from '@oceanbase/design';
 import classNames from 'classnames';
 import React, { useContext, useCallback } from 'react';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix, setLocale } from '../_util';
 import type { IActivateFormProps } from './ActivateForm';
 import ActivateForm from './ActivateForm';
 import zhCN from './locale/zh-CN';
@@ -20,7 +19,7 @@ import logoImg from '../assets/logo/oceanbase_logo.svg';
 import logoImgDark from '../assets/logo/oceanbase_logo_dark.svg';
 import type { Locale } from '../interface';
 import LocaleDropdown from '../LocaleDropdown';
-import './index.less';
+import useStyle from './style';
 
 export interface Values {
   username: string;
@@ -84,8 +83,6 @@ export interface LoginProps extends FormProps {
   isMobile?: boolean;
 }
 
-const prefix = getPrefix('login');
-
 const Login: React.FC<LoginProps> = props => {
   const {
     logo,
@@ -109,6 +106,9 @@ const Login: React.FC<LoginProps> = props => {
     isMobile,
     style = {},
   } = props;
+  const { getPrefixCls, theme } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('login');
+  const { wrapSSR } = useStyle(prefixCls);
   const [showRegister, setShowRegister] = useControllableValue(props, {
     defaultValue: false,
     valuePropName: 'showRegister',
@@ -121,8 +121,6 @@ const Login: React.FC<LoginProps> = props => {
   });
 
   const isLoading = loginProps?.loading || registerProps?.loading || otherLoginProps?.loading;
-
-  const { theme } = useContext(ConfigProvider.ConfigContext);
 
   const switchForm = useCallback(() => {
     if (isLoading) {
@@ -140,28 +138,28 @@ const Login: React.FC<LoginProps> = props => {
 
   const showWaterMark = !showRegister;
 
-  return (
+  return wrapSSR(
     <App>
       <div
-        className={classNames(`${prefix}-container`, {
-          [`${prefix}-container-with-board`]: board,
-          [`${prefix}-container-mobile`]: isMobile,
+        className={classNames(`${prefixCls}-container`, {
+          [`${prefixCls}-container-with-board`]: board,
+          [`${prefixCls}-container-mobile`]: isMobile,
         })}
         style={style}
       >
-        <div className={`${prefix}-bg`} style={{ backgroundImage: `url(${bgImage})` }}>
-          <div className={`${prefix}-info`}>
-            {title && <div className={`${prefix}-welcome`}>{title}</div>}
-            {description && <div className={`${prefix}-start`}>{description}</div>}
+        <div className={`${prefixCls}-bg`} style={{ backgroundImage: `url(${bgImage})` }}>
+          <div className={`${prefixCls}-info`}>
+            {title && <div className={`${prefixCls}-welcome`}>{title}</div>}
+            {description && <div className={`${prefixCls}-start`}>{description}</div>}
           </div>
         </div>
-        <div className={`${prefix}-card`}>
-          {showLocale && <LocaleDropdown locales={locales} className={`${prefix}-locale`} />}
-          {board && <div className={`${prefix}-board`}>{board}</div>}
-          <div className={`${prefix}-content`}>
+        <div className={`${prefixCls}-card`}>
+          {showLocale && <LocaleDropdown locales={locales} className={`${prefixCls}-locale`} />}
+          {board && <div className={`${prefixCls}-board`}>{board}</div>}
+          <div className={`${prefixCls}-content`}>
             {showActivate ? (
               <>
-                <img src={logo} alt="" className={`${prefix}-activate-logo`} />
+                <img src={logo} alt="" className={`${prefixCls}-activate-logo`} />
                 <Divider
                   style={{
                     marginTop: 14,
@@ -181,7 +179,7 @@ const Login: React.FC<LoginProps> = props => {
               <>
                 {showRegister ? (
                   <>
-                    <img src={logo} alt="" className={`${prefix}-reigster-logo`} />
+                    <img src={logo} alt="" className={`${prefixCls}-reigster-logo`} />
                     <Divider
                       style={{
                         marginTop: 14,
@@ -197,7 +195,7 @@ const Login: React.FC<LoginProps> = props => {
                   </>
                 ) : (
                   <>
-                    <img src={logo} alt="" className={`${prefix}-logo`} />
+                    <img src={logo} alt="" className={`${prefixCls}-logo`} />
                     <LoginForm
                       {...loginProps}
                       otherLoginProps={otherLoginProps}
@@ -213,7 +211,7 @@ const Login: React.FC<LoginProps> = props => {
               </>
             )}
             {!!enableRegister && (
-              <div className={`${prefix}-switch-btn`}>
+              <div className={`${prefixCls}-switch-btn`}>
                 <Button type="link" onClick={switchForm} data-testid="login.register.btn">
                   {showRegister ? locale.switchLoginLabel : locale.switchRegisterLabel}
                 </Button>
@@ -221,13 +219,13 @@ const Login: React.FC<LoginProps> = props => {
             )}
             {showWaterMark ? (
               <div
-                className={`${prefix}-watermark-wrapper`}
+                className={`${prefixCls}-watermark-wrapper`}
                 style={{ paddingLeft: showAuthCode ? 96 : 0 }}
               >
                 <img
                   src={theme?.isDark ? logoImgDark : logoImg}
                   alt=""
-                  className={`${prefix}-watermark`}
+                  className={`${prefixCls}-watermark`}
                 />
               </div>
             ) : null}

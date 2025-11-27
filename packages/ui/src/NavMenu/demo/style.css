@@ -6,7 +6,7 @@
   }
   .ant-menu-item {
     &::after {
-      border-right: 2px solid #006aff;
+      border-right: 2px solid #0d6cf2;
     }
   }
 }

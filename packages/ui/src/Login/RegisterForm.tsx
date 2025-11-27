@@ -1,10 +1,8 @@
-import { Alert, Button, Form, Input } from '@oceanbase/design';
+import { Alert, Button, ConfigProvider, Form, Input } from '@oceanbase/design';
 import type { FormProps, RuleObject } from '@oceanbase/design/es/form';
 import { isFunction, toString } from 'lodash';
-import React, { useCallback } from 'react';
-import { getPrefix } from '../_util';
+import React, { useCallback, useContext } from 'react';
 import type { LoginLocale } from './index';
-import './index.less';
 
 /**
  * 冗余的转义符可以增强正则的可读性
@@ -27,8 +25,6 @@ export interface IRegisterFormProps extends FormProps {
   errorMessage?: React.ReactNode | string;
 }
 
-const prefix = getPrefix('login');
-
 const Register: React.FC<IRegisterFormProps> = ({
   isUserExists,
   locale,
@@ -37,6 +33,8 @@ const Register: React.FC<IRegisterFormProps> = ({
   errorMessage,
   ...restProps
 }) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('login');
   const [form] = Form.useForm();
 
   const handleValidateAccount = useCallback(
@@ -77,13 +75,18 @@ const Register: React.FC<IRegisterFormProps> = ({
     <Form
       layout="vertical"
       requiredMark={false}
-      className={`${prefix}-form`}
+      className={`${prefixCls}-form`}
       form={form}
       {...restProps}
       data-testid="login.register"
     >
       {errorMessage && (
-        <Alert type="error" showIcon={true} className={`${prefix}-alert`} message={errorMessage} />
+        <Alert
+          type="error"
+          showIcon={true}
+          className={`${prefixCls}-alert`}
+          message={errorMessage}
+        />
       )}
       <Form.Item
         name="username"
@@ -110,7 +113,7 @@ const Register: React.FC<IRegisterFormProps> = ({
           },
         ]}
       >
-        <Input autoComplete="new-account" autoFocus />
+        <Input size="large" autoComplete="new-account" autoFocus />
       </Form.Item>
       <Form.Item
         name="password"
@@ -126,7 +129,7 @@ const Register: React.FC<IRegisterFormProps> = ({
           passwordRegexpRule,
         ]}
       >
-        <Input.Password visibilityToggle={true} autoComplete="new-password" />
+        <Input.Password size="large" visibilityToggle={true} autoComplete="new-password" />
       </Form.Item>
       <Form.Item
         name="confirmPassword"
@@ -143,15 +146,16 @@ const Register: React.FC<IRegisterFormProps> = ({
           },
         ]}
       >
-        <Input.Password visibilityToggle={true} autoComplete="new-password" />
+        <Input.Password size="large" visibilityToggle={true} autoComplete="new-password" />
       </Form.Item>
       <Button
         // 按下回车键，即可触发点击事件
         htmlType="submit"
+        size="large"
         loading={loading}
         type="primary"
         block={true}
-        className={`${prefix}-submit-btn`}
+        className={`${prefixCls}-submit-btn`}
       >
         {locale.registerBtn}
       </Button>

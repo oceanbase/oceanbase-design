@@ -1,6 +1,6 @@
 import type { Dayjs } from 'dayjs';
 import type { Moment } from 'moment';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import dayjsGenerateConfig from 'rc-picker/es/generate/dayjs';
 import momentGenerateConfig from 'rc-picker/es/generate/moment';
 import useCSSVarCls from 'antd/es/config-provider/hooks/useCSSVarCls';
@@ -11,6 +11,7 @@ import {
   Alert,
   Button,
   Col,
+  ConfigProvider,
   DatePicker,
   Divider,
   Form,
@@ -22,7 +23,6 @@ import {
 import { noop } from 'lodash';
 import moment from 'moment';
 import dayjs from 'dayjs';
-import { getPrefix } from '../_util';
 import { DATE_TIME_MONTH_FORMAT, DATE_TIME_MONTH_FORMAT_CN } from './constant';
 import type { RangeValue } from './Ranger';
 type ValidateTrigger = 'submit' | 'valueChange';
@@ -75,8 +75,6 @@ const useClickFSA = () => {
   return [state, next] as const;
 };
 
-const prefix = getPrefix('ranger-picker-panel');
-
 const prefixCls = 'ant-picker';
 const TIME_FORMAT = 'HH:mm:ss';
 
@@ -93,6 +91,8 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     disabledDate,
     hideSecond,
   } = props;
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefix = getPrefixCls('ranger-picker-panel');
   const rootCls = useCSSVarCls(prefixCls);
   const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
   const [clickFSA, clickFSANext] = useClickFSA();

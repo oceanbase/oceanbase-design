@@ -1,12 +1,9 @@
-import { Menu } from '@oceanbase/design';
+import { ConfigProvider, Menu } from '@oceanbase/design';
 import { isArray } from 'lodash';
 import { pathToRegexp } from 'path-to-regexp';
-import React, { useCallback, useEffect, useState } from 'react';
-import { getPrefix } from '../_util';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import useNavigate from '../_util/useNavigate';
-import './index.less';
-
-const prefix = getPrefix('menu');
+import useStyle from './style';
 
 export interface NavMenuItem {
   key: string;
@@ -27,6 +24,9 @@ export interface NavMenuProps {
 
 export default (props: NavMenuProps) => {
   const { menuList, className, style } = props;
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('menu');
+  const { wrapSSR } = useStyle(prefixCls);
   const [selectedKeys, setSelectedKeys] = useState(['0']);
   const [menus, setMenus] = useState([]);
   const location = window.location;
@@ -83,8 +83,8 @@ export default (props: NavMenuProps) => {
     [navigate]
   );
 
-  return (
-    <div className={`${prefix}-container ${className}`} style={style}>
+  return wrapSSR(
+    <div className={`${prefixCls}-container ${className || ''}`} style={style}>
       <Menu
         style={{ height: '100%', borderRight: 0 }}
         defaultSelectedKeys={['0']}

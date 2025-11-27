@@ -1,9 +1,9 @@
 import RcCheckBox from 'rc-checkbox';
 import classNames from 'classnames';
 import { isBoolean } from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { ConfigProvider } from '@oceanbase/design';
 import useStyle from './style';
-import { getPrefix } from '../_util';
 import type { TagSelectValueType } from './Group';
 import TagSelectContext from './TagSelectContext';
 
@@ -31,7 +31,8 @@ const Item: React.FC<TagSelectItemProps> = ({
   const [checked, setChecked] = useState<boolean>(restProps.defaultChecked);
   const coverType = typeof cover;
 
-  const prefixCls = getPrefix('tag-select');
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('tag-select');
   const { wrapSSR, hashId } = useStyle(prefixCls);
   const tagSelectGroup = React.useContext(TagSelectContext);
   const wrapperClassName = classNames(

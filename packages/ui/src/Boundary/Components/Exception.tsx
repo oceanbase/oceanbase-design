@@ -1,11 +1,12 @@
-import { Alert, Button } from '@oceanbase/design';
-import React from 'react';
+import { Alert, Button, ConfigProvider } from '@oceanbase/design';
+import React, { useContext } from 'react';
 import type { LocaleWrapperProps } from '../../locale/LocaleWrapper';
 import LocaleWrapper from '../../locale/LocaleWrapper';
 import { EXCEPTION_PRESET } from '../constant';
 import type { BoundaryLocale } from '../IBoundary';
 import zhCN from '../locale/zh-CN';
 import classNames from 'classnames';
+import useStyle from '../style';
 
 export interface ExceptionProps extends LocaleWrapperProps, React.HTMLProps<HTMLDivElement> {
   children?: React.ReactNode;
@@ -54,82 +55,90 @@ class BoundaryException extends React.PureComponent<ExceptionProps, ExceptionSta
   }
 
   render() {
-    const {
-      imageUrl,
-      title,
-      buttonText,
-      subscription,
-      isNotCompatible,
-      showError = false,
-      hasButton = true,
-      locale,
-      className,
-      ...restProps
-    } = this.props;
-
-    const errorInfo = EXCEPTION_PRESET(locale).ERROR_BOUNDARY;
-    const notCompatibleInfo = EXCEPTION_PRESET(locale).INCOMPATIBLE_VERSION;
-    const { error, info } = this.state;
-    const errorDescription = info?.componentStack;
-    const errorMessage = (error || '').toString();
-
-    if (this.state?.hasError) {
-      return (
-        <div
-          className={classNames('boundary-container', 'ob-boundary-error', className)}
-          {...restProps}
-        >
-          <div className="empty">
-            <img src={imageUrl || errorInfo.imageUrl} />
-            <h4>{title || errorInfo.title}</h4>
-            {showError ? (
-              <Alert
-                type="error"
-                showIcon={true}
-                message={errorMessage}
-                description={errorDescription}
-                style={{
-                  marginTop: 24,
-                  overflow: 'auto',
-                  maxHeight: '50vh',
-                  // 为了避免被 Empty 的水平居中样式影响，需要设置 textAlign
-                  textAlign: 'left',
-                }}
-              />
-            ) : (
-              subscription && <span>{subscription}</span>
-            )}
-            {hasButton ? (
-              <Button type="primary" onClick={() => this.onClick()}>
-                {buttonText || errorInfo.buttonText}
-              </Button>
-            ) : (
-              ''
-            )}
-          </div>
-        </div>
-      );
-    } else if (isNotCompatible) {
-      return (
-        <div
-          className={classNames(
-            'boundary-container',
-            'ob-boundary-browser-not-compatible',
-            className
-          )}
-          {...restProps}
-        >
-          <div className="empty">
-            <img src={imageUrl || notCompatibleInfo.imageUrl} />
-            <h4>{title || notCompatibleInfo.title}</h4>
-            <span>{subscription ? subscription : notCompatibleInfo.subscription}</span>
-          </div>
-        </div>
-      );
-    }
-    return this.props.children;
+    return <ExceptionWrapper component={this} />;
   }
 }
+
+const ExceptionWrapper: React.FC<{ component: BoundaryException }> = ({ component }) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('boundary');
+  const { wrapSSR } = useStyle(prefixCls);
+
+  const {
+    imageUrl,
+    title,
+    buttonText,
+    subscription,
+    isNotCompatible,
+    showError = false,
+    hasButton = true,
+    locale,
+    className,
+    ...restProps
+  } = component.props;
+
+  const errorInfo = EXCEPTION_PRESET(locale).ERROR_BOUNDARY;
+  const notCompatibleInfo = EXCEPTION_PRESET(locale).INCOMPATIBLE_VERSION;
+  const { error, info } = component.state;
+  const errorDescription = info?.componentStack;
+  const errorMessage = (error || '').toString();
+
+  if (component.state?.hasError) {
+    return wrapSSR(
+      <div
+        className={classNames('boundary-container', `${prefixCls}-error`, className)}
+        {...restProps}
+      >
+        <div className="empty">
+          <img src={imageUrl || errorInfo.imageUrl} />
+          <h4>{title || errorInfo.title}</h4>
+          {showError ? (
+            <Alert
+              type="error"
+              showIcon={true}
+              message={errorMessage}
+              description={errorDescription}
+              style={{
+                marginTop: 24,
+                overflow: 'auto',
+                maxHeight: '50vh',
+                // 为了避免被 Empty 的水平居中样式影响，需要设置 textAlign
+                textAlign: 'left',
+              }}
+            />
+          ) : (
+            subscription && <span>{subscription}</span>
+          )}
+          {hasButton ? (
+            <Button type="primary" onClick={() => component.onClick()}>
+              {buttonText || errorInfo.buttonText}
+            </Button>
+          ) : (
+            ''
+          )}
+        </div>
+      </div>
+    );
+  } else if (isNotCompatible) {
+    return wrapSSR(
+      <div
+        className={classNames(
+          'boundary-container',
+          `${prefixCls}-browser-not-compatible`,
+          className
+        )}
+        {...restProps}
+      >
+        <div className="empty">
+          <img src={imageUrl || notCompatibleInfo.imageUrl} />
+          <h4>{title || notCompatibleInfo.title}</h4>
+          <span>{subscription ? subscription : notCompatibleInfo.subscription}</span>
+        </div>
+      </div>
+    );
+  }
+  return component.props.children;
+};
 
 export const Exception = LocaleWrapper({
   componentName: 'Boundary',

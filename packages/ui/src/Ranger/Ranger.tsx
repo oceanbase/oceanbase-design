@@ -1,4 +1,4 @@
-import { DatePicker, Space } from '@oceanbase/design';
+import { ConfigProvider, DatePicker, Space } from '@oceanbase/design';
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
@@ -6,9 +6,8 @@ import { isNil, noop, omit } from 'lodash';
 import type { Moment } from 'moment';
 import moment from 'moment';
 import classNames from 'classnames';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix } from '../_util';
 import {
   CUSTOMIZE,
   DATE_TIME_FORMAT,
@@ -16,7 +15,7 @@ import {
   NEAR_1_MINUTES,
   NEAR_30_MINUTES,
 } from './constant';
-import './index.less';
+import useStyle from './style';
 import zhCN from './locale/zh-CN';
 import type { QuickPickerProps, QuickType } from './QuickPicker';
 import QuickPicker from './QuickPicker';
@@ -49,8 +48,6 @@ export interface RangerProps
   quickPickerProps?: QuickPickerProps;
 }
 
-const prefix = getPrefix('ranger');
-
 const Ranger = (props: RangerProps) => {
   const {
     selects = [NEAR_1_MINUTES, NEAR_30_MINUTES, NEAR_1_HOURS],
@@ -69,6 +66,9 @@ const Ranger = (props: RangerProps) => {
     quickPickerProps = {},
     ...rest
   } = props;
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('ranger');
+  const { wrapSSR } = useStyle(prefixCls);
   // 是否为 moment 时间对象
   const isMoment =
     moment.isMoment(defaultValue?.[0]) ||
@@ -145,14 +145,14 @@ const Ranger = (props: RangerProps) => {
   // 没有 selects 时，回退到普通 RangePicker
   const showQuickPicker = selects.length !== 0;
 
-  return (
+  return wrapSSR(
     <Space
       size={0}
       className={classNames(
         {
-          [`${prefix}-show-range`]: showRange,
+          [`${prefixCls}-show-range`]: showRange,
         },
-        prefix
+        prefixCls
       )}
       style={rest.style}
     >
@@ -179,7 +179,7 @@ const Ranger = (props: RangerProps) => {
           value={(innerValue || defaultInternalValue) as [Dayjs, Dayjs]}
           onChange={datePickerChange}
           showTime={true}
-          className={`${prefix}-range-picker`}
+          className={`${prefixCls}-range-picker`}
           size={size}
           // 透传 props 到 antd Ranger
           {...omit(rest, 'value', 'onChange')}

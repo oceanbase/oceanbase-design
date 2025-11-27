@@ -5,17 +5,17 @@
  * 优先支持主流语言，没有 import 在代码中使用的不会打包
  */
 import hljs from 'highlight.js/lib/core';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { default as javascript, default as jsx } from './languages/javascript';
 // tsx 本质上也是采用typescript进行解析，hljs做了支持
 import { CheckOutlined, CopyOutlined } from '@oceanbase/icons';
-import { theme as obTheme } from '@oceanbase/design';
+import { ConfigProvider, theme as obTheme } from '@oceanbase/design';
 import { message } from '@oceanbase/design';
 import classNames from 'classnames';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix } from '../_util';
+import useStyle from './style';
 import DiffView from './DiffView';
 import HighlightCell from './HighlightCell';
 import JsonView from './JsonView';
@@ -39,8 +39,6 @@ import xml from './languages/xml';
 import yaml from './languages/yaml';
 import zhCN from './locale/zh-CN';
 import { useKeyDownCopyEvent } from './useKeyDownCopyEvent';
-// @ts-ignore
-import './index.less';
 
 // 目前支持的语言列表
 export const languageMap = {
@@ -160,7 +158,9 @@ const Highlight: React.FC<HighlightProps> = props => {
     language,
     locale,
   } = props;
-  const prefixCls = getPrefix('highlight');
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('highlight');
+  const { wrapSSR } = useStyle(prefixCls);
   const themeClass = theme === THEME_DARK ? `${prefixCls}-dark` : `${prefixCls}-light`;
 
   const codeRef = React.createRef<HTMLPreElement>();
@@ -275,30 +275,28 @@ const Highlight: React.FC<HighlightProps> = props => {
     );
   };
 
-  return (
-    <>
-      <pre
-        {...customProps}
+  return wrapSSR(
+    <pre
+      {...customProps}
+      style={{
+        ...customStyle,
+        position: 'relative',
+      }}
+      className={classNames(`${prefixCls}`, className, themeClass)}
+    >
+      {copyable && <CopyButton />}
+      {/* 展示 lineNumber 或不展示 */}
+      <table
         style={{
-          ...customStyle,
-          position: 'relative',
+          height,
         }}
-        className={classNames(`${prefixCls}`, className, themeClass)}
+        className={classNames(
+          `${theme === THEME_DARK ? `${prefixCls}-dark` : `${prefixCls}-light`}`
+        )}
       >
-        {copyable && <CopyButton />}
-        {/* 展示 lineNumber 或不展示 */}
-        <table
-          style={{
-            height,
-          }}
-          className={classNames(
-            `${theme === THEME_DARK ? `${prefixCls}-dark` : `${prefixCls}-light`}`
-          )}
-        >
-          <tbody>{codeBlock}</tbody>
-        </table>
-      </pre>
-    </>
+        <tbody>{codeBlock}</tbody>
+      </table>
+    </pre>
   );
 };
 

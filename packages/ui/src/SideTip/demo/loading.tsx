@@ -1,5 +1,4 @@
 /**
- * title: 加载中
  * iframe: true
  */
 import React from 'react';

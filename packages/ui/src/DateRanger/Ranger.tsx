@@ -1,6 +1,14 @@
-import React, { useEffect, useRef, useState, useImperativeHandle, useMemo } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useImperativeHandle,
+  useMemo,
+} from 'react';
 import {
   Button,
+  ConfigProvider,
   DatePicker,
   Divider,
   Dropdown,
@@ -30,7 +38,6 @@ import type { Moment } from 'moment';
 import moment from 'moment';
 import classNames from 'classnames';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix } from '../_util';
 import {
   CUSTOMIZE,
   DATE_TIME_FORMAT,
@@ -55,7 +62,7 @@ import type { Rule } from './PickerPanel';
 import InternalPickerPanel from './PickerPanel';
 import zhCN from './locale/zh-CN';
 import enUS from './locale/en-US';
-import './index.less';
+import useStyle from './style';
 import { useClickAway } from 'ahooks';
 import { useLocalStorageState } from '@oceanbase/util';
 
@@ -116,9 +123,11 @@ export interface DateRangerProps
 
 const DefaultMaxHistoryCapacity = 20;
 
-const prefix = getPrefix('date-ranger');
-
 const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('date-ranger');
+  const { wrapSSR } = useStyle(prefixCls);
+  const prefix = prefixCls;
   const {
     selects = [
       NEAR_1_MINUTES,
@@ -210,8 +219,9 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     }
     return false;
   }, [historyProp]);
+  const localStorageKey = `${prefixCls}-date-ranger-history`;
   const [rangeHistory, setRangeHistory] = useLocalStorageState<RangeValueFormat[]>(
-    'ob-design-date-ranger-local-storage-range-history-state',
+    localStorageKey,
     { defaultValue: [], listenStorageChange: true }
   );
 
@@ -414,7 +424,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
         })
       : selects[rangeNameIndex + 1];
 
-  return (
+  return wrapSSR(
     <Space
       className={classNames(rest.className, {
         [prefix]: true,

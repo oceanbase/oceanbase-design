@@ -7,7 +7,7 @@ import {
 } from '@oceanbase/icons';
 import { TreeSearch } from '@oceanbase/ui';
 import { DataNode } from '@oceanbase/design/es/tree';
-import './style.less';
+import './style.css';
 
 interface Node extends DataNode {
   extra: React.ReactNode;

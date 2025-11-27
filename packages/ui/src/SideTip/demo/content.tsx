@@ -1,5 +1,4 @@
 /**
- * title: 内容展示
  * iframe: 600
  */
 import React, { useState } from 'react';

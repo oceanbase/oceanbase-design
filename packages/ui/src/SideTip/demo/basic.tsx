@@ -1,5 +1,4 @@
 /**
- * title: 基本使用
  * iframe: true
  */
 import React from 'react';

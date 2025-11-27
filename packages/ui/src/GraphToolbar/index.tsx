@@ -1,18 +1,17 @@
 import { FullscreenOutlined, MinusOutlined, PlusOutlined, SyncOutlined } from '@oceanbase/icons';
 import type { Graph } from '@antv/g6';
 import { toPercent } from '@oceanbase/util';
-import { Divider, Space, Tooltip } from '@oceanbase/design';
+import { ConfigProvider, Divider, Space, Tooltip } from '@oceanbase/design';
 import { debounce } from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix } from '../_util';
+import useStyle from './style';
 import zhCN from './locale/zh-CN';
 // @ts-ignore
 import fitViewIcon from '../assets/graph_fit_view_icon.svg';
 // @ts-ignore
 import resetIcon from '../assets/graph_reset_icon.svg';
-import './index.less';
 
 export function getCenterPointByGraph(graph) {
   const group = graph?.get('group');
@@ -35,8 +34,6 @@ export interface GraphToolbarLocale {
   fitView: string;
   refresh: string;
 }
-
-const prefix = getPrefix('graph-toolbar');
 
 export interface GraphToolbarProps extends LocaleWrapperProps {
   // 模式: 悬浮模式 | 嵌入模式
@@ -62,6 +59,9 @@ const GraphToolbar: React.FC<GraphToolbarProps> = ({
   locale,
   className,
 }) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('graph-toolbar');
+  const { wrapSSR } = useStyle(prefixCls);
   const [zoom, setZoom] = useState(0);
   useEffect(() => {
     const initialZoom = graph?.getZoom() > 2 ? 2 : graph?.getZoom();
@@ -78,12 +78,12 @@ const GraphToolbar: React.FC<GraphToolbarProps> = ({
     );
   }, [graph]);
 
-  return (
-    <Space size={16} className={`${prefix} ${`${prefix}-${mode}`} ${className}`}>
+  return wrapSSR(
+    <Space size={16} className={`${prefixCls} ${`${prefixCls}-${mode}`} ${className || ''}`}>
       {showFullscreen && (
         <Tooltip title={locale.fullscreen}>
           <FullscreenOutlined
-            className="pointable"
+            className={`${prefixCls}-pointable`}
             onClick={() => {
               if (onFullscreen) {
                 onFullscreen();
@@ -92,10 +92,10 @@ const GraphToolbar: React.FC<GraphToolbarProps> = ({
           />
         </Tooltip>
       )}
-      <span className={`${prefix}-zoom-wrapper`}>
+      <span className={`${prefixCls}-zoom-wrapper`}>
         <Tooltip title={locale.shrink}>
           <MinusOutlined
-            className={zoom >= 0.3 ? `${prefix}-pointable` : `${prefix}-disabled`}
+            className={zoom >= 0.3 ? `${prefixCls}-pointable` : `${prefixCls}-disabled`}
             onClick={() => {
               if (zoom >= 0.3) {
                 const newZoom = zoom - 0.1;
@@ -108,7 +108,7 @@ const GraphToolbar: React.FC<GraphToolbarProps> = ({
         {toPercent(zoom)}
         <Tooltip title={locale.enlarge}>
           <PlusOutlined
-            className={zoom <= 0.9 ? `${prefix}-pointable` : `${prefix}-disabled`}
+            className={zoom <= 0.9 ? `${prefixCls}-pointable` : `${prefixCls}-disabled`}
             onClick={() => {
               if (zoom <= 0.9) {
                 const newZoom = zoom + 0.1;
@@ -123,7 +123,7 @@ const GraphToolbar: React.FC<GraphToolbarProps> = ({
         <img
           src={resetIcon}
           alt=""
-          className={`${prefix}-pointable`}
+          className={`${prefixCls}-pointable`}
           onClick={() => {
             setZoom(1);
             graph?.zoomTo(1, getCenterPointByGraph(graph));
@@ -134,7 +134,7 @@ const GraphToolbar: React.FC<GraphToolbarProps> = ({
         <img
           src={fitViewIcon}
           alt=""
-          className={`${prefix}-pointable`}
+          className={`${prefixCls}-pointable`}
           onClick={() => {
             graph?.fitView();
           }}
@@ -142,14 +142,14 @@ const GraphToolbar: React.FC<GraphToolbarProps> = ({
       </Tooltip>
       {onReload && (
         <span>
-          <Divider type="vertical" className={`${prefix}-divider`} />
+          <Divider type="vertical" className={`${prefixCls}-divider`} />
         </span>
       )}
       {onReload && (
         <Tooltip title={locale.refresh}>
           <span>
             <SyncOutlined
-              className={`${prefix}-pointable`}
+              className={`${prefixCls}-pointable`}
               onClick={() => {
                 onReload();
               }}
