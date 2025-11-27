@@ -5,7 +5,7 @@ import { sortByNumber } from '@oceanbase/util';
 import { toNumber, toString } from 'lodash';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
-import './index.less';
+import './index.css';
 
 export interface ScoreConfig {
   size?: string | number;

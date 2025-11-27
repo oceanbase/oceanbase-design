@@ -9,7 +9,7 @@ import TinyArea from '../Tiny/TinyArea';
 import { useTheme } from '../theme';
 import type { Theme } from '../theme';
 import { calculateFontSize } from '../util/measureText';
-import './index.less';
+import './index.css';
 
 export interface StatConfig {
   width?: number;
