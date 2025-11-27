@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   App,
   message as antMessage,
@@ -9,16 +9,18 @@ import type { MessageInstance } from 'antd/es/message/interface';
 import type { ModalStaticFunctions } from 'antd/es/modal/confirm';
 import type { NotificationInstance } from 'antd/es/notification/interface';
 import formatToken from 'antd/lib/theme/util/alias';
+import ConfigProvider from '../config-provider';
+import useModalStyle from '../modal/style';
 import theme from '../theme';
 import defaultTheme from '../theme/default';
 
 const { defaultAlgorithm, defaultSeed, useToken } = theme;
 
-// 设置默认 token
+// set default token
 const mapToken = {
   ...defaultAlgorithm(defaultSeed),
   ...defaultTheme.token,
-  // 需要覆盖部分 Alias Token 的值
+  // need to override some Alias Token values
   override: {
     boxShadow: defaultTheme.token?.boxShadow,
     boxShadowSecondary: defaultTheme.token?.boxShadowSecondary,
@@ -38,11 +40,17 @@ let modal: Omit<ModalStaticFunctions, 'warn'> & {
 } = AntModal;
 
 export default () => {
-  // 自动注入 useToken，避免每次使用都要声明一遍，比较繁琐
+  // automatically inject useToken, avoid declaring it every time
   token = useToken().token;
 
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('modal');
+
+  // register Modal style, ensure static function can also apply style
+  useModalStyle(prefixCls);
+
   const staticFunction = App.useApp();
-  // 替换 antd 的静态方法，支持消费 ConfigProvider 配置
+  // replace antd's static methods, support consuming ConfigProvider configuration
   message = {
     ...staticFunction.message,
     useMessage: antMessage.useMessage,
