@@ -28,6 +28,7 @@ import darkTheme from '../theme/dark';
 import DefaultRenderEmpty from './DefaultRenderEmpty';
 import type { NavigateFunction } from './navigate';
 import type { Locale } from '../locale';
+import GlobalStyle from '../style/global';
 
 export * from './navigate';
 export * from 'antd/es/config-provider/context';
@@ -238,6 +239,8 @@ const ConfigProvider: ConfigProviderType = ({
         }}
       >
         <StyleProvider {...mergedStyleProviderProps}>
+          {/* Inject global styles via cssinjs */}
+          <GlobalStyle />
           {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
           {/* ref: https://ant.design/components/app */}
           <App component={false} {...appProps}>
