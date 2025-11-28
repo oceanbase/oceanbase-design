@@ -8,6 +8,15 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.5
+
+`2025-11-28`
+
+- 🛠 将所有组件的样式方案从 Less 迁移到 CSS-in-JS，以支持动态主题、更好的样式管理和在 Next.js 中使用。[#1279](https://github.com/oceanbase/oceanbase-design/pull/1279)
+- 🛠 规范化类名前缀，将硬编码的 `ob-xxx` 改为动态 `prefixCls`，支持通过 ConfigProvider 自定义前缀。[#1279](https://github.com/oceanbase/oceanbase-design/pull/1279)
+- 🛠 将类组件（Dialog、Dialog/Anchor、Action/Item）改造为函数组件。[#1279](https://github.com/oceanbase/oceanbase-design/pull/1279)
+- ⚡ 声明无 `sideEffects` 副作用，以支持 Tree Shaking。[#1279](https://github.com/oceanbase/oceanbase-design/pull/1279)
+
 ## 1.0.0-alpha.4
 
 `2025-11-27`
