@@ -8,6 +8,15 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.5
+
+`2025-11-28`
+
+- 主题:
+  - 🆕 新增 CSS 变量模式支持，通过 ConfigProvider 的 `theme.cssVar` 配置启用。[#1280](https://github.com/oceanbase/oceanbase-design/pull/1280)
+  - 🛠 改造 Design Token 样式运算的实现方案，使用专门的运算函数 (cal、unit 等)，以适配 CSS 变量模式。[#1281](https://github.com/oceanbase/oceanbase-design/pull/1281)
+  - 📝 新增 CSS 变量模式使用文档和示例代码。[#1280](https://github.com/oceanbase/oceanbase-design/pull/1280)
+
 ## 1.0.0-alpha.4
 
 `2025-11-27`

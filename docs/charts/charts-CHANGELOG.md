@@ -8,6 +8,12 @@ group: 可视化图表
 
 ---
 
+## 1.0.0-alpha.3
+
+`2025-11-28`
+
+- 🛠 将 Stat 和 Score 组件的样式从 Less 迁移到 CSS，以支持在 Next.js 中使用。[#1279](https://github.com/oceanbase/oceanbase-design/pull/1279)
+
 ## 0.4.9
 
 `2025-11-27`
