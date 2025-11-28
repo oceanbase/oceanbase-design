@@ -1,11 +1,12 @@
 import type { CSSObject } from '@ant-design/cssinjs';
+import { unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type DrawerToken = FullToken<'Drawer'>;
 
 export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): CSSObject => {
-  const { componentCls, antCls, fontSizeHeading3, colorSplit } = token;
+  const { componentCls, antCls, fontSizeHeading3, colorSplit, calc } = token;
   const contentPadding = token.paddingLG;
   const boxShadowBottom =
     '0 2px 4px 0 rgba(54,69,99,0.04), 0 1px 6px -1px rgba(54,69,99,0.04), 0 1px 2px 0 rgba(54,69,99,0.06)';
@@ -18,7 +19,7 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
       [`${componentCls}-content`]: {
         [`${componentCls}-header`]: {
           position: 'relative',
-          padding: `${token.padding}px ${token.paddingLG}px`,
+          padding: `${unit(token.padding)} ${unit(token.paddingLG)}`,
           borderBottom: 'none',
           transition: `box-shadow ${token.motionDurationMid}`,
           // ensure header box-shadow cover body content
@@ -36,8 +37,8 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
             height: '1px',
             backgroundColor: colorSplit,
             // 使用负margin让分割线贯通到content边缘
-            marginLeft: `-${token.paddingLG}px`,
-            marginRight: `-${token.paddingLG}px`,
+            marginLeft: calc(token.paddingLG).mul(-1).equal(),
+            marginRight: calc(token.paddingLG).mul(-1).equal(),
           },
         },
         [`${componentCls}-header-shadow`]: {
@@ -54,7 +55,7 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
         },
         [`${componentCls}-footer-container`]: {
           position: 'sticky',
-          padding: `${token.padding}px ${token.paddingLG}px`,
+          padding: `${unit(token.padding)} ${unit(token.paddingLG)}`,
           transition: `box-shadow ${token.motionDurationMid}`,
           // ensure footer box-shadow cover body content
           zIndex: 10,

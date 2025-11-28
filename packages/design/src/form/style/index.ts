@@ -5,7 +5,7 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 export type FormToken = FullToken<'Form'>;
 
 export const genFormStyle: GenerateStyle<FormToken> = (token: FormToken): CSSObject => {
-  const { componentCls } = token;
+  const { componentCls, calc } = token;
   return {
     [componentCls]: {
       [`${componentCls}-item-extra`]: {
@@ -31,7 +31,7 @@ export const genFormStyle: GenerateStyle<FormToken> = (token: FormToken): CSSObj
           paddingBottom: token.paddingXXS,
         },
         [`${componentCls}-item-description`]: {
-          paddingBottom: token.paddingXXS + 2,
+          paddingBottom: calc(token.paddingXXS).add(2).equal(),
           fontSize: token.fontSizeSM,
           color: token.colorTextDescription,
         },

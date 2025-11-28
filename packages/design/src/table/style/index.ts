@@ -1,4 +1,5 @@
 import type { CSSObject } from '@ant-design/cssinjs';
+import { unit } from '@ant-design/cssinjs';
 import type { FullToken } from '../../theme/interface';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
@@ -19,8 +20,8 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     padding,
     marginLG,
     marginXS,
+    calc,
   } = token;
-  console.log(token.fontWeight);
   return {
     // 表格通用样式
     [`${componentCls}-wrapper ${componentCls}`]: {
@@ -73,7 +74,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         // empty style
         [`${componentCls}-placeholder td`]: {},
         [`${componentCls}-empty-wrapper`]: {
-          minHeight: 360 - token.paddingSM * 2,
+          minHeight: calc(360).sub(calc(token.paddingSM).mul(2).equal()).equal(),
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -104,7 +105,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     [`${componentCls}-wrapper ${componentCls}${componentCls}-middle`]: {
       [`${componentCls}-tbody`]: {
         [`${componentCls}-empty-wrapper`]: {
-          minHeight: 260 - token.paddingXS * 2,
+          minHeight: calc(260).sub(calc(token.paddingXS).mul(2).equal()).equal(),
         },
       },
     },
@@ -113,7 +114,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     [`${componentCls}-wrapper ${componentCls}${componentCls}-small`]: {
       [`${componentCls}-tbody`]: {
         [`${componentCls}-empty-wrapper`]: {
-          minHeight: 160 - token.paddingXXS * 2,
+          minHeight: calc(160).sub(calc(token.paddingXXS).mul(2).equal()).equal(),
         },
       },
     },
@@ -121,7 +122,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     // 带边框的表格样式
     [`${componentCls}-wrapper ${componentCls}${componentCls}-bordered`]: {
       [`${componentCls}-footer`]: {
-        borderRadius: `0px 0px ${token.borderRadiusLG}px ${token.borderRadiusLG}px`,
+        borderRadius: `0px 0px ${unit(token.borderRadiusLG)} ${unit(token.borderRadiusLG)}`,
       },
     },
 
@@ -190,15 +191,18 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           [`${componentCls}-expanded-row > td`]: {
             // 除内嵌子表格外，设置其他内嵌元素样式
             [`& > *:not(${componentCls}-wrapper):not(${componentCls}-expanded-row-fixed)`]: {
-              marginLeft: token.marginXL + token.lineWidth * 2,
+              marginLeft: calc(token.marginXL).add(calc(token.lineWidth).mul(2).equal()).equal(),
             },
             [`& > *${componentCls}-expanded-row-fixed`]: {
-              paddingLeft: token.marginXL + token.lineWidth * 2 + token.padding,
+              paddingLeft: calc(token.marginXL)
+                .add(calc(token.lineWidth).mul(2).equal())
+                .add(token.padding)
+                .equal(),
             },
           },
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.margin + token.lineWidth * 2,
+            marginLeft: calc(token.margin).add(calc(token.lineWidth).mul(2).equal()).equal(),
           },
         },
       },
@@ -206,7 +210,10 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         [`${componentCls}-tbody`]: {
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.margin + token.lineWidth * 2 + token.margin,
+            marginLeft: calc(token.margin)
+              .add(calc(token.lineWidth).mul(2).equal())
+              .add(token.margin)
+              .equal(),
           },
         },
       },
@@ -219,15 +226,25 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           [`${componentCls}-expanded-row > td`]: {
             // 除内嵌子表格外，设置其他内嵌元素样式
             [`& > *:not(${componentCls}-wrapper):not(${componentCls}-expanded-row-fixed)`]: {
-              marginLeft: token.marginXL + token.marginXL + token.lineWidth * 2,
+              marginLeft: calc(token.marginXL)
+                .add(token.marginXL)
+                .add(calc(token.lineWidth).mul(2).equal())
+                .equal(),
             },
             [`& > *${componentCls}-expanded-row-fixed`]: {
-              paddingLeft: token.marginXL + token.marginXL + token.lineWidth * 2 + token.padding,
+              paddingLeft: calc(token.marginXL)
+                .add(token.marginXL)
+                .add(calc(token.lineWidth).mul(2).equal())
+                .add(token.padding)
+                .equal(),
             },
           },
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.margin + token.marginXL + token.lineWidth * 2,
+            marginLeft: calc(token.margin)
+              .add(token.marginXL)
+              .add(calc(token.lineWidth).mul(2).equal())
+              .equal(),
           },
         },
       },
@@ -235,7 +252,11 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         [`${componentCls}-tbody`]: {
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.margin + token.marginXL + token.lineWidth * 2 + token.margin,
+            marginLeft: calc(token.margin)
+              .add(token.marginXL)
+              .add(calc(token.lineWidth).mul(2).equal())
+              .add(token.margin)
+              .equal(),
           },
         },
       },
@@ -255,7 +276,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     [`${componentCls}-wrapper`]: {
       [`${componentCls}-pagination`]: {
         [`&${antCls}-pagination`]: {
-          padding: `${padding}px 0`,
+          padding: `${unit(padding)} 0`,
           margin: '0 !important',
         },
         // 批量操作栏样式
@@ -268,7 +289,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
             color: colorTextSecondary,
             fontWeight: token.fontWeightStrong,
             [`${componentCls}-batch-operation-selection-count`]: {
-              margin: `0 ${marginXS}px`,
+              margin: `0 ${unit(marginXS)}`,
               color: colorLink,
             },
           },

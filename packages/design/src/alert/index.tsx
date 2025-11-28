@@ -38,7 +38,6 @@ const Alert = ({
   ...restProps
 }: AlertProps) => {
   const { token } = theme.useToken();
-  console.log(token.colorText);
   // banner exists and type is empty, use warning type by default for correct icon
   const type = banner && !typeProp ? 'warning' : typeProp;
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);

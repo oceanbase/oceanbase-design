@@ -1,11 +1,12 @@
 import type { CSSObject } from '@ant-design/cssinjs';
+import { unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type EmptyToken = FullToken<'Badge'>;
 
 export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSSObject => {
-  const { antCls, componentCls, colorTextTertiary, colorText, colorTextSecondary } = token;
+  const { antCls, componentCls, colorTextTertiary, colorText, colorTextSecondary, calc } = token;
 
   return {
     [`${componentCls}`]: {
@@ -40,7 +41,7 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
             [`${antCls}-steps-item-icon`]: {
               height: token.controlHeightSM,
               width: token.controlHeightSM,
-              lineHeight: `${token.controlHeightSM}px`,
+              lineHeight: unit(token.controlHeightSM),
               backgroundColor: token.colorFillSecondary,
               // override default border color
               borderColor: token.colorFillSecondary,
@@ -54,9 +55,9 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
                 color: colorText,
                 fontSize: token.fontSize,
                 fontWeight: token.fontWeightStrong,
-                lineHeight: `${token.controlHeightSM}px`,
+                lineHeight: unit(token.controlHeightSM),
                 '&::after': {
-                  top: token.controlHeightSM / 2,
+                  top: calc(token.controlHeightSM).div(2).equal(),
                 },
               },
               [`${antCls}-steps-item-description`]: {

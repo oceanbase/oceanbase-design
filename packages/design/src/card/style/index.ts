@@ -1,4 +1,5 @@
 import type { CSSObject } from '@ant-design/cssinjs';
+import { unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
 import { genTabsStyle } from '../../tabs/style';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
@@ -40,7 +41,8 @@ export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSOb
 };
 
 export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObject => {
-  const { componentCls, antCls, tabsComponentCls, tabsPrefixCls, paddingSM, paddingLG } = token;
+  const { componentCls, antCls, tabsComponentCls, tabsPrefixCls, paddingSM, paddingLG, calc } =
+    token;
   const tableComponentCls = `${antCls}-table`;
   return {
     [`${componentCls}`]: {
@@ -53,7 +55,7 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       },
       // nested and bordered Card radius
       [`${componentCls}${componentCls}-bordered`]: {
-        borderRadius: token.borderRadiusLG - 2,
+        borderRadius: calc(token.borderRadiusLG).sub(2).equal(),
         [`${componentCls}${componentCls}-bordered`]: {
           borderRadius: token.borderRadius,
           [`${componentCls}${componentCls}-bordered`]: {
@@ -80,7 +82,7 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
     },
     [`${componentCls}${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
       [`${componentCls}-body`]: {
-        padding: `0 ${paddingLG}px ${paddingLG}px ${paddingLG}px`,
+        padding: `0 ${unit(paddingLG)} ${unit(paddingLG)} ${unit(paddingLG)}`,
       },
     },
     [`${componentCls}-small`]: {
@@ -90,7 +92,7 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
     },
     [`${componentCls}-small${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
       [`${componentCls}-body`]: {
-        padding: `0 ${paddingSM}px ${paddingSM}px ${paddingSM}px`,
+        padding: `0 ${unit(paddingSM)} ${unit(paddingSM)} ${unit(paddingSM)}`,
       },
     },
     [`${componentCls}-small${componentCls}-contain-tabs >${componentCls}-head`]: {
@@ -131,7 +133,7 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       [`${componentCls}-body`]: {
         [`& > ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
           {
-            marginTop: -token.marginSM,
+            marginTop: calc(token.marginSM).mul(-1).equal(),
           },
       },
     },

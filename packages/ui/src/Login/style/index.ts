@@ -228,9 +228,8 @@ export const genLoginStyle: GenerateStyle<LoginToken> = (token: LoginToken): CSS
             marginBottom: 24,
           },
           [`${componentCls}-watermark-wrapper`]: {
-            width: 'calc(100% - 64px)',
-            position: 'static',
             width: '100%',
+            position: 'static',
             marginTop: 96,
           },
         },

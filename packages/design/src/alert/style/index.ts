@@ -38,16 +38,15 @@ const genAlertTypeStyle = (
 };
 
 export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSSObject => {
-  const { componentCls, colorIcon, colorIconHover, motionDurationMid } = token;
+  const { componentCls, colorIcon, colorIconHover, motionDurationMid, calc } = token;
   // height = fontSize * lineHeight
-  const height = token.fontSize * token.lineHeight;
+  const height = calc(token.fontSize).mul(token.lineHeight).equal();
   // icon width = fontSizeLG (icon size)
   const iconWidth = token.fontSizeLG;
   // content and action start position = icon width + icon margin
-  const contentStartOffset = iconWidth + token.marginXS;
+  const contentStartOffset = calc(iconWidth).add(token.marginXS).equal();
   // close icon width (approximate)
   const closeIconWidth = height;
-  console.log(token.paddingXXS);
   return {
     [`${componentCls}`]: {
       // vertical align to flex-start
@@ -93,13 +92,17 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
     [`${componentCls}:not(${componentCls}-with-description)`]: {
       flexWrap: 'wrap',
       [`${componentCls}-content`]: {
-        flex: `1 1 calc(100% - ${contentStartOffset + closeIconWidth + token.padding}px)`,
+        flex: `1 1 ${calc('100%').sub(contentStartOffset).sub(closeIconWidth).sub(token.padding).equal()}`,
         minWidth: 0,
-        maxWidth: `calc(100% - ${contentStartOffset + closeIconWidth + token.padding}px)`,
+        maxWidth: calc('100%')
+          .sub(contentStartOffset)
+          .sub(closeIconWidth)
+          .sub(token.padding)
+          .equal(),
         wordBreak: 'break-word',
       },
       [`${componentCls}-action`]: {
-        width: `calc(100% - ${contentStartOffset + token.padding}px)`,
+        width: calc('100%').sub(contentStartOffset).sub(token.padding).equal(),
         marginInlineStart: contentStartOffset,
         marginTop: token.marginXS,
       },
@@ -117,13 +120,17 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
         wordBreak: 'break-word',
       },
       [`${componentCls}-content`]: {
-        flex: `1 1 calc(100% - ${contentStartOffset + closeIconWidth + token.padding}px)`,
+        flex: `1 1 ${calc('100%').sub(contentStartOffset).sub(closeIconWidth).sub(token.padding).equal()}`,
         minWidth: 0,
-        maxWidth: `calc(100% - ${contentStartOffset + closeIconWidth + token.padding}px)`,
+        maxWidth: calc('100%')
+          .sub(contentStartOffset)
+          .sub(closeIconWidth)
+          .sub(token.padding)
+          .equal(),
         wordBreak: 'break-word',
       },
       [`${componentCls}-action`]: {
-        width: `calc(100% - ${contentStartOffset + token.padding}px)`,
+        width: calc('100%').sub(contentStartOffset).sub(token.padding).equal(),
         marginInlineStart: contentStartOffset,
         marginTop: token.marginSM,
       },

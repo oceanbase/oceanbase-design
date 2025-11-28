@@ -1,5 +1,6 @@
 import type { FullToken, GenerateStyle } from 'antd/lib/theme/internal';
 import type { CSSObject } from '@ant-design/cssinjs';
+import { unit } from '@ant-design/cssinjs';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type TypographyToken = FullToken<'Typography'>;
@@ -7,8 +8,14 @@ export type TypographyToken = FullToken<'Typography'>;
 export const genTypographyStyle: GenerateStyle<TypographyToken> = (
   token: TypographyToken
 ): CSSObject => {
-  const { componentCls, controlHeight, fontSize, lineHeight } = token;
-  const marginOffset = (controlHeight - fontSize * lineHeight) / 2;
+  const { componentCls, controlHeight, fontSize, lineHeight, calc } = token;
+  const marginOffset = calc(controlHeight)
+    .sub(calc(fontSize).mul(lineHeight).equal())
+    .div(2)
+    .equal();
+  const paddingTop = calc(marginOffset).sub(token.lineWidth).equal();
+  const paddingInline = calc(token.paddingSM).sub(token.lineWidth).equal();
+  const negativeMarginOffset = calc(marginOffset).mul(-1).equal();
 
   return {
     // inherit color and lineHeight from parent instead of fixed colorText
@@ -23,44 +30,44 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
     [`${componentCls}${componentCls}-editable-text:not(${componentCls}-edit-content)`]: {
       '&:hover': {
         background: token.colorBgContainer,
-        border: `${token.lineWidth}px ${token.lineType} ${token.colorBorder}`,
+        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
         borderRadius: token.borderRadius,
         position: 'relative',
-        insetInlineStart: -token.paddingSM,
-        padding: `${marginOffset - token.lineWidth}px ${token.paddingSM - token.lineWidth}px`,
+        insetInlineStart: calc(token.paddingSM).mul(-1).equal(),
+        padding: `${paddingTop} ${paddingInline}`,
       },
       'div&:hover': {
         height: token.controlHeight,
-        marginTop: -marginOffset,
-        marginBottom: `calc(1em - ${marginOffset}px)`,
+        marginTop: negativeMarginOffset,
+        marginBottom: calc('1em').sub(marginOffset).equal(),
       },
       'span&:hover': {
         display: 'inline-block',
         height: token.controlHeight,
-        marginTop: -marginOffset,
-        marginBottom: -marginOffset,
+        marginTop: negativeMarginOffset,
+        marginBottom: negativeMarginOffset,
       },
       'h1&:hover, h2&:hover, h3&:hover, h4&:hover, h5&:hover': {
-        marginTop: `${-marginOffset}px !important`,
-        marginBottom: `${-marginOffset}px !important`,
+        marginTop: `${negativeMarginOffset} !important`,
+        marginBottom: `${negativeMarginOffset} !important`,
       },
     },
     [`${componentCls}${componentCls}-edit-content`]: {
       [`${componentCls}-div&`]: {
-        insetInlineStart: -token.paddingSM,
-        marginTop: -marginOffset,
-        marginBottom: `calc(1em - ${marginOffset}px)`,
+        insetInlineStart: calc(token.paddingSM).mul(-1).equal(),
+        marginTop: negativeMarginOffset,
+        marginBottom: calc('1em').sub(marginOffset).equal(),
       },
       [`${componentCls}-span&`]: {
-        insetInlineStart: -token.paddingSM,
-        marginTop: -marginOffset,
-        marginBottom: -marginOffset,
+        insetInlineStart: calc(token.paddingSM).mul(-1).equal(),
+        marginTop: negativeMarginOffset,
+        marginBottom: negativeMarginOffset,
       },
       [`${componentCls}-h1&, ${componentCls}-h2&, ${componentCls}-h3&, ${componentCls}-h4&, ${componentCls}-h5&`]:
         {
-          insetInlineStart: -token.paddingSM,
-          marginTop: `${-marginOffset}px !important`,
-          marginBottom: `${-marginOffset}px !important`,
+          insetInlineStart: calc(token.paddingSM).mul(-1).equal(),
+          marginTop: `${negativeMarginOffset} !important`,
+          marginBottom: `${negativeMarginOffset} !important`,
         },
     },
   };
