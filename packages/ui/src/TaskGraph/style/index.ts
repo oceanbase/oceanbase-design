@@ -8,17 +8,24 @@ export type TaskGraphToken = OBToken;
 export const genTaskGraphStyle: GenerateStyle<TaskGraphToken> = (
   token: TaskGraphToken
 ): CSSObject => {
-  const { componentCls, antCls, colorText, colorTextSecondary, fontWeight } = token;
+  const {
+    componentCls,
+    proComponentsCls,
+    antCls,
+    colorText,
+    colorTextSecondary,
+    fontWeightStrong,
+  } = token;
 
   return {
-    container: {
+    '#container': {
       position: 'relative',
       paddingBottom: '0 !important',
       [`${antCls}-page-header`]: {
         paddingTop: 12,
         paddingBottom: 12,
       },
-      '.tech-page-container-header-inner': {
+      [`${proComponentsCls}-page-container-header-inner`]: {
         backgroundColor: '#fafbff',
         [`${antCls}-page-header-heading ${antCls}-page-header-heading-title`]: {
           fontSize: 16,
@@ -75,7 +82,7 @@ export const genTaskGraphStyle: GenerateStyle<TaskGraphToken> = (
           },
           [`${antCls}-tabs-tab-active`]: {
             color: colorText,
-            fontWeight: fontWeight,
+            fontWeight: fontWeightStrong,
             backgroundColor: '#f7f8fc',
             borderBottom: 'none',
             borderLeft: 'none',
@@ -115,4 +122,3 @@ export default (prefixCls: string) => {
   });
   return useStyle(prefixCls);
 };
-

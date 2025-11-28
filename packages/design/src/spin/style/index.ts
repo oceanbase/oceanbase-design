@@ -9,9 +9,9 @@ export type SpinToken = FullToken<'Spin'> & {
 };
 
 const genSizeStyle = (spinDotSize: number, token: SpinToken): CSSObject => {
-  const { componentCls, colorText } = token;
+  const { componentCls, colorText, calc } = token;
   const spinDotWidth = spinDotSize;
-  const spinDotHight = spinDotWidth * (295 / 397);
+  const spinDotHight = calc(spinDotWidth).mul(295).div(397).equal();
   return {
     // only work for oceanbase indicator
     [`&${componentCls}-oceanbase`]: {
@@ -28,15 +28,15 @@ const genSizeStyle = (spinDotSize: number, token: SpinToken): CSSObject => {
 };
 
 const genNestedSizeStyle = (spinDotSize: number, token: SpinToken): CSSObject => {
-  const { componentCls, fontSize } = token;
+  const { componentCls, fontSize, calc } = token;
   const spinDotWidth = spinDotSize;
   // oceanbase indicator is rectangle instead of square, should calculate actual height by ratio
   // width: 295px
   // height: 397px
-  const spinDotHight = spinDotWidth * (295 / 397);
-  const dotMarginLeft = -spinDotWidth / 2;
-  const dotMarginTop = -spinDotHight / 2;
-  const textPaddingTop = (spinDotHight - fontSize) / 2 + 2;
+  const spinDotHight = calc(spinDotWidth).mul(295).div(397).equal();
+  const dotMarginLeft = calc(spinDotWidth).div(-2).equal();
+  const dotMarginTop = calc(spinDotHight).div(-2).equal();
+  const textPaddingTop = calc(spinDotHight).sub(fontSize).div(2).add(2).equal();
   return {
     // only work for oceanbase indicator
     // `& > ${componentCls}-oceanbase` is compatible with double .ant-spin like Table loading
@@ -49,7 +49,7 @@ const genNestedSizeStyle = (spinDotSize: number, token: SpinToken): CSSObject =>
         paddingTop: textPaddingTop,
       },
       [`&${componentCls}-show-text ${componentCls}-dot`]: {
-        marginTop: dotMarginTop - 10,
+        marginTop: calc(dotMarginTop).sub(10).equal(),
       },
     },
   };
@@ -78,6 +78,7 @@ export default (prefixCls: string) => {
     // should expand by 2x for oceanbase indicator
     // because it's inner padding is smaller than antd default indicator
     // const ratio = 3;
+    const { calc } = token;
     return [
       genSpinStyle({
         ...token,
@@ -85,9 +86,9 @@ export default (prefixCls: string) => {
         // spinDotSize: (token.controlHeightLG / 2) * ratio,
         // spinDotSizeSM: token.controlHeightLG * 0.35 * ratio,
         // spinDotSizeLG: token.controlHeight * ratio,
-        spinDotSize: token.controlHeight * 1.75, // 56,
-        spinDotSizeSM: token.controlHeight * 1.125, // 36
-        spinDotSizeLG: token.controlHeight * 2.25, // 72
+        spinDotSize: calc(token.controlHeight).mul(1.75).equal(), // 56,
+        spinDotSizeSM: calc(token.controlHeight).mul(1.125).equal(), // 36
+        spinDotSizeLG: calc(token.controlHeight).mul(2.25).equal(), // 72
       } as SpinToken),
     ];
   });

@@ -13,10 +13,11 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
     lineHeightHeading5,
     fontSizeHeading3,
     colorSplit,
+    calc,
   } = token;
   const top = 100;
   const bottom = 100;
-  const titleHeight = fontSizeHeading5 * lineHeightHeading5;
+  const titleHeight = calc(fontSizeHeading5).mul(lineHeightHeading5).equal();
 
   return {
     /* Modal */
@@ -45,13 +46,13 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
             backgroundColor: colorSplit,
             // antd Modal content默认padding通常是24px，使用负margin让分割线贯通
             // 如果antd使用其他padding值，可能需要调整
-            marginLeft: `-${token.paddingLG}px`,
-            marginRight: `-${token.paddingLG}px`,
+            marginLeft: calc(token.paddingLG).mul(-1).equal(),
+            marginRight: calc(token.paddingLG).mul(-1).equal(),
           },
         },
         [`${componentCls}-body`]: {
           paddingTop: token.paddingLG,
-          marginInline: `-${token.marginLG}px`,
+          marginInline: calc(token.marginLG).mul(-1).equal(),
           paddingInline: token.paddingLG,
         },
       },
@@ -123,7 +124,7 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
           fontSize: fontSizeHeading3,
         },
         [`${componentCls}-confirm-body > ${token.iconCls}`]: {
-          height: token.fontSizeHeading3 * token.lineHeight,
+          height: calc(token.fontSizeHeading3).mul(token.lineHeight).equal(),
         },
         [`${componentCls}-confirm-paragraph`]: {
           rowGap: token.marginSM,

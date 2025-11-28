@@ -5,13 +5,17 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 export type RadioToken = FullToken<'Radio'>;
 
 export const genRadioStyle: GenerateStyle<RadioToken> = (token: RadioToken): CSSObject => {
-  const { componentCls, radioSize, fontSize, fontSizeLG, lineHeight } = token;
+  const { componentCls, radioSize, fontSize, fontSizeLG, lineHeight, calc } = token;
+  const marginBottom = calc(calc(fontSize).mul(lineHeight).equal())
+    .sub(radioSize || fontSizeLG)
+    .div(-2)
+    .equal();
   return {
     [`${componentCls}-wrapper`]: {
       [`${componentCls}`]: {
         alignSelf: 'baseline',
         [`${componentCls}-inner`]: {
-          marginBottom: -(fontSize * lineHeight - (radioSize || fontSizeLG)) / 2,
+          marginBottom,
         },
       },
     },

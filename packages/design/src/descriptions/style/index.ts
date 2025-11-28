@@ -53,7 +53,7 @@ export const genVerticalStyle = (
 export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
   token: DescriptionsToken
 ): CSSObject => {
-  const { componentCls, typographyComponentCls } = token;
+  const { componentCls, typographyComponentCls, calc } = token;
 
   return {
     [`${componentCls}`]: {
@@ -70,7 +70,7 @@ export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
       },
       [`${componentCls}-item-container:has(${`${typographyComponentCls}-edit-content`})`]: {
         alignItems: 'center',
-        height: token.fontSize * token.lineHeight,
+        height: calc(token.fontSize).mul(token.lineHeight).equal(),
       },
     },
     [`${componentCls}${componentCls}-middle`]: genVerticalStyle('middle', token),
