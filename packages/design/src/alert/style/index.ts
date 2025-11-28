@@ -47,6 +47,7 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
   const contentStartOffset = iconWidth + token.marginXS;
   // close icon width (approximate)
   const closeIconWidth = height;
+  console.log(token.paddingXXS);
   return {
     [`${componentCls}`]: {
       // vertical align to flex-start

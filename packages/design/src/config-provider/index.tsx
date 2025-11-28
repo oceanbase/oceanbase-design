@@ -218,7 +218,7 @@ const ConfigProvider: ConfigProviderType = ({
             fontWeightStrongEn
           ),
         },
-      } as ConfigProviderProps['theme']['token'])}
+      } as ConfigProviderProps['theme'])}
       renderEmpty={
         parentContext.renderEmpty ||
         (componentName => <DefaultRenderEmpty componentName={componentName} />)
