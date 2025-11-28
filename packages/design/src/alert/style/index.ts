@@ -1,4 +1,5 @@
 import type { CSSObject } from '@ant-design/cssinjs';
+import { unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import { upperFirst } from 'lodash';
@@ -47,12 +48,27 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
   const contentStartOffset = calc(iconWidth).add(token.marginXS).equal();
   // close icon width (approximate)
   const closeIconWidth = height;
+  // Common calculated values
+  const contentWidth = unit(
+    calc(contentStartOffset).add(closeIconWidth).add(token.padding).equal()
+  );
+  const actionWidth = unit(calc(contentStartOffset).add(token.padding).equal());
   return {
     [`${componentCls}`]: {
       // vertical align to flex-start
       alignItems: 'flex-start !important',
       paddingInline: token.padding,
       position: 'relative',
+      [`${componentCls}-content`]: {
+        flex: `1 1 calc(100% - ${contentWidth})`,
+        minWidth: 0,
+        maxWidth: `calc(100% - ${contentWidth})`,
+        wordBreak: 'break-word',
+      },
+      [`${componentCls}-action`]: {
+        width: `calc(100% - ${actionWidth})`,
+        marginInlineStart: contentStartOffset,
+      },
       [`${componentCls}-icon`]: {
         height,
         fontSize: token.fontSizeLG,
@@ -91,19 +107,7 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
     },
     [`${componentCls}:not(${componentCls}-with-description)`]: {
       flexWrap: 'wrap',
-      [`${componentCls}-content`]: {
-        flex: `1 1 ${calc('100%').sub(contentStartOffset).sub(closeIconWidth).sub(token.padding).equal()}`,
-        minWidth: 0,
-        maxWidth: calc('100%')
-          .sub(contentStartOffset)
-          .sub(closeIconWidth)
-          .sub(token.padding)
-          .equal(),
-        wordBreak: 'break-word',
-      },
       [`${componentCls}-action`]: {
-        width: calc('100%').sub(contentStartOffset).sub(token.padding).equal(),
-        marginInlineStart: contentStartOffset,
         marginTop: token.marginXS,
       },
     },
@@ -119,19 +123,7 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
       [`${componentCls}-description`]: {
         wordBreak: 'break-word',
       },
-      [`${componentCls}-content`]: {
-        flex: `1 1 ${calc('100%').sub(contentStartOffset).sub(closeIconWidth).sub(token.padding).equal()}`,
-        minWidth: 0,
-        maxWidth: calc('100%')
-          .sub(contentStartOffset)
-          .sub(closeIconWidth)
-          .sub(token.padding)
-          .equal(),
-        wordBreak: 'break-word',
-      },
       [`${componentCls}-action`]: {
-        width: calc('100%').sub(contentStartOffset).sub(token.padding).equal(),
-        marginInlineStart: contentStartOffset,
         marginTop: token.marginSM,
       },
       [`${componentCls}-close-icon`]: {
