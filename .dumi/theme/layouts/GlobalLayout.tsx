@@ -194,6 +194,7 @@ const GlobalLayout: React.FC = () => {
             algorithm: getAlgorithm(theme),
             isDark: theme.includes('dark'),
             isAliyun: theme.includes('aliyun'),
+            cssVar: theme.includes('css-var') ? true : false,
             token: {
               motion: !theme.includes('motion-off'),
             },
