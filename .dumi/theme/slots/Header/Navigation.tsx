@@ -131,7 +131,7 @@ export default ({
       key: 'github',
     },
     {
-      label: isZhCN ? '中文' : 'English',
+      label: isZhCN ? 'English' : '中文',
       onClick: onLangChange,
       key: 'switch-lang',
     },
