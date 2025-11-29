@@ -156,7 +156,6 @@ function addTokenImportToBlockStatement(j, root, path) {
       moduleName: '@oceanbase/design',
       importedName: 'token',
       importKind: 'value',
-      after: 'react',
     });
   }
 }
@@ -271,35 +270,94 @@ function processTemplateLiterals(j, root) {
     templateList.forEach(path => {
       const templateLiteral = path.value;
       const quasis = templateLiteral.quasis;
+      const expressions = templateLiteral.expressions || [];
 
       // 检查每个模板字符串片段是否包含需要转换的颜色值
+      let needsReconstruction = false;
+      const newQuasis = [];
+      const newExpressions = [];
+
       for (let i = 0; i < quasis.length; i++) {
         const quasi = quasis[i];
         let value = quasi.value.raw;
-        let newValue = value;
-        let valueChanged = false;
 
         // 查找需要转换的颜色值
-        const colorMatch = newValue.match(
+        const colorMatch = value.match(
           /rgba?\([^)]+\)|#[0-9a-fA-F]{3,8}|rgb\([^)]+\)|hsl\([^)]+\)|hsla?\([^)]+\)/g
         );
         if (colorMatch) {
           hasChanged = true;
-          valueChanged = true;
+          needsReconstruction = true;
 
+          // 收集所有需要替换的匹配项及其 token
+          const replacements = [];
           colorMatch.forEach(match => {
             const { token } = tokenParse(match);
             if (token) {
-              newValue = newValue.replace(match, `\${token.${token}}`);
+              const index = value.indexOf(match);
+              replacements.push({ index, match, token });
             }
           });
+
+          // 按位置排序，从后往前处理以避免位置偏移
+          replacements.sort((a, b) => b.index - a.index);
+
+          let processedValue = value;
+          replacements.forEach(({ index, match, token }) => {
+            const before = processedValue.substring(0, index);
+            const after = processedValue.substring(index + match.length);
+
+            // 如果前面有内容，创建一个 quasi
+            if (before) {
+              newQuasis.push(j.templateElement({ raw: before, cooked: before }, false));
+            }
+
+            // 创建 token 表达式
+            newExpressions.push(j.memberExpression(j.identifier('token'), j.identifier(token)));
+
+            // 剩余部分继续处理
+            processedValue = after;
+          });
+
+          // 如果有剩余部分，添加到 quasis
+          if (processedValue || newQuasis.length === 0) {
+            const isTail = i === quasis.length - 1 && expressions.length === 0;
+            newQuasis.push(
+              j.templateElement({ raw: processedValue || '', cooked: processedValue || '' }, isTail)
+            );
+          } else if (newQuasis.length > 0) {
+            // 确保最后一个 quasi 标记为 tail（如果这是最后一个 quasi 且没有更多表达式）
+            const isTail = i === quasis.length - 1 && expressions.length === 0;
+            if (isTail) {
+              const lastQuasi = newQuasis[newQuasis.length - 1];
+              lastQuasi.tail = true;
+            }
+          }
+        } else {
+          // 如果没有颜色值需要转换，保持原样
+          newQuasis.push(quasi);
+          if (i < expressions.length) {
+            newExpressions.push(expressions[i]);
+          }
+        }
+      }
+
+      // 如果需要重构，替换整个模板字符串
+      if (needsReconstruction) {
+        // 确保最后一个 quasi 标记为 tail
+        if (newQuasis.length > 0) {
+          const lastQuasi = newQuasis[newQuasis.length - 1];
+          lastQuasi.tail = true;
         }
 
-        // 如果值发生了变化，更新模板字符串片段
-        if (valueChanged) {
-          quasi.value.raw = newValue;
-          quasi.value.cooked = newValue;
+        // 合并原有的表达式（如果有）
+        const allExpressions = [...newExpressions];
+        // 添加原有的表达式（在 quasis 之后）
+        for (let i = 0; i < expressions.length; i++) {
+          allExpressions.push(expressions[i]);
         }
+
+        path.replace(j.templateLiteral(newQuasis, allExpressions));
       }
     });
 
