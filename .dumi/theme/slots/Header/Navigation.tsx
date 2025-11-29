@@ -157,27 +157,27 @@ export default ({
 
   const items: MenuProps['items'] = [
     {
-      label: <Link to="/docs/spec/system-color">设计</Link>,
+      label: <Link to={`/docs/spec/system-color${search}`}>设计</Link>,
       key: 'docs/spec',
     },
     {
-      label: <Link to="/docs/design-introduce">研发</Link>,
+      label: <Link to={`/docs/design-introduce${search}`}>研发</Link>,
       key: 'docs',
     },
     {
-      label: <Link to="/components/button">基础组件</Link>,
+      label: <Link to={`/components/button${search}`}>基础组件</Link>,
       key: 'components',
     },
     {
-      label: <Link to="/biz-components/basic-layout">业务组件</Link>,
+      label: <Link to={`/biz-components/basic-layout${search}`}>业务组件</Link>,
       key: 'biz-components',
     },
     {
-      label: <Link to="/charts/stat">可视化图表</Link>,
+      label: <Link to={`/charts/stat${search}`}>可视化图表</Link>,
       key: 'charts',
     },
     {
-      label: <Link to="/docs/blog/chart-classification-palette-design-guide">博客</Link>,
+      label: <Link to={`/docs/blog/chart-classification-palette-design-guide${search}`}>博客</Link>,
       key: 'docs/blog',
     },
     ...(additional ?? []),
