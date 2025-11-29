@@ -15,6 +15,7 @@ const tests = [
   'nested-object',
   'case-insensitive',
   'antd-style',
+  'template-string',
 ];
 
 describe(testUnit, () => {

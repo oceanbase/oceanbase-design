@@ -142,14 +142,21 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
   const result = [];
   const cwd = path.join(process.cwd(), targetDir);
   const { readPackageUp } = await import('read-pkg-up');
-  const closetPkgJson = await readPackageUp({ cwd });
+  let closetPkgJson;
+  try {
+    closetPkgJson = await readPackageUp({ cwd });
+  } catch (err) {
+    // 处理无效的 package.json 文件（如版本格式错误）
+    console.log(chalk.yellow(`Warning: Failed to read package.json: ${err.message}`));
+    closetPkgJson = null;
+  }
 
   let pkgJsonPath;
   if (!closetPkgJson) {
     pkgJsonPath = "we didn't find your package.json";
     // unknown dependency property
-    result.push(['install', '@oceanbase/design', pkgUpgradeList['@oceanbase/design']]);
-    result.push(['install', '@oceanbase/ui', pkgUpgradeList['@oceanbase/ui']]);
+    result.push(['install', '@oceanbase/design', pkgUpgradeList['@oceanbase/design'].version]);
+    result.push(['install', '@oceanbase/ui', pkgUpgradeList['@oceanbase/ui'].version]);
     if (needOBCharts) {
       result.push(['install', '@oceanbase/charts', pkgUpgradeList['@oceanbase/charts'].version]);
     }
@@ -241,14 +248,31 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
   console.log(`\nNew package installed!\n`);
 
   // uninstall dependencies
-  console.log(`Deprecated package uninstalling...\n`);
-  const uninstallDependencies = ['@alipay/ob-ui', '@alipay/ob-util', '@alipay/ob-charts'];
-  console.log(uninstallDependencies.map(n => `* ${n}`).join('\n'));
-  console.log('\n');
-  await execa(npmCommand, ['uninstall', ...uninstallDependencies, '--save'], {
-    stdio: 'inherit',
-  });
-  console.log(`\nDeprecated package uninstalled!\n`);
+  const deprecatedPackages = ['@alipay/ob-ui', '@alipay/ob-util', '@alipay/ob-charts'];
+  const uninstallDependencies = [];
+
+  if (closetPkgJson) {
+    const { packageJson } = closetPkgJson;
+    deprecatedPackages.forEach(depName => {
+      dependencyProperties.forEach(property => {
+        const versionRange = _.get(packageJson, `${property}.${depName}`);
+        if (versionRange && !uninstallDependencies.includes(depName)) {
+          uninstallDependencies.push(depName);
+        }
+      });
+    });
+  }
+  // 如果没有找到 package.json，跳过卸载操作（无法确定包是否存在）
+
+  if (uninstallDependencies.length > 0) {
+    console.log(`Deprecated package uninstalling...\n`);
+    console.log(uninstallDependencies.map(n => `* ${n}`).join('\n'));
+    console.log('\n');
+    await execa(npmCommand, ['uninstall', ...uninstallDependencies, '--save'], {
+      stdio: 'inherit',
+    });
+    console.log(`\nDeprecated package uninstalled!\n`);
+  }
 }
 
 /**
