@@ -25,6 +25,8 @@ import StaticFunction from '../static-function';
 import themeConfig from '../theme';
 import defaultTheme, { fontFamilyEn, fontWeightEn, fontWeightStrongEn } from '../theme/default';
 import darkTheme from '../theme/dark';
+import compactTheme from '../theme/compact';
+import type { GlobalToken } from '../theme/interface';
 import DefaultRenderEmpty from './DefaultRenderEmpty';
 import type { NavigateFunction } from './navigate';
 import type { Locale } from '../locale';
@@ -37,8 +39,9 @@ export * from 'antd/es/config-provider/DisabledContext';
 export * from 'antd/es/config-provider';
 
 export interface ThemeConfig extends AntThemeConfig {
-  isDark?: boolean;
   isAliyun?: boolean;
+  isDark?: boolean;
+  isCompact?: boolean;
 }
 
 export type CardConfig = AntCardConfig & {
@@ -104,12 +107,13 @@ export type ConfigProviderType = React.FC<ConfigProviderProps> & {
 };
 
 const getLocaleTokenValue = (
+  mergedThemeToken: GlobalToken,
   locale: Locale,
   tokenKey: string,
   tokenValue: string | number,
   tokenValueEn: string | number
 ) => {
-  return tokenValue !== defaultTheme.token[tokenKey]
+  return tokenValue !== mergedThemeToken[tokenKey]
     ? { [tokenKey]: tokenValue }
     : ['en', 'en-gb'].includes(locale.locale)
       ? { [tokenKey]: tokenValueEn }
@@ -136,13 +140,49 @@ const ConfigProvider: ConfigProviderType = ({
   const parentContext = React.useContext<ConfigConsumerProps>(AntConfigProvider.ConfigContext);
   const parentExtendedContext =
     React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
-  const { isDark, isAliyun } = merge({}, parentContext.theme, theme);
-  const customTheme = isAliyun ? aliyunTheme : isDark ? darkTheme : undefined;
+  const { isAliyun, isDark, isCompact } = merge({}, parentContext.theme, theme);
+  const aliyunThemeConfig = isAliyun ? aliyunTheme : undefined;
+  const darkThemeConfig =
+    isDark && !isAliyun
+      ? isCompact
+        ? darkTheme
+        : {
+            ...darkTheme,
+            token: {
+              ...darkTheme.token,
+              ...Object.fromEntries(
+                Object.entries(defaultTheme.token).filter(
+                  ([key]) => !key?.toLowerCase()?.startsWith('color')
+                )
+              ),
+            },
+          }
+      : undefined;
+  const compactThemeConfig =
+    isCompact && !isAliyun
+      ? isDark
+        ? compactTheme
+        : {
+            ...compactTheme,
+            token: {
+              ...compactTheme.token,
+              ...Object.fromEntries(
+                Object.entries(defaultTheme.token).filter(
+                  ([key]) =>
+                    key?.toLowerCase()?.startsWith('color') &&
+                    !['colorBgBase', 'colorTextBase'].includes(key)
+                )
+              ),
+            },
+          }
+      : undefined;
   const mergedTheme = merge(
     {},
-    customTheme ? {} : defaultTheme,
+    isAliyun ? {} : isDark || isCompact ? themeConfig.defaultSeed : defaultTheme,
     parentContext.theme,
-    customTheme,
+    aliyunThemeConfig,
+    darkThemeConfig,
+    compactThemeConfig,
     theme
   );
 
@@ -210,9 +250,22 @@ const ConfigProvider: ConfigProviderType = ({
       tabs={merge({}, parentContext.tabs, tabs)}
       theme={merge({}, mergedTheme, {
         token: {
-          ...getLocaleTokenValue(mergedLocale, 'fontFamily', fontFamily, fontFamilyEn),
-          ...getLocaleTokenValue(mergedLocale, 'fontWeight', fontWeight, fontWeightEn),
           ...getLocaleTokenValue(
+            mergedTheme.token || {},
+            mergedLocale,
+            'fontFamily',
+            fontFamily,
+            fontFamilyEn
+          ),
+          ...getLocaleTokenValue(
+            mergedTheme.token || {},
+            mergedLocale,
+            'fontWeight',
+            fontWeight,
+            fontWeightEn
+          ),
+          ...getLocaleTokenValue(
+            mergedTheme.token || {},
             mergedLocale,
             'fontWeightStrong',
             fontWeightStrong,

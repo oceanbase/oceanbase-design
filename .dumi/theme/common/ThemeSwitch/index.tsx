@@ -30,7 +30,8 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = (props: ThemeSwitchProps) => {
         }}
         tooltip={<FormattedMessage id="app.theme.switch.dark" />}
       />
-      <FloatButton
+      {/* TODO: compact theme has some issues, comment out for now */}
+      {/* <FloatButton
         icon={<CompactTheme />}
         type={value.includes('compact') ? 'primary' : 'default'}
         onClick={() => {
@@ -41,7 +42,7 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = (props: ThemeSwitchProps) => {
           }
         }}
         tooltip={<FormattedMessage id="app.theme.switch.compact" />}
-      />
+      /> */}
       <FloatButton
         icon={<CloudOutlined />}
         type={value.includes('aliyun') ? 'primary' : 'default'}

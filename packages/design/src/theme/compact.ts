@@ -1,11 +1,7 @@
-import { theme } from 'antd';
-import themeConfig from './index';
+import theme from './index';
 
 const compactTheme = {
-  token: theme.getDesignToken({
-    algorithm: theme.compactAlgorithm,
-    token: themeConfig.defaultSeed,
-  }),
+  token: theme.defaultSeed,
   components: {
     InputNumber: {
       handleVisible: true,

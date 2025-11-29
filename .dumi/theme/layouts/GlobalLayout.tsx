@@ -89,7 +89,9 @@ const GlobalLayout: React.FC = () => {
     (props: SiteState) => {
       setSiteState(prev => ({ ...prev, ...props }));
 
-      // updating `searchParams` will clear the hash
+      // resever current hash, because updating `searchParams` will clear the hash
+      const currentHash = typeof window !== 'undefined' ? window.location.hash : '';
+
       const oldSearchStr = searchParams.toString();
 
       let nextSearchParams: URLSearchParams = searchParams;
@@ -122,6 +124,14 @@ const GlobalLayout: React.FC = () => {
 
       if (nextSearchParams.toString() !== oldSearchStr) {
         setSearchParams(nextSearchParams);
+        // 恢复 hash 参数
+        if (currentHash && typeof window !== 'undefined') {
+          window.history.replaceState(
+            null,
+            '',
+            `${window.location.pathname}${window.location.search}${currentHash}`
+          );
+        }
       }
     },
     [searchParams, setSearchParams]
@@ -192,8 +202,9 @@ const GlobalLayout: React.FC = () => {
         <SiteThemeProvider
           theme={{
             algorithm: getAlgorithm(theme),
-            isDark: theme.includes('dark'),
             isAliyun: theme.includes('aliyun'),
+            isDark: theme.includes('dark'),
+            isCompact: theme.includes('compact'),
             cssVar: theme.includes('css-var') ? true : false,
             token: {
               motion: !theme.includes('motion-off'),
