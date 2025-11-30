@@ -8,6 +8,14 @@ group: 自动化迁移工具
 
 ---
 
+## 1.0.0-alpha.6
+
+`2025-12-01`
+
+- 🐞 修复 `style-to-token` 未正确处理模板字符串的问题。[#1286](https://github.com/oceanbase/oceanbase-design/pull/1286)
+- 🐞 修复 `#5c6b8a` token 映射错误的问题，从 `colorTextTertiary` 更正为 `colorTextSecondary`，与主题定义一致。[#1286](https://github.com/oceanbase/oceanbase-design/pull/1286)
+- 🛠 增强 package.json 读取的错误处理和鲁棒性，并优化废弃包的卸载和日志打印。[#1286](https://github.com/oceanbase/oceanbase-design/pull/1286)
+
 ## 1.0.0-alpha.3
 
 `2025-10-23`
