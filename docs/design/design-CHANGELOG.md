@@ -8,6 +8,18 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.6
+
+`2025-12-01`
+
+- 🛠 重构全局样式实现，将 `global.css` 迁移为 CSS-in-JS 注入方式，提升样式管理的灵活性和一致性，并支持在非 Webpack 框架 (比如 Next.js、Vite) 中使用。[#1283](https://github.com/oceanbase/oceanbase-design/pull/1283)
+- 📝 Cascader 和 Tooltip 新增自定义偏移的示例。[#1287](https://github.com/oceanbase/oceanbase-design/pull/1287)
+- 🐞 修复 Alert `action` 操作区位置不正确的问题。[#1284](https://github.com/oceanbase/oceanbase-design/pull/1284)
+- 💄 优化暗色和紧凑主题。[#1285](https://github.com/oceanbase/oceanbase-design/pull/1285)
+- 💄 去掉 Button 的 `box-shadow` 阴影。[#1288](https://github.com/oceanbase/oceanbase-design/pull/1288)
+- 💄 优化 DatePicker、Dropdown、Popover、Select、Tooltip 和 Menu 弹出层的圆角大小。[#1289](https://github.com/oceanbase/oceanbase-design/pull/1289)
+- 💄 优化大尺寸 Input 和 InputNumber 的圆角大小。[#1289](https://github.com/oceanbase/oceanbase-design/pull/1289)
+
 ## 1.0.0-alpha.5
 
 `2025-11-28`
