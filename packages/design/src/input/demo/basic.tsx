@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Space } from '@oceanbase/design';
+import { Input, InputNumber, Space } from '@oceanbase/design';
 
 const App: React.FC = () => (
   <Space direction="vertical" style={{ width: '100%' }}>
