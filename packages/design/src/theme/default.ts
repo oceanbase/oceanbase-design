@@ -18,6 +18,10 @@ const colorBorderSecondary = colorFillSecondary;
 const fontSizeSM = 12;
 const tagColorBorder = colorTextQuaternary;
 
+const borderRadius = 4;
+const borderRadiusMD = 6;
+const borderRadiusLG = 8;
+
 export const fontFamilyEn = `Inter, 'Noto sans', sans-serif, Roboto, 'Open Sans', 'Segoe UI', 'Helvetica Neue', 'Helvetica, Arial', 'Apple Color Emoji'`;
 
 export const fontWeightWeakEn = 400;
@@ -32,9 +36,9 @@ const defaultTheme: ThemeConfig = {
     fontWeight: 400,
     fontWeightStrong: 500,
     borderRadiusSM: 2,
-    borderRadius: 4,
-    borderRadiusMD: 6,
-    borderRadiusLG: 8,
+    borderRadius,
+    borderRadiusMD,
+    borderRadiusLG,
     fontSizeSM,
     fontSize: 13,
     lineHeight: 20 / 13,
@@ -101,7 +105,7 @@ const defaultTheme: ThemeConfig = {
   },
   components: {
     Alert: {
-      borderRadiusLG: 6,
+      borderRadiusLG: borderRadiusMD,
     },
     Badge: {
       statusSize: 8,
@@ -122,16 +126,29 @@ const defaultTheme: ThemeConfig = {
     },
     Card: {
       headerFontSize: 16,
-      borderRadiusLG: 8,
+      borderRadiusLG: borderRadiusLG,
     },
     Collapse: {
       colorBorder: colorBorderSecondary,
     },
+    DatePicker: {
+      borderRadiusLG: borderRadiusMD,
+    },
     Descriptions: {
       labelColor: colorTextSecondary,
     },
+    Dropdown: {
+      borderRadiusLG: borderRadiusMD,
+    },
+    Input: {
+      borderRadiusLG: borderRadiusMD,
+    },
     InputNumber: {
       handleVisible: true,
+      borderRadiusLG: borderRadiusMD,
+    },
+    Popover: {
+      borderRadiusLG: borderRadiusMD,
     },
     Progress: {
       defaultColor: colorPrimarySecondary,
@@ -145,6 +162,7 @@ const defaultTheme: ThemeConfig = {
     },
     Select: {
       // work for all multiple select component, including Select, TreeSelect and Cascader and so on
+      borderRadiusLG: borderRadiusMD,
       multipleItemBg: colorFillQuaternary,
       multipleItemBorderColor: tagColorBorder,
       multipleItemBorderColorDisabled: tagColorBorder,
@@ -158,7 +176,7 @@ const defaultTheme: ThemeConfig = {
       handleColorDisabled: '#b3ccff',
     },
     Skeleton: {
-      blockRadius: 4,
+      blockRadius: borderRadius,
     },
     Tabs: {
       horizontalItemGutter: 24,
@@ -168,7 +186,7 @@ const defaultTheme: ThemeConfig = {
     },
     Tag: {
       colorBorder: tagColorBorder,
-      borderRadiusSM: 4,
+      borderRadiusSM: borderRadius,
     },
     Table: {
       cellFontSize: fontSizeSM,
@@ -182,13 +200,15 @@ const defaultTheme: ThemeConfig = {
       rowSelectedHoverBg: colorFillTertiary,
     },
     Tooltip: {
+      borderRadius: borderRadiusMD,
       colorBgSpotlight: '#ffffff',
       colorTextLightSolid: colorText,
     },
     Menu: {
+      borderRadiusLG: borderRadiusMD,
       paddingContentVertical: 0,
       itemHeight: 30,
-      itemBorderRadius: 4,
+      itemBorderRadius: borderRadius,
       // 80 means 50% opacity
       itemHoverBg: colorFillSecondary + '80',
       itemActiveBg: colorFillSecondary + '80',

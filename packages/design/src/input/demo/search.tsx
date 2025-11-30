@@ -21,34 +21,26 @@ const App: React.FC = () => {
 
   return (
     <Space direction="vertical">
-      <Search placeholder="input search text" onSearch={onSearch} style={{ width: 200 }} />
       <Search
-        placeholder="input search text"
         allowClear
         onSearch={onSearch}
+        placeholder="input search text"
         style={{ width: 200 }}
       />
       <Search
-        addonBefore="https://"
-        placeholder="input search text"
         allowClear
+        addonBefore="https://"
         onSearch={onSearch}
+        placeholder="input search text"
         style={{ width: 304 }}
       />
-      <Search placeholder="input search text" onSearch={onSearch} enterButton />
+      <Search allowClear enterButton onSearch={onSearch} placeholder="input search text" />
+      <Search allowClear enterButton="Search" onSearch={onSearch} placeholder="input search text" />
       <Search
-        placeholder="input search text"
-        allowClear
-        enterButton="Search"
-        size="large"
-        onSearch={onSearch}
-      />
-      <Search
-        placeholder="input search text"
-        enterButton="Search"
-        size="large"
         suffix={suffix}
+        enterButton="Search"
         onSearch={onSearch}
+        placeholder="input search text"
       />
     </Space>
   );
