@@ -21,7 +21,6 @@ module.exports = (file, api, options) => {
           'DocDialog',
           'FullscreenBox',
           'Highlight',
-          'GraphToolbar',
           'IconFont',
           'Login',
           'Lottie',
@@ -29,7 +28,6 @@ module.exports = (file, api, options) => {
           'Password',
           'Ranger',
           'SideTip',
-          'TaskGraph',
           'TreeSearch',
           'Welcome',
           /* pro-components */
@@ -50,7 +48,6 @@ module.exports = (file, api, options) => {
           'DialogProps',
           'DocDialogProps',
           'FullscreenBoxProps',
-          'GraphToolbarProps',
           'HighlightProps',
           'IconFontProps',
           'LoginProps',
@@ -61,7 +58,6 @@ module.exports = (file, api, options) => {
           'RangerProps',
           'QuickPickerProps',
           'SideTipProps',
-          'TaskGraphProps',
           // TreeSearch
           'TreeSearchProps',
           'TreeSearchRef',

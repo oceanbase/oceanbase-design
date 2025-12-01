@@ -32,9 +32,6 @@ export type { DocDialogProps } from './DocDialog';
 export { default as FullscreenBox } from './FullscreenBox';
 export type { FullscreenBoxProps } from './FullscreenBox';
 
-export { default as GraphToolbar } from './GraphToolbar';
-export type { GraphToolbarProps } from './GraphToolbar';
-
 export { default as Highlight } from './Highlight';
 export type { HighlightProps } from './Highlight';
 
@@ -79,9 +76,6 @@ export type { DateRangerProps } from './DateRanger';
 
 export { default as SideTip } from './SideTip';
 export type { SideTipProps } from './SideTip';
-
-export { default as TaskGraph } from './TaskGraph';
-export type { TaskGraphProps } from './TaskGraph';
 
 export { default as TreeSearch } from './TreeSearch';
 export type { TreeSearchProps, TreeSearchRef } from './TreeSearch';
