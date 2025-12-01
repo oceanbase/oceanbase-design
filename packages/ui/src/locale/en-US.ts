@@ -5,7 +5,6 @@ import Boundary from '../Boundary/locale/en-US';
 import Dialog from '../Dialog/locale/en-US';
 import DocDialog from '../DocDialog/locale/en-US';
 import FullscreenBox from '../FullscreenBox/locale/en-US';
-import GraphToolbar from '../GraphToolbar/locale/en-US';
 import Highlight from '../Highlight/locale/en-US';
 import Login from '../Login/locale/en-US';
 import PageContainer from '../PageContainer/locale/en-US';
@@ -13,7 +12,6 @@ import Password from '../Password/locale/en-US';
 import Ranger from '../Ranger/locale/en-US';
 import DateRanger from '../DateRanger/locale/en-US';
 import SideTip from '../SideTip/locale/en-US';
-import TaskGraph from '../TaskGraph/locale/en-US';
 import Welcome from '../Welcome/locale/en-US';
 import type { Locale } from './index';
 
@@ -24,8 +22,6 @@ export default {
   PageContainer,
   Login,
   Welcome,
-  GraphToolbar,
-  TaskGraph,
   Ranger,
   Password,
   Boundary,

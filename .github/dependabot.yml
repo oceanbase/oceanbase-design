@@ -17,7 +17,6 @@ updates:
       - "dependencies"
       - "Feature Branch"
     ignore:
-      - dependency-name: "@antv/g6"
       # execa latest 7.x works only in ES module
       - dependency-name: "execa"
       # chalk latest 5.x works only in ES module

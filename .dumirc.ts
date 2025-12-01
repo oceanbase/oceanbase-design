@@ -241,13 +241,6 @@ export default defineConfig({
           ],
         },
         {
-          title: '可视化',
-          children: [
-            { title: 'TaskGraph 任务流程图', link: '/biz-components/task-graph' },
-            { title: 'GraphToolbar 图工具栏', link: '/biz-components/graph-toolbar' },
-          ],
-        },
-        {
           title: '其他',
           children: [
             { title: 'Action 操作项', link: '/biz-components/action' },
