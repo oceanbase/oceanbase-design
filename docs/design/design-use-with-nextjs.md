@@ -4,21 +4,34 @@ order: 3
 group: 基础组件
 ---
 
-- 为了和 `@oceanbase/design` 搭配使用，需要安装 `file-loader` 依赖，并修改 Next.js 配置：
+## Turbopack 构建
 
-```bash
-npm install file-loader --save-dev
+- 如果使用 `turbopack` 作为构建工具，则无需额外配置，即可正常使用 `@oceanbase/design`。
+  - Next.js 16: 默认使用 `turbopack`，详见 [Next.js 文档](https://nextjs.org/docs/app/guides/upgrading/version-16#turbopack-by-default)。
+  - Next.js 15 及以下版本: 需要手动开启 `turbopack`。
+
+```json
+// package.json
+{
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build"
+  }
+}
 ```
 
+## Webpack 构建
+
+- 如果没有开启 `turbopack` 构建，则 Next.js 会使用 `webpack` 构建。由于 `@oceanbase/design` 内置了字体包，需要按如下修改 Next.js 配置，以正确处理字体文件：
+
 ```ts
+// next.config.ts
 const nextConfig = {
-  // to transpile some special packages to es5
-  transpilePackages: ['@oceanbase', 'query-string', '@ant-design', '@ant-design/cssinjs'],
   webpack: config => {
-    // to handle @oceanbase/design built-in font files
+    // Handle font files
     config.module.rules.push({
-      test: /\.(woff|woff2|ttf?g)$/i,
-      use: ['file-loader'],
+      test: /\.(woff|woff2|eot|ttf|otf)$/i,
+      type: 'asset/resource',
     });
     return config;
   },
@@ -26,12 +39,3 @@ const nextConfig = {
 
 export default nextConfig;
 ```
-
-- 完整配置和可运行的示例，可以参考我们提供的 [Next.js + @oceanbase/design 项目模板](https://stackblitz.com/edit/nextjs-oceanbase-design)。
-
-<iframe src="https://stackblitz.com/edit/nextjs-oceanbase-design?embed=1&file=app%2Fpage.tsx"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="@oceanbase/ui reproduction template"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-   ></iframe>
