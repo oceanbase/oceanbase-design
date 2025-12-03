@@ -1,14 +1,13 @@
 import React from 'react';
-import { Input, Space } from '@oceanbase/design';
+import { Divider, Input, Space } from '@oceanbase/design';
 
 const App: React.FC = () => {
   return (
     <Space direction="vertical" style={{ width: '100%' }}>
-      <Input.Password placeholder="auto fill password by default" />
-      <Input.Password
-        autoComplete="new-password"
-        placeholder='not auto fill password with autoComplete="new-password"'
-      />
+      <div>Input.Password</div>
+      <Input.Password />
+      <div>Input.Password with autoComplete="new-password"</div>
+      <Input.Password autoComplete="new-password" />
     </Space>
   );
 };
