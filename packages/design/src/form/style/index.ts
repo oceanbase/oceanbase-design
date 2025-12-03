@@ -8,9 +8,12 @@ export const genFormStyle: GenerateStyle<FormToken> = (token: FormToken): CSSObj
   const { componentCls, calc } = token;
   return {
     [componentCls]: {
-      [`${componentCls}-item-extra`]: {
+      [`${componentCls}-item-explain, ${componentCls}-item-extra`]: {
         paddingTop: token.paddingXXS,
         fontSize: token.fontSizeSM,
+      },
+      [`${componentCls}-item-explain + ${componentCls}-item-extra`]: {
+        paddingTop: 0,
       },
     },
     [`${componentCls}${componentCls}-vertical`]: {
