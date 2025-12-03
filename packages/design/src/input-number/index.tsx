@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
 import type { ConfigConsumerProps } from '../config-provider';
 import defaultLocale from '../locale/en-US';
+import useStyle from './style';
 
 export * from 'antd/es/input-number';
 
@@ -24,8 +25,12 @@ type CompoundedComponent = React.ForwardRefExoticComponent<
 };
 
 const InternalInputNumber = React.forwardRef<InputNumberRef, InputNumberProps>(
-  ({ locale: customLocale, ...restProps }, ref) => {
-    const { locale: contextLocale } = useContext<ConfigConsumerProps>(ConfigProvider.ConfigContext);
+  ({ prefixCls: customizePrefixCls, locale: customLocale, ...restProps }, ref) => {
+    const { getPrefixCls, locale: contextLocale } = useContext<ConfigConsumerProps>(
+      ConfigProvider.ConfigContext
+    );
+    const prefixCls = getPrefixCls('input-number', customizePrefixCls);
+    const { wrapSSR } = useStyle(prefixCls);
     const inputNumberLocale: InputNumberLocale = {
       placeholder:
         contextLocale?.global?.inputPlaceholder || defaultLocale.global?.inputPlaceholder,
@@ -34,7 +39,14 @@ const InternalInputNumber = React.forwardRef<InputNumberRef, InputNumberProps>(
       ...customLocale,
     };
 
-    return <AntInputNumber ref={ref} placeholder={inputNumberLocale.placeholder} {...restProps} />;
+    return wrapSSR(
+      <AntInputNumber
+        ref={ref}
+        prefixCls={customizePrefixCls}
+        placeholder={inputNumberLocale.placeholder}
+        {...restProps}
+      />
+    );
   }
 );
 

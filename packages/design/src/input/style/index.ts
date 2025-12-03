@@ -5,7 +5,7 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 export type InputToken = FullToken<'Input'>;
 
 export const genInputStyle: GenerateStyle<InputToken> = (token: InputToken): CSSObject => {
-  const { componentCls, calc } = token;
+  const { componentCls } = token;
   return {
     [`${componentCls}-affix-wrapper`]: {
       [`${componentCls}-suffix`]: {
