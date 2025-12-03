@@ -24,21 +24,21 @@ const App: React.FC = () => {
         </Form.Item>
       </Form>
       <Space direction="vertical" style={{ width: '100%' }}>
-        <Alert message="Success Tips" type="success" showIcon ghost={ghost} />
         <Alert message="Informational Notes" type="info" showIcon ghost={ghost} />
+        <Alert message="Success Tips" type="success" showIcon ghost={ghost} />
         <Alert message="Warning" type="warning" showIcon ghost={ghost} />
         <Alert message="Error" type="error" showIcon ghost={ghost} />
-        <Alert
-          message="Success Tips"
-          description="Detailed description and advice about successful copywriting."
-          type="success"
-          showIcon
-          ghost={ghost}
-        />
         <Alert
           message="Informational Notes"
           description="Additional description and information about copywriting."
           type="info"
+          showIcon
+          ghost={ghost}
+        />
+        <Alert
+          message="Success Tips"
+          description="Detailed description and advice about successful copywriting."
+          type="success"
           showIcon
           ghost={ghost}
         />
