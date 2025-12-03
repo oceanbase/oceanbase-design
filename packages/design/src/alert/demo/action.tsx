@@ -4,15 +4,15 @@ import React from 'react';
 const App: React.FC = () => (
   <Space direction="vertical" style={{ width: '100%' }}>
     <Alert
-      message="Success Tips"
-      type="success"
+      message="Informational Notes"
+      type="info"
       showIcon
       closable
       action={<Button size="small">Btn</Button>}
     />
     <Alert
-      message="Informational Notes"
-      type="info"
+      message="Success Tips"
+      type="success"
       showIcon
       closable
       action={<Button size="small">Btn</Button>}
@@ -32,17 +32,17 @@ const App: React.FC = () => (
       action={<Button size="small">Btn</Button>}
     />
     <Alert
-      message="Success Tips"
-      description="Detailed description and advice about successful copywriting."
-      type="success"
+      message="Informational Notes"
+      description="Additional description and information about copywriting."
+      type="info"
       showIcon
       closable
       action={<Button>Btn</Button>}
     />
     <Alert
-      message="Informational Notes"
-      description="Additional description and information about copywriting."
-      type="info"
+      message="Success Tips"
+      description="Detailed description and advice about successful copywriting."
+      type="success"
       showIcon
       closable
       action={<Button>Btn</Button>}

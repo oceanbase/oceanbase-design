@@ -20,7 +20,7 @@ markdown: |
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/style.tsx" title="四种样式" description="共有四种样式 `success`、`info`、`warning`、`error`。"></code>
+<code src="./demo/type.tsx" title="四种类型" description="共有四种类型 `success`、`info`、`warning`、`error`，默认为 `info`。"></code>
 <code src="./demo/mini.tsx" title="mini 模式" description="用于轻量信息提醒，尺寸更紧凑。"></code>
 <code src="./demo/description.tsx" title="描述"></code>
 <code src="./demo/closable.tsx" title="可关闭的警告提示" description="显示关闭按钮，点击可关闭警告提示。"></code>

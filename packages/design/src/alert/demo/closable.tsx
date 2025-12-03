@@ -7,26 +7,26 @@ const onClose = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 
 const App: React.FC = () => (
   <Space direction="vertical" style={{ width: '100%' }}>
-    <Alert message="Success Tips" type="success" showIcon closable onClose={onClose} />
     <Alert message="Informational Notes" type="info" showIcon closable onClose={onClose} />
+    <Alert message="Success Tips" type="success" showIcon closable onClose={onClose} />
     <Alert message="Warning" type="warning" showIcon closable onClose={onClose} />
     <Alert message="Error" type="error" showIcon closable onClose={onClose} />
-    <Alert message="Success Tips" type="success" showIcon mini closable onClose={onClose} />
     <Alert message="Informational Notes" type="info" showIcon mini closable onClose={onClose} />
+    <Alert message="Success Tips" type="success" showIcon mini closable onClose={onClose} />
     <Alert message="Warning" type="warning" showIcon mini closable onClose={onClose} />
     <Alert message="Error" type="error" showIcon mini closable onClose={onClose} />
     <Alert
-      message="Success Tips"
-      description="Detailed description and advice about successful copywriting."
-      type="success"
+      message="Informational Notes"
+      description="Additional description and information about copywriting."
+      type="info"
       showIcon
       closable
       onClose={onClose}
     />
     <Alert
-      message="Informational Notes"
-      description="Additional description and information about copywriting."
-      type="info"
+      message="Success Tips"
+      description="Detailed description and advice about successful copywriting."
+      type="success"
       showIcon
       closable
       onClose={onClose}

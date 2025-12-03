@@ -6,19 +6,19 @@ const App: React.FC = () => (
     <Alert
       message={
         <div>
-          Success Tips. <a>Link</a>
+          Informational Notes. <a>Link</a>
         </div>
       }
-      type="success"
+      type="info"
       showIcon
     />
     <Alert
       message={
         <div>
-          Informational Notes. <a>Link</a>
+          Success Tips. <a>Link</a>
         </div>
       }
-      type="info"
+      type="success"
       showIcon
     />
     <Alert
@@ -42,20 +42,20 @@ const App: React.FC = () => (
     <Alert
       message={
         <div>
-          Success Tips. <a>Link</a>
+          Informational Notes. <a>Link</a>
         </div>
       }
-      type="success"
+      type="info"
       showIcon
       mini
     />
     <Alert
       message={
         <div>
-          Informational Notes. <a>Link</a>
+          Success Tips. <a>Link</a>
         </div>
       }
-      type="info"
+      type="success"
       showIcon
       mini
     />
@@ -78,16 +78,6 @@ const App: React.FC = () => (
       type="error"
       showIcon
       mini
-    />
-    <Alert
-      message="Success Tips."
-      description={
-        <div>
-          Detailed description and advice about successful copywriting. <a>Link</a>
-        </div>
-      }
-      type="success"
-      showIcon
     />
     <Alert
       message="Informational Notes."
@@ -97,6 +87,16 @@ const App: React.FC = () => (
         </div>
       }
       type="info"
+      showIcon
+    />
+    <Alert
+      message="Success Tips."
+      description={
+        <div>
+          Detailed description and advice about successful copywriting. <a>Link</a>
+        </div>
+      }
+      type="success"
       showIcon
     />
     <Alert
