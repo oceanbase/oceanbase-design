@@ -5,6 +5,8 @@ import type { InputLocale, InputRef } from './Input';
 import ConfigProvider from '../config-provider';
 import type { ConfigConsumerProps } from '../config-provider';
 import defaultLocale from '../locale/en-US';
+import { showCountFormatter } from './Input';
+import useStyle from './style';
 
 export * from 'antd/es/input/TextArea';
 
@@ -13,8 +15,12 @@ export interface TextAreaProps extends AntTextAreaProps {
 }
 
 const TextArea = forwardRef<InputRef, TextAreaProps>(
-  ({ locale: customLocale, ...restProps }, ref) => {
-    const { locale: contextLocale } = useContext<ConfigConsumerProps>(ConfigProvider.ConfigContext);
+  ({ prefixCls: customizePrefixCls, locale: customLocale, showCount, ...restProps }, ref) => {
+    const { getPrefixCls, locale: contextLocale } = useContext<ConfigConsumerProps>(
+      ConfigProvider.ConfigContext
+    );
+    const prefixCls = getPrefixCls('input', customizePrefixCls);
+    const { wrapSSR } = useStyle(prefixCls);
     const inputLocale: InputLocale = {
       placeholder:
         contextLocale?.global?.inputPlaceholder || defaultLocale.global?.inputPlaceholder,
@@ -23,7 +29,15 @@ const TextArea = forwardRef<InputRef, TextAreaProps>(
       ...customLocale,
     };
 
-    return <AntInput.TextArea ref={ref} placeholder={inputLocale.placeholder} {...restProps} />;
+    return wrapSSR(
+      <AntInput.TextArea
+        ref={ref}
+        prefixCls={customizePrefixCls}
+        placeholder={inputLocale.placeholder}
+        showCount={showCount === true ? { formatter: showCountFormatter } : showCount}
+        {...restProps}
+      />
+    );
   }
 );
 
