@@ -8,6 +8,16 @@ group: 基础组件
 
 ---
 
+## 0.4.19
+
+`2025-12-04`
+
+- 🌐 优化日语 (ja-JP) 的文案翻译。[#1299](https://github.com/oceanbase/oceanbase-design/pull/1299)
+- Segmented
+  - 🐞 修复 Segmented 带 `icon` 时的样式问题。[#1300](https://github.com/oceanbase/oceanbase-design/pull/1300)
+  - ⭐️ Segmented 默认开启 `ellipsis` 省略和 tooltip。[#1300](https://github.com/oceanbase/oceanbase-design/pull/1300)
+- 💄 优化 Typography 切换编辑态时的位置抖动。[#1301](https://github.com/oceanbase/oceanbase-design/pull/1301)
+
 ## 0.4.18
 
 `2025-11-24`
