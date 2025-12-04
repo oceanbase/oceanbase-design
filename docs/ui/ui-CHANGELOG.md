@@ -8,6 +8,15 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.7
+
+`2025-12-04`
+
+- 📝 去掉在 Vite 中使用的文档，无需额外配置，即可在 Vite 中使用。[#1292](https://github.com/oceanbase/oceanbase-design/pull/1292)
+- 🗑️ 移除 TaskGraph 和 GraphToolbar 组件，去掉 G6 依赖和历史包袱。[#1292](https://github.com/oceanbase/oceanbase-design/pull/1292)
+- 🆕 PageContainer 新增 `header.document` 属性，用于设置文档链接。[#1305](https://github.com/oceanbase/oceanbase-design/pull/1305)
+- 🐞 修复 ProTable `cardProps.headerBordered` 属性不生效的问题。[#1306](https://github.com/oceanbase/oceanbase-design/pull/1306)
+
 ## 1.0.0-alpha.5
 
 `2025-11-28`

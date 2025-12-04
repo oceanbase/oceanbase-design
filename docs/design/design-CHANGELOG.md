@@ -8,6 +8,23 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.7
+
+`2025-12-04`
+
+- 📝 更新在 Next.js 中使用的文档。[#1291](https://github.com/oceanbase/oceanbase-design/pull/1291)
+- 🌈 全局修改英文字体的字重，包括:
+  - 更新 `Inter` 字体文件、样式定义和字重。[#1304](https://github.com/oceanbase/oceanbase-design/pull/1304)
+  - 修改辅助描述的字重 token `fontWeightWeak` `300 => 400`。[#1304](https://github.com/oceanbase/oceanbase-design/pull/1304)
+  - 在 Table、Descriptions、PageContainer 和 ProTable 等组件层面适配字重。[#1304](https://github.com/oceanbase/oceanbase-design/pull/1304)
+- 🌈 包含 `href` 或 `data-aspm-param^="obcloud_openLink=` 的 `<a>` 链接，hover 时底部增加下划线。[#1297](https://github.com/oceanbase/oceanbase-design/pull/1297)
+- 🐞 修复 Alert 未设置 `type` 时图标展示不正确的问题。[#1296](https://github.com/oceanbase/oceanbase-design/pull/1296)
+- 💄 优化 Form.Item 校验信息的字体大小和间距。[#1293](https://github.com/oceanbase/oceanbase-design/pull/1293)
+- Input
+  - 💄 优化 Input suffix 后缀的字体大小。[#1294](https://github.com/oceanbase/oceanbase-design/pull/1294)
+  - 💄 调整 Input `showCount` 的默认格式 `count / maxLength` => `count/maxLength`。[#1294](https://github.com/oceanbase/oceanbase-design/pull/1294)
+- 💄 优化 InputNumber 前置和后置标签的字体大小和颜色。[#1295](https://github.com/oceanbase/oceanbase-design/pull/1295)
+
 ## 1.0.0-alpha.6
 
 `2025-12-01`
