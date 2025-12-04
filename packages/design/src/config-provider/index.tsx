@@ -293,7 +293,7 @@ const ConfigProvider: ConfigProviderType = ({
       >
         <StyleProvider {...mergedStyleProviderProps}>
           {/* Inject global styles via cssinjs */}
-          <GlobalStyle />
+          <GlobalStyle prefixCls={restProps.prefixCls} />
           {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
           {/* ref: https://ant.design/components/app */}
           <App component={false} {...appProps}>

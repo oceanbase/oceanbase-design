@@ -6,19 +6,7 @@ export type AppToken = FullToken<'App'>;
 
 export const genAppStyle: GenerateStyle<AppToken> = (token: AppToken): CSSObject => {
   const { antCls, componentCls } = token;
-  const menuComponentCls = `${antCls}-menu`;
-  return {
-    [`${menuComponentCls}`]: {
-      [`${menuComponentCls}-item`]: {
-        [`${antCls}-menu-title-content`]: {
-          // handle link style in menu
-          'a:hover': {
-            textDecoration: 'none',
-          },
-        },
-      },
-    },
-  };
+  return {};
 };
 
 export default (prefixCls: string) => {
