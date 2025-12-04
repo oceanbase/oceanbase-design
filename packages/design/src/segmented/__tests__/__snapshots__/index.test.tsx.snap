@@ -152,7 +152,6 @@ exports[`Segmented > render options with ellipsis 1`] = `
       >
         <div
           class="ant-flex ant-flex-align-center ant-flex-justify-center"
-          style="gap: 4px;"
         >
           <span
             aria-describedby="test-id"

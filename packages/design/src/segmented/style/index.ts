@@ -28,6 +28,7 @@ export const genSegmentedStyle: GenerateStyle<SegmentedToken> = (
       [`>${componentCls}-item`]: {
         [`>${componentCls}-item-label`]: {
           [`${antCls}-badge >${antCls}-badge-count`]: {
+            marginInlineStart: 4,
             backgroundColor: colorFillSecondary,
             color: 'inherit',
             boxShadow: 'none',
