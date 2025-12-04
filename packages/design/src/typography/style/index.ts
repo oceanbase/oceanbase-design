@@ -48,17 +48,20 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
     [`${componentCls}${componentCls}-edit-content`]: {
       [`${componentCls}-div&`]: {
         insetInlineStart: -token.paddingSM,
+        insetBlockStart: 0,
         marginTop: -marginOffset,
         marginBottom: `calc(1em - ${marginOffset}px)`,
       },
       [`${componentCls}-span&`]: {
         insetInlineStart: -token.paddingSM,
+        insetBlockStart: 0,
         marginTop: -marginOffset,
         marginBottom: -marginOffset,
       },
       [`${componentCls}-h1&, ${componentCls}-h2&, ${componentCls}-h3&, ${componentCls}-h4&, ${componentCls}-h5&`]:
         {
           insetInlineStart: -token.paddingSM,
+          insetBlockStart: 0,
           marginTop: `${-marginOffset}px !important`,
           marginBottom: `${-marginOffset}px !important`,
         },
