@@ -1,6 +1,6 @@
 export default {
-  usernamePlaceholder: '请输入账号',
-  usernameMessage: '请输入账号',
+  usernamePlaceholder: '请输入用户名',
+  usernameMessage: '请输入用户名',
   passwordPlaceholder: '请输入密码',
   passwordMessage: '请输入密码',
   loginText: '登录',

@@ -1,12 +1,12 @@
 export default {
   help: 'ヘルプ',
   welcome: 'ウェルカムページ',
-  versionNotice: 'バージョン通知',
-  viewDocs: 'ユーザーマニュアルを表示',
-  downloadDocs: 'ユーザーマニュアルをダウンロード',
-  about: 'について',
+  versionNotice: '更新情報',
+  viewDocs: 'マニュアルを見る',
+  downloadDocs: 'マニュアルをダウンロード',
+  about: '製品について',
   version: 'バージョン',
   releaseTime: 'リリース日',
-  company: '北京奥星贝斯科技有限公司',
-  right: '著作権所有',
+  company: 'Beijing OceanBase Technology Co., Ltd.',
+  right: 'All Rights Reserved',
 };

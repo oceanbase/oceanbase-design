@@ -1,3 +1,3 @@
 export default {
-  reload: '更新',
+  reload: '再読み込み',
 };
