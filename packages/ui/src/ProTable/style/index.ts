@@ -25,6 +25,9 @@ export const genProTableStyle = (token: OBToken): CSSObject => {
           paddingInline: 0,
           [`${componentCls}-list-toolbar-container`]: {
             paddingInline: token.paddingLG,
+            [`${componentCls}-list-toolbar-title`]: {
+              fontWeight: token.fontWeightStrong,
+            },
           },
         },
         ...Card.genTableStyle(token.paddingLG, {

@@ -14,10 +14,7 @@ export interface UseMenuOptions {
 
 const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => {
   const fullData = useFullSidebarData();
-  const { pathname, search: allSearch } = useLocation();
-  const { theme } = queryString.parse(allSearch);
-  // sync theme query only when click menu
-  const search = allSearch ? `?${queryString.stringify({ theme })}` : '';
+  const { pathname, search } = useLocation();
   const sidebarData = useSidebarData();
   const { before, after } = options;
   const { token } = useSiteToken();

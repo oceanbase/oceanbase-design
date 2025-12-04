@@ -69,7 +69,11 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         },
         // 为了避免行展开/收起时出现 border 动画，覆盖 antd 默认配置，仅设置背景色动画
         [`tr > td`]: {
+          fontWeight: token.fontWeight,
           transition: `background ${token.motionDurationMid}`,
+          a: {
+            fontWeight: token.fontWeightStrong,
+          },
         },
         // empty style
         [`${componentCls}-placeholder td`]: {},

@@ -1,8 +1,8 @@
-import type { ProAliasToken } from '@ant-design/pro-components';
-import { useStyle } from '@ant-design/pro-components';
-import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import React from 'react';
 import { ConfigProvider } from '@oceanbase/design';
+import type { GenerateStyle } from '@oceanbase/design/es/theme';
+import type { ProAliasToken } from '@ant-design/pro-components';
+import { useStyle } from '@ant-design/pro-components';
 
 export interface OBToken extends ProAliasToken {
   /** Wrap component class with `.` prefix */
