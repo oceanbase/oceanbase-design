@@ -12,13 +12,13 @@ export default {
     total: '合計 ${total} 件',
   },
   Drawer: {
-    okText: '確定',
+    okText: 'OK',
     cancelText: 'キャンセル',
   },
   Table: {
     ...jaJP.Table,
     batchOperationBar: {
-      selected: '選択済み',
+      selected: '選択中',
       object: '件',
       cancel: 'キャンセル',
       collapse: '折りたたむ',

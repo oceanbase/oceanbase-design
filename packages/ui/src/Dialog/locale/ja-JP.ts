@@ -1,4 +1,4 @@
 export default {
-  helpDocument: 'ヘルプドキュメント',
-  openHelpCenter: 'ドキュメントセンターを開く',
+  helpDocument: 'ヘルプ',
+  openHelpCenter: 'ドキュメントセンターで開く',
 };

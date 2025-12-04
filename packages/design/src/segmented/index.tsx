@@ -17,6 +17,7 @@ export * from 'antd/es/segmented';
 type BadgeType = BadgeProps | BadgeProps['count'];
 
 export type SegmentedLabeledOption = AntSegmentedLabeledOption & {
+  icon?: React.ReactNode;
   ellipsis?: EllipsisConfig;
   badge?: BadgeType;
 };
@@ -44,16 +45,19 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     const newOptions = options?.map(item => {
       if (typeof item === 'object') {
-        const { label, badge, ...restItem } = item;
+        const {
+          label,
+          icon,
+          badge,
+          ellipsis = { tooltip: true },
+          ...restItem
+        } = item as SegmentedLabeledOption;
         return {
           ...restItem,
           label: (
-            <Flex gap={4} align="center" justify="center">
-              {(item as SegmentedLabeledOption)?.ellipsis ? (
-                <Typography.Text ellipsis={item.ellipsis}>{label}</Typography.Text>
-              ) : (
-                label
-              )}
+            <Flex align="center" justify="center">
+              {icon && <span className={`${prefixCls}-item-icon`}>{icon}</span>}
+              {ellipsis ? <Typography.Text ellipsis={ellipsis}>{label}</Typography.Text> : label}
               {badge && renderBadge(badge)}
             </Flex>
           ),

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Segmented } from '@oceanbase/design';
+import { BarsOutlined } from '@oceanbase/icons';
 
 export default () => {
   return (
@@ -12,14 +13,13 @@ export default () => {
           value: 'longtext1',
           label:
             'longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext',
-          ellipsis: {
-            tooltip: true,
-          },
+          icon: <BarsOutlined />,
         },
         {
           value: 'longtext2',
           label:
             'longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext-longtext',
+          // custom ellipsis
           ellipsis: {
             tooltip: {
               title: 'custom tooltip title',

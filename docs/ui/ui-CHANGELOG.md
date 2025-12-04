@@ -58,6 +58,12 @@ group: 业务组件
 
 - 💄 去掉 FooterToolbar 和 PageContainer 的大尺寸样式。[#1175](https://github.com/oceanbase/oceanbase-design/pull/1175)
 
+## 0.4.22
+
+`2025-12-04`
+
+- 🌐 优化日语 (ja-JP) 的文案翻译。[#1299](https://github.com/oceanbase/oceanbase-design/pull/1299)
+
 ## 0.4.21
 
 `2025-11-24`
