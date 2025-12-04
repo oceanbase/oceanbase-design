@@ -10,6 +10,14 @@ export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) =
       // remove box-shadow for button
       boxShadow: 'none !important',
     },
+    // link with href or data-aspm-param show underline on hover
+    [`${componentCls}${componentCls}-link:not(${componentCls}-disabled)`]: {
+      '&[href],&[data-aspm-param^="obcloud_openLink="]': {
+        '&:hover': {
+          textDecoration: 'underline',
+        },
+      },
+    },
   };
 };
 

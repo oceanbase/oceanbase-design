@@ -5,9 +5,7 @@ import type { OBToken } from '../../_util/genComponentStyleHook';
 
 export type NavMenuToken = OBToken;
 
-export const genNavMenuStyle: GenerateStyle<NavMenuToken> = (
-  token: NavMenuToken
-): CSSObject => {
+export const genNavMenuStyle: GenerateStyle<NavMenuToken> = (token: NavMenuToken): CSSObject => {
   const { componentCls, antCls } = token;
 
   return {
@@ -57,4 +55,3 @@ export default (prefixCls: string) => {
   });
   return useStyle(prefixCls);
 };
-
