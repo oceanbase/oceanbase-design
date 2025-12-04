@@ -5,9 +5,19 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 export type AppToken = FullToken<'App'>;
 
 export const genAppStyle: GenerateStyle<AppToken> = (token: AppToken): CSSObject => {
-  const { componentCls } = token;
+  const { antCls, componentCls } = token;
+  const menuComponentCls = `${antCls}-menu`;
   return {
-    [`${componentCls}`]: {},
+    [`${menuComponentCls}`]: {
+      [`${menuComponentCls}-item`]: {
+        [`${antCls}-menu-title-content`]: {
+          // handle link style in menu
+          'a:hover': {
+            textDecoration: 'none',
+          },
+        },
+      },
+    },
   };
 };
 

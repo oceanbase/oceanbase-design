@@ -43,6 +43,15 @@ const genGlobalStyle = (token: GlobalToken): CSSInterpolation => {
       '.rc-virtual-list-scrollbar-thumb': {
         background: `${token.colorFillSecondary} !important`,
       },
+      // link with href or data-aspm-param show underline on hover
+      // except disabled and antd element
+      'a:not([disabled]):not([class^="ant-"])': {
+        '&[href],&[data-aspm-param^="obcloud_openLink="]': {
+          '&:hover': {
+            textDecoration: 'underline',
+          },
+        },
+      },
     },
   ];
 };
