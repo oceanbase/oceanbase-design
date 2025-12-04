@@ -11,14 +11,13 @@ nav:
 
 ## 代码演示
 
-### 基本使用
-
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
+<code src="./demo/icon.tsx" title="带图标"></code>
 <code src="./demo/disabled.tsx" title="不可用"></code>
 <code src="./demo/size.tsx" title="三种大小"></code>
 <code src="./demo/block.tsx" title="block" description="block 属性使其撑满父元素宽度。"></code>
-<code src="./demo/ellipsis.tsx" title="省略" description="需要同时配置分段器的 block 和选项的 ellipsis 属性。"></code>
+<code src="./demo/ellipsis.tsx" title="省略" description="内容超长会自动省略，并展示 tooltip，仅开启 `block` 时生效。可通过 `ellipsis` 设置省略属性。"></code>
 <code src="./demo/badge.tsx" title="带徽标" description="展示徽标"></code>
 
 ## API
