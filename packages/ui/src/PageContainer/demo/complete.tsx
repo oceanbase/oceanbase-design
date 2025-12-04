@@ -116,6 +116,7 @@ export default () => {
       header={{
         title: '页面标题',
         onBack: () => {},
+        document: 'https://www.oceanbase.com',
         reload: {
           spin: loading,
           onClick: () => {
