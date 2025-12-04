@@ -1,14 +1,36 @@
-import React from 'react';
-import { Button, Card, Descriptions, Dropdown } from '@oceanbase/design';
+import React, { useState } from 'react';
+import { Button, Card, Descriptions, Dropdown, message } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
 import { EllipsisOutlined } from '@oceanbase/icons';
 
 export default () => {
+  const [loading, setLoading] = useState(false);
+
+  const mockRequest = () => {
+    const promise = new Promise<void>(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    });
+    setLoading(true);
+    promise.then(() => {
+      setLoading(false);
+      message.success('刷新成功');
+    });
+    return promise;
+  };
+
   return (
     <PageContainer
       ghost={false}
       header={{
         title: '页面标题',
+        reload: {
+          spin: loading,
+          onClick: () => {
+            mockRequest();
+          },
+        },
         extra: [
           <Button key="1">次要按钮</Button>,
           <Button key="2" type="primary">

@@ -48,6 +48,22 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
           fontSize: token.fontSizeLG,
           marginTop: token.marginXXS,
         },
+        [`${antCls}-page-header-heading-document-divider`]: {
+          marginInline: 0,
+          height: token.size,
+        },
+        [`${antCls}-page-header-heading-document-icon`]: {
+          display: 'inline-block',
+          color: token.colorIcon,
+          marginTop: (token.controlHeight - token.fontSizeLG) / 2,
+          cursor: 'pointer',
+          '&:hover': {
+            color: token.colorLinkHover,
+          },
+          '&:active': {
+            color: token.colorLinkActive,
+          },
+        },
         [`${antCls}-page-header-heading-left`]: {
           marginBlock: 0,
         },

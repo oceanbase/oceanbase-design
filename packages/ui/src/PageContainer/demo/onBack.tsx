@@ -9,6 +9,7 @@ export default () => {
       ghost={false}
       header={{
         title: '页面标题',
+        onBack: () => {},
         extra: [
           <Button key="1">次要按钮</Button>,
           <Button key="2" type="primary">
