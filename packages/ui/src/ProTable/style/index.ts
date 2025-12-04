@@ -20,6 +20,14 @@ export const genProTableStyle = (token: OBToken): CSSObject => {
         boxShadow: 'none !important',
       },
 
+      [`${proCardComponentCls}:not(${proCardComponentCls}-no-divider)`]: {
+        [`${proCardComponentCls}-body`]: {
+          [`${componentCls}-list-toolbar-container`]: {
+            borderBottom: `${token.lineWidth}px solid ${token.colorBorderSecondary}`,
+          },
+        },
+      },
+
       [`${proCardComponentCls}${proCardComponentCls}-no-padding`]: {
         [`${proCardComponentCls}-body`]: {
           paddingInline: 0,
