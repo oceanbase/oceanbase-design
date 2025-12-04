@@ -8,7 +8,11 @@ import consolasFont from '../fonts/Consolas.woff2';
 import helveticaNeueFont from '../fonts/HelveticaNeue.woff2';
 import 'antd/dist/reset.css';
 
-const genGlobalStyle = (token: GlobalToken): CSSInterpolation => {
+const genGlobalStyle = (token: GlobalToken, prefixCls?: string): CSSInterpolation => {
+  const antCls = `.${prefixCls}`;
+  const buttonComponentCls = `${antCls}-btn`;
+  const typographyComponentCls = `${antCls}-typography`;
+  const menuComponentCls = `${antCls}-menu`;
   return [
     // Priority: local font > self-hosting font > remote font
     {
@@ -43,12 +47,36 @@ const genGlobalStyle = (token: GlobalToken): CSSInterpolation => {
       '.rc-virtual-list-scrollbar-thumb': {
         background: `${token.colorFillSecondary} !important`,
       },
-      // link with href or data-aspm-param show underline on hover
+      // link with href or data-aspm-param^="obcloud_openLink= show underline on hover
       // except disabled and antd element
-      'a:not([disabled]):not([class^="ant-"])': {
-        '&[href],&[data-aspm-param^="obcloud_openLink="]': {
+      'a[href], a[data-aspm-param^="obcloud_openLink="]': {
+        [`&:not([disabled]):not([class^="${prefixCls}-"]):hover`]: {
+          textDecoration: 'underline',
+        },
+      },
+      // handle link style in button
+      [`${buttonComponentCls}${buttonComponentCls}-link:not(${buttonComponentCls}-disabled)`]: {
+        '&[href], &[data-aspm-param^="obcloud_openLink="]': {
           '&:hover': {
             textDecoration: 'underline',
+          },
+        },
+      },
+      // handle link style in typography
+      [`${typographyComponentCls}:not(${typographyComponentCls}-disabled)`]: {
+        '&[href], &[data-aspm-param^="obcloud_openLink="]': {
+          '&:hover': {
+            textDecoration: 'underline',
+          },
+        },
+      },
+      // handle link style in menu
+      [`${menuComponentCls}`]: {
+        [`${menuComponentCls}-item`]: {
+          [`${antCls}-menu-title-content`]: {
+            'a:hover': {
+              textDecoration: 'none',
+            },
           },
         },
       },
@@ -56,7 +84,11 @@ const genGlobalStyle = (token: GlobalToken): CSSInterpolation => {
   ];
 };
 
-const GlobalStyle: React.FC = () => {
+export interface GlobalStyleProps {
+  prefixCls?: string;
+}
+
+const GlobalStyle: React.FC<GlobalStyleProps> = ({ prefixCls = 'ant' }) => {
   const { theme, token } = themeConfig.useToken();
 
   const wrapSSR = useStyleRegister(
@@ -67,7 +99,7 @@ const GlobalStyle: React.FC = () => {
       hashId: '', // Empty hashId for global styles
       order: -1000, // Inject before other styles
     },
-    () => genGlobalStyle(token)
+    () => genGlobalStyle(token, prefixCls)
   );
 
   return wrapSSR(<></>);
