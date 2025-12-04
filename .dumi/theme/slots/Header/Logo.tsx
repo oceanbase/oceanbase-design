@@ -57,7 +57,11 @@ const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
   const { logo, title } = useStyle();
   return (
     <h1>
-      <Link to={utils.getLocalizedPathname('/', isZhCN, search)} css={logo}>
+      <Link
+        to={utils.getLocalizedPathname('/', isZhCN, search)}
+        css={logo}
+        style={{ textDecoration: 'none' }}
+      >
         <img
           src="https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original"
           alt="logo"

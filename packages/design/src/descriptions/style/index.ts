@@ -58,6 +58,9 @@ export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
   return {
     [`${componentCls}`]: {
       ...genVerticalStyle('default', token),
+      [`${componentCls}-item-label`]: {
+        fontWeight: token.fontWeightWeak,
+      },
       [`${componentCls}-item-container`]: {
         [`${componentCls}-item-content`]: {
           paddingRight: 12,

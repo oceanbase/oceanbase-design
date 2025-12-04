@@ -13,7 +13,6 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
     componentCls,
     colorBgLayout,
     fontSizeHeading2,
-    controlHeightLG,
     padding,
     paddingLG,
   } = token;
@@ -41,6 +40,7 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         },
         [`${antCls}-page-header-heading-title`]: {
           fontSize: fontSizeHeading2,
+          fontWeight: token.fontWeightStrong,
           marginInlineEnd: token.marginXS,
         },
         [`${antCls}-page-header-heading-reload`]: {

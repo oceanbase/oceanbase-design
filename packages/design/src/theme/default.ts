@@ -24,7 +24,7 @@ const borderRadiusLG = 8;
 
 export const fontFamilyEn = `Inter, 'Noto sans', sans-serif, Roboto, 'Open Sans', 'Segoe UI', 'Helvetica Neue', 'Helvetica, Arial', 'Apple Color Emoji'`;
 
-export const fontWeightWeakEn = 400;
+export const fontWeightWeakEn = 300;
 export const fontWeightEn = 500;
 export const fontWeightStrongEn = 600;
 
