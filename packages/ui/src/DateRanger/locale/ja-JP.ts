@@ -8,9 +8,9 @@ export default {
   endDate: '終了日',
   endTime: '終了時刻',
   cancel: 'キャンセル',
-  confirm: '確定',
+  confirm: 'OK',
   current: '現在',
-  jumpBack: '前の時間間隔にジャンプ',
-  jumpForward: '次の時間間隔にジャンプ',
+  jumpBack: '前の期間へ',
+  jumpForward: '次の期間へ',
   ...ja_JP,
 };
