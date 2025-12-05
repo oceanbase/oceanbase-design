@@ -23,7 +23,12 @@ import { merge } from 'lodash';
 import App from '../app';
 import StaticFunction from '../static-function';
 import themeConfig from '../theme';
-import defaultTheme, { fontFamilyEn, fontWeightEn, fontWeightStrongEn } from '../theme/default';
+import defaultTheme, {
+  fontFamilyEn,
+  fontWeightWeakEn,
+  fontWeightEn,
+  fontWeightStrongEn,
+} from '../theme/default';
 import darkTheme from '../theme/dark';
 import compactTheme from '../theme/compact';
 import type { GlobalToken } from '../theme/interface';
@@ -188,7 +193,7 @@ const ConfigProvider: ConfigProviderType = ({
 
   const { token } = themeConfig.useToken();
   const fontFamily = mergedTheme.token?.fontFamily || token.fontFamily;
-  // @ts-ignore
+  const fontWeightWeak = mergedTheme.token?.fontWeightWeak || token.fontWeightWeak;
   const fontWeight = mergedTheme.token?.fontWeight || token.fontWeight;
   const fontWeightStrong = mergedTheme.token?.fontWeightStrong || token.fontWeightStrong;
 
@@ -256,6 +261,13 @@ const ConfigProvider: ConfigProviderType = ({
             'fontFamily',
             fontFamily,
             fontFamilyEn
+          ),
+          ...getLocaleTokenValue(
+            mergedTheme.token || {},
+            mergedLocale,
+            'fontWeightWeak',
+            fontWeightWeak,
+            fontWeightWeakEn
           ),
           ...getLocaleTokenValue(
             mergedTheme.token || {},
