@@ -23,6 +23,7 @@ nav:
 <code src="./demo/form-item-action.tsx" title="操作项" description="可在 `Form.Item` 上设置 `action` 操作项，仅垂直布局生效。"></code>
 <code src="./demo/layout.tsx" title="表单布局"></code>
 <code src="./demo/multiple-layout.tsx" title="表单混合布局"></code>
+<code src="./demo/control-hooks.tsx" title="表单方法调用"></code>
 <code src="./demo/hideRequiredMark.tsx" title="hideRequiredMark" debug></code>
 <code src="./demo/pro-form.tsx" title="ProForm" debug></code>
 

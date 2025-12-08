@@ -80,16 +80,21 @@ const FormItem: CompoundedComponent = ({
     description && isVertical ? (
       <div className={`${prefixCls}-item-description`}>{description}</div>
     ) : null;
+  const actionContent: ReactNode =
+    action && (layout === 'vertical' || vertical) ? (
+      <span className={`${prefixCls}-item-action`}>{action}</span>
+    ) : null;
 
   return wrapSSR(
     <AntFormItem
       layout={layout}
       label={
-        action && (layout === 'vertical' || vertical) ? (
-          <>
+        actionContent || descriptionContent ? (
+          <div>
             {label}
-            {action && <span className={`${prefixCls}-item-action`}>{action}</span>}
-          </>
+            {actionContent}
+            {descriptionContent}
+          </div>
         ) : (
           label
         )
@@ -102,10 +107,7 @@ const FormItem: CompoundedComponent = ({
       className={formItemCls}
       {...restProps}
     >
-      <>
-        {descriptionContent}
-        {children}
-      </>
+      {children}
     </AntFormItem>
   );
 };
