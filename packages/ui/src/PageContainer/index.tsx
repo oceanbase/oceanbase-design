@@ -62,8 +62,14 @@ const DocumentIcon = ({ className }: { className?: string }) => {
 const PageContainer = ({
   prefixCls: customizePrefixCls,
   className,
-  /* compatible with title prop */
-  title,
+  /* compatible with title, title, subTitle, onBack, backIcon, extra prop */
+  title: titleProp,
+  subTitle: subTitleProp,
+  onBack: onBackProp,
+  backIcon: backIconProp,
+  breadcrumb: breadcrumbProp,
+  extra: extraProp,
+  // this is divider for above //
   header,
   content,
   extraContent,
@@ -83,10 +89,15 @@ const PageContainer = ({
 
   const {
     reload,
-    subTitle,
+    title = titleProp,
+    subTitle = subTitleProp,
+    onBack = onBackProp,
+    backIcon = backIconProp || (
+      <Button style={{ fontSize: token.fontSizeLG }} icon={<ArrowLeftOutlined />} />
+    ),
     document,
-    breadcrumb,
-    backIcon = <Button style={{ fontSize: token.fontSizeLG }} icon={<ArrowLeftOutlined />} />,
+    breadcrumb = breadcrumbProp,
+    extra = extraProp,
   } = header || {};
   const reloadProps =
     isObject(reload) && !React.isValidElement(reload)
@@ -137,20 +148,27 @@ const PageContainer = ({
       )}
     </Space>
   );
-  const newHeader: PageHeaderProps = header && {
+  const newHeader: PageHeaderProps = (header ||
+    title ||
+    newSubTitle ||
+    onBack ||
+    breadcrumb ||
+    extra) && {
     ...header,
+    title,
     subTitle: newSubTitle,
+    onBack,
+    backIcon,
     breadcrumb: breadcrumb && {
       itemRender: (route, params, routes, paths) => (
         <ItemRender route={route} params={params} routes={routes} paths={paths} />
       ),
       ...breadcrumb,
     },
-    backIcon,
+    extra,
   };
   const noHasHeader =
-    !title &&
-    ['title', 'subTitle', 'extra', 'tags', 'avatar', 'backIcon', 'breadcrumb'].every(
+    ['title', 'subTitle', 'onBack', 'breadcrumb', 'extra', 'tags', 'avatar'].every(
       item => !newHeader?.[item]
     ) &&
     !content &&
