@@ -171,14 +171,16 @@ exports[`Form.Item > action should work for vertical layout 1`] = `
           for="name"
           title=""
         >
-          Name
-          <span
-            class="ant-form-item-action"
-          >
-            <a>
-              Action
-            </a>
-          </span>
+          <div>
+            Name
+            <span
+              class="ant-form-item-action"
+            >
+              <a>
+                Action
+              </a>
+            </span>
+          </div>
           <span
             class="ant-form-item-optional"
             title=""
