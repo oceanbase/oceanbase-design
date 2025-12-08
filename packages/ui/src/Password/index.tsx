@@ -107,7 +107,7 @@ const Password: React.FC<PasswordProps> = ({
           // ref: https://github.com/ant-design/ant-design/issues/5899
           // @ts-ignore
           popupAlign={{
-            offset: [48, 0],
+            offset: [16, 0],
           }}
           content={
             <Content
