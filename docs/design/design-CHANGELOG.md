@@ -8,6 +8,15 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.8
+
+`2025-12-08`
+
+- 主题:
+  - 🐞 修复英文环境下 token `fontWeightWeak` 值不正确的问题。[#1308](https://github.com/oceanbase/oceanbase-design/pull/1308)
+  - 🐞 修复 `Inter-Medium` 和 `Inter-SemiBold` 远程字体链接不正确的问题。[#1309](https://github.com/oceanbase/oceanbase-design/pull/1309)
+- 🐞 修复 Form.Item `renderProps` 不生效的问题。[#1310](https://github.com/oceanbase/oceanbase-design/pull/1310)
+
 ## 1.0.0-alpha.7
 
 `2025-12-04`
