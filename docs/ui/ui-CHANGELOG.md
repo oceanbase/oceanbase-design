@@ -67,6 +67,12 @@ group: 业务组件
 
 - 💄 去掉 FooterToolbar 和 PageContainer 的大尺寸样式。[#1175](https://github.com/oceanbase/oceanbase-design/pull/1175)
 
+## 0.4.23
+
+`2025-12-08`
+
+- 🐞 修复 Password 校验规则弹出层偏移过大的问题。[#1312](https://github.com/oceanbase/oceanbase-design/pull/1312)
+
 ## 0.4.22
 
 `2025-12-04`
