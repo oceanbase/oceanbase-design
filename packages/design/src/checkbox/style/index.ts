@@ -6,8 +6,13 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 export type CheckboxToken = FullToken<'Checkbox'>;
 
 export const genCheckboxStyle: GenerateStyle<CheckboxToken> = (token: CheckboxToken): CSSObject => {
-  const { componentCls, fontSize, lineHeight, controlInteractiveSize, calc } = token;
-  const translateY = calc(fontSize).mul(lineHeight).sub(controlInteractiveSize).div(2).equal();
+  const { componentCls, fontSize, lineHeight, lineWidth, controlInteractiveSize, calc } = token;
+  const translateY = calc(fontSize)
+    .mul(lineHeight)
+    .sub(controlInteractiveSize)
+    .sub(lineWidth)
+    .div(2)
+    .equal();
   return {
     [`${componentCls}-wrapper`]: {
       [`${componentCls}`]: {

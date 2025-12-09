@@ -9,6 +9,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
   const {
     antCls,
     componentCls,
+    iconCls,
     colorText,
     colorBgBase,
     colorTextSecondary,
@@ -55,6 +56,10 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       [`${componentCls}-tbody`]: {
         [`${componentCls}-tbody-virtual-scrollbar ${componentCls}-tbody-virtual-scrollbar-thumb`]: {
           background: `${token.colorFillSecondary} !important`,
+        },
+        // for custom expand icon
+        [`${componentCls}-row-indent+${iconCls}`]: {
+          marginInlineEnd: token.marginXS,
         },
         // expandRowByClick 行样式
         [`tr${componentCls}-expand-row-by-click`]: {
