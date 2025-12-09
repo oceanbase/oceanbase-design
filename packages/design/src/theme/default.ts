@@ -184,6 +184,9 @@ const defaultTheme: ThemeConfig = {
       itemActiveColor: colorText,
       itemSelectedColor: colorText,
       itemHoverColor: colorText,
+      horizontalItemPaddingSM: '12px 0',
+      horizontalItemPadding: '16px 0',
+      horizontalItemPaddingLG: '16px 0',
     },
     Tag: {
       colorBorder: tagColorBorder,
