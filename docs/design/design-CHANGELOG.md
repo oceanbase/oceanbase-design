@@ -61,7 +61,7 @@ group: 基础组件
 
 - 🌐 站点支持中英文语言切换。[#1265](https://github.com/oceanbase/oceanbase-design/pull/1265)
 - 主题
-  - 🌈 更新 Design Token 三级填充色 colorFillTertiary、四级填充色 colorFillQuaternary 的值。[#1273](https://github.com/oceanbase/oceanbase-design/pull/1273)
+  - 🌈 更新 Design Token 三级填充色 `colorFillTertiary`、四级填充色 `colorFillQuaternary` 的值。[#1273](https://github.com/oceanbase/oceanbase-design/pull/1273)
   - 🌈 更新 Design Token 布局背景色 `colorBgLayout` 的值。[#1275](https://github.com/oceanbase/oceanbase-design/pull/1275)
   - 💄 优化字重的样式实现，使用 Design Token `fontWeight` 和 `fontWeightStrong` 替代硬编码值，确保字重随主题变化。[#1265](https://github.com/oceanbase/oceanbase-design/pull/1265)
 - Alert
