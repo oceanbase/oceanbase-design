@@ -240,6 +240,7 @@ const ConfigProvider: ConfigProviderType = ({
                   <CaretRightOutlined
                     onClick={e => onExpand(record, e)}
                     style={{
+                      // marginRight: mergedTheme.token?.marginXS || 8,
                       transition: `transform 0.2s`,
                       transform: expanded ? 'rotate(90deg)' : undefined,
                       color: mergedTheme.token?.colorIcon || mergedTheme.token?.colorTextSecondary,
