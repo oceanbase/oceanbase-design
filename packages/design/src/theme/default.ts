@@ -116,6 +116,7 @@ const defaultTheme: ThemeConfig = {
       lastItemColor: colorTextSecondary,
     },
     Button: {
+      iconGap: 4,
       contentFontSizeSM: 12,
       borderRadiusSM: 4,
       borderRadius: 4,
