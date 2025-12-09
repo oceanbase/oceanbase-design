@@ -9,6 +9,10 @@
       "@@/*": [".dumi/tmp/*"],
       "@oceanbase/design": ["packages/design/src/index.ts"],
       "@oceanbase/design/es/*": ["packages/design/src/*"],
+      "@oceanbase/ui": ["packages/ui/src/index.ts"],
+      "@oceanbase/ui/es/*": ["packages/ui/src/*"],
+      "@oceanbase/charts": ["packages/charts/src/index.ts"],
+      "@oceanbase/charts/es/*": ["packages/charts/src/*"],
       "dumi/theme/*": [".dumi/theme/*"]
     }
   },

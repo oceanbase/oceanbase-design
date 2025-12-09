@@ -7,8 +7,8 @@ import type { FC } from 'react';
 import React, { useContext } from 'react';
 import useLocale from '../hooks/useLocale';
 import SiteContext from './slots/SiteContext';
-import zhCN from '../../packages/design/src/locale/zh-CN';
-import enUS from '../../packages/design/src/locale/en-US';
+import zhCN from '../../packages/ui/src/locale/zh-CN';
+import enUS from '../../packages/ui/src/locale/en-US';
 import useSiteToken from '../hooks/useSiteToken';
 
 interface NewToken {

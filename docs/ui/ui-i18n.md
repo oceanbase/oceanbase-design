@@ -12,11 +12,10 @@ group: 业务组件
 
 ```jsx | pure
 import { ConfigProvider } from '@oceanbase/design';
-import zhCN1 from '@oceanbase/design/es/locale/zh-CN';
-import zhCN2 from '@oceanbase/ui/es/locale/zh-CN';
+import zhCN from '@oceanbase/ui/es/locale/zh-CN'; // also including zh-CN of @oceanbase/design
 
 return (
-  <ConfigProvider locale={{ ...zhCN1, ...zhCN2 }}>
+  <ConfigProvider locale={zhCN}>
     {...}
   </ConfigProvider>
 );
