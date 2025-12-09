@@ -49,4 +49,42 @@ describe('ConfigProvider card', () => {
     expect(container.querySelectorAll('.ant-card-no-divider').length).toBe(2);
     expect(asFragment().firstChild).toMatchSnapshot();
   });
+
+  it('gray', () => {
+    const Child1 = () => {
+      const { card } = useContext(ConfigProvider.ConfigContext);
+      expect(card.gray).toBe(undefined);
+      return <CardTest />;
+    };
+    const Child2 = () => {
+      const { card } = useContext(ConfigProvider.ConfigContext);
+      expect(card.gray).toBe(true);
+      return <CardTest />;
+    };
+    const Child3 = () => {
+      const { card } = useContext(ConfigProvider.ConfigContext);
+      expect(card.gray).toBe(true);
+      return <CardTest />;
+    };
+    const Child4 = () => {
+      const { card } = useContext(ConfigProvider.ConfigContext);
+      expect(card.gray).toBe(true);
+      return <CardTest gray={false} />;
+    };
+
+    const { container, asFragment } = render(
+      <ConfigProvider>
+        <Child1 />
+        <ConfigProvider card={{ gray: true }}>
+          <Child2 />
+          <ConfigProvider>
+            <Child3 />
+            <Child4 />
+          </ConfigProvider>
+        </ConfigProvider>
+      </ConfigProvider>
+    );
+    expect(container.querySelectorAll('.ant-card-gray').length).toBe(2);
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
 });

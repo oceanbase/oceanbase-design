@@ -46,6 +46,16 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
   const tableComponentCls = `${antCls}-table`;
   return {
     [`${componentCls}`]: {
+      [`${componentCls}-head`]: {
+        // remove divider for top and bottom tabs
+        [tabsComponentCls]: {
+          [`&${tabsComponentCls}-top, &${tabsComponentCls}-bottom`]: {
+            [`${tabsComponentCls}-nav::before`]: {
+              border: 'none',
+            },
+          },
+        },
+      },
       [`${componentCls}-body`]: {
         paddingTop: token.padding,
       },
@@ -64,35 +74,44 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
         },
       },
     },
+    [`${componentCls}${componentCls}-has-head${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]:
+      {
+        [`${componentCls}-body`]: {
+          paddingTop: 0,
+        },
+      },
+    [`${componentCls}:not(${componentCls}-has-head)`]: {
+      [`${componentCls}-body`]: {
+        paddingTop: paddingLG,
+      },
+    },
     [`${componentCls}${componentCls}-no-divider`]: {
       [`${componentCls}-head`]: {
-        // should not remove border-bottom to avoid tabs inkbar display correctly
+        // hide bottom border by setting borderBottomColor to transparent
         borderBottomColor: 'transparent',
-        paddingTop: token.paddingLG,
-        paddingBottom: token.padding,
-        // remove divider for top and bottom tabs
-        [tabsComponentCls]: {
-          [`&${tabsComponentCls}-top, &${tabsComponentCls}-bottom`]: {
-            [`${tabsComponentCls}-nav::before`]: {
-              border: 'none',
-            },
-          },
-        },
       },
     },
     [`${componentCls}${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
-      [`${componentCls}-body`]: {
-        padding: `0 ${unit(paddingLG)} ${unit(paddingLG)} ${unit(paddingLG)}`,
+      [`${componentCls}-head`]: {
+        paddingTop: token.paddingLG,
+        paddingBottom: token.padding,
       },
     },
+    [`${componentCls}${componentCls}-small:not(${componentCls}-has-head)`]: {
+      [`${componentCls}-body`]: {
+        paddingTop: paddingSM,
+      },
+    },
+    [`${componentCls}${componentCls}-small${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]:
+      {
+        [`${componentCls}-head`]: {
+          paddingTop: token.paddingSM,
+          paddingBottom: token.paddingXS,
+        },
+      },
     [`${componentCls}-small`]: {
       [`${componentCls}-body`]: {
         paddingTop: token.paddingXS,
-      },
-    },
-    [`${componentCls}-small${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
-      [`${componentCls}-body`]: {
-        padding: `0 ${unit(paddingSM)} ${unit(paddingSM)} ${unit(paddingSM)}`,
       },
     },
     [`${componentCls}-small${componentCls}-contain-tabs >${componentCls}-head`]: {
@@ -129,7 +148,7 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       },
     },
     // reduce margin between card title and table
-    [`&${componentCls}-has-title${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
+    [`&${componentCls}-has-head${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
       [`${componentCls}-body`]: {
         [`& > ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
           {
@@ -166,8 +185,24 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       },
       // hide bottom border of head when collapsed, avoid double border
       [`${componentCls}-head`]: {
-        borderBottom: 'none',
+        borderBottomColor: 'transparent',
       },
+      [`&${componentCls}-no-divider`]: {
+        [`${componentCls}-head`]: {
+          paddingBottom: paddingLG,
+        },
+      },
+      [`&${componentCls}-no-divider${componentCls}-small`]: {
+        [`${componentCls}-head`]: {
+          paddingBottom: paddingSM,
+        },
+      },
+    },
+    // gray background card style
+    [`${componentCls}${componentCls}-gray`]: {
+      boxShadow: 'none',
+      borderRadius: token.borderRadiusMD,
+      backgroundColor: token.colorFillQuaternary,
     },
   };
 };
