@@ -1,18 +1,19 @@
 import type { CSSObject } from '@ant-design/cssinjs';
+import { unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
 export type CheckboxToken = FullToken<'Checkbox'>;
 
 export const genCheckboxStyle: GenerateStyle<CheckboxToken> = (token: CheckboxToken): CSSObject => {
-  const { componentCls, fontSize, fontSizeLG, lineHeight, calc } = token;
-  const translateY = calc(calc(fontSize).mul(lineHeight).equal()).sub(fontSizeLG).div(2).equal();
+  const { componentCls, fontSize, lineHeight, controlInteractiveSize, calc } = token;
+  const translateY = calc(fontSize).mul(lineHeight).sub(controlInteractiveSize).div(2).equal();
   return {
     [`${componentCls}-wrapper`]: {
       [`${componentCls}`]: {
         alignSelf: 'baseline',
         [`${componentCls}-inner`]: {
-          transform: `translate(0px, ${translateY})`,
+          transform: `translate(0px, ${unit(translateY)})`,
         },
       },
     },
