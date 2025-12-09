@@ -11,16 +11,17 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
       class="ant-spin-container"
     >
       <div
-        class="ant-table"
+        class="ant-table ant-table-scroll-horizontal"
       >
         <div
           class="ant-table-container"
         >
           <div
             class="ant-table-content"
+            style="overflow-x: auto; overflow-y: hidden;"
           >
             <table
-              style="table-layout: auto;"
+              style="min-width: 100%; table-layout: auto;"
             >
               <thead
                 class="ant-table-thead"
@@ -49,6 +50,39 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
               <tbody
                 class="ant-table-tbody"
               >
+                <tr
+                  aria-hidden="true"
+                  class="ant-table-measure-row"
+                  tabindex="-1"
+                >
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Name
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Age
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Address
+                    </div>
+                  </th>
+                </tr>
                 <tr
                   class="ant-table-row ant-table-row-level-0"
                   data-row-key="1"
@@ -487,16 +521,17 @@ exports[`Table > default empty should work 1`] = `
       class="ant-spin-container"
     >
       <div
-        class="ant-table ant-table-empty"
+        class="ant-table ant-table-empty ant-table-scroll-horizontal"
       >
         <div
           class="ant-table-container"
         >
           <div
             class="ant-table-content"
+            style="overflow-x: auto; overflow-y: hidden;"
           >
             <table
-              style="table-layout: auto;"
+              style="min-width: 100%; table-layout: auto;"
             >
               <thead
                 class="ant-table-thead"
@@ -525,6 +560,39 @@ exports[`Table > default empty should work 1`] = `
               <tbody
                 class="ant-table-tbody"
               >
+                <tr
+                  aria-hidden="true"
+                  class="ant-table-measure-row"
+                  tabindex="-1"
+                >
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Name
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Age
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Address
+                    </div>
+                  </th>
+                </tr>
                 <tr
                   class="ant-table-placeholder"
                 >
@@ -624,16 +692,17 @@ exports[`Table > default pagination should work 1`] = `
       class="ant-spin-container"
     >
       <div
-        class="ant-table"
+        class="ant-table ant-table-scroll-horizontal"
       >
         <div
           class="ant-table-container"
         >
           <div
             class="ant-table-content"
+            style="overflow-x: auto; overflow-y: hidden;"
           >
             <table
-              style="table-layout: auto;"
+              style="min-width: 100%; table-layout: auto;"
             >
               <thead
                 class="ant-table-thead"
@@ -662,6 +731,39 @@ exports[`Table > default pagination should work 1`] = `
               <tbody
                 class="ant-table-tbody"
               >
+                <tr
+                  aria-hidden="true"
+                  class="ant-table-measure-row"
+                  tabindex="-1"
+                >
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Name
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Age
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Address
+                    </div>
+                  </th>
+                </tr>
                 <tr
                   class="ant-table-row ant-table-row-level-0"
                   data-row-key="1"
@@ -1129,16 +1231,17 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
       class="ant-spin-container"
     >
       <div
-        class="ant-table"
+        class="ant-table ant-table-scroll-horizontal"
       >
         <div
           class="ant-table-container"
         >
           <div
             class="ant-table-content"
+            style="overflow-x: auto; overflow-y: hidden;"
           >
             <table
-              style="table-layout: auto;"
+              style="min-width: 100%; table-layout: auto;"
             >
               <thead
                 class="ant-table-thead"
@@ -1167,6 +1270,39 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
               <tbody
                 class="ant-table-tbody"
               >
+                <tr
+                  aria-hidden="true"
+                  class="ant-table-measure-row"
+                  tabindex="-1"
+                >
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Name
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Age
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Address
+                    </div>
+                  </th>
+                </tr>
                 <tr
                   class="ant-table-row ant-table-row-level-0"
                   data-row-key="1"
@@ -1388,16 +1524,17 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
       class="ant-spin-container"
     >
       <div
-        class="ant-table"
+        class="ant-table ant-table-scroll-horizontal"
       >
         <div
           class="ant-table-container"
         >
           <div
             class="ant-table-content"
+            style="overflow-x: auto; overflow-y: hidden;"
           >
             <table
-              style="table-layout: auto;"
+              style="min-width: 100%; table-layout: auto;"
             >
               <thead
                 class="ant-table-thead"
@@ -1426,6 +1563,39 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
               <tbody
                 class="ant-table-tbody"
               >
+                <tr
+                  aria-hidden="true"
+                  class="ant-table-measure-row"
+                  tabindex="-1"
+                >
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Name
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Age
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Address
+                    </div>
+                  </th>
+                </tr>
                 <tr
                   class="ant-table-row ant-table-row-level-0"
                   data-row-key="1"
@@ -1800,16 +1970,17 @@ exports[`Table > innerBordered should work 1`] = `
       class="ant-spin-container"
     >
       <div
-        class="ant-table ant-table-bordered"
+        class="ant-table ant-table-bordered ant-table-scroll-horizontal"
       >
         <div
           class="ant-table-container"
         >
           <div
             class="ant-table-content"
+            style="overflow-x: auto; overflow-y: hidden;"
           >
             <table
-              style="table-layout: auto;"
+              style="min-width: 100%; table-layout: auto;"
             >
               <thead
                 class="ant-table-thead"
@@ -1838,6 +2009,39 @@ exports[`Table > innerBordered should work 1`] = `
               <tbody
                 class="ant-table-tbody"
               >
+                <tr
+                  aria-hidden="true"
+                  class="ant-table-measure-row"
+                  tabindex="-1"
+                >
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Name
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Age
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Address
+                    </div>
+                  </th>
+                </tr>
                 <tr
                   class="ant-table-row ant-table-row-level-0"
                   data-row-key="1"
@@ -2305,16 +2509,17 @@ exports[`Table > render 1`] = `
       class="ant-spin-container"
     >
       <div
-        class="ant-table"
+        class="ant-table ant-table-scroll-horizontal"
       >
         <div
           class="ant-table-container"
         >
           <div
             class="ant-table-content"
+            style="overflow-x: auto; overflow-y: hidden;"
           >
             <table
-              style="table-layout: auto;"
+              style="min-width: 100%; table-layout: auto;"
             >
               <thead
                 class="ant-table-thead"
@@ -2343,6 +2548,39 @@ exports[`Table > render 1`] = `
               <tbody
                 class="ant-table-tbody"
               >
+                <tr
+                  aria-hidden="true"
+                  class="ant-table-measure-row"
+                  tabindex="-1"
+                >
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Name
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Age
+                    </div>
+                  </th>
+                  <th
+                    class="ant-table-measure-cell"
+                  >
+                    <div
+                      class="ant-table-measure-cell-content"
+                    >
+                      Address
+                    </div>
+                  </th>
+                </tr>
                 <tr
                   class="ant-table-row ant-table-row-level-0"
                   data-row-key="1"

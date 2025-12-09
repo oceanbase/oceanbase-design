@@ -60,6 +60,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
     collapseText,
     openText,
     expandable,
+    scroll,
     hiddenCancelBtn = false,
     prefixCls: customizePrefixCls,
     className,
@@ -138,6 +139,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
     }
     return item;
   });
+  const hasEllipsisColumn = newColumns.some(item => item.ellipsis);
 
   const handleSelectedData = (selectedRowKeys: React.Key[], selectedRows: T[], info: any) => {
     setCurrentSelectedRowKeys(selectedRowKeys);
@@ -265,6 +267,11 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
             }
           : undefined
       }
+      scroll={{
+        // enable auto x scroll when there is no ellipsis column
+        x: hasEllipsisColumn ? undefined : 'max-content',
+        ...scroll,
+      }}
       footer={footer}
       pagination={
         pagination === false
