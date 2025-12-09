@@ -21,6 +21,7 @@ export interface CardTabListType extends AntCardTabListType {
 
 export interface CardProps extends AntCardProps {
   divided?: boolean;
+  gray?: boolean;
   tabList?: CardTabListType[];
   collapsible?: boolean;
   defaultCollapsed?: boolean;
@@ -34,9 +35,12 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       children,
       size,
       title,
+      extra,
       tabList,
       tabProps,
+      tabBarExtraContent,
       divided: outerDivided,
+      gray,
       prefixCls: customizePrefixCls,
       bodyStyle,
       styles,
@@ -45,16 +49,11 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       defaultCollapsed,
       collapsed: outerCollapsed,
       onCollapse,
-      extra,
       ...restProps
     },
     ref
   ) => {
-    const {
-      getPrefixCls,
-      card: contextCard,
-      iconPrefixCls,
-    } = useContext(ConfigProvider.ConfigContext);
+    const { getPrefixCls, card: contextCard } = useContext(ConfigProvider.ConfigContext);
     const { token } = theme.useToken();
     const divided = outerDivided ?? contextCard?.divided ?? true;
 
@@ -105,8 +104,9 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       isHorizontalPaddingZero(bodyStyle?.padding) || isHorizontalPaddingZero(styles?.body?.padding);
     const cardCls = classNames(
       {
-        [`${prefixCls}-has-title`]: !!title,
+        [`${prefixCls}-has-head`]: !!(title || extra || tabList || tabBarExtraContent),
         [`${prefixCls}-no-divider`]: !divided,
+        [`${prefixCls}-gray`]: gray,
         [`${prefixCls}-no-body-horizontal-padding`]: noBodyHorizontalPadding,
         [`${prefixCls}-collapsible`]: collapsible,
         [`${prefixCls}-collapsed`]: collapsed,
@@ -136,9 +136,11 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         size={size}
         title={cardTitle}
+        extra={extra}
         tabList={newTabList}
+        tabBarExtraContent={tabBarExtraContent}
         tabProps={{
-          size: 'middle',
+          size: size === 'small' ? 'small' : 'middle',
           ...tabProps,
         }}
         prefixCls={customizePrefixCls}
@@ -147,7 +149,6 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         }}
         styles={styles}
         className={cardCls}
-        extra={extra}
         {...restProps}
       >
         {children}
