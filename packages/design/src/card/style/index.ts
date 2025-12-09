@@ -126,13 +126,6 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
           componentCls: tabsComponentCls,
           prefixCls: tabsPrefixCls,
         }),
-        [tabsComponentCls]: {
-          [`&${tabsComponentCls}-top, &${tabsComponentCls}-bottom`]: {
-            [`${tabsComponentCls}-tab`]: {
-              paddingBlock: token.padding,
-            },
-          },
-        },
       },
     },
     [`${componentCls}${componentCls}-contain-grid`]: {
