@@ -1,10 +1,11 @@
 import React from 'react';
 import { ConfigProvider } from '@oceanbase/design';
 import type { GenerateStyle } from '@oceanbase/design/es/theme';
+import type { AliasToken } from '@oceanbase/design/es/theme/interface';
 import type { ProAliasToken } from '@ant-design/pro-components';
 import { useStyle } from '@ant-design/pro-components';
 
-export interface OBToken extends ProAliasToken {
+export interface OBToken extends ProAliasToken, AliasToken {
   /** Wrap component class with `.` prefix */
   componentCls: string;
   /** Origin prefix which do not have `.` prefix */

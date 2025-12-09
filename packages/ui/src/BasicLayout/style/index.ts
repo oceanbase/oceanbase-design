@@ -54,7 +54,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
       '100%': {
         backgroundRepeat: 'no-repeat',
         backgroundSize: '100% 100%',
-        borderRadius: 8,
+        borderRadius: token.borderRadiusLG,
       },
     },
     [`${componentCls}-banner-wrapper`]: {

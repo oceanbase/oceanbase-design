@@ -25,7 +25,7 @@ export const genDialogStyle: GenerateStyle<DialogToken> = (token: DialogToken): 
       boxSizing: 'content-box',
       color: '#eee',
       backgroundColor: 'rgba(65, 74, 77, 1)',
-      borderRadius: 8,
+      borderRadius: token.borderRadiusLG,
       boxShadow: boxShadowSecondary,
       transition: 'visibility 0.2s ease-in-out, opacity 0.2s linear',
       [`${componentCls}-header`]: {

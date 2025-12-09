@@ -14,7 +14,6 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
     colorBgContainer,
     colorBorder,
     borderRadius,
-    colorPrimaryBorderHover,
     colorTextSecondary,
     colorFillSecondary,
     colorFill,
@@ -48,7 +47,7 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
           },
         },
         '&:hover': {
-          borderColor: colorPrimaryBorderHover,
+          borderColor: token.colorPrimaryHover,
         },
       },
       [`${componentCls}-wrapper-has-jumper`]: {
@@ -56,7 +55,7 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
         borderBottomRightRadius: 0,
       },
       [`${componentCls}-play`]: {
-        padding: '4px 11px 4px',
+        padding: '3px 11px 3px',
       },
       [`${componentCls}-picker-input`]: {
         maxWidth: 125,
@@ -80,7 +79,7 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
       gap: 4,
       backgroundColor: colorBgContainer,
       backgroundClip: 'padding-box',
-      borderRadius: 8,
+      borderRadius: token.borderRadiusMD,
       outline: 'none',
       boxShadow:
         '0 6px 16px 0 rgba(54, 69, 99, 0.08), 0 3px 6px -4px rgba(54, 69, 99, 0.12), 0 9px 28px 8px rgba(54, 69, 99, 0.05)',
@@ -116,32 +115,33 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
           color: colorTextSecondary,
           transition: 'all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1)',
           '&:hover': {
-            borderColor: colorPrimaryBorderHover,
+            borderColor: token.colorPrimaryHover,
             '&::before': {
-              backgroundColor: colorPrimaryBorderHover,
+              backgroundColor: token.colorPrimaryHover,
             },
           },
         },
       },
     },
     [`${componentCls}-label`]: {
+      fontSize: token.fontSizeSM,
       backgroundColor: colorFillSecondary,
       color: colorTextSecondary,
       display: 'inline-block',
-      width: 60,
+      width: 52,
       padding: '4px 0',
-      borderRadius: 4,
+      borderRadius: token.borderRadiusSM,
       lineHeight: 1,
       textAlign: 'center',
     },
     [`${componentCls}-back-radio-focused`]: {
       [`${componentCls}-wrapper`]: {
-        borderRightColor: colorPrimaryBorderHover,
+        borderRightColor: token.colorPrimaryHover,
       },
       [`${componentCls}-playback-control`]: {
         [`${antCls}-radio-button-wrapper:first-child`]: {
           [`+ ${antCls}-radio-button-wrapper::before`]: {
-            backgroundColor: colorPrimaryBorderHover,
+            backgroundColor: token.colorPrimaryHover,
           },
         },
       },
