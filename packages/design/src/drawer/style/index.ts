@@ -6,17 +6,17 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 export type DrawerToken = FullToken<'Drawer'>;
 
 export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): CSSObject => {
-  const { componentCls, antCls, fontSizeHeading3, colorSplit, calc } = token;
+  const { componentCls, antCls, iconCls, fontSizeHeading3, colorSplit, calc } = token;
   const contentPadding = token.paddingLG;
-  const boxShadowBottom =
-    '0 2px 4px 0 rgba(54,69,99,0.04), 0 1px 6px -1px rgba(54,69,99,0.04), 0 1px 2px 0 rgba(54,69,99,0.06)';
-  const boxShadowTop =
-    '0 -2px 4px 0 rgba(54,69,99,0.04), 0 -1px 6px -1px rgba(54,69,99,0.04), 0 -1px 2px 0 rgba(54,69,99,0.06)';
+  const boxShadowTop = '0 -1px 2px 0 rgba(19, 33, 57, 0.1)';
+  const boxShadowBottom = '0 1px 2px 0 rgba(19, 33, 57, 0.1)';
 
   return {
     [`${componentCls}`]: {
       // should be wrapped by `${componentCls}-content` to overwritten antd style
       [`${componentCls}-content`]: {
+        // to avoid x scroll
+        overflow: 'initial',
         [`${componentCls}-header`]: {
           position: 'relative',
           padding: `${unit(token.padding)} ${unit(token.paddingLG)}`,
@@ -26,6 +26,9 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
           zIndex: 10,
           [`${componentCls}-title`]: {
             fontSize: fontSizeHeading3,
+            [iconCls]: {
+              fontSize: token.fontSizeLG,
+            },
           },
           // 标题栏底部增加分割线
           '&::after': {
