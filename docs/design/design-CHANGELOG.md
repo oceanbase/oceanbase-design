@@ -75,7 +75,7 @@ group: 基础组件
   - 💄 优化 Badge `default` 状态点的颜色。[#1267](https://github.com/oceanbase/oceanbase-design/pull/1267)
 - Card
   - 🔥 新版 Card 组件，根据设计规范更新样式，调整标题区、内容区和标签页的间距。[#1270](https://github.com/oceanbase/oceanbase-design/pull/1270)
-  - 🆕 新增 `collapsible` 属性，用于支持内容区展开和收起。[#1270](https://github.com/oceanbase/oceanbase-design/pull/1270)
+  - 🆕 新增 `collapsible` 属性，支持内容区展开和收起。[#1270](https://github.com/oceanbase/oceanbase-design/pull/1270)
 - 💄 Collapse 更新展开图标的颜色。[#1274](https://github.com/oceanbase/oceanbase-design/pull/1274)
 - 🔥 新版 Drawer 组件，根据设计规范更新样式，包括标题区增加分割线、标题字体大小 `16px => 18px`、调整内容区间距等。[#1269](https://github.com/oceanbase/oceanbase-design/pull/1269)
 - Form
