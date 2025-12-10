@@ -57,8 +57,14 @@ export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
 
   return {
     [`${componentCls}`]: {
+      [`${componentCls}-header`]: {
+        marginBottom: token.margin,
+      },
       // collapsible title style
       [`${componentCls}-title-wrapper`]: {
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
         userSelect: 'none',
         [`${componentCls}-collapsible-icon`]: {
           fontSize: token.fontSizeLG,
@@ -70,6 +76,9 @@ export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
       },
       [`${componentCls}-item-label`]: {
         fontWeight: token.fontWeightWeak,
+        [`&${componentCls}-item-no-colon::after`]: {
+          display: 'none',
+        },
       },
       [`${componentCls}-item-container`]: {
         [`${componentCls}-item-content`]: {
@@ -85,12 +94,69 @@ export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
         height: calc(token.fontSize).mul(token.lineHeight).equal(),
       },
     },
-    [`${componentCls}${componentCls}-middle`]: genVerticalStyle('middle', token),
-    [`${componentCls}${componentCls}-small`]: genVerticalStyle('small', token),
+    [`${componentCls}${componentCls}-middle`]: {
+      [`${componentCls}-header`]: {
+        marginBottom: token.marginSM,
+      },
+      ...genVerticalStyle('middle', token),
+    },
+    [`${componentCls}${componentCls}-small`]: {
+      [`${componentCls}-header`]: {
+        marginBottom: token.marginXS,
+      },
+      ...genVerticalStyle('small', token),
+    },
     // collapsed state
     [`${componentCls}${componentCls}-collapsed`]: {
       [`${componentCls}-view`]: {
         display: 'none',
+      },
+    },
+    // contentAlign="left": label column auto width based on longest label
+    // For non-bordered mode: use CSS Grid to make label and content align across rows
+    [`${componentCls}${componentCls}-content-align-left:not(${componentCls}-bordered)`]: {
+      [`${componentCls}-view`]: {
+        display: 'block',
+      },
+      // Make table, tbody, tr, td all transparent to grid layout
+      [`${componentCls}-view > table`]: {
+        display: 'grid',
+        gridTemplateColumns: 'auto 1fr',
+      },
+      [`${componentCls}-view > table > tbody`]: {
+        display: 'contents',
+      },
+      [`${componentCls}-row`]: {
+        display: 'contents',
+      },
+      [`${componentCls}-row > td${componentCls}-item`]: {
+        display: 'contents',
+      },
+      [`${componentCls}-item-container`]: {
+        display: 'contents',
+      },
+      [`${componentCls}-item-label`]: {
+        whiteSpace: 'nowrap',
+        paddingBottom: token.padding,
+        paddingInlineEnd: token.paddingLG,
+      },
+      [`${componentCls}-item-content`]: {
+        paddingBottom: token.padding,
+      },
+    },
+    // For bordered mode: label and content are in separate th and td
+    [`${componentCls}${componentCls}-content-align-left${componentCls}-bordered`]: {
+      [`${componentCls}-view > table`]: {
+        tableLayout: 'auto',
+      },
+      [`${componentCls}-row`]: {
+        [`& > th`]: {
+          whiteSpace: 'nowrap',
+          width: 1,
+        },
+        [`& > td`]: {
+          width: '100%',
+        },
       },
     },
   };

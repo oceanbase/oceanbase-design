@@ -248,7 +248,6 @@ const defaultTheme: ThemeConfig = {
       borderRadiusLG: borderRadiusMD,
     },
     Descriptions: {
-      titleMarginBottom: 16,
       labelColor: colorTextSecondary,
     },
     Dropdown: {

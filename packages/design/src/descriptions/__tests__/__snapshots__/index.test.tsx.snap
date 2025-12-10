@@ -1,5 +1,157 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Descriptions > contentAlign="left" should add content-align-left class 1`] = `
+<div
+  class="ant-descriptions ant-descriptions-horizontal ant-descriptions-content-align-left"
+>
+  <div
+    class="ant-descriptions-header"
+  >
+    <div
+      class="ant-descriptions-title"
+    >
+      User Info
+    </div>
+  </div>
+  <div
+    class="ant-descriptions-view"
+  >
+    <table>
+      <tbody>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                UserName
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  aria-describedby="test-id"
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+                >
+                  Zhou Maomao
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                Telephone
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  aria-describedby="test-id"
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+                >
+                  1810000000
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                Live
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  aria-describedby="test-id"
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+                >
+                  Hangzhou, Zhejiang
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="1"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                Remark
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  aria-describedby="test-id"
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+                >
+                  empty
+                </span>
+              </span>
+            </div>
+          </td>
+          <td
+            class="ant-descriptions-item"
+            colspan="2"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                Address
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  aria-describedby="test-id"
+                  class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+                >
+                  No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
 exports[`Descriptions > contentProps should work for Descriptions.Item 1`] = `
 <div
   class="ant-descriptions ant-descriptions-horizontal"

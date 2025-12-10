@@ -4,7 +4,7 @@ import { Badge, Descriptions, Typography } from '@oceanbase/design';
 export default () => (
   <Descriptions title="User Info">
     <Descriptions.Item label="UserName">
-      <Typography.Text copyable editable>
+      <Typography.Text ellipsis={{ tooltip: true }} copyable editable>
         Zhou Maomao
       </Typography.Text>
     </Descriptions.Item>

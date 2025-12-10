@@ -102,4 +102,10 @@ describe('Descriptions', () => {
     expect(container.querySelector('.ant-typography-ellipsis')).toBeTruthy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
+
+  it('contentAlign="left" should add content-align-left class', () => {
+    const { container, asFragment } = render(<DescriptionsTest1 contentAlign="left" />);
+    expect(container.querySelector('.ant-descriptions-content-align-left')).toBeTruthy();
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
 });
