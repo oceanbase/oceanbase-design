@@ -47,6 +47,13 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
   return {
     [`${componentCls}`]: {
       [`${componentCls}-head`]: {
+        // subTitle style
+        [`${componentCls}-sub-title`]: {
+          marginInlineStart: token.marginXS,
+          fontWeight: 'normal',
+          fontSize: token.fontSize,
+          color: token.colorTextDescription,
+        },
         // remove divider for top and bottom tabs
         [tabsComponentCls]: {
           [`&${tabsComponentCls}-top, &${tabsComponentCls}-bottom`]: {
