@@ -1,4 +1,5 @@
 import type { CSSObject } from '@ant-design/cssinjs';
+import { unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 
@@ -6,8 +7,10 @@ export type SliderToken = FullToken<'Slider'>;
 
 export const genSliderStyle: GenerateStyle<SliderToken> = (token: SliderToken): CSSObject => {
   const { componentCls, dotSize = 8, handleSize = 10, handleLineWidth = 2, calc } = token;
-  const dotSizeHalf = calc(dotSize).div(2).equal();
-  const handleOffset = calc(handleSize).add(calc(handleLineWidth).mul(2).equal()).div(2).equal();
+  const dotSizeHalf = unit(calc(dotSize).div(2).equal());
+  const handleOffset = unit(
+    calc(handleSize).add(calc(handleLineWidth).mul(2).equal()).div(2).equal()
+  );
   return {
     [`${componentCls}${componentCls}-horizontal`]: {
       [`${componentCls}-mark`]: {
