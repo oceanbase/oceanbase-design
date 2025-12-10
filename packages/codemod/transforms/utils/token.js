@@ -173,6 +173,18 @@ const PROPERTY_TOKEN_MAP = {
     15: 'fontSizeLG',
     16: 'fontSizeLG',
   },
+  fontWeight: {
+    300: 'fontWeightWeak',
+    400: 'fontWeight',
+    500: 'fontWeightStrong',
+    600: 'fontWeightStrong',
+  },
+  borderRadius: {
+    2: 'borderRadiusSM',
+    4: 'borderRadius',
+    6: 'borderRadiusMD',
+    8: 'borderRadiusLG',
+  },
 };
 
 function propertyTokenParse(propertyName, value) {

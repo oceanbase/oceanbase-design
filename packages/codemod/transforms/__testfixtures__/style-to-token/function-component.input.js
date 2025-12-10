@@ -5,8 +5,8 @@ function Demo1() {
   const tokenList = ['rgb(0 0 0 / 45%)', '#006AFF', '#f3f6fc'];
   return (
     <div>
-      <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '1px solid #d9d9d9', fontSize: 14 }} />
-      <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4D4F', fontSize: '12px' }}></Button>
+      <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '1px solid #d9d9d9', fontSize: 14, fontWeight: 400, borderRadius: 4 }} />
+      <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4D4F', fontSize: '12px', fontWeight: 500, borderRadius: 6 }}></Button>
       <Tooltip color="#ffffff" backgroundColor="#fff1f0" borderColor="#fafafa" border="1px solid #fafafa" />
     </div>
   );
