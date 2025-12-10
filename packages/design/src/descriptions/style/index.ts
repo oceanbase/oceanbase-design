@@ -57,13 +57,22 @@ export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
 
   return {
     [`${componentCls}`]: {
+      // collapsible title style
+      [`${componentCls}-title-wrapper`]: {
+        userSelect: 'none',
+        [`${componentCls}-collapsible-icon`]: {
+          fontSize: token.fontSizeLG,
+        },
+      },
       ...genVerticalStyle('default', token),
+      [`${componentCls}-row > th, ${componentCls}-row > td`]: {
+        paddingRight: token.paddingLG,
+      },
       [`${componentCls}-item-label`]: {
         fontWeight: token.fontWeightWeak,
       },
       [`${componentCls}-item-container`]: {
         [`${componentCls}-item-content`]: {
-          paddingRight: 12,
           [`${typographyComponentCls}-edit-content`]: {
             insetInlineStart: 0,
             marginTop: 0,
@@ -78,6 +87,12 @@ export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
     },
     [`${componentCls}${componentCls}-middle`]: genVerticalStyle('middle', token),
     [`${componentCls}${componentCls}-small`]: genVerticalStyle('small', token),
+    // collapsed state
+    [`${componentCls}${componentCls}-collapsed`]: {
+      [`${componentCls}-view`]: {
+        display: 'none',
+      },
+    },
   };
 };
 

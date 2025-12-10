@@ -9,12 +9,14 @@ nav:
 - 💄 定制主题和全局样式，符合 OceanBase Design 设计规范。
 - 🆕 无边框模式下，描述项内容溢出时自动省略，并展示 `Tooltip`。
 - 🆕 无边框模式下，`items` 和 Descriptions.Item 新增 `contentProps` 属性，用于设置省略、编辑、复制等内容属性。
+- 🆕 新增 `collapsible` 属性，支持内容区展开和收起。
 
 ## 代码演示
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本" description="简单展示。"></code>
 <code src="./demo/content.tsx" title="内容展示" description="内容超长自动省略，并展示 `Tooltip`。同时通过 `contentProps` 可设置省略、编辑、复制等内容属性。"></code>
+<code src="./demo/collapsible.tsx" title="可折叠" description="支持内容区的展开和收起。"></code>
 <code src="./demo/debug-typography.tsx" title="验证内置 Typography 在各个场景下的效果" description="超长省略、编辑、复制等功能均需表现正常。" debug></code>
 <code src="./demo/vertical.tsx" title="垂直" description="默认去掉冒号。"></code>
 <code src="./demo/bordered.tsx" title="带边框"></code>
@@ -22,6 +24,13 @@ nav:
 <code src="./demo/size.tsx" title="不同尺寸"></code>
 
 ## API
+
+| 参数             | 说明             | 类型                         | 默认值 | 版本 |
+| :--------------- | :--------------- | :--------------------------- | :----- | :--- |
+| collapsible      | 是否可折叠       | boolean                      | -      | -    |
+| collapsed        | 是否折叠（受控） | boolean                      | -      | -    |
+| defaultCollapsed | 是否默认折叠     | boolean                      | false  | -    |
+| onCollapse       | 折叠状态改变回调 | (collapsed: boolean) => void | -      | -    |
 
 ### items 和 Descriptions.Item
 
