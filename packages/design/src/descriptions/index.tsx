@@ -30,6 +30,8 @@ export interface DescriptionsProps extends AntDescriptionsProps {
   defaultCollapsed?: boolean;
   /** Callback when collapsed state changes */
   onCollapse?: (collapsed: boolean) => void;
+  /** Content alignment, when set to 'left', all content values will be aligned to the left based on the longest label width */
+  contentAlign?: 'left';
 }
 
 type CompoundedComponent = React.FC<DescriptionsProps> & {
@@ -50,6 +52,7 @@ const Descriptions: CompoundedComponent = ({
   collapsed: outerCollapsed,
   defaultCollapsed,
   onCollapse,
+  contentAlign,
   ...restProps
 }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -79,11 +82,7 @@ const Descriptions: CompoundedComponent = ({
       return null;
     }
     return (
-      <div
-        className={`${prefixCls}-title-wrapper`}
-        onClick={handleCollapse}
-        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-      >
+      <div className={`${prefixCls}-title-wrapper`} onClick={handleCollapse}>
         <CaretRightFilled
           className={`${prefixCls}-collapsible-icon`}
           style={{
@@ -103,6 +102,7 @@ const Descriptions: CompoundedComponent = ({
     [`${prefixCls}-horizontal`]: layout === 'horizontal',
     [`${prefixCls}-collapsible`]: collapsible,
     [`${prefixCls}-collapsed`]: collapsible && collapsed,
+    [`${prefixCls}-content-align-left`]: contentAlign === 'left',
   });
 
   return wrapSSR(
