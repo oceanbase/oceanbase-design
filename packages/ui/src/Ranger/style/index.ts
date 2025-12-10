@@ -5,9 +5,7 @@ import type { OBToken } from '../../_util/genComponentStyleHook';
 
 export type RangerToken = OBToken;
 
-export const genRangerStyle: GenerateStyle<RangerToken> = (
-  token: RangerToken
-): CSSObject => {
+export const genRangerStyle: GenerateStyle<RangerToken> = (token: RangerToken): CSSObject => {
   const { componentCls, antCls } = token;
 
   return {
@@ -38,7 +36,7 @@ export const genRangerStyle: GenerateStyle<RangerToken> = (
       },
     },
     [`${componentCls}-show-range`]: {
-      [`${componentCls}-quick-picker.${componentCls}-quick-picker-select`]: {
+      [`${componentCls}-quick-picker${componentCls}-quick-picker-select`]: {
         marginRight: -1,
         [`${antCls}-select-selector`]: {
           borderTopRightRadius: '0 !important',
@@ -61,4 +59,3 @@ export default (prefixCls: string) => {
   });
   return useStyle(prefixCls);
 };
-
