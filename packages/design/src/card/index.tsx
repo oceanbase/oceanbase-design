@@ -20,6 +20,7 @@ export interface CardTabListType extends AntCardTabListType {
 }
 
 export interface CardProps extends AntCardProps {
+  subTitle?: React.ReactNode;
   divided?: boolean;
   gray?: boolean;
   tabList?: CardTabListType[];
@@ -35,6 +36,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       children,
       size,
       title,
+      subTitle,
       extra,
       tabList,
       tabProps,
@@ -73,12 +75,31 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     }, [collapsed, outerCollapsed, onCollapse]);
 
     const cardTitle = useMemo(() => {
-      if (!collapsible) {
+      if (!collapsible && !subTitle) {
         return title;
       }
       if (!title) {
         return null;
       }
+
+      const titleContent = (
+        <>
+          <span>{title}</span>
+          {subTitle && <span className={`${prefixCls}-sub-title`}>{subTitle}</span>}
+        </>
+      );
+
+      if (!collapsible) {
+        return (
+          <div
+            className={`${prefixCls}-title-wrapper`}
+            style={{ display: 'flex', alignItems: 'center' }}
+          >
+            {titleContent}
+          </div>
+        );
+      }
+
       return (
         <div
           className={`${prefixCls}-title-wrapper`}
@@ -94,10 +115,10 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
               marginRight: token.marginXS,
             }}
           />
-          <span>{title}</span>
+          {titleContent}
         </div>
       );
-    }, [collapsible, title, collapsed, prefixCls, token, handleCollapse]);
+    }, [collapsible, title, subTitle, collapsed, prefixCls, token, handleCollapse]);
 
     // card body no horizontal padding
     const noBodyHorizontalPadding =
