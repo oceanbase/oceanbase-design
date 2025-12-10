@@ -67,6 +67,59 @@ export interface AliasToken extends AntAliasToken {
    * @descEN The text color of the critical error state.
    */
   colorFuchsiaText: string;
+
+  // ==================== 基础颜色 Token ====================
+  // 黑白色
+  white: string;
+  black: string;
+  // 中性色 Neutral
+  gray1: string;
+  gray2: string;
+  gray3: string;
+  gray4: string;
+  gray5: string;
+  gray6: string;
+  gray7: string;
+  gray8: string;
+  gray9: string;
+  // 蓝色 Blue
+  blue1: string;
+  blue2: string;
+  blue3: string;
+  blue4: string;
+  blue5: string;
+  blue6: string;
+  // 绿色 Green
+  green1: string;
+  green2: string;
+  green3: string;
+  green4: string;
+  green5: string;
+  green6: string;
+  // 橙色 Orange
+  orange1: string;
+  orange2: string;
+  orange3: string;
+  orange4: string;
+  orange5: string;
+  orange6: string;
+  // 红色 Red
+  red1: string;
+  red2: string;
+  red3: string;
+  red4: string;
+  red5: string;
+  red6: string;
+  // 紫色 Fuchsia
+  fuchsia1: string;
+  fuchsia2: string;
+  fuchsia3: string;
+  fuchsia4: string;
+  fuchsia5: string;
+  fuchsia6: string;
+  // 导航特殊色
+  colorNaviBg: string;
+  colorNaviBgHover: string;
 }
 
 /** Final token which contains the components level override */

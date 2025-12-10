@@ -1,6 +1,6 @@
 ---
 title: 国际化
-order: 4
+order: 5
 group: 基础组件
 ---
 

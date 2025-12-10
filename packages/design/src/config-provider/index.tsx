@@ -36,6 +36,7 @@ import DefaultRenderEmpty from './DefaultRenderEmpty';
 import type { NavigateFunction } from './navigate';
 import type { Locale } from '../locale';
 import GlobalStyle from '../style/global';
+import CssVariablesStyle from '../style/cssVariables';
 
 export * from './navigate';
 export * from 'antd/es/config-provider/context';
@@ -305,6 +306,8 @@ const ConfigProvider: ConfigProviderType = ({
         }}
       >
         <StyleProvider {...mergedStyleProviderProps}>
+          {/* Inject CSS variables via cssinjs */}
+          <CssVariablesStyle />
           {/* Inject global styles via cssinjs */}
           <GlobalStyle prefixCls={restProps.prefixCls} />
           {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}

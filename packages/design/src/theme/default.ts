@@ -1,18 +1,78 @@
 import type { ThemeConfig } from '../config-provider/context';
 import { formatTheme } from './util/format';
 
-const colorPrimary = '#0D6CF2';
-const colorPrimarySecondary = '#598CF3';
+// ==================== 基础颜色 Token ====================
+// 中性色 Neutral
+export const white = '#ffffff';
+export const gray1 = '#fbfcfe';
+export const gray2 = '#f5f7fc';
+export const gray3 = '#ebeff7';
+export const gray4 = '#e2e8f3';
+export const gray5 = '#cdd5e4';
+export const gray6 = '#b6c0d4';
+export const gray7 = '#8592ad';
+export const gray8 = '#5c6b8a';
+export const gray9 = '#3b4a69';
+export const gray10 = '#132039';
+export const black = '#000000';
 
-const colorText = '#132039';
-const colorTextSecondary = '#5C6B8A';
-const colorTextTertiary = '#8592AD';
-const colorTextQuaternary = '#B6C0D4';
+// 蓝色 Blue
+export const blue1 = '#f3f8fe';
+export const blue2 = '#b3d3ff';
+export const blue3 = '#619ef3';
+export const blue4 = '#0d6cf2';
+export const blue5 = '#0852bb';
+export const blue6 = '#0d3c80';
 
-const colorFill = '#CDD5E4';
-const colorFillSecondary = '#E2E8F3';
-const colorFillTertiary = '#EBEFF7';
-const colorFillQuaternary = '#F5F7FC';
+// 绿色 Green
+export const green1 = '#f5faf8';
+export const green2 = '#b3e6d5';
+export const green3 = '#79d1b4';
+export const green4 = '#16b882';
+export const green5 = '#0a8c61';
+export const green6 = '#09593f';
+
+// 橙色 Orange
+export const orange1 = '#fff9ee';
+export const orange2 = '#ffe7c2';
+export const orange3 = '#fac373';
+export const orange4 = '#f49f25';
+export const orange5 = '#ac690b';
+export const orange6 = '#6c4408';
+
+// 红色 Red
+export const red1 = '#fff2f2';
+export const red2 = '#ffd6d6';
+export const red3 = '#f69898';
+export const red4 = '#eb4242';
+export const red5 = '#b52727';
+export const red6 = '#8a1b1b';
+
+// 紫色 Fuchsia
+export const fuchsia1 = '#faf0fc';
+export const fuchsia2 = '#e8caee';
+export const fuchsia3 = '#d88ee7';
+export const fuchsia4 = '#b04ec4';
+export const fuchsia5 = '#802792';
+export const fuchsia6 = '#580e67';
+
+// 导航特殊色
+export const colorNaviBg = '#f1f6ff';
+export const colorNaviBgHover = '#e8effb';
+
+// ==================== 基础 Token 别名 ====================
+const colorPrimary = blue4;
+const colorPrimarySecondary = '#598cf3';
+
+const colorText = gray10;
+const colorTextSecondary = gray8;
+const colorTextTertiary = gray7;
+const colorTextQuaternary = gray6;
+
+const colorFill = gray5;
+const colorFillSecondary = gray4;
+const colorFillTertiary = gray3;
+const colorFillQuaternary = gray2;
 
 const colorBorderSecondary = colorFillSecondary;
 const fontSizeSM = 12;
@@ -53,36 +113,36 @@ const defaultTheme: ThemeConfig = {
     controlHeight: 28,
     colorPrimary: colorPrimary,
     colorInfo: colorPrimary,
-    colorInfoBorder: '#619EF3',
-    colorInfoBg: '#F3F8FE',
-    colorInfoHover: '#0852BB',
-    colorInfoActive: '#0852BB',
-    colorInfoText: '#0D3C80',
-    colorSuccess: '#16B882',
-    colorSuccessBorder: '#79D1B4',
-    colorSuccessBg: '#F5FAF8',
-    colorSuccessText: '#09593F',
-    colorWarning: '#F49F25',
-    colorWarningBorder: '#FAC373',
-    colorWarningBg: '#FFF9EE',
-    colorWarningText: '#6C4408',
-    colorError: '#EB4242',
-    colorErrorBorder: '#F69898',
-    colorErrorBg: '#FFF2F2',
-    colorErrorText: '#8A1B1B',
-    colorFuchsia: '#B04EC4',
-    colorFuchsiaBorder: '#D88EE7',
-    colorFuchsiaBg: '#FAF0FC',
-    colorFuchsiaText: '#580E67',
-    colorTextBase: '#000000',
+    colorInfoBorder: blue3,
+    colorInfoBg: blue1,
+    colorInfoHover: blue5,
+    colorInfoActive: blue5,
+    colorInfoText: blue6,
+    colorSuccess: green4,
+    colorSuccessBorder: green3,
+    colorSuccessBg: green1,
+    colorSuccessText: green6,
+    colorWarning: orange4,
+    colorWarningBorder: orange3,
+    colorWarningBg: orange1,
+    colorWarningText: orange6,
+    colorError: red4,
+    colorErrorBorder: red3,
+    colorErrorBg: red1,
+    colorErrorText: red6,
+    colorFuchsia: fuchsia4,
+    colorFuchsiaBorder: fuchsia3,
+    colorFuchsiaBg: fuchsia1,
+    colorFuchsiaText: fuchsia6,
+    colorTextBase: black,
     colorText,
     colorTextSecondary,
     colorTextTertiary,
     colorTextQuaternary,
     colorIcon: colorTextSecondary,
-    colorBgBase: '#ffffff',
-    colorBgContainer: '#ffffff',
-    colorBgLayout: '#FBFCFE',
+    colorBgBase: white,
+    colorBgContainer: white,
+    colorBgLayout: gray1,
     colorBorder: colorFill,
     colorBorderSecondary,
     colorFill,
@@ -91,8 +151,8 @@ const defaultTheme: ThemeConfig = {
     colorFillQuaternary,
     colorBgContainerDisabled: colorFillTertiary,
     colorBgMask: 'rgba(19, 32, 57, 0.6)',
-    colorBgElevated: '#ffffff',
-    colorBgSpotlight: '#ffffff',
+    colorBgElevated: white,
+    colorBgSpotlight: white,
     boxShadow:
       '0 6px 16px 0 rgba(54, 69, 99, 0.08), 0 3px 6px -4px rgba(54, 69, 99, 0.12), 0 9px 28px 8px rgba(54, 69, 99, 0.05)',
     boxShadowSecondary:
@@ -102,6 +162,58 @@ const defaultTheme: ThemeConfig = {
     wireframe: false,
     // Remove focus outline
     lineWidthFocus: 0,
+    // ==================== 基础颜色 Token ====================
+    // 黑白色
+    white,
+    black,
+    // 中性色 Neutral
+    gray1,
+    gray2,
+    gray3,
+    gray4,
+    gray5,
+    gray6,
+    gray7,
+    gray8,
+    gray9,
+    // 蓝色 Blue
+    blue1,
+    blue2,
+    blue3,
+    blue4,
+    blue5,
+    blue6,
+    // 绿色 Green
+    green1,
+    green2,
+    green3,
+    green4,
+    green5,
+    green6,
+    // 橙色 Orange
+    orange1,
+    orange2,
+    orange3,
+    orange4,
+    orange5,
+    orange6,
+    // 红色 Red
+    red1,
+    red2,
+    red3,
+    red4,
+    red5,
+    red6,
+    // 紫色 Fuchsia
+    fuchsia1,
+    fuchsia2,
+    fuchsia3,
+    fuchsia4,
+    fuchsia5,
+    fuchsia6,
+    // 导航特殊色
+    colorNaviBg,
+    colorNaviBgHover,
   },
   components: {
     Alert: {
@@ -205,7 +317,7 @@ const defaultTheme: ThemeConfig = {
     },
     Tooltip: {
       borderRadius: borderRadiusMD,
-      colorBgSpotlight: '#ffffff',
+      colorBgSpotlight: white,
       colorTextLightSolid: colorText,
     },
     Menu: {
