@@ -72,6 +72,11 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         },
         [`${antCls}-page-header-footer`]: {
           marginBlockStart: 0,
+          [`${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
+            borderBottom: `1px solid ${token.colorBorderSecondary}`,
+            left: -token.paddingXL,
+            right: -token.paddingXL,
+          },
         },
       },
       [`${componentCls}-children-container`]: {
@@ -82,6 +87,11 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         [`& > ${antCls}-tabs-top:not(${antCls}-tabs-card):first-child`]: {
           // equal to page header paddingBlockEnd
           marginTop: -padding,
+        },
+        [`& > ${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
+          borderBottom: `1px solid ${token.colorBorderSecondary}`,
+          left: -token.paddingXL,
+          right: -token.paddingXL,
         },
       },
     },
