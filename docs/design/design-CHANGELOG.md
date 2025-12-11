@@ -8,6 +8,36 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.9
+
+`2025-12-11`
+
+- 🔥 CSS 变量:
+  - 🆕 新增 `--ob-*` 前缀的 CSS 变量系统，提供精简和语义化命名的 Design Token，便于业务层消费使用 Token 标注的 Figma 样式。[#1330](https://github.com/oceanbase/oceanbase-design/pull/1330)
+  - 📝 新增 CSS 变量文档，说明 CSS 变量的使用方式和完整变量列表。[#1330](https://github.com/oceanbase/oceanbase-design/pull/1330)
+- 💄 修改 Button 内容和图标的间距 `8` => `4`。[#1319](https://github.com/oceanbase/oceanbase-design/pull/1319)
+- Card
+  - 🆕 Card 新增 `subTitle` 属性，用于设置副标题。[#1327](https://github.com/oceanbase/oceanbase-design/pull/1327)
+  - 🆕 Card 新增 `gray` 属性，支持灰底模式。[#1320](https://github.com/oceanbase/oceanbase-design/pull/1320)
+  - 💄 优化 Card 展开/折叠的交互，避免出现高度抖动。[#1320](https://github.com/oceanbase/oceanbase-design/pull/1320)
+  - 💄 Card `tabs` 尺寸和卡片尺寸保持一致。[#1320](https://github.com/oceanbase/oceanbase-design/pull/1320)
+- 🐞 修复 Checkbox 选择框没有垂直对齐的问题。[#1316](https://github.com/oceanbase/oceanbase-design/pull/1316)
+- Descriptions
+  - 🆕 Descriptions 新增 `collapsible` 属性，支持内容区展开和收起。[#1331](https://github.com/oceanbase/oceanbase-design/pull/1331)
+  - 🆕 Descriptions 新增 `contentAlign` 属性，支持内容左对齐。[#1332](https://github.com/oceanbase/oceanbase-design/pull/1332)
+  - 💄 优化 Descriptions 标题区在各个尺寸下的底部间距。[#1332](https://github.com/oceanbase/oceanbase-design/pull/1332)
+- Drawer
+  - 🐞 修复 Drawer 内容区出现预期外的横向滚动问题。[#1329](https://github.com/oceanbase/oceanbase-design/pull/1329)
+  - 💄 优化 Drawer 标题区的图标大小为 `16px`，避免跟随标题为 18px。[#1329](https://github.com/oceanbase/oceanbase-design/pull/1329)
+  - 💄 更新 Drawer 内容区滚动时的 `box-shadow` 阴影。[#1329](https://github.com/oceanbase/oceanbase-design/pull/1329)
+- 🐞 修复 Slider 左右两侧标签没有对齐的问题。[#1328](https://github.com/oceanbase/oceanbase-design/pull/1328)
+- Table
+  - ⭐️ 无省略列时，Table 默认开启横向滚动。[#1318](https://github.com/oceanbase/oceanbase-design/pull/1318)
+  - 🐞 修复 Table 固定列下的嵌套子表格样式对齐问题。[#1334](https://github.com/oceanbase/oceanbase-design/pull/1334)
+  - 💄 优化树形 Table 展开图标的间距。[#1317](https://github.com/oceanbase/oceanbase-design/pull/1317)
+- 💄 优化横向 Tabs 的标签内间距。[#1321](https://github.com/oceanbase/oceanbase-design/pull/1321)
+- 💄 优化 Tag 的行高，以对齐设计规范。[#1314](https://github.com/oceanbase/oceanbase-design/pull/1314)
+
 ## 1.0.0-alpha.8
 
 `2025-12-08`
