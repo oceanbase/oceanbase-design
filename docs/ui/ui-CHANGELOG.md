@@ -8,6 +8,18 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.9
+
+`2025-12-11`
+
+- 📝 更新国际化使用文档。[#1322](https://github.com/oceanbase/oceanbase-design/pull/1322)
+- 🌐 修复站点中英文切换组件文案不生效的问题。[#1322](https://github.com/oceanbase/oceanbase-design/pull/1322)
+- PageContainer
+  - 🐞 修复 PageContainer 不兼容 `onBack` 属性的问题。[#1315](https://github.com/oceanbase/oceanbase-design/pull/1315)
+  - 💄 PageContainer 页头区的 Tabs 增加分隔线并拉通。[#1326](https://github.com/oceanbase/oceanbase-design/pull/1326)
+- 💄 优化 DateRanger 圆角、边框、宽度等样式。[#1323](https://github.com/oceanbase/oceanbase-design/pull/1323)
+- 🐞 修复 Ranger 快捷选择的圆角问题。[#1324](https://github.com/oceanbase/oceanbase-design/pull/1324)
+
 ## 1.0.0-alpha.7
 
 `2025-12-04`

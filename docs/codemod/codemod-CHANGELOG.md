@@ -8,6 +8,26 @@ group: 自动化迁移工具
 
 ---
 
+## 1.0.0-alpha.9
+
+`2025-12-11`
+
+- 🔥 新增 `less-to-cssvar` 迁移能力，支持将 Less 变量自动迁移为 CSS 变量，用法详见 [文档](https://github.com/oceanbase/oceanbase-design/blob/v1/packages/codemod/README.md#less-to-cssvar)。[#1333](https://github.com/oceanbase/oceanbase-design/pull/1333)
+  - 支持将 `@colorPrimary` 等 Less 变量转换为 `var(--ant-color-primary)` 等 CSS 变量，并自动移除 `@import '~@oceanbase/design/es/theme/index.less';` 导入语句。
+  - 支持通过 `--prefix` 参数自定义 CSS 变量前缀，默认为 `ant`。
+  - 默认将 `.less` 文件重命名为 `.css`，支持自动检测导入方式，智能添加 `.module` 后缀（CSS Module 导入 → `.module.css`，全局导入 → `.css`）。可通过 `--rename-to-css=false` 禁用。
+  - 自动将 Less 单行注释 `//` 转换为 CSS 注释 `/* */`。
+  - 自动更新 JS/TS 文件中的样式文件引用路径。
+- ⭐️ 支持更多颜色值到 Design Token 的自动改写。[#1335](https://github.com/oceanbase/oceanbase-design/pull/1335)
+  - `#1843ff` => `colorInfo`
+  - `#597ef7` => `colorInfo`
+  - `#91a9f8` => `colorInfoBg`
+  - `#ffa940` => `colorWarning`
+  - `#fed59c` => `colorWarningBg`
+  - `#eb4444` => `colorError`
+  - `#ced5e3` => `@colorTextPlaceholder`
+- 🆕 `style-to-token` 和 `less-to-token` 工具支持对 `fontWeight` 和 `borderRadius` 进行改写。[#1325](https://github.com/oceanbase/oceanbase-design/pull/1325)
+
 ## 1.0.0-alpha.6
 
 `2025-12-01`
