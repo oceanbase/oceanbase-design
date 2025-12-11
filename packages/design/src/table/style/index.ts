@@ -207,12 +207,17 @@ export const genTableStyle = (token: TableToken): CSSObject => {
                 .add(calc(token.lineWidth).mul(2).equal())
                 .add(token.padding)
                 .equal(),
+              margin: `-${unit(token.marginXS)} -${unit(token.margin)}`,
             },
           },
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
             marginLeft: calc(token.margin).add(calc(token.lineWidth).mul(2).equal()).equal(),
           },
+          [`tr > td > ${componentCls}-expanded-row-fixed > ${componentCls}-wrapper:only-child ${componentCls}`]:
+            {
+              marginLeft: -token.padding,
+            },
         },
       },
       [`${componentCls}-middle, ${componentCls}-small`]: {
