@@ -1,0 +1,21 @@
+@import '~@oceanbase/design/es/theme/index.less';
+
+.container {
+  color: @colorText;
+}
+
+:global {
+  .ant-btn {
+    background: @colorPrimary;
+    border-radius: @borderRadius;
+  }
+}
+
+:global(.ant-modal) {
+  background: @colorBgElevated;
+}
+
+.local :global(.external) {
+  color: @colorTextSecondary;
+}
+

@@ -1,0 +1,22 @@
+@import '~@oceanbase/design/es/theme/index.less';
+
+.card {
+  padding: @paddingSM @paddingLG;
+  border: 1px solid @colorBorder;
+  border-radius: @borderRadiusLG;
+  box-shadow: @boxShadow;
+  font-size: @fontSizeLG;
+  line-height: @lineHeight;
+}
+
+.text {
+  color: @colorTextSecondary;
+  font-weight: @fontWeightStrong;
+}
+
+@media (max-width: @screenMD) {
+  .card {
+    padding: @paddingXS;
+  }
+}
+

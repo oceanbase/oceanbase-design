@@ -1,0 +1,19 @@
+.card {
+  // Mixed with fixed values
+  padding: 8px var(--ant-padding-sm) 16px var(--ant-padding-lg);
+  margin: var(--ant-margin-xs) auto;
+  border: 1px solid var(--ant-color-border);
+  border-radius: var(--ant-border-radius) 0 0 var(--ant-border-radius);
+
+  // Transition with tokens
+  transition: all var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out);
+
+  // Box shadow
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), var(--ant-box-shadow-tertiary);
+}
+
+.text {
+  font: var(--ant-font-weight) var(--ant-font-size)/var(--ant-line-height) var(--ant-font-family);
+  color: var(--ant-color-text);
+}
+

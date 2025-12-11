@@ -1,0 +1,21 @@
+@import '~@oceanbase/design/es/theme/index.less';
+
+.card {
+  // Mixed with fixed values
+  padding: 8px @paddingSM 16px @paddingLG;
+  margin: @marginXS auto;
+  border: 1px solid @colorBorder;
+  border-radius: @borderRadius 0 0 @borderRadius;
+
+  // Transition with tokens
+  transition: all @motionDurationMid @motionEaseInOut;
+
+  // Box shadow
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), @boxShadowTertiary;
+}
+
+.text {
+  font: @fontWeight @fontSize/@lineHeight @fontFamily;
+  color: @colorText;
+}
+
