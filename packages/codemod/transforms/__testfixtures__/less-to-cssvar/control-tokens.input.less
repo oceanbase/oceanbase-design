@@ -1,0 +1,29 @@
+@import '~@oceanbase/design/es/theme/index.less';
+
+.button {
+  height: @controlHeight;
+  background: @colorBgContainer;
+
+  &:hover {
+    background: @controlItemBgHover;
+  }
+
+  &:active {
+    background: @controlItemBgActive;
+  }
+
+  &.disabled {
+    background: @controlItemBgActiveDisabled;
+  }
+}
+
+.input {
+  height: @controlHeightSM;
+  padding: 0 @controlPaddingHorizontal;
+}
+
+.select {
+  height: @controlHeightLG;
+  padding: 0 @controlPaddingHorizontalSM;
+}
+

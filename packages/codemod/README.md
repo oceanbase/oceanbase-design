@@ -316,3 +316,88 @@ transform fixed less style to antd v5 design token.
     }
   }
 ```
+
+### `less-to-cssvar`
+
+Transform Less variables to CSS variables. This transformer must be explicitly specified via `--transformer` option.
+
+```shell
+# Basic usage (auto-detect: CSS Module import → .module.css, global import → .css)
+npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar
+
+# With custom prefix (default: ant)
+npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --prefix=ob
+
+# Never add .module suffix (skip auto-detection)
+npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --add-module=false
+
+# Disable renaming .less to .css (keep .less extension)
+npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --rename-to-css=false
+```
+
+**Options:**
+
+| Option            | Description                                          | Default |
+| ----------------- | ---------------------------------------------------- | ------- |
+| `--prefix`        | CSS variable prefix, e.g. `var(--ant-color-primary)` | `ant`   |
+| `--rename-to-css` | Rename `.less` files to `.css`                       | `true`  |
+| `--add-module`    | Add `.module` suffix when renaming                   | `true`  |
+
+**`--add-module` 说明：**
+
+| 值      | 行为                                         |
+| ------- | -------------------------------------------- |
+| `true`  | 自动检测：根据导入方式判断是否添加 `.module` |
+| `false` | 跳过检测：统一不添加 `.module`               |
+
+**自动检测规则：**
+
+| 导入方式                                       | 结果             |
+| ---------------------------------------------- | ---------------- |
+| `import styles from './xxx.less'` (CSS Module) | `xxx.module.css` |
+| `import './xxx.less'` (全局样式)               | `xxx.css`        |
+| `global.less` / `reset.less` 等常见全局文件名  | `xxx.css`        |
+
+**Important Notes:**
+
+When `--rename-to-css` is enabled (default):
+
+1. **Comment conversion**: Less single-line comments (`//`) will be automatically converted to CSS block comments (`/* */`).
+2. **`:global` syntax**: CSS Modules `:global` syntax will continue to work in `.css` files.
+3. **Import references**: Import references in JS/TS/JSX/TSX files will be **automatically updated**:
+
+```diff
+- import './style.less';
++ import './style.css';
+```
+
+**Example:**
+
+```diff
+- @import '~@oceanbase/design/es/theme/index.less';
+  .container {
+-   color: @colorPrimary;
+-   background: @colorBgContainer;
+-   border-color: @colorBorder;
+-   font-size: @fontSize;
++   color: var(--ant-color-primary);
++   background: var(--ant-color-bg-container);
++   border-color: var(--ant-color-border);
++   font-size: var(--ant-font-size);
+  }
+
+  .status {
+    &.success {
+-     color: @colorSuccess;
+-     background: @colorSuccessBg;
++     color: var(--ant-color-success);
++     background: var(--ant-color-success-bg);
+    }
+    &.error {
+-     color: @colorError;
+-     background: @colorErrorBg;
++     color: var(--ant-color-error);
++     background: var(--ant-color-error-bg);
+    }
+  }
+```

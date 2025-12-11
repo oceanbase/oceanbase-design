@@ -1,0 +1,24 @@
+@import '~@oceanbase/design/es/theme/index.less';
+
+.wrapper {
+  background: @colorBgContainer;
+
+  .header {
+    color: @colorText;
+    font-size: @fontSizeLG;
+
+    &:hover {
+      color: @colorPrimary;
+    }
+  }
+
+  .body {
+    padding: @padding;
+    border: 1px solid @colorBorder;
+
+    > .content {
+      margin: @marginSM;
+    }
+  }
+}
+

@@ -18,6 +18,7 @@ const pkg = require('../package.json');
 const pkgUpgradeList = require('./upgrade-list');
 const { getDependencies } = require('../transforms/utils/marker');
 const { lessToToken } = require('../transforms/less-to-token');
+const { lessToCssvar } = require('../transforms/less-to-cssvar');
 
 // jscodeshift codemod scripts dir
 const transformersDir = path.join(__dirname, '../transforms');
@@ -34,6 +35,13 @@ const transformers = [
   'style-to-token',
   'less-to-token',
 ];
+
+// Transformers that must be explicitly specified via --transformer option
+// These are not run by default
+const explicitTransformers = ['less-to-cssvar'];
+
+// All available transformers
+const allTransformers = [...transformers, ...explicitTransformers];
 
 const dependencyProperties = [
   'dependencies',
@@ -101,9 +109,11 @@ function getRunnerArgs(transformerPath, parser = 'babylon', options = {}) {
 }
 
 async function run(filePath, args = {}) {
-  const targetTransformers =
-    args.transformer?.split(',')?.filter(transformer => transformers.includes(transformer)) ||
-    transformers;
+  // When --transformer is specified, filter against all available transformers
+  // Otherwise, use default transformers only (excluding explicit-only ones like less-to-cssvar)
+  const targetTransformers = args.transformer
+    ? args.transformer.split(',').filter(transformer => allTransformers.includes(transformer))
+    : transformers;
   for (const transformer of targetTransformers) {
     await transform(transformer, 'babylon', filePath, args);
   }
@@ -120,6 +130,25 @@ async function transform(transformer, parser, filePath, options) {
   try {
     if (transformer === 'less-to-token') {
       await lessToToken(filePath);
+    } else if (transformer === 'less-to-cssvar') {
+      // less-to-cssvar options:
+      // --prefix: CSS variable prefix (default: 'ant')
+      // --rename-to-css: Whether to rename .less to .css (default: true)
+      // --add-module: Whether to add .module suffix when renaming (default: true)
+      //   - true (default): auto-detect based on import style (CSS Module vs global)
+      //   - false: skip detection, never add .module
+      const addModuleValue = options['add-module'] ?? options.addModule;
+      // Default is true (auto-detect), false means skip detection
+      const addModuleOption = addModuleValue !== false && addModuleValue !== 'false';
+
+      const lessToCssvarOptions = {
+        prefix: options.prefix || 'ant',
+        // Support both --rename-to-css and --renameToCss formats
+        // Default is true, use --rename-to-css=false or --no-rename-to-css to disable
+        renameToCss: options['rename-to-css'] !== false && options.renameToCss !== false,
+        addModule: addModuleOption,
+      };
+      await lessToCssvar(filePath, lessToCssvarOptions);
     } else {
       if (process.env.NODE_ENV === 'local') {
         console.log(`Running jscodeshift with: ${JSON.stringify(args)}`);
@@ -282,6 +311,13 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
  * --disablePrettier     // disable prettier
  * --transformer=t1,t2   // specify target transformer
  * --ignore-config       // ignore config file
+ *
+ * less-to-cssvar specific options:
+ * --prefix=ant          // CSS variable prefix (default: 'ant'), e.g. var(--ant-color-primary)
+ * --rename-to-css       // rename .less files to .css (default: true), use --rename-to-css=false to disable
+ * --add-module          // add .module suffix when renaming (default: true)
+ *                       // true: auto-detect based on import style (CSS Module vs global)
+ *                       // false: skip detection, never add .module
  */
 
 async function bootstrap() {
