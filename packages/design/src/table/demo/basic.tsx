@@ -1,5 +1,5 @@
-import { Table } from '@oceanbase/design';
 import React from 'react';
+import { Table } from '@oceanbase/design';
 
 const App: React.FC = () => {
   const columns = [
