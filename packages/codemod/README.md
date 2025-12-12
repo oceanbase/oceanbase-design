@@ -419,3 +419,58 @@ When `--rename-to` is set to `css` or `scss` (default: `css`):
     }
   }
 ```
+
+### `sass-to-cssvar`
+
+Transform SASS/SCSS variables to CSS variables. This transformer must be explicitly specified via `--transformer` option.
+
+```shell
+# Basic usage
+npx -p @oceanbase/codemod codemod src --transformer=sass-to-cssvar
+
+# With custom prefix (default: ant)
+npx -p @oceanbase/codemod codemod src --transformer=sass-to-cssvar --prefix=ob
+```
+
+**Options:**
+
+| Option     | Description                                          | Default |
+| ---------- | ---------------------------------------------------- | ------- |
+| `--prefix` | CSS variable prefix, e.g. `var(--ant-color-primary)` | `ant`   |
+
+**Important Notes:**
+
+1. **File format**: Supports both `.sass` and `.scss` files.
+2. **Variable syntax**: Converts SASS variables (`$variableName`) to CSS variables (`var(--prefix-variable-name)`).
+3. **Token matching**: Only converts variables that match tokens from `@oceanbase/design` theme.
+4. **No file renaming**: Files keep their original `.sass` or `.scss` extension.
+
+**Example:**
+
+```diff
+  .container {
+-   color: $colorPrimary;
+-   background: $colorBgContainer;
+-   border-color: $colorBorder;
+-   font-size: $fontSize;
++   color: var(--ant-color-primary);
++   background: var(--ant-color-bg-container);
++   border-color: var(--ant-color-border);
++   font-size: var(--ant-font-size);
+  }
+
+  .status {
+    &.success {
+-     color: $colorSuccess;
+-     background: $colorSuccessBg;
++     color: var(--ant-color-success);
++     background: var(--ant-color-success-bg);
+    }
+    &.error {
+-     color: $colorError;
+-     background: $colorErrorBg;
++     color: var(--ant-color-error);
++     background: var(--ant-color-error-bg);
+    }
+  }
+```

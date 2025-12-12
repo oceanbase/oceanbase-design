@@ -1,0 +1,18 @@
+.container {
+  color: $colorPrimary;
+  background: $colorBgContainer;
+  border-color: $colorBorder;
+  font-size: $fontSize;
+}
+
+.status {
+  &.success {
+    color: $colorSuccess;
+    background: $colorSuccessBg;
+  }
+  &.error {
+    color: $colorError;
+    background: $colorErrorBg;
+  }
+}
+
