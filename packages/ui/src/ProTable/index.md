@@ -18,6 +18,7 @@ nav:
 <code src="./demo/expandable.tsx" title="可展开表格"></code>
 <code src="./demo/bordered.tsx" title="卡片不带边框、表格带边框"></code>
 <code src="./demo/empty.tsx" title="空状态"></code>
+<code src="./demo/link.tsx" title="带链接" debug></code>
 
 ## API
 

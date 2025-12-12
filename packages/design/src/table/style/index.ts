@@ -78,6 +78,8 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           transition: `background ${token.motionDurationMid}`,
           a: {
             fontWeight: token.fontWeightStrong,
+            // work for ProTable link style
+            fontSize: token.fontSizeSM,
           },
         },
         // empty style
