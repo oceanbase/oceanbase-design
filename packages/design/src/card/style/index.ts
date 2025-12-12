@@ -152,7 +152,7 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       [`${componentCls}-body`]: {
         [`& > ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
           {
-            marginTop: calc(token.marginSM).mul(-1).equal(),
+            marginTop: calc(token.Table?.cellPaddingBlock).mul(-1).equal(),
           },
       },
     },
