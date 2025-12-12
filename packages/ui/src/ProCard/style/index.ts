@@ -15,6 +15,16 @@ export const genProCardStyle = (token: OBToken, outerComponentCls?: string): CSS
     [`div${componentCls}`]: {
       borderRadius: token.borderRadiusLG,
     },
+    [`${componentCls}${componentCls}-no-divider`]: {
+      [`${componentCls}-header`]: {
+        paddingBlockStart: token.paddingLG,
+      },
+    },
+    [`${componentCls}${componentCls}-size-small${componentCls}-no-divider`]: {
+      [`${componentCls}-header`]: {
+        paddingBlockStart: token.paddingSM,
+      },
+    },
     [`${componentCls}${componentCls}-border`]: {
       border: `${token.lineWidth}px solid ${token.colorBorderSecondary}`,
     },
