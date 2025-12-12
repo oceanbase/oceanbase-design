@@ -391,24 +391,26 @@ async function isImportedAsCssModule(lessFilePath, baseDir) {
 }
 
 /**
- * Get the new file path when renaming from .less to .css
+ * Get the new file path when renaming from .less to .css or .scss
  * @param {string} filePath - Original file path
  * @param {boolean} shouldAddModule - Whether to add .module suffix
+ * @param {string} outputFormat - Output format: 'css' or 'scss' (default: 'css')
  * @returns {string} - New file path
  */
-function getNewCssPath(filePath, shouldAddModule) {
+function getNewCssPath(filePath, shouldAddModule, outputFormat = 'css') {
+  const extension = outputFormat === 'scss' ? '.scss' : '.css';
   // Check if file already has .module in the name
   const hasModule = /\.module\.less$/.test(filePath);
 
   if (hasModule) {
     // Already has .module, just change extension
-    return filePath.replace(/\.less$/, '.css');
+    return filePath.replace(/\.less$/, extension);
   } else if (shouldAddModule) {
-    // Add .module before .css
-    return filePath.replace(/\.less$/, '.module.css');
+    // Add .module before extension
+    return filePath.replace(/\.less$/, `.module${extension}`);
   } else {
     // Just change extension
-    return filePath.replace(/\.less$/, '.css');
+    return filePath.replace(/\.less$/, extension);
   }
 }
 
@@ -417,22 +419,41 @@ function getNewCssPath(filePath, shouldAddModule) {
  * @param {string} file - File or directory path
  * @param {object} options - Transform options
  * @param {string} options.prefix - CSS variable prefix (default: 'ant')
- * @param {boolean} options.renameToCss - Whether to rename .less to .css (default: true)
+ * @param {string|boolean} options.renameTo - Target format: 'css', 'scss', or false to keep .less (default: 'css')
  * @param {boolean} options.addModule - Whether to add .module suffix when renaming (default: true)
- *   - true (default): Auto-detect based on import style (CSS Module import → .module.css, global import → .css)
+ *   - true (default): Auto-detect based on import style (CSS Module import → .module.css/.scss, global import → .css/.scss)
  *   - false: Skip detection, never add .module suffix
+ * @param {boolean} options._explicitAddModule - Internal flag: whether addModule was explicitly specified by user
  */
 async function lessToCssvar(file, options = {}) {
-  const { prefix = 'ant', renameToCss = true, addModule = true } = options;
+  let { prefix = 'ant', renameTo = 'css', addModule = true, _explicitAddModule = false } = options;
   const allLessFiles = findAllLessFiles(file);
   const renamedFiles = [];
   const baseDir = isDirectory.sync(file) ? file : path.dirname(file);
 
+  // Determine output format
+  let outputFormat = 'css';
+  let shouldRename = true;
+  if (renameTo === false || renameTo === 'false') {
+    shouldRename = false;
+    // When not renaming, disable addModule by default (only if not explicitly specified)
+    // No point in adding .module to .less files, but respect user's explicit choice
+    if (!_explicitAddModule && addModule === true) {
+      addModule = false;
+    }
+  } else if (renameTo === 'scss' || renameTo === true) {
+    // Support both 'scss' string and true (for backward compatibility)
+    outputFormat = renameTo === 'scss' ? 'scss' : 'css';
+  } else if (typeof renameTo === 'string') {
+    outputFormat = renameTo.toLowerCase() === 'scss' ? 'scss' : 'css';
+  }
+
   for await (const item of allLessFiles) {
     let { content, hasTransformations } = await transform(item, { prefix });
 
-    // If renaming to CSS, convert Less comments to CSS comments
-    if (renameToCss) {
+    // If renaming to CSS, convert Less comments
+    // Note: SCSS supports // comments, so only convert for CSS
+    if (shouldRename && outputFormat === 'css') {
       const convertedContent = convertLessCommentsToCss(content);
       if (convertedContent !== content) {
         content = convertedContent;
@@ -442,8 +463,8 @@ async function lessToCssvar(file, options = {}) {
 
     fs.writeFileSync(item, content);
 
-    // Rename .less to .css if option is enabled
-    if (renameToCss && hasTransformations) {
+    // Rename .less to .css/.scss if option is enabled
+    if (shouldRename && hasTransformations) {
       // Determine whether to add .module suffix
       let shouldAddModule;
       if (addModule) {
@@ -454,7 +475,7 @@ async function lessToCssvar(file, options = {}) {
         shouldAddModule = false;
       }
 
-      const newPath = getNewCssPath(item, shouldAddModule);
+      const newPath = getNewCssPath(item, shouldAddModule, outputFormat);
       if (newPath !== item) {
         fs.renameSync(item, newPath);
         console.log(`  Renamed: ${item} -> ${newPath}`);
@@ -464,7 +485,7 @@ async function lessToCssvar(file, options = {}) {
   }
 
   // Update import references in JS/TS files
-  if (renameToCss && renamedFiles.length > 0) {
+  if (shouldRename && renamedFiles.length > 0) {
     console.log(`\n  Updating import references...`);
     await updateImportReferences(baseDir, renamedFiles);
   }
@@ -477,6 +498,7 @@ module.exports = {
   convertLessCommentsToCss,
   updateImportReferences,
   getLessTokensFromTheme,
+  getNewCssPath,
   camelToKebab,
   LESS_TOKENS,
 };

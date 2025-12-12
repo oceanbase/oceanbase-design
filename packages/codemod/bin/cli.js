@@ -133,20 +133,46 @@ async function transform(transformer, parser, filePath, options) {
     } else if (transformer === 'less-to-cssvar') {
       // less-to-cssvar options:
       // --prefix: CSS variable prefix (default: 'ant')
-      // --rename-to-css: Whether to rename .less to .css (default: true)
+      // --rename-to: Target format: 'css', 'scss', or false to keep .less (default: 'css')
       // --add-module: Whether to add .module suffix when renaming (default: true)
       //   - true (default): auto-detect based on import style (CSS Module vs global)
       //   - false: skip detection, never add .module
+
+      // Check if user explicitly specified --add-module
+      const hasExplicitAddModule =
+        options['add-module'] !== undefined || options.addModule !== undefined;
       const addModuleValue = options['add-module'] ?? options.addModule;
       // Default is true (auto-detect), false means skip detection
-      const addModuleOption = addModuleValue !== false && addModuleValue !== 'false';
+      let addModuleOption = addModuleValue !== false && addModuleValue !== 'false';
+
+      // Parse --rename-to option: 'css', 'scss', or false
+      let renameToOption = 'css'; // default
+      const renameToValue = options['rename-to'] ?? options.renameTo;
+      if (renameToValue === false || renameToValue === 'false') {
+        renameToOption = false;
+        // When renameTo is false, disable addModule by default (only if not explicitly specified)
+        if (!hasExplicitAddModule && addModuleOption === true) {
+          addModuleOption = false;
+        }
+      } else if (renameToValue === 'scss' || renameToValue === true) {
+        renameToOption = renameToValue === 'scss' ? 'scss' : 'css';
+      } else if (typeof renameToValue === 'string') {
+        renameToOption = renameToValue.toLowerCase() === 'scss' ? 'scss' : 'css';
+      }
+      // Backward compatibility: support --rename-to-css=false
+      else if (options['rename-to-css'] === false || options.renameToCss === false) {
+        renameToOption = false;
+        // When renameTo is false, disable addModule by default (only if not explicitly specified)
+        if (!hasExplicitAddModule && addModuleOption === true) {
+          addModuleOption = false;
+        }
+      }
 
       const lessToCssvarOptions = {
         prefix: options.prefix || 'ant',
-        // Support both --rename-to-css and --renameToCss formats
-        // Default is true, use --rename-to-css=false or --no-rename-to-css to disable
-        renameToCss: options['rename-to-css'] !== false && options.renameToCss !== false,
+        renameTo: renameToOption,
         addModule: addModuleOption,
+        _explicitAddModule: hasExplicitAddModule, // Pass flag to indicate explicit user choice
       };
       await lessToCssvar(filePath, lessToCssvarOptions);
     } else {
@@ -314,7 +340,7 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
  *
  * less-to-cssvar specific options:
  * --prefix=ant          // CSS variable prefix (default: 'ant'), e.g. var(--ant-color-primary)
- * --rename-to-css       // rename .less files to .css (default: true), use --rename-to-css=false to disable
+ * --rename-to           // target format: 'css' (default), 'scss', or false to keep .less
  * --add-module          // add .module suffix when renaming (default: true)
  *                       // true: auto-detect based on import style (CSS Module vs global)
  *                       // false: skip detection, never add .module
