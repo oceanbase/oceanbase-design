@@ -325,23 +325,37 @@ Transform Less variables to CSS variables. This transformer must be explicitly s
 # Basic usage (auto-detect: CSS Module import → .module.css, global import → .css)
 npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar
 
+# Output as .scss instead of .css
+npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --rename-to=scss
+
 # With custom prefix (default: ant)
 npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --prefix=ob
 
 # Never add .module suffix (skip auto-detection)
 npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --add-module=false
 
-# Disable renaming .less to .css (keep .less extension)
-npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --rename-to-css=false
+# Keep .less extension (disable renaming)
+npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --rename-to=false
+
+# Combine options: output as .scss with custom prefix
+npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --rename-to=scss --prefix=ob
 ```
 
 **Options:**
 
-| Option            | Description                                          | Default |
-| ----------------- | ---------------------------------------------------- | ------- |
-| `--prefix`        | CSS variable prefix, e.g. `var(--ant-color-primary)` | `ant`   |
-| `--rename-to-css` | Rename `.less` files to `.css`                       | `true`  |
-| `--add-module`    | Add `.module` suffix when renaming                   | `true`  |
+| Option         | Description                                              | Default |
+| -------------- | -------------------------------------------------------- | ------- |
+| `--prefix`     | CSS variable prefix, e.g. `var(--ant-color-primary)`     | `ant`   |
+| `--rename-to`  | Target format: `css`, `scss`, or `false` to keep `.less` | `css`   |
+| `--add-module` | Add `.module` suffix when renaming                       | `true`  |
+
+**`--rename-to` 说明：**
+
+| 值      | 行为                          | 示例                        |
+| ------- | ----------------------------- | --------------------------- |
+| `css`   | 输出为 `.css` 文件（默认）    | `style.less` → `style.css`  |
+| `scss`  | 输出为 `.scss` 文件           | `style.less` → `style.scss` |
+| `false` | 保持 `.less` 扩展名，不重命名 | `style.less` → `style.less` |
 
 **`--add-module` 说明：**
 
@@ -350,25 +364,29 @@ npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --rename-to-c
 | `true`  | 自动检测：根据导入方式判断是否添加 `.module` |
 | `false` | 跳过检测：统一不添加 `.module`               |
 
+**注意**：当 `--rename-to=false` 时，如果用户没有显式指定 `--add-module`，则 `--add-module` 会自动设置为 `false`（因为不重命名文件时，添加 `.module` 后缀没有意义）。如果用户显式指定了 `--add-module`，则使用用户指定的值。
+
 **自动检测规则：**
 
-| 导入方式                                       | 结果             |
-| ---------------------------------------------- | ---------------- |
-| `import styles from './xxx.less'` (CSS Module) | `xxx.module.css` |
-| `import './xxx.less'` (全局样式)               | `xxx.css`        |
-| `global.less` / `reset.less` 等常见全局文件名  | `xxx.css`        |
+| 导入方式                                       | 结果（CSS）      | 结果（SCSS）      |
+| ---------------------------------------------- | ---------------- | ----------------- |
+| `import styles from './xxx.less'` (CSS Module) | `xxx.module.css` | `xxx.module.scss` |
+| `import './xxx.less'` (全局样式)               | `xxx.css`        | `xxx.scss`        |
+| `global.less` / `reset.less` 等常见全局文件名  | `xxx.css`        | `xxx.scss`        |
 
 **Important Notes:**
 
-When `--rename-to-css` is enabled (default):
+When `--rename-to` is set to `css` or `scss` (default: `css`):
 
-1. **Comment conversion**: Less single-line comments (`//`) will be automatically converted to CSS block comments (`/* */`).
-2. **`:global` syntax**: CSS Modules `:global` syntax will continue to work in `.css` files.
+1. **Comment conversion**:
+   - For `.css` output: Less single-line comments (`//`) will be automatically converted to CSS block comments (`/* */`).
+   - For `.scss` output: Comments are kept as `//` (SCSS supports single-line comments).
+2. **`:global` syntax**: CSS Modules `:global` syntax will continue to work in `.module.css` or `.module.scss` files.
 3. **Import references**: Import references in JS/TS/JSX/TSX files will be **automatically updated**:
 
 ```diff
 - import './style.less';
-+ import './style.css';
++ import './style.css';  // or './style.scss' if --rename-to=scss
 ```
 
 **Example:**
