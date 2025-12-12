@@ -27,6 +27,13 @@ const App: React.FC = () => {
         );
       },
     },
+    {
+      title: '操作',
+      dataIndex: 'action',
+      render: (text: string, record: any) => {
+        return <Button>编辑</Button>;
+      },
+    },
   ];
 
   const dataSource = [];

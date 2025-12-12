@@ -24,6 +24,7 @@ markdown: |
 <code src="./demo/inner-bordered.tsx" title="带内部边框" description="仅表格内部添加边框线。"></code>
 <code src="./demo/ellipsis.tsx" title="单元格自动省略" description="设置 `column.ellipsis` 可以让单元格内容根据宽度自动省略，并使用 Tooltip 展示全部内容。`说明`: 列头缩略暂不支持和排序筛选一起使用。"></code>
 <code src="./demo/fixed-columns-header-tables.tsx" title="固定头和列"></code>
+<code src="./demo/filter-and-sorter.tsx" title="筛选和排序"></code>
 <code src="./demo/row-selection.tsx" title="选择和操作"></code>
 <code src="./demo/expandable.tsx" title="可展开"></code>
 <code src="./demo/nesting-tables.tsx" title="嵌套子表格"></code>
@@ -38,6 +39,7 @@ markdown: |
 <code src="./demo/card-table.tsx" title="和 Card 组合使用"></code>
 <code src="./demo/pro-card-table.tsx" title="和 ProCard 组合使用" debug></code>
 <code src="./demo/empty.tsx" title="空状态"></code>
+<code src="./demo/button.tsx" title="带按钮" description="单元格内的按钮默认为小尺寸" debug></code>
 
 ## API
 
