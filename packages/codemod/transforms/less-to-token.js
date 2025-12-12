@@ -4,6 +4,7 @@ const postcss = require('postcss');
 const postcssLess = require('postcss-less');
 const isDirectory = require('is-directory');
 const { tokenParse, propertyTokenParse } = require('./utils/token');
+const { shouldExcludePath } = require('./utils/path-utils');
 
 /**
  * Find all less files in the directory
@@ -18,7 +19,7 @@ const findAllLessFiles = dir => {
     files.forEach(file => {
       const filePath = path.join(dir, file);
       if (isDirectory.sync(filePath)) {
-        if (filePath.includes('.umi') || filePath.includes('.umi-production')) {
+        if (shouldExcludePath(filePath)) {
           return;
         }
         lessFiles.push(...findAllLessFiles(filePath));

@@ -4,6 +4,7 @@ const postcss = require('postcss');
 const postcssLess = require('postcss-less');
 const isDirectory = require('is-directory');
 const { glob } = require('glob');
+const { shouldExcludePath } = require('./utils/path-utils');
 
 /**
  * Get Less tokens from @oceanbase/design theme Less file
@@ -74,7 +75,7 @@ const findAllLessFiles = dir => {
     files.forEach(file => {
       const filePath = path.join(dir, file);
       if (isDirectory.sync(filePath)) {
-        if (filePath.includes('.umi') || filePath.includes('.umi-production')) {
+        if (shouldExcludePath(filePath)) {
           return;
         }
         lessFiles.push(...findAllLessFiles(filePath));

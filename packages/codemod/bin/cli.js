@@ -13,12 +13,14 @@ const { run: jscodeshift } = require('jscodeshift/src/Runner');
 const execa = require('execa');
 const isDirectory = require('is-directory');
 const commandExistsSync = require('command-exists').sync;
+const { readPackageUp } = require('read-pkg-up');
 
 const pkg = require('../package.json');
 const pkgUpgradeList = require('./upgrade-list');
 const { getDependencies } = require('../transforms/utils/marker');
 const { lessToToken } = require('../transforms/less-to-token');
 const { lessToCssvar } = require('../transforms/less-to-cssvar');
+const { sassToCssvar } = require('../transforms/sass-to-cssvar');
 
 // jscodeshift codemod scripts dir
 const transformersDir = path.join(__dirname, '../transforms');
@@ -38,7 +40,7 @@ const transformers = [
 
 // Transformers that must be explicitly specified via --transformer option
 // These are not run by default
-const explicitTransformers = ['less-to-cssvar'];
+const explicitTransformers = ['less-to-cssvar', 'sass-to-cssvar'];
 
 // All available transformers
 const allTransformers = [...transformers, ...explicitTransformers];
@@ -117,6 +119,8 @@ async function run(filePath, args = {}) {
   for (const transformer of targetTransformers) {
     await transform(transformer, 'babylon', filePath, args);
   }
+  // Return executed transformers for checking if we should skip dependency detection
+  return targetTransformers;
 }
 
 async function transform(transformer, parser, filePath, options) {
@@ -175,6 +179,13 @@ async function transform(transformer, parser, filePath, options) {
         _explicitAddModule: hasExplicitAddModule, // Pass flag to indicate explicit user choice
       };
       await lessToCssvar(filePath, lessToCssvarOptions);
+    } else if (transformer === 'sass-to-cssvar') {
+      // sass-to-cssvar options:
+      // --prefix: CSS variable prefix (default: 'ant')
+      const sassToCssvarOptions = {
+        prefix: options.prefix || 'ant',
+      };
+      await sassToCssvar(filePath, sassToCssvarOptions);
     } else {
       if (process.env.NODE_ENV === 'local') {
         console.log(`Running jscodeshift with: ${JSON.stringify(args)}`);
@@ -191,6 +202,60 @@ async function transform(transformer, parser, filePath, options) {
       fs.appendFileSync(errorLogFile, '\n');
     }
   }
+}
+
+/**
+ * Detect which package manager to use
+ * Priority:
+ * 1. Check lockfile files (pnpm-lock.yaml, yarn.lock, package-lock.json)
+ * 2. Check package.json packageManager field
+ * 3. Check if commands exist (pnpm > yarn > tnpm > npm)
+ * @param {string} cwd - Current working directory
+ * @returns {Promise<string>} - Package manager command name
+ */
+async function detectPackageManager(cwd) {
+  // 1. Check for lockfiles
+  const lockfiles = {
+    'pnpm-lock.yaml': 'pnpm',
+    'yarn.lock': 'yarn',
+    'package-lock.json': 'npm',
+  };
+
+  for (const [lockfile, manager] of Object.entries(lockfiles)) {
+    const lockfilePath = path.join(cwd, lockfile);
+    if (fs.existsSync(lockfilePath)) {
+      if (commandExistsSync(manager)) {
+        return manager;
+      }
+    }
+  }
+
+  // 2. Check package.json for packageManager field
+  try {
+    const { readPackageUp } = await import('read-pkg-up');
+    const pkgResult = await readPackageUp({ cwd });
+    if (pkgResult?.packageJson?.packageManager) {
+      const packageManager = pkgResult.packageJson.packageManager;
+      // Format: "pnpm@8.6.0" or "yarn@3.0.0"
+      const manager = packageManager.split('@')[0];
+      if (commandExistsSync(manager)) {
+        return manager;
+      }
+    }
+  } catch (e) {
+    // Ignore errors
+  }
+
+  // 3. Check if commands exist in priority order
+  const managers = ['pnpm', 'yarn', 'tnpm', 'npm'];
+  for (const manager of managers) {
+    if (commandExistsSync(manager)) {
+      return manager;
+    }
+  }
+
+  // Fallback to npm
+  return 'npm';
 }
 
 async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
@@ -281,7 +346,7 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
     )
   );
   console.log(`> Update package.json file: ${pkgJsonPath} \n`);
-  const npmCommand = commandExistsSync('tnpm') ? 'tnpm' : 'npm';
+  const npmCommand = await detectPackageManager(cwd);
 
   // install dependencies
   console.log(`New package installing...\n`);
@@ -334,7 +399,7 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
  * options
  * --force               // force skip git checking (dangerously)
  * --cpus=1              // specify cpus cores to use
- * --disablePrettier     // disable prettier
+ * --disablePrettier     // disable prettier (default: true, use --disablePrettier=false to enable)
  * --transformer=t1,t2   // specify target transformer
  * --ignore-config       // ignore config file
  *
@@ -344,6 +409,9 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
  * --add-module          // add .module suffix when renaming (default: true)
  *                       // true: auto-detect based on import style (CSS Module vs global)
  *                       // false: skip detection, never add .module
+ *
+ * sass-to-cssvar specific options:
+ * --prefix=ant          // CSS variable prefix (default: 'ant'), e.g. var(--ant-color-primary)
  */
 
 async function bootstrap() {
@@ -375,9 +443,12 @@ async function bootstrap() {
     process.exit(1);
   }
 
-  await run(dir, args);
+  const executedTransformers = await run(dir, args);
 
-  if (!args.disablePrettier) {
+  // Default: disablePrettier is true (don't run prettier by default)
+  // User can enable prettier by passing --disablePrettier=false
+  const shouldRunPrettier = args.disablePrettier === false || args.disablePrettier === 'false';
+  if (shouldRunPrettier) {
     console.log('----------- Prettier Format -----------\n');
     console.log('[Prettier] format files running...');
     try {
@@ -391,19 +462,28 @@ async function bootstrap() {
     }
   }
 
-  try {
-    console.log('----------- Dependencies Alert -----------\n');
-    const depsList = await getDependencies();
-    await upgradeDetect(
-      dir,
-      depsList.includes('@oceanbase/charts'),
-      depsList.includes('@oceanbase/util')
-    );
-  } catch (err) {
-    console.log('skip summary due to', err);
-  } finally {
-    console.log(`\n----------- Thanks for using @oceanbase/codemod ${pkg.version} -----------`);
+  // Skip dependency detection if only explicit transformers are executed
+  // Explicit transformers (less-to-cssvar, sass-to-cssvar) only do code transformation
+  // and don't require dependency installation
+  const onlyExplicitTransformers =
+    executedTransformers.length > 0 &&
+    executedTransformers.every(t => explicitTransformers.includes(t));
+
+  if (!onlyExplicitTransformers) {
+    try {
+      console.log('----------- Dependencies Alert -----------\n');
+      const depsList = await getDependencies();
+      await upgradeDetect(
+        dir,
+        depsList.includes('@oceanbase/charts'),
+        depsList.includes('@oceanbase/util')
+      );
+    } catch (err) {
+      console.log('skip summary due to', err);
+    }
   }
+
+  console.log(`\n----------- Thanks for using @oceanbase/codemod ${pkg.version} -----------`);
 }
 
 module.exports = {
