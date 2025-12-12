@@ -47,7 +47,7 @@ export const genProCardStyle = (token: OBToken, outerComponentCls?: string): CSS
       [`${componentCls}-body`]: {
         [`& > ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
           {
-            marginTop: -token.marginSM,
+            marginTop: -token.Table?.cellPaddingBlock,
           },
       },
     },
