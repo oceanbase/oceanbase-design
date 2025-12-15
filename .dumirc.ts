@@ -34,6 +34,73 @@ export default defineConfig({
     if (fs.existsSync(esPath) && fs.existsSync(libPath)) {
       config.plugin('antd-alias').use(AntdAliasWebpackPlugin);
     }
+    // 仅为 shadcn 的 CSS 文件配置 Tailwind CSS
+    const shadcnTailwindConfig = path.join(__dirname, 'packages/shadcn/tailwind.config.js');
+
+    // 为 shadcn CSS 文件创建专门的 oneOf rule，确保在默认 rule 之前匹配
+    // 使用 before 确保优先级
+    config.module
+      .rule('css')
+      .oneOf('shadcn')
+      .before('normal')
+      .test(/packages\/shadcn\/src\/.*\.css$/)
+      .use('css-loader')
+      .loader(require.resolve('css-loader'))
+      .options({
+        importLoaders: 1,
+        esModule: true,
+      })
+      .end()
+      .use('postcss-loader')
+      .loader(require.resolve('postcss-loader'))
+      .options({
+        postcssOptions: {
+          plugins: [require('tailwindcss')(shadcnTailwindConfig), require('autoprefixer')],
+        },
+      });
+    // 解决不同包的相同组件名导致的 chunk 名称冲突
+    config.plugin('normalize-chunk-names').use(
+      class NormalizeChunkNamesPlugin {
+        apply(compiler) {
+          compiler.hooks.compilation.tap('NormalizeChunkNamesPlugin', compilation => {
+            compilation.hooks.beforeChunkIds.tap('NormalizeChunkNamesPlugin', chunks => {
+              chunks.forEach(chunk => {
+                if (!chunk.name?.includes('__demos')) {
+                  return;
+                }
+
+                // 检查 chunk 中的模块路径，确定来源包
+                const modules = Array.from(chunk.modulesIterable || []);
+                let packagePrefix = '';
+
+                for (const module of modules) {
+                  const resource = (module as any)?.resource || '';
+                  if (resource.includes('packages/shadcn/src')) {
+                    packagePrefix = '__shadcn';
+                    break;
+                  } else if (resource.includes('packages/ui/src')) {
+                    packagePrefix = '__ui';
+                    break;
+                  }
+                }
+
+                // 如果找到包前缀且 chunk 名称还没有该前缀，则添加
+                if (packagePrefix && !chunk.name.includes(packagePrefix)) {
+                  const normalizedName = chunk.name.replace('__demos', `${packagePrefix}__demos`);
+                  chunk.name = normalizedName;
+                  if (chunk.id) {
+                    chunk.id = normalizedName;
+                  }
+                  if (chunk.ids?.length > 0) {
+                    chunk.ids = [normalizedName];
+                  }
+                }
+              });
+            });
+          });
+        }
+      }
+    );
     return config;
   },
   outputPath: 'site',
@@ -108,6 +175,7 @@ export default defineConfig({
       { type: 'component', dir: 'packages/design/src' },
       { type: 'biz-component', dir: 'packages/ui/src' },
       { type: 'chart', dir: 'packages/charts/src' },
+      { type: 'shadcn', dir: 'packages/shadcn/src' },
     ],
     codeBlockMode: 'passive',
   },
@@ -125,6 +193,7 @@ export default defineConfig({
     '@oceanbase/charts': path.join(__dirname, 'packages/charts/src'),
     '@oceanbase/charts/es': path.join(__dirname, 'packages/charts/src'),
     '@oceanbase/util': path.join(__dirname, 'packages/util/src'),
+    '@oceanbase/shadcn': path.join(__dirname, 'packages/shadcn/src'),
   },
   favicons: [
     'https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original',
@@ -320,6 +389,90 @@ export default defineConfig({
               title: 'Tiny 迷你图',
               link: '/charts/tiny',
             },
+          ],
+        },
+      ],
+      '/shadcns': [
+        {
+          title: '通用',
+          children: [
+            { title: 'Button 按钮', link: '/shadcns/button' },
+            { title: 'Badge 徽章', link: '/shadcns/badge' },
+            { title: 'Avatar 头像', link: '/shadcns/avatar' },
+            { title: 'Skeleton 骨架屏', link: '/shadcns/skeleton' },
+            { title: 'Spinner 加载', link: '/shadcns/spinner' },
+          ],
+        },
+        {
+          title: '布局',
+          children: [
+            { title: 'Card 卡片', link: '/shadcns/card' },
+            { title: 'Separator 分割线', link: '/shadcns/separator' },
+            { title: 'AspectRatio 宽高比', link: '/shadcns/aspect-ratio' },
+            { title: 'Resizable 可调整大小', link: '/shadcns/resizable' },
+            { title: 'ScrollArea 滚动区域', link: '/shadcns/scroll-area' },
+          ],
+        },
+        {
+          title: '数据展示',
+          children: [
+            { title: 'Alert 提示', link: '/shadcns/alert' },
+            { title: 'Table 表格', link: '/shadcns/table' },
+            { title: 'Tabs 标签页', link: '/shadcns/tabs' },
+            { title: 'Accordion 手风琴', link: '/shadcns/accordion' },
+            { title: 'Collapsible 折叠', link: '/shadcns/collapsible' },
+            { title: 'Empty 空状态', link: '/shadcns/empty' },
+            { title: 'Progress 进度条', link: '/shadcns/progress' },
+          ],
+        },
+        {
+          title: '数据录入',
+          children: [
+            { title: 'Input 输入框', link: '/shadcns/input' },
+            { title: 'Textarea 文本域', link: '/shadcns/textarea' },
+            { title: 'Checkbox 复选框', link: '/shadcns/checkbox' },
+            { title: 'RadioGroup 单选框', link: '/shadcns/radio-group' },
+            { title: 'Switch 开关', link: '/shadcns/switch' },
+            { title: 'Select 选择器', link: '/shadcns/select' },
+            { title: 'Slider 滑块', link: '/shadcns/slider' },
+            { title: 'Calendar 日历', link: '/shadcns/calendar' },
+            { title: 'Form 表单', link: '/shadcns/form' },
+          ],
+        },
+        {
+          title: '反馈',
+          children: [
+            { title: 'Dialog 对话框', link: '/shadcns/dialog' },
+            { title: 'AlertDialog 警告对话框', link: '/shadcns/alert-dialog' },
+            { title: 'Drawer 抽屉', link: '/shadcns/drawer' },
+            { title: 'Sheet 侧边栏', link: '/shadcns/sheet' },
+            { title: 'Popover 气泡卡片', link: '/shadcns/popover' },
+            { title: 'Tooltip 文字提示', link: '/shadcns/tooltip' },
+            { title: 'HoverCard 悬停卡片', link: '/shadcns/hover-card' },
+            { title: 'Sonner 通知', link: '/shadcns/sonner' },
+          ],
+        },
+        {
+          title: '导航',
+          children: [
+            { title: 'Breadcrumb 面包屑', link: '/shadcns/breadcrumb' },
+            { title: 'NavigationMenu 导航菜单', link: '/shadcns/navigation-menu' },
+            { title: 'Menubar 菜单栏', link: '/shadcns/menubar' },
+            { title: 'DropdownMenu 下拉菜单', link: '/shadcns/dropdown-menu' },
+            { title: 'ContextMenu 右键菜单', link: '/shadcns/context-menu' },
+            { title: 'Pagination 分页', link: '/shadcns/pagination' },
+            { title: 'Sidebar 侧边栏', link: '/shadcns/sidebar' },
+          ],
+        },
+        {
+          title: '其他',
+          children: [
+            { title: 'Command 命令面板', link: '/shadcns/command' },
+            { title: 'Toggle 切换', link: '/shadcns/toggle' },
+            { title: 'Label 标签', link: '/shadcns/label' },
+            { title: 'Kbd 键盘按键', link: '/shadcns/kbd' },
+            { title: 'Carousel 轮播', link: '/shadcns/carousel' },
+            { title: 'Chart 图表', link: '/shadcns/chart' },
           ],
         },
       ],

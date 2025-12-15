@@ -13,6 +13,8 @@
       "@oceanbase/ui/es/*": ["packages/ui/src/*"],
       "@oceanbase/charts": ["packages/charts/src/index.ts"],
       "@oceanbase/charts/es/*": ["packages/charts/src/*"],
+      "@oceanbase/shadcn": ["packages/shadcn/src/index.ts"],
+      "@oceanbase/shadcn/*": ["packages/shadcn/src/*"],
       "dumi/theme/*": [".dumi/theme/*"]
     }
   },

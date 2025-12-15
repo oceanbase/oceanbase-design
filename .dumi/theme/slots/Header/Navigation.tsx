@@ -113,6 +113,8 @@ export default ({
     activeMenuItem = 'docs/react';
   } else if (pathname.startsWith('/docs/resources')) {
     activeMenuItem = 'docs/resources';
+  } else if (pathname.startsWith('/shadcns')) {
+    activeMenuItem = 'shadcns';
   }
 
   let additional: MenuProps['items'];
@@ -175,6 +177,10 @@ export default ({
     {
       label: <Link to={`/charts/stat${search}`}>可视化图表</Link>,
       key: 'charts',
+    },
+    {
+      label: <Link to={`/shadcns/button${search}`}>Shadcn UI</Link>,
+      key: 'shadcns',
     },
     {
       label: <Link to={`/docs/blog/chart-classification-palette-design-guide${search}`}>博客</Link>,

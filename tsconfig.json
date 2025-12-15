@@ -26,7 +26,9 @@
       "@oceanbase/ui/locale/*": ["packages/ui/src/locale/*"],
       "@oceanbase/charts": ["packages/charts/src/index.ts"],
       "@oceanbase/charts/es/*": ["packages/charts/src/*"],
-      "@oceanbase/util": ["packages/util/src/index.ts"]
+      "@oceanbase/util": ["packages/util/src/index.ts"],
+      "@oceanbase/shadcn": ["packages/shadcn/src/index.ts"],
+      "@oceanbase/shadcn/*": ["packages/shadcn/src/*"]
     }
   },
   "exclude": ["node_modules", "build", "es", "lib", "dist", "scripts"]

@@ -14,6 +14,8 @@ import {
   SearchBar,
   InlineCard,
 } from './styles';
+// 导入 shadcn 样式
+import '@oceanbase/shadcn/style/index.css';
 
 const GlobalStyles = () => (
   <>

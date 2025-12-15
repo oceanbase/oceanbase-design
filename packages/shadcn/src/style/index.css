@@ -1,0 +1,46 @@
+/**
+ * OceanBase Shadcn UI - 样式文件
+ * 
+ * 注意：此组件库基于 Tailwind CSS，使用者需要在项目中配置 Tailwind CSS
+ * 并引入 OceanBase Design 的 CSS 变量。
+ * 
+ * 参考 tailwind.config.ts 和 globals.css 的配置示例。
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*---break---
+ */
+@layer base {
+  :root {
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  .dark {
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+/*---break---
+ */
+@layer base {
+  * {
+    border-color: var(--ob-color-border-default);
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
