@@ -11,9 +11,9 @@ const InternalSwitch = React.forwardRef<HTMLButtonElement, AntSwitchProps>(
   ({ prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('switch', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const switchCls = classNames(className);
-    return wrapSSR(
+    return wrapCSSVar(
       <AntSwitch ref={ref} prefixCls={customizePrefixCls} className={switchCls} {...restProps} />
     );
   }

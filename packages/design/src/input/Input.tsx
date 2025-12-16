@@ -34,9 +34,9 @@ const Input = forwardRef<InputRef, InputProps>(
       ...customLocale,
     };
     const prefixCls = getPrefixCls('input', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
 
-    return wrapSSR(
+    return wrapCSSVar(
       <AntInput
         ref={ref}
         prefixCls={customizePrefixCls}

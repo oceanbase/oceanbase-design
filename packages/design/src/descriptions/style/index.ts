@@ -1,9 +1,9 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 import type { DescriptionsProps } from '..';
 
-export type DescriptionsToken = FullToken<'Alert'> & {
+export type DescriptionsToken = FullToken<'Descriptions'> & {
   typographyPrefixCls: string;
   typographyComponentCls: string;
 };
@@ -163,7 +163,7 @@ export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
 };
 
 export default (prefixCls: string, typographyPrefixCls: string) => {
-  const useStyle = genComponentStyleHook('Descriptions', token => {
+  const useStyle = genStyleHooks('Descriptions', token => {
     return [
       genDescriptionsStyle({
         ...token,

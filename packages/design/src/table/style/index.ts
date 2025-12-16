@@ -1,7 +1,7 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs';
 import type { FullToken } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type TableToken = FullToken<'Table'>;
 
@@ -345,9 +345,6 @@ export const genTableStyle = (token: TableToken): CSSObject => {
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Table', token => {
-    return [genTableStyle(token as TableToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Table', token => {
+  return [genTableStyle(token as TableToken)];
+});

@@ -1,7 +1,7 @@
 import type { FullToken, GenerateStyle } from 'antd/lib/theme/internal';
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type TypographyToken = FullToken<'Typography'>;
 
@@ -76,9 +76,6 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Typography', token => {
-    return [genTypographyStyle(token as TypographyToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Typography', token => {
+  return [genTypographyStyle(token as TypographyToken)];
+});

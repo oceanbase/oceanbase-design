@@ -1,7 +1,7 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type DrawerToken = FullToken<'Drawer'>;
 
@@ -94,9 +94,6 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Drawer', token => {
-    return [genDrawerStyle(token as DrawerToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Drawer', token => {
+  return [genDrawerStyle(token as DrawerToken)];
+});

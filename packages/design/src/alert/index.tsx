@@ -40,7 +40,7 @@ const Alert = ({
   const type = (banner && !typeProp ? 'warning' : typeProp) || 'info';
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('alert', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
+  const [wrapCSSVar] = useStyle(prefixCls);
   const alertCls = classNames(
     {
       [`${prefixCls}-closable`]: closable,
@@ -49,7 +49,7 @@ const Alert = ({
     },
     className
   );
-  return wrapSSR(
+  return wrapCSSVar(
     <AntAlert
       type={type}
       showIcon={showIcon}

@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type InputNumberToken = FullToken<'InputNumber'>;
 
@@ -22,9 +22,6 @@ export const genInputStyle: GenerateStyle<InputNumberToken> = (
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('InputNumber', token => {
-    return [genInputStyle(token as InputNumberToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('InputNumber', token => {
+  return [genInputStyle(token as InputNumberToken)];
+});

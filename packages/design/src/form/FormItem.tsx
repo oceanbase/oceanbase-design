@@ -45,7 +45,7 @@ const FormItem: CompoundedComponent = ({
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
 
   const prefixCls = getPrefixCls('form', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
+  const [wrapCSSVar] = useStyle(prefixCls);
   const formItemCls = classNames(className, {
     [`${prefixCls}-item-has-description`]: !!description,
   });
@@ -85,7 +85,7 @@ const FormItem: CompoundedComponent = ({
       <span className={`${prefixCls}-item-action`}>{action}</span>
     ) : null;
 
-  return wrapSSR(
+  return wrapCSSVar(
     <AntFormItem
       layout={layout}
       label={

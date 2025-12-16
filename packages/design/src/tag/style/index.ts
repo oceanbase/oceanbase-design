@@ -1,7 +1,7 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { mergeToken } from 'antd/es/theme/internal';
 import type { FullToken } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type TagToken = FullToken<'Tag'>;
 
@@ -64,17 +64,14 @@ export const genTagStyle = (token: TagToken): CSSObject => {
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Tag', (token: TagToken) => {
-    const tagToken = mergeToken<TagToken>(token, {});
+export default genStyleHooks('Tag', (token: TagToken) => {
+  const tagToken = mergeToken<TagToken>(token, {});
 
-    return [
-      genTagStyle(tagToken),
-      genTagPresetStatusStyle(tagToken, 'success'),
-      genTagPresetStatusStyle(tagToken, 'error'),
-      genTagPresetStatusStyle(tagToken, 'processing'),
-      genTagPresetStatusStyle(tagToken, 'warning'),
-    ];
-  });
-  return useStyle(prefixCls);
-};
+  return [
+    genTagStyle(tagToken),
+    genTagPresetStatusStyle(tagToken, 'success'),
+    genTagPresetStatusStyle(tagToken, 'error'),
+    genTagPresetStatusStyle(tagToken, 'processing'),
+    genTagPresetStatusStyle(tagToken, 'warning'),
+  ];
+});

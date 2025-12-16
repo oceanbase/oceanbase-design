@@ -59,7 +59,7 @@ const Descriptions: CompoundedComponent = ({
   const { token } = theme.useToken();
   const prefixCls = getPrefixCls('descriptions', customizePrefixCls);
   const typographyPrefixCls = getPrefixCls('typography', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls, typographyPrefixCls);
+  const [wrapCSSVar] = useStyle(prefixCls, typographyPrefixCls);
 
   const [internalCollapsed, setInternalCollapsed] = useState(defaultCollapsed ?? false);
   const collapsed = outerCollapsed !== undefined ? outerCollapsed : internalCollapsed;
@@ -105,7 +105,7 @@ const Descriptions: CompoundedComponent = ({
     [`${prefixCls}-content-align-left`]: contentAlign === 'left',
   });
 
-  return wrapSSR(
+  return wrapCSSVar(
     <AntDescriptions
       layout={layout}
       colon={colon}

@@ -65,7 +65,7 @@ const Drawer: CompoundedComponent = ({
 
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('drawer', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
+  const [wrapCSSVar] = useStyle(prefixCls);
 
   const [contentElment, setContentElement] = useState<HTMLDivElement | null>(null);
   // useSize for re-render when contentElment change size
@@ -95,7 +95,7 @@ const Drawer: CompoundedComponent = ({
     rootClassName
   );
 
-  return wrapSSR(
+  return wrapCSSVar(
     <AntDrawer
       loading={loading}
       destroyOnClose={true}

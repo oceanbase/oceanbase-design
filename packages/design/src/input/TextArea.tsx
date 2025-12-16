@@ -20,7 +20,7 @@ const TextArea = forwardRef<InputRef, TextAreaProps>(
       ConfigProvider.ConfigContext
     );
     const prefixCls = getPrefixCls('input', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const inputLocale: InputLocale = {
       placeholder:
         contextLocale?.global?.inputPlaceholder || defaultLocale.global?.inputPlaceholder,
@@ -29,7 +29,7 @@ const TextArea = forwardRef<InputRef, TextAreaProps>(
       ...customLocale,
     };
 
-    return wrapSSR(
+    return wrapCSSVar(
       <AntInput.TextArea
         ref={ref}
         prefixCls={customizePrefixCls}

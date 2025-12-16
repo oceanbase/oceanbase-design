@@ -1,7 +1,7 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 import { upperFirst } from 'lodash';
 
 export type AlertToken = FullToken<'Alert'>;
@@ -227,9 +227,6 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Alert', token => {
-    return [genAlertStyle(token as AlertToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Alert', token => {
+  return [genAlertStyle(token as AlertToken)];
+});

@@ -11,9 +11,9 @@ const InternalRadio = React.forwardRef<RadioRef, AntRadioProps>(
   ({ prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const radioCls = classNames(className);
-    return wrapSSR(
+    return wrapCSSVar(
       <AntRadio ref={ref} prefixCls={customizePrefixCls} className={radioCls} {...restProps} />
     );
   }

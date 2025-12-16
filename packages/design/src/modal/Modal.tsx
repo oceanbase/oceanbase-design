@@ -26,10 +26,10 @@ const Modal = ({
 }: ModalProps) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('modal', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
+  const [wrapCSSVar] = useStyle(prefixCls);
   const modalCls = classNames(className);
 
-  return wrapSSR(
+  return wrapCSSVar(
     <AntModal
       destroyOnClose={true}
       // convert false to null to hide .ant-modal-footer dom

@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type RadioToken = FullToken<'Radio'>;
 
@@ -22,9 +22,6 @@ export const genRadioStyle: GenerateStyle<RadioToken> = (token: RadioToken): CSS
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Radio', token => {
-    return [genRadioStyle(token as RadioToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Radio', token => {
+  return [genRadioStyle(token as RadioToken)];
+});
