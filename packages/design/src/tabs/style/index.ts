@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type TabsToken = FullToken<'Tabs'>;
 
@@ -74,9 +74,6 @@ export const genTabsStyle = (token: Partial<TabsToken>): CSSObject => {
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Tabs', token => {
-    return [genTabsStyle(token as TabsToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Tabs', token => {
+  return [genTabsStyle(token as TabsToken)];
+});

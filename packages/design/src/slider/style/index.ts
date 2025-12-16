@@ -1,7 +1,7 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type SliderToken = FullToken<'Slider'>;
 
@@ -28,9 +28,6 @@ export const genSliderStyle: GenerateStyle<SliderToken> = (token: SliderToken): 
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Slider', token => {
-    return [genSliderStyle(token as SliderToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Slider', token => {
+  return [genSliderStyle(token as SliderToken)];
+});

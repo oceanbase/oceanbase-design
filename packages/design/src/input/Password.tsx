@@ -20,7 +20,7 @@ const Password = forwardRef<InputRef, PasswordProps>(
       ConfigProvider.ConfigContext
     );
     const prefixCls = getPrefixCls('input', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const inputLocale: InputLocale = {
       placeholder:
         contextLocale?.global?.inputPlaceholder || defaultLocale.global?.inputPlaceholder,
@@ -29,7 +29,7 @@ const Password = forwardRef<InputRef, PasswordProps>(
       ...customLocale,
     };
 
-    return wrapSSR(
+    return wrapCSSVar(
       <AntInput.Password
         ref={ref}
         prefixCls={customizePrefixCls}

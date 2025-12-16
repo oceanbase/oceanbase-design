@@ -61,7 +61,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 
     const prefixCls = getPrefixCls('card', customizePrefixCls);
     const tabsPrefixCls = getPrefixCls('tabs', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls, tabsPrefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls, tabsPrefixCls);
 
     const [internalCollapsed, setInternalCollapsed] = useState(defaultCollapsed ?? false);
     const collapsed = outerCollapsed !== undefined ? outerCollapsed : internalCollapsed;
@@ -152,7 +152,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       return item;
     });
 
-    return wrapSSR(
+    return wrapCSSVar(
       <AntCard
         ref={ref}
         size={size}

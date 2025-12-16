@@ -2,7 +2,7 @@ import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
 import { genTabsStyle } from '../../tabs/style';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type CardToken = FullToken<'Card'> & {
   tabsComponentCls: string;
@@ -208,7 +208,7 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
 };
 
 export default (prefixCls: string, tabsPrefixCls: string) => {
-  const useStyle = genComponentStyleHook('Card', token => {
+  const useStyle = genStyleHooks('Card', token => {
     return [
       genCardStyle({
         ...token,

@@ -22,10 +22,10 @@ const Link = React.forwardRef<HTMLElement, LinkProps>(
   ({ editable, prefixCls: customizePrefixCls, className, children, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const typographyCls = useClassName(prefixCls, className, editable);
 
-    return wrapSSR(
+    return wrapCSSVar(
       <AntLink
         ref={ref}
         editable={editable}

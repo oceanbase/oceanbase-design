@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type ResultToken = FullToken<'Result'>;
 
@@ -28,9 +28,6 @@ export const genResultStyle: GenerateStyle<ResultToken> = (token: ResultToken): 
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Result', token => {
-    return [genResultStyle(token as ResultToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Result', token => {
+  return [genResultStyle(token as ResultToken)];
+});

@@ -11,10 +11,10 @@ const InternalCheckbox = React.forwardRef<CheckboxRef, AntCheckboxProps>(
   ({ prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const checkboxCls = classNames(className);
 
-    return wrapSSR(
+    return wrapCSSVar(
       <AntCheckbox
         ref={ref}
         prefixCls={customizePrefixCls}

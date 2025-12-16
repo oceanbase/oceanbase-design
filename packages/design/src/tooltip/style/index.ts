@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type TooltipToken = FullToken<'Tooltip'>;
 
@@ -31,16 +31,13 @@ export const genTooltipStyle: GenerateStyle<TooltipToken> = (token: TooltipToken
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook(
-    'Tooltip',
-    token => {
-      return [genTooltipStyle(token as TooltipToken)];
-    },
-    ({ zIndexPopupBase, colorBgSpotlight }) => ({
-      zIndexPopup: zIndexPopupBase + 70,
-      colorBgDefault: colorBgSpotlight,
-    })
-  );
-  return useStyle(prefixCls);
-};
+export default genStyleHooks(
+  'Tooltip',
+  token => {
+    return [genTooltipStyle(token as TooltipToken)];
+  },
+  ({ zIndexPopupBase, colorBgSpotlight }) => ({
+    zIndexPopup: zIndexPopupBase + 70,
+    colorBgDefault: colorBgSpotlight,
+  })
+);

@@ -34,7 +34,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
   ) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('tag', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
 
     const ellipsisConfig = getEllipsisConfig(ellipsis, children);
     const tagCls = classNames(
@@ -47,7 +47,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
 
     const realIcon = icon ? <span className={`${prefixCls}-icon`}>{icon}</span> : null;
 
-    return wrapSSR(
+    return wrapCSSVar(
       <AntTag
         ref={ref}
         prefixCls={customizePrefixCls}

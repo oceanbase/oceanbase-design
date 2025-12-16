@@ -83,7 +83,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   };
 
   const prefixCls = getPrefixCls('table', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
+  const [wrapCSSVar] = useStyle(prefixCls);
   const tableCls = classNames(
     {
       [`${prefixCls}-expandable`]: !isEmpty(expandable),
@@ -216,7 +216,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
     );
   };
 
-  return wrapSSR(
+  return wrapCSSVar(
     <AntTable
       {...props}
       ref={ref}

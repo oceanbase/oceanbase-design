@@ -22,7 +22,7 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   ({ prefixCls: customizePrefixCls, className, status, text, icon, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('badge', customizePrefixCls);
-    const { wrapSSR, hashId } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
 
     const iconMap = {
       default: <MinusCircleFilled rotate={45} />,
@@ -39,13 +39,13 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       warning: <EllipsisCircleFilled />,
     };
 
-    return wrapSSR(
+    return wrapCSSVar(
       <>
         {status && icon ? (
           <span
             ref={ref}
             // should add prefixCls as part of className to make style work
-            className={classNames(prefixCls, `${prefixCls}-status`, className, hashId)}
+            className={classNames(prefixCls, `${prefixCls}-status`, className)}
             style={{
               display: 'inline-block',
             }}

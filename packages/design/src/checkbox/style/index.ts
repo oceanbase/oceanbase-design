@@ -1,7 +1,7 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type CheckboxToken = FullToken<'Checkbox'>;
 
@@ -25,9 +25,6 @@ export const genCheckboxStyle: GenerateStyle<CheckboxToken> = (token: CheckboxTo
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Checkbox', token => {
-    return [genCheckboxStyle(token as CheckboxToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Checkbox', token => {
+  return [genCheckboxStyle(token as CheckboxToken)];
+});

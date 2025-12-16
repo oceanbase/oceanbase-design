@@ -14,10 +14,10 @@ export type AppType = React.FC<AppProps> & {
 const App: AppType = ({ prefixCls: customizePrefixCls, className, ...restProps }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('app', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
+  const [wrapCSSVar] = useStyle(prefixCls);
   const appCls = classNames(className);
 
-  return wrapSSR(<AntApp prefixCls={customizePrefixCls} className={appCls} {...restProps} />);
+  return wrapCSSVar(<AntApp prefixCls={customizePrefixCls} className={appCls} {...restProps} />);
 };
 
 App.useApp = AntApp.useApp;

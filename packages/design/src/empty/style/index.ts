@@ -1,7 +1,7 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type EmptyToken = FullToken<'Badge'>;
 
@@ -95,9 +95,6 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Empty', token => {
-    return [genEmptyStyle(token as EmptyToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Empty', token => {
+  return [genEmptyStyle(token as EmptyToken)];
+});
