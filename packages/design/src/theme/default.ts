@@ -260,6 +260,16 @@ const defaultTheme: ThemeConfig = {
       handleVisible: true,
       borderRadiusLG: borderRadiusMD,
     },
+    Message: {
+      borderRadiusLG: borderRadiusMD,
+    },
+    Notification: {
+      borderRadiusLG: borderRadiusMD,
+      colorSuccessBg: white,
+      colorErrorBg: white,
+      colorInfoBg: white,
+      colorWarningBg: white,
+    },
     Popover: {
       borderRadiusLG: borderRadiusMD,
     },
