@@ -32,7 +32,7 @@ export type ResultType = React.FC<ResultProps> & {
 const Result: ResultType = ({ prefixCls: customizePrefixCls, className, status, ...restProps }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('result', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
+  const [wrapCSSVar] = useStyle(prefixCls);
   const resultCls = classNames(className);
 
   const statusMap = {
@@ -45,7 +45,7 @@ const Result: ResultType = ({ prefixCls: customizePrefixCls, className, status, 
     500: <Image500 />,
   };
 
-  return wrapSSR(
+  return wrapCSSVar(
     <AntResult
       icon={statusMap[status]}
       prefixCls={customizePrefixCls}

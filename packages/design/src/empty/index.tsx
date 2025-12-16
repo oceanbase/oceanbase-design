@@ -50,7 +50,7 @@ const Empty: CompoundedComponent = props => {
   } = props;
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('empty', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
+  const [wrapCSSVar] = useStyle(prefixCls);
   const isHorizontal = layout === 'horizontal';
   const emptyCls = classNames(
     {
@@ -60,7 +60,7 @@ const Empty: CompoundedComponent = props => {
     className
   );
 
-  return wrapSSR(
+  return wrapCSSVar(
     <AntEmpty
       image={image}
       description={

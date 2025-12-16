@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type FormToken = FullToken<'Form'>;
 
@@ -45,9 +45,6 @@ export const genFormStyle: GenerateStyle<FormToken> = (token: FormToken): CSSObj
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Form', token => {
-    return [genFormStyle(token as FormToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Form', token => {
+  return [genFormStyle(token as FormToken)];
+});

@@ -13,9 +13,9 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
   ({ prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
     const { theme, getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('btn', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls, theme?.isAliyun);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const buttonCls = classNames(className);
-    return wrapSSR(
+    return wrapCSSVar(
       <AntButton ref={ref} prefixCls={customizePrefixCls} className={buttonCls} {...restProps} />
     );
   }

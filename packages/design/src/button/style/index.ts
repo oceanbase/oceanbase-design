@@ -1,5 +1,5 @@
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type ButtonToken = FullToken<'Button'>;
 
@@ -13,9 +13,6 @@ export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) =
   };
 };
 
-export default (prefixCls: string, isAliyun?: boolean) => {
-  const useStyle = genComponentStyleHook('Button', token => {
-    return [genButtonStyle(token as ButtonToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Button', token => {
+  return [genButtonStyle(token as ButtonToken)];
+});

@@ -1,6 +1,6 @@
 import type { FullToken, GenerateStyle } from 'antd/lib/theme/internal';
 import type { CSSObject } from '@ant-design/cssinjs';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type SegmentedToken = FullToken<'Segmented'>;
 
@@ -39,9 +39,6 @@ export const genSegmentedStyle: GenerateStyle<SegmentedToken> = (
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Segmented', token => {
-    return [genSegmentedStyle(token as SegmentedToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Segmented', token => {
+  return [genSegmentedStyle(token as SegmentedToken)];
+});

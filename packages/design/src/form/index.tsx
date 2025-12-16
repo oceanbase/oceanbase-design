@@ -31,10 +31,10 @@ const Form: CompoundedComponent = ({
   const { getPrefixCls, form: contextForm } = useContext(ConfigProvider.ConfigContext);
 
   const prefixCls = getPrefixCls('form', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
+  const [wrapCSSVar] = useStyle(prefixCls);
   const formCls = classNames(className);
 
-  return wrapSSR(
+  return wrapCSSVar(
     // @ts-ignore to ignore children type error
     <AntForm
       requiredMark={

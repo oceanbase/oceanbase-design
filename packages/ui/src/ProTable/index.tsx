@@ -39,7 +39,7 @@ function ProTable<T, U, ValueType>({
 
   // customize Table style
   const tablePrefixCls = getPrefixCls('table', customizePrefixCls);
-  const { wrapSSR: tableWrapSSR } = Table.useStyle(tablePrefixCls);
+  const [tableWrapCSSVar] = Table.useStyle(tablePrefixCls);
   const pagination = Table.useDefaultPagination(customPagination);
   const tableCls = classNames(
     {
@@ -69,7 +69,7 @@ function ProTable<T, U, ValueType>({
   );
   const proCardCls = getPrefixCls('pro-card', customizePrefixCls);
 
-  return tableWrapSSR(
+  return tableWrapCSSVar(
     lightFilterWrapSSR(
       wrapSSR(
         <AntProTable

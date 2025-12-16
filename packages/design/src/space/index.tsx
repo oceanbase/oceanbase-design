@@ -14,7 +14,7 @@ const Space = React.forwardRef<HTMLDivElement, SpaceProps>(
   ({ prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
     const { getPrefixCls } = React.useContext(ConfigContext);
     const prefixCls = getPrefixCls('space', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
 
     const supportFlexGap = useFlexGapSupport();
     const spaceCls = classNames(
@@ -25,7 +25,7 @@ const Space = React.forwardRef<HTMLDivElement, SpaceProps>(
       className
     );
 
-    return wrapSSR(<AntSpace ref={ref} className={spaceCls} {...restProps} />);
+    return wrapCSSVar(<AntSpace ref={ref} className={spaceCls} {...restProps} />);
   }
 );
 

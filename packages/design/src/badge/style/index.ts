@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type BadgeToken = FullToken<'Badge'>;
 
@@ -51,9 +51,6 @@ export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSS
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Badge', token => {
-    return [genBadgeStyle(token as BadgeToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Badge', token => {
+  return [genBadgeStyle(token as BadgeToken)];
+});

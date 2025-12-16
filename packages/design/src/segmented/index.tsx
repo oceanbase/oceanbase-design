@@ -34,7 +34,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
   ({ prefixCls: customizePrefixCls, options, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('segmented', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
 
     const renderBadge = useCallback((badge: BadgeType) => {
       if (typeof badge === 'object' && !isReactNode(badge)) {
@@ -66,7 +66,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       return item;
     });
 
-    return wrapSSR(<AntSegmented ref={ref} options={newOptions} {...restProps} />);
+    return wrapCSSVar(<AntSegmented ref={ref} options={newOptions} {...restProps} />);
   }
 );
 

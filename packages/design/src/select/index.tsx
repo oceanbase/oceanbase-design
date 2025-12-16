@@ -50,10 +50,10 @@ const InternalSelect = React.forwardRef<RefSelectProps, SelectProps<any, any>>(
     };
 
     const prefixCls = getPrefixCls('select', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const selectCls = classNames(className);
 
-    return wrapSSR(
+    return wrapCSSVar(
       <AntSelect
         ref={ref}
         placeholder={selectLocale.placeholder}

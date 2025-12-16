@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type ModalToken = FullToken<'Modal'>;
 
@@ -144,9 +144,6 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Modal', token => {
-    return [genModalStyle(token as ModalToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Modal', token => {
+  return [genModalStyle(token as ModalToken)];
+});

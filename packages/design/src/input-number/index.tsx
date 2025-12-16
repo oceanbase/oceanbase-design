@@ -30,7 +30,7 @@ const InternalInputNumber = React.forwardRef<InputNumberRef, InputNumberProps>(
       ConfigProvider.ConfigContext
     );
     const prefixCls = getPrefixCls('input-number', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const inputNumberLocale: InputNumberLocale = {
       placeholder:
         contextLocale?.global?.inputPlaceholder || defaultLocale.global?.inputPlaceholder,
@@ -39,7 +39,7 @@ const InternalInputNumber = React.forwardRef<InputNumberRef, InputNumberProps>(
       ...customLocale,
     };
 
-    return wrapSSR(
+    return wrapCSSVar(
       <AntInputNumber
         ref={ref}
         prefixCls={customizePrefixCls}

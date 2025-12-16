@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type SpaceToken = FullToken<'Space'>;
 
@@ -28,9 +28,6 @@ export const genSpaceStyle: GenerateStyle<SpaceToken> = (token: SpaceToken): CSS
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Space', token => {
-    return [genSpaceStyle(token as SpaceToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Space', token => {
+  return [genSpaceStyle(token as SpaceToken)];
+});

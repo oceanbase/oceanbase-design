@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type SwitchToken = FullToken<'Switch'>;
 
@@ -14,9 +14,6 @@ export const genSwitchStyle: GenerateStyle<SwitchToken> = (token: SwitchToken): 
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Switch', token => {
-    return [genSwitchStyle(token as SwitchToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Switch', token => {
+  return [genSwitchStyle(token as SwitchToken)];
+});
