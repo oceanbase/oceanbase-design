@@ -1,4 +1,4 @@
-import type { FullToken, GenerateStyle } from 'antd/lib/theme/internal';
+import type { FullToken, GenerateStyle } from '../../theme/interface';
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs';
 import { genStyleHooks } from '../../_util/genComponentStyleHook';
@@ -26,6 +26,10 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
       [`${componentCls}-edit`]: {
         fontSize: token.fontSize,
       },
+    },
+    [`${componentCls}-caption`]: {
+      fontSize: token.fontSizeSM,
+      fontWeight: token.fontWeightWeak,
     },
     [`${componentCls}${componentCls}-editable-text:not(${componentCls}-edit-content)`]: {
       '&:hover': {

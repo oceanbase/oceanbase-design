@@ -77,6 +77,10 @@ const genGlobalStyle = (token: GlobalToken, prefixCls?: string): CSSInterpolatio
       '.rc-virtual-list-scrollbar-thumb': {
         background: `${token.colorFillSecondary} !important`,
       },
+      // handle font-size: 12px font weight
+      [`[style*='font-size: 12px']`]: {
+        fontWeight: token.fontWeightWeak,
+      },
       // link with href or data-aspm-param^="obcloud_openLink= show underline on hover
       // except disabled and antd element
       'a[href], a[data-aspm-param^="obcloud_openLink="]': {
