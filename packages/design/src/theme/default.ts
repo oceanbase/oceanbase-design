@@ -74,9 +74,10 @@ const colorFillSecondary = gray4;
 const colorFillTertiary = gray3;
 const colorFillQuaternary = gray2;
 
-const colorBorderSecondary = colorFillSecondary;
+const colorBorder = gray5;
+const colorBorderSecondary = gray4;
 const fontSizeSM = 12;
-const tagColorBorder = colorTextQuaternary;
+const tagColorBorder = gray6;
 
 const borderRadius = 4;
 const borderRadiusMD = 6;
@@ -111,28 +112,49 @@ const defaultTheme: ThemeConfig = {
     fontSizeHeading5: 13,
     controlHeightSM: 24,
     controlHeight: 28,
+    colorLinkHover: blue5,
+    colorLinkActive: blue5,
     colorPrimary: colorPrimary,
+    colorPrimaryBorder: blue3,
+    colorPrimaryBg: blue1,
+    colorPrimaryBgHover: blue2,
+    colorPrimaryHover: blue5,
+    colorPrimaryActive: blue5,
+    colorPrimaryText: blue6,
     colorInfo: colorPrimary,
     colorInfoBorder: blue3,
     colorInfoBg: blue1,
+    colorInfoBgHover: blue2,
     colorInfoHover: blue5,
     colorInfoActive: blue5,
     colorInfoText: blue6,
     colorSuccess: green4,
     colorSuccessBorder: green3,
     colorSuccessBg: green1,
+    colorSuccessBgHover: green2,
+    colorSuccessHover: green5,
+    colorSuccessActive: green5,
     colorSuccessText: green6,
     colorWarning: orange4,
     colorWarningBorder: orange3,
     colorWarningBg: orange1,
+    colorWarningBgHover: orange2,
+    colorWarningHover: orange5,
+    colorWarningActive: orange5,
     colorWarningText: orange6,
     colorError: red4,
     colorErrorBorder: red3,
     colorErrorBg: red1,
+    colorErrorBgHover: red2,
+    colorErrorHover: red5,
+    colorErrorActive: red5,
     colorErrorText: red6,
     colorFuchsia: fuchsia4,
     colorFuchsiaBorder: fuchsia3,
     colorFuchsiaBg: fuchsia1,
+    colorFuchsiaBgHover: fuchsia2,
+    colorFuchsiaHover: fuchsia5,
+    colorFuchsiaActive: fuchsia5,
     colorFuchsiaText: fuchsia6,
     colorTextBase: black,
     colorText,
@@ -143,16 +165,24 @@ const defaultTheme: ThemeConfig = {
     colorBgBase: white,
     colorBgContainer: white,
     colorBgLayout: gray1,
-    colorBorder: colorFill,
+    colorBgTextHover: gray2,
+    colorBgTextActive: gray3,
+    colorBorder,
     colorBorderSecondary,
     colorFill,
     colorFillSecondary,
     colorFillTertiary,
     colorFillQuaternary,
-    colorBgContainerDisabled: colorFillTertiary,
+    colorBgContainerDisabled: gray2,
     colorBgMask: 'rgba(19, 32, 57, 0.6)',
     colorBgElevated: white,
     colorBgSpotlight: white,
+    controlItemBgHover: gray2,
+    controlItemBgActive: gray2,
+    // 导航特殊色
+    colorNaviBg,
+    colorNaviBgHover,
+    // 阴影
     boxShadow:
       '0 6px 16px 0 rgba(54, 69, 99, 0.08), 0 3px 6px -4px rgba(54, 69, 99, 0.12), 0 9px 28px 8px rgba(54, 69, 99, 0.05)',
     boxShadowSecondary:
@@ -183,6 +213,12 @@ const defaultTheme: ThemeConfig = {
     blue4,
     blue5,
     blue6,
+    'blue-1': blue1,
+    'blue-2': blue2,
+    'blue-3': blue3,
+    'blue-4': blue4,
+    'blue-5': blue5,
+    'blue-6': blue6,
     // 绿色 Green
     green1,
     green2,
@@ -190,6 +226,12 @@ const defaultTheme: ThemeConfig = {
     green4,
     green5,
     green6,
+    'green-1': green1,
+    'green-2': green2,
+    'green-3': green3,
+    'green-4': green4,
+    'green-5': green5,
+    'green-6': green6,
     // 橙色 Orange
     orange1,
     orange2,
@@ -197,6 +239,12 @@ const defaultTheme: ThemeConfig = {
     orange4,
     orange5,
     orange6,
+    'orange-1': orange1,
+    'orange-2': orange2,
+    'orange-3': orange3,
+    'orange-4': orange4,
+    'orange-5': orange5,
+    'orange-6': orange6,
     // 红色 Red
     red1,
     red2,
@@ -204,6 +252,12 @@ const defaultTheme: ThemeConfig = {
     red4,
     red5,
     red6,
+    'red-1': red1,
+    'red-2': red2,
+    'red-3': red3,
+    'red-4': red4,
+    'red-5': red5,
+    'red-6': red6,
     // 紫色 Fuchsia
     fuchsia1,
     fuchsia2,
@@ -211,9 +265,6 @@ const defaultTheme: ThemeConfig = {
     fuchsia4,
     fuchsia5,
     fuchsia6,
-    // 导航特殊色
-    colorNaviBg,
-    colorNaviBgHover,
   },
   components: {
     Alert: {
@@ -246,6 +297,10 @@ const defaultTheme: ThemeConfig = {
     },
     DatePicker: {
       borderRadiusLG: borderRadiusMD,
+      colorTextQuaternary: gray7,
+      // work for TimePicker and DatePicker
+      hoverBorderColor: gray7,
+      activeBorderColor: gray7,
     },
     Descriptions: {
       labelColor: colorTextSecondary,
@@ -255,10 +310,16 @@ const defaultTheme: ThemeConfig = {
     },
     Input: {
       borderRadiusLG: borderRadiusMD,
+      colorTextQuaternary: gray8,
+      // work for Input, InputNumber and AutoComplete
+      hoverBorderColor: gray7,
+      activeBorderColor: gray7,
     },
     InputNumber: {
       handleVisible: true,
       borderRadiusLG: borderRadiusMD,
+      hoverBorderColor: gray7,
+      activeBorderColor: gray7,
     },
     Message: {
       borderRadiusLG: borderRadiusMD,
@@ -284,9 +345,12 @@ const defaultTheme: ThemeConfig = {
       trackBg: colorFillTertiary,
     },
     Select: {
+      colorTextQuaternary: gray8,
       // work for all multiple select component, including Select, TreeSelect and Cascader and so on
       borderRadiusLG: borderRadiusMD,
-      multipleItemBg: colorFillQuaternary,
+      hoverBorderColor: gray7,
+      activeBorderColor: gray7,
+      multipleItemBg: gray2,
       multipleItemBorderColor: tagColorBorder,
       multipleItemBorderColorDisabled: tagColorBorder,
     },
@@ -332,16 +396,17 @@ const defaultTheme: ThemeConfig = {
       colorBgSpotlight: white,
       colorTextLightSolid: colorText,
     },
+    Typography: {},
     Menu: {
       borderRadiusLG: borderRadiusMD,
       paddingContentVertical: 0,
       itemHeight: 30,
       itemBorderRadius: borderRadius,
       // 80 means 50% opacity
-      itemHoverBg: colorFillSecondary + '80',
-      itemActiveBg: colorFillSecondary + '80',
-      itemSelectedBg: colorFillSecondary + '80',
-      itemColor: '#36496F',
+      itemHoverBg: gray3,
+      itemActiveBg: gray3,
+      itemSelectedBg: gray3,
+      itemColor: gray9,
       itemSelectedColor: colorText,
       itemMarginBlock: 6,
       groupTitleFontSize: 11,

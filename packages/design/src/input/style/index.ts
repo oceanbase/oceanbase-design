@@ -15,6 +15,30 @@ export const genInputStyle: GenerateStyle<InputToken> = (token: InputToken): CSS
   };
 };
 
+const genSearchInputStyle: GenerateStyle<InputToken> = (token: InputToken) => {
+  const { componentCls, antCls } = token;
+  const searchPrefixCls = `${componentCls}-search`;
+  return {
+    [searchPrefixCls]: {
+      [`> ${componentCls}-group`]: {
+        [`> ${componentCls}-group-addon:last-child`]: {
+          [`${searchPrefixCls}-button:not(${antCls}-btn-color-primary)`]: {
+            color: token.colorIcon,
+
+            '&:not([disabled]):hover': {
+              color: token.colorIconHover,
+            },
+
+            '&:active': {
+              color: token.colorIconHover,
+            },
+          },
+        },
+      },
+    },
+  };
+};
+
 export default genStyleHooks('Input', token => {
-  return [genInputStyle(token as InputToken)];
+  return [genInputStyle(token as InputToken), genSearchInputStyle(token as InputToken)];
 });

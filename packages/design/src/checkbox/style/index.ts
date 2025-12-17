@@ -21,6 +21,10 @@ export const genCheckboxStyle: GenerateStyle<CheckboxToken> = (token: CheckboxTo
           transform: `translate(0px, ${unit(translateY)})`,
         },
       },
+      [`&:hover ${componentCls}:not(${componentCls}-disabled):not(${componentCls}-checked) ${componentCls}-inner`]:
+        {
+          borderColor: token.gray7,
+        },
     },
   };
 };

@@ -61,6 +61,27 @@ export interface AliasToken extends AntAliasToken {
    */
   colorFuchsiaBg: string;
   /**
+   * @nameZH 严重错误色背景悬停色
+   * @nameEN Critical error background hover color
+   * @desc 严重错误色背景悬停色
+   * @descEN The hover color of the critical error background state.
+   */
+  colorFuchsiaBgHover: string;
+  /**
+   * @nameZH 严重错误色悬停色
+   * @nameEN Critical error hover color
+   * @desc 严重错误色悬停色
+   * @descEN The hover color of the critical error state.
+   */
+  colorFuchsiaHover: string;
+  /**
+   * @nameZH 严重错误色激活色
+   * @nameEN Critical error active color
+   * @desc 严重错误色激活色
+   * @descEN The active color of the critical error state.
+   */
+  colorFuchsiaActive: string;
+  /**
    * @nameZH 严重错误色文本
    * @nameEN Critical error text color
    * @desc 严重错误色文本
