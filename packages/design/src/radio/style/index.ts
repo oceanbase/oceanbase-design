@@ -18,6 +18,19 @@ export const genRadioStyle: GenerateStyle<RadioToken> = (token: RadioToken): CSS
           marginBottom,
         },
       },
+      [`&:hover ${componentCls}:not(${componentCls}-disabled):not(${componentCls}-checked) ${componentCls}-inner`]:
+        {
+          borderColor: token.gray7,
+        },
+    },
+    [`${componentCls}-group`]: {
+      [`${componentCls}-button-wrapper:not(${componentCls}-button-wrapper-disabled):not(${componentCls}-button-wrapper-checked):hover`]:
+        {
+          // set zIndex to 1 for hover effect to cover checked effect
+          zIndex: 1,
+          borderColor: token.gray7,
+          color: token.colorText,
+        },
     },
   };
 };
