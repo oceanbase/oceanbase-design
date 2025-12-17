@@ -164,6 +164,7 @@ export default defineConfig({
           children: [
             { title: 'AutoComplete 自动完成', link: '/components/auto-complete' },
             { title: 'Cascader 级联选择', link: '/components/cascader' },
+            { title: 'Filter 筛选器', link: '/components/filter' },
             { title: 'Form 表单', link: '/components/form' },
             { title: 'Input 输入框', link: '/components/input' },
             { title: 'InputNumber 数字输入框', link: '/components/input-number' },
