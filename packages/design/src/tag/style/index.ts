@@ -27,12 +27,8 @@ export const genTagStyle = (token: TagToken): CSSObject => {
 
   return {
     [`${componentCls}`]: {
-      lineHeight: token.lineHeight,
       paddingInline: token.paddingXS,
       fontSize: token.fontSizeSM,
-      [`&:not(${componentCls}-pill)`]: {
-        fontWeight: token.fontWeightStrong,
-      },
       [`${componentCls}-close-icon${iconCls}`]: {
         marginInlineStart: token.marginXXS,
       },
@@ -59,6 +55,8 @@ export const genTagStyle = (token: TagToken): CSSObject => {
       ['&-pill']: {
         borderRadius: 100,
         marginInlineEnd: token.marginXXS,
+        borderColor: token.colorBorderSecondary,
+        color: token.colorTextSecondary,
       },
     },
   };
