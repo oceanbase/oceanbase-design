@@ -5,19 +5,38 @@ import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type TagToken = FullToken<'Tag'>;
 
-const genTagPresetStatusStyle = (
-  token: TagToken,
-  status: 'success' | 'processing' | 'error' | 'warning'
-) => {
-  const colorMap = {
+type TagPresetStatus = 'success' | 'processing' | 'error' | 'warning' | 'critical';
+
+const genTagPresetStatusStyle = (token: TagToken, status: TagPresetStatus) => {
+  const colorMap: Record<TagPresetStatus, string> = {
     success: token.colorSuccessText,
     processing: token.colorInfoText,
-    error: token.colorErrorText,
     warning: token.colorWarningText,
+    error: token.colorErrorText,
+    critical: token.colorFuchsiaText,
+  };
+  const bgMap: Record<TagPresetStatus, string> = {
+    success: token.colorSuccessBg,
+    processing: token.colorInfoBg,
+    warning: token.colorWarningBg,
+    error: token.colorErrorBg,
+    critical: token.colorFuchsiaBg,
+  };
+  const borderMap: Record<TagPresetStatus, string> = {
+    success: token.colorSuccessBorder,
+    processing: token.colorInfoBorder,
+    warning: token.colorWarningBorder,
+    error: token.colorErrorBorder,
+    critical: token.colorFuchsiaBorder,
   };
   return {
     [`${token.componentCls}${token.componentCls}-${status}`]: {
       color: colorMap[status],
+      background: bgMap[status],
+      borderColor: borderMap[status],
+      [`&${token.componentCls}-borderless`]: {
+        borderColor: 'transparent',
+      },
     },
   };
 };
@@ -71,5 +90,6 @@ export default genStyleHooks('Tag', (token: TagToken) => {
     genTagPresetStatusStyle(tagToken, 'error'),
     genTagPresetStatusStyle(tagToken, 'processing'),
     genTagPresetStatusStyle(tagToken, 'warning'),
+    genTagPresetStatusStyle(tagToken, 'critical'),
   ];
 });

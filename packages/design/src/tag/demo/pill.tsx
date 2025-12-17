@@ -17,11 +17,14 @@ const App: React.FC = () => (
     <Tag pill color="processing">
       processing
     </Tag>
+    <Tag pill color="warning">
+      warning
+    </Tag>
     <Tag pill color="error">
       error
     </Tag>
-    <Tag pill color="warning">
-      warning
+    <Tag pill color="critical">
+      critical
     </Tag>
   </>
 );
