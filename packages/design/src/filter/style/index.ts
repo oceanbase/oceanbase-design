@@ -1,0 +1,226 @@
+import type { CSSObject, CSSInterpolation } from '@ant-design/cssinjs';
+import { useStyleRegister } from '@ant-design/cssinjs';
+import themeConfig from '../../theme';
+import type { GlobalToken } from '../../theme/interface';
+
+export interface FilterStyleToken extends GlobalToken {
+  filterPrefixCls: string;
+}
+
+const genSelectOptionStyle = (token: FilterStyleToken): CSSObject => {
+  const { filterPrefixCls } = token;
+  return {
+    [`.${filterPrefixCls}-select-option`]: {
+      padding: '4px 8px',
+      cursor: 'pointer',
+      borderRadius: token.borderRadius,
+
+      '&:hover': {
+        backgroundColor: '#eff3fa',
+
+        // hover 时图标切换效果
+        [`.${filterPrefixCls}-arrow-icon`]: {
+          opacity: 0,
+          visibility: 'hidden',
+        },
+
+        [`.${filterPrefixCls}-clear-icon`]: {
+          opacity: 1,
+          visibility: 'visible',
+        },
+      },
+
+      // 有选中子项的父级选项样式
+      [`&.${filterPrefixCls}-has-selected`]: {
+        backgroundColor: '#eff3fa',
+      },
+    },
+  };
+};
+
+const genCheckboxOptionStyle = (token: FilterStyleToken): CSSObject => {
+  const { filterPrefixCls } = token;
+  return {
+    [`.${filterPrefixCls}-checkbox-option`]: {
+      padding: '4px 8px',
+      cursor: 'pointer',
+      borderRadius: token.borderRadius,
+
+      '&:hover': {
+        backgroundColor: '#eff3fa',
+      },
+    },
+  };
+};
+
+const genSwitchOptionStyle = (token: FilterStyleToken): CSSObject => {
+  const { filterPrefixCls } = token;
+  return {
+    [`.${filterPrefixCls}-switch-option`]: {
+      cursor: 'default',
+    },
+  };
+};
+
+// 通用图标样式
+const genIconStyle = (token: FilterStyleToken): CSSObject => {
+  const { filterPrefixCls } = token;
+  return {
+    [`.${filterPrefixCls}-icon-wrapper`]: {
+      position: 'relative',
+      display: 'inline-flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
+    [`.${filterPrefixCls}-arrow-icon`]: {
+      opacity: 1,
+      fontSize: 12,
+      visibility: 'visible',
+      transition: 'opacity 0.2s ease-in-out, visibility 0.2s ease-in-out',
+    },
+
+    [`.${filterPrefixCls}-clear-icon`]: {
+      opacity: 0,
+      cursor: 'pointer',
+      visibility: 'hidden',
+      position: 'absolute',
+      left: 0,
+      top: '60%',
+      fontSize: 12,
+      transform: 'translateY(-50%)',
+      transition: 'opacity 0.2s ease-in-out, visibility 0.2s ease-in-out',
+    },
+  };
+};
+
+const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
+  const { filterPrefixCls, colorText, colorFillSecondary, colorBgContainer, colorBorder } = token;
+  return {
+    [`.${filterPrefixCls}-button-wrapper`]: {
+      display: 'inline-block',
+    },
+
+    [`.${filterPrefixCls}-button`]: {
+      height: 28,
+      padding: '4px 12px',
+      borderRadius: token.borderRadius,
+      cursor: 'pointer',
+      display: 'flex',
+      gap: 8,
+      alignItems: 'center',
+      justifyContent: 'right',
+      fontSize: token.fontSizeSM,
+      color: colorText,
+      whiteSpace: 'nowrap',
+
+      '&:hover': {
+        [`.${filterPrefixCls}-arrow-icon`]: {
+          opacity: 0,
+          visibility: 'hidden',
+        },
+
+        [`.${filterPrefixCls}-clear-icon`]: {
+          opacity: 1,
+          visibility: 'visible',
+        },
+      },
+    },
+
+    [`.${filterPrefixCls}-button-label-wrapper`]: {
+      width: '100%',
+      padding: '8px 16px',
+      borderBottom: `1px solid ${colorFillSecondary}`,
+      color: token.colorTextSecondary,
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+    },
+
+    [`.${filterPrefixCls}-border`]: {
+      border: `1px solid ${colorFillSecondary}`,
+      backgroundColor: colorBgContainer,
+      transition: 'background-color 0.3s ease-in-out, border-color 0.3s ease-in-out',
+
+      '&:hover, &:active, &:focus, &:focus-within': {
+        borderColor: colorBorder,
+        backgroundColor: '#eff3fa',
+      },
+    },
+
+    [`.${filterPrefixCls}-active`]: {
+      borderColor: colorBorder,
+      backgroundColor: '#f5f8fc',
+      color: token.colorTextTertiary,
+    },
+
+    [`.${filterPrefixCls}-disabled`]: {
+      backgroundColor: '#f5f8fc',
+      borderColor: colorBorder,
+      color: '#b6c0d4',
+      cursor: 'not-allowed',
+
+      '&:hover': {
+        [`.${filterPrefixCls}-arrow-icon`]: {
+          opacity: 1,
+          visibility: 'visible',
+        },
+
+        [`.${filterPrefixCls}-clear-icon`]: {
+          opacity: 0,
+          visibility: 'hidden',
+        },
+      },
+    },
+
+    [`.${filterPrefixCls}-selected`]: {
+      backgroundColor: '#f5f8fc',
+      color: '#132039',
+    },
+  };
+};
+
+const genFilterStyle = (token: FilterStyleToken): CSSInterpolation => {
+  return [
+    genIconStyle(token),
+    genSelectOptionStyle(token),
+    genCheckboxOptionStyle(token),
+    genSwitchOptionStyle(token),
+    genFilterButtonStyle(token),
+  ];
+};
+
+export interface UseFilterStyleResult {
+  wrapSSR: (node: React.ReactElement) => React.ReactElement;
+  hashId: string;
+  prefixCls: string;
+}
+
+export default function useFilterStyle(prefixCls: string = 'ob-filter'): UseFilterStyleResult {
+  const { theme, token } = themeConfig.useToken();
+
+  const filterToken: FilterStyleToken = {
+    ...token,
+    filterPrefixCls: prefixCls,
+  };
+
+  const wrapSSR = useStyleRegister(
+    {
+      theme,
+      token,
+      path: ['filter', prefixCls],
+      hashId: '',
+      order: -900,
+    },
+    () => genFilterStyle(filterToken)
+  );
+
+  return {
+    wrapSSR,
+    hashId: '',
+    prefixCls,
+  };
+}
+
+// 导出样式类名生成器，方便组件使用
+export const getFilterCls = (prefixCls: string, className: string) => `${prefixCls}-${className}`;
