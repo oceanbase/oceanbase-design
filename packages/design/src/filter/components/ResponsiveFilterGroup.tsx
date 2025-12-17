@@ -73,6 +73,27 @@ const isCollapsible = (child: ReactElement): boolean => {
   return true;
 };
 
+// 检查子元素是否应该始终折叠
+const isAlwaysCollapse = (child: ReactElement): boolean => {
+  const childProps = child.props;
+
+  // 直接检查 alwaysCollapse 属性
+  if (childProps?.alwaysCollapse !== undefined) {
+    return childProps.alwaysCollapse === true;
+  }
+
+  // 如果是 Form.Item 等包装组件，检查其 children 的 alwaysCollapse
+  if (childProps?.children && isValidElement(childProps.children)) {
+    const innerChild = childProps.children as ReactElement;
+    if (innerChild.props?.alwaysCollapse !== undefined) {
+      return innerChild.props.alwaysCollapse === true;
+    }
+  }
+
+  // 默认不始终折叠
+  return false;
+};
+
 const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   children,
   gap = 8,
@@ -99,6 +120,10 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   const unCollapsibleChildren = childrenArray.filter(child => !isCollapsible(child));
   const collapsibleChildren = childrenArray.filter(child => isCollapsible(child));
 
+  // 分离始终折叠和普通可收集的子元素
+  const alwaysCollapseChildren = collapsibleChildren.filter(child => isAlwaysCollapse(child));
+  const normalCollapsibleChildren = collapsibleChildren.filter(child => !isAlwaysCollapse(child));
+
   // 创建测量容器
   useEffect(() => {
     const container = document.createElement('div');
@@ -112,14 +137,14 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
     };
   }, []);
 
-  // 测量每个可收集子元素的宽度
+  // 测量每个可收集子元素的宽度（只测量普通可收集的，不包括始终折叠的）
   const measureChildren = useCallback(() => {
     if (!measureRef.current) return;
 
     const measureDiv = measureRef.current;
     const widths: number[] = [];
 
-    // 遍历测量容器中的子元素（只测量可收集的）
+    // 遍历测量容器中的子元素（只测量普通可收集的）
     const measureItems = measureDiv.children;
     for (let i = 0; i < measureItems.length; i++) {
       const item = measureItems[i] as HTMLElement;
@@ -134,11 +159,11 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
     }
   }, []);
 
-  // 计算可见的可收集子元素数量
+  // 计算可见的可收集子元素数量（只计算普通可收集的，不包括始终折叠的）
   const calculateVisibleCount = useCallback(() => {
     if (!containerRef.current) return;
-    // 如果没有可收集的子元素，显示全部
-    if (collapsibleChildren.length === 0) {
+    // 如果没有普通可收集的子元素，显示全部（0表示全部折叠）
+    if (normalCollapsibleChildren.length === 0) {
       setVisibleCount(0);
       return;
     }
@@ -150,12 +175,16 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
     let totalWidth = 0;
     let count = 0;
 
+    // 如果有始终折叠的元素，需要预留 more button 的宽度
+    const hasAlwaysCollapse = alwaysCollapseChildren.length > 0;
+    const reservedForMoreButton = hasAlwaysCollapse ? actualMoreButtonWidth + gap : 0;
+
     for (let i = 0; i < childWidths.length; i++) {
       const itemWidth = childWidths[i] + (i > 0 ? gap : 0);
       // 检查是否还有空间放置当前元素
       // 如果不是最后一个元素，需要预留 moreButtonWidth 给 "更多" 按钮
       const needMoreButton = i < childWidths.length - 1;
-      const reservedWidth = needMoreButton ? actualMoreButtonWidth + gap : 0;
+      const reservedWidth = needMoreButton ? actualMoreButtonWidth + gap : reservedForMoreButton;
 
       if (totalWidth + itemWidth + reservedWidth <= availableWidth) {
         totalWidth += itemWidth;
@@ -174,7 +203,13 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
     } else {
       setVisibleCount(count);
     }
-  }, [childWidths, gap, actualMoreButtonWidth, collapsibleChildren.length]);
+  }, [
+    childWidths,
+    gap,
+    actualMoreButtonWidth,
+    normalCollapsibleChildren.length,
+    alwaysCollapseChildren.length,
+  ]);
 
   // 初始测量 - 使用 useLayoutEffect 确保在绘制前完成
   useLayoutEffect(() => {
@@ -184,7 +219,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
         measureChildren();
       });
     }
-  }, [children, measureChildren, measureContainer]);
+  }, [children, measureChildren, measureContainer, normalCollapsibleChildren]);
 
   // 当 childWidths 更新后计算可见数量
   useLayoutEffect(() => {
@@ -219,11 +254,16 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
     };
   }, [calculateVisibleCount]);
 
-  // 分离可见和隐藏的可收集子元素
+  // 分离可见和隐藏的普通可收集子元素（始终折叠的不参与计算）
   const visibleCollapsibleChildren =
-    visibleCount === -1 ? collapsibleChildren : collapsibleChildren.slice(0, visibleCount);
+    visibleCount === -1
+      ? normalCollapsibleChildren
+      : normalCollapsibleChildren.slice(0, visibleCount);
   const hiddenCollapsibleChildren =
-    visibleCount === -1 ? [] : collapsibleChildren.slice(visibleCount);
+    visibleCount === -1 ? [] : normalCollapsibleChildren.slice(visibleCount);
+
+  // 合并始终折叠和隐藏的普通可收集子元素
+  const allHiddenChildren = [...alwaysCollapseChildren, ...hiddenCollapsibleChildren];
 
   // 递归地为子元素添加 _isInWrap prop
   const addIsInWrapProp = (element: ReactElement): ReactElement => {
@@ -251,9 +291,9 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
     return cloneElement(element, newProps);
   };
 
-  // 渲染隐藏的可收集子元素到 FilterWrap 中
+  // 渲染隐藏的可收集子元素到 FilterWrap 中（包括始终折叠和隐藏的普通可收集子元素）
   const renderHiddenChildren = () => {
-    if (hiddenCollapsibleChildren.length === 0) return null;
+    if (allHiddenChildren.length === 0) return null;
 
     return (
       <FilterWrap
@@ -278,7 +318,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
           )
         }
       >
-        {hiddenCollapsibleChildren.map((child, index) => {
+        {allHiddenChildren.map((child, index) => {
           if (isValidElement(child)) {
             return <React.Fragment key={index}>{addIsInWrapProp(child)}</React.Fragment>;
           }
@@ -293,7 +333,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   const measureContent = measureContainer
     ? createPortal(
         <>
-          {/* 隐藏的测量容器 - 只测量可收集的子元素 */}
+          {/* 隐藏的测量容器 - 只测量普通可收集的子元素（不包括始终折叠的） */}
           <div
             ref={measureRef}
             style={{
@@ -302,7 +342,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
               whiteSpace: 'nowrap',
             }}
           >
-            {collapsibleChildren.map((child, index) => (
+            {normalCollapsibleChildren.map((child, index) => (
               <div key={index} style={{ display: 'inline-flex' }}>
                 {child}
               </div>

@@ -60,6 +60,7 @@ const FilterButton = forwardRef<HTMLDivElement, FilterButtonProps>(
           {!isWrapped && (
             <Flex
               justify="space-between"
+              align="center"
               className={getFilterCls(prefixCls, 'button-label-wrapper')}
             >
               <div>{label}</div>

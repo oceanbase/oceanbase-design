@@ -4,7 +4,7 @@ nav:
   title: 基础组件
   path: /components
 demo:
-  cols: 2
+  cols: 1
 ---
 
 Filter 是一组轻量级的筛选组件，提供了多种筛选类型，适用于表格、列表等数据筛选场景。
@@ -22,10 +22,11 @@ Filter 是一组轻量级的筛选组件，提供了多种筛选类型，适用�
 <code src="./demo/basic.tsx" title="基本使用" description="Filter.Select 单选筛选器的基本用法。"></code>
 <code src="./demo/checkbox.tsx" title="多选筛选" description="Filter.Checkbox 多选筛选器，支持显示选中计数。"></code>
 <code src="./demo/cascader.tsx" title="级联筛选" description="Filter.Cascader 级联筛选器，支持单选和多选模式。"></code>
-<code src="./demo/switch.tsx" title="开关筛选" description="Filter.Switch 开关类型筛选器。"></code>
-<code src="./demo/wrap.tsx" title="筛选器容器" description="Filter.Wrap 用于包裹多个筛选器，支持普通模式和折叠模式。"></code>
-<code src="./demo/custom-render.tsx" title="自定义渲染" description="通过 optionRender 自定义选项的渲染。"></code>
 <code src="./demo/bordered.tsx" title="边框" description="通过 bordered 控制是否显示边框。"></code>
+<code src="./demo/custom-render.tsx" title="自定义渲染" description="通过 optionRender 自定义选项的渲染。"></code>
+<code src="./demo/extra.tsx" title="额外内容" description="通过 extra 属性可以在筛选器弹框的标签旁边显示额外内容，如提示信息、标签等。"></code>
+<code src="./demo/responsive.tsx" title="响应式折叠" description="Filter.ResponsiveGroup 支持响应式布局，当容器宽度不足时自动将筛选器折叠到更多按钮中。"></code>
+<code src="./demo/always-collapse.tsx" title="始终折叠" description="通过 alwaysCollapse 属性，可以让某些筛选器无论容器宽度是否充足，都始终折叠到更多按钮中。"></code>
 
 ## API
 
@@ -41,6 +42,7 @@ Filter 是一组轻量级的筛选组件，提供了多种筛选类型，适用�
 | bordered | 是否显示边框 | `boolean` | `true` |
 | footer | 底部操作区域 | `ReactNode` | - |
 | collapsible | 是否可以被 ResponsiveGroup 收集到 Wrap 中 | `boolean` | `true` |
+| alwaysCollapse | 是否始终折叠到"更多"按钮中，无论容器宽度是否充足 | `boolean` | `false` |
 | trigger | 触发方式 | `'hover' \| 'click' \| 'focus'` | `'click'` |
 | placement | 弹出位置 | `PopoverProps['placement']` | `'bottomLeft'` |
 

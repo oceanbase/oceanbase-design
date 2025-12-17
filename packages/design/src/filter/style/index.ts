@@ -58,11 +58,6 @@ const genSwitchOptionStyle = (token: FilterStyleToken): CSSObject => {
   return {
     [`.${filterPrefixCls}-switch-option`]: {
       cursor: 'default',
-      transition: 'background-color 0.2s ease-in-out',
-
-      '&:hover': {
-        backgroundColor: '#eff3fa',
-      },
     },
   };
 };
@@ -76,12 +71,11 @@ const genIconStyle = (token: FilterStyleToken): CSSObject => {
       display: 'inline-flex',
       justifyContent: 'center',
       alignItems: 'center',
-      width: 14,
-      height: 14,
     },
 
     [`.${filterPrefixCls}-arrow-icon`]: {
       opacity: 1,
+      fontSize: 12,
       visibility: 'visible',
       transition: 'opacity 0.2s ease-in-out, visibility 0.2s ease-in-out',
     },
@@ -92,19 +86,10 @@ const genIconStyle = (token: FilterStyleToken): CSSObject => {
       visibility: 'hidden',
       position: 'absolute',
       left: 0,
-      top: '50%',
-      fontSize: 8,
-      transform: 'translateY(-54%)',
-      transition:
-        'opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, background-color 0.2s ease-in-out',
-      color: 'white',
-      backgroundColor: '#b6c0d4',
-      borderRadius: '50%',
-      padding: '1px 3px',
-
-      '&:hover': {
-        backgroundColor: '#5c6b8a',
-      },
+      top: '60%',
+      fontSize: 12,
+      transform: 'translateY(-50%)',
+      transition: 'opacity 0.2s ease-in-out, visibility 0.2s ease-in-out',
     },
   };
 };
@@ -146,7 +131,6 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
       width: '100%',
       padding: '8px 16px',
       borderBottom: `1px solid ${colorFillSecondary}`,
-      fontSize: 12,
       color: token.colorTextSecondary,
       whiteSpace: 'nowrap',
       overflow: 'hidden',

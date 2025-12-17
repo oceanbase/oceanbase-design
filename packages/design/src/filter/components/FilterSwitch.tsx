@@ -1,6 +1,5 @@
 import { Flex, Switch, type SwitchProps, theme } from '@oceanbase/design';
 import type { FC } from 'react';
-import React from 'react';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import useFilterStyle, { getFilterCls } from '../style';
@@ -39,17 +38,7 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
 
   // 渲染弹框内容
   const renderContent = (
-    <Flex
-      justify="space-between"
-      align="center"
-      style={{
-        padding: '4px 8px',
-        minWidth: 200,
-        margin: '0 8px',
-        borderRadius: token.borderRadius,
-      }}
-      className={getFilterCls(prefixCls, 'switch-option')}
-    >
+    <Flex justify="space-between" align="center">
       <span>{label}</span>
       <Switch checked={currentValue} onChange={setValue} size="small" {...switchProps} />
     </Flex>

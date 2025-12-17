@@ -1,10 +1,9 @@
 import type { InputProps } from '@oceanbase/design';
-import { Flex, Input, Switch, type SwitchProps, theme } from '@oceanbase/design';
+import { Flex, Input, Switch, type SwitchProps } from '@oceanbase/design';
 import type { ChangeEvent, FC } from 'react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
-import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps } from '../type';
 import { wrapContent } from '../utils';
 import FilterButton from './FilterButton';
@@ -30,9 +29,7 @@ const FilterInput: FC<FilterInputProps> = ({
   switchProps,
   ...restProps
 }) => {
-  const { token } = theme.useToken();
   const isWrapped = useFilterWrapped();
-  const { prefixCls } = useFilterStyle();
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, '', onChange);
@@ -49,17 +46,7 @@ const FilterInput: FC<FilterInputProps> = ({
   // 渲染弹框内容
   const renderContent = (
     <div>
-      <Flex
-        justify="space-between"
-        align="center"
-        style={{
-          padding: '4px 8px',
-          minWidth: 200,
-          margin: '0 8px',
-          borderRadius: token.borderRadius,
-        }}
-        className={getFilterCls(prefixCls, 'switch-option')}
-      >
+      <Flex justify="space-between" align="center">
         <span>{label}</span>
         <Switch
           checked={switchValue}
@@ -69,8 +56,8 @@ const FilterInput: FC<FilterInputProps> = ({
         />
       </Flex>
       {switchValue ? (
-        <div style={{ padding: '0px 16px' }}>
-          <Input value={currentValue} onChange={handleChange} size="small" {...inputProps} />
+        <div style={{ marginTop: 8 }}>
+          <Input value={currentValue} onChange={handleChange} {...inputProps} />
         </div>
       ) : null}
     </div>
