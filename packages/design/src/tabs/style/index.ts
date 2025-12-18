@@ -23,6 +23,9 @@ export const genTabsStyle = (token: Partial<TabsToken>): CSSObject => {
         },
       },
       [`${componentCls}-tab`]: {
+        [`${componentCls}-tab-btn:hover`]: {
+          textShadow: '0 0 0.25px currentcolor',
+        },
         /** @deprecated */
         [`${componentCls}-tab-tag`]: {
           color: colorTextSecondary,
