@@ -26,6 +26,7 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
         },
         [`${componentCls}-description-content`]: {
           color: colorTextTertiary,
+          fontWeight: token.fontWeightWeak,
           maxWidth: 600,
           margin: '0px auto',
           marginTop: token.marginXS,
