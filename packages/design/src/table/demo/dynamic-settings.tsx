@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Radio, Space, Switch, Table } from '@oceanbase/design';
+import { Button, Form, Radio, Space, Switch, Table } from '@oceanbase/design';
 import type { RadioChangeEvent } from '@oceanbase/design';
 import type { SizeType } from '@oceanbase/design/es/config-provider';
 import type { ColumnsType, TableProps } from '@oceanbase/design/es/table';
 import type { ExpandableConfig, TableRowSelection } from '@oceanbase/design/es/table/interface';
-import { DownOutlined } from '@oceanbase/icons';
+import { EllipsisOutlined } from '@oceanbase/icons';
 
 interface DataType {
   key: number;
@@ -52,14 +52,9 @@ const columns: ColumnsType<DataType> = [
     key: 'action',
     sorter: true,
     render: () => (
-      <Space size="middle">
-        <a>Delete</a>
-        <a>
-          <Space>
-            More actions
-            <DownOutlined />
-          </Space>
-        </a>
+      <Space>
+        <Button>Delete</Button>
+        <Button icon={<EllipsisOutlined />} />
       </Space>
     ),
   },

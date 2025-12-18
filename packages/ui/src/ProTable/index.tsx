@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ProTable as AntProTable } from '@ant-design/pro-components';
 import type { ProTableProps as AntProTableProps } from '@ant-design/pro-components';
-import { ConfigProvider, Empty, Table } from '@oceanbase/design';
+import { ConfigProvider, Empty, Table, theme } from '@oceanbase/design';
 import classNames from 'classnames';
 import { isEmpty, merge } from 'lodash';
 import useLightFilterStyle from '../LightFilter/style';
@@ -36,6 +36,7 @@ function ProTable<T, U, ValueType>({
   ...restProps
 }: ProTableProps<T, U, ValueType>) {
   const { getPrefixCls, card: contextCard } = useContext(ConfigProvider.ConfigContext);
+  const { token } = theme.useToken();
 
   // customize Table style
   const tablePrefixCls = getPrefixCls('table', customizePrefixCls);

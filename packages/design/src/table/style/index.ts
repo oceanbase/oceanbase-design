@@ -81,19 +81,19 @@ export const genTableStyle = (token: TableToken): CSSObject => {
             // work for ProTable link style
             fontSize: token.fontSizeSM,
           },
-          // button is small size by default
-          [`${antCls}-btn:not(${antCls}-btn-sm):not(${antCls}-btn-lg)`]: {
-            height: token.controlHeightSM,
-            fontSize: token.fontSizeSM,
-            [`&:not(${antCls}-btn-icon-only):not(${antCls}-btn-circle)`]: {
-              paddingInline: token.paddingXS,
-            },
-            [`&${antCls}-btn-icon-only`]: {
-              width: token.controlHeightSM,
-            },
-            [`&${antCls}-btn-circle`]: {
-              minWidth: token.controlHeightSM,
-            },
+        },
+        // button is small size by default
+        [`${antCls}-btn:not(${antCls}-btn-sm):not(${antCls}-btn-lg)`]: {
+          height: token.controlHeightSM,
+          fontSize: token.fontSizeSM,
+          [`&:not(${antCls}-btn-icon-only):not(${antCls}-btn-circle)`]: {
+            paddingInline: token.paddingXS,
+          },
+          [`&${antCls}-btn-icon-only`]: {
+            width: token.controlHeightSM,
+          },
+          [`&${antCls}-btn-circle`]: {
+            minWidth: token.controlHeightSM,
           },
         },
         // empty style
@@ -306,8 +306,23 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     [`${componentCls}-wrapper`]: {
       [`${componentCls}-pagination`]: {
         [`&${antCls}-pagination`]: {
-          padding: `${unit(padding)} 0`,
+          fontSize: token.fontSizeSM,
+          padding: `${unit(token.paddingSM)} 0`,
           margin: '0 !important',
+          [`${antCls}-pagination-item, ${antCls}-pagination-total-text, ${antCls}-pagination-prev, ${antCls}-pagination-next`]:
+            {
+              height: token.controlHeightSM,
+              minWidth: token.controlHeightSM,
+              lineHeight: unit(
+                calc(token.controlHeightSM).sub(calc(token.lineWidth).mul(2)).equal()
+              ),
+            },
+          [`${antCls}-pagination-options ${antCls}-select-single`]: {
+            height: token.controlHeightSM,
+            [`${antCls}-select-selector`]: {
+              paddingInline: calc(token.paddingXS).sub(token.lineWidth).equal(),
+            },
+          },
         },
         // 批量操作栏样式
         [`${componentCls}-batch-operation-bar`]: {
@@ -316,8 +331,6 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           display: 'inline-block',
           marginRight: marginLG,
           [`${componentCls}-batch-operation-selection`]: {
-            color: colorTextSecondary,
-            fontWeight: token.fontWeightStrong,
             [`${componentCls}-batch-operation-selection-count`]: {
               margin: `0 ${unit(marginXS)}`,
               color: colorLink,

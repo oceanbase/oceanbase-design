@@ -16,6 +16,8 @@ import type { AnyObject } from '../_util/type';
 import useDefaultPagination from './hooks/useDefaultPagination';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import enUS from '../locale/en-US';
+import theme, { type GlobalToken } from '../theme';
+import type { ThemeConfig } from '../config-provider';
 
 export * from 'antd/es/table';
 
@@ -67,6 +69,8 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   } = props;
   const extendedContext = useContext(ConfigProvider.ExtendedConfigContext);
   const pagination = useDefaultPagination(customPagination);
+
+  const { token } = theme.useToken();
 
   const { getPrefixCls, locale, table } = useContext(ConfigProvider.ConfigContext);
   const {
@@ -217,80 +221,102 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   };
 
   return wrapCSSVar(
-    <AntTable
-      {...props}
-      ref={ref}
-      prefixCls={customizePrefixCls}
-      className={tableCls}
-      locale={{
-        ...restLocale,
-        emptyText: (
-          <div className={`${prefixCls}-empty-wrapper`}>
-            {typeof emptyText === 'function' ? emptyText() : emptyText}
-          </div>
-        ),
+    <ConfigProvider
+      theme={{
+        components: {
+          Button: {
+            fontSize: token.fontSizeSM,
+            controlHeight: token.controlHeightSM,
+            paddingInline: token.paddingXS,
+          },
+          Pagination: {
+            fontSize: token.fontSizeSM,
+            controlHeight: token.controlHeightSM,
+          },
+          Select: {
+            fontSize: token.fontSizeSM,
+            controlHeight: token.controlHeightSM,
+            // control select padding by inputPaddingHorizontalBase
+            paddingSM: token.paddingXS,
+          },
+        },
       }}
-      size={size}
-      bordered={bordered || innerBordered}
-      columns={newColumns}
-      rowClassName={(...args) => {
-        return classNames(
-          typeof rowClassName === 'function' ? rowClassName(...args) : rowClassName,
-          {
-            [`${prefixCls}-expand-row-by-click`]: expandable?.expandRowByClick,
-          }
-        );
-      }}
-      expandable={
-        expandable
-          ? {
-              columnWidth: !size || size === 'large' ? 40 : 32,
-              ...expandable,
+    >
+      <AntTable
+        {...props}
+        ref={ref}
+        prefixCls={customizePrefixCls}
+        className={tableCls}
+        locale={{
+          ...restLocale,
+          emptyText: (
+            <div className={`${prefixCls}-empty-wrapper`}>
+              {typeof emptyText === 'function' ? emptyText() : emptyText}
+            </div>
+          ),
+        }}
+        size={size}
+        bordered={bordered || innerBordered}
+        columns={newColumns}
+        rowClassName={(...args) => {
+          return classNames(
+            typeof rowClassName === 'function' ? rowClassName(...args) : rowClassName,
+            {
+              [`${prefixCls}-expand-row-by-click`]: expandable?.expandRowByClick,
             }
-          : undefined
-      }
-      rowSelection={
-        rowSelection
-          ? {
-              columnWidth: table?.selectionColumnWidth,
-              ...rowSelection,
-              onChange: (
-                selectedRowKeys: React.Key[],
-                selectedRows: any[],
-                info: {
-                  type: RowSelectMethod;
-                }
-              ) => {
-                handleSelectedData(selectedRowKeys, selectedRows, info);
-                rowSelection?.onChange?.(selectedRowKeys, selectedRows, info);
-              },
-            }
-          : undefined
-      }
-      scroll={{
-        // enable auto x scroll when there is no ellipsis column
-        x: hasEllipsisColumn ? undefined : 'max-content',
-        ...scroll,
-      }}
-      footer={footer}
-      pagination={
-        pagination === false
-          ? false
-          : {
-              ...pagination,
-              hideOnSinglePage:
-                toolAlertRender ||
-                toolOptionsRender ||
-                toolSelectedContent ||
-                pagination?.showSizeChanger
-                  ? false
-                  : pagination?.hideOnSinglePage !== undefined
-                    ? pagination?.hideOnSinglePage
-                    : extendedContext.hideOnSinglePage,
-              showTotal: renderOptionsBar,
-            }
-      }
-    />
+          );
+        }}
+        expandable={
+          expandable
+            ? {
+                columnWidth: !size || size === 'large' ? 40 : 32,
+                ...expandable,
+              }
+            : undefined
+        }
+        rowSelection={
+          rowSelection
+            ? {
+                columnWidth: table?.selectionColumnWidth,
+                ...rowSelection,
+                onChange: (
+                  selectedRowKeys: React.Key[],
+                  selectedRows: any[],
+                  info: {
+                    type: RowSelectMethod;
+                  }
+                ) => {
+                  handleSelectedData(selectedRowKeys, selectedRows, info);
+                  rowSelection?.onChange?.(selectedRowKeys, selectedRows, info);
+                },
+              }
+            : undefined
+        }
+        scroll={{
+          // enable auto x scroll when there is no ellipsis column
+          x: hasEllipsisColumn ? undefined : 'max-content',
+          ...scroll,
+        }}
+        footer={footer}
+        pagination={
+          pagination === false
+            ? false
+            : {
+                ...pagination,
+                hideOnSinglePage:
+                  toolAlertRender ||
+                  toolOptionsRender ||
+                  toolSelectedContent ||
+                  pagination?.showSizeChanger
+                    ? false
+                    : pagination?.hideOnSinglePage !== undefined
+                      ? pagination?.hideOnSinglePage
+                      : extendedContext.hideOnSinglePage,
+                showTotal: renderOptionsBar,
+              }
+        }
+      />
+    </ConfigProvider>
   );
 }
 

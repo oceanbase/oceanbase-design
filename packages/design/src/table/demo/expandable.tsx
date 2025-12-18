@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { TableColumnsType } from '@oceanbase/design';
-import { Form, Switch, Table } from '@oceanbase/design';
+import { Button, Form, Switch, Table } from '@oceanbase/design';
 
 interface DataType {
   key: React.Key;
@@ -22,7 +22,7 @@ const App: React.FC = () => {
     { title: 'Upgraded', dataIndex: 'upgradeNum', key: 'upgradeNum' },
     { title: 'Creator', dataIndex: 'creator', key: 'creator' },
     { title: 'Date', dataIndex: 'createdAt', key: 'createdAt' },
-    { title: 'Action', key: 'operation', render: () => <a>Publish</a> },
+    { title: 'Action', key: 'operation', render: () => <Button>Action</Button> },
   ];
 
   const data: DataType[] = [];
