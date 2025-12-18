@@ -8,6 +8,9 @@ export const genSelectStyle: GenerateStyle<SelectToken> = (token: SelectToken): 
   const { componentCls } = token;
   return {
     [`${componentCls}`]: {
+      [`${componentCls}-selection-placeholder`]: {
+        fontWeight: token.fontWeightWeak,
+      },
       [`${componentCls}-clear`]: {
         color: token.colorTextTertiary,
       },
