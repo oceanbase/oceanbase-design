@@ -143,6 +143,27 @@ export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
       [`${componentCls}-item-content`]: {
         paddingBottom: token.padding,
       },
+      [`&${componentCls}-middle`]: {
+        [`${componentCls}-item-label`]: {
+          paddingBottom: token.paddingSM,
+          paddingInlineEnd: token.paddingLG,
+        },
+        [`${componentCls}-item-content`]: {
+          paddingBottom: token.paddingSM,
+        },
+      },
+      [`&${componentCls}-small`]: {
+        [`${componentCls}-title`]: {
+          fontSize: token.fontSize,
+        },
+        [`${componentCls}-item-label`]: {
+          paddingBottom: token.paddingXS,
+          paddingInlineEnd: token.paddingLG,
+        },
+        [`${componentCls}-item-content`]: {
+          paddingBottom: token.paddingXS,
+        },
+      },
     },
     // For bordered mode: label and content are in separate th and td
     [`${componentCls}${componentCls}-content-align-left${componentCls}-bordered`]: {

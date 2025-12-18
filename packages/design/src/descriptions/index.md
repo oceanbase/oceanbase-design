@@ -18,7 +18,8 @@ nav:
 <code src="./demo/basic.tsx" title="基本" description="简单展示。"></code>
 <code src="./demo/content.tsx" title="内容展示" description="内容超长自动省略，并展示 `Tooltip`。同时通过 `contentProps` 可设置省略、编辑、复制等内容属性。"></code>
 <code src="./demo/collapsible.tsx" title="可折叠" description="支持内容区的展开和收起。"></code>
-<code src="./demo/content-align.tsx" title="内容左对齐" description="设置 `contentAlign` 为 `left` 可以让内容左对齐。"></code>
+<code src="./demo/content-align.tsx" title="内容左对齐" description="设置 `contentAlign` 为 `left` 可以让内容左对齐，并且总是为单列模式。"></code>
+<code src="./demo/popover.tsx" title="在 Popover 中使用" description="内容左对齐 + 小尺寸。"></code>
 <code src="./demo/debug-typography.tsx" title="验证内置 Typography 在各个场景下的效果" description="超长省略、编辑、复制等功能均需表现正常。" debug></code>
 <code src="./demo/vertical.tsx" title="垂直" description="默认去掉冒号。"></code>
 <code src="./demo/bordered.tsx" title="带边框"></code>
