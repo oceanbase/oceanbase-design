@@ -20,9 +20,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <Space direction="vertical">
-      <Search allowClear onSearch={onSearch} style={{ width: 200 }} />
-      <Search allowClear addonBefore="https://" onSearch={onSearch} style={{ width: 304 }} />
+    <Space direction="vertical" style={{ width: '100%' }}>
+      <Search allowClear onSearch={onSearch} />
+      <Search allowClear addonBefore="https://" onSearch={onSearch} />
       <Search allowClear enterButton onSearch={onSearch} />
       <Search allowClear enterButton="Search" onSearch={onSearch} />
       <Search suffix={suffix} enterButton="Search" onSearch={onSearch} />

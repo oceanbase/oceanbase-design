@@ -8,8 +8,18 @@ export const genInputStyle: GenerateStyle<InputToken> = (token: InputToken): CSS
   const { componentCls } = token;
   return {
     [`${componentCls}-affix-wrapper`]: {
+      [`&:not(${componentCls}-disabled)`]: {
+        [`${componentCls}-prefix, ${componentCls}-suffix`]: {
+          fontSize: token.fontSizeSM,
+        },
+      },
+      [`${componentCls}-prefix, ${componentCls}-suffix`]: {
+        color: token.colorIcon,
+      },
       [`${componentCls}-suffix`]: {
-        fontSize: token.fontSizeSM,
+        [`${componentCls}-clear-icon`]: {
+          color: token.colorTextTertiary,
+        },
       },
     },
   };
