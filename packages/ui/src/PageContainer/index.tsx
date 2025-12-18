@@ -128,22 +128,23 @@ const PageContainer = ({
             type="vertical"
             className={`${rootPrefixCls}-page-header-heading-document-divider`}
           />
-          {documentLink || documentClick ? (
-            <Tooltip title={locale.viewDocument}>
-              <a
-                href={documentLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={documentClick}
-              >
-                <span className={`${rootPrefixCls}-page-header-heading-document-icon`}>
-                  <DocumentIcon />
-                </span>
-              </a>
-            </Tooltip>
-          ) : (
-            (document as React.ReactNode)
-          )}
+          <Tooltip title={locale.viewDocument}>
+            <a
+              href={documentLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={documentClick}
+              className={`${rootPrefixCls}-page-header-heading-document-icon`}
+            >
+              {documentLink || documentClick ? (
+                <DocumentIcon
+                  className={`${rootPrefixCls}-page-header-heading-document-default-icon`}
+                />
+              ) : (
+                (document as React.ReactNode)
+              )}
+            </a>
+          </Tooltip>
         </Space>
       )}
     </Space>

@@ -25,4 +25,7 @@ export default {
       open: 'Open',
     },
   },
+  Card: {
+    viewDocument: 'View Document',
+  },
 } as Locale;

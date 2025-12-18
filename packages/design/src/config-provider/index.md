@@ -12,6 +12,7 @@ nav:
 - 🆕 支持 CSS 变量模式，通过 `theme.cssVar` 配置启用，详见 [CSS 变量模式](#css-变量模式)。
 - 🆕 新增 `card.divided` 属性，用于配置 Card 是否展示分割线。
 - 🆕 新增 `locale.Input.placeholder` 属性，用于配置 Input 的默认 `placeholder`。
+- 🆕 新增 `locale.Card.viewDocument` 属性，用于配置 Card 文档链接的提示文本。
 - 🆕 新增 `table.selectionColumnWidth` 属性，用于配置表格的选择列宽度。
 - 🆕 新增 `styleProviderProps` 属性，一般用于配置 [StyleProvider](https://github.com/ant-design/cssinjs#styleprovider) 的 `hashPriority` 和 `transformers` 属性实现样式降级，来兼容 Chrome 88 以下的低版本浏览器，详见 [antd v5 样式兼容说明](https://ant-design.antgroup.com/docs/react/compatible-style-cn)。
 - 🆕 新增 `appProps` 属性，用于配置内嵌的 [App 组件属性](https://ant-design.antgroup.com/components/app-cn#app)。

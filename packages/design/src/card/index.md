@@ -8,6 +8,7 @@ nav:
 - 🔥 完全继承 antd [Card](https://ant.design/components/card-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 - 🆕 新增 `subTitle` 属性，用于设置副标题。
+- 🆕 新增 `document` 属性，用于设置文档链接。
 - 🆕 新增 `divided` 属性，控制是否展示分割线。
 - 🆕 新增 `gray` 属性，支持灰底模式。
 - 🆕 `tabList` 新增 `tag` 属性，用于设置选项卡后面的标签。
@@ -19,6 +20,7 @@ nav:
 <code src="./demo/basic.tsx" title="典型卡片" description="包含标题、内容、操作区域。"></code>
 <code src="./demo/no-divider.tsx" title="无分割线" description="去掉卡片头部和内容区的分割线。"></code>
 <code src="./demo/subTitle.tsx" title="副标题" description="可通过 `subTitle` 设置副标题。"></code>
+<code src="./demo/document.tsx" title="文档链接" description="支持文档链接、事件回调和 ReactNode 三种使用场景。"></code>
 <code src="./demo/border-less.tsx" title="无边框" description="带有阴影，通常位于灰色背景之上。"></code>
 <code src="./demo/collapsible.tsx" title="可折叠卡片" description="支持内容区的展开和收起。"></code>
 <code src="./demo/gray.tsx" title="灰底模式" description="设置灰色背景，适用于区分不同的内容区域。"></code>
@@ -34,6 +36,7 @@ nav:
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
 | subTitle | 副标题 | ReactNode | - | - |
+| document | 文档链接，支持字符串链接、点击事件回调和 ReactNode | string \| React.MouseEventHandler\<HTMLAnchorElement\> \| ReactNode | - | - |
 | divided | 是否展示分割线 | boolean | true | - |
 | gray | 是否为灰底模式 | boolean | false | - |
 | tabList | 页签标题列表 | {key: string, tab: ReactNode, tag: ReactNode }[] | - | - |
