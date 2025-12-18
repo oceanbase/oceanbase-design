@@ -89,6 +89,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
       onClear={handleClear}
       content={content}
       extra={extra}
+      showArrow={false}
       {...restProps}
     >
       <span>{label}</span>

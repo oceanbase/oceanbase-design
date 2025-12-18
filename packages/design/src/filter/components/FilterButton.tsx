@@ -2,10 +2,14 @@ import { Flex, Popover, Spin, token } from '@oceanbase/design';
 import { CloseOutlined, DownOutlined, LoadingOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
-import React, { forwardRef, useMemo, useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import { useFilterContext } from '../FilterContext';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps } from '../type';
+
+export interface FilterButtonRef {
+  closePopover: () => void;
+}
 
 interface FilterButtonProps extends BaseFilterProps {
   children?: ReactNode;
@@ -21,9 +25,15 @@ interface FilterButtonProps extends BaseFilterProps {
   selected?: boolean;
   /** 额外内容，显示在标签旁边 */
   extra?: ReactNode;
+  /** 选择后是否自动关闭弹出层 */
+  autoCloseOnSelect?: boolean;
+  /** 选择回调，当选择项时调用，如果 autoCloseOnSelect 为 true，调用后会自动关闭弹出层 */
+  onSelect?: () => void;
+  /** 是否显示下拉箭头图标，默认 true */
+  showArrow?: boolean;
 }
 
-const FilterButton = forwardRef<HTMLDivElement, FilterButtonProps>(
+const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
   (
     {
       children,
@@ -39,6 +49,9 @@ const FilterButton = forwardRef<HTMLDivElement, FilterButtonProps>(
       loading = false,
       selected = false,
       extra,
+      autoCloseOnSelect = false,
+      onSelect,
+      showArrow = true,
       ...restProps
     },
     ref
@@ -46,12 +59,22 @@ const FilterButton = forwardRef<HTMLDivElement, FilterButtonProps>(
     const { isWrapped } = useFilterContext();
     const [open, setOpen] = useState(false);
     const { wrapSSR, prefixCls } = useFilterStyle();
+    const innerRef = useRef<HTMLDivElement>(null);
 
     const handleClearClick = (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
       onClear?.();
       setOpen(false);
     };
+
+    const closePopover = () => {
+      setOpen(false);
+    };
+
+    // 通过 ref 暴露关闭方法
+    useImperativeHandle(ref, () => ({
+      closePopover,
+    }));
 
     // 使用 useMemo 缓存 content，避免每次都重新创建
     const popoverContent = useMemo(
@@ -103,7 +126,7 @@ const FilterButton = forwardRef<HTMLDivElement, FilterButtonProps>(
         }}
         {...restProps}
       >
-        <div ref={ref}>
+        <div ref={innerRef}>
           <div
             className={classNames(
               getFilterCls(prefixCls, 'button'),
@@ -125,9 +148,11 @@ const FilterButton = forwardRef<HTMLDivElement, FilterButtonProps>(
                   />
                 ) : (
                   <>
-                    <DownOutlined
-                      className={selected ? getFilterCls(prefixCls, 'arrow-icon') : ''}
-                    />
+                    {showArrow && (
+                      <DownOutlined
+                        className={selected ? getFilterCls(prefixCls, 'arrow-icon') : ''}
+                      />
+                    )}
                     {selected && (
                       <div
                         className={getFilterCls(prefixCls, 'clear-icon')}

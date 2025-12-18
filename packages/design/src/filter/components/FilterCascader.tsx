@@ -1,8 +1,8 @@
 import { Checkbox, Flex, Popover, Tag, Tooltip } from '@oceanbase/design';
-import { CheckOutlined, FilterOutlined, RightOutlined } from '@oceanbase/icons';
+import { CheckOutlined, CloseOutlined, RightOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import useFilterStyle, { getFilterCls } from '../style';
@@ -10,6 +10,7 @@ import type { BaseFilterProps, InternalFilterProps } from '../type';
 import { getPlaceholder, getWrappedValueStyle } from '../utils';
 import CountNumber from './CountNumber';
 import FilterButton from './FilterButton';
+import type { FilterButtonRef } from './FilterButton';
 import WrappedTagsDisplay from './WrappedTagsDisplay';
 
 export interface CascaderOption {
@@ -45,6 +46,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
 }) => {
   const isWrapped = useFilterWrapped(_isInWrap);
   const { prefixCls } = useFilterStyle();
+  const filterButtonRef = useRef<FilterButtonRef>(null);
 
   // 解析 count 配置
   const showCount = !!count;
@@ -82,6 +84,8 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
           newValueList = [[parentValue, childValue]];
         }
         setValue(newValueList);
+        // 单选模式下，选择后立即关闭弹出层
+        filterButtonRef.current?.closePopover();
       }
     },
     [currentValue, multiple, setValue]
@@ -249,7 +253,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
                           clearByParent(option.value);
                         }}
                       >
-                        <FilterOutlined />
+                        <CloseOutlined />
                       </div>
                     )}
                   </div>
@@ -274,6 +278,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
         <div>
           <div style={{ marginBottom: 8 }}>{label}</div>
           <FilterButton
+            ref={filterButtonRef}
             icon={icon}
             label={label}
             bordered={bordered}
@@ -293,6 +298,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
       <div>
         <div style={{ marginBottom: 8 }}>{label}</div>
         <FilterButton
+          ref={filterButtonRef}
           icon={icon}
           label={label}
           bordered={bordered}
@@ -311,6 +317,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
 
   return (
     <FilterButton
+      ref={filterButtonRef}
       icon={icon}
       label={label}
       bordered={bordered}

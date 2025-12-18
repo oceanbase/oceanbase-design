@@ -71,6 +71,7 @@ const genIconStyle = (token: FilterStyleToken): CSSObject => {
       display: 'inline-flex',
       justifyContent: 'center',
       alignItems: 'center',
+      marginTop: 2,
     },
 
     [`.${filterPrefixCls}-arrow-icon`]: {
@@ -110,7 +111,6 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
       gap: 8,
       alignItems: 'center',
       justifyContent: 'right',
-      fontSize: token.fontSizeSM,
       color: colorText,
       whiteSpace: 'nowrap',
 

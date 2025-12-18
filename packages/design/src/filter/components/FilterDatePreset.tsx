@@ -1,11 +1,13 @@
 import { Flex } from '@oceanbase/design';
 import { CheckOutlined } from '@oceanbase/icons';
 import type { FC, ReactNode } from 'react';
+import { useRef } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps } from '../type';
 import { getIcon } from '../utils';
 import FilterButton from './FilterButton';
+import type { FilterButtonRef } from './FilterButton';
 import dayjs from 'dayjs';
 
 export interface DatePresetOption {
@@ -51,6 +53,7 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
   ...restProps
 }) => {
   const { prefixCls } = useFilterStyle();
+  const filterButtonRef = useRef<FilterButtonRef>(null);
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, '', onChange);
@@ -62,6 +65,12 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
     setValue('');
   };
 
+  const handleSelect = (optionValue: string) => {
+    setValue(optionValue);
+    // 选择后立即关闭弹出层
+    filterButtonRef.current?.closePopover();
+  };
+
   const content = (
     <div style={{ padding: 8 }}>
       {options.map(option => (
@@ -69,7 +78,7 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
           gap={8}
           key={option.value}
           className={getFilterCls(prefixCls, 'select-option')}
-          onClick={() => setValue(option.value)}
+          onClick={() => handleSelect(option.value)}
           justify="space-between"
         >
           <span>{option.label}</span>
@@ -83,6 +92,7 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
 
   return (
     <FilterButton
+      ref={filterButtonRef}
       icon={icon || getIcon('time')}
       label={label}
       bordered={bordered}

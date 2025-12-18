@@ -1,13 +1,14 @@
 import { Flex, theme } from '@oceanbase/design';
 import { CheckOutlined } from '@oceanbase/icons';
 import type { FC, ReactNode } from 'react';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
 import { getPlaceholder, getWrappedValueStyle, wrapContent } from '../utils';
 import FilterButton from './FilterButton';
+import type { FilterButtonRef } from './FilterButton';
 
 export interface SelectOption {
   label: ReactNode;
@@ -43,6 +44,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
   const isWrapped = useFilterWrapped(_isInWrap);
   const { token } = theme.useToken();
   const { prefixCls } = useFilterStyle();
+  const filterButtonRef = useRef<FilterButtonRef>(null);
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, '', onChange);
@@ -54,6 +56,8 @@ const FilterSelect: FC<FilterSelectProps> = ({
       return;
     }
     setValue(option.value);
+    // 选择后立即关闭弹出层
+    filterButtonRef.current?.closePopover();
   };
 
   const handleClear = () => {
@@ -102,6 +106,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
       <div>
         <div style={{ marginBottom: 8 }}>{label}</div>
         <FilterButton
+          ref={filterButtonRef}
           icon={icon}
           label={label}
           bordered={bordered}
@@ -121,6 +126,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
 
   return (
     <FilterButton
+      ref={filterButtonRef}
       icon={icon}
       label={label}
       bordered={bordered}
