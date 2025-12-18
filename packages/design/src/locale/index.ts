@@ -6,6 +6,7 @@ import type { InputNumberLocale } from '../input-number';
 import type { SelectLocale } from '../select';
 import type { TreeSelectLocale } from '../tree-select';
 import type { TableLocale } from '../table';
+import type { CardLocale } from '../card';
 
 export * from 'antd/es/locale';
 
@@ -26,6 +27,7 @@ export interface Locale extends AntLocale {
   Select?: SelectLocale;
   TreeSelect?: TreeSelectLocale;
   Table?: TableLocale;
+  Card?: CardLocale;
 }
 
 export { default as useLocale } from './useLocale';

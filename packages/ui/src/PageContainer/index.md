@@ -72,6 +72,6 @@ const App = () => {
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
 | header.reload | 页面刷新 | boolean \| [IconComponentProps](https://ant.design/components/icon-cn#api) \| ReactNode | - | - |
-| header.document | 文档链接 | string \| MouseEventHandler\<HTMLAnchorElement\> \| ReactNode | - | - |
+| header.document | 文档链接，支持字符串链接、点击事件回调和 ReactNode | string \| MouseEventHandler\<HTMLAnchorElement\> \| ReactNode | - | - |
 
 - 更多 API 详见 pro-components PageContainer 文档: https://procomponents.ant.design/components/page-container

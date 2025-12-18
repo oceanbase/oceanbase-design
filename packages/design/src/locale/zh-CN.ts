@@ -25,4 +25,7 @@ export default {
       open: '展开',
     },
   },
+  Card: {
+    viewDocument: '查看文档',
+  },
 } as Locale;
