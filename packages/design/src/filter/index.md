@@ -22,7 +22,6 @@ Filter 是一组轻量级的筛选组件，提供了多种筛选类型，适用�
 <code src="./demo/basic.tsx" title="基本使用" description="Filter.Select 单选筛选器的基本用法。"></code>
 <code src="./demo/checkbox.tsx" title="多选筛选" description="Filter.Checkbox 多选筛选器，支持显示选中计数。"></code>
 <code src="./demo/cascader.tsx" title="级联筛选" description="Filter.Cascader 级联筛选器，支持单选和多选模式。"></code>
-<code src="./demo/bordered.tsx" title="边框" description="通过 bordered 控制是否显示边框。"></code>
 <code src="./demo/custom-render.tsx" title="自定义渲染" description="通过 optionRender 自定义选项的渲染。"></code>
 <code src="./demo/extra.tsx" title="额外内容" description="通过 extra 属性可以在筛选器弹框的标签旁边显示额外内容，如提示信息、标签等。"></code>
 <code src="./demo/responsive.tsx" title="响应式折叠" description="Filter.ResponsiveGroup 支持响应式布局，当容器宽度不足时自动将筛选器折叠到更多按钮中。"></code>
