@@ -43,6 +43,9 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
           fontWeight: token.fontWeightStrong,
           marginInlineEnd: token.marginXS,
         },
+        [`${antCls}-page-header-heading-sub-title`]: {
+          fontSize: token.fontSize,
+        },
         [`${antCls}-page-header-heading-reload`]: {
           cursor: 'pointer',
           fontSize: token.fontSizeLG,

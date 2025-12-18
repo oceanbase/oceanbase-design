@@ -115,6 +115,7 @@ export default () => {
       loading={loading}
       header={{
         title: '页面标题',
+        subTitle: '副标题',
         onBack: () => {},
         document: 'https://www.oceanbase.com',
         reload: {
