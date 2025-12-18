@@ -42,8 +42,8 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
   const { componentCls, colorIcon, colorIconHover, motionDurationMid, calc } = token;
   // height = fontSize * lineHeight
   const height = calc(token.fontSize).mul(token.lineHeight).equal();
-  // icon width = fontSizeLG (icon size)
-  const iconWidth = token.fontSizeLG;
+  // icon width = fontSize + 1px (icon size)
+  const iconWidth = calc(token.fontSize).add(1).equal();
   // content and action start position = icon width + icon margin
   const contentStartOffset = calc(iconWidth).add(token.marginXS).equal();
   // close icon width (approximate)
@@ -71,7 +71,7 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
       },
       [`${componentCls}-icon`]: {
         height,
-        fontSize: token.fontSizeLG,
+        fontSize: iconWidth,
         marginInlineEnd: token.marginXS,
         flexShrink: 0,
       },
