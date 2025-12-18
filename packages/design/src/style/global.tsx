@@ -71,6 +71,10 @@ const genGlobalStyle = (token: GlobalToken, prefixCls?: string): CSSInterpolatio
       'pre, code, kbd, samp': {
         fontFamily: token.fontFamilyCode,
       },
+      'input::placeholder': {
+        // affact all placeholder excluding select
+        fontWeight: token.fontWeightWeak,
+      },
       '*': {
         scrollbarColor: `${token.colorFillSecondary} transparent`,
       },
