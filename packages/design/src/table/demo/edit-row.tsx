@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { Form, Input, InputNumber, Popconfirm, Table, Typography } from '@oceanbase/design';
+import {
+  Button,
+  Form,
+  Input,
+  InputNumber,
+  Popconfirm,
+  Space,
+  Table,
+  Typography,
+} from '@oceanbase/design';
 
 interface Item {
   key: string;
@@ -126,18 +135,16 @@ const App: React.FC = () => {
       render: (_: any, record: Item) => {
         const editable = isEditing(record);
         return editable ? (
-          <span>
-            <Typography.Link onClick={() => save(record.key)} style={{ marginRight: 8 }}>
-              Save
-            </Typography.Link>
+          <Space>
+            <Button onClick={() => save(record.key)}>Save</Button>
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a>Cancel</a>
+              <Button>Cancel</Button>
             </Popconfirm>
-          </span>
+          </Space>
         ) : (
-          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
+          <Button disabled={editingKey !== ''} onClick={() => edit(record)}>
             Edit
-          </Typography.Link>
+          </Button>
         );
       },
     },

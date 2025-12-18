@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button } from '@oceanbase/design';
+import { Button, Space } from '@oceanbase/design';
+import { EllipsisOutlined } from '@oceanbase/icons';
 import { ProTable } from '@oceanbase/ui';
 
 const App: React.FC = () => {
@@ -28,11 +29,15 @@ const App: React.FC = () => {
       },
     },
     {
-      title: '操作',
-      dataIndex: 'action',
-      render: (text: string, record: any) => {
-        return <Button>编辑</Button>;
-      },
+      title: 'Action',
+      key: 'action',
+      sorter: true,
+      render: () => (
+        <Space>
+          <Button>Delete</Button>
+          <Button icon={<EllipsisOutlined />} />
+        </Space>
+      ),
     },
   ];
 

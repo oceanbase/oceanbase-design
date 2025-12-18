@@ -10,7 +10,7 @@ import {
   TableColumnsType,
 } from '@oceanbase/design';
 import type { SizeType } from '@oceanbase/design/es/config-provider';
-import { DownOutlined } from '@oceanbase/icons';
+import { EllipsisOutlined } from '@oceanbase/icons';
 
 interface DataType {
   key: React.Key;
@@ -53,12 +53,10 @@ const App: React.FC = () => {
         dataIndex: 'operation',
         key: 'operation',
         render: () => (
-          <Space size="middle">
-            <a>Stop</a>
+          <Space>
+            <Button>Stop</Button>
             <Dropdown menu={{ items }}>
-              <a>
-                More <DownOutlined />
-              </a>
+              <Button icon={<EllipsisOutlined />} />
             </Dropdown>
           </Space>
         ),
@@ -84,7 +82,7 @@ const App: React.FC = () => {
     { title: 'Upgraded', dataIndex: 'upgradeNum', key: 'upgradeNum' },
     { title: 'Creator', dataIndex: 'creator', key: 'creator' },
     { title: 'Date', dataIndex: 'createdAt', key: 'createdAt' },
-    { title: 'Action', key: 'operation', render: () => <a>Publish</a> },
+    { title: 'Action', key: 'operation', render: () => <Button>Publish</Button> },
   ];
 
   const data: DataType[] = [];

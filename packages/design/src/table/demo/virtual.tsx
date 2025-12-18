@@ -1,5 +1,5 @@
 import React from 'react';
-import { Space, Switch, Table, Typography } from '@oceanbase/design';
+import { Button, Space, Switch, Table, Typography } from '@oceanbase/design';
 import type { TableProps } from '@oceanbase/design';
 
 interface RecordType {
@@ -53,12 +53,12 @@ const columns: TableProps<RecordType>['columns'] = [
   },
   {
     title: 'Action',
-    width: 150,
+    width: 160,
     fixed: 'right',
     render: () => (
       <Space>
-        <Typography.Link>Action1</Typography.Link>
-        <Typography.Link>Action2</Typography.Link>
+        <Button>Action1</Button>
+        <Button>Action2</Button>
       </Space>
     ),
   },
