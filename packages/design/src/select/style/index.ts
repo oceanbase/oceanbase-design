@@ -8,7 +8,7 @@ export const genSelectStyle: GenerateStyle<SelectToken> = (token: SelectToken): 
   const { componentCls } = token;
   return {
     [`${componentCls}`]: {
-      [`${componentCls}-arrow${componentCls}-arrow-loading`]: {
+      [`${componentCls}-clear`]: {
         color: token.colorTextTertiary,
       },
     },
