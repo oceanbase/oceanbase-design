@@ -17,6 +17,10 @@ export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSS
       [`${componentCls}-status-dot`]: {
         [`&${componentCls}-status-default`]: {},
       },
+      [`${componentCls}-status-processing::after`]: {
+        // remove animation for processing status dot
+        display: 'none',
+      },
       // icon style
       [`${componentCls}-status-icon`]: {
         // remove dot style
