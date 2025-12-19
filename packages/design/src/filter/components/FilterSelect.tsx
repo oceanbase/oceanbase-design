@@ -25,8 +25,6 @@ export interface FilterSelectProps extends BaseFilterProps, InternalFilterProps 
   onChange?: (value: string) => void;
   /** 自定义渲染选项 */
   optionRender?: (option: SelectOption, info: { index: number }) => ReactNode;
-  /** 是否加载中 */
-  loading?: boolean;
 }
 
 const FilterSelect: FC<FilterSelectProps> = ({
@@ -45,6 +43,9 @@ const FilterSelect: FC<FilterSelectProps> = ({
   const { token } = theme.useToken();
   const { prefixCls } = useFilterStyle();
   const filterButtonRef = useRef<FilterButtonRef>(null);
+
+  // 从 restProps 中排除 showArrow，避免类型冲突
+  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps as any;
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, '', onChange);
@@ -114,7 +115,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
           content={wrappedContent}
           loading={loading}
           selected={hasValue}
-          {...restProps}
+          {...filterButtonProps}
         >
           <span
             className={getFilterCls(prefixCls, 'text-ellipsis')}
@@ -137,7 +138,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
       content={wrappedContent}
       loading={loading}
       selected={!!currentValue}
-      {...restProps}
+      {...filterButtonProps}
     >
       <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{currentLabel}</span>
     </FilterButton>

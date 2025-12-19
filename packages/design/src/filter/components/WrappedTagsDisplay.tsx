@@ -38,7 +38,7 @@ const WrappedTagsDisplay: React.FC<WrappedTagsDisplayProps> = ({
   }
 
   return (
-    <Flex gap={4} align="center" style={{ flex: 1, overflow: 'hidden' }}>
+    <Flex align="center" style={{ overflow: 'hidden', flex: 1 }}>
       {visibleTags.map(item => (
         <Tag
           key={item.value}
@@ -48,7 +48,7 @@ const WrappedTagsDisplay: React.FC<WrappedTagsDisplayProps> = ({
             e.stopPropagation();
             onRemove?.(item.value);
           }}
-          style={{ maxWidth: tagMaxWidth }}
+          style={{ maxWidth: tagMaxWidth, marginRight: 4 }}
         >
           {item.label}
         </Tag>

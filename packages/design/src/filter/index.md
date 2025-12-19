@@ -41,6 +41,8 @@ Filter 是一组轻量级的筛选组件，提供了多种筛选类型，适用�
 | disabled | 是否禁用 | `boolean` | `false` |
 | bordered | 是否显示边框 | `boolean` | `true` |
 | footer | 底部操作区域 | `ReactNode` | - |
+| extra | 额外内容，显示在筛选器弹框的标签旁边 | `ReactNode` | - |
+| loading | 是否加载中 | `boolean` | `false` |
 | collapsible | 是否可以被 ResponsiveGroup 收集到 Wrap 中 | `boolean` | `true` |
 | alwaysCollapse | 是否始终折叠到"更多"按钮中，无论容器宽度是否充足 | `boolean` | `false` |
 | trigger | 触发方式 | `'hover' \| 'click' \| 'focus'` | `'click'` |

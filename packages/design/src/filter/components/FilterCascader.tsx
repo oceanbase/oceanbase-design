@@ -1,4 +1,4 @@
-import { Checkbox, Flex, Popover, Tag, Tooltip } from '@oceanbase/design';
+import { Checkbox, Flex, Popover, Tag, Tooltip, theme } from '@oceanbase/design';
 import { CheckOutlined, CloseOutlined, RightOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
@@ -16,7 +16,8 @@ import WrappedTagsDisplay from './WrappedTagsDisplay';
 export interface CascaderOption {
   label?: ReactNode;
   value: string;
-  children?: { label?: ReactNode; value: string }[];
+  disabled?: boolean;
+  children?: { label?: ReactNode; value: string; disabled?: boolean }[];
 }
 
 export interface FilterCascaderProps extends BaseFilterProps, InternalFilterProps {
@@ -46,6 +47,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
 }) => {
   const isWrapped = useFilterWrapped(_isInWrap);
   const { prefixCls } = useFilterStyle();
+  const { token } = theme.useToken();
   const filterButtonRef = useRef<FilterButtonRef>(null);
   // 用于控制二级 Popover 的打开状态（仅在单选模式下使用）
   const [openPopoverKey, setOpenPopoverKey] = useState<string | null>(null);
@@ -62,6 +64,13 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
 
   const handleChange = useCallback(
     (parentValue: string, childValue: string) => {
+      // 检查选项是否被禁用
+      const parentOption = options.find(opt => opt.value === parentValue);
+      const childOption = parentOption?.children?.find(child => child.value === childValue);
+      if (parentOption?.disabled || childOption?.disabled) {
+        return;
+      }
+
       if (multiple) {
         // 多选模式
         const existingIndex = currentValue.findIndex(
@@ -97,7 +106,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
         }, 0);
       }
     },
-    [currentValue, multiple, setValue]
+    [currentValue, multiple, setValue, options]
   );
 
   const clearByParent = useCallback(
@@ -115,8 +124,15 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   // 选中该分类下的所有子项
   const selectAllChildren = useCallback(
     (option: CascaderOption) => {
+      if (option.disabled) {
+        return;
+      }
       const otherValues = currentValue.filter(item => item[0] !== option.value);
-      const allChildValues = option.children?.map(child => [option.value, child.value]) || [];
+      // 只选择未禁用的子项
+      const allChildValues =
+        option.children
+          ?.filter(child => !child.disabled)
+          .map(child => [option.value, child.value]) || [];
       const newValueList = [...otherValues, ...allChildValues];
       setValue(newValueList);
     },
@@ -193,7 +209,8 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
             trigger={'hover'}
             key={option.value}
             arrow={false}
-            open={multiple ? undefined : openPopoverKey === option.value}
+            // 禁用时不展开子集
+            open={option?.disabled ? false : multiple ? undefined : openPopoverKey === option.value}
             onOpenChange={
               multiple
                 ? undefined
@@ -207,6 +224,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
             }
             content={option.children?.map(child => {
               const isSelected = selectedChildren.includes(child.value);
+              const isChildDisabled = child.disabled || false;
               return (
                 <Flex
                   key={child.value}
@@ -215,11 +233,17 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
                   justify="space-between"
                   onClick={e => {
                     e.stopPropagation();
-                    handleChange(option.value, child.value);
+                    if (!isChildDisabled) {
+                      handleChange(option.value, child.value);
+                    }
+                  }}
+                  style={{
+                    cursor: isChildDisabled ? 'not-allowed' : 'pointer',
+                    color: isChildDisabled ? token.colorTextDisabled : 'inherit',
                   }}
                 >
                   {multiple ? (
-                    <Checkbox checked={isSelected}>
+                    <Checkbox checked={isSelected} disabled={isChildDisabled}>
                       <span className={getFilterCls(prefixCls, 'text-ellipsis')}>
                         {child.label}
                       </span>
@@ -252,17 +276,24 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
                 })}
                 justify="space-between"
                 align="center"
+                style={{
+                  cursor: option.disabled ? 'not-allowed' : 'pointer',
+                  color: option.disabled ? token.colorTextDisabled : 'inherit',
+                }}
               >
                 {multiple ? (
                   <Checkbox
                     checked={allChildrenSelected}
                     indeterminate={hasSelectedChildren && !allChildrenSelected}
+                    disabled={option.disabled}
                     onClick={(e: React.MouseEvent) => e.stopPropagation()}
                     onChange={() => {
-                      if (allChildrenSelected) {
-                        clearByParent(option.value);
-                      } else {
-                        selectAllChildren(option);
+                      if (!option.disabled) {
+                        if (allChildrenSelected) {
+                          clearByParent(option.value);
+                        } else {
+                          selectAllChildren(option);
+                        }
                       }
                     }}
                   >
@@ -349,7 +380,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
     );
   }
 
-  return (
+  const filterButton = (
     <FilterButton
       ref={filterButtonRef}
       icon={icon}
@@ -362,29 +393,39 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
     >
       <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{getSelectedLabel()}</span>
       {multiple && showCount && currentValue.length > 0 && (
-        <Tooltip
-          title={
-            <Flex wrap="wrap" gap={4}>
-              {getSelectedTags().map(item => (
-                <Tag key={item.value} closable onClose={() => handleRemoveTag(item.value)}>
-                  {item.label}
-                </Tag>
-              ))}
-            </Flex>
-          }
-        >
-          <span>
-            <CountNumber
-              count={currentValue.length}
-              total={
-                showTotal ? options.reduce((acc, curr) => acc + (curr.children?.length || 0), 0) : 0
-              }
-            />
-          </span>
-        </Tooltip>
+        <span>
+          <CountNumber
+            count={currentValue.length}
+            total={
+              showTotal ? options.reduce((acc, curr) => acc + (curr.children?.length || 0), 0) : 0
+            }
+          />
+        </span>
       )}
     </FilterButton>
   );
+
+  // 多选模式下，如果有选中值，用 Tooltip 包裹整个 FilterButton
+  if (multiple && currentValue.length > 0) {
+    return (
+      <Tooltip
+        mouseEnterDelay={1}
+        title={
+          <Flex wrap="wrap" gap={4}>
+            {getSelectedTags().map(item => (
+              <Tag key={item.value} closable onClose={() => handleRemoveTag(item.value)}>
+                {item.label}
+              </Tag>
+            ))}
+          </Flex>
+        }
+      >
+        {filterButton}
+      </Tooltip>
+    );
+  }
+
+  return filterButton;
 };
 
 export default FilterCascader;

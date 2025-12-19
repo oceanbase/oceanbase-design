@@ -1,4 +1,4 @@
-import { Checkbox, Flex, Tag, Tooltip } from '@oceanbase/design';
+import { Checkbox, Flex, Tag, Tooltip, theme } from '@oceanbase/design';
 import type { FC, ReactNode } from 'react';
 import React, { memo, useCallback, useMemo } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
@@ -13,6 +13,7 @@ import WrappedTagsDisplay from './WrappedTagsDisplay';
 export interface CheckboxOption {
   label: ReactNode;
   value: string;
+  disabled?: boolean;
 }
 
 export interface FilterCheckboxProps extends BaseFilterProps, InternalFilterProps {
@@ -39,6 +40,10 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
 }) => {
   const isWrapped = useFilterWrapped(_isInWrap);
   const { prefixCls } = useFilterStyle();
+  const { token } = theme.useToken();
+
+  // 从 restProps 中排除 showArrow，避免类型冲突
+  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps as any;
 
   // 解析 count 配置
   const showCount = !!count;
@@ -66,18 +71,26 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
         style={{ flexDirection: 'column', width: '100%' }}
         value={selectedValues}
       >
-        {options.map(option => (
-          <Checkbox
-            key={option.value}
-            value={option.value}
-            className={getFilterCls(prefixCls, 'checkbox-option')}
-          >
-            {option.label}
-          </Checkbox>
-        ))}
+        {options.map(option => {
+          const isDisabled = option.disabled || false;
+          return (
+            <Checkbox
+              key={option.value}
+              value={option.value}
+              disabled={isDisabled}
+              className={getFilterCls(prefixCls, 'checkbox-option')}
+              style={{
+                cursor: isDisabled ? 'not-allowed' : 'pointer',
+                color: isDisabled ? token.colorTextDisabled : 'inherit',
+              }}
+            >
+              {option.label}
+            </Checkbox>
+          );
+        })}
       </Checkbox.Group>
     ),
-    [options, selectedValues, handleChange, prefixCls]
+    [options, selectedValues, handleChange, prefixCls, token.colorTextDisabled]
   );
 
   // 获取选中值的 labels
@@ -117,7 +130,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
           onClear={handleClear}
           content={wrappedContent}
           selected={hasValue}
-          {...restProps}
+          {...filterButtonProps}
         >
           <WrappedTagsDisplay tags={selectedTags} onRemove={handleRemoveTag} />
         </FilterButton>
@@ -125,7 +138,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
     );
   }
 
-  return (
+  const filterButton = (
     <FilterButton
       icon={icon}
       label={label}
@@ -133,28 +146,38 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
       onClear={handleClear}
       content={wrappedContent}
       selected={!!selectedValues.length}
-      {...restProps}
+      {...filterButtonProps}
     >
       <span>{label}</span>
       {showCount && selectedValues.length > 0 && (
-        <Tooltip
-          title={
-            <Flex wrap="wrap" gap={4}>
-              {getSelectedTags().map(item => (
-                <Tag key={item.value} closable onClose={() => handleRemoveTag(item.value)}>
-                  {item.label}
-                </Tag>
-              ))}
-            </Flex>
-          }
-        >
-          <span>
-            <CountNumber count={selectedValues.length} total={showTotal ? options.length : 0} />
-          </span>
-        </Tooltip>
+        <span>
+          <CountNumber count={selectedValues.length} total={showTotal ? options.length : 0} />
+        </span>
       )}
     </FilterButton>
   );
+
+  // 多选模式下，如果有选中值且显示计数，用 Tooltip 包裹整个 FilterButton
+  if (selectedValues.length > 0) {
+    return (
+      <Tooltip
+        mouseEnterDelay={0.8}
+        title={
+          <Flex wrap="wrap" gap={4}>
+            {getSelectedTags().map(item => (
+              <Tag key={item.value} closable onClose={() => handleRemoveTag(item.value)}>
+                {item.label}
+              </Tag>
+            ))}
+          </Flex>
+        }
+      >
+        {filterButton}
+      </Tooltip>
+    );
+  }
+
+  return filterButton;
 };
 
 export default memo(FilterCheckbox);

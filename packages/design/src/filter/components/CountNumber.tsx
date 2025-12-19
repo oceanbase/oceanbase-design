@@ -21,6 +21,7 @@ const CountNumber: FC<CountNumberProps> = ({ count, total }) => {
         color: token.colorTextSecondary,
         background: token.colorFillSecondary,
         height: 14,
+        marginBottom: 3,
       }}
     >
       {total ? `${count}/${total}` : count}

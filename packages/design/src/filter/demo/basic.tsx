@@ -1,10 +1,69 @@
-import React, { useState } from 'react';
-import { Filter, Space, Flex } from '@oceanbase/design';
+import React, { useMemo, useState } from 'react';
+import { Filter, Space, Flex, theme, Badge, Button, Typography } from '@oceanbase/design';
 import { HeaderTableOutlined } from '@oceanbase/icons';
 
 const App: React.FC = () => {
+  const { token } = theme.useToken();
   const [selectValue, setSelectValue] = useState<string>('');
+  const [statusListValue, setStatusListValue] = useState<string[]>([]);
 
+  const statusList = [
+    {
+      status: 'success',
+      color: token.colorSuccess,
+    },
+    {
+      status: 'failure',
+      color: token.colorError,
+    },
+    {
+      status: 'processing',
+      color: token.colorPrimary,
+    },
+    {
+      status: 'warning',
+      color: token.colorWarning,
+    },
+  ];
+
+  const renderFilterStatusIcon = useMemo(() => {
+    return (
+      <div
+        style={{
+          position: 'relative',
+          minWidth: statusList.length + 10,
+        }}
+      >
+        {statusList.map((item, index) =>
+          statusListValue.includes(item.status) ? (
+            <Badge
+              key={item.status}
+              color={item.color}
+              style={{
+                position: 'absolute',
+                left: index * 3,
+                top: -3,
+              }}
+            />
+          ) : (
+            <div
+              key={item.status}
+              style={{
+                width: 8,
+                height: 8,
+                backgroundColor: 'white',
+                borderRadius: '50%',
+                border: `1px solid ${token.colorBorder}`,
+                position: 'absolute',
+                top: -4,
+                left: index * 3,
+              }}
+            />
+          )
+        )}
+      </div>
+    );
+  }, [statusList, statusListValue]);
   return (
     <Flex vertical gap={16}>
       <div>
@@ -66,6 +125,31 @@ const App: React.FC = () => {
               { value: 'disabled', label: '禁用选项', disabled: true },
             ]}
           />
+          <Filter.Cascader
+            label="footer"
+            options={[
+              {
+                value: 'frontend',
+                label: '前端',
+                children: [
+                  { value: 'react', label: 'React' },
+                  { value: 'vue', label: 'Vue' },
+                  { value: 'angular', label: 'Angular', disabled: true },
+                ],
+              },
+              {
+                value: 'backend',
+                label: '后端',
+                disabled: true,
+                children: [
+                  { value: 'java', label: 'Java' },
+                  { value: 'python', label: 'Python' },
+                  { value: 'go', label: 'Go' },
+                ],
+              },
+            ]}
+            footer={<Typography.Link>了解更多</Typography.Link>}
+          />
         </Space>
       </div>
       <div>
@@ -76,6 +160,28 @@ const App: React.FC = () => {
               { value: 'type1', label: '这是一个非常长的选项，用来测试内容自动缩略功能' },
               { value: 'type2', label: '这是一个非常长的选项，用来测试内容自动缩略功能' },
             ]}
+          />
+        </Space>
+      </div>
+      <div>
+        <Space wrap>
+          <Filter.Checkbox
+            icon={renderFilterStatusIcon}
+            value={statusListValue}
+            onChange={setStatusListValue}
+            count={{ showTotal: true }}
+            label="Status"
+            options={statusList.map(item => ({
+              label: <Badge text={item.status} color={item.color} />,
+              value: item.status,
+            }))}
+          />
+          <Filter.DatePreset
+            label="日期"
+            // options={[
+            //   { value: 'today', label: '今天' },
+            //   { value: 'yesterday', label: '昨天' },
+            // ]}
           />
         </Space>
       </div>

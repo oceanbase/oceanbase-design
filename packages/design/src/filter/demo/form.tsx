@@ -7,7 +7,7 @@ const App: React.FC = () => {
   const [form] = Form.useForm();
 
   const handleApply = () => {
-    const values = form.getFieldsValue();
+    const values = form.validateFields();
     console.log('表单值:', values);
   };
 
@@ -44,7 +44,7 @@ const App: React.FC = () => {
 
       <Form form={form} layout="inline">
         <Filter.ResponsiveGroup label="更多筛选" onApply={handleApply} onClearAll={handleClearAll}>
-          <Form.Item name="status" noStyle>
+          <Form.Item name="status" noStyle rules={[{ required: true, message: '请选择状态' }]}>
             <Filter.Select
               label="状态"
               options={[
