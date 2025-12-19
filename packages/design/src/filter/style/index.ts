@@ -39,7 +39,7 @@ const genSelectOptionStyle = (token: FilterStyleToken): CSSObject => {
 };
 
 const genCheckboxOptionStyle = (token: FilterStyleToken): CSSObject => {
-  const { filterPrefixCls } = token;
+  const { filterPrefixCls, colorTextDisabled } = token;
   return {
     [`.${filterPrefixCls}-checkbox-option`]: {
       padding: '4px 8px',
@@ -48,6 +48,15 @@ const genCheckboxOptionStyle = (token: FilterStyleToken): CSSObject => {
 
       '&:hover': {
         backgroundColor: '#eff3fa',
+      },
+
+      '&.ant-checkbox-wrapper-disabled': {
+        cursor: 'not-allowed',
+        color: colorTextDisabled,
+
+        '&:hover': {
+          backgroundColor: 'transparent',
+        },
       },
     },
   };
@@ -141,12 +150,10 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
 
     [`.${filterPrefixCls}-border`]: {
       border: `1px solid ${colorFillSecondary}`,
-      backgroundColor: colorBgContainer,
       transition: 'background-color 0.3s ease-in-out, border-color 0.3s ease-in-out',
 
       '&:hover, &:active, &:focus, &:focus-within': {
-        borderColor: colorBorder,
-        backgroundColor: '#eff3fa',
+        borderColor: token.gray7,
       },
     },
 

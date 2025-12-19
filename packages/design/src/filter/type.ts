@@ -14,6 +14,8 @@ export interface BaseFilterProps extends Omit<PopoverProps, 'title' | 'content' 
   footer?: ReactNode;
   /** 额外内容，显示在筛选器弹框的标签旁边 */
   extra?: ReactNode;
+  /** 是否加载中 */
+  loading?: boolean;
   /** 是否可以被 ResponsiveGroup 收集到 Wrap 中，默认为 true */
   collapsible?: boolean;
   /** 是否始终折叠到"更多"按钮中，无论容器宽度是否充足，默认为 false */

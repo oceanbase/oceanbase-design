@@ -90,7 +90,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               className={getFilterCls(prefixCls, 'button-label-wrapper')}
               style={showLabelDivider ? undefined : { borderBottom: 'none' }}
             >
-              <div>{label}</div>
+              <div style={{ fontSize: token.fontSizeSM }}>{label}</div>
               <div>{extra}</div>
             </Flex>
           )}
