@@ -8,6 +8,20 @@ group: 自动化迁移工具
 
 ---
 
+## 1.0.0-alpha.10
+
+`2025-12-19`
+
+- 🆕 新增 `sass-to-cssvar` 迁移能力，支持将 SASS/SCSS 变量自动迁移为 CSS 变量，用法详见 [文档](https://github.com/oceanbase/oceanbase-design/blob/v1/packages/codemod/README.md#sass-to-cssvar)。[#1342](https://github.com/oceanbase/oceanbase-design/pull/1342)
+  - 支持将 `$colorPrimary` 等 SASS 变量转换为 `var(--ant-color-primary)` 等 CSS 变量。
+  - 支持通过 `--prefix` 参数自定义 CSS 变量前缀，默认为 `ant`。
+  - 支持 `.sass` 和 `.scss` 文件格式。
+  - 仅转换匹配 `@oceanbase/design` 主题的 token 变量。
+- ⭐️ 增强 `less-to-cssvar` 迁移能力。[#1341](https://github.com/oceanbase/oceanbase-design/pull/1341)
+  - 支持 `--rename-to` 参数，可指定输出格式为 `css`、`scss` 或 `false`（保持 `.less` 扩展名），替代原有的 `--rename-to-css` 和 `--to-scss` 参数。
+  - 当 `--rename-to=false` 时，自动将 `--add-module` 设置为 `false`（除非用户显式指定）。
+- ⭐️ 默认开启 `disablePrettier`，即默认不执行 prettier 格式化。
+
 ## 1.0.0-alpha.9
 
 `2025-12-11`

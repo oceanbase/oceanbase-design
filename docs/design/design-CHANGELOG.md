@@ -8,6 +8,46 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.10
+
+`2025-12-19`
+
+- 主题:
+  - 🌈 调整基础中性色、功能色并补充 hover/active、边框、导航等 Token，统一多组件 hover 边框色为 `gray7`。[#1345](https://github.com/oceanbase/oceanbase-design/pull/1345)
+  - 🌈 超链接 hover/active 的颜色改为 `blue5`。[#1345](https://github.com/oceanbase/oceanbase-design/pull/1345)
+  - 🌈 弱化 `placeholder` 在英文环境下的字重。[#1354](https://github.com/oceanbase/oceanbase-design/pull/1354)
+  - 🌈 新增 [style*='font-size: 12px'] 全局样式处理，针对部分场景自动设置字重。[#1346](https://github.com/oceanbase/oceanbase-design/pull/1346)
+  - 🌈 更新 `lineHeight` 相关的 Design Token，保证行高和字体大小相匹配。[#1347](https://github.com/oceanbase/oceanbase-design/pull/1347)
+  - 🐞 修复 less 主题文件中 `colorIcon` 变量值不正确的问题。[#1345](https://github.com/oceanbase/oceanbase-design/pull/1345)
+- 💄 Alert 状态图标大小改为 `14px`。[#1351](https://github.com/oceanbase/oceanbase-design/pull/1351)
+- 💄 Badge 去掉 `processing` 状态点的动画效果。[#1359](https://github.com/oceanbase/oceanbase-design/pull/1359)
+- Button
+  - 💄 outlined & dashed 类型按钮 hover 时边框改为 `gray7`。[#1345](https://github.com/oceanbase/oceanbase-design/pull/1345)
+  - 💄 outlined & dashed 类型 + 带预设颜色的按钮，hover 时填充背景色、字体反白。
+- 🆕 Card 新增 `document` 属性，用于设置文档链接。[#1352](https://github.com/oceanbase/oceanbase-design/pull/1352)
+- 💄 Checkbox / Radio hover 时边框颜色改为 `gray7`。[#1345](https://github.com/oceanbase/oceanbase-design/pull/1345)
+- 💄 优化 Descriptions 内容左对齐在各个尺寸下的间距和标题大小。[#1358](https://github.com/oceanbase/oceanbase-design/pull/1358)
+- 💄 优化 Dropdown.Button 为主按钮时的分割线样式。[#1355](https://github.com/oceanbase/oceanbase-design/pull/1355)
+- 💄 弱化 Empty 描述文本在英文环境下的字重。[#1349](https://github.com/oceanbase/oceanbase-design/pull/1349)
+- Input & Select [#1350](https://github.com/oceanbase/oceanbase-design/pull/1350)
+  - 💄 优化 Input 前缀和后缀的字体大小和颜色。
+  - 💄 优化 Input 清除图标的颜色。
+  - 💄 优化 Select 清除图标的颜色。
+- 💄 Input、InputNumber、Select、DatePicker 等 hover/active 时边框改为 `gray7`。[#1345](https://github.com/oceanbase/oceanbase-design/pull/1345)
+- 💄 优化 message 的圆角大小。[#1344](https://github.com/oceanbase/oceanbase-design/pull/1344)
+- 💄 优化 notification 的背景色和圆角大小。[#1344](https://github.com/oceanbase/oceanbase-design/pull/1344)
+- Table
+  - 💄 Table 下的按钮默认为小尺寸样式。[#1338](https://github.com/oceanbase/oceanbase-design/pull/1338)
+  - 💄 优化 Table 在无分割线 Card 和 ProCard 内的间距。[#1339](https://github.com/oceanbase/oceanbase-design/pull/1339)
+  - 💄 优化 Table 分页器的样式，包括字体大小、高度和间距。[#1357](https://github.com/oceanbase/oceanbase-design/pull/1357)
+- 💄 Tabs 标签页 `hover` 时加深字重。[#1356](https://github.com/oceanbase/oceanbase-design/pull/1356)
+- Tag
+  - 🆕 Tag 新增 `critical` 状态色，用于表示严重的场景，比如告警等级-严重。[#1348](https://github.com/oceanbase/oceanbase-design/pull/1348)
+  - 💄 优化 Tag 的字重。[#1347](https://github.com/oceanbase/oceanbase-design/pull/1347)
+  - 💄 优化胶囊 Tag 的字重、字体颜色和边框颜色。[#1347](https://github.com/oceanbase/oceanbase-design/pull/1347)
+- 🆕 Typography.Text 新增 caption 属性，用于辅助描述的场景。[#1346](https://github.com/oceanbase/oceanbase-design/pull/1346)
+- 🛠 参考 antd，重构样式生成机制，将 `genComponentStyleHook` 迁移为 `genStyleHooks`，提升样式管理的灵活性和一致性。[#1343](https://github.com/oceanbase/oceanbase-design/pull/1343)
+
 ## 1.0.0-alpha.9
 
 `2025-12-11`

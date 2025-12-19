@@ -8,6 +8,16 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.10
+
+`2025-12-19`
+
+- 🐞 修复 ProTable 下的链接字体大小不正确的问题。[#1337](https://github.com/oceanbase/oceanbase-design/pull/1337)
+- 💄 优化 ProCard 标题区的上间距，以对齐 Card 样式。[#1340](https://github.com/oceanbase/oceanbase-design/pull/1340)
+- PageContainer
+  - 💄 PageContainer 自定义文档链接时自动追加默认样式。[#1352](https://github.com/oceanbase/oceanbase-design/pull/1352)
+  - 💄 优化 PageContainer 副标题的字体大小。[#1353](https://github.com/oceanbase/oceanbase-design/pull/1353)
+
 ## 1.0.0-alpha.9
 
 `2025-12-11`
