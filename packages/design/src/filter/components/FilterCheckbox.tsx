@@ -150,9 +150,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
     >
       <span>{label}</span>
       {showCount && selectedValues.length > 0 && (
-        <span>
-          <CountNumber count={selectedValues.length} total={showTotal ? options.length : 0} />
-        </span>
+        <CountNumber count={selectedValues.length} total={showTotal ? options.length : 0} />
       )}
     </FilterButton>
   );

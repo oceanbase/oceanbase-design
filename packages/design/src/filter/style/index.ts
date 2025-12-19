@@ -98,6 +98,7 @@ const genIconStyle = (token: FilterStyleToken): CSSObject => {
       position: 'absolute',
       left: 0,
       top: '60%',
+      color: token.colorIcon,
       fontSize: 12,
       transform: 'translateY(-50%)',
       transition: 'opacity 0.2s ease-in-out, visibility 0.2s ease-in-out',
@@ -140,12 +141,17 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
 
     [`.${filterPrefixCls}-button-label-wrapper`]: {
       width: '100%',
-      padding: '8px 12px 0px',
+      padding: '8px 12px',
       borderBottom: `1px solid ${colorFillSecondary}`,
       color: token.colorTextSecondary,
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
+    },
+
+    [`.${filterPrefixCls}-button-label-wrapper-no-border`]: {
+      borderBottom: 'none',
+      padding: '8px 12px 0px',
     },
 
     [`.${filterPrefixCls}-border`]: {
