@@ -87,8 +87,10 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
             <Flex
               justify="space-between"
               align="center"
-              className={getFilterCls(prefixCls, 'button-label-wrapper')}
-              style={showLabelDivider ? undefined : { borderBottom: 'none' }}
+              className={classNames(
+                getFilterCls(prefixCls, 'button-label-wrapper'),
+                showLabelDivider ? '' : getFilterCls(prefixCls, 'button-label-wrapper-no-border')
+              )}
             >
               <div style={{ fontSize: token.fontSizeSM }}>{label}</div>
               <div>{extra}</div>
@@ -126,7 +128,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
           body: {
             padding: 0,
             maxWidth: 300,
-            minWidth: isWrapped ? 268 : 200,
+            minWidth: 200,
           },
         }}
         {...restProps}

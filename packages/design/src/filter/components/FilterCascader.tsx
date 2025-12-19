@@ -186,7 +186,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   const renderContent = (
     <div
       style={{
-        padding: isWrapped ? 0 : '8px 0px',
+        padding: '8px 0px',
         maxHeight: 300,
         overflowY: 'auto',
       }}
@@ -393,14 +393,12 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
     >
       <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{getSelectedLabel()}</span>
       {multiple && showCount && currentValue.length > 0 && (
-        <span>
-          <CountNumber
-            count={currentValue.length}
-            total={
-              showTotal ? options.reduce((acc, curr) => acc + (curr.children?.length || 0), 0) : 0
-            }
-          />
-        </span>
+        <CountNumber
+          count={currentValue.length}
+          total={
+            showTotal ? options.reduce((acc, curr) => acc + (curr.children?.length || 0), 0) : 0
+          }
+        />
       )}
     </FilterButton>
   );
@@ -409,7 +407,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   if (multiple && currentValue.length > 0) {
     return (
       <Tooltip
-        mouseEnterDelay={1}
+        mouseEnterDelay={0.8}
         title={
           <Flex wrap="wrap" gap={4}>
             {getSelectedTags().map(item => (

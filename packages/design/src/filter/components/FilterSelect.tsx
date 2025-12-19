@@ -1,4 +1,4 @@
-import { Flex, theme } from '@oceanbase/design';
+import { Flex, Tooltip, theme } from '@oceanbase/design';
 import { CheckOutlined } from '@oceanbase/icons';
 import type { FC, ReactNode } from 'react';
 import React, { useRef } from 'react';
@@ -100,35 +100,53 @@ const FilterSelect: FC<FilterSelectProps> = ({
 
   const wrappedContent = wrapContent(renderContent);
 
+  // 获取选中值的显示文本
+  const selectedValueText = currentValue
+    ? options.find(option => option.value === currentValue)?.label
+    : null;
+
+  // 生成 Tooltip 内容
+  const tooltipTitle = selectedValueText ? `${label}: ${selectedValueText}` : null;
+
   if (isWrapped) {
     const hasValue = !!currentValue;
+
+    const filterButton = (
+      <FilterButton
+        ref={filterButtonRef}
+        icon={icon}
+        label={label}
+        bordered={bordered}
+        onClear={handleClear}
+        content={wrappedContent}
+        loading={loading}
+        selected={hasValue}
+        {...filterButtonProps}
+      >
+        <span
+          className={getFilterCls(prefixCls, 'text-ellipsis')}
+          style={getWrappedValueStyle(hasValue)}
+        >
+          {hasValue ? currentLabel : getPlaceholder()}
+        </span>
+      </FilterButton>
+    );
 
     return (
       <div>
         <div style={{ marginBottom: 8 }}>{label}</div>
-        <FilterButton
-          ref={filterButtonRef}
-          icon={icon}
-          label={label}
-          bordered={bordered}
-          onClear={handleClear}
-          content={wrappedContent}
-          loading={loading}
-          selected={hasValue}
-          {...filterButtonProps}
-        >
-          <span
-            className={getFilterCls(prefixCls, 'text-ellipsis')}
-            style={getWrappedValueStyle(hasValue)}
-          >
-            {hasValue ? currentLabel : getPlaceholder()}
-          </span>
-        </FilterButton>
+        {tooltipTitle ? (
+          <Tooltip mouseEnterDelay={0.8} title={tooltipTitle}>
+            {filterButton}
+          </Tooltip>
+        ) : (
+          filterButton
+        )}
       </div>
     );
   }
 
-  return (
+  const filterButton = (
     <FilterButton
       ref={filterButtonRef}
       icon={icon}
@@ -142,6 +160,14 @@ const FilterSelect: FC<FilterSelectProps> = ({
     >
       <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{currentLabel}</span>
     </FilterButton>
+  );
+
+  return tooltipTitle ? (
+    <Tooltip mouseEnterDelay={0.8} title={tooltipTitle}>
+      {filterButton}
+    </Tooltip>
+  ) : (
+    filterButton
   );
 };
 

@@ -65,8 +65,9 @@ const FilterWrap: FC<FilterWrapProps> = ({
         style={{
           padding: '16px',
           maxHeight: 350,
-          width: 300,
           overflowY: 'auto',
+          minWidth: 200,
+          maxWidth: 300,
         }}
       >
         <Flex vertical gap={12}>
