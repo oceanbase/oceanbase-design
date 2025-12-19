@@ -4,11 +4,11 @@ import { Filter, Space } from '@oceanbase/design';
 const options = [
   {
     value: 'frontend',
-    label: '前端',
+    label: 'Angulardfghjjkandanwdajkndjkwandkjwnadjakjndwkad',
     children: [
       { value: 'react', label: 'React' },
       { value: 'vue', label: 'Vue' },
-      { value: 'angular', label: 'Angular' },
+      { value: 'angular', label: 'Angulardfghjjkandanwdajkndjkwandkjwnadjakjndwkad' },
     ],
   },
   {

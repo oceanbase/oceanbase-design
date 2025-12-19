@@ -31,6 +31,8 @@ interface FilterButtonProps extends BaseFilterProps {
   onSelect?: () => void;
   /** 是否显示下拉箭头图标，默认 true */
   showArrow?: boolean;
+  /** 是否显示标签下方的分割线，默认 false */
+  showLabelDivider?: boolean;
 }
 
 const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
@@ -52,6 +54,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       autoCloseOnSelect = false,
       onSelect,
       showArrow = true,
+      showLabelDivider = false,
       ...restProps
     },
     ref
@@ -85,6 +88,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               justify="space-between"
               align="center"
               className={getFilterCls(prefixCls, 'button-label-wrapper')}
+              style={showLabelDivider ? undefined : { borderBottom: 'none' }}
             >
               <div>{label}</div>
               <div>{extra}</div>
@@ -103,7 +107,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
           )}
         </>
       ),
-      [content, footer, label, extra, isWrapped, prefixCls]
+      [content, footer, label, extra, isWrapped, prefixCls, showLabelDivider]
     );
 
     return wrapSSR(
@@ -121,6 +125,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
         styles={{
           body: {
             padding: 0,
+            maxWidth: 300,
             minWidth: isWrapped ? 268 : 200,
           },
         }}
@@ -138,7 +143,12 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
           >
             <Flex align="center" justify="space-between" gap={8} style={{ width: '100%' }}>
               {icon && <div style={{ lineHeight: '1px' }}>{icon}</div>}
-              <Flex gap={8} align="center">
+              <Flex
+                gap={8}
+                align="center"
+                flex={1}
+                className={getFilterCls(prefixCls, 'text-ellipsis')}
+              >
                 {children}
               </Flex>
               <div className={getFilterCls(prefixCls, 'icon-wrapper')}>

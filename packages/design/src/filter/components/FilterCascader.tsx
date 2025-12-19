@@ -2,7 +2,7 @@ import { Checkbox, Flex, Popover, Tag, Tooltip } from '@oceanbase/design';
 import { CheckOutlined, CloseOutlined, RightOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import useFilterStyle, { getFilterCls } from '../style';
@@ -47,6 +47,11 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   const isWrapped = useFilterWrapped(_isInWrap);
   const { prefixCls } = useFilterStyle();
   const filterButtonRef = useRef<FilterButtonRef>(null);
+  // 用于控制二级 Popover 的打开状态（仅在单选模式下使用）
+  const [openPopoverKey, setOpenPopoverKey] = useState<string | null>(null);
+
+  // 从 restProps 中排除 showArrow，避免类型冲突
+  const { showArrow: _showArrow, ...filterButtonProps } = restProps as any;
 
   // 解析 count 配置
   const showCount = !!count;
@@ -84,8 +89,12 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
           newValueList = [[parentValue, childValue]];
         }
         setValue(newValueList);
-        // 单选模式下，选择后立即关闭弹出层
-        filterButtonRef.current?.closePopover();
+        // 单选模式下，选择后立即关闭所有弹出层（主弹窗和二级 Popover）
+        setOpenPopoverKey(null);
+        // 使用 setTimeout 确保状态更新完成后再关闭主弹窗
+        setTimeout(() => {
+          filterButtonRef.current?.closePopover();
+        }, 0);
       }
     },
     [currentValue, multiple, setValue]
@@ -181,9 +190,21 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
         return (
           <Popover
             placement="rightTop"
-            trigger="hover"
+            trigger={'hover'}
             key={option.value}
             arrow={false}
+            open={multiple ? undefined : openPopoverKey === option.value}
+            onOpenChange={
+              multiple
+                ? undefined
+                : open => {
+                    if (!open) {
+                      setOpenPopoverKey(null);
+                    } else {
+                      setOpenPopoverKey(option.value);
+                    }
+                  }
+            }
             content={option.children?.map(child => {
               const isSelected = selectedChildren.includes(child.value);
               return (
@@ -192,13 +213,22 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
                   gap={8}
                   className={getFilterCls(prefixCls, 'select-option')}
                   justify="space-between"
-                  onClick={() => handleChange(option.value, child.value)}
+                  onClick={e => {
+                    e.stopPropagation();
+                    handleChange(option.value, child.value);
+                  }}
                 >
                   {multiple ? (
-                    <Checkbox checked={isSelected}>{child.label}</Checkbox>
+                    <Checkbox checked={isSelected}>
+                      <span className={getFilterCls(prefixCls, 'text-ellipsis')}>
+                        {child.label}
+                      </span>
+                    </Checkbox>
                   ) : (
                     <>
-                      {child.label}
+                      <span className={getFilterCls(prefixCls, 'text-ellipsis')}>
+                        {child.label}
+                      </span>
                       <span>{isSelected && <CheckOutlined style={{ color: '#1616ff' }} />}</span>
                     </>
                   )}
@@ -209,6 +239,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
               body: {
                 padding: 8,
                 maxHeight: 220,
+                maxWidth: 300,
                 overflowY: 'auto',
               },
             }}
@@ -235,10 +266,10 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
                       }
                     }}
                   >
-                    {option.label}
+                    <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{option.label}</span>
                   </Checkbox>
                 ) : (
-                  <div>{option.label}</div>
+                  <div className={getFilterCls(prefixCls, 'text-ellipsis')}>{option.label}</div>
                 )}
                 <Flex align="center" gap={4}>
                   <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
@@ -285,7 +316,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
             onClear={handleClear}
             content={renderContent}
             selected={hasValue}
-            {...restProps}
+            {...filterButtonProps}
           >
             <WrappedTagsDisplay tags={selectedTags} onRemove={handleRemoveTag} />
           </FilterButton>
@@ -305,9 +336,12 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
           onClear={handleClear}
           content={renderContent}
           selected={hasValue}
-          {...restProps}
+          {...filterButtonProps}
         >
-          <span style={getWrappedValueStyle(hasValue)}>
+          <span
+            className={getFilterCls(prefixCls, 'text-ellipsis')}
+            style={getWrappedValueStyle(hasValue)}
+          >
             {hasValue ? getSelectedLabel() : getPlaceholder()}
           </span>
         </FilterButton>
@@ -324,9 +358,9 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
       onClear={handleClear}
       content={renderContent}
       selected={!!currentValue.length}
-      {...restProps}
+      {...filterButtonProps}
     >
-      <span style={{ whiteSpace: 'nowrap' }}>{getSelectedLabel()}</span>
+      <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{getSelectedLabel()}</span>
       {multiple && showCount && currentValue.length > 0 && (
         <Tooltip
           title={

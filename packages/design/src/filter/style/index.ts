@@ -77,6 +77,7 @@ const genIconStyle = (token: FilterStyleToken): CSSObject => {
     [`.${filterPrefixCls}-arrow-icon`]: {
       opacity: 1,
       fontSize: 12,
+      color: token.colorIcon,
       visibility: 'visible',
       transition: 'opacity 0.2s ease-in-out, visibility 0.2s ease-in-out',
     },
@@ -113,6 +114,7 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
       justifyContent: 'right',
       color: colorText,
       whiteSpace: 'nowrap',
+      maxWidth: '260px',
 
       '&:hover': {
         [`.${filterPrefixCls}-arrow-icon`]: {
@@ -129,7 +131,7 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
 
     [`.${filterPrefixCls}-button-label-wrapper`]: {
       width: '100%',
-      padding: '8px 16px',
+      padding: '8px 12px 0px',
       borderBottom: `1px solid ${colorFillSecondary}`,
       color: token.colorTextSecondary,
       whiteSpace: 'nowrap',
@@ -180,6 +182,17 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
   };
 };
 
+const genFilterTextEllipsisStyle = (token: FilterStyleToken): CSSObject => {
+  const { filterPrefixCls } = token;
+  return {
+    [`.${filterPrefixCls}-text-ellipsis`]: {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+    },
+  };
+};
+
 const genFilterStyle = (token: FilterStyleToken): CSSInterpolation => {
   return [
     genIconStyle(token),
@@ -187,6 +200,7 @@ const genFilterStyle = (token: FilterStyleToken): CSSInterpolation => {
     genCheckboxOptionStyle(token),
     genSwitchOptionStyle(token),
     genFilterButtonStyle(token),
+    genFilterTextEllipsisStyle(token),
   ];
 };
 

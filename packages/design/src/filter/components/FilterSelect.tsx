@@ -86,7 +86,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
             {optionRender ? (
               <div style={{ flex: 1 }}>{optionRender(option, { index })}</div>
             ) : (
-              <span>{option.label}</span>
+              <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{option.label}</span>
             )}
             <span style={{ width: 14, flexShrink: 0 }}>
               {isSelected && <CheckOutlined style={{ color: '#1616ff' }} />}
@@ -116,7 +116,10 @@ const FilterSelect: FC<FilterSelectProps> = ({
           selected={hasValue}
           {...restProps}
         >
-          <span style={getWrappedValueStyle(hasValue)}>
+          <span
+            className={getFilterCls(prefixCls, 'text-ellipsis')}
+            style={getWrappedValueStyle(hasValue)}
+          >
             {hasValue ? currentLabel : getPlaceholder()}
           </span>
         </FilterButton>
@@ -136,7 +139,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
       selected={!!currentValue}
       {...restProps}
     >
-      <span>{currentLabel}</span>
+      <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{currentLabel}</span>
     </FilterButton>
   );
 };

@@ -68,6 +68,17 @@ const App: React.FC = () => {
           />
         </Space>
       </div>
+      <div>
+        <Space wrap>
+          <Filter.Select
+            label="内容自动缩略"
+            options={[
+              { value: 'type1', label: '这是一个非常长的选项，用来测试内容自动缩略功能' },
+              { value: 'type2', label: '这是一个非常长的选项，用来测试内容自动缩略功能' },
+            ]}
+          />
+        </Space>
+      </div>
     </Flex>
   );
 };

@@ -90,6 +90,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
       content={content}
       extra={extra}
       showArrow={false}
+      showLabelDivider={!!restProps.footer}
       {...restProps}
     >
       <span>{label}</span>

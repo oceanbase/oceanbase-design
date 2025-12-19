@@ -26,6 +26,7 @@ Filter 是一组轻量级的筛选组件，提供了多种筛选类型，适用�
 <code src="./demo/extra.tsx" title="额外内容" description="通过 extra 属性可以在筛选器弹框的标签旁边显示额外内容，如提示信息、标签等。"></code>
 <code src="./demo/responsive.tsx" title="响应式折叠" description="Filter.ResponsiveGroup 支持响应式布局，当容器宽度不足时自动将筛选器折叠到更多按钮中。"></code>
 <code src="./demo/always-collapse.tsx" title="始终折叠" description="通过 alwaysCollapse 属性，可以让某些筛选器无论容器宽度是否充足，都始终折叠到更多按钮中。"></code>
+<code src="./demo/form.tsx" title="表单集成" description="使用 Form.Item 包裹筛选组件，点击 Apply 按钮时获取并输出所有表单值。"></code>
 
 ## API
 
