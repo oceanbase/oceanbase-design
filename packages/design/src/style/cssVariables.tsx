@@ -80,7 +80,7 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
         [`--${prefix}-color-bg-hover`]: token.gray2,
         [`--${prefix}-color-bg-hover-secondary`]: token.gray3,
         [`--${prefix}-color-bg-focus`]: token.gray3,
-        [`--${prefix}-color-bg-active`]: token.blue4,
+        [`--${prefix}-color-bg-selected`]: token.blue4,
         [`--${prefix}-color-bg-disabled`]: token.gray3,
 
         // 边框色 Border
@@ -88,7 +88,7 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
         [`--${prefix}-color-border-default`]: token.gray5,
         [`--${prefix}-color-border-container`]: token.gray4,
         [`--${prefix}-color-border-inverse`]: token.white,
-        [`--${prefix}-color-border-hover`]: token.blue4,
+        [`--${prefix}-color-border-hover`]: token.gray7,
         [`--${prefix}-color-border-focus`]: token.blue4,
         [`--${prefix}-color-border-error`]: token.red4,
         [`--${prefix}-color-border-warning`]: token.orange4,
@@ -97,7 +97,7 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
         [`--${prefix}-color-text-default`]: token.colorText,
         [`--${prefix}-color-text-navigation`]: token.gray9,
         [`--${prefix}-color-text-label`]: token.gray8,
-        [`--${prefix}-color-text-info`]: token.gray7,
+        [`--${prefix}-color-text-description`]: token.gray7,
         [`--${prefix}-color-text-disabled`]: token.gray6,
         [`--${prefix}-color-text-focus`]: token.colorText,
         [`--${prefix}-color-text-selected`]: token.blue4,
