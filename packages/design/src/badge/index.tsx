@@ -1,37 +1,59 @@
 import React, { useContext } from 'react';
-import { Badge as AntBadge } from 'antd';
+import { Badge as AntBadge, Progress } from 'antd';
 import type { BadgeProps as AntBadgeProps } from 'antd/es/badge';
+import type { ProgressProps as AntProgressProps } from 'antd/es/progress';
 import {
   CloseCircleFilled,
   CheckCircleFilled,
-  Loading3QuartersOutlined,
   MinusCircleFilled,
   EllipsisCircleFilled,
 } from '@oceanbase/icons';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
+import theme from '../theme';
 import useStyle from './style';
 
 export * from 'antd/es/badge';
 
 export interface BadgeProps extends AntBadgeProps {
   icon?: boolean | React.ReactNode;
+  progressProps?: AntProgressProps;
 }
 
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ prefixCls: customizePrefixCls, className, status, text, icon, ...restProps }, ref) => {
-    const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  (
+    { prefixCls: customizePrefixCls, className, status, text, icon, progressProps, ...restProps },
+    ref
+  ) => {
+    const { getPrefixCls, iconPrefixCls = 'anticon' } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('badge', customizePrefixCls);
     const [wrapCSSVar, hashId] = useStyle(prefixCls);
+
+    const { token } = theme.useToken();
+    const hasPercent = progressProps?.percent !== undefined;
 
     const iconMap = {
       default: <MinusCircleFilled rotate={45} />,
       processing: (
-        <Loading3QuartersOutlined
+        <Progress
+          type="circle"
+          trailColor="transparent"
+          strokeColor={token.colorPrimary}
+          percent={progressProps?.percent ?? 75}
+          strokeWidth={18}
+          size={token.fontSize}
+          {...progressProps}
+          className={classNames(
+            {
+              [`${iconPrefixCls}-spin`]: !hasPercent,
+            },
+            progressProps?.className
+          )}
           style={{
-            display: 'inline-block',
+            // remove pointer events for progress icon to avoid trigger format popover when no percent
+            ...(hasPercent ? {} : { pointerEvents: 'none' }),
+            ...progressProps?.style,
           }}
-          spin={true}
         />
       ),
       success: <CheckCircleFilled />,
