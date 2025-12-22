@@ -1,4 +1,4 @@
-import { Checkbox, Flex, Form, Tag, Tooltip, theme } from '@oceanbase/design';
+import { Checkbox, Flex, Tag, Tooltip, theme } from '@oceanbase/design';
 import type { FC, ReactNode } from 'react';
 import React, { memo, useCallback, useMemo } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
@@ -41,9 +41,6 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
   const isWrapped = useFilterWrapped(_isInWrap);
   const { prefixCls } = useFilterStyle();
   const { token } = theme.useToken();
-
-  // 获取 Form.Item 的校验状态
-  const formItemStatus = Form.Item?.useStatus?.();
 
   // 从 restProps 中排除 showArrow，避免类型冲突
   const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps as any;
@@ -133,7 +130,6 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
           onClear={handleClear}
           content={wrappedContent}
           selected={hasValue}
-          formItemStatus={formItemStatus}
           {...filterButtonProps}
         >
           <WrappedTagsDisplay tags={selectedTags} onRemove={handleRemoveTag} />
@@ -150,7 +146,6 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
       onClear={handleClear}
       content={wrappedContent}
       selected={!!selectedValues.length}
-      formItemStatus={formItemStatus}
       {...filterButtonProps}
     >
       <span>{label}</span>
@@ -164,6 +159,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
   return (
     <Tooltip
       mouseEnterDelay={0.8}
+      open={isWrapped ? false : undefined}
       title={
         selectedValues.length > 0 ? (
           <Flex wrap="wrap" gap={4}>

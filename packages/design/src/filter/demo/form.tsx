@@ -49,7 +49,7 @@ const App: React.FC = () => {
             onApply={handleApply}
             onClearAll={handleClearAll}
           >
-            <Form.Item name="status" rules={[{ required: true, message: '请选择状态' }]}>
+            <Form.Item name="status" noStyle>
               <Filter.Select
                 icon={<HeaderTableOutlined />}
                 label="状态"
@@ -61,7 +61,7 @@ const App: React.FC = () => {
               />
             </Form.Item>
 
-            <Form.Item name="type" rules={[{ required: true }]}>
+            <Form.Item name="type" noStyle>
               <Filter.Select
                 label="类型"
                 options={[
@@ -71,7 +71,7 @@ const App: React.FC = () => {
               />
             </Form.Item>
 
-            <Form.Item name="priority" rules={[{ required: true }]}>
+            <Form.Item name="priority" noStyle>
               <Filter.Checkbox
                 label="优先级"
                 count
@@ -83,16 +83,11 @@ const App: React.FC = () => {
               />
             </Form.Item>
 
-            <Form.Item name="category" rules={[{ required: true }]}>
+            <Form.Item name="category" noStyle>
               <Filter.Cascader label="分类" multiple count options={categoryOptions} />
             </Form.Item>
 
-            <Form.Item
-              name="darkMode"
-              valuePropName="checked"
-              rules={[{ required: true }]}
-              initialValue={false}
-            >
+            <Form.Item name="darkMode" valuePropName="checked" noStyle initialValue={false}>
               <Filter.Switch label="暗黑模式" />
             </Form.Item>
           </Filter.ResponsiveGroup>

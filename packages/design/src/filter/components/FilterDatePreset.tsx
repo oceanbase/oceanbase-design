@@ -4,19 +4,20 @@ import type { FC, ReactNode } from 'react';
 import { useRef } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
 import useFilterStyle, { getFilterCls } from '../style';
-import type { BaseFilterProps } from '../type';
+import type { BaseFilterProps, InternalFilterProps } from '../type';
 import { getIcon } from '../utils';
 import FilterButton from './FilterButton';
 import type { FilterButtonRef } from './FilterButton';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
+import { useFilterWrapped } from '../hooks';
 
 export interface DatePresetOption {
   label: ReactNode;
   value: [Dayjs, Dayjs] | null;
 }
 
-export interface FilterDatePresetProps extends BaseFilterProps {
+export interface FilterDatePresetProps extends BaseFilterProps, InternalFilterProps {
   /** 当前选中值 */
   value?: [Dayjs, Dayjs];
   /** 值变化回调 */
@@ -51,9 +52,11 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
   value,
   onChange,
   options = defaultOptions,
+  _isInWrap = false,
   ...restProps
 }) => {
   const { prefixCls } = useFilterStyle();
+  const isWrapped = useFilterWrapped(_isInWrap);
   const filterButtonRef = useRef<FilterButtonRef>(null);
 
   // 从 restProps 中排除 showArrow，避免类型冲突
@@ -123,7 +126,7 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
   );
 
   return tooltipTitle ? (
-    <Tooltip mouseEnterDelay={0.8} title={tooltipTitle}>
+    <Tooltip mouseEnterDelay={0.8} title={tooltipTitle} open={isWrapped ? false : undefined}>
       {filterButton}
     </Tooltip>
   ) : (

@@ -1,5 +1,5 @@
 import type { InputProps } from '@oceanbase/design';
-import { Flex, Form, Input, Switch, type SwitchProps } from '@oceanbase/design';
+import { Flex, Input, Switch, type SwitchProps } from '@oceanbase/design';
 import type { ChangeEvent, FC } from 'react';
 import { useState } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
@@ -30,9 +30,6 @@ const FilterInput: FC<FilterInputProps> = ({
   ...restProps
 }) => {
   const isWrapped = useFilterWrapped();
-
-  // 获取 Form.Item 的校验状态
-  const formItemStatus = Form.Item?.useStatus?.();
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, '', onChange);
@@ -80,7 +77,6 @@ const FilterInput: FC<FilterInputProps> = ({
       onClear={handleClear}
       content={wrappedContent}
       label={label}
-      formItemStatus={formItemStatus}
       {...restProps}
     >
       <span>{label}</span>

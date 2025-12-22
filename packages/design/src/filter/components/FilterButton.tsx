@@ -33,12 +33,6 @@ interface FilterButtonProps extends BaseFilterProps {
   showArrow?: boolean;
   /** 是否显示标签下方的分割线，默认 false */
   showLabelDivider?: boolean;
-  /** 表单校验状态 */
-  formItemStatus?: {
-    status: 'error' | 'success' | 'warning' | 'info' | '';
-    errors: string[];
-    warnings: string[];
-  };
 }
 
 const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
@@ -61,7 +55,6 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       onSelect,
       showArrow = true,
       showLabelDivider = false,
-      formItemStatus,
       ...restProps
     },
     ref
@@ -147,8 +140,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               bordered && getFilterCls(prefixCls, 'border'),
               open && getFilterCls(prefixCls, 'active'),
               disabled && getFilterCls(prefixCls, 'disabled'),
-              selected && !isWrapped && getFilterCls(prefixCls, 'selected'),
-              formItemStatus?.status === 'error' && getFilterCls(prefixCls, 'error')
+              selected && !isWrapped && getFilterCls(prefixCls, 'selected')
             )}
           >
             <Flex align="center" justify="space-between" style={{ width: '100%' }}>

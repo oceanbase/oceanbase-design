@@ -34,8 +34,6 @@ interface ResponsiveFilterGroupProps {
   style?: React.CSSProperties;
   /** 额外内容 */
   extra?: ReactNode;
-  /** 折叠区组件间距 */
-  collapsibleGap?: number;
 }
 
 /**
@@ -107,7 +105,6 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   moreButtonWidth = 100,
   style,
   extra,
-  collapsibleGap = 0,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const innerFlexRef = useRef<HTMLDivElement>(null);
@@ -304,7 +301,6 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
         icon={icon}
         label={label}
         extra={extra}
-        gap={collapsibleGap}
         footer={
           showActions && (
             <Flex justify="space-between">

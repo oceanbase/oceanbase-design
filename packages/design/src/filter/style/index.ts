@@ -176,7 +176,7 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
     },
 
     [`.${filterPrefixCls}-disabled`]: {
-      backgroundColor: '#f5f8fc',
+      backgroundColor: 'var(--ob-color-bg-disabled)',
       borderColor: 'var(--ob-color-border-default)',
       color: 'var(--ob-color-text-disabled)',
       cursor: 'not-allowed',
@@ -197,21 +197,6 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
     [`.${filterPrefixCls}-selected`]: {
       backgroundColor: '#f5f8fc',
       color: 'var(--ob-color-text-default)',
-    },
-
-    [`.${filterPrefixCls}-error`]: {
-      borderColor: 'var(--ob-color-border-error)',
-      color: 'var(--ob-color-error-text)',
-      '&:hover, &:active, &:focus, &:focus-within': {
-        borderColor: 'var(--ob-color-border-error)',
-        color: 'var(--ob-color-error-text)',
-      },
-      [`& .${filterPrefixCls}-button-prefix-icon`]: {
-        color: 'var(--ob-color-icon-error)',
-      },
-      [`& .${filterPrefixCls}-icon-wrapper`]: {
-        color: 'var(--ob-color-icon-error)',
-      },
     },
   };
 };

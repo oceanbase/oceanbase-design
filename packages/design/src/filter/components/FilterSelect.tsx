@@ -1,4 +1,4 @@
-import { Flex, Form, Tooltip, theme } from '@oceanbase/design';
+import { Flex, Tooltip, theme } from '@oceanbase/design';
 import { CheckOutlined } from '@oceanbase/icons';
 import type { FC, ReactNode } from 'react';
 import React, { useRef } from 'react';
@@ -43,9 +43,6 @@ const FilterSelect: FC<FilterSelectProps> = ({
   const { token } = theme.useToken();
   const { prefixCls } = useFilterStyle();
   const filterButtonRef = useRef<FilterButtonRef>(null);
-
-  // 获取 Form.Item 的校验状态
-  const formItemStatus = Form.Item?.useStatus?.();
 
   // 从 restProps 中排除 showArrow，避免类型冲突
   const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps as any;
@@ -124,7 +121,6 @@ const FilterSelect: FC<FilterSelectProps> = ({
         content={wrappedContent}
         loading={loading}
         selected={hasValue}
-        formItemStatus={formItemStatus}
         {...filterButtonProps}
       >
         <span
@@ -140,7 +136,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
       <div>
         <div style={{ marginBottom: 8 }}>{label}</div>
         {tooltipTitle ? (
-          <Tooltip mouseEnterDelay={0.8} title={tooltipTitle}>
+          <Tooltip mouseEnterDelay={0.8} title={tooltipTitle} open={isWrapped ? false : undefined}>
             {filterButton}
           </Tooltip>
         ) : (
@@ -160,7 +156,6 @@ const FilterSelect: FC<FilterSelectProps> = ({
       content={wrappedContent}
       loading={loading}
       selected={!!currentValue}
-      formItemStatus={formItemStatus}
       {...filterButtonProps}
     >
       <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{currentLabel}</span>
