@@ -5,7 +5,7 @@ import { FilterProvider } from '../FilterContext';
 import type { BaseFilterProps } from '../type';
 import FilterButton from './FilterButton';
 
-interface FilterWrapProps extends Omit<BaseFilterProps, 'label'> {
+export interface FilterWrapProps extends Omit<BaseFilterProps, 'label'> {
   children: ReactNode;
   label?: ReactNode;
   /** 是否折叠模式（使用弹框包裹所有子元素），默认 false */
@@ -83,6 +83,9 @@ const FilterWrap: FC<FilterWrapProps> = ({
     </FilterProvider>
   );
 
+  // 从 restProps 中排除 showArrow，避免类型冲突
+  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps as any;
+
   return (
     <FilterButton
       icon={icon}
@@ -93,7 +96,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
       extra={extra}
       showArrow={false}
       showLabelDivider={!!restProps.footer}
-      {...restProps}
+      {...filterButtonProps}
     >
       <span>{label}</span>
     </FilterButton>

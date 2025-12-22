@@ -67,7 +67,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
 
   // 渲染弹框内容
   const renderContent = (
-    <>
+    <div>
       {options.map((option, index) => {
         const isSelected = currentValue === option.value;
         const isDisabled = option.disabled || false;
@@ -95,7 +95,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
           </Flex>
         );
       })}
-    </>
+    </div>
   );
 
   const wrappedContent = wrapContent(renderContent);
@@ -133,7 +133,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
     );
 
     return (
-      <div>
+      <div style={{ padding: 'var(--ob-space-100) 0px' }}>
         <div style={{ marginBottom: 8 }}>{label}</div>
         {tooltipTitle ? (
           <Tooltip mouseEnterDelay={0.8} title={tooltipTitle} open={isWrapped ? false : undefined}>

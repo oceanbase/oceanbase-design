@@ -14,7 +14,7 @@ import { createPortal } from 'react-dom';
 import FilterWrap from './FilterWrap';
 import { FilterOutlined } from '@oceanbase/icons';
 
-interface ResponsiveFilterGroupProps {
+export interface ResponsiveFilterGroupProps {
   children: ReactNode;
   /** 容器间距 */
   gap?: number;

@@ -45,7 +45,7 @@ const FilterInput: FC<FilterInputProps> = ({
 
   // 渲染弹框内容
   const renderContent = (
-    <div>
+    <div style={{ padding: 'var(--ob-space-100) 0px' }}>
       <Flex justify="space-between" align="center">
         <span>{label}</span>
         <Switch
@@ -70,6 +70,9 @@ const FilterInput: FC<FilterInputProps> = ({
 
   const wrappedContent = wrapContent(renderContent, '8px 0px');
 
+  // 从 restProps 中排除 showArrow，避免类型冲突
+  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps as any;
+
   return (
     <FilterButton
       icon={icon}
@@ -77,7 +80,7 @@ const FilterInput: FC<FilterInputProps> = ({
       onClear={handleClear}
       content={wrappedContent}
       label={label}
-      {...restProps}
+      {...filterButtonProps}
     >
       <span>{label}</span>
     </FilterButton>

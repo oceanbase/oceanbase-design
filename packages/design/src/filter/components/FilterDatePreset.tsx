@@ -1,16 +1,16 @@
 import { Flex, Tooltip } from '@oceanbase/design';
 import { CheckOutlined } from '@oceanbase/icons';
 import type { FC, ReactNode } from 'react';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
+import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
-import { getIcon } from '../utils';
+import { getIcon, getPlaceholder, getWrappedValueStyle, wrapContent } from '../utils';
 import FilterButton from './FilterButton';
 import type { FilterButtonRef } from './FilterButton';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
-import { useFilterWrapped } from '../hooks';
 
 export interface DatePresetOption {
   label: ReactNode;
@@ -24,6 +24,8 @@ export interface FilterDatePresetProps extends BaseFilterProps, InternalFilterPr
   onChange?: (value: [Dayjs, Dayjs]) => void;
   /** 预设选项列表 */
   options?: DatePresetOption[];
+  /** 是否加载中 */
+  loading?: boolean;
 }
 
 const defaultOptions: DatePresetOption[] = [
@@ -52,6 +54,7 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
   value,
   onChange,
   options = defaultOptions,
+  loading = false,
   _isInWrap = false,
   ...restProps
 }) => {
@@ -78,8 +81,9 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
     filterButtonRef.current?.closePopover();
   };
 
-  const content = (
-    <div style={{ padding: 8 }}>
+  // 渲染弹框内容
+  const renderContent = (
+    <div>
       {options.map(option => (
         <Flex
           gap={8}
@@ -97,6 +101,8 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
     </div>
   );
 
+  const wrappedContent = wrapContent(renderContent);
+
   // 获取选中值的显示文本
   const selectedValueText = currentValue
     ? options.find(option => {
@@ -111,6 +117,44 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
   // 生成 Tooltip 内容
   const tooltipTitle = selectedValueText ? `${label}: ${selectedValueText}` : null;
 
+  if (isWrapped) {
+    const hasValue = !!currentValue;
+
+    const filterButton = (
+      <FilterButton
+        ref={filterButtonRef}
+        icon={icon || getIcon('time')}
+        label={label}
+        bordered={bordered}
+        onClear={handleClear}
+        content={wrappedContent}
+        loading={loading}
+        selected={hasValue}
+        {...filterButtonProps}
+      >
+        <span
+          className={getFilterCls(prefixCls, 'text-ellipsis')}
+          style={getWrappedValueStyle(hasValue)}
+        >
+          {hasValue ? currentLabel : getPlaceholder()}
+        </span>
+      </FilterButton>
+    );
+
+    return (
+      <div style={{ padding: 'var(--ob-space-100) 0px' }}>
+        <div style={{ marginBottom: 8 }}>{label}</div>
+        {tooltipTitle ? (
+          <Tooltip mouseEnterDelay={0.8} title={tooltipTitle} open={isWrapped ? false : undefined}>
+            {filterButton}
+          </Tooltip>
+        ) : (
+          filterButton
+        )}
+      </div>
+    );
+  }
+
   const filterButton = (
     <FilterButton
       ref={filterButtonRef}
@@ -118,15 +162,17 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
       label={label}
       bordered={bordered}
       onClear={handleClear}
-      content={content}
+      content={wrappedContent}
+      loading={loading}
+      selected={!!currentValue}
       {...filterButtonProps}
     >
-      <span>{currentLabel || label}</span>
+      <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{currentLabel || label}</span>
     </FilterButton>
   );
 
   return tooltipTitle ? (
-    <Tooltip mouseEnterDelay={0.8} title={tooltipTitle} open={isWrapped ? false : undefined}>
+    <Tooltip mouseEnterDelay={0.8} title={tooltipTitle}>
       {filterButton}
     </Tooltip>
   ) : (

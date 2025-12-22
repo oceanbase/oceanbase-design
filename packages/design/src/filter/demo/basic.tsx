@@ -62,7 +62,7 @@ const App: React.FC = () => {
               style={{
                 position: 'absolute',
                 left: index * overlapDistance,
-                top: 0,
+                top: 1,
                 width: iconWidth,
                 height: iconWidth,
                 backgroundColor: 'white',

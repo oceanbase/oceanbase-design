@@ -121,7 +121,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
     const selectedTags = getSelectedTags();
 
     return (
-      <div>
+      <div style={{ padding: 'var(--ob-space-100) 0px' }}>
         <div style={{ marginBottom: 8 }}>{label}</div>
         <FilterButton
           icon={icon}

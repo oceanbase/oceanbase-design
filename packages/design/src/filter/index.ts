@@ -15,6 +15,8 @@ export type { FilterCascaderProps, CascaderOption } from './components/FilterCas
 export type { FilterSwitchProps } from './components/FilterSwitch';
 export type { FilterDatePresetProps, DatePresetOption } from './components/FilterDatePreset';
 export type { FilterInputProps } from './components/FilterInput';
+export type { FilterWrapProps } from './components/FilterWrap';
+export type { ResponsiveFilterGroupProps } from './components/ResponsiveFilterGroup';
 
 const Filter = {
   Select,
