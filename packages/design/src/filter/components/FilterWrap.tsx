@@ -1,9 +1,10 @@
 import { Flex } from '@oceanbase/design';
 import type { FC, ReactNode } from 'react';
-import React, { Children, isValidElement } from 'react';
+import React, { Children, isValidElement, useRef } from 'react';
 import { FilterProvider } from '../FilterContext';
 import type { BaseFilterProps } from '../type';
 import FilterButton from './FilterButton';
+import type { FilterButtonRef } from './FilterButton';
 
 export interface FilterWrapProps extends Omit<BaseFilterProps, 'label'> {
   children: ReactNode;
@@ -12,6 +13,7 @@ export interface FilterWrapProps extends Omit<BaseFilterProps, 'label'> {
   collapsed?: boolean;
   /** 额外内容 */
   extra?: ReactNode;
+  filterButtonRef?: React.RefObject<FilterButtonRef>;
 }
 
 /**
@@ -42,6 +44,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
   bordered = true,
   collapsed = false,
   extra,
+  filterButtonRef,
   ...restProps
 }) => {
   // 如果不使用折叠模式，按原来的方式渲染
@@ -51,10 +54,10 @@ const FilterWrap: FC<FilterWrapProps> = ({
 
   // 使用折叠模式
   const handleClear = () => {
-    // 遍历所有子组件，调用它们的 onChange 并设置为 false
+    // 遍历所有子组件，调用它们的 onChange 并设置为 undefined
     Children.forEach(children, child => {
       if (isValidElement(child) && child.props.onChange) {
-        child.props.onChange(false);
+        child.props.onChange(undefined);
       }
     });
   };
@@ -88,6 +91,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
 
   return (
     <FilterButton
+      ref={filterButtonRef}
       icon={icon}
       label={label}
       bordered={bordered}

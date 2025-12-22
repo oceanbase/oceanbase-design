@@ -9,7 +9,7 @@ const App: React.FC = () => {
   const [priority, setPriority] = useState<string[]>([]);
   const [search, setSearch] = useState('');
   const [darkMode, setDarkMode] = useState(false);
-  const [containerWidth, setContainerWidth] = useState(700);
+  const [containerWidth, setContainerWidth] = useState(300);
 
   return (
     <Space direction="vertical" size="large" style={{ width: '100%' }}>

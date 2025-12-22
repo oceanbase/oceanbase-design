@@ -13,6 +13,7 @@ import React, {
 import { createPortal } from 'react-dom';
 import FilterWrap from './FilterWrap';
 import { FilterOutlined } from '@oceanbase/icons';
+import { FilterButtonRef } from './FilterButton';
 
 export interface ResponsiveFilterGroupProps {
   children: ReactNode;
@@ -110,6 +111,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   const innerFlexRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
   const moreButtonRef = useRef<HTMLDivElement>(null);
+  const filterButtonRef = useRef<FilterButtonRef>(null);
   const [visibleCount, setVisibleCount] = useState<number>(-1); // -1 表示还未计算
   const [childWidths, setChildWidths] = useState<number[]>([]);
   const [actualMoreButtonWidth, setActualMoreButtonWidth] = useState<number>(moreButtonWidth);
@@ -298,6 +300,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
     return (
       <FilterWrap
         collapsed
+        filterButtonRef={filterButtonRef}
         icon={icon}
         label={label}
         extra={extra}
@@ -305,7 +308,14 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
           showActions && (
             <Flex justify="space-between">
               {onApply && (
-                <Button type="primary" size="small" onClick={onApply}>
+                <Button
+                  type="primary"
+                  size="small"
+                  onClick={() => {
+                    onApply?.();
+                    filterButtonRef.current?.closePopover();
+                  }}
+                >
                   Apply
                 </Button>
               )}

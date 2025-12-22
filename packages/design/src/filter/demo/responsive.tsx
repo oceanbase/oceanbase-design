@@ -4,12 +4,11 @@ import { Filter, Slider, Space, Typography } from '@oceanbase/design';
 const { Text } = Typography;
 
 const App: React.FC = () => {
-  const [containerWidth, setContainerWidth] = useState(700);
+  const [containerWidth, setContainerWidth] = useState(300);
   const [status, setStatus] = useState<string>('');
   const [type, setType] = useState<string>('');
   const [priority, setPriority] = useState<string[]>([]);
   const [category, setCategory] = useState<string[][]>([]);
-  const [darkMode, setDarkMode] = useState(false);
 
   const categoryOptions = [
     {
@@ -109,7 +108,6 @@ const App: React.FC = () => {
             count
             options={categoryOptions}
           />
-          <Filter.Switch label="暗黑模式" value={darkMode} onChange={setDarkMode} />
           <Filter.Select
             label="来源"
             options={[
