@@ -31,6 +31,7 @@ export default defineConfig({
     globalSetup: [path.join(__dirname, 'tests/globalSetup.ts')],
     // exclude part of charts tests for now
     // ref: https://github.com/antvis/L7/issues/2332
+    // exclude use-client.test.ts as it requires build outputs and should run separately
     exclude: [
       '**/node_modules/**',
       '**/Area/__tests__/ref.test.tsx',
@@ -38,6 +39,8 @@ export default defineConfig({
       '**/Line/__tests__/ref.test.tsx',
       '**/Pie/__tests__/donut.test.tsx',
       '**/ChartProvider/__tests__/theme.test.tsx',
+      '**/demo.test.ts',
+      '**/use-client.test.ts',
     ],
     sequence: {
       // 按顺序调用钩子，和 jest 行为保持一致

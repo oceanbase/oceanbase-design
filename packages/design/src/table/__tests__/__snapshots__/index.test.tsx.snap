@@ -769,8 +769,12 @@ exports[`Table > default pagination should work 1`] = `
                   data-row-key="1"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 1
                   </td>
                   <td
@@ -789,8 +793,12 @@ exports[`Table > default pagination should work 1`] = `
                   data-row-key="2"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 2
                   </td>
                   <td
@@ -809,8 +817,12 @@ exports[`Table > default pagination should work 1`] = `
                   data-row-key="3"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 3
                   </td>
                   <td
@@ -829,8 +841,12 @@ exports[`Table > default pagination should work 1`] = `
                   data-row-key="4"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 4
                   </td>
                   <td
@@ -849,8 +865,12 @@ exports[`Table > default pagination should work 1`] = `
                   data-row-key="5"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 5
                   </td>
                   <td
@@ -869,8 +889,12 @@ exports[`Table > default pagination should work 1`] = `
                   data-row-key="6"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 6
                   </td>
                   <td
@@ -889,8 +913,12 @@ exports[`Table > default pagination should work 1`] = `
                   data-row-key="7"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 7
                   </td>
                   <td
@@ -909,8 +937,12 @@ exports[`Table > default pagination should work 1`] = `
                   data-row-key="8"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 8
                   </td>
                   <td
@@ -929,8 +961,12 @@ exports[`Table > default pagination should work 1`] = `
                   data-row-key="9"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 9
                   </td>
                   <td
@@ -949,8 +985,12 @@ exports[`Table > default pagination should work 1`] = `
                   data-row-key="10"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 10
                   </td>
                   <td
@@ -1308,8 +1348,12 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                   data-row-key="1"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 1
                   </td>
                   <td
@@ -1328,8 +1372,12 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                   data-row-key="2"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 2
                   </td>
                   <td
@@ -1348,8 +1396,12 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                   data-row-key="3"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 3
                   </td>
                   <td
@@ -1368,8 +1420,12 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                   data-row-key="4"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 4
                   </td>
                   <td
@@ -1388,8 +1444,12 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                   data-row-key="5"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 5
                   </td>
                   <td
@@ -1408,8 +1468,12 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                   data-row-key="6"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 6
                   </td>
                   <td
@@ -1428,8 +1492,12 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                   data-row-key="7"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 7
                   </td>
                   <td
@@ -1448,8 +1516,12 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                   data-row-key="8"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 8
                   </td>
                   <td
@@ -1468,8 +1540,12 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                   data-row-key="9"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 9
                   </td>
                   <td
@@ -1488,8 +1564,12 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                   data-row-key="10"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 10
                   </td>
                   <td
@@ -1601,8 +1681,12 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                   data-row-key="1"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 1
                   </td>
                   <td
@@ -1621,8 +1705,12 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                   data-row-key="2"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 2
                   </td>
                   <td
@@ -1641,8 +1729,12 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                   data-row-key="3"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 3
                   </td>
                   <td
@@ -1661,8 +1753,12 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                   data-row-key="4"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 4
                   </td>
                   <td
@@ -1681,8 +1777,12 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                   data-row-key="5"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 5
                   </td>
                   <td
@@ -1701,8 +1801,12 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                   data-row-key="6"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 6
                   </td>
                   <td
@@ -1721,8 +1825,12 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                   data-row-key="7"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 7
                   </td>
                   <td
@@ -1741,8 +1849,12 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                   data-row-key="8"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 8
                   </td>
                   <td
@@ -1761,8 +1873,12 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                   data-row-key="9"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 9
                   </td>
                   <td
@@ -1781,8 +1897,12 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                   data-row-key="10"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 10
                   </td>
                   <td
@@ -2047,8 +2167,12 @@ exports[`Table > innerBordered should work 1`] = `
                   data-row-key="1"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 1
                   </td>
                   <td
@@ -2067,8 +2191,12 @@ exports[`Table > innerBordered should work 1`] = `
                   data-row-key="2"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 2
                   </td>
                   <td
@@ -2087,8 +2215,12 @@ exports[`Table > innerBordered should work 1`] = `
                   data-row-key="3"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 3
                   </td>
                   <td
@@ -2107,8 +2239,12 @@ exports[`Table > innerBordered should work 1`] = `
                   data-row-key="4"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 4
                   </td>
                   <td
@@ -2127,8 +2263,12 @@ exports[`Table > innerBordered should work 1`] = `
                   data-row-key="5"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 5
                   </td>
                   <td
@@ -2147,8 +2287,12 @@ exports[`Table > innerBordered should work 1`] = `
                   data-row-key="6"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 6
                   </td>
                   <td
@@ -2167,8 +2311,12 @@ exports[`Table > innerBordered should work 1`] = `
                   data-row-key="7"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 7
                   </td>
                   <td
@@ -2187,8 +2335,12 @@ exports[`Table > innerBordered should work 1`] = `
                   data-row-key="8"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 8
                   </td>
                   <td
@@ -2207,8 +2359,12 @@ exports[`Table > innerBordered should work 1`] = `
                   data-row-key="9"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 9
                   </td>
                   <td
@@ -2227,8 +2383,12 @@ exports[`Table > innerBordered should work 1`] = `
                   data-row-key="10"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 10
                   </td>
                   <td
@@ -2586,8 +2746,12 @@ exports[`Table > render 1`] = `
                   data-row-key="1"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 1
                   </td>
                   <td
@@ -2606,8 +2770,12 @@ exports[`Table > render 1`] = `
                   data-row-key="2"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 2
                   </td>
                   <td
@@ -2626,8 +2794,12 @@ exports[`Table > render 1`] = `
                   data-row-key="3"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 3
                   </td>
                   <td
@@ -2646,8 +2818,12 @@ exports[`Table > render 1`] = `
                   data-row-key="4"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 4
                   </td>
                   <td
@@ -2666,8 +2842,12 @@ exports[`Table > render 1`] = `
                   data-row-key="5"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 5
                   </td>
                   <td
@@ -2686,8 +2866,12 @@ exports[`Table > render 1`] = `
                   data-row-key="6"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 6
                   </td>
                   <td
@@ -2706,8 +2890,12 @@ exports[`Table > render 1`] = `
                   data-row-key="7"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 7
                   </td>
                   <td
@@ -2726,8 +2914,12 @@ exports[`Table > render 1`] = `
                   data-row-key="8"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 8
                   </td>
                   <td
@@ -2746,8 +2938,12 @@ exports[`Table > render 1`] = `
                   data-row-key="9"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 9
                   </td>
                   <td
@@ -2766,8 +2962,12 @@ exports[`Table > render 1`] = `
                   data-row-key="10"
                 >
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-with-append"
                   >
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
                     John 10
                   </td>
                   <td
