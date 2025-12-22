@@ -8,6 +8,7 @@ const App: React.FC = () => (
       <Badge icon={true} status="error" />
       <Badge icon={true} status="default" />
       <Badge icon={true} status="processing" />
+      <Badge icon={true} status="processing" progressProps={{ percent: 50 }} />
       <Badge icon={true} status="warning" />
     </Space>
     <br />
@@ -17,6 +18,12 @@ const App: React.FC = () => (
       <Badge icon={true} status="error" text="Error" />
       <Badge icon={true} status="default" text="Default" />
       <Badge icon={true} status="processing" text="Processing" />
+      <Badge
+        icon={true}
+        status="processing"
+        text="Processing with progress"
+        progressProps={{ percent: 50 }}
+      />
       <Badge icon={true} status="warning" text="Warning" />
     </Space>
   </>

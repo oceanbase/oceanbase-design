@@ -15,6 +15,7 @@ export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSS
     [`${componentCls}${componentCls}-status`]: {
       // dot style
       [`${componentCls}-status-dot`]: {
+        margin: 1,
         [`&${componentCls}-status-default`]: {},
       },
       [`${componentCls}-status-processing::after`]: {
