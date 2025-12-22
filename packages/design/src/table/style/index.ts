@@ -5,6 +5,26 @@ import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type TableToken = FullToken<'Table'>;
 
+const genSmallBtnStyle = (token: TableToken): CSSObject => {
+  const { antCls } = token;
+  return {
+    // button is small size by default
+    [`${antCls}-btn:not(${antCls}-btn-sm):not(${antCls}-btn-lg)`]: {
+      height: token.controlHeightSM,
+      fontSize: token.fontSizeSM,
+      [`&:not(${antCls}-btn-icon-only):not(${antCls}-btn-circle)`]: {
+        paddingInline: token.paddingXS,
+      },
+      [`&${antCls}-btn-icon-only`]: {
+        width: token.controlHeightSM,
+      },
+      [`&${antCls}-btn-circle`]: {
+        minWidth: token.controlHeightSM,
+      },
+    },
+  };
+};
+
 export const genTableStyle = (token: TableToken): CSSObject => {
   const {
     antCls,
@@ -82,20 +102,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
             fontSize: token.fontSizeSM,
           },
         },
-        // button is small size by default
-        [`${antCls}-btn:not(${antCls}-btn-sm):not(${antCls}-btn-lg)`]: {
-          height: token.controlHeightSM,
-          fontSize: token.fontSizeSM,
-          [`&:not(${antCls}-btn-icon-only):not(${antCls}-btn-circle)`]: {
-            paddingInline: token.paddingXS,
-          },
-          [`&${antCls}-btn-icon-only`]: {
-            width: token.controlHeightSM,
-          },
-          [`&${antCls}-btn-circle`]: {
-            minWidth: token.controlHeightSM,
-          },
-        },
+        ...genSmallBtnStyle(token),
         // empty style
         [`${componentCls}-placeholder td`]: {},
         [`${componentCls}-empty-wrapper`]: {
@@ -336,6 +343,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
               color: colorLink,
             },
           },
+          ...genSmallBtnStyle(token),
         },
       },
     },
