@@ -49,10 +49,8 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
   // close icon width (approximate)
   const closeIconWidth = height;
   // Common calculated values
-  const contentWidth = unit(
-    calc(contentStartOffset).add(closeIconWidth).add(token.padding).equal()
-  );
-  const actionWidth = unit(calc(contentStartOffset).add(token.padding).equal());
+  const contentWidth = unit(calc(contentStartOffset).equal());
+  const closableContentWidth = unit(calc(contentStartOffset).add(closeIconWidth).equal());
   return {
     [`${componentCls}`]: {
       // vertical align to flex-start
@@ -66,7 +64,7 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
         wordBreak: 'break-word',
       },
       [`${componentCls}-action`]: {
-        width: `calc(100% - ${actionWidth})`,
+        width: `calc(100% - ${contentWidth})`,
         marginInlineStart: contentStartOffset,
       },
       [`${componentCls}-icon`]: {
@@ -104,6 +102,15 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
       [`&${componentCls}-info`]: genAlertTypeStyle('info', token),
       [`&${componentCls}-warning`]: genAlertTypeStyle('warning', token),
       [`&${componentCls}-error`]: genAlertTypeStyle('error', token),
+    },
+    [`${componentCls}${componentCls}-closable`]: {
+      [`${componentCls}-content`]: {
+        flex: `1 1 calc(100% - ${closableContentWidth})`,
+        maxWidth: `calc(100% - ${closableContentWidth})`,
+      },
+      [`${componentCls}-action`]: {
+        width: `calc(100% - ${closableContentWidth})`,
+      },
     },
     [`${componentCls}:not(${componentCls}-with-description)`]: {
       flexWrap: 'wrap',
