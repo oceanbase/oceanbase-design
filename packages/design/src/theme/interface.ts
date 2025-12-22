@@ -32,6 +32,13 @@ export interface AliasToken extends AntAliasToken {
    */
   fontHeight: number;
   /**
+   * @nameZH 小号字体的高度
+   * @nameEN Font height for small size
+   * @desc 小号字体的高度，用于组件中的一些小号字体，如 Pill Tag 等一些组件样式。
+   * @descEN The height of the small font, used in some small font components, such as Pill Tag etc.
+   */
+  fontHeightSM: number;
+  /**
    * @nameZH MD号圆角
    * @nameEN MD Border Radius
    * @desc MD号圆角，用于组件中的一些中圆角，如嵌套 Card、Alert、Tooltip、Dropdown 等一些组件样式。
