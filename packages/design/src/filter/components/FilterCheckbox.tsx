@@ -155,12 +155,12 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
     </FilterButton>
   );
 
-  // 多选模式下，如果有选中值且显示计数，用 Tooltip 包裹整个 FilterButton
-  if (selectedValues.length > 0) {
-    return (
-      <Tooltip
-        mouseEnterDelay={0.8}
-        title={
+  // 只在有选中值时显示 Tooltip 内容
+  return (
+    <Tooltip
+      mouseEnterDelay={0.8}
+      title={
+        selectedValues.length > 0 ? (
           <Flex wrap="wrap" gap={4}>
             {getSelectedTags().map(item => (
               <Tag key={item.value} closable onClose={() => handleRemoveTag(item.value)}>
@@ -168,14 +168,12 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
               </Tag>
             ))}
           </Flex>
-        }
-      >
-        {filterButton}
-      </Tooltip>
-    );
-  }
-
-  return filterButton;
+        ) : null
+      }
+    >
+      {filterButton}
+    </Tooltip>
+  );
 };
 
 export default memo(FilterCheckbox);
