@@ -11,10 +11,6 @@ const App: React.FC = () => (
     <Alert message="Success Tips" type="success" showIcon closable onClose={onClose} />
     <Alert message="Warning" type="warning" showIcon closable onClose={onClose} />
     <Alert message="Error" type="error" showIcon closable onClose={onClose} />
-    <Alert message="Informational Notes" type="info" showIcon mini closable onClose={onClose} />
-    <Alert message="Success Tips" type="success" showIcon mini closable onClose={onClose} />
-    <Alert message="Warning" type="warning" showIcon mini closable onClose={onClose} />
-    <Alert message="Error" type="error" showIcon mini closable onClose={onClose} />
     <Alert
       message="Informational Notes"
       description="Additional description and information about copywriting."
@@ -47,6 +43,10 @@ const App: React.FC = () => (
       closable
       onClose={onClose}
     />
+    <Alert message="Informational Notes" type="info" showIcon mini closable onClose={onClose} />
+    <Alert message="Success Tips" type="success" showIcon mini closable onClose={onClose} />
+    <Alert message="Warning" type="warning" showIcon mini closable onClose={onClose} />
+    <Alert message="Error" type="error" showIcon mini closable onClose={onClose} />
   </Space>
 );
 

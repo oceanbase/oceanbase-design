@@ -40,46 +40,6 @@ const App: React.FC = () => (
       showIcon
     />
     <Alert
-      message={
-        <div>
-          Informational Notes. <a>Link</a>
-        </div>
-      }
-      type="info"
-      showIcon
-      mini
-    />
-    <Alert
-      message={
-        <div>
-          Success Tips. <a>Link</a>
-        </div>
-      }
-      type="success"
-      showIcon
-      mini
-    />
-    <Alert
-      message={
-        <div>
-          Warning. <a>Link</a>
-        </div>
-      }
-      type="warning"
-      showIcon
-      mini
-    />
-    <Alert
-      message={
-        <div>
-          Error. <a>Link</a>
-        </div>
-      }
-      type="error"
-      showIcon
-      mini
-    />
-    <Alert
       message="Informational Notes."
       description={
         <div>
@@ -118,6 +78,46 @@ const App: React.FC = () => (
       }
       type="error"
       showIcon
+    />
+    <Alert
+      message={
+        <div>
+          Informational Notes. <a>Link</a>
+        </div>
+      }
+      type="info"
+      showIcon
+      mini
+    />
+    <Alert
+      message={
+        <div>
+          Success Tips. <a>Link</a>
+        </div>
+      }
+      type="success"
+      showIcon
+      mini
+    />
+    <Alert
+      message={
+        <div>
+          Warning. <a>Link</a>
+        </div>
+      }
+      type="warning"
+      showIcon
+      mini
+    />
+    <Alert
+      message={
+        <div>
+          Error. <a>Link</a>
+        </div>
+      }
+      type="error"
+      showIcon
+      mini
     />
   </Space>
 );

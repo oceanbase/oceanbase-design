@@ -32,6 +32,7 @@ const Alert = ({
   ghost,
   mini,
   banner,
+  action,
   prefixCls: customizePrefixCls,
   className,
   ...restProps
@@ -46,6 +47,7 @@ const Alert = ({
       [`${prefixCls}-closable`]: closable,
       [`${prefixCls}-ghost`]: ghost,
       [`${prefixCls}-mini`]: mini,
+      [`${prefixCls}-with-action`]: !!action,
     },
     className
   );
@@ -56,6 +58,7 @@ const Alert = ({
       closable={closable}
       banner={banner}
       icon={iconMapOutlined[type]}
+      action={action}
       prefixCls={customizePrefixCls}
       className={alertCls}
       {...restProps}
