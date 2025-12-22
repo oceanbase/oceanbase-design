@@ -75,18 +75,25 @@ const genSwitchOptionStyle = (token: FilterStyleToken): CSSObject => {
 const genIconStyle = (token: FilterStyleToken): CSSObject => {
   const { filterPrefixCls } = token;
   return {
+    [`.${filterPrefixCls}-button-prefix-icon`]: {
+      marginRight: 'var(--ob-space-100)',
+      color: 'var(--ob-color-icon-default)',
+    },
+
     [`.${filterPrefixCls}-icon-wrapper`]: {
       position: 'relative',
       display: 'inline-flex',
       justifyContent: 'center',
       alignItems: 'center',
       marginTop: 2,
+      marginLeft: 'var(--ob-space-200)',
+      color: 'var(--ob-color-icon-default)',
     },
 
     [`.${filterPrefixCls}-arrow-icon`]: {
       opacity: 1,
       fontSize: 12,
-      color: token.colorIcon,
+      color: 'var(--ob-color-icon-default)',
       visibility: 'visible',
       transition: 'opacity 0.2s ease-in-out, visibility 0.2s ease-in-out',
     },
@@ -98,7 +105,7 @@ const genIconStyle = (token: FilterStyleToken): CSSObject => {
       position: 'absolute',
       left: 0,
       top: '60%',
-      color: token.colorIcon,
+      color: 'var(--ob-color-icon-default)',
       fontSize: 12,
       transform: 'translateY(-50%)',
       transition: 'opacity 0.2s ease-in-out, visibility 0.2s ease-in-out',

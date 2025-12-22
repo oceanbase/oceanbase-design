@@ -143,8 +143,8 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               selected && !isWrapped && getFilterCls(prefixCls, 'selected')
             )}
           >
-            <Flex align="center" justify="space-between" gap={8} style={{ width: '100%' }}>
-              {icon && <div style={{ lineHeight: '1px' }}>{icon}</div>}
+            <Flex align="center" justify="space-between" style={{ width: '100%' }}>
+              {icon && <div className={getFilterCls(prefixCls, 'button-prefix-icon')}>{icon}</div>}
               <Flex
                 gap={8}
                 align="center"

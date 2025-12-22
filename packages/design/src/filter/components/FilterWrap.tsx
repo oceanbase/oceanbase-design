@@ -68,9 +68,10 @@ const FilterWrap: FC<FilterWrapProps> = ({
           overflowY: 'auto',
           minWidth: 200,
           maxWidth: 300,
+          fontSize: 'var(--ob-font-body1)',
         }}
       >
-        <Flex vertical gap={12}>
+        <Flex vertical gap={'var(--ob-space-200)'}>
           {Children.map(children, (child, index) => {
             if (isValidElement(child)) {
               return <React.Fragment key={index}>{child}</React.Fragment>;

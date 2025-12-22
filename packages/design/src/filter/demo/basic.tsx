@@ -27,11 +27,21 @@ const App: React.FC = () => {
   ];
 
   const renderFilterStatusIcon = useMemo(() => {
+    // 每个 icon 的宽度
+    const iconWidth = 8;
+    // 重叠距离（每个 icon 向左偏移的距离）
+    const overlapDistance = 3;
+    // 计算容器宽度：第一个 icon 的完整宽度 + (icon数量 - 1) * 重叠距离
+    const containerWidth = iconWidth + (statusList.length - 1) * overlapDistance;
+
     return (
       <div
         style={{
           position: 'relative',
-          minWidth: statusList.length + 10,
+          width: containerWidth,
+          height: iconWidth,
+          display: 'flex',
+          alignItems: 'center',
         }}
       >
         {statusList.map((item, index) =>
@@ -41,29 +51,32 @@ const App: React.FC = () => {
               color={item.color}
               style={{
                 position: 'absolute',
-                left: index * 3,
-                top: -3,
+                left: index * overlapDistance,
+                top: -6,
+                zIndex: statusList.length - index, // 后面的 icon z-index 更高，显示在上层
               }}
             />
           ) : (
             <div
               key={item.status}
               style={{
-                width: 8,
-                height: 8,
+                position: 'absolute',
+                left: index * overlapDistance,
+                top: 0,
+                width: iconWidth,
+                height: iconWidth,
                 backgroundColor: 'white',
                 borderRadius: '50%',
                 border: `1px solid ${token.colorBorder}`,
-                position: 'absolute',
-                top: -4,
-                left: index * 3,
+                zIndex: statusList.length - index, // 后面的 icon z-index 更高，显示在上层
               }}
             />
           )
         )}
       </div>
     );
-  }, [statusList, statusListValue]);
+  }, [statusList, statusListValue, token.colorBorder]);
+
   return (
     <Flex vertical gap={16}>
       <div>
@@ -176,13 +189,7 @@ const App: React.FC = () => {
               value: item.status,
             }))}
           />
-          <Filter.DatePreset
-            label="日期"
-            // options={[
-            //   { value: 'today', label: '今天' },
-            //   { value: 'yesterday', label: '昨天' },
-            // ]}
-          />
+          <Filter.DatePreset label="日期" />
         </Space>
       </div>
     </Flex>
