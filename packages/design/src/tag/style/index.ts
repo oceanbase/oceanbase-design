@@ -1,4 +1,5 @@
 import type { CSSObject } from '@ant-design/cssinjs';
+import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from 'antd/es/theme/internal';
 import type { FullToken } from '../../theme/interface';
 import { genStyleHooks } from '../../_util/genComponentStyleHook';
@@ -76,6 +77,8 @@ export const genTagStyle = (token: TagToken): CSSObject => {
         marginInlineEnd: token.marginXXS,
         borderColor: token.colorBorderSecondary,
         color: token.colorTextSecondary,
+        // pill tag use smaller line-height
+        lineHeight: unit(token.fontHeightSM),
       },
     },
   };
