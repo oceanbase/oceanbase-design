@@ -96,8 +96,17 @@ export default (api: IApi) => {
 
       let lessString = '';
       Object.keys(aliasToken).forEach(key => {
-        const value = unit(key, aliasToken[key]);
-        lessString += `@${key}: ${value};\n`;
+        // fontWeight 相关的变量需要引用 CSS 变量，因为英文环境下的值不同
+        if (key === 'fontWeightWeak') {
+          lessString += `@${key}: var(--ob-font-weight-sm);\n`;
+        } else if (key === 'fontWeight') {
+          lessString += `@${key}: var(--ob-font-weight-md);\n`;
+        } else if (key === 'fontWeightStrong') {
+          lessString += `@${key}: var(--ob-font-weight-lg);\n`;
+        } else {
+          const value = unit(key, aliasToken[key]);
+          lessString += `@${key}: ${value};\n`;
+        }
       });
 
       fs.writeFileSync(`packages/design/src/theme/style/${item.theme}.less`, lessString);
