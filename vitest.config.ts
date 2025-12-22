@@ -39,8 +39,6 @@ export default defineConfig({
       '**/Line/__tests__/ref.test.tsx',
       '**/Pie/__tests__/donut.test.tsx',
       '**/ChartProvider/__tests__/theme.test.tsx',
-      '**/demo.test.ts',
-      '**/use-client.test.ts',
     ],
     sequence: {
       // 按顺序调用钩子，和 jest 行为保持一致
