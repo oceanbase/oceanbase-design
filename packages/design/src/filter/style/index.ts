@@ -13,7 +13,7 @@ const genSelectOptionStyle = (token: FilterStyleToken): CSSObject => {
     [`.${filterPrefixCls}-select-option`]: {
       padding: '4px 8px',
       cursor: 'pointer',
-      borderRadius: token.borderRadius,
+      borderRadius: 'var(--ob-radius-md)',
 
       '&:hover': {
         backgroundColor: '#eff3fa',
@@ -44,7 +44,7 @@ const genCheckboxOptionStyle = (token: FilterStyleToken): CSSObject => {
     [`.${filterPrefixCls}-checkbox-option`]: {
       padding: '4px 8px',
       cursor: 'pointer',
-      borderRadius: token.borderRadius,
+      borderRadius: 'var(--ob-radius-md)',
 
       '&:hover': {
         backgroundColor: '#eff3fa',
@@ -85,7 +85,6 @@ const genIconStyle = (token: FilterStyleToken): CSSObject => {
       display: 'inline-flex',
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 2,
       marginLeft: 'var(--ob-space-200)',
       color: 'var(--ob-color-icon-default)',
     },
@@ -114,7 +113,7 @@ const genIconStyle = (token: FilterStyleToken): CSSObject => {
 };
 
 const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
-  const { filterPrefixCls, colorText, colorFillSecondary, colorBgContainer, colorBorder } = token;
+  const { filterPrefixCls, colorText, colorFillSecondary } = token;
   return {
     [`.${filterPrefixCls}-button-wrapper`]: {
       display: 'inline-block',
@@ -123,7 +122,7 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
     [`.${filterPrefixCls}-button`]: {
       height: 28,
       padding: '4px 12px',
-      borderRadius: token.borderRadius,
+      borderRadius: 'var(--ob-radius-md)',
       cursor: 'pointer',
       display: 'flex',
       gap: 8,
@@ -171,15 +170,15 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
     },
 
     [`.${filterPrefixCls}-active`]: {
-      borderColor: colorBorder,
+      borderColor: 'var(--ob-color-border-default)',
       backgroundColor: '#f5f8fc',
       color: token.colorTextTertiary,
     },
 
     [`.${filterPrefixCls}-disabled`]: {
       backgroundColor: '#f5f8fc',
-      borderColor: colorBorder,
-      color: '#b6c0d4',
+      borderColor: 'var(--ob-color-border-default)',
+      color: 'var(--ob-color-text-disabled)',
       cursor: 'not-allowed',
 
       '&:hover': {
@@ -197,7 +196,22 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
 
     [`.${filterPrefixCls}-selected`]: {
       backgroundColor: '#f5f8fc',
-      color: '#132039',
+      color: 'var(--ob-color-text-default)',
+    },
+
+    [`.${filterPrefixCls}-error`]: {
+      borderColor: 'var(--ob-color-border-error)',
+      color: 'var(--ob-color-error-text)',
+      '&:hover, &:active, &:focus, &:focus-within': {
+        borderColor: 'var(--ob-color-border-error)',
+        color: 'var(--ob-color-error-text)',
+      },
+      [`& .${filterPrefixCls}-button-prefix-icon`]: {
+        color: 'var(--ob-color-icon-error)',
+      },
+      [`& .${filterPrefixCls}-icon-wrapper`]: {
+        color: 'var(--ob-color-icon-error)',
+      },
     },
   };
 };

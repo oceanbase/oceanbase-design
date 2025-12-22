@@ -1,4 +1,4 @@
-import { Checkbox, Flex, Popover, Tag, Tooltip, theme } from '@oceanbase/design';
+import { Checkbox, Flex, Form, Popover, Tag, Tooltip, theme } from '@oceanbase/design';
 import { CheckOutlined, CloseOutlined, RightOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
@@ -51,6 +51,9 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   const filterButtonRef = useRef<FilterButtonRef>(null);
   // 用于控制二级 Popover 的打开状态（仅在单选模式下使用）
   const [openPopoverKey, setOpenPopoverKey] = useState<string | null>(null);
+
+  // 获取 Form.Item 的校验状态
+  const formItemStatus = Form.Item?.useStatus?.();
 
   // 从 restProps 中排除 showArrow，避免类型冲突
   const { showArrow: _showArrow, ...filterButtonProps } = restProps as any;
@@ -347,6 +350,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
             onClear={handleClear}
             content={renderContent}
             selected={hasValue}
+            formItemStatus={formItemStatus}
             {...filterButtonProps}
           >
             <WrappedTagsDisplay tags={selectedTags} onRemove={handleRemoveTag} />
@@ -389,6 +393,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
       onClear={handleClear}
       content={renderContent}
       selected={!!currentValue.length}
+      formItemStatus={formItemStatus}
       {...filterButtonProps}
     >
       <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{getSelectedLabel()}</span>

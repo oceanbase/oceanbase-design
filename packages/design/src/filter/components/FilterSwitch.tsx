@@ -1,4 +1,4 @@
-import { Flex, Switch, type SwitchProps, theme } from '@oceanbase/design';
+import { Flex, Form, Switch, type SwitchProps, theme } from '@oceanbase/design';
 import type { FC } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
@@ -29,6 +29,9 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
   const isWrapped = useFilterWrapped();
   const { prefixCls } = useFilterStyle();
 
+  // 获取 Form.Item 的校验状态
+  const formItemStatus = Form.Item?.useStatus?.();
+
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, false, onChange);
 
@@ -58,6 +61,7 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
       bordered={bordered}
       onClear={handleClear}
       content={wrappedContent}
+      formItemStatus={formItemStatus}
       {...restProps}
     >
       <span>{label}</span>

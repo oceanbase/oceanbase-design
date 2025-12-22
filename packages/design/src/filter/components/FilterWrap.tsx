@@ -12,6 +12,8 @@ interface FilterWrapProps extends Omit<BaseFilterProps, 'label'> {
   collapsed?: boolean;
   /** 额外内容 */
   extra?: ReactNode;
+  /** 容器间距 */
+  gap?: number;
 }
 
 /**
@@ -42,6 +44,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
   bordered = true,
   collapsed = false,
   extra,
+  gap = 0,
   ...restProps
 }) => {
   // 如果不使用折叠模式，按原来的方式渲染
@@ -71,7 +74,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
           fontSize: 'var(--ob-font-body1)',
         }}
       >
-        <Flex vertical gap={'var(--ob-space-200)'}>
+        <Flex vertical gap={gap}>
           {Children.map(children, (child, index) => {
             if (isValidElement(child)) {
               return <React.Fragment key={index}>{child}</React.Fragment>;

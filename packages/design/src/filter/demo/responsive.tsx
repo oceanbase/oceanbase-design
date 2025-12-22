@@ -62,6 +62,7 @@ const App: React.FC = () => {
         <Filter.ResponsiveGroup
           label="更多筛选"
           onApply={() => console.log('Apply clicked')}
+          collapsibleGap={8}
           onClearAll={() => {
             setStatus('');
             setType('');
