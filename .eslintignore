@@ -10,3 +10,4 @@ config/wrapper.js
 demo/
 __test__/
 antd-alias-webpack-plugin.js
+babel-plugin-add-use-client.js

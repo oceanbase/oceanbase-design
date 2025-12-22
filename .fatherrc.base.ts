@@ -1,11 +1,16 @@
 import { defineConfig } from 'father';
+import path from 'path';
 
 export default defineConfig({
   esm: {
+    // 默认为 esbuild 构建，需要指定使用 babel，以便 babel 插件生效
+    transformer: 'babel',
     output: 'es',
     ignores: ['**/demo/**'],
   },
   cjs: {
+    // 默认为 esbuild 构建，需要指定使用 babel，以便 babel 插件生效
+    transformer: 'babel',
     output: 'lib',
     ignores: ['**/demo/**'],
   },
@@ -19,5 +24,8 @@ export default defineConfig({
       'react-dom': 'ReactDOM',
     },
   },
-  extraBabelPlugins: ['react-inline-svg-unique-id'],
+  extraBabelPlugins: [
+    'react-inline-svg-unique-id',
+    path.resolve(__dirname, 'babel-plugin-add-use-client.js'),
+  ],
 });
