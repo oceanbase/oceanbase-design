@@ -130,6 +130,9 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
         top: token.paddingSM,
       },
     },
+    [`${componentCls}${componentCls}-with-action`]: {
+      paddingBlock: token.paddingSM,
+    },
     [`${componentCls}${componentCls}-ghost`]: {
       backgroundColor: 'transparent',
       border: 'none',
@@ -137,7 +140,7 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
       borderRadius: 0,
     },
     [`${componentCls}${componentCls}-mini`]: {
-      paddingBlock: token.paddingXXS,
+      paddingBlock: 1,
       paddingInline: token.paddingXS,
       border: 'none',
       width: 'fit-content',
@@ -151,6 +154,8 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
         alignItems: 'center',
         justifyContent: 'center',
         lineHeight: 1,
+        //
+        fontSize: token.fontSizeSM,
       },
       [`${componentCls}-message`]: {
         whiteSpace: 'nowrap',
