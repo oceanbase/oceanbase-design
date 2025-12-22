@@ -32,7 +32,7 @@ markdown: |
 <code src="./demo/tree-table.tsx" title="树形表格" description="当数据中有 `children` 字段时会自动展示为树形表格，如果不需要或配置为其他字段可以用 childrenColumnName 进行配置。可以通过设置 indentSize 以控制每一层的缩进宽度。"></code>
 <code src="./demo/grouping-columns.tsx" title="表头分组" description="columns 可以通过嵌套 children，实现表头分组。"></code>
 <code src="./demo/rowspan.tsx" title="行合并" description="通过 onCell 设置单元格属性 rowSpan，可以实现行合并。"></code>
-<code src="./demo/colspan-rowspan.tsx" title="行列合并" description="表头只支持列合并，使用 column 里的 colSpan 进行设置。\n表格支持行/列合并，使用 render 里的单元格属性 colSpan 或者 rowSpan 设值为 0 时，设置的表格不会渲染。"></code>
+<code src="./demo/colspan-rowspan.tsx" title="行列合并" description="表头只支持列合并，使用 column 里的 colSpan 进行设置。<br/>表格支持行/列合并，使用 render 里的单元格属性 colSpan 或者 rowSpan 设值为 0 时，设置的表格不会渲染。"></code>
 <code src="./demo/edit-row.tsx" title="可编辑行" description="带行编辑功能的表格。"></code>
 <code src="./demo/virtual.tsx" title="虚拟滚动" description="通过 `virtual` 开启虚拟滚动，要求设置 `scroll.x` 和 `scroll.y` 且必须为 number 类型。"></code>
 <code src="./demo/dynamic-settings.tsx" title="动态控制表格属性" description="选择不同配置组合查看效果。"></code>
