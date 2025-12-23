@@ -7,7 +7,7 @@
   ],
   "packageManager": "pnpm@8.6.0",
   "scripts": {
-    "build": "pnpm --filter \"@oceanbase/**\" build && cross-env vitest --config tests/vitest.config.ts tests/__tests__/use-client.test.ts",
+    "build": "pnpm --filter \"@oceanbase/**\" build",
     "build:watch": "pnpm --filter \"@oceanbase/**\" build --watch",
     "build:design": "pnpm --filter \"@oceanbase/design\" build",
     "ci": "npm run tsc && npm run lint && npm run test",
@@ -26,6 +26,7 @@
     "test": "npm run test:prepare && cross-env vitest",
     "test:coverage": "npm run test:prepare && cross-env TEST_LOG=none vitest --coverage",
     "test:update": "npm run test:prepare && cross-env vitest -u",
+    "test:build": "cross-env vitest --config tests/vitest.config.ts tests/__tests__/use-client.test.ts",
     "test:use-client": "pnpm --filter \"@oceanbase/design\" build && pnpm --filter \"@oceanbase/ui\" build && pnpm --filter \"@oceanbase/charts\" build",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint --cache --ext .js,.jsx,.ts,.tsx --fix --format=pretty",
