@@ -34,7 +34,7 @@ const WrappedTagsDisplay: React.FC<WrappedTagsDisplayProps> = ({
   const hiddenCount = hiddenTags.length;
 
   if (!hasValue) {
-    return <span style={{ color: '#b6c0d4' }}>Please select</span>;
+    return <span style={{ color: 'var(--ob-color-text-disabled)' }}>Please select</span>;
   }
 
   return (

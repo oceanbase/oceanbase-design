@@ -279,7 +279,11 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
                       <span className={getFilterCls(prefixCls, 'text-ellipsis')}>
                         {child.label}
                       </span>
-                      <span>{isSelected && <CheckOutlined style={{ color: '#1616ff' }} />}</span>
+                      <span>
+                        {isSelected && (
+                          <CheckOutlined style={{ color: 'var(--ob-color-text-link)' }} />
+                        )}
+                      </span>
                     </>
                   )}
                 </Flex>

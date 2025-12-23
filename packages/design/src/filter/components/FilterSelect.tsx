@@ -110,7 +110,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
               <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{option.label}</span>
             )}
             <span style={{ width: 14, flexShrink: 0 }}>
-              {isSelected && <CheckOutlined style={{ color: '#1616ff' }} />}
+              {isSelected && <CheckOutlined style={{ color: 'var(--ob-color-text-link)' }} />}
             </span>
           </Flex>
         );

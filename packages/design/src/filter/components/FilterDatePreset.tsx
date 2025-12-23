@@ -130,7 +130,9 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
           >
             <span>{option.label}</span>
             <span style={{ width: 14 }}>
-              {currentValue === option.value && <CheckOutlined style={{ color: '#1616ff' }} />}
+              {currentValue === option.value && (
+                <CheckOutlined style={{ color: 'var(--ob-color-text-link)' }} />
+              )}
             </span>
           </Flex>
         );

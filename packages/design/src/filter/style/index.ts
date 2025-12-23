@@ -16,7 +16,7 @@ const genSelectOptionStyle = (token: FilterStyleToken): CSSObject => {
       borderRadius: 'var(--ob-radius-md)',
 
       '&:hover': {
-        backgroundColor: '#eff3fa',
+        backgroundColor: 'var(--ob-color-bg-hover)',
 
         // hover 时图标切换效果
         [`.${filterPrefixCls}-arrow-icon`]: {
@@ -32,7 +32,7 @@ const genSelectOptionStyle = (token: FilterStyleToken): CSSObject => {
 
       // 有选中子项的父级选项样式
       [`&.${filterPrefixCls}-has-selected`]: {
-        backgroundColor: '#eff3fa',
+        backgroundColor: 'var(--ob-color-bg-hover)',
       },
     },
   };
@@ -47,7 +47,7 @@ const genCheckboxOptionStyle = (token: FilterStyleToken): CSSObject => {
       borderRadius: 'var(--ob-radius-md)',
 
       '&:hover': {
-        backgroundColor: '#eff3fa',
+        backgroundColor: 'var(--ob-color-bg-hover)',
       },
 
       '&.ant-checkbox-wrapper-disabled': {
@@ -171,7 +171,7 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
 
     [`.${filterPrefixCls}-active`]: {
       borderColor: 'var(--ob-color-border-default)',
-      backgroundColor: '#f5f8fc',
+      backgroundColor: 'var(--ob-color-bg-focus)',
       color: token.colorTextTertiary,
     },
 
@@ -195,7 +195,7 @@ const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
     },
 
     [`.${filterPrefixCls}-selected`]: {
-      backgroundColor: '#f5f8fc',
+      backgroundColor: 'var(--ob-color-bg-focus)',
       color: 'var(--ob-color-text-default)',
     },
   };
