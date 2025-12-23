@@ -8,7 +8,7 @@ interface CountNumberProps {
 
 const CountNumber: FC<CountNumberProps> = ({ count, total }) => {
   const { token } = theme.useToken();
-  return count && count > 0 ? (
+  return count > 0 ? (
     <Badge
       color={token.colorFillSecondary}
       count={total ? `${count}/${total}` : count}

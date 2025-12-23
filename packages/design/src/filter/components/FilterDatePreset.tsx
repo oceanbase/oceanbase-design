@@ -1,13 +1,21 @@
 import { Flex, Tooltip } from '@oceanbase/design';
 import { CheckOutlined } from '@oceanbase/icons';
 import type { FC, ReactNode } from 'react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
+import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
-import { getIcon, getPlaceholder, getWrappedValueStyle, wrapContent } from '../utils';
+import {
+  generateFilterId,
+  getIcon,
+  getPlaceholder,
+  getStableOptionsKey,
+  getWrappedValueStyle,
+  wrapContent,
+} from '../utils';
 import FilterButton from './FilterButton';
 import type { FilterButtonRef } from './FilterButton';
 import dayjs from 'dayjs';
@@ -63,22 +71,29 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
   const isWrapped = useFilterWrapped(_isInWrap);
   const filterButtonRef = useRef<FilterButtonRef>(null);
   const { updateFilterValue } = useFilterContext();
-  const filterIdRef = useRef(
-    `filter-datepreset-${label}-${Math.random().toString(36).substr(2, 9)}`
-  );
+  const filterId = useMemo(() => generateFilterId('datepreset', label), [label]);
+  const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
 
   // 从 restProps 中排除 showArrow，避免类型冲突
-  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps as any;
+  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps;
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, null, onChange);
 
   // 当值变化时，更新 context 中的值
+  // 使用 stableOptionsKey 而不是 options 来避免不必要的更新
   useEffect(() => {
     if (isWrapped && updateFilterValue) {
-      updateFilterValue(filterIdRef.current, label, currentValue, options, 'datepreset');
+      updateFilterValue(
+        filterId,
+        label,
+        currentValue,
+        options,
+        'datepreset' as FilterComponentName
+      );
     }
-  }, [isWrapped, updateFilterValue, label, currentValue, options]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isWrapped, updateFilterValue, filterId, label, currentValue, stableOptionsKey]);
 
   // 根据当前值计算显示标签
   const currentLabel = options.find(option => option.value === currentValue)?.label || label;
@@ -96,20 +111,30 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
   // 渲染弹框内容
   const renderContent = (
     <div>
-      {options.map(option => (
-        <Flex
-          gap={8}
-          key={option.toString()}
-          className={getFilterCls(prefixCls, 'select-option')}
-          onClick={() => handleSelect(option.value)}
-          justify="space-between"
-        >
-          <span>{option.label}</span>
-          <span style={{ width: 14 }}>
-            {currentValue === option.value && <CheckOutlined style={{ color: '#1616ff' }} />}
-          </span>
-        </Flex>
-      ))}
+      {options.map((option, index) => {
+        // 使用稳定的 key：优先使用 label，如果 label 是对象则使用 index
+        const optionKey =
+          typeof option.label === 'string' || typeof option.label === 'number'
+            ? `datepreset-${option.label}`
+            : option.value
+              ? `datepreset-${option.value[0]?.format('YYYY-MM-DD')}-${option.value[1]?.format('YYYY-MM-DD')}`
+              : `datepreset-${index}`;
+
+        return (
+          <Flex
+            gap={8}
+            key={optionKey}
+            className={getFilterCls(prefixCls, 'select-option')}
+            onClick={() => handleSelect(option.value)}
+            justify="space-between"
+          >
+            <span>{option.label}</span>
+            <span style={{ width: 14 }}>
+              {currentValue === option.value && <CheckOutlined style={{ color: '#1616ff' }} />}
+            </span>
+          </Flex>
+        );
+      })}
     </div>
   );
 

@@ -1,15 +1,13 @@
 import { Flex, Tooltip } from '@oceanbase/design';
 import type { FC, ReactNode } from 'react';
-import React, {
-  Children,
-  isValidElement,
-  useCallback,
-  useContext,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { FilterProvider, useFilterContext, type FilterValueItem } from '../FilterContext';
+import React, { Children, isValidElement, useCallback, useMemo } from 'react';
+import {
+  FilterProvider,
+  useFilterContext,
+  type FilterComponentName,
+  type FilterValue,
+  type FilterValueItem,
+} from '../FilterContext';
 import type { BaseFilterProps } from '../type';
 import FilterButton from './FilterButton';
 import type { FilterButtonRef } from './FilterButton';
@@ -35,56 +33,73 @@ const FilterWrap: FC<FilterWrapProps> = ({
   filterButtonRef,
   ...restProps
 }) => {
-  // 只在折叠模式下才需要读取 filterValues
+  // 始终调用 Hook，但只在折叠模式下使用 filterValues
   const contextValue = useFilterContext();
+  // 稳定化 filterValues 的引用，避免不必要的重新计算
+  const stableFilterValuesKey = useMemo(() => {
+    if (!collapsed || !contextValue.filterValues) return '';
+    return JSON.stringify(contextValue.filterValues.map(item => item.id));
+  }, [collapsed, contextValue.filterValues]);
+
   const filterValues = useMemo(() => {
     if (!collapsed) return [];
     return contextValue.filterValues || [];
-  }, [collapsed, contextValue.filterValues]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [collapsed, stableFilterValuesKey]);
 
   // 格式化值用于 Tooltip 显示
   const formatValueForTooltip = useCallback(
-    (value: any, options?: any[], componentName?: string): string => {
+    (value: FilterValue, options?: unknown[], componentName?: FilterComponentName): string => {
       if (!value) return '';
 
-      if (componentName?.includes('select')) {
-        const selectedOption = options?.find((opt: any) => opt.value === value);
-        return selectedOption?.label || String(value);
-      } else if (componentName?.includes('checkbox')) {
-        const selectedLabels = (value as string[])
-          .map(val => {
-            const option = options?.find((opt: any) => opt.value === val);
-            return option?.label || val;
-          })
-          .filter(Boolean);
-        return selectedLabels.join(', ');
-      } else if (componentName?.includes('cascader')) {
-        const selectedLabels = (value as string[][]).map(valPair => {
-          const [parentVal, childVal] = valPair;
-          const parentOption = options?.find((opt: any) => opt.value === parentVal);
-          const childOption = parentOption?.children?.find(
-            (childOpt: any) => childOpt.value === childVal
+      switch (componentName) {
+        case 'select':
+        case 'datepreset': {
+          const selectedOption = (options as { value: unknown; label: ReactNode }[])?.find(
+            opt => opt.value === value
           );
-          if (parentOption && childOption) {
-            return childOption.label;
-          }
-          return valPair.join('/');
-        });
-        return selectedLabels.join(', ');
-      } else if (componentName?.includes('switch')) {
-        // switch 组件的 false 值不显示
-        if (value) {
-          return '开启';
-        } else {
-          return '';
+          return selectedOption?.label ? String(selectedOption.label) : String(value);
         }
-      } else if (componentName?.includes('datepreset')) {
-        const selectedOption = options?.find((opt: any) => opt.value === value);
-        return selectedOption?.label || String(value);
-      } else if (componentName?.includes('input')) {
-        return String(value);
-      } else {
-        return String(value);
+        case 'checkbox': {
+          const selectedLabels = (value as string[])
+            .map(val => {
+              const option = (options as { value: string; label: ReactNode }[])?.find(
+                opt => opt.value === val
+              );
+              return option?.label ? String(option.label) : val;
+            })
+            .filter(Boolean);
+          return selectedLabels.join(', ');
+        }
+        case 'cascader': {
+          const selectedLabels = (value as string[][]).map(valPair => {
+            const [parentVal, childVal] = valPair;
+            const parentOption = (
+              options as {
+                value: string;
+                children?: { value: string; label?: ReactNode }[];
+              }[]
+            )?.find(opt => opt.value === parentVal);
+            const childOption = parentOption?.children?.find(
+              childOpt => childOpt.value === childVal
+            );
+            if (parentOption && childOption) {
+              return childOption.label ? String(childOption.label) : childVal;
+            }
+            return valPair.join('/');
+          });
+          return selectedLabels.join(', ');
+        }
+        case 'switch': {
+          // switch 组件的 false 值不显示
+          return value ? '开启' : '';
+        }
+        case 'input': {
+          return String(value);
+        }
+        default: {
+          return String(value);
+        }
       }
     },
     []
@@ -93,34 +108,34 @@ const FilterWrap: FC<FilterWrapProps> = ({
   // 生成 Tooltip 内容
   const tooltipTitle = useMemo(() => {
     if (!collapsed || !filterValues || filterValues.length === 0) {
-      return '';
+      return null;
     }
 
-    return (
-      <div style={{ maxWidth: 300, padding: '0px 4px' }}>
-        {filterValues.map((item, index) => {
-          const formattedValue = formatValueForTooltip(
-            item.value,
-            item.options,
-            item.componentName
-          );
-          if (!formattedValue) {
-            return '';
-          }
+    const validItems = filterValues
+      .map(item => {
+        const formattedValue = formatValueForTooltip(item.value, item.options, item.componentName);
+        if (!formattedValue) {
+          return null;
+        }
 
-          return (
-            <Flex key={item.id} gap={16}>
-              <div
-                style={{ color: 'var(--ob-color-text-label)', minWidth: 50, whiteSpace: 'nowrap' }}
-              >
-                {item.label}
-              </div>
-              <div>{formattedValue}</div>
-            </Flex>
-          );
-        })}
-      </div>
-    );
+        return (
+          <Flex key={item.id} gap={16}>
+            <div
+              style={{ color: 'var(--ob-color-text-label)', minWidth: 50, whiteSpace: 'nowrap' }}
+            >
+              {item.label}
+            </div>
+            <div>{formattedValue}</div>
+          </Flex>
+        );
+      })
+      .filter(Boolean);
+
+    if (validItems.length === 0) {
+      return null;
+    }
+
+    return <div style={{ maxWidth: 300, padding: '0px 4px' }}>{validItems}</div>;
   }, [filterValues, formatValueForTooltip, collapsed]);
 
   // 如果不使用折叠模式，按原来的方式渲染
@@ -132,36 +147,52 @@ const FilterWrap: FC<FilterWrapProps> = ({
   const handleClear = () => {
     // 遍历所有子组件，调用它们的 onChange 并设置为 undefined
     Children.forEach(children, child => {
-      if (isValidElement(child) && child.props.onChange) {
-        child.props.onChange(undefined);
+      if (isValidElement(child)) {
+        const props = child.props as { onChange?: (value: unknown) => void };
+        if (props.onChange) {
+          props.onChange(undefined);
+        }
       }
     });
+    // 同步清除 context 中的 filterValues
+    if (contextValue.clearAllFilterValues) {
+      contextValue.clearAllFilterValues();
+    }
   };
 
   const content = (
-    <div
-      style={{
-        padding: '16px',
-        maxHeight: 350,
-        overflowY: 'auto',
-        minWidth: 200,
-        maxWidth: 300,
-        fontSize: 'var(--ob-font-body1)',
-      }}
+    <FilterProvider
+      isWrapped={true}
+      filterValues={contextValue.filterValues}
+      updateFilterValue={contextValue.updateFilterValue}
+      clearAllFilterValues={contextValue.clearAllFilterValues}
     >
-      <Flex vertical gap={'var(--ob-space-200)'}>
-        {Children.map(children, (child, index) => {
-          if (isValidElement(child)) {
-            return <React.Fragment key={index}>{child}</React.Fragment>;
-          }
-          return child;
-        })}
-      </Flex>
-    </div>
+      <div
+        style={{
+          padding: '16px',
+          maxHeight: 350,
+          overflowY: 'auto',
+          minWidth: 200,
+          maxWidth: 300,
+          fontSize: 'var(--ob-font-body1)',
+        }}
+      >
+        <Flex vertical gap={'var(--ob-space-200)'}>
+          {Children.map(children, (child, index) => {
+            if (isValidElement(child)) {
+              // 使用 child.key 或生成稳定的 key
+              const stableKey = child.key || `filter-wrap-child-${index}`;
+              return <React.Fragment key={stableKey}>{child}</React.Fragment>;
+            }
+            return child;
+          })}
+        </Flex>
+      </div>
+    </FilterProvider>
   );
 
   // 从 restProps 中排除 showArrow，避免类型冲突
-  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps as any;
+  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps;
 
   const filterButton = (
     <FilterButton

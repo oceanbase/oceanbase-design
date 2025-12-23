@@ -1,12 +1,13 @@
 import { Checkbox, Flex, Tag, Tooltip, theme } from '@oceanbase/design';
 import type { FC, ReactNode } from 'react';
-import React, { memo, useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { memo, useCallback, useEffect, useMemo } from 'react';
+import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
-import { wrapContent } from '../utils';
+import { generateFilterId, getStableOptionsKey, wrapContent } from '../utils';
 import CountNumber from './CountNumber';
 import FilterButton from './FilterButton';
 import WrappedTagsDisplay from './WrappedTagsDisplay';
@@ -43,10 +44,11 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
   const { prefixCls } = useFilterStyle();
   const { token } = theme.useToken();
   const { updateFilterValue } = useFilterContext();
-  const filterIdRef = useRef(`filter-checkbox-${label}-${Math.random().toString(36).substr(2, 9)}`);
+  const filterId = useMemo(() => generateFilterId('checkbox', label), [label]);
+  const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
 
   // 从 restProps 中排除 showArrow，避免类型冲突
-  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps as any;
+  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps;
 
   // 解析 count 配置
   const showCount = !!count;
@@ -56,11 +58,19 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
   const [selectedValues, setSelectedValues] = useControlledState(value, [], onChange);
 
   // 当值变化时，更新 context 中的值
+  // 使用 stableOptionsKey 而不是 options 来避免不必要的更新
   useEffect(() => {
     if (isWrapped && updateFilterValue) {
-      updateFilterValue(filterIdRef.current, label, selectedValues, options, 'checkbox');
+      updateFilterValue(
+        filterId,
+        label,
+        selectedValues,
+        options,
+        'checkbox' as FilterComponentName
+      );
     }
-  }, [isWrapped, updateFilterValue, label, selectedValues, options]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isWrapped, updateFilterValue, filterId, label, selectedValues, stableOptionsKey]);
 
   const handleChange = useCallback(
     (val: string[]) => {

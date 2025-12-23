@@ -1,12 +1,22 @@
 import type { FC, ReactNode } from 'react';
 import React, { createContext, useContext } from 'react';
 
+export type FilterComponentName =
+  | 'select'
+  | 'checkbox'
+  | 'cascader'
+  | 'switch'
+  | 'datepreset'
+  | 'input';
+
+export type FilterValue = string | string[] | string[][] | boolean | [any, any] | null | undefined;
+
 export interface FilterValueItem {
   id: string;
   label: ReactNode;
-  value: any;
-  options?: any[];
-  componentName?: string;
+  value: FilterValue;
+  options?: unknown[];
+  componentName?: FilterComponentName;
 }
 
 interface FilterContextValue {
@@ -15,10 +25,11 @@ interface FilterContextValue {
   updateFilterValue?: (
     id: string,
     label: ReactNode,
-    value: any,
-    options?: any[],
-    componentName?: string
+    value: FilterValue,
+    options?: unknown[],
+    componentName?: FilterComponentName
   ) => void;
+  clearAllFilterValues?: () => void;
 }
 
 const FilterContext = createContext<FilterContextValue>({
@@ -34,13 +45,16 @@ export const FilterProvider: FC<{
   updateFilterValue?: (
     id: string,
     label: ReactNode,
-    value: any,
-    options?: any[],
-    componentName?: string
+    value: FilterValue,
+    options?: unknown[],
+    componentName?: FilterComponentName
   ) => void;
-}> = ({ children, isWrapped = false, filterValues, updateFilterValue }) => {
+  clearAllFilterValues?: () => void;
+}> = ({ children, isWrapped = false, filterValues, updateFilterValue, clearAllFilterValues }) => {
   return (
-    <FilterContext.Provider value={{ isWrapped, filterValues, updateFilterValue }}>
+    <FilterContext.Provider
+      value={{ isWrapped, filterValues, updateFilterValue, clearAllFilterValues }}
+    >
       {children}
     </FilterContext.Provider>
   );

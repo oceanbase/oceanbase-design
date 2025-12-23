@@ -13,8 +13,13 @@ import React, {
 import { createPortal } from 'react-dom';
 import FilterWrap from './FilterWrap';
 import { FilterOutlined } from '@oceanbase/icons';
-import { FilterButtonRef } from './FilterButton';
-import { FilterProvider, type FilterValueItem } from '../FilterContext';
+import type { FilterButtonRef } from './FilterButton';
+import {
+  FilterProvider,
+  type FilterComponentName,
+  type FilterValue,
+  type FilterValueItem,
+} from '../FilterContext';
 
 export interface ResponsiveFilterGroupProps {
   children: ReactNode;
@@ -299,7 +304,13 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
 
   // 更新筛选值的函数
   const updateFilterValue = useCallback(
-    (id: string, filterLabel: ReactNode, value: any, options?: any[], componentName?: string) => {
+    (
+      id: string,
+      filterLabel: ReactNode,
+      value: FilterValue,
+      options?: unknown[],
+      componentName?: FilterComponentName
+    ) => {
       setFilterValues(prev => {
         // 如果值为空，移除该项
         // 对于 switch 组件，false 被视为未选中状态，应该被视为空值
@@ -322,10 +333,18 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
         const existingIndex = prev.findIndex(item => item.id === id);
         if (existingIndex >= 0) {
           const existingItem = prev[existingIndex];
+          // 深度比较 options 是否相等
+          const optionsEqual =
+            existingItem.options === options ||
+            (existingItem.options === undefined && options === undefined) ||
+            (existingItem.options !== undefined &&
+              options !== undefined &&
+              JSON.stringify(existingItem.options) === JSON.stringify(options));
+
           // 如果值、选项和组件名都没变化，直接返回原数组
           if (
             existingItem.value === value &&
-            existingItem.options === options &&
+            optionsEqual &&
             existingItem.componentName === componentName &&
             existingItem.label === filterLabel
           ) {
@@ -380,8 +399,30 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
                     type="link"
                     size="small"
                     onClick={() => {
-                      onClearAll();
+                      // 先清除所有子组件的值
+                      allHiddenChildren.forEach(child => {
+                        if (isValidElement(child)) {
+                          const childProps = child.props as {
+                            children?: ReactNode;
+                            onChange?: (value: unknown) => void;
+                          };
+                          // 如果是 Form.Item，需要访问其子组件
+                          if (childProps.children && isValidElement(childProps.children)) {
+                            const innerChildProps = childProps.children.props as {
+                              onChange?: (value: unknown) => void;
+                            };
+                            if (innerChildProps.onChange) {
+                              innerChildProps.onChange(undefined);
+                            }
+                          } else if (childProps.onChange) {
+                            childProps.onChange(undefined);
+                          }
+                        }
+                      });
+                      // 然后清除 filterValues
                       setFilterValues([]);
+                      // 最后调用外部回调
+                      onClearAll();
                     }}
                   >
                     Clear All
@@ -393,7 +434,9 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
         >
           {allHiddenChildren.map((child, index) => {
             if (isValidElement(child)) {
-              return <React.Fragment key={index}>{addIsInWrapProp(child)}</React.Fragment>;
+              // 使用 child.key 或生成稳定的 key
+              const stableKey = child.key || `responsive-filter-child-${index}`;
+              return <React.Fragment key={stableKey}>{addIsInWrapProp(child)}</React.Fragment>;
             }
             return child;
           })}
@@ -416,11 +459,16 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
               whiteSpace: 'nowrap',
             }}
           >
-            {normalCollapsibleChildren.map((child, index) => (
-              <div key={index} style={{ display: 'inline-flex' }}>
-                {child}
-              </div>
-            ))}
+            {normalCollapsibleChildren.map((child, index) => {
+              // 使用 child.key 或生成稳定的 key
+              const stableKey =
+                isValidElement(child) && child.key ? child.key : `measure-child-${index}`;
+              return (
+                <div key={stableKey} style={{ display: 'inline-flex' }}>
+                  {child}
+                </div>
+              );
+            })}
           </div>
 
           {/* 隐藏的 more button 测量容器 */}

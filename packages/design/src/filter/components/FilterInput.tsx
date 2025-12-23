@@ -1,12 +1,13 @@
 import type { InputProps } from '@oceanbase/design';
 import { Flex, Input, Switch, type SwitchProps } from '@oceanbase/design';
 import type { ChangeEvent, FC } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import type { BaseFilterProps } from '../type';
-import { wrapContent } from '../utils';
+import { generateFilterId, wrapContent } from '../utils';
 import FilterButton from './FilterButton';
 
 export interface FilterInputProps extends BaseFilterProps {
@@ -32,18 +33,26 @@ const FilterInput: FC<FilterInputProps> = ({
 }) => {
   const isWrapped = useFilterWrapped();
   const { updateFilterValue } = useFilterContext();
-  const filterIdRef = useRef(`filter-input-${label}-${Math.random().toString(36).substr(2, 9)}`);
+  const filterId = useMemo(() => generateFilterId('input', label), [label]);
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, '', onChange);
   const [switchValue, setSwitchValue] = useState(false);
 
   // 当值变化时，更新 context 中的值
+  // 只有当 switchValue 为 true 时才注册 currentValue，否则视为空值
   useEffect(() => {
     if (isWrapped && updateFilterValue) {
-      updateFilterValue(filterIdRef.current, label, currentValue, undefined, 'input');
+      const valueToRegister = switchValue ? currentValue : undefined;
+      updateFilterValue(
+        filterId,
+        label,
+        valueToRegister,
+        undefined,
+        'input' as FilterComponentName
+      );
     }
-  }, [isWrapped, updateFilterValue, label, currentValue]);
+  }, [isWrapped, updateFilterValue, filterId, label, currentValue, switchValue]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -51,6 +60,7 @@ const FilterInput: FC<FilterInputProps> = ({
 
   const handleClear = () => {
     setValue('');
+    setSwitchValue(false);
   };
 
   // 渲染弹框内容
@@ -81,7 +91,7 @@ const FilterInput: FC<FilterInputProps> = ({
   const wrappedContent = wrapContent(renderContent, '8px 0px');
 
   // 从 restProps 中排除 showArrow，避免类型冲突
-  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps as any;
+  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps;
 
   return (
     <FilterButton

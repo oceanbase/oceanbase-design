@@ -1,11 +1,12 @@
 import { Flex, Switch, type SwitchProps, theme } from '@oceanbase/design';
 import type { FC } from 'react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo } from 'react';
+import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import type { BaseFilterProps } from '../type';
-import { wrapContent } from '../utils';
+import { generateFilterId, wrapContent } from '../utils';
 import FilterButton from './FilterButton';
 
 export interface FilterSwitchProps extends BaseFilterProps {
@@ -28,7 +29,7 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
 }) => {
   const isWrapped = useFilterWrapped();
   const { updateFilterValue } = useFilterContext();
-  const filterIdRef = useRef(`filter-switch-${label}-${Math.random().toString(36).substr(2, 9)}`);
+  const filterId = useMemo(() => generateFilterId('switch', label), [label]);
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, false, onChange);
@@ -36,9 +37,9 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
   // 当值变化时，更新 context 中的值
   useEffect(() => {
     if (isWrapped && updateFilterValue) {
-      updateFilterValue(filterIdRef.current, label, currentValue, undefined, 'switch');
+      updateFilterValue(filterId, label, currentValue, undefined, 'switch' as FilterComponentName);
     }
-  }, [isWrapped, updateFilterValue, label, currentValue]);
+  }, [isWrapped, updateFilterValue, filterId, label, currentValue]);
 
   const handleClear = () => {
     setValue(false);
@@ -60,7 +61,7 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
   const wrappedContent = wrapContent(renderContent, '8px 0px');
 
   // 从 restProps 中排除 showArrow，避免类型冲突
-  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps as any;
+  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps;
 
   return (
     <FilterButton

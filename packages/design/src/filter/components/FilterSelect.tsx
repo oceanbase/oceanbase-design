@@ -1,13 +1,20 @@
 import { Flex, Tooltip, theme } from '@oceanbase/design';
 import { CheckOutlined } from '@oceanbase/icons';
 import type { FC, ReactNode } from 'react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
+import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
-import { getPlaceholder, getWrappedValueStyle, wrapContent } from '../utils';
+import {
+  generateFilterId,
+  getPlaceholder,
+  getStableOptionsKey,
+  getWrappedValueStyle,
+  wrapContent,
+} from '../utils';
 import FilterButton from './FilterButton';
 import type { FilterButtonRef } from './FilterButton';
 
@@ -45,20 +52,23 @@ const FilterSelect: FC<FilterSelectProps> = ({
   const { prefixCls } = useFilterStyle();
   const filterButtonRef = useRef<FilterButtonRef>(null);
   const { updateFilterValue } = useFilterContext();
-  const filterIdRef = useRef(`filter-select-${label}-${Math.random().toString(36).substr(2, 9)}`);
+  const filterId = useMemo(() => generateFilterId('select', label), [label]);
+  const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
 
   // 从 restProps 中排除 showArrow，避免类型冲突
-  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps as any;
+  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps;
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, '', onChange);
 
   // 当值变化时，更新 context 中的值
+  // 使用 stableOptionsKey 而不是 options 来避免不必要的更新
   useEffect(() => {
     if (isWrapped && updateFilterValue) {
-      updateFilterValue(filterIdRef.current, label, currentValue, options, 'select');
+      updateFilterValue(filterId, label, currentValue, options, 'select' as FilterComponentName);
     }
-  }, [isWrapped, updateFilterValue, label, currentValue, options]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isWrapped, updateFilterValue, filterId, label, currentValue, stableOptionsKey]);
 
   const currentLabel = options.find(option => option.value === currentValue)?.label || label;
 
