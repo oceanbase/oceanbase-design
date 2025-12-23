@@ -47,6 +47,10 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
   return {
     [`${componentCls}`]: {
       [`${componentCls}-head`]: {
+        // title style
+        [`${componentCls}-title-content`]: {
+          lineHeight: token.lineHeightLG,
+        },
         // subTitle style
         [`${componentCls}-sub-title-wrapper`]: {
           marginInlineStart: token.marginXS,

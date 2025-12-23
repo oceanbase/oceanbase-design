@@ -107,7 +107,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 
       const titleContent = (
         <>
-          <span>{title}</span>
+          <span className={`${prefixCls}-title-content`}>{title}</span>
           {(subTitle || document) && (
             <Space className={`${prefixCls}-sub-title-wrapper`} size="small">
               {subTitle && <div className={`${prefixCls}-sub-title`}>{subTitle}</div>}
