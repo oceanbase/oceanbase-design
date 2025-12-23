@@ -16,7 +16,7 @@ exports[`Modal.Progress > render with loading 1`] = `
         <div
           aria-labelledby="test-id"
           aria-modal="true"
-          class="ant-modal ant-modal-progress ant-zoom-appear ant-zoom-appear-prepare ant-zoom"
+          class="ant-modal ant-modal-no-footer ant-modal-progress ant-zoom-appear ant-zoom-appear-prepare ant-zoom"
           role="dialog"
           style="width: 567px;"
         >
@@ -125,7 +125,7 @@ exports[`Modal.Progress > render with progress.percent 1`] = `
         <div
           aria-labelledby="test-id"
           aria-modal="true"
-          class="ant-modal ant-modal-progress ant-zoom-appear ant-zoom-appear-prepare ant-zoom"
+          class="ant-modal ant-modal-no-footer ant-modal-progress ant-zoom-appear ant-zoom-appear-prepare ant-zoom"
           role="dialog"
           style="width: 567px;"
         >
@@ -269,7 +269,7 @@ exports[`Modal.Progress > render with progress.status 1`] = `
         <div
           aria-labelledby="test-id"
           aria-modal="true"
-          class="ant-modal ant-modal-progress ant-zoom-appear ant-zoom-appear-prepare ant-zoom"
+          class="ant-modal ant-modal-no-footer ant-modal-progress ant-zoom-appear ant-zoom-appear-prepare ant-zoom"
           role="dialog"
           style="width: 567px;"
         >
@@ -431,7 +431,7 @@ exports[`Modal.Progress > render without description 1`] = `
         <div
           aria-labelledby="test-id"
           aria-modal="true"
-          class="ant-modal ant-modal-progress ant-zoom-appear ant-zoom-appear-prepare ant-zoom"
+          class="ant-modal ant-modal-no-footer ant-modal-progress ant-zoom-appear ant-zoom-appear-prepare ant-zoom"
           role="dialog"
           style="width: 567px;"
         >

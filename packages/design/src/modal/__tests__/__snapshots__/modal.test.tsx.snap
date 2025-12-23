@@ -143,7 +143,7 @@ exports[`Modal > should hide footer dom when footer is false 1`] = `
         <div
           aria-labelledby="test-id"
           aria-modal="true"
-          class="ant-modal ant-zoom-appear ant-zoom-appear-prepare ant-zoom"
+          class="ant-modal ant-modal-no-footer ant-zoom-appear ant-zoom-appear-prepare ant-zoom"
           role="dialog"
           style="width: 520px;"
         >
@@ -227,7 +227,7 @@ exports[`Modal > should hide footer dom when footer is null 1`] = `
         <div
           aria-labelledby="test-id"
           aria-modal="true"
-          class="ant-modal ant-zoom-appear ant-zoom-appear-prepare ant-zoom"
+          class="ant-modal ant-modal-no-footer ant-zoom-appear ant-zoom-appear-prepare ant-zoom"
           role="dialog"
           style="width: 520px;"
         >

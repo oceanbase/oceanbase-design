@@ -8,6 +8,30 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.11
+
+`2025-12-23`
+
+- 🛠 在 ESM、CommonJS 构建产物的文件头部添加 `use client;` 指令，以支持 SSR 服务端渲染。[#1362](https://github.com/oceanbase/oceanbase-design/pull/1362)
+- 主题:
+  - ⭐️ 将 `fontWeight` 相关的 less 主题变量，改为引用 `--ob-font-weight-**` 的 CSS 变量，以支持动态值。[#1364](https://github.com/oceanbase/oceanbase-design/pull/1364)
+  - 🌈 CSS 变量 token 更新: [#1365](https://github.com/oceanbase/oceanbase-design/pull/1365)
+    - `--ob-color-text-info` 命名改为 `--ob-color-text-description`。
+    - `--ob-color-bg-active` 命名改为 `--ob-color-bg-selected`。
+    - `--ob-color-border-hover` 值从 blue-4 改为 grey-7。
+- Alert
+  - 💄 优化 `mini` Alert 的高度。[#1369](https://github.com/oceanbase/oceanbase-design/pull/1369)
+  - 💄 优化 Alert 包含 `extra`、但不包含 `description` 时的上下间距。[#1369](https://github.com/oceanbase/oceanbase-design/pull/1369)
+  - 💄 优化 Alert 内容区和操作区的最大宽度。[#1370](https://github.com/oceanbase/oceanbase-design/pull/1370)
+- Badge
+  - 🆕 Badge 新增 `progressProps` 属性，用于设置图标模式下 `processing` 状态的进度信息。[#1368](https://github.com/oceanbase/oceanbase-design/pull/1368)
+  - 💄 Badge 状态点外围新增 1px 间距，保证整体尺寸为 10px。[#1368](https://github.com/oceanbase/oceanbase-design/pull/1368)
+  - 💄 更新 Badge `processing` 的状态图标。[#1368](https://github.com/oceanbase/oceanbase-design/pull/1368)
+- 💄 优化 Card 标题的行高为 24px。[#1371](https://github.com/oceanbase/oceanbase-design/pull/1371)
+- 💄 优化 Modal 内容区、无标题、无页脚时的间距。[#1372](https://github.com/oceanbase/oceanbase-design/pull/1372)
+- 🐞 修复 Table 部分样式不生效的问题。[#1367](https://github.com/oceanbase/oceanbase-design/pull/1367)
+- 💄 优化胶囊 Tag 的高度。[#1366](https://github.com/oceanbase/oceanbase-design/pull/1366)
+
 ## 1.0.0-alpha.10
 
 `2025-12-19`
