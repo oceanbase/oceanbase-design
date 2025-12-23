@@ -32,8 +32,8 @@ export default () => {
         <div
           style={{
             height: 800,
-            background: token.colorBgLayout,
-            borderRadius: token.borderRadius,
+            background: token.colorFillQuaternary,
+            borderRadius: token.borderRadiusMD,
             padding: 12,
           }}
         >

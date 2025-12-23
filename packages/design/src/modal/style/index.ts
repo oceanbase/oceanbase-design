@@ -51,13 +51,13 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
           },
         },
         [`${componentCls}-body`]: {
-          paddingTop: token.paddingLG,
           marginInline: calc(token.marginLG).mul(-1).equal(),
           paddingInline: token.paddingLG,
+          paddingBlock: token.paddingLG,
         },
       },
       [`${componentCls}-footer`]: {
-        paddingTop: token.paddingLG,
+        paddingTop: token.padding,
         marginTop: 0,
         [`${antCls}-btn`]: {
           height: 28,
@@ -72,6 +72,16 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
             // make extra align to start
             textAlign: 'start',
           },
+        },
+      },
+      [`&${componentCls}-no-title`]: {
+        [`${componentCls}-content`]: {
+          paddingBlockStart: 0,
+        },
+      },
+      [`&${componentCls}${componentCls}-no-footer`]: {
+        [`${componentCls}-content`]: {
+          paddingBlockEnd: 0,
         },
       },
     },
