@@ -14,6 +14,7 @@ import { createPortal } from 'react-dom';
 import FilterWrap from './FilterWrap';
 import { FilterOutlined } from '@oceanbase/icons';
 import { FilterButtonRef } from './FilterButton';
+import { FilterProvider, type FilterValueItem } from '../FilterContext';
 
 export interface ResponsiveFilterGroupProps {
   children: ReactNode;
@@ -116,6 +117,9 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   const [childWidths, setChildWidths] = useState<number[]>([]);
   const [actualMoreButtonWidth, setActualMoreButtonWidth] = useState<number>(moreButtonWidth);
   const [measureContainer, setMeasureContainer] = useState<HTMLElement | null>(null);
+  // 维护筛选值的数组
+  const [filterValues, setFilterValues] = useState<FilterValueItem[]>([]);
+
   const childrenArray = Children.toArray(children).filter(isValidElement) as ReactElement[];
 
   // 分离不可收集和可收集的子元素
@@ -293,48 +297,108 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
     return cloneElement(element, newProps);
   };
 
+  // 更新筛选值的函数
+  const updateFilterValue = useCallback(
+    (id: string, filterLabel: ReactNode, value: any, options?: any[], componentName?: string) => {
+      setFilterValues(prev => {
+        // 如果值为空，移除该项
+        // 对于 switch 组件，false 被视为未选中状态，应该被视为空值
+        const isEmpty =
+          value === undefined ||
+          value === null ||
+          value === '' ||
+          (componentName === 'switch' && value === false) || // switch 组件的 false 值视为空
+          (Array.isArray(value) && value.length === 0);
+
+        if (isEmpty) {
+          const filtered = prev.filter(item => item.id !== id);
+          // 如果数组长度没变化，说明该项本来就不存在，直接返回原数组
+          if (filtered.length === prev.length) {
+            return prev;
+          }
+          return filtered;
+        }
+        // 查找是否已存在
+        const existingIndex = prev.findIndex(item => item.id === id);
+        if (existingIndex >= 0) {
+          const existingItem = prev[existingIndex];
+          // 如果值、选项和组件名都没变化，直接返回原数组
+          if (
+            existingItem.value === value &&
+            existingItem.options === options &&
+            existingItem.componentName === componentName &&
+            existingItem.label === filterLabel
+          ) {
+            return prev;
+          }
+          // 更新已存在的项
+          const newValues = [...prev];
+          newValues[existingIndex] = { id, label: filterLabel, value, options, componentName };
+          return newValues;
+        } else {
+          // 添加新项
+          return [...prev, { id, label: filterLabel, value, options, componentName }];
+        }
+      });
+    },
+    []
+  );
+
   // 渲染隐藏的可收集子元素到 FilterWrap 中（包括始终折叠和隐藏的普通可收集子元素）
   const renderHiddenChildren = () => {
     if (allHiddenChildren.length === 0) return null;
 
     return (
-      <FilterWrap
-        collapsed
-        filterButtonRef={filterButtonRef}
-        icon={icon}
-        label={label}
-        extra={extra}
-        footer={
-          showActions && (
-            <Flex justify="space-between">
-              {onApply && (
-                <Button
-                  type="primary"
-                  size="small"
-                  onClick={() => {
-                    onApply?.();
-                    filterButtonRef.current?.closePopover();
-                  }}
-                >
-                  Apply
-                </Button>
-              )}
-              {onClearAll && (
-                <Button type="link" size="small" onClick={onClearAll}>
-                  Clear All
-                </Button>
-              )}
-            </Flex>
-          )
-        }
+      <FilterProvider
+        isWrapped={true}
+        filterValues={filterValues}
+        updateFilterValue={updateFilterValue}
       >
-        {allHiddenChildren.map((child, index) => {
-          if (isValidElement(child)) {
-            return <React.Fragment key={index}>{addIsInWrapProp(child)}</React.Fragment>;
+        <FilterWrap
+          collapsed
+          filterButtonRef={filterButtonRef}
+          icon={icon}
+          label={label}
+          extra={extra}
+          footer={
+            showActions && (
+              <Flex justify="space-between">
+                {onApply && (
+                  <Button
+                    type="primary"
+                    size="small"
+                    onClick={() => {
+                      onApply?.();
+                      filterButtonRef.current?.closePopover();
+                    }}
+                  >
+                    Apply
+                  </Button>
+                )}
+                {onClearAll && (
+                  <Button
+                    type="link"
+                    size="small"
+                    onClick={() => {
+                      onClearAll();
+                      setFilterValues([]);
+                    }}
+                  >
+                    Clear All
+                  </Button>
+                )}
+              </Flex>
+            )
           }
-          return child;
-        })}
-      </FilterWrap>
+        >
+          {allHiddenChildren.map((child, index) => {
+            if (isValidElement(child)) {
+              return <React.Fragment key={index}>{addIsInWrapProp(child)}</React.Fragment>;
+            }
+            return child;
+          })}
+        </FilterWrap>
+      </FilterProvider>
     );
   };
 

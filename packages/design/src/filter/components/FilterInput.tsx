@@ -1,8 +1,9 @@
 import type { InputProps } from '@oceanbase/design';
 import { Flex, Input, Switch, type SwitchProps } from '@oceanbase/design';
 import type { ChangeEvent, FC } from 'react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
+import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import type { BaseFilterProps } from '../type';
 import { wrapContent } from '../utils';
@@ -30,10 +31,19 @@ const FilterInput: FC<FilterInputProps> = ({
   ...restProps
 }) => {
   const isWrapped = useFilterWrapped();
+  const { updateFilterValue } = useFilterContext();
+  const filterIdRef = useRef(`filter-input-${label}-${Math.random().toString(36).substr(2, 9)}`);
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, '', onChange);
   const [switchValue, setSwitchValue] = useState(false);
+
+  // 当值变化时，更新 context 中的值
+  useEffect(() => {
+    if (isWrapped && updateFilterValue) {
+      updateFilterValue(filterIdRef.current, label, currentValue, undefined, 'input');
+    }
+  }, [isWrapped, updateFilterValue, label, currentValue]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);

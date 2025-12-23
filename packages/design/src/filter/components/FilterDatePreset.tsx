@@ -1,8 +1,9 @@
 import { Flex, Tooltip } from '@oceanbase/design';
 import { CheckOutlined } from '@oceanbase/icons';
 import type { FC, ReactNode } from 'react';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
+import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
@@ -61,12 +62,23 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
   const { prefixCls } = useFilterStyle();
   const isWrapped = useFilterWrapped(_isInWrap);
   const filterButtonRef = useRef<FilterButtonRef>(null);
+  const { updateFilterValue } = useFilterContext();
+  const filterIdRef = useRef(
+    `filter-datepreset-${label}-${Math.random().toString(36).substr(2, 9)}`
+  );
 
   // 从 restProps 中排除 showArrow，避免类型冲突
   const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps as any;
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, null, onChange);
+
+  // 当值变化时，更新 context 中的值
+  useEffect(() => {
+    if (isWrapped && updateFilterValue) {
+      updateFilterValue(filterIdRef.current, label, currentValue, options, 'datepreset');
+    }
+  }, [isWrapped, updateFilterValue, label, currentValue, options]);
 
   // 根据当前值计算显示标签
   const currentLabel = options.find(option => option.value === currentValue)?.label || label;

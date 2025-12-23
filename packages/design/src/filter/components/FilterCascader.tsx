@@ -2,8 +2,9 @@ import { Checkbox, Flex, Popover, Tag, Tooltip, theme } from '@oceanbase/design'
 import { CheckOutlined, CloseOutlined, RightOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
+import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
@@ -49,6 +50,8 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   const { prefixCls } = useFilterStyle();
   const { token } = theme.useToken();
   const filterButtonRef = useRef<FilterButtonRef>(null);
+  const { updateFilterValue } = useFilterContext();
+  const filterIdRef = useRef(`filter-cascader-${label}-${Math.random().toString(36).substr(2, 9)}`);
   // 用于控制二级 Popover 的打开状态（仅在单选模式下使用）
   const [openPopoverKey, setOpenPopoverKey] = useState<string | null>(null);
 
@@ -61,6 +64,13 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, [], onChange);
+
+  // 当值变化时，更新 context 中的值
+  useEffect(() => {
+    if (isWrapped && updateFilterValue) {
+      updateFilterValue(filterIdRef.current, label, currentValue, options, 'cascader');
+    }
+  }, [isWrapped, updateFilterValue, label, currentValue, options]);
 
   const handleChange = useCallback(
     (parentValue: string, childValue: string) => {

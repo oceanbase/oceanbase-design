@@ -87,8 +87,16 @@ const App: React.FC = () => {
               <Filter.Cascader label="分类" multiple count options={categoryOptions} />
             </Form.Item>
 
+            <Form.Item name="date" noStyle>
+              <Filter.DatePreset label="日期" />
+            </Form.Item>
+
             <Form.Item name="darkMode" valuePropName="checked" noStyle initialValue={false}>
               <Filter.Switch label="暗黑模式" />
+            </Form.Item>
+
+            <Form.Item name="search" noStyle>
+              <Filter.Input label="搜索" />
             </Form.Item>
           </Filter.ResponsiveGroup>
         </Form>

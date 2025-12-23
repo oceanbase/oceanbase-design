@@ -1,6 +1,8 @@
 import { Flex, Switch, type SwitchProps, theme } from '@oceanbase/design';
 import type { FC } from 'react';
+import { useEffect, useRef } from 'react';
 import { useControlledState } from '../hooks/useControlledState';
+import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import type { BaseFilterProps } from '../type';
 import { wrapContent } from '../utils';
@@ -25,9 +27,18 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
   ...restProps
 }) => {
   const isWrapped = useFilterWrapped();
+  const { updateFilterValue } = useFilterContext();
+  const filterIdRef = useRef(`filter-switch-${label}-${Math.random().toString(36).substr(2, 9)}`);
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, false, onChange);
+
+  // 当值变化时，更新 context 中的值
+  useEffect(() => {
+    if (isWrapped && updateFilterValue) {
+      updateFilterValue(filterIdRef.current, label, currentValue, undefined, 'switch');
+    }
+  }, [isWrapped, updateFilterValue, label, currentValue]);
 
   const handleClear = () => {
     setValue(false);
