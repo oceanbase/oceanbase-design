@@ -18,6 +18,7 @@ export interface ModalProps extends AntModalProps {
 }
 
 const Modal = ({
+  title,
   extra,
   footer,
   prefixCls: customizePrefixCls,
@@ -27,11 +28,18 @@ const Modal = ({
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('modal', customizePrefixCls);
   const [wrapCSSVar] = useStyle(prefixCls);
-  const modalCls = classNames(className);
+  const modalCls = classNames(
+    {
+      [`${prefixCls}-no-title`]: !title,
+      [`${prefixCls}-no-footer`]: footer === false || footer === null,
+    },
+    className
+  );
 
   return wrapCSSVar(
     <AntModal
       destroyOnClose={true}
+      title={title}
       // convert false to null to hide .ant-modal-footer dom
       // ref: https://github.com/ant-design/ant-design/blob/master/components/modal/Modal.tsx#L105
       footer={
