@@ -36,7 +36,7 @@ import DefaultRenderEmpty from './DefaultRenderEmpty';
 import type { NavigateFunction } from './navigate';
 import type { Locale } from '../locale';
 import GlobalStyle from '../style/global';
-import CssVariablesStyle from '../style/cssVariables';
+import CssVariablesStyle from '../theme/obToken';
 
 export * from './navigate';
 export * from 'antd/es/config-provider/context';

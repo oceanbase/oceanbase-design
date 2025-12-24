@@ -13,8 +13,8 @@ const useStyle = createStyles(({ token, css }) => ({
   `,
   dot: css`
     display: inline-block;
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     margin-inline-end: ${token.marginXXS}px;
     border: 1px solid ${token.colorSplit};
@@ -25,7 +25,7 @@ interface ColorChunkProps {
   value?: ColorInput;
 }
 
-const ColorChunk: React.FC<React.PropsWithChildren<ColorChunkProps>> = (props) => {
+const ColorChunk: React.FC<React.PropsWithChildren<ColorChunkProps>> = props => {
   const { styles } = useStyle();
   const { value, children } = props;
 
