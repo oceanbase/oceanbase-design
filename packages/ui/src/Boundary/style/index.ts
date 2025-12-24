@@ -5,9 +5,7 @@ import type { OBToken } from '../../_util/genComponentStyleHook';
 
 export type BoundaryToken = OBToken;
 
-export const genBoundaryStyle: GenerateStyle<BoundaryToken> = (
-  token: BoundaryToken
-): CSSObject => {
+export const genBoundaryStyle: GenerateStyle<BoundaryToken> = (token: BoundaryToken): CSSObject => {
   const { colorTextTertiary } = token;
 
   return {
@@ -33,7 +31,7 @@ export const genBoundaryStyle: GenerateStyle<BoundaryToken> = (
         '> span': {
           marginTop: 8,
           color: colorTextTertiary,
-          fontSize: 14,
+          fontSize: token.fontSize,
           textAlign: 'center',
         },
         '> button': {
@@ -53,4 +51,3 @@ export default (prefixCls: string) => {
   });
   return useStyle(prefixCls);
 };
-
