@@ -145,9 +145,10 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
         [`--${prefix}-font-family-default`]: token.fontFamily,
 
         // 字重
-        [`--${prefix}-font-weight-sm`]: token.fontWeightWeak,
-        [`--${prefix}-font-weight-md`]: token.fontWeight,
-        [`--${prefix}-font-weight-lg`]: token.fontWeightStrong,
+        // use string to avoid appending px to the value by useStyleRegister
+        [`--${prefix}-font-weight-sm`]: `${token.fontWeightWeak}`,
+        [`--${prefix}-font-weight-md`]: `${token.fontWeight}`,
+        [`--${prefix}-font-weight-lg`]: `${token.fontWeightStrong}`,
 
         // 字号
         [`--${prefix}-font-size-300`]: `${token.fontSizeSM}px`,

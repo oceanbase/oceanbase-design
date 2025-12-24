@@ -9,7 +9,7 @@ export const genFooterToolbarStyle: GenerateStyle<FooterToolBarToken> = (
   const { componentCls, colorBgBase, borderRadius, boxShadowSecondary, controlHeightLG } = token;
 
   return {
-    [`${componentCls}`]: {
+    [`div${componentCls}`]: {
       flexDirection: 'row-reverse',
       lineHeight: 'initial',
       alignItems: 'center',
