@@ -44,7 +44,7 @@ export type { ModalProps, ModalFuncProps, ModalProgressProps } from './modal';
 export { default as Drawer } from './drawer';
 export type { DrawerProps } from './drawer';
 
-export { message, notification, token } from './static-function';
+export { message, notification, token, obToken } from './static-function';
 
 export { default as List } from './list';
 export type { ListProps } from './list';

@@ -3,7 +3,7 @@
  * CSS 变量元数据定义，用于文档展示
  */
 
-export type CssVariableCategory =
+export type ObTokenCategory =
   | 'color'
   | 'color-bg'
   | 'color-border'
@@ -16,7 +16,7 @@ export type CssVariableCategory =
   | 'space'
   | 'component';
 
-export interface CssVariableMeta {
+export interface ObTokenMeta {
   /** 变量名 (不含前缀) */
   name: string;
   /** 描述 */
@@ -24,7 +24,7 @@ export interface CssVariableMeta {
   /** 英文描述 */
   descEn?: string;
   /** 分类 */
-  category: CssVariableCategory;
+  category: ObTokenCategory;
   /** token 来源 (用于获取值) */
   token?: string;
   /** 固定值 (非 token) */
@@ -34,229 +34,229 @@ export interface CssVariableMeta {
 /**
  * CSS 变量元数据
  */
-export const cssVariablesMeta: CssVariableMeta[] = [
+export const obTokenMeta: ObTokenMeta[] = [
   // ==================== 基础颜色 Token ====================
   // 中性色 Neutral
   { name: 'white', desc: '白色', descEn: 'White', category: 'color', token: 'white' },
   { name: 'black', desc: '黑色', descEn: 'Black', category: 'color', token: 'black' },
-  //   {
-  //     name: 'gray-1',
-  //     desc: '页面底色',
-  //     descEn: 'Page background',
-  //     category: 'color',
-  //     token: 'gray1',
-  //   },
-  //   {
-  //     name: 'gray-2',
-  //     desc: '侧边导航底色、悬停态、禁用态',
-  //     descEn: 'Side nav bg, hover, disabled',
-  //     category: 'color',
-  //     token: 'gray2',
-  //   },
-  //   {
-  //     name: 'gray-3',
-  //     desc: '子表格悬停态',
-  //     descEn: 'Sub-table hover',
-  //     category: 'color',
-  //     token: 'gray3',
-  //   },
-  //   {
-  //     name: 'gray-4',
-  //     desc: '二级边框色、分割线、卡片边框',
-  //     descEn: 'Secondary border, divider, card border',
-  //     category: 'color',
-  //     token: 'gray4',
-  //   },
-  //   {
-  //     name: 'gray-5',
-  //     desc: '一级边框色',
-  //     descEn: 'Primary border',
-  //     category: 'color',
-  //     token: 'gray5',
-  //   },
-  //   {
-  //     name: 'gray-6',
-  //     desc: '四级文本：输入框暗文、禁用文本',
-  //     descEn: 'Placeholder, disabled text',
-  //     category: 'color',
-  //     token: 'gray6',
-  //   },
-  //   {
-  //     name: 'gray-7',
-  //     desc: '三级文本：表单提示信息',
-  //     descEn: 'Form hint text',
-  //     category: 'color',
-  //     token: 'gray7',
-  //   },
-  //   {
-  //     name: 'gray-8',
-  //     desc: '二级文本：表头文字',
-  //     descEn: 'Table header',
-  //     category: 'color',
-  //     token: 'gray8',
-  //   },
-  //   {
-  //     name: 'gray-9',
-  //     desc: '导航默认态文字色',
-  //     descEn: 'Nav default text',
-  //     category: 'color',
-  //     token: 'gray9',
-  //   },
-  //   {
-  //     name: 'gray-10',
-  //     desc: '一级文本',
-  //     descEn: 'Primary text',
-  //     category: 'color',
-  //     token: 'colorText',
-  //   },
+  {
+    name: 'gray-1',
+    desc: '页面底色',
+    descEn: 'Page background',
+    category: 'color',
+    token: 'gray1',
+  },
+  {
+    name: 'gray-2',
+    desc: '侧边导航底色、悬停态、禁用态',
+    descEn: 'Side nav bg, hover, disabled',
+    category: 'color',
+    token: 'gray2',
+  },
+  {
+    name: 'gray-3',
+    desc: '子表格悬停态',
+    descEn: 'Sub-table hover',
+    category: 'color',
+    token: 'gray3',
+  },
+  {
+    name: 'gray-4',
+    desc: '二级边框色、分割线、卡片边框',
+    descEn: 'Secondary border, divider, card border',
+    category: 'color',
+    token: 'gray4',
+  },
+  {
+    name: 'gray-5',
+    desc: '一级边框色',
+    descEn: 'Primary border',
+    category: 'color',
+    token: 'gray5',
+  },
+  {
+    name: 'gray-6',
+    desc: '四级文本：输入框暗文、禁用文本',
+    descEn: 'Placeholder, disabled text',
+    category: 'color',
+    token: 'gray6',
+  },
+  {
+    name: 'gray-7',
+    desc: '三级文本：表单提示信息',
+    descEn: 'Form hint text',
+    category: 'color',
+    token: 'gray7',
+  },
+  {
+    name: 'gray-8',
+    desc: '二级文本：表头文字',
+    descEn: 'Table header',
+    category: 'color',
+    token: 'gray8',
+  },
+  {
+    name: 'gray-9',
+    desc: '导航默认态文字色',
+    descEn: 'Nav default text',
+    category: 'color',
+    token: 'gray9',
+  },
+  {
+    name: 'gray-10',
+    desc: '一级文本',
+    descEn: 'Primary text',
+    category: 'color',
+    token: 'colorText',
+  },
 
-  //   // 蓝色 Blue
-  //   { name: 'blue-1', desc: '蓝色-填充', descEn: 'Blue-fill', category: 'color', token: 'blue1' },
-  //   {
-  //     name: 'blue-2',
-  //     desc: '蓝色-备用色',
-  //     descEn: 'Blue-secondary',
-  //     category: 'color',
-  //     token: 'blue2',
-  //   },
-  //   { name: 'blue-3', desc: '蓝色-描边', descEn: 'Blue-border', category: 'color', token: 'blue3' },
-  //   { name: 'blue-4', desc: '蓝色-默认', descEn: 'Blue-default', category: 'color', token: 'blue4' },
-  //   {
-  //     name: 'blue-5',
-  //     desc: '蓝色-悬停、激活',
-  //     descEn: 'Blue-hover, active',
-  //     category: 'color',
-  //     token: 'blue5',
-  //   },
-  //   { name: 'blue-6', desc: '蓝色-文字', descEn: 'Blue-text', category: 'color', token: 'blue6' },
+  // 蓝色 Blue
+  { name: 'blue-1', desc: '蓝色-填充', descEn: 'Blue-fill', category: 'color', token: 'blue1' },
+  {
+    name: 'blue-2',
+    desc: '蓝色-备用色',
+    descEn: 'Blue-secondary',
+    category: 'color',
+    token: 'blue2',
+  },
+  { name: 'blue-3', desc: '蓝色-描边', descEn: 'Blue-border', category: 'color', token: 'blue3' },
+  { name: 'blue-4', desc: '蓝色-默认', descEn: 'Blue-default', category: 'color', token: 'blue4' },
+  {
+    name: 'blue-5',
+    desc: '蓝色-悬停、激活',
+    descEn: 'Blue-hover, active',
+    category: 'color',
+    token: 'blue5',
+  },
+  { name: 'blue-6', desc: '蓝色-文字', descEn: 'Blue-text', category: 'color', token: 'blue6' },
 
-  //   // 绿色 Green
-  //   { name: 'green-1', desc: '绿色-填充', descEn: 'Green-fill', category: 'color', token: 'green1' },
-  //   {
-  //     name: 'green-2',
-  //     desc: '绿色-备用色',
-  //     descEn: 'Green-secondary',
-  //     category: 'color',
-  //     token: 'green2',
-  //   },
-  //   {
-  //     name: 'green-3',
-  //     desc: '绿色-描边',
-  //     descEn: 'Green-border',
-  //     category: 'color',
-  //     token: 'green3',
-  //   },
-  //   {
-  //     name: 'green-4',
-  //     desc: '绿色-默认',
-  //     descEn: 'Green-default',
-  //     category: 'color',
-  //     token: 'green4',
-  //   },
-  //   {
-  //     name: 'green-5',
-  //     desc: '绿色-备用色',
-  //     descEn: 'Green-secondary',
-  //     category: 'color',
-  //     token: 'green5',
-  //   },
-  //   { name: 'green-6', desc: '绿色-文字', descEn: 'Green-text', category: 'color', token: 'green6' },
+  // 绿色 Green
+  { name: 'green-1', desc: '绿色-填充', descEn: 'Green-fill', category: 'color', token: 'green1' },
+  {
+    name: 'green-2',
+    desc: '绿色-备用色',
+    descEn: 'Green-secondary',
+    category: 'color',
+    token: 'green2',
+  },
+  {
+    name: 'green-3',
+    desc: '绿色-描边',
+    descEn: 'Green-border',
+    category: 'color',
+    token: 'green3',
+  },
+  {
+    name: 'green-4',
+    desc: '绿色-默认',
+    descEn: 'Green-default',
+    category: 'color',
+    token: 'green4',
+  },
+  {
+    name: 'green-5',
+    desc: '绿色-备用色',
+    descEn: 'Green-secondary',
+    category: 'color',
+    token: 'green5',
+  },
+  { name: 'green-6', desc: '绿色-文字', descEn: 'Green-text', category: 'color', token: 'green6' },
 
-  //   // 橙色 Orange
-  //   {
-  //     name: 'orange-1',
-  //     desc: '橙色-填充',
-  //     descEn: 'Orange-fill',
-  //     category: 'color',
-  //     token: 'orange1',
-  //   },
-  //   {
-  //     name: 'orange-2',
-  //     desc: '橙色-备用色',
-  //     descEn: 'Orange-secondary',
-  //     category: 'color',
-  //     token: 'orange2',
-  //   },
-  //   {
-  //     name: 'orange-3',
-  //     desc: '橙色-描边',
-  //     descEn: 'Orange-border',
-  //     category: 'color',
-  //     token: 'orange3',
-  //   },
-  //   {
-  //     name: 'orange-4',
-  //     desc: '橙色-默认',
-  //     descEn: 'Orange-default',
-  //     category: 'color',
-  //     token: 'orange4',
-  //   },
-  //   {
-  //     name: 'orange-5',
-  //     desc: '橙色-备用色',
-  //     descEn: 'Orange-secondary',
-  //     category: 'color',
-  //     token: 'orange5',
-  //   },
-  //   {
-  //     name: 'orange-6',
-  //     desc: '橙色-文字',
-  //     descEn: 'Orange-text',
-  //     category: 'color',
-  //     token: 'orange6',
-  //   },
+  // 橙色 Orange
+  {
+    name: 'orange-1',
+    desc: '橙色-填充',
+    descEn: 'Orange-fill',
+    category: 'color',
+    token: 'orange1',
+  },
+  {
+    name: 'orange-2',
+    desc: '橙色-备用色',
+    descEn: 'Orange-secondary',
+    category: 'color',
+    token: 'orange2',
+  },
+  {
+    name: 'orange-3',
+    desc: '橙色-描边',
+    descEn: 'Orange-border',
+    category: 'color',
+    token: 'orange3',
+  },
+  {
+    name: 'orange-4',
+    desc: '橙色-默认',
+    descEn: 'Orange-default',
+    category: 'color',
+    token: 'orange4',
+  },
+  {
+    name: 'orange-5',
+    desc: '橙色-备用色',
+    descEn: 'Orange-secondary',
+    category: 'color',
+    token: 'orange5',
+  },
+  {
+    name: 'orange-6',
+    desc: '橙色-文字',
+    descEn: 'Orange-text',
+    category: 'color',
+    token: 'orange6',
+  },
 
-  //   // 红色 Red
-  //   { name: 'red-1', desc: '红色-填充', descEn: 'Red-fill', category: 'color', token: 'red1' },
-  //   { name: 'red-2', desc: '红色-备用色', descEn: 'Red-secondary', category: 'color', token: 'red2' },
-  //   { name: 'red-3', desc: '红色-描边', descEn: 'Red-border', category: 'color', token: 'red3' },
-  //   { name: 'red-4', desc: '红色-默认', descEn: 'Red-default', category: 'color', token: 'red4' },
-  //   { name: 'red-5', desc: '红色-备用色', descEn: 'Red-secondary', category: 'color', token: 'red5' },
-  //   { name: 'red-6', desc: '红色-文字', descEn: 'Red-text', category: 'color', token: 'red6' },
+  // 红色 Red
+  { name: 'red-1', desc: '红色-填充', descEn: 'Red-fill', category: 'color', token: 'red1' },
+  { name: 'red-2', desc: '红色-备用色', descEn: 'Red-secondary', category: 'color', token: 'red2' },
+  { name: 'red-3', desc: '红色-描边', descEn: 'Red-border', category: 'color', token: 'red3' },
+  { name: 'red-4', desc: '红色-默认', descEn: 'Red-default', category: 'color', token: 'red4' },
+  { name: 'red-5', desc: '红色-备用色', descEn: 'Red-secondary', category: 'color', token: 'red5' },
+  { name: 'red-6', desc: '红色-文字', descEn: 'Red-text', category: 'color', token: 'red6' },
 
-  //   // 紫色 Fuchsia
-  //   {
-  //     name: 'fuchsia-1',
-  //     desc: '紫红色-填充',
-  //     descEn: 'Fuchsia-fill',
-  //     category: 'color',
-  //     token: 'fuchsia1',
-  //   },
-  //   {
-  //     name: 'fuchsia-2',
-  //     desc: '紫红色-备用色',
-  //     descEn: 'Fuchsia-secondary',
-  //     category: 'color',
-  //     token: 'fuchsia2',
-  //   },
-  //   {
-  //     name: 'fuchsia-3',
-  //     desc: '紫红色-描边',
-  //     descEn: 'Fuchsia-border',
-  //     category: 'color',
-  //     token: 'fuchsia3',
-  //   },
-  //   {
-  //     name: 'fuchsia-4',
-  //     desc: '紫红色-默认',
-  //     descEn: 'Fuchsia-default',
-  //     category: 'color',
-  //     token: 'fuchsia4',
-  //   },
-  //   {
-  //     name: 'fuchsia-5',
-  //     desc: '紫红色-备用色',
-  //     descEn: 'Fuchsia-secondary',
-  //     category: 'color',
-  //     token: 'fuchsia5',
-  //   },
-  //   {
-  //     name: 'fuchsia-6',
-  //     desc: '紫红色-文字',
-  //     descEn: 'Fuchsia-text',
-  //     category: 'color',
-  //     token: 'fuchsia6',
-  //   },
+  // 紫色 Fuchsia
+  {
+    name: 'fuchsia-1',
+    desc: '紫红色-填充',
+    descEn: 'Fuchsia-fill',
+    category: 'color',
+    token: 'fuchsia1',
+  },
+  {
+    name: 'fuchsia-2',
+    desc: '紫红色-备用色',
+    descEn: 'Fuchsia-secondary',
+    category: 'color',
+    token: 'fuchsia2',
+  },
+  {
+    name: 'fuchsia-3',
+    desc: '紫红色-描边',
+    descEn: 'Fuchsia-border',
+    category: 'color',
+    token: 'fuchsia3',
+  },
+  {
+    name: 'fuchsia-4',
+    desc: '紫红色-默认',
+    descEn: 'Fuchsia-default',
+    category: 'color',
+    token: 'fuchsia4',
+  },
+  {
+    name: 'fuchsia-5',
+    desc: '紫红色-备用色',
+    descEn: 'Fuchsia-secondary',
+    category: 'color',
+    token: 'fuchsia5',
+  },
+  {
+    name: 'fuchsia-6',
+    desc: '紫红色-文字',
+    descEn: 'Fuchsia-text',
+    category: 'color',
+    token: 'fuchsia6',
+  },
 
   // ==================== 语义颜色 Token ====================
   // 填充色 Background
@@ -878,26 +878,26 @@ export const cssVariablesMeta: CssVariableMeta[] = [
   },
 
   // ==================== 间距 Token ====================
-  { name: 'space-0', desc: '间距0', descEn: 'Space 0', category: 'space', value: '0px' },
-  { name: 'space-50', desc: '间距50', descEn: 'Space 50', category: 'space', value: '2px' },
+  { name: 'space-0', desc: '间距 0', descEn: 'Space 0', category: 'space', value: '0px' },
+  { name: 'space-50', desc: '间距 50', descEn: 'Space 50', category: 'space', value: '2px' },
   {
     name: 'space-100',
-    desc: '间距100',
+    desc: '间距 100',
     descEn: 'Space 100',
     category: 'space',
     token: 'paddingXXS',
   },
-  { name: 'space-150', desc: '间距150', descEn: 'Space 150', category: 'space', value: '6px' },
+  { name: 'space-150', desc: '间距 150', descEn: 'Space 150', category: 'space', value: '6px' },
   {
     name: 'space-200',
-    desc: '间距200',
+    desc: '间距 200',
     descEn: 'Space 200',
     category: 'space',
     token: 'paddingXS',
   },
   {
     name: 'space-300',
-    desc: '间距300',
+    desc: '间距 300',
     descEn: 'Space 300',
     category: 'space',
     token: 'paddingSM',
@@ -905,21 +905,21 @@ export const cssVariablesMeta: CssVariableMeta[] = [
   { name: 'space-400', desc: '间距400', descEn: 'Space 400', category: 'space', token: 'padding' },
   {
     name: 'space-500',
-    desc: '间距500',
+    desc: '间距 500',
     descEn: 'Space 500',
     category: 'space',
     token: 'paddingMD',
   },
   {
     name: 'space-600',
-    desc: '间距600',
+    desc: '间距 600',
     descEn: 'Space 600',
     category: 'space',
     token: 'paddingLG',
   },
   {
     name: 'space-800',
-    desc: '间距800',
+    desc: '间距 800',
     descEn: 'Space 800',
     category: 'space',
     token: 'paddingXL',
@@ -1082,4 +1082,4 @@ export const cssVariablesMeta: CssVariableMeta[] = [
   },
 ];
 
-export default cssVariablesMeta;
+export default obTokenMeta;

@@ -11,8 +11,10 @@ import type { NotificationInstance } from 'antd/es/notification/interface';
 import formatToken from 'antd/lib/theme/util/alias';
 import ConfigProvider from '../config-provider';
 import useModalStyle from '../modal/style';
+import { genObToken } from '../theme/obToken';
 import theme from '../theme';
 import defaultTheme from '../theme/default';
+import type { GlobalToken } from '../theme/interface';
 
 const { defaultAlgorithm, defaultSeed, useToken } = theme;
 
@@ -28,6 +30,7 @@ const mapToken = {
   },
 };
 let token = formatToken(mapToken);
+let obToken = genObToken(token as GlobalToken);
 
 let message: MessageInstance & {
   useMessage: typeof antMessage.useMessage;
@@ -42,6 +45,7 @@ let modal: Omit<ModalStaticFunctions, 'warn'> & {
 export default () => {
   // automatically inject useToken, avoid declaring it every time
   token = useToken().token;
+  obToken = genObToken(token as GlobalToken);
 
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('modal');
@@ -67,4 +71,4 @@ export default () => {
   return null;
 };
 
-export { token, message, notification, modal };
+export { token, obToken, message, notification, modal };

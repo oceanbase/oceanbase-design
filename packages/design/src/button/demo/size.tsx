@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { DownloadOutlined } from '@oceanbase/icons';
-import { Button, Divider, Flex, Radio } from '@oceanbase/design';
+import { Button, Divider, Flex, Radio, theme } from '@oceanbase/design';
 import type { ConfigProviderProps } from 'antd';
 
 type SizeType = ConfigProviderProps['componentSize'];
 
 const App: React.FC = () => {
   const [size, setSize] = useState<SizeType>('middle');
+  const { token, obToken } = theme.useToken();
+  console.log(obToken);
   return (
     <>
       <Radio.Group value={size} onChange={e => setSize(e.target.value)}>
