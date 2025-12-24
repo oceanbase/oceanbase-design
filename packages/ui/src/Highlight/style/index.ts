@@ -16,7 +16,7 @@ export const genHighlightStyle: GenerateStyle<HighlightToken> = (
       margin: 0,
       padding: 0,
       color: 'rgba(0, 0, 0, 0.88)',
-      fontSize: 14,
+      fontSize: token.fontSize,
       lineHeight: 1.5714285714285714,
       listStyle: 'none',
       borderRadius: borderRadius,
@@ -83,9 +83,10 @@ export const genHighlightStyle: GenerateStyle<HighlightToken> = (
         '.hljs-built_in, .hljs-class, .hljs-title': {
           color: '#c18401',
         },
-        '.hljs-attr, .hljs-variable, .hljs-template-variable, .hljs-type, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-number': {
-          color: '#986801',
-        },
+        '.hljs-attr, .hljs-variable, .hljs-template-variable, .hljs-type, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-number':
+          {
+            color: '#986801',
+          },
         '.hljs-symbol, .hljs-bullet, .hljs-link, .hljs-meta, .hljs-selector-id, .hljs-title': {
           color: '#4078f2',
         },
@@ -159,12 +160,14 @@ export const genHighlightStyle: GenerateStyle<HighlightToken> = (
         '.hljs-comment, .hljs-quote': {
           color: '#65737e',
         },
-        '.hljs-variable, .hljs-template-variable, .hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-regexp, .hljs-deletion': {
-          color: '#bf616a',
-        },
-        '.hljs-number, .hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-params, .hljs-meta, .hljs-link': {
-          color: '#d08770',
-        },
+        '.hljs-variable, .hljs-template-variable, .hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-regexp, .hljs-deletion':
+          {
+            color: '#bf616a',
+          },
+        '.hljs-number, .hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-params, .hljs-meta, .hljs-link':
+          {
+            color: '#d08770',
+          },
         '.hljs-attribute': {
           color: '#ebcb8b',
         },
@@ -272,4 +275,3 @@ export default (prefixCls: string) => {
   });
   return useStyle(prefixCls);
 };
-

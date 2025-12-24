@@ -87,7 +87,7 @@ export const genLoginStyle: GenerateStyle<LoginToken> = (token: LoginToken): CSS
           [`${componentCls}-form`]: {
             width: '100%',
             'input::placeholder': {
-              fontSize: 14,
+              fontSize: token.fontSize,
             },
             [`${antCls}-form-item`]: {
               marginBottom: 24,

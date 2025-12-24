@@ -151,9 +151,8 @@ const Password: React.FC<PasswordProps> = ({
       {value && fieldError?.length === 0 && (
         <div
           style={{
-            fontSize: 14,
-            color: token.colorTextTertiary,
-            lineHeight: '22px',
+            fontSize: token.fontSizeSM,
+            color: token.colorTextDescription,
             marginTop: token.marginXXS,
           }}
         >
@@ -173,7 +172,7 @@ const Password: React.FC<PasswordProps> = ({
               ],
               tooltips: ['', locale.copySuccessfully],
             }}
-            style={{ marginLeft: token.marginXS }}
+            style={{ marginLeft: token.marginXXS }}
           />
         </div>
       )}
