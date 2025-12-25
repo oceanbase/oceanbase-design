@@ -8,6 +8,17 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.12
+
+`2025-12-25`
+
+- 🔥 新增 Filter 筛选器组件，提供多种筛选类型，适用于表格、列表等数据筛选场景。[#1363](https://github.com/oceanbase/oceanbase-design/pull/1363) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+- 主题
+  - 🆕 `theme.useToken()` 新增 `obToken` 返回，用于在 React 函数组件和 hooks 中消费新版 Design Token。[#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)
+  - 🆕 新增 `obToken` 静态对象，用于在 React 类组件和非 React 上下文中消费新版 Design Token。[#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)- 📝 新增 [Design Token 使用文档](https://oceanbase-design-v1.vercel.app/docs/design-token)，详细列举新版 Token 的使用方式和完整列表。[#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)
+  - 📢 CSS 变量命名调整 `--ob-spacing-negative-25` => `--ob-space-negative-25`。[#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)
+  - 🐞 修复 CSS 变量 `--ob-font-weight-**` 值不正确的问题，去掉多余的单位 `px`。[#1375](https://github.com/oceanbase/oceanbase-design/pull/1375)
+
 ## 1.0.0-alpha.11
 
 `2025-12-23`

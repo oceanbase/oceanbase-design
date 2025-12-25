@@ -8,6 +8,12 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.12
+
+`2025-12-25`
+
+- 💄 优化 Password 提示文案的字体大小。[#1374](https://github.com/oceanbase/oceanbase-design/pull/1374)
+
 ## 1.0.0-alpha.10
 
 `2025-12-19`
