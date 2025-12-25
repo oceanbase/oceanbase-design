@@ -15,8 +15,6 @@ const App: React.FC = () => {
   return (
     <Space direction="vertical" size="large" style={{ width: '100%' }}>
       <div>
-        <Text strong>示例：使用 alwaysCollapse 属性</Text>
-        <br />
         <div>
           <Slider
             min={100}

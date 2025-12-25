@@ -1,13 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import React, { createContext, useContext } from 'react';
 
-export type FilterComponentName =
-  | 'select'
-  | 'checkbox'
-  | 'cascader'
-  | 'switch'
-  | 'datepreset'
-  | 'input';
+export type FilterComponentName = 'select' | 'checkbox' | 'cascader' | 'switch' | 'range' | 'input';
 
 export type FilterValue = string | string[] | string[][] | boolean | [any, any] | null | undefined;
 

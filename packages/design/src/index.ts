@@ -113,9 +113,8 @@ export type {
   FilterCheckboxProps,
   FilterCascaderProps,
   FilterSwitchProps,
-  FilterDatePresetProps,
+  FilterRangeProps,
   FilterInputProps,
-  FilterStatusProps,
   FilterWrapProps,
   ResponsiveFilterGroupProps,
 } from './filter';

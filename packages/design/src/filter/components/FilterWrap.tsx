@@ -65,7 +65,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
 
       switch (componentName) {
         case 'select':
-        case 'datepreset': {
+        case 'range': {
           const selectedOption = (options as { value: unknown; label: ReactNode }[])?.find(
             opt => opt.value === value
           );

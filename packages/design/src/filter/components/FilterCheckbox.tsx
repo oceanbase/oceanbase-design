@@ -4,6 +4,7 @@ import { Flex } from 'antd';
 import Checkbox from '../../checkbox';
 import Tag from '../../tag';
 import Tooltip from '../../tooltip';
+import Badge from '../../badge';
 import theme from '../../theme';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
@@ -20,6 +21,8 @@ export interface CheckboxOption {
   label: ReactNode;
   value: string;
   disabled?: boolean;
+  /** 状态颜色，如果提供则启用状态模式（显示重叠图标、使用 Badge 显示） */
+  color?: string;
 }
 
 export interface FilterCheckboxProps extends BaseFilterProps, InternalFilterProps {
@@ -87,6 +90,68 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
     setSelectedValues([]);
   }, [setSelectedValues]);
 
+  // 检测是否启用状态模式（options 中包含 color 属性）
+  const isStatusMode = useMemo(() => {
+    return options.some(option => option.color !== undefined);
+  }, [options]);
+
+  // 渲染状态图标（重叠显示）- 仅在状态模式下使用
+  const renderStatusIcon = useMemo(() => {
+    if (!isStatusMode || options.length === 0) return null;
+
+    // 每个 icon 的宽度
+    const iconWidth = 8;
+    // 重叠距离（每个 icon 向左偏移的距离）
+    const overlapDistance = 3;
+    // 计算容器宽度：第一个 icon 的完整宽度 + (icon数量 - 1) * 重叠距离
+    const containerWidth = iconWidth + (options.length - 1) * overlapDistance;
+
+    // 获取当前选中的值
+    const selectedStatuses = selectedValues || [];
+
+    return (
+      <div
+        style={{
+          position: 'relative',
+          width: containerWidth,
+          height: iconWidth,
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        {options.map((item, index) =>
+          selectedStatuses.includes(item.value) && item.color ? (
+            <Badge
+              key={item.value}
+              color={item.color}
+              style={{
+                position: 'absolute',
+                left: index * overlapDistance,
+                top: -6,
+                zIndex: options.length - index, // 后面的 icon z-index 更高，显示在上层
+              }}
+            />
+          ) : (
+            <div
+              key={item.value}
+              style={{
+                position: 'absolute',
+                left: index * overlapDistance,
+                top: 1,
+                width: iconWidth,
+                height: iconWidth,
+                backgroundColor: 'white',
+                borderRadius: '50%',
+                border: `1px solid ${token.colorBorder}`,
+                zIndex: options.length - index, // 后面的 icon z-index 更高，显示在上层
+              }}
+            />
+          )
+        )}
+      </div>
+    );
+  }, [isStatusMode, options, selectedValues, token.colorBorder]);
+
   // 渲染弹框内容
   const renderContent = useMemo(
     () => (
@@ -97,6 +162,14 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
       >
         {options.map(option => {
           const isDisabled = option.disabled || false;
+          // 状态模式下，使用 Badge 显示 label 和 color
+          const labelContent =
+            isStatusMode && option.color && typeof option.label === 'string' ? (
+              <Badge text={option.label} color={option.color} />
+            ) : (
+              option.label
+            );
+
           return (
             <Checkbox
               key={option.value}
@@ -108,13 +181,13 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
                 color: isDisabled ? token.colorTextDisabled : 'inherit',
               }}
             >
-              {option.label}
+              {labelContent}
             </Checkbox>
           );
         })}
       </Checkbox.Group>
     ),
-    [options, selectedValues, handleChange, prefixCls, token.colorTextDisabled]
+    [options, selectedValues, handleChange, prefixCls, token.colorTextDisabled, isStatusMode]
   );
 
   // 获取选中值的 labels
@@ -139,6 +212,9 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
 
   const wrappedContent = wrapContent(renderContent);
 
+  // 状态模式下，如果没有自定义 icon，使用自动生成的状态图标
+  const displayIcon = icon || (isStatusMode ? renderStatusIcon : undefined);
+
   // 如果被 FilterWrap 包裹，使用和其他组件一致的展示逻辑
   if (isWrapped) {
     const hasValue = selectedValues.length > 0;
@@ -148,7 +224,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
       <div style={{ paddingBlock: token.paddingXXS }}>
         <div style={{ marginBottom: 8 }}>{label}</div>
         <FilterButton
-          icon={icon}
+          icon={displayIcon}
           label={label}
           bordered={bordered}
           onClear={handleClear}
@@ -164,7 +240,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
 
   const filterButton = (
     <FilterButton
-      icon={icon}
+      icon={displayIcon}
       label={label}
       bordered={bordered}
       onClear={handleClear}

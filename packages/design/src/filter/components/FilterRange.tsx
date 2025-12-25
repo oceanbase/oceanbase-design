@@ -23,23 +23,23 @@ import type { FilterButtonRef } from './FilterButton';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 
-export interface DatePresetOption {
+export interface RangeOption {
   label: ReactNode;
   value: [Dayjs, Dayjs] | null;
 }
 
-export interface FilterDatePresetProps extends BaseFilterProps, InternalFilterProps {
+export interface FilterRangeProps extends BaseFilterProps, InternalFilterProps {
   /** 当前选中值 */
   value?: [Dayjs, Dayjs];
   /** 值变化回调 */
   onChange?: (value: [Dayjs, Dayjs]) => void;
   /** 预设选项列表 */
-  options?: DatePresetOption[];
+  options?: RangeOption[];
   /** 是否加载中 */
   loading?: boolean;
 }
 
-const defaultOptions: DatePresetOption[] = [
+const defaultOptions: RangeOption[] = [
   {
     label: 'Last 1 Days',
     value: [dayjs().subtract(1, 'day'), dayjs()],
@@ -58,7 +58,7 @@ const defaultOptions: DatePresetOption[] = [
   },
 ];
 
-const FilterDatePreset: FC<FilterDatePresetProps> = ({
+const FilterRange: FC<FilterRangeProps> = ({
   icon,
   label,
   bordered = true,
@@ -74,7 +74,7 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
   const isWrapped = useFilterWrapped(_isInWrap);
   const filterButtonRef = useRef<FilterButtonRef>(null);
   const { updateFilterValue } = useFilterContext();
-  const filterId = useMemo(() => generateFilterId('datepreset', label), [label]);
+  const filterId = useMemo(() => generateFilterId('range', label), [label]);
   const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
 
   // 从 restProps 中排除 showArrow，避免类型冲突
@@ -92,7 +92,7 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
         label,
         currentValue,
         options,
-        'datepreset' as FilterComponentName
+        'range' as FilterComponentName
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -118,10 +118,10 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
         // 使用稳定的 key：优先使用 label，如果 label 是对象则使用 index
         const optionKey =
           typeof option.label === 'string' || typeof option.label === 'number'
-            ? `datepreset-${option.label}`
+            ? `range-${option.label}`
             : option.value
-              ? `datepreset-${option.value[0]?.format('YYYY-MM-DD')}-${option.value[1]?.format('YYYY-MM-DD')}`
-              : `datepreset-${index}`;
+              ? `range-${option.value[0]?.format('YYYY-MM-DD')}-${option.value[1]?.format('YYYY-MM-DD')}`
+              : `range-${index}`;
 
         return (
           <Flex
@@ -222,4 +222,5 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
   );
 };
 
-export default FilterDatePreset;
+export default FilterRange;
+

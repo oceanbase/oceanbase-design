@@ -84,7 +84,7 @@ const App: React.FC = () => {
             </Form.Item>
 
             <Form.Item name="date" noStyle>
-              <Filter.DatePreset label="日期" />
+              <Filter.Range label="时间段" />
             </Form.Item>
 
             <Form.Item name="darkMode" valuePropName="checked" noStyle initialValue={false}>
