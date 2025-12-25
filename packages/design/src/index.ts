@@ -106,6 +106,19 @@ export type { BadgeProps } from './badge';
 export { default as Lottie } from './lottie';
 export type { LottieProps, LottieRef } from './lottie';
 
+export { default as Filter, FilterProvider, useFilterContext } from './filter';
+export type {
+  BaseFilterProps,
+  FilterSelectProps,
+  FilterCheckboxProps,
+  FilterCascaderProps,
+  FilterSwitchProps,
+  FilterRangeProps,
+  FilterInputProps,
+  FilterWrapProps,
+  ResponsiveFilterGroupProps,
+} from './filter';
+
 export { default as theme } from './theme';
 
 import theme from './theme';
