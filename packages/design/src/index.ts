@@ -107,7 +107,18 @@ export { default as Lottie } from './lottie';
 export type { LottieProps, LottieRef } from './lottie';
 
 export { default as Filter, FilterProvider, useFilterContext } from './filter';
-export type { BaseFilterProps } from './filter';
+export type {
+  BaseFilterProps,
+  FilterSelectProps,
+  FilterCheckboxProps,
+  FilterCascaderProps,
+  FilterSwitchProps,
+  FilterDatePresetProps,
+  FilterInputProps,
+  FilterStatusProps,
+  FilterWrapProps,
+  ResponsiveFilterGroupProps,
+} from './filter';
 
 export { default as theme } from './theme';
 

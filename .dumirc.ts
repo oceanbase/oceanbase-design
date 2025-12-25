@@ -171,6 +171,7 @@ export default defineConfig({
             { title: 'Checkbox 多选框', link: '/components/checkbox' },
             { title: 'Switch 开关', link: '/components/switch' },
             { title: 'Select 选择器', link: '/components/select' },
+            { title: 'Filter 筛选器', link: '/components/filter' },
             { title: 'Slider 滑动输入条', link: '/components/slider' },
             { title: 'DatePicker 日期选择框', link: '/components/date-picker' },
             { title: 'TimePicker 时间选择器', link: '/components/time-picker' },

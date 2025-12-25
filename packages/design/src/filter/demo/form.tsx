@@ -44,11 +44,7 @@ const App: React.FC = () => {
       </div>
       <Space direction="vertical" size="large" style={{ width: '240px' }}>
         <Form form={form} layout="inline">
-          <Filter.ResponsiveGroup
-            label="更多筛选"
-            onApply={handleApply}
-            onClearAll={handleClearAll}
-          >
+          <Filter.ResponsiveGroup onApply={handleApply} onClearAll={handleClearAll}>
             <Form.Item name="status" noStyle>
               <Filter.Select
                 icon={<HeaderTableOutlined />}

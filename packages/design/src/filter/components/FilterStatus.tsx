@@ -1,6 +1,7 @@
-import { Badge, theme } from '@oceanbase/design';
 import type { FC } from 'react';
 import React, { useMemo } from 'react';
+import Badge from '../../badge';
+import theme from '../../theme';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
 import FilterCheckbox from './FilterCheckbox';
 import type { CheckboxOption } from './FilterCheckbox';

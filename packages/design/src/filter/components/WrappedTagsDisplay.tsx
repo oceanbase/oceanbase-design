@@ -1,6 +1,12 @@
-import { Flex, Tag, Tooltip } from '@oceanbase/design';
 import type { ReactNode } from 'react';
-import React from 'react';
+import React, { useContext } from 'react';
+import { Flex } from 'antd';
+import Tag from '../../tag';
+import Tooltip from '../../tooltip';
+import theme from '../../theme';
+import ConfigProvider from '../../config-provider';
+import type { Locale } from '../../locale';
+import enUS from '../../locale/en-US';
 
 export interface TagItem {
   label: ReactNode;
@@ -28,13 +34,16 @@ const WrappedTagsDisplay: React.FC<WrappedTagsDisplayProps> = ({
   onRemove,
   tagMaxWidth = 80,
 }) => {
+  const { token } = theme.useToken();
+  const { locale: contextLocale } = useContext(ConfigProvider.ConfigContext);
+  const filterLocale = (contextLocale as Locale)?.Filter || enUS.Filter;
   const hasValue = tags.length > 0;
   const visibleTags = tags.slice(0, maxVisibleTags);
   const hiddenTags = tags.slice(maxVisibleTags);
   const hiddenCount = hiddenTags.length;
 
   if (!hasValue) {
-    return <span style={{ color: 'var(--ob-color-text-disabled)' }}>Please select</span>;
+    return <span style={{ color: token.colorTextPlaceholder }}>{filterLocale?.pleaseSelect}</span>;
   }
 
   return (

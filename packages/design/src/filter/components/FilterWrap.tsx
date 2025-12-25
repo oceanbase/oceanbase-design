@@ -1,6 +1,11 @@
-import { Flex, Tooltip } from '@oceanbase/design';
 import type { FC, ReactNode } from 'react';
-import React, { Children, isValidElement, useCallback, useMemo } from 'react';
+import React, { Children, isValidElement, useCallback, useContext, useMemo } from 'react';
+import { Flex } from 'antd';
+import Tooltip from '../../tooltip';
+import theme from '../../theme';
+import ConfigProvider from '../../config-provider';
+import type { Locale } from '../../locale';
+import enUS from '../../locale/en-US';
 import {
   FilterProvider,
   useFilterContext,
@@ -25,7 +30,7 @@ export interface FilterWrapProps extends Omit<BaseFilterProps, 'label'> {
 
 const FilterWrap: FC<FilterWrapProps> = ({
   children,
-  label = 'Filters',
+  label,
   icon,
   bordered = true,
   collapsed = false,
@@ -33,8 +38,14 @@ const FilterWrap: FC<FilterWrapProps> = ({
   filterButtonRef,
   ...restProps
 }) => {
+  const { token } = theme.useToken();
+  const { locale: contextLocale } = useContext(ConfigProvider.ConfigContext);
+  const filterLocale = (contextLocale as Locale)?.Filter || enUS.Filter;
   // 始终调用 Hook，但只在折叠模式下使用 filterValues
   const contextValue = useFilterContext();
+
+  // 如果没有传入 label，使用国际化默认值
+  const filterLabel = label ?? filterLocale?.filters;
   // 稳定化 filterValues 的引用，避免不必要的重新计算
   const stableFilterValuesKey = useMemo(() => {
     if (!collapsed || !contextValue.filterValues) return '';
@@ -92,7 +103,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
         }
         case 'switch': {
           // switch 组件的 false 值不显示
-          return value ? '开启' : '';
+          return value ? filterLocale?.open : '';
         }
         case 'input': {
           return String(value);
@@ -102,7 +113,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
         }
       }
     },
-    []
+    [filterLocale]
   );
 
   // 生成 Tooltip 内容
@@ -120,9 +131,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
 
         return (
           <Flex key={item.id} gap={16}>
-            <div
-              style={{ color: 'var(--ob-color-text-label)', minWidth: 50, whiteSpace: 'nowrap' }}
-            >
+            <div style={{ color: token.colorTextLabel, minWidth: 50, whiteSpace: 'nowrap' }}>
               {item.label}
             </div>
             <div>{formattedValue}</div>
@@ -136,7 +145,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
     }
 
     return <div style={{ maxWidth: 300, padding: '0px 4px' }}>{validItems}</div>;
-  }, [filterValues, formatValueForTooltip, collapsed]);
+  }, [filterValues, formatValueForTooltip, collapsed, token.colorTextLabel]);
 
   // 如果不使用折叠模式，按原来的方式渲染
   if (!collapsed) {
@@ -169,15 +178,16 @@ const FilterWrap: FC<FilterWrapProps> = ({
     >
       <div
         style={{
-          padding: '16px',
+          padding: token.padding,
           maxHeight: 350,
           overflowY: 'auto',
           minWidth: 200,
           maxWidth: 300,
-          fontSize: 'var(--ob-font-body1)',
+          fontSize: token.fontSize,
+          fontWeight: token.fontWeight,
         }}
       >
-        <Flex vertical gap={'var(--ob-space-200)'}>
+        <Flex vertical gap={token.sizeXS}>
           {Children.map(children, (child, index) => {
             if (isValidElement(child)) {
               // 使用 child.key 或生成稳定的 key
@@ -198,7 +208,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
     <FilterButton
       ref={filterButtonRef}
       icon={icon}
-      label={label}
+      label={filterLabel}
       bordered={bordered}
       onClear={handleClear}
       content={content}
@@ -207,7 +217,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
       showLabelDivider={!!restProps.footer}
       {...filterButtonProps}
     >
-      <span>{label}</span>
+      <span>{filterLabel}</span>
       <CountNumber count={filterValues.length} />
     </FilterButton>
   );

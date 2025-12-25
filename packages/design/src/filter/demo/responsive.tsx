@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Filter, Slider, Space, Typography } from '@oceanbase/design';
+import { Filter, Slider, Space, Typography, theme } from '@oceanbase/design';
 
 const { Text } = Typography;
 
 const App: React.FC = () => {
+  const { token } = theme.useToken();
   const [containerWidth, setContainerWidth] = useState(300);
   const [status, setStatus] = useState<string>('');
   const [type, setType] = useState<string>('');
@@ -52,14 +53,13 @@ const App: React.FC = () => {
       <div
         style={{
           width: containerWidth,
-          border: '1px dashed #d9d9d9',
+          border: `1px dashed ${token.colorBorder}`,
           padding: 16,
           borderRadius: 8,
           overflow: 'hidden',
         }}
       >
         <Filter.ResponsiveGroup
-          label="更多筛选"
           onApply={() => console.log('Apply clicked')}
           gap={8}
           onClearAll={() => {
@@ -119,7 +119,7 @@ const App: React.FC = () => {
       </div>
 
       <Text type="secondary">
-        当容器宽度不足以显示所有筛选器时，后面的筛选器会自动折叠到"更多筛选"按钮中。
+        当容器宽度不足以显示所有筛选器时，后面的筛选器会自动折叠到“筛选”按钮中。
       </Text>
     </Space>
   );

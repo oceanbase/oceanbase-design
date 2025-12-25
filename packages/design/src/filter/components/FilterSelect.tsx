@@ -1,7 +1,9 @@
-import { Flex, Tooltip, theme } from '@oceanbase/design';
-import { CheckOutlined } from '@oceanbase/icons';
 import type { FC, ReactNode } from 'react';
 import React, { useEffect, useMemo, useRef } from 'react';
+import { Flex } from 'antd';
+import { CheckOutlined } from '@oceanbase/icons';
+import Tooltip from '../../tooltip';
+import theme from '../../theme';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
@@ -110,7 +112,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
               <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{option.label}</span>
             )}
             <span style={{ width: 14, flexShrink: 0 }}>
-              {isSelected && <CheckOutlined style={{ color: 'var(--ob-color-text-link)' }} />}
+              {isSelected && <CheckOutlined style={{ color: token.colorPrimary }} />}
             </span>
           </Flex>
         );
@@ -153,7 +155,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
     );
 
     return (
-      <div style={{ padding: 'var(--ob-space-100) 0px' }}>
+      <div style={{ paddingBlock: token.paddingXXS }}>
         <div style={{ marginBottom: 8 }}>{label}</div>
         {tooltipTitle ? (
           <Tooltip mouseEnterDelay={0.8} title={tooltipTitle} open={isWrapped ? false : undefined}>

@@ -1,6 +1,8 @@
-import { Flex, Switch, type SwitchProps, theme } from '@oceanbase/design';
 import type { FC } from 'react';
 import { useEffect, useMemo } from 'react';
+import { Flex } from 'antd';
+import Switch, { type SwitchProps } from '../../switch';
+import theme from '../../theme';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
@@ -27,6 +29,7 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
   switchProps,
   ...restProps
 }) => {
+  const { token } = theme.useToken();
   const isWrapped = useFilterWrapped();
   const { updateFilterValue } = useFilterContext();
   const filterId = useMemo(() => generateFilterId('switch', label), [label]);
@@ -47,7 +50,7 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
 
   // 渲染弹框内容
   const renderContent = (
-    <Flex justify="space-between" align="center" style={{ padding: 'var(--ob-space-100) 0px' }}>
+    <Flex justify="space-between" align="center" style={{ paddingBlock: token.paddingXXS }}>
       <span>{label}</span>
       <Switch checked={currentValue} onChange={setValue} size="small" {...switchProps} />
     </Flex>

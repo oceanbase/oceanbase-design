@@ -1,58 +1,65 @@
+import { useContext } from 'react';
 import type { CSSObject, CSSInterpolation } from '@ant-design/cssinjs';
-import { useStyleRegister } from '@ant-design/cssinjs';
+import { unit, useStyleRegister } from '@ant-design/cssinjs';
 import themeConfig from '../../theme';
 import type { GlobalToken } from '../../theme/interface';
+import ConfigProvider from '../../config-provider';
 
-export interface FilterStyleToken extends GlobalToken {
-  filterPrefixCls: string;
+export interface FilterToken extends GlobalToken {
+  antCls: string;
+  componentCls: string;
+  iconCls: string;
+  prefixCls: string;
 }
 
-const genSelectOptionStyle = (token: FilterStyleToken): CSSObject => {
-  const { filterPrefixCls } = token;
+const genSelectOptionStyle = (token: FilterToken): CSSObject => {
+  const { componentCls } = token;
   return {
-    [`.${filterPrefixCls}-select-option`]: {
-      padding: '4px 8px',
+    [`${componentCls}-select-option`]: {
+      paddingBlock: token.paddingXXS,
+      paddingInline: token.paddingXS,
       cursor: 'pointer',
-      borderRadius: 'var(--ob-radius-md)',
+      borderRadius: token.borderRadius,
 
       '&:hover': {
-        backgroundColor: 'var(--ob-color-bg-hover)',
+        backgroundColor: token.colorBgTextHover,
 
         // hover 时图标切换效果
-        [`.${filterPrefixCls}-arrow-icon`]: {
+        [`${componentCls}-arrow-icon`]: {
           opacity: 0,
           visibility: 'hidden',
         },
 
-        [`.${filterPrefixCls}-clear-icon`]: {
+        [`${componentCls}-clear-icon`]: {
           opacity: 1,
           visibility: 'visible',
         },
       },
 
       // 有选中子项的父级选项样式
-      [`&.${filterPrefixCls}-has-selected`]: {
-        backgroundColor: 'var(--ob-color-bg-hover)',
+      [`&${componentCls}-has-selected`]: {
+        backgroundColor: token.colorBgTextHover,
       },
     },
   };
 };
 
-const genCheckboxOptionStyle = (token: FilterStyleToken): CSSObject => {
-  const { filterPrefixCls, colorTextDisabled } = token;
+const genCheckboxOptionStyle = (token: FilterToken): CSSObject => {
+  const { antCls, componentCls } = token;
   return {
-    [`.${filterPrefixCls}-checkbox-option`]: {
-      padding: '4px 8px',
+    [`${componentCls}-checkbox-option`]: {
+      paddingBlock: token.paddingXXS,
+      paddingInline: token.paddingXS,
       cursor: 'pointer',
-      borderRadius: 'var(--ob-radius-md)',
+      borderRadius: token.borderRadius,
 
       '&:hover': {
-        backgroundColor: 'var(--ob-color-bg-hover)',
+        backgroundColor: token.colorBgTextHover,
       },
 
-      '&.ant-checkbox-wrapper-disabled': {
+      [`&${antCls}-checkbox-wrapper-disabled`]: {
         cursor: 'not-allowed',
-        color: colorTextDisabled,
+        color: token.colorTextDisabled,
 
         '&:hover': {
           backgroundColor: 'transparent',
@@ -62,149 +69,151 @@ const genCheckboxOptionStyle = (token: FilterStyleToken): CSSObject => {
   };
 };
 
-const genSwitchOptionStyle = (token: FilterStyleToken): CSSObject => {
-  const { filterPrefixCls } = token;
+const genSwitchOptionStyle = (token: FilterToken): CSSObject => {
+  const { componentCls } = token;
   return {
-    [`.${filterPrefixCls}-switch-option`]: {
+    [`${componentCls}-switch-option`]: {
       cursor: 'default',
     },
   };
 };
 
 // 通用图标样式
-const genIconStyle = (token: FilterStyleToken): CSSObject => {
-  const { filterPrefixCls } = token;
+const genIconStyle = (token: FilterToken): CSSObject => {
+  const { componentCls } = token;
   return {
-    [`.${filterPrefixCls}-button-prefix-icon`]: {
-      marginRight: 'var(--ob-space-100)',
-      color: 'var(--ob-color-icon-default)',
+    [`${componentCls}-button-prefix-icon`]: {
+      marginRight: token.paddingXXS,
+      color: token.colorIcon,
     },
 
-    [`.${filterPrefixCls}-icon-wrapper`]: {
+    [`${componentCls}-icon-wrapper`]: {
       position: 'relative',
       display: 'inline-flex',
       justifyContent: 'center',
       alignItems: 'center',
-      marginLeft: 'var(--ob-space-200)',
-      color: 'var(--ob-color-icon-default)',
+      marginLeft: token.paddingXS,
+      color: token.colorIcon,
     },
 
-    [`.${filterPrefixCls}-arrow-icon`]: {
+    [`${componentCls}-arrow-icon`]: {
       opacity: 1,
-      fontSize: 12,
-      color: 'var(--ob-color-icon-default)',
+      fontSize: token.fontSizeSM,
+      color: token.colorIcon,
       visibility: 'visible',
-      transition: 'opacity 0.2s ease-in-out, visibility 0.2s ease-in-out',
+      transition: `opacity ${token.motionDurationMid} ease-in-out, visibility ${token.motionDurationMid} ease-in-out`,
     },
 
-    [`.${filterPrefixCls}-clear-icon`]: {
+    [`${componentCls}-clear-icon`]: {
       opacity: 0,
       cursor: 'pointer',
       visibility: 'hidden',
       position: 'absolute',
       left: 0,
       top: '60%',
-      color: 'var(--ob-color-icon-default)',
-      fontSize: 12,
+      color: token.colorIcon,
+      fontSize: token.fontSizeSM,
       transform: 'translateY(-50%)',
-      transition: 'opacity 0.2s ease-in-out, visibility 0.2s ease-in-out',
+      transition: `opacity ${token.motionDurationMid} ease-in-out, visibility ${token.motionDurationMid} ease-in-out`,
     },
   };
 };
 
-const genFilterButtonStyle = (token: FilterStyleToken): CSSObject => {
-  const { filterPrefixCls, colorText, colorFillSecondary } = token;
+const genFilterButtonStyle = (token: FilterToken): CSSObject => {
+  const { componentCls } = token;
   return {
-    [`.${filterPrefixCls}-button-wrapper`]: {
+    [`${componentCls}-button-wrapper`]: {
       display: 'inline-block',
     },
 
-    [`.${filterPrefixCls}-button`]: {
-      height: 28,
-      padding: '4px 12px',
-      borderRadius: 'var(--ob-radius-md)',
+    [`${componentCls}-button`]: {
+      height: token.controlHeight,
+      paddingBlock: token.paddingXXS,
+      paddingInline: token.paddingSM,
+      borderRadius: token.borderRadius,
       cursor: 'pointer',
       display: 'flex',
-      gap: 8,
+      gap: token.paddingXS,
       alignItems: 'center',
       justifyContent: 'right',
-      color: colorText,
+      color: token.colorText,
       whiteSpace: 'nowrap',
       maxWidth: '260px',
 
       '&:hover': {
-        [`.${filterPrefixCls}-arrow-icon`]: {
+        [`${componentCls}-arrow-icon`]: {
           opacity: 0,
           visibility: 'hidden',
         },
 
-        [`.${filterPrefixCls}-clear-icon`]: {
+        [`${componentCls}-clear-icon`]: {
           opacity: 1,
           visibility: 'visible',
         },
       },
     },
 
-    [`.${filterPrefixCls}-button-label-wrapper`]: {
+    [`${componentCls}-button-label-wrapper`]: {
       width: '100%',
-      padding: '8px 12px',
-      borderBottom: `1px solid ${colorFillSecondary}`,
+      paddingBlock: token.paddingXS,
+      paddingInline: token.paddingSM,
+      borderBottom: `1px solid ${token.colorFillSecondary}`,
       color: token.colorTextSecondary,
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
     },
 
-    [`.${filterPrefixCls}-button-label-wrapper-no-border`]: {
+    [`${componentCls}-button-label-wrapper-no-border`]: {
       borderBottom: 'none',
-      padding: '8px 12px 0px',
+      padding: `${unit(token.paddingXS)} ${unit(token.paddingSM)} 0px`,
     },
 
-    [`.${filterPrefixCls}-border`]: {
-      border: `1px solid ${colorFillSecondary}`,
-      transition: 'background-color 0.3s ease-in-out, border-color 0.3s ease-in-out',
+    [`${componentCls}-border`]: {
+      border: `${token.lineWidth}px solid ${token.colorFillSecondary}`,
+      transition: `background-color ${token.motionDurationSlow} ease-in-out, border-color ${token.motionDurationSlow} ease-in-out`,
 
       '&:hover, &:active, &:focus, &:focus-within': {
-        borderColor: token.gray7,
+        borderColor: token.colorTextTertiary,
       },
     },
 
-    [`.${filterPrefixCls}-active`]: {
-      borderColor: 'var(--ob-color-border-default)',
-      backgroundColor: 'var(--ob-color-bg-focus)',
+    [`${componentCls}-active`]: {
+      borderColor: token.colorBorder,
+      backgroundColor: token.colorFillTertiary,
       color: token.colorTextTertiary,
     },
 
-    [`.${filterPrefixCls}-disabled`]: {
-      backgroundColor: 'var(--ob-color-bg-disabled)',
-      borderColor: 'var(--ob-color-border-default)',
-      color: 'var(--ob-color-text-disabled)',
+    [`${componentCls}-disabled`]: {
+      backgroundColor: token.colorBgContainerDisabled,
+      borderColor: token.colorBorder,
+      color: token.colorTextQuaternary,
       cursor: 'not-allowed',
 
       '&:hover': {
-        [`.${filterPrefixCls}-arrow-icon`]: {
+        [`${componentCls}-arrow-icon`]: {
           opacity: 1,
           visibility: 'visible',
         },
 
-        [`.${filterPrefixCls}-clear-icon`]: {
+        [`${componentCls}-clear-icon`]: {
           opacity: 0,
           visibility: 'hidden',
         },
       },
     },
 
-    [`.${filterPrefixCls}-selected`]: {
-      backgroundColor: 'var(--ob-color-bg-focus)',
-      color: 'var(--ob-color-text-default)',
+    [`${componentCls}-selected`]: {
+      backgroundColor: token.colorFillTertiary,
+      color: token.colorText,
     },
   };
 };
 
-const genFilterTextEllipsisStyle = (token: FilterStyleToken): CSSObject => {
-  const { filterPrefixCls } = token;
+const genFilterTextEllipsisStyle = (token: FilterToken): CSSObject => {
+  const { componentCls } = token;
   return {
-    [`.${filterPrefixCls}-text-ellipsis`]: {
+    [`${componentCls}-text-ellipsis`]: {
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
@@ -212,7 +221,7 @@ const genFilterTextEllipsisStyle = (token: FilterStyleToken): CSSObject => {
   };
 };
 
-const genFilterStyle = (token: FilterStyleToken): CSSInterpolation => {
+const genFilterStyle = (token: FilterToken): CSSInterpolation => {
   return [
     genIconStyle(token),
     genSelectOptionStyle(token),
@@ -229,12 +238,16 @@ export interface UseFilterStyleResult {
   prefixCls: string;
 }
 
-export default function useFilterStyle(prefixCls: string = 'ob-filter'): UseFilterStyleResult {
+export default function useFilterStyle(prefixCls: string = 'ant-filter'): UseFilterStyleResult {
   const { theme, token } = themeConfig.useToken();
+  const { getPrefixCls, iconPrefixCls } = useContext(ConfigProvider.ConfigContext);
 
-  const filterToken: FilterStyleToken = {
+  const filterToken: FilterToken = {
     ...token,
-    filterPrefixCls: prefixCls,
+    antCls: getPrefixCls(),
+    componentCls: `.${prefixCls}`,
+    iconCls: `.${iconPrefixCls}`,
+    prefixCls,
   };
 
   const wrapSSR = useStyleRegister(

@@ -18,6 +18,12 @@ export interface PaginationLocale extends AntPaginationLocale {
   total?: string;
 }
 
+export interface FilterLocale {
+  pleaseSelect?: string;
+  open?: string;
+  filters?: string;
+}
+
 export interface Locale extends AntLocale {
   global?: GlobalLocale;
   Pagination?: PaginationLocale;
@@ -28,6 +34,7 @@ export interface Locale extends AntLocale {
   TreeSelect?: TreeSelectLocale;
   Table?: TableLocale;
   Card?: CardLocale;
+  Filter?: FilterLocale;
 }
 
 export { default as useLocale } from './useLocale';

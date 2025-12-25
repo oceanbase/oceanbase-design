@@ -1,7 +1,9 @@
-import { Flex, Tooltip } from '@oceanbase/design';
-import { CheckOutlined } from '@oceanbase/icons';
 import type { FC, ReactNode } from 'react';
 import React, { useEffect, useMemo, useRef } from 'react';
+import { Flex } from 'antd';
+import { CheckOutlined } from '@oceanbase/icons';
+import Tooltip from '../../tooltip';
+import theme from '../../theme';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
@@ -68,6 +70,7 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
   ...restProps
 }) => {
   const { prefixCls } = useFilterStyle();
+  const { token } = theme.useToken();
   const isWrapped = useFilterWrapped(_isInWrap);
   const filterButtonRef = useRef<FilterButtonRef>(null);
   const { updateFilterValue } = useFilterContext();
@@ -131,7 +134,7 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
             <span>{option.label}</span>
             <span style={{ width: 14 }}>
               {currentValue === option.value && (
-                <CheckOutlined style={{ color: 'var(--ob-color-text-link)' }} />
+                <CheckOutlined style={{ color: token.colorPrimary }} />
               )}
             </span>
           </Flex>
@@ -181,7 +184,7 @@ const FilterDatePreset: FC<FilterDatePresetProps> = ({
     );
 
     return (
-      <div style={{ padding: 'var(--ob-space-100) 0px' }}>
+      <div style={{ paddingBlock: token.paddingXXS }}>
         <div style={{ marginBottom: 8 }}>{label}</div>
         {tooltipTitle ? (
           <Tooltip mouseEnterDelay={0.8} title={tooltipTitle} open={isWrapped ? false : undefined}>

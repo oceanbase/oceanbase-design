@@ -1,7 +1,9 @@
-import type { InputProps } from '@oceanbase/design';
-import { Flex, Input, Switch, type SwitchProps } from '@oceanbase/design';
 import type { ChangeEvent, FC } from 'react';
 import { useEffect, useMemo, useState } from 'react';
+import { Flex } from 'antd';
+import Input, { type InputProps } from '../../input';
+import Switch, { type SwitchProps } from '../../switch';
+import theme from '../../theme';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
@@ -31,6 +33,7 @@ const FilterInput: FC<FilterInputProps> = ({
   switchProps,
   ...restProps
 }) => {
+  const { token } = theme.useToken();
   const isWrapped = useFilterWrapped();
   const { updateFilterValue } = useFilterContext();
   const filterId = useMemo(() => generateFilterId('input', label), [label]);
@@ -65,7 +68,7 @@ const FilterInput: FC<FilterInputProps> = ({
 
   // 渲染弹框内容
   const renderContent = (
-    <div style={{ padding: 'var(--ob-space-100) 0px' }}>
+    <div style={{ paddingBlock: token.paddingXXS }}>
       <Flex justify="space-between" align="center">
         <span>{label}</span>
         <Switch

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Filter, Slider, Space, Typography } from '@oceanbase/design';
+import { Filter, Slider, Space, theme, Typography } from '@oceanbase/design';
 
 const { Text } = Typography;
 
 const App: React.FC = () => {
+  const { token } = theme.useToken();
   const [status, setStatus] = useState<string>('');
   const [type, setType] = useState<string>('');
   const [priority, setPriority] = useState<string[]>([]);
@@ -31,21 +32,20 @@ const App: React.FC = () => {
           />
         </div>
         <Text type="secondary">
-          下面的示例中，"分类"和"来源"筛选器设置了 <code>alwaysCollapse</code> 属性，
-          无论容器宽度是否充足，它们都会被折叠到"更多筛选"按钮中。
+          下面的示例中，“分类”和“来源”筛选器设置了 <code>alwaysCollapse</code> 属性，
+          无论容器宽度是否充足，它们都会被折叠到“筛选”按钮中。
         </Text>
       </div>
 
       <div
         style={{
           width: containerWidth,
-          border: '1px dashed #d9d9d9',
+          border: `1px dashed ${token.colorBorder}`,
           padding: 16,
           borderRadius: 8,
         }}
       >
         <Filter.ResponsiveGroup
-          label="更多筛选"
           onApply={() => console.log('Apply clicked')}
           onClearAll={() => {
             setStatus('');
@@ -92,7 +92,7 @@ const App: React.FC = () => {
 
       <Text type="secondary">
         提示：即使容器宽度足够显示所有筛选器，alwaysCollapse 为 true
-        的筛选器也会始终折叠在"更多筛选"按钮中。
+        的筛选器也会始终折叠在“筛选”按钮中。
       </Text>
     </Space>
   );

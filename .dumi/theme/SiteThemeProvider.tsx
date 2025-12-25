@@ -72,7 +72,7 @@ const SiteThemeProvider: FC<
         {...rest}
         theme={theme as ThemeConfig}
         direction={direction}
-        locale={locale === 'cn' ? zhCN : enUS}
+        locale={locale === 'en' ? enUS : zhCN}
       >
         <ChartProvider theme={theme.isDark ? 'dark' : 'light'}>{children}</ChartProvider>
       </ConfigProvider>

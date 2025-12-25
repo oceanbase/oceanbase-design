@@ -28,4 +28,9 @@ export default {
   Card: {
     viewDocument: '查看文檔',
   },
+  Filter: {
+    pleaseSelect: '請選擇',
+    open: '開啟',
+    filters: '篩選',
+  },
 } as Locale;

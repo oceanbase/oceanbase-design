@@ -1,8 +1,12 @@
-import { Checkbox, Flex, Popover, Tag, Tooltip, theme } from '@oceanbase/design';
-import { CheckOutlined, CloseOutlined, RightOutlined } from '@oceanbase/icons';
-import classNames from 'classnames';
 import type { ReactNode } from 'react';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Flex, Popover } from 'antd';
+import { CheckOutlined, CloseOutlined, RightOutlined } from '@oceanbase/icons';
+import classNames from 'classnames';
+import Checkbox from '../../checkbox';
+import Tag from '../../tag';
+import Tooltip from '../../tooltip';
+import theme from '../../theme';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
@@ -280,9 +284,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
                         {child.label}
                       </span>
                       <span>
-                        {isSelected && (
-                          <CheckOutlined style={{ color: 'var(--ob-color-text-link)' }} />
-                        )}
+                        {isSelected && <CheckOutlined style={{ color: token.colorPrimary }} />}
                       </span>
                     </>
                   )}
@@ -367,7 +369,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
       const selectedTags = getSelectedTags();
 
       return (
-        <div style={{ padding: 'var(--ob-space-100) 0px' }}>
+        <div style={{ paddingBlock: token.paddingXXS }}>
           <div style={{ marginBottom: 8 }}>{label}</div>
           <FilterButton
             ref={filterButtonRef}

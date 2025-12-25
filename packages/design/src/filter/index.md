@@ -11,23 +11,27 @@ Filter 是一组轻量级的筛选组件，提供了多种筛选类型，适用�
 
 ## 特性
 
-- 🎯 轻量级设计，适合作为表格/列表的筛选条件
-- 🔧 支持多种筛选类型：单选、多选、级联、开关等
-- 📦 支持响应式布局，自动收起到"更多"按钮
-- 🎨 符合 OceanBase Design 设计规范
+- 🎨 符合 OceanBase Design 设计规范。
+- 🎯 轻量级设计，适合作为表格/列表的筛选条件。
+- 🔧 支持多种筛选类型：单选、多选、级联、开关等。
+- 📦 支持响应式布局，自动收起到"更多"按钮。
 
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx" title="基本使用" description="Filter.Select 单选筛选器的基本用法。"></code>
-<code src="./demo/checkbox.tsx" title="多选筛选" description="Filter.Checkbox 多选筛选器，支持显示选中计数。"></code>
-<code src="./demo/cascader.tsx" title="级联筛选" description="Filter.Cascader 级联筛选器，支持单选和多选模式。"></code>
-<code src="./demo/custom-render.tsx" title="自定义渲染" description="通过 optionRender 自定义选项的渲染。"></code>
-<code src="./demo/extra.tsx" title="额外内容" description="通过 extra 属性可以在筛选器弹框的标签旁边显示额外内容，如提示信息、标签等。"></code>
-<code src="./demo/date.tsx" title="日期选择" description="通过 options 属性可以自定义日期范围"></code>
-<code src="./demo/responsive.tsx" title="响应式折叠" description="Filter.ResponsiveGroup 支持响应式布局，当容器宽度不足时自动将筛选器折叠到更多按钮中。"></code>
-<code src="./demo/always-collapse.tsx" title="始终折叠" description="通过 alwaysCollapse 属性，可以让某些筛选器无论容器宽度是否充足，都始终折叠到更多按钮中。"></code>
-<code src="./demo/form.tsx" title="表单集成" description="使用 Form.Item 包裹筛选组件，点击 Apply 按钮时获取并输出所有表单值。"></code>
+<code src="./demo/select.tsx" title="单选筛选" description="`Filter.Select` 单选筛选器的基本用法。"></code>
+<code src="./demo/checkbox.tsx" title="多选筛选" description="`Filter.Checkbox` 多选筛选器，支持显示选中计数。"></code>
+<code src="./demo/status.tsx" title="状态筛选" description="`Filter.Status` 状态筛选器，用于多选状态场景，支持重叠显示状态图标。"></code>
+<code src="./demo/switch.tsx" title="开关筛选" description="`Filter.Switch` 开关筛选器，用于布尔值筛选场景。"></code>
+<code src="./demo/input.tsx" title="输入筛选" description="`Filter.Input` 输入筛选器，带开关控制，只有开启开关后输入的值才会生效。"></code>
+<code src="./demo/cascader.tsx" title="级联筛选" description="`Filter.Cascader` 级联筛选器，支持单选和多选模式。"></code>
+<code src="./demo/date.tsx" title="时间段筛选" description="通过 `options` 属性可以自定义日期范围"></code>
+<code src="./demo/custom-render.tsx" title="自定义渲染" description="通过 `optionRender` 自定义选项的渲染。"></code>
+<code src="./demo/extra.tsx" title="额外内容" description="通过 `extra` 属性可以在筛选器弹框的标签旁边显示额外内容，如提示信息、标签等。"></code>
+<code src="./demo/responsive.tsx" title="响应式折叠" description="Filter.ResponsiveGroup 支持响应式布局，当容器宽度不足时自动将筛选器折叠到“筛选”按钮中。"></code>
+<code src="./demo/always-collapse.tsx" title="始终折叠" description="通过 `alwaysCollapse` 属性，可以让某些筛选器无论容器宽度是否充足，都始终折叠到“筛选”按钮中。"></code> <code src="./demo/form.tsx" title="表单集成" description="使用 `Form.Item` 包裹筛选组件，点击 Apply 按钮时获取并输出所有表单值。"></code>
+
+<!-- <code src="./demo/wrap.tsx" title="筛选器容器" description="`Filter.Wrap` 筛选器容器，用于包裹多个筛选器，支持折叠模式。"></code> -->
 
 ## API
 
@@ -93,7 +97,7 @@ Filter 是一组轻量级的筛选组件，提供了多种筛选类型，适用�
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| statusList | 状态选项列表 | `StatusOption[]` | `[]` |
+| options | 状态选项列表 | `StatusOption[]` | `[]` |
 | value | 当前选中值 | `string[]` | - |
 | onChange | 值变化回调 | `(value: string[]) => void` | - |
 | count | 是否显示计数，可传入 `{ showTotal: true }` 同时显示总数 | `boolean \| { showTotal?: boolean }` | `false` |
@@ -102,8 +106,8 @@ Filter 是一组轻量级的筛选组件，提供了多种筛选类型，适用�
 
 | 属性     | 说明     | 类型      | 默认值  |
 | -------- | -------- | --------- | ------- |
-| label   | 状态文本   | `string`  | -       |
-| value   | 状态值   | `string`  | -       |
+| label    | 状态文本 | `string`  | -       |
+| value    | 状态值   | `string`  | -       |
 | color    | 状态颜色 | `string`  | -       |
 | disabled | 是否禁用 | `boolean` | `false` |
 
@@ -194,6 +198,85 @@ Filter 是一组轻量级的筛选组件，提供了多种筛选类型，适用�
 | style           | 容器样式                         | `React.CSSProperties` | -           |
 | extra           | 额外内容                         | `ReactNode`           | -           |
 
+## 使用场景
+
+### 表格筛选
+
+Filter 组件最适合用于表格、列表等数据展示场景的筛选功能：
+
+```tsx
+import { Filter, Table } from '@oceanbase/design';
+
+const App = () => {
+  return (
+    <div>
+      <Filter.ResponsiveGroup>
+        <Filter.Select label="状态" options={[...]} />
+        <Filter.Checkbox label="类型" options={[...]} />
+      </Filter.ResponsiveGroup>
+      <Table dataSource={data} columns={columns} />
+    </div>
+  );
+};
+```
+
+### 响应式布局
+
+使用 `Filter.ResponsiveGroup` 可以自动处理响应式布局，当容器宽度不足时自动折叠：
+
+```tsx
+<Filter.ResponsiveGroup
+  onApply={handleApply}
+  onClearAll={handleClearAll}
+>
+  <Filter.Select label="状态" options={[...]} />
+  <Filter.Select label="类型" options={[...]} />
+  {/* 当宽度不足时，后面的筛选器会自动折叠 */}
+</Filter.ResponsiveGroup>
+```
+
+### 折叠模式
+
+使用 `Filter.Wrap` 可以将多个筛选器折叠到一个按钮中：
+
+```tsx
+<Filter.Wrap collapsed label="筛选条件">
+  <Filter.Select label="状态" options={[...]} />
+  <Filter.Checkbox label="类型" options={[...]} />
+</Filter.Wrap>
+```
+
+## 最佳实践
+
+### 1. 选择合适的筛选类型
+
+- **Filter.Select**: 适用于单选场景，选项数量较少（建议 < 10 个）
+- **Filter.Checkbox**: 适用于多选场景，选项数量适中
+- **Filter.Cascader**: 适用于有层级关系的筛选场景
+- **Filter.Status**: 适用于状态筛选，需要视觉化展示状态
+- **Filter.Switch**: 适用于布尔值筛选（开启/关闭）
+- **Filter.Input**: 适用于文本搜索场景，需要开关控制
+- **Filter.DatePreset**: 适用于日期范围筛选
+
+### 2. 响应式布局建议
+
+- 使用 `Filter.ResponsiveGroup` 处理响应式布局
+- 对于不常用的筛选器，设置 `alwaysCollapse={true}` 始终折叠
+- 合理设置 `moreButtonWidth` 预留"更多"按钮的宽度
+
+### 3. 性能优化
+
+- 对于大量选项，考虑使用 `optionRender` 自定义渲染
+- 使用受控模式时，合理使用 `useMemo` 优化选项列表
+- 避免在 `onChange` 回调中执行重计算操作
+
+### 4. 用户体验
+
+- 提供清晰的标签说明
+- 使用 `footer` 属性提供额外提示信息
+- 对于重要筛选器，使用 `extra` 属性显示额外说明
+- 合理使用 `loading` 状态提示数据加载
+
 ## Context
 
 ### FilterProvider
@@ -210,3 +293,14 @@ const MyComponent = () => {
   return <div>{isWrapped ? '折叠模式' : '普通模式'}</div>;
 };
 ```
+
+### useFilterContext
+
+获取筛选器上下文，包含以下属性：
+
+| 属性 | 说明 | 类型 |
+| --- | --- | --- |
+| isWrapped | 是否在折叠模式的 Wrap 中 | `boolean` |
+| filterValues | 当前所有筛选器的值 | `FilterValueItem[]` |
+| updateFilterValue | 更新筛选器值 | `(id: string, label: ReactNode, value: FilterValue, options?: unknown[], componentName?: FilterComponentName) => void` |
+| clearAllFilterValues | 清除所有筛选器值 | `() => void` |

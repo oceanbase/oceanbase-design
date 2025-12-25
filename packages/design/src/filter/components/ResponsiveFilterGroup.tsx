@@ -1,19 +1,24 @@
-import { Button, Flex } from '@oceanbase/design';
 import type { FC, ReactElement, ReactNode } from 'react';
 import React, {
   Children,
   cloneElement,
   isValidElement,
   useCallback,
+  useContext,
   useEffect,
   useLayoutEffect,
   useRef,
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
-import FilterWrap from './FilterWrap';
+import { Flex } from 'antd';
 import { FilterOutlined } from '@oceanbase/icons';
+import Button from '../../button';
+import FilterWrap from './FilterWrap';
 import type { FilterButtonRef } from './FilterButton';
+import ConfigProvider from '../../config-provider';
+import type { Locale } from '../../locale';
+import enUS from '../../locale/en-US';
 import {
   FilterProvider,
   type FilterComponentName,
@@ -104,7 +109,7 @@ const isAlwaysCollapse = (child: ReactElement): boolean => {
 const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   children,
   gap = 8,
-  label = 'Filters',
+  label,
   icon = <FilterOutlined />,
   onApply,
   onClearAll,
@@ -113,6 +118,10 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   style,
   extra,
 }) => {
+  const { locale: contextLocale } = useContext(ConfigProvider.ConfigContext);
+  const filterLocale = (contextLocale as Locale)?.Filter || enUS.Filter;
+  // 如果没有传入 label，使用国际化默认值
+  const filterLabel = label ?? filterLocale?.filters;
   const containerRef = useRef<HTMLDivElement>(null);
   const innerFlexRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
@@ -377,7 +386,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
           collapsed
           filterButtonRef={filterButtonRef}
           icon={icon}
-          label={label}
+          label={filterLabel}
           extra={extra}
           footer={
             showActions && (
@@ -478,7 +487,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
               display: 'inline-flex',
             }}
           >
-            <FilterWrap collapsed icon={icon} label={label}>
+            <FilterWrap collapsed icon={icon} label={filterLabel}>
               <div />
             </FilterWrap>
           </div>

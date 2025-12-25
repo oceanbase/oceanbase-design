@@ -1,8 +1,10 @@
-import { Flex, Popover, Spin, token } from '@oceanbase/design';
-import { CloseOutlined, DownOutlined, LoadingOutlined } from '@oceanbase/icons';
-import classNames from 'classnames';
 import type { ReactNode } from 'react';
 import React, { forwardRef, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import { Flex, Popover } from 'antd';
+import { CloseOutlined, DownOutlined, LoadingOutlined } from '@oceanbase/icons';
+import classNames from 'classnames';
+import Spin from '../../spin';
+import theme from '../../theme';
 import { useFilterContext } from '../FilterContext';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps } from '../type';
@@ -59,6 +61,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     },
     ref
   ) => {
+    const { token } = theme.useToken();
     const { isWrapped } = useFilterContext();
     const [open, setOpen] = useState(false);
     const { wrapSSR, prefixCls } = useFilterStyle();

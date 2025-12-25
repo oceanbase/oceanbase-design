@@ -1,6 +1,10 @@
-import { Checkbox, Flex, Tag, Tooltip, theme } from '@oceanbase/design';
 import type { FC, ReactNode } from 'react';
 import React, { memo, useCallback, useEffect, useMemo } from 'react';
+import { Flex } from 'antd';
+import Checkbox from '../../checkbox';
+import Tag from '../../tag';
+import Tooltip from '../../tooltip';
+import theme from '../../theme';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
@@ -141,7 +145,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
     const selectedTags = getSelectedTags();
 
     return (
-      <div style={{ padding: 'var(--ob-space-100) 0px' }}>
+      <div style={{ paddingBlock: token.paddingXXS }}>
         <div style={{ marginBottom: 8 }}>{label}</div>
         <FilterButton
           icon={icon}

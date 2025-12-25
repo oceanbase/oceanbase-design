@@ -1,5 +1,5 @@
-import type { PopoverProps } from '@oceanbase/design';
 import type { ReactNode } from 'react';
+import type { PopoverProps } from 'antd';
 
 export interface BaseFilterProps extends Omit<PopoverProps, 'title' | 'content' | 'children'> {
   /** 前缀图标 */

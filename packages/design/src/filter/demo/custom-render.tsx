@@ -26,7 +26,7 @@ const App: React.FC = () => {
         optionRender={option => (
           <Space>
             <Tag color={colorMap[option.value]}>{option.label}</Tag>
-            <span style={{ color: '#999' }}>({option.value})</span>
+            <span style={{ color: '#8592ad' }}>({option.value})</span>
           </Space>
         )}
       />
