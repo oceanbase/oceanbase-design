@@ -8,6 +8,15 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.13
+
+`2025-12-26`
+
+- Filter [#1363](https://github.com/oceanbase/oceanbase-design/pull/1363) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🆕 新增 showSuffixIcon API
+  - 💄 优化有值时弹窗交互
+  - 💄 优化样式
+
 ## 1.0.0-alpha.12
 
 `2025-12-25`
