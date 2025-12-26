@@ -168,33 +168,33 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               >
                 {children}
               </Flex>
-              <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
-                {loading ? (
+              {loading ? (
+                <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
                   <Spin
                     indicator={<LoadingOutlined style={{ fontSize: token.fontSizeSM }} spin />}
                   />
-                ) : (
-                  <>
-                    {showArrow && (
-                      <DownOutlined
-                        className={selected ? getFilterCls(prefixCls, 'arrow-icon') : ''}
-                      />
-                    )}
-                    {selected && (
-                      <div
-                        className={getFilterCls(prefixCls, 'clear-icon')}
-                        onClick={e => {
-                          if (!disabled) {
-                            handleClearClick(e);
-                          }
-                        }}
-                      >
-                        <CloseOutlined />
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
+                </div>
+              ) : showArrow || selected ? (
+                <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
+                  {showArrow && (
+                    <DownOutlined
+                      className={selected ? getFilterCls(prefixCls, 'arrow-icon') : ''}
+                    />
+                  )}
+                  {selected && (
+                    <div
+                      className={getFilterCls(prefixCls, 'clear-icon')}
+                      onClick={e => {
+                        if (!disabled) {
+                          handleClearClick(e);
+                        }
+                      }}
+                    >
+                      <CloseOutlined />
+                    </div>
+                  )}
+                </div>
+              ) : null}
             </Flex>
           </div>
         </div>
