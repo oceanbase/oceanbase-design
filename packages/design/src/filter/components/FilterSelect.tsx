@@ -58,12 +58,8 @@ const FilterSelect: FC<FilterSelectProps> = ({
   const filterId = useMemo(() => generateFilterId('select', label), [label]);
   const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
 
-  // 从 restProps 中排除 showArrow 和 onOpenChange，避免类型冲突
-  const {
-    showArrow: _showArrowFilter,
-    onOpenChange: externalOnOpenChange,
-    ...filterButtonProps
-  } = restProps;
+  // 从 restProps 中排除 onOpenChange，避免类型冲突
+  const { onOpenChange: externalOnOpenChange, ...filterButtonProps } = restProps;
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, '', onChange);

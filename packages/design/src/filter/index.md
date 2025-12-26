@@ -96,6 +96,7 @@ const App = () => {
 | loading | 是否加载中 | `boolean` | `false` |
 | collapsible | 是否可以被 ResponsiveGroup 收集到 Wrap 中 | `boolean` | `true` |
 | alwaysCollapse | 是否始终折叠到"更多"按钮中，无论容器宽度是否充足 | `boolean` | `false` |
+| showSuffixIcon | 是否显示后缀图标区域（包括下拉箭头和清除图标） | `boolean` | `true` |
 | trigger | 触发方式 | `'hover' \| 'click' \| 'focus'` | `'click'` |
 | placement | 弹出位置 | `PopoverProps['placement']` | `'bottomLeft'` |
 

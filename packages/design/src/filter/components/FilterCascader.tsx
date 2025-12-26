@@ -69,12 +69,8 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   // 用于跟踪主弹窗的开启状态
   const [isMainPopoverOpen, setIsMainPopoverOpen] = useState(false);
 
-  // 从 restProps 中排除 showArrow 和 onOpenChange，避免类型冲突
-  const {
-    showArrow: _showArrow,
-    onOpenChange: externalOnOpenChange,
-    ...filterButtonProps
-  } = restProps;
+  // 从 restProps 中排除 onOpenChange，避免类型冲突
+  const { onOpenChange: externalOnOpenChange, ...filterButtonProps } = restProps;
 
   // 解析 count 配置
   const showCount = !!count;

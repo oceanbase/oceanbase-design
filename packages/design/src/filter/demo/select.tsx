@@ -75,6 +75,14 @@ const App: React.FC = () => {
             ]}
             footer={<Typography.Link>了解更多</Typography.Link>}
           />
+          <Filter.Select
+            label="隐藏后侧图标"
+            showSuffixIcon={false}
+            options={[
+              { value: 'option1', label: '选项一' },
+              { value: 'option2', label: '选项二' },
+            ]}
+          />
         </Space>
       </div>
       <div>

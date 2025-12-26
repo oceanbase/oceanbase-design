@@ -68,12 +68,8 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
     hasValue: selectedValues.length > 0,
   });
 
-  // 从 restProps 中排除 showArrow 和 onOpenChange，避免类型冲突
-  const {
-    showArrow: _showArrowFilter,
-    onOpenChange: externalOnOpenChange,
-    ...filterButtonProps
-  } = restProps;
+  // 从 restProps 中排除 onOpenChange，避免类型冲突
+  const { onOpenChange: externalOnOpenChange, ...filterButtonProps } = restProps;
 
   // 处理主弹窗状态变化
   const handlePopoverOpenChange = useCallback(

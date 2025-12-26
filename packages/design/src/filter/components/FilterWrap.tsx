@@ -219,12 +219,8 @@ const FilterWrap: FC<FilterWrapProps> = ({
     </FilterProvider>
   );
 
-  // 从 restProps 中排除 showArrow 和 onOpenChange，避免类型冲突
-  const {
-    showArrow: _showArrowFilter,
-    onOpenChange: externalOnOpenChange,
-    ...filterButtonProps
-  } = restProps;
+  // 从 restProps 中排除 onOpenChange，避免类型冲突
+  const { onOpenChange: externalOnOpenChange, ...filterButtonProps } = restProps;
 
   const filterButton = (
     <FilterButton
@@ -235,7 +231,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
       onClear={handleClear}
       content={content}
       extra={extra}
-      showArrow={false}
+      showSuffixIcon={false}
       showLabelDivider={!!restProps.footer}
       onOpenChange={open => {
         handlePopoverOpenChange(open);
