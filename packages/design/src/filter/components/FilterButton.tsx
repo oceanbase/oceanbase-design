@@ -67,6 +67,9 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     const { wrapSSR, prefixCls } = useFilterStyle();
     const innerRef = useRef<HTMLDivElement>(null);
 
+    // 从 restProps 中提取 onOpenChange，避免被 Popover 的 onOpenChange 覆盖
+    const { onOpenChange: externalOnOpenChange, ...popoverProps } = restProps;
+
     const handleClearClick = (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
       onClear?.();
@@ -78,9 +81,22 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     };
 
     // 通过 ref 暴露关闭方法
-    useImperativeHandle(ref, () => ({
-      closePopover,
-    }));
+    useImperativeHandle(
+      ref,
+      () => ({
+        closePopover,
+      }),
+      []
+    );
+
+    // 处理 popover 状态变化
+    const handleOpenChange = (newOpen: boolean) => {
+      if (!disabled) {
+        setOpen(newOpen);
+        // 调用外部传入的 onOpenChange 回调，让父组件能够实时监听状态变化
+        externalOnOpenChange?.(newOpen);
+      }
+    };
 
     // 使用 useMemo 缓存 content，避免每次都重新创建
     const popoverContent = useMemo(
@@ -112,7 +128,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
           )}
         </>
       ),
-      [content, footer, label, extra, isWrapped, prefixCls, showLabelDivider]
+      [content, footer, label, extra, isWrapped, prefixCls, showLabelDivider, token]
     );
 
     return wrapSSR(
@@ -122,11 +138,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
         trigger={trigger}
         content={popoverContent}
         open={open && !disabled}
-        onOpenChange={newOpen => {
-          if (!disabled) {
-            setOpen(newOpen);
-          }
-        }}
+        onOpenChange={handleOpenChange}
         styles={{
           body: {
             padding: 0,
@@ -134,7 +146,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
             minWidth: 200,
           },
         }}
-        {...restProps}
+        {...popoverProps}
       >
         <div ref={innerRef}>
           <div

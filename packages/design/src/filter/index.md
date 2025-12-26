@@ -234,6 +234,7 @@ const App = () => {
 | label | 折叠模式下的标签 | `ReactNode` | `'Filters'` |
 | collapsed | 是否折叠模式（使用弹框包裹所有子元素） | `boolean` | `false` |
 | extra | 额外内容 | `ReactNode` | - |
+| gap | 非折叠模式下的间距 | number | 8 |
 | filterButtonRef | FilterButton 的 ref，用于控制弹窗关闭 | `React.RefObject<FilterButtonRef>` | - |
 
 ### Filter.ResponsiveGroup

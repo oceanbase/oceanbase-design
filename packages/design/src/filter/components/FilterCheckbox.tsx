@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from 'react';
-import React, { memo, useCallback, useEffect, useMemo } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { Flex } from 'antd';
 import Checkbox from '../../checkbox';
 import Tag from '../../tag';
@@ -10,6 +10,7 @@ import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
+import { useTooltipWithPopover } from '../hooks/useTooltipWithPopover';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
 import { generateFilterId, getStableOptionsKey, wrapContent } from '../utils';
@@ -54,15 +55,40 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
   const filterId = useMemo(() => generateFilterId('checkbox', label), [label]);
   const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
 
-  // 从 restProps 中排除 showArrow，避免类型冲突
-  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps;
+  // 用于跟踪主弹窗的开启状态
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  // 使用受控状态 hook
+  const [selectedValues, setSelectedValues] = useControlledState(value, [], onChange);
+
+  // 使用 Hook 管理 Tooltip 与 Popover 的交互逻辑
+  const { tooltipOpen, onTooltipOpenChange } = useTooltipWithPopover({
+    isPopoverOpen,
+    enabled: !isWrapped,
+    hasValue: selectedValues.length > 0,
+  });
+
+  // 从 restProps 中排除 showArrow 和 onOpenChange，避免类型冲突
+  const {
+    showArrow: _showArrowFilter,
+    onOpenChange: externalOnOpenChange,
+    ...filterButtonProps
+  } = restProps;
+
+  // 处理主弹窗状态变化
+  const handlePopoverOpenChange = useCallback(
+    (open: boolean) => {
+      setIsPopoverOpen(open);
+      // 调用外部传入的 onOpenChange 回调
+      // Tooltip 的控制逻辑已由 useTooltipWithPopover Hook 自动处理
+      externalOnOpenChange?.(open);
+    },
+    [externalOnOpenChange]
+  );
 
   // 解析 count 配置
   const showCount = !!count;
   const showTotal = typeof count === 'object' ? (count.showTotal ?? false) : false;
-
-  // 使用受控状态 hook
-  const [selectedValues, setSelectedValues] = useControlledState(value, [], onChange);
 
   // 当值变化时，更新 context 中的值
   // 使用 stableOptionsKey 而不是 options 来避免不必要的更新
@@ -230,6 +256,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
           onClear={handleClear}
           content={wrappedContent}
           selected={hasValue}
+          onOpenChange={handlePopoverOpenChange}
           {...filterButtonProps}
         >
           <WrappedTagsDisplay tags={selectedTags} onRemove={handleRemoveTag} />
@@ -246,6 +273,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
       onClear={handleClear}
       content={wrappedContent}
       selected={!!selectedValues.length}
+      onOpenChange={handlePopoverOpenChange}
       {...filterButtonProps}
     >
       <span>{label}</span>
@@ -259,7 +287,8 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
   return (
     <Tooltip
       mouseEnterDelay={0.8}
-      open={isWrapped ? false : undefined}
+      open={isWrapped ? false : tooltipOpen}
+      onOpenChange={onTooltipOpenChange}
       title={
         selectedValues.length > 0 ? (
           <Flex wrap="wrap" gap={4}>

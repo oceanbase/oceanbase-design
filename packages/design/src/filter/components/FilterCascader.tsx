@@ -11,6 +11,7 @@ import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
+import { useTooltipWithPopover } from '../hooks/useTooltipWithPopover';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
 import {
@@ -65,9 +66,15 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
   // 用于控制二级 Popover 的打开状态（仅在单选模式下使用）
   const [openPopoverKey, setOpenPopoverKey] = useState<string | null>(null);
+  // 用于跟踪主弹窗的开启状态
+  const [isMainPopoverOpen, setIsMainPopoverOpen] = useState(false);
 
-  // 从 restProps 中排除 showArrow，避免类型冲突
-  const { showArrow: _showArrow, ...filterButtonProps } = restProps;
+  // 从 restProps 中排除 showArrow 和 onOpenChange，避免类型冲突
+  const {
+    showArrow: _showArrow,
+    onOpenChange: externalOnOpenChange,
+    ...filterButtonProps
+  } = restProps;
 
   // 解析 count 配置
   const showCount = !!count;
@@ -75,6 +82,28 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, [], onChange);
+
+  // 使用 Hook 管理 Tooltip 与 Popover 的交互逻辑（仅在多选模式下启用）
+  const { tooltipOpen, onTooltipOpenChange } = useTooltipWithPopover({
+    isPopoverOpen: isMainPopoverOpen,
+    enabled: multiple,
+    hasValue: currentValue.length > 0,
+  });
+
+  // 处理主弹窗状态变化
+  const handleMainPopoverOpenChange = useCallback(
+    (open: boolean) => {
+      setIsMainPopoverOpen(open);
+      // 当主弹窗关闭时，同步关闭二级弹窗（单选模式）
+      if (!open && !multiple) {
+        setOpenPopoverKey(null);
+      }
+      // 调用外部传入的 onOpenChange 回调
+      // Tooltip 的控制逻辑已由 useTooltipWithPopover Hook 自动处理
+      externalOnOpenChange?.(open);
+    },
+    [externalOnOpenChange, multiple]
+  );
 
   // 当值变化时，更新 context 中的值
   // 使用 stableOptionsKey 而不是 options 来避免不必要的更新
@@ -379,6 +408,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
             onClear={handleClear}
             content={renderContent}
             selected={hasValue}
+            onOpenChange={handleMainPopoverOpenChange}
             {...filterButtonProps}
           >
             <WrappedTagsDisplay tags={selectedTags} onRemove={handleRemoveTag} />
@@ -399,6 +429,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
           onClear={handleClear}
           content={renderContent}
           selected={hasValue}
+          onOpenChange={handleMainPopoverOpenChange}
           {...filterButtonProps}
         >
           <span
@@ -421,6 +452,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
       onClear={handleClear}
       content={renderContent}
       selected={!!currentValue.length}
+      onOpenChange={handleMainPopoverOpenChange}
       {...filterButtonProps}
     >
       <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{getSelectedLabel()}</span>
@@ -442,7 +474,8 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
     return (
       <Tooltip
         mouseEnterDelay={0.8}
-        open={isWrapped ? false : undefined}
+        open={isWrapped ? false : tooltipOpen}
+        onOpenChange={onTooltipOpenChange}
         title={
           currentValue.length > 0 ? (
             <Flex wrap="wrap" gap={4}>
