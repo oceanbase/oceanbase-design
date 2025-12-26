@@ -70,7 +70,7 @@ const App: React.FC = () => {
 
       <div>
         <Text strong>带额外内容：</Text>
-        <Filter.Wrap collapsed label="筛选条件" extra={<Text type="secondary">共 3 个筛选器</Text>}>
+        <Filter.Wrap collapsed label="筛选条件" extra={<Text type="secondary">共 2 个筛选器</Text>}>
           <Filter.Select
             label="状态"
             options={[

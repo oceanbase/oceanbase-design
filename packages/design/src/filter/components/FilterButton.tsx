@@ -31,10 +31,10 @@ interface FilterButtonProps extends BaseFilterProps {
   autoCloseOnSelect?: boolean;
   /** 选择回调，当选择项时调用，如果 autoCloseOnSelect 为 true，调用后会自动关闭弹出层 */
   onSelect?: () => void;
-  /** 是否显示下拉箭头图标，默认 true */
-  showArrow?: boolean;
   /** 是否显示标签下方的分割线，默认 false */
   showLabelDivider?: boolean;
+  /** 是否显示后缀图标区域（包括下拉箭头和清除图标），默认 true */
+  showSuffixIcon?: boolean;
 }
 
 const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
@@ -55,8 +55,8 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       extra,
       autoCloseOnSelect = false,
       onSelect,
-      showArrow = true,
       showLabelDivider = false,
+      showSuffixIcon = true,
       ...restProps
     },
     ref
@@ -66,6 +66,9 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     const [open, setOpen] = useState(false);
     const { wrapSSR, prefixCls } = useFilterStyle();
     const innerRef = useRef<HTMLDivElement>(null);
+
+    // 从 restProps 中提取 onOpenChange，避免被 Popover 的 onOpenChange 覆盖
+    const { onOpenChange: externalOnOpenChange, ...popoverProps } = restProps;
 
     const handleClearClick = (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
@@ -78,9 +81,22 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     };
 
     // 通过 ref 暴露关闭方法
-    useImperativeHandle(ref, () => ({
-      closePopover,
-    }));
+    useImperativeHandle(
+      ref,
+      () => ({
+        closePopover,
+      }),
+      []
+    );
+
+    // 处理 popover 状态变化
+    const handleOpenChange = (newOpen: boolean) => {
+      if (!disabled) {
+        setOpen(newOpen);
+        // 调用外部传入的 onOpenChange 回调，让父组件能够实时监听状态变化
+        externalOnOpenChange?.(newOpen);
+      }
+    };
 
     // 使用 useMemo 缓存 content，避免每次都重新创建
     const popoverContent = useMemo(
@@ -112,7 +128,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
           )}
         </>
       ),
-      [content, footer, label, extra, isWrapped, prefixCls, showLabelDivider]
+      [content, footer, label, extra, isWrapped, prefixCls, showLabelDivider, token]
     );
 
     return wrapSSR(
@@ -122,11 +138,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
         trigger={trigger}
         content={popoverContent}
         open={open && !disabled}
-        onOpenChange={newOpen => {
-          if (!disabled) {
-            setOpen(newOpen);
-          }
-        }}
+        onOpenChange={handleOpenChange}
         styles={{
           body: {
             padding: 0,
@@ -134,7 +146,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
             minWidth: 200,
           },
         }}
-        {...restProps}
+        {...popoverProps}
       >
         <div ref={innerRef}>
           <div
@@ -156,33 +168,29 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               >
                 {children}
               </Flex>
-              <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
-                {loading ? (
+              {loading ? (
+                <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
                   <Spin
                     indicator={<LoadingOutlined style={{ fontSize: token.fontSizeSM }} spin />}
                   />
-                ) : (
-                  <>
-                    {showArrow && (
-                      <DownOutlined
-                        className={selected ? getFilterCls(prefixCls, 'arrow-icon') : ''}
-                      />
-                    )}
-                    {selected && (
-                      <div
-                        className={getFilterCls(prefixCls, 'clear-icon')}
-                        onClick={e => {
-                          if (!disabled) {
-                            handleClearClick(e);
-                          }
-                        }}
-                      >
-                        <CloseOutlined />
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
+                </div>
+              ) : showSuffixIcon ? (
+                <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
+                  <DownOutlined className={selected ? getFilterCls(prefixCls, 'arrow-icon') : ''} />
+                  {selected && (
+                    <div
+                      className={getFilterCls(prefixCls, 'clear-icon')}
+                      onClick={e => {
+                        if (!disabled) {
+                          handleClearClick(e);
+                        }
+                      }}
+                    >
+                      <CloseOutlined />
+                    </div>
+                  )}
+                </div>
+              ) : null}
             </Flex>
           </div>
         </div>

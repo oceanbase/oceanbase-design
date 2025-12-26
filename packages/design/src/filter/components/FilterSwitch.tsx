@@ -61,10 +61,10 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
     return renderContent;
   }
 
-  const wrappedContent = wrapContent(renderContent, '8px 0px');
+  const wrappedContent = wrapContent(renderContent, '8px 12px');
 
-  // 从 restProps 中排除 showArrow，避免类型冲突
-  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps;
+  // 从 restProps 中排除不需要的属性，避免类型冲突
+  const { ...filterButtonProps } = restProps;
 
   return (
     <FilterButton

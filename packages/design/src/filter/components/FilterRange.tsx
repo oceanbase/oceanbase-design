@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from 'react';
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Flex } from 'antd';
 import { CheckOutlined } from '@oceanbase/icons';
 import Tooltip from '../../tooltip';
@@ -8,6 +8,7 @@ import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
+import { useTooltipWithPopover } from '../hooks/useTooltipWithPopover';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
 import {
@@ -77,23 +78,38 @@ const FilterRange: FC<FilterRangeProps> = ({
   const filterId = useMemo(() => generateFilterId('range', label), [label]);
   const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
 
-  // 从 restProps 中排除 showArrow，避免类型冲突
-  const { showArrow: _showArrowFilter, ...filterButtonProps } = restProps;
+  // 从 restProps 中排除 onOpenChange，避免类型冲突
+  const { onOpenChange: externalOnOpenChange, ...filterButtonProps } = restProps;
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, null, onChange);
+
+  // 用于跟踪主弹窗的开启状态
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  // 使用 Hook 管理 Tooltip 与 Popover 的交互逻辑
+  const { tooltipOpen, onTooltipOpenChange } = useTooltipWithPopover({
+    isPopoverOpen,
+    enabled: !isWrapped,
+    hasValue: !!currentValue,
+  });
+
+  // 处理主弹窗状态变化
+  const handlePopoverOpenChange = useCallback(
+    (open: boolean) => {
+      setIsPopoverOpen(open);
+      // 调用外部传入的 onOpenChange 回调
+      // Tooltip 的控制逻辑已由 useTooltipWithPopover Hook 自动处理
+      externalOnOpenChange?.(open);
+    },
+    [externalOnOpenChange]
+  );
 
   // 当值变化时，更新 context 中的值
   // 使用 stableOptionsKey 而不是 options 来避免不必要的更新
   useEffect(() => {
     if (isWrapped && updateFilterValue) {
-      updateFilterValue(
-        filterId,
-        label,
-        currentValue,
-        options,
-        'range' as FilterComponentName
-      );
+      updateFilterValue(filterId, label, currentValue, options, 'range' as FilterComponentName);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isWrapped, updateFilterValue, filterId, label, currentValue, stableOptionsKey]);
@@ -172,6 +188,7 @@ const FilterRange: FC<FilterRangeProps> = ({
         content={wrappedContent}
         loading={loading}
         selected={hasValue}
+        onOpenChange={handlePopoverOpenChange}
         {...filterButtonProps}
       >
         <span
@@ -187,7 +204,12 @@ const FilterRange: FC<FilterRangeProps> = ({
       <div style={{ paddingBlock: token.paddingXXS }}>
         <div style={{ marginBottom: 8 }}>{label}</div>
         {tooltipTitle ? (
-          <Tooltip mouseEnterDelay={0.8} title={tooltipTitle} open={isWrapped ? false : undefined}>
+          <Tooltip
+            mouseEnterDelay={0.8}
+            title={tooltipTitle}
+            open={isWrapped ? false : tooltipOpen}
+            onOpenChange={onTooltipOpenChange}
+          >
             {filterButton}
           </Tooltip>
         ) : (
@@ -207,6 +229,7 @@ const FilterRange: FC<FilterRangeProps> = ({
       content={wrappedContent}
       loading={loading}
       selected={!!currentValue}
+      onOpenChange={handlePopoverOpenChange}
       {...filterButtonProps}
     >
       <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{currentLabel || label}</span>
@@ -214,7 +237,12 @@ const FilterRange: FC<FilterRangeProps> = ({
   );
 
   return tooltipTitle ? (
-    <Tooltip mouseEnterDelay={0.8} title={tooltipTitle}>
+    <Tooltip
+      mouseEnterDelay={0.8}
+      title={tooltipTitle}
+      open={tooltipOpen}
+      onOpenChange={onTooltipOpenChange}
+    >
       {filterButton}
     </Tooltip>
   ) : (
@@ -223,4 +251,3 @@ const FilterRange: FC<FilterRangeProps> = ({
 };
 
 export default FilterRange;
-

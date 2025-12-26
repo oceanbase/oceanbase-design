@@ -20,6 +20,8 @@ export interface BaseFilterProps extends Omit<PopoverProps, 'title' | 'content' 
   collapsible?: boolean;
   /** 是否始终折叠到"更多"按钮中，无论容器宽度是否充足，默认为 false */
   alwaysCollapse?: boolean;
+  /** 是否显示后缀图标区域（包括下拉箭头和清除图标），默认 true */
+  showSuffixIcon?: boolean;
 }
 
 /** 内部属性，用于标记组件是否在 Wrap 中 */
