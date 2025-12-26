@@ -180,8 +180,7 @@ const genFilterButtonStyle = (token: FilterToken): CSSObject => {
 
     [`${componentCls}-active`]: {
       borderColor: token.colorBorder,
-      backgroundColor: token.colorFillTertiary,
-      color: token.colorTextTertiary,
+      color: token.colorTextLabel,
     },
 
     [`${componentCls}-disabled`]: {
@@ -190,7 +189,9 @@ const genFilterButtonStyle = (token: FilterToken): CSSObject => {
       color: token.colorTextQuaternary,
       cursor: 'not-allowed',
 
-      '&:hover': {
+      '&:hover, &:active, &:focus, &:focus-within': {
+        borderColor: token.colorBorder,
+
         [`${componentCls}-arrow-icon`]: {
           opacity: 1,
           visibility: 'visible',
@@ -205,7 +206,7 @@ const genFilterButtonStyle = (token: FilterToken): CSSObject => {
 
     [`${componentCls}-selected`]: {
       backgroundColor: token.colorFillTertiary,
-      color: token.colorText,
+      color: token.colorTextLabel,
     },
   };
 };
