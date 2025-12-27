@@ -40,7 +40,18 @@ const FilterInput: FC<FilterInputProps> = ({
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, '', onChange);
-  const [switchValue, setSwitchValue] = useState(false);
+  // 如果外部传入了初始值，应当默认打开 switch，使该值被上报
+  const [switchValue, setSwitchValue] = useState<boolean>(() => {
+    return value !== undefined && value !== '';
+  });
+
+  // 如果外部 value 后续变化并且当前 switch 未打开，则在发现非空 value 时自动打开 switch
+  useEffect(() => {
+    if (value !== undefined && value !== '' && !switchValue) {
+      setSwitchValue(true);
+    }
+    // 不在此处自动关闭 switch 当 value 变为空，以避免覆盖用户交互
+  }, [value, switchValue]);
 
   // 当值变化时，更新 context 中的值
   // 只有当 switchValue 为 true 时才注册 currentValue，否则视为空值

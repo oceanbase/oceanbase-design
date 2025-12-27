@@ -34,8 +34,15 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
   const { updateFilterValue } = useFilterContext();
   const filterId = useMemo(() => generateFilterId('switch', label), [label]);
 
-  // 使用受控状态 hook
-  const [currentValue, setValue] = useControlledState(value, false, onChange);
+  // 支持从 Form.Item 通过 `valuePropName="checked"` 传入的 checked 属性
+  const propChecked = (restProps as any).checked;
+
+  // 使用受控状态 hook：优先使用明确的 value，其次使用 checked（来自 Form.Item）
+  const [currentValue, setValue] = useControlledState(
+    value !== undefined ? value : propChecked,
+    false,
+    onChange
+  );
 
   // 当值变化时，更新 context 中的值
   useEffect(() => {

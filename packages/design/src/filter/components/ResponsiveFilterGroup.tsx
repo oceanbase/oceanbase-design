@@ -529,6 +529,34 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
             })}
           </div>
 
+          {/* 隐藏的、立即挂载的折叠子组件副本，用于在首次渲染时将 initialValue 上报到 FilterProvider */}
+          <FilterProvider
+            isWrapped={true}
+            filterValues={filterValues}
+            updateFilterValue={updateFilterValue}
+          >
+            <div
+              style={{
+                position: 'absolute',
+                visibility: 'hidden',
+                pointerEvents: 'none',
+                top: -9999,
+                left: -9999,
+              }}
+            >
+              {allHiddenChildren.map((child, index) => {
+                if (isValidElement(child)) {
+                  return (
+                    <React.Fragment key={child.key || `hidden-clone-${index}`}>
+                      {addIsInWrapProp(child)}
+                    </React.Fragment>
+                  );
+                }
+                return child;
+              })}
+            </div>
+          </FilterProvider>
+
           {/* 隐藏的 more button 测量容器 - 使用 FilterProvider 以便显示 badge/count */}
           <FilterProvider
             isWrapped={true}
