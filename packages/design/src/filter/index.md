@@ -242,18 +242,17 @@ const App = () => {
 
 响应式筛选器组，当宽度不足时自动将后面的筛选器收起到"更多"按钮中。
 
-| 属性            | 说明                             | 类型                  | 默认值      |
-| --------------- | -------------------------------- | --------------------- | ----------- |
-| children        | 子元素                           | `ReactNode`           | -           |
-| gap             | 容器间距                         | `number`              | `8`         |
-| label           | FilterWrap 的 label              | `ReactNode`           | `'Filters'` |
-| icon            | FilterWrap 的图标                | `ReactNode`           | -           |
-| onApply         | 点击 Apply 按钮时的回调          | `() => void`          | -           |
-| onClearAll      | 点击 Clear All 按钮时的回调      | `() => void`          | -           |
-| showActions     | 是否显示 Apply 和 Clear All 按钮 | `boolean`             | `true`      |
-| moreButtonWidth | 预留给"更多"按钮的宽度           | `number`              | `100`       |
-| style           | 容器样式                         | `React.CSSProperties` | -           |
-| extra           | 额外内容                         | `ReactNode`           | -           |
+| 属性        | 说明                             | 类型                  | 默认值      |
+| ----------- | -------------------------------- | --------------------- | ----------- |
+| children    | 子元素                           | `ReactNode`           | -           |
+| gap         | 容器间距                         | `number`              | `8`         |
+| label       | FilterWrap 的 label              | `ReactNode`           | `'Filters'` |
+| icon        | FilterWrap 的图标                | `ReactNode`           | -           |
+| onApply     | 点击 Apply 按钮时的回调          | `() => void`          | -           |
+| onClearAll  | 点击 Clear All 按钮时的回调      | `() => void`          | -           |
+| showActions | 是否显示 Apply 和 Clear All 按钮 | `boolean`             | `true`      |
+| style       | 容器样式                         | `React.CSSProperties` | -           |
+| extra       | 额外内容                         | `ReactNode`           | -           |
 
 ## Context
 
