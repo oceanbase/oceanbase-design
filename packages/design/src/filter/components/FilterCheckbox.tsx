@@ -124,7 +124,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
     // 每个 icon 的宽度
     const iconWidth = 8;
     // 重叠距离（每个 icon 向左偏移的距离）
-    const overlapDistance = 3;
+    const overlapDistance = 4;
     // 计算容器宽度：第一个 icon 的完整宽度 + (icon数量 - 1) * 重叠距离
     const containerWidth = iconWidth + (options.length - 1) * overlapDistance;
 
@@ -141,35 +141,24 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
           alignItems: 'center',
         }}
       >
-        {options.map((item, index) =>
-          selectedStatuses.includes(item.value) && item.color ? (
-            <Badge
-              key={item.value}
-              color={item.color}
-              style={{
-                position: 'absolute',
-                left: index * overlapDistance,
-                top: -6,
-                zIndex: options.length - index, // 后面的 icon z-index 更高，显示在上层
-              }}
-            />
-          ) : (
-            <div
-              key={item.value}
-              style={{
-                position: 'absolute',
-                left: index * overlapDistance,
-                top: 1,
-                width: iconWidth,
-                height: iconWidth,
-                backgroundColor: 'white',
-                borderRadius: '50%',
-                border: `1px solid ${token.colorBorder}`,
-                zIndex: options.length - index, // 后面的 icon z-index 更高，显示在上层
-              }}
-            />
-          )
-        )}
+        {options.map((item, index) => (
+          <div
+            key={item.value}
+            style={{
+              position: 'absolute',
+              left: index * overlapDistance,
+              width: iconWidth,
+              height: iconWidth,
+              backgroundColor:
+                selectedStatuses.includes(item.value) && item.color
+                  ? item.color
+                  : token.colorFillContent,
+              borderRadius: '50%',
+              border: `1px solid white`,
+              zIndex: index, // 后面的 icon z-index 更高，显示在上层
+            }}
+          />
+        ))}
       </div>
     );
   }, [isStatusMode, options, selectedValues, token.colorBorder]);
