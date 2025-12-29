@@ -1,17 +1,13 @@
 import type { ReactNode } from 'react';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Flex, Popover } from 'antd';
+import { Checkbox, Flex, Popover, theme } from '@oceanbase/design';
 import { CheckOutlined, CloseOutlined, RightOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
-import Checkbox from '../../checkbox';
-import Tag from '../../tag';
-import Tooltip from '../../tooltip';
-import theme from '../../theme';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
-import { useTooltipWithPopover } from '../hooks/useTooltipWithPopover';
+import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
 import {
@@ -66,8 +62,6 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
   // 用于控制二级 Popover 的打开状态（仅在单选模式下使用）
   const [openPopoverKey, setOpenPopoverKey] = useState<string | null>(null);
-  // 用于跟踪主弹窗的开启状态
-  const [isMainPopoverOpen, setIsMainPopoverOpen] = useState(false);
 
   // 从 restProps 中排除 onOpenChange，避免类型冲突
   const { onOpenChange: externalOnOpenChange, ...filterButtonProps } = restProps;
@@ -78,114 +72,6 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
 
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, [], onChange);
-
-  // 使用 Hook 管理 Tooltip 与 Popover 的交互逻辑（仅在多选模式下启用）
-  const { tooltipOpen, onTooltipOpenChange } = useTooltipWithPopover({
-    isPopoverOpen: isMainPopoverOpen,
-    enabled: multiple,
-    hasValue: currentValue.length > 0,
-  });
-
-  // 处理主弹窗状态变化
-  const handleMainPopoverOpenChange = useCallback(
-    (open: boolean) => {
-      setIsMainPopoverOpen(open);
-      // 当主弹窗关闭时，同步关闭二级弹窗（单选模式）
-      if (!open && !multiple) {
-        setOpenPopoverKey(null);
-      }
-      // 调用外部传入的 onOpenChange 回调
-      // Tooltip 的控制逻辑已由 useTooltipWithPopover Hook 自动处理
-      externalOnOpenChange?.(open);
-    },
-    [externalOnOpenChange, multiple]
-  );
-
-  // 当值变化时，更新 context 中的值
-  // 使用 stableOptionsKey 而不是 options 来避免不必要的更新
-  useEffect(() => {
-    if (isWrapped && updateFilterValue) {
-      updateFilterValue(filterId, label, currentValue, options, 'cascader' as FilterComponentName);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isWrapped, updateFilterValue, filterId, label, currentValue, stableOptionsKey]);
-
-  const handleChange = useCallback(
-    (parentValue: string, childValue: string) => {
-      // 检查选项是否被禁用
-      const parentOption = options.find(opt => opt.value === parentValue);
-      const childOption = parentOption?.children?.find(child => child.value === childValue);
-      if (parentOption?.disabled || childOption?.disabled) {
-        return;
-      }
-
-      if (multiple) {
-        // 多选模式
-        const existingIndex = currentValue.findIndex(
-          item => item[0] === parentValue && item[1] === childValue
-        );
-
-        let newValueList: string[][];
-        if (existingIndex !== -1) {
-          newValueList = currentValue.filter((_, index) => index !== existingIndex);
-        } else {
-          newValueList = [...currentValue, [parentValue, childValue]];
-        }
-        setValue(newValueList);
-      } else {
-        // 单选模式 - 全局只能选择一个值
-        const isCurrentSelected =
-          currentValue.length === 1 &&
-          currentValue[0][0] === parentValue &&
-          currentValue[0][1] === childValue;
-
-        let newValueList: string[][];
-        if (isCurrentSelected) {
-          newValueList = [];
-        } else {
-          newValueList = [[parentValue, childValue]];
-        }
-        setValue(newValueList);
-        // 单选模式下，选择后立即关闭所有弹出层（主弹窗和二级 Popover）
-        setOpenPopoverKey(null);
-        // 使用 setTimeout 确保状态更新完成后再关闭主弹窗
-        setTimeout(() => {
-          filterButtonRef.current?.closePopover();
-        }, 0);
-      }
-    },
-    [currentValue, multiple, setValue, options]
-  );
-
-  const clearByParent = useCallback(
-    (parentValue: string) => {
-      const newValueList = currentValue.filter(item => item[0] !== parentValue);
-      setValue(newValueList);
-    },
-    [currentValue, setValue]
-  );
-
-  const handleClear = useCallback(() => {
-    setValue([]);
-  }, [setValue]);
-
-  // 选中该分类下的所有子项
-  const selectAllChildren = useCallback(
-    (option: CascaderOption) => {
-      if (option.disabled) {
-        return;
-      }
-      const otherValues = currentValue.filter(item => item[0] !== option.value);
-      // 只选择未禁用的子项
-      const allChildValues =
-        option.children
-          ?.filter(child => !child.disabled)
-          .map(child => [option.value, child.value]) || [];
-      const newValueList = [...otherValues, ...allChildValues];
-      setValue(newValueList);
-    },
-    [currentValue, setValue]
-  );
 
   // 获取当前选中值的 label（用于单选模式显示）
   const getSelectedLabel = useCallback((): ReactNode => {
@@ -211,7 +97,6 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
     return currentValue.map(([parentValue, childValue], index) => {
       const parentOption = options.find(opt => opt.value === parentValue);
       const childOption = parentOption?.children?.find(child => child.value === childValue);
-      // 使用分隔符 `::` 来避免与 value 中的 `-` 冲突
       return {
         label: childOption?.label || childValue,
         value: `${parentValue}::${childValue}::${index}`,
@@ -224,7 +109,6 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   // 移除某个选中的值
   const handleRemoveTag = useCallback(
     (tagValue: string) => {
-      // 使用 `::` 分隔符分割，格式为 `parentValue::childValue::index`
       const parts = tagValue.split('::');
       if (parts.length >= 2) {
         const [parentValue, childValue] = parts;
@@ -233,6 +117,109 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
         );
         setValue(newValueList);
       }
+    },
+    [currentValue, setValue]
+  );
+
+  // 使用 Tooltip hook
+  const { onPopoverOpenChange, wrapWithTooltip } = useFilterTooltip({
+    hasValue: currentValue.length > 0,
+    label,
+    content:
+      currentValue.length > 0
+        ? getSelectedTags()
+            .map(i => i.label)
+            .join(', ')
+        : null,
+    disabled: isWrapped,
+  });
+
+  // 处理主弹窗状态变化
+  const handleMainPopoverOpenChange = useCallback(
+    (open: boolean) => {
+      onPopoverOpenChange(open);
+      // 当主弹窗关闭时，同步关闭二级弹窗（单选模式）
+      if (!open && !multiple) {
+        setOpenPopoverKey(null);
+      }
+      externalOnOpenChange?.(open);
+    },
+    [onPopoverOpenChange, externalOnOpenChange, multiple]
+  );
+
+  // 当值变化时，更新 context 中的值
+  useEffect(() => {
+    if (isWrapped && updateFilterValue) {
+      updateFilterValue(filterId, label, currentValue, options, 'cascader' as FilterComponentName);
+    }
+  }, [isWrapped, updateFilterValue, filterId, label, currentValue, options]);
+
+  const handleChange = useCallback(
+    (parentValue: string, childValue: string) => {
+      const parentOption = options.find(opt => opt.value === parentValue);
+      const childOption = parentOption?.children?.find(child => child.value === childValue);
+      if (parentOption?.disabled || childOption?.disabled) {
+        return;
+      }
+
+      if (multiple) {
+        const existingIndex = currentValue.findIndex(
+          item => item[0] === parentValue && item[1] === childValue
+        );
+
+        let newValueList: string[][];
+        if (existingIndex !== -1) {
+          newValueList = currentValue.filter((_, index) => index !== existingIndex);
+        } else {
+          newValueList = [...currentValue, [parentValue, childValue]];
+        }
+        setValue(newValueList);
+      } else {
+        const isCurrentSelected =
+          currentValue.length === 1 &&
+          currentValue[0][0] === parentValue &&
+          currentValue[0][1] === childValue;
+
+        let newValueList: string[][];
+        if (isCurrentSelected) {
+          newValueList = [];
+        } else {
+          newValueList = [[parentValue, childValue]];
+        }
+        setValue(newValueList);
+        setOpenPopoverKey(null);
+        setTimeout(() => {
+          filterButtonRef.current?.closePopover();
+        }, 0);
+      }
+    },
+    [currentValue, multiple, setValue, options]
+  );
+
+  const clearByParent = useCallback(
+    (parentValue: string) => {
+      const newValueList = currentValue.filter(item => item[0] !== parentValue);
+      setValue(newValueList);
+    },
+    [currentValue, setValue]
+  );
+
+  const handleClear = useCallback(() => {
+    setValue([]);
+  }, [setValue]);
+
+  const selectAllChildren = useCallback(
+    (option: CascaderOption) => {
+      if (option.disabled) {
+        return;
+      }
+      const otherValues = currentValue.filter(item => item[0] !== option.value);
+      const allChildValues =
+        option.children
+          ?.filter(child => !child.disabled)
+          .map(child => [option.value, child.value]) || [];
+      const newValueList = [...otherValues, ...allChildValues];
+      setValue(newValueList);
     },
     [currentValue, setValue]
   );
@@ -264,7 +251,6 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
             trigger={'hover'}
             key={option.value}
             arrow={false}
-            // 禁用时不展开子集
             open={option?.disabled ? false : multiple ? undefined : openPopoverKey === option.value}
             onOpenChange={
               multiple
@@ -389,10 +375,8 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   if (isWrapped) {
     const hasValue = currentValue.length > 0;
 
-    // 多选模式：使用 Tag 展示选中的值
     if (multiple) {
       const selectedTags = getSelectedTags();
-
       return (
         <div style={{ paddingBlock: token.paddingXXS }}>
           <div style={{ marginBottom: 8 }}>{label}</div>
@@ -413,7 +397,6 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
       );
     }
 
-    // 单选模式
     return (
       <div>
         <div style={{ marginBottom: 8 }}>{label}</div>
@@ -439,6 +422,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
     );
   }
 
+  // 正常模式
   const filterButton = (
     <FilterButton
       ref={filterButtonRef}
@@ -463,37 +447,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
     </FilterButton>
   );
 
-  // 多选模式下，始终用 Tooltip 包裹整个 FilterButton，保持组件树结构稳定
-  // 类似 FilterCheckbox 的处理方式，避免第一次选择时组件树变化导致弹窗关闭
-  if (!isWrapped && multiple) {
-    const selectedTags = getSelectedTags();
-    return (
-      <Tooltip
-        mouseEnterDelay={0.8}
-        open={isWrapped ? false : tooltipOpen}
-        onOpenChange={onTooltipOpenChange}
-        title={
-          currentValue.length > 0 ? (
-            <Flex wrap="wrap" gap={4}>
-              {selectedTags.map(item => (
-                <Tag
-                  key={`${item.parentValue}-${item.childValue}`}
-                  closable
-                  onClose={() => handleRemoveTag(item.value)}
-                >
-                  {item.label}
-                </Tag>
-              ))}
-            </Flex>
-          ) : null
-        }
-      >
-        {filterButton}
-      </Tooltip>
-    );
-  }
-
-  return filterButton;
+  return wrapWithTooltip(filterButton);
 };
 
 export default FilterCascader;

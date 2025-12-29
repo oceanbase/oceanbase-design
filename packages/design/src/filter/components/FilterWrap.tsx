@@ -1,8 +1,6 @@
 import type { FC, ReactNode } from 'react';
-import React, { Children, isValidElement, useCallback, useContext, useMemo, useState } from 'react';
-import { Flex } from 'antd';
-import Tooltip from '../../tooltip';
-import theme from '../../theme';
+import React, { Children, isValidElement, useCallback, useContext, useMemo } from 'react';
+import { theme, Flex } from '@oceanbase/design';
 import ConfigProvider from '../../config-provider';
 import type { Locale } from '../../locale';
 import enUS from '../../locale/en-US';
@@ -11,9 +9,8 @@ import {
   useFilterContext,
   type FilterComponentName,
   type FilterValue,
-  type FilterValueItem,
 } from '../FilterContext';
-import { useTooltipWithPopover } from '../hooks/useTooltipWithPopover';
+import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import type { BaseFilterProps } from '../type';
 import FilterButton from './FilterButton';
 import type { FilterButtonRef } from './FilterButton';
@@ -46,9 +43,6 @@ const FilterWrap: FC<FilterWrapProps> = ({
   const filterLocale = (contextLocale as Locale)?.Filter || enUS.Filter;
   // 始终调用 Hook，但只在折叠模式下使用 filterValues
   const contextValue = useFilterContext();
-
-  // 用于跟踪主弹窗的开启状态
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   // 如果没有传入 label，使用国际化默认值
   const filterLabel = label ?? filterLocale?.filters;
@@ -108,7 +102,6 @@ const FilterWrap: FC<FilterWrapProps> = ({
           return selectedLabels.join(', ');
         }
         case 'switch': {
-          // switch 组件的 false 值不显示
           return value ? filterLocale?.open : '';
         }
         case 'input': {
@@ -136,10 +129,8 @@ const FilterWrap: FC<FilterWrapProps> = ({
         }
 
         return (
-          <Flex key={item.id} gap={16}>
-            <div style={{ color: token.colorTextLabel, minWidth: 50, whiteSpace: 'nowrap' }}>
-              {item.label}
-            </div>
+          <Flex key={item.id} gap={4} style={{ maxWidth: '300px' }}>
+            <div style={{ color: token.colorTextLabel, whiteSpace: 'nowrap' }}>{item.label}:</div>
             <div>{formattedValue}</div>
           </Flex>
         );
@@ -153,17 +144,13 @@ const FilterWrap: FC<FilterWrapProps> = ({
     return <div style={{ maxWidth: 300, padding: '0px 4px' }}>{validItems}</div>;
   }, [filterValues, formatValueForTooltip, collapsed, token.colorTextLabel]);
 
-  // 使用 Hook 管理 Tooltip 与 Popover 的交互逻辑
-  const { tooltipOpen, onTooltipOpenChange } = useTooltipWithPopover({
-    isPopoverOpen,
-    enabled: collapsed,
+  // 使用 Tooltip hook
+  const { onPopoverOpenChange, wrapWithTooltip } = useFilterTooltip({
     hasValue: filterValues && filterValues.length > 0,
+    // label: filterLabel,
+    content: tooltipTitle,
+    disabled: !collapsed,
   });
-
-  // 处理主弹窗状态变化
-  const handlePopoverOpenChange = useCallback((open: boolean) => {
-    setIsPopoverOpen(open);
-  }, []);
 
   // 如果不使用折叠模式，按原来的方式渲染
   if (!collapsed) {
@@ -172,7 +159,6 @@ const FilterWrap: FC<FilterWrapProps> = ({
 
   // 使用折叠模式
   const handleClear = () => {
-    // 遍历所有子组件，调用它们的 onChange 并设置为 undefined
     Children.forEach(children, child => {
       if (isValidElement(child)) {
         const props = child.props as { onChange?: (value: unknown) => void };
@@ -181,7 +167,6 @@ const FilterWrap: FC<FilterWrapProps> = ({
         }
       }
     });
-    // 同步清除 context 中的 filterValues
     if (contextValue.clearAllFilterValues) {
       contextValue.clearAllFilterValues();
     }
@@ -208,7 +193,6 @@ const FilterWrap: FC<FilterWrapProps> = ({
         <Flex vertical gap={token.sizeXS}>
           {Children.map(children, (child, index) => {
             if (isValidElement(child)) {
-              // 使用 child.key 或生成稳定的 key
               const stableKey = child.key || `filter-wrap-child-${index}`;
               return <React.Fragment key={stableKey}>{child}</React.Fragment>;
             }
@@ -234,7 +218,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
       showSuffixIcon={false}
       showLabelDivider={!!restProps.footer}
       onOpenChange={open => {
-        handlePopoverOpenChange(open);
+        onPopoverOpenChange(open);
         externalOnOpenChange?.(open);
       }}
       {...filterButtonProps}
@@ -244,16 +228,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
     </FilterButton>
   );
 
-  return (
-    <Tooltip
-      mouseEnterDelay={0.8}
-      title={tooltipTitle || null}
-      open={tooltipOpen}
-      onOpenChange={onTooltipOpenChange}
-    >
-      {filterButton}
-    </Tooltip>
-  );
+  return wrapWithTooltip(filterButton);
 };
 
 export default FilterWrap;

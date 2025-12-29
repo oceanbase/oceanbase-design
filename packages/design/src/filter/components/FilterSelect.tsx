@@ -1,14 +1,12 @@
 import type { FC, ReactNode } from 'react';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Flex } from 'antd';
+import React, { useEffect, useMemo, useRef } from 'react';
+import { Flex, theme } from '@oceanbase/design';
 import { CheckOutlined } from '@oceanbase/icons';
-import Tooltip from '../../tooltip';
-import theme from '../../theme';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
 import { useFilterWrapped } from '../hooks/useFilterWrapped';
-import { useTooltipWithPopover } from '../hooks/useTooltipWithPopover';
+import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
 import {
@@ -64,29 +62,26 @@ const FilterSelect: FC<FilterSelectProps> = ({
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, '', onChange);
 
-  // 用于跟踪主弹窗的开启状态
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  // 获取选中值的 label
+  const selectedOption = options.find(option => option.value === currentValue);
+  const selectedLabel = selectedOption?.label;
+  const currentLabel = selectedLabel || label;
 
-  // 使用 Hook 管理 Tooltip 与 Popover 的交互逻辑
-  const { tooltipOpen, onTooltipOpenChange } = useTooltipWithPopover({
-    isPopoverOpen,
-    enabled: !isWrapped,
+  // 使用 Tooltip hook
+  const { onPopoverOpenChange, wrapWithTooltip } = useFilterTooltip({
     hasValue: !!currentValue,
+    label,
+    content: selectedLabel ? selectedLabel : null,
+    disabled: isWrapped, // wrapped 模式下禁用 Tooltip
   });
 
-  // 处理主弹窗状态变化
-  const handlePopoverOpenChange = useCallback(
-    (open: boolean) => {
-      setIsPopoverOpen(open);
-      // 调用外部传入的 onOpenChange 回调
-      // Tooltip 的控制逻辑已由 useTooltipWithPopover Hook 自动处理
-      externalOnOpenChange?.(open);
-    },
-    [externalOnOpenChange]
-  );
+  // 处理 Popover 状态变化
+  const handlePopoverOpenChange = (open: boolean) => {
+    onPopoverOpenChange(open);
+    externalOnOpenChange?.(open);
+  };
 
   // 当值变化时，更新 context 中的值
-  // 使用 stableOptionsKey 而不是 options 来避免不必要的更新
   useEffect(() => {
     if (isWrapped && updateFilterValue) {
       updateFilterValue(filterId, label, currentValue, options, 'select' as FilterComponentName);
@@ -94,14 +89,11 @@ const FilterSelect: FC<FilterSelectProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isWrapped, updateFilterValue, filterId, label, currentValue, stableOptionsKey]);
 
-  const currentLabel = options.find(option => option.value === currentValue)?.label || label;
-
   const handleChange = (option: SelectOption) => {
     if (option.disabled) {
       return;
     }
     setValue(option.value);
-    // 选择后立即关闭弹出层
     filterButtonRef.current?.closePopover();
   };
 
@@ -144,58 +136,36 @@ const FilterSelect: FC<FilterSelectProps> = ({
 
   const wrappedContent = wrapContent(renderContent);
 
-  // 获取选中值的显示文本
-  const selectedValueText = currentValue
-    ? options.find(option => option.value === currentValue)?.label
-    : null;
-
-  // 生成 Tooltip 内容
-  const tooltipTitle = selectedValueText ? `${label}: ${selectedValueText}` : null;
-
+  // wrapped 模式
   if (isWrapped) {
     const hasValue = !!currentValue;
-
-    const filterButton = (
-      <FilterButton
-        ref={filterButtonRef}
-        icon={icon}
-        label={label}
-        bordered={bordered}
-        onClear={handleClear}
-        content={wrappedContent}
-        loading={loading}
-        selected={hasValue}
-        onOpenChange={handlePopoverOpenChange}
-        {...filterButtonProps}
-      >
-        <span
-          className={getFilterCls(prefixCls, 'text-ellipsis')}
-          style={getWrappedValueStyle(hasValue)}
-        >
-          {hasValue ? currentLabel : getPlaceholder()}
-        </span>
-      </FilterButton>
-    );
-
     return (
       <div style={{ paddingBlock: token.paddingXXS }}>
         <div style={{ marginBottom: 8 }}>{label}</div>
-        {tooltipTitle ? (
-          <Tooltip
-            mouseEnterDelay={0.8}
-            title={tooltipTitle}
-            open={isWrapped ? false : tooltipOpen}
-            onOpenChange={onTooltipOpenChange}
+        <FilterButton
+          ref={filterButtonRef}
+          icon={icon}
+          label={label}
+          bordered={bordered}
+          onClear={handleClear}
+          content={wrappedContent}
+          loading={loading}
+          selected={hasValue}
+          onOpenChange={handlePopoverOpenChange}
+          {...filterButtonProps}
+        >
+          <span
+            className={getFilterCls(prefixCls, 'text-ellipsis')}
+            style={getWrappedValueStyle(hasValue)}
           >
-            {filterButton}
-          </Tooltip>
-        ) : (
-          filterButton
-        )}
+            {hasValue ? currentLabel : getPlaceholder()}
+          </span>
+        </FilterButton>
       </div>
     );
   }
 
+  // 正常模式
   const filterButton = (
     <FilterButton
       ref={filterButtonRef}
@@ -213,18 +183,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
     </FilterButton>
   );
 
-  return tooltipTitle ? (
-    <Tooltip
-      mouseEnterDelay={0.8}
-      title={tooltipTitle}
-      open={tooltipOpen}
-      onOpenChange={onTooltipOpenChange}
-    >
-      {filterButton}
-    </Tooltip>
-  ) : (
-    filterButton
-  );
+  return wrapWithTooltip(filterButton);
 };
 
 export default FilterSelect;

@@ -1,10 +1,15 @@
 import type { ReactNode } from 'react';
-import React, { forwardRef, useImperativeHandle, useMemo, useRef, useState } from 'react';
-import { Flex, Popover } from 'antd';
+import React, {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { Flex, Popover, Spin, theme } from '@oceanbase/design';
 import { CloseOutlined, DownOutlined, LoadingOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
-import Spin from '../../spin';
-import theme from '../../theme';
 import { useFilterContext } from '../FilterContext';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps } from '../type';
@@ -76,9 +81,11 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       setOpen(false);
     };
 
-    const closePopover = () => {
+    const closePopover = useCallback(() => {
       setOpen(false);
-    };
+      // 通知外部组件 Popover 已关闭，确保 Tooltip hook 状态同步
+      externalOnOpenChange?.(false);
+    }, [externalOnOpenChange]);
 
     // 通过 ref 暴露关闭方法
     useImperativeHandle(
@@ -86,7 +93,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       () => ({
         closePopover,
       }),
-      []
+      [closePopover]
     );
 
     // 处理 popover 状态变化
@@ -155,7 +162,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               bordered && getFilterCls(prefixCls, 'border'),
               open && getFilterCls(prefixCls, 'active'),
               disabled && getFilterCls(prefixCls, 'disabled'),
-              selected && !isWrapped && getFilterCls(prefixCls, 'selected')
+              selected && bordered && !isWrapped && getFilterCls(prefixCls, 'selected')
             )}
           >
             <Flex align="center" justify="space-between" style={{ width: '100%' }}>
