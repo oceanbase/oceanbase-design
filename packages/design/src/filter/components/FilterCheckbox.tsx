@@ -121,12 +121,14 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
   const renderStatusIcon = useMemo(() => {
     if (!isStatusMode || options.length === 0) return null;
 
-    // 每个 icon 的宽度
-    const iconWidth = 8;
-    // 重叠距离（每个 icon 向左偏移的距离）
-    const overlapDistance = 4;
+    // 每个 icon 的宽度（选中状态）
+    const iconWidth = 10;
+    // 未选中状态的图标宽度（稍小一些，与选中状态视觉上更协调）
+    const iconWidthUnselected = 8;
+    // 重叠距离（每个 icon 向左偏移的距离，使重叠更自然）
+    const overlapDistance = 6;
     // 计算容器宽度：第一个 icon 的完整宽度 + (icon数量 - 1) * 重叠距离
-    const containerWidth = iconWidth + (options.length - 1) * overlapDistance;
+    const containerWidth = iconWidth + (options.length - 1) * overlapDistance + 1;
 
     // 获取当前选中的值
     const selectedStatuses = selectedValues || [];
@@ -136,32 +138,64 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
         style={{
           position: 'relative',
           width: containerWidth,
-          height: iconWidth,
+          height: iconWidth + 2,
           display: 'flex',
           alignItems: 'center',
         }}
       >
-        {options.map((item, index) => (
-          <div
-            key={item.value}
-            style={{
-              position: 'absolute',
-              left: index * overlapDistance,
-              width: iconWidth,
-              height: iconWidth,
-              backgroundColor:
-                selectedStatuses.includes(item.value) && item.color
-                  ? item.color
-                  : token.colorFillContent,
-              borderRadius: '50%',
-              border: `1px solid white`,
-              zIndex: index, // 后面的 icon z-index 更高，显示在上层
-            }}
-          />
-        ))}
+        {options.map((item, index) => {
+          const isSelected = selectedStatuses.includes(item.value) && item.color;
+          const baseSize = isSelected ? iconWidth : iconWidthUnselected;
+
+          return isSelected ? (
+            <div
+              key={item.value}
+              style={{
+                position: 'absolute',
+                left: index * overlapDistance,
+                width: baseSize,
+                height: baseSize,
+                borderRadius: '50%',
+                zIndex: index, // 后面的 icon z-index 更高，显示在上层
+                backgroundColor: item.color,
+                // 使用白色边框来分隔重叠的圆圈，边框稍粗以增强分隔效果
+                border: `1px solid ${token.white}`,
+              }}
+            />
+          ) : (
+            <div
+              key={item.value}
+              style={{
+                position: 'absolute',
+                left: index * overlapDistance,
+                borderRadius: '50%',
+                zIndex: index, // 后面的 icon z-index 更高，显示在上层
+                border: `1px solid ${token.white}`,
+              }}
+            >
+              <div
+                style={{
+                  width: baseSize,
+                  height: baseSize,
+                  borderRadius: '50%',
+                  backgroundColor: token.white,
+                  border: `1px solid ${token.colorBorderSecondary}`,
+                }}
+              />
+            </div>
+          );
+        })}
       </div>
     );
-  }, [isStatusMode, options, selectedValues, token.colorBorder]);
+  }, [
+    isStatusMode,
+    options,
+    selectedValues,
+    token.white,
+    token.colorBorderSecondary,
+    token.gray4,
+    token.colorBorder,
+  ]);
 
   // 渲染弹框内容
   const renderContent = useMemo(

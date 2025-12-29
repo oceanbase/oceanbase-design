@@ -205,8 +205,7 @@ const genFilterButtonStyle = (token: FilterToken): CSSObject => {
     },
 
     [`${componentCls}-selected`]: {
-      backgroundColor: token.colorFillTertiary,
-      color: token.colorTextLabel,
+      backgroundColor: 'var(--ob-color-bg-hover)',
     },
   };
 };
