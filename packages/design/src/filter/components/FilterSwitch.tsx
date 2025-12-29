@@ -5,7 +5,7 @@ import type { SwitchProps } from '@oceanbase/design';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
-import { useFilterWrapped } from '../hooks/useFilterWrapped';
+import { useFilterCollapsed } from '../hooks/useFilterCollapsed';
 import type { BaseFilterProps } from '../type';
 import { generateFilterId, wrapContent } from '../utils';
 import FilterButton from './FilterButton';
@@ -29,7 +29,7 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
   ...restProps
 }) => {
   const { token } = theme.useToken();
-  const isWrapped = useFilterWrapped();
+  const isCollapsed = useFilterCollapsed();
   const { updateFilterValue } = useFilterContext();
   const filterId = useMemo(() => generateFilterId('switch', label), [label]);
 
@@ -45,10 +45,10 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
 
   // 当值变化时，更新 context 中的值
   useEffect(() => {
-    if (isWrapped && updateFilterValue) {
+    if (isCollapsed && updateFilterValue) {
       updateFilterValue(filterId, label, currentValue, undefined, 'switch' as FilterComponentName);
     }
-  }, [isWrapped, updateFilterValue, filterId, label, currentValue]);
+  }, [isCollapsed, updateFilterValue, filterId, label, currentValue]);
 
   const handleClear = () => {
     setValue(false);
@@ -62,8 +62,8 @@ const FilterSwitch: FC<FilterSwitchProps> = ({
     </Flex>
   );
 
-  // 如果被 FilterWrap 包裹，只渲染内容部分
-  if (isWrapped) {
+  // 如果处于折叠模式，只渲染内容部分
+  if (isCollapsed) {
     return renderContent;
   }
 

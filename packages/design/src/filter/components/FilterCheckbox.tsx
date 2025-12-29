@@ -4,7 +4,7 @@ import { Checkbox, theme, Badge } from '@oceanbase/design';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
-import { useFilterWrapped } from '../hooks/useFilterWrapped';
+import { useFilterCollapsed } from '../hooks/useFilterCollapsed';
 import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
@@ -40,10 +40,10 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
   label,
   bordered = true,
   count = false,
-  _isInWrap = false,
+  _isCollapsed = false,
   ...restProps
 }) => {
-  const isWrapped = useFilterWrapped(_isInWrap);
+  const isCollapsed = useFilterCollapsed(_isCollapsed);
   const { prefixCls } = useFilterStyle();
   const { token } = theme.useToken();
   const { updateFilterValue } = useFilterContext();
@@ -90,7 +90,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
             .map(i => i.label)
             .join(', ')
         : null,
-    disabled: isWrapped,
+    disabled: isCollapsed,
   });
 
   // 处理 Popover 状态变化
@@ -104,7 +104,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
 
   // 当值变化时，更新 context 中的值
   useEffect(() => {
-    if (isWrapped && updateFilterValue) {
+    if (isCollapsed && updateFilterValue) {
       updateFilterValue(
         filterId,
         label,
@@ -114,7 +114,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isWrapped, updateFilterValue, filterId, label, selectedValues, stableOptionsKey]);
+  }, [isCollapsed, updateFilterValue, filterId, label, selectedValues, stableOptionsKey]);
 
   const handleChange = useCallback(
     (val: string[]) => {
@@ -240,8 +240,8 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
   // 状态模式下，如果没有自定义 icon，使用自动生成的状态图标
   const displayIcon = icon || (isStatusMode ? renderStatusIcon : undefined);
 
-  // wrapped 模式
-  if (isWrapped) {
+  // 折叠模式
+  if (isCollapsed) {
     const hasValue = selectedValues.length > 0;
     const selectedTags = getSelectedTags();
 

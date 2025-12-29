@@ -16,7 +16,7 @@ export interface BaseFilterProps extends Omit<PopoverProps, 'title' | 'content' 
   extra?: ReactNode;
   /** 是否加载中 */
   loading?: boolean;
-  /** 是否可以被 ResponsiveGroup 收集到 Wrap 中，默认为 true */
+  /** 是否可以被 ResponsiveGroup 收集到折叠容器中，默认为 true */
   collapsible?: boolean;
   /** 是否始终折叠到"更多"按钮中，无论容器宽度是否充足，默认为 false */
   alwaysCollapse?: boolean;
@@ -24,8 +24,8 @@ export interface BaseFilterProps extends Omit<PopoverProps, 'title' | 'content' 
   showSuffixIcon?: boolean;
 }
 
-/** 内部属性，用于标记组件是否在 Wrap 中 */
+/** 内部属性，用于标记组件是否在折叠模式中 */
 export interface InternalFilterProps {
-  /** @internal */
-  _isInWrap?: boolean;
+  /** @internal 是否处于折叠模式 */
+  _isCollapsed?: boolean;
 }

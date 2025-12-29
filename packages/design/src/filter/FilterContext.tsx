@@ -14,7 +14,8 @@ export interface FilterValueItem {
 }
 
 interface FilterContextValue {
-  isWrapped: boolean;
+  /** 是否处于折叠模式 */
+  isCollapsed: boolean;
   filterValues?: FilterValueItem[];
   updateFilterValue?: (
     id: string,
@@ -27,14 +28,15 @@ interface FilterContextValue {
 }
 
 const FilterContext = createContext<FilterContextValue>({
-  isWrapped: false,
+  isCollapsed: false,
 });
 
 export const useFilterContext = () => useContext(FilterContext);
 
 export const FilterProvider: FC<{
   children: ReactNode;
-  isWrapped?: boolean;
+  /** 是否处于折叠模式 */
+  isCollapsed?: boolean;
   filterValues?: FilterValueItem[];
   updateFilterValue?: (
     id: string,
@@ -44,10 +46,10 @@ export const FilterProvider: FC<{
     componentName?: FilterComponentName
   ) => void;
   clearAllFilterValues?: () => void;
-}> = ({ children, isWrapped = false, filterValues, updateFilterValue, clearAllFilterValues }) => {
+}> = ({ children, isCollapsed = false, filterValues, updateFilterValue, clearAllFilterValues }) => {
   return (
     <FilterContext.Provider
-      value={{ isWrapped, filterValues, updateFilterValue, clearAllFilterValues }}
+      value={{ isCollapsed, filterValues, updateFilterValue, clearAllFilterValues }}
     >
       {children}
     </FilterContext.Provider>

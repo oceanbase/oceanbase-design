@@ -67,7 +67,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     ref
   ) => {
     const { token } = theme.useToken();
-    const { isWrapped } = useFilterContext();
+    const { isCollapsed } = useFilterContext();
     const [open, setOpen] = useState(false);
     const { wrapSSR, prefixCls } = useFilterStyle();
     const innerRef = useRef<HTMLDivElement>(null);
@@ -109,7 +109,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     const popoverContent = useMemo(
       () => (
         <>
-          {!isWrapped && (
+          {!isCollapsed && (
             <Flex
               justify="space-between"
               align="center"
@@ -135,7 +135,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
           )}
         </>
       ),
-      [content, footer, label, extra, isWrapped, prefixCls, showLabelDivider, token]
+      [content, footer, label, extra, isCollapsed, prefixCls, showLabelDivider, token]
     );
 
     return wrapSSR(
@@ -162,7 +162,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               bordered && getFilterCls(prefixCls, 'border'),
               open && getFilterCls(prefixCls, 'active'),
               disabled && getFilterCls(prefixCls, 'disabled'),
-              selected && bordered && !isWrapped && getFilterCls(prefixCls, 'selected')
+              selected && bordered && !isCollapsed && getFilterCls(prefixCls, 'selected')
             )}
           >
             <Flex align="center" justify="space-between" style={{ width: '100%' }}>

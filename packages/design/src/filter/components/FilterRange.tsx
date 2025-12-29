@@ -7,7 +7,7 @@ import type { Dayjs } from 'dayjs';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
-import { useFilterWrapped } from '../hooks/useFilterWrapped';
+import { useFilterCollapsed } from '../hooks/useFilterCollapsed';
 import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
@@ -64,12 +64,12 @@ const FilterRange: FC<FilterRangeProps> = ({
   onChange,
   options = defaultOptions,
   loading = false,
-  _isInWrap = false,
+  _isCollapsed = false,
   ...restProps
 }) => {
   const { prefixCls } = useFilterStyle();
   const { token } = theme.useToken();
-  const isWrapped = useFilterWrapped(_isInWrap);
+  const isCollapsed = useFilterCollapsed(_isCollapsed);
   const filterButtonRef = useRef<FilterButtonRef>(null);
   const { updateFilterValue } = useFilterContext();
   const filterId = useMemo(() => generateFilterId('range', label), [label]);
@@ -98,7 +98,7 @@ const FilterRange: FC<FilterRangeProps> = ({
     hasValue: !!currentValue,
     label,
     content: selectedLabel ? selectedLabel : null,
-    disabled: isWrapped,
+    disabled: isCollapsed,
   });
 
   // 处理 Popover 状态变化
@@ -109,10 +109,10 @@ const FilterRange: FC<FilterRangeProps> = ({
 
   // 当值变化时，更新 context 中的值
   useEffect(() => {
-    if (isWrapped && updateFilterValue) {
+    if (isCollapsed && updateFilterValue) {
       updateFilterValue(filterId, label, currentValue, options, 'range' as FilterComponentName);
     }
-  }, [isWrapped, updateFilterValue, filterId, label, currentValue, options]);
+  }, [isCollapsed, updateFilterValue, filterId, label, currentValue, options]);
 
   const handleClear = () => {
     setValue(null);
@@ -160,8 +160,8 @@ const FilterRange: FC<FilterRangeProps> = ({
 
   const wrappedContent = wrapContent(renderContent);
 
-  // wrapped 模式
-  if (isWrapped) {
+  // 折叠模式
+  if (isCollapsed) {
     const hasValue = !!currentValue;
     return (
       <div style={{ paddingBlock: token.paddingXXS }}>

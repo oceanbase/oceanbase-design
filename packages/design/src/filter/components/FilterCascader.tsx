@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
-import { useFilterWrapped } from '../hooks/useFilterWrapped';
+import { useFilterCollapsed } from '../hooks/useFilterCollapsed';
 import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
@@ -50,10 +50,10 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   bordered = true,
   multiple = false,
   count = false,
-  _isInWrap = false,
+  _isCollapsed = false,
   ...restProps
 }) => {
-  const isWrapped = useFilterWrapped(_isInWrap);
+  const isCollapsed = useFilterCollapsed(_isCollapsed);
   const { prefixCls } = useFilterStyle();
   const { token } = theme.useToken();
   const filterButtonRef = useRef<FilterButtonRef>(null);
@@ -75,7 +75,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
 
   // 获取当前选中值的 label（用于单选模式显示）
   const getSelectedLabel = useCallback((): ReactNode => {
-    if (isWrapped && currentValue.length === 0) {
+    if (isCollapsed && currentValue.length === 0) {
       return '';
     }
     if (currentValue.length === 0) {
@@ -90,7 +90,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
     }
 
     return label;
-  }, [currentValue, isWrapped, label, multiple, options]);
+  }, [currentValue, isCollapsed, label, multiple, options]);
 
   // 获取选中值的 tags（用于多选模式 Tag 显示）
   const getSelectedTags = useCallback(() => {
@@ -131,7 +131,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
             .map(i => i.label)
             .join(', ')
         : null,
-    disabled: isWrapped,
+    disabled: isCollapsed,
   });
 
   // 处理主弹窗状态变化
@@ -149,10 +149,10 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
 
   // 当值变化时，更新 context 中的值
   useEffect(() => {
-    if (isWrapped && updateFilterValue) {
+    if (isCollapsed && updateFilterValue) {
       updateFilterValue(filterId, label, currentValue, options, 'cascader' as FilterComponentName);
     }
-  }, [isWrapped, updateFilterValue, filterId, label, currentValue, options]);
+  }, [isCollapsed, updateFilterValue, filterId, label, currentValue, options]);
 
   const handleChange = useCallback(
     (parentValue: string, childValue: string) => {
@@ -372,7 +372,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   );
 
   // Wrapped 模式
-  if (isWrapped) {
+  if (isCollapsed) {
     const hasValue = currentValue.length > 0;
 
     if (multiple) {

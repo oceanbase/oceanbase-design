@@ -313,12 +313,12 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   // 合并始终折叠和隐藏的普通可收集子元素
   const allHiddenChildren = [...alwaysCollapseChildren, ...hiddenCollapsibleChildren];
 
-  // 递归地为子元素添加 _isInWrap prop
+  // 递归地为子元素添加 _isCollapsed prop
   const addIsInWrapProp = (element: ReactElement): ReactElement => {
     const childProps = element.props;
 
-    // 对当前元素添加 _isInWrap prop
-    const newProps: Record<string, unknown> = { _isInWrap: true };
+    // 对当前元素添加 _isCollapsed prop
+    const newProps: Record<string, unknown> = { _isCollapsed: true };
 
     // 如果有 children，递归处理
     if (childProps?.children) {
@@ -406,7 +406,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
 
     return (
       <FilterProvider
-        isWrapped={true}
+        isCollapsed={true}
         filterValues={filterValues}
         updateFilterValue={updateFilterValue}
       >
@@ -531,7 +531,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
 
           {/* 隐藏的、立即挂载的折叠子组件副本，用于在首次渲染时将 initialValue 上报到 FilterProvider */}
           <FilterProvider
-            isWrapped={true}
+            isCollapsed={true}
             filterValues={filterValues}
             updateFilterValue={updateFilterValue}
           >
@@ -559,7 +559,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
 
           {/* 隐藏的 more button 测量容器 - 使用 FilterProvider 以便显示 badge/count */}
           <FilterProvider
-            isWrapped={true}
+            isCollapsed={true}
             filterValues={filterValues}
             updateFilterValue={updateFilterValue}
           >

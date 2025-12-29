@@ -206,7 +206,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
 
   const content = (
     <FilterProvider
-      isWrapped={true}
+      isCollapsed={true}
       filterValues={contextValue.filterValues}
       updateFilterValue={contextValue.updateFilterValue}
       clearAllFilterValues={contextValue.clearAllFilterValues}
