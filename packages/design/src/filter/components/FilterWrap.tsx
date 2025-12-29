@@ -47,9 +47,15 @@ const FilterWrap: FC<FilterWrapProps> = ({
   // 如果没有传入 label，使用国际化默认值
   const filterLabel = label ?? filterLocale?.filters;
   // 稳定化 filterValues 的引用，避免不必要的重新计算
+  // 需要包含 id 和 value，这样当值改变时也会触发更新
   const stableFilterValuesKey = useMemo(() => {
     if (!collapsed || !contextValue.filterValues) return '';
-    return JSON.stringify(contextValue.filterValues.map(item => item.id));
+    return JSON.stringify(
+      contextValue.filterValues.map(item => ({
+        id: item.id,
+        value: item.value,
+      }))
+    );
   }, [collapsed, contextValue.filterValues]);
 
   const filterValues = useMemo(() => {
@@ -64,12 +70,38 @@ const FilterWrap: FC<FilterWrapProps> = ({
       if (!value) return '';
 
       switch (componentName) {
-        case 'select':
-        case 'range': {
+        case 'select': {
           const selectedOption = (options as { value: unknown; label: ReactNode }[])?.find(
             opt => opt.value === value
           );
           return selectedOption?.label ? String(selectedOption.label) : String(value);
+        }
+        case 'range': {
+          // Range 的 value 是 [Dayjs, Dayjs]，需要使用 isSame 比较
+          const rangeValue = value as
+            | [
+                { isSame?: (other: unknown, unit: string) => boolean },
+                { isSame?: (other: unknown, unit: string) => boolean },
+              ]
+            | null;
+          if (!rangeValue || !Array.isArray(rangeValue) || rangeValue.length !== 2) {
+            return '';
+          }
+          const selectedOption = (
+            options as { value: [unknown, unknown] | null; label: ReactNode }[]
+          )?.find(opt => {
+            if (!opt.value || !rangeValue) return false;
+            // 使用 isSame 方法比较 Dayjs 对象
+            const optValue = opt.value as [
+              { isSame?: (other: unknown, unit: string) => boolean },
+              { isSame?: (other: unknown, unit: string) => boolean },
+            ];
+            return (
+              optValue[0]?.isSame?.(rangeValue[0], 'day') &&
+              optValue[1]?.isSame?.(rangeValue[1], 'day')
+            );
+          });
+          return selectedOption?.label ? String(selectedOption.label) : '';
         }
         case 'checkbox': {
           const selectedLabels = (value as string[])

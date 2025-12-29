@@ -9,13 +9,7 @@ import { useFilterWrapped } from '../hooks/useFilterWrapped';
 import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
-import {
-  generateFilterId,
-  getPlaceholder,
-  getStableOptionsKey,
-  getWrappedValueStyle,
-  wrapContent,
-} from '../utils';
+import { generateFilterId, getPlaceholder, getWrappedValueStyle, wrapContent } from '../utils';
 import FilterButton from './FilterButton';
 import type { FilterButtonRef } from './FilterButton';
 
@@ -54,7 +48,6 @@ const FilterSelect: FC<FilterSelectProps> = ({
   const filterButtonRef = useRef<FilterButtonRef>(null);
   const { updateFilterValue } = useFilterContext();
   const filterId = useMemo(() => generateFilterId('select', label), [label]);
-  const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
 
   // 从 restProps 中排除 onOpenChange，避免类型冲突
   const { onOpenChange: externalOnOpenChange, ...filterButtonProps } = restProps;
@@ -86,8 +79,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
     if (isWrapped && updateFilterValue) {
       updateFilterValue(filterId, label, currentValue, options, 'select' as FilterComponentName);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isWrapped, updateFilterValue, filterId, label, currentValue, stableOptionsKey]);
+  }, [isWrapped, updateFilterValue, filterId, label, currentValue, options]);
 
   const handleChange = (option: SelectOption) => {
     if (option.disabled) {

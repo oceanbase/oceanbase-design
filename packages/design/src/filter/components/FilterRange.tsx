@@ -15,7 +15,6 @@ import {
   generateFilterId,
   getIcon,
   getPlaceholder,
-  getStableOptionsKey,
   getWrappedValueStyle,
   wrapContent,
 } from '../utils';
@@ -74,7 +73,6 @@ const FilterRange: FC<FilterRangeProps> = ({
   const filterButtonRef = useRef<FilterButtonRef>(null);
   const { updateFilterValue } = useFilterContext();
   const filterId = useMemo(() => generateFilterId('range', label), [label]);
-  const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
 
   // 从 restProps 中排除 onOpenChange，避免类型冲突
   const { onOpenChange: externalOnOpenChange, ...filterButtonProps } = restProps;
@@ -114,8 +112,7 @@ const FilterRange: FC<FilterRangeProps> = ({
     if (isWrapped && updateFilterValue) {
       updateFilterValue(filterId, label, currentValue, options, 'range' as FilterComponentName);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isWrapped, updateFilterValue, filterId, label, currentValue, stableOptionsKey]);
+  }, [isWrapped, updateFilterValue, filterId, label, currentValue, options]);
 
   const handleClear = () => {
     setValue(null);
