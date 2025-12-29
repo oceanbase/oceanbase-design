@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Flex } from 'antd';
+import theme from '../../theme';
 import Tooltip from '../../tooltip';
-import { Flex, token } from '@oceanbase/design';
 
 export interface UseFilterTooltipOptions {
   /** 是否有选中的值 */
@@ -38,6 +39,7 @@ export function useFilterTooltip({
   disabled = false,
   closeDelay = 100,
 }: UseFilterTooltipOptions): UseFilterTooltipReturn {
+  const { token } = theme.useToken();
   // Tooltip 是否可见
   const [tooltipVisible, setTooltipVisible] = useState(false);
   // Popover 是否打开
@@ -127,7 +129,7 @@ export function useFilterTooltip({
         </Tooltip>
       );
     },
-    [disabled, hasValue, label, content, tooltipVisible, handleTooltipOpenChange]
+    [disabled, hasValue, label, content, tooltipVisible, handleTooltipOpenChange, token]
   );
 
   return {

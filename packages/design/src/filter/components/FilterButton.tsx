@@ -7,7 +7,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Flex, Popover, Spin, theme } from '@oceanbase/design';
+import { Flex, Popover, Spin } from 'antd';
+import theme from '../../theme';
 import { CloseOutlined, DownOutlined, LoadingOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
 import { useFilterContext } from '../FilterContext';

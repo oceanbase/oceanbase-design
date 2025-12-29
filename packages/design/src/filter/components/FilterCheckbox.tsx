@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import React, { memo, useCallback, useEffect, useMemo } from 'react';
-import { Checkbox, theme, Badge } from '@oceanbase/design';
+import { Checkbox, Badge } from 'antd';
+import theme from '../../theme';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
@@ -196,7 +197,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
         })}
       </div>
     );
-  }, [isStatusMode, options, selectedValues, token.white, token.colorBorderSecondary]);
+  }, [isStatusMode, options, selectedValues, token]);
 
   // 渲染弹框内容
   const renderContent = useMemo(

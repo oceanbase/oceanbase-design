@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import React, { Children, isValidElement, useCallback, useContext, useMemo } from 'react';
-import { theme, Flex } from '@oceanbase/design';
+import { Flex } from 'antd';
+import theme from '../../theme';
 import ConfigProvider from '../../config-provider';
 import type { Locale } from '../../locale';
 import enUS from '../../locale/en-US';
@@ -219,7 +220,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
           minWidth: 200,
           maxWidth: 300,
           fontSize: token.fontSize,
-          fontWeight: token.fontWeight,
+          fontWeight: token.fontWeightStrong,
         }}
       >
         <Flex vertical gap={token.sizeXS}>

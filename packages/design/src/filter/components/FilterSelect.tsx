@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import React, { useEffect, useMemo, useRef } from 'react';
-import { Flex, theme } from '@oceanbase/design';
+import { Flex } from 'antd';
+import theme from '../../theme';
 import { CheckOutlined } from '@oceanbase/icons';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';

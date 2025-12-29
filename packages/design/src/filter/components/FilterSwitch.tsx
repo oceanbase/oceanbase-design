@@ -1,7 +1,8 @@
 import type { FC } from 'react';
 import { useEffect, useMemo } from 'react';
-import { Flex, Switch, theme } from '@oceanbase/design';
-import type { SwitchProps } from '@oceanbase/design';
+import { Flex, Switch } from 'antd';
+import theme from '../../theme';
+import type { SwitchProps } from 'antd';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';

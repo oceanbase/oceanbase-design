@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import React, { useEffect, useMemo, useRef } from 'react';
-import { Flex, theme } from '@oceanbase/design';
+import { Flex } from 'antd';
+import theme from '../../theme';
 import { CheckOutlined } from '@oceanbase/icons';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';

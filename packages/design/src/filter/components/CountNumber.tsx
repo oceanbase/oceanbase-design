@@ -1,4 +1,4 @@
-import { Badge, theme } from '@oceanbase/design';
+import { Badge, theme } from 'antd';
 import type { FC } from 'react';
 
 interface CountNumberProps {
