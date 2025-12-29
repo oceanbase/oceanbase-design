@@ -1,5 +1,6 @@
-import { Badge, theme } from 'antd';
 import type { FC } from 'react';
+import Badge from '../../badge';
+import theme from '../../theme';
 
 interface CountNumberProps {
   count?: number;

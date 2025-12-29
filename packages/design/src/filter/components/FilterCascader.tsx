@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Checkbox, Flex, Popover } from 'antd';
+import { Flex, Popover } from 'antd';
+import Checkbox from '../../checkbox';
 import theme from '../../theme';
 import { CheckOutlined, CloseOutlined, RightOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';

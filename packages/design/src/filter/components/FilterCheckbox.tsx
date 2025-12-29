@@ -1,7 +1,8 @@
 import type { FC, ReactNode } from 'react';
 import React, { memo, useCallback, useEffect, useMemo } from 'react';
-import { Checkbox, Badge } from 'antd';
 import theme from '../../theme';
+import Checkbox from '../../checkbox';
+import Badge from '../../badge';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
