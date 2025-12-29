@@ -27,7 +27,7 @@
     "**/*.css"
   ],
   "scripts": {
-    "build": "NODE_OPTIONS=--max_old_space_size=4096 father build"
+    "build": "NODE_OPTIONS=--max_old_space_size=4096 father build && node ../../scripts/post-process-use-client.js charts"
   },
   "dependencies": {
     "@ant-design/charts": "^1.4.3",
