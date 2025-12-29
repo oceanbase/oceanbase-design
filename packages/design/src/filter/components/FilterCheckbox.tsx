@@ -1,16 +1,13 @@
 import type { FC, ReactNode } from 'react';
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { Flex } from 'antd';
-import Checkbox from '../../checkbox';
-import Tag from '../../tag';
-import Tooltip from '../../tooltip';
-import Badge from '../../badge';
+import React, { memo, useCallback, useEffect, useMemo } from 'react';
 import theme from '../../theme';
+import Checkbox from '../../checkbox';
+import Badge from '../../badge';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
-import { useFilterWrapped } from '../hooks/useFilterWrapped';
-import { useTooltipWithPopover } from '../hooks/useTooltipWithPopover';
+import { useFilterCollapsed } from '../hooks/useFilterCollapsed';
+import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
 import { generateFilterId, getStableOptionsKey, wrapContent } from '../utils';
@@ -45,51 +42,71 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
   label,
   bordered = true,
   count = false,
-  _isInWrap = false,
+  _isCollapsed = false,
   ...restProps
 }) => {
-  const isWrapped = useFilterWrapped(_isInWrap);
+  const isCollapsed = useFilterCollapsed(_isCollapsed);
   const { prefixCls } = useFilterStyle();
   const { token } = theme.useToken();
   const { updateFilterValue } = useFilterContext();
   const filterId = useMemo(() => generateFilterId('checkbox', label), [label]);
   const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
 
-  // 用于跟踪主弹窗的开启状态
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-
-  // 使用受控状态 hook
-  const [selectedValues, setSelectedValues] = useControlledState(value, [], onChange);
-
-  // 使用 Hook 管理 Tooltip 与 Popover 的交互逻辑
-  const { tooltipOpen, onTooltipOpenChange } = useTooltipWithPopover({
-    isPopoverOpen,
-    enabled: !isWrapped,
-    hasValue: selectedValues.length > 0,
-  });
-
   // 从 restProps 中排除 onOpenChange，避免类型冲突
   const { onOpenChange: externalOnOpenChange, ...filterButtonProps } = restProps;
 
-  // 处理主弹窗状态变化
-  const handlePopoverOpenChange = useCallback(
-    (open: boolean) => {
-      setIsPopoverOpen(open);
-      // 调用外部传入的 onOpenChange 回调
-      // Tooltip 的控制逻辑已由 useTooltipWithPopover Hook 自动处理
-      externalOnOpenChange?.(open);
-    },
-    [externalOnOpenChange]
-  );
+  // 使用受控状态 hook
+  const [selectedValues, setSelectedValues] = useControlledState(value, [], onChange);
 
   // 解析 count 配置
   const showCount = !!count;
   const showTotal = typeof count === 'object' ? (count.showTotal ?? false) : false;
 
+  // 获取选中值的 labels
+  const getSelectedTags = useCallback(() => {
+    return selectedValues.map(val => {
+      const option = options.find(opt => opt.value === val);
+      return {
+        label: option?.label || val,
+        value: val,
+      };
+    });
+  }, [selectedValues, options]);
+
+  // 移除某个选中的值
+  const handleRemoveTag = useCallback(
+    (val: string) => {
+      const newValues = selectedValues.filter(v => v !== val);
+      setSelectedValues(newValues);
+    },
+    [selectedValues, setSelectedValues]
+  );
+
+  // 使用 Tooltip hook
+  const { onPopoverOpenChange, wrapWithTooltip } = useFilterTooltip({
+    hasValue: selectedValues.length > 0,
+    label,
+    content:
+      selectedValues.length > 0
+        ? getSelectedTags()
+            .map(i => i.label)
+            .join(', ')
+        : null,
+    disabled: isCollapsed,
+  });
+
+  // 处理 Popover 状态变化
+  const handlePopoverOpenChange = useCallback(
+    (open: boolean) => {
+      onPopoverOpenChange(open);
+      externalOnOpenChange?.(open);
+    },
+    [onPopoverOpenChange, externalOnOpenChange]
+  );
+
   // 当值变化时，更新 context 中的值
-  // 使用 stableOptionsKey 而不是 options 来避免不必要的更新
   useEffect(() => {
-    if (isWrapped && updateFilterValue) {
+    if (isCollapsed && updateFilterValue) {
       updateFilterValue(
         filterId,
         label,
@@ -99,7 +116,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isWrapped, updateFilterValue, filterId, label, selectedValues, stableOptionsKey]);
+  }, [isCollapsed, updateFilterValue, filterId, label, selectedValues, stableOptionsKey]);
 
   const handleChange = useCallback(
     (val: string[]) => {
@@ -121,14 +138,11 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
   const renderStatusIcon = useMemo(() => {
     if (!isStatusMode || options.length === 0) return null;
 
-    // 每个 icon 的宽度
-    const iconWidth = 8;
-    // 重叠距离（每个 icon 向左偏移的距离）
-    const overlapDistance = 3;
-    // 计算容器宽度：第一个 icon 的完整宽度 + (icon数量 - 1) * 重叠距离
-    const containerWidth = iconWidth + (options.length - 1) * overlapDistance;
+    const iconWidth = 10;
+    const iconWidthUnselected = 8;
+    const overlapDistance = 6;
+    const containerWidth = iconWidth + (options.length - 1) * overlapDistance + 1;
 
-    // 获取当前选中的值
     const selectedStatuses = selectedValues || [];
 
     return (
@@ -136,21 +150,27 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
         style={{
           position: 'relative',
           width: containerWidth,
-          height: iconWidth,
+          height: iconWidth + 2,
           display: 'flex',
           alignItems: 'center',
         }}
       >
-        {options.map((item, index) =>
-          selectedStatuses.includes(item.value) && item.color ? (
-            <Badge
+        {options.map((item, index) => {
+          const isSelected = selectedStatuses.includes(item.value) && item.color;
+          const baseSize = isSelected ? iconWidth : iconWidthUnselected;
+
+          return isSelected ? (
+            <div
               key={item.value}
-              color={item.color}
               style={{
                 position: 'absolute',
                 left: index * overlapDistance,
-                top: -6,
-                zIndex: options.length - index, // 后面的 icon z-index 更高，显示在上层
+                width: baseSize,
+                height: baseSize,
+                borderRadius: '50%',
+                zIndex: index,
+                backgroundColor: item.color,
+                border: `1px solid ${token.white}`,
               }}
             />
           ) : (
@@ -159,20 +179,26 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
               style={{
                 position: 'absolute',
                 left: index * overlapDistance,
-                top: 1,
-                width: iconWidth,
-                height: iconWidth,
-                backgroundColor: 'white',
                 borderRadius: '50%',
-                border: `1px solid ${token.colorBorder}`,
-                zIndex: options.length - index, // 后面的 icon z-index 更高，显示在上层
+                zIndex: index,
+                border: `1px solid ${token.white}`,
               }}
-            />
-          )
-        )}
+            >
+              <div
+                style={{
+                  width: baseSize,
+                  height: baseSize,
+                  borderRadius: '50%',
+                  backgroundColor: token.white,
+                  border: `1px solid ${token.colorBorderSecondary}`,
+                }}
+              />
+            </div>
+          );
+        })}
       </div>
     );
-  }, [isStatusMode, options, selectedValues, token.colorBorder]);
+  }, [isStatusMode, options, selectedValues, token]);
 
   // 渲染弹框内容
   const renderContent = useMemo(
@@ -184,7 +210,6 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
       >
         {options.map(option => {
           const isDisabled = option.disabled || false;
-          // 状态模式下，使用 Badge 显示 label 和 color
           const labelContent =
             isStatusMode && option.color && typeof option.label === 'string' ? (
               <Badge text={option.label} color={option.color} />
@@ -212,33 +237,13 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
     [options, selectedValues, handleChange, prefixCls, token.colorTextDisabled, isStatusMode]
   );
 
-  // 获取选中值的 labels
-  const getSelectedTags = useCallback(() => {
-    return selectedValues.map(val => {
-      const option = options.find(opt => opt.value === val);
-      return {
-        label: option?.label || val,
-        value: val,
-      };
-    });
-  }, [selectedValues, options]);
-
-  // 移除某个选中的值
-  const handleRemoveTag = useCallback(
-    (val: string) => {
-      const newValues = selectedValues.filter(v => v !== val);
-      setSelectedValues(newValues);
-    },
-    [selectedValues, setSelectedValues]
-  );
-
   const wrappedContent = wrapContent(renderContent);
 
   // 状态模式下，如果没有自定义 icon，使用自动生成的状态图标
   const displayIcon = icon || (isStatusMode ? renderStatusIcon : undefined);
 
-  // 如果被 FilterWrap 包裹，使用和其他组件一致的展示逻辑
-  if (isWrapped) {
+  // 折叠模式
+  if (isCollapsed) {
     const hasValue = selectedValues.length > 0;
     const selectedTags = getSelectedTags();
 
@@ -261,6 +266,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
     );
   }
 
+  // 正常模式
   const filterButton = (
     <FilterButton
       icon={displayIcon}
@@ -279,27 +285,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
     </FilterButton>
   );
 
-  // 只在有选中值时显示 Tooltip 内容
-  return (
-    <Tooltip
-      mouseEnterDelay={0.8}
-      open={isWrapped ? false : tooltipOpen}
-      onOpenChange={onTooltipOpenChange}
-      title={
-        selectedValues.length > 0 ? (
-          <Flex wrap="wrap" gap={4}>
-            {getSelectedTags().map(item => (
-              <Tag key={item.value} closable onClose={() => handleRemoveTag(item.value)}>
-                {item.label}
-              </Tag>
-            ))}
-          </Flex>
-        ) : null
-      }
-    >
-      {filterButton}
-    </Tooltip>
-  );
+  return wrapWithTooltip(filterButton);
 };
 
 export default memo(FilterCheckbox);

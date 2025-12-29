@@ -1,28 +1,26 @@
 import type { FC, ReactNode } from 'react';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { Flex } from 'antd';
-import { CheckOutlined } from '@oceanbase/icons';
-import Tooltip from '../../tooltip';
 import theme from '../../theme';
+import { CheckOutlined } from '@oceanbase/icons';
+import dayjs from 'dayjs';
+import type { Dayjs } from 'dayjs';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
-import { useFilterWrapped } from '../hooks/useFilterWrapped';
-import { useTooltipWithPopover } from '../hooks/useTooltipWithPopover';
+import { useFilterCollapsed } from '../hooks/useFilterCollapsed';
+import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
 import {
   generateFilterId,
   getIcon,
   getPlaceholder,
-  getStableOptionsKey,
   getWrappedValueStyle,
   wrapContent,
 } from '../utils';
 import FilterButton from './FilterButton';
 import type { FilterButtonRef } from './FilterButton';
-import dayjs from 'dayjs';
-import type { Dayjs } from 'dayjs';
 
 export interface RangeOption {
   label: ReactNode;
@@ -67,16 +65,15 @@ const FilterRange: FC<FilterRangeProps> = ({
   onChange,
   options = defaultOptions,
   loading = false,
-  _isInWrap = false,
+  _isCollapsed = false,
   ...restProps
 }) => {
   const { prefixCls } = useFilterStyle();
   const { token } = theme.useToken();
-  const isWrapped = useFilterWrapped(_isInWrap);
+  const isCollapsed = useFilterCollapsed(_isCollapsed);
   const filterButtonRef = useRef<FilterButtonRef>(null);
   const { updateFilterValue } = useFilterContext();
   const filterId = useMemo(() => generateFilterId('range', label), [label]);
-  const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
 
   // 从 restProps 中排除 onOpenChange，避免类型冲突
   const { onOpenChange: externalOnOpenChange, ...filterButtonProps } = restProps;
@@ -84,38 +81,39 @@ const FilterRange: FC<FilterRangeProps> = ({
   // 使用受控状态 hook
   const [currentValue, setValue] = useControlledState(value, null, onChange);
 
-  // 用于跟踪主弹窗的开启状态
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  // 查找选中的选项
+  const selectedOption = currentValue
+    ? options.find(option => {
+        if (!option.value || !currentValue) return false;
+        return (
+          option.value[0].isSame(currentValue[0], 'day') &&
+          option.value[1].isSame(currentValue[1], 'day')
+        );
+      })
+    : null;
+  const selectedLabel = selectedOption?.label;
+  const currentLabel = selectedLabel || label;
 
-  // 使用 Hook 管理 Tooltip 与 Popover 的交互逻辑
-  const { tooltipOpen, onTooltipOpenChange } = useTooltipWithPopover({
-    isPopoverOpen,
-    enabled: !isWrapped,
+  // 使用 Tooltip hook
+  const { onPopoverOpenChange, wrapWithTooltip } = useFilterTooltip({
     hasValue: !!currentValue,
+    label,
+    content: selectedLabel ? selectedLabel : null,
+    disabled: isCollapsed,
   });
 
-  // 处理主弹窗状态变化
-  const handlePopoverOpenChange = useCallback(
-    (open: boolean) => {
-      setIsPopoverOpen(open);
-      // 调用外部传入的 onOpenChange 回调
-      // Tooltip 的控制逻辑已由 useTooltipWithPopover Hook 自动处理
-      externalOnOpenChange?.(open);
-    },
-    [externalOnOpenChange]
-  );
+  // 处理 Popover 状态变化
+  const handlePopoverOpenChange = (open: boolean) => {
+    onPopoverOpenChange(open);
+    externalOnOpenChange?.(open);
+  };
 
   // 当值变化时，更新 context 中的值
-  // 使用 stableOptionsKey 而不是 options 来避免不必要的更新
   useEffect(() => {
-    if (isWrapped && updateFilterValue) {
+    if (isCollapsed && updateFilterValue) {
       updateFilterValue(filterId, label, currentValue, options, 'range' as FilterComponentName);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isWrapped, updateFilterValue, filterId, label, currentValue, stableOptionsKey]);
-
-  // 根据当前值计算显示标签
-  const currentLabel = options.find(option => option.value === currentValue)?.label || label;
+  }, [isCollapsed, updateFilterValue, filterId, label, currentValue, options]);
 
   const handleClear = () => {
     setValue(null);
@@ -123,7 +121,6 @@ const FilterRange: FC<FilterRangeProps> = ({
 
   const handleSelect = (optionValue: [Dayjs, Dayjs]) => {
     setValue(optionValue);
-    // 选择后立即关闭弹出层
     filterButtonRef.current?.closePopover();
   };
 
@@ -131,13 +128,18 @@ const FilterRange: FC<FilterRangeProps> = ({
   const renderContent = (
     <div>
       {options.map((option, index) => {
-        // 使用稳定的 key：优先使用 label，如果 label 是对象则使用 index
         const optionKey =
           typeof option.label === 'string' || typeof option.label === 'number'
             ? `range-${option.label}`
             : option.value
               ? `range-${option.value[0]?.format('YYYY-MM-DD')}-${option.value[1]?.format('YYYY-MM-DD')}`
               : `range-${index}`;
+
+        const isSelected =
+          currentValue &&
+          option.value &&
+          option.value[0].isSame(currentValue[0], 'day') &&
+          option.value[1].isSame(currentValue[1], 'day');
 
         return (
           <Flex
@@ -149,9 +151,7 @@ const FilterRange: FC<FilterRangeProps> = ({
           >
             <span>{option.label}</span>
             <span style={{ width: 14 }}>
-              {currentValue === option.value && (
-                <CheckOutlined style={{ color: token.colorPrimary }} />
-              )}
+              {isSelected && <CheckOutlined style={{ color: token.colorPrimary }} />}
             </span>
           </Flex>
         );
@@ -161,64 +161,36 @@ const FilterRange: FC<FilterRangeProps> = ({
 
   const wrappedContent = wrapContent(renderContent);
 
-  // 获取选中值的显示文本
-  const selectedValueText = currentValue
-    ? options.find(option => {
-        if (!option.value || !currentValue) return false;
-        return (
-          option.value[0].isSame(currentValue[0], 'day') &&
-          option.value[1].isSame(currentValue[1], 'day')
-        );
-      })?.label
-    : null;
-
-  // 生成 Tooltip 内容
-  const tooltipTitle = selectedValueText ? `${label}: ${selectedValueText}` : null;
-
-  if (isWrapped) {
+  // 折叠模式
+  if (isCollapsed) {
     const hasValue = !!currentValue;
-
-    const filterButton = (
-      <FilterButton
-        ref={filterButtonRef}
-        icon={icon || getIcon('time')}
-        label={label}
-        bordered={bordered}
-        onClear={handleClear}
-        content={wrappedContent}
-        loading={loading}
-        selected={hasValue}
-        onOpenChange={handlePopoverOpenChange}
-        {...filterButtonProps}
-      >
-        <span
-          className={getFilterCls(prefixCls, 'text-ellipsis')}
-          style={getWrappedValueStyle(hasValue)}
-        >
-          {hasValue ? currentLabel : getPlaceholder()}
-        </span>
-      </FilterButton>
-    );
-
     return (
       <div style={{ paddingBlock: token.paddingXXS }}>
         <div style={{ marginBottom: 8 }}>{label}</div>
-        {tooltipTitle ? (
-          <Tooltip
-            mouseEnterDelay={0.8}
-            title={tooltipTitle}
-            open={isWrapped ? false : tooltipOpen}
-            onOpenChange={onTooltipOpenChange}
+        <FilterButton
+          ref={filterButtonRef}
+          icon={icon || getIcon('time')}
+          label={label}
+          bordered={bordered}
+          onClear={handleClear}
+          content={wrappedContent}
+          loading={loading}
+          selected={hasValue}
+          onOpenChange={handlePopoverOpenChange}
+          {...filterButtonProps}
+        >
+          <span
+            className={getFilterCls(prefixCls, 'text-ellipsis')}
+            style={getWrappedValueStyle(hasValue)}
           >
-            {filterButton}
-          </Tooltip>
-        ) : (
-          filterButton
-        )}
+            {hasValue ? currentLabel : getPlaceholder()}
+          </span>
+        </FilterButton>
       </div>
     );
   }
 
+  // 正常模式
   const filterButton = (
     <FilterButton
       ref={filterButtonRef}
@@ -236,18 +208,7 @@ const FilterRange: FC<FilterRangeProps> = ({
     </FilterButton>
   );
 
-  return tooltipTitle ? (
-    <Tooltip
-      mouseEnterDelay={0.8}
-      title={tooltipTitle}
-      open={tooltipOpen}
-      onOpenChange={onTooltipOpenChange}
-    >
-      {filterButton}
-    </Tooltip>
-  ) : (
-    filterButton
-  );
+  return wrapWithTooltip(filterButton);
 };
 
 export default FilterRange;

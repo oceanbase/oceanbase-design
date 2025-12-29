@@ -15,6 +15,7 @@ Filter 是一组轻量级的筛选组件，提供了多种筛选类型，适用�
 - 🎯 轻量级设计，适合作为表格/列表的筛选条件。
 - 🔧 支持多种筛选类型：单选、多选、级联、开关等。
 - 📦 支持响应式布局，自动收起到"更多"按钮。
+- 💡 支持 Tooltip 显示选中值，hover 时自动展示当前选中的内容。
 
 ## 代码演示
 
@@ -242,18 +243,17 @@ const App = () => {
 
 响应式筛选器组，当宽度不足时自动将后面的筛选器收起到"更多"按钮中。
 
-| 属性            | 说明                             | 类型                  | 默认值      |
-| --------------- | -------------------------------- | --------------------- | ----------- |
-| children        | 子元素                           | `ReactNode`           | -           |
-| gap             | 容器间距                         | `number`              | `8`         |
-| label           | FilterWrap 的 label              | `ReactNode`           | `'Filters'` |
-| icon            | FilterWrap 的图标                | `ReactNode`           | -           |
-| onApply         | 点击 Apply 按钮时的回调          | `() => void`          | -           |
-| onClearAll      | 点击 Clear All 按钮时的回调      | `() => void`          | -           |
-| showActions     | 是否显示 Apply 和 Clear All 按钮 | `boolean`             | `true`      |
-| moreButtonWidth | 预留给"更多"按钮的宽度           | `number`              | `100`       |
-| style           | 容器样式                         | `React.CSSProperties` | -           |
-| extra           | 额外内容                         | `ReactNode`           | -           |
+| 属性        | 说明                             | 类型                  | 默认值      |
+| ----------- | -------------------------------- | --------------------- | ----------- |
+| children    | 子元素                           | `ReactNode`           | -           |
+| gap         | 容器间距                         | `number`              | `8`         |
+| label       | FilterWrap 的 label              | `ReactNode`           | `'Filters'` |
+| icon        | FilterWrap 的图标                | `ReactNode`           | -           |
+| onApply     | 点击 Apply 按钮时的回调          | `() => void`          | -           |
+| onClearAll  | 点击 Clear All 按钮时的回调      | `() => void`          | -           |
+| showActions | 是否显示 Apply 和 Clear All 按钮 | `boolean`             | `true`      |
+| style       | 容器样式                         | `React.CSSProperties` | -           |
+| extra       | 额外内容                         | `ReactNode`           | -           |
 
 ## Context
 
@@ -266,9 +266,9 @@ import { FilterProvider, useFilterContext } from '@oceanbase/design';
 
 // 在自定义组件中获取上下文
 const MyComponent = () => {
-  const { isWrapped } = useFilterContext();
-  // isWrapped 为 true 时表示组件在折叠模式的 Wrap 中
-  return <div>{isWrapped ? '折叠模式' : '普通模式'}</div>;
+  const { isCollapsed } = useFilterContext();
+  // isCollapsed 为 true 时表示组件处于折叠模式
+  return <div>{isCollapsed ? '折叠模式' : '普通模式'}</div>;
 };
 ```
 
@@ -278,7 +278,7 @@ const MyComponent = () => {
 
 | 属性 | 说明 | 类型 |
 | --- | --- | --- |
-| isWrapped | 是否在折叠模式的 Wrap 中 | `boolean` |
+| isCollapsed | 是否处于折叠模式 | `boolean` |
 | filterValues | 当前所有筛选器的值 | `FilterValueItem[]` |
 | updateFilterValue | 更新筛选器值 | `(id: string, label: ReactNode, value: FilterValue, options?: unknown[], componentName?: FilterComponentName) => void` |
 | clearAllFilterValues | 清除所有筛选器值 | `() => void` |

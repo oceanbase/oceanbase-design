@@ -1,10 +1,17 @@
 import type { ReactNode } from 'react';
-import React, { forwardRef, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import React, {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { Flex, Popover } from 'antd';
-import { CloseOutlined, DownOutlined, LoadingOutlined } from '@oceanbase/icons';
-import classNames from 'classnames';
 import Spin from '../../spin';
 import theme from '../../theme';
+import { CloseOutlined, DownOutlined, LoadingOutlined } from '@oceanbase/icons';
+import classNames from 'classnames';
 import { useFilterContext } from '../FilterContext';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps } from '../type';
@@ -62,7 +69,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     ref
   ) => {
     const { token } = theme.useToken();
-    const { isWrapped } = useFilterContext();
+    const { isCollapsed } = useFilterContext();
     const [open, setOpen] = useState(false);
     const { wrapSSR, prefixCls } = useFilterStyle();
     const innerRef = useRef<HTMLDivElement>(null);
@@ -76,9 +83,11 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       setOpen(false);
     };
 
-    const closePopover = () => {
+    const closePopover = useCallback(() => {
       setOpen(false);
-    };
+      // 通知外部组件 Popover 已关闭，确保 Tooltip hook 状态同步
+      externalOnOpenChange?.(false);
+    }, [externalOnOpenChange]);
 
     // 通过 ref 暴露关闭方法
     useImperativeHandle(
@@ -86,7 +95,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       () => ({
         closePopover,
       }),
-      []
+      [closePopover]
     );
 
     // 处理 popover 状态变化
@@ -102,7 +111,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     const popoverContent = useMemo(
       () => (
         <>
-          {!isWrapped && (
+          {!isCollapsed && (
             <Flex
               justify="space-between"
               align="center"
@@ -128,7 +137,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
           )}
         </>
       ),
-      [content, footer, label, extra, isWrapped, prefixCls, showLabelDivider, token]
+      [content, footer, label, extra, isCollapsed, prefixCls, showLabelDivider, token]
     );
 
     return wrapSSR(
@@ -155,7 +164,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               bordered && getFilterCls(prefixCls, 'border'),
               open && getFilterCls(prefixCls, 'active'),
               disabled && getFilterCls(prefixCls, 'disabled'),
-              selected && !isWrapped && getFilterCls(prefixCls, 'selected')
+              selected && bordered && !isCollapsed && getFilterCls(prefixCls, 'selected')
             )}
           >
             <Flex align="center" justify="space-between" style={{ width: '100%' }}>
