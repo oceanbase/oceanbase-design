@@ -32,7 +32,7 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "NODE_OPTIONS=--max_old_space_size=4096 father build"
+    "build": "NODE_OPTIONS=--max_old_space_size=4096 father build && node ../../scripts/post-process-use-client.js ui"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.24.0",
