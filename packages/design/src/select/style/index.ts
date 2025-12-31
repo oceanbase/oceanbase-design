@@ -5,7 +5,8 @@ import { genStyleHooks } from '../../_util/genComponentStyleHook';
 export type SelectToken = FullToken<'Select'>;
 
 export const genSelectStyle: GenerateStyle<SelectToken> = (token: SelectToken): CSSObject => {
-  const { componentCls } = token;
+  const { antCls, componentCls } = token;
+  const tagCls = `${antCls}-tag`;
   return {
     [`${componentCls}`]: {
       [`${componentCls}-selection-placeholder`]: {
@@ -13,6 +14,11 @@ export const genSelectStyle: GenerateStyle<SelectToken> = (token: SelectToken): 
       },
       [`${componentCls}-clear`]: {
         color: token.colorTextTertiary,
+      },
+      [`${componentCls}-selector`]: {
+        [`${tagCls}`]: {
+          marginInlineEnd: token.marginXXS,
+        },
       },
     },
   };
