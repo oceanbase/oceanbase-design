@@ -47,7 +47,7 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
           },
         },
         '&:hover': {
-          borderColor: token.colorPrimaryHover,
+          borderColor: token.gray7,
         },
       },
       [`${componentCls}-wrapper-has-jumper`]: {
@@ -115,9 +115,9 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
           color: colorTextSecondary,
           transition: 'all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1)',
           '&:hover': {
-            borderColor: token.colorPrimaryHover,
+            borderColor: token.gray7,
             '&::before': {
-              backgroundColor: token.colorPrimaryHover,
+              backgroundColor: token.gray7,
             },
           },
         },
@@ -136,12 +136,12 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
     },
     [`${componentCls}-back-radio-focused`]: {
       [`${componentCls}-wrapper`]: {
-        borderRightColor: token.colorPrimaryHover,
+        borderRightColor: token.gray7,
       },
       [`${componentCls}-playback-control`]: {
         [`${antCls}-radio-button-wrapper:first-child`]: {
           [`+ ${antCls}-radio-button-wrapper::before`]: {
-            backgroundColor: token.colorPrimaryHover,
+            backgroundColor: token.gray7,
           },
         },
       },

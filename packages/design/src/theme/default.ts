@@ -186,6 +186,7 @@ const defaultTheme: ThemeConfig = {
     colorBgSpotlight: white,
     controlItemBgHover: gray2,
     controlItemBgActive: gray2,
+    controlItemBgActiveHover: gray2,
     // 导航特殊色
     colorNaviBg,
     colorNaviBgHover,
