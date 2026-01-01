@@ -5,16 +5,17 @@ import { genStyleHooks } from '../../_util/genComponentStyleHook';
 export type DropdownToken = FullToken<'Dropdown'>;
 
 export const genDropdownStyle: GenerateStyle<DropdownToken> = (token: DropdownToken) => {
-  const { antCls, lineWidth } = token;
+  const { antCls, componentCls, lineWidth } = token;
   const btnComponentCls = `${antCls}-btn`;
   const selector = `${btnComponentCls}-compact-item${btnComponentCls}-primary:not([disabled])`;
+
   return {
     // special style for primary Dropdown.Button
     [`${selector} + ${selector}::before`]: {
       top: -1,
       backgroundColor: token.colorWhite,
       height: `calc(100% + ${lineWidth * 2}px)`,
-    } as CSSObject,
+    },
   };
 };
 
