@@ -80,8 +80,6 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
           marginBlockStart: 0,
           [`${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
             borderBottom: `1px solid ${token.colorBorderSecondary}`,
-            left: -token.paddingXL,
-            right: -token.paddingXL,
           },
         },
       },
@@ -96,8 +94,6 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         },
         [`& > ${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
           borderBottom: `1px solid ${token.colorBorderSecondary}`,
-          left: -token.paddingXL,
-          right: -token.paddingXL,
         },
       },
     },
