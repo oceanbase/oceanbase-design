@@ -22,6 +22,11 @@ export const genRadioStyle: GenerateStyle<RadioToken> = (token: RadioToken): CSS
         {
           borderColor: token.gray7,
         },
+      [`&:hover ${componentCls}${componentCls}-checked:not(${componentCls}-disabled) ${componentCls}-inner`]:
+        {
+          borderColor: token.colorPrimaryHover,
+          backgroundColor: token.colorPrimaryHover,
+        },
     },
     [`${componentCls}-group`]: {
       [`${componentCls}-button-wrapper:not(${componentCls}-button-wrapper-disabled):not(${componentCls}-button-wrapper-checked):hover`]:
