@@ -25,7 +25,7 @@ export const BoundaryFunction: React.FC<IBoundaryFunction> = props => {
       className={classNames('boundary-container', `${prefixCls}-function`, className)}
       {...restProps}
     >
-      <div className="empty">
+      <div className="boundary-empty">
         <img src={info.imageUrl} />
         <h4>{info.title}</h4>
         {children}

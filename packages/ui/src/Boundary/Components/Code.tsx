@@ -42,7 +42,7 @@ const BoundaryCode: React.FC<IBoundaryCode> = props => {
       )}
       {...restProps}
     >
-      <div className="empty">
+      <div className="boundary-empty">
         <img src={imageUrl || info.imageUrl} />
         <h4>{title || info.title}</h4>
         {children}
