@@ -14,12 +14,14 @@ export const genBoundaryStyle: GenerateStyle<BoundaryToken> = (token: BoundaryTo
       alignItems: 'center',
       justifyContent: 'center',
       height: '100%',
-      '.empty': {
+      backgroundColor: token.colorBgContainer,
+      paddingBlock: token.paddingLG,
+      paddingInline: token.paddingXL,
+      '.boundary-empty': {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingBottom: 60,
         '> img': {
           height: 102,
           marginBottom: 24,

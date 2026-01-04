@@ -89,7 +89,7 @@ const ExceptionWrapper: React.FC<{ component: BoundaryException }> = ({ componen
         className={classNames('boundary-container', `${prefixCls}-error`, className)}
         {...restProps}
       >
-        <div className="empty">
+        <div className="boundary-empty">
           <img src={imageUrl || errorInfo.imageUrl} />
           <h4>{title || errorInfo.title}</h4>
           {showError ? (
@@ -129,7 +129,7 @@ const ExceptionWrapper: React.FC<{ component: BoundaryException }> = ({ componen
         )}
         {...restProps}
       >
-        <div className="empty">
+        <div className="boundary-empty">
           <img src={imageUrl || notCompatibleInfo.imageUrl} />
           <h4>{title || notCompatibleInfo.title}</h4>
           <span>{subscription ? subscription : notCompatibleInfo.subscription}</span>
