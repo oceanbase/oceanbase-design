@@ -41,8 +41,16 @@ export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSOb
 };
 
 export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObject => {
-  const { componentCls, antCls, tabsComponentCls, tabsPrefixCls, paddingSM, paddingLG, calc } =
-    token;
+  const {
+    antCls,
+    iconCls,
+    componentCls,
+    tabsComponentCls,
+    tabsPrefixCls,
+    paddingSM,
+    paddingLG,
+    calc,
+  } = token;
   const tableComponentCls = `${antCls}-table`;
   return {
     [`${componentCls}`]: {
