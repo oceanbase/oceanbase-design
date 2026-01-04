@@ -89,6 +89,8 @@ export const fontWeightWeakEn = 300;
 export const fontWeightEn = 500;
 export const fontWeightStrongEn = 600;
 
+const lineHeightSM = 20 / 12;
+
 const defaultTheme: ThemeConfig = {
   token: {
     fontFamily: `-apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
@@ -102,7 +104,7 @@ const defaultTheme: ThemeConfig = {
     borderRadiusLG,
     fontSizeSM,
     fontSize: 13,
-    lineHeightSM: 20 / 12,
+    lineHeightSM: lineHeightSM,
     lineHeight: 20 / 13,
     lineHeightLG: 24 / 16,
     fontHeight: 20,
@@ -283,6 +285,7 @@ const defaultTheme: ThemeConfig = {
     },
     Breadcrumb: {
       fontSize: fontSizeSM,
+      lineHeight: lineHeightSM,
       fontHeight: 20,
       lastItemColor: colorTextSecondary,
     },

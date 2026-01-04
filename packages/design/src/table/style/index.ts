@@ -12,6 +12,7 @@ const genSmallBtnStyle = (token: TableToken): CSSObject => {
     [`${antCls}-btn:not(${antCls}-btn-sm):not(${antCls}-btn-lg)`]: {
       height: token.controlHeightSM,
       fontSize: token.fontSizeSM,
+      lineHeight: token.lineHeightSM,
       [`&:not(${antCls}-btn-icon-only):not(${antCls}-btn-circle)`]: {
         paddingInline: token.paddingXS,
       },
@@ -46,6 +47,8 @@ export const genTableStyle = (token: TableToken): CSSObject => {
   return {
     // 表格通用样式
     [`${componentCls}-wrapper ${componentCls}`]: {
+      // to match fontSizeSM lineHeight
+      lineHeight: token.lineHeightSM,
       color: colorText,
       backgroundColor: colorBgBase,
       borderRadius: borderRadiusLG,

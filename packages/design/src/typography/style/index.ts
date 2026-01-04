@@ -29,6 +29,7 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
     },
     [`${componentCls}-caption`]: {
       fontSize: token.fontSizeSM,
+      lineHeight: token.lineHeightSM,
       fontWeight: token.fontWeightWeak,
     },
     [`${componentCls}${componentCls}-editable-text:not(${componentCls}-edit-content)`]: {

@@ -161,7 +161,6 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
         alignItems: 'center',
         justifyContent: 'center',
         lineHeight: 1,
-        //
         fontSize: token.fontSizeSM,
       },
       [`${componentCls}-message`]: {
