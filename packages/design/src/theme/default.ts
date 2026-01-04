@@ -305,7 +305,7 @@ const defaultTheme: ThemeConfig = {
     },
     DatePicker: {
       borderRadiusLG: borderRadiusMD,
-      colorTextQuaternary: gray7,
+      colorTextQuaternary: gray8,
       // work for TimePicker and DatePicker
       hoverBorderColor: gray7,
       activeBorderColor: gray7,
