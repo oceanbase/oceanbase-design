@@ -7,6 +7,7 @@ export type ModalToken = FullToken<'Modal'>;
 export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSSObject => {
   const {
     antCls,
+    iconCls,
     componentCls,
     marginLG,
     fontSizeHeading5,
@@ -34,6 +35,9 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
           paddingBottom: token.padding,
           [`${componentCls}-title`]: {
             fontSize: fontSizeHeading3,
+            [iconCls]: {
+              fontSize: token.fontSizeLG,
+            },
           },
           [`${componentCls}-title-wrapper`]: {
             display: 'flex',
