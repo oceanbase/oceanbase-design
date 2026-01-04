@@ -10,11 +10,17 @@ import consolas from '../fonts/Consolas.woff2';
 import helveticaNeue from '../fonts/HelveticaNeue.woff2';
 import 'antd/dist/reset.css';
 
-const genGlobalStyle = (token: GlobalToken, prefixCls?: string): CSSInterpolation => {
+const genGlobalStyle = (
+  token: GlobalToken,
+  prefixCls?: string,
+  iconPrefixCls?: string
+): CSSInterpolation => {
   const antCls = `.${prefixCls}`;
+  const iconCls = `.${iconPrefixCls}`;
   const buttonComponentCls = `${antCls}-btn`;
   const typographyComponentCls = `${antCls}-typography`;
   const menuComponentCls = `${antCls}-menu`;
+  const pickerComponentCls = `${antCls}-picker`;
   return [
     {
       '@font-face': {
@@ -118,15 +124,28 @@ const genGlobalStyle = (token: GlobalToken, prefixCls?: string): CSSInterpolatio
           },
         },
       },
+      // handle picker clear icon style, work for DatePicker and TimePicker
+      [`${pickerComponentCls}`]: {
+        [`${pickerComponentCls}-clear ${iconCls}`]: {
+          color: token.gray7,
+          ['&:hover']: {
+            color: token.gray8,
+          },
+        },
+      },
     },
   ];
 };
 
 export interface GlobalStyleProps {
   prefixCls?: string;
+  iconPrefixCls?: string;
 }
 
-const GlobalStyle: React.FC<GlobalStyleProps> = ({ prefixCls = 'ant' }) => {
+const GlobalStyle: React.FC<GlobalStyleProps> = ({
+  prefixCls = 'ant',
+  iconPrefixCls = 'anticon',
+}) => {
   const { theme, token } = themeConfig.useToken();
 
   const wrapSSR = useStyleRegister(
@@ -137,7 +156,7 @@ const GlobalStyle: React.FC<GlobalStyleProps> = ({ prefixCls = 'ant' }) => {
       hashId: '', // Empty hashId for global styles
       order: -1000, // Inject before other styles
     },
-    () => genGlobalStyle(token, prefixCls)
+    () => genGlobalStyle(token, prefixCls, iconPrefixCls)
   );
 
   return wrapSSR(<></>);
