@@ -10,7 +10,7 @@ import { CaretRightFilled } from '@oceanbase/icons';
 import ConfigProvider from '../config-provider';
 import type { ConfigConsumerProps } from '../config-provider';
 import defaultLocale from '../locale/en-US';
-import { isHorizontalPaddingZero } from '../_util';
+import { isHorizontalPaddingZero, isPaddingBottomZero } from '../_util';
 import theme from '../theme';
 import useStyle, { genTableStyle } from './style';
 
@@ -184,12 +184,15 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     // card body no horizontal padding
     const noBodyHorizontalPadding =
       isHorizontalPaddingZero(bodyStyle?.padding) || isHorizontalPaddingZero(styles?.body?.padding);
+    const noBodyPaddingBottom =
+      isPaddingBottomZero(bodyStyle?.padding) || isPaddingBottomZero(styles?.body?.padding);
     const cardCls = classNames(
       {
         [`${prefixCls}-has-head`]: !!(title || extra || tabList || tabBarExtraContent),
         [`${prefixCls}-no-divider`]: !divided,
         [`${prefixCls}-gray`]: gray,
         [`${prefixCls}-no-body-horizontal-padding`]: noBodyHorizontalPadding,
+        [`${prefixCls}-no-body-padding-bottom`]: noBodyPaddingBottom,
         [`${prefixCls}-collapsible`]: collapsible,
         [`${prefixCls}-collapsed`]: collapsed,
       },

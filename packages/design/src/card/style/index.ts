@@ -175,7 +175,7 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
     // reduce margin between card title and table
     [`&${componentCls}-has-head${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
       [`${componentCls}-body`]: {
-        [`& > ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
+        [`> ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
           {
             marginTop: calc(token.Table?.cellPaddingBlock).mul(-1).equal(),
           },
@@ -186,6 +186,27 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
     // no body horizontal padding small card
     [`${componentCls}${componentCls}-no-body-horizontal-padding${componentCls}-small`]:
       genTableStyle(paddingSM, token),
+    // no body padding bottom and bordered card
+    [`${componentCls}${componentCls}-bordered${componentCls}-no-body-padding-bottom`]: {
+      [`${componentCls}-body`]: {
+        // fix double border when Table has no pagination
+        [`> ${tableComponentCls}-wrapper${tableComponentCls}-no-pagination`]: {
+          [`${tableComponentCls}`]: {
+            [`${tableComponentCls}-tbody > tr:last-child > td`]: {
+              borderBottom: 'none',
+            },
+          },
+        },
+        // fix double border when Table has no data
+        [`> ${tableComponentCls}-wrapper${tableComponentCls}-has-empty`]: {
+          [`${tableComponentCls}`]: {
+            [`${tableComponentCls}-tbody > tr > td`]: {
+              borderBottom: 'none',
+            },
+          },
+        },
+      },
+    },
     // collapsible card style
     [`${componentCls}${componentCls}-collapsible`]: {
       [`${componentCls}-title-wrapper`]: {

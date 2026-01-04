@@ -512,7 +512,7 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
 
 exports[`Table > default empty should work 1`] = `
 <div
-  class="ant-table-wrapper"
+  class="ant-table-wrapper ant-table-has-empty"
 >
   <div
     class="ant-spin-nested-loading"
