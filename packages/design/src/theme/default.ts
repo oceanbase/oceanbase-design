@@ -324,13 +324,11 @@ const defaultTheme: ThemeConfig = {
       colorTextQuaternary: gray8,
       // work for Input, InputNumber and AutoComplete
       hoverBorderColor: gray7,
-      activeBorderColor: gray7,
     },
     InputNumber: {
       handleVisible: true,
       borderRadiusLG: borderRadiusMD,
       hoverBorderColor: gray7,
-      activeBorderColor: gray7,
     },
     Message: {
       borderRadiusLG: borderRadiusMD,
@@ -360,7 +358,6 @@ const defaultTheme: ThemeConfig = {
       // work for all multiple select component, including Select, TreeSelect and Cascader and so on
       borderRadiusLG: borderRadiusMD,
       hoverBorderColor: gray7,
-      activeBorderColor: gray7,
       multipleItemBg: gray2,
       multipleItemBorderColor: tagColorBorder,
       multipleItemBorderColorDisabled: tagColorBorder,
