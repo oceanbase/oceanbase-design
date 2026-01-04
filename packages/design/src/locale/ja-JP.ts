@@ -6,6 +6,7 @@ export default {
   global: {
     ...jaJP.global,
     inputPlaceholder: '入力してください',
+    viewDocument: 'ドキュメントを見る',
   },
   Pagination: {
     ...jaJP.Pagination,
@@ -24,9 +25,6 @@ export default {
       collapse: '折りたたむ',
       open: '展開',
     },
-  },
-  Card: {
-    viewDocument: 'ドキュメントを見る',
   },
   Filter: {
     pleaseSelect: '選択してください',

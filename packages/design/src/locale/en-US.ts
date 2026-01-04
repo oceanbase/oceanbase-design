@@ -6,6 +6,7 @@ export default {
   global: {
     ...enUS.global,
     inputPlaceholder: 'Please enter',
+    viewDocument: 'View Document',
   },
   Pagination: {
     ...enUS.Pagination,
@@ -24,9 +25,6 @@ export default {
       collapse: 'Collapse',
       open: 'Open',
     },
-  },
-  Card: {
-    viewDocument: 'View Document',
   },
   Filter: {
     pleaseSelect: 'Please select',

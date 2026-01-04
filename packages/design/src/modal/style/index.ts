@@ -35,6 +35,33 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
           [`${componentCls}-title`]: {
             fontSize: fontSizeHeading3,
           },
+          [`${componentCls}-title-wrapper`]: {
+            display: 'flex',
+            alignItems: 'center',
+          },
+          [`${componentCls}-title-content`]: {
+            lineHeight: token.lineHeightLG,
+            marginInlineEnd: token.marginXS,
+          },
+          [`${componentCls}-document-divider`]: {
+            marginInline: 0,
+            height: token.size,
+          },
+          [`${componentCls}-document-icon`]: {
+            display: 'inline-block',
+            color: token.colorIcon,
+            fontSize: token.fontSizeLG,
+            cursor: 'pointer',
+            '&:hover': {
+              color: token.colorLinkHover,
+            },
+            '&:active': {
+              color: token.colorLinkActive,
+            },
+          },
+          [`${componentCls}-document-default-icon`]: {
+            marginTop: (token.controlHeight - token.fontSizeLG) / 2,
+          },
           // 使用伪元素创建贯通的分割线
           '&::after': {
             content: '""',

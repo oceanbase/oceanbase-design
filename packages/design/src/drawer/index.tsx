@@ -1,4 +1,4 @@
-import React, { isValidElement, useState, useContext } from 'react';
+import React, { isValidElement, useState, useContext, useMemo } from 'react';
 import { Drawer as AntDrawer, Space } from 'antd';
 import type { DrawerProps as AntDrawerProps } from 'antd/es/drawer';
 import { useScroll, useSize } from 'ahooks';
@@ -9,6 +9,7 @@ import type { ConfigConsumerProps } from '../config-provider';
 import Button from '../button';
 import type { ButtonProps } from '../button';
 import defaultLocale from '../locale/en-US';
+import { Document, type DocumentType } from '../_util';
 import useStyle from './style';
 
 export * from 'antd/es/drawer';
@@ -28,6 +29,7 @@ export interface DrawerProps extends AntDrawerProps {
   cancelText?: string;
   okText?: string;
   okButtonProps?: ButtonProps;
+  document?: DocumentType;
   locale?: DrawerLocale;
 }
 
@@ -48,6 +50,8 @@ const Drawer: CompoundedComponent = ({
   confirmLoading,
   footer,
   footerExtra,
+  document,
+  title,
   rootClassName,
   bodyStyle,
   styles,
@@ -66,6 +70,30 @@ const Drawer: CompoundedComponent = ({
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('drawer', customizePrefixCls);
   const [wrapCSSVar] = useStyle(prefixCls);
+
+  const viewDocument = contextLocale?.global?.viewDocument;
+
+  const drawerTitle = useMemo(() => {
+    if (!title && !document) {
+      return title;
+    }
+    if (!title) {
+      return null;
+    }
+    if (!document) {
+      return title;
+    }
+
+    return (
+      <div
+        className={`${prefixCls}-title-wrapper`}
+        style={{ display: 'flex', alignItems: 'center' }}
+      >
+        <span className={`${prefixCls}-title-content`}>{title}</span>
+        <Document document={document} prefixCls={prefixCls} viewDocument={viewDocument} />
+      </div>
+    );
+  }, [title, document, prefixCls, viewDocument]);
 
   const [contentElment, setContentElement] = useState<HTMLDivElement | null>(null);
   // useSize for re-render when contentElment change size
@@ -100,6 +128,7 @@ const Drawer: CompoundedComponent = ({
       loading={loading}
       destroyOnClose={true}
       onClose={handleCancel}
+      title={drawerTitle}
       rootClassName={drawerCls}
       prefixCls={customizePrefixCls}
       classNames={{
