@@ -147,9 +147,8 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
       borderRadius: 0,
     },
     [`${componentCls}${componentCls}-mini`]: {
-      paddingBlock: 1,
+      paddingBlock: token.paddingXXS,
       paddingInline: token.paddingXS,
-      border: 'none',
       width: 'fit-content',
       display: 'inline-flex',
       alignItems: 'center',
@@ -160,8 +159,6 @@ export const genAlertStyle: GenerateStyle<AlertToken> = (token: AlertToken): CSS
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        lineHeight: 1,
-        fontSize: token.fontSizeSM,
       },
       [`${componentCls}-message`]: {
         whiteSpace: 'nowrap',
