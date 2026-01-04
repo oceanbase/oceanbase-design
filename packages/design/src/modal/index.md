@@ -15,6 +15,7 @@ markdown: |
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 - 📢 `destroyOnClose` 属性的默认值为 `true`。
 - 🆕 Modal 新增 `extra` 属性，用于设置底部额外内容。
+- 🆕 Modal 新增 `document` 属性，用于在标题旁设置文档链接。
 - 🆕 新增 `Modal.Progress` 组件，可用于异步任务或耗时较长的场景。
 - 🆕 `Modal.method()` 静态方法，支持消费 `ConfigProvider` 全局配置。
 
@@ -24,6 +25,7 @@ markdown: |
 <code src="./demo/basic.tsx" title="基本"></code>
 <code src="./demo/no-title.tsx" title="无标题" description="标题为空的 Modal 示例，用于调试。" debug></code>
 <code src="./demo/no-footer.tsx" title="无页脚" description="页脚为空的 Modal 示例，用于调试。" debug></code>
+<code src="./demo/document.tsx" title="文档链接" description="可通过 `document` 属性在标题旁显示文档链接图标。"></code>
 <code src="./demo/extra.tsx" title="底部额外内容" description="可通过 `extra` 属性进行设置。"></code>
 <code src="./demo/form.tsx" title="Form 表单"></code>
 <code src="./demo/scroll.tsx" title="内容区滚动" description="可限制最大高度，并设置滚动。"></code>
@@ -35,9 +37,10 @@ markdown: |
 
 ### Modal
 
-| 参数           | 说明                        | 类型    | 默认值 | 版本  |
-| :------------- | :-------------------------- | :------ | :----- | :---- |
-| destroyOnClose | 关闭时销毁 Modal 里的子元素 | boolean | true   | 0.3.1 |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| :-- | :-- | :-- | :-- | :-- |
+| destroyOnClose | 关闭时销毁 Modal 里的子元素 | boolean | true | 0.3.1 |
+| document | 文档链接，支持字符串、函数或自定义图标 | string \| React.MouseEventHandler\<HTMLAnchorElement\> \| React.ReactNode | - | - |
 
 - 更多 API 详见 antd Modal 文档: https://ant.design/components/modal-cn#api
 

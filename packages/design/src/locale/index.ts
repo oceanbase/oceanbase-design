@@ -12,6 +12,7 @@ export * from 'antd/es/locale';
 
 export type GlobalLocale = AntLocale['global'] & {
   inputPlaceholder?: string;
+  viewDocument?: string;
 };
 
 export interface PaginationLocale extends AntPaginationLocale {

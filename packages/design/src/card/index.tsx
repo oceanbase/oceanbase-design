@@ -1,5 +1,5 @@
 import { isNullValue } from '@oceanbase/util';
-import { Card as AntCard, Space, Tag, Divider, Tooltip } from 'antd';
+import { Card as AntCard, Space, Tag } from 'antd';
 import type {
   CardProps as AntCardProps,
   CardTabListType as AntCardTabListType,
@@ -10,7 +10,12 @@ import { CaretRightFilled } from '@oceanbase/icons';
 import ConfigProvider from '../config-provider';
 import type { ConfigConsumerProps } from '../config-provider';
 import defaultLocale from '../locale/en-US';
-import { isHorizontalPaddingZero, isPaddingBottomZero } from '../_util';
+import {
+  isHorizontalPaddingZero,
+  isPaddingBottomZero,
+  Document,
+  type DocumentType,
+} from '../_util';
 import theme from '../theme';
 import useStyle, { genTableStyle } from './style';
 
@@ -21,13 +26,11 @@ export interface CardTabListType extends AntCardTabListType {
   tag?: React.ReactNode;
 }
 
-export interface CardLocale {
-  viewDocument?: string;
-}
+export type CardLocale = Record<string, never>;
 
 export interface CardProps extends AntCardProps {
   subTitle?: React.ReactNode;
-  document?: string | React.MouseEventHandler<HTMLAnchorElement> | React.ReactNode;
+  document?: DocumentType;
   divided?: boolean;
   gray?: boolean;
   tabList?: CardTabListType[];
@@ -83,6 +86,8 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     const tabsPrefixCls = getPrefixCls('tabs', customizePrefixCls);
     const [wrapCSSVar] = useStyle(prefixCls, tabsPrefixCls);
 
+    const viewDocument = contextLocale?.global?.viewDocument;
+
     const [internalCollapsed, setInternalCollapsed] = useState(defaultCollapsed ?? false);
     const collapsed = outerCollapsed !== undefined ? outerCollapsed : internalCollapsed;
 
@@ -93,9 +98,6 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       }
       onCollapse?.(newCollapsed);
     }, [collapsed, outerCollapsed, onCollapse]);
-
-    const documentLink = typeof document === 'string' ? document : undefined;
-    const documentClick = typeof document === 'function' ? document : undefined;
 
     const cardTitle = useMemo(() => {
       if (!collapsible && !subTitle && !document) {
@@ -111,28 +113,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
           {(subTitle || document) && (
             <Space className={`${prefixCls}-sub-title-wrapper`} size="small">
               {subTitle && <div className={`${prefixCls}-sub-title`}>{subTitle}</div>}
-              {document && (
-                <Space size="small">
-                  {document && (
-                    <Divider type="vertical" className={`${prefixCls}-document-divider`} />
-                  )}
-                  <Tooltip title={cardLocale.viewDocument}>
-                    <a
-                      href={documentLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={documentClick}
-                      className={`${prefixCls}-document-icon`}
-                    >
-                      {documentLink || documentClick ? (
-                        <DocumentIcon className={`${prefixCls}-document-default-icon`} />
-                      ) : (
-                        (document as React.ReactNode)
-                      )}
-                    </a>
-                  </Tooltip>
-                </Space>
-              )}
+              <Document document={document} prefixCls={prefixCls} viewDocument={viewDocument} />
             </Space>
           )}
         </>
@@ -172,13 +153,11 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       title,
       subTitle,
       document,
-      documentLink,
-      documentClick,
       collapsed,
       prefixCls,
       token,
       handleCollapse,
-      cardLocale.viewDocument,
+      viewDocument,
     ]);
 
     // card body no horizontal padding
@@ -245,33 +224,6 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 if (process.env.NODE_ENV !== 'production') {
   Card.displayName = AntCard.displayName;
 }
-
-const DocumentIcon = ({ className }: { className?: string }) => {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-    >
-      <g clipPath="url(#clip0_61186_2038)">
-        <path
-          d="M7.99992 4.66667C7.99992 3.95942 7.71897 3.28115 7.21887 2.78105C6.71877 2.28095 6.0405 2 5.33325 2H1.33325V12H5.99992C6.53035 12 7.03906 12.2107 7.41413 12.5858C7.78921 12.9609 7.99992 13.4696 7.99992 14M7.99992 4.66667V14M7.99992 4.66667C7.99992 3.95942 8.28087 3.28115 8.78097 2.78105C9.28106 2.28095 9.95934 2 10.6666 2H14.6666V12H9.99992C9.46949 12 8.96078 12.2107 8.5857 12.5858C8.21063 12.9609 7.99992 13.4696 7.99992 14"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </g>
-      <defs>
-        <clipPath id="clip0_61186_2038">
-          <rect width="16" height="16" fill="white" />
-        </clipPath>
-      </defs>
-    </svg>
-  );
-};
 
 export default Object.assign(Card, {
   Grid: AntCard.Grid,

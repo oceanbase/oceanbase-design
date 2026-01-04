@@ -11,6 +11,7 @@ nav:
   - 内容区滚动时，动态设置页头和页脚的阴影。
   - 当内容高度大于等于抽屉高度时，页脚会置底展示；当内容高度小于抽屉高度时，`footer` 会跟随内容展示。
 - 📢 `destroyOnClose` 属性的默认值为 `true`。
+- 🆕 新增 `document` 属性，用于在标题旁设置文档链接。
 - 🆕 新增 `footer` 属性，用于设置抽屉的底部内容，默认为 `取消` 和 `确定` 按钮。
 - 🆕 新增 `footerExtra` 属性，用于设置抽屉底部的额外内容，仅默认页脚生效。
 - 🆕 新增 `onOk` 和 `onCancel` 属性，用于设置 `取消` 和 `确定` 按钮的回调。
@@ -22,6 +23,7 @@ nav:
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基础抽屉" description="默认包含标题、内容。"></code>
+<code src="./demo/document.tsx" title="文档链接" description="可通过 `document` 属性在标题旁显示文档链接图标。"></code>
 <code src="./demo/footer.tsx" title="开启页脚" description="内容较短时，页脚跟随内容展示；可通过 `onOk` 或 `footer` 开启页脚。"></code>
 <code src="./demo/footerExtra.tsx" title="设置默认页脚的额外内容" description="通过 `footerExtra` 设置，仅默认页脚生效。"></code>
 <code src="./demo/custom-footer.tsx" title="自定义页脚"></code>
@@ -33,16 +35,17 @@ nav:
 
 ## API
 
-| 参数           | 说明                               | 类型                 | 默认值 | 版本 |
-| :------------- | :--------------------------------- | :------------------- | :----- | :--- |
-| destroyOnClose | 关闭时销毁 Modal 里的子元素        | boolean              | true   | -    |
-| onOk           | 点击确定回调，设置时会开启默认页脚 | (e) => void          | -      | -    |
-| onCancel       | 点击取消按钮的回调                 | (e) => void          | -      | -    |
-| cancelText     | 设置取消按钮文字                   | string               | 取消   | -    |
-| okText         | 确认按钮文字                       | string               | 确定   | -    |
-| okButtonProps  | ok 按钮 props                      | ButtonProps          | -      | -    |
-| confirmLoading | 确定按钮 loading                   | boolean              | -      | -    |
-| footer         | 抽屉的页脚                         | boolean \| ReactNode | -      | -    |
-| footerExtra    | 抽屉页脚的额外内容，仅默认页脚生效 | ReactNode            | -      | -    |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| :-- | :-- | :-- | :-- | :-- |
+| destroyOnClose | 关闭时销毁 Modal 里的子元素 | boolean | true | - |
+| document | 文档链接，支持字符串、函数或自定义图标 | string \| React.MouseEventHandler\<HTMLAnchorElement\> \| React.ReactNode | - | - |
+| onOk | 点击确定回调，设置时会开启默认页脚 | (e) => void | - | - |
+| onCancel | 点击取消按钮的回调 | (e) => void | - | - |
+| cancelText | 设置取消按钮文字 | string | 取消 | - |
+| okText | 确认按钮文字 | string | 确定 | - |
+| okButtonProps | ok 按钮 props | ButtonProps | - | - |
+| confirmLoading | 确定按钮 loading | boolean | - | - |
+| footer | 抽屉的页脚 | boolean \| ReactNode | - | - |
+| footerExtra | 抽屉页脚的额外内容，仅默认页脚生效 | ReactNode | - | - |
 
 - 更多 API 详见 antd Drawer 文档: https://ant.design/components/drawer-cn

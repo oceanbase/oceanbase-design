@@ -7,30 +7,61 @@ import {
   InfoCircleOutlined,
 } from '@oceanbase/icons';
 import classNames from 'classnames';
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import ConfigProvider from '../config-provider';
+import type { ConfigConsumerProps } from '../config-provider';
 import Space from '../space';
 import { modal } from '../static-function';
+import { Document, type DocumentType } from '../_util';
 import useStyle from './style';
 
 export interface ModalProps extends AntModalProps {
   extra?: React.ReactNode;
+  document?: DocumentType;
 }
 
 const Modal = ({
   title,
   extra,
   footer,
+  document,
   prefixCls: customizePrefixCls,
   className,
   ...restProps
 }: ModalProps) => {
-  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const { getPrefixCls, locale: contextLocale } = useContext<ConfigConsumerProps>(
+    ConfigProvider.ConfigContext
+  );
   const prefixCls = getPrefixCls('modal', customizePrefixCls);
   const [wrapCSSVar] = useStyle(prefixCls);
+
+  const viewDocument = contextLocale?.global?.viewDocument;
+
+  const modalTitle = useMemo(() => {
+    if (!title && !document) {
+      return title;
+    }
+    if (!title) {
+      return null;
+    }
+    if (!document) {
+      return title;
+    }
+
+    return (
+      <div
+        className={`${prefixCls}-title-wrapper`}
+        style={{ display: 'flex', alignItems: 'center' }}
+      >
+        <span className={`${prefixCls}-title-content`}>{title}</span>
+        <Document document={document} prefixCls={prefixCls} viewDocument={viewDocument} />
+      </div>
+    );
+  }, [title, document, prefixCls, viewDocument]);
+
   const modalCls = classNames(
     {
-      [`${prefixCls}-no-title`]: !title,
+      [`${prefixCls}-no-title`]: !title && !document,
       [`${prefixCls}-no-footer`]: footer === false || footer === null,
     },
     className
@@ -39,7 +70,7 @@ const Modal = ({
   return wrapCSSVar(
     <AntModal
       destroyOnClose={true}
-      title={title}
+      title={modalTitle}
       // convert false to null to hide .ant-modal-footer dom
       // ref: https://github.com/ant-design/ant-design/blob/master/components/modal/Modal.tsx#L105
       footer={

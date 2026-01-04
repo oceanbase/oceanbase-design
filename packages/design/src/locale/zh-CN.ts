@@ -6,6 +6,7 @@ export default {
   global: {
     ...zhCN.global,
     inputPlaceholder: '请输入',
+    viewDocument: '查看文档',
   },
   Pagination: {
     ...zhCN.Pagination,
@@ -24,9 +25,6 @@ export default {
       collapse: '收起',
       open: '展开',
     },
-  },
-  Card: {
-    viewDocument: '查看文档',
   },
   Filter: {
     pleaseSelect: '请选择',

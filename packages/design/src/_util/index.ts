@@ -46,3 +46,5 @@ export const isPaddingBottomZero = (padding?: string | number) => {
 
   return false;
 };
+
+export { DocumentIcon, Document, type DocumentType } from './document';

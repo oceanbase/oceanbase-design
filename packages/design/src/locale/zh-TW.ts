@@ -6,6 +6,7 @@ export default {
   global: {
     ...zhTW.global,
     inputPlaceholder: '請輸入',
+    viewDocument: '查看文檔',
   },
   Pagination: {
     ...zhTW.Pagination,
@@ -24,9 +25,6 @@ export default {
       collapse: '收起',
       open: '展開',
     },
-  },
-  Card: {
-    viewDocument: '查看文檔',
   },
   Filter: {
     pleaseSelect: '請選擇',
