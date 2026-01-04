@@ -125,13 +125,12 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
     },
     [`${componentCls}-label`]: {
       fontSize: token.fontSizeSM,
+      lineHeight: token.lineHeightSM,
       backgroundColor: colorFillSecondary,
       color: colorTextSecondary,
       display: 'inline-block',
       width: 52,
-      padding: '4px 0',
       borderRadius: token.borderRadiusSM,
-      lineHeight: 1,
       textAlign: 'center',
     },
     [`${componentCls}-back-radio-focused`]: {

@@ -44,6 +44,7 @@ export const genVerticalStyle = (
       [`${componentCls}-item`]: {
         [`${componentCls}-item-label`]: {
           fontSize: token.fontSizeSM,
+          lineHeight: token.lineHeightSM,
         },
       },
     },

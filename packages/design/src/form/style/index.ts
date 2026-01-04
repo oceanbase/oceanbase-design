@@ -12,6 +12,7 @@ export const genFormStyle: GenerateStyle<FormToken> = (token: FormToken): CSSObj
       [`${componentCls}-item-explain, ${componentCls}-item-extra`]: {
         paddingTop: token.paddingXXS,
         fontSize: token.fontSizeSM,
+        lineHeight: token.lineHeightSM,
       },
       [`${componentCls}-item-explain + ${componentCls}-item-extra`]: {
         paddingTop: 0,
@@ -30,6 +31,7 @@ export const genFormStyle: GenerateStyle<FormToken> = (token: FormToken): CSSObj
         [`${componentCls}-item-description`]: {
           paddingTop: token.paddingXXS,
           fontSize: token.fontSizeSM,
+          lineHeight: token.lineHeightSM,
           color: token.colorTextDescription,
         },
         // action style

@@ -64,6 +64,7 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
               [`${antCls}-steps-item-description`]: {
                 color: colorTextTertiary,
                 fontSize: token.fontSizeSM,
+                lineHeight: token.lineHeightSM,
                 marginTop: token.marginXS,
               },
             },
