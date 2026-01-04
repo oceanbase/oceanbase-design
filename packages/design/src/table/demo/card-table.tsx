@@ -18,6 +18,7 @@ const App: React.FC = () => {
   const [expandable, setExpandable] = useState(true);
   const [selectable, setSelectable] = useState(true);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [hasData, setHasData] = useState(true);
 
   const columns = [
     {
@@ -152,6 +153,15 @@ const App: React.FC = () => {
             }}
           />
         </Form.Item>
+        <Form.Item label="Table has data" required={true}>
+          <Switch
+            size="small"
+            value={hasData}
+            onChange={value => {
+              setHasData(value);
+            }}
+          />
+        </Form.Item>
       </Form>
       <Card
         bordered={hasBorder}
@@ -187,7 +197,7 @@ const App: React.FC = () => {
           bordered={bordered}
           innerBordered={innerBordered}
           columns={columns}
-          dataSource={dataSource}
+          dataSource={hasData ? dataSource : []}
           rowKey={record => record.key}
           expandable={
             expandable

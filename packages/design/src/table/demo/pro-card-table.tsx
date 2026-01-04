@@ -10,6 +10,7 @@ const App: React.FC = () => {
   const [hasTitle, setHasTitle] = useState(true);
   const [hasTabs, setHasTabs] = useState(false);
   const [hasPadding, setHasPadding] = useState(false);
+  const [hasData, setHasData] = useState(true);
 
   // table
   const [bordered, setBordered] = useState(false);
@@ -143,6 +144,15 @@ const App: React.FC = () => {
             }}
           />
         </Form.Item>
+        <Form.Item label="Table has data" required={true}>
+          <Switch
+            size="small"
+            value={hasData}
+            onChange={value => {
+              setHasData(value);
+            }}
+          />
+        </Form.Item>
       </Form>
       <ProCard
         bordered={hasBorder}
@@ -176,7 +186,7 @@ const App: React.FC = () => {
           bordered={bordered}
           innerBordered={innerBordered}
           columns={columns}
-          dataSource={dataSource}
+          dataSource={hasData ? dataSource : []}
           rowKey={record => record.key}
           expandable={
             expandable

@@ -48,6 +48,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
     size,
     bordered,
     innerBordered,
+    dataSource,
     columns,
     footer,
     pagination: customPagination,
@@ -84,12 +85,16 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
 
   const prefixCls = getPrefixCls('table', customizePrefixCls);
   const [wrapCSSVar] = useStyle(prefixCls);
+  const noPagination = pagination === false || pagination === null;
+  const noData = dataSource?.length === 0;
   const tableCls = classNames(
     {
       [`${prefixCls}-expandable`]: !isEmpty(expandable),
       [`${prefixCls}-selectable`]: !!rowSelection,
       [`${prefixCls}-has-footer`]: !!footer,
       [`${prefixCls}-inner-bordered`]: innerBordered,
+      [`${prefixCls}-no-pagination`]: noPagination,
+      [`${prefixCls}-has-empty`]: noData,
     },
     className
   );
@@ -232,6 +237,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
       }}
       size={size}
       bordered={bordered || innerBordered}
+      dataSource={dataSource}
       columns={newColumns}
       rowClassName={(...args) => {
         return classNames(
@@ -274,7 +280,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
       }}
       footer={footer}
       pagination={
-        pagination === false
+        noPagination
           ? false
           : {
               ...pagination,
