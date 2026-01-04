@@ -10,6 +10,9 @@ export const genSwitchStyle: GenerateStyle<SwitchToken> = (token: SwitchToken): 
     [`${componentCls}:not(${componentCls}-checked):not(${componentCls}-disabled):not(${componentCls}-loading)`]:
       {
         background: token.colorTextTertiary,
+        [`&:hover`]: {
+          background: token.colorTextSecondary,
+        },
       },
   };
 };

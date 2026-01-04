@@ -404,7 +404,6 @@ const defaultTheme: ThemeConfig = {
       colorBgSpotlight: white,
       colorTextLightSolid: colorText,
     },
-    Typography: {},
     Menu: {
       borderRadiusLG: borderRadiusMD,
       paddingContentVertical: 0,
