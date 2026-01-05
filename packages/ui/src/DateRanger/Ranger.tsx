@@ -77,8 +77,10 @@ export type RangeDateValue = {
   range: RangeValue;
 };
 
-export interface DateRangerProps
-  extends Omit<RangePickerProps, 'mode' | 'picker' | 'value' | 'defaultValue'> {
+export interface DateRangerProps extends Omit<
+  RangePickerProps,
+  'mode' | 'picker' | 'value' | 'defaultValue'
+> {
   // 数据相关
   selects?: RangeOption[];
   defaultQuickValue?: string;
@@ -725,7 +727,6 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                 value="stepForward"
                 style={{
                   paddingInline: 8,
-                  borderInlineStart: 0,
                   borderTopLeftRadius: 0,
                   borderBottomLeftRadius: 0,
                 }}

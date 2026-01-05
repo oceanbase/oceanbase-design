@@ -95,6 +95,12 @@ group: 业务组件
 
 - 💄 去掉 FooterToolbar 和 PageContainer 的大尺寸样式。[#1175](https://github.com/oceanbase/oceanbase-design/pull/1175)
 
+## 0.4.24
+
+`2026-01-05`
+
+- 💄 优化 DateRanger 时间前进和后退按钮的样式。[#1395](https://github.com/oceanbase/oceanbase-design/pull/1395)
+
 ## 0.4.23
 
 `2025-12-08`

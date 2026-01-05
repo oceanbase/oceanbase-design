@@ -21,14 +21,15 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
       children,
       prefixCls: customizePrefixCls,
       icon,
-      className,
       color: colorProp,
+      closable,
       ellipsis = {
         tooltip: {
           title: children,
         },
       },
       pill,
+      className,
       ...restProps
     },
     ref
@@ -41,6 +42,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
     const ellipsisConfig = getEllipsisConfig(ellipsis, children);
     const tagCls = classNames(
       {
+        [`${prefixCls}-closable`]: !!closable,
         [`${prefixCls}-ellipsis`]: !!ellipsisConfig,
         [`${prefixCls}-pill`]: pill,
         [`${prefixCls}-critical`]: isCritical,
@@ -58,6 +60,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
         icon={ellipsisConfig ? null : icon}
         // treat critical as preset status, avoid being treated as custom color
         color={isCritical ? undefined : colorProp}
+        closable={closable}
         {...restProps}
       >
         {ellipsisConfig ? (

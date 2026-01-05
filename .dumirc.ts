@@ -253,7 +253,7 @@ export default defineConfig({
               title: 'ContentWithIcon 文字旁提示',
               link: '/biz-components/content-with-icon',
             },
-            { title: 'DateRanger 新版日期时间选择', link: '/biz-components/date-ranger' },
+            { title: 'DateRanger 日期时间选择 (新版)', link: '/biz-components/date-ranger' },
             { title: 'Ranger 日期时间选择', link: '/biz-components/ranger' },
             { title: 'TreeSearch 树搜索', link: '/biz-components/tree-search' },
             { title: 'Password 密码输入框', link: '/biz-components/password' },

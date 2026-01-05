@@ -251,6 +251,12 @@ group: 基础组件
 - 💄 更新 Table 样式，包括去掉斑马纹、增加行分隔线、调整单元格间距等。[#1176](https://github.com/oceanbase/oceanbase-design/pull/1176)
 - 💄 调整 Tabs 的字体颜色和火柴棍长度。[#1177](https://github.com/oceanbase/oceanbase-design/pull/1177)
 
+## 0.4.20
+
+`2026-01-05`
+
+- 🐞 修复 Tag 内容超长省略并且可关闭时的样式问题。[#1394](https://github.com/oceanbase/oceanbase-design/pull/1394)
+
 ## 0.4.19
 
 `2025-12-04`

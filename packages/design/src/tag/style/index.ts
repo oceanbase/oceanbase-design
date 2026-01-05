@@ -43,7 +43,8 @@ const genTagPresetStatusStyle = (token: TagToken, status: TagPresetStatus) => {
 };
 
 export const genTagStyle = (token: TagToken): CSSObject => {
-  const { antCls, componentCls, iconCls } = token;
+  const { antCls, iconCls, componentCls } = token;
+  const typographyComponentCls = `${antCls}-typography`;
 
   return {
     [`${componentCls}`]: {
@@ -59,9 +60,13 @@ export const genTagStyle = (token: TagToken): CSSObject => {
       },
       ['&-ellipsis']: {
         maxWidth: '100%',
-        textOverflow: 'ellipsis',
-        overflow: 'hidden',
         verticalAlign: 'bottom',
+      },
+      ['&-closable&-ellipsis']: {
+        verticalAlign: 'bottom',
+        [`${typographyComponentCls}`]: {
+          maxWidth: `calc(100% - ${unit(token.margin)})`,
+        },
       },
       ['&-checkable']: {
         borderColor: 'transparent',

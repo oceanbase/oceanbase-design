@@ -1,10 +1,16 @@
 import { CheckCircleOutlined } from '@oceanbase/icons';
-import { Tag } from '@oceanbase/design';
+import { Space, Tag } from '@oceanbase/design';
 import React from 'react';
 
 const App: React.FC = () => (
-  <>
+  <Space direction="vertical" style={{ width: '100%' }}>
     <Tag>
+      Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for
+      excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show
+      ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for
+      excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.
+    </Tag>
+    <Tag icon={<CheckCircleOutlined />} closable>
       Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for
       excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show
       ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for
@@ -12,6 +18,7 @@ const App: React.FC = () => (
     </Tag>
     <Tag
       icon={<CheckCircleOutlined />}
+      closable
       ellipsis={{
         tooltip: {
           placement: 'topLeft',
@@ -19,8 +26,7 @@ const App: React.FC = () => (
         },
       }}
       style={{
-        width: 200,
-        marginTop: 16,
+        width: 400,
       }}
     >
       Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for
@@ -28,7 +34,7 @@ const App: React.FC = () => (
       ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for
       excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.
     </Tag>
-  </>
+  </Space>
 );
 
 export default App;

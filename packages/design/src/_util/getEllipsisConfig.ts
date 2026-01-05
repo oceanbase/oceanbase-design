@@ -1,7 +1,6 @@
 import React, { isValidElement } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import type { EllipsisConfig } from '../typography';
-import type { TooltipPlacement } from '../tooltip';
 
 export type Ellipsis = boolean | EllipsisConfig;
 
