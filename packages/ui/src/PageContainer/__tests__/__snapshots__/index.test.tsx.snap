@@ -292,7 +292,9 @@ exports[`PageContainer > extra and footer 1`] = `
       class="ant-breadcrumb ant-page-header-breadcrumb"
     >
       <ol>
-        <li>
+        <li
+          class="ant-breadcrumb-item"
+        >
           <a>
             一级页面
           </a>
@@ -303,7 +305,9 @@ exports[`PageContainer > extra and footer 1`] = `
         >
           /
         </li>
-        <li>
+        <li
+          class="ant-breadcrumb-item"
+        >
           <a>
             二级页面
           </a>
@@ -314,7 +318,9 @@ exports[`PageContainer > extra and footer 1`] = `
         >
           /
         </li>
-        <li>
+        <li
+          class="ant-breadcrumb-item"
+        >
           <span>
             当前页面
           </span>
