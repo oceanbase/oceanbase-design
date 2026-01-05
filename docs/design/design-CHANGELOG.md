@@ -8,6 +8,40 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.13
+
+`2026-01-05`
+
+- 🛠 修复 `use client;` 指令在 ESM、CommonJS 构建产物的顺序问题，避免 SSR 中报错。[#1380](https://github.com/oceanbase/oceanbase-design/pull/1380)
+- 主题
+  - 🌈 更新 Design Token `controlItemBgActiveHover` => `#f5f7fc`，以优化 Dropdown 选中项 `hover` 时的背景色。[#1382](https://github.com/oceanbase/oceanbase-design/pull/1382)
+  - 🌈 优化 `12px` 字体的行高为 20px，涉及 Breadcrumb、Descriptions、Empty、Form、Table 和 Typography 等组件。[#1386](https://github.com/oceanbase/oceanbase-design/pull/1386)
+- 💄 优化 Alert `mini` 模式的样式，以对齐设计规范。[#1388](https://github.com/oceanbase/oceanbase-design/pull/1388)
+- Button
+  - 💄 优化 `outlined` 和 `dashed` Button 加载态的背景色。[#1400](https://github.com/oceanbase/oceanbase-design/pull/1400)
+  - 💄 优化小尺寸 Button 的图标大小。[#1400](https://github.com/oceanbase/oceanbase-design/pull/1400)
+- 💄 DatePicker & TimePicker 的线性图标颜色改为 gray8 `#5c6b8a`。[#1385](https://github.com/oceanbase/oceanbase-design/pull/1385)
+- 🆕 Drawer 新增 `document` 属性，用于在标题旁设置文档链接。[#1390](https://github.com/oceanbase/oceanbase-design/pull/1390)
+- 💄 优化 Dropdown.Button 主按钮 `hover` 时的分割线样式。[#1399](https://github.com/oceanbase/oceanbase-design/pull/1399)
+- Filter
+  - 🆕 Filter 新增 `showSuffixIcon` 属性，用于设置是否显示后缀图标（包括下拉箭头和清除图标）。[#1378](https://github.com/oceanbase/oceanbase-design/pull/1378) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 📢 FilterProvider 属性和 useFilterContext 返回值属性命名调整 `isWrapped` => `isCollapsed`。[#1379](https://github.com/oceanbase/oceanbase-design/pull/1379) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 💄 优化折叠容器宽度计算逻辑，以支持更好的自适应。[#1379](https://github.com/oceanbase/oceanbase-design/pull/1379) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+- 💄 Input、InputNumber 和 Select `focus` 时的边框色设为 blue4 `#0d6cf2`。[#1392](https://github.com/oceanbase/oceanbase-design/pull/1392)
+- Modal
+  - 🆕 Modal 新增 `document` 属性，用于在标题旁设置文档链接。[#1390](https://github.com/oceanbase/oceanbase-design/pull/1390)
+  - 💄 Modal 标题区的图标大小设为 `16px`，避免跟随标题为 18px。[#1391](https://github.com/oceanbase/oceanbase-design/pull/1391)
+- Radio
+  - 🆕 Radio.Button 新增 `icon` 属性，用于设置图标。[#1398](https://github.com/oceanbase/oceanbase-design/pull/1398)
+  - 💄 调整 Radio.Button 的横向间距为 `12px`，和按钮保持一致。[#1398](https://github.com/oceanbase/oceanbase-design/pull/1398)
+  - 💄 优化 Radio 圆点和内容的纵向对齐样式。[#1398](https://github.com/oceanbase/oceanbase-design/pull/1398)
+  - 💄 优化 Radio 已选中项 `hover` 时的背景颜色。[#1393](https://github.com/oceanbase/oceanbase-design/pull/1393)
+- 💄 优化 Select 自定义标签的间距。[#1381](https://github.com/oceanbase/oceanbase-design/pull/1381)
+- 💄 优化 Switch 未开启项 hover 时的背景颜色。[#1393](https://github.com/oceanbase/oceanbase-design/pull/1393)
+- Table
+  - 💄 去掉无分页器 Table 在卡片 (带边框+内容区底部间距为0) 中的底部多余边框。[#1383](https://github.com/oceanbase/oceanbase-design/pull/1383)
+  - 💄 去掉无数据 Table 在卡片 (带边框+内容区底部间距为0) 中的底部多余边框。[#1383](https://github.com/oceanbase/oceanbase-design/pull/1383)
+
 ## 1.0.0-alpha.12
 
 `2025-12-25`
