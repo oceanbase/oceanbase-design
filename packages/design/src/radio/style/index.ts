@@ -9,6 +9,7 @@ export const genRadioStyle: GenerateStyle<RadioToken> = (token: RadioToken): CSS
   const marginBottom = calc(calc(fontSize).mul(lineHeight).equal())
     .sub(radioSize || fontSizeLG)
     .div(-2)
+    .sub(1)
     .equal();
   return {
     [`${componentCls}-wrapper`]: {
@@ -36,6 +37,22 @@ export const genRadioStyle: GenerateStyle<RadioToken> = (token: RadioToken): CSS
           borderColor: token.gray7,
           color: token.colorText,
         },
+      // Radio.Button with icon style
+      [`${componentCls}-button-wrapper`]: {
+        [`&${componentCls}-button-wrapper-with-icon`]: {
+          [`${componentCls}-button-label`]: {
+            gap: token.sizeXXS,
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%',
+          },
+        },
+        // Radio.Button icon-only style
+        [`&${componentCls}-button-wrapper-icon-only`]: {
+          paddingInline: token.paddingXS,
+        },
+      },
     },
   };
 };
