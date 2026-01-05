@@ -10,11 +10,18 @@ export const genDropdownStyle: GenerateStyle<DropdownToken> = (token: DropdownTo
   const selector = `${btnComponentCls}-compact-item${btnComponentCls}-primary:not([disabled])`;
 
   return {
-    // special style for primary Dropdown.Button
-    [`${selector} + ${selector}::before`]: {
-      top: -1,
-      backgroundColor: token.colorWhite,
-      height: `calc(100% + ${lineWidth * 2}px)`,
+    [`${componentCls}-button`]: {
+      // special style for primary Dropdown.Button
+      [`${selector} + ${selector}::before`]: {
+        top: -1,
+        backgroundColor: token.colorWhite,
+        height: `calc(100% + ${lineWidth * 2}px)`,
+      },
+      [`${btnComponentCls}-primary${btnComponentCls}-compact-item`]: {
+        [`&:hover, &:focus, &:active`]: {
+          zIndex: 2,
+        },
+      },
     },
   };
 };
