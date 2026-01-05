@@ -65,7 +65,8 @@ export const genTagStyle = (token: TagToken): CSSObject => {
       ['&-closable&-ellipsis']: {
         verticalAlign: 'bottom',
         [`${typographyComponentCls}`]: {
-          maxWidth: `calc(100% - ${unit(token.margin)})`,
+          // maxWidth should match (close icon left margin + tag right padding)
+          maxWidth: `calc(100% - ${unit(token.marginSM)})`,
         },
       },
       ['&-checkable']: {

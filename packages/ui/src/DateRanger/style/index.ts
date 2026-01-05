@@ -116,6 +116,7 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
           transition: 'all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1)',
           '&:hover': {
             borderColor: token.gray7,
+            zIndex: 1,
             '&::before': {
               backgroundColor: token.gray7,
             },
