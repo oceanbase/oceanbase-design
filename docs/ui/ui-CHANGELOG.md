@@ -8,6 +8,15 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.13
+
+`2026-01-05`
+
+- Boundary
+  - 💄 优化 Boundary 的背景和间距，方面业务侧直接使用，无需容器包裹。[#1389](https://github.com/oceanbase/oceanbase-design/pull/1389)
+  - ⭐️ 优化 Boundary 的 `class` 命名，避免和业务常用类名冲突、导致样式被覆盖。[#1389](https://github.com/oceanbase/oceanbase-design/pull/1389)
+- 💄 优化 DateRanger `hover` 时的边框色。[#1382](https://github.com/oceanbase/oceanbase-design/pull/1382)
+
 ## 1.0.0-alpha.12
 
 `2025-12-25`
