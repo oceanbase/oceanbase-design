@@ -3,9 +3,11 @@ import type { RadioProps as AntRadioProps, RadioRef } from 'antd/es/radio';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
+import RadioButton from './RadioButton';
 import useStyle from './style';
 
 export * from 'antd/es/radio';
+export type { RadioButtonProps } from './RadioButton';
 
 const InternalRadio = React.forwardRef<RadioRef, AntRadioProps>(
   ({ prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
@@ -19,9 +21,9 @@ const InternalRadio = React.forwardRef<RadioRef, AntRadioProps>(
   }
 );
 
-const Radio = InternalRadio as typeof AntRadio;
+const Radio = InternalRadio as typeof AntRadio & { Button: typeof RadioButton };
 
-Radio.Button = AntRadio.Button;
+Radio.Button = RadioButton;
 Radio.Group = AntRadio.Group;
 // @ts-ignore
 Radio.__ANT_RADIO = AntRadio.__ANT_RADIO;

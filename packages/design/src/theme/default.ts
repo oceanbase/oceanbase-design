@@ -349,6 +349,8 @@ const defaultTheme: ThemeConfig = {
     Radio: {
       // temporarily fix style for checked disabled Radio.Button
       controlItemBgActiveDisabled: colorFillSecondary,
+      // to match Button padding
+      buttonPaddingInline: 12,
     },
     Segmented: {
       trackBg: colorFillTertiary,
