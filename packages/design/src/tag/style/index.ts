@@ -1,8 +1,8 @@
-import { mergeToken, type FullToken, type GenerateStyle } from 'antd/es/theme/internal';
+import { mergeToken, type FullToken } from 'antd/es/theme/internal';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import { genPresetColor } from 'antd/lib/theme/internal';
 import { getWeakenBorderColor } from '../../_util/getWeakenBorderColor';
-import type { CSSObject } from '@ant-design/cssinjs';
+import { unit, type CSSObject } from '@ant-design/cssinjs';
 
 export type TagToken = FullToken<'Tag'> & {
   tagPaddingHorizontal: number;
@@ -40,6 +40,7 @@ const genPresetStyle = (token: TagToken) =>
 
 export const genTagStyle = (token: TagToken): CSSObject => {
   const { antCls, componentCls, tagPaddingHorizontal, lineWidth, calc } = token;
+  const typographyComponentCls = `${antCls}-typography`;
 
   const paddingInline = calc(tagPaddingHorizontal).sub(lineWidth).equal();
   return {
@@ -54,9 +55,13 @@ export const genTagStyle = (token: TagToken): CSSObject => {
       },
       ['&-ellipsis']: {
         maxWidth: '100%',
-        textOverflow: 'ellipsis',
-        overflow: 'hidden',
         verticalAlign: 'bottom',
+      },
+      ['&-closable&-ellipsis']: {
+        verticalAlign: 'bottom',
+        [`${typographyComponentCls}`]: {
+          maxWidth: `calc(100% - ${unit(token.margin)})`,
+        },
       },
       ['&-checkable']: {
         borderColor: 'transparent',

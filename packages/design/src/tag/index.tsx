@@ -20,12 +20,13 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
       children,
       prefixCls: customizePrefixCls,
       icon,
-      className,
+      closable,
       ellipsis = {
         tooltip: {
           title: children,
         },
       },
+      className,
       ...restProps
     },
     ref
@@ -37,6 +38,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
     const ellipsisConfig = getEllipsisConfig(ellipsis, children);
     const tagCls = classNames(
       {
+        [`${prefixCls}-closable`]: !!closable,
         [`${prefixCls}-ellipsis`]: !!ellipsisConfig,
       },
       className
@@ -50,6 +52,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
         prefixCls={customizePrefixCls}
         className={tagCls}
         icon={ellipsisConfig ? null : icon}
+        closable={closable}
         {...restProps}
       >
         {ellipsisConfig ? (
