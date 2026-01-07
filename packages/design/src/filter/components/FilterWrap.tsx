@@ -26,6 +26,8 @@ export interface FilterWrapProps extends Omit<BaseFilterProps, 'label'> {
   extra?: ReactNode;
   filterButtonRef?: React.RefObject<FilterButtonRef>;
   gap?: number;
+  /** 是否显示计数 默认 true */
+  count?: boolean;
 }
 
 const FilterWrap: FC<FilterWrapProps> = ({
@@ -37,6 +39,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
   extra,
   filterButtonRef,
   gap = 8,
+  count = true,
   ...restProps
 }) => {
   const { token } = theme.useToken();
@@ -257,7 +260,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
       {...filterButtonProps}
     >
       <span>{filterLabel}</span>
-      <CountNumber count={filterValues.length} />
+      {count && <CountNumber count={filterValues.length} />}
     </FilterButton>
   );
 

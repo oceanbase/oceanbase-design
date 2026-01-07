@@ -44,6 +44,8 @@ export interface ResponsiveFilterGroupProps {
   style?: React.CSSProperties;
   /** 额外内容 */
   extra?: ReactNode;
+  /** 是否显示计数 默认 true */
+  count?: boolean;
 }
 
 /**
@@ -114,6 +116,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   showActions = true,
   style,
   extra,
+  count: countProp = true,
 }) => {
   const { locale: contextLocale } = useContext(ConfigProvider.ConfigContext);
   const filterLocale = (contextLocale as Locale)?.Filter || enUS.Filter;
@@ -569,7 +572,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
                 display: 'inline-flex',
               }}
             >
-              <FilterWrap collapsed icon={icon} label={filterLabel}>
+              <FilterWrap collapsed icon={icon} label={filterLabel} count={countProp}>
                 <div />
               </FilterWrap>
             </div>
