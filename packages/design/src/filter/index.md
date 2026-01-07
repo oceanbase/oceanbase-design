@@ -254,7 +254,7 @@ const App = () => {
 | showActions | 是否显示 Apply 和 Clear All 按钮 | `boolean`             | `true`      |
 | style       | 容器样式                         | `React.CSSProperties` | -           |
 | extra       | 额外内容                         | `ReactNode`           | -           |
-| count       | 是否显示计数                     | `boolean`             | `true`      |
+| showCount   | 是否显示计数                     | `boolean`             | `true`      |
 
 ## Context
 

@@ -29,7 +29,7 @@ export interface FilterWrapProps extends Omit<BaseFilterProps, 'label'> {
   filterButtonRef?: React.RefObject<FilterButtonRef>;
   gap?: number;
   /** 是否显示计数 默认 true */
-  count?: boolean;
+  showCount?: boolean;
   /** 点击清除所有按钮时的回调 */
   onClearAll?: () => void;
 }
@@ -43,7 +43,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
   extra,
   filterButtonRef,
   gap = 8,
-  count = true,
+  showCount = true,
   onClearAll,
   ...restProps
 }) => {
@@ -267,7 +267,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
       {...filterButtonProps}
     >
       <span>{filterLabel}</span>
-      {count && filterValues.length > 0 && (
+      {showCount && filterValues.length > 0 && (
         <div className={getFilterCls(prefixCls, 'wrap-icon-wrapper')} style={{ marginLeft: 0 }}>
           <CountNumber
             count={filterValues.length}
