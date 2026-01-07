@@ -404,7 +404,6 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   );
 
   const handleClearAll = () => {
-    console.log('handleClearAll');
     // 先清除所有子组件的值
     allHiddenChildren.forEach(child => {
       if (isValidElement(child)) {
