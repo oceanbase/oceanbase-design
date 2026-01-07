@@ -42,6 +42,8 @@ interface FilterButtonProps extends BaseFilterProps {
   showLabelDivider?: boolean;
   /** 是否显示后缀图标区域（包括下拉箭头和清除图标），默认 true */
   showSuffixIcon?: boolean;
+  /** 是否强制显示选中态样式（忽略 isCollapsed 状态），默认 false */
+  forceShowSelected?: boolean;
 }
 
 const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
@@ -64,6 +66,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       onSelect,
       showLabelDivider = false,
       showSuffixIcon = true,
+      forceShowSelected = false,
       ...restProps
     },
     ref
@@ -164,7 +167,10 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               bordered && getFilterCls(prefixCls, 'border'),
               open && getFilterCls(prefixCls, 'active'),
               disabled && getFilterCls(prefixCls, 'disabled'),
-              selected && bordered && !isCollapsed && getFilterCls(prefixCls, 'selected')
+              selected &&
+                bordered &&
+                (!isCollapsed || forceShowSelected) &&
+                getFilterCls(prefixCls, 'selected')
             )}
           >
             <Flex align="center" justify="space-between" style={{ width: '100%' }}>
@@ -185,7 +191,10 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
                 </div>
               ) : showSuffixIcon ? (
                 <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
-                  <DownOutlined className={selected ? getFilterCls(prefixCls, 'arrow-icon') : ''} />
+                  <DownOutlined
+                    className={selected ? getFilterCls(prefixCls, 'arrow-icon') : ''}
+                    style={disabled ? { color: 'var(--ob-color-icon-disabled)' } : undefined}
+                  />
                   {selected && (
                     <div
                       className={getFilterCls(prefixCls, 'clear-icon')}

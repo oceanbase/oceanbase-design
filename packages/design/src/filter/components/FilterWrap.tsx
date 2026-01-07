@@ -16,6 +16,8 @@ import type { BaseFilterProps } from '../type';
 import FilterButton from './FilterButton';
 import type { FilterButtonRef } from './FilterButton';
 import CountNumber from './CountNumber';
+import { CloseOutlined } from '@oceanbase/icons';
+import useFilterStyle, { getFilterCls } from '../style';
 
 export interface FilterWrapProps extends Omit<BaseFilterProps, 'label'> {
   children: ReactNode;
@@ -28,6 +30,8 @@ export interface FilterWrapProps extends Omit<BaseFilterProps, 'label'> {
   gap?: number;
   /** 是否显示计数 默认 true */
   count?: boolean;
+  /** 点击清除所有按钮时的回调 */
+  onClearAll?: () => void;
 }
 
 const FilterWrap: FC<FilterWrapProps> = ({
@@ -40,6 +44,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
   filterButtonRef,
   gap = 8,
   count = true,
+  onClearAll,
   ...restProps
 }) => {
   const { token } = theme.useToken();
@@ -47,6 +52,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
   const filterLocale = (contextLocale as Locale)?.Filter || enUS.Filter;
   // 始终调用 Hook，但只在折叠模式下使用 filterValues
   const contextValue = useFilterContext();
+  const { prefixCls } = useFilterStyle();
 
   // 如果没有传入 label，使用国际化默认值
   const filterLabel = label ?? filterLocale?.filters;
@@ -223,7 +229,6 @@ const FilterWrap: FC<FilterWrapProps> = ({
           minWidth: 200,
           maxWidth: 300,
           fontSize: token.fontSize,
-          fontWeight: token.fontWeightStrong,
         }}
       >
         <Flex vertical gap={token.sizeXS}>
@@ -252,15 +257,34 @@ const FilterWrap: FC<FilterWrapProps> = ({
       content={content}
       extra={extra}
       showSuffixIcon={false}
+      forceShowSelected={true}
       showLabelDivider={!!restProps.footer}
       onOpenChange={open => {
         onPopoverOpenChange(open);
         externalOnOpenChange?.(open);
       }}
+      selected={filterValues.length > 0}
       {...filterButtonProps}
     >
       <span>{filterLabel}</span>
-      {count && <CountNumber count={filterValues.length} />}
+      {count && filterValues.length > 0 && (
+        <div className={getFilterCls(prefixCls, 'wrap-icon-wrapper')} style={{ marginLeft: 0 }}>
+          <CountNumber
+            count={filterValues.length}
+            className={getFilterCls(prefixCls, 'wrap-count')}
+          />
+          <div
+            className={getFilterCls(prefixCls, 'wrap-clear-icon')}
+            onClick={e => {
+              e.stopPropagation();
+              handleClear();
+              onClearAll?.();
+            }}
+          >
+            <CloseOutlined />
+          </div>
+        </div>
+      )}
     </FilterButton>
   );
 

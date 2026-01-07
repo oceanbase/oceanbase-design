@@ -403,6 +403,34 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
     []
   );
 
+  const handleClearAll = () => {
+    console.log('handleClearAll');
+    // 先清除所有子组件的值
+    allHiddenChildren.forEach(child => {
+      if (isValidElement(child)) {
+        const childProps = child.props as {
+          children?: ReactNode;
+          onChange?: (value: unknown) => void;
+        };
+        // 如果是 Form.Item，需要访问其子组件
+        if (childProps.children && isValidElement(childProps.children)) {
+          const innerChildProps = childProps.children.props as {
+            onChange?: (value: unknown) => void;
+          };
+          if (innerChildProps.onChange) {
+            innerChildProps.onChange(undefined);
+          }
+        } else if (childProps.onChange) {
+          childProps.onChange(undefined);
+        }
+      }
+    });
+    // 然后清除 filterValues
+    setFilterValues([]);
+    // 最后调用外部回调
+    onClearAll();
+  };
+
   // 渲染隐藏的可收集子元素到 FilterWrap 中（包括始终折叠和隐藏的普通可收集子元素）
   const renderHiddenChildren = () => {
     if (allHiddenChildren.length === 0) return null;
@@ -419,6 +447,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
           icon={icon}
           label={filterLabel}
           extra={extra}
+          onClearAll={handleClearAll}
           footer={
             showActions && (
               <Flex justify="space-between">
@@ -435,36 +464,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
                   </Button>
                 )}
                 {onClearAll && (
-                  <Button
-                    type="link"
-                    size="small"
-                    onClick={() => {
-                      // 先清除所有子组件的值
-                      allHiddenChildren.forEach(child => {
-                        if (isValidElement(child)) {
-                          const childProps = child.props as {
-                            children?: ReactNode;
-                            onChange?: (value: unknown) => void;
-                          };
-                          // 如果是 Form.Item，需要访问其子组件
-                          if (childProps.children && isValidElement(childProps.children)) {
-                            const innerChildProps = childProps.children.props as {
-                              onChange?: (value: unknown) => void;
-                            };
-                            if (innerChildProps.onChange) {
-                              innerChildProps.onChange(undefined);
-                            }
-                          } else if (childProps.onChange) {
-                            childProps.onChange(undefined);
-                          }
-                        }
-                      });
-                      // 然后清除 filterValues
-                      setFilterValues([]);
-                      // 最后调用外部回调
-                      onClearAll();
-                    }}
-                  >
+                  <Button type="link" size="small" onClick={handleClearAll}>
                     Clear All
                   </Button>
                 )}
@@ -572,7 +572,13 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
                 display: 'inline-flex',
               }}
             >
-              <FilterWrap collapsed icon={icon} label={filterLabel} count={countProp}>
+              <FilterWrap
+                collapsed
+                icon={icon}
+                label={filterLabel}
+                count={countProp}
+                onClearAll={handleClearAll}
+              >
                 <div />
               </FilterWrap>
             </div>

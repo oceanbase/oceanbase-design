@@ -116,6 +116,57 @@ const genIconStyle = (token: FilterToken): CSSObject => {
       transform: 'translateY(-50%)',
       transition: `opacity ${token.motionDurationMid} ease-in-out, visibility ${token.motionDurationMid} ease-in-out`,
     },
+
+    [`${componentCls}-wrap-icon-wrapper`]: {
+      position: 'relative',
+      display: 'inline-flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: token.paddingXS,
+      color: token.colorIcon,
+      backgroundColor: 'var(--ob-color-border-container)',
+      borderRadius: 8,
+
+      '&:hover': {
+        [`${componentCls}-wrap-count`]: {
+          opacity: 0,
+          visibility: 'hidden',
+        },
+
+        [`${componentCls}-wrap-clear-icon`]: {
+          opacity: 1,
+          visibility: 'visible',
+        },
+      },
+    },
+
+    [`${componentCls}-wrap-count`]: {
+      opacity: 1,
+      fontSize: token.fontSizeSM,
+      color: token.colorIcon,
+      visibility: 'visible',
+      transition: `opacity ${token.motionDurationMid} ease-in-out, visibility ${token.motionDurationMid} ease-in-out`,
+    },
+
+    [`${componentCls}-wrap-clear-icon`]: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '18px',
+      height: '18px',
+      borderRadius: 8,
+      opacity: 0,
+      cursor: 'pointer',
+      visibility: 'hidden',
+      position: 'absolute',
+      backgroundColor: 'var(--ob-color-border-container)',
+      left: 0,
+      top: '50%',
+      color: token.colorIcon,
+      fontSize: token.fontSizeSM,
+      transform: 'translateY(-50%)',
+      transition: `opacity ${token.motionDurationMid} ease-in-out, visibility ${token.motionDurationMid} ease-in-out`,
+    },
   };
 };
 
@@ -131,6 +182,7 @@ const genFilterButtonStyle = (token: FilterToken): CSSObject => {
       paddingBlock: token.paddingXXS,
       paddingInline: token.paddingSM,
       borderRadius: token.borderRadius,
+      backgroundColor: token.white,
       cursor: 'pointer',
       display: 'flex',
       gap: token.paddingXS,
@@ -170,7 +222,7 @@ const genFilterButtonStyle = (token: FilterToken): CSSObject => {
     },
 
     [`${componentCls}-border`]: {
-      border: `${token.lineWidth}px solid ${token.colorFillSecondary}`,
+      border: `${token.lineWidth}px solid var(--ob-color-border-container)`,
       transition: `background-color ${token.motionDurationSlow} ease-in-out, border-color ${token.motionDurationSlow} ease-in-out`,
 
       '&:hover, &:active, &:focus, &:focus-within': {
