@@ -28,4 +28,9 @@ export interface BaseFilterProps extends Omit<PopoverProps, 'title' | 'content' 
 export interface InternalFilterProps {
   /** @internal 是否处于折叠模式 */
   _isCollapsed?: boolean;
+  /**
+   * @internal
+   * 是否为 Wrap 组件透传，默认 false
+   */
+  _isInWrapComponent?: boolean;
 }

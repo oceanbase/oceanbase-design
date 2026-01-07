@@ -81,6 +81,42 @@ const genSwitchOptionStyle = (token: FilterToken): CSSObject => {
 // 通用图标样式
 const genIconStyle = (token: FilterToken): CSSObject => {
   const { componentCls } = token;
+
+  // 基础计数样式（复用）
+  const baseCountStyle: CSSObject = {
+    opacity: 1,
+    fontSize: token.fontSizeSM,
+    color: token.colorIcon,
+    borderRadius: 8,
+    width: '18px',
+    height: '18px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+
+  // 基础清除图标样式（复用）
+  const baseClearIconStyle: CSSObject = {
+    opacity: 0,
+    cursor: 'pointer',
+    visibility: 'hidden',
+    position: 'absolute',
+    color: token.colorIcon,
+    fontSize: token.fontSizeSM,
+    transform: 'translateY(-50%)',
+    transition: `opacity ${token.motionDurationMid} ease-in-out, visibility ${token.motionDurationMid} ease-in-out`,
+  };
+
+  // 基础图标容器样式（复用）
+  const baseIconWrapperStyle: CSSObject = {
+    position: 'relative',
+    display: 'inline-flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: token.paddingXS,
+    color: token.colorIcon,
+  };
+
   return {
     [`${componentCls}-button-prefix-icon`]: {
       marginRight: token.paddingXXS,
@@ -88,12 +124,12 @@ const genIconStyle = (token: FilterToken): CSSObject => {
     },
 
     [`${componentCls}-icon-wrapper`]: {
-      position: 'relative',
-      display: 'inline-flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginLeft: token.paddingXS,
-      color: token.colorIcon,
+      ...baseIconWrapperStyle,
+    },
+
+    [`${componentCls}-count`]: {
+      ...baseCountStyle,
+      backgroundColor: 'var(--ob-color-border-container)',
     },
 
     [`${componentCls}-arrow-icon`]: {
@@ -105,16 +141,43 @@ const genIconStyle = (token: FilterToken): CSSObject => {
     },
 
     [`${componentCls}-clear-icon`]: {
+      ...baseClearIconStyle,
+      left: 0,
+      top: '60%',
+    },
+
+    [`${componentCls}-wrap-icon-wrapper`]: {
+      ...baseIconWrapperStyle,
+
+      '&:hover': {
+        [`${componentCls}-wrap-count`]: {
+          opacity: 0,
+          visibility: 'hidden',
+        },
+
+        [`${componentCls}-wrap-clear-icon`]: {
+          opacity: 1,
+          visibility: 'visible',
+        },
+      },
+    },
+
+    [`${componentCls}-wrap-count`]: {
+      ...baseCountStyle,
+      backgroundColor: 'var(--ob-color-border-container)',
+      visibility: 'visible',
+      transition: `opacity ${token.motionDurationMid} ease-in-out, visibility ${token.motionDurationMid} ease-in-out`,
+    },
+
+    [`${componentCls}-wrap-clear-icon`]: {
+      ...baseClearIconStyle,
+      ...baseCountStyle,
       opacity: 0,
       cursor: 'pointer',
       visibility: 'hidden',
       position: 'absolute',
       left: 0,
-      top: '60%',
-      color: token.colorIcon,
-      fontSize: token.fontSizeSM,
-      transform: 'translateY(-50%)',
-      transition: `opacity ${token.motionDurationMid} ease-in-out, visibility ${token.motionDurationMid} ease-in-out`,
+      top: '50%',
     },
   };
 };
@@ -131,6 +194,7 @@ const genFilterButtonStyle = (token: FilterToken): CSSObject => {
       paddingBlock: token.paddingXXS,
       paddingInline: token.paddingSM,
       borderRadius: token.borderRadius,
+      backgroundColor: token.white,
       cursor: 'pointer',
       display: 'flex',
       gap: token.paddingXS,
@@ -170,7 +234,7 @@ const genFilterButtonStyle = (token: FilterToken): CSSObject => {
     },
 
     [`${componentCls}-border`]: {
-      border: `${token.lineWidth}px solid ${token.colorFillSecondary}`,
+      border: `${token.lineWidth}px solid var(--ob-color-border-container)`,
       transition: `background-color ${token.motionDurationSlow} ease-in-out, border-color ${token.motionDurationSlow} ease-in-out`,
 
       '&:hover, &:active, &:focus, &:focus-within': {

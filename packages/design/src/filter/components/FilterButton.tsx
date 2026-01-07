@@ -14,13 +14,13 @@ import { CloseOutlined, DownOutlined, LoadingOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
 import { useFilterContext } from '../FilterContext';
 import useFilterStyle, { getFilterCls } from '../style';
-import type { BaseFilterProps } from '../type';
+import type { BaseFilterProps, InternalFilterProps } from '../type';
 
 export interface FilterButtonRef {
   closePopover: () => void;
 }
 
-interface FilterButtonProps extends BaseFilterProps {
+interface FilterButtonProps extends BaseFilterProps, InternalFilterProps {
   children?: ReactNode;
   /** 清除回调 */
   onClear?: () => void;
@@ -64,6 +64,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       onSelect,
       showLabelDivider = false,
       showSuffixIcon = true,
+      _isInWrapComponent = false,
       ...restProps
     },
     ref
@@ -111,7 +112,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     const popoverContent = useMemo(
       () => (
         <>
-          {!isCollapsed && (
+          {(!isCollapsed || _isInWrapComponent) && (
             <Flex
               justify="space-between"
               align="center"
@@ -164,7 +165,10 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               bordered && getFilterCls(prefixCls, 'border'),
               open && getFilterCls(prefixCls, 'active'),
               disabled && getFilterCls(prefixCls, 'disabled'),
-              selected && bordered && !isCollapsed && getFilterCls(prefixCls, 'selected')
+              selected &&
+                bordered &&
+                (!isCollapsed || _isInWrapComponent) &&
+                getFilterCls(prefixCls, 'selected')
             )}
           >
             <Flex align="center" justify="space-between" style={{ width: '100%' }}>
@@ -185,7 +189,10 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
                 </div>
               ) : showSuffixIcon ? (
                 <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
-                  <DownOutlined className={selected ? getFilterCls(prefixCls, 'arrow-icon') : ''} />
+                  <DownOutlined
+                    className={selected ? getFilterCls(prefixCls, 'arrow-icon') : ''}
+                    style={disabled ? { color: 'var(--ob-color-icon-disabled)' } : undefined}
+                  />
                   {selected && (
                     <div
                       className={getFilterCls(prefixCls, 'clear-icon')}
