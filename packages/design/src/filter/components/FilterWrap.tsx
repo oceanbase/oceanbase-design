@@ -223,7 +223,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
     >
       <div
         style={{
-          padding: token.padding,
+          padding: '8px 16px 16px',
           maxHeight: 350,
           overflowY: 'auto',
           minWidth: 200,
@@ -257,7 +257,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
       content={content}
       extra={extra}
       showSuffixIcon={false}
-      forceShowSelected={true}
+      _isInWrapComponent={true}
       showLabelDivider={!!restProps.footer}
       onOpenChange={open => {
         onPopoverOpenChange(open);

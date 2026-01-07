@@ -14,13 +14,13 @@ import { CloseOutlined, DownOutlined, LoadingOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
 import { useFilterContext } from '../FilterContext';
 import useFilterStyle, { getFilterCls } from '../style';
-import type { BaseFilterProps } from '../type';
+import type { BaseFilterProps, InternalFilterProps } from '../type';
 
 export interface FilterButtonRef {
   closePopover: () => void;
 }
 
-interface FilterButtonProps extends BaseFilterProps {
+interface FilterButtonProps extends BaseFilterProps, InternalFilterProps {
   children?: ReactNode;
   /** 清除回调 */
   onClear?: () => void;
@@ -42,8 +42,6 @@ interface FilterButtonProps extends BaseFilterProps {
   showLabelDivider?: boolean;
   /** 是否显示后缀图标区域（包括下拉箭头和清除图标），默认 true */
   showSuffixIcon?: boolean;
-  /** 是否强制显示选中态样式（忽略 isCollapsed 状态），默认 false */
-  forceShowSelected?: boolean;
 }
 
 const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
@@ -66,7 +64,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       onSelect,
       showLabelDivider = false,
       showSuffixIcon = true,
-      forceShowSelected = false,
+      _isInWrapComponent = false,
       ...restProps
     },
     ref
@@ -114,7 +112,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     const popoverContent = useMemo(
       () => (
         <>
-          {!isCollapsed && (
+          {(!isCollapsed || _isInWrapComponent) && (
             <Flex
               justify="space-between"
               align="center"
@@ -169,7 +167,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               disabled && getFilterCls(prefixCls, 'disabled'),
               selected &&
                 bordered &&
-                (!isCollapsed || forceShowSelected) &&
+                (!isCollapsed || _isInWrapComponent) &&
                 getFilterCls(prefixCls, 'selected')
             )}
           >

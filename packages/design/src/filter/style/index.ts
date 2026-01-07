@@ -87,7 +87,6 @@ const genIconStyle = (token: FilterToken): CSSObject => {
     opacity: 1,
     fontSize: token.fontSizeSM,
     color: token.colorIcon,
-    backgroundColor: 'var(--ob-color-border-container)',
     borderRadius: 8,
     width: '18px',
     height: '18px',
@@ -130,6 +129,7 @@ const genIconStyle = (token: FilterToken): CSSObject => {
 
     [`${componentCls}-count`]: {
       ...baseCountStyle,
+      backgroundColor: 'var(--ob-color-border-container)',
     },
 
     [`${componentCls}-arrow-icon`]: {
@@ -148,8 +148,6 @@ const genIconStyle = (token: FilterToken): CSSObject => {
 
     [`${componentCls}-wrap-icon-wrapper`]: {
       ...baseIconWrapperStyle,
-      backgroundColor: 'var(--ob-color-border-container)',
-      borderRadius: 8,
 
       '&:hover': {
         [`${componentCls}-wrap-count`]: {
@@ -166,6 +164,7 @@ const genIconStyle = (token: FilterToken): CSSObject => {
 
     [`${componentCls}-wrap-count`]: {
       ...baseCountStyle,
+      backgroundColor: 'var(--ob-color-border-container)',
       visibility: 'visible',
       transition: `opacity ${token.motionDurationMid} ease-in-out, visibility ${token.motionDurationMid} ease-in-out`,
     },
