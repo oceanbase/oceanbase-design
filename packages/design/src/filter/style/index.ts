@@ -81,6 +81,43 @@ const genSwitchOptionStyle = (token: FilterToken): CSSObject => {
 // 通用图标样式
 const genIconStyle = (token: FilterToken): CSSObject => {
   const { componentCls } = token;
+
+  // 基础计数样式（复用）
+  const baseCountStyle: CSSObject = {
+    opacity: 1,
+    fontSize: token.fontSizeSM,
+    color: token.colorIcon,
+    backgroundColor: 'var(--ob-color-border-container)',
+    borderRadius: 8,
+    width: '18px',
+    height: '18px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+
+  // 基础清除图标样式（复用）
+  const baseClearIconStyle: CSSObject = {
+    opacity: 0,
+    cursor: 'pointer',
+    visibility: 'hidden',
+    position: 'absolute',
+    color: token.colorIcon,
+    fontSize: token.fontSizeSM,
+    transform: 'translateY(-50%)',
+    transition: `opacity ${token.motionDurationMid} ease-in-out, visibility ${token.motionDurationMid} ease-in-out`,
+  };
+
+  // 基础图标容器样式（复用）
+  const baseIconWrapperStyle: CSSObject = {
+    position: 'relative',
+    display: 'inline-flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: token.paddingXS,
+    color: token.colorIcon,
+  };
+
   return {
     [`${componentCls}-button-prefix-icon`]: {
       marginRight: token.paddingXXS,
@@ -88,12 +125,11 @@ const genIconStyle = (token: FilterToken): CSSObject => {
     },
 
     [`${componentCls}-icon-wrapper`]: {
-      position: 'relative',
-      display: 'inline-flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginLeft: token.paddingXS,
-      color: token.colorIcon,
+      ...baseIconWrapperStyle,
+    },
+
+    [`${componentCls}-count`]: {
+      ...baseCountStyle,
     },
 
     [`${componentCls}-arrow-icon`]: {
@@ -105,25 +141,13 @@ const genIconStyle = (token: FilterToken): CSSObject => {
     },
 
     [`${componentCls}-clear-icon`]: {
-      opacity: 0,
-      cursor: 'pointer',
-      visibility: 'hidden',
-      position: 'absolute',
+      ...baseClearIconStyle,
       left: 0,
       top: '60%',
-      color: token.colorIcon,
-      fontSize: token.fontSizeSM,
-      transform: 'translateY(-50%)',
-      transition: `opacity ${token.motionDurationMid} ease-in-out, visibility ${token.motionDurationMid} ease-in-out`,
     },
 
     [`${componentCls}-wrap-icon-wrapper`]: {
-      position: 'relative',
-      display: 'inline-flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginLeft: token.paddingXS,
-      color: token.colorIcon,
+      ...baseIconWrapperStyle,
       backgroundColor: 'var(--ob-color-border-container)',
       borderRadius: 8,
 
@@ -141,31 +165,20 @@ const genIconStyle = (token: FilterToken): CSSObject => {
     },
 
     [`${componentCls}-wrap-count`]: {
-      opacity: 1,
-      fontSize: token.fontSizeSM,
-      color: token.colorIcon,
+      ...baseCountStyle,
       visibility: 'visible',
       transition: `opacity ${token.motionDurationMid} ease-in-out, visibility ${token.motionDurationMid} ease-in-out`,
     },
 
     [`${componentCls}-wrap-clear-icon`]: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '18px',
-      height: '18px',
-      borderRadius: 8,
+      ...baseClearIconStyle,
+      ...baseCountStyle,
       opacity: 0,
       cursor: 'pointer',
       visibility: 'hidden',
       position: 'absolute',
-      backgroundColor: 'var(--ob-color-border-container)',
       left: 0,
       top: '50%',
-      color: token.colorIcon,
-      fontSize: token.fontSizeSM,
-      transform: 'translateY(-50%)',
-      transition: `opacity ${token.motionDurationMid} ease-in-out, visibility ${token.motionDurationMid} ease-in-out`,
     },
   };
 };
