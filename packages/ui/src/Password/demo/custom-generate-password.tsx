@@ -52,7 +52,7 @@ export default () => {
           }
           generatePassword={() => {
             // your custom password generate logic
-            return 'aaAA11__';
+            return 'custom_password';
           }}
           onValidate={setPassed}
         />
