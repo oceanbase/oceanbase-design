@@ -406,6 +406,9 @@ const defaultTheme: ThemeConfig = {
       colorBgSpotlight: white,
       colorTextLightSolid: colorText,
     },
+    Transfer: {
+      borderRadiusLG: borderRadiusMD,
+    },
     Menu: {
       borderRadiusLG: borderRadiusMD,
       paddingContentVertical: 0,
