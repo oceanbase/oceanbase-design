@@ -103,6 +103,13 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const isEn = locale?.antLocale === 'en';
 
+  // 监听外部传入的 defaultValue 变化，同步更新 calendarValue
+  React.useEffect(() => {
+    if (defaultValue && defaultValue.length === 2) {
+      setCalendarValue(defaultValue);
+    }
+  }, [defaultValue?.[0]?.valueOf(), defaultValue?.[1]?.valueOf()]);
+
   //
   const DATE_FORMAT = isEn ? DATE_TIME_MONTH_FORMAT : DATE_TIME_MONTH_FORMAT_CN;
 
@@ -138,27 +145,28 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     );
   };
 
-  // 对日期进行排序
-  const formatValues = [...calendarValue]
-    .sort((a, b) => {
-      return a?.valueOf() - b?.valueOf();
-    })
-    .map(item => {
-      return item?.format(DATE_FORMAT);
-    });
+  // 保持原始顺序，不进行排序（只在提交时排序）
+  const formatValues = calendarValue.map(item => {
+    return item?.format(DATE_FORMAT);
+  });
 
   const [form] = Form.useForm();
   const [_sDate, _eDate] = formatValues;
+
   const setFormatDateToForm = () => {
+    const [startVal, endVal] = calendarValue;
     form.setFieldsValue({
       startDate: getDateInstance(_sDate),
       endDate: getDateInstance(_eDate),
+      // 同步更新时间值，保持原始顺序
+      startTime: startVal || getDateInstance(),
+      endTime: endVal || getDateInstance(),
     });
   };
 
   useEffect(() => {
     setFormatDateToForm();
-  }, [_sDate, _eDate]);
+  }, [calendarValue?.[0]?.valueOf(), calendarValue?.[1]?.valueOf()]);
 
   const defaultTime = useMemo(() => {
     return getDateInstance();
@@ -373,15 +381,19 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           onClick={() => {
             form.validateFields().then(values => {
               const { startDate, startTime, endDate, endTime } = values;
-              // 日期同一天时对时间进行排序，保证开始时间在结束时间之前
-              const [sTime, eTime] = startDate.isSame(endDate)
-                ? [startTime, endTime].sort((a, b) => {
-                    return a?.valueOf() - b?.valueOf();
-                  })
-                : [startTime, endTime];
 
-              const start = `${formatDate(startDate)} ${sTime.format(TIME_FORMAT)}`;
-              const end = `${formatDate(endDate)} ${eTime.format(TIME_FORMAT)}`;
+              // 组合日期和时间
+              const startDateTime = `${formatDate(startDate)} ${startTime.format(TIME_FORMAT)}`;
+              const endDateTime = `${formatDate(endDate)} ${endTime.format(TIME_FORMAT)}`;
+
+              // 对完整的日期时间进行排序，保证开始时间在结束时间之前
+              const startMoment = getDateInstance(startDateTime, `${DATE_FORMAT} ${TIME_FORMAT}`);
+              const endMoment = getDateInstance(endDateTime, `${DATE_FORMAT} ${TIME_FORMAT}`);
+
+              const [start, end] =
+                startMoment.valueOf() <= endMoment.valueOf()
+                  ? [startDateTime, endDateTime]
+                  : [endDateTime, startDateTime];
 
               let errorList = [];
               let message = '';

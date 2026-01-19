@@ -57,6 +57,7 @@ import {
   YEAR_DATE_TIME_FORMAT_CN,
   YEAR_DATE_TIME_SECOND_FORMAT_CN,
 } from './constant';
+import EditableDateTimeInput from './EditableDateTimeInput';
 import type { RangeOption } from './typing';
 import type { Rule } from './PickerPanel';
 import InternalPickerPanel from './PickerPanel';
@@ -640,42 +641,22 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
             </Space>
           </Dropdown>
           {(!simpleMode || !isPlay) && (
-            <span
-              ref={rangeRef}
-              onClick={() => {
-                setOpen(true);
-                setTooltipOpen(true);
-              }}
-            >
-              {/* @ts-ignore  */}
-              <DatePicker.RangePicker
-                className={classNames(`${prefix}-picker`)}
-                style={{
-                  // pointerEvents: 'none',
-                  border: 0,
+            <span ref={rangeRef} className={`${prefix}-editable-wrapper`}>
+              <EditableDateTimeInput
+                prefixCls={prefixCls}
+                value={innerValue as [Dayjs | Moment | null, Dayjs | Moment | null]}
+                onChange={newValue => {
+                  datePickerChange(newValue as RangeValue);
                 }}
-                format={v => {
-                  // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
-                  if (hideYear && isThisYear) {
-                    return hideSecond
-                      ? v.format(isCn ? DATE_TIME_FORMAT_CN : DATE_TIME_FORMAT)
-                      : v.format(isCn ? DATE_TIME_SECOND_FORMAT_CN : DATE_TIME_SECOND_FORMAT);
-                  }
-                  return hideSecond
-                    ? v.format(isCn ? YEAR_DATE_TIME_FORMAT_CN : YEAR_DATE_TIME_FORMAT)
-                    : v.format(
-                        isCn ? YEAR_DATE_TIME_SECOND_FORMAT_CN : YEAR_DATE_TIME_SECOND_FORMAT
-                      );
+                hideYear={hideYear && isThisYear}
+                hideSecond={hideSecond}
+                isMoment={isMoment}
+                isCn={isCn}
+                onClick={() => {
+                  setOpen(true);
+                  setTooltipOpen(true);
                 }}
-                // @ts-ignore
-                value={innerValue}
-                onChange={datePickerChange}
-                allowClear={false}
-                size={size}
-                suffixIcon={null}
-                // 透传 props 到 antd Ranger
                 {...omit(rest, 'value', 'onChange', 'style', 'className')}
-                open={false}
               />
             </span>
           )}
