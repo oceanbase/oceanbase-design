@@ -176,6 +176,7 @@ export default defineConfig({
             { title: 'DatePicker 日期选择框', link: '/components/date-picker' },
             { title: 'TimePicker 时间选择器', link: '/components/time-picker' },
             { title: 'TreeSelect 树选择', link: '/components/tree-select' },
+            { title: 'Tansfer 穿梭框', link: '/components/transfer' },
             { title: 'Upload 上传', link: '/components/upload' },
           ],
         },
