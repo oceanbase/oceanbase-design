@@ -312,6 +312,9 @@ const defaultTheme: ThemeConfig = {
       // work for TimePicker and DatePicker
       hoverBorderColor: gray7,
       activeBorderColor: gray7,
+      activeShadow: 'none',
+      warningActiveShadow: 'none',
+      errorActiveShadow: 'none',
     },
     Descriptions: {
       labelColor: colorTextSecondary,
@@ -324,11 +327,17 @@ const defaultTheme: ThemeConfig = {
       colorTextQuaternary: gray8,
       // work for Input, InputNumber and AutoComplete
       hoverBorderColor: gray7,
+      activeShadow: 'none',
+      warningActiveShadow: 'none',
+      errorActiveShadow: 'none',
     },
     InputNumber: {
       handleVisible: true,
       borderRadiusLG: borderRadiusMD,
       hoverBorderColor: gray7,
+      activeShadow: 'none',
+      warningActiveShadow: 'none',
+      errorActiveShadow: 'none',
     },
     Message: {
       borderRadiusLG: borderRadiusMD,
@@ -363,6 +372,8 @@ const defaultTheme: ThemeConfig = {
       multipleItemBg: gray2,
       multipleItemBorderColor: tagColorBorder,
       multipleItemBorderColorDisabled: tagColorBorder,
+      // to remove active shadow, work for Select, TreeSelect and Cascader and so on
+      controlOutlineWidth: 0,
     },
     Slider: {
       trackBg: colorPrimary,
