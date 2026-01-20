@@ -22,10 +22,10 @@ export const genInputNumberStyle: GenerateStyle<InputNumberToken> = (
     },
     [`${componentCls}-group-wrapper`]: {
       [`${componentCls}-group-addon`]: {
-        color: token.colorTextTertiary,
+        color: token.colorTextSecondary,
         fontSize: token.fontSizeSM,
         [selectComponentCls]: {
-          color: token.colorTextTertiary,
+          color: token.colorTextSecondary,
         },
       },
     },
