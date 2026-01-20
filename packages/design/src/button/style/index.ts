@@ -32,7 +32,7 @@ export const genPresetColorStyle = (token: ButtonToken): Record<string, CSSObjec
 };
 
 export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) => {
-  const { componentCls } = token;
+  const { iconCls, componentCls } = token;
   return {
     [`${componentCls}`]: {
       // remove box-shadow for button
@@ -44,13 +44,16 @@ export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) =
           backgroundColor: token.colorBgContainerDisabled,
         },
         // disabled style
-        [`&:not(:disabled):not(${componentCls}-disabled):hover`]: {
-          [`&:not(${componentCls}-color-dangerous)`]: {
+        [`&:not(:disabled):not(${componentCls}-disabled)`]: {
+          [`&:not(${componentCls}-color-dangerous):hover`]: {
             borderColor: token.gray7,
             color: token.colorText,
           },
-          [`&:not(${componentCls}-loading)`]: {
+          [`&:not(${componentCls}-loading):hover`]: {
             ...genPresetColorStyle(token),
+          },
+          [iconCls]: {
+            color: token.colorIcon,
           },
         },
       },

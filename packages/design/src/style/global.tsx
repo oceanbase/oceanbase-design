@@ -21,6 +21,10 @@ const genGlobalStyle = (
   const typographyComponentCls = `${antCls}-typography`;
   const menuComponentCls = `${antCls}-menu`;
   const pickerComponentCls = `${antCls}-picker`;
+  const collapseComponentCls = `${antCls}-collapse`;
+  const treeComponentCls = `${antCls}-tree`;
+  const treeSelectComponentCls = `${antCls}-select-tree`;
+  const uploadComponentCls = `${antCls}-upload`;
   return [
     {
       '@font-face': {
@@ -133,6 +137,20 @@ const genGlobalStyle = (
           },
         },
       },
+      [`${collapseComponentCls} ${collapseComponentCls}-extra`]: {
+        [`${iconCls}`]: {
+          color: token.colorIcon,
+          '&:hover': {
+            color: token.colorIconHover,
+          },
+        },
+      },
+      [`${treeComponentCls} ${treeComponentCls}-switcher, ${treeSelectComponentCls} ${treeSelectComponentCls}-switcher, ${uploadComponentCls}`]:
+        {
+          [`${iconCls}`]: {
+            color: token.colorIcon,
+          },
+        },
     },
   ];
 };
