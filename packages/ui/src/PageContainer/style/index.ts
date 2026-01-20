@@ -80,8 +80,6 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
           marginBlockStart: 0,
           [`${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
             borderBottom: `1px solid ${token.colorBorderSecondary}`,
-            left: -token.paddingXL,
-            right: -token.paddingXL,
           },
         },
       },
@@ -96,8 +94,6 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
         },
         [`& > ${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
           borderBottom: `1px solid ${token.colorBorderSecondary}`,
-          left: -token.paddingXL,
-          right: -token.paddingXL,
         },
       },
     },
@@ -108,6 +104,23 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
     },
     [`${componentCls}-with-footer `]: {
       paddingBottom: 64,
+    },
+    // tabs pull through when the width is not overflow
+    [`${componentCls}:not(${componentCls}-max-width)`]: {
+      [`${componentCls}-warp-page-header,${componentCls}-wrap-page-header`]: {
+        [`${antCls}-page-header-footer`]: {
+          [`${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
+            left: -token.paddingXL,
+            right: -token.paddingXL,
+          },
+        },
+      },
+      [`${componentCls}-children-container`]: {
+        [`& > ${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
+          left: -token.paddingXL,
+          right: -token.paddingXL,
+        },
+      },
     },
     ...(genFooterToolbarStyle({
       ...token,
