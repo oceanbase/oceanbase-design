@@ -362,7 +362,10 @@ const defaultTheme: ThemeConfig = {
       buttonPaddingInline: 12,
     },
     Segmented: {
-      trackBg: colorFillTertiary,
+      trackBg: gray2,
+      itemHoverBg: gray3,
+      itemActiveBg: gray4,
+      itemColor: colorText,
     },
     Select: {
       colorTextQuaternary: gray8,
