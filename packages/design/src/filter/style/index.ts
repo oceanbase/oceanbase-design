@@ -234,7 +234,7 @@ const genFilterButtonStyle = (token: FilterToken): CSSObject => {
     },
 
     [`${componentCls}-border`]: {
-      border: `${token.lineWidth}px solid var(--ob-color-border-container)`,
+      border: `${token.lineWidth}px solid ${token.colorBorder}`,
       transition: `background-color ${token.motionDurationSlow} ease-in-out, border-color ${token.motionDurationSlow} ease-in-out`,
 
       '&:hover, &:active, &:focus, &:focus-within': {
