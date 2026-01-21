@@ -114,11 +114,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   const DATE_FORMAT = isEn ? DATE_TIME_MONTH_FORMAT : DATE_TIME_MONTH_FORMAT_CN;
 
   const getDateInstance = useCallback(
-    (
-      v?: string | Dayjs | Moment,
-      format?: typeof DATE_FORMAT | typeof TIME_FORMAT,
-      strict?: boolean
-    ) => {
+    (v?: string | Dayjs | Moment, format?: string, strict?: boolean) => {
       return isMoment ? moment(v as Moment, format, strict) : dayjs(v as Dayjs, format, strict);
     },
     [isMoment]

@@ -656,7 +656,16 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   setOpen(true);
                   setTooltipOpen(true);
                 }}
-                {...omit(rest, 'value', 'onChange', 'style', 'className')}
+                {...omit(
+                  rest,
+                  'value',
+                  'onChange',
+                  'style',
+                  'className',
+                  'onClick',
+                  'format',
+                  'disabled'
+                )}
               />
             </span>
           )}
