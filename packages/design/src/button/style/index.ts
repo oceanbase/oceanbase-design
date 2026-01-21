@@ -37,25 +37,27 @@ export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) =
     [`${componentCls}`]: {
       // remove box-shadow for button
       boxShadow: 'none !important',
+      // loading style for not primary button
+      [`&${componentCls}-loading:not(${componentCls}-primary)`]: {
+        opacity: 1,
+      },
       // button outlined and dashed style
       [`&${componentCls}-variant-outlined, &${componentCls}-variant-dashed`]: {
-        // loading style
-        [`&${componentCls}-loading`]: {
-          backgroundColor: token.colorBgContainerDisabled,
-        },
         // disabled style
         [`&:not(:disabled):not(${componentCls}-disabled)`]: {
-          [`&:not(${componentCls}-color-dangerous):hover`]: {
-            borderColor: token.gray7,
-            color: token.colorText,
-          },
           [`&:not(${componentCls}-loading):hover`]: {
             ...genPresetColorStyle(token),
           },
-          [iconCls]: {
-            color: token.colorIcon,
+          [`&${componentCls}-color-default`]: {
+            [iconCls]: {
+              color: token.colorIcon,
+            },
           },
         },
+      },
+      // button solid style
+      [`&${componentCls}-variant-solid:not(:disabled):not(${componentCls}-disabled):hover`]: {
+        ...genPresetColorStyle(token),
       },
     },
     [`${componentCls}${componentCls}-sm`]: {
