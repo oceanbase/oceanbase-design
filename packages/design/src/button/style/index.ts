@@ -16,7 +16,7 @@ export const genPresetColorStyle = (token: ButtonToken): Record<string, CSSObjec
         dangerous: 'red',
       };
       const bgColor = addPresetColors.includes(colorKey)
-        ? token[`${colorKeyMap[colorKey]}4`]
+        ? token[`${colorKeyMap[colorKey]}5`]
         : token[`${colorKey}6`];
       return {
         ...prev,
@@ -55,10 +55,11 @@ export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) =
           },
         },
       },
-      // button solid style
-      [`&${componentCls}-variant-solid:not(:disabled):not(${componentCls}-disabled):hover`]: {
-        ...genPresetColorStyle(token),
-      },
+      // button loading and solid style
+      [`&${componentCls}-variant-solid${componentCls}-loading:not(:disabled):not(${componentCls}-disabled):hover`]:
+        {
+          ...genPresetColorStyle(token),
+        },
     },
     [`${componentCls}${componentCls}-sm`]: {
       [`${componentCls}-icon`]: {
