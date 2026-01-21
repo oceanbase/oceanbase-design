@@ -22,6 +22,7 @@ const genGlobalStyle = (
   const menuComponentCls = `${antCls}-menu`;
   const pickerComponentCls = `${antCls}-picker`;
   const collapseComponentCls = `${antCls}-collapse`;
+  const selectComponentCls = `${antCls}-select`;
   const treeComponentCls = `${antCls}-tree`;
   const treeSelectComponentCls = `${antCls}-select-tree`;
   const uploadComponentCls = `${antCls}-upload`;
@@ -128,6 +129,11 @@ const genGlobalStyle = (
           },
         },
       },
+      // handle select open style
+      [`${selectComponentCls}${selectComponentCls}-single${selectComponentCls}-open ${selectComponentCls}-selection-item`]:
+        {
+          color: token.colorTextSecondary,
+        },
       // handle picker clear icon style, work for DatePicker and TimePicker
       [`${pickerComponentCls}`]: {
         [`${pickerComponentCls}-clear ${iconCls}`]: {
