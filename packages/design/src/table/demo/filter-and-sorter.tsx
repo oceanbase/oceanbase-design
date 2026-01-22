@@ -13,7 +13,6 @@ const columns: TableColumnsType<DataType> = [
   {
     title: 'Name',
     dataIndex: 'name',
-    showSorterTooltip: { target: 'full-header' },
     filters: [
       {
         text: 'Joe',
@@ -38,11 +37,8 @@ const columns: TableColumnsType<DataType> = [
         ],
       },
     ],
-    // specify the condition of filtering result
-    // here is that finding the name started with `value`
     onFilter: (value, record) => record.name.indexOf(value as string) === 0,
     sorter: (a, b) => a.name.length - b.name.length,
-    sortDirections: ['descend'],
   },
   {
     title: 'Age',
@@ -99,12 +95,7 @@ const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter,
 };
 
 const App: React.FC = () => (
-  <Table<DataType>
-    columns={columns}
-    dataSource={data}
-    onChange={onChange}
-    showSorterTooltip={{ target: 'sorter-icon' }}
-  />
+  <Table<DataType> columns={columns} dataSource={data} onChange={onChange} />
 );
 
 export default App;

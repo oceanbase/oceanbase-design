@@ -10,7 +10,7 @@ export type CardToken = FullToken<'Card'> & {
 };
 
 export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSObject => {
-  const { antCls } = token;
+  const { antCls, componentCls } = token;
   const tableComponentCls = `${antCls}-table`;
   return {
     [`${tableComponentCls}-wrapper`]: {
@@ -25,6 +25,18 @@ export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSOb
           {
             paddingRight: padding,
           },
+        [`${componentCls}${componentCls}-bordered`]: {
+          [`${tableComponentCls}-container`]: {
+            // ::after 伪元素用于固定列时的阴影效果，表格带边框时去掉左上角和右上角的圆角
+            ['&::after']: {
+              borderStartStartRadius: token.borderRadius,
+              borderStartEndRadius: token.borderRadius,
+            },
+            [`${tableComponentCls}-content`]: {
+              borderStartStartRadius: token.borderRadius,
+              borderStartEndRadius: token.borderRadius,
+            }
+          },
       },
       [`${tableComponentCls}-pagination${antCls}-pagination`]: {
         // add marginLeft for table batchOperationBar
@@ -37,7 +49,7 @@ export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSOb
         },
       },
     },
-  };
+  }};
 };
 
 export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObject => {
