@@ -8,6 +8,39 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.14
+
+`2026-01-22`
+
+- 主题
+  - 🌈 去掉 Button、Switch、Radio 和 Checkbox 的点击波纹效果。[#1408](https://github.com/oceanbase/oceanbase-design/pull/1408)
+  - 🌈 去掉 Input、InputNumber、Select、TreeSelect、DatePicker、TimePicker 和 Cascader 的 `activeShadow` 激活态阴影。[#1409](https://github.com/oceanbase/oceanbase-design/pull/1409)
+  - 🐞 修复部分 token 的 `less 变量` 不正确的问题。[#1416](https://github.com/oceanbase/oceanbase-design/pull/1416)
+- Button
+  - 💄 优化 Button 加载态的样式。[#1419](https://github.com/oceanbase/oceanbase-design/pull/1419)
+  - 💄 优化 Button 为 outlined 和 dashed 类型时的 hover 背景色。[#1420](https://github.com/oceanbase/oceanbase-design/pull/1420)
+- 💄 优化 Button、Collapse 操作区、Tree 和 TreeSelect 展开/折叠的图标颜色。[#1415](https://github.com/oceanbase/oceanbase-design/pull/1415)
+- Filter
+  - 🆕 Filter.ResponsiveGroup 新增 `showCount` 属性，用于设置是否显示计数。[#1402](https://github.com/oceanbase/oceanbase-design/pull/1402) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🐞 修复折叠面板内容字重不正确的问题。[#1402](https://github.com/oceanbase/oceanbase-design/pull/1402) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 💄 优化 Filter 的边框色，和 Select 保持一致。[#1414](https://github.com/oceanbase/oceanbase-design/pull/1414)
+- 💄 优化 Input 和 Select 置灰状态下的图标颜色。[#1410](https://github.com/oceanbase/oceanbase-design/pull/1410)
+- InputNumber
+  - 💄 优化 InputNumber 操作按钮 hover 时的边框色。[#1411](https://github.com/oceanbase/oceanbase-design/pull/1411)
+  - 💄 优化 InputNumber 前置和后置标签的字体颜色。[#1412](https://github.com/oceanbase/oceanbase-design/pull/1412)
+- 💄 修复 Modal 文档图标没有垂直居中的问题。[#1405](https://github.com/oceanbase/oceanbase-design/pull/1405)
+- 💄 优化 Radio.Button 中的图标颜色。[#1413](https://github.com/oceanbase/oceanbase-design/pull/1413)
+- 💄 更新 Segmented 的轨道背景色、分段项背景色和字体颜色。[#1417](https://github.com/oceanbase/oceanbase-design/pull/1417)
+- 💄 优化 Select 选中回填项的字体颜色。[#1418](https://github.com/oceanbase/oceanbase-design/pull/1418)
+- 💄 Transfer 圆角大小改为 `6px`。[#1404](https://github.com/oceanbase/oceanbase-design/pull/1404)
+- Table [#1422](https://github.com/oceanbase/oceanbase-design/pull/1422)
+  - 💄 优化带边框 Table 的圆角样式，支持行列合并、虚拟滚动、表头分组等场景下的正确圆角显示。
+  - 💄 优化表头分组 Table 的纵向分割线，body 区仅保留最后一列的纵向分割线。
+  - 💄 修复固定列在带圆角 Table 中无法完全遮挡背后其他列的问题。
+  - 💄 自定义排序图标为 `<SwapRightOutlined />` 和 `<SwapLeftOutlined />`，根据升序和降序高亮不同的图标。
+  - 💄 自定义筛选图标为 `<FilterOutlined />`。
+  - 💄 优化虚拟滚动 Table 的底部圆角和边框样式。
+
 ## 1.0.0-alpha.13
 
 `2026-01-05`
