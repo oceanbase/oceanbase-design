@@ -229,10 +229,11 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
         return;
       }
       const otherValues = currentValue.filter(item => item[0] !== option.value);
-      const allChildValues =
-        option.children
-          ?.filter(child => !child.disabled)
-          .map(child => [option.value, child.value]) || [];
+
+      // 当搜索时，只选择当前显示的子选项（filteredOptions 中的）
+      const childrenToSelect = option.children?.filter(child => !child.disabled) || [];
+      const allChildValues = childrenToSelect.map(child => [option.value, child.value]);
+
       const newValueList = [...otherValues, ...allChildValues];
       setValue(newValueList);
     },

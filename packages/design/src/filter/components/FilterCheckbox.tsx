@@ -131,11 +131,28 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCollapsed, updateFilterValue, filterId, label, selectedValues, stableOptionsKey]);
 
+  // 根据搜索关键词过滤选项
+  const filteredOptions = useMemo(() => {
+    if (!showSearch || !searchKeyword) return options;
+    return filterOptions(options, searchKeyword);
+  }, [showSearch, searchKeyword, options]);
+
   const handleChange = useCallback(
     (val: string[]) => {
-      setSelectedValues(val);
+      // 当开启搜索时，需要合并未显示但已选中的选项
+      if (showSearch && searchKeyword) {
+        // 找出已选中但不在当前过滤结果中的选项值
+        const hiddenSelectedValues = selectedValues.filter(
+          selectedVal => !filteredOptions.find(opt => opt.value === selectedVal)
+        );
+        // 合并：保留未显示的已选中项 + 当前操作后的选项
+        const mergedValues = [...new Set([...hiddenSelectedValues, ...val])];
+        setSelectedValues(mergedValues);
+      } else {
+        setSelectedValues(val);
+      }
     },
-    [setSelectedValues]
+    [setSelectedValues, showSearch, searchKeyword, selectedValues, filteredOptions]
   );
 
   const handleClear = useCallback(() => {
@@ -146,12 +163,6 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
   const isStatusMode = useMemo(() => {
     return options.some(option => option.color !== undefined);
   }, [options]);
-
-  // 根据搜索关键词过滤选项
-  const filteredOptions = useMemo(() => {
-    if (!showSearch || !searchKeyword) return options;
-    return filterOptions(options, searchKeyword);
-  }, [showSearch, searchKeyword, options]);
 
   // 渲染状态图标（重叠显示）- 仅在状态模式下使用
   const renderStatusIcon = useMemo(() => {
