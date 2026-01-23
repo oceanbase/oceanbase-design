@@ -3,7 +3,9 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Flex, Popover } from 'antd';
 import Checkbox from '../../checkbox';
 import theme from '../../theme';
-import { CheckOutlined, CloseOutlined, RightOutlined } from '@oceanbase/icons';
+import Input from '../../input';
+import Empty from '../../empty';
+import { CheckOutlined, CloseOutlined, RightOutlined, SearchOutlined } from '@oceanbase/icons';
 import classNames from 'classnames';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
@@ -17,6 +19,7 @@ import {
   getPlaceholder,
   getStableOptionsKey,
   getWrappedValueStyle,
+  normalizeLabel,
 } from '../utils';
 import CountNumber from './CountNumber';
 import FilterButton from './FilterButton';
@@ -41,6 +44,8 @@ export interface FilterCascaderProps extends BaseFilterProps, InternalFilterProp
   onChange?: (value: string[][]) => void;
   /** 是否显示计数，可传入 { showTotal: true } 同时显示总数 */
   count?: boolean | { showTotal?: boolean };
+  /** 是否显示搜索框，默认为 false */
+  showSearch?: boolean;
 }
 
 const FilterCascader: React.FC<FilterCascaderProps> = ({
@@ -52,6 +57,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   bordered = true,
   multiple = false,
   count = false,
+  showSearch = false,
   _isCollapsed = false,
   ...restProps
 }) => {
@@ -64,6 +70,9 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
   // 用于控制二级 Popover 的打开状态（仅在单选模式下使用）
   const [openPopoverKey, setOpenPopoverKey] = useState<string | null>(null);
+
+  // 搜索关键词状态
+  const [searchKeyword, setSearchKeyword] = useState('');
 
   // 从 restProps 中排除 onOpenChange，避免类型冲突
   const { onOpenChange: externalOnOpenChange, ...filterButtonProps } = restProps;
@@ -143,6 +152,10 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
       // 当主弹窗关闭时，同步关闭二级弹窗（单选模式）
       if (!open && !multiple) {
         setOpenPopoverKey(null);
+      }
+      // 弹窗关闭时清空搜索关键词
+      if (!open) {
+        setSearchKeyword('');
       }
       externalOnOpenChange?.(open);
     },
@@ -226,6 +239,36 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
     [currentValue, setValue]
   );
 
+  // 根据搜索关键词过滤选项（同时搜索父级和子级）
+  const filteredOptions = useMemo(() => {
+    if (!showSearch || !searchKeyword) return options;
+    const lowerKeyword = searchKeyword.toLowerCase().trim();
+
+    return options
+      .map(option => {
+        const parentLabel = normalizeLabel(option.label).toLowerCase();
+        const parentMatches = parentLabel.includes(lowerKeyword);
+
+        // 过滤子级选项
+        const filteredChildren = option.children?.filter(child => {
+          const childLabel = normalizeLabel(child.label).toLowerCase();
+          return childLabel.includes(lowerKeyword);
+        });
+
+        // 如果父级匹配或有匹配的子级，则保留该选项
+        if (parentMatches || (filteredChildren && filteredChildren.length > 0)) {
+          return {
+            ...option,
+            // 如果父级不匹配但子级匹配，只显示匹配的子级
+            children: parentMatches ? option.children : filteredChildren,
+          } as CascaderOption;
+        }
+
+        return null;
+      })
+      .filter((option): option is CascaderOption => option !== null);
+  }, [showSearch, searchKeyword, options]);
+
   // 渲染弹框内容
   const renderContent = (
     <div
@@ -235,141 +278,165 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
         overflowY: 'auto',
       }}
     >
-      {options.map(option => {
-        const selectedChildren = currentValue
-          .filter(item => item[0] === option.value)
-          .map(item => item[1]);
+      {showSearch && (
+        <div style={{ marginInline: 12, marginBottom: 8 }}>
+          <Input
+            placeholder="搜索"
+            prefix={<SearchOutlined />}
+            allowClear
+            value={searchKeyword}
+            onChange={e => setSearchKeyword(e.target.value)}
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+      )}
+      {filteredOptions.length === 0 ? (
+        <Empty
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          description="无匹配结果"
+          style={{ padding: '16px 0' }}
+        />
+      ) : (
+        filteredOptions.map(option => {
+          const selectedChildren = currentValue
+            .filter(item => item[0] === option.value)
+            .map(item => item[1]);
 
-        const hasSelectedChildren = selectedChildren.length > 0;
-        const allChildrenSelected =
-          multiple &&
-          option.children &&
-          option.children.length > 0 &&
-          selectedChildren.length === option.children.length;
+          const hasSelectedChildren = selectedChildren.length > 0;
+          const allChildrenSelected =
+            multiple &&
+            option.children &&
+            option.children.length > 0 &&
+            selectedChildren.length === option.children.length;
 
-        return (
-          <Popover
-            placement="rightTop"
-            trigger={'hover'}
-            key={option.value}
-            arrow={false}
-            open={option?.disabled ? false : multiple ? undefined : openPopoverKey === option.value}
-            onOpenChange={
-              multiple
-                ? undefined
-                : open => {
-                    if (!open) {
-                      setOpenPopoverKey(null);
-                    } else {
-                      setOpenPopoverKey(option.value);
+          return (
+            <Popover
+              placement="rightTop"
+              trigger={'hover'}
+              key={option.value}
+              arrow={false}
+              open={
+                option?.disabled ? false : multiple ? undefined : openPopoverKey === option.value
+              }
+              onOpenChange={
+                multiple
+                  ? undefined
+                  : open => {
+                      if (!open) {
+                        setOpenPopoverKey(null);
+                      } else {
+                        setOpenPopoverKey(option.value);
+                      }
                     }
-                  }
-            }
-            content={option.children?.map(child => {
-              const isSelected = selectedChildren.includes(child.value);
-              const isChildDisabled = child.disabled || false;
-              return (
+              }
+              content={option.children?.map(child => {
+                const isSelected = selectedChildren.includes(child.value);
+                const isChildDisabled = child.disabled || false;
+                return (
+                  <Flex
+                    key={child.value}
+                    gap={8}
+                    className={getFilterCls(prefixCls, 'select-option')}
+                    justify="space-between"
+                    onClick={e => {
+                      e.stopPropagation();
+                      if (!isChildDisabled) {
+                        handleChange(option.value, child.value);
+                      }
+                    }}
+                    style={{
+                      cursor: isChildDisabled ? 'not-allowed' : 'pointer',
+                      color: isChildDisabled ? token.colorTextDisabled : 'inherit',
+                    }}
+                  >
+                    {multiple ? (
+                      <Checkbox checked={isSelected} disabled={isChildDisabled}>
+                        <span className={getFilterCls(prefixCls, 'text-ellipsis')}>
+                          {child.label}
+                        </span>
+                      </Checkbox>
+                    ) : (
+                      <>
+                        <span className={getFilterCls(prefixCls, 'text-ellipsis')}>
+                          {child.label}
+                        </span>
+                        <span>
+                          {isSelected && <CheckOutlined style={{ color: token.colorPrimary }} />}
+                        </span>
+                      </>
+                    )}
+                  </Flex>
+                );
+              })}
+              styles={{
+                body: {
+                  padding: 8,
+                  maxHeight: 220,
+                  maxWidth: 300,
+                  overflowY: 'auto',
+                },
+              }}
+            >
+              <div style={{ padding: '0px 8px' }}>
                 <Flex
-                  key={child.value}
                   gap={8}
-                  className={getFilterCls(prefixCls, 'select-option')}
+                  className={classNames(getFilterCls(prefixCls, 'select-option'), {
+                    [getFilterCls(prefixCls, 'has-selected')]: hasSelectedChildren,
+                  })}
                   justify="space-between"
-                  onClick={e => {
-                    e.stopPropagation();
-                    if (!isChildDisabled) {
-                      handleChange(option.value, child.value);
-                    }
-                  }}
+                  align="center"
                   style={{
-                    cursor: isChildDisabled ? 'not-allowed' : 'pointer',
-                    color: isChildDisabled ? token.colorTextDisabled : 'inherit',
+                    cursor: option.disabled ? 'not-allowed' : 'pointer',
+                    color: option.disabled ? token.colorTextDisabled : 'inherit',
                   }}
                 >
                   {multiple ? (
-                    <Checkbox checked={isSelected} disabled={isChildDisabled}>
+                    <Checkbox
+                      checked={allChildrenSelected}
+                      indeterminate={hasSelectedChildren && !allChildrenSelected}
+                      disabled={option.disabled}
+                      onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                      onChange={() => {
+                        if (!option.disabled) {
+                          if (allChildrenSelected) {
+                            clearByParent(option.value);
+                          } else {
+                            selectAllChildren(option);
+                          }
+                        }
+                      }}
+                    >
                       <span className={getFilterCls(prefixCls, 'text-ellipsis')}>
-                        {child.label}
+                        {option.label}
                       </span>
                     </Checkbox>
                   ) : (
-                    <>
-                      <span className={getFilterCls(prefixCls, 'text-ellipsis')}>
-                        {child.label}
-                      </span>
-                      <span>
-                        {isSelected && <CheckOutlined style={{ color: token.colorPrimary }} />}
-                      </span>
-                    </>
+                    <div className={getFilterCls(prefixCls, 'text-ellipsis')}>{option.label}</div>
                   )}
+                  <Flex align="center" gap={4}>
+                    <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
+                      <RightOutlined
+                        className={hasSelectedChildren ? getFilterCls(prefixCls, 'arrow-icon') : ''}
+                      />
+                      {hasSelectedChildren && (
+                        <div
+                          className={getFilterCls(prefixCls, 'clear-icon')}
+                          onClick={e => {
+                            e.stopPropagation();
+                            clearByParent(option.value);
+                          }}
+                        >
+                          <CloseOutlined />
+                        </div>
+                      )}
+                    </div>
+                  </Flex>
                 </Flex>
-              );
-            })}
-            styles={{
-              body: {
-                padding: 8,
-                maxHeight: 220,
-                maxWidth: 300,
-                overflowY: 'auto',
-              },
-            }}
-          >
-            <div style={{ padding: '0px 8px' }}>
-              <Flex
-                gap={8}
-                className={classNames(getFilterCls(prefixCls, 'select-option'), {
-                  [getFilterCls(prefixCls, 'has-selected')]: hasSelectedChildren,
-                })}
-                justify="space-between"
-                align="center"
-                style={{
-                  cursor: option.disabled ? 'not-allowed' : 'pointer',
-                  color: option.disabled ? token.colorTextDisabled : 'inherit',
-                }}
-              >
-                {multiple ? (
-                  <Checkbox
-                    checked={allChildrenSelected}
-                    indeterminate={hasSelectedChildren && !allChildrenSelected}
-                    disabled={option.disabled}
-                    onClick={(e: React.MouseEvent) => e.stopPropagation()}
-                    onChange={() => {
-                      if (!option.disabled) {
-                        if (allChildrenSelected) {
-                          clearByParent(option.value);
-                        } else {
-                          selectAllChildren(option);
-                        }
-                      }
-                    }}
-                  >
-                    <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{option.label}</span>
-                  </Checkbox>
-                ) : (
-                  <div className={getFilterCls(prefixCls, 'text-ellipsis')}>{option.label}</div>
-                )}
-                <Flex align="center" gap={4}>
-                  <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
-                    <RightOutlined
-                      className={hasSelectedChildren ? getFilterCls(prefixCls, 'arrow-icon') : ''}
-                    />
-                    {hasSelectedChildren && (
-                      <div
-                        className={getFilterCls(prefixCls, 'clear-icon')}
-                        onClick={e => {
-                          e.stopPropagation();
-                          clearByParent(option.value);
-                        }}
-                      >
-                        <CloseOutlined />
-                      </div>
-                    )}
-                  </div>
-                </Flex>
-              </Flex>
-            </div>
-          </Popover>
-        );
-      })}
+              </div>
+            </Popover>
+          );
+        })
+      )}
     </div>
   );
 
