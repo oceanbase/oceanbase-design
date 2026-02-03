@@ -15,6 +15,7 @@ interface OptionCheckboxProps {
   prefixCls: string;
   onValueChange: (value: string[][]) => void;
   onClick?: (e: React.MouseEvent) => void;
+  onAfterChange?: () => void; // 值改变后的回调，用于关闭面板等操作
 }
 
 /**
@@ -30,6 +31,7 @@ export const OptionCheckbox: React.FC<OptionCheckboxProps> = ({
   prefixCls,
   onValueChange,
   onClick,
+  onAfterChange,
 }) => {
   const isExactMatch = currentValue.some(
     selectedPath =>
@@ -99,6 +101,8 @@ export const OptionCheckbox: React.FC<OptionCheckboxProps> = ({
           } else {
             onValueChange([...currentValue, currentPath]);
           }
+          // 叶子节点勾选后，触发回调（用于关闭右侧面板）
+          onAfterChange?.();
         }
       }}
     >

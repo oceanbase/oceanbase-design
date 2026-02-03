@@ -87,12 +87,11 @@ export const FlatFirstColumn: React.FC<FlatFirstColumnProps> = ({
                   if (hasOptionChildren) {
                     // 有子节点，设置第一列和第二列（第二列使用空值占位）
                     onColumnsChange([[option.value], [option.value, '']]);
-                  } else {
-                    // 无子节点，只保留第一列（关闭右侧面板）
+                  } else if (!multiple) {
+                    // 单选模式下，无子节点，关闭右侧面板并选中
                     onColumnsChange([[option.value]]);
 
-                    // 单选模式下，选中并关闭弹窗
-                    if (!option.disabled && !multiple) {
+                    if (!option.disabled) {
                       if (isExact) {
                         onValueChange([]);
                       } else {
@@ -103,6 +102,7 @@ export const FlatFirstColumn: React.FC<FlatFirstColumnProps> = ({
                       }, 0);
                     }
                   }
+                  // 多选模式下的叶子节点，通过 OptionCheckbox 的 onAfterChange 处理
                 }}
                 style={{
                   cursor: option.disabled ? 'not-allowed' : 'pointer',
@@ -121,6 +121,14 @@ export const FlatFirstColumn: React.FC<FlatFirstColumnProps> = ({
                       allChildrenSelected={allChildrenSelected}
                       prefixCls={prefixCls}
                       onValueChange={onValueChange}
+                      onAfterChange={
+                        hasOptionChildren
+                          ? undefined
+                          : () => {
+                              // 叶子节点勾选后，关闭右侧面板
+                              onColumnsChange([[option.value]]);
+                            }
+                      }
                     />
                     <OptionItem
                       label=""

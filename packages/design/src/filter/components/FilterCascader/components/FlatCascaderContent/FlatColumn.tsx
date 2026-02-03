@@ -111,14 +111,13 @@ export const FlatColumn: React.FC<FlatColumnProps> = ({
                   newColumns[columnIndex] = currentPath;
                   newColumns.push([...currentPath, '']);
                   onColumnsChange(newColumns);
-                } else {
-                  // 无子节点，关闭右侧的子面板
+                } else if (!multiple) {
+                  // 单选模式下，无子节点，关闭右侧面板并选中
                   const newColumns = flatColumnsPath.slice(0, columnIndex + 1);
                   newColumns[columnIndex] = currentPath;
                   onColumnsChange(newColumns);
 
-                  // 单选模式下，选中并关闭弹窗
-                  if (!option.disabled && !multiple) {
+                  if (!option.disabled) {
                     if (isExact) {
                       onValueChange([]);
                     } else {
@@ -129,6 +128,7 @@ export const FlatColumn: React.FC<FlatColumnProps> = ({
                     }, 0);
                   }
                 }
+                // 多选模式下的叶子节点，通过 OptionCheckbox 的 onAfterChange 处理
               }}
               style={{
                 cursor: option.disabled ? 'not-allowed' : 'pointer',
@@ -147,6 +147,16 @@ export const FlatColumn: React.FC<FlatColumnProps> = ({
                     allChildrenSelected={allChildrenSelected}
                     prefixCls={prefixCls}
                     onValueChange={onValueChange}
+                    onAfterChange={
+                      hasOptionChildren
+                        ? undefined
+                        : () => {
+                            // 叶子节点勾选后，关闭右侧面板
+                            const newColumns = flatColumnsPath.slice(0, columnIndex + 1);
+                            newColumns[columnIndex] = currentPath;
+                            onColumnsChange(newColumns);
+                          }
+                    }
                   />
                   <OptionItem
                     label=""
