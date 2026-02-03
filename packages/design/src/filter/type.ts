@@ -33,4 +33,9 @@ export interface InternalFilterProps {
    * 是否为 Wrap 组件透传，默认 false
    */
   _isInWrapComponent?: boolean;
+  /**
+   * @internal
+   * 是否为扁平化模式，默认 false
+   */
+  _isFlat?: boolean;
 }

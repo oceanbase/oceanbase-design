@@ -14,7 +14,7 @@ const CountNumber: FC<CountNumberProps> = ({ count, total, className }) => {
   return (
     <div
       className={classNames(className || getFilterCls(prefixCls, 'count'))}
-      style={total ? { width: '26px' } : undefined}
+      style={total ? { width: 'fit-content', padding: '0px 4px' } : undefined}
     >
       {total ? `${count}/${total}` : count}
     </div>
