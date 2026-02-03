@@ -111,16 +111,23 @@ export const FlatColumn: React.FC<FlatColumnProps> = ({
                   newColumns[columnIndex] = currentPath;
                   newColumns.push([...currentPath, '']);
                   onColumnsChange(newColumns);
-                } else if (!option.disabled && !multiple) {
-                  // 单选模式下，无子节点，直接选中/取消选中
-                  if (isExact) {
-                    onValueChange([]);
-                  } else {
-                    onValueChange([currentPath]);
+                } else {
+                  // 无子节点，关闭右侧的子面板
+                  const newColumns = flatColumnsPath.slice(0, columnIndex + 1);
+                  newColumns[columnIndex] = currentPath;
+                  onColumnsChange(newColumns);
+
+                  // 单选模式下，选中并关闭弹窗
+                  if (!option.disabled && !multiple) {
+                    if (isExact) {
+                      onValueChange([]);
+                    } else {
+                      onValueChange([currentPath]);
+                    }
+                    setTimeout(() => {
+                      filterButtonRef.current?.closePopover();
+                    }, 0);
                   }
-                  setTimeout(() => {
-                    filterButtonRef.current?.closePopover();
-                  }, 0);
                 }
               }}
               style={{

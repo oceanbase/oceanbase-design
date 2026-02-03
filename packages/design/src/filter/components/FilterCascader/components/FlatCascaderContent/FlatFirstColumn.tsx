@@ -87,16 +87,21 @@ export const FlatFirstColumn: React.FC<FlatFirstColumnProps> = ({
                   if (hasOptionChildren) {
                     // 有子节点，设置第一列和第二列（第二列使用空值占位）
                     onColumnsChange([[option.value], [option.value, '']]);
-                  } else if (!option.disabled && !multiple) {
-                    // 单选模式下，无子节点，直接选中/取消选中
-                    if (isExact) {
-                      onValueChange([]);
-                    } else {
-                      onValueChange([currentPath]);
+                  } else {
+                    // 无子节点，只保留第一列（关闭右侧面板）
+                    onColumnsChange([[option.value]]);
+
+                    // 单选模式下，选中并关闭弹窗
+                    if (!option.disabled && !multiple) {
+                      if (isExact) {
+                        onValueChange([]);
+                      } else {
+                        onValueChange([currentPath]);
+                      }
+                      setTimeout(() => {
+                        filterButtonRef.current?.closePopover();
+                      }, 0);
                     }
-                    setTimeout(() => {
-                      filterButtonRef.current?.closePopover();
-                    }, 0);
                   }
                 }}
                 style={{
