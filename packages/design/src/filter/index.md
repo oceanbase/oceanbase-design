@@ -111,6 +111,7 @@ const App = () => {
 | value | 当前选中值 | `string` | - |
 | onChange | 值变化回调 | `(value: string) => void` | - |
 | optionRender | 自定义渲染选项 | `(option: SelectOption, info: { index: number }) => ReactNode` | - |
+| showSearch | 是否显示搜索框 | `boolean` | `false` |
 | loading | 是否加载中 | `boolean` | `false` |
 
 #### SelectOption
@@ -131,6 +132,7 @@ const App = () => {
 | value | 当前选中值 | `string[]` | - |
 | onChange | 值变化回调 | `(value: string[]) => void` | - |
 | count | 是否显示计数，可传入 `{ showTotal: true }` 同时显示总数 | `boolean \| { showTotal?: boolean }` | `false` |
+| showSearch | 是否显示搜索框 | `boolean` | `false` |
 
 #### CheckboxOption
 
@@ -179,6 +181,7 @@ const App = () => {
 | onChange | 值变化回调 | `(value: string[][]) => void` | - |
 | multiple | 是否多选 | `boolean` | `false` |
 | count | 是否显示计数，可传入 `{ showTotal: true }` 同时显示总数 | `boolean \| { showTotal?: boolean }` | `false` |
+| showSearch | 是否显示搜索框，支持同时搜索父级和子级选项 | `boolean` | `false` |
 
 #### CascaderOption
 
