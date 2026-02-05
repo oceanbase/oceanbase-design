@@ -8,6 +8,22 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.15
+
+`2026-02-05`
+
+- 💄 优化 Button `hover` 时的边框和背景色。[#1428](https://github.com/oceanbase/oceanbase-design/pull/1428)
+- 🐞 修复 Card 受到父卡片样式影响、导致嵌套子卡片样式不正确的问题。[#1430](https://github.com/oceanbase/oceanbase-design/pull/1430)
+- Filter
+  - 🔥 Filter 新增 `showSearch` 属性，用于设置下拉搜索。[#1424](https://github.com/oceanbase/oceanbase-design/pull/1424) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🌐 Filter 文案支持国际化。[#1432](https://github.com/oceanbase/oceanbase-design/pull/1432)
+  - 💄 优化 Filter.Checkbox 折叠模式下标签容器的横向间距。[#1432](https://github.com/oceanbase/oceanbase-design/pull/1432)
+  - 💄 优化弹出面板的最小宽度 `200px` => `120px`。[#1432](https://github.com/oceanbase/oceanbase-design/pull/1432)
+- 💄 优化 Radio、InputNumber、Collapse、Tree 和 TreeSelect 的图标颜色。[#1429](https://github.com/oceanbase/oceanbase-design/pull/1429)
+- Table
+  - 🐞 修复 Table 和卡片组合使用时，分页器右侧间距不生效的问题。[#1427](https://github.com/oceanbase/oceanbase-design/pull/1427)
+  - 💄 优化 Table 无分页器和横向滚动时在卡片内的圆角。[#1431](https://github.com/oceanbase/oceanbase-design/pull/1431)
+
 ## 1.0.0-alpha.14
 
 `2026-01-22`

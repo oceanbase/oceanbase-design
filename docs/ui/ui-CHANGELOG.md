@@ -8,6 +8,13 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.15
+
+`2026-02-05`
+
+- ⭐️ DateRanger 时间选择器支持分段修改。[#1403](https://github.com/oceanbase/oceanbase-design/pull/1403) [@18735185652](https://github.com/18735185652)
+- 🐞 修复 PageContainer 对浏览器 API 的使用，以适配 SSR。[#1426](https://github.com/oceanbase/oceanbase-design/pull/1426)
+
 ## 1.0.0-alpha.14
 
 `2026-01-22`
