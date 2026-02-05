@@ -23,6 +23,8 @@ export interface FilterLocale {
   pleaseSelect?: string;
   open?: string;
   filters?: string;
+  apply?: string;
+  clearAll?: string;
 }
 
 export interface Locale extends AntLocale {

@@ -320,6 +320,10 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
           selected={hasValue}
           onOpenChange={handlePopoverOpenChange}
           {...filterButtonProps}
+          style={{
+            ...filterButtonProps?.style,
+            paddingInline: token.paddingXXS,
+          }}
         >
           <WrappedTagsDisplay tags={selectedTags} onRemove={handleRemoveTag} />
         </FilterButton>

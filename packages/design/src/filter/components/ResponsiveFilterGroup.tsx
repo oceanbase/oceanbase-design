@@ -17,8 +17,8 @@ import Button from '../../button';
 import FilterWrap from './FilterWrap';
 import type { FilterButtonRef } from './FilterButton';
 import ConfigProvider from '../../config-provider';
-import type { Locale } from '../../locale';
-import enUS from '../../locale/en-US';
+import type { FilterLocale, Locale } from '../../locale';
+import defaultLocale from '../../locale/en-US';
 import {
   FilterProvider,
   type FilterComponentName,
@@ -46,6 +46,7 @@ export interface ResponsiveFilterGroupProps {
   extra?: ReactNode;
   /** 是否显示计数 默认 true */
   showCount?: boolean;
+  locale?: FilterLocale;
 }
 
 /**
@@ -117,9 +118,14 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   style,
   extra,
   showCount = true,
+  locale: customLocale,
 }) => {
   const { locale: contextLocale } = useContext(ConfigProvider.ConfigContext);
-  const filterLocale = (contextLocale as Locale)?.Filter || enUS.Filter;
+  const filterLocale: FilterLocale = {
+    ...defaultLocale.Filter,
+    ...contextLocale?.Filter,
+    ...customLocale,
+  };
   // 如果没有传入 label，使用国际化默认值
   const filterLabel = label ?? filterLocale?.filters;
   const containerRef = useRef<HTMLDivElement>(null);
@@ -459,12 +465,12 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
                       filterButtonRef.current?.closePopover();
                     }}
                   >
-                    Apply
+                    {filterLocale?.apply}
                   </Button>
                 )}
                 {onClearAll && (
                   <Button type="link" size="small" onClick={handleClearAll}>
-                    Clear All
+                    {filterLocale?.clearAll}
                   </Button>
                 )}
               </Flex>

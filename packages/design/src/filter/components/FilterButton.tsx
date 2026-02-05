@@ -42,6 +42,7 @@ interface FilterButtonProps extends BaseFilterProps, InternalFilterProps {
   showLabelDivider?: boolean;
   /** 是否显示后缀图标区域（包括下拉箭头和清除图标），默认 true */
   showSuffixIcon?: boolean;
+  style?: React.CSSProperties;
 }
 
 const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
@@ -65,6 +66,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       showLabelDivider = false,
       showSuffixIcon = true,
       _isInWrapComponent = false,
+      style,
       ...restProps
     },
     ref
@@ -153,7 +155,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
           body: {
             padding: 0,
             maxWidth: 300,
-            minWidth: 200,
+            minWidth: 120,
           },
         }}
         {...popoverProps}
@@ -170,6 +172,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
                 (!isCollapsed || _isInWrapComponent) &&
                 getFilterCls(prefixCls, 'selected')
             )}
+            style={style}
           >
             <Flex align="center" justify="space-between" style={{ width: '100%' }}>
               {icon && <div className={getFilterCls(prefixCls, 'button-prefix-icon')}>{icon}</div>}

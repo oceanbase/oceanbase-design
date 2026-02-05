@@ -30,5 +30,7 @@ export default {
     pleaseSelect: '請選擇',
     open: '開啟',
     filters: '篩選',
+    apply: '確定',
+    clearAll: '清空',
   },
 } as Locale;
