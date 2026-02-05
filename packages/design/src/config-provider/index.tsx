@@ -219,14 +219,7 @@ const ConfigProvider: ConfigProviderType = ({
       collapse={merge(
         {},
         {
-          expandIcon: ({ isActive }) => (
-            <CaretRightOutlined
-              rotate={isActive ? 90 : 0}
-              style={{
-                color: mergedTheme.token?.colorIcon || mergedTheme.token?.colorTextSecondary,
-              }}
-            />
-          ),
+          expandIcon: ({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />,
         } as ConfigProviderProps['collapse'],
         parentContext.collapse,
         collapse

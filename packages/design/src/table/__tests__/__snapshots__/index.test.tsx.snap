@@ -1961,7 +1961,7 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
 
 exports[`Table > innerBordered should work 1`] = `
 <div
-  class="ant-table-wrapper ant-table-has-bordered ant-table-inner-bordered"
+  class="ant-table-wrapper ant-table-inner-bordered"
 >
   <div
     class="ant-spin-nested-loading"

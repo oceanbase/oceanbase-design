@@ -7,13 +7,16 @@ export type InputNumberToken = FullToken<'InputNumber'>;
 export const genInputNumberStyle: GenerateStyle<InputNumberToken> = (
   token: InputNumberToken
 ): CSSObject => {
-  const { antCls, componentCls } = token;
+  const { antCls, iconCls, componentCls } = token;
   const selectComponentCls = `${antCls}-select-selector`;
   return {
     [`${componentCls}`]: {
       [`${componentCls}-handler-wrap`]: {
         [`${componentCls}-handler:hover`]: {
           borderColor: token.gray7,
+          [iconCls]: {
+            color: token.colorIcon,
+          },
           [`& + ${componentCls}-handler`]: {
             borderTopColor: token.gray7,
           },

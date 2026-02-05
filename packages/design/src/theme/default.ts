@@ -69,6 +69,8 @@ const colorTextSecondary = gray8;
 const colorTextTertiary = gray7;
 const colorTextQuaternary = gray6;
 
+const colorIcon = gray8;
+
 const colorFill = gray5;
 const colorFillSecondary = gray4;
 const colorFillTertiary = gray3;
@@ -170,7 +172,7 @@ const defaultTheme: ThemeConfig = {
     colorTextSecondary,
     colorTextTertiary,
     colorTextQuaternary,
-    colorIcon: colorTextSecondary,
+    colorIcon,
     colorBgBase: white,
     colorBgContainer: white,
     colorBgLayout: gray1,

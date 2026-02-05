@@ -22,6 +22,7 @@ const genGlobalStyle = (
   const menuComponentCls = `${antCls}-menu`;
   const pickerComponentCls = `${antCls}-picker`;
   const collapseComponentCls = `${antCls}-collapse`;
+  const paginationComponentCls = `${antCls}-pagination`;
   const selectComponentCls = `${antCls}-select`;
   const treeComponentCls = `${antCls}-tree`;
   const treeSelectComponentCls = `${antCls}-select-tree`;
@@ -129,6 +130,15 @@ const genGlobalStyle = (
           },
         },
       },
+      // handle pagination prev and next icon style
+      [`${paginationComponentCls}`]: {
+        [`${paginationComponentCls}-prev:not(${paginationComponentCls}-disabled), ${paginationComponentCls}-next:not(${paginationComponentCls}-disabled)`]:
+          {
+            [`${paginationComponentCls}-item-link`]: {
+              color: token.colorIcon,
+            },
+          },
+      },
       // handle select open style
       [`${selectComponentCls}${selectComponentCls}-single${selectComponentCls}-open ${selectComponentCls}-selection-item`]:
         {
@@ -143,20 +153,38 @@ const genGlobalStyle = (
           },
         },
       },
-      [`${collapseComponentCls} ${collapseComponentCls}-extra`]: {
-        [`${iconCls}`]: {
-          color: token.colorIcon,
-          '&:hover': {
-            color: token.colorIconHover,
+      [`${collapseComponentCls}`]: {
+        [`${collapseComponentCls}-item ${collapseComponentCls}-header ${collapseComponentCls}-expand-icon, ${collapseComponentCls}-extra`]:
+          {
+            [`${iconCls}`]: {
+              color: token.colorIcon,
+              '&:hover': {
+                color: token.colorIconHover,
+              },
+            },
+          },
+      },
+      // handle tree and tree select icon style
+      [`${treeComponentCls} ${treeComponentCls}-switcher, ${treeSelectComponentCls} ${treeSelectComponentCls}-switcher`]:
+        {
+          [`${iconCls}`]: {
+            color: token.colorIcon,
+            // to avoid icon to be hidden when hover
+            position: 'relative',
           },
         },
-      },
-      [`${treeComponentCls} ${treeComponentCls}-switcher, ${treeSelectComponentCls} ${treeSelectComponentCls}-switcher, ${uploadComponentCls}`]:
+      [`${treeComponentCls} ${treeComponentCls}-iconEle, ${treeSelectComponentCls} ${treeSelectComponentCls}-iconEle`]:
         {
           [`${iconCls}`]: {
             color: token.colorIcon,
           },
         },
+      // handle upload icon style
+      [`${uploadComponentCls}`]: {
+        [`${iconCls}`]: {
+          color: token.colorIcon,
+        },
+      },
     },
   ];
 };

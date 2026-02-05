@@ -47,13 +47,14 @@ export const genRadioStyle: GenerateStyle<RadioToken> = (token: RadioToken): CSS
             justifyContent: 'center',
             height: '100%',
           },
-          [`&:not(${componentCls}-button-wrapper-disabled)`]: {
-            [`${componentCls}-button-label`]: {
-              [iconCls]: {
-                color: token.colorIcon,
+          [`&:not(${componentCls}-button-wrapper-checked):not(${componentCls}-button-wrapper-disabled)`]:
+            {
+              [`${componentCls}-button-label`]: {
+                [iconCls]: {
+                  color: token.colorIcon,
+                },
               },
             },
-          },
         },
         // Radio.Button icon-only style
         [`&${componentCls}-button-wrapper-icon-only`]: {
