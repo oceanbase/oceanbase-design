@@ -49,26 +49,39 @@ const DocDialogComp = (props: DocDialogProps) => {
     embedConfig = {},
     normalConfig = {},
   } = props;
-  const [clientHeight, setClientHeight] = useState(document.body.clientHeight);
-  const [clientWidth, setClientWidth] = useState(document.body.clientWidth);
-  const location = window.location;
+  // Avoid SSR issue: only read document/window on client (e.g. Next.js)
+  const [clientHeight, setClientHeight] = useState(0);
+  const [clientWidth, setClientWidth] = useState(0);
+  const [location, setLocation] = useState<{ pathname: string } | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setClientHeight(window.document.body.clientHeight);
+      setClientWidth(window.document.body.clientWidth);
+      setLocation({ pathname: window.location.pathname });
+    }
+  }, []);
 
   const currentLink = useMemo(() => {
-    const { pathname } = location;
+    const pathname = location?.pathname ?? '';
     const link = Object.entries(docUrls).find(set => pathname.indexOf(set[0]) > -1);
     return link?.[1] ?? fallbackUrl;
   }, [location, docUrls, fallbackUrl]);
 
   const handleResize = debounce(() => {
-    setClientWidth(document.body.clientWidth);
-    setClientHeight(document.body.clientHeight);
+    if (typeof window !== 'undefined') {
+      setClientWidth(window.document.body.clientWidth);
+      setClientHeight(window.document.body.clientHeight);
+    }
   }, 300);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- register resize listener once on mount
   }, []);
 
   const DialogProps = useMemo(() => {

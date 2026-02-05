@@ -166,6 +166,30 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
         backgroundColor: `${colorFill} !important`,
       },
     },
+    // 可编辑日期时间输入组件样式
+    [`${componentCls}-editable-wrapper`]: {
+      display: 'inline-flex',
+      alignItems: 'center',
+    },
+    [`${componentCls}-range-editable`]: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      cursor: 'text',
+      '&-disabled': {
+        cursor: 'not-allowed',
+        opacity: 0.6,
+      },
+    },
+    [`${componentCls}-range-editable-input`]: {
+      width: 290,
+      cursor: 'text',
+      caretColor: 'transparent',
+      '&:focus, &:focus-within': {
+        [`${antCls}-input`]: {
+          caretColor: token.colorPrimary,
+        },
+      },
+    },
   } as CSSObject;
 };
 

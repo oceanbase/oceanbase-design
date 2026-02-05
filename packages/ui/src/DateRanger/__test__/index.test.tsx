@@ -41,7 +41,7 @@ describe('DateRanger', () => {
     const { container } = render(<DateRanger simpleMode />);
     // As simple mode
     expect(container.querySelector('.ant-date-ranger-play')).toBeTruthy();
-    expect(container.querySelector('.ant-date-ranger-picker')).toBeFalsy();
+    expect(container.querySelector('.ant-date-ranger-editable-wrapper')).toBeFalsy();
   });
   it('Support setting default value' /** 支持设置默认时间值 */, () => {
     const { container } = render(
@@ -49,7 +49,7 @@ describe('DateRanger', () => {
     );
     // As normal mode
     expect(container.querySelector('.ant-date-ranger-play')).toBeFalsy();
-    expect(container.querySelector('.ant-date-ranger-picker')).toBeTruthy();
+    expect(container.querySelector('.ant-date-ranger-editable-wrapper')).toBeTruthy();
   });
   suite('Panel shortcut options' /** 选择面板中的快捷选项 */, () => {
     it('In simple mode, the shortcut option that is consistent with the ranger label should be selected' /** 在简单模式下，快捷选项应选中和ranger label 一致的快捷选项 */, () => {
