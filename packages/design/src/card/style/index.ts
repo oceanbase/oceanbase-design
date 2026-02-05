@@ -25,17 +25,15 @@ export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSOb
           {
             paddingRight: padding,
           },
-        [`${componentCls}${componentCls}-bordered`]: {
-          [`${tableComponentCls}-container`]: {
-            // ::after 伪元素用于固定列时的阴影效果，表格带边框时去掉左上角和右上角的圆角
-            ['&::after']: {
-              borderStartStartRadius: token.borderRadius,
-              borderStartEndRadius: token.borderRadius,
-            },
-            [`${tableComponentCls}-content`]: {
-              borderStartStartRadius: token.borderRadius,
-              borderStartEndRadius: token.borderRadius,
-            },
+        [`${tableComponentCls}-container`]: {
+          // ::after 伪元素用于固定列时的阴影效果，表格带边框时去掉左上角和右上角的圆角
+          ['&::before, &::after']: {
+            borderStartStartRadius: token.borderRadiusMD,
+            borderStartEndRadius: token.borderRadiusMD,
+          },
+          [`${tableComponentCls}-content`]: {
+            borderStartStartRadius: token.borderRadiusLG,
+            borderStartEndRadius: token.borderRadiusLG,
           },
         },
       },

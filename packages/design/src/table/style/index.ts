@@ -76,6 +76,9 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         // 去掉排序列表头的灰色背景
         [`th${componentCls}-column-has-sorters`]: {
           backgroundColor: colorBgBase,
+          ['&:hover']: {
+            backgroundColor: colorBgBase,
+          },
         },
         [`${componentCls}-column-sorters`]: {
           justifyContent: 'flex-start',
@@ -126,6 +129,10 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         [`tr > td`]: {
           fontWeight: token.fontWeight,
           transition: `background ${token.motionDurationMid}`,
+          // remove sort column background color
+          [`&${antCls}-table-column-sort`]: {
+            backgroundColor: colorBgBase,
+          },
           a: {
             fontWeight: token.fontWeightStrong,
             // work for ProTable link style
@@ -249,13 +256,13 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       {
         [`${componentCls}-container`]: {
           // ::after 伪元素用于固定列时的阴影效果，表格带边框时去掉左上角和右上角的圆角
-          ['&::after']: {
-            borderStartStartRadius: token.borderRadius,
-            borderStartEndRadius: token.borderRadius,
+          ['&::before, &::after']: {
+            borderStartStartRadius: token.borderRadiusMD,
+            borderStartEndRadius: token.borderRadiusMD,
           },
           [`${componentCls}-content`]: {
-            borderStartStartRadius: token.borderRadius,
-            borderStartEndRadius: token.borderRadius,
+            borderStartStartRadius: token.borderRadiusLG,
+            borderStartEndRadius: token.borderRadiusLG,
           },
         },
       },
@@ -355,8 +362,8 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         },
       },
 
-    // 非可展开表格、不带 footer 表格、非空表格、不带边框表格: 去掉底部圆角
-    [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
+    // 非可展开表格、不带 footer 表格、带分页器表格、非空表格、不带边框表格: 去掉底部圆角
+    [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer):not(${componentCls}-no-pagination) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
       {
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0,
