@@ -7,7 +7,7 @@ import type {
 import { PageContainer as AntPageContainer } from '@ant-design/pro-components';
 import classNames from 'classnames';
 import { isObject } from 'lodash';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, ConfigProvider, Divider, Space, Tooltip, theme } from '@oceanbase/design';
 import { useSize } from 'ahooks';
 import LocaleWrapper from '../locale/LocaleWrapper';
@@ -88,8 +88,16 @@ const PageContainer = ({
 
   const { token } = theme.useToken();
 
+  // Avoid SSR issue: only get container element on client (e.g. Next.js)
+  const [containerEl, setContainerEl] = useState<HTMLElement | null>(null);
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.document) {
+      setContainerEl(window.document.querySelector(`.${prefixCls}`) as HTMLElement);
+    }
+  }, [prefixCls]);
+
   // TODO: PageContainer should support ref to get the width of the container
-  const size = useSize(window?.document?.querySelector(`.${prefixCls}`) as HTMLElement);
+  const size = useSize(containerEl);
   const width = size?.width;
   const maxWidthValue = restProps.style?.maxWidth;
   const maxWidth =
