@@ -92,7 +92,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
             [iconCls]: {
               color: token.colorIconHover,
             },
-          }
+          },
         },
         // 保留排序列表头分割线
         [`th${componentCls}-column-sort:before`]: {
@@ -192,15 +192,16 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       [`${componentCls}-footer`]: {
         borderRadius: `0px 0px ${unit(token.borderRadiusLG)} ${unit(token.borderRadiusLG)}`,
       },
-      // 表头分组的表格（thead 中有多个 tr），去掉 tbody 的纵向分割线
-      // 使用 :has() 检测 thead 是否有多个 tr
-      // 但保留最后一列的纵向分割线（表格右边界）
-      [`${componentCls}-thead:has(> tr:not(:only-child))`]: {
-        [`& ~ ${componentCls}-tbody > tr > td:not(${componentCls}-cell-last-column)`]: {
+    },
+
+    // 表头分组的表格（thead 中有多个 tr），去掉 tbody 的纵向分割线，保留最后一列的纵向分割线
+    // 通过 Table 组件上的 ant-table-thead-multiple-rows 类选择，避免使用 :has() 在部分环境下产生无效选择器
+    [`${componentCls}-wrapper${componentCls}-thead-multiple-rows ${componentCls}${componentCls}-bordered`]:
+      {
+        [`${componentCls}-tbody > tr > td:not(${componentCls}-cell-last-column)`]: {
           borderInlineEnd: 'none',
         },
       },
-    },
 
     // 带内部边框的表格样式
     [`${componentCls}-wrapper${componentCls}-inner-bordered ${componentCls}-bordered`]: {
@@ -243,7 +244,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           borderRadius: token.borderRadiusLG,
         },
       },
-    
+
     [`${componentCls}-wrapper:not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
       {
         [`${componentCls}-container`]: {
@@ -255,7 +256,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           [`${componentCls}-content`]: {
             borderStartStartRadius: token.borderRadius,
             borderStartEndRadius: token.borderRadius,
-          }
+          },
         },
       },
 
@@ -461,6 +462,10 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           fontSize: token.fontSizeSM,
           padding: `${unit(token.paddingSM)} 0`,
           margin: 0,
+          // 带边框和带内部边框的 Table，分页器右侧间距设为 token.marginLG
+          [`${componentCls}-wrapper${componentCls}-has-bordered &`]: {
+            marginInlineEnd: marginLG,
+          },
           [`${antCls}-pagination-item, ${antCls}-pagination-total-text, ${antCls}-pagination-prev, ${antCls}-pagination-next`]:
             {
               height: token.controlHeightSM,
@@ -483,9 +488,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           left: 0,
           display: 'inline-block',
           marginRight: marginLG,
-          [`${componentCls}-batch-operation-selection`]: {
-            
-          },
+          [`${componentCls}-batch-operation-selection`]: {},
           ...genSmallBtnStyle(token),
         },
       },

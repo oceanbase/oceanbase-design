@@ -199,7 +199,6 @@ const App: React.FC = () => {
           columns={columns}
           dataSource={hasData ? dataSource : []}
           rowKey={record => record.key}
-          scroll={{ x: 1200 }}
           expandable={
             expandable
               ? {

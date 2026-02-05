@@ -121,6 +121,11 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
     // 如果最后一行的最后一列 rowSpan 为 0，说明被前面的行覆盖了
     return cellProps && cellProps.rowSpan === 0;
   }, [columns, dataSource]);
+  // 检测表头是否有多个 tr（表头分组），用于样式上去掉 tbody 纵向分割线
+  const hasMultipleTheadRows = React.useMemo(() => {
+    if (!columns) return false;
+    return columns.some((col: any) => Array.isArray(col?.children) && col.children.length > 0);
+  }, [columns]);
   const tableCls = classNames(
     {
       [`${prefixCls}-expandable`]: !isEmpty(expandable),
@@ -128,6 +133,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
       [`${prefixCls}-has-footer`]: !!footer,
       [`${prefixCls}-has-first-column-rowspan`]: hasFirstColumnRowSpan,
       [`${prefixCls}-has-last-column-rowspan`]: hasLastColumnRowSpan,
+      [`${prefixCls}-thead-multiple-rows`]: hasMultipleTheadRows,
       [`${prefixCls}-inner-bordered`]: innerBordered,
       [`${prefixCls}-no-pagination`]: noPagination,
       [`${prefixCls}-has-empty`]: noData,
@@ -146,37 +152,40 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   const [currentSelectedInfo, setCurrentSelectedInfo] = useState<any>({});
 
   // 递归处理嵌套的 columns，为所有层级的列添加排序和筛选图标
-  const processColumn = React.useCallback((item: any): any => {
-    const newItem = { ...item };
-    // 自定义排序图标，根据排序状态高亮不同的图标
-    if (item.sorter && !item.sortIcon) {
-      newItem.sortIcon = ({ sortOrder }: { sortOrder?: 'ascend' | 'descend' }) => (
-        <span className={`${prefixCls}-column-sorter`}>
-          <SwapRightOutlined
-            rotate={-90}
-            style={sortOrder === 'ascend' ? { color: token.colorPrimary } : {}}
-          />
-          <SwapRightOutlined
-            rotate={90}
-            style={{
-              ...(sortOrder === 'descend' ? { color: token.colorPrimary } : {}),
-              marginLeft: -6,
-              marginRight: -4,
-            }}
-          />
-        </span>
-      );
-    }
-    // 自定义筛选图标
-    if ((item.filters || item.filterDropdown) && !item.filterIcon) {
-      newItem.filterIcon = () => <FilterOutlined />;
-    }
-    // 递归处理 children
-    if (item.children && Array.isArray(item.children)) {
-      newItem.children = item.children.map((child: any) => processColumn(child));
-    }
-    return newItem;
-  }, [prefixCls, token.colorPrimary]);
+  const processColumn = React.useCallback(
+    (item: any): any => {
+      const newItem = { ...item };
+      // 自定义排序图标，根据排序状态高亮不同的图标
+      if (item.sorter && !item.sortIcon) {
+        newItem.sortIcon = ({ sortOrder }: { sortOrder?: 'ascend' | 'descend' }) => (
+          <span className={`${prefixCls}-column-sorter`}>
+            <SwapRightOutlined
+              rotate={-90}
+              style={sortOrder === 'ascend' ? { color: token.colorPrimary } : {}}
+            />
+            <SwapRightOutlined
+              rotate={90}
+              style={{
+                ...(sortOrder === 'descend' ? { color: token.colorPrimary } : {}),
+                marginLeft: -6,
+                marginRight: -4,
+              }}
+            />
+          </span>
+        );
+      }
+      // 自定义筛选图标
+      if ((item.filters || item.filterDropdown) && !item.filterIcon) {
+        newItem.filterIcon = () => <FilterOutlined />;
+      }
+      // 递归处理 children
+      if (item.children && Array.isArray(item.children)) {
+        newItem.children = item.children.map((child: any) => processColumn(child));
+      }
+      return newItem;
+    },
+    [prefixCls, token.colorPrimary]
+  );
 
   // 找到最后一个非 hidden 的列索引
   const lastVisibleColumnIndex = React.useMemo(() => {

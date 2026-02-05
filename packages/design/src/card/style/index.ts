@@ -35,8 +35,9 @@ export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSOb
             [`${tableComponentCls}-content`]: {
               borderStartStartRadius: token.borderRadius,
               borderStartEndRadius: token.borderRadius,
-            }
+            },
           },
+        },
       },
       [`${tableComponentCls}-pagination${antCls}-pagination`]: {
         // add marginLeft for table batchOperationBar
@@ -49,7 +50,7 @@ export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSOb
         },
       },
     },
-  }};
+  };
 };
 
 export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObject => {
