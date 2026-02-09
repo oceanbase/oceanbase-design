@@ -1,121 +1,72 @@
-import React from 'react';
-import { Flex } from 'antd';
-import Input from '../../../../../input';
-import Empty from '../../../../../empty';
-import { SearchOutlined } from '@oceanbase/icons';
+import React, { useMemo } from 'react';
+import { Cascader } from 'antd';
 import type { CascaderOption } from '../../types';
 import type { FilterButtonRef } from '../../../FilterButton';
-import { FlatFirstColumn } from './FlatFirstColumn';
-import { FlatColumn } from './FlatColumn';
-import { COLUMN_WIDTH } from '../../constants';
 
 interface FlatCascaderContentProps {
-  flatColumnsPath: string[][];
   options: CascaderOption[];
   currentValue: string[][];
-  multiple: boolean;
-  prefixCls: string;
+  multiple?: boolean;
   filterButtonRef: React.RefObject<FilterButtonRef>;
-  onColumnsChange: (columns: string[][]) => void;
   onValueChange: (value: string[][]) => void;
-  showSearch?: boolean;
-  searchKeyword?: string;
-  onSearchChange?: (value: string) => void;
 }
 
 /**
  * Flat 模式的级联内容容器组件
+ * 使用 antd 的 Cascader.Panel 实现多列展示
  */
 export const FlatCascaderContent: React.FC<FlatCascaderContentProps> = ({
-  flatColumnsPath,
   options,
   currentValue,
-  multiple,
-  prefixCls,
   filterButtonRef,
-  onColumnsChange,
+  multiple = false,
   onValueChange,
-  showSearch = false,
-  searchKeyword = '',
-  onSearchChange,
 }) => {
-  // 如果没有任何列，显示第一列（根级别）
-  if (flatColumnsPath.length === 0) {
-    return (
-      <>
-        {showSearch && (
-          <div style={{ padding: '8px 12px' }}>
-            <Input
-              placeholder="搜索"
-              prefix={<SearchOutlined />}
-              allowClear
-              value={searchKeyword}
-              onChange={e => onSearchChange?.(e.target.value)}
-              onClick={e => e.stopPropagation()}
-            />
-          </div>
-        )}
-        {options.length === 0 ? (
-          <Empty
-            image={Empty.PRESENTED_IMAGE_SIMPLE}
-            description="无匹配结果"
-            style={{ padding: '16px 0' }}
-          />
-        ) : (
-          <FlatFirstColumn
-            options={options}
-            currentValue={currentValue}
-            multiple={multiple}
-            prefixCls={prefixCls}
-            filterButtonRef={filterButtonRef}
-            onColumnsChange={onColumnsChange}
-            onValueChange={onValueChange}
-          />
-        )}
-      </>
-    );
-  }
+  // 将组件内部的值格式转换为 Cascader.Panel 需要的格式
+  // 组件内部：[[parent, child], ...] 或 [[parent, child]]
+  // Cascader.Panel：
+  //   - 单选：string[]
+  //   - 多选：string[][]
 
-  // 渲染多列
+  const cascaderValue = useMemo(() => {
+    if (currentValue.length === 0) return undefined;
+
+    if (!multiple) {
+      // 单选：currentValue 是 [[parent, child]]
+      const firstValue = currentValue[0];
+      // 确保 firstValue 是数组
+      if (Array.isArray(firstValue) && firstValue.length > 0 && Array.isArray(firstValue[0])) {
+        // 嵌套数组，展平
+        return firstValue.flat() as string[];
+      }
+      return firstValue as string[];
+    } else {
+      // 多选：currentValue 是 [[parent, child], ...]
+      return currentValue as string[][];
+    }
+  }, [currentValue, multiple]);
+
+  // 处理 Cascader.Panel 的值变化
+  const handleCascaderChange = (
+    value: string[] | string[][],
+    selectedOptions: CascaderOption[]
+  ) => {
+    if (!multiple) {
+      // 单选：value 是 string[]，如 ['frontend', 'react']
+      onValueChange([value as string[]]);
+      filterButtonRef.current?.closePopover();
+    } else {
+      // 多选：value 是 string[][]，如 [['frontend', 'react'], ['backend', 'java']]
+      onValueChange(value as string[][]);
+    }
+  };
+
   return (
-    <>
-      {showSearch && (
-        <div style={{ padding: '8px 12px' }}>
-          <Input
-            placeholder="搜索"
-            prefix={<SearchOutlined />}
-            allowClear
-            value={searchKeyword}
-            onChange={e => onSearchChange?.(e.target.value)}
-            onClick={e => e.stopPropagation()}
-          />
-        </div>
-      )}
-      {options.length === 0 ? (
-        <Empty
-          image={Empty.PRESENTED_IMAGE_SIMPLE}
-          description="无匹配结果"
-          style={{ padding: '16px 0' }}
-        />
-      ) : (
-        <Flex style={{ minWidth: flatColumnsPath.length * COLUMN_WIDTH }}>
-          {flatColumnsPath.map((columnPath, index) => (
-            <FlatColumn
-              key={columnPath.join('-')}
-              columnPath={columnPath}
-              columnIndex={index}
-              flatColumnsPath={flatColumnsPath}
-              currentValue={currentValue}
-              options={options}
-              multiple={multiple}
-              prefixCls={prefixCls}
-              filterButtonRef={filterButtonRef}
-              onColumnsChange={onColumnsChange}
-              onValueChange={onValueChange}
-            />
-          ))}
-        </Flex>
-      )}
-    </>
+    <Cascader.Panel
+      options={options}
+      value={cascaderValue}
+      onChange={handleCascaderChange}
+      multiple={multiple}
+    />
   );
 };

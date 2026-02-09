@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Cascader, Input } from 'antd';
 import theme from '../../../theme';
-import Input from '../../../input';
 import Empty from '../../../empty';
 import { SearchOutlined } from '@oceanbase/icons';
 import { useFilterContext } from '../../FilterContext';
@@ -182,17 +182,11 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   // 渲染内容
   const renderContent = flat ? (
     <FlatCascaderContent
-      flatColumnsPath={flatColumnsPath}
       options={filteredOptions}
       currentValue={currentValue}
       multiple={multiple}
-      prefixCls={prefixCls}
       filterButtonRef={filterButtonRef}
-      onColumnsChange={setFlatColumnsPath}
       onValueChange={setValue}
-      showSearch={showSearch}
-      searchKeyword={searchKeyword}
-      onSearchChange={setSearchKeyword}
     />
   ) : (
     <NormalCascaderContent
@@ -218,8 +212,6 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
     ? {
         body: {
           padding: 0,
-          maxWidth: Math.max(flatColumnsPath.length * COLUMN_WIDTH, COLUMN_WIDTH),
-          minWidth: Math.max(flatColumnsPath.length * COLUMN_WIDTH, COLUMN_WIDTH),
         },
       }
     : undefined;
