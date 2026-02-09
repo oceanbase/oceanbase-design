@@ -302,4 +302,5 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   return wrapWithTooltip(filterButton);
 };
 
+export type { FilterCascaderProps, CascaderOption } from './types';
 export default FilterCascader;
