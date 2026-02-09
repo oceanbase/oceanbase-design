@@ -47,18 +47,19 @@ export const FlatCascaderContent: React.FC<FlatCascaderContentProps> = ({
     }
   }, [currentValue, multiple]);
 
-  // 处理 Cascader.Panel 的值变化（单选版本）
-  const handleSingleCascaderChange = (value: string[], _selectedOptions: CascaderOption[]) => {
-    onValueChange([value]);
-    filterButtonRef.current?.closePopover();
-  };
-
-  // 处理 Cascader.Panel 的值变化（多选版本）
-  const handleMultipleCascaderChange = (
-    value: string[][],
-    _selectedOptions: CascaderOption[][]
+  // 处理 Cascader.Panel 的值变化
+  const handleCascaderChange = (
+    value: CascaderPanelValue<typeof multiple>,
+    _selectedOptions: CascaderOption[] | CascaderOption[][]
   ) => {
-    onValueChange(value);
+    if (multiple) {
+      // 多选：value 是 string[][]，如 [['frontend', 'react'], ['backend', 'java']]
+      onValueChange(value as string[][]);
+    } else {
+      // 单选：value 是 string[]，如 ['frontend', 'react']
+      onValueChange([value as string[]]);
+      filterButtonRef.current?.closePopover();
+    }
   };
 
   // 使用条件渲染来处理 multiple 属性的类型问题
@@ -66,14 +67,14 @@ export const FlatCascaderContent: React.FC<FlatCascaderContentProps> = ({
     <Cascader.Panel
       options={options}
       value={cascaderValue as string[][]}
-      onChange={handleMultipleCascaderChange}
-      multiple={true}
+      onChange={handleCascaderChange}
+      multiple={multiple}
     />
   ) : (
     <Cascader.Panel
       options={options}
       value={cascaderValue as string[]}
-      onChange={handleSingleCascaderChange}
+      onChange={handleCascaderChange}
       multiple={false}
     />
   );
