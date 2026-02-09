@@ -72,6 +72,24 @@ const App: React.FC = () => {
           options={options}
         />
       </Space>
+
+      <Space wrap>
+        <Filter.Cascader
+          label="扁平化单选"
+          value={singleValue}
+          onChange={setSingleValue}
+          options={options}
+          flat
+        />
+        <Filter.Cascader
+          label="扁平化多选"
+          multiple
+          value={multipleValue}
+          onChange={setMultipleValue}
+          options={options}
+          flat
+        />
+      </Space>
     </Space>
   );
 };
