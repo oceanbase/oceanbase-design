@@ -22,6 +22,8 @@ export interface FilterCascaderSingleProps extends BaseFilterProps, InternalFilt
   count?: boolean | { showTotal?: boolean };
   /** 扁平化展示 */
   flat?: boolean;
+  /** 是否显示搜索框，默认为 false */
+  showSearch?: boolean;
 }
 
 export interface FilterCascaderMultipleProps extends BaseFilterProps, InternalFilterProps {
@@ -37,6 +39,8 @@ export interface FilterCascaderMultipleProps extends BaseFilterProps, InternalFi
   count?: boolean | { showTotal?: boolean };
   /** 扁平化展示 */
   flat?: boolean;
+  /** 是否显示搜索框，默认为 false */
+  showSearch?: boolean;
 }
 
 export type FilterCascaderProps = FilterCascaderSingleProps | FilterCascaderMultipleProps;

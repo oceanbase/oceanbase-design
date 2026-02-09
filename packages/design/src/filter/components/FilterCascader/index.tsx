@@ -1,16 +1,24 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import theme from '../../../theme';
+import Input from '../../../input';
+import Empty from '../../../empty';
+import { SearchOutlined } from '@oceanbase/icons';
 import { useFilterContext } from '../../FilterContext';
 import { useFilterCollapsed } from '../../hooks/useFilterCollapsed';
 import { useFilterTooltip } from '../../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../../style';
-import { generateFilterId, getPlaceholder, getWrappedValueStyle } from '../../utils';
+import {
+  generateFilterId,
+  getPlaceholder,
+  getWrappedValueStyle,
+  normalizeLabel,
+} from '../../utils';
 import type { FilterComponentName } from '../../FilterContext';
 import CountNumber from '../CountNumber';
 import FilterButton from '../FilterButton';
 import type { FilterButtonRef } from '../FilterButton';
 import WrappedTagsDisplay from '../WrappedTagsDisplay';
-import type { FilterCascaderProps } from './types';
+import type { FilterCascaderProps, CascaderOption } from './types';
 import { useNormalizedValue } from './hooks/useNormalizedValue';
 import { useCascaderLabels } from './hooks/useCascaderLabels';
 import { useCascaderCallbacks } from './hooks/useCascaderCallbacks';
@@ -28,6 +36,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   bordered = true,
   multiple = false,
   count = false,
+  showSearch = false,
   _isCollapsed = false,
   flat = false,
   ...restProps
@@ -43,6 +52,9 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   const [openPopoverKey, setOpenPopoverKey] = useState<string | null>(null);
   // 用于 flat 模式下的多列路径（支持多层级）
   const [flatColumnsPath, setFlatColumnsPath] = useState<string[][]>([]);
+
+  // 搜索关键词状态
+  const [searchKeyword, setSearchKeyword] = useState('');
 
   // 从 restProps 中排除 onOpenChange，避免类型冲突
   const { onOpenChange: externalOnOpenChange, ...filterButtonProps } = restProps;
@@ -64,20 +76,15 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   );
 
   // 回调函数
-  const {
-    handleChange,
-    clearByParent,
-    handleClear,
-    selectAllChildren,
-    handleRemoveTag,
-  } = useCascaderCallbacks(
-    currentValue,
-    setValue,
-    options,
-    multiple,
-    filterButtonRef,
-    setOpenPopoverKey
-  );
+  const { handleChange, clearByParent, handleClear, selectAllChildren, handleRemoveTag } =
+    useCascaderCallbacks(
+      currentValue,
+      setValue,
+      options,
+      multiple,
+      filterButtonRef,
+      setOpenPopoverKey
+    );
 
   // 使用 Tooltip hook
   const { onPopoverOpenChange, wrapWithTooltip } = useFilterTooltip({
@@ -104,10 +111,66 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
       if (!open && flat) {
         setFlatColumnsPath([]);
       }
+      // 弹窗关闭时清空搜索关键词
+      if (!open) {
+        setSearchKeyword('');
+      }
       externalOnOpenChange?.(open);
     },
     [onPopoverOpenChange, externalOnOpenChange, multiple, flat]
   );
+
+  // 根据搜索关键词过滤选项（同时搜索父级和子级）
+  const filteredOptions = useMemo(() => {
+    if (!showSearch || !searchKeyword) return options;
+    const lowerKeyword = searchKeyword.toLowerCase().trim();
+
+    return options
+      .map(option => {
+        const parentLabel = normalizeLabel(option.label).toLowerCase();
+        const parentMatches = parentLabel.includes(lowerKeyword);
+
+        // 递归过滤子级选项
+        const filterChildren = (children: CascaderOption[]): CascaderOption[] => {
+          return children
+            .map(child => {
+              const childLabel = normalizeLabel(child.label).toLowerCase();
+              const childMatches = childLabel.includes(lowerKeyword);
+
+              // 如果有子级，递归过滤
+              if (child.children && child.children.length > 0) {
+                const filteredChildren = filterChildren(child.children);
+                // 如果当前节点匹配或有匹配的子级，则保留
+                if (childMatches || filteredChildren.length > 0) {
+                  return {
+                    ...child,
+                    children: childMatches ? child.children : filteredChildren,
+                  };
+                }
+                return null;
+              }
+
+              // 叶子节点，如果匹配则保留
+              return childMatches ? child : null;
+            })
+            .filter((child): child is CascaderOption => child !== null);
+        };
+
+        const filteredChildren = option.children ? filterChildren(option.children) : [];
+
+        // 如果父级匹配或有匹配的子级，则保留该选项
+        if (parentMatches || filteredChildren.length > 0) {
+          return {
+            ...option,
+            // 如果父级不匹配但子级匹配，只显示匹配的子级
+            children: parentMatches ? option.children : filteredChildren,
+          } as CascaderOption;
+        }
+
+        return null;
+      })
+      .filter((option): option is CascaderOption => option !== null);
+  }, [showSearch, searchKeyword, options]);
 
   // 当值变化时，更新 context 中的值
   useEffect(() => {
@@ -120,17 +183,20 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   const renderContent = flat ? (
     <FlatCascaderContent
       flatColumnsPath={flatColumnsPath}
-      options={options}
+      options={filteredOptions}
       currentValue={currentValue}
       multiple={multiple}
       prefixCls={prefixCls}
       filterButtonRef={filterButtonRef}
       onColumnsChange={setFlatColumnsPath}
       onValueChange={setValue}
+      showSearch={showSearch}
+      searchKeyword={searchKeyword}
+      onSearchChange={setSearchKeyword}
     />
   ) : (
     <NormalCascaderContent
-      options={options}
+      options={filteredOptions}
       currentValue={currentValue}
       multiple={multiple}
       prefixCls={prefixCls}
@@ -141,6 +207,9 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
       onHandleChange={handleChange}
       onClearByParent={clearByParent}
       onSelectAllChildren={selectAllChildren}
+      showSearch={showSearch}
+      searchKeyword={searchKeyword}
+      onSearchChange={setSearchKeyword}
     />
   );
 
