@@ -1,4 +1,4 @@
-import Cascader from './components/FilterCascader';
+import Cascader from './components/FilterCascader/index';
 import Checkbox from './components/FilterCheckbox';
 import Range from './components/FilterRange';
 import Input from './components/FilterInput';

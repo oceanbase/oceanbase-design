@@ -42,6 +42,8 @@ interface FilterButtonProps extends BaseFilterProps, InternalFilterProps {
   showLabelDivider?: boolean;
   /** 是否显示后缀图标区域（包括下拉箭头和清除图标），默认 true */
   showSuffixIcon?: boolean;
+  /** 是否为 flat 模式（内部使用） */
+  _isFlat?: boolean;
   style?: React.CSSProperties;
 }
 
@@ -66,6 +68,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       showLabelDivider = false,
       showSuffixIcon = true,
       _isInWrapComponent = false,
+      _isFlat = false,
       style,
       ...restProps
     },
@@ -114,7 +117,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     const popoverContent = useMemo(
       () => (
         <>
-          {(!isCollapsed || _isInWrapComponent) && (
+          {!_isFlat && (!isCollapsed || _isInWrapComponent) && (
             <Flex
               justify="space-between"
               align="center"
@@ -140,7 +143,18 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
           )}
         </>
       ),
-      [content, footer, label, extra, isCollapsed, prefixCls, showLabelDivider, token]
+      [
+        content,
+        footer,
+        label,
+        extra,
+        isCollapsed,
+        prefixCls,
+        showLabelDivider,
+        token,
+        _isFlat,
+        _isInWrapComponent,
+      ]
     );
 
     return wrapSSR(

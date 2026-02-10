@@ -20,6 +20,7 @@ const genSelectOptionStyle = (token: FilterToken): CSSObject => {
       paddingInline: token.paddingXS,
       cursor: 'pointer',
       borderRadius: token.borderRadius,
+      transition: `background-color ${token.motionDurationMid} ease-in-out`,
 
       '&:hover': {
         backgroundColor: token.colorBgTextHover,
@@ -39,6 +40,15 @@ const genSelectOptionStyle = (token: FilterToken): CSSObject => {
       // 有选中子项的父级选项样式
       [`&${componentCls}-has-selected`]: {
         backgroundColor: token.colorBgTextHover,
+      },
+
+      // flat 模式下激活的父节点样式（优先级更高）
+      [`&${componentCls}-flat-active`]: {
+        backgroundColor: token.colorBgTextHover,
+
+        '&:hover': {
+          backgroundColor: token.colorBgTextHover,
+        },
       },
     },
   };
@@ -130,6 +140,7 @@ const genIconStyle = (token: FilterToken): CSSObject => {
     [`${componentCls}-count`]: {
       ...baseCountStyle,
       backgroundColor: 'var(--ob-color-border-container)',
+      padding: '0px 2px',
     },
 
     [`${componentCls}-arrow-icon`]: {
