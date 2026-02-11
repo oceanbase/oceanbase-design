@@ -452,6 +452,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
           icon={icon}
           label={filterLabel}
           extra={extra}
+          showCount={showCount}
           onClearAll={handleClearAll}
           footer={
             showActions && (
