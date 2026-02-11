@@ -24,65 +24,66 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
       [`${proComponentsCls}-grid-content`]: {
         minHeight: 'auto',
       },
-      [`${componentCls}-warp-page-header,${componentCls}-wrap-page-header`]: {
-        // 减小内容区左右两侧间距
-        paddingInlineStart: `${token.paddingXL}px !important`,
-        paddingInlineEnd: `${token.paddingXL}px !important`,
-        paddingBlockStart: `${paddingLG}px !important`,
-        paddingBlockEnd: `${padding}px !important`,
-        [`${antCls}-page-header-breadcrumb`]: {
-          // overwritten pro-components style
-          paddingBlockStart: 0,
-        },
-        // remove paddingBlockStart for page header
-        [`${antCls}-page-header-heading`]: {
-          paddingBlockStart: 0,
-        },
-        [`${antCls}-page-header-heading-title`]: {
-          fontSize: fontSizeHeading2,
-          fontWeight: token.fontWeightStrong,
-          marginInlineEnd: token.marginXS,
-        },
-        [`${antCls}-page-header-heading-sub-title`]: {
-          fontSize: token.fontSize,
-        },
-        [`${antCls}-page-header-heading-reload`]: {
-          cursor: 'pointer',
-          fontSize: token.fontSizeLG,
-          marginTop: token.marginXXS,
-        },
-        [`${antCls}-page-header-heading-document-divider`]: {
-          marginInline: 0,
-          height: token.size,
-        },
-        [`${antCls}-page-header-heading-document-icon`]: {
-          display: 'inline-block',
-          color: token.colorIcon,
-          fontSize: token.fontSizeLG,
-          cursor: 'pointer',
-          '&:hover': {
-            color: token.colorLinkHover,
+      [`${antCls}-page-header${componentCls}-warp-page-header, ${antCls}-page-header${componentCls}-wrap-page-header`]:
+        {
+          // 减小内容区左右两侧间距
+          paddingInlineStart: `${token.paddingXL}px`,
+          paddingInlineEnd: `${token.paddingXL}px`,
+          paddingBlockStart: `${paddingLG}px`,
+          paddingBlockEnd: `${padding}px`,
+          [`${antCls}-page-header-breadcrumb`]: {
+            // overwritten pro-components style
+            paddingBlockStart: 0,
           },
-          '&:active': {
-            color: token.colorLinkActive,
+          // remove paddingBlockStart for page header
+          [`${antCls}-page-header-heading`]: {
+            paddingBlockStart: 0,
+          },
+          [`${antCls}-page-header-heading-title`]: {
+            fontSize: fontSizeHeading2,
+            fontWeight: token.fontWeightStrong,
+            marginInlineEnd: token.marginXS,
+          },
+          [`${antCls}-page-header-heading-sub-title`]: {
+            fontSize: token.fontSize,
+          },
+          [`${antCls}-page-header-heading-reload`]: {
+            cursor: 'pointer',
+            fontSize: token.fontSizeLG,
+            marginTop: token.marginXXS,
+          },
+          [`${antCls}-page-header-heading-document-divider`]: {
+            marginInline: 0,
+            height: token.size,
+          },
+          [`${antCls}-page-header-heading-document-icon`]: {
+            display: 'inline-block',
+            color: token.colorIcon,
+            fontSize: token.fontSizeLG,
+            cursor: 'pointer',
+            '&:hover': {
+              color: token.colorLinkHover,
+            },
+            '&:active': {
+              color: token.colorLinkActive,
+            },
+          },
+          [`${antCls}-page-header-heading-document-default-icon`]: {
+            marginBottom: -3,
+          },
+          [`${antCls}-page-header-heading-left`]: {
+            marginBlock: 0,
+          },
+          [`${antCls}-page-header-heading-extra`]: {
+            marginBlock: 0,
+          },
+          [`${antCls}-page-header-footer`]: {
+            marginBlockStart: 0,
+            [`${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
+              borderBottom: `1px solid ${token.colorBorderSecondary}`,
+            },
           },
         },
-        [`${antCls}-page-header-heading-document-default-icon`]: {
-          marginBottom: -3,
-        },
-        [`${antCls}-page-header-heading-left`]: {
-          marginBlock: 0,
-        },
-        [`${antCls}-page-header-heading-extra`]: {
-          marginBlock: 0,
-        },
-        [`${antCls}-page-header-footer`]: {
-          marginBlockStart: 0,
-          [`${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
-            borderBottom: `1px solid ${token.colorBorderSecondary}`,
-          },
-        },
-      },
       [`${componentCls}-children-container`]: {
         paddingInline: token.paddingXL,
         paddingBlockStart: 0,
