@@ -8,6 +8,14 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.16
+
+`2026-02-11`
+
+- Filter
+  - 🆕 Filter.Cascader 新增 `flat` 属性，用于设置级联选择是否扁平化展示，常用于三级及以上级联选择场景。[#1425](https://github.com/oceanbase/oceanbase-design/pull/1425) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🐞 修复 Filter `showCount` 属性在 ResponsiveGroup 下不生效的问题。[#1435](https://github.com/oceanbase/oceanbase-design/pull/1435) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+
 ## 1.0.0-alpha.15
 
 `2026-02-05`

@@ -182,7 +182,7 @@ const App = () => {
 | multiple | 是否多选 | `boolean` | `false` |
 | count | 是否显示计数，可传入 `{ showTotal: true }` 同时显示总数 | `boolean \| { showTotal?: boolean }` | `false` |
 | showSearch | 是否显示搜索框，支持同时搜索父级和子级选项 | `boolean` | `false` |
-| flat | 是否使用扁平化展示 | boolean | `false` |
+| flat | 是否使用扁平化展示，常用于三级及以上级联选择场景。 | `boolean` | `false` |
 
 #### CascaderOption
 
