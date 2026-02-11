@@ -8,6 +8,12 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.16
+
+`2026-02-11`
+
+- 💄 提升 PageContainer 页头样式的优先级，避免由于样式加载顺序可能导致的样式问题。[#1436](https://github.com/oceanbase/oceanbase-design/pull/1436)
+
 ## 1.0.0-alpha.15
 
 `2026-02-05`
