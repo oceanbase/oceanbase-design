@@ -453,6 +453,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
           label={filterLabel}
           extra={extra}
           onClearAll={handleClearAll}
+          showCount={showCount}
           footer={
             showActions && (
               <Flex justify="space-between">
