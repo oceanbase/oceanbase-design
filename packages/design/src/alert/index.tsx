@@ -29,6 +29,7 @@ const Alert = ({
   type: typeProp,
   showIcon = true,
   closable,
+  closeIcon,
   ghost,
   mini,
   banner,
@@ -44,7 +45,7 @@ const Alert = ({
   const [wrapCSSVar] = useStyle(prefixCls);
   const alertCls = classNames(
     {
-      [`${prefixCls}-closable`]: closable,
+      [`${prefixCls}-closable`]: closable || closeIcon,
       [`${prefixCls}-ghost`]: ghost,
       [`${prefixCls}-mini`]: mini,
       [`${prefixCls}-with-action`]: !!action,
@@ -56,6 +57,7 @@ const Alert = ({
       type={type}
       showIcon={showIcon}
       closable={closable}
+      closeIcon={closeIcon}
       banner={banner}
       icon={iconMapOutlined[type]}
       action={action}
