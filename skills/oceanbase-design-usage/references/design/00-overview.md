@@ -1,6 +1,6 @@
 # @oceanbase/design 概述
 
-design 是 OceanBase Design（OBUI）的设计系统与基础组件库，提供按钮、表格、筛选、表单、空状态、反馈、导航等组件，以及主题与布局能力。与 `@oceanbase/ui`、`@oceanbase/icons`、`@oceanbase/charts` 等配合使用。
+design 是 OceanBase Design 的设计系统与基础组件库，提供按钮、表格、筛选、表单、空状态、反馈、导航等组件，以及主题与布局能力。与 `@oceanbase/ui`、`@oceanbase/icons`、`@oceanbase/charts` 等配合使用。
 
 ## 定位与关系
 
