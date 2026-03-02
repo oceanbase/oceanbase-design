@@ -395,8 +395,9 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   };
 
   // --- 渲染子元素 ---
-  // 所有子元素始终保持在 Flex 中的稳定位置（用 div 包裹 + 稳定 key），
-  // 通过 CSS display 控制显隐，避免在可见/折叠间切换时卸载重挂载导致表单值丢失
+  // 所有子元素始终保持在 Flex 中的稳定位置（FilterProvider + div 包裹 + 稳定 key），
+  // 通过 CSS display 控制显隐，避免在可见/折叠间切换时卸载重挂载导致表单值丢失。
+  // FilterProvider 使隐藏的原始组件能直接感知 isCollapsed 并上报值，无需依赖 Popover 中的克隆。
   const renderChildren = () => {
     const elements: ReactNode[] = [];
     let filterWrapInserted = false;
@@ -424,9 +425,16 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
       }
 
       elements.push(
-        <div key={stableKey} data-filter-item={isMeasuring ? index : undefined} style={{ display }}>
-          {child}
-        </div>
+        <FilterProvider
+          key={stableKey}
+          isCollapsed={!isMeasuring && isHidden}
+          filterValues={filterValues}
+          updateFilterValue={updateFilterValue}
+        >
+          <div data-filter-item={isMeasuring ? index : undefined} style={{ display }}>
+            {child}
+          </div>
+        </FilterProvider>
       );
 
       if (!isMeasuring && isHidden && !filterWrapInserted && allHiddenItems.length > 0) {

@@ -105,7 +105,7 @@ const App: React.FC = () => {
             <Form.Item name="category" noStyle>
               <Filter.Cascader label="分类" multiple count options={categoryOptions} />
             </Form.Item>
-            <Button>点击进行操作</Button>
+            <Button>操作</Button>
           </Filter.ResponsiveGroup>
         </Form>
       </div>
