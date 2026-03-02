@@ -18,14 +18,19 @@ export type { FilterInputProps } from './components/FilterInput';
 export type { FilterWrapProps } from './components/FilterWrap';
 export type { ResponsiveFilterGroupProps } from './components/ResponsiveFilterGroup';
 
+function markAsFilterComponent<T>(component: T): T {
+  (component as any).__isFilterComponent = true;
+  return component;
+}
+
 const Filter = {
-  Select,
-  Checkbox,
-  Range,
+  Select: markAsFilterComponent(Select),
+  Checkbox: markAsFilterComponent(Checkbox),
+  Range: markAsFilterComponent(Range),
   Wrap,
-  Cascader,
-  Switch,
-  Input,
+  Cascader: markAsFilterComponent(Cascader),
+  Switch: markAsFilterComponent(Switch),
+  Input: markAsFilterComponent(Input),
   ResponsiveGroup,
 };
 
