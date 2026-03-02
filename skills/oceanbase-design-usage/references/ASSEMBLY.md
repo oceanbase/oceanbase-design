@@ -15,6 +15,4 @@
 | **筛选** | 优先 design Filter；Filter.Input/Switch 有 inputProps/switchProps；受控必传 value+onChange；trigger、placement | [08-filter](design/08-filter.md) |
 | **组合** | Card/ProCard+Table 无内边距时 Table innerBordered；Table+批量操作 toolOptionsRender；ConfigProvider 全局配置；Filter+Table、Form+Modal 用 confirmLoading | [09-combo](design/09-combo.md) |
 
-**通用**：组件与图标从 `@oceanbase/design`、`@oceanbase/icons` 引入；迁移先跑 `@oceanbase/codemod` 再人工核对。
-
-**原子化规则**（可做 CI/门禁）：[config-provider-required](../rules/config-provider-required.md)、[icons-from-oceanbase](../rules/icons-from-oceanbase.md)、[card-table-innerBordered](../rules/card-table-innerBordered.md)、[filter-controlled](../rules/filter-controlled.md)。
+**通用**：组件与图标从 `@oceanbase/design`、`@oceanbase/icons` 引入；迁移先跑 `@oceanbase/codemod` 再人工核对。高价值约定（ConfigProvider 必包、图标来源、Card+Table innerBordered、Filter 受控）已融入 [00-overview](design/00-overview.md)、[icons](../icons.md)、[09-combo](design/09-combo.md)、[08-filter](design/08-filter.md)。

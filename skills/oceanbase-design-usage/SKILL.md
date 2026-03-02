@@ -7,7 +7,7 @@ description: Guide for using OceanBase Design (OBUI) packages—design, ui, icon
 
 ## 概述
 
-**OceanBase Design 即 OBUI**，包含 design、ui、icons、charts、util 等多个库。本 Skill 指导正确使用 `@oceanbase/design`、`@oceanbase/ui`、`@oceanbase/icons`、`@oceanbase/util`、`@oceanbase/charts`（适用于 oceanbase-design 仓库及引用上述包的业务项目）；并说明使用 `@oceanbase/codemod` 进行自动化迁移与升级。遵循推荐用法可减少差异、提升样式一致性和代码规范性。
+**OceanBase Design**，包含 design、ui、icons、charts、util 等多个库。本 Skill 指导正确使用 `@oceanbase/design`、`@oceanbase/ui`、`@oceanbase/icons`、`@oceanbase/util`、`@oceanbase/charts`（适用于 oceanbase-design 仓库及引用上述包的业务项目）；并说明使用 `@oceanbase/codemod` 进行自动化迁移与升级。遵循推荐用法可减少差异、提升样式一致性和代码规范性。
 
 ## 包关系与依赖
 
@@ -54,13 +54,13 @@ description: Guide for using OceanBase Design (OBUI) packages—design, ui, icon
 - **@oceanbase/charts**：见 [references/charts.md](references/charts.md)。
 - **@oceanbase/codemod**：自动化迁移工具，见 [references/codemod.md](references/codemod.md)。用于从 antd、obui、techui、pro-components 等迁移到 design/ui/util/charts，以及 Less/Sass 转 token 或 CSS 变量。执行时须指定版本 `@oceanbase/codemod@^1.0.0-alpha.0`。
 
-在修改或新增组件、做 Code Review、统一样式与导入方式时，按需查阅上述 reference 以保持与 design 及各包使用规范一致。存量项目迁移时先运行 codemod，再按 design 与各包规范做人工核对。本 skill 的 reference 位于 `references/`；design 细则入口为 [references/design/README.md](references/design/README.md)；**关键约束一句话汇编**见 [references/ASSEMBLY.md](references/ASSEMBLY.md)；**原子化规则**（可做 CI/门禁）见 [rules/README.md](rules/README.md)；变更见 [CHANGELOG.md](CHANGELOG.md)。
+在修改或新增组件、做 Code Review、统一样式与导入方式时，按需查阅上述 reference 以保持与 design 及各包使用规范一致。存量项目迁移时先运行 codemod，再按 design 与各包规范做人工核对。本 skill 的 reference 位于 `references/`；design 细则入口为 [references/design/README.md](references/design/README.md)；**关键约束一句话汇编**见 [references/ASSEMBLY.md](references/ASSEMBLY.md)。高价值约定（ConfigProvider 必包、图标来源、Card+Table innerBordered、Filter 受控）已融入各相关 reference。
 
 ## 何时不用 / 例外
 
-- **不接入 OBUI 的项目**：若业务明确只使用 antd、不引入 OceanBase Design，则无需遵循本 skill；一旦引入 design/ui/icons 任一包，即应按本 skill 统一来源与用法。
+- **不接入的项目**：若业务明确只使用 antd、不引入 OceanBase Design，则无需遵循本 skill；一旦引入 design/ui/icons 任一包，即应按本 skill 统一来源与用法。
 - **临时原型或一次性脚本**：可放宽（如暂不 ConfigProvider），但上线前需补齐根节点 ConfigProvider 与图标来源。
 - **与第三方库强绑定**：若某第三方组件强制依赖 @ant-design/icons 或 antd 的 useToken，可在该局部保留，其余业务代码仍应使用 @oceanbase/icons 与 obToken。
 - **例外必须说明**：未遵循某条约定时，在注释或 PR 中写明原因（如「此处因 xxx 暂未使用 innerBordered」），便于后续收敛。
 
-**使用本 Skill 生成或修改代码时**：请遵循对应 reference 中的约束与示例；若未遵循某条约定（如 Card+Table 未设 innerBordered），请在注释或 PR 中简要说明原因；迁移场景请注明是否已用或拟用 codemod。高价值可检测约定见 [rules/](rules/) 原子化规则。
+**使用本 Skill 生成或修改代码时**：请遵循对应 reference 中的约束与示例；若未遵循某条约定（如 Card+Table 未设 innerBordered），请在注释或 PR 中简要说明原因；迁移场景请注明是否已用或拟用 codemod。高价值约定已融入 00-overview、icons、09-combo、08-filter 等 reference。
