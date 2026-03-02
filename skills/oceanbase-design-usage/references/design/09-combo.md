@@ -4,7 +4,7 @@
 
 ## Card + Table
 
-当 **Card 无横向内间距**（如 `bodyStyle={{ padding: 0 }}`）且**表格需要内部边框**时，两者搭配使用一般要设置 Table 的 **`innerBordered`**，避免双线或边框缺失。
+当 **Card 无横向内间距**（如 `bodyStyle={{ padding: 0 }}`）且内嵌 Table 时，须设置 Table 的 **`innerBordered`**，否则 Table 外边框与 Card 会重叠或缺失，出现双线或断线；innerBordered 使表格仅保留内部单元格边框。Card 有内边距或 ProCard 未去掉 padding 时可不设；若仍出现边框问题再设。
 
 ```tsx
 import { Card, Table } from '@oceanbase/design';

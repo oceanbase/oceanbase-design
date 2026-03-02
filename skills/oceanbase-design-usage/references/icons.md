@@ -9,7 +9,7 @@ OceanBase 图标库，与 design、ui 组件搭配使用，保证图标风格与
 - **按图标名从 `@oceanbase/icons` 引入**，不混用 `@ant-design/icons`。
 - 与 design 的 Button、Input、Table、Filter、Tabs、Dropdown 等组件搭配时，图标均从本包引入。
 
-**错误**：与 design 组件搭配时从 `@ant-design/icons` 引入，会导致依赖混用、样式与命名空间不一致。**正确**：统一从 `@oceanbase/icons` 引入。
+**错误**：与 design 组件搭配时从 `@ant-design/icons` 引入，会导致依赖混用、样式与命名空间不一致。**正确**：统一从 `@oceanbase/icons` 引入。**例外**：某第三方库强制依赖 `@ant-design/icons` 且无法替换时，可仅在该局部使用；业务自写代码仍应使用 `@oceanbase/icons`。
 
 ```tsx
 // 正确

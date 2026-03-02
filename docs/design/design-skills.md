@@ -27,14 +27,26 @@ npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
 
 ## Skill 内容结构
 
-| 入口 | 说明 |
-| --- | --- |
-| **SKILL.md** | 概述、包关系与依赖、包选择速查、最高优先级（必遵）、快速规范、各包详细说明与链接、何时不用/例外 |
-| **references/design/** | README 为模块导航；00 概述、01 主题与 Token、02～09 为组件约束与示例（基础、布局与卡片、表单、数据展示、反馈、导航、筛选、组合） |
-| **references/ui.md** | @oceanbase/ui：业务级组件与布局（ProTable、PageContainer、BasicLayout、LightFilter、Action、DateRanger 等），导入约定与使用要点 |
-| **references/icons.md** | @oceanbase/icons：图标库与 design/ui 搭配使用，按名引入、不混用 @ant-design/icons |
-| **references/util.md** | @oceanbase/util：工具函数与 hooks（format、robust、sort、hooks、util、component），导入约定 |
-| **references/charts.md** | @oceanbase/charts：图表组件与 ChartProvider，与 design 主题联动 |
-| **references/codemod.md** | @oceanbase/codemod：自动化迁移工具（antd/obui/techui/pro-components 等到 design/ui/charts/util），版本要求与使用方式 |
-| **references/ASSEMBLY.md** | design 模块 00～09 关键约束一句话汇总，便于一次性查阅或 Code Review |
-| **rules/** | 4 条原子化规则：ConfigProvider 必包、图标从 @oceanbase/icons 引入、Card+Table innerBordered、Filter 受控；每则含 Why / Incorrect / Correct / When not to use，可做 CI/门禁 |
+```
+oceanbase-design-usage/
+├── SKILL.md                              # 入口与总览
+└── references/
+    ├── ASSEMBLY.md                       # 00～09 约束汇总
+    ├── design/                           # 基础组件
+    │   ├── README.md                     # 模块导航
+    │   ├── 00-overview.md                # 概述、ConfigProvider、约定（根节点必包）
+    │   ├── 01-theme-and-token.md         # 主题与 Token
+    │   ├── 02-basic.md                   # 基础组件
+    │   ├── 03-layout-card.md             # 布局与卡片
+    │   ├── 04-form.md                    # 表单
+    │   ├── 05-data-display.md            # 数据展示
+    │   ├── 06-feedback.md                # 反馈
+    │   ├── 07-navigation.md              # 导航
+    │   ├── 08-filter.md                  # 筛选（含受控约定）
+    │   └── 09-combo.md                   # 组合用法（含 Card+Table innerBordered）
+    ├── ui.md                             # 业务组件
+    ├── icons.md                          # 图标
+    ├── util.md                           # 工具
+    ├── charts.md                         # 图表
+    └── codemod.md                        # codemod 迁移
+```
