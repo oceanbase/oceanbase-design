@@ -171,9 +171,29 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
     const iconWidth = 10;
     const iconWidthUnselected = 8;
     const overlapDistance = 6;
-    const containerWidth = iconWidth + (options.length - 1) * overlapDistance + 1;
 
-    const selectedStatuses = selectedValues || [];
+    // 按颜色分组选项，并检查每种颜色是否有选中的选项
+    const colorGroups: { color: string; hasSelected: boolean }[] = [];
+    const colorMap = new Map<string, { color: string; hasSelected: boolean }>();
+
+    options.forEach(option => {
+      if (option.color) {
+        const isSelected = selectedValues.includes(option.value);
+        const existing = colorMap.get(option.color);
+        if (existing) {
+          // 如果已有该颜色，更新选中状态（只要有一个选中即为选中）
+          if (isSelected) {
+            existing.hasSelected = true;
+          }
+        } else {
+          const group = { color: option.color, hasSelected: isSelected };
+          colorMap.set(option.color, group);
+          colorGroups.push(group);
+        }
+      }
+    });
+
+    const containerWidth = iconWidth + (colorGroups.length - 1) * overlapDistance + 1;
 
     return (
       <div
@@ -185,13 +205,13 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
           alignItems: 'center',
         }}
       >
-        {options.map((item, index) => {
-          const isSelected = selectedStatuses.includes(item.value) && item.color;
+        {colorGroups.map((group, index) => {
+          const isSelected = group.hasSelected;
           const baseSize = isSelected ? iconWidth : iconWidthUnselected;
 
           return isSelected ? (
             <div
-              key={item.value}
+              key={group.color}
               style={{
                 position: 'absolute',
                 left: index * overlapDistance,
@@ -199,13 +219,13 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
                 height: baseSize,
                 borderRadius: '50%',
                 zIndex: index,
-                backgroundColor: item.color,
+                backgroundColor: group.color,
                 border: `1px solid ${token.white}`,
               }}
             />
           ) : (
             <div
-              key={item.value}
+              key={group.color}
               style={{
                 position: 'absolute',
                 left: index * overlapDistance,
