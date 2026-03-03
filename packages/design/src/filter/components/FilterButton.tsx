@@ -165,6 +165,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
         content={popoverContent}
         open={open && !disabled}
         onOpenChange={handleOpenChange}
+        forceRender={_isInWrapComponent}
         styles={{
           body: {
             padding: 0,
