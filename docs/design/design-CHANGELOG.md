@@ -8,6 +8,16 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.17
+
+`2026-03-03`
+
+- 🤖 新增 `oceanbase-design-usage` skills，用于规范样式和组件使用，详见 [使用文档](https://oceanbase-design-v1.vercel.app/docs/design-skills)。[#1439](https://github.com/oceanbase/oceanbase-design/pull/1439)
+- 🐞 修复 Alert 仅设置 `closeIcon` 时，关闭图标样式不生效的问题。[#1440](https://github.com/oceanbase/oceanbase-design/pull/1440)
+- Filter
+  - 💄 优化 Filter.Checkbox 针对相同颜色合并展示。[#1442](https://github.com/oceanbase/oceanbase-design/pull/1442) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 💄 优化 Filter.ResponsiveGroup 下最后一个非 Filter 组件的展示位置。[#1438](https://github.com/oceanbase/oceanbase-design/pull/1438) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+
 ## 1.0.0-alpha.16
 
 `2026-02-11`
