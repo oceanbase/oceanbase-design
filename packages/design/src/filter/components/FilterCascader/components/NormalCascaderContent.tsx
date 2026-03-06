@@ -127,9 +127,7 @@ export const NormalCascaderContent: React.FC<NormalCascaderContentProps> = ({
               <div key={option.value} style={{ padding: PADDING_HORIZONTAL }}>
                 <Flex
                   gap={GAP_SIZE_SMALL * 2}
-                  className={classNames(getFilterCls(prefixCls, 'select-option'), {
-                    [getFilterCls(prefixCls, 'has-selected')]: isNodeSelected,
-                  })}
+                  className={getFilterCls(prefixCls, 'select-option')}
                   justify="space-between"
                   align="center"
                   onClick={handleNodeClick}
@@ -229,9 +227,7 @@ export const NormalCascaderContent: React.FC<NormalCascaderContentProps> = ({
               <div style={{ padding: PADDING_HORIZONTAL }}>
                 <Flex
                   gap={GAP_SIZE_SMALL * 2}
-                  className={classNames(getFilterCls(prefixCls, 'select-option'), {
-                    [getFilterCls(prefixCls, 'has-selected')]: hasSelectedChildren,
-                  })}
+                  className={getFilterCls(prefixCls, 'select-option')}
                   justify="space-between"
                   align="center"
                   style={{

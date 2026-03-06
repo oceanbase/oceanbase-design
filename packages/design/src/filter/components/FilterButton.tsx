@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import React, {
   forwardRef,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
@@ -77,6 +78,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     const { token } = theme.useToken();
     const { isCollapsed } = useFilterContext();
     const [open, setOpen] = useState(false);
+    const [popoverWidth, setPopoverWidth] = useState<number | undefined>();
     const { wrapSSR, prefixCls } = useFilterStyle();
     const innerRef = useRef<HTMLDivElement>(null);
 
@@ -108,10 +110,23 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     const handleOpenChange = (newOpen: boolean) => {
       if (!disabled) {
         setOpen(newOpen);
-        // 调用外部传入的 onOpenChange 回调，让父组件能够实时监听状态变化
         externalOnOpenChange?.(newOpen);
       }
     };
+
+    // 折叠模式下实时监听按钮宽度变化，同步到 Popover 面板宽度
+    useEffect(() => {
+      if (!open || !isCollapsed || _isInWrapComponent || !innerRef.current) {
+        return;
+      }
+      const el = innerRef.current;
+      setPopoverWidth(el.offsetWidth);
+      const observer = new ResizeObserver(() => {
+        setPopoverWidth(el.offsetWidth);
+      });
+      observer.observe(el);
+      return () => observer.disconnect();
+    }, [open, isCollapsed, _isInWrapComponent]);
 
     // 使用 useMemo 缓存 content，避免每次都重新创建
     const popoverContent = useMemo(
@@ -171,6 +186,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
             padding: 0,
             maxWidth: 300,
             minWidth: 120,
+            ...(isCollapsed && !_isInWrapComponent && popoverWidth ? { width: popoverWidth } : {}),
           },
         }}
         {...popoverProps}
