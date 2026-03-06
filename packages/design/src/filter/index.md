@@ -102,6 +102,7 @@ const App = () => {
 | showSuffixIcon | 是否显示后缀图标区域（包括下拉箭头和清除图标） | `boolean` | `true` |
 | trigger | 触发方式 | `'hover' \| 'click' \| 'focus'` | `'click'` |
 | placement | 弹出位置 | `PopoverProps['placement']` | `'bottomLeft'` |
+| allowClear | 展示清除 Icon | boolean | `true` |
 
 ### Filter.Select
 

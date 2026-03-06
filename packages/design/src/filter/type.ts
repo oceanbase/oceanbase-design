@@ -22,6 +22,8 @@ export interface BaseFilterProps extends Omit<PopoverProps, 'title' | 'content' 
   alwaysCollapse?: boolean;
   /** 是否显示后缀图标区域（包括下拉箭头和清除图标），默认 true */
   showSuffixIcon?: boolean;
+  /** 是否显示清除按钮，默认 true */
+  allowClear?: boolean;
 }
 
 /** 内部属性，用于标记组件是否在折叠模式中 */

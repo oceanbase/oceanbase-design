@@ -70,6 +70,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       _isInWrapComponent = false,
       _isFlat = false,
       style,
+      allowClear = true,
       ...restProps
     },
     ref
@@ -208,10 +209,10 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               ) : showSuffixIcon ? (
                 <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
                   <DownOutlined
-                    className={selected ? getFilterCls(prefixCls, 'arrow-icon') : ''}
+                    className={selected && allowClear ? getFilterCls(prefixCls, 'arrow-icon') : ''}
                     style={disabled ? { color: 'var(--ob-color-icon-disabled)' } : undefined}
                   />
-                  {selected && (
+                  {selected && allowClear && (
                     <div
                       className={getFilterCls(prefixCls, 'clear-icon')}
                       onClick={e => {
