@@ -147,7 +147,10 @@ const App: React.FC = () => {
           label="扁平化多选"
           multiple
           value={flatMultipleValue}
-          onChange={setFlatMultipleValue}
+          onChange={value => {
+            console.log('value at line 150:', value);
+            setFlatMultipleValue(value);
+          }}
           options={flatOptions}
           flat
         />
