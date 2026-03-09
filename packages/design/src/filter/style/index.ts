@@ -213,7 +213,7 @@ const genFilterButtonStyle = (token: FilterToken): CSSObject => {
       justifyContent: 'right',
       color: token.colorText,
       whiteSpace: 'nowrap',
-      maxWidth: '260px',
+      maxWidth: '268px',
 
       '&:hover': {
         [`${componentCls}-arrow-icon`]: {
