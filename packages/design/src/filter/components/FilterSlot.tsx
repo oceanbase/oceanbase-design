@@ -13,8 +13,18 @@ import FilterButton from './FilterButton';
 import type { FilterButtonRef } from './FilterButton';
 
 export interface FilterSlotProps extends BaseFilterProps, InternalFilterProps {
-  /** Popover 弹框中的自定义内容，或 customRender 模式下直接渲染的内容 */
-  children: ReactNode;
+  /**
+   * 直接渲染的自定义内容，不包裹 FilterButton + Popover。
+   * Filter.Slot 仅作为响应式收集的包裹容器，
+   * 会通过 cloneElement 自动注入 value/onChange。
+   */
+  children?: ReactNode;
+  /**
+   * Popover 弹框中的自定义筛选内容。
+   * 设置后使用 FilterButton + Popover 模式，
+   * 会通过 cloneElement 自动注入 value/onChange。
+   */
+  dropdownRender?: ReactNode;
   /** 当前筛选值（受控） */
   value?: any;
   /** 默认筛选值（非受控） */
@@ -25,17 +35,11 @@ export interface FilterSlotProps extends BaseFilterProps, InternalFilterProps {
   formatValue?: (value: any) => string;
   /** 未选值时的占位文本 */
   placeholder?: string;
-  /**
-   * 是否启用完全自定义渲染模式。
-   * 开启后 children 在正常态和折叠态都直接渲染，不包裹 FilterButton + Popover，
-   * Slot 仅作为响应式收集的包裹容器。
-   * 默认 false
-   */
-  customRender?: boolean;
 }
 
 const FilterSlot: FC<FilterSlotProps> = ({
   children,
+  dropdownRender,
   value,
   defaultValue,
   onChange,
@@ -45,7 +49,6 @@ const FilterSlot: FC<FilterSlotProps> = ({
   label,
   bordered = true,
   loading = false,
-  customRender = false,
   _isCollapsed = false,
   ...restProps
 }) => {
@@ -65,11 +68,13 @@ const FilterSlot: FC<FilterSlotProps> = ({
   const displayText = hasValue ? formattedText || String(currentValue) : '';
   const currentLabel = hasValue && displayText ? displayText : label;
 
+  const isDirectRender = !dropdownRender;
+
   const { onPopoverOpenChange, wrapWithTooltip } = useFilterTooltip({
     hasValue,
     label,
     content: displayText || null,
-    disabled: isCollapsed || customRender,
+    disabled: isCollapsed || isDirectRender,
   });
 
   const handlePopoverOpenChange = (open: boolean) => {
@@ -112,35 +117,40 @@ const FilterSlot: FC<FilterSlotProps> = ({
     [setValue]
   );
 
-  const renderCustomChildren = useCallback(() => {
-    if (isValidElement(children)) {
-      const childElement = children as React.ReactElement<any>;
-      const originalOnChange = childElement.props?.onChange;
-      return React.cloneElement(childElement, {
-        value: currentValue,
-        onChange: (...args: any[]) => {
-          handleChildChange(...args);
-          originalOnChange?.(...args);
-        },
-      });
-    }
-    return children;
-  }, [children, currentValue, handleChildChange]);
+  const injectValueProps = useCallback(
+    (element: ReactNode) => {
+      if (isValidElement(element)) {
+        const childElement = element as React.ReactElement<any>;
+        const originalOnChange = childElement.props?.onChange;
+        return React.cloneElement(childElement, {
+          value: currentValue,
+          onChange: (...args: any[]) => {
+            handleChildChange(...args);
+            originalOnChange?.(...args);
+          },
+        });
+      }
+      return element;
+    },
+    [currentValue, handleChildChange]
+  );
 
-  // customRender 模式：注入 value/onChange 后直接渲染 children
-  if (customRender) {
+  // ======== 直接渲染模式（仅 children，无 dropdownRender） ========
+  if (isDirectRender) {
     if (isCollapsed) {
       return (
         <div style={{ paddingBlock: token.paddingXXS }}>
           <div style={{ marginBottom: 8 }}>{label}</div>
-          {renderCustomChildren()}
+          {injectValueProps(children)}
         </div>
       );
     }
-    return <>{renderCustomChildren()}</>;
+    return <>{injectValueProps(children)}</>;
   }
 
-  // 折叠模式：使用 FilterButton 紧凑布局
+  // ======== Popover 模式（设置了 dropdownRender） ========
+  const wrappedContent = wrapContent(injectValueProps(dropdownRender));
+
   if (isCollapsed) {
     return (
       <div style={{ paddingBlock: token.paddingXXS }}>
@@ -151,7 +161,7 @@ const FilterSlot: FC<FilterSlotProps> = ({
           label={label}
           bordered={bordered}
           onClear={handleClear}
-          content={wrapContent(children)}
+          content={wrappedContent}
           loading={loading}
           selected={hasValue}
           onOpenChange={handlePopoverOpenChange}
@@ -167,9 +177,6 @@ const FilterSlot: FC<FilterSlotProps> = ({
       </div>
     );
   }
-
-  // 默认模式：FilterButton + Popover
-  const wrappedContent = wrapContent(children);
 
   const filterButton = (
     <FilterButton

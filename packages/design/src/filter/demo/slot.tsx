@@ -50,7 +50,7 @@ const App: React.FC = () => {
 
   return (
     <Flex vertical gap={24}>
-      {/* 默认模式：自定义内容展示在 FilterButton + Popover 中 */}
+      {/* dropdownRender 模式：自定义内容展示在 FilterButton + Popover 中 */}
       <Space wrap>
         <Filter.Slot
           label="标签"
@@ -58,30 +58,23 @@ const App: React.FC = () => {
           value={tags}
           onChange={setTags}
           formatValue={val => val?.join(', ')}
-        >
-          <TagPicker value={tags} onChange={setTags} />
-        </Filter.Slot>
+          dropdownRender={<TagPicker />}
+        />
         <Filter.Slot
           label="评分"
           value={rating}
           onChange={setRating}
           formatValue={val => `${val} 星及以上`}
-        >
-          <Rate value={rating} onChange={setRating} />
-        </Filter.Slot>
-        <Filter.Slot label="禁用状态" disabled>
-          <div>自定义内容</div>
-        </Filter.Slot>
-        <Filter.Slot label="加载中" loading>
-          <div>自定义内容</div>
-        </Filter.Slot>
+          dropdownRender={<Rate />}
+        />
+        <Filter.Slot label="禁用状态" disabled dropdownRender={<div>自定义内容</div>} />
+        <Filter.Slot label="加载中" loading dropdownRender={<div>自定义内容</div>} />
       </Space>
 
-      {/* customRender 模式 + 响应式折叠 */}
+      {/* children 直接渲染模式 + 响应式折叠 */}
       <div>
         <Text>
-          开启 <code>customRender</code> 后 children 直接渲染，不包裹
-          FilterButton，调整宽度查看折叠效果：
+          通过 <code>children</code> 直接渲染自定义内容，调整宽度查看折叠效果：
         </Text>
         <Slider
           min={100}
@@ -101,13 +94,7 @@ const App: React.FC = () => {
         }}
       >
         <Filter.ResponsiveGroup gap={8} showActions={false}>
-          <Filter.Slot
-            label="搜索"
-            customRender
-            value={keyword}
-            onChange={setKeyword}
-            formatValue={val => val}
-          >
+          <Filter.Slot label="搜索" value={keyword} onChange={setKeyword} formatValue={val => val}>
             <Input
               prefix={<SearchOutlined />}
               placeholder="搜索..."
@@ -128,9 +115,8 @@ const App: React.FC = () => {
             value={tags}
             onChange={setTags}
             formatValue={val => val?.join(', ')}
-          >
-            <TagPicker value={tags} onChange={setTags} />
-          </Filter.Slot>
+            dropdownRender={<TagPicker />}
+          />
           <Filter.Select
             label="优先级"
             options={[

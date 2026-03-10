@@ -93,7 +93,7 @@ const App: React.FC = () => {
             </Form.Item>
 
             <Form.Item name="search" noStyle>
-              <Filter.Slot label="搜索" customRender formatValue={val => val}>
+              <Filter.Slot label="搜索" formatValue={val => val}>
                 <Input prefix={<SearchOutlined />} placeholder="搜索..." allowClear />
               </Filter.Slot>
             </Form.Item>

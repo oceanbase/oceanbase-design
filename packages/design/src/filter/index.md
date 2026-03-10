@@ -235,30 +235,41 @@ const App = () => {
 
 ### Filter.Slot
 
-自定义筛选器插槽，将任意自定义内容以标准 FilterButton + Popover 形态集成到 Filter 体系中。
+自定义筛选器插槽，支持两种模式将自定义组件集成到 Filter 体系中。`value`/`onChange` 只需设置在 `Filter.Slot` 上，会通过 `cloneElement` 自动注入到子组件。
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| children | 自定义内容。默认渲染在 Popover 弹框中；开启 `customRender` 后直接渲染 | `ReactNode` | - |
+| dropdownRender | Popover 弹框中的自定义筛选内容，设置后使用 FilterButton + Popover 模式 | `ReactNode` | - |
+| children | 直接渲染的自定义内容，不包裹 FilterButton + Popover，仅作为响应式收集容器 | `ReactNode` | - |
 | value | 当前筛选值 | `any` | - |
 | defaultValue | 默认筛选值 | `any` | - |
 | onChange | 值变化回调 | `(value: any) => void` | - |
 | formatValue | 将 value 格式化为展示文本，用于 FilterButton 标签和折叠态 Tooltip | `(value: any) => string` | - |
 | placeholder | 未选值时的占位文本 | `string` | `'请选择'` |
-| customRender | 完全自定义渲染模式，children 在正常态和折叠态都直接渲染，Slot 仅作为响应式收集容器 | `boolean` | `false` |
 
 **使用示例：**
 
 ```tsx
-// 将自定义的标签选择器集成到 Filter 体系
+// dropdownRender 模式：自定义内容展示在 Popover 弹框中
+// value/onChange 只需设置在 Filter.Slot 上，TagPicker 自动获取
 <Filter.Slot
   label="标签"
   icon={<TagOutlined />}
   value={tags}
   onChange={setTags}
   formatValue={val => val?.join(', ')}
+  dropdownRender={<MyCustomTagPicker />}
+/>
+
+// children 直接渲染模式：仅提供响应式收集能力
+// value/onChange 自动注入到 Input
+<Filter.Slot
+  label="搜索"
+  value={keyword}
+  onChange={setKeyword}
+  formatValue={val => val}
 >
-  <MyCustomTagPicker value={tags} onChange={setTags} />
+  <Input prefix={<SearchOutlined />} placeholder="搜索..." />
 </Filter.Slot>
 
 // 与 Form.Item 配合使用
@@ -266,26 +277,9 @@ const App = () => {
   <Filter.Slot
     label="自定义"
     formatValue={val => val?.name || ''}
-  >
-    <MyCustomSelector />
-  </Filter.Slot>
-</Form.Item>
-
-// customRender 模式：children 直接渲染，仅提供响应式收集能力
-<Filter.Slot
-  label="搜索"
-  customRender
-  value={keyword}
-  onChange={setKeyword}
-  formatValue={val => val}
->
-  <Input
-    prefix={<SearchOutlined />}
-    placeholder="搜索..."
-    value={keyword}
-    onChange={e => setKeyword(e.target.value)}
+    dropdownRender={<MyCustomSelector />}
   />
-</Filter.Slot>
+</Form.Item>
 ```
 
 ### Filter.Wrap
