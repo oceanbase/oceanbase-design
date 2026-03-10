@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Filter, Form, Input, Slider, Space, Typography, theme } from '@oceanbase/design';
+import { SearchOutlined } from '@oceanbase/icons';
 
 const { Text } = Typography;
 
@@ -89,6 +90,12 @@ const App: React.FC = () => {
                   { value: 'type3', label: '类型三' },
                 ]}
               />
+            </Form.Item>
+
+            <Form.Item name="search" noStyle>
+              <Filter.Slot label="搜索" formatValue={val => val}>
+                <Input prefix={<SearchOutlined />} placeholder="搜索..." allowClear />
+              </Filter.Slot>
             </Form.Item>
 
             <Form.Item name="priority" noStyle>

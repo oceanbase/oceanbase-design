@@ -254,6 +254,36 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
     setVisibleCount(prev => (prev === count ? prev : count));
   }, [filterValues]);
 
+  // Effect 4: 监听子元素的宽度变化（如筛选值变化导致按钮变宽），
+  // 更新缓存宽度并重新计算可见数量。
+  // 依赖 visibleCount 以便在显隐切换后重新查询 DOM 元素。
+  useEffect(() => {
+    if (!containerRef.current || isMeasuring) return;
+    const el = containerRef.current;
+    const items = el.querySelectorAll<HTMLElement>('[data-filter-item]');
+    if (items.length === 0) return;
+
+    const ro = new ResizeObserver(() => {
+      let widthChanged = false;
+      items.forEach(item => {
+        const idx = Number(item.dataset.filterItem);
+        if (isNaN(idx)) return;
+        const w = item.offsetWidth;
+        if (w > 0 && Math.abs(w - (cachedWidths.current[idx] || 0)) > 1) {
+          cachedWidths.current[idx] = w;
+          widthChanged = true;
+        }
+      });
+      if (widthChanged) {
+        const count = calculateRef.current(el.offsetWidth);
+        setVisibleCount(prev => (prev === count ? prev : count));
+      }
+    });
+
+    items.forEach(item => ro.observe(item));
+    return () => ro.disconnect();
+  }, [isMeasuring, visibleCount]);
+
   // --- 派生状态 ---
   const visibleIndexSet = useMemo(() => {
     if (visibleCount === null) return null;
@@ -431,7 +461,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
           filterValues={filterValues}
           updateFilterValue={updateFilterValue}
         >
-          <div data-filter-item={isMeasuring ? index : undefined} style={{ display }}>
+          <div data-filter-item={index} style={{ display, flexShrink: 0 }}>
             {child}
           </div>
         </FilterProvider>
@@ -458,6 +488,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
         flex: '1 1 auto',
         minWidth: 0,
         position: 'relative',
+        overflow: 'hidden',
         visibility: isMeasuring ? 'hidden' : undefined,
         ...style,
       }}

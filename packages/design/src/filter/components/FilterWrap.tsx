@@ -177,6 +177,13 @@ const FilterWrap: FC<FilterWrapProps> = ({
         case 'input': {
           return String(value);
         }
+        case 'slot': {
+          const slotMeta = options as { formattedText?: string }[] | undefined;
+          if (slotMeta?.[0]?.formattedText) {
+            return slotMeta[0].formattedText;
+          }
+          return String(value);
+        }
         default: {
           return String(value);
         }
