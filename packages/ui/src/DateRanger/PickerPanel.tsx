@@ -40,6 +40,7 @@ export type Rule = {
 export interface PickerPanelProps {
   value?: RangeValue;
   defaultValue?: RangeValue;
+  initialValue?: RangeValue;
   tip?: string;
   required?: boolean;
   rules?: Rule[];
@@ -81,6 +82,7 @@ const TIME_FORMAT = 'HH:mm:ss';
 const InternalPickerPanel = (props: PickerPanelProps) => {
   const {
     defaultValue,
+    initialValue,
     isMoment,
     locale,
     tip,
@@ -109,6 +111,13 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
       setCalendarValue(defaultValue);
     }
   }, [defaultValue?.[0]?.valueOf(), defaultValue?.[1]?.valueOf()]);
+
+  // 监听 initialValue 变化，当弹窗打开时恢复初始值
+  React.useEffect(() => {
+    if (initialValue && initialValue.length === 2) {
+      setCalendarValue(initialValue);
+    }
+  }, [initialValue?.[0]?.valueOf(), initialValue?.[1]?.valueOf()]);
 
   //
   const DATE_FORMAT = isEn ? DATE_TIME_MONTH_FORMAT : DATE_TIME_MONTH_FORMAT_CN;
@@ -149,20 +158,48 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   const [form] = Form.useForm();
   const [_sDate, _eDate] = formatValues;
 
-  const setFormatDateToForm = () => {
+  /**
+   * 合并日期和时间，创建完整的日期时间对象
+   */
+  const mergeDateTime = useCallback(
+    (date: Dayjs | Moment | null, time: Dayjs | Moment | null): Dayjs | Moment => {
+      if (!date) {
+        return time || getDateInstance();
+      }
+      if (!time) {
+        return date;
+      }
+      // 保留日期部分，使用时间的时间部分
+      const hour = time.hour();
+      const minute = time.minute();
+      const second = time.second();
+      return date.hour(hour).minute(minute).second(second);
+    },
+    [getDateInstance]
+  );
+
+  const setFormatDateToForm = useCallback(() => {
     const [startVal, endVal] = calendarValue;
+    // 获取当前表单中的时间值，如果不存在则使用 calendarValue 中的时间
+    const currentStartTime = form.getFieldValue('startTime');
+    const currentEndTime = form.getFieldValue('endTime');
+
+    // 合并日期和时间
+    const mergedStartTime = mergeDateTime(startVal, currentStartTime);
+    const mergedEndTime = mergeDateTime(endVal, currentEndTime);
+
     form.setFieldsValue({
       startDate: getDateInstance(_sDate),
       endDate: getDateInstance(_eDate),
-      // 同步更新时间值，保持原始顺序
-      startTime: startVal || getDateInstance(),
-      endTime: endVal || getDateInstance(),
+      // 同步更新时间值，使用合并后的完整日期时间
+      startTime: mergedStartTime,
+      endTime: mergedEndTime,
     });
-  };
+  }, [calendarValue, _sDate, _eDate, form, mergeDateTime, getDateInstance]);
 
   useEffect(() => {
     setFormatDateToForm();
-  }, [calendarValue?.[0]?.valueOf(), calendarValue?.[1]?.valueOf()]);
+  }, [calendarValue?.[0]?.valueOf(), calendarValue?.[1]?.valueOf(), setFormatDateToForm]);
 
   const defaultTime = useMemo(() => {
     return getDateInstance();
@@ -239,6 +276,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                   allowClear={false}
                   suffixIcon={null}
                   needConfirm={false}
+                  open={false}
                   getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
                   style={{ width: '100%' }}
                   format={{
@@ -327,10 +365,23 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
             }}
             onSelect={(...res) => {
               clickFSANext();
+
+              // 获取当前表单中的时间值
+              const currentStartTime = form.getFieldValue('startTime');
+              const currentEndTime = form.getFieldValue('endTime');
+
               if (clickFSA === CLICK_STATE.END) {
-                setCalendarValue([res[0], res[0]]);
+                // 首次点击，开始和结束都设置为选择的日期，保留当前时间
+                const newDate = res[0];
+                const timeToUse = currentStartTime || currentEndTime || getDateInstance();
+                const mergedDate = mergeDateTime(newDate, timeToUse);
+                setCalendarValue([mergedDate, mergedDate]);
               } else {
-                setCalendarValue(fillCalendarValue(res[0], activeIndex));
+                // 第二次点击，根据 activeIndex 更新对应的日期，保留对应的时间
+                const newDate = res[0];
+                const currentTime = activeIndex === 0 ? currentStartTime : currentEndTime;
+                const mergedDate = mergeDateTime(newDate, currentTime);
+                setCalendarValue(fillCalendarValue(mergedDate, activeIndex));
               }
               setActiveIndex(index => {
                 return index + 1 === 2 ? 0 : index + 1;
