@@ -49,21 +49,27 @@ const getOrder = ({ type, fixed }: { type?: string; fixed?: boolean }) => {
 };
 
 /**
+ * 判断是否是 Action 组件（Action.Button 或 Action.Link）
+ */
+const isActionComponent = (element: React.ReactElement): boolean => {
+  // @ts-ignore
+  return element.type?.__DISPLAY_NAME === 'button' || element.type?.__DISPLAY_NAME === 'link';
+};
+
+/**
  * 递归查找 Action 组件（可能被 Popconfirm/Tooltip 等组件包裹）
- * 返回实际的 Action 组件和其 props
+ * 返回实际的 Action 组件和是否被包裹
  */
 const findActionComponent = (
   element: React.ReactElement,
   depth = 0
-): { action: React.ReactElement; wrapper: React.ReactElement | null } | null => {
+): { action: React.ReactElement; hasWrapper: boolean } | null => {
   if (!React.isValidElement(element)) {
     return null;
   }
 
-  // 检查是否是 Action.Button 或 Action.Link
-  // @ts-ignore
-  if (element.type?.__DISPLAY_NAME === 'button' || element.type?.__DISPLAY_NAME === 'link') {
-    return { action: element, wrapper: null };
+  if (isActionComponent(element)) {
+    return { action: element, hasWrapper: false };
   }
 
   // 如果深度太深，避免无限递归
@@ -78,13 +84,35 @@ const findActionComponent = (
     if (React.isValidElement(child)) {
       const result = findActionComponent(child, depth + 1);
       if (result) {
-        // 如果找到了 Action 组件，当前元素就是 wrapper
-        return { action: result.action, wrapper: element };
+        return { action: result.action, hasWrapper: true };
       }
     }
   }
 
   return null;
+};
+
+/**
+ * 递归克隆元素树，将 newProps 应用到最内层的 Action 组件
+ */
+const cloneWithActionProps = (
+  element: React.ReactElement,
+  newProps: Record<string, any>
+): React.ReactElement => {
+  if (isActionComponent(element)) {
+    return React.cloneElement(element, { ...newProps, ...element.props });
+  }
+
+  const elementChildren = (element.props as any)?.children;
+  if (React.isValidElement(elementChildren)) {
+    return React.cloneElement(element, {
+      ...element.props,
+      key: newProps.key,
+      children: cloneWithActionProps(elementChildren, newProps),
+    });
+  }
+
+  return element;
 };
 
 /**
@@ -97,47 +125,20 @@ const renderMenuItemContent = (
 ): React.ReactNode => {
   const { loading, children, tooltip } = actionProps;
   const result = findActionComponent(action);
+  const actualAction = result?.action || action;
 
-  if (!result) {
-    // 如果没有找到嵌套结构，使用默认渲染
-    const content = (
-      <>
-        {loading && enableLoading && <LoadingOutlined />} {children || action}
-      </>
-    );
-    // 如果有 tooltip，用 Tooltip 包裹
-    return tooltip ? <Tooltip title={tooltip}>{content}</Tooltip> : content;
-  }
-
-  const { action: actualAction, wrapper } = result;
-
-  // 创建新的 action 元素，保留所有 props 并添加 loading 状态
-  const newAction = React.cloneElement(actualAction, {
-    ...actualAction.props,
-    ...actionProps,
-    children: (
-      <>
-        {loading && enableLoading && <LoadingOutlined />} {children || actualAction.props.children}
-      </>
-    ),
-  });
-
-  // 如果 action 被包裹，需要重新构建包裹结构
-  if (wrapper) {
-    const wrapperProps = wrapper.props;
-    // 保持原有的 wrapper 结构，只更新 children
-    return React.cloneElement(wrapper, {
-      ...wrapperProps,
-      children: newAction,
-    });
-  }
-
-  // 如果没有包裹，直接渲染，如果有 tooltip 则用 Tooltip 包裹
   const content = (
     <>
       {loading && enableLoading && <LoadingOutlined />} {children || actualAction.props.children}
     </>
   );
+
+  // 如果有 wrapper，需要重新构建包裹结构
+  if (result?.hasWrapper) {
+    return cloneWithActionProps(action, { ...actionProps, children: content });
+  }
+
+  // 没有包裹时，如果有 tooltip 则用 Tooltip 包裹
   return tooltip ? <Tooltip title={tooltip}>{content}</Tooltip> : content;
 };
 
@@ -223,16 +224,23 @@ export default ({
   return wrapSSR(
     <Space size={ellipsisType === 'button' ? 8 : 16}>
       {mainActions.map(action => {
-        return React.cloneElement(action, {
+        // 查找实际的 Action 组件（可能被 Popconfirm/Tooltip 等包裹）
+        const actionResult = findActionComponent(action);
+        const actualAction = actionResult?.action || action;
+        const actualActionProps = actualAction.props as BaseProps;
+
+        const newProps = {
+          key: action.key,
           // size should be covered by action props
           size: buttonSize,
-          ...action.props,
-          key: action.key,
           enableLoading: enableLoading,
-          disabled: isBoolean(action.props.disabled)
-            ? action.props.disabled
+          disabled: isBoolean(actualActionProps.disabled)
+            ? actualActionProps.disabled
             : getDefaultDisabled(action.key as string),
-        });
+        };
+
+        // 统一使用 cloneWithActionProps，无论是否有包裹都能正确处理
+        return cloneWithActionProps(action, newProps);
       })}
       {ellipsisActions.length > 0 && (
         <Dropdown
@@ -271,7 +279,7 @@ export default ({
                 const handleMenuItemClick = (info: { domEvent: React.MouseEvent<HTMLElement> }) => {
                   // 如果 action 被包裹（可能是 Popconfirm 或其他组件），不直接触发 onClick
                   // 让包裹组件来处理交互
-                  if (actionResult?.wrapper) {
+                  if (actionResult?.hasWrapper) {
                     // 包裹组件会处理点击，这里不需要做任何事
                     // 注意：Menu.Item 的点击会关闭下拉菜单，但 Popconfirm 应该能够正常显示
                     return;

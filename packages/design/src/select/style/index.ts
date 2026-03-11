@@ -21,6 +21,11 @@ export const genSelectStyle: GenerateStyle<SelectToken> = (token: SelectToken): 
         },
       },
     },
+    [`${componentCls}${componentCls}-disabled`]: {
+      [`${componentCls}-arrow`]: {
+        color: token.colorTextDisabled,
+      },
+    },
   };
 };
 

@@ -7,12 +7,13 @@ import type {
 import { PageContainer as AntPageContainer } from '@ant-design/pro-components';
 import classNames from 'classnames';
 import { isObject } from 'lodash';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, ConfigProvider, Divider, Space, Tooltip, theme } from '@oceanbase/design';
+import { useSize } from 'ahooks';
 import LocaleWrapper from '../locale/LocaleWrapper';
+import zhCN from './locale/zh-CN';
 import ItemRender from './ItemRender';
 import PageLoading from '../PageLoading';
-import zhCN from './locale/zh-CN';
 import useStyle from './style';
 
 export type ReloadType = boolean | IconComponentProps | React.ReactNode;
@@ -86,6 +87,26 @@ const PageContainer = ({
   const { wrapSSR } = useStyle(prefixCls);
 
   const { token } = theme.useToken();
+
+  // Avoid SSR issue: only get container element on client (e.g. Next.js)
+  const [containerEl, setContainerEl] = useState<HTMLElement | null>(null);
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.document) {
+      setContainerEl(window.document.querySelector(`.${prefixCls}`) as HTMLElement);
+    }
+  }, [prefixCls]);
+
+  // TODO: PageContainer should support ref to get the width of the container
+  const size = useSize(containerEl);
+  const width = size?.width;
+  const maxWidthValue = restProps.style?.maxWidth;
+  const maxWidth =
+    typeof maxWidthValue === 'number'
+      ? maxWidthValue
+      : maxWidthValue?.includes('px')
+        ? parseInt(maxWidthValue)
+        : undefined;
+  const isOverflow = width && width >= maxWidth;
 
   const {
     reload,
@@ -180,6 +201,7 @@ const PageContainer = ({
   const pageContainerCls = classNames(
     {
       [`${prefixCls}-no-page-header`]: noHasHeader,
+      [`${prefixCls}-max-width`]: isOverflow,
     },
     className
   );

@@ -8,6 +8,27 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.16
+
+`2026-02-11`
+
+- 💄 提升 PageContainer 页头样式的优先级，避免由于样式加载顺序可能导致的样式问题。[#1436](https://github.com/oceanbase/oceanbase-design/pull/1436)
+
+## 1.0.0-alpha.15
+
+`2026-02-05`
+
+- ⭐️ DateRanger 时间选择器支持分段修改。[#1403](https://github.com/oceanbase/oceanbase-design/pull/1403) [@18735185652](https://github.com/18735185652)
+- 🐞 修复 PageContainer 对浏览器 API 的使用，以适配 SSR。[#1426](https://github.com/oceanbase/oceanbase-design/pull/1426)
+
+## 1.0.0-alpha.14
+
+`2026-01-22`
+
+- 🐞 修复 Action 被 Tooltip 和 Popconfirm 包裹时没有继承 Action.Group `buttonSize` 属性的问题。[#1421](https://github.com/oceanbase/oceanbase-design/pull/1421)
+- 💄 优化 FooterToolbar 的阴影。[#1406](https://github.com/oceanbase/oceanbase-design/pull/1406)
+- 💄 PageContainer 达到最大宽度时，其下的 tabs 分割线改为不拉通。[#1407](https://github.com/oceanbase/oceanbase-design/pull/1407)
+
 ## 1.0.0-alpha.13
 
 `2026-01-05`

@@ -96,6 +96,24 @@ const App: React.FC = () => {
           />
         </Space>
       </div>
+      <div>
+        <Space wrap>
+          <Filter.Select
+            label="开启搜索"
+            showSearch
+            options={[
+              { value: 'running', label: '运行中' },
+              { value: 'stopped', label: '已停止' },
+              { value: 'pending', label: '待处理' },
+              { value: 'completed', label: '已完成' },
+              { value: 'failed', label: '失败' },
+              { value: 'cancelled', label: '已取消' },
+              { value: 'processing', label: '处理中' },
+              { value: 'waiting', label: '等待中' },
+            ]}
+          />
+        </Space>
+      </div>
     </Flex>
   );
 };

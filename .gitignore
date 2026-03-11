@@ -22,4 +22,5 @@ doc.zip
 assets.json
 lerna-debug.log
 useless-locale.txt
-
+.claude
+AGENTS.md

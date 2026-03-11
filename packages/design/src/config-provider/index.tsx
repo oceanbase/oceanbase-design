@@ -130,6 +130,7 @@ const ConfigProvider: ConfigProviderType = ({
   children,
   theme,
   locale,
+  wave,
   navigate,
   hideOnSinglePage,
   card,
@@ -206,18 +207,19 @@ const ConfigProvider: ConfigProviderType = ({
   return (
     <AntConfigProvider
       locale={mergedLocale}
+      wave={merge(
+        {},
+        {
+          disabled: true,
+        } as ConfigProviderProps['wave'],
+        parentContext.wave,
+        wave
+      )}
       card={merge({}, parentContext.card, card)}
       collapse={merge(
         {},
         {
-          expandIcon: ({ isActive }) => (
-            <CaretRightOutlined
-              rotate={isActive ? 90 : 0}
-              style={{
-                color: mergedTheme.token?.colorIcon || mergedTheme.token?.colorTextSecondary,
-              }}
-            />
-          ),
+          expandIcon: ({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />,
         } as ConfigProviderProps['collapse'],
         parentContext.collapse,
         collapse

@@ -5,7 +5,7 @@ import { genStyleHooks } from '../../_util/genComponentStyleHook';
 export type RadioToken = FullToken<'Radio'>;
 
 export const genRadioStyle: GenerateStyle<RadioToken> = (token: RadioToken): CSSObject => {
-  const { componentCls, radioSize, fontSize, fontSizeLG, lineHeight, calc } = token;
+  const { iconCls, componentCls, radioSize, fontSize, fontSizeLG, lineHeight, calc } = token;
   const marginBottom = calc(calc(fontSize).mul(lineHeight).equal())
     .sub(radioSize || fontSizeLG)
     .div(-2)
@@ -47,6 +47,14 @@ export const genRadioStyle: GenerateStyle<RadioToken> = (token: RadioToken): CSS
             justifyContent: 'center',
             height: '100%',
           },
+          [`&:not(${componentCls}-button-wrapper-checked):not(${componentCls}-button-wrapper-disabled)`]:
+            {
+              [`${componentCls}-button-label`]: {
+                [iconCls]: {
+                  color: token.colorIcon,
+                },
+              },
+            },
         },
         // Radio.Button icon-only style
         [`&${componentCls}-button-wrapper-icon-only`]: {

@@ -118,7 +118,7 @@ const App: React.FC = () => (
     bordered={true}
     columns={columns}
     dataSource={data}
-    scroll={{ x: 'calc(700px + 50%)', y: 240 }}
+    scroll={{ x: 'calc(700px + 50%)' }}
   />
 );
 

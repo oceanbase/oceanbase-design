@@ -30,5 +30,7 @@ export default {
     pleaseSelect: '選択してください',
     open: '開く',
     filters: 'フィルター',
+    apply: '確定',
+    clearAll: 'すべてクリア',
   },
 } as Locale;

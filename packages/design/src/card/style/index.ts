@@ -10,7 +10,7 @@ export type CardToken = FullToken<'Card'> & {
 };
 
 export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSObject => {
-  const { antCls } = token;
+  const { antCls, componentCls } = token;
   const tableComponentCls = `${antCls}-table`;
   return {
     [`${tableComponentCls}-wrapper`]: {
@@ -25,6 +25,17 @@ export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSOb
           {
             paddingRight: padding,
           },
+        [`${tableComponentCls}-container`]: {
+          // ::after 伪元素用于固定列时的阴影效果，表格带边框时去掉左上角和右上角的圆角
+          ['&::before, &::after']: {
+            borderStartStartRadius: token.borderRadiusMD,
+            borderStartEndRadius: token.borderRadiusMD,
+          },
+          [`${tableComponentCls}-content`]: {
+            borderStartStartRadius: token.borderRadiusLG,
+            borderStartEndRadius: token.borderRadiusLG,
+          },
+        },
       },
       [`${tableComponentCls}-pagination${antCls}-pagination`]: {
         // add marginLeft for table batchOperationBar
@@ -54,7 +65,7 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
   const tableComponentCls = `${antCls}-table`;
   return {
     [`${componentCls}`]: {
-      [`${componentCls}-head`]: {
+      [`> ${componentCls}-head`]: {
         // title style
         [`${componentCls}-title-content`]: {
           lineHeight: token.lineHeightLG,
@@ -96,7 +107,7 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
           },
         },
       },
-      [`${componentCls}-body`]: {
+      [`> ${componentCls}-body`]: {
         paddingTop: token.padding,
       },
       // nested Card style
@@ -116,51 +127,51 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
     },
     [`${componentCls}${componentCls}-has-head${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]:
       {
-        [`${componentCls}-body`]: {
+        [`> ${componentCls}-body`]: {
           paddingTop: 0,
         },
       },
     [`${componentCls}:not(${componentCls}-has-head)`]: {
-      [`${componentCls}-body`]: {
+      [`> ${componentCls}-body`]: {
         paddingTop: paddingLG,
       },
     },
     [`${componentCls}${componentCls}-no-divider`]: {
-      [`${componentCls}-head`]: {
+      [`> ${componentCls}-head`]: {
         // hide bottom border by setting borderBottomColor to transparent
         borderBottomColor: 'transparent',
       },
     },
     [`${componentCls}${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
-      [`${componentCls}-head`]: {
+      [`> ${componentCls}-head`]: {
         paddingTop: token.paddingLG,
         paddingBottom: token.padding,
       },
     },
     [`${componentCls}${componentCls}-small:not(${componentCls}-has-head)`]: {
-      [`${componentCls}-body`]: {
+      [`> ${componentCls}-body`]: {
         paddingTop: paddingSM,
       },
     },
     [`${componentCls}${componentCls}-small${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]:
       {
-        [`${componentCls}-head`]: {
+        [`> ${componentCls}-head`]: {
           paddingTop: token.paddingSM,
           paddingBottom: token.paddingXS,
         },
       },
-    [`${componentCls}-small`]: {
-      [`${componentCls}-body`]: {
+    [`${componentCls}${componentCls}-small`]: {
+      [`> ${componentCls}-body`]: {
         paddingTop: token.paddingXS,
       },
     },
-    [`${componentCls}-small${componentCls}-contain-tabs >${componentCls}-head`]: {
+    [`${componentCls}-small${componentCls}-contain-tabs > ${componentCls}-head`]: {
       [`${componentCls}-head-title, ${componentCls}-head-extra`]: {
         paddingTop: token.paddingXS,
       },
     },
     [`${componentCls}${componentCls}-contain-tabs`]: {
-      [`${componentCls}-head`]: {
+      [`> ${componentCls}-head`]: {
         ...genTabsStyle({
           ...token,
           componentCls: tabsComponentCls,
@@ -169,20 +180,20 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       },
     },
     [`${componentCls}${componentCls}-contain-grid`]: {
-      [`${componentCls}-head`]: {
+      [`> ${componentCls}-head`]: {
         // work for Card containing Card.Grid
         marginBottom: -1,
       },
     },
     [`${componentCls}:not(${componentCls}-contain-grid)`]: {
-      [`${componentCls}-head`]: {
+      [`> ${componentCls}-head`]: {
         // work for Card not containing Card.Grid
         marginBottom: 0,
       },
     },
     // reduce margin between card title and table
     [`&${componentCls}-has-head${componentCls}-no-divider:not(${componentCls}-contain-tabs)`]: {
-      [`${componentCls}-body`]: {
+      [`> ${componentCls}-body`]: {
         [`> ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
           {
             marginTop: calc(token.Table?.cellPaddingBlock).mul(-1).equal(),
@@ -196,7 +207,7 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
       genTableStyle(paddingSM, token),
     // no body padding bottom and bordered card
     [`${componentCls}${componentCls}-bordered${componentCls}-no-body-padding-bottom`]: {
-      [`${componentCls}-body`]: {
+      [`> ${componentCls}-body`]: {
         // fix double border when Table has no pagination
         [`> ${tableComponentCls}-wrapper${tableComponentCls}-no-pagination`]: {
           [`${tableComponentCls}`]: {
@@ -223,12 +234,12 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
           fontSize: token.fontSizeLG,
         },
       },
-      [`${componentCls}-body`]: {
+      [`> ${componentCls}-body`]: {
         overflow: 'hidden',
       },
     },
     [`${componentCls}${componentCls}-collapsible${componentCls}-collapsed`]: {
-      [`${componentCls}-body`]: {
+      [`> ${componentCls}-body`]: {
         maxHeight: 0,
         paddingTop: 0,
         paddingBottom: 0,
@@ -238,16 +249,16 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
         margin: 0,
       },
       // hide bottom border of head when collapsed, avoid double border
-      [`${componentCls}-head`]: {
+      [`> ${componentCls}-head`]: {
         borderBottomColor: 'transparent',
       },
       [`&${componentCls}-no-divider`]: {
-        [`${componentCls}-head`]: {
+        [`> ${componentCls}-head`]: {
           paddingBottom: paddingLG,
         },
       },
       [`&${componentCls}-no-divider${componentCls}-small`]: {
-        [`${componentCls}-head`]: {
+        [`> ${componentCls}-head`]: {
           paddingBottom: paddingSM,
         },
       },

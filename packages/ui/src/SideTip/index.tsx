@@ -209,16 +209,19 @@ const SideTip: React.FC<SideTipProps> = props => {
     [prefixCls]
   );
 
-  const [hide, setHide] = useState(
-    hideable
-      ? defaultHide === undefined
-        ? window.localStorage.getItem(getLocalStorageKey(id)) === 'true'
-        : !!defaultHide
-      : false
-  );
+  // Avoid SSR issue: same initial value on server and client, then sync from localStorage in useEffect
+  const [hide, setHide] = useState(hideable ? !!defaultHide : false);
   const [hovered, setHovered] = useState<boolean>(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined' || !hideable) return;
+    if (defaultHide === undefined) {
+      setHide(window.localStorage.getItem(getLocalStorageKey(id)) === 'true');
+    }
+  }, [hideable, defaultHide, id, getLocalStorageKey]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
     if (hide) {
       window.localStorage.setItem(getLocalStorageKey(id), 'true');
     } else {

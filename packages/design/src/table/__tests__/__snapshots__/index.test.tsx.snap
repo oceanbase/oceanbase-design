@@ -40,7 +40,7 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
                     Age
                   </th>
                   <th
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                     scope="col"
                   >
                     Address
@@ -102,7 +102,7 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     1 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -126,7 +126,7 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     2 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -150,7 +150,7 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     3 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -174,7 +174,7 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     4 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -198,7 +198,7 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     5 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -222,7 +222,7 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     6 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -246,7 +246,7 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     7 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -270,7 +270,7 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     8 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -294,7 +294,7 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     9 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -318,7 +318,7 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     10 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -550,7 +550,7 @@ exports[`Table > default empty should work 1`] = `
                     Age
                   </th>
                   <th
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                     scope="col"
                   >
                     Address
@@ -721,7 +721,7 @@ exports[`Table > default pagination should work 1`] = `
                     Age
                   </th>
                   <th
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                     scope="col"
                   >
                     Address
@@ -779,7 +779,7 @@ exports[`Table > default pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     1 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -799,7 +799,7 @@ exports[`Table > default pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     2 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -819,7 +819,7 @@ exports[`Table > default pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     3 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -839,7 +839,7 @@ exports[`Table > default pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     4 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -859,7 +859,7 @@ exports[`Table > default pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     5 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -879,7 +879,7 @@ exports[`Table > default pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     6 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -899,7 +899,7 @@ exports[`Table > default pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     7 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -919,7 +919,7 @@ exports[`Table > default pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     8 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -939,7 +939,7 @@ exports[`Table > default pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     9 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -959,7 +959,7 @@ exports[`Table > default pagination should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     10 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1260,7 +1260,7 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                     Age
                   </th>
                   <th
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                     scope="col"
                   >
                     Address
@@ -1318,7 +1318,7 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     1 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1338,7 +1338,7 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     2 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1358,7 +1358,7 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     3 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1378,7 +1378,7 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     4 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1398,7 +1398,7 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     5 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1418,7 +1418,7 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     6 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1438,7 +1438,7 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     7 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1458,7 +1458,7 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     8 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1478,7 +1478,7 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     9 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1498,7 +1498,7 @@ exports[`Table > hideOnSinglePage could be changed 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     10 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1553,7 +1553,7 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                     Age
                   </th>
                   <th
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                     scope="col"
                   >
                     Address
@@ -1611,7 +1611,7 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     1 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1631,7 +1631,7 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     2 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1651,7 +1651,7 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     3 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1671,7 +1671,7 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     4 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1691,7 +1691,7 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     5 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1711,7 +1711,7 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     6 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1731,7 +1731,7 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     7 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1751,7 +1751,7 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     8 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1771,7 +1771,7 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     9 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1791,7 +1791,7 @@ exports[`Table > hideOnSinglePage should be false by default 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     10 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -1999,7 +1999,7 @@ exports[`Table > innerBordered should work 1`] = `
                     Age
                   </th>
                   <th
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                     scope="col"
                   >
                     Address
@@ -2057,7 +2057,7 @@ exports[`Table > innerBordered should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     1 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2077,7 +2077,7 @@ exports[`Table > innerBordered should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     2 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2097,7 +2097,7 @@ exports[`Table > innerBordered should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     3 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2117,7 +2117,7 @@ exports[`Table > innerBordered should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     4 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2137,7 +2137,7 @@ exports[`Table > innerBordered should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     5 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2157,7 +2157,7 @@ exports[`Table > innerBordered should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     6 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2177,7 +2177,7 @@ exports[`Table > innerBordered should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     7 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2197,7 +2197,7 @@ exports[`Table > innerBordered should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     8 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2217,7 +2217,7 @@ exports[`Table > innerBordered should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     9 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2237,7 +2237,7 @@ exports[`Table > innerBordered should work 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     10 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2538,7 +2538,7 @@ exports[`Table > render 1`] = `
                     Age
                   </th>
                   <th
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                     scope="col"
                   >
                     Address
@@ -2596,7 +2596,7 @@ exports[`Table > render 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     1 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2616,7 +2616,7 @@ exports[`Table > render 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     2 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2636,7 +2636,7 @@ exports[`Table > render 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     3 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2656,7 +2656,7 @@ exports[`Table > render 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     4 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2676,7 +2676,7 @@ exports[`Table > render 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     5 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2696,7 +2696,7 @@ exports[`Table > render 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     6 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2716,7 +2716,7 @@ exports[`Table > render 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     7 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2736,7 +2736,7 @@ exports[`Table > render 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     8 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2756,7 +2756,7 @@ exports[`Table > render 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     9 Road, Hangzhou, Zhejiang Province
                   </td>
@@ -2776,7 +2776,7 @@ exports[`Table > render 1`] = `
                     32
                   </td>
                   <td
-                    class="ant-table-cell"
+                    class="ant-table-cell ant-table-cell-last-column"
                   >
                     10 Road, Hangzhou, Zhejiang Province
                   </td>

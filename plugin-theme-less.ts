@@ -85,6 +85,13 @@ export default (api: IApi) => {
               omitBy(
                 {
                   colorIcon: item.token.colorIcon,
+                  colorBgTextHover: item.token.colorBgTextHover,
+                  colorBgTextActive: item.token.colorBgTextActive,
+                  colorBgContainerDisabled: item.token.colorBgContainerDisabled,
+                  controlItemBgHover: item.token.controlItemBgHover,
+                  controlItemBgActive: item.token.controlItemBgActive,
+                  controlItemBgActiveHover: item.token.controlItemBgActiveHover,
+                  lineWidthFocus: item.token.lineWidthFocus,
                   boxShadow: item.token.boxShadow,
                   boxShadowSecondary: item.token.boxShadowSecondary,
                   boxShadowTertiary: item.token.boxShadowTertiary,

@@ -16,8 +16,8 @@ export const genPresetColorStyle = (token: ButtonToken): Record<string, CSSObjec
         dangerous: 'red',
       };
       const bgColor = addPresetColors.includes(colorKey)
-        ? token[`${colorKeyMap[colorKey]}4`]
-        : token[`${colorKey}6`];
+        ? token[`${colorKeyMap[colorKey]}5`]
+        : token[`${colorKey}7`];
       return {
         ...prev,
         [`&${componentCls}-color-${colorKey}:hover`]: {
@@ -32,27 +32,36 @@ export const genPresetColorStyle = (token: ButtonToken): Record<string, CSSObjec
 };
 
 export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) => {
-  const { componentCls } = token;
+  const { iconCls, componentCls } = token;
   return {
     [`${componentCls}`]: {
       // remove box-shadow for button
       boxShadow: 'none !important',
+      // loading style for not primary button
+      [`&${componentCls}-loading:not(${componentCls}-primary)`]: {
+        opacity: 1,
+      },
       // button outlined and dashed style
       [`&${componentCls}-variant-outlined, &${componentCls}-variant-dashed`]: {
-        // loading style
-        [`&${componentCls}-loading`]: {
-          backgroundColor: token.colorBgContainerDisabled,
-        },
         // disabled style
-        [`&:not(:disabled):not(${componentCls}-disabled):hover`]: {
-          [`&:not(${componentCls}-color-dangerous)`]: {
-            borderColor: token.gray7,
-            color: token.colorText,
-          },
-          [`&:not(${componentCls}-loading)`]: {
+        [`&:not(:disabled):not(${componentCls}-disabled)`]: {
+          [`&:not(${componentCls}-loading):hover`]: {
             ...genPresetColorStyle(token),
           },
+          [`&${componentCls}-color-default`]: {
+            '&:hover': {
+              borderColor: token.gray7,
+              color: token.colorText,
+            },
+            [iconCls]: {
+              color: token.colorIcon,
+            },
+          },
         },
+      },
+      // button loading and solid style
+      [`&${componentCls}-variant-solid:not(:disabled):not(${componentCls}-disabled):hover`]: {
+        ...genPresetColorStyle(token),
       },
     },
     [`${componentCls}${componentCls}-sm`]: {

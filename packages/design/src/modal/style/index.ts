@@ -64,7 +64,7 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
             },
           },
           [`${componentCls}-document-default-icon`]: {
-            marginTop: (token.controlHeight - token.fontSizeLG) / 2,
+            marginBottom: -2,
           },
           // 使用伪元素创建贯通的分割线
           '&::after': {
