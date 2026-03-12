@@ -29,13 +29,20 @@ export default (props: NavMenuProps) => {
   const { wrapSSR } = useStyle(prefixCls);
   const [selectedKeys, setSelectedKeys] = useState(['0']);
   const [menus, setMenus] = useState([]);
-  const location = window.location;
+  // Avoid SSR issue: only read window.location on client (e.g. Next.js)
+  const [location, setLocation] = useState<{ pathname: string } | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setLocation({ pathname: window.location.pathname });
+    }
+  }, []);
 
   const navigate = useNavigate();
 
   const preProcess = useCallback(
     list => {
-      const { pathname } = location;
+      const pathname = location?.pathname ?? '';
       try {
         for (let i = 0; i < list.length; i++) {
           const { link, openNewTab, href, key, children } = list[i];

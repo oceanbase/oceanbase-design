@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Switch, Table, theme } from '@oceanbase/design';
+import { Form, Radio, Switch, Table, theme } from '@oceanbase/design';
+import type { RadioChangeEvent } from '@oceanbase/design';
+import type { ColumnsType } from '@oceanbase/design/es/table';
 import { ProCard } from '@oceanbase/ui';
 
 const App: React.FC = () => {
@@ -19,8 +21,10 @@ const App: React.FC = () => {
   const [expandable, setExpandable] = useState(true);
   const [selectable, setSelectable] = useState(true);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [yScroll, setYScroll] = useState(false);
+  const [xScroll, setXScroll] = useState<string | undefined>(undefined);
 
-  const columns = [
+  const columns: ColumnsType<Record<string, any>> = [
     {
       title: '姓名',
       dataIndex: 'name',
@@ -46,6 +50,21 @@ const App: React.FC = () => {
       age: 32,
       address: `西湖区湖底公园${i}号`,
     });
+  }
+
+  // 参考 card-table / dynamic-settings 的 scroll 配置
+  const scroll: { x?: number | string; y?: number | string } = {};
+  if (yScroll) {
+    scroll.y = 240;
+  }
+  if (xScroll) {
+    scroll.x = '1000px';
+  }
+
+  const tableColumns = columns.map(item => ({ ...item }));
+  if (xScroll === 'fixed') {
+    tableColumns[0].fixed = 'left';
+    tableColumns[tableColumns.length - 1].fixed = 'right';
   }
 
   return (
@@ -153,6 +172,20 @@ const App: React.FC = () => {
             }}
           />
         </Form.Item>
+        <Form.Item label="Fixed Header" required={true}>
+          <Switch size="small" checked={!!yScroll} onChange={setYScroll} />
+        </Form.Item>
+        <Form.Item label="Table Scroll" required={true}>
+          <Radio.Group
+            size="small"
+            value={xScroll}
+            onChange={(e: RadioChangeEvent) => setXScroll(e.target.value)}
+          >
+            <Radio.Button value={undefined}>Unset</Radio.Button>
+            <Radio.Button value="scroll">Scroll</Radio.Button>
+            <Radio.Button value="fixed">Fixed Columns</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
       </Form>
       <ProCard
         bordered={hasBorder}
@@ -185,9 +218,10 @@ const App: React.FC = () => {
         <Table
           bordered={bordered}
           innerBordered={innerBordered}
-          columns={columns}
+          columns={tableColumns}
           dataSource={hasData ? dataSource : []}
           rowKey={record => record.key}
+          scroll={scroll}
           expandable={
             expandable
               ? {

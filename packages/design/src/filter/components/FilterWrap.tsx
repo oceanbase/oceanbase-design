@@ -68,11 +68,39 @@ const FilterWrap: FC<FilterWrapProps> = ({
     );
   }, [collapsed, contextValue.filterValues]);
 
-  const filterValues = useMemo(() => {
+  const allFilterValues = useMemo(() => {
     if (!collapsed) return [];
     return contextValue.filterValues || [];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collapsed, stableFilterValuesKey]);
+
+  // 从 children 中递归提取 label 集合，用于过滤 filterValues 只保留当前折叠项的值
+  // children 结构可能是 Fragment → Form.Item → Filter.Select，需要递归查找
+  const childLabelSet = useMemo(() => {
+    const labels = new Set<ReactNode>();
+    const extractLabel = (node: ReactNode) => {
+      if (!isValidElement(node)) return;
+      const props = node.props as { label?: ReactNode; children?: ReactNode };
+      if (props.label !== undefined) {
+        labels.add(props.label);
+        return;
+      }
+      if (props.children) {
+        if (isValidElement(props.children)) {
+          extractLabel(props.children);
+        } else if (Array.isArray(props.children)) {
+          props.children.forEach(extractLabel);
+        }
+      }
+    };
+    Children.forEach(children, extractLabel);
+    return labels;
+  }, [children]);
+
+  const filterValues = useMemo(() => {
+    if (childLabelSet.size === 0) return allFilterValues;
+    return allFilterValues.filter(item => childLabelSet.has(item.label));
+  }, [allFilterValues, childLabelSet]);
 
   // 格式化值用于 Tooltip 显示
   const formatValueForTooltip = useCallback(
@@ -147,6 +175,13 @@ const FilterWrap: FC<FilterWrapProps> = ({
           return value ? filterLocale?.open : '';
         }
         case 'input': {
+          return String(value);
+        }
+        case 'slot': {
+          const slotMeta = options as { formattedText?: string }[] | undefined;
+          if (slotMeta?.[0]?.formattedText) {
+            return slotMeta[0].formattedText;
+          }
           return String(value);
         }
         default: {

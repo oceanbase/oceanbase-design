@@ -3,6 +3,9 @@
  * @returns string
  */
 export function getLocale(): string {
+  if (typeof window === 'undefined') {
+    return 'en-US';
+  }
   return window.localStorage.getItem('umi_locale') || navigator.language;
 }
 
@@ -11,6 +14,7 @@ export function getLocale(): string {
  * @param locale 语言的 key
  */
 export function setLocale(locale: string) {
+  if (typeof window === 'undefined') return;
   window.localStorage.setItem('umi_locale', locale);
   // 设置完 locale 后需要 reload，以使页面生效
   window.location.reload();
@@ -18,6 +22,7 @@ export function setLocale(locale: string) {
 
 // 非单页应用内部跳转，使用 directTo 方法
 export function directTo(url: string, blank = true) {
+  if (typeof window === 'undefined') return;
   if (blank) {
     // 在新的标签页中打开
     const blankWindow = window.open('about:blank');

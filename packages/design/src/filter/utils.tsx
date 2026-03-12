@@ -137,3 +137,50 @@ export const getStableOptionsKey = (options: unknown[] | undefined): string => {
     return `${options.length}-${String(options[0])}`;
   }
 };
+
+/**
+ * 将 ReactNode 转换为可搜索的字符串
+ * 用于搜索功能中的文本匹配
+ */
+export const normalizeLabel = (label: ReactNode): string => {
+  if (typeof label === 'string') return label;
+  if (typeof label === 'number') return String(label);
+  if (typeof label === 'boolean' || label === null || label === undefined) {
+    return '';
+  }
+  if (Array.isArray(label)) {
+    return label.map(normalizeLabel).join(' ');
+  }
+  if (typeof label === 'object' && 'props' in label) {
+    // 尝试从 props 中获取 children 或文本内容
+    const props = (label as any).props;
+    if (props?.children) {
+      return normalizeLabel(props.children);
+    }
+    if (props?.text !== undefined) {
+      return String(props.text);
+    }
+    if (props?.label) {
+      return normalizeLabel(props.label);
+    }
+  }
+  return '';
+};
+
+/**
+ * 根据关键词过滤选项列表
+ * @param options 选项列表
+ * @param keyword 搜索关键词
+ * @returns 过滤后的选项列表
+ */
+export const filterOptions = <T extends { label?: ReactNode }>(
+  options: T[],
+  keyword: string
+): T[] => {
+  if (!keyword.trim()) return options;
+  const lowerKeyword = keyword.toLowerCase().trim();
+  return options.filter(option => {
+    const labelText = normalizeLabel(option.label);
+    return labelText.toLowerCase().includes(lowerKeyword);
+  });
+};

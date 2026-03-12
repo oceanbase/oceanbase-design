@@ -87,6 +87,31 @@ const App: React.FC = () => {
           options={statusOptions}
         />
       </Space>
+
+      <Space wrap>
+        <Filter.Checkbox
+          label="开启搜索"
+          showSearch
+          options={[
+            { value: 'tag1', label: '标签一' },
+            { value: 'tag2', label: '标签二' },
+            { value: 'tag3', label: '标签三' },
+            { value: 'tag4', label: '标签四' },
+            { value: 'tag5', label: '标签五' },
+            { value: 'tag6', label: '标签六' },
+            { value: 'tag7', label: '标签七' },
+            { value: 'tag8', label: '标签八' },
+          ]}
+        />
+        <Filter.Checkbox
+          label="状态搜索"
+          showSearch
+          value={statusValues}
+          onChange={setStatusValues}
+          count
+          options={statusOptions}
+        />
+      </Space>
     </Space>
   );
 };

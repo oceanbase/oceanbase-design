@@ -17,7 +17,7 @@ export interface IconComponentProps extends AntdIconProps {
 }
 
 // Initial setting
-setTwoToneColor('#0D6CF2');
+setTwoToneColor('#006aff');
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/34757#issuecomment-488848720
 interface IconBaseComponent<Props>

@@ -4,18 +4,31 @@ import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type InputNumberToken = FullToken<'InputNumber'>;
 
-export const genInputStyle: GenerateStyle<InputNumberToken> = (
+export const genInputNumberStyle: GenerateStyle<InputNumberToken> = (
   token: InputNumberToken
 ): CSSObject => {
-  const { antCls, componentCls } = token;
+  const { antCls, iconCls, componentCls } = token;
   const selectComponentCls = `${antCls}-select-selector`;
   return {
+    [`${componentCls}`]: {
+      [`${componentCls}-handler-wrap`]: {
+        [`${componentCls}-handler:hover`]: {
+          borderColor: token.gray7,
+          [iconCls]: {
+            color: token.colorIcon,
+          },
+          [`& + ${componentCls}-handler`]: {
+            borderTopColor: token.gray7,
+          },
+        },
+      },
+    },
     [`${componentCls}-group-wrapper`]: {
       [`${componentCls}-group-addon`]: {
-        color: token.colorTextTertiary,
+        color: token.colorTextSecondary,
         fontSize: token.fontSizeSM,
         [selectComponentCls]: {
-          color: token.colorTextTertiary,
+          color: token.colorTextSecondary,
         },
       },
     },
@@ -23,5 +36,5 @@ export const genInputStyle: GenerateStyle<InputNumberToken> = (
 };
 
 export default genStyleHooks('InputNumber', token => {
-  return [genInputStyle(token as InputNumberToken)];
+  return [genInputNumberStyle(token as InputNumberToken)];
 });

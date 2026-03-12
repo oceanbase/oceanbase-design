@@ -1,24 +1,23 @@
 import type { FC, ReactElement, ReactNode } from 'react';
 import React, {
   Children,
-  cloneElement,
   isValidElement,
   useCallback,
   useContext,
   useEffect,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
-import { createPortal } from 'react-dom';
 import { Flex } from 'antd';
 import { FilterOutlined } from '@oceanbase/icons';
 import Button from '../../button';
 import FilterWrap from './FilterWrap';
 import type { FilterButtonRef } from './FilterButton';
 import ConfigProvider from '../../config-provider';
-import type { Locale } from '../../locale';
-import enUS from '../../locale/en-US';
+import type { FilterLocale } from '../../locale';
+import defaultLocale from '../../locale/en-US';
 import {
   FilterProvider,
   type FilterComponentName,
@@ -46,34 +45,30 @@ export interface ResponsiveFilterGroupProps {
   extra?: ReactNode;
   /** 是否显示计数 默认 true */
   showCount?: boolean;
+  locale?: FilterLocale;
 }
 
-/**
- * ResponsiveFilterGroup 组件
- *
- * 响应式 Filter 容器，当宽度不足时自动将后面的 Filter 收起到 FilterWrap 中
- *
- * @example
- * ```tsx
- * <ResponsiveFilterGroup onApply={handleSearch} onClearAll={handleReset}>
- *   <Filter.Select label="操作者" ... />
- *   <Filter.Cascader label="事件操作" ... />
- *   <Filter.Select label="执行结果" ... />
- * </ResponsiveFilterGroup>
- * ```
- */
-// 检查子元素是否可以被收集
-const isCollapsible = (child: ReactElement): boolean => {
-  // 检查子元素的 props 中是否有 collapsible 属性
-  // 如果子元素是 Form.Item，需要检查其子元素的 props
+// 检查元素是否是 Filter 组件（通过 __isFilterComponent 静态标记识别）
+const isFilterComponent = (child: ReactElement): boolean => {
+  const type = child.type as any;
+  if (type?.__isFilterComponent) return true;
+
+  if (child.props?.children && isValidElement(child.props.children)) {
+    const innerType = (child.props.children as ReactElement).type as any;
+    if (innerType?.__isFilterComponent) return true;
+  }
+
+  return false;
+};
+
+// 检查子元素是否可以被折叠（只有 Filter 组件默认可折叠，其他组件需要显式设置 collapsible）
+const isCollapsibleCheck = (child: ReactElement): boolean => {
   const childProps = child.props;
 
-  // 直接检查 collapsible 属性
   if (childProps?.collapsible !== undefined) {
     return childProps.collapsible !== false;
   }
 
-  // 如果是 Form.Item 等包装组件，检查其 children 的 collapsible
   if (childProps?.children && isValidElement(childProps.children)) {
     const innerChild = childProps.children as ReactElement;
     if (innerChild.props?.collapsible !== undefined) {
@@ -81,20 +76,17 @@ const isCollapsible = (child: ReactElement): boolean => {
     }
   }
 
-  // 默认可以被收集
-  return true;
+  return isFilterComponent(child);
 };
 
 // 检查子元素是否应该始终折叠
-const isAlwaysCollapse = (child: ReactElement): boolean => {
+const isAlwaysCollapseCheck = (child: ReactElement): boolean => {
   const childProps = child.props;
 
-  // 直接检查 alwaysCollapse 属性
   if (childProps?.alwaysCollapse !== undefined) {
     return childProps.alwaysCollapse === true;
   }
 
-  // 如果是 Form.Item 等包装组件，检查其 children 的 alwaysCollapse
   if (childProps?.children && isValidElement(childProps.children)) {
     const innerChild = childProps.children as ReactElement;
     if (innerChild.props?.alwaysCollapse !== undefined) {
@@ -102,7 +94,6 @@ const isAlwaysCollapse = (child: ReactElement): boolean => {
     }
   }
 
-  // 默认不始终折叠
   return false;
 };
 
@@ -117,232 +108,199 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   style,
   extra,
   showCount = true,
+  locale: customLocale,
 }) => {
   const { locale: contextLocale } = useContext(ConfigProvider.ConfigContext);
-  const filterLocale = (contextLocale as Locale)?.Filter || enUS.Filter;
-  // 如果没有传入 label，使用国际化默认值
+  const filterLocale: FilterLocale = {
+    ...defaultLocale.Filter,
+    ...contextLocale?.Filter,
+    ...customLocale,
+  };
   const filterLabel = label ?? filterLocale?.filters;
+
   const containerRef = useRef<HTMLDivElement>(null);
-  const innerFlexRef = useRef<HTMLDivElement>(null);
-  const measureRef = useRef<HTMLDivElement>(null);
-  const unmeasureRef = useRef<HTMLDivElement>(null);
-  const moreButtonRef = useRef<HTMLDivElement>(null);
   const filterButtonRef = useRef<FilterButtonRef>(null);
-  const [visibleCount, setVisibleCount] = useState<number>(-1); // -1 表示还未计算
-  const [childWidths, setChildWidths] = useState<number[]>([]);
-  // 不再依赖外部传入的预留宽度，初始为 0，后续通过真实 DOM 测量获得
-  const [actualMoreButtonWidth, setActualMoreButtonWidth] = useState<number>(0);
-  const [unCollapsibleWidth, setUnCollapsibleWidth] = useState<number>(0);
-  const [measureContainer, setMeasureContainer] = useState<HTMLElement | null>(null);
-  // 维护筛选值的数组
+  const moreButtonMeasureRef = useRef<HTMLDivElement>(null);
+  const cachedWidths = useRef<number[]>([]);
+
+  const [visibleCount, setVisibleCount] = useState<number | null>(null);
   const [filterValues, setFilterValues] = useState<FilterValueItem[]>([]);
 
-  const childrenArray = Children.toArray(children).filter(isValidElement) as ReactElement[];
+  const childrenArray = useMemo(
+    () => Children.toArray(children).filter(isValidElement) as ReactElement[],
+    [children]
+  );
 
-  // 分离不可收集和可收集的子元素
-  const unCollapsibleChildren = childrenArray.filter(child => !isCollapsible(child));
-  const collapsibleChildren = childrenArray.filter(child => isCollapsible(child));
+  const childInfo = useMemo(
+    () =>
+      childrenArray.map((child, index) => ({
+        child,
+        index,
+        isCollapsible: isCollapsibleCheck(child),
+        isAlwaysCollapse: isAlwaysCollapseCheck(child),
+      })),
+    [childrenArray]
+  );
 
-  // 分离始终折叠和普通可收集的子元素
-  const alwaysCollapseChildren = collapsibleChildren.filter(child => isAlwaysCollapse(child));
-  const normalCollapsibleChildren = collapsibleChildren.filter(child => !isAlwaysCollapse(child));
+  const collapsibleItems = useMemo(() => childInfo.filter(item => item.isCollapsible), [childInfo]);
+  const alwaysCollapseItems = useMemo(
+    () => collapsibleItems.filter(item => item.isAlwaysCollapse),
+    [collapsibleItems]
+  );
+  const normalCollapsibleItems = useMemo(
+    () => collapsibleItems.filter(item => !item.isAlwaysCollapse),
+    [collapsibleItems]
+  );
 
-  // 创建测量容器
+  // 当 children 结构变化（增删/重排）时才重置为测量模式
+  // 不能用 childrenArray 引用比较，因为 JSX 每次渲染都产生新引用
+  const childrenStructureKey = childrenArray.map(c => c.key ?? c.type).join(',');
+  const [prevStructureKey, setPrevStructureKey] = useState(childrenStructureKey);
+  if (childrenStructureKey !== prevStructureKey) {
+    setPrevStructureKey(childrenStructureKey);
+    setVisibleCount(null);
+  }
+
+  const isMeasuring = visibleCount === null;
+
+  // 纯计算函数：根据容器宽度计算可显示的可折叠项数量
+  const calculateVisibleCount = useCallback(
+    (containerWidth: number): number => {
+      if (normalCollapsibleItems.length === 0) return 0;
+
+      const widths = cachedWidths.current;
+      if (widths.length === 0) return normalCollapsibleItems.length;
+
+      let uncollapsibleTotalWidth = 0;
+      let uncollapsibleCount = 0;
+      childInfo.forEach(info => {
+        if (!info.isCollapsible) {
+          uncollapsibleTotalWidth += widths[info.index] || 0;
+          uncollapsibleCount++;
+        }
+      });
+
+      const moreWidth = moreButtonMeasureRef.current?.offsetWidth || 0;
+      const hasAlwaysCollapse = alwaysCollapseItems.length > 0;
+
+      let visibleWidth = 0;
+      let count = 0;
+
+      for (let i = 0; i < normalCollapsibleItems.length; i++) {
+        const itemWidth = widths[normalCollapsibleItems[i].index] || 0;
+        const newWidth = visibleWidth + itemWidth;
+
+        const remaining = normalCollapsibleItems.length - i - 1;
+        const needMore = remaining > 0 || hasAlwaysCollapse;
+
+        const totalItems = uncollapsibleCount + count + 1 + (needMore ? 1 : 0);
+        const totalGaps = totalItems > 1 ? (totalItems - 1) * gap : 0;
+
+        const totalWidth =
+          uncollapsibleTotalWidth + newWidth + (needMore ? moreWidth : 0) + totalGaps;
+
+        if (totalWidth <= containerWidth) {
+          visibleWidth = newWidth;
+          count++;
+        } else {
+          break;
+        }
+      }
+
+      return count;
+    },
+    [childInfo, normalCollapsibleItems, alwaysCollapseItems, gap]
+  );
+
+  // 使用 ref 保存最新的计算函数，避免 ResizeObserver 等 effect 频繁重建
+  const calculateRef = useRef(calculateVisibleCount);
+  calculateRef.current = calculateVisibleCount;
+
+  // Effect 1: 测量模式下，读取所有子元素宽度并计算 visibleCount
+  useLayoutEffect(() => {
+    if (!containerRef.current || !isMeasuring) return;
+
+    const items = containerRef.current.querySelectorAll<HTMLElement>('[data-filter-item]');
+    const newWidths: number[] = [];
+    items.forEach(el => {
+      const idx = Number(el.dataset.filterItem);
+      if (!isNaN(idx)) {
+        newWidths[idx] = el.offsetWidth;
+      }
+    });
+    cachedWidths.current = newWidths;
+
+    const count = calculateRef.current(containerRef.current.offsetWidth);
+    setVisibleCount(count);
+  }, [isMeasuring]);
+
+  // Effect 2: 监听容器大小变化，用缓存宽度重新计算（不需要重新测量）
   useEffect(() => {
-    const container = document.createElement('div');
-    container.style.cssText =
-      'position: absolute; visibility: hidden; pointer-events: none; top: -9999px; left: -9999px;';
-    document.body.appendChild(container);
-    setMeasureContainer(container);
-
-    return () => {
-      document.body.removeChild(container);
-    };
+    if (!containerRef.current) return;
+    const el = containerRef.current;
+    const ro = new ResizeObserver(() => {
+      if (cachedWidths.current.length === 0) return;
+      const count = calculateRef.current(el.offsetWidth);
+      setVisibleCount(prev => (prev === count ? prev : count));
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
   }, []);
 
-  // 测量每个可收集子元素的宽度（只测量普通可收集的，不包括始终折叠的）
-  const measureChildren = useCallback(() => {
-    if (!measureRef.current) return;
+  // Effect 3: filterValues 变化时，more 按钮 badge 可能变化，需要重新计算
+  useEffect(() => {
+    if (!containerRef.current || cachedWidths.current.length === 0) return;
+    const count = calculateRef.current(containerRef.current.offsetWidth);
+    setVisibleCount(prev => (prev === count ? prev : count));
+  }, [filterValues]);
 
-    // 测量普通可收集子元素宽度
-    const widths: number[] = [];
-    if (measureRef.current) {
-      const measureDiv = measureRef.current;
-      const measureItems = measureDiv.children;
-      for (let i = 0; i < measureItems.length; i++) {
-        const item = measureItems[i] as HTMLElement;
-        widths.push(item.offsetWidth);
-      }
-    }
-    setChildWidths(widths);
+  // Effect 4: 监听子元素的宽度变化（如筛选值变化导致按钮变宽），
+  // 更新缓存宽度并重新计算可见数量。
+  // 依赖 visibleCount 以便在显隐切换后重新查询 DOM 元素。
+  useEffect(() => {
+    if (!containerRef.current || isMeasuring) return;
+    const el = containerRef.current;
+    const items = el.querySelectorAll<HTMLElement>('[data-filter-item]');
+    if (items.length === 0) return;
 
-    // 测量 more button 的宽度
-    if (moreButtonRef.current) {
-      setActualMoreButtonWidth(moreButtonRef.current.offsetWidth);
-    }
-
-    // 测量不可收集子元素的总宽度（使用隐藏测量容器，保证与普通可收集项的测量方式一致）
-    if (unmeasureRef.current) {
-      let sum = 0;
-      const items = unmeasureRef.current.children;
-      for (let i = 0; i < items.length; i++) {
-        const it = items[i] as HTMLElement;
-        sum += it.offsetWidth;
-      }
-      setUnCollapsibleWidth(sum || 0);
-    } else {
-      setUnCollapsibleWidth(0);
-    }
-  }, [unCollapsibleChildren.length, normalCollapsibleChildren.length, gap]);
-
-  // 计算可见的可收集子元素数量（只计算普通可收集的，不包括始终折叠的）
-  const calculateVisibleCount = useCallback(() => {
-    if (!containerRef.current) return;
-    // 如果没有普通可收集的子元素，显示全部（0表示全部折叠）
-    if (normalCollapsibleChildren.length === 0) {
-      setVisibleCount(0);
-      return;
-    }
-    if (childWidths.length === 0) return;
-
-    // 可用宽度 = 容器宽度 - 不可收集子元素占用的宽度 - 可能存在的间隙
-    const containerWidth = containerRef.current.offsetWidth;
-    const gapBetweenUncollapsibleAndCollapsible =
-      unCollapsibleChildren.length > 0 && normalCollapsibleChildren.length > 0 ? gap : 0;
-    const availableWidth =
-      containerWidth - (unCollapsibleWidth || 0) - gapBetweenUncollapsibleAndCollapsible;
-
-    let totalWidth = 0;
-    let count = 0;
-
-    // 如果有始终折叠的元素，需要预留 more button 的宽度
-    const hasAlwaysCollapse = alwaysCollapseChildren.length > 0;
-    const reservedForMoreButton = hasAlwaysCollapse ? actualMoreButtonWidth + gap : 0;
-
-    for (let i = 0; i < childWidths.length; i++) {
-      const itemWidth = childWidths[i] + (i > 0 ? gap : 0);
-      // 检查是否还有空间放置当前元素
-      // 如果不是最后一个元素，需要预留实际测量到的更多按钮宽度
-      const needMoreButton = i < childWidths.length - 1;
-      const reservedWidth = needMoreButton ? actualMoreButtonWidth + gap : reservedForMoreButton;
-
-      if (totalWidth + itemWidth + reservedWidth <= availableWidth) {
-        totalWidth += itemWidth;
-        count++;
-      } else {
-        break;
-      }
-    }
-
-    // 如果所有元素都能显示，就显示全部
-    if (count === childWidths.length) {
-      setVisibleCount(childWidths.length);
-    } else if (count === 0) {
-      // 如果一个都放不下，只显示 more button
-      setVisibleCount(0);
-    } else {
-      setVisibleCount(count);
-    }
-  }, [
-    childWidths,
-    gap,
-    actualMoreButtonWidth,
-    normalCollapsibleChildren.length,
-    alwaysCollapseChildren.length,
-    unCollapsibleWidth,
-    unCollapsibleChildren.length,
-  ]);
-
-  // 初始测量 - 使用 useLayoutEffect 确保在绘制前完成
-  useLayoutEffect(() => {
-    if (measureContainer) {
-      // 延迟一帧确保 portal 已渲染
-      requestAnimationFrame(() => {
-        measureChildren();
+    const ro = new ResizeObserver(() => {
+      let widthChanged = false;
+      items.forEach(item => {
+        const idx = Number(item.dataset.filterItem);
+        if (isNaN(idx)) return;
+        const w = item.offsetWidth;
+        if (w > 0 && Math.abs(w - (cachedWidths.current[idx] || 0)) > 1) {
+          cachedWidths.current[idx] = w;
+          widthChanged = true;
+        }
       });
-    }
-  }, [children, measureChildren, measureContainer, normalCollapsibleChildren]);
-
-  // 当 filterValues 改变时，more 按钮可能会显示 badge，导致宽度变化，需重新测量
-  useEffect(() => {
-    if (measureContainer) {
-      requestAnimationFrame(() => {
-        measureChildren();
-      });
-    }
-  }, [filterValues, measureChildren, measureContainer]);
-
-  // 当 childWidths 更新后计算可见数量
-  useLayoutEffect(() => {
-    calculateVisibleCount();
-  }, [childWidths, unCollapsibleWidth, calculateVisibleCount]);
-
-  // 监听窗口大小变化
-  useEffect(() => {
-    const handleResize = () => {
-      calculateVisibleCount();
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [calculateVisibleCount]);
-
-  // 监听容器大小变化
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const resizeObserver = new ResizeObserver(() => {
-      calculateVisibleCount();
+      if (widthChanged) {
+        const count = calculateRef.current(el.offsetWidth);
+        setVisibleCount(prev => (prev === count ? prev : count));
+      }
     });
 
-    resizeObserver.observe(containerRef.current);
+    items.forEach(item => ro.observe(item));
+    return () => ro.disconnect();
+  }, [isMeasuring, visibleCount]);
 
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, [calculateVisibleCount]);
+  // --- 派生状态 ---
+  const visibleIndexSet = useMemo(() => {
+    if (visibleCount === null) return null;
+    return new Set(normalCollapsibleItems.slice(0, visibleCount).map(item => item.index));
+  }, [visibleCount, normalCollapsibleItems]);
 
-  // 分离可见和隐藏的普通可收集子元素（始终折叠的不参与计算）
-  const visibleCollapsibleChildren =
-    visibleCount === -1
-      ? normalCollapsibleChildren
-      : normalCollapsibleChildren.slice(0, visibleCount);
-  const hiddenCollapsibleChildren =
-    visibleCount === -1 ? [] : normalCollapsibleChildren.slice(visibleCount);
+  const hiddenCollapsibleItems = useMemo(() => {
+    if (!visibleIndexSet) return [];
+    return normalCollapsibleItems.filter(item => !visibleIndexSet.has(item.index));
+  }, [visibleIndexSet, normalCollapsibleItems]);
 
-  // 合并始终折叠和隐藏的普通可收集子元素
-  const allHiddenChildren = [...alwaysCollapseChildren, ...hiddenCollapsibleChildren];
+  const allHiddenItems = useMemo(
+    () => [...alwaysCollapseItems, ...hiddenCollapsibleItems],
+    [alwaysCollapseItems, hiddenCollapsibleItems]
+  );
 
-  // 递归地为子元素添加 _isCollapsed prop
-  const addIsInWrapProp = (element: ReactElement): ReactElement => {
-    const childProps = element.props;
-
-    // 对当前元素添加 _isCollapsed prop
-    const newProps: Record<string, unknown> = { _isCollapsed: true };
-
-    // 如果有 children，递归处理
-    if (childProps?.children) {
-      if (isValidElement(childProps.children)) {
-        // 单个子元素
-        newProps.children = addIsInWrapProp(childProps.children as ReactElement);
-      } else if (Array.isArray(childProps.children)) {
-        // 多个子元素
-        newProps.children = childProps.children.map((child: ReactNode) => {
-          if (isValidElement(child)) {
-            return addIsInWrapProp(child as ReactElement);
-          }
-          return child;
-        });
-      }
-    }
-
-    return cloneElement(element, newProps);
-  };
-
-  // 更新筛选值的函数
+  // --- 值管理 ---
   const updateFilterValue = useCallback(
     (
       id: string,
@@ -352,87 +310,69 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
       componentName?: FilterComponentName
     ) => {
       setFilterValues(prev => {
-        // 如果值为空，移除该项
-        // 对于 switch 组件，false 被视为未选中状态，应该被视为空值
         const isEmpty =
           value === undefined ||
           value === null ||
           value === '' ||
-          (componentName === 'switch' && value === false) || // switch 组件的 false 值视为空
+          (componentName === 'switch' && value === false) ||
           (Array.isArray(value) && value.length === 0);
 
         if (isEmpty) {
           const filtered = prev.filter(item => item.id !== id);
-          // 如果数组长度没变化，说明该项本来就不存在，直接返回原数组
-          if (filtered.length === prev.length) {
-            return prev;
-          }
-          return filtered;
+          return filtered.length === prev.length ? prev : filtered;
         }
-        // 查找是否已存在
         const existingIndex = prev.findIndex(item => item.id === id);
         if (existingIndex >= 0) {
-          const existingItem = prev[existingIndex];
-          // 深度比较 options 是否相等
+          const existing = prev[existingIndex];
           const optionsEqual =
-            existingItem.options === options ||
-            (existingItem.options === undefined && options === undefined) ||
-            (existingItem.options !== undefined &&
+            existing.options === options ||
+            (existing.options === undefined && options === undefined) ||
+            (existing.options !== undefined &&
               options !== undefined &&
-              JSON.stringify(existingItem.options) === JSON.stringify(options));
+              JSON.stringify(existing.options) === JSON.stringify(options));
 
-          // 如果值、选项和组件名都没变化，直接返回原数组
           if (
-            existingItem.value === value &&
+            existing.value === value &&
             optionsEqual &&
-            existingItem.componentName === componentName &&
-            existingItem.label === _filterLabel
+            existing.componentName === componentName &&
+            existing.label === _filterLabel
           ) {
             return prev;
           }
-          // 更新已存在的项
           const newValues = [...prev];
           newValues[existingIndex] = { id, label: _filterLabel, value, options, componentName };
           return newValues;
-        } else {
-          // 添加新项
-          return [...prev, { id, label: _filterLabel, value, options, componentName }];
         }
+        return [...prev, { id, label: _filterLabel, value, options, componentName }];
       });
     },
     []
   );
 
   const handleClearAll = () => {
-    // 先清除所有子组件的值
-    allHiddenChildren.forEach(child => {
-      if (isValidElement(child)) {
-        const childProps = child.props as {
+    allHiddenItems.forEach(item => {
+      if (isValidElement(item.child)) {
+        const childProps = item.child.props as {
           children?: ReactNode;
           onChange?: (value: unknown) => void;
         };
-        // 如果是 Form.Item，需要访问其子组件
         if (childProps.children && isValidElement(childProps.children)) {
           const innerChildProps = childProps.children.props as {
             onChange?: (value: unknown) => void;
           };
-          if (innerChildProps.onChange) {
-            innerChildProps.onChange(undefined);
-          }
-        } else if (childProps.onChange) {
-          childProps.onChange(undefined);
+          innerChildProps.onChange?.(undefined);
+        } else {
+          childProps.onChange?.(undefined);
         }
       }
     });
-    // 然后清除 filterValues
     setFilterValues([]);
-    // 最后调用外部回调
-    onClearAll();
+    onClearAll?.();
   };
 
-  // 渲染隐藏的可收集子元素到 FilterWrap 中（包括始终折叠和隐藏的普通可收集子元素）
+  // --- 渲染 FilterWrap（收起的筛选项） ---
   const renderHiddenChildren = () => {
-    if (allHiddenChildren.length === 0) return null;
+    if (allHiddenItems.length === 0) return null;
 
     return (
       <FilterProvider
@@ -447,6 +387,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
           label={filterLabel}
           extra={extra}
           onClearAll={handleClearAll}
+          showCount={showCount}
           footer={
             showActions && (
               <Flex justify="space-between">
@@ -459,153 +400,132 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
                       filterButtonRef.current?.closePopover();
                     }}
                   >
-                    Apply
+                    {filterLocale?.apply}
                   </Button>
                 )}
                 {onClearAll && (
                   <Button type="link" size="small" onClick={handleClearAll}>
-                    Clear All
+                    {filterLocale?.clearAll}
                   </Button>
                 )}
               </Flex>
             )
           }
         >
-          {allHiddenChildren.map((child, index) => {
-            if (isValidElement(child)) {
-              // 使用 child.key 或生成稳定的 key
-              const stableKey = child.key || `responsive-filter-child-${index}`;
-              return <React.Fragment key={stableKey}>{addIsInWrapProp(child)}</React.Fragment>;
+          {allHiddenItems.map((item, index) => {
+            if (isValidElement(item.child)) {
+              const stableKey = item.child.key || `responsive-filter-child-${index}`;
+              return <React.Fragment key={stableKey}>{item.child}</React.Fragment>;
             }
-            return child;
+            return item.child;
           })}
         </FilterWrap>
       </FilterProvider>
     );
   };
 
-  // 测量容器内容 - 使用 Portal 渲染到 body 外部，避免影响布局计算
-  // 只测量可收集的子元素
-  const measureContent = measureContainer
-    ? createPortal(
-        <>
-          {/* 不再在隐藏容器中测量不可收集子元素，优先使用实际渲染的 DOM（innerFlexRef）测量 */}
+  // --- 渲染子元素 ---
+  // 所有子元素始终保持在 Flex 中的稳定位置（FilterProvider + div 包裹 + 稳定 key），
+  // 通过 CSS display 控制显隐，避免在可见/折叠间切换时卸载重挂载导致表单值丢失。
+  // FilterProvider 使隐藏的原始组件能直接感知 isCollapsed 并上报值，无需依赖 Popover 中的克隆。
+  const renderChildren = () => {
+    const elements: ReactNode[] = [];
+    let filterWrapInserted = false;
+    let collapsibleIdx = 0;
 
-          {/* 隐藏的测量容器 - 测量不可收集与普通可收集子元素（与实际渲染保持一致的包装） */}
-          <div
-            ref={unmeasureRef}
-            style={{
-              display: 'flex',
-              gap,
-              whiteSpace: 'nowrap',
-            }}
-          >
-            {unCollapsibleChildren.map((child, index) => {
-              const stableKey =
-                isValidElement(child) && child.key ? child.key : `measure-unc-${index}`;
-              return (
-                <div key={stableKey} style={{ display: 'inline-flex' }}>
-                  {child}
-                </div>
-              );
-            })}
+    childrenArray.forEach((child, index) => {
+      const info = childInfo[index];
+      const stableKey = child.key || `filter-item-${index}`;
+
+      let display: string | undefined;
+      let isHidden = false;
+
+      if (isMeasuring) {
+        display = 'inline-flex';
+      } else if (!info.isCollapsible) {
+        display = undefined;
+      } else if (info.isAlwaysCollapse) {
+        display = 'none';
+        isHidden = true;
+      } else {
+        const isVisible = collapsibleIdx < visibleCount!;
+        display = isVisible ? undefined : 'none';
+        isHidden = !isVisible;
+        collapsibleIdx++;
+      }
+
+      elements.push(
+        <FilterProvider
+          key={stableKey}
+          isCollapsed={!isMeasuring && isHidden}
+          filterValues={filterValues}
+          updateFilterValue={updateFilterValue}
+        >
+          <div data-filter-item={index} style={{ display, flexShrink: 0 }}>
+            {child}
           </div>
+        </FilterProvider>
+      );
 
-          <div
-            ref={measureRef}
-            style={{
-              display: 'flex',
-              gap,
-              whiteSpace: 'nowrap',
-            }}
-          >
-            {normalCollapsibleChildren.map((child, index) => {
-              // 使用 child.key 或生成稳定的 key
-              const stableKey =
-                isValidElement(child) && child.key ? child.key : `measure-child-${index}`;
-              return (
-                <div key={stableKey} style={{ display: 'inline-flex' }}>
-                  {child}
-                </div>
-              );
-            })}
-          </div>
+      if (!isMeasuring && isHidden && !filterWrapInserted && allHiddenItems.length > 0) {
+        filterWrapInserted = true;
+        elements.push(<React.Fragment key="filter-wrap">{renderHiddenChildren()}</React.Fragment>);
+      }
+    });
 
-          {/* 隐藏的、立即挂载的折叠子组件副本，用于在首次渲染时将 initialValue 上报到 FilterProvider */}
-          <FilterProvider
-            isCollapsed={true}
-            filterValues={filterValues}
-            updateFilterValue={updateFilterValue}
-          >
-            <div
-              style={{
-                position: 'absolute',
-                visibility: 'hidden',
-                pointerEvents: 'none',
-                top: -9999,
-                left: -9999,
-              }}
-            >
-              {allHiddenChildren.map((child, index) => {
-                if (isValidElement(child)) {
-                  return (
-                    <React.Fragment key={child.key || `hidden-clone-${index}`}>
-                      {addIsInWrapProp(child)}
-                    </React.Fragment>
-                  );
-                }
-                return child;
-              })}
-            </div>
-          </FilterProvider>
+    if (!isMeasuring && !filterWrapInserted && allHiddenItems.length > 0) {
+      elements.push(<React.Fragment key="filter-wrap">{renderHiddenChildren()}</React.Fragment>);
+    }
 
-          {/* 隐藏的 more button 测量容器 - 使用 FilterProvider 以便显示 badge/count */}
-          <FilterProvider
-            isCollapsed={true}
-            filterValues={filterValues}
-            updateFilterValue={updateFilterValue}
-          >
-            <div
-              ref={moreButtonRef}
-              style={{
-                display: 'inline-flex',
-              }}
-            >
-              <FilterWrap
-                collapsed
-                icon={icon}
-                label={filterLabel}
-                showCount={showCount}
-                onClearAll={handleClearAll}
-              >
-                <div />
-              </FilterWrap>
-            </div>
-          </FilterProvider>
-        </>,
-        measureContainer
-      )
-    : null;
+    return elements;
+  };
 
   return (
-    <>
-      {measureContent}
-
-      {/* 实际渲染的容器 */}
+    <div
+      ref={containerRef}
+      className="responsive-filter-group"
+      style={{
+        flex: '1 1 auto',
+        minWidth: 0,
+        position: 'relative',
+        overflow: 'hidden',
+        visibility: isMeasuring ? 'hidden' : undefined,
+        ...style,
+      }}
+    >
+      {/* 隐藏的 FilterWrap 按钮，仅用于测量 more 按钮宽度（含 badge） */}
       <div
-        ref={containerRef}
-        style={{ flex: '1 1 auto', minWidth: 0, overflow: 'hidden', ...style }}
+        ref={moreButtonMeasureRef}
+        style={{
+          position: 'absolute',
+          visibility: 'hidden',
+          pointerEvents: 'none',
+          top: -9999,
+          left: -9999,
+          display: 'inline-flex',
+        }}
       >
-        <Flex ref={innerFlexRef} gap={gap} align="center" wrap="nowrap">
-          {/* 先渲染不可收集的子元素 */}
-          {unCollapsibleChildren}
-          {/* 再渲染可见的可收集子元素 */}
-          {visibleCollapsibleChildren}
-          {/* 最后渲染收起的子元素 */}
-          {renderHiddenChildren()}
-        </Flex>
+        <FilterProvider
+          isCollapsed={true}
+          filterValues={filterValues}
+          updateFilterValue={updateFilterValue}
+        >
+          <FilterWrap
+            collapsed
+            icon={icon}
+            label={filterLabel}
+            showCount={showCount}
+            onClearAll={handleClearAll}
+          >
+            <div />
+          </FilterWrap>
+        </FilterProvider>
       </div>
-    </>
+
+      <Flex gap={gap} align="center" wrap="nowrap">
+        {renderChildren()}
+      </Flex>
+    </div>
   );
 };
 

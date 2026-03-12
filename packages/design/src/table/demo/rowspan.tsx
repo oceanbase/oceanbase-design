@@ -31,10 +31,16 @@ const columns: ColumnsType<DataType> = [
   {
     title: 'Phone',
     dataIndex: 'phone',
+    onCell: (_, index) => {
+      return { rowSpan: index % 2 === 0 ? 2 : 0 };
+    },
   },
   {
     title: 'Address',
     dataIndex: 'address',
+    onCell: (_, index) => {
+      return { rowSpan: index % 2 === 0 ? 2 : 0 };
+    },
   },
 ];
 

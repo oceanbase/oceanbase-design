@@ -11,10 +11,8 @@ export const genInputStyle: GenerateStyle<InputToken> = (token: InputToken): CSS
       [`&:not(${componentCls}-disabled)`]: {
         [`${componentCls}-prefix, ${componentCls}-suffix`]: {
           fontSize: token.fontSizeSM,
+          color: token.colorIcon,
         },
-      },
-      [`${componentCls}-prefix, ${componentCls}-suffix`]: {
-        color: token.colorIcon,
       },
       [`${componentCls}-suffix`]: {
         [`${componentCls}-clear-icon`]: {

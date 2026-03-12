@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/codemod",
-  "version": "1.0.0-alpha.13",
+  "version": "1.0.0-alpha.17",
   "description": "Codemod for OceanBase Design upgrade",
   "keywords": [
     "oceanbase",
@@ -36,7 +36,7 @@
     "postcss": "^8.5.6",
     "postcss-less": "^6.0.0",
     "postcss-scss": "^4.0.9",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.0",
     "read-pkg-up": "^10.1.0",
     "semver": "^7.7.3",
     "update-check": "^1.5.4",

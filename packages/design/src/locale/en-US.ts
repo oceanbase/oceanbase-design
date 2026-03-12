@@ -30,5 +30,7 @@ export default {
     pleaseSelect: 'Please select',
     open: 'Open',
     filters: 'Filters',
+    apply: 'Apply',
+    clearAll: 'Clear All',
   },
 } as Locale;

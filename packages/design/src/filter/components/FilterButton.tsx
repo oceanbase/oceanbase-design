@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import React, {
   forwardRef,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
@@ -42,6 +43,9 @@ interface FilterButtonProps extends BaseFilterProps, InternalFilterProps {
   showLabelDivider?: boolean;
   /** 是否显示后缀图标区域（包括下拉箭头和清除图标），默认 true */
   showSuffixIcon?: boolean;
+  /** 是否为 flat 模式（内部使用） */
+  _isFlat?: boolean;
+  style?: React.CSSProperties;
 }
 
 const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
@@ -65,6 +69,9 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
       showLabelDivider = false,
       showSuffixIcon = true,
       _isInWrapComponent = false,
+      _isFlat = false,
+      style,
+      allowClear = true,
       ...restProps
     },
     ref
@@ -72,6 +79,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     const { token } = theme.useToken();
     const { isCollapsed } = useFilterContext();
     const [open, setOpen] = useState(false);
+    const [popoverWidth, setPopoverWidth] = useState<number | undefined>();
     const { wrapSSR, prefixCls } = useFilterStyle();
     const innerRef = useRef<HTMLDivElement>(null);
 
@@ -103,16 +111,29 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
     const handleOpenChange = (newOpen: boolean) => {
       if (!disabled) {
         setOpen(newOpen);
-        // 调用外部传入的 onOpenChange 回调，让父组件能够实时监听状态变化
         externalOnOpenChange?.(newOpen);
       }
     };
+
+    // 折叠模式下实时监听按钮宽度变化，同步到 Popover 面板宽度
+    useEffect(() => {
+      if (!open || !isCollapsed || _isInWrapComponent || !innerRef.current) {
+        return;
+      }
+      const el = innerRef.current;
+      setPopoverWidth(el.offsetWidth);
+      const observer = new ResizeObserver(() => {
+        setPopoverWidth(el.offsetWidth);
+      });
+      observer.observe(el);
+      return () => observer.disconnect();
+    }, [open, isCollapsed, _isInWrapComponent]);
 
     // 使用 useMemo 缓存 content，避免每次都重新创建
     const popoverContent = useMemo(
       () => (
         <>
-          {(!isCollapsed || _isInWrapComponent) && (
+          {!_isFlat && (!isCollapsed || _isInWrapComponent) && (
             <Flex
               justify="space-between"
               align="center"
@@ -138,7 +159,18 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
           )}
         </>
       ),
-      [content, footer, label, extra, isCollapsed, prefixCls, showLabelDivider, token]
+      [
+        content,
+        footer,
+        label,
+        extra,
+        isCollapsed,
+        prefixCls,
+        showLabelDivider,
+        token,
+        _isFlat,
+        _isInWrapComponent,
+      ]
     );
 
     return wrapSSR(
@@ -149,11 +181,13 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
         content={popoverContent}
         open={open && !disabled}
         onOpenChange={handleOpenChange}
+        forceRender={_isInWrapComponent}
         styles={{
           body: {
             padding: 0,
             maxWidth: 300,
-            minWidth: 200,
+            minWidth: 120,
+            ...(isCollapsed && !_isInWrapComponent && popoverWidth ? { width: popoverWidth } : {}),
           },
         }}
         {...popoverProps}
@@ -170,6 +204,7 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
                 (!isCollapsed || _isInWrapComponent) &&
                 getFilterCls(prefixCls, 'selected')
             )}
+            style={style}
           >
             <Flex align="center" justify="space-between" style={{ width: '100%' }}>
               {icon && <div className={getFilterCls(prefixCls, 'button-prefix-icon')}>{icon}</div>}
@@ -190,10 +225,10 @@ const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
               ) : showSuffixIcon ? (
                 <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
                   <DownOutlined
-                    className={selected ? getFilterCls(prefixCls, 'arrow-icon') : ''}
+                    className={selected && allowClear ? getFilterCls(prefixCls, 'arrow-icon') : ''}
                     style={disabled ? { color: 'var(--ob-color-icon-disabled)' } : undefined}
                   />
-                  {selected && (
+                  {selected && allowClear && (
                     <div
                       className={getFilterCls(prefixCls, 'clear-icon')}
                       onClick={e => {

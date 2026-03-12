@@ -6,7 +6,7 @@ import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 export const genFooterToolbarStyle: GenerateStyle<FooterToolBarToken> = (
   token: FooterToolBarToken
 ): CSSObject => {
-  const { componentCls, colorBgBase, borderRadius, boxShadowSecondary, controlHeightLG } = token;
+  const { componentCls, colorBgBase } = token;
 
   return {
     [`div${componentCls}`]: {
@@ -19,7 +19,7 @@ export const genFooterToolbarStyle: GenerateStyle<FooterToolBarToken> = (
       paddingInline: token.paddingXL,
       width: '100%',
       backgroundColor: colorBgBase,
-      boxShadow: boxShadowSecondary,
+      boxShadow: '0px -1px 2px 0px #1320391A',
       borderBlockStart: 'none',
     },
   } as CSSObject;

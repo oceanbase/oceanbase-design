@@ -21,7 +21,7 @@ markdown: |
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
 <code src="./demo/bordered.tsx" title="带边框" description="添加表格边框线。"></code>
-<code src="./demo/inner-bordered.tsx" title="带内部边框" description="仅表格内部添加边框线。"></code>
+<code src="./demo/inner-bordered.tsx" title="带内部边框" description="仅表格内部添加边框线，常和带边框的 Card 一起使用，以避免外部边框重复。"></code>
 <code src="./demo/ellipsis.tsx" title="单元格自动省略" description="设置 `column.ellipsis` 可以让单元格内容根据宽度自动省略，并使用 Tooltip 展示全部内容。`说明`: 列头缩略暂不支持和排序筛选一起使用。"></code>
 <code src="./demo/fixed-columns-header-tables.tsx" title="固定头和列"></code>
 <code src="./demo/filter-and-sorter.tsx" title="筛选和排序"></code>

@@ -1,8 +1,8 @@
 import type { FC, ReactNode } from 'react';
-import React, { useEffect, useMemo, useRef } from 'react';
-import { Flex } from 'antd';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import Empty from '../../empty';
 import theme from '../../theme';
-import { CheckOutlined } from '@oceanbase/icons';
+import { CheckOutlined, SearchOutlined } from '@oceanbase/icons';
 import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
@@ -10,9 +10,17 @@ import { useFilterCollapsed } from '../hooks/useFilterCollapsed';
 import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
-import { generateFilterId, getPlaceholder, getWrappedValueStyle, wrapContent } from '../utils';
+import {
+  generateFilterId,
+  getPlaceholder,
+  getWrappedValueStyle,
+  wrapContent,
+  filterOptions,
+} from '../utils';
 import FilterButton from './FilterButton';
 import type { FilterButtonRef } from './FilterButton';
+import Input from '../../input';
+import { Flex } from 'antd';
 
 export interface SelectOption {
   label: ReactNode;
@@ -29,6 +37,8 @@ export interface FilterSelectProps extends BaseFilterProps, InternalFilterProps 
   onChange?: (value: string) => void;
   /** 自定义渲染选项 */
   optionRender?: (option: SelectOption, info: { index: number }) => ReactNode;
+  /** 是否显示搜索框，默认为 false */
+  showSearch?: boolean;
 }
 
 const FilterSelect: FC<FilterSelectProps> = ({
@@ -40,6 +50,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
   bordered = true,
   optionRender,
   loading = false,
+  showSearch = false,
   _isCollapsed = false,
   ...restProps
 }) => {
@@ -49,6 +60,9 @@ const FilterSelect: FC<FilterSelectProps> = ({
   const filterButtonRef = useRef<FilterButtonRef>(null);
   const { updateFilterValue } = useFilterContext();
   const filterId = useMemo(() => generateFilterId('select', label), [label]);
+
+  // 搜索关键词状态
+  const [searchKeyword, setSearchKeyword] = useState('');
 
   // 从 restProps 中排除 onOpenChange，避免类型冲突
   const { onOpenChange: externalOnOpenChange, ...filterButtonProps } = restProps;
@@ -73,6 +87,10 @@ const FilterSelect: FC<FilterSelectProps> = ({
   const handlePopoverOpenChange = (open: boolean) => {
     onPopoverOpenChange(open);
     externalOnOpenChange?.(open);
+    // 弹窗关闭时清空搜索关键词
+    if (!open) {
+      setSearchKeyword('');
+    }
   };
 
   // 当值变化时，更新 context 中的值
@@ -94,36 +112,62 @@ const FilterSelect: FC<FilterSelectProps> = ({
     setValue('');
   };
 
+  // 根据搜索关键词过滤选项
+  const filteredOptions = useMemo(() => {
+    if (!showSearch || !searchKeyword) return options;
+    return filterOptions(options, searchKeyword);
+  }, [showSearch, searchKeyword, options]);
+
   // 渲染弹框内容
   const renderContent = (
     <div>
-      {options.map((option, index) => {
-        const isSelected = currentValue === option.value;
-        const isDisabled = option.disabled || false;
+      {showSearch && (
+        <div style={{ marginInline: 4, marginBottom: 8 }}>
+          <Input
+            placeholder="搜索"
+            prefix={<SearchOutlined />}
+            allowClear
+            value={searchKeyword}
+            onChange={e => setSearchKeyword(e.target.value)}
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+      )}
+      {filteredOptions.length === 0 ? (
+        <Empty
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          description="无匹配结果"
+          style={{ padding: '16px 0' }}
+        />
+      ) : (
+        filteredOptions.map((option, index) => {
+          const isSelected = currentValue === option.value;
+          const isDisabled = option.disabled || false;
 
-        return (
-          <Flex
-            gap={8}
-            key={option.value}
-            className={getFilterCls(prefixCls, 'select-option')}
-            onClick={() => handleChange(option)}
-            justify="space-between"
-            style={{
-              cursor: isDisabled ? 'not-allowed' : 'pointer',
-              color: isDisabled ? token.colorTextDisabled : 'inherit',
-            }}
-          >
-            {optionRender ? (
-              <div style={{ flex: 1 }}>{optionRender(option, { index })}</div>
-            ) : (
-              <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{option.label}</span>
-            )}
-            <span style={{ width: 14, flexShrink: 0 }}>
-              {isSelected && <CheckOutlined style={{ color: token.colorPrimary }} />}
-            </span>
-          </Flex>
-        );
-      })}
+          return (
+            <Flex
+              gap={8}
+              key={option.value}
+              className={getFilterCls(prefixCls, 'select-option')}
+              onClick={() => handleChange(option)}
+              justify="space-between"
+              style={{
+                cursor: isDisabled ? 'not-allowed' : 'pointer',
+                color: isDisabled ? token.colorTextDisabled : 'inherit',
+              }}
+            >
+              {optionRender ? (
+                <div style={{ flex: 1 }}>{optionRender(option, { index })}</div>
+              ) : (
+                <span className={getFilterCls(prefixCls, 'text-ellipsis')}>{option.label}</span>
+              )}
+              <span style={{ width: 14, flexShrink: 0 }}>
+                {isSelected && <CheckOutlined style={{ color: token.colorPrimary }} />}
+              </span>
+            </Flex>
+          );
+        })
+      )}
     </div>
   );
 

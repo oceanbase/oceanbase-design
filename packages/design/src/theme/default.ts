@@ -69,6 +69,8 @@ const colorTextSecondary = gray8;
 const colorTextTertiary = gray7;
 const colorTextQuaternary = gray6;
 
+const colorIcon = gray8;
+
 const colorFill = gray5;
 const colorFillSecondary = gray4;
 const colorFillTertiary = gray3;
@@ -170,7 +172,7 @@ const defaultTheme: ThemeConfig = {
     colorTextSecondary,
     colorTextTertiary,
     colorTextQuaternary,
-    colorIcon: colorTextSecondary,
+    colorIcon,
     colorBgBase: white,
     colorBgContainer: white,
     colorBgLayout: gray1,
@@ -312,6 +314,9 @@ const defaultTheme: ThemeConfig = {
       // work for TimePicker and DatePicker
       hoverBorderColor: gray7,
       activeBorderColor: gray7,
+      activeShadow: 'none',
+      warningActiveShadow: 'none',
+      errorActiveShadow: 'none',
     },
     Descriptions: {
       labelColor: colorTextSecondary,
@@ -324,11 +329,17 @@ const defaultTheme: ThemeConfig = {
       colorTextQuaternary: gray8,
       // work for Input, InputNumber and AutoComplete
       hoverBorderColor: gray7,
+      activeShadow: 'none',
+      warningActiveShadow: 'none',
+      errorActiveShadow: 'none',
     },
     InputNumber: {
       handleVisible: true,
       borderRadiusLG: borderRadiusMD,
       hoverBorderColor: gray7,
+      activeShadow: 'none',
+      warningActiveShadow: 'none',
+      errorActiveShadow: 'none',
     },
     Message: {
       borderRadiusLG: borderRadiusMD,
@@ -353,7 +364,10 @@ const defaultTheme: ThemeConfig = {
       buttonPaddingInline: 12,
     },
     Segmented: {
-      trackBg: colorFillTertiary,
+      trackBg: gray2,
+      itemHoverBg: gray3,
+      itemActiveBg: gray4,
+      itemColor: colorText,
     },
     Select: {
       colorTextQuaternary: gray8,
@@ -363,6 +377,8 @@ const defaultTheme: ThemeConfig = {
       multipleItemBg: gray2,
       multipleItemBorderColor: tagColorBorder,
       multipleItemBorderColorDisabled: tagColorBorder,
+      // to remove active shadow, work for Select, TreeSelect and Cascader and so on
+      controlOutlineWidth: 0,
     },
     Slider: {
       trackBg: colorPrimary,
@@ -405,6 +421,9 @@ const defaultTheme: ThemeConfig = {
       borderRadius: borderRadiusMD,
       colorBgSpotlight: white,
       colorTextLightSolid: colorText,
+    },
+    Transfer: {
+      borderRadiusLG: borderRadiusMD,
     },
     Menu: {
       borderRadiusLG: borderRadiusMD,
