@@ -185,6 +185,30 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     moment.isMoment(value?.[1]) ||
     isMomentProps;
 
+  // 从 rest 中提取 format 并转换为字符串类型
+  const restFormat = (rest as any)?.format;
+  const formatProp = useMemo(() => {
+    const format = restFormat;
+    if (!format) return undefined;
+    if (typeof format === 'string') return format;
+    if (typeof format === 'object' && format?.format) return format.format;
+    if (Array.isArray(format) && format.length > 0) {
+      const firstFormat = format[0];
+      return typeof firstFormat === 'string' ? firstFormat : firstFormat?.format;
+    }
+    return undefined;
+  }, [restFormat]);
+
+  // 在组件初始化时设置 dayjs 或 moment 的语言
+  useEffect(() => {
+    const localeName = isCn ? 'zh-cn' : 'en';
+    if (isMoment) {
+      moment.locale(localeName);
+    } else {
+      dayjs.locale(localeName);
+    }
+  }, [isCn, isMoment]);
+
   const defaultRangeName =
     value || defaultValue ? CUSTOMIZE : (defaultQuickValue ?? selects?.[0]?.name);
   const [rangeName, setRangeName] = useState(defaultRangeName);
@@ -206,6 +230,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [backRadioFocused, setBackRadioFocused] = useState(false);
   const [historyMenuVisible, setHistoryMenuVisible] = useState(false);
+  // 保存打开弹窗时的初始值，用于取消时恢复
+  const [initialValue, setInitialValue] = useState<RangeValue>(innerValue);
   const rangeRef = useRef(null);
   const popRef = useRef(null);
   const labelRef = useRef(null);
@@ -260,12 +286,6 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     setRangeHistory(updatedValue);
   };
 
-  const compare = (m1: RangeValue, m2: RangeValue) => {
-    if (Array.isArray(m1) && !Array.isArray(m2)) return false;
-    if (Array.isArray(m2) && !Array.isArray(m1)) return false;
-    return value[0] === innerValue[0] || value[1] === innerValue[1];
-  };
-
   useClickAway(() => {
     closeTooltip();
   }, [
@@ -279,6 +299,13 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     if (isNil(value) && isNil(innerValue)) return;
     // FIXME: 当前存在值的时候赋空值给组件，不好处理先 workaround 绕过，后面再想一个整体的方案
     if (isNil(value) && !isNil(innerValue)) return;
+
+    const compare = (m1: RangeValue, m2: RangeValue) => {
+      if (Array.isArray(m1) && !Array.isArray(m2)) return false;
+      if (Array.isArray(m2) && !Array.isArray(m1)) return false;
+      return value?.[0] === innerValue?.[0] || value?.[1] === innerValue?.[1];
+    };
+
     const isEqual = compare(value, innerValue as RangeValue);
     // 前后时间有差异时，进行赋值
     if (!isEqual) {
@@ -287,7 +314,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
         setRangeName(CUSTOMIZE);
       }
     }
-  }, [value, stickRangeName]);
+  }, [value, stickRangeName, innerValue]);
 
   const closeTooltip = () => {
     setOpen(false);
@@ -307,8 +334,9 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     updateRangeHistory(range);
   };
 
+  // 修改日期输入框时，只更新内部状态，不触发外部 onChange
   const datePickerChange = (range: RangeValue) => {
-    rangeChange(range);
+    setInnerValue(range);
     setRangeName(CUSTOMIZE);
   };
   const disabledFuture = (current: Moment | Dayjs) => {
@@ -417,6 +445,14 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   const isThisYear = startTime?.year() === thisYear && endTime?.year() === thisYear;
   const rangeNameIndex = findIndex(selects, item => item.name === rangeName);
 
+  // 计算用于显示历史记录的 format，与 EditableDateTimeInput 保持一致
+  const historyDisplayFormat = useMemo(() => {
+    if (formatProp) {
+      return formatProp;
+    }
+    return isCn ? YEAR_DATE_TIME_SECOND_FORMAT_CN : YEAR_DATE_TIME_SECOND_FORMAT;
+  }, [formatProp, isCn]);
+
   const nextRangeItem =
     rangeNameIndex === -1
       ? selects.find(item => {
@@ -453,6 +489,11 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
             onOpenChange={o => {
               if (o === false && tooltipOpen) {
                 return;
+              }
+
+              // 打开弹窗时保存初始值
+              if (o === true) {
+                setInitialValue(innerValue);
               }
 
               setOpen(o);
@@ -501,13 +542,13 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                                 >
                                   <span>
                                     {(isMoment ? moment(range[0]) : dayjs(range[0])).format(
-                                      YEAR_DATE_TIME_SECOND_FORMAT_CN
+                                      historyDisplayFormat
                                     )}
-                                    ~
+                                    {isEN ? ' - ' : ' ~ '}
                                   </span>
                                   <span>
                                     {(isMoment ? moment(range[1]) : dayjs(range[1])).format(
-                                      YEAR_DATE_TIME_SECOND_FORMAT_CN
+                                      historyDisplayFormat
                                     )}
                                   </span>
                                   <Space className={`${prefix}-menu-text-btn-wrapper`}>
@@ -520,7 +561,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                                       onClick={e => {
                                         e.stopPropagation();
                                         const vList = range.map(v => v);
-                                        const text = `${vList.join('~')}`;
+                                        const separator = isEN ? '-' : '~';
+                                        const text = `${vList.join(separator)}`;
                                         navigator.clipboard.writeText(text);
                                         message.success(text);
                                       }}
@@ -565,6 +607,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   <Divider type="vertical" style={{ height: 'auto', margin: '0px 4px 0px 0px' }} />
                   <InternalPickerPanel
                     defaultValue={innerValue || []}
+                    initialValue={initialValue || []}
                     // @ts-ignore
                     locale={locale}
                     disabledDate={pastOnly ? disabledFuture : disabledDate}
@@ -575,6 +618,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                     onOk={vList => {
                       setIsPlay(false);
                       handleNameChange(CUSTOMIZE);
+                      // 点击确定时才触发外部 onChange
                       rangeChange(
                         vList.map(v => {
                           return isMoment ? moment(v) : dayjs(v);
@@ -584,6 +628,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                       closeTooltip();
                     }}
                     onCancel={() => {
+                      // 点击取消时恢复初始值
+                      setInnerValue(initialValue);
                       closeTooltip();
                     }}
                   />
@@ -652,6 +698,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                 hideSecond={hideSecond}
                 isMoment={isMoment}
                 isCn={isCn}
+                format={formatProp}
                 onClick={() => {
                   setOpen(true);
                   setTooltipOpen(true);

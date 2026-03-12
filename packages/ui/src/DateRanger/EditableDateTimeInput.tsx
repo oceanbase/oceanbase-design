@@ -46,9 +46,9 @@ const EditableDateTimeInput: React.FC<EditableDateTimeInputProps> = props => {
       return hideSecond ? 'YYYY-MM-DD HH:mm' : 'YYYY-MM-DD HH:mm:ss';
     } else {
       if (hideYear) {
-        return hideSecond ? 'MM/DD HH:mm' : 'MM/DD HH:mm:ss';
+        return hideSecond ? 'MMM DD HH:mm' : 'MMM DD HH:mm:ss';
       }
-      return hideSecond ? 'MM/DD/YYYY HH:mm' : 'MM/DD/YYYY HH:mm:ss';
+      return hideSecond ? 'MMM DD, YYYY HH:mm' : 'MMM DD, YYYY HH:mm:ss';
     }
   }, [formatProp, hideYear, hideSecond, isCn]);
 
