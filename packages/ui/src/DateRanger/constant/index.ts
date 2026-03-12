@@ -15,11 +15,11 @@ const WEEK_UNIT = 'week';
 const MONTH_UNIT = 'month';
 const YEAR_UNIT = 'year';
 
-export const YEAR_DATE_TIME_SECOND_FORMAT = 'MM/DD/YYYY HH:mm:ss';
-export const YEAR_DATE_TIME_FORMAT = 'MM/DD/YYYY HH:mm';
-export const DATE_TIME_SECOND_FORMAT = 'MM/DD HH:mm:ss';
-export const DATE_TIME_FORMAT = 'MM/DD HH:mm';
-export const DATE_TIME_MONTH_FORMAT = 'MM/DD/YYYY';
+export const YEAR_DATE_TIME_SECOND_FORMAT = 'MMM DD, YYYY HH:mm:ss';
+export const YEAR_DATE_TIME_FORMAT = 'MMM DD, YYYY HH:mm';
+export const DATE_TIME_SECOND_FORMAT = 'MMM DD HH:mm:ss';
+export const DATE_TIME_FORMAT = 'MMM DD HH:mm';
+export const DATE_TIME_MONTH_FORMAT = 'MMM DD, YYYY';
 
 export const YEAR_DATE_TIME_SECOND_FORMAT_CN = 'YYYY-MM-DD HH:mm:ss';
 export const YEAR_DATE_TIME_FORMAT_CN = 'YYYY-MM-DD HH:mm';

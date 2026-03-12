@@ -47,17 +47,14 @@ export interface UseSegmentedInputReturn {
 const getRangeSeparator = (isCn: boolean) => (isCn ? ' ~ ' : ' - ');
 
 // 段落配置表
-const SEGMENT_CONFIG: Record<
-  string,
-  { type: SegmentType; length: number; min: number; max: number }
-> = {
-  YYYY: { type: 'year', length: 4, min: 1900, max: 2100 },
-  MM: { type: 'month', length: 2, min: 1, max: 12 },
-  MMM: { type: 'month', length: 3, min: 1, max: 12 },
-  DD: { type: 'day', length: 2, min: 1, max: 31 },
-  HH: { type: 'hour', length: 2, min: 0, max: 23 },
-  mm: { type: 'minute', length: 2, min: 0, max: 59 },
-  ss: { type: 'second', length: 2, min: 0, max: 59 },
+const SEGMENT_CONFIG: Record<string, { type: SegmentType; min: number; max: number }> = {
+  YYYY: { type: 'year', min: 1900, max: 2100 },
+  MM: { type: 'month', min: 1, max: 12 },
+  MMM: { type: 'month', min: 1, max: 12 },
+  DD: { type: 'day', min: 1, max: 31 },
+  HH: { type: 'hour', min: 0, max: 23 },
+  mm: { type: 'minute', min: 0, max: 59 },
+  ss: { type: 'second', min: 0, max: 59 },
 };
 
 // 月份缩写映射
@@ -82,22 +79,6 @@ const PASTE_SEPARATORS = [' ~ ', '~', ' - ', ' – ', ' — '] as const;
 // 月份总数
 const MONTH_COUNT = 12;
 
-// 粘贴支持的日期格式
-const PASTE_FORMATS = [
-  'MMM DD, YYYY HH:mm:ss',
-  'MMM DD, YYYY HH:mm',
-  'YYYY-MM-DD HH:mm:ss',
-  'YYYY-MM-DD HH:mm',
-  'YYYY/MM/DD HH:mm:ss',
-  'YYYY/MM/DD HH:mm',
-  'MM/DD/YYYY HH:mm:ss',
-  'MM/DD/YYYY HH:mm',
-  'YYYY-MM-DD',
-  'YYYY/MM/DD',
-  'MM/DD/YYYY',
-  'MMM DD, HH:mm:ss',
-];
-
 /**
  * 查找月份缩写的索引
  */
@@ -117,50 +98,19 @@ const formatMonthDisplay = (value: string, isValid: boolean): string => {
 };
 
 /**
- * 将月份缩写转换为数字格式用于解析
- */
-const convertMonthToNumber = (
-  dateStr: string,
-  format: string
-): { parseFormat: string; parseValue: string } => {
-  if (!format.includes('MMM')) {
-    return { parseFormat: format, parseValue: dateStr };
-  }
-  const parseFormat = format.replace(/MMM/g, 'MM');
-  const parseValue = dateStr.replace(/[A-Za-z]{3}/, match => {
-    const monthIndex = findMonthIndex(match);
-    return monthIndex !== -1 ? String(monthIndex + 1).padStart(2, '0') : match;
-  });
-  return { parseFormat, parseValue };
-};
-
-/**
  * 使用正确的 locale 解析日期
+ * 注意：dayjs 或 moment 的 locale 应该在组件初始化时已经设置好
+ * 这里只需要根据 format 动态解析即可
  */
 const parseDateWithLocale = (
   dateStr: string,
   format: string,
   isMoment: boolean
 ): Dayjs | Moment | null => {
-  const needsEnLocale = format.includes('MMM');
-
   if (isMoment) {
-    const parsed = moment(dateStr, format, true);
-    return needsEnLocale ? parsed.locale('en') : parsed;
+    return moment(dateStr, format, true);
   }
-
-  if (needsEnLocale) {
-    const currentLocale = dayjs.locale();
-    try {
-      dayjs.locale('en');
-      return dayjs(dateStr, format, true);
-    } finally {
-      if (currentLocale) {
-        dayjs.locale(currentLocale);
-      }
-    }
-  }
-
+  // 使用当前已设置的 locale 解析
   return dayjs(dateStr, format, true);
 };
 
@@ -192,8 +142,9 @@ const parseDateTimeSegments = (
     usedPositions.add(formatIndex);
 
     const config = SEGMENT_CONFIG[pattern];
+    const patternLength = pattern.length; // 动态计算 pattern 的长度
     const valueStart = formatIndex;
-    const valueEnd = formatIndex + config.length;
+    const valueEnd = formatIndex + patternLength;
 
     let segmentValue = dateValue.substring(valueStart, valueEnd);
 
@@ -213,7 +164,7 @@ const parseDateTimeSegments = (
       value: segmentValue,
       min: config.min,
       max: config.max,
-      padLength: pattern === 'MMM' ? 2 : config.length, // MMM 编辑时使用2位数字
+      padLength: pattern === 'MMM' ? 2 : patternLength, // MMM 编辑时使用2位数字
     });
   }
 
@@ -291,6 +242,31 @@ const getAdjacentSegment = (
   return null;
 };
 
+/**
+ * 获取跨 range 的 segment（当当前 range 内没有下一个/上一个 segment 时）
+ */
+const getCrossRangeSegment = (
+  segments: Segment[],
+  currentSegment: Segment,
+  direction: 'next' | 'prev'
+): Segment | null => {
+  if (direction === 'next' && currentSegment.range === 'start') {
+    // 从开始时间的最后一个 segment 切换到结束时间的第一个 segment
+    const endSegments = segments.filter(s => s.range === 'end').sort((a, b) => a.start - b.start);
+    return endSegments.length > 0 ? endSegments[0] : null;
+  }
+
+  if (direction === 'prev' && currentSegment.range === 'end') {
+    // 从结束时间的第一个 segment 切换到开始时间的最后一个 segment
+    const startSegments = segments
+      .filter(s => s.range === 'start')
+      .sort((a, b) => a.start - b.start);
+    return startSegments.length > 0 ? startSegments[startSegments.length - 1] : null;
+  }
+
+  return null;
+};
+
 export const useSegmentedInput = (options: UseSegmentedInputOptions): UseSegmentedInputReturn => {
   const { value, onChange, format, baseFormat, isMoment = false, isCn = true, onClick } = options;
 
@@ -310,17 +286,13 @@ export const useSegmentedInput = (options: UseSegmentedInputOptions): UseSegment
     (v: Dayjs | Moment | null, includeTimezone: boolean = true): string => {
       if (!v) return '';
       const formatToUse = includeTimezone ? format : baseFormat;
-
-      // 如果格式包含 MMM，需要根据 isCn 设置正确的 locale
-      if (formatToUse.includes('MMM')) {
-        const locale = isCn ? 'zh-cn' : 'en';
-        if (isMoment) {
-          return (v as Moment).locale(locale).format(formatToUse);
-        } else {
-          return (v as Dayjs).locale(locale).format(formatToUse);
-        }
+      // 确保使用正确的 locale 格式化（特别是对于 MMM 格式）
+      const localeName = isCn ? 'zh-cn' : 'en';
+      if (isMoment) {
+        return (v as Moment).locale(localeName).format(formatToUse);
+      } else {
+        return (v as Dayjs).locale(localeName).format(formatToUse);
       }
-      return v.format(formatToUse);
     },
     [format, baseFormat, isCn, isMoment]
   );
@@ -356,18 +328,6 @@ export const useSegmentedInput = (options: UseSegmentedInputOptions): UseSegment
     return allSegments.find(s => `${s.range}-${s.type}` === currentSegmentKey) || null;
   }, [currentSegmentKey, allSegments]);
 
-  // 创建新的日期对象
-  const createDate = useCallback(
-    (dateStr: string, rangeType: RangeType) => {
-      const formatToUse = rangeType === 'start' ? baseFormat : format;
-      if (isMoment) {
-        return moment(dateStr, formatToUse);
-      }
-      return dayjs(dateStr, formatToUse);
-    },
-    [isMoment, format, baseFormat]
-  );
-
   /**
    * 更新日期值（统一处理 MMM 和普通格式）
    */
@@ -399,10 +359,10 @@ export const useSegmentedInput = (options: UseSegmentedInputOptions): UseSegment
       }
 
       // 输入有效，更新日期值
-      const { parseFormat, parseValue } = convertMonthToNumber(newDateValue, formatToUse);
-      const newDate = isMoment ? moment(parseValue, parseFormat) : dayjs(parseValue, parseFormat);
+      // 使用 parseDateWithLocale 根据 format 动态解析（自动处理 MMM 格式）
+      const newDate = parseDateWithLocale(newDateValue, formatToUse, isMoment);
 
-      if (newDate.isValid()) {
+      if (newDate && newDate.isValid()) {
         // 创建新的日期范围值
         const fallbackDate = newDate;
         const newRange: [Dayjs | Moment, Dayjs | Moment] =
@@ -538,7 +498,9 @@ export const useSegmentedInput = (options: UseSegmentedInputOptions): UseSegment
         const monthIndex = findMonthIndex(newBuffer);
         if (monthIndex !== -1) {
           updateValue(currentSegment!, MONTH_ABBR[monthIndex], true);
-          const nextSegment = getAdjacentSegment(allSegments, currentSegment!, 'next');
+          const nextSegment =
+            getAdjacentSegment(allSegments, currentSegment!, 'next') ||
+            getCrossRangeSegment(allSegments, currentSegment!, 'next');
           if (nextSegment) {
             setTimeout(() => selectSegment(nextSegment), 0);
           }
@@ -568,7 +530,9 @@ export const useSegmentedInput = (options: UseSegmentedInputOptions): UseSegment
         const clampedValue = Math.max(currentSegment!.min, Math.min(currentSegment!.max, numValue));
         updateValue(currentSegment!, String(clampedValue), true);
 
-        const nextSegment = getAdjacentSegment(allSegments, currentSegment!, 'next');
+        const nextSegment =
+          getAdjacentSegment(allSegments, currentSegment!, 'next') ||
+          getCrossRangeSegment(allSegments, currentSegment!, 'next');
         if (nextSegment) {
           setTimeout(() => selectSegment(nextSegment), 0);
         }
@@ -580,65 +544,95 @@ export const useSegmentedInput = (options: UseSegmentedInputOptions): UseSegment
   );
 
   /**
+   * 从显示值中提取当前 segment 的值
+   */
+  const getCurrentSegmentValue = useCallback(
+    (segment: Segment): string => {
+      const currentDateValue = segment.range === 'start' ? startValue : endValue;
+      const separator = getRangeSeparator(isCn);
+      const baseOffset = segment.range === 'start' ? 0 : startValue.length + separator.length;
+      const localStart = segment.start - baseOffset;
+      const localEnd = segment.end - baseOffset;
+      return currentDateValue.substring(localStart, localEnd);
+    },
+    [startValue, endValue, isCn]
+  );
+
+  /**
+   * 获取月份索引（支持 MMM 格式和数字格式）
+   */
+  const getMonthIndex = useCallback((monthValue: string): number => {
+    const monthIndex = findMonthIndex(monthValue);
+    if (monthIndex !== -1) return monthIndex;
+
+    const numValue = parseInt(monthValue, 10);
+    if (!isNaN(numValue) && numValue >= 1 && numValue <= 12) {
+      return numValue - 1;
+    }
+
+    return 0; // 默认值
+  }, []);
+
+  /**
+   * 计算下一个数值（带循环）
+   */
+  const calculateNextValue = useCallback(
+    (current: number, min: number, max: number, delta: number): number => {
+      const newValue = current + delta;
+      if (newValue > max) return min;
+      if (newValue < min) return max;
+      return newValue;
+    },
+    []
+  );
+
+  /**
    * 处理方向键（上下箭头）调整数值
    */
   const handleArrowUpDown = useCallback(
     (key: string, isMonthMMM: boolean, shiftKey: boolean = false) => {
+      const segment = currentSegment!;
+      const currentValue = getCurrentSegmentValue(segment);
+
       if (isMonthMMM) {
-        // 对于 MMM 格式，segment.value 可能是数字格式（01-12），需要从显示值中提取实际的月份字符串
-        let currentMonthIndex = -1;
-
-        // 尝试从显示值中提取月份字符串
-        if (inputRef.current?.input) {
-          const currentDisplayValue = inputRef.current.input.value || displayValue;
-          const monthStr = currentDisplayValue.substring(
-            currentSegment!.start,
-            currentSegment!.end
-          );
-          currentMonthIndex = findMonthIndex(monthStr);
-        }
-
-        // 如果找不到，尝试从 segment.value 解析（可能是数字格式）
-        if (currentMonthIndex === -1) {
-          const numValue = parseInt(currentSegment!.value, 10);
-          if (!isNaN(numValue) && numValue >= 1 && numValue <= 12) {
-            currentMonthIndex = numValue - 1; // 转换为索引（0-11）
-          }
-        }
-
-        // 如果仍然找不到，默认为 0（Jan）
-        if (currentMonthIndex === -1) {
-          currentMonthIndex = 0;
-        }
-
-        // 如果按住 Shift 键，切换一年（12个月），否则切换一个月
+        const currentMonthIndex = getMonthIndex(currentValue);
         const step = shiftKey ? MONTH_COUNT : 1;
-        const newIndex =
-          key === 'ArrowUp'
-            ? (currentMonthIndex + step) % MONTH_COUNT
-            : (currentMonthIndex - step + MONTH_COUNT) % MONTH_COUNT;
-        updateValue(currentSegment!, MONTH_ABBR[newIndex], true);
+        const delta = key === 'ArrowUp' ? step : -step;
+        const newIndex = (currentMonthIndex + delta + MONTH_COUNT) % MONTH_COUNT;
+        updateValue(segment, MONTH_ABBR[newIndex], true);
       } else {
-        const currentNum = parseInt(currentSegment!.value, 10);
-        const delta = key === 'ArrowUp' ? 1 : -1;
-        let newNum = currentNum + delta;
-
-        if (newNum > currentSegment!.max) {
-          newNum = currentSegment!.min;
-        } else if (newNum < currentSegment!.min) {
-          newNum = currentSegment!.max;
+        const currentNum = parseInt(currentValue, 10);
+        if (isNaN(currentNum)) {
+          updateValue(segment, String(segment.min), true);
+          return;
         }
 
-        updateValue(currentSegment!, String(newNum), true);
+        const delta = key === 'ArrowUp' ? 1 : -1;
+        const newNum = calculateNextValue(currentNum, segment.min, segment.max, delta);
+        updateValue(segment, String(newNum), true);
       }
 
+      // 更新选中区域
       setTimeout(() => {
-        if (inputRef.current?.input && currentSegment) {
-          inputRef.current.input.setSelectionRange(currentSegment.start, currentSegment.end);
+        if (inputRef.current?.input && currentSegmentKey) {
+          const updatedSegment = allSegments.find(
+            s => `${s.range}-${s.type}` === currentSegmentKey
+          );
+          if (updatedSegment) {
+            inputRef.current.input.setSelectionRange(updatedSegment.start, updatedSegment.end);
+          }
         }
       }, 0);
     },
-    [currentSegment, updateValue, displayValue]
+    [
+      currentSegment,
+      currentSegmentKey,
+      allSegments,
+      getCurrentSegmentValue,
+      getMonthIndex,
+      calculateNextValue,
+      updateValue,
+    ]
   );
 
   /**
@@ -714,11 +708,10 @@ export const useSegmentedInput = (options: UseSegmentedInputOptions): UseSegment
       // 处理 Tab 键
       if (key === 'Tab') {
         e.preventDefault();
-        const nextSegment = getAdjacentSegment(
-          allSegments,
-          currentSegment,
-          e.shiftKey ? 'prev' : 'next'
-        );
+        const direction = e.shiftKey ? 'prev' : 'next';
+        const nextSegment =
+          getAdjacentSegment(allSegments, currentSegment, direction) ||
+          getCrossRangeSegment(allSegments, currentSegment, direction);
         if (nextSegment) {
           selectSegment(nextSegment);
         }
@@ -790,18 +783,27 @@ export const useSegmentedInput = (options: UseSegmentedInputOptions): UseSegment
 
   /**
    * 解析粘贴的日期字符串
+   * 使用 baseFormat 和 format 来解析，只要符合格式要求即可
    */
   const parsePastedDate = useCallback(
-    (dateStr: string): Dayjs | Moment | null => {
-      for (const fmt of PASTE_FORMATS) {
-        const parsed = parseDateWithLocale(dateStr, fmt, isMoment);
-        if (parsed?.isValid()) {
-          return parsed;
-        }
+    (dateStr: string, rangeType: RangeType = 'start'): Dayjs | Moment | null => {
+      // 先尝试使用对应 range 的格式
+      const formatToUse = rangeType === 'start' ? baseFormat : format;
+      const parsed = parseDateWithLocale(dateStr, formatToUse, isMoment);
+      if (parsed?.isValid()) {
+        return parsed;
       }
+
+      // 如果失败，尝试另一个格式（可能粘贴的是完整格式的日期）
+      const altFormat = rangeType === 'start' ? format : baseFormat;
+      const altParsed = parseDateWithLocale(dateStr, altFormat, isMoment);
+      if (altParsed?.isValid()) {
+        return altParsed;
+      }
+
       return null;
     },
-    [isMoment]
+    [isMoment, baseFormat, format]
   );
 
   /**
@@ -836,8 +838,8 @@ export const useSegmentedInput = (options: UseSegmentedInputOptions): UseSegment
       }
 
       // 解析日期
-      const parsedStart = parsePastedDate(startStr);
-      const parsedEnd = parsePastedDate(endStr);
+      const parsedStart = parsePastedDate(startStr, 'start');
+      const parsedEnd = parsePastedDate(endStr, 'end');
 
       // 更新值
       if (parsedStart && parsedEnd) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { DateRanger } from '@oceanbase/ui';
 import { ConfigProvider, Radio, RadioChangeEvent, Space } from '@oceanbase/design';
 import dayjs from 'dayjs';
@@ -33,7 +33,7 @@ export default () => {
       </div>
       <ConfigProvider locale={locale}>
         <Space direction="vertical">
-          <DateRanger allowClear />
+          <DateRanger history allowClear />
           <DateRanger simpleMode />
         </Space>
       </ConfigProvider>
