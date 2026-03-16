@@ -181,7 +181,7 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
       },
     },
     [`${componentCls}-range-editable-input`]: {
-      width: 290,
+      width: 310,
       cursor: 'text',
       caretColor: 'transparent',
       '&:focus, &:focus-within': {
