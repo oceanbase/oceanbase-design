@@ -8,6 +8,14 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.18
+
+`2026-03-16`
+
+- DateRanger
+- 🆕 DateRanger新增复制(ctrl+c)与粘贴(ctrl+v)日期格式
+- 🆕 支持format默认格式修改
+
 ## 1.0.0-alpha.17
 
 `2026-03-03`
