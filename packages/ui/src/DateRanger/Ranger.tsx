@@ -33,6 +33,7 @@ import {
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
 import { findIndex, isEqual as _isEqual, isNil, noop, omit } from 'lodash';
 import type { Moment } from 'moment';
 import moment from 'moment';
@@ -209,6 +210,10 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   const rangeRef = useRef(null);
   const popRef = useRef(null);
   const labelRef = useRef(null);
+  const editableInputRef = useRef<{
+    hasPastedValue: boolean;
+    confirmPastedValue: () => void;
+  } | null>(null);
 
   // 没有 selects 时，回退到普通 RangePicker, 当前时间选项为自定义时，应该显示 RangePicker
   const [isPlay, setIsPlay] = useState(rangeName !== CUSTOMIZE);
@@ -573,15 +578,24 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                     rules={rules}
                     hideSecond={hideSecond}
                     onOk={vList => {
-                      setIsPlay(false);
-                      handleNameChange(CUSTOMIZE);
-                      rangeChange(
-                        vList.map(v => {
-                          return isMoment ? moment(v) : dayjs(v);
-                        }) as RangeValue
-                      );
+                      // 如果有粘贴值，优先使用粘贴值
+                      if (editableInputRef.current?.hasPastedValue) {
+                        editableInputRef.current.confirmPastedValue();
+                        setIsPlay(false);
+                        handleNameChange(CUSTOMIZE);
+                        closeTooltip();
+                      } else {
+                        // 否则使用面板中的值
+                        setIsPlay(false);
+                        handleNameChange(CUSTOMIZE);
+                        rangeChange(
+                          vList.map(v => {
+                            return isMoment ? moment(v) : dayjs(v);
+                          }) as RangeValue
+                        );
 
-                      closeTooltip();
+                        closeTooltip();
+                      }
                     }}
                     onCancel={() => {
                       closeTooltip();
@@ -643,6 +657,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
           {(!simpleMode || !isPlay) && (
             <span ref={rangeRef} className={`${prefix}-editable-wrapper`}>
               <EditableDateTimeInput
+                ref={editableInputRef}
                 prefixCls={prefixCls}
                 value={innerValue as [Dayjs | Moment | null, Dayjs | Moment | null]}
                 onChange={newValue => {
@@ -652,6 +667,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                 hideSecond={hideSecond}
                 isMoment={isMoment}
                 isCn={isCn}
+                format={(rest?.format as string) || YEAR_DATE_TIME_SECOND_FORMAT_CN}
+                open={open}
                 onClick={() => {
                   setOpen(true);
                   setTooltipOpen(true);
@@ -663,8 +680,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   'style',
                   'className',
                   'onClick',
-                  'format',
-                  'disabled'
+                  'disabled',
+                  'format'
                 )}
               />
             </span>
