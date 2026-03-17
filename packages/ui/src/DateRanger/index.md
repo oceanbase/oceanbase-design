@@ -49,6 +49,7 @@ markdown: |
 | overlayClassName | 选择面板根元素的类名称 | string | - | - |
 | overlayStyle | 选择面板根元素的样式 | CSSProperties | - | - |
 | ref | updateCurrentTime 手动更新当前时间 | function | - | - |
+| variant | 边框变体 | 'dashed' | - | - |
 | history | 开启历史记录, 可以配置最大保留的记录条数，默认20条 | boolean \| { capacity: number } | false | - |
 | 其他 antd/RangePicker 的 `props` | [antd-RangePicker](https://ant.design/components/date-picker-cn/#RangePicker) | - | - | - |
 

@@ -81,7 +81,7 @@ export type RangeDateValue = {
 
 export interface DateRangerProps extends Omit<
   RangePickerProps,
-  'mode' | 'picker' | 'value' | 'defaultValue'
+  'mode' | 'picker' | 'value' | 'defaultValue' | 'variant'
 > {
   // 数据相关
   selects?: RangeOption[];
@@ -118,6 +118,8 @@ export interface DateRangerProps extends Omit<
   value?: RangeValue;
   defaultValue?: RangeValue;
   size?: 'small' | 'large' | 'middle';
+  /** 边框变体，默认实线，可配置为 dashed 虚线 */
+  variant?: 'dashed';
   tooltipProps?: TooltipProps;
   autoAdjustOverflow?: boolean;
   overlayClassName?: string;
@@ -163,6 +165,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     size,
     //固定 rangeName
     stickRangeName = false,
+    variant,
     tooltipProps,
     isMoment: isMomentProps,
     rules,
@@ -437,6 +440,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
       className={classNames(rest.className, {
         [prefix]: true,
         [`${prefix}-show-range`]: true,
+        [`${prefix}-dashed`]: variant === 'dashed',
         [`${prefix}-back-radio-focused`]: backRadioFocused,
       })}
       style={rest.style}
