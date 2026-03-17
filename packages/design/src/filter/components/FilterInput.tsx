@@ -94,11 +94,19 @@ const FilterInput: FC<FilterInputProps> = ({
           />
         )}
       </Flex>
-      {showSwitch && switchValue ? (
+      {showSwitch ? (
+        // 有开关：根据 switchValue 决定是否显示 Input
+        switchValue && (
+          <div style={{ marginTop: 8 }}>
+            <Input value={currentValue} onChange={handleChange} {...inputProps} />
+          </div>
+        )
+      ) : (
+        // 无开关：直接显示 Input
         <div style={{ marginTop: 8 }}>
           <Input value={currentValue} onChange={handleChange} {...inputProps} />
         </div>
-      ) : null}
+      )}
     </div>
   );
 
