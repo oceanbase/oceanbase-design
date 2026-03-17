@@ -24,11 +24,25 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
       cursor: 'pointer',
       [`${componentCls}-wrapper`]: {
         backgroundColor: colorBgContainer,
-        border: `1px solid ${colorBorder}`,
+        border: `1px dashed ${colorBorder}`,
         boxSizing: 'border-box',
         display: 'flex',
         borderRadius: borderRadius,
         transition: 'all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1)',
+        [`&.${componentCls}-wrapper-border-solid`]: {
+          border: `1px solid ${colorBorder}`,
+          '&:hover': {
+            border: `1px solid ${token.gray7}`,
+            borderColor: `${token.gray7}`,
+          },
+        },
+        [`&.${componentCls}-wrapper-border-dashed`]: {
+          border: `1px dashed ${colorBorder}`,
+          '&:hover': {
+            border: `1px dashed ${token.gray7}`,
+            borderColor: `${token.gray7}`,
+          },
+        },
         [`${componentCls}-picker`]: {
           paddingLeft: 0,
           paddingRight: 16,

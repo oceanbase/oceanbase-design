@@ -123,6 +123,7 @@ export interface DateRangerProps extends Omit<
   overlayClassName?: string;
   overlayStyle?: React.CSSProperties;
   locale?: any;
+  borderStyle?: 'dashed' | 'solid';
 }
 
 const DefaultMaxHistoryCapacity = 20;
@@ -171,6 +172,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     overlayClassName,
     overlayStyle,
     getPopupContainer,
+    borderStyle = 'solid',
     ...rest
   } = props;
 
@@ -438,6 +440,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
         [prefix]: true,
         [`${prefix}-show-range`]: true,
         [`${prefix}-back-radio-focused`]: backRadioFocused,
+        [`${prefix}-border-${borderStyle}`]: borderStyle,
       })}
       style={rest.style}
     >
@@ -445,7 +448,11 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
         <div
           className={classNames(`${prefix}-wrapper`, {
             [`${prefix}-wrapper-has-jumper`]: hasRewind || hasForward,
+            [`${prefix}-wrapper-border-${borderStyle}`]: borderStyle,
           })}
+          style={{
+            borderStyle: borderStyle,
+          }}
         >
           <Dropdown
             trigger={['click']}
@@ -704,6 +711,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   borderInlineStart: 0,
                   borderTopLeftRadius: 0,
                   borderBottomLeftRadius: 0,
+                  borderStyle: borderStyle,
                 }}
                 onMouseEnter={() => setBackRadioFocused(true)}
                 onMouseLeave={() => setBackRadioFocused(false)}
@@ -736,6 +744,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   paddingInline: 8,
                   borderTopLeftRadius: 0,
                   borderBottomLeftRadius: 0,
+                  borderStyle: borderStyle,
                 }}
                 // disabled={isPlay}
                 onClick={() => {
