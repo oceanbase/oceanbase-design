@@ -134,6 +134,19 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
       borderRadius: token.borderRadiusSM,
       textAlign: 'center',
     },
+    [`${componentCls}-dashed`]: {
+      [`${componentCls}-wrapper`]: {
+        borderStyle: 'dashed',
+      },
+      [`${componentCls}-playback-control`]: {
+        [`${antCls}-radio-button-wrapper`]: {
+          borderStyle: 'dashed',
+          '&::before': {
+            borderStyle: 'dashed',
+          },
+        },
+      },
+    },
     [`${componentCls}-back-radio-focused`]: {
       [`${componentCls}-wrapper`]: {
         borderRightColor: token.gray7,
