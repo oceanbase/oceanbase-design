@@ -21,6 +21,8 @@ export interface FilterInputProps extends BaseFilterProps {
   inputProps?: InputProps;
   /** Switch 组件的额外属性 */
   switchProps?: SwitchProps;
+  /** 是否显示开关，默认为 false */
+  showSwitch?: boolean;
 }
 
 const FilterInput: FC<FilterInputProps> = ({
@@ -31,6 +33,7 @@ const FilterInput: FC<FilterInputProps> = ({
   bordered = true,
   inputProps,
   switchProps,
+  showSwitch,
   ...restProps
 }) => {
   const { token } = theme.useToken();
@@ -82,14 +85,16 @@ const FilterInput: FC<FilterInputProps> = ({
     <div style={{ paddingBlock: token.paddingXXS }}>
       <Flex justify="space-between" align="center">
         <span>{label}</span>
-        <Switch
-          checked={switchValue}
-          onChange={val => setSwitchValue(val)}
-          size="small"
-          {...switchProps}
-        />
+        {showSwitch && (
+          <Switch
+            checked={switchValue}
+            onChange={val => setSwitchValue(val)}
+            size="small"
+            {...switchProps}
+          />
+        )}
       </Flex>
-      {switchValue ? (
+      {showSwitch && switchValue ? (
         <div style={{ marginTop: 8 }}>
           <Input value={currentValue} onChange={handleChange} {...inputProps} />
         </div>

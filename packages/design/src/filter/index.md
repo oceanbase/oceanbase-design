@@ -205,6 +205,7 @@ const App = () => {
 | value       | 当前值                | `boolean`                  | -      |
 | onChange    | 值变化回调            | `(value: boolean) => void` | -      |
 | switchProps | Switch 组件的额外属性 | `SwitchProps`              | -      |
+| showSwitch  | 是否显示开关          | `boolean`                  | false  |
 
 ### Filter.Input
 
