@@ -290,6 +290,7 @@ const ConfigProvider: ConfigProviderType = ({
         },
       } as ConfigProviderProps['theme'])}
       renderEmpty={
+        restProps.renderEmpty ||
         parentContext.renderEmpty ||
         (componentName => <DefaultRenderEmpty componentName={componentName} />)
       }

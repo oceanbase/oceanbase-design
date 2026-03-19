@@ -71,18 +71,25 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   const extendedContext = useContext(ConfigProvider.ExtendedConfigContext);
   const pagination = useDefaultPagination(customPagination);
 
-  const { getPrefixCls, locale, table } = useContext(ConfigProvider.ConfigContext);
-  const {
-    batchOperationBar,
-    emptyText = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />,
-    ...restLocale
-  } = {
+  const { getPrefixCls, locale, table, renderEmpty } = useContext(ConfigProvider.ConfigContext);
+  const { batchOperationBar, emptyText, ...restLocale } = {
     ...customLocale,
     batchOperationBar: {
       ...enUS.Table?.batchOperationBar,
       ...locale?.Table?.batchOperationBar,
       ...customLocale?.batchOperationBar,
     },
+  };
+
+  // 优先使用 ConfigProvider 的 renderEmpty,其次使用 locale.emptyText,最后使用默认值
+  const getEmptyText = () => {
+    if (emptyText !== undefined) {
+      return emptyText;
+    }
+    if (renderEmpty) {
+      return renderEmpty('Table');
+    }
+    return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
   };
 
   const prefixCls = getPrefixCls('table', customizePrefixCls);
@@ -326,7 +333,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
         ...restLocale,
         emptyText: (
           <div className={`${prefixCls}-empty-wrapper`}>
-            {typeof emptyText === 'function' ? emptyText() : emptyText}
+            {typeof getEmptyText() === 'function' ? getEmptyText()() : getEmptyText()}
           </div>
         ),
       }}
