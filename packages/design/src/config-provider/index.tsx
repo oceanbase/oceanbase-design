@@ -25,9 +25,15 @@ import StaticFunction from '../static-function';
 import themeConfig from '../theme';
 import defaultTheme, {
   fontFamilyEn,
+  fontSizeCn,
+  fontHeightCn,
+  lineHeightCn,
+  fontSizeEn,
   fontWeightWeakEn,
   fontWeightEn,
   fontWeightStrongEn,
+  isCnLikeLocale,
+  tableCellFontSizeEn,
 } from '../theme/default';
 import darkTheme from '../theme/dark';
 import compactTheme from '../theme/compact';
@@ -112,6 +118,7 @@ export type ConfigProviderType = React.FC<ConfigProviderProps> & {
   useConfig: typeof AntConfigProvider.useConfig;
 };
 
+/** `en` / `en-gb` → `tokenValueEn`（与 `fontFamilyEn` 等一致）。 */
 const getLocaleTokenValue = (
   mergedThemeToken: GlobalToken,
   locale: Locale,
@@ -125,6 +132,57 @@ const getLocaleTokenValue = (
       ? { [tokenKey]: tokenValueEn }
       : {};
 };
+
+/** Cn（zh/ja/ko）且仍为拉丁基线 `tokenValueEn` 时 → `tokenValueCn`，结构上与 {@link getLocaleTokenValue} 对称。 */
+const getLocaleTokenValueCn = (
+  mergedThemeToken: GlobalToken,
+  locale: Locale,
+  tokenKey: string,
+  tokenValue: string | number | undefined,
+  tokenValueEn: number,
+  tokenValueCn: number
+) => {
+  return tokenValue !== mergedThemeToken[tokenKey]
+    ? { [tokenKey]: tokenValue }
+    : isCnLikeLocale(locale.locale) && (tokenValue === undefined || tokenValue === tokenValueEn)
+      ? { [tokenKey]: tokenValueCn }
+      : {};
+};
+
+/** Cn 字号补丁（正文 + Table 单元格），供单测与 ConfigProvider 共用。 */
+export function getLocaleFontSizeThemePatch(
+  mergedLocale: Locale,
+  mergedTheme: ThemeConfig,
+  resolvedFontSize: number | undefined
+): ThemeConfig {
+  const tokenPatch = getLocaleTokenValueCn(
+    (mergedTheme.token ?? {}) as GlobalToken,
+    mergedLocale,
+    'fontSize',
+    resolvedFontSize,
+    fontSizeEn,
+    fontSizeCn
+  );
+
+  const patch: ThemeConfig = {};
+  if ('fontSize' in tokenPatch && tokenPatch.fontSize !== undefined) {
+    patch.token = {
+      fontSize: tokenPatch.fontSize as number,
+      lineHeight: lineHeightCn,
+      fontHeight: fontHeightCn,
+    } as ThemeConfig['token'];
+  }
+
+  const cellFs = mergedTheme.components?.Table?.cellFontSize;
+  if (
+    (cellFs === undefined || cellFs === tableCellFontSizeEn) &&
+    isCnLikeLocale(mergedLocale.locale)
+  ) {
+    patch.components = { Table: { cellFontSize: fontSizeCn } };
+  }
+
+  return patch;
+}
 
 const ConfigProvider: ConfigProviderType = ({
   children,
@@ -195,6 +253,7 @@ const ConfigProvider: ConfigProviderType = ({
 
   const { token } = themeConfig.useToken();
   const fontFamily = mergedTheme.token?.fontFamily || token.fontFamily;
+  const fontSize = mergedTheme.token?.fontSize ?? token.fontSize;
   const fontWeightWeak = mergedTheme.token?.fontWeightWeak || token.fontWeightWeak;
   const fontWeight = mergedTheme.token?.fontWeight || token.fontWeight;
   const fontWeightStrong = mergedTheme.token?.fontWeightStrong || token.fontWeightStrong;
@@ -257,38 +316,43 @@ const ConfigProvider: ConfigProviderType = ({
         ) as TableConfig
       }
       tabs={merge({}, parentContext.tabs, tabs)}
-      theme={merge({}, mergedTheme, {
-        token: {
-          ...getLocaleTokenValue(
-            mergedTheme.token || {},
-            mergedLocale,
-            'fontFamily',
-            fontFamily,
-            fontFamilyEn
-          ),
-          ...getLocaleTokenValue(
-            mergedTheme.token || {},
-            mergedLocale,
-            'fontWeightWeak',
-            fontWeightWeak,
-            fontWeightWeakEn
-          ),
-          ...getLocaleTokenValue(
-            mergedTheme.token || {},
-            mergedLocale,
-            'fontWeight',
-            fontWeight,
-            fontWeightEn
-          ),
-          ...getLocaleTokenValue(
-            mergedTheme.token || {},
-            mergedLocale,
-            'fontWeightStrong',
-            fontWeightStrong,
-            fontWeightStrongEn
-          ),
-        },
-      } as ConfigProviderProps['theme'])}
+      theme={merge(
+        {},
+        mergedTheme,
+        getLocaleFontSizeThemePatch(mergedLocale, mergedTheme, fontSize),
+        {
+          token: {
+            ...getLocaleTokenValue(
+              mergedTheme.token || {},
+              mergedLocale,
+              'fontFamily',
+              fontFamily,
+              fontFamilyEn
+            ),
+            ...getLocaleTokenValue(
+              mergedTheme.token || {},
+              mergedLocale,
+              'fontWeightWeak',
+              fontWeightWeak,
+              fontWeightWeakEn
+            ),
+            ...getLocaleTokenValue(
+              mergedTheme.token || {},
+              mergedLocale,
+              'fontWeight',
+              fontWeight,
+              fontWeightEn
+            ),
+            ...getLocaleTokenValue(
+              mergedTheme.token || {},
+              mergedLocale,
+              'fontWeightStrong',
+              fontWeightStrong,
+              fontWeightStrongEn
+            ),
+          },
+        } as ConfigProviderProps['theme']
+      )}
       renderEmpty={
         parentContext.renderEmpty ||
         (componentName => <DefaultRenderEmpty componentName={componentName} />)

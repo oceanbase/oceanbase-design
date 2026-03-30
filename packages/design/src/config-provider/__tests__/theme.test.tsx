@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import { ConfigProvider, useToken } from '@oceanbase/design';
 import defaultTheme, { fontFamilyEn } from '../../theme/default';
 import enUS from '../../locale/en-US';
+import zhCN from '../../locale/zh-CN';
 
 describe('ConfigProvider theme', () => {
   it('token', () => {
@@ -88,6 +89,31 @@ describe('ConfigProvider theme', () => {
           </ConfigProvider>
         </ConfigProvider>
       </ConfigProvider>
+    );
+  });
+
+  it('token fontSize follows Cn vs non-Cn locale', () => {
+    const ChildEn = () => {
+      const { token } = useToken();
+      expect(token.fontSize).toBe(13);
+      expect(token.fontHeight).toBe(20);
+      return <div />;
+    };
+    const ChildZh = () => {
+      const { token } = useToken();
+      expect(token.fontSize).toBe(14);
+      expect(token.fontHeight).toBe(22);
+      return <div />;
+    };
+    render(
+      <>
+        <ConfigProvider locale={enUS}>
+          <ChildEn />
+        </ConfigProvider>
+        <ConfigProvider locale={zhCN}>
+          <ChildZh />
+        </ConfigProvider>
+      </>
     );
   });
 
