@@ -41,10 +41,14 @@ export function genStyleHooks<C extends ComponentName>(
 ) {
   const normalizedComponentName = Array.isArray(componentName) ? componentName[0] : componentName;
 
-  // Create the component name with OB- prefix
+  /**
+   * 使用 [Component, subName] 注册，第一维与 antd 一致以便合并 `theme.components[Component]`（如 Table.cellFontSize）；
+   * 第二维与 antd 默认样式区分，避免覆盖/顶替同组件的主样式钩子。
+   */
+  const OCEANBASE_SUB_STYLE = 'oceanbase';
   const obComponentName = Array.isArray(componentName)
-    ? ([`OB-${normalizedComponentName}`, componentName[1]] as [string, string])
-    : (`OB-${normalizedComponentName}` as string);
+    ? ([normalizedComponentName, `${OCEANBASE_SUB_STYLE}-${componentName[1]}`] as [C, string])
+    : ([normalizedComponentName, OCEANBASE_SUB_STYLE] as [C, string]);
 
   return antGenStyleHooks(
     obComponentName as any,

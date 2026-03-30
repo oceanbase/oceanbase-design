@@ -1,26 +1,40 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs';
+import { prepareComponentToken } from 'antd/es/table/style';
 import type { FullToken } from '../../theme/interface';
 import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type TableToken = FullToken<'Table'>;
 
+/**
+ * 单元格是否与全局正文同档（`cellFontSize === token.fontSize`）。
+ */
+const isTableCellBodyFontScale = (token: TableToken): boolean =>
+  token.cellFontSize === token.fontSize;
+
+const getTableCellLineHeight = (token: TableToken): number =>
+  isTableCellBodyFontScale(token) ? token.lineHeight : token.lineHeightSM;
+
+const getTableEmbeddedControlHeight = (token: TableToken): number =>
+  isTableCellBodyFontScale(token) ? token.controlHeight : token.controlHeightSM;
+
 const genSmallBtnStyle = (token: TableToken): CSSObject => {
   const { antCls } = token;
+  const cellLineHeight = getTableCellLineHeight(token);
+  const controlH = getTableEmbeddedControlHeight(token);
   return {
-    // button is small size by default
     [`${antCls}-btn:not(${antCls}-btn-sm):not(${antCls}-btn-lg)`]: {
-      height: token.controlHeightSM,
-      fontSize: token.fontSizeSM,
-      lineHeight: token.lineHeightSM,
+      height: controlH,
+      fontSize: token.cellFontSize,
+      lineHeight: cellLineHeight,
       [`&:not(${antCls}-btn-icon-only):not(${antCls}-btn-circle)`]: {
         paddingInline: token.paddingXS,
       },
       [`&${antCls}-btn-icon-only`]: {
-        width: token.controlHeightSM,
+        width: controlH,
       },
       [`&${antCls}-btn-circle`]: {
-        minWidth: token.controlHeightSM,
+        minWidth: controlH,
       },
     },
   };
@@ -44,11 +58,12 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     marginXS,
     calc,
   } = token;
+  const cellLineHeight = getTableCellLineHeight(token);
+  const embeddedControlH = getTableEmbeddedControlHeight(token);
   return {
     // 表格通用样式
     [`${componentCls}-wrapper ${componentCls}`]: {
-      // to match fontSizeSM lineHeight
-      lineHeight: token.lineHeightSM,
+      lineHeight: cellLineHeight,
       color: colorText,
       backgroundColor: colorBgBase,
       borderRadius: borderRadiusLG,
@@ -135,8 +150,8 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           },
           a: {
             fontWeight: token.fontWeightStrong,
-            // work for ProTable link style
-            fontSize: token.fontSizeSM,
+            // work for ProTable link style；与单元格字号一致
+            fontSize: token.cellFontSize,
           },
         },
         ...genSmallBtnStyle(token),
@@ -466,7 +481,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     [`${componentCls}-wrapper`]: {
       [`${componentCls}-pagination`]: {
         [`&${antCls}-pagination`]: {
-          fontSize: token.fontSizeSM,
+          fontSize: token.cellFontSize,
           padding: `${unit(token.paddingSM)} 0`,
           margin: 0,
           // 带边框和带内部边框的 Table，分页器右侧间距设为 token.marginLG
@@ -475,16 +490,14 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           },
           [`${antCls}-pagination-item, ${antCls}-pagination-total-text, ${antCls}-pagination-prev, ${antCls}-pagination-next`]:
             {
-              height: token.controlHeightSM,
-              minWidth: token.controlHeightSM,
-              lineHeight: unit(
-                calc(token.controlHeightSM).sub(calc(token.lineWidth).mul(2)).equal()
-              ),
+              height: embeddedControlH,
+              minWidth: embeddedControlH,
+              lineHeight: unit(calc(embeddedControlH).sub(calc(token.lineWidth).mul(2)).equal()),
             },
           [`${antCls}-pagination-options ${antCls}-select-single`]: {
-            height: token.controlHeightSM,
+            height: embeddedControlH,
             [`${antCls}-select-selector`]: {
-              fontSize: token.fontSizeSM,
+              fontSize: token.cellFontSize,
               paddingInline: calc(token.paddingXS).sub(token.lineWidth).equal(),
             },
           },
@@ -519,6 +532,9 @@ export const genTableStyle = (token: TableToken): CSSObject => {
   };
 };
 
-export default genStyleHooks('Table', token => {
-  return [genTableStyle(token as TableToken)];
-});
+// 经 genComponentStyleHook 注册为 ['Table','oceanbase']：合并 components.Table，且不与 antd 主 Table 样式钩子冲突。
+export default genStyleHooks(
+  'Table',
+  token => [genTableStyle(token as TableToken)],
+  prepareComponentToken
+);
