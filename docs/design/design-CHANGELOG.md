@@ -8,6 +8,19 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.18
+
+`2026-03-31`
+
+- 🌈 中文、日文和韩文，正文和表格字体改为 `14px`，和英文进行区分。[#1458](https://github.com/oceanbase/oceanbase-design/pull/1458)
+- Filter
+  - 🆕 Filter.Input 新增 `showSwitch` 属性，用于设置是否显示开关。[#1452](https://github.com/oceanbase/oceanbase-design/pull/1452) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🆕 新增 Filter.Slot 组件，以支持自定义下拉面板。[#1446](https://github.com/oceanbase/oceanbase-design/pull/1446) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🆕 Filter 新增 `allowClear` 属性，用于设置是否展示清除图标。[#1447](https://github.com/oceanbase/oceanbase-design/pull/1447) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - ⭐️ Filter.Cascader 支持透传属性到 Cascader.Panel。[#1447](https://github.com/oceanbase/oceanbase-design/pull/1447) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 💄 优化 Filter.Select 下拉面板的宽度，默认跟随容器宽度。[#1444](https://github.com/oceanbase/oceanbase-design/pull/1444) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 💄 去掉 Filter.Cascader 选中后的背景色。[#1444](https://github.com/oceanbase/oceanbase-design/pull/1444) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+
 ## 1.0.0-alpha.17
 
 `2026-03-03`

@@ -8,6 +8,14 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.18
+
+`2026-03-31`
+
+- DateRanger
+  - 🆕 DateRanger 新增 `variant` 属性，用于设置变体 (比如 `dashed`)。[#1453](https://github.com/oceanbase/oceanbase-design/pull/1453) [@18735185652](https://github.com/18735185652)
+  - ⭐️ DateRanger 日期时间支持跨组件复制和粘贴。[#1450](https://github.com/oceanbase/oceanbase-design/pull/1450) [@18735185652](https://github.com/18735185652)
+
 ## 1.0.0-alpha.16
 
 `2026-02-11`
