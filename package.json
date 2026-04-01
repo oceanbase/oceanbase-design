@@ -33,7 +33,8 @@
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,less,md,json}\"",
     "tsc": "tsc --noEmit",
     "tsc:clean": "tsc --build --clean",
-    "locale:remove-useless": "ts-node scripts/remove-useless-locale.ts"
+    "locale:remove-useless": "ts-node scripts/remove-useless-locale.ts",
+    "check:ob-token-dtcg": "ts-node packages/design/scripts/verify-ob-token-alignment.ts"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
