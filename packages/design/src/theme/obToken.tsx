@@ -79,7 +79,11 @@ const genObToken = (token: GlobalToken, prefix = 'ob') => {
     colorBgHoverSecondary: token.gray3,
     colorBgFocus: token.gray3,
     colorBgSelected: token.blue4,
-    colorBgDisabled: token.gray3,
+    colorBgDisabled: token.gray2,
+    colorBgInfo: token.blue1,
+    colorBgSuccess: token.green1,
+    colorBgWarning: token.orange1,
+    colorBgError: token.red1,
 
     // 边框色 Border
     colorDivider: token.gray4,
@@ -87,7 +91,9 @@ const genObToken = (token: GlobalToken, prefix = 'ob') => {
     colorBorderContainer: token.gray4,
     colorBorderInverse: token.white,
     colorBorderHover: token.gray7,
+    colorBorderSelected: token.blue4,
     colorBorderFocus: token.blue4,
+    colorBorderSuccess: token.green4,
     colorBorderError: token.red4,
     colorBorderWarning: token.orange4,
 
@@ -101,6 +107,10 @@ const genObToken = (token: GlobalToken, prefix = 'ob') => {
     colorTextSelected: token.blue4,
     colorTextLink: token.blue4,
     colorTextInverse: token.white,
+    colorTextDisabledSelected: token.gray7,
+    colorTextSuccess: token.green4,
+    colorTextError: token.red4,
+    colorTextWarning: token.orange4,
 
     // 图标色 Icon
     colorIconDefault: token.gray8,
@@ -112,8 +122,11 @@ const genObToken = (token: GlobalToken, prefix = 'ob') => {
     colorIconWarning: token.orange4,
     colorIconSuccess: token.green4,
     colorIconError: token.red4,
+    colorIconCritical: token.fuchsia4,
 
-    // 状态色
+    /**
+     * 兼容旧版「状态色」字段（与 DTCG 语义色并存；勿在新代码中使用，亦不在文档中列出）
+     */
     colorDefaultText: token.colorText,
     colorDefaultIcon: token.gray8,
     colorDefaultFill: token.gray2,
@@ -141,6 +154,7 @@ const genObToken = (token: GlobalToken, prefix = 'ob') => {
 
     // ==================== 字体 Token ====================
     fontFamilyDefault: token.fontFamily,
+    fontFamilyCode: token.fontFamilyCode,
     fontWeightSm: token.fontWeightWeak,
     fontWeightMd: token.fontWeight,
     fontWeightLg: token.fontWeightStrong,
@@ -160,6 +174,7 @@ const genObToken = (token: GlobalToken, prefix = 'ob') => {
     fontBody1: `${token.fontWeight} ${token.fontSize}px/var(--${prefix}-font-line-height-500) ${token.fontFamily}`,
     fontBody2: `${token.fontWeightWeak} ${token.fontSizeSM}px/var(--${prefix}-font-line-height-500) ${token.fontFamily}`,
     fontCaption: `${token.fontWeightWeak} ${token.fontSizeSM}px/var(--${prefix}-font-line-height-500) ${token.fontFamily}`,
+    fontBodyCode: `${token.fontWeight} ${token.fontSize}px/var(--${prefix}-font-line-height-500) var(--${prefix}-font-family-code)`,
 
     // ==================== 阴影 Token ====================
     shadow1Top: '0px -1px 2px 0px hsla(219, 50%, 15%, 0.1)',
@@ -289,7 +304,11 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
         [`--${prefix}-color-bg-hover-secondary`]: token.gray3,
         [`--${prefix}-color-bg-focus`]: token.gray3,
         [`--${prefix}-color-bg-selected`]: token.blue4,
-        [`--${prefix}-color-bg-disabled`]: token.gray3,
+        [`--${prefix}-color-bg-disabled`]: token.gray2,
+        [`--${prefix}-color-bg-info`]: token.blue1,
+        [`--${prefix}-color-bg-success`]: token.green1,
+        [`--${prefix}-color-bg-warning`]: token.orange1,
+        [`--${prefix}-color-bg-error`]: token.red1,
 
         // 边框色 Border
         [`--${prefix}-color-divider`]: token.gray4,
@@ -297,7 +316,9 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
         [`--${prefix}-color-border-container`]: token.gray4,
         [`--${prefix}-color-border-inverse`]: token.white,
         [`--${prefix}-color-border-hover`]: token.gray7,
+        [`--${prefix}-color-border-selected`]: token.blue4,
         [`--${prefix}-color-border-focus`]: token.blue4,
+        [`--${prefix}-color-border-success`]: token.green4,
         [`--${prefix}-color-border-error`]: token.red4,
         [`--${prefix}-color-border-warning`]: token.orange4,
 
@@ -311,6 +332,10 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
         [`--${prefix}-color-text-selected`]: token.blue4,
         [`--${prefix}-color-text-link`]: token.blue4,
         [`--${prefix}-color-text-inverse`]: token.white,
+        [`--${prefix}-color-text-disabled-selected`]: token.gray7,
+        [`--${prefix}-color-text-success`]: token.green4,
+        [`--${prefix}-color-text-error`]: token.red4,
+        [`--${prefix}-color-text-warning`]: token.orange4,
 
         // 图标色 Icon
         [`--${prefix}-color-icon-default`]: token.gray8,
@@ -322,8 +347,9 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
         [`--${prefix}-color-icon-warning`]: token.orange4,
         [`--${prefix}-color-icon-success`]: token.green4,
         [`--${prefix}-color-icon-error`]: token.red4,
+        [`--${prefix}-color-icon-critical`]: token.fuchsia4,
 
-        // 状态色
+        /* 兼容旧版「状态色」CSS 变量（勿在新代码中使用，亦不在文档中列出） */
         [`--${prefix}-color-default-text`]: token.colorText,
         [`--${prefix}-color-default-icon`]: token.gray8,
         [`--${prefix}-color-default-fill`]: token.gray2,
@@ -351,6 +377,7 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
 
         // ==================== 字体 Token ====================
         [`--${prefix}-font-family-default`]: token.fontFamily,
+        [`--${prefix}-font-family-code`]: token.fontFamilyCode,
 
         // 字重
         // use string to avoid appending px to the value by useStyleRegister
@@ -386,6 +413,8 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
         [`--${prefix}-font-body2`]: `${token.fontWeightWeak} ${token.fontSizeSM}px/var(--${prefix}-font-line-height-500) ${token.fontFamily}`,
         // font-caption: 描述
         [`--${prefix}-font-caption`]: `${token.fontWeightWeak} ${token.fontSizeSM}px/var(--${prefix}-font-line-height-500) ${token.fontFamily}`,
+        // font-body-code: 代码
+        [`--${prefix}-font-body-code`]: `${token.fontWeight} ${token.fontSize}px/var(--${prefix}-font-line-height-500) var(--${prefix}-font-family-code)`,
 
         // ==================== 阴影 Token ====================
         [`--${prefix}-shadow-1-top`]: '0px -1px 2px 0px hsla(219, 50%, 15%, 0.1)',

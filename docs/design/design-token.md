@@ -158,8 +158,8 @@ class MyComponent extends React.Component {
 ```tsx | pure
 <div
   style={{
-    backgroundColor: 'var(--ob-color-info-fill)',
-    color: 'var(--ob-color-info-text)',
+    backgroundColor: 'var(--ob-color-bg-info)',
+    color: 'var(--ob-color-text-link)',
     padding: 'var(--ob-space-400)',
   }}
 >
@@ -192,8 +192,8 @@ const MyComponent: React.FC = () => {
   return (
     <div
       style={{
-        backgroundColor: obToken.colorInfoFill,
-        color: obToken.colorInfoText,
+        backgroundColor: obToken.colorBgInfo,
+        color: obToken.colorLink,
         padding: obToken.space400,
         borderRadius: obToken.radiusSm,
       }}
@@ -392,10 +392,6 @@ const config = { backgroundColor: obToken.colorBgDefault };
 #### 图标色
 
 <ObTokenTable category="color-icon"></ObTokenTable>
-
-#### 状态色
-
-<ObTokenTable category="color-status"></ObTokenTable>
 
 ### 字体
 

@@ -159,11 +159,10 @@ obToken 键名与 CSS 变量对应，去掉 `--ob-` 前缀，驼峰命名：
 |  | colorTextLink | --ob-color-text-link | 链接文本 |
 | **图标** | colorIconDefault | --ob-color-icon-default | 默认图标 |
 |  | colorIconHover | --ob-color-icon-hover | 悬浮图标 |
-| **状态** | colorInfoFill / colorInfoText | --ob-color-info-fill / --ob-color-info-text | 信息 |
-|  | colorSuccessFill / colorSuccessText | --ob-color-success-fill / --ob-color-success-text | 成功 |
-|  | colorWarningFill / colorWarningText | --ob-color-warning-fill / --ob-color-warning-text | 警告 |
-|  | colorErrorFill / colorErrorText | --ob-color-error-fill / --ob-color-error-text | 错误 |
-|  | colorCriticalFill / colorCriticalText | --ob-color-critical-fill / --ob-color-critical-text | 严重 |
+|  | colorIconCritical | --ob-color-icon-critical | 严重/警示图标 |
+| **语义背景** | colorBgInfo | --ob-color-bg-info | 信息背景 |
+|  | colorBgSuccess / colorBgWarning / colorBgError | 对应 `--ob-color-bg-*` | 成功/警告/错误背景 |
+| **语义文本** | colorTextSuccess / colorTextError / colorTextWarning | 对应 `--ob-color-text-*` | 成功/错误/警告强调文本 |
 
 ### 间距
 
