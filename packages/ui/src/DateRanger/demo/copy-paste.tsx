@@ -7,7 +7,7 @@ import zhCN from '@oceanbase/ui/locale/zh-CN';
 
 export default () => {
   const [locale, setLocal] = useState(enUS);
-  const [format, setFormat] = useState('MMM DD, YYYY HH:mm:ss');
+  const [format, setFormat] = useState('MMM DD, YYYY HH:mm:ss(UTC+8)');
   // 初始化时设置 dayjs locale
   React.useEffect(() => {
     dayjs.locale('en');
@@ -18,10 +18,10 @@ export default () => {
     setLocal(localeValue);
     if (localeValue === enUS || (localeValue as any)?.locale === 'en') {
       dayjs.locale('en');
-      setFormat('MMM DD, YYYY HH:mm:ss');
+      setFormat('MMM DD, YYYY HH:mm:ss(UTC+8)');
     } else {
       dayjs.locale('zh-cn');
-      setFormat('YYYY-MM-DD HH:mm:ss');
+      setFormat('YYYY-MM-DD HH:mm:ss(UTC+8)');
     }
   };
 

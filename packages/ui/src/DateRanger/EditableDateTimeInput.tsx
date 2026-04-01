@@ -4,6 +4,7 @@ import type { Moment } from 'moment';
 import classNames from 'classnames';
 import { Input } from '@oceanbase/design';
 import { useSegmentedInput } from './hooks/useSegmentedInput';
+import { useAutoWidthInput } from './hooks/useAutoWidthInput';
 
 export interface EditableDateTimeInputProps {
   value?: [Dayjs | Moment | null, Dayjs | Moment | null];
@@ -95,6 +96,12 @@ const EditableDateTimeInput = forwardRef<EditableDateTimeInputRef, EditableDateT
       open,
     });
 
+    const { sizerRef, inputWidth } = useAutoWidthInput({
+      inputRef,
+      value: displayValue,
+      minWidth: 80,
+    });
+
     // 暴露方法给父组件
     useImperativeHandle(ref, () => ({
       hasPastedValue,
@@ -108,9 +115,11 @@ const EditableDateTimeInput = forwardRef<EditableDateTimeInputRef, EditableDateT
           [`${prefixCls}-range-editable-disabled`]: disabled,
         })}
       >
+        <span ref={sizerRef} className={`${prefixCls}-range-editable-sizer`} aria-hidden />
         <Input
           ref={inputRef}
           className={`${prefixCls}-range-editable-input`}
+          style={{ width: inputWidth }}
           value={displayValue}
           readOnly
           disabled={disabled}
