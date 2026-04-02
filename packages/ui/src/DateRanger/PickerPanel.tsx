@@ -205,7 +205,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
               >
                 <DatePicker
                   format={{
-                    format: 'YYYY-MM-DD',
+                    format: DATE_FORMAT,
                     type: 'mask',
                   }}
                   style={{ width: 128 }}
@@ -261,7 +261,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
               >
                 <DatePicker
                   format={{
-                    format: 'YYYY-MM-DD',
+                    format: DATE_FORMAT,
                     type: 'mask',
                   }}
                   style={{ width: 128 }}
