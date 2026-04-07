@@ -8,6 +8,17 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.19
+
+`2026-04-07`
+
+- 主题
+  - 🌈 对齐设计侧的 [Design Token](https://design-token-system.vercel.app/)，包括补齐缺失的 token 以及修正 token 值。[#1462](https://github.com/oceanbase/oceanbase-design/pull/1462)
+  - 🐞 修复 ConfigProvider 主题开启 CSS 变量 模式时，组件样式丢失的问题。[#1463](https://github.com/oceanbase/oceanbase-design/pull/1463)
+- Table
+  - 🐞 修复 Table 首列行合并，在 Card 下单元格 `padding-left` 错位的问题。[#1466](https://github.com/oceanbase/oceanbase-design/pull/1466)
+  - 💄 优化 Table 中的按钮、页码大小下拉选择在中文环境下的样式。[#1467](https://github.com/oceanbase/oceanbase-design/pull/1467)
+
 ## 1.0.0-alpha.18
 
 `2026-03-31`
