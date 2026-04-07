@@ -2,7 +2,12 @@ import type { ThemeConfig } from 'antd/es/config-provider';
 import defaultTheme from '../../theme/default';
 import zhCN from '../../locale/zh-CN';
 import enUS from '../../locale/en-US';
-import { fontSizeEn, tableCellFontSizeEn, isCnLikeLocale } from '../../theme/default';
+import {
+  fontSizeEn,
+  tableCellFontSizeEn,
+  isCnLikeLocale,
+  isEnLikeLocale,
+} from '../../theme/default';
 import { getLocaleFontSizeThemePatch } from '../index';
 
 describe('isCnLikeLocale', () => {
@@ -27,6 +32,22 @@ describe('isCnLikeLocale', () => {
   });
 });
 
+describe('isEnLikeLocale', () => {
+  it('matches en and en-* subtags', () => {
+    expect(isEnLikeLocale('en')).toBe(true);
+    expect(isEnLikeLocale('en-gb')).toBe(true);
+    expect(isEnLikeLocale('en-US')).toBe(true);
+    expect(isEnLikeLocale('en_au')).toBe(true);
+  });
+
+  it('rejects non-English locales', () => {
+    expect(isEnLikeLocale('zh-cn')).toBe(false);
+    expect(isEnLikeLocale('de-DE')).toBe(false);
+    expect(isEnLikeLocale('')).toBe(false);
+    expect(isEnLikeLocale(undefined)).toBe(false);
+  });
+});
+
 describe('getLocaleFontSizeThemePatch', () => {
   const baseTheme = defaultTheme as ThemeConfig;
   const resolvedFs = baseTheme.token?.fontSize;
@@ -42,14 +63,16 @@ describe('getLocaleFontSizeThemePatch', () => {
     expect(patch.components?.Table?.cellFontSize).toBe(14);
   });
 
-  it('returns empty for en locale', () => {
+  it('returns only Table localeEnEmbeddedControls for en locale', () => {
     expect(
       getLocaleFontSizeThemePatch(
         enUS as Parameters<typeof getLocaleFontSizeThemePatch>[0],
         baseTheme,
         resolvedFs
       )
-    ).toEqual({});
+    ).toEqual({
+      components: { Table: { localeEnEmbeddedControls: true } },
+    });
   });
 
   it('does not override custom body fontSize', () => {
