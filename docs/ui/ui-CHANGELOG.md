@@ -8,6 +8,12 @@ group: 业务组件
 
 ---
 
+## 1.0.0-alpha.19
+
+`2026-04-07`
+
+- 💄 DateRanger 宽度支持根据内容自适应。[#1464](https://github.com/oceanbase/oceanbase-design/pull/1464) [@18735185652](https://github.com/18735185652)
+
 ## 1.0.0-alpha.18
 
 `2026-03-31`
