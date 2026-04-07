@@ -23,6 +23,7 @@ const App: React.FC = () => {
   const [hasData, setHasData] = useState(true);
   const [yScroll, setYScroll] = useState(false);
   const [xScroll, setXScroll] = useState<string | undefined>(undefined);
+  const [rowspan, setRowspan] = useState(false);
 
   const columns: ColumnsType<Record<string, any>> = [
     {
@@ -42,8 +43,10 @@ const App: React.FC = () => {
     },
   ];
 
-  const dataSource = [];
-  for (let i = 1; i <= 5; i++) {
+  // 开启 rowspan 时使用 4 行，与 demo/rowspan.tsx 数据行数一致，便于两两合并
+  const rowCount = hasData ? (rowspan ? 4 : 5) : 0;
+  const dataSource: Record<string, any>[] = [];
+  for (let i = 1; i <= rowCount; i++) {
     dataSource.push({
       key: i,
       name: '胡彦斌' + i,
@@ -65,6 +68,19 @@ const App: React.FC = () => {
   if (xScroll === 'fixed') {
     tableColumns[0].fixed = 'left';
     tableColumns[tableColumns.length - 1].fixed = 'right';
+  }
+  // 第一列行合并，onCell 规则与 demo/rowspan.tsx 一致
+  if (rowspan) {
+    const rowspanOnCell: NonNullable<ColumnsType<Record<string, any>>[number]['onCell']> = (
+      _,
+      index
+    ) => ({
+      rowSpan: index! % 2 === 0 ? 2 : 0,
+    });
+    const firstCol = tableColumns[0];
+    if (firstCol) {
+      firstCol.onCell = rowspanOnCell;
+    }
   }
 
   return (
@@ -180,6 +196,9 @@ const App: React.FC = () => {
               setHasData(value);
             }}
           />
+        </Form.Item>
+        <Form.Item label="Table rowspan" required={true}>
+          <Switch size="small" checked={rowspan} onChange={setRowspan} />
         </Form.Item>
         <Form.Item label="Fixed Header" required={true}>
           <Switch size="small" checked={!!yScroll} onChange={setYScroll} />
