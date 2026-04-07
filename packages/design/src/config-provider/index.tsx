@@ -33,6 +33,7 @@ import defaultTheme, {
   fontWeightEn,
   fontWeightStrongEn,
   isCnLikeLocale,
+  isEnLikeLocale,
   tableCellFontSizeEn,
 } from '../theme/default';
 import darkTheme from '../theme/dark';
@@ -149,7 +150,10 @@ const getLocaleTokenValueCn = (
       : {};
 };
 
-/** Cn 字号补丁（正文 + Table 单元格），供单测与 ConfigProvider 共用。 */
+/**
+ * 按 locale 合并主题补丁：Cn 正文/表内字号、英文 Table 内嵌控件与分页对齐（`localeEnEmbeddedControls`）。
+ * 供单测与 ConfigProvider 共用。
+ */
 export function getLocaleFontSizeThemePatch(
   mergedLocale: Locale,
   mergedTheme: ThemeConfig,
@@ -173,12 +177,22 @@ export function getLocaleFontSizeThemePatch(
     } as ThemeConfig['token'];
   }
 
+  const tablePatch: NonNullable<ThemeConfig['components']>['Table'] = {};
+
   const cellFs = mergedTheme.components?.Table?.cellFontSize;
   if (
     (cellFs === undefined || cellFs === tableCellFontSizeEn) &&
     isCnLikeLocale(mergedLocale.locale)
   ) {
-    patch.components = { Table: { cellFontSize: fontSizeCn } };
+    Object.assign(tablePatch, { cellFontSize: fontSizeCn });
+  }
+
+  if (isEnLikeLocale(mergedLocale.locale)) {
+    Object.assign(tablePatch, { localeEnEmbeddedControls: true });
+  }
+
+  if (Object.keys(tablePatch as object).length > 0) {
+    patch.components = { Table: tablePatch };
   }
 
   return patch;

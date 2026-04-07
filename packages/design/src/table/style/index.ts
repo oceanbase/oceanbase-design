@@ -1,10 +1,29 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs';
-import { prepareComponentToken } from 'antd/es/table/style';
-import type { FullToken } from '../../theme/interface';
+import { prepareComponentToken as antdPrepareComponentTokenImport } from 'antd/es/table/style';
+import type { FullToken, GlobalToken } from '../../theme/interface';
 import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type TableToken = FullToken<'Table'>;
+
+const antdPrepareComponentToken = antdPrepareComponentTokenImport as unknown as (
+  token: GlobalToken
+) => Record<string, unknown>;
+
+/**
+ * `genStyleHooks` 注册名为 `OB-Table`，`@ant-design/cssinjs-utils` 的 getComponentToken 只合并 `token.OB-Table`，
+ * 而 ConfigProvider 的 `theme.components.Table` 挂在 `token.Table` 上。若不合并，自定义 Table 组件 token（含
+ * `localeEnEmbeddedControls`）不会进入样式计算。
+ */
+function prepareComponentToken(token: GlobalToken) {
+  const base = antdPrepareComponentToken(token);
+  const tableCfg = (token as unknown as Record<string, unknown>).Table;
+  if (!tableCfg || typeof tableCfg !== 'object' || Array.isArray(tableCfg)) {
+    return base;
+  }
+  const { theme: _nestedTheme, ...tableOverrides } = tableCfg as Record<string, unknown>;
+  return { ...base, ...tableOverrides };
+}
 
 /**
  * 单元格是否与全局正文同档（`cellFontSize === token.fontSize`）。
@@ -19,6 +38,9 @@ const getTableEmbeddedControlHeight = (token: TableToken): number =>
   isTableCellBodyFontScale(token) ? token.controlHeight : token.controlHeightSM;
 
 const genSmallBtnStyle = (token: TableToken): CSSObject => {
+  if (!token.localeEnEmbeddedControls) {
+    return {};
+  }
   const { antCls } = token;
   const cellLineHeight = getTableCellLineHeight(token);
   const controlH = getTableEmbeddedControlHeight(token);
@@ -35,6 +57,31 @@ const genSmallBtnStyle = (token: TableToken): CSSObject => {
       },
       [`&${antCls}-btn-circle`]: {
         minWidth: controlH,
+      },
+    },
+  };
+};
+
+/** 英文 locale 下分页条与 page size Select 与单元格内嵌控件对齐的样式（与 {@link genSmallBtnStyle} 同开关）。 */
+const genSmallPaginationStyle = (token: TableToken): CSSObject => {
+  if (!token.localeEnEmbeddedControls) {
+    return {};
+  }
+  const { antCls, calc } = token;
+  const embeddedControlH = getTableEmbeddedControlHeight(token);
+  return {
+    fontSize: token.cellFontSize,
+    [`${antCls}-pagination-item, ${antCls}-pagination-total-text, ${antCls}-pagination-prev, ${antCls}-pagination-next`]:
+      {
+        height: embeddedControlH,
+        minWidth: embeddedControlH,
+        lineHeight: unit(calc(embeddedControlH).sub(calc(token.lineWidth).mul(2)).equal()),
+      },
+    [`${antCls}-pagination-options ${antCls}-select-single`]: {
+      height: embeddedControlH,
+      [`${antCls}-select-selector`]: {
+        fontSize: token.cellFontSize,
+        paddingInline: calc(token.paddingXS).sub(token.lineWidth).equal(),
       },
     },
   };
@@ -59,7 +106,6 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     calc,
   } = token;
   const cellLineHeight = getTableCellLineHeight(token);
-  const embeddedControlH = getTableEmbeddedControlHeight(token);
   return {
     // 表格通用样式
     [`${componentCls}-wrapper ${componentCls}`]: {
@@ -480,26 +526,13 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     [`${componentCls}-wrapper`]: {
       [`${componentCls}-pagination`]: {
         [`&${antCls}-pagination`]: {
-          fontSize: token.cellFontSize,
           padding: `${unit(token.paddingSM)} 0`,
           margin: 0,
           // 带边框和带内部边框的 Table，分页器右侧间距设为 token.marginLG
           [`${componentCls}-wrapper${componentCls}-has-bordered &`]: {
             marginInlineEnd: marginLG,
           },
-          [`${antCls}-pagination-item, ${antCls}-pagination-total-text, ${antCls}-pagination-prev, ${antCls}-pagination-next`]:
-            {
-              height: embeddedControlH,
-              minWidth: embeddedControlH,
-              lineHeight: unit(calc(embeddedControlH).sub(calc(token.lineWidth).mul(2)).equal()),
-            },
-          [`${antCls}-pagination-options ${antCls}-select-single`]: {
-            height: embeddedControlH,
-            [`${antCls}-select-selector`]: {
-              fontSize: token.cellFontSize,
-              paddingInline: calc(token.paddingXS).sub(token.lineWidth).equal(),
-            },
-          },
+          ...genSmallPaginationStyle(token),
         },
         // 批量操作栏样式
         [`${componentCls}-batch-operation-bar`]: {

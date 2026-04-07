@@ -97,7 +97,7 @@ export const fontSizeEn = 13;
 /** Table 单元格字号（非 Cn），与 components.Table.cellFontSize 默认值一致 */
 export const tableCellFontSizeEn = fontSizeSM;
 
-/** Cn 正文/表内字号补丁（由 config-provider `getLocaleFontSizeThemePatch` 消费） */
+/** Cn 正文/表内字号等 locale 主题补丁（由 config-provider `getLocaleFontSizeThemePatch` 消费） */
 export const fontSizeCn = 14;
 export const fontHeightCn = 22;
 export const lineHeightCn = fontHeightCn / fontSizeCn;
@@ -474,4 +474,16 @@ export function isCnLikeLocale(locale: string | undefined): boolean {
   }
   const primary = String(locale).toLowerCase().replace(/_/g, '-').split('-')[0];
   return primary === 'zh' || primary === 'ja' || primary === 'ko';
+}
+
+/**
+ * Whether the BCP 47 locale uses English UI compact embedded controls in Table
+ * (matches {@link ConfigProvider} `locale.locale` values such as `en`, `en-gb`, `en-*`).
+ */
+export function isEnLikeLocale(locale: string | undefined): boolean {
+  if (locale == null || locale === '') {
+    return false;
+  }
+  const norm = String(locale).toLowerCase().replace(/_/g, '-');
+  return norm === 'en' || norm === 'en-gb' || norm.startsWith('en-');
 }
