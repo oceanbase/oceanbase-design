@@ -10,20 +10,24 @@ export type CardToken = FullToken<'Card'> & {
 };
 
 export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSObject => {
-  const { antCls, componentCls } = token;
+  const { antCls } = token;
   const tableComponentCls = `${antCls}-table`;
+  const cellInline = token.Table?.cellPaddingInline ?? token.padding ?? token.paddingSM ?? 16;
+
   return {
     [`${tableComponentCls}-wrapper`]: {
       [`${tableComponentCls}`]: {
-        // first column should align with card title
-        [`${tableComponentCls}-thead > tr > th:first-child, ${tableComponentCls}-tbody > tr > td:first-child`]:
+        [`${tableComponentCls}-thead > tr > th:first-child`]: { paddingLeft: padding },
+        [`${tableComponentCls}-tbody > tr > td:first-child`]: { paddingLeft: padding },
+        [`${tableComponentCls}-tbody > tr > td:first-child[data-ob-user-col]:not([data-ob-user-col="0"])`]:
           {
-            paddingLeft: padding,
+            paddingLeft: cellInline,
           },
-        // last column should align with card extra
-        [`${tableComponentCls}-thead > tr > th:last-child, ${tableComponentCls}-tbody > tr > td:last-child`]:
+        [`${tableComponentCls}-thead > tr > th:last-child`]: { paddingRight: padding },
+        [`${tableComponentCls}-tbody > tr > td:last-child`]: { paddingRight: padding },
+        [`${tableComponentCls}-tbody > tr > td:last-child[data-ob-user-col]:not([data-ob-user-col-tail])`]:
           {
-            paddingRight: padding,
+            paddingRight: cellInline,
           },
         [`${tableComponentCls}-container`]: {
           // ::after 伪元素用于固定列时的阴影效果，表格带边框时去掉左上角和右上角的圆角
@@ -37,15 +41,10 @@ export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSOb
           },
         },
       },
+      // 分页与 .ant-table 同级（在 Spin 容器内），须挂在 wrapper 下
       [`${tableComponentCls}-pagination${antCls}-pagination`]: {
-        // add marginLeft for table batchOperationBar
-        [`${tableComponentCls}-batch-operation-bar`]: {
-          marginLeft: padding,
-        },
-        // add marginRight for table pagination
-        [`& > li:last-child`]: {
-          marginRight: padding,
-        },
+        marginInlineEnd: padding,
+        [`${tableComponentCls}-batch-operation-bar`]: { marginLeft: padding },
       },
     },
   };

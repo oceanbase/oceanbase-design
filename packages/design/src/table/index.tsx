@@ -20,6 +20,116 @@ import enUS from '../locale/en-US';
 
 export * from 'antd/es/table';
 
+/** 第一个非 hidden 的叶子列（支持 column 分组） */
+function getFirstLeafColumn<T extends AnyObject>(
+  cols: ColumnsType<T> | undefined
+): AnyObject | null {
+  if (!cols) {
+    return null;
+  }
+  for (const item of cols as AnyObject[]) {
+    if (item.hidden) {
+      continue;
+    }
+    if (item.children?.length) {
+      const found = getFirstLeafColumn(item.children as ColumnsType<T>);
+      if (found) {
+        return found;
+      }
+    } else {
+      return item;
+    }
+  }
+  return null;
+}
+
+/** 最后一个非 hidden 的叶子列 */
+function getLastLeafColumn<T extends AnyObject>(
+  cols: ColumnsType<T> | undefined
+): AnyObject | null {
+  if (!cols) {
+    return null;
+  }
+  for (let i = cols.length - 1; i >= 0; i--) {
+    const item = cols[i] as AnyObject;
+    if (item.hidden) {
+      continue;
+    }
+    if (item.children?.length) {
+      const found = getLastLeafColumn(item.children as ColumnsType<T>);
+      if (found) {
+        return found;
+      }
+    } else {
+      return item;
+    }
+  }
+  return null;
+}
+
+/** 叶子列数量（与 rc-table 扁平列顺序一致：深度优先跳过 hidden） */
+function countLeafColumns<T extends AnyObject>(cols: ColumnsType<T> | undefined): number {
+  if (!cols?.length) {
+    return 0;
+  }
+  let n = 0;
+  const walk = (items: ColumnsType<T>) => {
+    for (const item of items as AnyObject[]) {
+      if (item.hidden) {
+        continue;
+      }
+      if (item.children?.length) {
+        walk(item.children as ColumnsType<T>);
+      } else {
+        n += 1;
+      }
+    }
+  };
+  walk(cols);
+  return n;
+}
+
+/**
+ * onCell 写入 data-ob-user-col / 末列 data-ob-user-col-tail，供 Card 无横向 body padding 时纠偏 rowspan 与 :first/:last-child 不一致。
+ * 仅在首列或末列存在 rowspan 时由调用方注入，避免无合并表格多出 DOM 属性。
+ */
+function injectUserColumnCellMeta<T extends AnyObject>(
+  cols: ColumnsType<T> | undefined
+): ColumnsType<T> | undefined {
+  if (!cols?.length) {
+    return cols;
+  }
+  const tailIdx = countLeafColumns(cols) - 1;
+  let leafIndex = 0;
+  const walk = (items: ColumnsType<T>): ColumnsType<T> =>
+    (items as AnyObject[]).map((item: AnyObject) => {
+      if (item.hidden) {
+        return item;
+      }
+      if (item.children?.length) {
+        return { ...item, children: walk(item.children as ColumnsType<T>) };
+      }
+      const myIndex = leafIndex;
+      leafIndex += 1;
+      const origOnCell = item.onCell;
+      return {
+        ...item,
+        onCell: (record: T, rowIndex: number) => {
+          const base =
+            typeof origOnCell === 'function'
+              ? origOnCell(record, rowIndex) || {}
+              : ({} as AnyObject);
+          return {
+            ...base,
+            'data-ob-user-col': String(myIndex),
+            ...(myIndex === tailIdx ? { 'data-ob-user-col-tail': '1' } : {}),
+          };
+        },
+      };
+    });
+  return walk(cols);
+}
+
 export interface TableLocale extends AntTableLocale {
   batchOperationBar?: {
     selected?: string;
@@ -90,49 +200,72 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   const [wrapCSSVar] = useStyle(prefixCls);
   const noPagination = pagination === false || pagination === null;
   const noData = dataSource?.length === 0;
-  // 检测第一列是否有 rowSpan 覆盖最后一行，用于设置正确的左下角圆角
-  const hasFirstColumnRowSpan = React.useMemo(() => {
-    if (!columns || !dataSource || dataSource.length === 0) return false;
-    const firstCol = columns[0];
-    if (!firstCol || typeof firstCol.onCell !== 'function') return false;
-    // 检测最后一行的第一列是否被 rowspan 覆盖（rowSpan: 0 表示被隐藏）
-    const lastIndex = dataSource.length - 1;
-    const lastRecord = dataSource[lastIndex];
-    const cellProps = firstCol.onCell(lastRecord, lastIndex);
-    // 如果最后一行的第一列 rowSpan 为 0，说明被前面的行覆盖了
-    return cellProps && cellProps.rowSpan === 0;
-  }, [columns, dataSource]);
-  // 检测最后一列是否有 rowSpan 覆盖最后一行，用于设置正确的右下角圆角
-  const hasLastColumnRowSpan = React.useMemo(() => {
-    if (!columns || !dataSource || dataSource.length === 0) return false;
-    // 找到最后一个非 hidden 的列
-    let lastCol = null;
-    for (let i = columns.length - 1; i >= 0; i--) {
-      if (!columns[i].hidden) {
-        lastCol = columns[i];
-        break;
-      }
+
+  /** 基于原始 columns 检测，避免依赖注入后的 onCell；needsColMeta 为真时才注入 data-* */
+  const { needsColMeta, hasFirstColumnRowSpan, hasLastColumnRowSpan } = React.useMemo(() => {
+    const empty = {
+      needsColMeta: false,
+      hasFirstColumnRowSpan: false,
+      hasLastColumnRowSpan: false,
+    };
+    if (!columns?.length || !dataSource?.length) {
+      return empty;
     }
-    if (!lastCol || typeof lastCol.onCell !== 'function') return false;
-    // 检测最后一行的最后一列是否被 rowspan 覆盖（rowSpan: 0 表示被隐藏）
-    const lastIndex = dataSource.length - 1;
-    const lastRecord = dataSource[lastIndex];
-    const cellProps = lastCol.onCell(lastRecord, lastIndex);
-    // 如果最后一行的最后一列 rowSpan 为 0，说明被前面的行覆盖了
-    return cellProps && cellProps.rowSpan === 0;
+    const firstCol = getFirstLeafColumn(columns);
+    const lastCol = getLastLeafColumn(columns);
+    const leafHasRowSpan = (col: AnyObject | null) => {
+      if (typeof col?.onCell !== 'function') {
+        return false;
+      }
+      for (let i = 0; i < dataSource.length; i++) {
+        const rs = col.onCell(dataSource[i], i)?.rowSpan;
+        if (rs === 0 || (typeof rs === 'number' && rs > 1)) {
+          return true;
+        }
+      }
+      return false;
+    };
+    const first = leafHasRowSpan(firstCol);
+    const last = firstCol === lastCol ? first : leafHasRowSpan(lastCol);
+    return {
+      needsColMeta: first || last,
+      hasFirstColumnRowSpan: first,
+      hasLastColumnRowSpan: last,
+    };
   }, [columns, dataSource]);
-  // 检测表头是否有多个 tr（表头分组），用于样式上去掉 tbody 纵向分割线
+
+  const columnsWithCellMeta = React.useMemo(
+    () => (needsColMeta ? injectUserColumnCellMeta(columns) : columns),
+    [columns, needsColMeta]
+  );
+
   const hasMultipleTheadRows = React.useMemo(() => {
-    if (!columns) return false;
+    if (!columns?.length) {
+      return false;
+    }
     return columns.some((col: any) => Array.isArray(col?.children) && col.children.length > 0);
   }, [columns]);
+
+  /** 包装器上只挂一个 class：has-rowspan-first | has-rowspan-last | has-rowspan-both（与 antd 一致 class 在 wrapper） */
+  const rowspanSuffix = React.useMemo((): 'first' | 'last' | 'both' | null => {
+    if (!hasFirstColumnRowSpan && !hasLastColumnRowSpan) {
+      return null;
+    }
+    if (hasFirstColumnRowSpan && hasLastColumnRowSpan) {
+      return 'both';
+    }
+    if (hasFirstColumnRowSpan) {
+      return 'first';
+    }
+    return 'last';
+  }, [hasFirstColumnRowSpan, hasLastColumnRowSpan]);
+
   const tableCls = classNames(
     {
       [`${prefixCls}-expandable`]: !isEmpty(expandable),
       [`${prefixCls}-selectable`]: !!rowSelection,
       [`${prefixCls}-has-footer`]: !!footer,
-      [`${prefixCls}-has-first-column-rowspan`]: hasFirstColumnRowSpan,
-      [`${prefixCls}-has-last-column-rowspan`]: hasLastColumnRowSpan,
+      ...(rowspanSuffix ? { [`${prefixCls}-has-rowspan-${rowspanSuffix}`]: true } : {}),
       [`${prefixCls}-thead-multiple-rows`]: hasMultipleTheadRows,
       [`${prefixCls}-inner-bordered`]: innerBordered,
       [`${prefixCls}-no-pagination`]: noPagination,
@@ -189,16 +322,16 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
 
   // 找到最后一个非 hidden 的列索引
   const lastVisibleColumnIndex = React.useMemo(() => {
-    if (!columns) return -1;
-    for (let i = columns.length - 1; i >= 0; i--) {
-      if (!columns[i].hidden) {
+    if (!columnsWithCellMeta) return -1;
+    for (let i = columnsWithCellMeta.length - 1; i >= 0; i--) {
+      if (!columnsWithCellMeta[i].hidden) {
         return i;
       }
     }
     return -1;
-  }, [columns]);
+  }, [columnsWithCellMeta]);
 
-  const newColumns = columns?.map((item, colIndex) => {
+  const newColumns = columnsWithCellMeta?.map((item, colIndex) => {
     const isLastVisibleColumn = colIndex === lastVisibleColumnIndex;
     let newItem = processColumn(item);
     if (item.ellipsis) {

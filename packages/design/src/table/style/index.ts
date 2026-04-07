@@ -248,9 +248,10 @@ export const genTableStyle = (token: TableToken): CSSObject => {
             // 设置 paddingRight 即可
             paddingRight: token.paddingXS,
           },
-          // 紧跟在选择列或展开列后的第一列，左侧间距减小为 8px
+          // 紧跟在选择/展开列后的「逻辑首列」左侧缩进为 8px；首列 rowspan 时续行第一个 td 实为第二列，勿用纯 + 相邻否则会误伤
           [`&${componentCls}-selection-column, &${componentCls}-row-expand-icon-cell`]: {
-            [`& + td, & + th`]: {
+            [`& + td:not([data-ob-user-col]), & + th:not([data-ob-user-col]),
+              & + td[data-ob-user-col="0"], & + th[data-ob-user-col="0"]`]: {
               paddingLeft: token.paddingXS,
             },
           },
@@ -296,8 +297,8 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         },
       },
 
-    // 非虚拟滚动、带边框（非内部边框）、不带 footer、第一列和最后一列都没有 rowSpan 覆盖最后一行的表格样式
-    [`${componentCls}-wrapper:not(${componentCls}-has-footer):not(${componentCls}-has-first-column-rowspan):not(${componentCls}-has-last-column-rowspan):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
+    // 非虚拟滚动、带边框（非内部边框）、不带 footer、首/末列无 rowSpan 覆盖最后一行
+    [`${componentCls}-wrapper:not(${componentCls}-has-footer):not(${componentCls}-has-rowspan-first):not(${componentCls}-has-rowspan-last):not(${componentCls}-has-rowspan-both):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
       {
         [`${componentCls}-tbody`]: {
           // 最后一行左下角单元格增加圆角
@@ -311,9 +312,8 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         },
       },
 
-    // 非虚拟滚动、带边框（非内部边框）、不带 footer、第一列有 rowSpan 覆盖最后一行的表格样式
-    // 通过 rowspan 属性检测延伸到最后一行的单元格，设置左下角圆角
-    [`${componentCls}-wrapper${componentCls}-has-first-column-rowspan:not(${componentCls}-has-footer):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
+    // 非虚拟滚动、带边框、不带 footer：首列或双端 rowSpan 时的左下角（延伸到最后一行的首列格）
+    [`${componentCls}-wrapper:is(${componentCls}-has-rowspan-first, ${componentCls}-has-rowspan-both):not(${componentCls}-has-footer):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
       {
         [`${componentCls}-tbody`]: {
           // 有 rowspan 且延伸到最后一行的第一列单元格，设置左下角圆角
@@ -333,9 +333,8 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         },
       },
 
-    // 非虚拟滚动、带边框（非内部边框）、不带 footer、最后一列有 rowSpan 覆盖最后一行的表格样式
-    // 通过 rowspan 属性检测延伸到最后一行的单元格，设置右下角圆角
-    [`${componentCls}-wrapper${componentCls}-has-last-column-rowspan:not(${componentCls}-has-footer):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
+    // 末列或双端 rowSpan 时的右下角
+    [`${componentCls}-wrapper:is(${componentCls}-has-rowspan-last, ${componentCls}-has-rowspan-both):not(${componentCls}-has-footer):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
       {
         [`${componentCls}-tbody`]: {
           // 有 rowspan 且延伸到最后一行的最后一列单元格，设置右下角圆角
@@ -355,8 +354,8 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         },
       },
 
-    // 非虚拟滚动、带边框（非内部边框）、不带 footer、最后一列没有 rowSpan 但第一列有的表格样式
-    [`${componentCls}-wrapper${componentCls}-has-first-column-rowspan:not(${componentCls}-has-last-column-rowspan):not(${componentCls}-has-footer):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
+    // 仅首列 rowSpan：最后一行右下角圆角
+    [`${componentCls}-wrapper${componentCls}-has-rowspan-first:not(${componentCls}-has-footer):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
       {
         [`${componentCls}-tbody`]: {
           // 最后一行右下角单元格增加圆角
@@ -366,8 +365,8 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         },
       },
 
-    // 非虚拟滚动、带边框（非内部边框）、不带 footer、第一列没有 rowSpan 但最后一列有的表格样式
-    [`${componentCls}-wrapper${componentCls}-has-last-column-rowspan:not(${componentCls}-has-first-column-rowspan):not(${componentCls}-has-footer):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
+    // 仅末列 rowSpan：最后一行左下角圆角
+    [`${componentCls}-wrapper${componentCls}-has-rowspan-last:not(${componentCls}-has-footer):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
       {
         [`${componentCls}-tbody`]: {
           // 最后一行左下角单元格增加圆角
