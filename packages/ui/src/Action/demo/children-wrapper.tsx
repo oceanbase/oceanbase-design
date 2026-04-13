@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Action } from '@oceanbase/ui';
-import { Drawer, Space } from '@oceanbase/design';
+import { Drawer, Space, Switch } from '@oceanbase/design';
 
 const ActionButton4 = () => {
   const [open, setOpen] = useState(false);
@@ -61,37 +61,49 @@ const ActionLink4 = () => {
 const ActionLink5 = () => <Action.Link disabled>action5</Action.Link>;
 
 export default () => {
+  const [showConditionalAction, setShowConditionalAction] = useState(true);
+
   return (
-    <Space direction="vertical">
+    <Space direction="vertical" size="middle">
+      <Space align="center" size="small">
+        <span>显示「条件展示」操作项</span>
+        <Switch checked={showConditionalAction} onChange={setShowConditionalAction} />
+      </Space>
       <Action.Group>
-        <Action.Button>action1</Action.Button>
-        <Action.Button disabled tooltip={'禁用展示tooltip'}>
-          禁用提示
-        </Action.Button>
-        <Action.Button
-          onClick={() => {
-            console.log('hello~~');
-          }}
-        >
-          action3
-        </Action.Button>
-        <ActionButton4 />
-        <ActionButton5 />
+        <>
+          <Action.Button>action1</Action.Button>
+          <Action.Button disabled tooltip={'禁用展示tooltip'}>
+            禁用提示
+          </Action.Button>
+          <Action.Button
+            onClick={() => {
+              console.log('hello~~');
+            }}
+          >
+            action3
+          </Action.Button>
+          {showConditionalAction && <Action.Button key="cond-true">条件展示</Action.Button>}
+          <ActionButton4 />
+          <ActionButton5 />
+        </>
       </Action.Group>
       <Action.Group>
-        <Action.Link>action1</Action.Link>
-        <Action.Link disabled tooltip={'禁用展示tooltip'}>
-          禁用提示
-        </Action.Link>
-        <Action.Link
-          onClick={() => {
-            console.log('hello~~');
-          }}
-        >
-          action3
-        </Action.Link>
-        <ActionLink4 />
-        <ActionLink5 />
+        <>
+          <Action.Link>action1</Action.Link>
+          <Action.Link disabled tooltip={'禁用展示tooltip'}>
+            禁用提示
+          </Action.Link>
+          <Action.Link
+            onClick={() => {
+              console.log('hello~~');
+            }}
+          >
+            action3
+          </Action.Link>
+          {showConditionalAction && <Action.Link key="cond-true-link">条件展示</Action.Link>}
+          <ActionLink4 />
+          <ActionLink5 />
+        </>
       </Action.Group>
     </Space>
   );
