@@ -24,3 +24,5 @@ lerna-debug.log
 useless-locale.txt
 .claude
 AGENTS.md
+figma/ralph
+figma/.env

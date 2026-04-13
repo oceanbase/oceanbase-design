@@ -1,0 +1,455 @@
+// @ts-nocheck
+
+import { DownOutlined } from '@ant-design/icons';
+import { figma } from '@figma/code-connect';
+import {
+  Badge,
+  Button,
+  Checkbox,
+  Progress,
+  Space,
+  Table,
+  Tag,
+  Tooltip,
+  Typography,
+} from '@oceanbase/design';
+import { DbTenantOutlined } from '@oceanbase/icons';
+
+/**
+ * Code Connect — Table 页：TableCell / TableGroup / TableHeader。
+ * Default 单元格：unfold × checkbox × icon × desc 在 props 内嵌套映射（gen-figma §4）。
+ */
+
+// Figma: "TableCell" · 2324:9665
+// https://www.figma.com/design/dqhv73np0wsgrmzIZYRDf2/codeconnect%E6%B5%8B%E8%AF%95%E7%BB%84%E4%BB%B6%E5%BA%93?node-id=2324-9665&m=dev
+figma.connect(Table.Column, '<FIGMA_OCEANBASE_TABLECELL>', {
+  props: {
+    align: figma.enum('position', {
+      left: 'left',
+      center: 'center',
+      right: 'right',
+    }),
+    cell: figma.enum('element', {
+      Default: figma.boolean('unfold', {
+        true: figma.boolean('checkbox', {
+          true: figma.boolean('icon', {
+            true: figma.boolean('desc', {
+              true: (
+                <Space size={4} align="start">
+                  <DownOutlined style={{ fontSize: 12, color: '#8c8c8c' }} />
+                  <Checkbox />
+                  <DbTenantOutlined style={{ fontSize: 14, color: '#595959' }} />
+                  <Space direction="vertical" size={0}>
+                    <Typography.Text>{figma.string('Title')}</Typography.Text>
+                    <Typography.Text type="secondary">{figma.string('Desc')}</Typography.Text>
+                  </Space>
+                </Space>
+              ),
+              false: (
+                <Space size={4} align="start">
+                  <DownOutlined style={{ fontSize: 12, color: '#8c8c8c' }} />
+                  <Checkbox />
+                  <DbTenantOutlined style={{ fontSize: 14, color: '#595959' }} />
+                  <Typography.Text>{figma.string('Title')}</Typography.Text>
+                </Space>
+              ),
+            }),
+            false: figma.boolean('desc', {
+              true: (
+                <Space size={4} align="start">
+                  <DownOutlined style={{ fontSize: 12, color: '#8c8c8c' }} />
+                  <Checkbox />
+                  <Space direction="vertical" size={0}>
+                    <Typography.Text>{figma.string('Title')}</Typography.Text>
+                    <Typography.Text type="secondary">{figma.string('Desc')}</Typography.Text>
+                  </Space>
+                </Space>
+              ),
+              false: (
+                <Space size={4} align="start">
+                  <DownOutlined style={{ fontSize: 12, color: '#8c8c8c' }} />
+                  <Checkbox />
+                  <Typography.Text>{figma.string('Title')}</Typography.Text>
+                </Space>
+              ),
+            }),
+          }),
+          false: figma.boolean('icon', {
+            true: figma.boolean('desc', {
+              true: (
+                <Space size={4} align="start">
+                  <DownOutlined style={{ fontSize: 12, color: '#8c8c8c' }} />
+                  <Checkbox />
+                  <DbTenantOutlined style={{ fontSize: 14, color: '#595959' }} />
+                  <Space direction="vertical" size={0}>
+                    <Typography.Text>{figma.string('Title')}</Typography.Text>
+                    <Typography.Text type="secondary">{figma.string('Desc')}</Typography.Text>
+                  </Space>
+                </Space>
+              ),
+              false: (
+                <Space size={4} align="start">
+                  <DownOutlined style={{ fontSize: 12, color: '#8c8c8c' }} />
+                  <Checkbox />
+                  <DbTenantOutlined style={{ fontSize: 14, color: '#595959' }} />
+                  <Typography.Text>{figma.string('Title')}</Typography.Text>
+                </Space>
+              ),
+            }),
+            false: figma.boolean('desc', {
+              true: (
+                <Space size={4} align="start">
+                  <DownOutlined style={{ fontSize: 12, color: '#8c8c8c' }} />
+                  <Checkbox />
+                  <Space direction="vertical" size={0}>
+                    <Typography.Text>{figma.string('Title')}</Typography.Text>
+                    <Typography.Text type="secondary">{figma.string('Desc')}</Typography.Text>
+                  </Space>
+                </Space>
+              ),
+              false: (
+                <Space size={4} align="start">
+                  <DownOutlined style={{ fontSize: 12, color: '#8c8c8c' }} />
+                  <Checkbox />
+                  <Typography.Text>{figma.string('Title')}</Typography.Text>
+                </Space>
+              ),
+            }),
+          }),
+        }),
+        false: figma.boolean('checkbox', {
+          true: figma.boolean('icon', {
+            true: figma.boolean('desc', {
+              true: (
+                <Space size={4} align="start">
+                  <Checkbox />
+                  <DbTenantOutlined style={{ fontSize: 14, color: '#595959' }} />
+                  <Space direction="vertical" size={0}>
+                    <Typography.Text>{figma.string('Title')}</Typography.Text>
+                    <Typography.Text type="secondary">{figma.string('Desc')}</Typography.Text>
+                  </Space>
+                </Space>
+              ),
+              false: (
+                <Space size={4} align="start">
+                  <Checkbox />
+                  <DbTenantOutlined style={{ fontSize: 14, color: '#595959' }} />
+                  <Typography.Text>{figma.string('Title')}</Typography.Text>
+                </Space>
+              ),
+            }),
+            false: figma.boolean('desc', {
+              true: (
+                <Space size={4} align="start">
+                  <Checkbox />
+                  <Space direction="vertical" size={0}>
+                    <Typography.Text>{figma.string('Title')}</Typography.Text>
+                    <Typography.Text type="secondary">{figma.string('Desc')}</Typography.Text>
+                  </Space>
+                </Space>
+              ),
+              false: (
+                <Space size={4} align="start">
+                  <Checkbox />
+                  <Typography.Text>{figma.string('Title')}</Typography.Text>
+                </Space>
+              ),
+            }),
+          }),
+          false: figma.boolean('icon', {
+            true: figma.boolean('desc', {
+              true: (
+                <Space size={4} align="start">
+                  <DbTenantOutlined style={{ fontSize: 14, color: '#595959' }} />
+                  <Space direction="vertical" size={0}>
+                    <Typography.Text>{figma.string('Title')}</Typography.Text>
+                    <Typography.Text type="secondary">{figma.string('Desc')}</Typography.Text>
+                  </Space>
+                </Space>
+              ),
+              false: (
+                <Space size={4} align="start">
+                  <DbTenantOutlined style={{ fontSize: 14, color: '#595959' }} />
+                  <Typography.Text>{figma.string('Title')}</Typography.Text>
+                </Space>
+              ),
+            }),
+            false: figma.boolean('desc', {
+              true: (
+                <Space direction="vertical" size={0}>
+                  <Typography.Text>{figma.string('Title')}</Typography.Text>
+                  <Typography.Text type="secondary">{figma.string('Desc')}</Typography.Text>
+                </Space>
+              ),
+              false: <Typography.Text>{figma.string('Title')}</Typography.Text>,
+            }),
+          }),
+        }),
+      }),
+      Tag: (
+        <Space size={4}>
+          <span style={{ display: 'none' }} aria-hidden>
+            {figma.string('Title')}
+          </span>
+          <span style={{ display: 'none' }} aria-hidden>
+            {figma.string('Desc')}
+          </span>
+          <Tag color="error">tag</Tag>
+          <Tag color="success">tag</Tag>
+          <Tag color="processing">tag</Tag>
+        </Space>
+      ),
+      Status: (
+        <Space size={8} align="center">
+          <span style={{ display: 'none' }} aria-hidden>
+            {figma.string('Title')}
+          </span>
+          <span style={{ display: 'none' }} aria-hidden>
+            {figma.string('Desc')}
+          </span>
+          <Badge status="processing" text="status" />
+        </Space>
+      ),
+      Process: (
+        <Space size={8} align="center">
+          <span style={{ display: 'none' }} aria-hidden>
+            {figma.string('Title')}
+          </span>
+          <span style={{ display: 'none' }} aria-hidden>
+            {figma.string('Desc')}
+          </span>
+          <Progress percent={50} showInfo={false} style={{ width: 120 }} />
+          <Typography.Text>50%</Typography.Text>
+        </Space>
+      ),
+      Actions: (
+        <Space size={8}>
+          <span style={{ display: 'none' }} aria-hidden>
+            {figma.string('Title')}
+          </span>
+          <span style={{ display: 'none' }} aria-hidden>
+            {figma.string('Desc')}
+          </span>
+          <Button type="primary" ghost>
+            Button
+          </Button>
+          <Button>Button</Button>
+          <Button icon={<Typography.Text>⋯</Typography.Text>} />
+        </Space>
+      ),
+    }),
+  },
+  example: ({ align, cell }) => (
+    <Table dataSource={[{ key: 'r1', v: 'x' }]} pagination={false}>
+      <Table.Column title="列标题" dataIndex="v" key="v" align={align} render={() => cell} />
+    </Table>
+  ),
+});
+
+// Figma: "TableGroup" · 2324:9563
+// https://www.figma.com/design/dqhv73np0wsgrmzIZYRDf2/codeconnect%E6%B5%8B%E8%AF%95%E7%BB%84%E4%BB%B6%E5%BA%93?node-id=2324-9563&m=dev
+figma.connect(Table, '<FIGMA_OCEANBASE_TABLEGROUP>', {
+  props: {
+    body: figma.enum('type', {
+      表头: (
+        <Table
+          pagination={false}
+          columns={[
+            { title: 'Title', dataIndex: 'c1', key: 'c1' },
+            { title: 'Title', dataIndex: 'c2', key: 'c2', align: 'center' },
+            { title: 'Title', dataIndex: 'c3', key: 'c3', align: 'center' },
+            { title: 'Title', dataIndex: 'c4', key: 'c4', align: 'center' },
+            { title: 'Title', dataIndex: 'c5', key: 'c5', align: 'right' },
+          ]}
+          dataSource={[]}
+        />
+      ),
+      单元格: (
+        <Table
+          pagination={false}
+          showHeader={false}
+          columns={[
+            {
+              key: 'c1',
+              render: () => (
+                <Space direction="vertical" size={0}>
+                  <Typography.Text>{figma.string('Title')}</Typography.Text>
+                  <Typography.Text type="secondary">{figma.string('Desc')}</Typography.Text>
+                </Space>
+              ),
+            },
+            {
+              key: 'c2',
+              render: () => (
+                <Space align="start">
+                  <Space direction="vertical" size={0}>
+                    <Typography.Text>{figma.string('Title')}</Typography.Text>
+                    <Typography.Text type="secondary">{figma.string('Desc')}</Typography.Text>
+                  </Space>
+                </Space>
+              ),
+            },
+            {
+              key: 'c3',
+              dataIndex: 'plain',
+              render: (t: string) => t,
+            },
+            {
+              key: 'c4',
+              align: 'center',
+              render: () => (
+                <Space size={4}>
+                  <Tag color="error">tag</Tag>
+                  <Tag color="success">tag</Tag>
+                  <Tag color="processing">tag</Tag>
+                </Space>
+              ),
+            },
+            {
+              key: 'c5',
+              align: 'right',
+              render: () => (
+                <Space>
+                  <Button type="primary" ghost>
+                    Button
+                  </Button>
+                  <Button>Button</Button>
+                  <Button icon={<Typography.Text>⋯</Typography.Text>} />
+                </Space>
+              ),
+            },
+          ]}
+          dataSource={[{ plain: 'Title', key: 'row' }]}
+        />
+      ),
+      翻页器: (
+        <Table
+          columns={[{ title: 'Title', dataIndex: 'a', key: 'a' }]}
+          dataSource={[{ key: '1', a: '—' }]}
+          pagination={{
+            total: 50,
+            current: 1,
+            pageSize: 10,
+            showSizeChanger: true,
+            showTotal: total => 'Total ' + total + ' items',
+            pageSizeOptions: ['10', '20', '50'],
+          }}
+        />
+      ),
+      翻页器2: (
+        <Table
+          columns={[{ title: 'Title', dataIndex: 'a', key: 'a' }]}
+          dataSource={[{ key: '1', a: '—' }]}
+          pagination={{
+            total: 1000,
+            current: 7,
+            pageSize: 10,
+            showSizeChanger: true,
+            showTotal: total => 'Total ' + total + ' items',
+            pageSizeOptions: ['10', '20', '50'],
+          }}
+        />
+      ),
+    }),
+  },
+  example: ({ body }) => (
+    <div style={{ background: '#ffffff', padding: 0, boxSizing: 'border-box' }}>{body}</div>
+  ),
+});
+
+// Figma: "TableHeader" · 2324:9582
+// https://www.figma.com/design/dqhv73np0wsgrmzIZYRDf2/codeconnect%E6%B5%8B%E8%AF%95%E7%BB%84%E4%BB%B6%E5%BA%93?node-id=2324-9582&m=dev
+figma.connect(Table.Column, '<FIGMA_OCEANBASE_TABLEHEADER>', {
+  props: {
+    align: figma.enum('position', {
+      left: 'left',
+      center: 'center',
+      right: 'right',
+    }),
+    sortEnabled: figma.boolean('sort', {
+      true: true,
+      false: false,
+    }),
+    titleRendered: figma.boolean('unfold', {
+      true: figma.boolean('checkbox', {
+        true: figma.boolean('info', {
+          true: (
+            <Space size={4}>
+              <DownOutlined style={{ fontSize: 12, color: '#8c8c8c' }} />
+              <Checkbox />
+              <Space size={4}>
+                <span>{figma.string('Title')}</span>
+                <Tooltip title="帮助说明">
+                  <Typography.Link>ⓘ</Typography.Link>
+                </Tooltip>
+              </Space>
+            </Space>
+          ),
+          false: (
+            <Space size={4}>
+              <DownOutlined style={{ fontSize: 12, color: '#8c8c8c' }} />
+              <Checkbox />
+              <span>{figma.string('Title')}</span>
+            </Space>
+          ),
+        }),
+        false: figma.boolean('info', {
+          true: (
+            <Space size={4}>
+              <Checkbox />
+              <Space size={4}>
+                <span>{figma.string('Title')}</span>
+                <Tooltip title="帮助说明">
+                  <Typography.Link>ⓘ</Typography.Link>
+                </Tooltip>
+              </Space>
+            </Space>
+          ),
+          false: (
+            <Space size={4}>
+              <Checkbox />
+              <span>{figma.string('Title')}</span>
+            </Space>
+          ),
+        }),
+      }),
+      false: figma.boolean('checkbox', {
+        true: figma.boolean('info', {
+          true: (
+            <Space size={4}>
+              <Space size={4}>
+                <span>{figma.string('Title')}</span>
+                <Tooltip title="帮助说明">
+                  <Typography.Link>ⓘ</Typography.Link>
+                </Tooltip>
+              </Space>
+            </Space>
+          ),
+          false: <span>{figma.string('Title')}</span>,
+        }),
+        false: figma.boolean('info', {
+          true: (
+            <Space size={4}>
+              <span>{figma.string('Title')}</span>
+              <Tooltip title="帮助说明">
+                <Typography.Link>ⓘ</Typography.Link>
+              </Tooltip>
+            </Space>
+          ),
+          false: <span>{figma.string('Title')}</span>,
+        }),
+      }),
+    }),
+  },
+  example: ({ titleRendered, align, sortEnabled }) => (
+    <Table dataSource={[{ key: '1', field: '—' }]} pagination={false}>
+      <Table.Column
+        title={titleRendered}
+        dataIndex="field"
+        key="field"
+        align={align}
+        sorter={sortEnabled}
+      />
+    </Table>
+  ),
+});

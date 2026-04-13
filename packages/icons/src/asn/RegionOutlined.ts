@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const RegionOutlined: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"0 0 16 16","focusable":"false"},"children":[{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M3.75 10.5c.95 0 1.75.8 1.75 1.75S4.7 14 3.75 14 2 13.2 2 12.25s.8-1.75 1.75-1.75zm0-1C2.25 9.5 1 10.75 1 12.25S2.25 15 3.75 15s2.75-1.25 2.75-2.75S5.25 9.5 3.75 9.5zM12.25 2C13.2 2 14 2.8 14 3.75s-.8 1.75-1.75 1.75-1.75-.8-1.75-1.75S11.3 2 12.25 2zm0-1C10.75 1 9.5 2.25 9.5 3.75s1.25 2.75 2.75 2.75S15 5.25 15 3.75 13.75 1 12.25 1z","fill-rule":"evenodd"}},{"tag":"path","attrs":{"d":"M5.5 3h5v1h-5z"}},{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M10.5 3h-5v1h5V3z","fill-rule":"evenodd"}},{"tag":"path","attrs":{"d":"M5.5 12h5v1h-5z"}},{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M10.5 12h-5v1h5v-1zM13 5.5h-1v5h1v-5zM4 5.5H3v5h1v-5z","fill-rule":"evenodd"}},{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M12.25 10.5c.95 0 1.75.8 1.75 1.75S13.2 14 12.25 14s-1.75-.8-1.75-1.75.8-1.75 1.75-1.75zm0-1c-1.5 0-2.75 1.25-2.75 2.75S10.75 15 12.25 15 15 13.75 15 12.25 13.75 9.5 12.25 9.5zM3.75 2c.95 0 1.75.8 1.75 1.75S4.7 5.5 3.75 5.5 2 4.7 2 3.75 2.8 2 3.75 2zm0-1C2.25 1 1 2.25 1 3.75S2.25 6.5 3.75 6.5 6.5 5.25 6.5 3.75 5.25 1 3.75 1z","fill-rule":"evenodd"}}]},"name":"region","theme":"outlined"};
+
+export default RegionOutlined;

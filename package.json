@@ -33,7 +33,11 @@
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,less,md,json}\"",
     "tsc": "tsc --noEmit",
     "tsc:clean": "tsc --build --clean",
-    "locale:remove-useless": "ts-node scripts/remove-useless-locale.ts"
+    "locale:remove-useless": "ts-node scripts/remove-useless-locale.ts",
+    "generate:figma-stubs": "ts-node-esm --transpile-only scripts/figma/code-connect/gen-figma-stubs.ts",
+    "generate:ralph-batch-loop": "ts-node-esm --transpile-only scripts/figma/ralph/gen-code-connect-batch-loop.ts",
+    "figma:connect:publish": "node --env-file=figma/.env node_modules/@figma/code-connect/dist/cli.js connect publish --config figma/figma.config.json --batch-size 5",
+    "figma:icons": "node --env-file=figma/.env scripts/figma/icons/app.mjs"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -55,6 +59,7 @@
     "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
     "@emotion/server": "^11.11.0",
+    "@figma/code-connect": "file:./figma/figma-code-connect-cli.tgz",
     "@qixian.cs/github-contributors-list": "^2.0.2",
     "@rc-component/trigger": "^2.3.1",
     "@stackblitz/sdk": "^1.11.0",
@@ -122,5 +127,10 @@
     "vitest": "^2.1.9",
     "vitest-fetch-mock": "^0.2.2",
     "web-vitals": "^3.5.2"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@figma/code-connect@1.4.3": "patches/@figma__code-connect@1.4.3.patch"
+    }
   }
 }

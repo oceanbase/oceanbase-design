@@ -1,0 +1,1492 @@
+[
+  [
+    "AccessFilled",
+    "",
+    "figma.connect(AccessFilled, \"<FIGMA_ICONS_BASE>?node-id=2420-2796\", { example: () => <AccessFilled /> });"
+  ],
+  [
+    "AccessOutlined",
+    "",
+    "figma.connect(AccessOutlined, \"<FIGMA_ICONS_BASE>?node-id=2420-2787\", { example: () => <AccessOutlined /> });"
+  ],
+  [
+    "AccountAuditFilled",
+    "",
+    "figma.connect(AccountAuditFilled, \"<FIGMA_ICONS_BASE>?node-id=2502-260\", { example: () => <AccountAuditFilled /> });"
+  ],
+  [
+    "AccountAuditOutlined",
+    "",
+    "figma.connect(AccountAuditOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-271\", { example: () => <AccountAuditOutlined /> });"
+  ],
+  [
+    "AccountFilled",
+    "",
+    "figma.connect(AccountFilled, \"<FIGMA_ICONS_BASE>?node-id=2502-225\", { example: () => <AccountFilled /> });"
+  ],
+  [
+    "AccountLinkOutlined",
+    "",
+    "figma.connect(AccountLinkOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-210\", { example: () => <AccountLinkOutlined /> });"
+  ],
+  [
+    "AccountOutlined",
+    "",
+    "figma.connect(AccountOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3632\", { example: () => <AccountOutlined /> });"
+  ],
+  [
+    "AddOutlined",
+    "",
+    "figma.connect(AddOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3371\", { example: () => <AddOutlined /> });"
+  ],
+  [
+    "AdjustmentFilled",
+    "",
+    "figma.connect(AdjustmentFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-961\", { example: () => <AdjustmentFilled /> });"
+  ],
+  [
+    "AdjustmentOutlined",
+    "",
+    "figma.connect(AdjustmentOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-968\", { example: () => <AdjustmentOutlined /> });"
+  ],
+  [
+    "AimOutlined",
+    "",
+    "figma.connect(AimOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3372\", { example: () => <AimOutlined /> });"
+  ],
+  [
+    "AlertFilled",
+    "",
+    "figma.connect(AlertFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2317\", { example: () => <AlertFilled /> });"
+  ],
+  [
+    "AlertOutlined",
+    "",
+    "figma.connect(AlertOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2303\", { example: () => <AlertOutlined /> });"
+  ],
+  [
+    "AlertPrimaryFilled",
+    "",
+    "figma.connect(AlertPrimaryFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2310\", { example: () => <AlertPrimaryFilled /> });"
+  ],
+  [
+    "AliyunColored",
+    "",
+    "figma.connect(AliyunColored, \"<FIGMA_ICONS_BASE>?node-id=2255-5147\", { example: () => <AliyunColored /> });"
+  ],
+  [
+    "ArrowDownOutlined",
+    "",
+    "figma.connect(ArrowDownOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-272\", { example: () => <ArrowDownOutlined /> });"
+  ],
+  [
+    "ArrowLeftOutlined",
+    "",
+    "figma.connect(ArrowLeftOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-274\", { example: () => <ArrowLeftOutlined /> });"
+  ],
+  [
+    "ArrowRightOutlined",
+    "",
+    "figma.connect(ArrowRightOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-276\", { example: () => <ArrowRightOutlined /> });"
+  ],
+  [
+    "ArrowUpOutlined",
+    "",
+    "figma.connect(ArrowUpOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-270\", { example: () => <ArrowUpOutlined /> });"
+  ],
+  [
+    "AuditFilled",
+    "",
+    "figma.connect(AuditFilled, \"<FIGMA_ICONS_BASE>?node-id=2502-193\", { example: () => <AuditFilled /> });"
+  ],
+  [
+    "AuditOutlined",
+    "",
+    "figma.connect(AuditOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-183\", { example: () => <AuditOutlined /> });"
+  ],
+  [
+    "AwsColored",
+    "",
+    "figma.connect(AwsColored, \"<FIGMA_ICONS_BASE>?node-id=2255-5102\", { example: () => <AwsColored /> });"
+  ],
+  [
+    "AzFilled",
+    "",
+    "figma.connect(AzFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1993\", { example: () => <AzFilled /> });"
+  ],
+  [
+    "AzOutlined",
+    "",
+    "figma.connect(AzOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2002\", { example: () => <AzOutlined /> });"
+  ],
+  [
+    "AzureOutlined",
+    "",
+    "figma.connect(AzureOutlined, \"<FIGMA_ICONS_BASE>?node-id=2255-5153\", { example: () => <AzureOutlined /> });"
+  ],
+  [
+    "BackupFilled",
+    "",
+    "figma.connect(BackupFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-926\", { example: () => <BackupFilled /> });"
+  ],
+  [
+    "BackupOutlined",
+    "",
+    "figma.connect(BackupOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-932\", { example: () => <BackupOutlined /> });"
+  ],
+  [
+    "BellFilled",
+    "",
+    "figma.connect(BellFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-715\", { example: () => <BellFilled /> });"
+  ],
+  [
+    "BellOutlined",
+    "",
+    "figma.connect(BellOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-721\", { example: () => <BellOutlined /> });"
+  ],
+  [
+    "BillFilled",
+    "",
+    "figma.connect(BillFilled, \"<FIGMA_ICONS_BASE>?node-id=2502-143\", { example: () => <BillFilled /> });"
+  ],
+  [
+    "BillingFilled",
+    "",
+    "figma.connect(BillingFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-736\", { example: () => <BillingFilled /> });"
+  ],
+  [
+    "BillingOutlined",
+    "",
+    "figma.connect(BillingOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-741\", { example: () => <BillingOutlined /> });"
+  ],
+  [
+    "BillOutlined",
+    "",
+    "figma.connect(BillOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-145\", { example: () => <BillOutlined /> });"
+  ],
+  [
+    "BinaryOutlined",
+    "",
+    "figma.connect(BinaryOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3643\", { example: () => <BinaryOutlined /> });"
+  ],
+  [
+    "BulbOutlined",
+    "",
+    "figma.connect(BulbOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1028\", { example: () => <BulbOutlined /> });"
+  ],
+  [
+    "CalendarOutlined",
+    "",
+    "figma.connect(CalendarOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3347\", { example: () => <CalendarOutlined /> });"
+  ],
+  [
+    "CancelOutlined",
+    "",
+    "figma.connect(CancelOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3337\", { example: () => <CancelOutlined /> });"
+  ],
+  [
+    "CardFilled",
+    "",
+    "figma.connect(CardFilled, \"<FIGMA_ICONS_BASE>?node-id=2502-336\", { example: () => <CardFilled /> });"
+  ],
+  [
+    "CardOutlined",
+    "",
+    "figma.connect(CardOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-335\", { example: () => <CardOutlined /> });"
+  ],
+  [
+    "CaretDownOutlined",
+    "",
+    "figma.connect(CaretDownOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-281\", { example: () => <CaretDownOutlined /> });"
+  ],
+  [
+    "CaretLeftOutlined",
+    "",
+    "figma.connect(CaretLeftOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-283\", { example: () => <CaretLeftOutlined /> });"
+  ],
+  [
+    "CaretRightOutlined",
+    "",
+    "figma.connect(CaretRightOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-285\", { example: () => <CaretRightOutlined /> });"
+  ],
+  [
+    "CaretUpOutlined",
+    "",
+    "figma.connect(CaretUpOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-279\", { example: () => <CaretUpOutlined /> });"
+  ],
+  [
+    "ClearOutlined",
+    "",
+    "figma.connect(ClearOutlined, \"<FIGMA_ICONS_BASE>?node-id=5310-2267\", { example: () => <ClearOutlined /> });"
+  ],
+  [
+    "CloudSyncOutlined",
+    "",
+    "figma.connect(CloudSyncOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3370\", { example: () => <CloudSyncOutlined /> });"
+  ],
+  [
+    "ClusterFilled",
+    "",
+    "figma.connect(ClusterFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1810\", { example: () => <ClusterFilled /> });"
+  ],
+  [
+    "ClusterOutlined",
+    "",
+    "figma.connect(ClusterOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1814\", { example: () => <ClusterOutlined /> });"
+  ],
+  [
+    "CodeSnippetOutlined",
+    "",
+    "figma.connect(CodeSnippetOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3647\", { example: () => <CodeSnippetOutlined /> });"
+  ],
+  [
+    "ColumnOutlined",
+    "",
+    "figma.connect(ColumnOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3634\", { example: () => <ColumnOutlined /> });"
+  ],
+  [
+    "CompatibilityFilled",
+    "",
+    "figma.connect(CompatibilityFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1467\", { example: () => <CompatibilityFilled /> });"
+  ],
+  [
+    "CompatibilityOutlined",
+    "",
+    "figma.connect(CompatibilityOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1474\", { example: () => <CompatibilityOutlined /> });"
+  ],
+  [
+    "ConfirmOutlined",
+    "",
+    "figma.connect(ConfirmOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3338\", { example: () => <ConfirmOutlined /> });"
+  ],
+  [
+    "CopyOutlined",
+    "",
+    "figma.connect(CopyOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3381\", { example: () => <CopyOutlined /> });"
+  ],
+  [
+    "CostFilled",
+    "",
+    "figma.connect(CostFilled, \"<FIGMA_ICONS_BASE>?node-id=2502-178\", { example: () => <CostFilled /> });"
+  ],
+  [
+    "CostOutlined",
+    "",
+    "figma.connect(CostOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-173\", { example: () => <CostOutlined /> });"
+  ],
+  [
+    "CpuFilled",
+    "",
+    "figma.connect(CpuFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2167\", { example: () => <CpuFilled /> });"
+  ],
+  [
+    "CpuOutlined",
+    "",
+    "figma.connect(CpuOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2180\", { example: () => <CpuOutlined /> });"
+  ],
+  [
+    "DangerFilled",
+    "",
+    "figma.connect(DangerFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2407\", { example: () => <DangerFilled /> });"
+  ],
+  [
+    "DangerPrimaryFilled",
+    "",
+    "figma.connect(DangerPrimaryFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2400\", { example: () => <DangerPrimaryFilled /> });"
+  ],
+  [
+    "DatabaseFilled",
+    "",
+    "figma.connect(DatabaseFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1918\", { example: () => <DatabaseFilled /> });"
+  ],
+  [
+    "DatabaseOutlined",
+    "",
+    "figma.connect(DatabaseOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1926\", { example: () => <DatabaseOutlined /> });"
+  ],
+  [
+    "DatahubColored",
+    "",
+    "figma.connect(DatahubColored, \"<FIGMA_ICONS_BASE>?node-id=2255-5036\", { example: () => <DatahubColored /> });"
+  ],
+  [
+    "DataSourceFilled",
+    "",
+    "figma.connect(DataSourceFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1151\", { example: () => <DataSourceFilled /> });"
+  ],
+  [
+    "DataSourceOutlined",
+    "",
+    "figma.connect(DataSourceOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1160\", { example: () => <DataSourceOutlined /> });"
+  ],
+  [
+    "DatasyncFilled",
+    "",
+    "figma.connect(DatasyncFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-3375\", { example: () => <DatasyncFilled /> });"
+  ],
+  [
+    "DataSyncOutlined",
+    "",
+    "figma.connect(DataSyncOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1137\", { example: () => <DataSyncOutlined /> });"
+  ],
+  [
+    "DeleteOutlined",
+    "",
+    "figma.connect(DeleteOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3377\", { example: () => <DeleteOutlined /> });"
+  ],
+  [
+    "DevelopFilled",
+    "",
+    "figma.connect(DevelopFilled, \"<FIGMA_ICONS_BASE>?node-id=2418-1121\", { example: () => <DevelopFilled /> });"
+  ],
+  [
+    "DevelopOutlined",
+    "",
+    "figma.connect(DevelopOutlined, \"<FIGMA_ICONS_BASE>?node-id=2418-1119\", { example: () => <DevelopOutlined /> });"
+  ],
+  [
+    "DiskFilled",
+    "",
+    "figma.connect(DiskFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2206\", { example: () => <DiskFilled /> });"
+  ],
+  [
+    "DiskOutlined",
+    "",
+    "figma.connect(DiskOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2215\", { example: () => <DiskOutlined /> });"
+  ],
+  [
+    "DistributedFilled",
+    "",
+    "figma.connect(DistributedFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1511\", { example: () => <DistributedFilled /> });"
+  ],
+  [
+    "DistributedOutlined",
+    "",
+    "figma.connect(DistributedOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1521\", { example: () => <DistributedOutlined /> });"
+  ],
+  [
+    "DocumentOutlined",
+    "",
+    "figma.connect(DocumentOutlined, \"<FIGMA_ICONS_BASE>?node-id=2347-1391\", { example: () => <DocumentOutlined /> });"
+  ],
+  [
+    "DownDoubleOutlined",
+    "",
+    "figma.connect(DownDoubleOutlined, \"<FIGMA_ICONS_BASE>?node-id=2424-12865\", { example: () => <DownDoubleOutlined /> });"
+  ],
+  [
+    "DownloadOutlined",
+    "",
+    "figma.connect(DownloadOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3380\", { example: () => <DownloadOutlined /> });"
+  ],
+  [
+    "DownOutlined",
+    "",
+    "figma.connect(DownOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-263\", { example: () => <DownOutlined /> });"
+  ],
+  [
+    "DownSquareOutlined",
+    "",
+    "figma.connect(DownSquareOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-294\", { example: () => <DownSquareOutlined /> });"
+  ],
+  [
+    "DragOutlined",
+    "",
+    "figma.connect(DragOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3344\", { example: () => <DragOutlined /> });"
+  ],
+  [
+    "DrillDownOutlined",
+    "",
+    "figma.connect(DrillDownOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3343\", { example: () => <DrillDownOutlined /> });"
+  ],
+  [
+    "DuplicateFilled",
+    "",
+    "figma.connect(DuplicateFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2104\", { example: () => <DuplicateFilled /> });"
+  ],
+  [
+    "DuplicateOutlined",
+    "",
+    "figma.connect(DuplicateOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2110\", { example: () => <DuplicateOutlined /> });"
+  ],
+  [
+    "EditOutlined",
+    "",
+    "figma.connect(EditOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3340\", { example: () => <EditOutlined /> });"
+  ],
+  [
+    "ErrorFilled",
+    "",
+    "figma.connect(ErrorFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2336\", { example: () => <ErrorFilled /> });"
+  ],
+  [
+    "ErrorOutlined",
+    "",
+    "figma.connect(ErrorOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2323\", { example: () => <ErrorOutlined /> });"
+  ],
+  [
+    "ErrorPrimaryOutlined",
+    "",
+    "figma.connect(ErrorPrimaryOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2330\", { example: () => <ErrorPrimaryOutlined /> });"
+  ],
+  [
+    "EventFilled",
+    "",
+    "figma.connect(EventFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-757\", { example: () => <EventFilled /> });"
+  ],
+  [
+    "EventOutlined",
+    "",
+    "figma.connect(EventOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-765\", { example: () => <EventOutlined /> });"
+  ],
+  [
+    "ExpandOutlined",
+    "",
+    "figma.connect(ExpandOutlined, \"<FIGMA_ICONS_BASE>?node-id=2305-1984\", { example: () => <ExpandOutlined /> });"
+  ],
+  [
+    "ExportOutlined",
+    "",
+    "figma.connect(ExportOutlined, \"<FIGMA_ICONS_BASE>?node-id=2317-399\", { example: () => <ExportOutlined /> });"
+  ],
+  [
+    "EyeInvisibleOutlined",
+    "",
+    "figma.connect(EyeInvisibleOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3385\", { example: () => <EyeInvisibleOutlined /> });"
+  ],
+  [
+    "EyeOutlined",
+    "",
+    "figma.connect(EyeOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3351\", { example: () => <EyeOutlined /> });"
+  ],
+  [
+    "FileFilled",
+    "",
+    "figma.connect(FileFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-816\", { example: () => <FileFilled /> });"
+  ],
+  [
+    "FileFolderFilled",
+    "",
+    "figma.connect(FileFolderFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1531\", { example: () => <FileFolderFilled /> });"
+  ],
+  [
+    "FileFolderOutlined",
+    "",
+    "figma.connect(FileFolderOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3342\", { example: () => <FileFolderOutlined /> });"
+  ],
+  [
+    "FileOutlined",
+    "",
+    "figma.connect(FileOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3358\", { example: () => <FileOutlined /> });"
+  ],
+  [
+    "FilesOutlined",
+    "",
+    "figma.connect(FilesOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-823\", { example: () => <FilesOutlined /> });"
+  ],
+  [
+    "FilterOutlined",
+    "",
+    "figma.connect(FilterOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3438\", { example: () => <FilterOutlined /> });"
+  ],
+  [
+    "FolderOutlined",
+    "",
+    "figma.connect(FolderOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3361\", { example: () => <FolderOutlined /> });"
+  ],
+  [
+    "FolderOutOutlined",
+    "",
+    "figma.connect(FolderOutOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1534\", { example: () => <FolderOutOutlined /> });"
+  ],
+  [
+    "FoldOutlined",
+    "",
+    "figma.connect(FoldOutlined, \"<FIGMA_ICONS_BASE>?node-id=2305-1985\", { example: () => <FoldOutlined /> });"
+  ],
+  [
+    "FullScreenExitOutlined",
+    "",
+    "figma.connect(FullScreenExitOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3382\", { example: () => <FullScreenExitOutlined /> });"
+  ],
+  [
+    "FullScreenOutlined",
+    "",
+    "figma.connect(FullScreenOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3387\", { example: () => <FullScreenOutlined /> });"
+  ],
+  [
+    "FunctionOutlined",
+    "",
+    "figma.connect(FunctionOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3642\", { example: () => <FunctionOutlined /> });"
+  ],
+  [
+    "GcpColored",
+    "",
+    "figma.connect(GcpColored, \"<FIGMA_ICONS_BASE>?node-id=2255-5121\", { example: () => <GcpColored /> });"
+  ],
+  [
+    "GlyphColored",
+    "",
+    "figma.connect(GlyphColored, \"<FIGMA_ICONS_BASE>?node-id=2255-5128\", { example: () => <GlyphColored /> });"
+  ],
+  [
+    "HelpFilled",
+    "",
+    "figma.connect(HelpFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1024\", { example: () => <HelpFilled /> });"
+  ],
+  [
+    "HelpOutlined",
+    "",
+    "figma.connect(HelpOutlined, \"<FIGMA_ICONS_BASE>?node-id=2845-5180\", { example: () => <HelpOutlined /> });"
+  ],
+  [
+    "HomePageFilled",
+    "",
+    "figma.connect(HomePageFilled, \"<FIGMA_ICONS_BASE>?node-id=2320-398\", { example: () => <HomePageFilled /> });"
+  ],
+  [
+    "HomePageOutlined",
+    "",
+    "figma.connect(HomePageOutlined, \"<FIGMA_ICONS_BASE>?node-id=2320-400\", { example: () => <HomePageOutlined /> });"
+  ],
+  [
+    "HostMachineFilled",
+    "",
+    "figma.connect(HostMachineFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1862\", { example: () => <HostMachineFilled /> });"
+  ],
+  [
+    "HostMachineOutlined",
+    "",
+    "figma.connect(HostMachineOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1872\", { example: () => <HostMachineOutlined /> });"
+  ],
+  [
+    "HuaweiLogoColored",
+    "",
+    "figma.connect(HuaweiLogoColored, \"<FIGMA_ICONS_BASE>?node-id=2255-5136\", { example: () => <HuaweiLogoColored /> });"
+  ],
+  [
+    "IndexOutlined",
+    "",
+    "figma.connect(IndexOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3654\", { example: () => <IndexOutlined /> });"
+  ],
+  [
+    "InfoFilled",
+    "",
+    "figma.connect(InfoFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2372\", { example: () => <InfoFilled /> });"
+  ],
+  [
+    "InfoOutlined",
+    "",
+    "figma.connect(InfoOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2358\", { example: () => <InfoOutlined /> });"
+  ],
+  [
+    "InfoPrimaryOutlined",
+    "",
+    "figma.connect(InfoPrimaryOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2365\", { example: () => <InfoPrimaryOutlined /> });"
+  ],
+  [
+    "IntegrationFilled",
+    "",
+    "figma.connect(IntegrationFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1316\", { example: () => <IntegrationFilled /> });"
+  ],
+  [
+    "IntegrationOutlined",
+    "",
+    "figma.connect(IntegrationOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1321\", { example: () => <IntegrationOutlined /> });"
+  ],
+  [
+    "InvoiceFilled",
+    "",
+    "figma.connect(InvoiceFilled, \"<FIGMA_ICONS_BASE>?node-id=2502-166\", { example: () => <InvoiceFilled /> });"
+  ],
+  [
+    "InvoiceOutlined",
+    "",
+    "figma.connect(InvoiceOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-159\", { example: () => <InvoiceOutlined /> });"
+  ],
+  [
+    "JobOutlined",
+    "",
+    "figma.connect(JobOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3635\", { example: () => <JobOutlined /> });"
+  ],
+  [
+    "KafkaColored",
+    "",
+    "figma.connect(KafkaColored, \"<FIGMA_ICONS_BASE>?node-id=2255-5061\", { example: () => <KafkaColored /> });"
+  ],
+  [
+    "LanguageChOutlined",
+    "",
+    "figma.connect(LanguageChOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-343\", { example: () => <LanguageChOutlined /> });"
+  ],
+  [
+    "LanguageChtOutlined",
+    "",
+    "figma.connect(LanguageChtOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1098\", { example: () => <LanguageChtOutlined /> });"
+  ],
+  [
+    "LanguageEnOutlined",
+    "",
+    "figma.connect(LanguageEnOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-344\", { example: () => <LanguageEnOutlined /> });"
+  ],
+  [
+    "LanguageJpOutlined",
+    "",
+    "figma.connect(LanguageJpOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-345\", { example: () => <LanguageJpOutlined /> });"
+  ],
+  [
+    "LeftDoubleOutlined",
+    "",
+    "figma.connect(LeftDoubleOutlined, \"<FIGMA_ICONS_BASE>?node-id=2424-12867\", { example: () => <LeftDoubleOutlined /> });"
+  ],
+  [
+    "LeftOutlined",
+    "",
+    "figma.connect(LeftOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-265\", { example: () => <LeftOutlined /> });"
+  ],
+  [
+    "LeftSquareOutlined",
+    "",
+    "figma.connect(LeftSquareOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-300\", { example: () => <LeftSquareOutlined /> });"
+  ],
+  [
+    "LifecycleFilled",
+    "",
+    "figma.connect(LifecycleFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-3352\", { example: () => <LifecycleFilled /> });"
+  ],
+  [
+    "LifecycleOutlined",
+    "",
+    "figma.connect(LifecycleOutlined, \"<FIGMA_ICONS_BASE>?node-id=2359-1422\", { example: () => <LifecycleOutlined /> });"
+  ],
+  [
+    "LinkfileOutlined",
+    "",
+    "figma.connect(LinkfileOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3348\", { example: () => <LinkfileOutlined /> });"
+  ],
+  [
+    "LinkOutlined",
+    "",
+    "figma.connect(LinkOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3349\", { example: () => <LinkOutlined /> });"
+  ],
+  [
+    "ListOutlined",
+    "",
+    "figma.connect(ListOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3364\", { example: () => <ListOutlined /> });"
+  ],
+  [
+    "LoadingFilled",
+    "",
+    "figma.connect(LoadingFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2392\", { example: () => <LoadingFilled /> });"
+  ],
+  [
+    "LoadingPrimaryOutlined",
+    "",
+    "figma.connect(LoadingPrimaryOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2390\", { example: () => <LoadingPrimaryOutlined /> });"
+  ],
+  [
+    "LoadingSpinnerOutlined",
+    "",
+    "figma.connect(LoadingSpinnerOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2385\", { example: () => <LoadingSpinnerOutlined /> });"
+  ],
+  [
+    "LocationOutlined",
+    "",
+    "figma.connect(LocationOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3373\", { example: () => <LocationOutlined /> });"
+  ],
+  [
+    "LockOutlined",
+    "",
+    "figma.connect(LockOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3366\", { example: () => <LockOutlined /> });"
+  ],
+  [
+    "LogDiskFilled",
+    "",
+    "figma.connect(LogDiskFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2232\", { example: () => <LogDiskFilled /> });"
+  ],
+  [
+    "LogDiskOutlined",
+    "",
+    "figma.connect(LogDiskOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2239\", { example: () => <LogDiskOutlined /> });"
+  ],
+  [
+    "LogFilled",
+    "",
+    "figma.connect(LogFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-943\", { example: () => <LogFilled /> });"
+  ],
+  [
+    "LogOutlined",
+    "",
+    "figma.connect(LogOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-948\", { example: () => <LogOutlined /> });"
+  ],
+  [
+    "LogoutOutlined",
+    "",
+    "figma.connect(LogoutOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3354\", { example: () => <LogoutOutlined /> });"
+  ],
+  [
+    "MachineRoomFilled",
+    "",
+    "figma.connect(MachineRoomFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2048\", { example: () => <MachineRoomFilled /> });"
+  ],
+  [
+    "MachineRoomOutlined",
+    "",
+    "figma.connect(MachineRoomOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2064\", { example: () => <MachineRoomOutlined /> });"
+  ],
+  [
+    "MemberFilled",
+    "",
+    "figma.connect(MemberFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-844\", { example: () => <MemberFilled /> });"
+  ],
+  [
+    "MembersOutlined",
+    "",
+    "figma.connect(MembersOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1216\", { example: () => <MembersOutlined /> });"
+  ],
+  [
+    "MemoryFilled",
+    "",
+    "figma.connect(MemoryFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2131\", { example: () => <MemoryFilled /> });"
+  ],
+  [
+    "MemoryOutlined",
+    "",
+    "figma.connect(MemoryOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2141\", { example: () => <MemoryOutlined /> });"
+  ],
+  [
+    "MenufoldOutlined",
+    "",
+    "figma.connect(MenufoldOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3365\", { example: () => <MenufoldOutlined /> });"
+  ],
+  [
+    "MenuunfoldOutlined",
+    "",
+    "figma.connect(MenuunfoldOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3378\", { example: () => <MenuunfoldOutlined /> });"
+  ],
+  [
+    "MfaFilled",
+    "",
+    "figma.connect(MfaFilled, \"<FIGMA_ICONS_BASE>?node-id=2502-93\", { example: () => <MfaFilled /> });"
+  ],
+  [
+    "MfaOutlined",
+    "",
+    "figma.connect(MfaOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-98\", { example: () => <MfaOutlined /> });"
+  ],
+  [
+    "MigrationFilled",
+    "",
+    "figma.connect(MigrationFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1119\", { example: () => <MigrationFilled /> });"
+  ],
+  [
+    "MigrationOutlined",
+    "",
+    "figma.connect(MigrationOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1124\", { example: () => <MigrationOutlined /> });"
+  ],
+  [
+    "MinusOutlined",
+    "",
+    "figma.connect(MinusOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3353\", { example: () => <MinusOutlined /> });"
+  ],
+  [
+    "MinusSquareOutlined",
+    "",
+    "figma.connect(MinusSquareOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3368\", { example: () => <MinusSquareOutlined /> });"
+  ],
+  [
+    "MonitorFilled",
+    "",
+    "figma.connect(MonitorFilled, \"<FIGMA_ICONS_BASE>?node-id=2255-21\", { example: () => <MonitorFilled /> });"
+  ],
+  [
+    "MonitorLineChartFilled",
+    "",
+    "figma.connect(MonitorLineChartFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1176\", { example: () => <MonitorLineChartFilled /> });"
+  ],
+  [
+    "MonitorLineChartOutlined",
+    "",
+    "figma.connect(MonitorLineChartOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1180\", { example: () => <MonitorLineChartOutlined /> });"
+  ],
+  [
+    "MonitorOutlined",
+    "",
+    "figma.connect(MonitorOutlined, \"<FIGMA_ICONS_BASE>?node-id=2255-22\", { example: () => <MonitorOutlined /> });"
+  ],
+  [
+    "MoreHorizontalOutlined",
+    "",
+    "figma.connect(MoreHorizontalOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3384\", { example: () => <MoreHorizontalOutlined /> });"
+  ],
+  [
+    "MoreVerticalOutlined",
+    "",
+    "figma.connect(MoreVerticalOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3350\", { example: () => <MoreVerticalOutlined /> });"
+  ],
+  [
+    "MysqlColored",
+    "",
+    "figma.connect(MysqlColored, \"<FIGMA_ICONS_BASE>?node-id=2255-5049\", { example: () => <MysqlColored /> });"
+  ],
+  [
+    "NetworkFilled",
+    "",
+    "figma.connect(NetworkFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1058\", { example: () => <NetworkFilled /> });"
+  ],
+  [
+    "NetworkOutlined",
+    "",
+    "figma.connect(NetworkOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1081\", { example: () => <NetworkOutlined /> });"
+  ],
+  [
+    "NetworkSettingFilled",
+    "",
+    "figma.connect(NetworkSettingFilled, \"<FIGMA_ICONS_BASE>?node-id=2294-1155\", { example: () => <NetworkSettingFilled /> });"
+  ],
+  [
+    "NetworkSettingOutlined",
+    "",
+    "figma.connect(NetworkSettingOutlined, \"<FIGMA_ICONS_BASE>?node-id=2294-1156\", { example: () => <NetworkSettingOutlined /> });"
+  ],
+  [
+    "NewsOutlined",
+    "",
+    "figma.connect(NewsOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-408\", { example: () => <NewsOutlined /> });"
+  ],
+  [
+    "NewtickeOutlined",
+    "",
+    "figma.connect(NewtickeOutlined, \"<FIGMA_ICONS_BASE>?node-id=2420-2910\", { example: () => <NewtickeOutlined /> });"
+  ],
+  [
+    "NewticketFilled",
+    "",
+    "figma.connect(NewticketFilled, \"<FIGMA_ICONS_BASE>?node-id=2420-2834\", { example: () => <NewticketFilled /> });"
+  ],
+  [
+    "NewticketOutlined",
+    "",
+    "figma.connect(NewticketOutlined, \"<FIGMA_ICONS_BASE>?node-id=2420-2850\", { example: () => <NewticketOutlined /> });"
+  ],
+  [
+    "NodeFilled",
+    "",
+    "figma.connect(NodeFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1889\", { example: () => <NodeFilled /> });"
+  ],
+  [
+    "NodeOutlined",
+    "",
+    "figma.connect(NodeOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1896\", { example: () => <NodeOutlined /> });"
+  ],
+  [
+    "NotificationBellOutlined",
+    "",
+    "figma.connect(NotificationBellOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-243\", { example: () => <NotificationBellOutlined /> });"
+  ],
+  [
+    "NumOutlined",
+    "",
+    "figma.connect(NumOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3645\", { example: () => <NumOutlined /> });"
+  ],
+  [
+    "OasFilled",
+    "",
+    "figma.connect(OasFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-903\", { example: () => <OasFilled /> });"
+  ],
+  [
+    "OasOutlined",
+    "",
+    "figma.connect(OasOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-912\", { example: () => <OasOutlined /> });"
+  ],
+  [
+    "ObProxyFilled",
+    "",
+    "figma.connect(ObProxyFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1769\", { example: () => <ObProxyFilled /> });"
+  ],
+  [
+    "ObProxyOutlined",
+    "",
+    "figma.connect(ObProxyOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1779\", { example: () => <ObProxyOutlined /> });"
+  ],
+  [
+    "OceanbaseColored",
+    "",
+    "figma.connect(OceanbaseColored, \"<FIGMA_ICONS_BASE>?node-id=2255-5043\", { example: () => <OceanbaseColored /> });"
+  ],
+  [
+    "OneToOneOutlined",
+    "",
+    "figma.connect(OneToOneOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3374\", { example: () => <OneToOneOutlined /> });"
+  ],
+  [
+    "OperationFilled",
+    "",
+    "figma.connect(OperationFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1442\", { example: () => <OperationFilled /> });"
+  ],
+  [
+    "OperationOutlined",
+    "",
+    "figma.connect(OperationOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1446\", { example: () => <OperationOutlined /> });"
+  ],
+  [
+    "OpsFilled",
+    "",
+    "figma.connect(OpsFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1399\", { example: () => <OpsFilled /> });"
+  ],
+  [
+    "OpsOutlined",
+    "",
+    "figma.connect(OpsOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1407\", { example: () => <OpsOutlined /> });"
+  ],
+  [
+    "OracleColored",
+    "",
+    "figma.connect(OracleColored, \"<FIGMA_ICONS_BASE>?node-id=2255-5055\", { example: () => <OracleColored /> });"
+  ],
+  [
+    "OrgFilled",
+    "",
+    "figma.connect(OrgFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-787\", { example: () => <OrgFilled /> });"
+  ],
+  [
+    "OrgOutlined",
+    "",
+    "figma.connect(OrgOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-797\", { example: () => <OrgOutlined /> });"
+  ],
+  [
+    "OverviewFilled",
+    "",
+    "figma.connect(OverviewFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-878\", { example: () => <OverviewFilled /> });"
+  ],
+  [
+    "OverviewOutlined",
+    "",
+    "figma.connect(OverviewOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-882\", { example: () => <OverviewOutlined /> });"
+  ],
+  [
+    "PackageBodyOutlined",
+    "",
+    "figma.connect(PackageBodyOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3656\", { example: () => <PackageBodyOutlined /> });"
+  ],
+  [
+    "PackageHeaderOutlined",
+    "",
+    "figma.connect(PackageHeaderOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3640\", { example: () => <PackageHeaderOutlined /> });"
+  ],
+  [
+    "PackageOutlined",
+    "",
+    "figma.connect(PackageOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3653\", { example: () => <PackageOutlined /> });"
+  ],
+  [
+    "ParameterOutlined",
+    "",
+    "figma.connect(ParameterOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3649\", { example: () => <ParameterOutlined /> });"
+  ],
+  [
+    "PartitionOutlined",
+    "",
+    "figma.connect(PartitionOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3646\", { example: () => <PartitionOutlined /> });"
+  ],
+  [
+    "PauseFilled",
+    "",
+    "figma.connect(PauseFilled, \"<FIGMA_ICONS_BASE>?node-id=2255-43\", { example: () => <PauseFilled /> });"
+  ],
+  [
+    "PauseOutlined",
+    "",
+    "figma.connect(PauseOutlined, \"<FIGMA_ICONS_BASE>?node-id=2255-34\", { example: () => <PauseOutlined /> });"
+  ],
+  [
+    "PerformanceFilled",
+    "",
+    "figma.connect(PerformanceFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1486\", { example: () => <PerformanceFilled /> });"
+  ],
+  [
+    "PerformanceOutlined",
+    "",
+    "figma.connect(PerformanceOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1490\", { example: () => <PerformanceOutlined /> });"
+  ],
+  [
+    "PersonalSpaceFilled",
+    "",
+    "figma.connect(PersonalSpaceFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1229\", { example: () => <PersonalSpaceFilled /> });"
+  ],
+  [
+    "PersonalSpaceOutlined",
+    "",
+    "figma.connect(PersonalSpaceOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1233\", { example: () => <PersonalSpaceOutlined /> });"
+  ],
+  [
+    "PgColored",
+    "",
+    "figma.connect(PgColored, \"<FIGMA_ICONS_BASE>?node-id=2255-5085\", { example: () => <PgColored /> });"
+  ],
+  [
+    "PlscriptOutlined",
+    "",
+    "figma.connect(PlscriptOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3631\", { example: () => <PlscriptOutlined /> });"
+  ],
+  [
+    "PlusOutlined",
+    "",
+    "figma.connect(PlusOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3362\", { example: () => <PlusOutlined /> });"
+  ],
+  [
+    "PlusSquareOutlined",
+    "",
+    "figma.connect(PlusSquareOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3356\", { example: () => <PlusSquareOutlined /> });"
+  ],
+  [
+    "PolardbColored",
+    "",
+    "figma.connect(PolardbColored, \"<FIGMA_ICONS_BASE>?node-id=2255-4997\", { example: () => <PolardbColored /> });"
+  ],
+  [
+    "ProcedureOutlined",
+    "",
+    "figma.connect(ProcedureOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3648\", { example: () => <ProcedureOutlined /> });"
+  ],
+  [
+    "ProductFilled",
+    "",
+    "figma.connect(ProductFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1370\", { example: () => <ProductFilled /> });"
+  ],
+  [
+    "ProductOutlined",
+    "",
+    "figma.connect(ProductOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1375\", { example: () => <ProductOutlined /> });"
+  ],
+  [
+    "ProjectFilled",
+    "",
+    "figma.connect(ProjectFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1250\", { example: () => <ProjectFilled /> });"
+  ],
+  [
+    "ProjectOutlined",
+    "",
+    "figma.connect(ProjectOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1258\", { example: () => <ProjectOutlined /> });"
+  ],
+  [
+    "QuestionOutlined",
+    "",
+    "figma.connect(QuestionOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2377\", { example: () => <QuestionOutlined /> });"
+  ],
+  [
+    "RedoFlatOutlined",
+    "",
+    "figma.connect(RedoFlatOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3379\", { example: () => <RedoFlatOutlined /> });"
+  ],
+  [
+    "RegionFilled",
+    "",
+    "figma.connect(RegionFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1953\", { example: () => <RegionFilled /> });"
+  ],
+  [
+    "RegionOutlined",
+    "",
+    "figma.connect(RegionOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1964\", { example: () => <RegionOutlined /> });"
+  ],
+  [
+    "ReloadOutlined",
+    "",
+    "figma.connect(ReloadOutlined, \"<FIGMA_ICONS_BASE>?node-id=2359-1410\", { example: () => <ReloadOutlined /> });"
+  ],
+  [
+    "ReturnOutlined",
+    "",
+    "figma.connect(ReturnOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3641\", { example: () => <ReturnOutlined /> });"
+  ],
+  [
+    "RightDoubleOutlined",
+    "",
+    "figma.connect(RightDoubleOutlined, \"<FIGMA_ICONS_BASE>?node-id=2424-12869\", { example: () => <RightDoubleOutlined /> });"
+  ],
+  [
+    "RightOutlined",
+    "",
+    "figma.connect(RightOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-267\", { example: () => <RightOutlined /> });"
+  ],
+  [
+    "RightSquareOutlined",
+    "",
+    "figma.connect(RightSquareOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-306\", { example: () => <RightSquareOutlined /> });"
+  ],
+  [
+    "RocketmqColored",
+    "",
+    "figma.connect(RocketmqColored, \"<FIGMA_ICONS_BASE>?node-id=2255-5071\", { example: () => <RocketmqColored /> });"
+  ],
+  [
+    "SafetyFilled",
+    "",
+    "figma.connect(SafetyFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1295\", { example: () => <SafetyFilled /> });"
+  ],
+  [
+    "SafetyOutlined",
+    "",
+    "figma.connect(SafetyOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1303\", { example: () => <SafetyOutlined /> });"
+  ],
+  [
+    "SaveOutlined",
+    "",
+    "figma.connect(SaveOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3359\", { example: () => <SaveOutlined /> });"
+  ],
+  [
+    "SearchOutlined",
+    "",
+    "figma.connect(SearchOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3383\", { example: () => <SearchOutlined /> });"
+  ],
+  [
+    "SeekOutlined",
+    "",
+    "figma.connect(SeekOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3386\", { example: () => <SeekOutlined /> });"
+  ],
+  [
+    "SequenceOutlined",
+    "",
+    "figma.connect(SequenceOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3633\", { example: () => <SequenceOutlined /> });"
+  ],
+  [
+    "SettingOutlined",
+    "",
+    "figma.connect(SettingOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3341\", { example: () => <SettingOutlined /> });"
+  ],
+  [
+    "ShareOutlined",
+    "",
+    "figma.connect(ShareOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3346\", { example: () => <ShareOutlined /> });"
+  ],
+  [
+    "SnippetFilled",
+    "",
+    "figma.connect(SnippetFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1336\", { example: () => <SnippetFilled /> });"
+  ],
+  [
+    "SnippetOutlined",
+    "",
+    "figma.connect(SnippetOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1340\", { example: () => <SnippetOutlined /> });"
+  ],
+  [
+    "SortNegativeOutlined",
+    "",
+    "figma.connect(SortNegativeOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3435\", { example: () => <SortNegativeOutlined /> });"
+  ],
+  [
+    "SortOutlined",
+    "",
+    "figma.connect(SortOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3437\", { example: () => <SortOutlined /> });"
+  ],
+  [
+    "SortPositiveOutlined",
+    "",
+    "figma.connect(SortPositiveOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3434\", { example: () => <SortPositiveOutlined /> });"
+  ],
+  [
+    "SqlConsoleFilled",
+    "",
+    "figma.connect(SqlConsoleFilled, \"<FIGMA_ICONS_BASE>?node-id=2418-1112\", { example: () => <SqlConsoleFilled /> });"
+  ],
+  [
+    "SqlConsoleOutlined",
+    "",
+    "figma.connect(SqlConsoleOutlined, \"<FIGMA_ICONS_BASE>?node-id=2418-1106\", { example: () => <SqlConsoleOutlined /> });"
+  ],
+  [
+    "SqlLineChartOutlined",
+    "",
+    "figma.connect(SqlLineChartOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3357\", { example: () => <SqlLineChartOutlined /> });"
+  ],
+  [
+    "SqlScriptOutlined",
+    "",
+    "figma.connect(SqlScriptOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3638\", { example: () => <SqlScriptOutlined /> });"
+  ],
+  [
+    "StarOutlined",
+    "",
+    "figma.connect(StarOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3360\", { example: () => <StarOutlined /> });"
+  ],
+  [
+    "StringOutlined",
+    "",
+    "figma.connect(StringOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3650\", { example: () => <StringOutlined /> });"
+  ],
+  [
+    "SubProgramOutlined",
+    "",
+    "figma.connect(SubProgramOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3651\", { example: () => <SubProgramOutlined /> });"
+  ],
+  [
+    "SubscriptionFilled",
+    "",
+    "figma.connect(SubscriptionFilled, \"<FIGMA_ICONS_BASE>?node-id=2359-1039\", { example: () => <SubscriptionFilled /> });"
+  ],
+  [
+    "SubscriptionOutlined",
+    "",
+    "figma.connect(SubscriptionOutlined, \"<FIGMA_ICONS_BASE>?node-id=2359-1013\", { example: () => <SubscriptionOutlined /> });"
+  ],
+  [
+    "SuccessFilled",
+    "",
+    "figma.connect(SuccessFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2353\", { example: () => <SuccessFilled /> });"
+  ],
+  [
+    "SuccessOutlined",
+    "",
+    "figma.connect(SuccessOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2341\", { example: () => <SuccessOutlined /> });"
+  ],
+  [
+    "SuccessPrimaryOutlined",
+    "",
+    "figma.connect(SuccessPrimaryOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2347\", { example: () => <SuccessPrimaryOutlined /> });"
+  ],
+  [
+    "SupportFilled",
+    "",
+    "figma.connect(SupportFilled, \"<FIGMA_ICONS_BASE>?node-id=2420-2783\", { example: () => <SupportFilled /> });"
+  ],
+  [
+    "SupportOutlined",
+    "",
+    "figma.connect(SupportOutlined, \"<FIGMA_ICONS_BASE>?node-id=2420-2780\", { example: () => <SupportOutlined /> });"
+  ],
+  [
+    "SwitchOutlined",
+    "",
+    "figma.connect(SwitchOutlined, \"<FIGMA_ICONS_BASE>?node-id=2320-409\", { example: () => <SwitchOutlined /> });"
+  ],
+  [
+    "SyncOutlined",
+    "",
+    "figma.connect(SyncOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1140\", { example: () => <SyncOutlined /> });"
+  ],
+  [
+    "SynonymsOutlined",
+    "",
+    "figma.connect(SynonymsOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3655\", { example: () => <SynonymsOutlined /> });"
+  ],
+  [
+    "TableOutlined",
+    "",
+    "figma.connect(TableOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3657\", { example: () => <TableOutlined /> });"
+  ],
+  [
+    "TagFilled",
+    "",
+    "figma.connect(TagFilled, \"<FIGMA_ICONS_BASE>?node-id=2207-325\", { example: () => <TagFilled /> });"
+  ],
+  [
+    "TagOutlined",
+    "",
+    "figma.connect(TagOutlined, \"<FIGMA_ICONS_BASE>?node-id=2207-314\", { example: () => <TagOutlined /> });"
+  ],
+  [
+    "TaskFilled",
+    "",
+    "figma.connect(TaskFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-990\", { example: () => <TaskFilled /> });"
+  ],
+  [
+    "TaskOutlined",
+    "",
+    "figma.connect(TaskOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-998\", { example: () => <TaskOutlined /> });"
+  ],
+  [
+    "TeamSpaceFilled",
+    "",
+    "figma.connect(TeamSpaceFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1209\", { example: () => <TeamSpaceFilled /> });"
+  ],
+  [
+    "TeamSpaceOutlined",
+    "",
+    "figma.connect(TeamSpaceOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-855\", { example: () => <TeamSpaceOutlined /> });"
+  ],
+  [
+    "TenantFilled",
+    "",
+    "figma.connect(TenantFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1834\", { example: () => <TenantFilled /> });"
+  ],
+  [
+    "TenantOutlined",
+    "",
+    "figma.connect(TenantOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1842\", { example: () => <TenantOutlined /> });"
+  ],
+  [
+    "TerminateFilled",
+    "",
+    "figma.connect(TerminateFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2421\", { example: () => <TerminateFilled /> });"
+  ],
+  [
+    "TicketFilled",
+    "",
+    "figma.connect(TicketFilled, \"<FIGMA_ICONS_BASE>?node-id=2420-2911\", { example: () => <TicketFilled /> });"
+  ],
+  [
+    "TidbColored",
+    "",
+    "figma.connect(TidbColored, \"<FIGMA_ICONS_BASE>?node-id=2255-5029\", { example: () => <TidbColored /> });"
+  ],
+  [
+    "TimejobOutlined",
+    "",
+    "figma.connect(TimejobOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3644\", { example: () => <TimejobOutlined /> });"
+  ],
+  [
+    "TimeOutlined",
+    "",
+    "figma.connect(TimeOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3367\", { example: () => <TimeOutlined /> });"
+  ],
+  [
+    "TimezoneFilled",
+    "",
+    "figma.connect(TimezoneFilled, \"<FIGMA_ICONS_BASE>?node-id=2294-1169\", { example: () => <TimezoneFilled /> });"
+  ],
+  [
+    "TimezoneOutlined",
+    "",
+    "figma.connect(TimezoneOutlined, \"<FIGMA_ICONS_BASE>?node-id=2294-1159\", { example: () => <TimezoneOutlined /> });"
+  ],
+  [
+    "ToOutlined",
+    "",
+    "figma.connect(ToOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3339\", { example: () => <ToOutlined /> });"
+  ],
+  [
+    "TriggerOutlined",
+    "",
+    "figma.connect(TriggerOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3637\", { example: () => <TriggerOutlined /> });"
+  ],
+  [
+    "TutorialFilled",
+    "",
+    "figma.connect(TutorialFilled, \"<FIGMA_ICONS_BASE>?node-id=2288-1102\", { example: () => <TutorialFilled /> });"
+  ],
+  [
+    "TutorialOutlined",
+    "",
+    "figma.connect(TutorialOutlined, \"<FIGMA_ICONS_BASE>?node-id=2288-1103\", { example: () => <TutorialOutlined /> });"
+  ],
+  [
+    "TutorialsOutlined",
+    "",
+    "figma.connect(TutorialsOutlined, \"<FIGMA_ICONS_BASE>?node-id=2502-254\", { example: () => <TutorialsOutlined /> });"
+  ],
+  [
+    "TypeOutlined",
+    "",
+    "figma.connect(TypeOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3636\", { example: () => <TypeOutlined /> });"
+  ],
+  [
+    "UndoFlatOutlined",
+    "",
+    "figma.connect(UndoFlatOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3369\", { example: () => <UndoFlatOutlined /> });"
+  ],
+  [
+    "UnitFilled",
+    "",
+    "figma.connect(UnitFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2083\", { example: () => <UnitFilled /> });"
+  ],
+  [
+    "UnitOutlined",
+    "",
+    "figma.connect(UnitOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2087\", { example: () => <UnitOutlined /> });"
+  ],
+  [
+    "UpDoubleOutlined",
+    "",
+    "figma.connect(UpDoubleOutlined, \"<FIGMA_ICONS_BASE>?node-id=2424-12863\", { example: () => <UpDoubleOutlined /> });"
+  ],
+  [
+    "UploadOutlined",
+    "",
+    "figma.connect(UploadOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3355\", { example: () => <UploadOutlined /> });"
+  ],
+  [
+    "UpOutlined",
+    "",
+    "figma.connect(UpOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-261\", { example: () => <UpOutlined /> });"
+  ],
+  [
+    "UpSquareOutlined",
+    "",
+    "figma.connect(UpSquareOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-288\", { example: () => <UpSquareOutlined /> });"
+  ],
+  [
+    "UserFilled",
+    "",
+    "figma.connect(UserFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1011\", { example: () => <UserFilled /> });"
+  ],
+  [
+    "UserOutlined",
+    "",
+    "figma.connect(UserOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1014\", { example: () => <UserOutlined /> });"
+  ],
+  [
+    "UserSettingFilled",
+    "",
+    "figma.connect(UserSettingFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1191\", { example: () => <UserSettingFilled /> });"
+  ],
+  [
+    "UserSettingOutlined",
+    "",
+    "figma.connect(UserSettingOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1195\", { example: () => <UserSettingOutlined /> });"
+  ],
+  [
+    "VariableOutlined",
+    "",
+    "figma.connect(VariableOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3639\", { example: () => <VariableOutlined /> });"
+  ],
+  [
+    "VerificationFilled",
+    "",
+    "figma.connect(VerificationFilled, \"<FIGMA_ICONS_BASE>?node-id=2357-2394\", { example: () => <VerificationFilled /> });"
+  ],
+  [
+    "VerificationOutlined",
+    "",
+    "figma.connect(VerificationOutlined, \"<FIGMA_ICONS_BASE>?node-id=2357-2372\", { example: () => <VerificationOutlined /> });"
+  ],
+  [
+    "ViewOutlined",
+    "",
+    "figma.connect(ViewOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3652\", { example: () => <ViewOutlined /> });"
+  ],
+  [
+    "WaitingFilled",
+    "",
+    "figma.connect(WaitingFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2413\", { example: () => <WaitingFilled /> });"
+  ],
+  [
+    "WorkBenchFilled",
+    "",
+    "figma.connect(WorkBenchFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-1350\", { example: () => <WorkBenchFilled /> });"
+  ],
+  [
+    "WorkBenchOutlined",
+    "",
+    "figma.connect(WorkBenchOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-1355\", { example: () => <WorkBenchOutlined /> });"
+  ],
+  [
+    "ZoneFilled",
+    "",
+    "figma.connect(ZoneFilled, \"<FIGMA_ICONS_BASE>?node-id=2088-2020\", { example: () => <ZoneFilled /> });"
+  ],
+  [
+    "ZoneOutlined",
+    "",
+    "figma.connect(ZoneOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-2027\", { example: () => <ZoneOutlined /> });"
+  ],
+  [
+    "ZoominOutlined",
+    "",
+    "figma.connect(ZoominOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3376\", { example: () => <ZoominOutlined /> });"
+  ],
+  [
+    "ZoomoutOutlined",
+    "",
+    "figma.connect(ZoomoutOutlined, \"<FIGMA_ICONS_BASE>?node-id=2088-3363\", { example: () => <ZoomoutOutlined /> });"
+  ]
+]

@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const EditOutlined: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"0 0 16 16","focusable":"false"},"children":[{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M4.027 11.75a.63.63 0 00.093-.008l2.628-.46a.153.153 0 00.083-.044l6.624-6.624c.06-.06.06-.16 0-.22l-2.597-2.599a.155.155 0 00-.111-.045.155.155 0 00-.111.045L4.013 8.42a.159.159 0 00-.044.083l-.461 2.628a.53.53 0 00.519.62zM5.08 9.025l5.667-5.666 1.145 1.146-5.667 5.665-1.39.246.245-1.391zm8.67 4.037H2.25a.5.5 0 00-.5.5v.563c0 .069.056.125.125.125h12.25a.125.125 0 00.125-.125v-.563a.5.5 0 00-.5-.5z","fill-rule":"evenodd"}},{"tag":"mask","attrs":{"height":"14","id":"icon-outlined-edit-a","maskUnits":"userSpaceOnUse","style":"mask-type:luminance","width":"14","x":"1","y":"1"},"children":[{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M4.027 11.75a.63.63 0 00.093-.008l2.628-.46a.153.153 0 00.083-.044l6.624-6.624c.06-.06.06-.16 0-.22l-2.597-2.599a.155.155 0 00-.111-.045.155.155 0 00-.111.045L4.013 8.42a.159.159 0 00-.044.083l-.461 2.628a.53.53 0 00.519.62zM5.08 9.025l5.667-5.666 1.145 1.146-5.667 5.665-1.39.246.245-1.391zm8.67 4.037H2.25a.5.5 0 00-.5.5v.563c0 .069.056.125.125.125h12.25a.125.125 0 00.125-.125v-.563a.5.5 0 00-.5-.5z","fill-rule":"evenodd"}}]}]},"name":"edit","theme":"outlined"};
+
+export default EditOutlined;
