@@ -1,7 +1,0 @@
-// This icon file is generated automatically.
-
-import { IconDefinition } from '../types';
-
-const MachineRoomFilled: IconDefinition = {"icon":{"tag":"svg","attrs":{"fill":"none","viewBox":"0 0 16 16","focusable":"false"},"children":[{"tag":"path","attrs":{"d":"M0 0h16v16H0z","fill":"#fff","opacity":".01"}},{"tag":"path","attrs":{"d":"M0 0h16v16H0z","fill":"#fff","opacity":".01"}},{"tag":"path","attrs":{"d":"M0 0h16v16H0z","fill":"#fff","opacity":".01"}},{"tag":"path","attrs":{"d":"M6.989 2a.5.5 0 01.5.5v11a.5.5 0 01-.5.5H1.995a.5.5 0 01-.5-.5v-11a.5.5 0 01.5-.5H6.99zM3.142 6.015a.126.126 0 00-.125.125v.75c0 .069.056.124.125.125h2.75a.125.125 0 00.125-.125v-.75a.125.125 0 00-.125-.125h-2.75zm0-2.003a.125.125 0 00-.125.125v.75c0 .068.056.125.125.125h2.75a.125.125 0 00.125-.125v-.75a.125.125 0 00-.125-.125h-2.75zM14.004 2a.5.5 0 01.5.5v11a.5.5 0 01-.5.5H9.011a.5.5 0 01-.5-.5v-11a.5.5 0 01.5-.5h4.993zm-3.87 4.015a.125.125 0 00-.126.125v.75c0 .069.056.125.125.125h2.75a.125.125 0 00.125-.125v-.75a.126.126 0 00-.125-.125h-2.75zm0-2.003a.125.125 0 00-.126.125v.75c0 .069.056.125.125.125h2.75a.126.126 0 00.125-.125v-.75a.125.125 0 00-.125-.125h-2.75z","fill":"#0D6CF2"}}]},"name":"machine-room","theme":"filled"};
-
-export default MachineRoomFilled;

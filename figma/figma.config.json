@@ -8,6 +8,7 @@
       "packages/design/src/figma/Breadcrumb.figma.tsx",
       "packages/design/src/figma/Button.figma.tsx",
       "packages/design/src/figma/Card.figma.tsx",
+      "packages/design/src/figma/Icons.figma.tsx",
       "packages/design/src/figma/Checkbox.figma.tsx",
       "packages/design/src/figma/Datatoolbar.figma.tsx",
       "packages/design/src/figma/Dateranger.figma.tsx",
