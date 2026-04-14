@@ -128,10 +128,5 @@
     "vitest": "^2.1.9",
     "vitest-fetch-mock": "^0.2.2",
     "web-vitals": "^3.5.2"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "@figma/code-connect@1.4.3": "patches/@figma__code-connect@1.4.3.patch"
-    }
   }
 }

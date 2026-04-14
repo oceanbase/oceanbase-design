@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  '@figma/code-connect@1.4.3':
-    hash: rozpqdb4ilg6xh6kv4jt6pet7y
-    path: patches/@figma__code-connect@1.4.3.patch
-
 importers:
 
   .:
@@ -48,7 +43,7 @@ importers:
         version: 11.11.0(@emotion/css@11.13.5)
       '@figma/code-connect':
         specifier: file:./figma/figma-code-connect-cli.tgz
-        version: file:figma/figma-code-connect-cli.tgz(patch_hash=rozpqdb4ilg6xh6kv4jt6pet7y)
+        version: file:figma/figma-code-connect-cli.tgz
       '@qixian.cs/github-contributors-list':
         specifier: ^2.0.2
         version: 2.0.2(react-dom@18.3.1)(react@18.3.1)
@@ -26325,9 +26320,8 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: true
 
-  file:figma/figma-code-connect-cli.tgz(patch_hash=rozpqdb4ilg6xh6kv4jt6pet7y):
-    resolution: {integrity: sha512-l1xWgpnoolDx6+0NyeHItTS+A/iQwFXxClidHjkOWYn4fwgfJxVX+WpvL2JXSaSNnMG70nYenEqJz+Zoyw8ZeQ==, tarball: file:figma/figma-code-connect-cli.tgz}
-    id: file:figma/figma-code-connect-cli.tgz
+  file:figma/figma-code-connect-cli.tgz:
+    resolution: {integrity: sha512-odPGGLdxg065hzpbYlFVXbdyRnMpogkKN3dyeOjXudeXoEHIuJ456IQSwqgXNSlWgf/DrMZSdjGo5XGC6MHfZw==, tarball: file:figma/figma-code-connect-cli.tgz}
     name: '@figma/code-connect'
     version: 1.4.3
     engines: {node: '>=18'}
@@ -26361,4 +26355,3 @@ packages:
       - supports-color
       - utf-8-validate
     dev: true
-    patched: true

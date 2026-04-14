@@ -83,6 +83,7 @@ export { default as AccountAuditPrimaryFilled } from './icons/AccountAuditPrimar
 export { default as AccountPrimaryFilled } from './icons/AccountPrimaryFilled';
 export { default as AdjustmentPrimaryFilled } from './icons/AdjustmentPrimaryFilled';
 export { default as AlertPrimaryFilled } from './icons/AlertPrimaryFilled';
+export { default as AlertFilled } from './icons/AlertFilled';
 export { default as AuditPrimaryFilled } from './icons/AuditPrimaryFilled';
 export { default as AzPrimaryFilled } from './icons/AzPrimaryFilled';
 export { default as BackupPrimaryFilled } from './icons/BackupPrimaryFilled';
@@ -97,6 +98,7 @@ export { default as CompatibilityPrimaryFilled } from './icons/CompatibilityPrim
 export { default as CostPrimaryFilled } from './icons/CostPrimaryFilled';
 export { default as CpuPrimaryFilled } from './icons/CpuPrimaryFilled';
 export { default as DangerPrimaryFilled } from './icons/DangerPrimaryFilled';
+export { default as DangerFilled } from './icons/DangerFilled';
 export { default as DataSyncPrimaryFilled } from './icons/DataSyncPrimaryFilled';
 export { default as DatabasePrimaryFilled } from './icons/DatabasePrimaryFilled';
 export { default as DatabaseRadiusFilled } from './icons/DatabaseRadiusFilled';
