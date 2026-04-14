@@ -38,6 +38,7 @@
     "generate:ralph-batch-loop": "ts-node-esm --transpile-only scripts/figma/ralph/gen-code-connect-batch-loop.ts",
     "figma:connect:publish": "node --env-file=figma/.env node_modules/@figma/code-connect/dist/cli.js connect publish --config figma/figma.config.json --batch-size 5",
     "figma:icons": "node --env-file=figma/.env scripts/figma/icons/app.mjs"
+    "check:ob-token-dtcg": "ts-node packages/design/scripts/verify-ob-token-alignment.ts"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

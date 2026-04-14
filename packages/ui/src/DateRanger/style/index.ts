@@ -185,6 +185,7 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
       alignItems: 'center',
     },
     [`${componentCls}-range-editable`]: {
+      position: 'relative',
       display: 'inline-flex',
       alignItems: 'center',
       cursor: 'text',
@@ -193,10 +194,22 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
         opacity: 0.6,
       },
     },
+    [`${componentCls}-range-editable-sizer`]: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      height: 0,
+      overflow: 'hidden',
+      whiteSpace: 'pre',
+      visibility: 'hidden',
+      pointerEvents: 'none',
+    },
     [`${componentCls}-range-editable-input`]: {
-      width: 310,
+      minWidth: 80,
+      maxWidth: '100%',
       cursor: 'text',
       caretColor: 'transparent',
+      fontVariantNumeric: 'tabular-nums',
       '&:focus, &:focus-within': {
         [`${antCls}-input`]: {
           caretColor: token.colorPrimary,

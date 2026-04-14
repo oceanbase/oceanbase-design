@@ -9,7 +9,6 @@ export type ObTokenCategory =
   | 'color-border'
   | 'color-text'
   | 'color-icon'
-  | 'color-status'
   | 'font'
   | 'shadow'
   | 'radius'
@@ -265,7 +264,7 @@ export const obTokenMeta: ObTokenMeta[] = [
     desc: '默认背景色',
     descEn: 'Default background',
     category: 'color-bg',
-    token: 'colorBgContainer',
+    token: 'white',
   },
   {
     name: 'color-bg-primary',
@@ -314,7 +313,35 @@ export const obTokenMeta: ObTokenMeta[] = [
     desc: '禁用背景色',
     descEn: 'Disabled background',
     category: 'color-bg',
-    token: 'gray3',
+    token: 'gray2',
+  },
+  {
+    name: 'color-bg-info',
+    desc: '信息背景色',
+    descEn: 'Info background',
+    category: 'color-bg',
+    token: 'blue1',
+  },
+  {
+    name: 'color-bg-success',
+    desc: '成功背景色',
+    descEn: 'Success background',
+    category: 'color-bg',
+    token: 'green1',
+  },
+  {
+    name: 'color-bg-warning',
+    desc: '警告背景色',
+    descEn: 'Warning background',
+    category: 'color-bg',
+    token: 'orange1',
+  },
+  {
+    name: 'color-bg-error',
+    desc: '错误背景色',
+    descEn: 'Error background',
+    category: 'color-bg',
+    token: 'red1',
   },
 
   // 边框色 Border
@@ -354,11 +381,25 @@ export const obTokenMeta: ObTokenMeta[] = [
     token: 'gray7',
   },
   {
+    name: 'color-border-selected',
+    desc: '选中边框色',
+    descEn: 'Selected border',
+    category: 'color-border',
+    token: 'blue4',
+  },
+  {
     name: 'color-border-focus',
     desc: '聚焦边框色',
     descEn: 'Focus border',
     category: 'color-border',
     token: 'blue4',
+  },
+  {
+    name: 'color-border-success',
+    desc: '成功边框色',
+    descEn: 'Success border',
+    category: 'color-border',
+    token: 'green4',
   },
   {
     name: 'color-border-error',
@@ -439,6 +480,34 @@ export const obTokenMeta: ObTokenMeta[] = [
     category: 'color-text',
     token: 'white',
   },
+  {
+    name: 'color-text-disabled-selected',
+    desc: '禁用且选中时的文本色',
+    descEn: 'Disabled selected text',
+    category: 'color-text',
+    token: 'gray7',
+  },
+  {
+    name: 'color-text-success',
+    desc: '成功文本色',
+    descEn: 'Success text',
+    category: 'color-text',
+    token: 'green4',
+  },
+  {
+    name: 'color-text-error',
+    desc: '错误文本色',
+    descEn: 'Error text',
+    category: 'color-text',
+    token: 'red4',
+  },
+  {
+    name: 'color-text-warning',
+    desc: '警告文本色',
+    descEn: 'Warning text',
+    category: 'color-text',
+    token: 'orange4',
+  },
 
   // 图标色 Icon
   {
@@ -504,175 +573,12 @@ export const obTokenMeta: ObTokenMeta[] = [
     category: 'color-icon',
     token: 'red4',
   },
-
-  // 状态色
   {
-    name: 'color-default-text',
-    desc: '默认状态-文本',
-    descEn: 'Default status text',
-    category: 'color-status',
-    token: 'colorText',
-  },
-  {
-    name: 'color-default-icon',
-    desc: '默认状态-图标',
-    descEn: 'Default status icon',
-    category: 'color-status',
-    token: 'gray8',
-  },
-  {
-    name: 'color-default-fill',
-    desc: '默认状态-填充',
-    descEn: 'Default status fill',
-    category: 'color-status',
-    token: 'gray2',
-  },
-  {
-    name: 'color-default-border',
-    desc: '默认状态-边框',
-    descEn: 'Default status border',
-    category: 'color-status',
-    token: 'gray2',
-  },
-  {
-    name: 'color-info-text',
-    desc: '信息状态-文本',
-    descEn: 'Info status text',
-    category: 'color-status',
-    token: 'blue6',
-  },
-  {
-    name: 'color-info-icon',
-    desc: '信息状态-图标',
-    descEn: 'Info status icon',
-    category: 'color-status',
-    token: 'blue6',
-  },
-  {
-    name: 'color-info-fill',
-    desc: '信息状态-填充',
-    descEn: 'Info status fill',
-    category: 'color-status',
-    token: 'blue1',
-  },
-  {
-    name: 'color-info-border',
-    desc: '信息状态-边框',
-    descEn: 'Info status border',
-    category: 'color-status',
-    token: 'blue3',
-  },
-  {
-    name: 'color-success-text',
-    desc: '成功状态-文本',
-    descEn: 'Success status text',
-    category: 'color-status',
-    token: 'green6',
-  },
-  {
-    name: 'color-success-icon',
-    desc: '成功状态-图标',
-    descEn: 'Success status icon',
-    category: 'color-status',
-    token: 'green6',
-  },
-  {
-    name: 'color-success-fill',
-    desc: '成功状态-填充',
-    descEn: 'Success status fill',
-    category: 'color-status',
-    token: 'green1',
-  },
-  {
-    name: 'color-success-border',
-    desc: '成功状态-边框',
-    descEn: 'Success status border',
-    category: 'color-status',
-    token: 'green3',
-  },
-  {
-    name: 'color-warning-text',
-    desc: '警告状态-文本',
-    descEn: 'Warning status text',
-    category: 'color-status',
-    token: 'orange6',
-  },
-  {
-    name: 'color-warning-icon',
-    desc: '警告状态-图标',
-    descEn: 'Warning status icon',
-    category: 'color-status',
-    token: 'orange6',
-  },
-  {
-    name: 'color-warning-fill',
-    desc: '警告状态-填充',
-    descEn: 'Warning status fill',
-    category: 'color-status',
-    token: 'orange1',
-  },
-  {
-    name: 'color-warning-border',
-    desc: '警告状态-边框',
-    descEn: 'Warning status border',
-    category: 'color-status',
-    token: 'orange3',
-  },
-  {
-    name: 'color-error-text',
-    desc: '错误状态-文本',
-    descEn: 'Error status text',
-    category: 'color-status',
-    token: 'red6',
-  },
-  {
-    name: 'color-error-icon',
-    desc: '错误状态-图标',
-    descEn: 'Error status icon',
-    category: 'color-status',
-    token: 'red6',
-  },
-  {
-    name: 'color-error-fill',
-    desc: '错误状态-填充',
-    descEn: 'Error status fill',
-    category: 'color-status',
-    token: 'red1',
-  },
-  {
-    name: 'color-error-border',
-    desc: '错误状态-边框',
-    descEn: 'Error status border',
-    category: 'color-status',
-    token: 'red3',
-  },
-  {
-    name: 'color-critical-text',
-    desc: '严重错误状态-文本',
-    descEn: 'Critical status text',
-    category: 'color-status',
-    token: 'fuchsia6',
-  },
-  {
-    name: 'color-critical-icon',
-    desc: '严重错误状态-图标',
-    descEn: 'Critical status icon',
-    category: 'color-status',
-    token: 'fuchsia6',
-  },
-  {
-    name: 'color-critical-fill',
-    desc: '严重错误状态-填充',
-    descEn: 'Critical status fill',
-    category: 'color-status',
-    token: 'fuchsia1',
-  },
-  {
-    name: 'color-critical-border',
-    desc: '严重错误状态-边框',
-    descEn: 'Critical status border',
-    category: 'color-status',
-    token: 'fuchsia3',
+    name: 'color-icon-critical',
+    desc: '严重/警示图标色',
+    descEn: 'Critical icon',
+    category: 'color-icon',
+    token: 'fuchsia4',
   },
 
   // ==================== 字体 Token ====================
@@ -682,6 +588,13 @@ export const obTokenMeta: ObTokenMeta[] = [
     descEn: 'Default font family',
     category: 'font',
     token: 'fontFamily',
+  },
+  {
+    name: 'font-family-code',
+    desc: '代码字体',
+    descEn: 'Code font family',
+    category: 'font',
+    token: 'fontFamilyCode',
   },
   {
     name: 'font-weight-sm',
@@ -815,6 +728,13 @@ export const obTokenMeta: ObTokenMeta[] = [
     descEn: 'Caption',
     category: 'font',
     value: '400 12px/20px fontFamily',
+  },
+  {
+    name: 'font-body-code',
+    desc: '代码样式',
+    descEn: 'Code typography',
+    category: 'font',
+    value: '400 13px/20px fontFamilyCode',
   },
 
   // ==================== 阴影 Token ====================

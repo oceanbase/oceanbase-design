@@ -16,6 +16,7 @@ nav:
 - 🆕 新增 `table.selectionColumnWidth` 属性，用于配置表格的选择列宽度。
 - 🆕 新增 `styleProviderProps` 属性，一般用于配置 [StyleProvider](https://github.com/ant-design/cssinjs#styleprovider) 的 `hashPriority` 和 `transformers` 属性实现样式降级，来兼容 Chrome 88 以下的低版本浏览器，详见 [antd v5 样式兼容说明](https://ant-design.antgroup.com/docs/react/compatible-style-cn)。
 - 🆕 新增 `appProps` 属性，用于配置内嵌的 [App 组件属性](https://ant-design.antgroup.com/components/app-cn#app)。
+- 🆕 按 `locale` 自动调整正文字号与表格单元格字号：`zh` / `ja` / `ko`（含 `zh-cn`、`ja-JP` 等）下默认正文 **14px**、表格单元格 **14px**；其它 locale（如 `en`、`de`）与英文一致，为 **13px / 12px**。
 
 ## 代码演示
 

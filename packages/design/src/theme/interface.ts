@@ -162,3 +162,14 @@ export type FullToken<C extends TokenMapKey<ComponentTokenMap>> = FullTokenTypeU
   AliasToken,
   C
 >;
+
+declare module 'antd/es/table/style' {
+  export interface ComponentToken {
+    /**
+     * 英文界面下启用表格内嵌 Button（genSmallBtnStyle）与分页条（含 page size Select）的整套对齐样式。
+     * @descEN Enables full embedded Button and pagination (incl. page-size Select) alignment styles for English UI.
+     * @internal
+     */
+    localeEnEmbeddedControls?: boolean;
+  }
+}

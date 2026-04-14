@@ -91,6 +91,17 @@ export const fontWeightWeakEn = 300;
 export const fontWeightEn = 500;
 export const fontWeightStrongEn = 600;
 
+/** 正文字号（非 Cn），与 token.fontSize 一致；命名对齐 fontFamilyEn / fontWeightEn */
+export const fontSizeEn = 13;
+
+/** Table 单元格字号（非 Cn），与 components.Table.cellFontSize 默认值一致 */
+export const tableCellFontSizeEn = fontSizeSM;
+
+/** Cn 正文/表内字号等 locale 主题补丁（由 config-provider `getLocaleFontSizeThemePatch` 消费） */
+export const fontSizeCn = 14;
+export const fontHeightCn = 22;
+export const lineHeightCn = fontHeightCn / fontSizeCn;
+
 const lineHeightSM = 20 / 12;
 
 const defaultTheme: ThemeConfig = {
@@ -105,9 +116,9 @@ const defaultTheme: ThemeConfig = {
     borderRadiusMD,
     borderRadiusLG,
     fontSizeSM,
-    fontSize: 13,
+    fontSize: fontSizeEn,
     lineHeightSM: lineHeightSM,
-    lineHeight: 20 / 13,
+    lineHeight: 20 / fontSizeEn,
     lineHeightLG: 24 / 16,
     fontHeight: 20,
     fontSizeLG: 16,
@@ -115,12 +126,12 @@ const defaultTheme: ThemeConfig = {
     fontSizeHeading2: 20,
     fontSizeHeading3: 18,
     fontSizeHeading4: 16,
-    fontSizeHeading5: 13,
+    fontSizeHeading5: fontSizeEn,
     lineHeightHeading1: 32 / 24,
     lineHeightHeading2: 28 / 20,
     lineHeightHeading3: 26 / 18,
     lineHeightHeading4: 24 / 16,
-    lineHeightHeading5: 20 / 13,
+    lineHeightHeading5: 20 / fontSizeEn,
     controlHeightSM: 24,
     controlHeight: 28,
     colorLinkHover: blue5,
@@ -453,3 +464,26 @@ defaultTheme.token = {
 };
 
 export default formatTheme(defaultTheme);
+
+/**
+ * Whether the BCP 47 locale should use Cn typography sizing (14px body + table cells; zh/ja/ko).
+ */
+export function isCnLikeLocale(locale: string | undefined): boolean {
+  if (locale == null || locale === '') {
+    return false;
+  }
+  const primary = String(locale).toLowerCase().replace(/_/g, '-').split('-')[0];
+  return primary === 'zh' || primary === 'ja' || primary === 'ko';
+}
+
+/**
+ * Whether the BCP 47 locale uses English UI compact embedded controls in Table
+ * (matches {@link ConfigProvider} `locale.locale` values such as `en`, `en-gb`, `en-*`).
+ */
+export function isEnLikeLocale(locale: string | undefined): boolean {
+  if (locale == null || locale === '') {
+    return false;
+  }
+  const norm = String(locale).toLowerCase().replace(/_/g, '-');
+  return norm === 'en' || norm === 'en-gb' || norm.startsWith('en-');
+}

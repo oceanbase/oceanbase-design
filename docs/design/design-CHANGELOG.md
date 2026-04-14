@@ -8,6 +8,30 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.19
+
+`2026-04-07`
+
+- 主题
+  - 🌈 对齐设计侧的 [Design Token](https://design-token-system.vercel.app/)，包括补齐缺失的 token 以及修正 token 值。[#1462](https://github.com/oceanbase/oceanbase-design/pull/1462)
+  - 🐞 修复 ConfigProvider 主题开启 CSS 变量 模式时，组件样式丢失的问题。[#1463](https://github.com/oceanbase/oceanbase-design/pull/1463)
+- Table
+  - 🐞 修复 Table 首列行合并，在 Card 下单元格 `padding-left` 错位的问题。[#1466](https://github.com/oceanbase/oceanbase-design/pull/1466)
+  - 💄 优化 Table 中的按钮、页码大小下拉选择在中文环境下的样式。[#1467](https://github.com/oceanbase/oceanbase-design/pull/1467)
+
+## 1.0.0-alpha.18
+
+`2026-03-31`
+
+- 🌈 中文、日文和韩文，正文和表格字体改为 `14px`，和英文进行区分。[#1458](https://github.com/oceanbase/oceanbase-design/pull/1458)
+- Filter
+  - 🆕 Filter.Input 新增 `showSwitch` 属性，用于设置是否显示开关。[#1452](https://github.com/oceanbase/oceanbase-design/pull/1452) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🆕 新增 Filter.Slot 组件，以支持自定义下拉面板。[#1446](https://github.com/oceanbase/oceanbase-design/pull/1446) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🆕 Filter 新增 `allowClear` 属性，用于设置是否展示清除图标。[#1447](https://github.com/oceanbase/oceanbase-design/pull/1447) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - ⭐️ Filter.Cascader 支持透传属性到 Cascader.Panel。[#1447](https://github.com/oceanbase/oceanbase-design/pull/1447) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 💄 优化 Filter.Select 下拉面板的宽度，默认跟随容器宽度。[#1444](https://github.com/oceanbase/oceanbase-design/pull/1444) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 💄 去掉 Filter.Cascader 选中后的背景色。[#1444](https://github.com/oceanbase/oceanbase-design/pull/1444) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+
 ## 1.0.0-alpha.17
 
 `2026-03-03`
@@ -116,7 +140,8 @@ group: 基础组件
 - 🔥 新增 Filter 筛选器组件，提供多种筛选类型，适用于表格、列表等数据筛选场景。[#1363](https://github.com/oceanbase/oceanbase-design/pull/1363) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
 - 主题
   - 🆕 `theme.useToken()` 新增 `obToken` 返回，用于在 React 函数组件和 hooks 中消费新版 Design Token。[#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)
-  - 🆕 新增 `obToken` 静态对象，用于在 React 类组件和非 React 上下文中消费新版 Design Token。[#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)- 📝 新增 [Design Token 使用文档](https://oceanbase-design-v1.vercel.app/docs/design-token)，详细列举新版 Token 的使用方式和完整列表。[#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)
+  - 🆕 新增 `obToken` 静态对象，用于在 React 类组件和非 React 上下文中消费新版 Design Token。[#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)
+  - 📝 新增 [Design Token 使用文档](https://oceanbase-design-v1.vercel.app/docs/design-token)，详细列举新版 Token 的使用方式和完整列表。[#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)
   - 📢 CSS 变量命名调整 `--ob-spacing-negative-25` => `--ob-space-negative-25`。[#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)
   - 🐞 修复 CSS 变量 `--ob-font-weight-**` 值不正确的问题，去掉多余的单位 `px`。[#1375](https://github.com/oceanbase/oceanbase-design/pull/1375)
 
