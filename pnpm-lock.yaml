@@ -11824,7 +11824,7 @@ packages:
     dev: true
 
   /debug@4.4.3(supports-color@5.5.0):
-    resolution: {integrity: sha512-HAJOBmBAjgCWu9EqgW+JPwK/ANredks5yoaznWqopccruDm6Q/1XI5b3vhse2teaM7lNK9PYPhOBhv+vF8yY8Q==}
+    resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
     engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
@@ -25874,6 +25874,7 @@ packages:
   /whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
     dependencies:
       iconv-lite: 0.6.3
     dev: true
@@ -26316,7 +26317,7 @@ packages:
     dev: true
 
   file:figma/figma-code-connect-cli.tgz:
-    resolution: {integrity: sha512-S0QNlwgBSxMAXfsMsFWNztq1hnW3nOwrNzHKR9QSt/6JQwXTiMLSrPNSJmUYg0MbOc4lLozmmxhYXbIHd80oyg==, tarball: file:figma/figma-code-connect-cli.tgz}
+    resolution: {integrity: sha512-odPGGLdxg065hzpbYlFVXbdyRnMpogkKN3dyeOjXudeXoEHIuJ456IQSwqgXNSlWgf/DrMZSdjGo5XGC6MHfZw==, tarball: file:figma/figma-code-connect-cli.tgz}
     name: '@figma/code-connect'
     version: 1.4.3
     engines: {node: '>=18'}
