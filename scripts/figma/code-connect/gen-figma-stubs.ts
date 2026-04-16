@@ -1,17 +1,17 @@
 /**
  * Fetches a Figma file, groups COMPONENT / COMPONENT_SET by page (CANVAS), and writes
- * one `*.figma.tsx` per page with `figma.connect` blocks and props mapped from
+ * one `index.figma.tsx` per page folder with `figma.connect` blocks and props mapped from
  * `componentPropertyDefinitions`, merged with COMPONENT_SET variant axes inferred from
  * child components (`variantProperties`).
  *
  * Usage:
  *   npm run generate:figma-stubs
  *       Loads `figma/.env` (does not override vars already set in the shell).
- *       Full run: only creates pages that do not yet have a `*.figma.tsx` file.
+ *       Full run: only creates pages that do not yet have `…/<fileBase>/index.figma.tsx`.
  *
  *   npm run generate:figma-stubs -- --reset badge
  *   npm run generate:figma-stubs -- badge
- *       Reset one page file (e.g. `Badge.figma.tsx`) under `packages/design/src/figma/`.
+ *       Reset one page file (e.g. `Badge/index.figma.tsx`) under `packages/design/src/figma/`.
  */
 import fs from 'fs';
 import path from 'path';
@@ -117,7 +117,7 @@ function safePascalExport(name: string, nodeId: string): string {
 
 const SKIPPED_CANVAS_TITLES = new Set(['icon', 'cursor', 'cover', 'demo', 'assests']);
 
-/** True when this Figma page (CANVAS) should not emit a `*.figma.tsx` file. */
+/** True when this Figma page (CANVAS) should not emit a page folder with `index.figma.tsx`. */
 function isSkippedCanvasPage(pageName: string): boolean {
   const cleaned = pageName.replace(/^[\s↵\u21b5]+/u, '').trim();
   if (!cleaned) return false;
@@ -358,10 +358,13 @@ function mergeFigmaConfig(configPath: string, additions: Record<string, string>)
   fs.writeFileSync(configPath, `${JSON.stringify(json, null, 2)}\n`, 'utf8');
 }
 
-/** Align `codeConnect.include` with every `*.figma.tsx` on disk (sorted). Publish/parse use this list. */
+/** Align `codeConnect.include` with every `…/<name>/index.figma.tsx` on disk (sorted). Publish/parse use this list. */
 function syncCodeConnectInclude(configPath: string, uiDirAbs: string, projectRoot: string): void {
   if (!fs.existsSync(uiDirAbs)) return;
-  const names = fs.readdirSync(uiDirAbs).filter(f => f.endsWith('.figma.tsx'));
+  const names = fs
+    .readdirSync(uiDirAbs, { withFileTypes: true })
+    .filter(d => d.isDirectory() && fs.existsSync(path.join(uiDirAbs, d.name, 'index.figma.tsx')))
+    .map(d => path.join(d.name, 'index.figma.tsx'));
   const include = names
     .sort((a, b) => a.localeCompare(b))
     .map(f => {
@@ -444,7 +447,7 @@ function buildPagePlans(
       fileBase,
       pageName,
       pageItems,
-      outPath: path.join(outDir, `${fileBase}.figma.tsx`),
+      outPath: path.join(outDir, fileBase, 'index.figma.tsx'),
     });
   }
   return plans;
@@ -452,6 +455,7 @@ function buildPagePlans(
 
 function normalizeResetArg(raw: string): string {
   let s = raw.trim();
+  s = s.replace(/\/index\.figma\.tsx$/i, '');
   s = s.replace(/^.*[/\\]/, '');
   s = s.replace(/\.figma\.tsx$/i, '');
   return s;
@@ -470,13 +474,13 @@ function parseResetTarget(argv: string[]): string | null {
   if (args.includes('--help') || args.includes('-h')) {
     console.log(`Usage:
   npm run generate:figma-stubs
-      Reads figma/.env. Creates missing page stubs only (existing *.figma.tsx files are not overwritten).
-      Output: packages/design/src/figma/
+      Reads figma/.env. Creates missing page stubs only (existing index.figma.tsx files are not overwritten).
+      Output: packages/design/src/figma/<Page>/index.figma.tsx
 
   npm run generate:figma-stubs -- <name>
   npm run generate:figma-stubs -- --reset <name>
   npm run generate:figma-stubs -- -r <name>
-      Regenerate one file, e.g. badge → packages/design/src/figma/Badge.figma.tsx.
+      Regenerate one file, e.g. badge → packages/design/src/figma/Badge/index.figma.tsx.
 
   npm run generate:figma-stubs -- badge
   npm run generate:figma-stubs -- --reset Badge
@@ -577,7 +581,7 @@ async function main() {
     if (matches.length === 0) {
       const available = plans.map(p => p.fileBase).join(', ');
       console.error(
-        `No page maps to "${resetTargetRaw}.figma.tsx". Figma-derived names: ${available || '(none)'}`
+        `No page maps to "${resetTargetRaw}" (expected packages/design/src/figma/<Name>/index.figma.tsx). Figma-derived names: ${available || '(none)'}`
       );
       process.exit(1);
     }
@@ -601,7 +605,7 @@ async function main() {
     );
     mergeFigmaConfig(figmaConfigPath, configAdditions);
     syncCodeConnectInclude(figmaConfigPath, outDir, repoRoot);
-    console.log(`Reset ${plan.fileBase}.figma.tsx (${plan.pageName}).`);
+    console.log(`Reset ${plan.fileBase}/index.figma.tsx (${plan.pageName}).`);
     return;
   }
 

@@ -10580,7 +10580,7 @@ packages:
       parse5: 7.3.0
       parse5-htmlparser2-tree-adapter: 7.1.0
       parse5-parser-stream: 7.1.2
-      undici: 7.18.2
+      undici: 7.24.8
       whatwg-mimetype: 4.0.0
     dev: true
 
@@ -11824,7 +11824,7 @@ packages:
     dev: true
 
   /debug@4.4.3(supports-color@5.5.0):
-    resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
+    resolution: {integrity: sha512-HAJOBmBAjgCWu9EqgW+JPwK/ANredks5yoaznWqopccruDm6Q/1XI5b3vhse2teaM7lNK9PYPhOBhv+vF8yY8Q==}
     engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
@@ -25052,11 +25052,6 @@ packages:
   /undici-types@7.16.0:
     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
 
-  /undici@7.18.2:
-    resolution: {integrity: sha512-y+8YjDFzWdQlSE9N5nzKMT3g4a5UBX1HKowfdXh0uvAnTaqqwqB92Jt4UXBAeKekDs5IaDKyJFR4X1gYVCgXcw==}
-    engines: {node: '>=20.18.1'}
-    dev: true
-
   /undici@7.24.8:
     resolution: {integrity: sha512-6KQ/+QxK49Z/p3HO6E5ZCZWNnCasyZLa5ExaVYyvPxUwKtbCPMKELJOqh7EqOle0t9cH/7d2TaaTRRa6Nhs4YQ==}
     engines: {node: '>=20.18.1'}
@@ -26321,7 +26316,7 @@ packages:
     dev: true
 
   file:figma/figma-code-connect-cli.tgz:
-    resolution: {integrity: sha512-odPGGLdxg065hzpbYlFVXbdyRnMpogkKN3dyeOjXudeXoEHIuJ456IQSwqgXNSlWgf/DrMZSdjGo5XGC6MHfZw==, tarball: file:figma/figma-code-connect-cli.tgz}
+    resolution: {integrity: sha512-S0QNlwgBSxMAXfsMsFWNztq1hnW3nOwrNzHKR9QSt/6JQwXTiMLSrPNSJmUYg0MbOc4lLozmmxhYXbIHd80oyg==, tarball: file:figma/figma-code-connect-cli.tgz}
     name: '@figma/code-connect'
     version: 1.4.3
     engines: {node: '>=18'}

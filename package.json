@@ -35,6 +35,7 @@
     "tsc:clean": "tsc --build --clean",
     "locale:remove-useless": "ts-node scripts/remove-useless-locale.ts",
     "generate:figma-stubs": "ts-node-esm --transpile-only scripts/figma/code-connect/gen-figma-stubs.ts",
+    "generate:playground-connect-map": "ts-node-esm --transpile-only scripts/figma/code-connect/gen-playground-connect-map.ts",
     "generate:ralph-batch-loop": "ts-node-esm --transpile-only scripts/figma/ralph/gen-code-connect-batch-loop.ts",
     "figma:connect:publish": "node --env-file=figma/.env node_modules/@figma/code-connect/dist/cli.js connect publish --config figma/figma.config.json --batch-size 5",
     "figma:icons": "node --env-file=figma/.env scripts/figma/icons/app.mjs",

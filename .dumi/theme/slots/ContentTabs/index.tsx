@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react';
 import React from 'react';
-import { CodeOutlined, SkinOutlined } from '@oceanbase/icons';
+import { CodeOutlined, LinkOutlined, SkinOutlined } from '@oceanbase/icons';
 import { Tabs } from '@oceanbase/design';
 import { useRouteMeta } from 'dumi';
 import type { IContentTabsProps } from 'dumi/theme-default/slots/ContentTabs';
@@ -8,10 +8,12 @@ import type { TabsProps } from 'rc-tabs';
 
 const titleMap: Record<string, ReactNode> = {
   design: '设计',
+  playground: '组件映射',
 };
 
 const iconMap: Record<string, ReactNode> = {
   design: <SkinOutlined />,
+  playground: <LinkOutlined />,
 };
 
 const ContentTabs: FC<IContentTabsProps> = ({ tabs, tabKey, onChange }) => {
