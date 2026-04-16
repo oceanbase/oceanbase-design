@@ -8,7 +8,7 @@ import type { TabsProps } from 'rc-tabs';
 
 const titleMap: Record<string, ReactNode> = {
   design: '设计',
-  playground: '组件映射',
+  playground: 'Figma Code Connect',
 };
 
 const iconMap: Record<string, ReactNode> = {
