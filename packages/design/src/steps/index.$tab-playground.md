@@ -1,1 +1,7 @@
-<embed src="../figma/Steps/index.md#L8-L100000"></embed>
+本页对应 `packages/design/src/steps/index.figma.tsx` 的 Figma Code Connect 映射。[Figma](https://www.figma.com/design/dqhv73np0wsgrmzIZYRDf2/codeconnect%E6%B5%8B%E8%AF%95%E7%BB%84%E4%BB%B6%E5%BA%93?node-id=5026-8410&m=dev)。
+
+## 代码演示
+
+<code src="./demo/index.figma.tsx" title="StepItem 预览" description="与 index.figma.tsx 中 Steps.Step（FIGMA_OCEANBASE_STEPITEM）映射一致。"></code>
+
+<code src="./demo/steps.figma.tsx" title="Steps 预览" description="与 index.figma.tsx 中 Steps 四步组合（FIGMA_OCEANBASE_STEPS）映射一致。"></code>
