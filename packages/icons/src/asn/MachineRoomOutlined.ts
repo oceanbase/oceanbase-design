@@ -1,7 +1,0 @@
-// This icon file is generated automatically.
-
-import { IconDefinition } from '../types';
-
-const MachineRoomOutlined: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"0 0 16 16","focusable":"false"},"children":[{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M6.989 2H1.995a.5.5 0 00-.5.5v11a.5.5 0 00.5.5H6.99a.5.5 0 00.5-.5v-11a.5.5 0 00-.5-.5zM2.495 13H6.49V3H2.495v10z","fill-rule":"evenodd"}},{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M5.364 5.011H3.628a.125.125 0 01-.125-.125v-.75c0-.069.056-.125.125-.125h1.736c.069 0 .125.056.125.125v.75a.125.125 0 01-.125.125zM5.364 7.015H3.628a.125.125 0 01-.125-.125v-.75c0-.07.056-.125.125-.125h1.736c.069 0 .125.056.125.125v.75a.125.125 0 01-.125.125zM14.005 2H9.01a.5.5 0 00-.5.5v11a.5.5 0 00.5.5h4.994a.5.5 0 00.5-.5v-11a.5.5 0 00-.5-.5zM9.51 13h3.994V3H9.51v10z","fill-rule":"evenodd"}},{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M12.38 5.011h-1.736a.125.125 0 01-.125-.125v-.75c0-.069.056-.125.125-.125h1.736c.068 0 .124.056.124.125v.75a.125.125 0 01-.124.125zM12.38 7.015h-1.736a.125.125 0 01-.125-.125v-.75c0-.07.056-.125.125-.125h1.736c.068 0 .124.056.124.125v.75a.125.125 0 01-.124.125z","fill-rule":"evenodd"}}]},"name":"machine-room","theme":"outlined"};
-
-export default MachineRoomOutlined;

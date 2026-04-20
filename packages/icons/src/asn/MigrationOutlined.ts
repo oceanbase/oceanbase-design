@@ -1,7 +1,0 @@
-// This icon file is generated automatically.
-
-import { IconDefinition } from '../types';
-
-const MigrationOutlined: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"0 0 16 16","focusable":"false"},"children":[{"tag":"path","attrs":{"d":"M6.661 3.539v1H2.754v8.707h6.03v-1.23h1v1.783c0 .247-.2.447-.446.447H2.2a.446.446 0 01-.446-.447V3.985c0-.246.2-.446.446-.446h4.461z"}},{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M6.662 1.754c-.247 0-.447.2-.447.446v2.338h.5a.5.5 0 00.5-.5V2.754h6.03v8.707h-6.03V9.027a.125.125 0 00-.125-.125.875.875 0 00-.875.875v2.238c0 .246.2.446.447.446H13.8c.246 0 .446-.2.446-.446V2.2c0-.246-.2-.446-.446-.446H6.662z","fill-rule":"evenodd"}},{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M10.156 8.975l-.531-.53a.125.125 0 010-.176l1.677-1.685a.125.125 0 000-.176L9.625 4.724a.125.125 0 010-.177l.531-.53a.125.125 0 01.177.001l2.117 2.125a.5.5 0 010 .706l-2.117 2.125a.125.125 0 01-.177 0z","fill-rule":"evenodd"}},{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M11.971 6.996H4.326a.125.125 0 01-.125-.125v-.75c0-.069.056-.125.125-.125h7.645c.07 0 .125.056.125.125v.75a.125.125 0 01-.125.125z","fill-rule":"evenodd"}}]},"name":"migration","theme":"outlined"};
-
-export default MigrationOutlined;

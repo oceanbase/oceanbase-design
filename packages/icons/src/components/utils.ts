@@ -24,14 +24,6 @@ export function isIconDefinition(target: any): target is IconDefinition {
 export function normalizeAttrs(attrs: Attrs = {}): Attrs {
   return Object.keys(attrs).reduce((acc: Attrs, key) => {
     const val = attrs[key];
-    if (key === 'style') {
-      if (typeof val === 'string' && val.trim() === 'mask-type:luminance') {
-        acc.style = { maskType: 'luminance' };
-      } else if (typeof val === 'object' && val !== null) {
-        acc.style = val;
-      }
-      return acc;
-    }
     switch (key) {
       case 'class':
         acc.className = val;
@@ -45,7 +37,7 @@ export function normalizeAttrs(attrs: Attrs = {}): Attrs {
 }
 
 export interface Attrs {
-  [key: string]: unknown;
+  [key: string]: string;
 }
 
 export function generate(

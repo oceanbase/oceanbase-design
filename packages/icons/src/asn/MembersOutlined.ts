@@ -1,7 +1,0 @@
-// This icon file is generated automatically.
-
-import { IconDefinition } from '../types';
-
-const MembersOutlined: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"0 0 16 16","focusable":"false"},"children":[{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M14 1.5H2a.5.5 0 00-.5.5v12a.5.5 0 00.5.5h12a.5.5 0 00.5-.5V2a.5.5 0 00-.5-.5zm-11.5 12h11v-11h-11v11z","fill-rule":"evenodd"}},{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M8.5 3.713a.5.5 0 00-.17.03L3.83 5.38a.5.5 0 00-.33.47v6.068c0 .07.056.125.125.125h.75a.125.125 0 00.125-.125V6.2L8 4.928v6.99c0 .07.056.125.125.125h.75A.125.125 0 009 11.918V4.214a.5.5 0 00-.5-.5z","fill-rule":"evenodd"}},{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M12.112 7.442L8 6.5v5.418c0 .07.056.125.125.125h.75A.125.125 0 009 11.918V7.755l2.5.573v3.59c0 .07.056.125.125.125h.75a.125.125 0 00.125-.125V7.93a.5.5 0 00-.388-.488zM6.875 7h-1.25a.125.125 0 00-.125.125v.75c0 .069.056.125.125.125h1.25A.125.125 0 007 7.875v-.75A.125.125 0 006.875 7zM6.875 9h-1.25a.125.125 0 00-.125.125v.75c0 .069.056.125.125.125h1.25A.125.125 0 007 9.875v-.75A.125.125 0 006.875 9z","fill-rule":"evenodd"}}]},"name":"members","theme":"outlined"};
-
-export default MembersOutlined;
