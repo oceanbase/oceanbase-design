@@ -50,7 +50,7 @@ const FIGMA_IMAGE_WAIT_MS = 15_000;
 const FIGMA_SVG_FETCH_TIMEOUT_MS = 90_000;
 const FIGMA_SVG_FETCH_ATTEMPTS = 5;
 
-const iconsFigmaPath = path.join(repoRoot, 'packages/icons/index.figma.tsx');
+const iconsFigmaPath = path.join(repoRoot, 'packages/design/src/icon/index.figma.tsx');
 
 function normalizeFigmaNodeId(id) {
   return String(id).replace(/-/g, ':');
