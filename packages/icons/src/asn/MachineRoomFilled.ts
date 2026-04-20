@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const MachineRoomFilled: IconDefinition = {"icon":{"tag":"svg","attrs":{"fill":"none","viewBox":"64 64 896 896","focusable":"false"},"children":[{"tag":"path","attrs":{"d":"M0 0h1024v1024H0z","fill":"#fff","opacity":".01"}},{"tag":"path","attrs":{"d":"M0 0h1024v1024H0z","fill":"#fff","opacity":".01"}},{"tag":"path","attrs":{"d":"M0 0h1024v1024H0z","fill":"#fff","opacity":".01"}},{"tag":"path","attrs":{"d":"M447.274 128c17.673 0 32 14.327 32 32v704c0 17.67-14.327 32-32 32H127.71c-17.674 0-32-14.33-32-32V160c0-17.673 14.326-32 32-32h319.563zM201.086 384.938c-4.402.012-7.99 3.597-8 8v48c0 4.41 3.592 7.987 8 8h176a8 8 0 008-8v-48c-.01-4.41-3.588-8-8-8h-176zm0-128.188c-4.408.012-8 3.59-8 8v48c.012 4.4 3.6 7.988 8 8h176c4.41 0 7.988-3.592 8-8v-48a8 8 0 00-8-8h-176zM896.275 128c17.67 0 32 14.327 32 32v704c0 17.67-14.33 32-32 32H576.711c-17.674 0-32-14.33-32-32V160c0-17.673 14.326-32 32-32h319.564zm-247.75 256.938c-4.416 0-7.994 3.59-8 8v48c0 4.418 3.577 8 8 8h176c4.41-.013 8-3.59 8-8v-48c-.013-4.403-3.597-7.989-8-8h-176zm0-128.188c-4.423 0-8 3.582-8 8v48c.013 4.408 3.59 8 8 8h176c4.397-.012 7.987-3.6 8-8v-48c0-4.41-3.59-7.988-8-8h-176z","fill":"#0D6CF2"}}]},"name":"machine-room","theme":"filled"};
+
+export default MachineRoomFilled;

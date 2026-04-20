@@ -1,4 +1,4 @@
-import { ArrowRightOutlined, LeftOutlined, ReloadOutlined, RightOutlined } from '@ant-design/icons';
+import { ArrowRightOutlined, LeftOutlined, ReloadOutlined, RightOutlined } from '@oceanbase/icons';
 import {
   Button,
   Col,

@@ -1,5 +1,4 @@
-import { UserOutlined } from '@ant-design/icons';
-import { CheckOutlined } from '@oceanbase/icons';
+import { CheckOutlined, UserOutlined } from '@oceanbase/icons';
 import {
   Badge,
   Button,

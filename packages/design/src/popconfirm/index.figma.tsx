@@ -1,8 +1,7 @@
 // @ts-nocheck
 
 import { figma } from '@figma/code-connect';
-// Popconfirm 稿面与 antd 默认警告图标一致；@oceanbase/icons 无 ExclamationCircleFilled 语义等价导出（§1）。
-import { ExclamationCircleFilled } from '@ant-design/icons';
+import { ExclamationCircleFilled } from '@oceanbase/icons';
 import { Button, Popconfirm } from '@oceanbase/design';
 
 /**

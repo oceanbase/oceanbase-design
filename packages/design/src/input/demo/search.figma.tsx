@@ -1,4 +1,4 @@
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined } from '@oceanbase/icons';
 import { Col, Input, Row, Select, Space, Switch, Typography } from '@oceanbase/design';
 import React, { useMemo, useState } from 'react';
 

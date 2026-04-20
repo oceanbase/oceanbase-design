@@ -1,4 +1,4 @@
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@oceanbase/icons';
 import { Button, Col, Flex, Row, Space, Switch, Typography, Upload } from '@oceanbase/design';
 import React, { useMemo, useState } from 'react';
 

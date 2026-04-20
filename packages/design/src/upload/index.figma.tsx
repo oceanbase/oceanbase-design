@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-// Figma 上传触发区与 antd Upload 一致；使用 @ant-design/icons 的 UploadOutlined（@oceanbase/icons 无同名上传图标）。
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@oceanbase/icons';
 import { figma } from '@figma/code-connect';
 import { Button, Flex, Typography, Upload } from '@oceanbase/design';
 

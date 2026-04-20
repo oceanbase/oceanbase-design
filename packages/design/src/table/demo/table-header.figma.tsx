@@ -1,4 +1,4 @@
-import { DownOutlined } from '@ant-design/icons';
+import { DownOutlined } from '@oceanbase/icons';
 import {
   Checkbox,
   Col,

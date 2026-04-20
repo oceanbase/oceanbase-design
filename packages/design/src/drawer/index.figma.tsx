@@ -1,29 +1,35 @@
 // @ts-nocheck
 
 import { figma } from '@figma/code-connect';
-import { Button, Descriptions, Drawer, Form, Input, Space } from '@oceanbase/design';
+import {
+  Button,
+  Descriptions,
+  Drawer,
+  Flex,
+  Form,
+  Input,
+  Space,
+  Typography,
+} from '@oceanbase/design';
 
 /**
- * Auto-generated — Code Connect (one file per Figma page).
+ * Code Connect — Drawer（2351:3603：无 footer 区为 Descriptions；有 footer 为 Form + 底部按钮）。
  * Page: "↵Drawer"
+ *
+ * - Figma 控件 **`footer`**：`figma.boolean` — `false` → 双组 Descriptions；`true` → 纵向表单 + `footer` 操作区。
+ * - 预览像素见 `demo/index.figma.tsx`（§3.4a）；本文件不挂 style / className / styles（§3.4c）。
  */
 
 // Figma: "Drawer" · 2351:3603
 // https://www.figma.com/design/dqhv73np0wsgrmzIZYRDf2/codeconnect%E6%B5%8B%E8%AF%95%E7%BB%84%E4%BB%B6%E5%BA%93?node-id=2351-3603&m=dev
 figma.connect(Drawer, '<FIGMA_OCEANBASE_DRAWER>', {
   props: {
-    preview: figma.enum('footer', {
+    root: figma.boolean('footer', {
       false: (
         <Drawer open width={520} placement="right" title="Title" onClose={() => {}}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <Flex vertical gap={24}>
             <Descriptions
-              title={
-                <span
-                  style={{ fontSize: 14, fontWeight: 500, color: '#132039', lineHeight: '20px' }}
-                >
-                  Title
-                </span>
-              }
+              title={<Typography.Text strong>Title</Typography.Text>}
               column={1}
               layout="horizontal"
               bordered={false}
@@ -32,23 +38,9 @@ figma.connect(Drawer, '<FIGMA_OCEANBASE_DRAWER>', {
                 { key: '2', label: 'label', children: 'caption' },
                 { key: '3', label: 'label', children: 'caption' },
               ]}
-              style={{ width: '100%' }}
-              labelStyle={{
-                color: '#5c6b8a',
-                fontSize: 14,
-                lineHeight: '20px',
-                whiteSpace: 'nowrap',
-              }}
-              contentStyle={{ color: '#132039', fontSize: 14, lineHeight: '20px' }}
             />
             <Descriptions
-              title={
-                <span
-                  style={{ fontSize: 14, fontWeight: 500, color: '#132039', lineHeight: '20px' }}
-                >
-                  Title
-                </span>
-              }
+              title={<Typography.Text strong>Title</Typography.Text>}
               column={1}
               layout="horizontal"
               bordered={false}
@@ -57,16 +49,8 @@ figma.connect(Drawer, '<FIGMA_OCEANBASE_DRAWER>', {
                 { key: 'b', label: 'label', children: 'caption' },
                 { key: 'c', label: 'label', children: 'caption' },
               ]}
-              style={{ width: '100%' }}
-              labelStyle={{
-                color: '#5c6b8a',
-                fontSize: 14,
-                lineHeight: '20px',
-                whiteSpace: 'nowrap',
-              }}
-              contentStyle={{ color: '#132039', fontSize: 14, lineHeight: '20px' }}
             />
-          </div>
+          </Flex>
         </Drawer>
       ),
       true: (
@@ -83,7 +67,7 @@ figma.connect(Drawer, '<FIGMA_OCEANBASE_DRAWER>', {
             </Space>
           }
         >
-          <Form layout="vertical" style={{ width: '100%' }}>
+          <Form layout="vertical">
             {Array.from({ length: 9 }, (_, i) => (
               <Form.Item key={'drawer-form-' + i} label="Label">
                 <Input placeholder="Enter" />
@@ -94,5 +78,5 @@ figma.connect(Drawer, '<FIGMA_OCEANBASE_DRAWER>', {
       ),
     }),
   },
-  example: ({ preview }) => <div>{preview}</div>,
+  example: ({ root }) => <div>{root}</div>,
 });

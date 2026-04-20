@@ -1,6 +1,5 @@
-import { DownOutlined } from '@ant-design/icons';
+import { DownOutlined, ObTenantOutlined } from '@oceanbase/icons';
 import { Badge, Button, Checkbox, Progress, Space, Tag, Typography } from '@oceanbase/design';
-import { ObTenantOutlined } from '@oceanbase/icons';
 import React from 'react';
 
 /** 与 `../index.figma.tsx` FIGMA_OCEANBASE_TABLECELL 中 `element` 枚举一致 */

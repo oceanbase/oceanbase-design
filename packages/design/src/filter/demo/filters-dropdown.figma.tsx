@@ -1,4 +1,4 @@
-import { CheckOutlined, PlusOutlined } from '@ant-design/icons';
+import { CheckOutlined, PlusOutlined } from '@oceanbase/icons';
 import {
   Button,
   Checkbox,

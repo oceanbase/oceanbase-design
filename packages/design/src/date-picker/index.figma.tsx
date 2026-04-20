@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-// 箭头类图标使用 @ant-design/icons，与 Figma 图层命名及 MCP 一致；@oceanbase/icons 无等价时再选用。
-import { ArrowRightOutlined, LeftOutlined, ReloadOutlined, RightOutlined } from '@ant-design/icons';
+import { ArrowRightOutlined, LeftOutlined, ReloadOutlined, RightOutlined } from '@oceanbase/icons';
 import { figma } from '@figma/code-connect';
 import { Button, DatePicker, Flex, Tag, TimePicker } from '@oceanbase/design';
 import dayjs from 'dayjs';

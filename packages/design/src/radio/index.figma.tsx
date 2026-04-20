@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-// QuestionCircleOutlined：Figma 为提示类图标；@oceanbase/icons 无等价语义图标时沿用 @ant-design/icons（§1）。
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { QuestionCircleOutlined } from '@oceanbase/icons';
 import { figma } from '@figma/code-connect';
 import {
   AwsColored,

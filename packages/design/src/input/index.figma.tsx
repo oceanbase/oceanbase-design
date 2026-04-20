@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-// Figma 搜索图标：稿面与 antd Search 惯例一致；`SearchOutlined` 取自 @ant-design/icons。
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined } from '@oceanbase/icons';
 import { figma } from '@figma/code-connect';
 import { Input } from '@oceanbase/design';
 

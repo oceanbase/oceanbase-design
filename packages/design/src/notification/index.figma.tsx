@@ -1,13 +1,12 @@
 // @ts-nocheck
 
 import { figma } from '@figma/code-connect';
-// Notification 稿面状态色与 antd 语义图标一致；@oceanbase/icons 无与稿面一一对应的 Filled 变体导出（§1）。
 import {
   CheckCircleFilled,
   CloseCircleFilled,
   CloseOutlined,
   ExclamationCircleFilled,
-} from '@ant-design/icons';
+} from '@oceanbase/icons';
 import { Button, Card, Flex, Space, Typography } from '@oceanbase/design';
 
 /**

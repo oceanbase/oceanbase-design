@@ -3,7 +3,7 @@ import {
   CloseCircleFilled,
   CloseOutlined,
   ExclamationCircleFilled,
-} from '@ant-design/icons';
+} from '@oceanbase/icons';
 import {
   Button,
   Card,

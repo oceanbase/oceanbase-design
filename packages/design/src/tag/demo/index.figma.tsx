@@ -1,5 +1,5 @@
 import { Col, Input, Row, Select, Space, Switch, Tag, Typography } from '@oceanbase/design';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@oceanbase/icons';
 import React, { useMemo, useState } from 'react';
 
 /**

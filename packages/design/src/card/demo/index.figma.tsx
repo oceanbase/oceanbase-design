@@ -1,6 +1,6 @@
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Badge, Button, Card, Col, Input, Row, Select, Space, Typography } from '@oceanbase/design';
-import { DatasyncFilled } from '@oceanbase/icons';
+import { DataSyncFilled } from '@oceanbase/icons';
 import React, { useMemo, useState } from 'react';
 
 /**
@@ -63,7 +63,7 @@ const FILTER_TOOLBAR = (
     <Space size={8}>
       <Button>Button</Button>
       <Button icon={<EllipsisOutlined />} />
-      <Button icon={<DatasyncFilled />} />
+      <Button icon={<DataSyncFilled />} />
     </Space>
   </div>
 );

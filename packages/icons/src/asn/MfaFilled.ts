@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const MfaFilled: IconDefinition = {"icon":{"tag":"svg","attrs":{"fill":"none","viewBox":"64 64 896 896","focusable":"false"},"children":[{"tag":"g","attrs":{"transform":"scale(64)"},"children":[{"tag":"g","attrs":{"clip-path":"url(#icon-filled-mfa-a)"},"children":[{"tag":"path","attrs":{"d":"M8.123 1.429l5.482 1.488a.47.47 0 01.348.454v4.621c0 3.737-2.398 5.415-5.952 6.596-3.556-1.181-5.954-2.86-5.954-6.597V3.37a.47.47 0 01.348-.454l5.482-1.488a.5.5 0 01.246 0m2.757 6.583h-.719a.12.12 0 00-.12.114 2.034 2.034 0 01-3.473 1.33l-.062-.065.375-.294a.12.12 0 00-.045-.212l-1.473-.36a.12.12 0 00-.148.116l-.006 1.521c0 .1.114.158.193.095l.348-.273a2.99 2.99 0 002.258 1.029A3 3 0 0011 8.137a.12.12 0 00-.12-.125M8.022 5.013A3 3 0 005.03 7.889a.12.12 0 00.12.125h.719a.12.12 0 00.118-.116 2.034 2.034 0 013.473-1.33l.062.065-.375.294a.12.12 0 00.045.212l1.473.36a.12.12 0 00.149-.115l.007-1.52a.12.12 0 00-.193-.095l-.348.273a2.99 2.99 0 00-2.258-1.029z","fill":"#0D6CF2"}}]},{"tag":"defs","attrs":{},"children":[{"tag":"clipPath","attrs":{"id":"icon-filled-mfa-a"},"children":[{"tag":"path","attrs":{"d":"M0 0h16v16H0z","fill":"#fff"}}]}]}]}]},"name":"mfa","theme":"filled"};
+
+export default MfaFilled;

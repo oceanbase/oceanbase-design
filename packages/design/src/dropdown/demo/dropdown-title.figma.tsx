@@ -1,4 +1,4 @@
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@oceanbase/icons';
 import { Button, Col, Dropdown, Flex, Row, Space, Switch, Typography } from '@oceanbase/design';
 import type { MenuProps } from '@oceanbase/design';
 import React, { useMemo, useState } from 'react';

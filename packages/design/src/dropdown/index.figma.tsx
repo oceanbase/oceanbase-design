@@ -1,8 +1,6 @@
 // @ts-nocheck
 
-import { CheckOutlined } from '@oceanbase/icons';
-// Figma「Add」与 Plus 语义一致；@oceanbase/icons 无等价线性加号导出
-import { PlusOutlined } from '@ant-design/icons';
+import { CheckOutlined, PlusOutlined } from '@oceanbase/icons';
 import {
   Badge,
   Button,

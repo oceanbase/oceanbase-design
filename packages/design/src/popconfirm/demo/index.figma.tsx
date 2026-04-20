@@ -1,4 +1,4 @@
-import { ExclamationCircleFilled } from '@ant-design/icons';
+import { ExclamationCircleFilled } from '@oceanbase/icons';
 import { Button, Col, Input, Popconfirm, Row, Select, Space, Typography } from '@oceanbase/design';
 import React, { useRef, useState } from 'react';
 

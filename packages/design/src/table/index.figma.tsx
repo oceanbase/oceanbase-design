@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-// DownOutlined（@ant-design/icons）：与稿面折叠箭头语义一致；@oceanbase/icons 无等价「下箭头」通用图标。
-import { DownOutlined } from '@ant-design/icons';
+import { DownOutlined } from '@oceanbase/icons';
 import { figma } from '@figma/code-connect';
 import {
   Badge,

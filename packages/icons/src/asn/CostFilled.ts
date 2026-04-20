@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const CostFilled: IconDefinition = {"icon":{"tag":"svg","attrs":{"fill":"none","viewBox":"64 64 896 896","focusable":"false"},"children":[{"tag":"path","attrs":{"d":"M928 128c17.67 0 32 14.327 32 32v704l-.627 6.438c-2.554 12.512-12.423 22.381-24.935 24.935L928 896H96l-6.438-.627c-12.511-2.554-22.384-12.423-24.937-24.935L64 864V160c0-17.673 14.327-32 32-32h832zM608 320c-88.365 0-160 71.635-160 160l.813 16.375c7.652 75.29 67.521 135.16 142.812 142.812L608 640h288v-64H608c-53.02 0-96-42.98-96-96s42.98-96 96-96h288v-64H608zm0 128c-17.673 0-32 14.327-32 32 0 17.673 14.327 32 32 32 17.673 0 32-14.327 32-32 0-17.673-14.327-32-32-32z","fill":"#0D6CF2"}}]},"name":"cost","theme":"filled"};
+
+export default CostFilled;

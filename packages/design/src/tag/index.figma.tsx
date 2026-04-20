@@ -2,7 +2,7 @@
 
 import { figma } from '@figma/code-connect';
 import { Tag } from '@oceanbase/design';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@oceanbase/icons';
 
 /**
  * Code Connect — Tag（5025:5905；style→color 与 Figma 一致；closeicon / plusicon 为布尔）。

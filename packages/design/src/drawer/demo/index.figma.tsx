@@ -3,6 +3,7 @@ import {
   Col,
   Descriptions,
   Drawer,
+  Flex,
   Form,
   Input,
   Row,
@@ -14,7 +15,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 /**
  * Playground：与 `../index.figma.tsx` 中唯一一条 `figma.connect` 的 props / example 一致。
- * Figma 属性名为 `footer`：`false` → Descriptions 内容；`true` → Form + footer 按钮区。
+ * Figma 属性 **`footer`**（boolean）：`false` → Descriptions 内容；`true` → Form + footer 按钮区。
  * 文档内用 `getContainer` 将抽屉限制在左侧预览区；Code Connect 侧为整页遮罩语义。
  */
 
@@ -70,10 +71,10 @@ const DESCRIPTIONS_BLOCK_B = (
   />
 );
 
-/** 与 figma.connect 中 `example: ({ preview }) => <div>{preview}</div>` 同构，仅补充预览容器与开关状态 */
-function FigmaDrawerExample(props: { preview: React.ReactNode }) {
-  const { preview } = props;
-  return <div>{preview}</div>;
+/** 与 figma.connect 中 `example: ({ root }) => <div>{root}</div>` 同构，仅补充预览容器与开关状态 */
+function FigmaDrawerExample(props: { root: React.ReactNode }) {
+  const { root } = props;
+  return <div>{root}</div>;
 }
 
 type FooterEnum = 'false' | 'true';
@@ -105,10 +106,10 @@ const App: React.FC = () => {
           onClose={handleClose}
           getContainer={container}
         >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <Flex vertical gap={24}>
             {DESCRIPTIONS_BLOCK_A}
             {DESCRIPTIONS_BLOCK_B}
-          </div>
+          </Flex>
         </Drawer>
       );
     }
@@ -189,7 +190,7 @@ const App: React.FC = () => {
               </Button>
             </div>
           )}
-          {preview ? <FigmaDrawerExample preview={preview} /> : null}
+          {preview ? <FigmaDrawerExample root={preview} /> : null}
         </div>
       </Col>
       <Col

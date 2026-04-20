@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { figma } from '@figma/code-connect';
-import { QuestionCircleOutlined, RightOutlined } from '@ant-design/icons';
+import { QuestionCircleOutlined, RightOutlined } from '@oceanbase/icons';
 import { Descriptions, Space, Typography } from '@oceanbase/design';
 
 /**

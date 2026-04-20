@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const PlusCircleOutlined: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"64 64 896 896","focusable":"false"},"children":[{"tag":"g","attrs":{"transform":"scale(64)"},"children":[{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M8 1a7 7 0 10.001 14.001A7 7 0 008 1zm0 12.813A5.813 5.813 0 018 2.187a5.813 5.813 0 010 11.626zM8.5 7.5h2.375c.069 0 .125.056.125.125v.75a.125.125 0 01-.125.125H8.5v2.375a.125.125 0 01-.125.125h-.75a.125.125 0 01-.125-.125V8.5H5.125A.125.125 0 015 8.375v-.75c0-.069.056-.125.125-.125H7.5V5.125c0-.069.056-.125.125-.125h.75c.069 0 .125.056.125.125V7.5z","fill-rule":"evenodd"}},{"tag":"mask","attrs":{"height":"14","id":"icon-outlined-plus-circle-a","maskUnits":"userSpaceOnUse","width":"14","x":"1","y":"1"},"children":[{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M8 1a7 7 0 10.001 14.001A7 7 0 008 1zm0 12.813A5.813 5.813 0 018 2.187a5.813 5.813 0 010 11.626zM8.5 7.5h2.375c.069 0 .125.056.125.125v.75a.125.125 0 01-.125.125H8.5v2.375a.125.125 0 01-.125.125h-.75a.125.125 0 01-.125-.125V8.5H5.125A.125.125 0 015 8.375v-.75c0-.069.056-.125.125-.125H7.5V5.125c0-.069.056-.125.125-.125h.75c.069 0 .125.056.125.125V7.5z","fill-rule":"evenodd"}}]}]}]},"name":"plus-circle","theme":"outlined"};
+
+export default PlusCircleOutlined;

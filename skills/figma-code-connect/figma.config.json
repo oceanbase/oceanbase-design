@@ -80,6 +80,7 @@
       "packages/ui/src/FooterToolbar/index.figma.tsx",
       "packages/ui/src/PageContainer/demo/index.figma.tsx",
       "packages/ui/src/PageContainer/index.figma.tsx",
+      "packages/design/src/icon/index.figma.tsx",
       "packages/icons/src/index.ts",
       "packages/icons/src/types.ts",
       "packages/icons/src/icons/**/*.tsx",

@@ -1,4 +1,4 @@
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { QuestionCircleOutlined } from '@oceanbase/icons';
 import { Col, Flex, Input, Radio, Row, Space, Switch, Typography } from '@oceanbase/design';
 import React, { useMemo, useState } from 'react';
 

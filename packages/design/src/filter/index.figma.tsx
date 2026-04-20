@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import { PlusOutlined } from '@ant-design/icons';
-import { CheckOutlined, FilterOutlined } from '@oceanbase/icons';
+import { CheckOutlined, FilterOutlined, PlusOutlined } from '@oceanbase/icons';
 import {
   Button,
   Checkbox,
