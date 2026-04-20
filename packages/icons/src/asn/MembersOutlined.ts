@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const MembersOutlined: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"64 64 896 896","focusable":"false"},"children":[{"tag":"g","attrs":{"clip-rule":"evenodd","fill-rule":"evenodd"},"children":[{"tag":"path","attrs":{"d":"M896 96H128c-17.673 0-32 14.327-32 32v768c0 17.67 14.327 32 32 32h768c17.67 0 32-14.33 32-32V128c0-17.673-14.33-32-32-32zM160 864h704V160H160v704z"}},{"tag":"path","attrs":{"d":"M544.04 237.658c-3.611 0-7.312.622-10.976 1.954l-288 104.728A31.999 31.999 0 00224 374.413v388.352c0 4.422 3.58 8 8 8h48c4.418 0 8-3.578 8-8V396.828l224-81.456V762.765c0 4.422 3.58 8 8 8h48c4.418 0 8-3.578 8-8V269.686c0-18.309-14.998-32.028-31.96-32.028z"}},{"tag":"path","attrs":{"d":"M775.149 476.305L512 416v346.771c0 4.416 3.582 8 8 8h48c4.418 0 8-3.584 8-8V496.326l160 36.667v229.778c0 4.416 3.584 8 8 8h48c4.416 0 8-3.584 8-8V507.496c0-14.919-10.31-27.858-24.851-31.19zM440 448h-80a8 8 0 00-8 8v48a8 8 0 008 8h80a8 8 0 008-8v-48a8 8 0 00-8-8zM440 576h-80a8 8 0 00-8 8v48a8 8 0 008 8h80a8 8 0 008-8v-48a8 8 0 00-8-8z"}}]}]},"name":"members","theme":"outlined"};
+
+export default MembersOutlined;

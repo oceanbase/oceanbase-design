@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const LogoutOutlined: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"64 64 896 896","focusable":"false"},"children":[{"tag":"g","attrs":{"transform":"scale(64)"},"children":[{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M13.88 11.834h-.84a.121.121 0 00-.121.12v.966h-9.84V3.08h9.841v.965c0 .066.055.12.12.12h.841a.12.12 0 00.12-.12V2.48a.479.479 0 00-.48-.48H2.48a.479.479 0 00-.48.48v11.04c0 .266.214.48.48.48h11.04c.266 0 .48-.214.48-.48v-1.565a.12.12 0 00-.12-.12zm.29-3.932l-2.217-1.75a.125.125 0 00-.203.098v1.188H6.844a.125.125 0 00-.125.125v.875c0 .068.056.124.125.124h4.906V9.75c0 .105.122.164.203.098l2.217-1.75a.125.125 0 000-.196z","fill-rule":"evenodd"}},{"tag":"mask","attrs":{"height":"12","id":"icon-outlined-logout-a","maskUnits":"userSpaceOnUse","width":"13","x":"2","y":"2"},"children":[{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M13.88 11.834h-.84a.121.121 0 00-.121.12v.966h-9.84V3.08h9.841v.965c0 .066.055.12.12.12h.841a.12.12 0 00.12-.12V2.48a.479.479 0 00-.48-.48H2.48a.479.479 0 00-.48.48v11.04c0 .266.214.48.48.48h11.04c.266 0 .48-.214.48-.48v-1.565a.12.12 0 00-.12-.12zm.29-3.932l-2.217-1.75a.125.125 0 00-.203.098v1.188H6.844a.125.125 0 00-.125.125v.875c0 .068.056.124.125.124h4.906V9.75c0 .105.122.164.203.098l2.217-1.75a.125.125 0 000-.196z","fill-rule":"evenodd"}}]}]}]},"name":"logout","theme":"outlined"};
+
+export default LogoutOutlined;
