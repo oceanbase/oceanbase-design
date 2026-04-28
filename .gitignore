@@ -22,6 +22,8 @@ doc.zip
 assets.json
 lerna-debug.log
 useless-locale.txt
-.cursor
+.cursor/*
+!.cursor/skills/
+!.cursor/skills/**
 .claude
 AGENTS.md
