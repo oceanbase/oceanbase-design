@@ -1,0 +1,65 @@
+# Maps changed paths to existing repo labels (see https://github.com/actions/labeler).
+# Labels must already exist on the repository.
+# Omit `changed-files-labels-limit`: some actions/labeler@v6 releases treat unknown top-level keys as labels (integer → parse error).
+
+'@oceanbase/design':
+  - changed-files:
+    - any-glob-to-any-file: 'packages/design/**'
+
+'@oceanbase/ui':
+  - changed-files:
+    - any-glob-to-any-file: 'packages/ui/**'
+
+'@oceanbase/icons':
+  - changed-files:
+    - any-glob-to-any-file: 'packages/icons/**'
+
+'@oceanbase/charts':
+  - changed-files:
+    - any-glob-to-any-file: 'packages/charts/**'
+
+'@oceanbase/util':
+  - changed-files:
+    - any-glob-to-any-file: 'packages/util/**'
+
+'@oceanbase/codemod':
+  - changed-files:
+    - any-glob-to-any-file: 'packages/codemod/**'
+
+documentation:
+  - changed-files:
+    - any-glob-to-any-file: 'docs/**'
+
+changelog:
+  - changed-files:
+    - any-glob-to-any-file: '**/*CHANGELOG.md'
+
+demo:
+  - changed-files:
+    - any-glob-to-any-file: '**/demos/**'
+
+skills:
+  - changed-files:
+    - any-glob-to-any-file: 'skills/**'
+
+site:
+  - changed-files:
+    - any-glob-to-any-file:
+        - '.dumi/**'
+        - '.dumirc.ts'
+        - '.dumirc.theme.ts'
+        - 'plugin-theme-less.ts'
+        - 'public/**'
+        - 'CNAME'
+
+Test:
+  - changed-files:
+    - any-glob-to-any-file: 'tests/**'
+
+workflow:
+  - changed-files:
+    - any-glob-to-any-file: '.github/**'
+
+CI:
+  - changed-files:
+    - any-glob-to-any-file: '.github/workflows/**'
