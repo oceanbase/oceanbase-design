@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const DeleteOutlined: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"64 64 896 896","focusable":"false"},"children":[{"tag":"g","attrs":{"transform":"scale(64)"},"children":[{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M5.625 2.875h4.75V4H11.5V2.75a1 1 0 00-1-1h-5a1 1 0 00-1 1V4h1.125V2.875zM13.5 4h-11a.5.5 0 00-.5.5V5c0 .069.056.125.125.125h.944l.386 8.172a1 1 0 00.998.953h7.094a.999.999 0 00.998-.953l.386-8.172h.944A.125.125 0 0014 5v-.5a.5.5 0 00-.5-.5zm-2.073 9.125H4.573l-.378-8h7.61l-.378 8z","fill-rule":"evenodd"}},{"tag":"mask","attrs":{"height":"14","id":"icon-outlined-delete-a","maskUnits":"userSpaceOnUse","width":"12","x":"2","y":"1"},"children":[{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M5.625 2.875h4.75V4H11.5V2.75a1 1 0 00-1-1h-5a1 1 0 00-1 1V4h1.125V2.875zM13.5 4h-11a.5.5 0 00-.5.5V5c0 .069.056.125.125.125h.944l.386 8.172a1 1 0 00.998.953h7.094a.999.999 0 00.998-.953l.386-8.172h.944A.125.125 0 0014 5v-.5a.5.5 0 00-.5-.5zm-2.073 9.125H4.573l-.378-8h7.61l-.378 8z","fill-rule":"evenodd"}}]}]}]},"name":"delete","theme":"outlined"};
+
+export default DeleteOutlined;
