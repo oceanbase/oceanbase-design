@@ -13,13 +13,23 @@ jobs:
   deploy-site:
     permissions:
       actions: read # for dawidd6/action-download-artifact to query and download artifacts
-      issues: write # for actions-cool/maintain-one-comment to modify or create issue comments
-      pull-requests: write # for actions-cool/maintain-one-comment to modify or create PR comments
+      issues: write
+      pull-requests: write
     name: deploy preview
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success' }}
 
     steps:
+      - name: Resolve PR number
+        id: pr
+        run: |
+          pr_number="${{ github.event.workflow_run.pull_requests[0].number }}"
+          if [ -z "$pr_number" ]; then
+            echo "No pull request associated with workflow run"
+            exit 1
+          fi
+          echo "number=$pr_number" >> "$GITHUB_OUTPUT"
+
       - name: Download site artifact
         uses: dawidd6/action-download-artifact@v2
         with:
@@ -30,49 +40,82 @@ jobs:
       - name: Upload surge service
         id: deploy
         run: |
-          export DEPLOY_DOMAIN=https://preview-${{ github.event.number }}-oceanbase-design.surge.sh
+          export DEPLOY_DOMAIN=https://preview-${{ steps.pr.outputs.number }}-oceanbase-design.surge.sh
           npx surge --project ./ --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
 
-      - name: Update status comment
-        uses: actions-cool/maintain-one-comment@v3
+      - name: Find preview comment
+        if: success()
+        uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3
+        id: find-comment
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ steps.pr.outputs.number }}
+          body-includes: '<!-- AUTO_PREVIEW_HOOK -->'
+
+      - name: Update status comment
+        if: success()
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ steps.pr.outputs.number }}
+          edit-mode: replace
           body: |
-            <a href="https://preview-${{ github.event.number }}-oceanbase-design.surge.sh" target="_blank">
+            <a href="https://preview-${{ steps.pr.outputs.number }}-oceanbase-design.surge.sh" target="_blank">
               <img width="360" src="https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*biIGSYhvfOQAAAAAAAAAAAAADvSFAQ/original">
             </a>
             <!-- AUTO_PREVIEW_HOOK -->
-          body-include: '<!-- AUTO_PREVIEW_HOOK -->'
-          number: ${{ github.event.number }}
 
-      - name: The job has failed
-        if: ${{ failure() }}
-        uses: actions-cool/maintain-one-comment@v3
+      - name: Find preview comment (deploy failed)
+        if: failure()
+        uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3
+        id: find-comment-failed
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ steps.pr.outputs.number }}
+          body-includes: '<!-- AUTO_PREVIEW_HOOK -->'
+
+      - name: Update status comment (deploy failed)
+        if: failure()
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
+        with:
+          comment-id: ${{ steps.find-comment-failed.outputs.comment-id }}
+          issue-number: ${{ steps.pr.outputs.number }}
+          edit-mode: replace
           body: |
             😭 Preview Deploy failed.
             <img width="300" src="https://user-images.githubusercontent.com/507615/90250824-4e066700-de6f-11ea-8230-600ecc3d6a6b.png">
             <!-- AUTO_PREVIEW_HOOK -->
-          body-include: '<!-- AUTO_PREVIEW_HOOK -->'
-          number: ${{ github.event.number }}
 
   build-site-failed:
     permissions:
-      actions: read # for dawidd6/action-download-artifact to query and download artifacts
-      issues: write # for actions-cool/maintain-one-comment to modify or create issue comments
-      pull-requests: write # for actions-cool/maintain-one-comment to modify or create PR comments
+      issues: write
+      pull-requests: write
     name: build preview failed
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'failure' }}
 
     steps:
-      - name: The job has failed
-        uses: actions-cool/maintain-one-comment@v3
+      - name: Resolve PR number
+        id: pr
+        run: |
+          pr_number="${{ github.event.workflow_run.pull_requests[0].number }}"
+          if [ -z "$pr_number" ]; then
+            echo "No pull request associated with workflow run"
+            exit 1
+          fi
+          echo "number=$pr_number" >> "$GITHUB_OUTPUT"
+
+      - name: Find preview comment
+        uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3
+        id: find-comment
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ steps.pr.outputs.number }}
+          body-includes: '<!-- AUTO_PREVIEW_HOOK -->'
+
+      - name: Update status comment
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ steps.pr.outputs.number }}
+          edit-mode: replace
           body: |
             <img width="534" src="https://user-images.githubusercontent.com/5378891/75333447-1e63a280-58c1-11ea-975d-235367fd1522.png">
             <!-- AUTO_PREVIEW_HOOK -->
-          body-include: '<!-- AUTO_PREVIEW_HOOK -->'
-          number: ${{ github.event.number }}
