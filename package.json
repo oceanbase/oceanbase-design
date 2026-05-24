@@ -87,7 +87,7 @@
     "husky": "^9.1.7",
     "identity-obj-proxy": "^3.0.0",
     "isomorphic-fetch": "^3.0.0",
-    "jest-environment-jsdom": "^30.1.2",
+    "jest-environment-jsdom": "^30.2.0",
     "jsonml-to-react-element": "^1.1.11",
     "jsonml.js": "^0.1.0",
     "lerna": "^8.2.3",
