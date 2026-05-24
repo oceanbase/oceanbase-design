@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const MigrationOutlined: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"64 64 896 896","focusable":"false"},"children":[{"tag":"g","attrs":{},"children":[{"tag":"path","attrs":{"d":"M426.328 226.477v64H176.266v557.248h385.937v-78.746h64v114.183c0 15.77-12.793 28.563-28.563 28.563H140.828c-15.769 0-28.562-12.794-28.562-28.563V255.039c0-15.77 12.793-28.562 28.562-28.562h285.5z"}},{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M426.341 112.27c-15.769 0-28.552 12.783-28.552 28.552V290.44h32c17.673 0 32-14.327 32-32v-82.17H847.73v557.253H461.79v-155.78a8 8 0 00-8-8c-30.928 0-56 25.072-56 56v143.223c0 15.77 12.783 28.557 28.552 28.557h456.833c15.77 0 28.557-12.787 28.557-28.557V140.822c0-15.77-12.787-28.553-28.557-28.553H426.341z","fill-rule":"evenodd"}},{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M650.003 574.383l-34.008-33.875a8 8 0 01-.022-11.314l107.374-107.792a7.999 7.999 0 000-11.293L615.973 302.316a8 8 0 01.022-11.314l34.008-33.875a7.994 7.994 0 0111.309.022l135.5 136.022c12.442 12.487 12.442 32.681 0 45.168l-135.5 136.023a7.995 7.995 0 01-11.309.021z","fill-rule":"evenodd"}},{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M766.144 447.756h-489.27a8 8 0 01-8-8v-48a8 8 0 018-8h489.27c4.422 0 8 3.582 8 8v48c0 4.418-3.578 8-8 8z","fill-rule":"evenodd"}}]}]},"name":"migration","theme":"outlined"};
+
+export default MigrationOutlined;

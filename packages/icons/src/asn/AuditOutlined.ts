@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const AuditOutlined: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"64 64 896 896","focusable":"false"},"children":[{"tag":"path","attrs":{"d":"M704 128c35.347 0 64 28.654 64 64v322.25C876.557 529.776 960 623.152 960 736c0 123.712-100.288 224-224 224-61.011 0-116.29-24.435-156.687-64H128c-35.346 0-64-28.653-64-64V192c0-35.346 28.654-64 64-64h576zm32 448c-88.365 0-160 71.635-160 160s71.635 160 160 160 160-71.635 160-160-71.635-160-160-160zM128 832h405.562C519.74 802.906 512 770.355 512 736c0-112.848 83.445-206.224 192-221.75V192H128v640zm624-105.997l56.998 56.999-33.996 33.996-64-64L704 745.94V640h48v86.003zM416 608H224v-64h192v64zm192-128H224v-64h384v64zm0-128H224v-64h384v64z"}}]},"name":"audit","theme":"outlined"};
+
+export default AuditOutlined;
