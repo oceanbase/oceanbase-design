@@ -399,7 +399,7 @@ const defaultTheme: ThemeConfig = {
       handleColorDisabled: '#b3ccff',
     },
     Skeleton: {
-      blockRadius: borderRadius,
+      blockRadius: 2,
     },
     Tabs: {
       horizontalItemGutter: 24,
