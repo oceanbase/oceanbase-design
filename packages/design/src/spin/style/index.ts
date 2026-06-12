@@ -9,9 +9,9 @@ export type SpinToken = FullToken<'Spin'> & {
 };
 
 const genSizeStyle = (spinDotSize: number, token: SpinToken): CSSObject => {
-  const { componentCls, colorText, calc } = token;
+  const { componentCls, colorText } = token;
   const spinDotWidth = spinDotSize;
-  const spinDotHight = calc(spinDotWidth).mul(295).div(397).equal();
+  const spinDotHight = spinDotWidth;
   return {
     // only work for oceanbase indicator
     [`&${componentCls}-oceanbase`]: {
@@ -30,10 +30,8 @@ const genSizeStyle = (spinDotSize: number, token: SpinToken): CSSObject => {
 const genNestedSizeStyle = (spinDotSize: number, token: SpinToken): CSSObject => {
   const { componentCls, fontSize, calc } = token;
   const spinDotWidth = spinDotSize;
-  // oceanbase indicator is rectangle instead of square, should calculate actual height by ratio
-  // width: 295px
-  // height: 397px
-  const spinDotHight = calc(spinDotWidth).mul(295).div(397).equal();
+  // oceanbase indicator lottie canvas is 360x360
+  const spinDotHight = spinDotWidth;
   const dotMarginLeft = calc(spinDotWidth).div(-2).equal();
   const dotMarginTop = calc(spinDotHight).div(-2).equal();
   const textPaddingTop = calc(spinDotHight).sub(fontSize).div(2).add(2).equal();
