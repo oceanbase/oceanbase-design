@@ -9,4 +9,7 @@ export default {
   releaseTime: 'Release date',
   company: 'Beijing OceanBase Technology Co., Ltd.',
   right: 'All Rights Reserved',
+  expandSider: 'Expand main navigation',
+  collapseSider: 'Collapse main navigation',
+  sideNavigation: 'Main navigation',
 };

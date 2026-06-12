@@ -268,7 +268,7 @@ class Draggable extends React.Component<DraggableProps, DraggableState> {
     // 非组件左键点按之后的事件不处理
     if (dragged) {
       const interval = new Date().getTime() - this.intervalStart;
-      if (interval < 200 && e.target.id !== 'ui-mini-hide') {
+      if (interval < 200 && !(e.target as HTMLElement)?.closest?.('#ui-mini-hide')) {
         this.props.onClick(e);
         this.setState({
           dragged: false,

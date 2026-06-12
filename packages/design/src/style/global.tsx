@@ -87,6 +87,18 @@ const genGlobalStyle = (
         // affact all placeholder excluding select
         fontWeight: token.fontWeightWeak,
       },
+      // WCAG 2.4.7: native / non-ant focusables still need a visible ring (antd controls use token lineWidthFocus)
+      [[
+        `button:not([class^="${prefixCls}-"]):not([class*=" ${prefixCls}-"]):focus-visible`,
+        `a:not([class^="${prefixCls}-"]):not([class*=" ${prefixCls}-"]):focus-visible`,
+        `textarea:not([class^="${prefixCls}-"]):not([class*=" ${prefixCls}-"]):focus-visible`,
+        `select:not([class^="${prefixCls}-"]):not([class*=" ${prefixCls}-"]):focus-visible`,
+        `input:not([class^="${prefixCls}-"]):not([class*=" ${prefixCls}-"]):focus-visible`,
+        `[role="button"]:not([class^="${prefixCls}-"]):not([class*=" ${prefixCls}-"]):focus-visible`,
+      ].join(', ')]: {
+        outline: `${token.lineWidthFocus ?? 2}px solid ${token.colorPrimary}`,
+        outlineOffset: 2,
+      },
       '*': {
         scrollbarColor: `${token.colorFillSecondary} transparent`,
       },

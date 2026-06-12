@@ -213,8 +213,8 @@ const defaultTheme: ThemeConfig = {
     boxShadowTertiary:
       '0 1px 2px 0 rgba(54, 69, 99, 0.03), 0 1px 6px -1px rgba(54, 69, 99, 0.02), 0 2px 4px 0 rgba(54, 69, 99, 0.02)',
     wireframe: false,
-    // Remove focus outline
-    lineWidthFocus: 0,
+    // WCAG 2.4.7: visible focus ring for antd controls (align with antd seed default)
+    lineWidthFocus: 2,
     // ==================== 基础颜色 Token ====================
     // 黑白色
     white,
@@ -388,15 +388,14 @@ const defaultTheme: ThemeConfig = {
       multipleItemBg: gray2,
       multipleItemBorderColor: tagColorBorder,
       multipleItemBorderColorDisabled: tagColorBorder,
-      // to remove active shadow, work for Select, TreeSelect and Cascader and so on
-      controlOutlineWidth: 0,
     },
     Slider: {
       trackBg: colorPrimary,
-      trackHoverBg: '#5189fb',
+      // Deeper blue for hover/active track (better contrast vs white than #5189fb)
+      trackHoverBg: blue5,
       trackBgDisabled: '#b3ccff',
       handleColor: colorPrimary,
-      handleActiveColor: '#5189fb',
+      handleActiveColor: blue5,
       handleColorDisabled: '#b3ccff',
     },
     Skeleton: {

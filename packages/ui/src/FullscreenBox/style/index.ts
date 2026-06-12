@@ -36,8 +36,23 @@ export const genFullscreenBoxStyle: GenerateStyle<FullscreenBoxToken> = (
           paddingBlock: 20,
           paddingInline: 24,
         },
-        [`${componentCls}-header-icon`]: {
+        [`${componentCls}-header-icon-btn`]: {
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minWidth: 24,
+          minHeight: 24,
+          padding: 0,
+          margin: 0,
+          border: 'none',
+          background: 'transparent',
           cursor: 'pointer',
+          verticalAlign: 'middle',
+        },
+        [`${componentCls}-header-icon`]: {
+          display: 'inline-flex',
+          fontSize: 16,
+          lineHeight: 1,
         },
         [`${componentCls}-header-title`]: {
           fontWeight: fontWeightStrong,
@@ -65,4 +80,3 @@ export default (prefixCls: string) => {
   });
   return useStyle(prefixCls);
 };
-

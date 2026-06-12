@@ -9,4 +9,7 @@ export default {
   releaseTime: '發佈日期',
   company: '北京奧星貝斯科技有限公司',
   right: '版權所有',
+  expandSider: '展開主導航',
+  collapseSider: '收起主導航',
+  sideNavigation: '主導航',
 };

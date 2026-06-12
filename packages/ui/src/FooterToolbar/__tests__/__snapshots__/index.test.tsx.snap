@@ -3,32 +3,37 @@
 exports[`FooterToolbar > portalDom is true 1`] = `
 <div>
   <div
-    class="ant-pro-footer-bar"
+    aria-label="底部操作栏"
+    role="toolbar"
   >
     <div
-      class="ant-pro-footer-bar-left"
+      class="ant-pro-footer-bar"
     >
-      Some extra message
-    </div>
-    <div
-      class="ant-pro-footer-bar-right"
-    >
-      <button
-        class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        type="button"
+      <div
+        class="ant-pro-footer-bar-left"
       >
-        <span>
-          Cancel
-        </span>
-      </button>
-      <button
-        class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
-        type="button"
+        Some extra message
+      </div>
+      <div
+        class="ant-pro-footer-bar-right"
       >
-        <span>
-          Ok
-        </span>
-      </button>
+        <button
+          class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+          type="button"
+        >
+          <span>
+            Cancel
+          </span>
+        </button>
+        <button
+          class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+          type="button"
+        >
+          <span>
+            Ok
+          </span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -37,32 +42,37 @@ exports[`FooterToolbar > portalDom is true 1`] = `
 exports[`FooterToolbar > render 1`] = `
 <div>
   <div
-    class="ant-pro-footer-bar"
+    aria-label="底部操作栏"
+    role="toolbar"
   >
     <div
-      class="ant-pro-footer-bar-left"
+      class="ant-pro-footer-bar"
     >
-      Some extra message
-    </div>
-    <div
-      class="ant-pro-footer-bar-right"
-    >
-      <button
-        class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        type="button"
+      <div
+        class="ant-pro-footer-bar-left"
       >
-        <span>
-          Cancel
-        </span>
-      </button>
-      <button
-        class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
-        type="button"
+        Some extra message
+      </div>
+      <div
+        class="ant-pro-footer-bar-right"
       >
-        <span>
-          Ok
-        </span>
-      </button>
+        <button
+          class="ant-btn ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+          type="button"
+        >
+          <span>
+            Cancel
+          </span>
+        </button>
+        <button
+          class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+          type="button"
+        >
+          <span>
+            Ok
+          </span>
+        </button>
+      </div>
     </div>
   </div>
 </div>

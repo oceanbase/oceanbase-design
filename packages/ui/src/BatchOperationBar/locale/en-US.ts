@@ -3,4 +3,5 @@ export default {
   openText: 'Expand Selected',
   hiddenText: 'Collapse Selected',
   alertText: '${} items selected',
+  toolbarLabel: 'Batch actions',
 };

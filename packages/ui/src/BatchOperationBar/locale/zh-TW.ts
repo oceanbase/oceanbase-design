@@ -3,4 +3,5 @@ export default {
   openText: '展開選擇',
   hiddenText: '收起已選',
   alertText: '已選擇 ${} 項',
+  toolbarLabel: '批次操作',
 };

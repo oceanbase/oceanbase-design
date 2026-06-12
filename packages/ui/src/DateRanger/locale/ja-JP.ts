@@ -12,5 +12,7 @@ export default {
   current: '現在',
   jumpBack: '前の期間へ',
   jumpForward: '次の期間へ',
+  syncToCurrent: '現在時刻に同期',
+  zoomOutRange: '時間範囲を拡大',
   ...ja_JP,
 };
