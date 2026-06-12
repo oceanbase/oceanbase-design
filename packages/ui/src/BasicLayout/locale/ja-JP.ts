@@ -9,4 +9,7 @@ export default {
   releaseTime: 'リリース日',
   company: 'Beijing OceanBase Technology Co., Ltd.',
   right: 'All Rights Reserved',
+  expandSider: 'メインナビを展開',
+  collapseSider: 'メインナビを折りたたむ',
+  sideNavigation: 'メインナビゲーション',
 };

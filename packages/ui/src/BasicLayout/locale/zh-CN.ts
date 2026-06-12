@@ -9,4 +9,7 @@ export default {
   releaseTime: '发布日期',
   company: '北京奥星贝斯科技有限公司',
   right: '版权所有',
+  expandSider: '展开主导航',
+  collapseSider: '收起主导航',
+  sideNavigation: '主导航',
 };

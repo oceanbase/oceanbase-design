@@ -31,6 +31,11 @@ const SCROLL_BAR_WIDTH = 1;
 export interface DialogLocale {
   helpDocument: string;
   openHelpCenter: string;
+  closeDialog: string;
+  minimize: string;
+  restoreWindow: string;
+  maximize: string;
+  exitFullscreen: string;
 }
 
 export interface DialogExtLink {
@@ -110,6 +115,9 @@ const DialogComp: React.FC<DialogProps> = props => {
     setRootWidth,
     isEmbed = false,
   } = props;
+
+  const titleId = React.useId();
+  const dialogRootRef = useRef<HTMLDivElement | null>(null);
 
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('dialog');
@@ -234,6 +242,29 @@ const DialogComp: React.FC<DialogProps> = props => {
     setDialogTop(tempState.top);
     setRootWidthInEmbedMode(tempState.width);
   }, [visible, clientWidth, clientHeight, getDefaultEmbedState, setRootWidthInEmbedMode]);
+
+  useEffect(() => {
+    if (!visible) return;
+    const frame = requestAnimationFrame(() => {
+      if (!minimize) {
+        dialogRootRef.current?.focus({ preventScroll: true });
+      }
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [visible, minimize]);
+
+  useEffect(() => {
+    if (!visible) return;
+    const onDocKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      const root = dialogRootRef.current;
+      const target = e.target as Node | null;
+      if (root && target && !root.contains(target)) return;
+      onClose?.();
+    };
+    document.addEventListener('keydown', onDocKeyDown);
+    return () => document.removeEventListener('keydown', onDocKeyDown);
+  }, [visible, onClose]);
 
   useEffect(() => {
     if (isEmbed) {
@@ -490,14 +521,19 @@ const DialogComp: React.FC<DialogProps> = props => {
 
   // Render methods
   const renderControlLink = () => {
+    if (!extLink?.link) {
+      return null;
+    }
+    const linkText = extLink.text || locale?.openHelpCenter;
     return (
       <span className={`${prefixCls}-item`}>
         <a
           className={`${prefixCls}-item-link`}
-          href={extLink?.link}
+          href={extLink.link}
           target="_blank"
           rel="noopener noreferrer"
         >
+          <span className={`${prefixCls}-item-link-text`}>{linkText}</span>
           <svg
             className="icon"
             viewBox="0 0 1024 1024"
@@ -505,6 +541,7 @@ const DialogComp: React.FC<DialogProps> = props => {
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
+            aria-hidden
           >
             <path d="M880.0256 912.0256H144.0256a31.9488 31.9488 0 0 1-32.0512-32V144.0256c0-17.7152 14.336-32.0512 32.0512-32.0512h359.936c4.4544 0 8.0384 3.584 8.0384 8.0384v56.0128c0 4.352-3.584 7.9872-7.9872 7.9872h-320v655.9744h655.9744v-320c0-4.4032 3.584-7.9872 8.0384-7.9872h55.9616c4.4032 0 8.0384 3.584 8.0384 7.9872v359.9872c0 17.7152-14.336 32-32 32zM770.8672 199.1168l-52.224-52.224a8.0384 8.0384 0 0 1 4.7104-13.568l179.4048-20.992c5.12-0.6144 9.5232 3.6864 8.9088 8.9088l-20.992 179.4048a8.0384 8.0384 0 0 1-13.6192 4.6592L824.6784 252.928l-256.2048 256.2048c-3.072 3.072-8.192 3.072-11.264 0l-42.4448-42.3936a8.0384 8.0384 0 0 1 0-11.264l256.1024-256.3584z" />
           </svg>
@@ -518,26 +555,52 @@ const DialogComp: React.FC<DialogProps> = props => {
       return (
         <span className={`${prefixCls}-controls`}>
           {renderControlLink()}
-          <span className={`${prefixCls}-item`} onClick={handleClose}>
-            <CloseOutlined />
-          </span>
+          <button
+            type="button"
+            className={`${prefixCls}-item`}
+            aria-label={locale?.closeDialog}
+            onClick={handleClose}
+          >
+            <span aria-hidden>
+              <CloseOutlined />
+            </span>
+          </button>
         </span>
       );
     }
     return (
       <span className={`${prefixCls}-controls`}>
         {renderControlLink()}
-        <span className={`${prefixCls}-item`} onClick={toggleMinimize}>
-          {minimize ? <ExpandAltOutlined /> : <MinusOutlined />}
-        </span>
+        <button
+          type="button"
+          className={`${prefixCls}-item`}
+          aria-label={minimize ? locale?.restoreWindow : locale?.minimize}
+          onClick={toggleMinimize}
+        >
+          <span aria-hidden>{minimize ? <ExpandAltOutlined /> : <MinusOutlined />}</span>
+        </button>
         {enableMaximization && (
-          <span className={`${prefixCls}-item`} onClick={toggleMaximization}>
-            {maximization ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
-          </span>
+          <button
+            type="button"
+            className={`${prefixCls}-item`}
+            aria-label={maximization ? locale?.exitFullscreen : locale?.maximize}
+            onClick={toggleMaximization}
+          >
+            <span aria-hidden>
+              {maximization ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
+            </span>
+          </button>
         )}
-        <span className={`${prefixCls}-item`} onClick={handleClose}>
-          <CloseOutlined />
-        </span>
+        <button
+          type="button"
+          className={`${prefixCls}-item`}
+          aria-label={locale?.closeDialog}
+          onClick={handleClose}
+        >
+          <span aria-hidden>
+            <CloseOutlined />
+          </span>
+        </button>
       </span>
     );
   };
@@ -555,7 +618,9 @@ const DialogComp: React.FC<DialogProps> = props => {
         onPointerDown={onDragStart}
         onDoubleClick={toggleMaximization}
       >
-        <span className={`${prefixCls}-title`}>{title || locale?.helpDocument}</span>
+        <span className={`${prefixCls}-title`} id={titleId}>
+          {title || locale?.helpDocument}
+        </span>
         {renderControls()}
       </header>
     );
@@ -664,9 +729,13 @@ const DialogComp: React.FC<DialogProps> = props => {
 
     return wrapSSR(
       <div
+        ref={dialogRootRef}
         className={`${prefixCls}-container ${className || ''} ${isEmbed ? `${prefixCls}-container-embed` : ''}`}
         style={style}
-        {...(minimize ? {} : { tabIndex: 0 })}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        {...(minimize ? {} : { tabIndex: -1 })}
       >
         {renderHeader()}
         {renderContent()}

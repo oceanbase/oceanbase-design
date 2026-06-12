@@ -48,6 +48,7 @@ const DocDialogComp = (props: DocDialogProps) => {
     normalModeWidth = DEFAULT_MOBILE_CLIENT_WIDTH,
     embedConfig = {},
     normalConfig = {},
+    locale,
   } = props;
   // Avoid SSR issue: only read document/window on client (e.g. Next.js)
   const [clientHeight, setClientHeight] = useState(0);
@@ -141,7 +142,7 @@ const DocDialogComp = (props: DocDialogProps) => {
   return (
     <div>
       <Dialog {...DialogProps}>
-        <iframe src={currentLink} />
+        <iframe src={currentLink} title={title || locale?.docIframeTitle} />
       </Dialog>
     </div>
   );

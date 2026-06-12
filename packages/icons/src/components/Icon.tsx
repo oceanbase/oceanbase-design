@@ -20,6 +20,7 @@ export interface CustomIconComponentProps {
 export interface IconComponentProps extends IconBaseProps {
   viewBox?: string;
   component?: React.ComponentType<CustomIconComponentProps | React.SVGProps<SVGSVGElement>>;
+  /** 可访问名称；未设置且无 `onClick` 时图标视为装饰性并设置 `aria-hidden` */
   ariaLabel?: React.AriaAttributes['aria-label'];
 }
 
@@ -39,8 +40,12 @@ const Icon = React.forwardRef<HTMLSpanElement, IconComponentProps>((props, ref) 
 
     // children
     children,
+    ariaLabel,
+    'aria-label': ariaLabelNative,
     ...restProps
   } = props;
+
+  const accessibleName = ariaLabel ?? ariaLabelNative;
 
   if (!!Component || !!children) {
     console.error('Should have `component` prop or `children`.');
@@ -110,12 +115,14 @@ const Icon = React.forwardRef<HTMLSpanElement, IconComponentProps>((props, ref) 
 
   return (
     <span
-      role="img"
       {...restProps}
       ref={ref}
       tabIndex={iconTabIndex}
       onClick={onClick}
       className={classString}
+      role={accessibleName ? 'img' : undefined}
+      aria-label={accessibleName}
+      aria-hidden={!accessibleName && !onClick ? true : undefined}
     >
       {renderInnerNode()}
     </span>

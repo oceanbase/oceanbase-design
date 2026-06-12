@@ -10,4 +10,5 @@ export default {
   pleaseRememberYourPassword: 'Please remember and keep your password.',
   copySuccessfully: 'Copied',
   copyPassword: 'Copy Password',
+  passwordStrengthRules: 'Password strength rules',
 };

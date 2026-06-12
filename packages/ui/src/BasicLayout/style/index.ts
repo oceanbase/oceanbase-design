@@ -135,6 +135,11 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               borderRadius: '10px',
               cursor: 'pointer',
               opacity: 0,
+              font: 'inherit',
+              padding: 0,
+              margin: 0,
+              appearance: 'none',
+              WebkitAppearance: 'none',
               // 设置展开/收起按钮中的图标大小
               [iconCls]: {
                 fontSize: 'px',
@@ -381,6 +386,10 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
         [`${componentCls}-content`]: {
           backgroundColor: colorBgLayout,
           transition: 'all 0.3s',
+        },
+        [`${componentCls}-content-main`]: {
+          display: 'block',
+          minHeight: '100%',
         },
       },
     },

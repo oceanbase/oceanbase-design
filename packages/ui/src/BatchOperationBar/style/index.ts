@@ -32,6 +32,11 @@ export const genBatchOperationBarStyle: GenerateStyle<BatchOperationBarToken> = 
         [`${componentCls}-cancel, ${componentCls}-display-btn`]: {
           color: token.colorPrimary,
           cursor: 'pointer',
+          border: 'none',
+          background: 'transparent',
+          padding: 0,
+          font: 'inherit',
+          textAlign: 'inherit',
         },
         [`${componentCls}-display-text`]: {
           marginRight: 4,

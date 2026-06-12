@@ -200,6 +200,7 @@ const SideTip: React.FC<SideTipProps> = props => {
     disabled = false,
     draggable = true,
     getPopupContainer,
+    locale,
   } = props;
 
   const getLocalStorageKey = useCallback(
@@ -273,6 +274,18 @@ const SideTip: React.FC<SideTipProps> = props => {
   const typeCls = getTypeCls(type);
   const sizeCls = getSizeCls(size);
 
+  const toggleAriaLabel =
+    typeof tooltip?.title === 'string' && tooltip.title.trim()
+      ? tooltip.title
+      : locale?.toggleLabel;
+
+  const onInnerKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (disabled) return;
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    onButtonClick(e);
+  };
+
   const buttonPrefix = `${prefixCls}-button`;
 
   // icon
@@ -289,7 +302,7 @@ const SideTip: React.FC<SideTipProps> = props => {
       {React.isValidElement(icon) ? (
         icon
       ) : typeof icon === 'string' && icon ? (
-        <img src={icon} alt="icon" width="100%" height="100%" />
+        <img src={icon} alt="" width="100%" height="100%" />
       ) : null}
     </span>
   ) : null;
@@ -314,11 +327,24 @@ const SideTip: React.FC<SideTipProps> = props => {
 
   // 内部 Icon
   const InnerButton = (
-    <div className={buttonClassName} ref={buttonRef} style={buttonStyle}>
+    <div
+      className={buttonClassName}
+      ref={buttonRef}
+      style={buttonStyle}
+      role="button"
+      tabIndex={disabled ? -1 : 0}
+      aria-disabled={disabled || undefined}
+      aria-expanded={!!(open || visible)}
+      aria-haspopup="dialog"
+      aria-label={toggleAriaLabel}
+      onKeyDown={onInnerKeyDown}
+    >
       {loading && <IconLoading className={loadingClassName} />}
       <>
         {iconDom}
-        <CloseOutlined className={closeClassName} />
+        <span aria-hidden>
+          <CloseOutlined className={closeClassName} />
+        </span>
       </>
     </div>
   );
@@ -338,9 +364,15 @@ const SideTip: React.FC<SideTipProps> = props => {
 
   // 隐藏按钮
   const hideIcon = (
-    <div id="ui-mini-hide" onClick={hideSideTip} className={hideIconClassName}>
-      <div className={`${prefixCls}-hide-icon`} />
-    </div>
+    <button
+      type="button"
+      id="ui-mini-hide"
+      onClick={hideSideTip}
+      className={hideIconClassName}
+      aria-label={locale?.hideFloatingButton}
+    >
+      <span className={`${prefixCls}-hide-icon`} aria-hidden />
+    </button>
   );
 
   const containerClassName = classnames(className, {

@@ -16,6 +16,7 @@ export interface IconProps {
   primaryColor?: string; // only for twotone
   secondaryColor?: string; // only for twotone
   focusable?: string;
+  'aria-label'?: string;
 }
 
 export interface TwoToneColorPaletteSetter {
@@ -51,7 +52,16 @@ interface IconBaseComponent<P> extends React.FC<P> {
 }
 
 const IconBase: IconBaseComponent<IconProps> = props => {
-  const { icon, className, onClick, style, primaryColor, secondaryColor, ...restProps } = props;
+  const {
+    icon,
+    className,
+    onClick,
+    style,
+    primaryColor,
+    secondaryColor,
+    'aria-label': ariaLabel,
+    ...restProps
+  } = props;
 
   let colors: TwoToneColorPalette = twoToneColorPalette;
   if (primaryColor) {
@@ -84,7 +94,8 @@ const IconBase: IconBaseComponent<IconProps> = props => {
     width: '1em',
     height: '1em',
     fill: 'currentColor',
-    'aria-hidden': 'true',
+    'aria-hidden': ariaLabel ? undefined : 'true',
+    'aria-label': ariaLabel,
     ...restProps,
   });
 };

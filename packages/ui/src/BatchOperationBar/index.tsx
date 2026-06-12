@@ -98,12 +98,15 @@ const BatchOperationBar = (props: BatchOperationBarProps) => {
   const disPlayBtnRender = () => {
     if (!showOpenBtn) return null;
     return (
-      <div
+      <button
+        type="button"
         className={classnames({
           [`${prefixCls}-open-btn`]: isOpen,
           [`${prefixCls}-close-btn`]: !isOpen,
           [`${prefixCls}-display-btn`]: true,
         })}
+        aria-expanded={isOpen}
+        aria-label={isOpen ? String(hiddenText) : String(openText)}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span
@@ -113,8 +116,8 @@ const BatchOperationBar = (props: BatchOperationBarProps) => {
         >
           {isOpen ? hiddenText : openText}
         </span>
-        {isOpen ? hiddenIcon : openIcon}
-      </div>
+        <span aria-hidden>{isOpen ? hiddenIcon : openIcon}</span>
+      </button>
     );
   };
   useEffect(() => {
@@ -129,6 +132,8 @@ const BatchOperationBar = (props: BatchOperationBarProps) => {
         [prefixCls]: true,
       })}
       style={style}
+      role="toolbar"
+      aria-label={typeof locale?.toolbarLabel === 'string' ? locale.toolbarLabel : undefined}
     >
       <div className={`${prefixCls}-header`}>
         <Space>
@@ -137,18 +142,21 @@ const BatchOperationBar = (props: BatchOperationBarProps) => {
           ) : (
             <Space>
               {title && <span className={`${prefixCls}-title`}>{title}</span>}
-              <span>{locale?.alertText?.replace?.(/\$\{\}/, selectedData?.length || 0)}</span>
+              <span aria-live="polite" aria-atomic="true">
+                {locale?.alertText?.replace?.(/\$\{\}/, String(selectedData?.length || 0))}
+              </span>
             </Space>
           )}
           {!!showCancelBtn && (
-            <span
+            <button
+              type="button"
               className={classnames({
                 [`${prefixCls}-cancel`]: true,
               })}
               onClick={() => cleanSelectedRows()}
             >
               {cancelText}
-            </span>
+            </button>
           )}
           {disPlayBtnRender()}
         </Space>

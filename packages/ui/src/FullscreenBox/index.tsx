@@ -47,7 +47,7 @@ export interface FullscreenBoxProps extends LocaleWrapperProps {
 }
 
 const FullscreenBox = React.forwardRef<FullscreenBoxRef, FullscreenBoxProps>(
-  ({ style, header, className, defaultMode, children, onChange }, ref) => {
+  ({ style, header, className, defaultMode, children, onChange, locale }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('fullscreen-box');
     const { wrapSSR } = useStyle(prefixCls);
@@ -121,11 +121,8 @@ const FullscreenBox = React.forwardRef<FullscreenBoxRef, FullscreenBoxProps>(
       },
     }));
 
-    const icon = innerFullscreen ? (
-      <FullscreenExitOutlined className={`${prefixCls}-header-icon`} onClick={toggleFullscreen} />
-    ) : (
-      <FullscreenOutlined className={`${prefixCls}-header-icon`} onClick={toggleFullscreen} />
-    );
+    const fullscreenLabel = innerFullscreen ? locale?.exitFullscreen : locale?.enterFullscreen;
+    const fullscreenIcon = innerFullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />;
 
     useEffect(() => {
       if (innerFullscreen) {
@@ -154,7 +151,17 @@ const FullscreenBox = React.forwardRef<FullscreenBoxRef, FullscreenBoxProps>(
       headerContent = (
         <div className={`${prefixCls}-header`} data-testid="header">
           <div className={`${prefixCls}-header-left`}>
-            {icon}
+            <button
+              type="button"
+              className={`${prefixCls}-header-icon-btn`}
+              aria-label={fullscreenLabel}
+              aria-pressed={innerFullscreen}
+              onClick={toggleFullscreen}
+            >
+              <span className={`${prefixCls}-header-icon`} aria-hidden>
+                {fullscreenIcon}
+              </span>
+            </button>
             {title && <span className={`${prefixCls}-header-title`}>{title}</span>}
           </div>
           {isComplexHeader && extra && <div className={`${prefixCls}-header-extra`}>{extra}</div>}
@@ -169,6 +176,7 @@ const FullscreenBox = React.forwardRef<FullscreenBoxRef, FullscreenBoxProps>(
         className={classnames(`${prefixCls}-box`, className, {
           [`${prefixCls}-box-fullscreen`]: innerFullscreen,
         })}
+        aria-live="polite"
       >
         {headerContent}
         {children}

@@ -1,7 +1,7 @@
 import { Button, Input, message, Popover, Space, Typography } from '@oceanbase/design';
 import type { PasswordProps as InputPasswordProps } from '@oceanbase/design/es/input';
 import RandExp from 'randexp';
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import { theme } from '@oceanbase/design';
 import { CheckOutlined, CopyOutlined } from '@oceanbase/icons';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
@@ -20,6 +20,7 @@ export interface PasswordLocale {
   pleaseRememberYourPassword: string;
   copySuccessfully: string;
   copyPassword: string;
+  passwordStrengthRules: string;
 }
 
 export interface PasswordProps extends LocaleWrapperProps, Omit<InputPasswordProps, 'onChange'> {
@@ -46,7 +47,7 @@ const Password: React.FC<PasswordProps> = ({
   const [fieldError, setFieldError] = useState<string[]>([]);
   const [isValidating, setIsValidating] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
-  const [copyHover, setCopyHover] = useState(false);
+  const strengthRulesId = useId();
 
   const defaultRules: Validator[] = [
     {
@@ -116,6 +117,8 @@ const Password: React.FC<PasswordProps> = ({
               isValidating={isValidating}
               rules={newRules}
               fieldError={fieldError}
+              rulesRegionId={strengthRulesId}
+              rulesAriaLabel={locale.passwordStrengthRules}
             />
           }
           overlayStyle={{ maxWidth: 400 }}
@@ -126,6 +129,8 @@ const Password: React.FC<PasswordProps> = ({
           <Input.Password
             value={value}
             autoComplete="new-password"
+            aria-haspopup="dialog"
+            aria-describedby={strengthRulesId}
             onChange={e => {
               handleChange(e?.target?.value);
             }}
@@ -162,15 +167,15 @@ const Password: React.FC<PasswordProps> = ({
               text: value,
               icon: [
                 <Space key="copy" size={token.marginXXS}>
-                  <CopyOutlined />
+                  <CopyOutlined aria-hidden />
                   <a>{locale.copyPassword}</a>
                 </Space>,
                 <Space key="copy-success" size={token.marginXXS}>
-                  <CheckOutlined />
+                  <CheckOutlined aria-hidden />
                   <a>{locale.copyPassword}</a>
                 </Space>,
               ],
-              tooltips: ['', locale.copySuccessfully],
+              tooltips: [locale.copyPassword, locale.copySuccessfully],
             }}
             style={{ marginLeft: token.marginXXS }}
           />
