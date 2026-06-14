@@ -13,14 +13,14 @@ group: 业务组件
 `2026-06-14`
 
 - 可访问性
-  - ♿ Dialog、DocDialog、BasicLayout、SideTip、BatchOperationBar、Highlight、NavMenu、FullscreenBox、FooterToolbar、TagSelect、LightFilter、Password、DateRanger 等补充 ARIA 语义、触控区域与多语言 `aria-label`。[#1483](https://github.com/oceanbase/oceanbase-design/pull/1483)
+  - ♿ 优化 Dialog、BasicLayout、FullscreenBox 等组件的可访问性，补充语义化标记、触控区域与多语言文案。[#1483](https://github.com/oceanbase/oceanbase-design/pull/1483)
 - BasicLayout
   - 🆕 `menus` 新增 `type="group"` 属性，以支持菜单分组。[#1448](https://github.com/oceanbase/oceanbase-design/pull/1448) [@linhf123](https://github.com/linhf123)
 - Action
   - 🐞 修复 Action.Group 条件渲染子元素和嵌套子元素时渲染为空的问题。[#1470](https://github.com/oceanbase/oceanbase-design/pull/1470) [@linhf123](https://github.com/linhf123)
 - FullscreenBox
-  - 🐞 修复 CSS-in-JS 迁移后全屏入口与 header 样式未生效的问题。[#1487](https://github.com/oceanbase/oceanbase-design/pull/1487)
-- 💄 替换默认品牌 logo 资产（`oceanbase_logo`、`oceanbase_logo_dark`、`oceanbase_watermark`），采用新蓝紫渐变品牌标识。[#1486](https://github.com/oceanbase/oceanbase-design/pull/1486)
+  - 🐞 修复全屏入口与 header 样式未生效的问题。[#1487](https://github.com/oceanbase/oceanbase-design/pull/1487)
+- 💄 替换默认品牌 logo，采用新蓝紫渐变品牌标识。[#1486](https://github.com/oceanbase/oceanbase-design/pull/1486)
 
 ## 1.0.0-alpha.19
 
