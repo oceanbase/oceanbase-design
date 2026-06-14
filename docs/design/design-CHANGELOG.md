@@ -8,6 +8,21 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.20
+
+`2026-06-14`
+
+- 可访问性
+  - 🌈 主题：优化键盘焦点可见性，以及 Select、Slider 等组件的焦点与悬停对比度。[#1483](https://github.com/oceanbase/oceanbase-design/pull/1483)
+  - 📖 文档：新增 [可访问性指引](https://oceanbase-design-v1.vercel.app/docs/design-accessibility) 和 [WCAG 审计报告](https://oceanbase-design-v1.vercel.app/wcag-audit-report.html)。[#1483](https://github.com/oceanbase/oceanbase-design/pull/1483)
+  - ✅ 新增可访问性自动化测试。[#1483](https://github.com/oceanbase/oceanbase-design/pull/1483)
+- Spin
+  - 💄 更新 Spin 的加载动画（灰色/彩色）。[#1484](https://github.com/oceanbase/oceanbase-design/pull/1484)
+- Skeleton
+  - 💄 优化 Skeleton 块状骨架的圆角。[#1485](https://github.com/oceanbase/oceanbase-design/pull/1485)
+- [Icon] ♿ 优化装饰图标与语义图标的可访问性支持。[#1483](https://github.com/oceanbase/oceanbase-design/pull/1483)
+- [Icon] 💄 替换 OceanBase 品牌 logo。[#1486](https://github.com/oceanbase/oceanbase-design/pull/1486)
+
 ## 1.0.0-alpha.19
 
 `2026-04-07`
