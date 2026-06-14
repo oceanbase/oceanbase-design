@@ -8,35 +8,38 @@ export type FullscreenBoxToken = OBToken;
 export const genFullscreenBoxStyle: GenerateStyle<FullscreenBoxToken> = (
   token: FullscreenBoxToken
 ): CSSObject => {
-  const { componentCls, fontWeightStrong } = token;
+  const { componentCls, fontWeightStrong, colorText, colorBgContainer, prefixCls } = token;
 
   return {
-    [`${componentCls}-box`]: {
+    [componentCls]: {
       boxSizing: 'border-box',
       margin: 0,
       padding: 0,
-      color: 'rgba(0, 0, 0, 0.88)',
+      color: colorText,
       fontSize: 14,
       lineHeight: 1.5714285714285714,
       listStyle: 'none',
-      [`&.${componentCls}-box-fullscreen`]: {
+      [`&.${prefixCls}-fullscreen`]: {
         position: 'fixed',
         zIndex: 900,
-        background: '#fff',
+        background: colorBgContainer,
         insetBlockStart: 0,
         insetInlineEnd: 0,
         insetBlockEnd: 0,
         insetInlineStart: 0,
       },
-      [`${componentCls}-header`]: {
+      [`& ${componentCls}-header`]: {
         display: 'flex',
+        alignItems: 'center',
         height: 64,
-        [`${componentCls}-header-left`]: {
+        [`& ${componentCls}-header-left`]: {
+          display: 'flex',
           flex: 1,
+          alignItems: 'center',
           paddingBlock: 20,
           paddingInline: 24,
         },
-        [`${componentCls}-header-icon-btn`]: {
+        [`& ${componentCls}-header-icon-btn`]: {
           display: 'inline-flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -46,21 +49,22 @@ export const genFullscreenBoxStyle: GenerateStyle<FullscreenBoxToken> = (
           margin: 0,
           border: 'none',
           background: 'transparent',
+          color: colorText,
           cursor: 'pointer',
           verticalAlign: 'middle',
         },
-        [`${componentCls}-header-icon`]: {
+        [`& ${componentCls}-header-icon`]: {
           display: 'inline-flex',
           fontSize: 16,
           lineHeight: 1,
         },
-        [`${componentCls}-header-title`]: {
+        [`& ${componentCls}-header-title`]: {
           fontWeight: fontWeightStrong,
           fontSize: 16,
           lineHeight: 24,
           marginInlineStart: 24,
         },
-        [`${componentCls}-header-extra`]: {
+        [`& ${componentCls}-header-extra`]: {
           flex: 2,
           lineHeight: 64,
           textAlign: 'end',

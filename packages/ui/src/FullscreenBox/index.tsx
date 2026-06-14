@@ -173,8 +173,8 @@ const FullscreenBox = React.forwardRef<FullscreenBoxRef, FullscreenBoxProps>(
       <div
         ref={containerRef}
         style={style}
-        className={classnames(`${prefixCls}-box`, className, {
-          [`${prefixCls}-box-fullscreen`]: innerFullscreen,
+        className={classnames(prefixCls, className, {
+          [`${prefixCls}-fullscreen`]: innerFullscreen,
         })}
         aria-live="polite"
       >
