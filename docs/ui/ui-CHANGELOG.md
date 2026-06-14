@@ -8,6 +8,13 @@ group: 业务组件
 
 ---
 
+## 0.4.25
+
+`2026-06-14`
+
+- 💄 替换默认品牌 logo 资产（`oceanbase_logo`、`oceanbase_logo_dark`、`oceanbase_watermark`），采用新蓝紫渐变品牌标识。[#1486](https://github.com/oceanbase/oceanbase-design/pull/1486)
+- 💄 更新 Highlight demo 中的 logo CDN 链接。[#1486](https://github.com/oceanbase/oceanbase-design/pull/1486)
+
 ## 0.4.24
 
 `2026-01-05`

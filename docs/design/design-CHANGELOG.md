@@ -8,6 +8,14 @@ group: 基础组件
 
 ---
 
+## 0.4.21
+
+`2026-06-14`
+
+- Spin
+  - 💄 更新 Spin 的加载动画（灰色/彩色）。[#1484](https://github.com/oceanbase/oceanbase-design/pull/1484)
+  - 🐞 修复 Spin 在暗色主题下背景不透明的问题。[#1484](https://github.com/oceanbase/oceanbase-design/pull/1484)
+
 ## 0.4.20
 
 `2026-01-05`
