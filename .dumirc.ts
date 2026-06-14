@@ -60,7 +60,7 @@ export default defineConfig({
       'data-rh': 'keywords',
       property: 'og:image',
       content:
-        'https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original',
+        'https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*8zHZT7CORL0AAAAAQCAAAAgAemfOAQ/original',
     },
     {
       property: 'og:description',
@@ -126,9 +126,7 @@ export default defineConfig({
     '@oceanbase/charts/es': path.join(__dirname, 'packages/charts/src'),
     '@oceanbase/util': path.join(__dirname, 'packages/util/src'),
   },
-  favicons: [
-    'https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original',
-  ],
+  favicons: ['/assets/oceanbase_logo.svg'],
   themeConfig: {
     sidebar: {
       '/components': [

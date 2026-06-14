@@ -57,11 +57,12 @@ const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
   const { logo, title } = useStyle();
   return (
     <h1>
-      <Link to={utils.getLocalizedPathname('/', isZhCN, search)} css={logo}>
-        <img
-          src="https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original"
-          alt="logo"
-        />
+      <Link
+        to={utils.getLocalizedPathname('/', isZhCN, search)}
+        css={logo}
+        style={{ textDecoration: 'none' }}
+      >
+        <img src="/assets/oceanbase_logo.svg" alt="logo" />
         <Space>
           <span css={title}>OceanBase Design</span>
         </Space>

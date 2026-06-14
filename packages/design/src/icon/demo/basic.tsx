@@ -15,8 +15,8 @@ const App: React.FC = () => (
     <HourglassHalfOutlined spin />
     <OceanbaseFilled />
     <DouyinFilled style={{ color: 'hotpink' }} />
-    <OceanbaseColored style={{ fontSize: 24 }} />
-    <ObClusterColored />
+    <OceanbaseColored />
+    <ObClusterColored style={{ fontSize: 24 }} />
   </Space>
 );
 

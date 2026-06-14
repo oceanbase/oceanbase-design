@@ -6,19 +6,19 @@ const dataSource = [
   {
     name: 'OceanBase Design',
     image:
-      'https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original',
+      'https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*8zHZT7CORL0AAAAAQCAAAAgAemfOAQ/original',
     desc: '我是一条测试的描述',
   },
   {
     name: 'OceanBase Database',
     image:
-      'https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original',
+      'https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*8zHZT7CORL0AAAAAQCAAAAgAemfOAQ/original',
     desc: '我是一条测试的描述',
   },
   {
     name: 'OceanBase Cloud',
     image:
-      'https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original',
+      'https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*8zHZT7CORL0AAAAAQCAAAAgAemfOAQ/original',
     desc: '我是一条测试的描述',
   },
 ];
