@@ -18,6 +18,12 @@ const genSizeStyle = (spinDotSize: number, token: SpinToken): CSSObject => {
       [`${componentCls}-dot`]: {
         width: spinDotWidth,
         height: spinDotHight,
+        overflow: 'hidden',
+        lineHeight: 0,
+        [`> div`]: {
+          width: '100%',
+          height: '100%',
+        },
       },
       [`${componentCls}-text`]: {
         width: spinDotWidth,
