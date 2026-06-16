@@ -8,6 +8,13 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.21
+
+`2026-06-16`
+
+- 主题
+  - 🐞 修复原生 HTML 元素出现多余全局 focus-visible 描边的问题。[#1492](https://github.com/oceanbase/oceanbase-design/pull/1492)
+
 ## 1.0.0-alpha.20
 
 `2026-06-14`
