@@ -277,6 +277,52 @@ const ConfigProvider: ConfigProviderType = ({
   const mergedStyleProviderProps = merge({}, parentStyleContext, styleProviderProps);
   const mergedLocale = merge({}, parentContext.locale, locale);
 
+  const resolvedAntTheme = merge(
+    {},
+    mergedTheme,
+    getLocaleFontSizeThemePatch(mergedLocale, mergedTheme, fontSize),
+    {
+      token: {
+        ...getLocaleTokenValue(
+          mergedTheme.token || {},
+          mergedLocale,
+          'fontFamily',
+          fontFamily,
+          fontFamilyEn
+        ),
+        ...getLocaleTokenValue(
+          mergedTheme.token || {},
+          mergedLocale,
+          'fontWeightWeak',
+          fontWeightWeak,
+          fontWeightWeakEn
+        ),
+        ...getLocaleTokenValue(
+          mergedTheme.token || {},
+          mergedLocale,
+          'fontWeight',
+          fontWeight,
+          fontWeightEn
+        ),
+        ...getLocaleTokenValue(
+          mergedTheme.token || {},
+          mergedLocale,
+          'fontWeightStrong',
+          fontWeightStrong,
+          fontWeightStrongEn
+        ),
+      },
+    } as ConfigProviderProps['theme']
+  );
+
+  // cssVar 模式下 App 必须有真实 DOM 节点挂载 cssVarCls，component={false} 会导致变量作用域丢失
+  const cssVarEnabled = Boolean(resolvedAntTheme?.cssVar);
+  const resolvedAppProps: AppProps = merge(
+    {},
+    cssVarEnabled ? { component: 'div' as const } : { component: false as const },
+    appProps
+  );
+
   return (
     <AntConfigProvider
       locale={mergedLocale}
@@ -330,43 +376,7 @@ const ConfigProvider: ConfigProviderType = ({
         ) as TableConfig
       }
       tabs={merge({}, parentContext.tabs, tabs)}
-      theme={merge(
-        {},
-        mergedTheme,
-        getLocaleFontSizeThemePatch(mergedLocale, mergedTheme, fontSize),
-        {
-          token: {
-            ...getLocaleTokenValue(
-              mergedTheme.token || {},
-              mergedLocale,
-              'fontFamily',
-              fontFamily,
-              fontFamilyEn
-            ),
-            ...getLocaleTokenValue(
-              mergedTheme.token || {},
-              mergedLocale,
-              'fontWeightWeak',
-              fontWeightWeak,
-              fontWeightWeakEn
-            ),
-            ...getLocaleTokenValue(
-              mergedTheme.token || {},
-              mergedLocale,
-              'fontWeight',
-              fontWeight,
-              fontWeightEn
-            ),
-            ...getLocaleTokenValue(
-              mergedTheme.token || {},
-              mergedLocale,
-              'fontWeightStrong',
-              fontWeightStrong,
-              fontWeightStrongEn
-            ),
-          },
-        } as ConfigProviderProps['theme']
-      )}
+      theme={resolvedAntTheme}
       renderEmpty={
         parentContext.renderEmpty ||
         (componentName => <DefaultRenderEmpty componentName={componentName} />)
@@ -392,7 +402,7 @@ const ConfigProvider: ConfigProviderType = ({
           <GlobalStyle prefixCls={restProps.prefixCls} iconPrefixCls={restProps.iconPrefixCls} />
           {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
           {/* ref: https://ant.design/components/app */}
-          <App component={false} {...appProps}>
+          <App {...resolvedAppProps}>
             {children}
             {parentExtendedContext.injectStaticFunction && <StaticFunction />}
           </App>
