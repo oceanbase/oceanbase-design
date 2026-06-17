@@ -8,6 +8,15 @@ group: 基础组件
 
 ---
 
+## 1.0.0-alpha.22
+
+`2026-06-17`
+
+- 主题
+  - 🐞 修复 ConfigProvider 开启 cssVar 时内嵌 App 使用 `component={false}` 导致 CSS 变量作用域无法挂载的问题。[#1495](https://github.com/oceanbase/oceanbase-design/pull/1495)
+- Spin
+  - 🐞 修复 Spin 默认 Lottie 指示器偶发以 360px 原始尺寸渲染的问题。[#1494](https://github.com/oceanbase/oceanbase-design/pull/1494)
+
 ## 1.0.0-alpha.21
 
 `2026-06-16`
