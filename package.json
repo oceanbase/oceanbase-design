@@ -122,7 +122,7 @@
     "typescript": "^5.9.3",
     "vanilla-jsoneditor": "^0.23.8",
     "vi-canvas-mock": "^1.0.0",
-    "vitest": "^2.1.9",
+    "vitest": "^4.1.0",
     "vitest-fetch-mock": "^0.2.2",
     "web-vitals": "^3.5.2"
   }
