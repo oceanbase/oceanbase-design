@@ -1,0 +1,7 @@
+// This icon file is generated automatically.
+
+import { IconDefinition } from '../types';
+
+const UploadOutlined: IconDefinition = {"icon":{"tag":"svg","attrs":{"viewBox":"64 64 896 896","focusable":"false"},"children":[{"tag":"g","attrs":{"transform":"scale(64)"},"children":[{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M6.25 4.964h1.155v5.286c0 .069.056.125.125.125h.937a.125.125 0 00.125-.125V4.964H9.75c.105 0 .162-.12.098-.202l-1.75-2.215a.125.125 0 00-.196 0L6.152 4.76a.126.126 0 00.098.203zm7.469 4.817h-.938a.125.125 0 00-.125.125v2.406H3.344V9.906a.125.125 0 00-.125-.125H2.28a.125.125 0 00-.125.125V13a.5.5 0 00.5.5h10.688a.5.5 0 00.5-.5V9.906a.125.125 0 00-.125-.125z","fill-rule":"evenodd"}},{"tag":"mask","attrs":{"height":"12","id":"icon-outlined-upload-a","maskUnits":"userSpaceOnUse","width":"12","x":"2","y":"2"},"children":[{"tag":"path","attrs":{"clip-rule":"evenodd","d":"M6.25 4.964h1.155v5.286c0 .069.056.125.125.125h.937a.125.125 0 00.125-.125V4.964H9.75c.105 0 .162-.12.098-.202l-1.75-2.215a.125.125 0 00-.196 0L6.152 4.76a.126.126 0 00.098.203zm7.469 4.817h-.938a.125.125 0 00-.125.125v2.406H3.344V9.906a.125.125 0 00-.125-.125H2.28a.125.125 0 00-.125.125V13a.5.5 0 00.5.5h10.688a.5.5 0 00.5-.5V9.906a.125.125 0 00-.125-.125z","fill-rule":"evenodd"}}]}]}]},"name":"upload","theme":"outlined"};
+
+export default UploadOutlined;
