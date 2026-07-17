@@ -1,6 +1,6 @@
 ---
 title: 可访问性（WCAG 2.1）
-order: 7
+order: 9
 group: 基础组件
 ---
 

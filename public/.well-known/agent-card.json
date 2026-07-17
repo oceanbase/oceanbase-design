@@ -1,0 +1,27 @@
+{
+  "name": "OceanBase Design Agent",
+  "description": "AI agent card for OceanBase Design. Use ob-design mcp as the sole programmatic API entry.",
+  "url": "/",
+  "version": "1.0.0",
+  "skills": [
+    {
+      "id": "oceanbase-design-usage",
+      "name": "OceanBase Design Usage",
+      "install": "npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage"
+    }
+  ],
+  "mcp": {
+    "server": "oceanbase-design",
+    "command": "npx",
+    "args": ["-y", "@oceanbase/design-cli", "mcp"]
+  },
+  "documentation": {
+    "forAgents": "/docs/react/for-agents.md",
+    "forAgentsStatic": "/for-agents.md",
+    "designMd": "/design.md",
+    "llms": "/llms.txt",
+    "mcp": "/docs/react/mcp.md",
+    "cli": "/docs/react/cli.md",
+    "constraints": "/llms-ob-constraints.txt"
+  }
+}

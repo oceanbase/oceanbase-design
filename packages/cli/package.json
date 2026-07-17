@@ -1,0 +1,47 @@
+{
+  "name": "@oceanbase/design-cli",
+  "version": "0.1.0-alpha.1",
+  "description": "CLI and MCP for OceanBase Design",
+  "type": "module",
+  "bin": {
+    "ob-design": "./bin/ob-design.mjs"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "prepublishOnly": "node ../../scripts/generate-metadata.mjs"
+  },
+  "peerDependencies": {
+    "@ant-design/cli": ">=1.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@ant-design/cli": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "commander": "^12.1.0"
+  },
+  "keywords": [
+    "oceanbase",
+    "design",
+    "mcp",
+    "cli",
+    "antd"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oceanbase/oceanbase-design.git",
+    "directory": "packages/cli"
+  }
+}

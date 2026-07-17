@@ -1,0 +1,259 @@
+{
+  "Alert": {
+    "source": "packages/design/src/alert/index.tsx",
+    "props": ["ghost", "mini"],
+    "allInterfaceProps": ["ghost", "mini"]
+  },
+  "BasicLayout": {
+    "source": "packages/ui/src/BasicLayout/index.tsx",
+    "props": [
+      "location",
+      "children",
+      "banner",
+      "iconUrl",
+      "logoUrl",
+      "simpleLogoUrl",
+      "className",
+      "topHeader",
+      "menus",
+      "defaultCollapsed",
+      "defaultSelectedKeys",
+      "defaultOpenKeys",
+      "sideHeader",
+      "subSideMenus",
+      "subSideMenuProps",
+      "prefixCls",
+      "style"
+    ],
+    "allInterfaceProps": [
+      "location",
+      "children",
+      "banner",
+      "iconUrl",
+      "logoUrl",
+      "simpleLogoUrl",
+      "className",
+      "topHeader",
+      "menus",
+      "defaultCollapsed",
+      "defaultSelectedKeys",
+      "defaultOpenKeys",
+      "sideHeader",
+      "subSideMenus",
+      "subSideMenuProps",
+      "prefixCls",
+      "style"
+    ]
+  },
+  "Button": {
+    "source": "packages/design/src/button/index.tsx",
+    "props": [],
+    "allInterfaceProps": []
+  },
+  "Card": {
+    "source": "packages/design/src/card/index.tsx",
+    "props": [
+      "subTitle",
+      "document",
+      "divided",
+      "gray",
+      "tabList",
+      "collapsible",
+      "defaultCollapsed",
+      "collapsed",
+      "onCollapse"
+    ],
+    "allInterfaceProps": [
+      "subTitle",
+      "document",
+      "divided",
+      "gray",
+      "tabList",
+      "collapsible",
+      "defaultCollapsed",
+      "collapsed",
+      "onCollapse",
+      "locale"
+    ]
+  },
+  "ConfigProvider": {
+    "source": "packages/design/src/config-provider/index.tsx",
+    "props": [
+      "theme",
+      "navigate",
+      "hideOnSinglePage",
+      "card",
+      "pagination",
+      "spin",
+      "table",
+      "styleProviderProps",
+      "appProps"
+    ],
+    "allInterfaceProps": [
+      "theme",
+      "locale",
+      "navigate",
+      "hideOnSinglePage",
+      "card",
+      "pagination",
+      "spin",
+      "table",
+      "styleProviderProps",
+      "appProps"
+    ]
+  },
+  "Descriptions": {
+    "source": "packages/design/src/descriptions/index.tsx",
+    "props": [
+      "items",
+      "collapsible",
+      "collapsed",
+      "defaultCollapsed",
+      "onCollapse",
+      "contentAlign"
+    ],
+    "allInterfaceProps": [
+      "items",
+      "collapsible",
+      "collapsed",
+      "defaultCollapsed",
+      "onCollapse",
+      "contentAlign"
+    ]
+  },
+  "Drawer": {
+    "source": "packages/design/src/drawer/index.tsx",
+    "props": [
+      "onOk",
+      "onCancel",
+      "confirmLoading",
+      "footer",
+      "footerExtra",
+      "cancelText",
+      "okText",
+      "okButtonProps",
+      "document"
+    ],
+    "allInterfaceProps": [
+      "onOk",
+      "onCancel",
+      "confirmLoading",
+      "footer",
+      "footerExtra",
+      "cancelText",
+      "okText",
+      "okButtonProps",
+      "document",
+      "locale"
+    ]
+  },
+  "Dropdown": {
+    "source": "packages/design/src/dropdown/index.tsx",
+    "props": [],
+    "allInterfaceProps": []
+  },
+  "Empty": {
+    "source": "packages/design/src/empty/index.tsx",
+    "props": ["title", "steps", "layout"],
+    "allInterfaceProps": ["title", "steps", "layout"]
+  },
+  "Filter": {
+    "source": "packages/design/src/filter/type.ts",
+    "props": [
+      "icon",
+      "label",
+      "disabled",
+      "bordered",
+      "footer",
+      "extra",
+      "loading",
+      "collapsible",
+      "alwaysCollapse",
+      "showSuffixIcon",
+      "allowClear"
+    ],
+    "allInterfaceProps": [
+      "icon",
+      "label",
+      "disabled",
+      "bordered",
+      "footer",
+      "extra",
+      "loading",
+      "collapsible",
+      "alwaysCollapse",
+      "showSuffixIcon",
+      "allowClear"
+    ]
+  },
+  "Form": {
+    "source": "packages/design/src/form/index.tsx",
+    "props": [],
+    "allInterfaceProps": []
+  },
+  "Input": {
+    "source": "packages/design/src/input/index.tsx",
+    "props": [],
+    "allInterfaceProps": []
+  },
+  "LightFilter": {
+    "source": "packages/ui/src/LightFilter/index.tsx",
+    "props": [],
+    "allInterfaceProps": []
+  },
+  "Modal": {
+    "source": "packages/design/src/modal/Modal.tsx",
+    "props": ["extra", "document"],
+    "allInterfaceProps": ["extra", "document"]
+  },
+  "PageContainer": {
+    "source": "packages/ui/src/PageContainer/index.tsx",
+    "props": ["header", "locale"],
+    "allInterfaceProps": ["header", "locale"]
+  },
+  "ProTable": {
+    "source": "packages/ui/src/ProTable/index.tsx",
+    "props": ["innerBordered"],
+    "allInterfaceProps": ["innerBordered"]
+  },
+  "Result": {
+    "source": "packages/design/src/result/index.tsx",
+    "props": ["status"],
+    "allInterfaceProps": ["status"]
+  },
+  "Select": {
+    "source": "packages/design/src/select/index.tsx",
+    "props": ["locale"],
+    "allInterfaceProps": ["locale"]
+  },
+  "Spin": {
+    "source": "packages/design/src/spin/index.tsx",
+    "props": ["gray"],
+    "allInterfaceProps": ["gray"]
+  },
+  "Table": {
+    "source": "packages/design/src/table/index.tsx",
+    "props": [
+      "innerBordered",
+      "cancelText",
+      "collapseText",
+      "openText",
+      "hiddenCancelBtn",
+      "toolOptionsRender",
+      "toolAlertRender",
+      "toolSelectedContent"
+    ],
+    "allInterfaceProps": [
+      "innerBordered",
+      "columns",
+      "cancelText",
+      "collapseText",
+      "openText",
+      "hiddenCancelBtn",
+      "toolOptionsRender",
+      "toolAlertRender",
+      "toolSelectedContent",
+      "locale"
+    ]
+  }
+}

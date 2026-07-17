@@ -1,6 +1,6 @@
 ---
 title: 从 @alipay/ob-ui 迁移
-order: 6
+order: 11
 group: 基础组件
 ---
 

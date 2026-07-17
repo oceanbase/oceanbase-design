@@ -1,6 +1,36 @@
 # design 筛选器 Filter
 
-Filter 为 design 独有组件，用于表格/列表上方筛选；**优先使用 Filter（优于 LightFilter）**。
+Filter 为 design 独有组件，用于表格/列表上方筛选；**默认优先 Filter**，仅在明确需要 LightFilter 形态时使用 `@oceanbase/ui` 的 LightFilter。详见下方决策树（与 [agent-tooling.md](../agent-tooling.md) 决策速查一致）。
+
+## Filter vs LightFilter 决策树
+
+```
+需要列表/表格上方筛选？
+│
+├─ 否 → 表单内筛选用 Form.Item + Filter.* 或 Form 字段（见「表单集成」）
+│
+└─ 是 → 是否要求 Pro 系「单行紧凑 + onFinish 提交」形态？
+         │
+         ├─ 是，且筛选项少、布局固定单行
+         │     → @oceanbase/ui LightFilter + LightFilter.Item
+         │        （内部字段仍用 @oceanbase/design 组件，如 Select）
+         │
+         └─ 否（默认）→ @oceanbase/design Filter.*
+                │
+                ├─ 多条件、需响应式折叠 → Filter.ResponsiveGroup
+                ├─ 固定收起到一个按钮 → Filter.Wrap
+                ├─ 需 Apply / ClearAll 与列表联动 → onApply + onClearAll + 受控 value/onChange
+                └─ 禁止：裸 Select / Space+Select 充当筛选条（见 agent-tooling 禁止项）
+```
+
+| 场景 | 选用 | 包 |
+| --- | --- | --- |
+| 标准多条件筛选条（默认） | `Filter.ResponsiveGroup` + `Filter.Select/Checkbox/...` | `@oceanbase/design` |
+| 轻量单行筛选、紧凑条、`onFinish` 一次提交 | `LightFilter` + `LightFilter.Item` | `@oceanbase/ui` |
+| 表单页内筛选字段 | `Form.Item` + `Filter.*` | `@oceanbase/design` |
+| 表格/列表数据区 | `Table`（静态）或 `ProTable`（需 request） | design / ui |
+
+**原则**：能用 Filter 就不用 LightFilter；能用 Table 就不用 ProTable。Agent 不确定时：`ob-design route "<页面意图>"`，再 `ob-design info Filter` / `ob-design info LightFilter`。
 
 ## 组成
 

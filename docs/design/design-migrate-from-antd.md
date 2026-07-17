@@ -1,6 +1,6 @@
 ---
 title: 从 antd 迁移
-order: 5
+order: 10
 group: 基础组件
 ---
 

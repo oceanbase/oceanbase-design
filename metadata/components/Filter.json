@@ -1,0 +1,24 @@
+{
+  "name": "Filter",
+  "package": "@oceanbase/design",
+  "diffLevel": "D",
+  "extendsAntd": null,
+  "obOnly": true,
+  "delegateAntd": false,
+  "addedProps": [
+    "icon",
+    "label",
+    "bordered",
+    "footer",
+    "extra",
+    "collapsible",
+    "alwaysCollapse",
+    "showSuffixIcon",
+    "allowClear"
+  ],
+  "constraints": ["filter-not-select-for-bar", "filter-controlled"],
+  "keywords": ["filter", "search", "table", "list", "筛选"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/filter/type.ts",
+  "docSource": "packages/design/src/filter/index.md"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Descriptions",
+  "package": "@oceanbase/design",
+  "diffLevel": "B",
+  "extendsAntd": "Descriptions",
+  "delegateAntd": true,
+  "addedProps": ["collapsible", "collapsed", "defaultCollapsed", "onCollapse", "contentAlign"],
+  "constraints": [],
+  "keywords": ["descriptions", "detail", "label-value", "collapsible"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/descriptions/index.tsx",
+  "docSource": "packages/design/src/descriptions/index.md"
+}
