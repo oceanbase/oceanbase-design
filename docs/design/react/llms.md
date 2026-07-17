@@ -12,7 +12,7 @@ group:
 
 ## 文件说明
 
-站点构建后在**根路径**提供以下文件（根相对路径，本地开发与生产均可用）：
+站点构建后在**根路径**提供以下文件：
 
 | 文件 | 说明 |
 | --- | --- |
@@ -58,7 +58,7 @@ ob-design setup --client claude
 并安装 Skill：
 
 ```bash
-npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
+npx skills add oceanbase/oceanbase-design
 ```
 
 ## 与 MCP 的关系

@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const outPath = join(root, 'skills/oceanbase-design-usage/references/generated/props-index.md');
+const outPath = join(root, 'skills/oceanbase-design/references/generated/props-index.md');
 
 const before = readFileSync(outPath, 'utf8');
 execSync('node scripts/generate-skill-props.mjs', { cwd: root, stdio: 'pipe' });

@@ -1,6 +1,12 @@
 ---
-name: oceanbase-design-usage
-description: Guide for using OceanBase Design (OBUI) packages—design, ui, icons, charts, util—correctly. Use when developing or modifying components in this repo, adding new components, reviewing code for consistency, or migrating from antd/obui/techui to oceanbase-design. Covers import conventions, theme/style patterns, code standards, and @oceanbase/codemod for automated migration. Trigger terms: OceanBase Design, OBUI, oceanbase design, @oceanbase/design, Table, Filter, ConfigProvider, antd 迁移, obui, techui, codemod, obToken, 主题, 组件规范, design 组件 Code Review, @oceanbase/design-cli, ob-design mcp, AGENTS.md, For Agents, AI agent.
+name: oceanbase-design
+description: >
+  Use when the user's task involves OceanBase Design (@oceanbase/design, @oceanbase/ui, @oceanbase/icons, @oceanbase/charts) — writing OB components, reviewing OB code, querying ob_info/ob_doc via ob-design mcp, migrating from antd/obui/techui, or configuring agent tooling. Triggers on OceanBase Design, OBUI, Table, Filter, ConfigProvider, codemod, obToken, ob-design mcp, AGENTS.md, For Agents.
+
+allowed-tools:
+  - Bash(ob-design *)
+  - Bash(npx @oceanbase/design-cli *)
+  - Bash(npm install -g @oceanbase/design-cli*)
 ---
 
 # OceanBase Design 使用规范
@@ -22,15 +28,54 @@ description: Guide for using OceanBase Design (OBUI) packages—design, ui, icon
 
 ## Agent 工具链
 
-编写或审查 **AI 生成代码**时，本 Skill 提供叙事与范式；**组件 API 以 `ob-design info` / `ob_info` 为准**（`@oceanbase/design-cli`）。项目接入见 [references/agent-tooling.md](references/agent-tooling.md) 与站点 [For Agents](https://design.oceanbase.com/docs/react/for-agents)。
+编写或审查 **AI 生成代码**时，本 Skill 提供叙事与范式；**组件 API 以 `ob-design info` / `ob_info` 为准**（`@oceanbase/design-cli`）。完整 CLI/MCP 说明见 [references/agent-tooling.md](references/agent-tooling.md)；站点 [For Agents](https://design.oceanbase.com/docs/react/for-agents) · [CLI](https://design.oceanbase.com/docs/react/cli)。
+
+### 分工（Skill vs CLI）
+
+| 问题 | 查哪里 |
+| --- | --- |
+| 为什么 Card+Table 要 `innerBordered`？ | 本 Skill `09-combo` / ASSEMBLY |
+| `Table` 有哪些 OB 扩展 props？ | `ob-design info Table` / `ob_info`（**不以 Skill 为准**） |
+| 页面该用 Filter 还是 LightFilter？ | 本 Skill `08-filter` + `ob-design route` |
+| MCP / AGENTS.md 怎么配？ | `ob-design setup` 或 agent-tooling.md |
+
+### 接入
 
 ```bash
 npm install -g @oceanbase/design-cli
-ob-design setup --client cursor   # MCP
+ob-design setup --client cursor   # MCP（key: oceanbase-design）
 ob-design setup --client agents   # AGENTS.md
+npx skills add oceanbase/oceanbase-design
 ```
 
-未全局安装时：`npx @oceanbase/design-cli setup --client <client>`
+未全局安装时：`npx @oceanbase/design-cli <command>`。
+
+### 推荐工作流
+
+```
+ob-design route "<页面意图>"
+  → ob-design info <Component>     # API 真相
+  → ob-design doc <Component>        # 用法/约束（可选）
+  → ob-design constraint --dense     # 有疑虑时
+  → ob-design template <name>        # 可选起点
+  → 生成代码
+  → ob-design lint ./src
+```
+
+### 常用命令
+
+| 命令                                   | 用途                                     |
+| -------------------------------------- | ---------------------------------------- |
+| `ob-design route "<intent>"`           | 页面意图 → 组件组合                      |
+| `ob-design info <Name>`                | 组件 API（OB merge 后，MCP: `ob_info`）  |
+| `ob-design doc` / `demo`               | 文档与 Demo（MCP: `ob_doc` / `ob_demo`） |
+| `ob-design constraint`                 | ASSEMBLY 约束（MCP: `ob_constraint`）    |
+| `ob-design token`                      | obToken / `var(--ob-*)`                  |
+| `ob-design lint` / `doctor`            | 约定检查与项目健康                       |
+| `ob-design migrate`                    | 封装 `@oceanbase/codemod`                |
+| `ob-design template list-filter-table` | 列表+筛选+表格模板                       |
+
+**禁止**：配置 `@ant-design/cli mcp` 或调用 `antd_info`；`@ant-design/cli` 仅作 `ob_info` 内部 delegate。
 
 ## 包选择速查
 
@@ -67,6 +112,7 @@ ob-design setup --client agents   # AGENTS.md
 - **@oceanbase/util**：见 [references/util.md](references/util.md)。
 - **@oceanbase/charts**：见 [references/charts.md](references/charts.md)。
 - **@oceanbase/codemod**：自动化迁移工具，见 [references/codemod.md](references/codemod.md)。用于从 antd、obui、techui、pro-components 等迁移到 design/ui/util/charts，以及 Less/Sass 转 token 或 CSS 变量。执行时须指定版本 `@oceanbase/codemod@^1.0.0-alpha.0`。
+- **@oceanbase/design-cli**：Agent CLI 与 MCP（`ob-design`），见 [references/agent-tooling.md](references/agent-tooling.md)。
 
 在修改或新增组件、做 Code Review、统一样式与导入方式时，按需查阅上述 reference 以保持与 design 及各包使用规范一致。存量项目迁移时先运行 codemod，再按 design 与各包规范做人工核对。本 skill 的 reference 位于 `references/`；design 细则入口为 [references/design/README.md](references/design/README.md)；**机器可读的 OB 扩展 props 索引（CI 生成）**见 [references/generated/props-index.md](references/generated/props-index.md)；**关键约束一句话汇编**见 [references/ASSEMBLY.md](references/ASSEMBLY.md)。高价值约定（ConfigProvider 必包、图标来源、Card+Table innerBordered、Filter 受控）已融入各相关 reference。
 

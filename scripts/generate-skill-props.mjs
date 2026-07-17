@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /**
  * @input metadata/components/*.json
- * @output skills/oceanbase-design-usage/references/generated/props-index.md
+ * @output skills/oceanbase-design/references/generated/props-index.md
  */
 import { readFileSync, writeFileSync, readdirSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const outDir = join(root, 'skills/oceanbase-design-usage/references/generated');
+const outDir = join(root, 'skills/oceanbase-design/references/generated');
 const outPath = join(outDir, 'props-index.md');
 
 mkdirSync(outDir, { recursive: true });

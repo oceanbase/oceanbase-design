@@ -86,7 +86,7 @@ ob_route "<页面意图>"
 
 ## 无 MCP 时的替代方案
 
-若 IDE 不支持 MCP，可使用 [LLMs.txt](/docs/react/llms) 将文档灌入上下文，并安装 `oceanbase-design-usage` Skill。但**动态 API 查询仍建议在支持 MCP 的环境开发**。
+若 IDE 不支持 MCP，可使用 [LLMs.txt](/docs/react/llms) 将文档灌入上下文，并安装 `oceanbase-design` Skill。但**动态 API 查询仍建议在支持 MCP 的环境开发**。
 
 ## 发现协议
 

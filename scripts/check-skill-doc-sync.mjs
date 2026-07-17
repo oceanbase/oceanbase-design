@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * @input metadata/constraints.yaml, skills/oceanbase-design-usage/references/ASSEMBLY.md
+ * @input metadata/constraints.yaml, skills/oceanbase-design/references/ASSEMBLY.md
  * @output exit 0 if constraint ids stay in sync
  */
 import { readFileSync } from 'node:fs';
@@ -12,7 +12,7 @@ const errors = [];
 
 const yaml = readFileSync(join(root, 'metadata/constraints.yaml'), 'utf8');
 const assembly = readFileSync(
-  join(root, 'skills/oceanbase-design-usage/references/ASSEMBLY.md'),
+  join(root, 'skills/oceanbase-design/references/ASSEMBLY.md'),
   'utf8',
 );
 

@@ -68,7 +68,7 @@ Configure **only** the oceanbase-design MCP server (runs \`@oceanbase/design-cli
 
 ## Skill
 
-\`npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage\`
+\`npx skills add oceanbase/oceanbase-design\`
 
 ## Constraints (summary)
 

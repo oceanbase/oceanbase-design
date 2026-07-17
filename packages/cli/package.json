@@ -19,15 +19,8 @@
   "scripts": {
     "prepublishOnly": "node ../../scripts/generate-metadata.mjs"
   },
-  "peerDependencies": {
-    "@ant-design/cli": ">=1.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@ant-design/cli": {
-      "optional": true
-    }
-  },
   "dependencies": {
+    "@ant-design/cli": "^6.5.1",
     "@modelcontextprotocol/sdk": "^1.12.1",
     "commander": "^12.1.0"
   },

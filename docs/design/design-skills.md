@@ -6,7 +6,7 @@ group:
   order: 0
 ---
 
-本仓库提供 **oceanbase-design-usage** Skill，用于在开发、Code Review、迁移时统一 **OceanBase Design** 各包（design、ui、icons、charts、util）的使用方式，减少样式与代码差异。适用于本仓库及引用上述包的业务项目；迁移场景覆盖 `@oceanbase/codemod` 与人工核对。
+本仓库提供 **oceanbase-design** Skill，用于在开发、Code Review、迁移时统一 **OceanBase Design** 各包（design、ui、icons、charts、util）的使用方式，减少样式与代码差异。适用于本仓库及引用上述包的业务项目；迁移场景覆盖 `@oceanbase/codemod` 与人工核对。
 
 程序化接入见侧栏 **AI** 分组（与 Ant Design 对齐）；本页为叙事与 Code Review 规范，入口见 [For Agents](/docs/react/for-agents)。
 
@@ -35,23 +35,16 @@ Skill 是**叙事与范式**；`@oceanbase/design-cli` 是**API 与约束的机�
 
 ### 安装
 
-在业务项目根目录执行（OpenSkills 会拉取仓库并只安装 skill 子目录）：
+在业务项目根目录执行（与 [Ant Design](https://ant.design/docs/react/for-agents) 对齐，推荐）：
 
 ```bash
-npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
+npx skills add oceanbase/oceanbase-design
 ```
-
-安装后可执行 `npx openskills update oceanbase-design-usage` 更新为仓库最新版本。
-
-### 安装后使用
-
-- 在项目中执行 `npx openskills read oceanbase-design-usage` 可加载规范内容。
-- 在 Cursor、Claude Code 等支持 OpenSkills 的环境中，Agent 会在涉及「OceanBase Design」「OBUI」「Table」「Filter」「ConfigProvider」「迁移」「obToken」等任务时自动引用该 Skill。
 
 ## Skill 内容结构
 
 ```
-oceanbase-design-usage/
+oceanbase-design/
 ├── SKILL.md                              # 入口与总览
 └── references/
     ├── ASSEMBLY.md                       # 00～09 约束汇总

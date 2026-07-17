@@ -28,6 +28,8 @@ jobs:
         run: pnpm run check:metadata
       - name: Skill doc sync
         run: pnpm run check:skill-doc-sync
+      - name: Sync agent doc markdown
+        run: pnpm run sync:agent-doc-md
       - name: Agent discovery assets
         run: pnpm run check:agent-discovery
       - name: CLI unit tests
