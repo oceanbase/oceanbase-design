@@ -25,6 +25,7 @@ export default defineConfig({
   },
   extraRehypePlugins: [rehypePlugin],
   extraRemarkPlugins: [remarkPlugin],
+  plugins: ['./.dumi/theme/plugins/llms.ts'],
   extraBabelPresets: [require.resolve('@emotion/babel-preset-css-prop')],
   extraBabelPlugins: ['react-inline-svg-unique-id'],
   chainWebpack: config => {

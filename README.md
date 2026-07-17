@@ -12,6 +12,22 @@
 - [@oceanbase/charts](https://design.oceanbase.com/docs/charts-introduce)
 - [@oceanbase/util](https://github.com/oceanbase/oceanbase-design/tree/master/packages/util)
 - [@oceanbase/codemod](https://github.com/oceanbase/oceanbase-design/tree/master/packages/codemod)
+- [@oceanbase/design-cli](https://github.com/oceanbase/oceanbase-design/tree/master/packages/cli) — Agent CLI & MCP（[文档](https://design.oceanbase.com/docs/react/cli)）
+
+## 🤖 For AI Agents
+
+| 文档 | 说明 |
+| --- | --- |
+| [For Agents](https://design.oceanbase.com/docs/react/for-agents) | 可复制 Prompt + 能力总览 |
+| [LLMs.txt](https://design.oceanbase.com/docs/react/llms) | 结构化文档索引 |
+| [MCP Server](https://design.oceanbase.com/docs/react/mcp) | `ob-design mcp` 配置与工具 |
+| [CLI](https://design.oceanbase.com/docs/react/cli) | `ob-design` 命令参考 |
+| [Agent Skills](https://design.oceanbase.com/docs/design/design-skills) | `oceanbase-design-usage` Skill |
+
+```bash
+npx @oceanbase/design-cli setup --client cursor
+npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
+```
 
 ## ⌨️ Development
 

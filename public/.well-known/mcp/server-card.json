@@ -1,0 +1,30 @@
+{
+  "serverInfo": {
+    "name": "OceanBase Design",
+    "version": "1.0.0"
+  },
+  "description": "OceanBase Design documentation MCP. Component API (ob_info merge), constraints, routes, demos, and lint for @oceanbase/design and @oceanbase/ui. Single entry — antd CLI is internal only.",
+  "url": "/",
+  "transport": {
+    "type": "stdio",
+    "command": "npx",
+    "args": ["-y", "@oceanbase/design-cli", "mcp"],
+    "description": "Run via npx @oceanbase/design-cli mcp. Do not configure antd MCP separately."
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": true
+  },
+  "tools": [
+    { "name": "ob_info", "description": "Merged OB component API by diffLevel" },
+    { "name": "ob_doc", "description": "Component documentation with OB constraints" },
+    { "name": "ob_demo", "description": "Demo code with imports rewritten to @oceanbase/design" },
+    { "name": "ob_route", "description": "Intent to component combination" },
+    { "name": "ob_constraint", "description": "ASSEMBLY constraints from metadata" },
+    { "name": "ob_token", "description": "obToken and theme tokens" },
+    { "name": "ob_lint", "description": "Static lint for OB conventions" },
+    { "name": "ob_search", "description": "Cross-domain search" },
+    { "name": "ob_doctor", "description": "Project health check" }
+  ]
+}

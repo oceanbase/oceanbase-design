@@ -1,0 +1,15 @@
+{
+  "name": "LightFilter",
+  "package": "@oceanbase/ui",
+  "diffLevel": "D",
+  "extendsAntd": null,
+  "obOnly": true,
+  "delegateAntd": false,
+  "addedProps": ["filterAriaLabel"],
+  "addedPropsManual": true,
+  "constraints": ["filter-not-select-for-bar"],
+  "keywords": ["filter", "light", "search", "pro"],
+  "importFrom": "@oceanbase/ui",
+  "propsSource": "packages/ui/src/LightFilter/index.tsx",
+  "docSource": "packages/ui/src/LightFilter/index.md"
+}

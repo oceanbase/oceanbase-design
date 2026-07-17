@@ -110,7 +110,9 @@ export default ({
     .join('/');
   let activeMenuItem = module || 'home';
   if (pathname.startsWith('/changelog')) {
-    activeMenuItem = 'docs/react';
+    activeMenuItem = 'docs';
+  } else if (pathname.startsWith('/docs/react')) {
+    activeMenuItem = 'docs';
   } else if (pathname.startsWith('/docs/resources')) {
     activeMenuItem = 'docs/resources';
   }

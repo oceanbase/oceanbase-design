@@ -1,0 +1,22 @@
+{
+  "name": "Card",
+  "package": "@oceanbase/design",
+  "diffLevel": "B",
+  "extendsAntd": "Card",
+  "delegateAntd": true,
+  "addedProps": [
+    "subTitle",
+    "document",
+    "divided",
+    "gray",
+    "collapsible",
+    "defaultCollapsed",
+    "collapsed",
+    "onCollapse"
+  ],
+  "constraints": ["card-table-inner-bordered"],
+  "keywords": ["card", "container", "collapsible", "document"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/card/index.tsx",
+  "docSource": "packages/design/src/card/index.md"
+}

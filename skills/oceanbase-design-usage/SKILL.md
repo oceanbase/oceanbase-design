@@ -1,6 +1,6 @@
 ---
 name: oceanbase-design-usage
-description: Guide for using OceanBase Design (OBUI) packages—design, ui, icons, charts, util—correctly. Use when developing or modifying components in this repo, adding new components, reviewing code for consistency, or migrating from antd/obui/techui to oceanbase-design. Covers import conventions, theme/style patterns, code standards, and @oceanbase/codemod for automated migration. Trigger terms: OceanBase Design, OBUI, oceanbase design, @oceanbase/design, Table, Filter, ConfigProvider, antd 迁移, obui, techui, codemod, obToken, 主题, 组件规范, design 组件 Code Review.
+description: Guide for using OceanBase Design (OBUI) packages—design, ui, icons, charts, util—correctly. Use when developing or modifying components in this repo, adding new components, reviewing code for consistency, or migrating from antd/obui/techui to oceanbase-design. Covers import conventions, theme/style patterns, code standards, and @oceanbase/codemod for automated migration. Trigger terms: OceanBase Design, OBUI, oceanbase design, @oceanbase/design, Table, Filter, ConfigProvider, antd 迁移, obui, techui, codemod, obToken, 主题, 组件规范, design 组件 Code Review, @oceanbase/design-cli, ob-design mcp, AGENTS.md, For Agents, AI agent.
 ---
 
 # OceanBase Design 使用规范
@@ -20,6 +20,15 @@ description: Guide for using OceanBase Design (OBUI) packages—design, ui, icon
 
 应用入口应使用 `ConfigProvider`（来自 design）包裹，需要图表主题时在内部使用 `ChartProvider`（来自 charts）。存量项目迁移时可使用 codemod 自动转换后再按本 skill 规范核对。
 
+## Agent 工具链
+
+编写或审查 **AI 生成代码**时，本 Skill 提供叙事与范式；**组件 API 以 `ob-design info` / `ob_info` 为准**（`@oceanbase/design-cli`）。项目接入见 [references/agent-tooling.md](references/agent-tooling.md) 与站点 [For Agents](https://design.oceanbase.com/docs/react/for-agents)。
+
+```bash
+npx @oceanbase/design-cli setup --client cursor   # MCP
+npx @oceanbase/design-cli setup --client agents   # AGENTS.md
+```
+
 ## 包选择速查
 
 | 需求 | 推荐包 | 说明 |
@@ -36,6 +45,8 @@ description: Guide for using OceanBase Design (OBUI) packages—design, ui, icon
 - **根节点**：应用入口用 design 的 `ConfigProvider` 包裹；使用 message/notification/Modal 静态方法或图表时，必须已在 ConfigProvider/ChartProvider 子树内。
 - **组件与图标**：基础组件、Table、Filter、表单等从 `@oceanbase/design` 引入；图标从 `@oceanbase/icons` 引入，**不要**从 `@ant-design/icons` 引入。
 - **Card + Table**：Card 使用 `bodyStyle={{ padding: 0 }}` 时，Table **必须**设 `innerBordered`，否则边框错乱。
+- **筛选**：列表/页面筛选用 `Filter.*`（design）或 `LightFilter`（ui 轻量场景），**不要**用裸 `Select` 充当筛选条。
+- **表格**：静态数据用 `Table`；仅当需要 `request`、内置搜索等能力时用 `ProTable`（ui）。
 - **迁移**：从 antd/obui/techui 迁移时，先运行 `@oceanbase/codemod`，再按本 skill 做人工核对。
 
 ## 快速规范
@@ -54,7 +65,7 @@ description: Guide for using OceanBase Design (OBUI) packages—design, ui, icon
 - **@oceanbase/charts**：见 [references/charts.md](references/charts.md)。
 - **@oceanbase/codemod**：自动化迁移工具，见 [references/codemod.md](references/codemod.md)。用于从 antd、obui、techui、pro-components 等迁移到 design/ui/util/charts，以及 Less/Sass 转 token 或 CSS 变量。执行时须指定版本 `@oceanbase/codemod@^1.0.0-alpha.0`。
 
-在修改或新增组件、做 Code Review、统一样式与导入方式时，按需查阅上述 reference 以保持与 design 及各包使用规范一致。存量项目迁移时先运行 codemod，再按 design 与各包规范做人工核对。本 skill 的 reference 位于 `references/`；design 细则入口为 [references/design/README.md](references/design/README.md)；**关键约束一句话汇编**见 [references/ASSEMBLY.md](references/ASSEMBLY.md)。高价值约定（ConfigProvider 必包、图标来源、Card+Table innerBordered、Filter 受控）已融入各相关 reference。
+在修改或新增组件、做 Code Review、统一样式与导入方式时，按需查阅上述 reference 以保持与 design 及各包使用规范一致。存量项目迁移时先运行 codemod，再按 design 与各包规范做人工核对。本 skill 的 reference 位于 `references/`；design 细则入口为 [references/design/README.md](references/design/README.md)；**机器可读的 OB 扩展 props 索引（CI 生成）**见 [references/generated/props-index.md](references/generated/props-index.md)；**关键约束一句话汇编**见 [references/ASSEMBLY.md](references/ASSEMBLY.md)。高价值约定（ConfigProvider 必包、图标来源、Card+Table innerBordered、Filter 受控）已融入各相关 reference。
 
 ## 何时不用 / 例外
 

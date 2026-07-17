@@ -1,0 +1,13 @@
+{
+  "name": "Spin",
+  "package": "@oceanbase/design",
+  "diffLevel": "C",
+  "extendsAntd": "Spin",
+  "delegateAntd": true,
+  "addedProps": ["gray"],
+  "constraints": [],
+  "keywords": ["loading", "spinner", "lottie"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/spin/index.tsx",
+  "docSource": "packages/design/src/spin/index.md"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@oceanbase/vibe-tests",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Vibeability tests for OceanBase Design AI tooling",
+  "type": "module",
+  "bin": {
+    "ob-vibe-tests": "./src/cli.mjs"
+  },
+  "scripts": {
+    "sample": "node src/cli.mjs interactive --sample 5",
+    "run": "node src/cli.mjs run --configs all --fresh",
+    "run:compare": "node src/cli.mjs run --configs baseline-antd,ob-mcp-only --fresh",
+    "smoke": "node src/cli.mjs smoke",
+    "aggregate": "node src/cli.mjs aggregate",
+    "compare": "node src/cli.mjs compare"
+  },
+  "dependencies": {
+    "@oceanbase/design-cli": "workspace:*"
+  }
+}

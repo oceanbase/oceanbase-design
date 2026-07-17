@@ -1,0 +1,14 @@
+{
+  "name": "PageContainer",
+  "package": "@oceanbase/ui",
+  "diffLevel": "D",
+  "extendsAntd": null,
+  "obOnly": true,
+  "delegateAntd": false,
+  "addedProps": ["header", "locale"],
+  "constraints": [],
+  "keywords": ["page", "layout", "container", "header"],
+  "importFrom": "@oceanbase/ui",
+  "propsSource": "packages/ui/src/PageContainer/index.tsx",
+  "docSource": "packages/ui/src/PageContainer/index.md"
+}

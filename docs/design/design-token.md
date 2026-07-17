@@ -1,6 +1,6 @@
 ---
 title: Design Token
-order: 4
+order: 5
 group: 基础组件
 ---
 

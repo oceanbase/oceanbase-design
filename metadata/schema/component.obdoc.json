@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://design.oceanbase.com/schema/component.obdoc.json",
+  "title": "OceanBase Design Component Metadata",
+  "type": "object",
+  "required": ["name", "package", "diffLevel", "importFrom"],
+  "properties": {
+    "name": { "type": "string", "description": "PascalCase component name" },
+    "package": {
+      "type": "string",
+      "enum": [
+        "@oceanbase/design",
+        "@oceanbase/ui",
+        "@oceanbase/charts",
+        "@oceanbase/icons",
+        "@oceanbase/util"
+      ]
+    },
+    "diffLevel": {
+      "type": "string",
+      "enum": ["A", "B", "C", "D"],
+      "description": "A=thin-wrap, B=extended, C=customized, D=ob-only"
+    },
+    "extendsAntd": {
+      "type": ["string", "null"],
+      "description": "antd component name if extends antd"
+    },
+    "obOnly": { "type": "boolean", "default": false },
+    "delegateAntd": { "type": "boolean", "default": true },
+    "addedProps": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "keywords": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "importFrom": { "type": "string" },
+    "propsSource": { "type": "string" },
+    "docSource": { "type": "string" }
+  }
+}
