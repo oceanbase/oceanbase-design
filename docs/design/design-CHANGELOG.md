@@ -8,6 +8,15 @@ group: 基础组件
 
 ---
 
+## 1.0.0
+
+`2026-07-17`
+
+- AI / Agent
+  - 🆕 新增 `@oceanbase/design-cli` 命令行工具，支持组件 API 查询、文档、Demo、页面路由推荐与设计约束检查。
+  - 🆕 新增 MCP 服务（IDE 配置名 `oceanbase-design`），提供 `ob_info`、`ob_doc`、`ob_constraint`、`ob_route` 等工具；编写 OB 业务代码时只需配置此 MCP。
+  - 📖 新增 `For Agents`、`design.md`、`LLMs.txt`、`MCP Server` 和 `CLI` 文档。
+
 ## 1.0.0-alpha.22
 
 `2026-06-17`
