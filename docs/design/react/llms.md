@@ -76,5 +76,4 @@ npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
 - [MCP Server](/docs/react/mcp)
 - [CLI 参考](/docs/react/cli)
 - [Agent Skills](/docs/design/design-skills)
-- [AI 设计原则](/docs/design/design-ai-principles)
 - [design.md](/docs/react/design-md)

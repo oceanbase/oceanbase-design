@@ -195,6 +195,5 @@ ob-design route "<页面意图>"
 - [LLMs.txt](/docs/react/llms)
 - [MCP Server](/docs/react/mcp)
 - [Agent Skills](/docs/design/design-skills)
-- [AI 设计原则](/docs/design/design-ai-principles)
 - [design.md](/docs/react/design-md)
 - [迁移指南](/docs/react/migrate)

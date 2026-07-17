@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * @input metadata/, skills/, docs/design/design-ai-principles.md
+ * @input metadata/, skills/
  * @output AGENTS.md in cwd or --out path
  */
 import { writeFileSync, readFileSync, existsSync, readdirSync } from 'node:fs';

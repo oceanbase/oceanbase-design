@@ -133,8 +133,6 @@ npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
 | 机器真相层 | `@oceanbase/design-cli` + `ob-design mcp` | API、demo、路由、lint     |
 | 约束层     | `metadata/constraints.yaml`               | 机器可读规则              |
 
-详见 [AI 设计原则](/docs/design/design-ai-principles)。
-
 ## 相关文档
 
 侧栏 **AI** 分组（与 Ant Design 对齐）：
@@ -144,4 +142,4 @@ npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
 3. [MCP Server](/docs/react/mcp)
 4. [CLI](/docs/react/cli)
 
-扩展阅读：[Agent Skills](/docs/design/design-skills) · [AI 设计原则](/docs/design/design-ai-principles) · [迁移指南](/docs/react/migrate)
+扩展阅读：[Agent Skills](/docs/design/design-skills) · [迁移指南](/docs/react/migrate)

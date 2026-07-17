@@ -176,7 +176,6 @@ async function generateLLms(api: IApi) {
     '## More for agents',
     '',
     '- [Agent Skills](./docs/design/design-skills.md)',
-    '- [AI Principles](./docs/design/design-ai-principles.md)',
     '- [Migrate guide](./docs/react/migrate.md)',
     '',
     '## LLM resources',
