@@ -39,6 +39,10 @@
     "antd"
   ],
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/oceanbase/oceanbase-design.git",
