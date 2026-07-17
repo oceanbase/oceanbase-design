@@ -34,6 +34,7 @@ export default defineConfig({
     // exclude use-client.test.ts as it requires build outputs and should run separately
     exclude: [
       '**/node_modules/**',
+      'packages/cli/**',
       '**/Area/__tests__/ref.test.tsx',
       '**/DualAxes/__tests__/ref.test.tsx',
       '**/Line/__tests__/ref.test.tsx',
