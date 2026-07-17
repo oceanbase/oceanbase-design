@@ -13,13 +13,18 @@
 ## 推荐接入顺序
 
 ```bash
-# 1. 业务项目：MCP + AGENTS.md
-npx @oceanbase/design-cli setup --client cursor
-npx @oceanbase/design-cli setup --client agents
+# 1. 全局安装 CLI（推荐，与 antd CLI 用法一致）
+npm install -g @oceanbase/design-cli
 
-# 2. Skill（叙事规范）
+# 2. 业务项目：MCP + AGENTS.md
+ob-design setup --client cursor
+ob-design setup --client agents
+
+# 3. Skill（叙事规范）
 npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
 ```
+
+未全局安装时，将 `ob-design` 替换为 `npx @oceanbase/design-cli`。
 
 ## Agent 工作流
 

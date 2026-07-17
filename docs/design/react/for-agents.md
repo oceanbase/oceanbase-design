@@ -8,13 +8,13 @@ group:
 
 本页提供**可复制 Prompt**，让任意 AI 编程 Agent 高效使用 OceanBase Design。业务项目**只配置单体 `ob-design mcp`**，不要直接配置 antd MCP 编写 OB 代码。
 
-## Copy this prompt
+## 复制这段 prompt
 
-复制到 Agent 对话或自动化 Runner：
+复制到 Agent 对话或自动化流程中：
 
 ```text
 你正在开发使用 @oceanbase/design 的 React 项目。组件 API 与训练数据可能不一致，写代码前请先阅读：
-/docs/react/for-agents.md
+https://design.oceanbase.com/docs/react/for-agents.md
 https://github.com/oceanbase/oceanbase-design/blob/master/skills/oceanbase-design-usage/SKILL.md
 
 规则：
@@ -32,16 +32,16 @@ npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
 ob_doc 仅含 OB 文档（用法、约束、OB API）；结构化 API 用 ob_info。若需 antd 完整说明，读 ob_doc 内 antd 链接或 shell 执行 antd doc <Name>（勿配置 antd MCP）。
 ```
 
-> Prompt 中的 `/docs/...`、`/design.md` 等为**站点根相对路径**。Agent 抓取时请拼接当前 origin（本地 `http://localhost:8000`，生产 `https://design.oceanbase.com`）。
-
-## What the agent gets
+## Agent 获得什么
 
 ### CLI — 离线知识与项目工具
 
 `@oceanbase/design-cli` 提供 metadata、约束、模板与迁移封装；组件 API 以 `ob-design info` / `ob_info` 为准（按 diffLevel merge）。
 
 ```bash
-npx @oceanbase/design-cli list
+npm install -g @oceanbase/design-cli   # 推荐，与 antd CLI 用法一致
+
+ob-design list
 ob-design info Table --dense
 ob-design doc Filter
 ob-design demo Table basic
@@ -58,11 +58,13 @@ ob-design setup --client cursor
 ob-design mcp
 ```
 
+未全局安装时可用 `npx @oceanbase/design-cli <command>`。
+
 内置页面模板：`list-filter-table`、`detail-descriptions`、`app-basic-layout`、`form-in-modal`。
 
 完整参考：[CLI](/docs/react/cli)
 
-### design.md — 设计语言（antd 基线 + OB 增量）
+### design.md — 设计语言
 
 [design.md](/docs/react/design-md) 在 [Ant Design design.md](https://ant.design/design.md) 上融合 OB 品牌色与组件约定，供 AI 设计工具使用。
 
@@ -73,6 +75,21 @@ ob-design mcp
 ### MCP Server — IDE 集成
 
 CLI 以 `ob-design mcp` 提供 **9 个工具**与 **2 个 Prompt**，供 Cursor、Claude Desktop 等调用。
+
+全局安装后：
+
+```json
+{
+  "mcpServers": {
+    "oceanbase-design": {
+      "command": "ob-design",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+未全局安装时：
 
 ```json
 {
@@ -114,10 +131,13 @@ npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
 ## 一键接入
 
 ```bash
-npx @oceanbase/design-cli setup --client cursor   # MCP
-npx @oceanbase/design-cli setup --client agents   # AGENTS.md
+npm install -g @oceanbase/design-cli
+ob-design setup --client cursor   # MCP
+ob-design setup --client agents   # AGENTS.md
 npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
 ```
+
+未全局安装时，将 `ob-design` 替换为 `npx @oceanbase/design-cli`。
 
 ## 禁止事项
 
@@ -139,7 +159,8 @@ npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
 
 1. [design.md](/docs/react/design-md)
 2. [LLMs.txt](/docs/react/llms)
-3. [MCP Server](/docs/react/mcp)
-4. [CLI](/docs/react/cli)
+3. [Agent Skills](/docs/design/design-skills)
+4. [MCP Server](/docs/react/mcp)
+5. [CLI](/docs/react/cli)
 
-扩展阅读：[Agent Skills](/docs/design/design-skills) · [迁移指南](/docs/react/migrate)
+扩展阅读：[迁移指南](/docs/react/migrate)

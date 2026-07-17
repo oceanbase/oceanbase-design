@@ -16,6 +16,7 @@ const readJson = (...segments) => JSON.parse(readFileSync(publicPath(...segments
 assert.ok(existsSync(publicPath('.well-known', 'mcp', 'server-card.json')));
 assert.ok(existsSync(publicPath('.well-known', 'agent-card.json')));
 assert.ok(existsSync(publicPath('_headers')));
+assert.ok(existsSync(publicPath('docs', 'react', 'for-agents.md')));
 
 const serverCard = readJson('.well-known', 'mcp', 'server-card.json');
 assert.equal(serverCard.serverInfo.name, 'OceanBase Design');

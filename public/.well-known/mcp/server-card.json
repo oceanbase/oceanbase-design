@@ -7,9 +7,9 @@
   "url": "/",
   "transport": {
     "type": "stdio",
-    "command": "npx",
-    "args": ["-y", "@oceanbase/design-cli", "mcp"],
-    "description": "Run via npx @oceanbase/design-cli mcp. Do not configure antd MCP separately."
+    "command": "ob-design",
+    "args": ["mcp"],
+    "description": "Run via ob-design mcp (npm install -g @oceanbase/design-cli). Without global install, use npx -y @oceanbase/design-cli mcp. Do not configure antd MCP separately."
   },
   "capabilities": {
     "tools": true,

@@ -25,9 +25,12 @@ description: Guide for using OceanBase Design (OBUI) packages—design, ui, icon
 编写或审查 **AI 生成代码**时，本 Skill 提供叙事与范式；**组件 API 以 `ob-design info` / `ob_info` 为准**（`@oceanbase/design-cli`）。项目接入见 [references/agent-tooling.md](references/agent-tooling.md) 与站点 [For Agents](https://design.oceanbase.com/docs/react/for-agents)。
 
 ```bash
-npx @oceanbase/design-cli setup --client cursor   # MCP
-npx @oceanbase/design-cli setup --client agents   # AGENTS.md
+npm install -g @oceanbase/design-cli
+ob-design setup --client cursor   # MCP
+ob-design setup --client agents   # AGENTS.md
 ```
+
+未全局安装时：`npx @oceanbase/design-cli setup --client <client>`
 
 ## 包选择速查
 

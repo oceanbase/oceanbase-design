@@ -18,7 +18,16 @@ CLI and MCP for OceanBase Design — single programmatic entry for AI agents.
 ## Install
 
 ```bash
+npm install -g @oceanbase/design-cli
+```
+
+Requires Node.js `>=18`. Also: `pnpm add -g @oceanbase/design-cli` or `bun add -g @oceanbase/design-cli`.
+
+Without global install:
+
+```bash
 npx @oceanbase/design-cli <command>
+pnpm add -D @oceanbase/design-cli && pnpm exec ob-design list
 ```
 
 ## Commands
@@ -38,6 +47,21 @@ npx @oceanbase/design-cli <command>
 | `ob-design mcp`                       | MCP server (stdio)                       |
 
 ## MCP
+
+After global install:
+
+```json
+{
+  "mcpServers": {
+    "oceanbase-design": {
+      "command": "ob-design",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+Without global install:
 
 ```json
 {

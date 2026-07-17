@@ -9,9 +9,11 @@ group: 基础组件
 ## ob-design migrate（推荐）
 
 ```bash
-npx @oceanbase/design-cli migrate ./src
-npx @oceanbase/design-cli migrate ./src --dry
+ob-design migrate ./src
+ob-design migrate ./src --dry
 ```
+
+未全局安装时：`npx @oceanbase/design-cli migrate ./src`
 
 内部调用 `@oceanbase/codemod`，并在项目根目录生成 `migration-report.json`。
 

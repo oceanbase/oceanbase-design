@@ -78,10 +78,10 @@ ${constraints}
 
 ## Docs
 
-Resolve paths against your OceanBase Design site origin (local: \`http://localhost:8000\`, production: \`https://design.oceanbase.com\`):
+Resolve paths against your OceanBase Design site origin:
 
-- /docs/react/for-agents.md
-- /llms-ob-constraints.txt
+- https://design.oceanbase.com/docs/react/for-agents.md
+- https://design.oceanbase.com/llms-ob-constraints.txt
 `;
 
 writeFileSync(outPath, content);

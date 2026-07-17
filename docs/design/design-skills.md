@@ -1,7 +1,9 @@
 ---
 title: Agent Skills
-order: 7
-group: 基础组件
+order: 3
+group:
+  title: AI
+  order: 0
 ---
 
 本仓库提供 **oceanbase-design-usage** Skill，用于在开发、Code Review、迁移时统一 **OceanBase Design** 各包（design、ui、icons、charts、util）的使用方式，减少样式与代码差异。适用于本仓库及引用上述包的业务项目；迁移场景覆盖 `@oceanbase/codemod` 与人工核对。
