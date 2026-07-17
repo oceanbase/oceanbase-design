@@ -12,6 +12,8 @@ es
 lib
 !scripts/lib/
 !scripts/lib/**
+!packages/cli/src/lib/
+!packages/cli/src/lib/**
 dist
 site
 server

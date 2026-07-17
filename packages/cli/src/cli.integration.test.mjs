@@ -8,11 +8,16 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 const ob = join(root, 'packages/cli/bin/ob-design.mjs');
 
 function runOb(...args) {
-  return execFileSync(process.execPath, [ob, ...args], {
-    cwd: root,
-    encoding: 'utf8',
-    env: { ...process.env, NO_COLOR: '1' },
-  });
+  try {
+    return execFileSync(process.execPath, [ob, ...args], {
+      cwd: root,
+      encoding: 'utf8',
+      env: { ...process.env, NO_COLOR: '1' },
+    });
+  } catch (err) {
+    const detail = [err.stderr, err.stdout].filter(Boolean).join('\n');
+    throw new Error(detail ? `${err.message}\n${detail}` : err.message);
+  }
 }
 
 test('ob-design info Table includes innerBordered (offline)', () => {
