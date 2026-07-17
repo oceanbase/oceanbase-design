@@ -19,7 +19,7 @@ OceanBase Design 是 OceanBase 前端和设计团队出品的 UI 资产库，与
 
 ## AI 代理
 
-使用 OceanBase Design 编写代码的 AI 工具，请从侧栏 **AI** 分组开始：**[For Agents](/docs/react/for-agents)** → [design.md](/docs/react/design-md) → [LLMs.txt](/docs/react/llms) → [MCP Server](/docs/react/mcp) → [CLI](/docs/react/cli)。叙事规范见 [Agent Skills](/docs/design/design-skills)；迁移见 [迁移指南](/docs/react/migrate)。
+使用 OceanBase Design 编写代码的 AI 工具，请从侧栏 **AI** 分组开始：**[For Agents](/docs/react/for-agents)** → [design.md](/docs/react/design-md) → [LLMs.txt](/docs/react/llms) → [Agent Skills](/docs/design/design-skills) → [MCP Server](/docs/react/mcp) → [CLI](/docs/react/cli)。迁移见 [迁移指南](/docs/react/migrate)。
 
 ## 支持环境
 

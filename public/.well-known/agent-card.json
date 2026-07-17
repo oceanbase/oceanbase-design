@@ -16,12 +16,12 @@
     "args": ["-y", "@oceanbase/design-cli", "mcp"]
   },
   "documentation": {
-    "forAgents": "/docs/react/for-agents.md",
-    "forAgentsStatic": "/for-agents.md",
-    "designMd": "/design.md",
-    "llms": "/llms.txt",
-    "mcp": "/docs/react/mcp.md",
-    "cli": "/docs/react/cli.md",
-    "constraints": "/llms-ob-constraints.txt"
+    "forAgents": "https://design.oceanbase.com/docs/react/for-agents.md",
+    "forAgentsStatic": "https://design.oceanbase.com/for-agents.md",
+    "designMd": "https://design.oceanbase.com/design.md",
+    "llms": "https://design.oceanbase.com/llms.txt",
+    "mcp": "https://design.oceanbase.com/docs/react/mcp.md",
+    "cli": "https://design.oceanbase.com/docs/react/cli.md",
+    "constraints": "https://design.oceanbase.com/llms-ob-constraints.txt"
   }
 }

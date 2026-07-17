@@ -25,7 +25,8 @@
 | [Agent Skills](https://design.oceanbase.com/docs/design/design-skills) | `oceanbase-design-usage` Skill |
 
 ```bash
-npx @oceanbase/design-cli setup --client cursor
+npm install -g @oceanbase/design-cli
+ob-design setup --client cursor
 npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
 ```
 

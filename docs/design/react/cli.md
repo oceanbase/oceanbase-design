@@ -1,6 +1,6 @@
 ---
 title: CLI
-order: 4
+order: 5
 group:
   title: AI
   order: 0
@@ -10,18 +10,45 @@ group:
 
 > 叙事规范见 [Agent Skills](/docs/design/design-skills)；接入流程见 [For Agents](/docs/react/for-agents)。
 
-## 安装与调用
+## 安装
 
 ```bash
-# 一次性命令
+npm install -g @oceanbase/design-cli
+```
+
+需要 Node.js `>=18`。也可以使用 `pnpm add -g @oceanbase/design-cli` 或 `bun add -g @oceanbase/design-cli` 全局安装。
+
+其他方式：
+
+```bash
+# 无需全局安装：一次性命令
 npx @oceanbase/design-cli <command>
 
-# 项目内 devDependency（推荐）
+# 项目内 devDependency（CI / 锁定版本）
 pnpm add -D @oceanbase/design-cli
 pnpm exec ob-design list
 ```
 
 二进制名：`ob-design`（与 `@ant-design/cli` 的 `antd` 对标；避免与 npm 全局包 `ob` 冲突）。
+
+## 快速开始
+
+```bash
+ob-design list                           # 所有组件及 diffLevel
+ob-design info Table                     # 组件 Props（OB merge 后）
+ob-design doc Filter                     # OB 组件 Markdown 文档
+ob-design demo Table basic               # 可运行 Demo 源码
+ob-design route "用户列表带筛选"         # 页面意图 → 组件组合
+ob-design constraint --dense             # 设计约束
+ob-design token                          # obToken / CSS 变量
+ob-design design.md                      # 设计语言（antd + OB）
+ob-design lint ./src                     # 约定静态检查
+ob-design doctor                         # 项目健康检查
+ob-design migrate ./src                  # 封装 @oceanbase/codemod
+ob-design template list-filter-table     # 页面模板
+ob-design mcp                            # 启动 MCP 服务
+ob-design setup --client cursor          # 写入 MCP / AGENTS.md
+```
 
 ## 命令一览
 
@@ -34,7 +61,7 @@ pnpm exec ob-design list
 | `ob-design route "<intent>"` | `ob_route`      | 页面意图 → 推荐组件组合                     |
 | `ob-design constraint`       | `ob_constraint` | 设计约束（ASSEMBLY）                        |
 | `ob-design token`            | `ob_token`      | obToken / CSS 变量参考                      |
-| `ob-design design.md`        | —               | 设计语言（antd 基线 + OB 增量）             |
+| `ob-design design.md`        | —               | 设计语言                                    |
 | `ob-design search <query>`   | `ob_search`     | 全文检索文档与元数据                        |
 | `ob-design lint <path>`      | `ob_lint`       | 约定静态检查                                |
 | `ob-design doctor`           | `ob_doctor`     | 项目健康检查（MCP/Skill/依赖）              |
@@ -77,8 +104,6 @@ CLI 名与 MCP 工具前缀**不必一致**（对标 `antd` CLI + `antd_info` �
 
 antd CLI 解析顺序（仅 `ob_info` 使用）：**PATH `antd` → 项目 `node_modules` → `npx`**。调用使用 `@ant-design/cli` 的 `--format json`，并**固定查询 antd v5 API**（`--version` 来自项目 antd 5 依赖或 `@oceanbase/design` 内置范围）。
 
-> **OceanBase Design 1.x 仅适配 antd v5，暂不支持 antd v6。** `ob_info` 内部 merge 忽略 node_modules 中的 antd v6，不会返回 v6 专属 API。
-
 ### Agent 查什么用什么
 
 ```
@@ -98,12 +123,12 @@ antd CLI 解析顺序（仅 `ob_info` 使用）：**PATH `antd` → 项目 `node
 
 | 安装项 | 必须？ | 作用 |
 | --- | --- | --- |
-| `@oceanbase/design-cli`（或 `npx`） | 是 | MCP + 全部 `ob_*` 命令 |
+| `@oceanbase/design-cli` | 是 | MCP + 全部 `ob_*` 命令；推荐全局安装，亦可用 `npx` / devDependency |
 | `@oceanbase/design` | 是（业务项目） | 实际组件库 |
 | `@ant-design/cli` | 否（建议） | 加速 `ob_info` 的 antd **v5** API merge；**不配 antd MCP**；勿依赖其默认 v6 数据 |
 
 ```bash
-# 可选加速 ob_info（setup 会检测并提示）
+# 可选：全局安装 antd CLI，加速 ob_info 内部 merge（无需配置 antd MCP）
 npm install -g @ant-design/cli
 ob-design setup --install-antd-cli
 ```
@@ -129,10 +154,13 @@ ob-design template list-filter-table --skeleton
 ## 一键接入
 
 ```bash
-# Cursor MCP 配置
-npx @oceanbase/design-cli setup --client cursor
+# 全局安装后（推荐）
+npm install -g @oceanbase/design-cli
+ob-design setup --client cursor    # MCP
+ob-design setup --client agents    # AGENTS.md
 
-# 业务项目 AGENTS.md
+# 或未全局安装时
+npx @oceanbase/design-cli setup --client cursor
 npx @oceanbase/design-cli setup --client agents
 
 # 可选：全局安装 antd CLI，加速 ob_info 内部 merge（无需配置 antd MCP）
@@ -143,6 +171,21 @@ ob-design setup --install-antd-cli
 详见上文 [命令与 antd 依赖矩阵](#命令与-antd-依赖矩阵)。
 
 ## MCP 配置
+
+全局安装后：
+
+```json
+{
+  "mcpServers": {
+    "oceanbase-design": {
+      "command": "ob-design",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+未全局安装时（`npx` 按需拉取，适合 CI 或锁定版本）：
 
 ```json
 {

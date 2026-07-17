@@ -1,6 +1,6 @@
 ---
 title: MCP Server
-order: 3
+order: 4
 group:
   title: AI
   order: 0
@@ -11,6 +11,21 @@ group:
 业务项目编写 OB 代码时，**只配置单体 `ob-design mcp`**（`@oceanbase/design-cli`）。**不要**单独配置 `@ant-design/cli mcp` 或调用 `antd_info`——Ant Design CLI 仅作为 `ob_info` 的内部 delegate。命令与 antd 依赖见 [CLI 矩阵](/docs/react/cli#命令与-antd-依赖矩阵)。
 
 ## 快速配置
+
+全局安装后（推荐）：
+
+```json
+{
+  "mcpServers": {
+    "oceanbase-design": {
+      "command": "ob-design",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+未全局安装时：
 
 ```json
 {
@@ -26,13 +41,16 @@ group:
 一键写入 Cursor：
 
 ```bash
-npx @oceanbase/design-cli setup --client cursor
+npm install -g @oceanbase/design-cli
+ob-design setup --client cursor
 ```
+
+未全局安装时：`npx @oceanbase/design-cli setup --client cursor`
 
 本地启动（调试）：
 
 ```bash
-npx @oceanbase/design-cli mcp
+ob-design mcp
 ```
 
 ## MCP 工具（9）

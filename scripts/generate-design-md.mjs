@@ -44,10 +44,10 @@ Never \`from 'antd'\` or \`@ant-design/icons\`.
 
 ### Agent toolchain
 
-- Design language: \`/design.md\` (this file; prefix site origin in local dev, e.g. \`http://localhost:8000\`)
+- Design language: \`https://design.oceanbase.com/design.md\`
 - API: \`ob-design info\` / \`ob_info\` (\`@oceanbase/design-cli mcp\`)
 - Constraints: \`ob-design constraint --dense\`
-- Guide: \`/docs/react/design-md\`
+- Guide: \`https://design.oceanbase.com/docs/react/design-md\`
 `;
 
 function fetchAntdDesignMd() {
