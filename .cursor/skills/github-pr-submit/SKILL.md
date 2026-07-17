@@ -1,5 +1,6 @@
 ---
 name: github-pr-submit
+internal: true
 description: >-
   Opens and updates GitHub pull requests for this repository using GitHub CLI (gh), filling the title and body from .github/PULL_REQUEST_TEMPLATE.md and team conventions. Covers optional issue links, self-check, and post-create label editing. Use when the user wants to submit a PR, open a pull request, use gh to create a PR, or align description with the repository PR template for oceanbase/oceanbase-design.
 ---

@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const sources = [
   join(root, 'docs/design/react/migrate.md'),
-  join(root, 'skills/oceanbase-design-usage/references/codemod.md'),
+  join(root, 'skills/oceanbase-design/references/codemod.md'),
 ];
 
 const parts = [

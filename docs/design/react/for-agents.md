@@ -6,30 +6,21 @@ group:
   order: 0
 ---
 
-本页提供**可复制 Prompt**，让任意 AI 编程 Agent 高效使用 OceanBase Design。业务项目**只配置单体 `ob-design mcp`**，不要直接配置 antd MCP 编写 OB 代码。
+本页提供**可复制 Prompt**，让任意 AI 编程 Agent 高效使用 OceanBase Design。具体编码规则与组合范式见 **Skill**；组件 API 以 **ob-design mcp** 为准。
 
 ## 复制这段 prompt
 
 复制到 Agent 对话或自动化流程中：
 
 ```text
-你正在开发使用 @oceanbase/design 的 React 项目。组件 API 与训练数据可能不一致，写代码前请先阅读：
+你正在开发使用 @oceanbase/design 的 React 项目。组件 API、约定与文件结构可能与训练数据不一致。写任何代码前，请先阅读下列文档并遵循其中说明使用 OceanBase Design：
 https://design.oceanbase.com/docs/react/for-agents.md
-https://github.com/oceanbase/oceanbase-design/blob/master/skills/oceanbase-design-usage/SKILL.md
+https://raw.githubusercontent.com/oceanbase/oceanbase-design/master/skills/oceanbase-design/SKILL.md
 
-规则：
-1. 只使用 ob-design mcp（ob_info、ob_doc、ob_constraint、ob_route 等），禁止 antd MCP / antd_info。
-2. 组件与图标从 @oceanbase/design、@oceanbase/ui、@oceanbase/icons 引入，禁止 from 'antd'。OB 1.x 基于 antd v5，勿按 antd v6 API 生成代码。
-3. 列表筛选用 Filter.* 或 LightFilter，不要用裸 Select 充当筛选条。
-4. Card bodyStyle padding:0 内嵌 Table 时必须 innerBordered。
-5. 根节点包裹 ConfigProvider（@oceanbase/design）。
+业务项目只配置 ob-design mcp（@oceanbase/design-cli），不要单独配置 antd MCP 或调用 antd_info。
 
 若可安装 Skill：
-npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
-
-开始任务前：ob-design route "<页面意图>"，再 ob_info 相关组件。
-
-ob_doc 仅含 OB 文档（用法、约束、OB API）；结构化 API 用 ob_info。若需 antd 完整说明，读 ob_doc 内 antd 链接或 shell 执行 antd doc <Name>（勿配置 antd MCP）。
+npx skills add oceanbase/oceanbase-design
 ```
 
 ## Agent 获得什么
@@ -68,8 +59,6 @@ ob-design mcp
 
 [design.md](/docs/react/design-md) 在 [Ant Design design.md](https://ant.design/design.md) 上融合 OB 品牌色与组件约定，供 AI 设计工具使用。
 
-在线读取：<a href="/design.md" target="_blank" rel="noopener noreferrer">design.md</a> · CLI：`ob-design design.md`
-
 完整参考：[design.md 指南](/docs/react/design-md)
 
 ### MCP Server — IDE 集成
@@ -106,10 +95,10 @@ CLI 以 `ob-design mcp` 提供 **9 个工具**与 **2 个 Prompt**，供 Cursor�
 
 ### Skill — 叙事与组合范式
 
-`oceanbase-design-usage` Skill 说明**为何**这样用（Filter vs LightFilter、Card+Table、迁移核对），不重复维护 props 列表。
+`oceanbase-design` Skill 说明**为何**这样用（Filter vs LightFilter、Card+Table、迁移核对），不重复维护 props 列表。
 
 ```bash
-npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
+npx skills add oceanbase/oceanbase-design
 ```
 
 完整参考：[Agent Skills](/docs/design/design-skills)
@@ -131,10 +120,11 @@ npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
 ## 一键接入
 
 ```bash
-npm install -g @oceanbase/design-cli
-ob-design setup --client cursor   # MCP
-ob-design setup --client agents   # AGENTS.md
-npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage
+npm install -g @oceanbase/design-cli   # 自带 @ant-design/cli，加速 ob_info merge
+ob-design setup --client cursor   # MCP（Cursor）
+ob-design setup --client claude    # MCP（Claude Desktop）
+ob-design setup --client agents    # AGENTS.md
+npx skills add oceanbase/oceanbase-design
 ```
 
 未全局安装时，将 `ob-design` 替换为 `npx @oceanbase/design-cli`。

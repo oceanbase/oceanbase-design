@@ -43,7 +43,7 @@ function processMarkdownFile(
 function generateCodemodLlms(root: string): string {
   const sources = [
     path.join(root, 'docs/design/react/migrate.md'),
-    path.join(root, 'skills/oceanbase-design-usage/references/codemod.md'),
+    path.join(root, 'skills/oceanbase-design/references/codemod.md'),
   ];
   const parts = [
     '# OceanBase Design — Codemod & Migration',

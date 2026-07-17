@@ -2,18 +2,18 @@
 
 CLI and MCP for OceanBase Design — single programmatic entry for AI agents.
 
-> Site docs: [CLI 参考](https://design.oceanbase.com/docs/react/cli) · [For Agents](https://design.oceanbase.com/docs/react/for-agents)
+> Site docs: [CLI reference](https://design.oceanbase.com/docs/react/cli) · [For Agents](https://design.oceanbase.com/docs/react/for-agents)
 
-## 包名说明
+## Package naming
 
-| 名称                     | 角色                                   |
-| ------------------------ | -------------------------------------- |
-| **OceanBase Design CLI** | 产品名（文档、`ob --help`）            |
-| `@oceanbase/design-cli`  | npm 包名                               |
-| `ob-design`              | 命令行二进制（`ob-design info Table`） |
-| `oceanbase-design`       | IDE 中 MCP server 的 key               |
+| Name                     | Role                                  |
+| ------------------------ | ------------------------------------- |
+| **OceanBase Design CLI** | Product name (docs, `ob --help`)      |
+| `@oceanbase/design-cli`  | npm package                           |
+| `ob-design`              | Shell binary (`ob-design info Table`) |
+| `oceanbase-design`       | MCP server key in IDE config          |
 
-与 `@oceanbase/design`、`@oceanbase/codemod` 同属 `@oceanbase/*` scope；**不是** OceanBase 数据库运维 CLI。
+Same `@oceanbase/*` scope as `@oceanbase/design` and `@oceanbase/codemod`. **Not** the OceanBase Database ops CLI.
 
 ## Install
 
@@ -32,19 +32,19 @@ pnpm add -D @oceanbase/design-cli && pnpm exec ob-design list
 
 ## Commands
 
-| Command                               | Description                              |
-| ------------------------------------- | ---------------------------------------- |
-| `ob-design list`                      | Registered components (diffLevel)        |
-| `ob-design info <Name>`               | Merged OB API (`ob_info`)                |
-| `ob-design doc` / `ob-design demo`    | Docs and demos (imports rewritten)       |
-| `ob-design route <intent>`            | Page → components                        |
-| `ob-design constraint`                | ASSEMBLY constraints                     |
-| `ob-design token`                     | obToken reference                        |
-| `ob-design lint` / `ob-design doctor` | Conventions and health                   |
-| `ob-design setup`                     | Write **only** ob-design mcp + AGENTS.md |
-| `ob-design migrate`                   | `@oceanbase/codemod` wrapper             |
-| `ob-design template <name>`           | Page templates                           |
-| `ob-design mcp`                       | MCP server (stdio)                       |
+| Command | Description |
+| --- | --- |
+| `ob-design list` | Registered components (diffLevel) |
+| `ob-design info <Name>` | Merged OB API (`ob_info`) |
+| `ob-design doc` / `ob-design demo` | Docs and demos (imports rewritten) |
+| `ob-design route <intent>` | Page → components |
+| `ob-design constraint` | ASSEMBLY constraints |
+| `ob-design token` | obToken reference |
+| `ob-design lint` / `ob-design doctor` | Conventions and health |
+| `ob-design setup` | Write ob-design mcp + AGENTS.md (`@ant-design/cli` bundled) |
+| `ob-design migrate` | `@oceanbase/codemod` wrapper |
+| `ob-design template <name>` | Page templates |
+| `ob-design mcp` | MCP server (stdio) |
 
 ## MCP
 

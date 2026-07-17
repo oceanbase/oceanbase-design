@@ -70,8 +70,7 @@ export async function runCli(argv) {
     .command('setup')
     .description('Write ob-design mcp + AGENTS.md (no antd mcp)')
     .option('--client <client>', 'cursor | claude | agents | all', 'all')
-    .option('--install-antd-cli', 'Install @ant-design/cli globally for faster ob_info merge')
-    .action((opts) => setupCommand(opts.client, { installAntdCli: opts.installAntdCli }));
+    .action((opts) => setupCommand(opts.client));
 
   program
     .command('migrate [target]')

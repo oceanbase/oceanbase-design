@@ -1,5 +1,5 @@
 # Machine-readable constraints for CLI, MCP, and llms-ob-constraints.txt
-# SYNC: skills/oceanbase-design-usage/references/ASSEMBLY.md
+# SYNC: skills/oceanbase-design/references/ASSEMBLY.md
 
 constraints:
   - id: config-provider-root

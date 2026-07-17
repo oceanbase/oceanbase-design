@@ -3,8 +3,6 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync, execFileSync } from 'node:child_process';
 import { getAntdCliStatus } from '../delegate/antd-cli.mjs';
-import { installAntdCliGlobal } from '../delegate/install-antd-cli.mjs';
-import { resetAntdCliCache } from '../delegate/resolve-antd-cli.mjs';
 
 function whichBinary(name) {
   try {
@@ -80,26 +78,17 @@ function mergeMcpConfig(path, cwd) {
   return _via;
 }
 
-function reportAntdCliDelegate(cwd, { installAntdCli }) {
-  if (installAntdCli) {
-    console.log('\nInstalling @ant-design/cli globally (faster ob_info merge)...');
-    installAntdCliGlobal();
-    resetAntdCliCache();
-  }
-
+function reportAntdCliDelegate(cwd) {
   const status = getAntdCliStatus(cwd);
   if (status.fast) {
     console.log(`\nantd CLI for ob_info: ${status.via} (${status.label})`);
-    return;
+  } else {
+    console.log('\nantd CLI for ob_info: npx (slow — reinstall @oceanbase/design-cli to bundle @ant-design/cli)');
   }
-
-  console.log('\nantd CLI for ob_info: npx (slow — ~2s per merge on delegateAntd components)');
-  console.log('  Speed up: npm install -g @ant-design/cli');
-  console.log('  Or:       ob-design setup --install-antd-cli');
   console.log('  Do NOT add @ant-design/cli mcp — delegate stays internal.');
 }
 
-export function setupCommand(client, { installAntdCli = false } = {}) {
+export function setupCommand(client) {
   const cwd = process.cwd();
   let mcpVia = 'npx';
   let mcpWritten = false;
@@ -124,11 +113,11 @@ export function setupCommand(client, { installAntdCli = false } = {}) {
     execSync(`node "${script}" --out "${join(cwd, 'AGENTS.md')}"`, { stdio: 'inherit' });
   }
 
-  reportAntdCliDelegate(cwd, { installAntdCli });
+  reportAntdCliDelegate(cwd);
 
   if (mcpWritten && mcpVia === 'npx') {
     console.log('\nTip: npm install -g @oceanbase/design-cli for faster MCP startup (ob-design mcp on PATH)');
   }
 
-  console.log('\nSkill: npx openskills install oceanbase/oceanbase-design/skills/oceanbase-design-usage');
+  console.log('\nSkill: npx skills add oceanbase/oceanbase-design');
 }

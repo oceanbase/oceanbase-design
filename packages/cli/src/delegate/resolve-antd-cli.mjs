@@ -1,17 +1,20 @@
 /**
- * @input cwd, PATH, local node_modules
- * @output antd CLI invocation (path → local → npx fallback)
+ * @input cwd, PATH, local node_modules, @oceanbase/design-cli bundle
+ * @output antd CLI invocation (path → local → bundled → npx fallback)
  * @position delegate layer — avoids npx cold-start when antd is installed
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
 
-/** @typedef {'path' | 'local-bin' | 'local-package' | 'npx'} AntdCliVia */
+/** @typedef {'path' | 'local-bin' | 'local-package' | 'bundled-bin' | 'bundled-package' | 'npx'} AntdCliVia */
 
 /** @type {{ command: string, args: string[], via: AntdCliVia, label: string } | null} */
 let _cached;
+
+const CLI_PACKAGE_JSON = join(dirname(fileURLToPath(import.meta.url)), '../../package.json');
 
 function whichBinary(name) {
   try {
@@ -69,9 +72,38 @@ function resolveLocalPackage(cwd) {
   });
 }
 
+function resolveBundledFromDesignCli() {
+  try {
+    const cliDir = dirname(CLI_PACKAGE_JSON);
+    const binName = process.platform === 'win32' ? 'antd.cmd' : 'antd';
+    const bin = join(cliDir, 'node_modules', '.bin', binName);
+    if (existsSync(bin)) {
+      return {
+        command: bin,
+        args: [],
+        via: 'bundled-bin',
+        label: bin,
+      };
+    }
+
+    const req = createRequire(CLI_PACKAGE_JSON);
+    const pkgJson = req.resolve('@ant-design/cli/package.json');
+    const entry = join(dirname(pkgJson), 'dist', 'index.js');
+    if (!existsSync(entry)) return null;
+    return {
+      command: process.execPath,
+      args: [entry],
+      via: 'bundled-package',
+      label: entry,
+    };
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Resolve how to invoke @ant-design/cli.
- * Priority: PATH `antd` → local .bin → resolved package → `npx -y`.
+ * Priority: PATH `antd` → local .bin → resolved package → design-cli bundle → `npx -y`.
  * @param {string} [cwd]
  */
 export function resolveAntdCliInvocation(cwd = process.cwd()) {
@@ -92,6 +124,12 @@ export function resolveAntdCliInvocation(cwd = process.cwd()) {
   const localPkg = resolveLocalPackage(cwd);
   if (localPkg) {
     _cached = localPkg;
+    return _cached;
+  }
+
+  const bundled = resolveBundledFromDesignCli();
+  if (bundled) {
+    _cached = bundled;
     return _cached;
   }
 

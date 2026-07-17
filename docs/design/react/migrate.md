@@ -46,4 +46,4 @@ npx @oceanbase/codemod@^1.0.0-alpha.0 . --transformer=antd-to-oceanbase-design
 4. `ob-design lint ./src` 静态检查
 5. `ob-design doctor` 依赖与健康检查
 
-详见 Skill [codemod 要点](https://github.com/oceanbase/oceanbase-design/blob/master/skills/oceanbase-design-usage/references/codemod.md) 与 [For Agents](/docs/react/for-agents)。
+详见 Skill [codemod 要点](https://github.com/oceanbase/oceanbase-design/blob/master/skills/oceanbase-design/references/codemod.md) 与 [For Agents](/docs/react/for-agents)。

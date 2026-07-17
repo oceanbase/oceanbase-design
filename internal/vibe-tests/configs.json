@@ -6,7 +6,7 @@
     "agentsMd": false
   },
   "ob-skill-only": {
-    "description": "oceanbase-design-usage Skill only",
+    "description": "oceanbase-design Skill only",
     "mcp": [],
     "skill": true,
     "agentsMd": false

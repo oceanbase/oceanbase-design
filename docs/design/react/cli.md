@@ -72,38 +72,6 @@ ob-design setup --client cursor          # 写入 MCP / AGENTS.md
 
 常用选项：`--dense`（token 友好输出）、`--json`（机器可读）。
 
-## 命令与 antd 依赖矩阵
-
-业务项目**只配置 `oceanbase-design` MCP**，**不要**配置 `@ant-design/cli` MCP。antd 仅作为 `ob_info` 的**内部子进程 delegate**（不是 MCP）。
-
-### 三层命名
-
-| 层级           | 名称                 | 说明                                  |
-| -------------- | -------------------- | ------------------------------------- |
-| CLI 二进制     | `ob-design`          | 终端命令；避免与 npm 全局包 `ob` 冲突 |
-| MCP server key | `oceanbase-design`   | IDE 里配置的服务名                    |
-| MCP 工具       | `ob_info`、`ob_doc`… | Agent 实际调用的工具（前缀 `ob_`）    |
-
-CLI 名与 MCP 工具前缀**不必一致**（对标 `antd` CLI + `antd_info` 工具）。
-
-### 命令 × 数据源 × antd
-
-| 命令 / MCP | 数据来源 | 内部调 antd CLI？ | 说明 |
-| --- | --- | --- | --- |
-| `ob_info` | OB metadata + 可选 antd merge | **是**（仅 `delegateAntd` 且有 `extendsAntd`） | **API 唯一真相入口**；B/C 级依赖 merge |
-| `ob_doc` | OB 本地 `index.md` | 否 | 用法、约束、OB API 表；文内含 antd 官网链接 |
-| `ob_demo` | OB 本地 `demo/*.tsx` | 否 | 仅本地 demo；缺失时列出可用 `demoId` |
-| `ob_token` | `obTokenMeta.ts` | 否 | 仅 OB 主题 token |
-| `ob_list` / `ob_search` | `metadata/` | 否 | 组件注册表与检索 |
-| `ob_constraint` | `constraints.yaml` | 否 | ASSEMBLY 约束 |
-| `ob_route` | 内置意图路由 | 否 | 页面 → 组件组合 |
-| `ob_lint` | 项目源码 | 否 | import 与约定检查 |
-| `ob_doctor` | 项目 `package.json` + antd 可解析性 | **否**（只检测 PATH/local/npx） | `antd-cli-for-ob_info` 为安装建议，非硬错误 |
-| `ob-design design.md` | `public/design.md` | 否（仓库生成时 merge antd v6 基线） | 设计语言，对标 `antd design.md` |
-| `setup` / `template` / `migrate` / `mcp` | OB 内置 | 否 | 配置、模板、迁移、启 MCP |
-
-antd CLI 解析顺序（仅 `ob_info` 使用）：**PATH `antd` → 项目 `node_modules` → `npx`**。调用使用 `@ant-design/cli` 的 `--format json`，并**固定查询 antd v5 API**（`--version` 来自项目 antd 5 依赖或 `@oceanbase/design` 内置范围）。
-
 ### Agent 查什么用什么
 
 ```
@@ -119,23 +87,11 @@ antd CLI 解析顺序（仅 `ob_info` 使用）：**PATH `antd` → 项目 `node
   → 或终端 antd --version 5 doc <Name>（勿配置 antd MCP）
 ```
 
-### 业务侧需要装什么
+## ob_info 与 @ant-design/cli
 
-| 安装项 | 必须？ | 作用 |
-| --- | --- | --- |
-| `@oceanbase/design-cli` | 是 | MCP + 全部 `ob_*` 命令；推荐全局安装，亦可用 `npx` / devDependency |
-| `@oceanbase/design` | 是（业务项目） | 实际组件库 |
-| `@ant-design/cli` | 否（建议） | 加速 `ob_info` 的 antd **v5** API merge；**不配 antd MCP**；勿依赖其默认 v6 数据 |
+`@oceanbase/design-cli` **已捆绑** `@ant-design/cli`，供 `ob_info` 内部 merge antd **v5** API。业务侧**无需**单独安装或配置 antd MCP。
 
-```bash
-# 可选：全局安装 antd CLI，加速 ob_info 内部 merge（无需配置 antd MCP）
-npm install -g @ant-design/cli
-ob-design setup --install-antd-cli
-```
-
-### 演进说明
-
-当前 `ob_info` 在运行时 merge antd API。后续计划在 `generate:metadata` 阶段**预合并**进 `metadata/`，业务侧可完全离线、零 antd CLI 依赖。`ob_doc` 已不包含 antd 截断附录。
+解析顺序（仅 `ob_info`）：**PATH `antd` → 项目 `node_modules` → design-cli 捆绑 → `npx`**。
 
 ## 页面模板
 
@@ -158,17 +114,12 @@ ob-design template list-filter-table --skeleton
 npm install -g @oceanbase/design-cli
 ob-design setup --client cursor    # MCP
 ob-design setup --client agents    # AGENTS.md
+npx skills add oceanbase/oceanbase-design
 
 # 或未全局安装时
 npx @oceanbase/design-cli setup --client cursor
 npx @oceanbase/design-cli setup --client agents
-
-# 可选：全局安装 antd CLI，加速 ob_info 内部 merge（无需配置 antd MCP）
-ob-design setup --install-antd-cli
-# 或手动：npm install -g @ant-design/cli
 ```
-
-详见上文 [命令与 antd 依赖矩阵](#命令与-antd-依赖矩阵)。
 
 ## MCP 配置
 

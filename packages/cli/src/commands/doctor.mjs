@@ -33,7 +33,7 @@ export async function doctorCommand({ json }) {
     ok: antdStatus.fast,
     message: antdStatus.fast
       ? `antd CLI ready for ob_info merge (via ${antdStatus.via})`
-      : `antd CLI via npx — ob_info merge works but is slow; npm i -g @ant-design/cli`,
+      : `antd CLI via npx — reinstall @oceanbase/design-cli to bundle @ant-design/cli`,
   });
 
   const allOk = checks.every((c) => c.ok);

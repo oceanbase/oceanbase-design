@@ -17,13 +17,13 @@ group:
 
 ## 在线读取
 
-根相对路径（适用于本地开发与生产）：
+AI 工具可以直接读取：
 
 ```text
-/design.md
+https://design.oceanbase.com/design.md
 ```
 
-AI 设计工具提示词示例，如 `https://design.oceanbase.com/design.md`）：
+你可以在 AI 设计工具中使用这段提示词：
 
 ```text
 阅读 /design.md，并按 OceanBase Design（继承 Ant Design）的视觉语言生成界面。组件代码使用 @oceanbase/design，禁止 from 'antd'。
