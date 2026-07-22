@@ -2,14 +2,13 @@ import { GithubOutlined, MenuOutlined } from '@oceanbase/icons';
 import { ClassNames, css } from '@emotion/react';
 import { Col, Popover, Row } from '@oceanbase/design';
 import classNames from 'classnames';
-import { useLocation, useSiteData } from 'dumi';
+import { history, useLocation, useLocale as useDumiLocale, useSiteData } from 'dumi';
 import DumiSearchBar from 'dumi/theme-default/slots/SearchBar';
-import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-// 不再使用 useLocale，改用 SiteContext 中的 locale 状态
-// import useLocale from '../../../hooks/useLocale';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import useSiteToken from '../../../hooks/useSiteToken';
 import DirectionIcon from '../../common/DirectionIcon';
 import * as utils from '../../utils';
+import { setStoredLocale, toLocalizedPath } from '../../locale-preference';
 import type { SiteContextProps } from '../SiteContext';
 import SiteContext from '../SiteContext';
 import Logo from './Logo';
@@ -119,8 +118,6 @@ interface HeaderState {
 // ================================= Header =================================
 const Header: React.FC = () => {
   const [isClient, setIsClient] = React.useState(false);
-  // 不再使用 useLocale，改用 SiteContext 中的 locale 状态
-  // const [, lang] = useLocale();
 
   const { pkg } = useSiteData();
 
@@ -181,26 +178,23 @@ const Header: React.FC = () => {
     window.location.href = urlObj.href.replace(/\/$/, '');
   }, []);
 
-  const onLangChange = useCallback(() => {
-    // 新的语言切换逻辑：同步到 URL query 参数和 localStorage
-    const newLocale = locale === 'cn' ? 'en' : 'cn';
-    // updateSiteConfig 会自动将 locale 同步到 URL query 参数和 localStorage
-    updateSiteConfig({ locale: newLocale });
+  const dumiLocale = useDumiLocale();
+  const { locales: siteLocales } = useSiteData();
 
-    // 原先的逻辑（已注释）：通过修改 URL 路径来切换语言
-    // const currentProtocol = `${window.location.protocol}//`;
-    // const currentHref = window.location.href.slice(currentProtocol.length);
-    //
-    // if (utils.isLocalStorageNameSupported()) {
-    //   localStorage.setItem('locale', utils.isZhCN(pathname) ? 'en-US' : 'zh-CN');
-    // }
-    // window.location.href =
-    //   currentProtocol +
-    //   currentHref.replace(
-    //     window.location.pathname,
-    //     utils.getLocalizedPathname(pathname, !utils.isZhCN(pathname), search).pathname
-    //   );
-  }, [locale, updateSiteConfig]);
+  const onLangChange = useCallback(() => {
+    if (siteLocales && siteLocales.length > 1) {
+      const targetLocale = siteLocales.find(l => l.id !== dumiLocale.id);
+      if (targetLocale) {
+        const stored = targetLocale.id === 'zh-CN' ? 'zh-CN' : 'en-US';
+        history.push(toLocalizedPath(history.location.pathname, stored) + (search || ''));
+        setStoredLocale(stored);
+        return;
+      }
+    }
+    // 单语言时回退到 query 参数方式
+    const newLocale = locale === 'cn' ? 'en' : 'cn';
+    updateSiteConfig({ locale: newLocale });
+  }, [locale, updateSiteConfig, dumiLocale, siteLocales, search]);
 
   const nextDirectionText = useMemo<string>(
     () => (direction !== 'rtl' ? 'RTL' : 'LTR'),
@@ -214,7 +208,8 @@ const Header: React.FC = () => {
 
   const { menuVisible, windowWidth, searching } = headerState;
 
-  const isHome = ['', 'index', 'index-cn'].includes(pathname);
+  const pathnameWithoutLocale = utils.getPathWithoutLocale(pathname);
+  const isHome = ['', '/', 'index', 'index-cn'].includes(pathnameWithoutLocale);
   // 使用新的 locale 状态，而不是从 URL 路径判断
   const isZhCN = locale === 'cn';
   const isRTL = direction === 'rtl';

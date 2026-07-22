@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 import {
   Button,
   Dropdown,
+  Drawer,
   Menu,
+  Modal,
   Space,
   Tooltip,
   Typography,
@@ -25,7 +27,7 @@ export interface GroupProps {
     | 'bottomLeft'
     | 'bottomCenter'
     | 'bottomRight';
-  children: React.ReactElement<BaseProps> | React.ReactElement<BaseProps>[];
+  children: React.ReactNode;
   shouldVisible?: (key: string) => boolean;
   shouldDisabled?: (key: string) => boolean;
   enableLoading?: boolean;
@@ -51,9 +53,36 @@ const getOrder = ({ type, fixed }: { type?: string; fixed?: boolean }) => {
 /**
  * 判断是否是 Action 组件（Action.Button 或 Action.Link）
  */
+const getActionDisplayName = (element: React.ReactElement): string | undefined =>
+  (element.type as { __DISPLAY_NAME?: string } | undefined)?.__DISPLAY_NAME;
+
 const isActionComponent = (element: React.ReactElement): boolean => {
-  // @ts-ignore
-  return element.type?.__DISPLAY_NAME === 'button' || element.type?.__DISPLAY_NAME === 'link';
+  const name = getActionDisplayName(element);
+  return name === 'button' || name === 'link';
+};
+
+/** 不向内部查找 Action：与操作列同级的 Modal/Drawer 等应整体忽略 */
+const isOpaqueToActionSearch = (element: React.ReactElement): boolean => {
+  const t = element.type as unknown;
+  return t === Modal || t === Drawer;
+};
+
+const REACT_HOOKS_IN_SOURCE =
+  /\buse(?:State|Effect|Reducer|Ref|Context|Memo|Callback|LayoutEffect|ImperativeHandle|DeferredValue|SyncExternalStore|Insertion|Id)\b/;
+
+/**
+ * 粗略判断函数组件是否可能使用 Hooks。含 Hooks 的不能在 Group 渲染阶段同步调用，需按「函数子树」整体参与折叠。
+ */
+const isLikelyUsingReactHooks = (fn: Function): boolean =>
+  REACT_HOOKS_IN_SOURCE.test(Function.prototype.toString.call(fn));
+
+const isClassComponent = (type: unknown): boolean => {
+  if (typeof type !== 'function') {
+    return false;
+  }
+  const proto = (type as { prototype?: { isReactComponent?: boolean; render?: unknown } })
+    .prototype;
+  return !!(proto && (proto.isReactComponent || proto.render));
 };
 
 /**
@@ -68,6 +97,10 @@ const findActionComponent = (
     return null;
   }
 
+  if (isOpaqueToActionSearch(element)) {
+    return null;
+  }
+
   if (isActionComponent(element)) {
     return { action: element, hasWrapper: false };
   }
@@ -77,19 +110,84 @@ const findActionComponent = (
     return null;
   }
 
-  // 如果有 children，递归查找
   const elementChildren = (element.props as any)?.children;
-  if (elementChildren) {
-    const child = React.Children.only(elementChildren);
-    if (React.isValidElement(child)) {
-      const result = findActionComponent(child, depth + 1);
-      if (result) {
-        return { action: result.action, hasWrapper: true };
-      }
+  if (elementChildren == null) {
+    return null;
+  }
+
+  const childArray = React.Children.toArray(elementChildren).filter(
+    React.isValidElement
+  ) as React.ReactElement[];
+  for (const child of childArray) {
+    const result = findActionComponent(child, depth + 1);
+    if (result) {
+      return { action: result.action, hasWrapper: true };
     }
   }
 
   return null;
+};
+
+type NormalizedChildPiece =
+  | { kind: 'action'; el: React.ReactElement }
+  /** 含 Hooks 的函数组件等：整体占 1 个折叠位，由 React 正常挂载 */
+  | { kind: 'function-child'; el: React.ReactElement }
+  | { kind: 'passthrough'; el: React.ReactElement };
+
+/**
+ * 扁平化 Fragment，过滤 null / false。
+ * - Action（及可解析的外包）→ 操作位
+ * - 无 Hooks 的函数组件 → 同步求值后递归展开（如 () => <Action.Button />）
+ * - 含 Hooks 的函数组件 → 整体占 1 位
+ * - Modal / Drawer → 透传挂载，不占折叠位
+ */
+const normalizeActionGroupPieces = (node: React.ReactNode): NormalizedChildPiece[] => {
+  const out: NormalizedChildPiece[] = [];
+  React.Children.forEach(node, child => {
+    if (child == null || typeof child === 'boolean') {
+      return;
+    }
+    if (!React.isValidElement(child)) {
+      return;
+    }
+    if (child.type === React.Fragment) {
+      normalizeActionGroupPieces((child.props as { children?: React.ReactNode }).children).forEach(
+        p => out.push(p)
+      );
+      return;
+    }
+    if (findActionComponent(child)) {
+      out.push({ kind: 'action', el: child });
+      return;
+    }
+    if (isOpaqueToActionSearch(child)) {
+      out.push({ kind: 'passthrough', el: child });
+      return;
+    }
+
+    const t = child.type;
+    if (typeof t === 'function' && !isClassComponent(t)) {
+      if (isLikelyUsingReactHooks(t)) {
+        out.push({ kind: 'function-child', el: child });
+        return;
+      }
+      try {
+        const rendered = (t as React.FC<Record<string, unknown>>)(
+          child.props as Record<string, unknown>
+        );
+        if (rendered == null) {
+          return;
+        }
+        normalizeActionGroupPieces(rendered).forEach(p => out.push(p));
+      } catch {
+        out.push({ kind: 'function-child', el: child });
+      }
+      return;
+    }
+
+    out.push({ kind: 'function-child', el: child });
+  });
+  return out;
 };
 
 /**
@@ -159,42 +257,89 @@ export default ({
   const prefixCls = getPrefixCls('action', customizePrefixCls);
   const { wrapSSR } = useStyle(prefixCls);
 
-  const visibleActions = Array.isArray(children)
-    ? children.filter(c => {
-        if (isBoolean(c.props.visible) && shouldVisible)
-          return c.props.visible && shouldVisible(c.key as string);
-        if (isBoolean(c.props.visible)) return c.props.visible;
-        else if (shouldVisible) return shouldVisible(c.key as string);
-        return true;
-      })
-    : [children];
+  const childPieces = normalizeActionGroupPieces(children);
+  const passthroughChildren = childPieces.filter(p => p.kind === 'passthrough').map(p => p.el);
+  const slotPieces = childPieces.filter(
+    (
+      p
+    ): p is
+      | { kind: 'action'; el: React.ReactElement }
+      | { kind: 'function-child'; el: React.ReactElement } =>
+      p.kind === 'action' || p.kind === 'function-child'
+  );
 
-  const visibleActionsSort = visibleActions.slice(0);
-
-  visibleActionsSort.sort((a, b) => {
-    const orderA = getOrder(a.props);
-    const orderB = getOrder(b.props);
-
-    return orderB - orderA;
+  const visibleSlots = slotPieces.filter(p => {
+    if (p.kind === 'function-child') {
+      return true;
+    }
+    const c = p.el;
+    const inner = findActionComponent(c)?.action;
+    if (!inner) {
+      return false;
+    }
+    const bp = inner.props as BaseProps;
+    if (isBoolean(bp.visible) && shouldVisible) {
+      return bp.visible && shouldVisible(c.key as string);
+    }
+    if (isBoolean(bp.visible)) {
+      return bp.visible;
+    }
+    if (shouldVisible) {
+      return shouldVisible(c.key as string);
+    }
+    return true;
   });
 
-  const fixedSize = visibleActionsSort.filter(
-    action => action.props.type === 'primary' || action.props.fixed
-  ).length;
+  const visibleSlotsWithOrder = visibleSlots.map((p, sourceIdx) => ({
+    piece: p,
+    sourceIdx,
+    sortOrder:
+      p.kind === 'action'
+        ? getOrder((findActionComponent(p.el)?.action ?? p.el).props as BaseProps)
+        : getOrder({ type: undefined, fixed: false }),
+  }));
+
+  visibleSlotsWithOrder.sort((a, b) => {
+    const d = b.sortOrder - a.sortOrder;
+    if (d !== 0) {
+      return d;
+    }
+    return a.sourceIdx - b.sourceIdx;
+  });
+
+  const visibleOrderedSlots = visibleSlotsWithOrder.map(x => x.piece);
+
+  const fixedSize = visibleOrderedSlots.filter(p => {
+    if (p.kind !== 'action') {
+      return false;
+    }
+    const props = (findActionComponent(p.el)?.action ?? p.el).props as BaseProps;
+    return props.type === 'primary' || props.fixed;
+  }).length;
   const realSize = max([fixedSize, size]);
 
-  const mainActions = visibleActionsSort.slice(0, realSize);
-  const ellipsisActions = visibleActionsSort.slice(realSize);
+  const mainSlots = visibleOrderedSlots.slice(0, realSize);
+  const ellipsisSlots = visibleOrderedSlots.slice(realSize);
 
   let ellipsisType = 'link';
 
-  // @ts-ignore
-  if (visibleActionsSort.some(action => action.type.__DISPLAY_NAME === 'button')) {
+  if (
+    visibleOrderedSlots.some(
+      p =>
+        p.kind === 'action' &&
+        getActionDisplayName(findActionComponent(p.el)?.action ?? p.el) === 'button'
+    )
+  ) {
     ellipsisType = 'button';
   }
 
-  // @ts-ignore
-  if (visibleActionsSort.some(action => action.type.__DISPLAY_NAME === 'link')) {
+  if (
+    visibleOrderedSlots.some(
+      p =>
+        p.kind === 'action' &&
+        getActionDisplayName(findActionComponent(p.el)?.action ?? p.el) === 'link'
+    )
+  ) {
     ellipsisType = 'link';
   }
 
@@ -222,94 +367,112 @@ export default ({
   }
 
   return wrapSSR(
-    <Space size={ellipsisType === 'button' ? 8 : 16}>
-      {mainActions.map(action => {
-        // 查找实际的 Action 组件（可能被 Popconfirm/Tooltip 等包裹）
-        const actionResult = findActionComponent(action);
-        const actualAction = actionResult?.action || action;
-        const actualActionProps = actualAction.props as BaseProps;
-
-        const newProps = {
-          key: action.key,
-          // size should be covered by action props
-          size: buttonSize,
-          enableLoading: enableLoading,
-          disabled: isBoolean(actualActionProps.disabled)
-            ? actualActionProps.disabled
-            : getDefaultDisabled(action.key as string),
-        };
-
-        // 统一使用 cloneWithActionProps，无论是否有包裹都能正确处理
-        return cloneWithActionProps(action, newProps);
-      })}
-      {ellipsisActions.length > 0 && (
-        <Dropdown
-          placement={dropDownPlacement}
-          overlay={
-            <Menu className={`${prefixCls}-more-menu`}>
-              {ellipsisActions.map((action, index) => {
-                const actionKey = action.key;
-                // 查找实际的 Action 组件以获取 props
-                const actionResult = findActionComponent(action);
-                const actualAction = actionResult?.action || action;
-                const actionProps = actualAction.props as BaseProps;
-
-                // 当用户传入loading 或者 传入 disabled 的情况都要禁用按钮
-                const actionDisabled =
-                  actionProps.loading ||
-                  (isBoolean(actionProps.disabled)
-                    ? actionProps.disabled
-                    : getDefaultDisabled(action.key as string));
-
-                // 提取需要传递给 Menu.Item 的 props（排除 danger，单独处理）
-                const menuItemProps = omit(actionProps, [
-                  'disabled',
-                  'loading',
-                  'tooltip',
-                  'visible',
-                  'fixed',
-                  'enableLoading',
-                  'onClick',
-                  'children',
-                  'danger',
-                ]);
-
-                // 处理 onClick：如果 action 被 Popconfirm 包裹，Menu.Item 的 onClick 不应该直接触发 action 的 onClick
-                // 而是让 Popconfirm 来处理。如果没有 Popconfirm，则正常触发。
-                const handleMenuItemClick = (info: { domEvent: React.MouseEvent<HTMLElement> }) => {
-                  // 如果 action 被包裹（可能是 Popconfirm 或其他组件），不直接触发 onClick
-                  // 让包裹组件来处理交互
-                  if (actionResult?.hasWrapper) {
-                    // 包裹组件会处理点击，这里不需要做任何事
-                    // 注意：Menu.Item 的点击会关闭下拉菜单，但 Popconfirm 应该能够正常显示
-                    return;
-                  }
-                  // 如果没有包裹，正常触发 onClick
-                  actionProps.onClick?.(info.domEvent);
-                };
-
-                return (
-                  <>
-                    <Menu.Item
-                      key={(actionKey as string) ?? index.toString()}
-                      // @ts-ignore
-                      onClick={handleMenuItemClick}
-                      disabled={actionDisabled}
-                      danger={!!actionProps.danger}
-                      {...menuItemProps}
-                    >
-                      {renderMenuItemContent(action, actionProps, enableLoading)}
-                    </Menu.Item>
-                    {actionProps.divider && <Menu.Divider />}
-                  </>
-                );
-              })}
-            </Menu>
+    <>
+      <Space size={ellipsisType === 'button' ? 8 : 16}>
+        {mainSlots.map((slot, slotIndex) => {
+          if (slot.kind === 'function-child') {
+            return (
+              <React.Fragment key={(slot.el.key as React.Key) ?? `fn-main-${slotIndex}`}>
+                {slot.el}
+              </React.Fragment>
+            );
           }
-        >
-          {moreDom}
-        </Dropdown>
+          const action = slot.el;
+          const actionResult = findActionComponent(action);
+          const actualAction = actionResult?.action || action;
+          const actualActionProps = actualAction.props as BaseProps;
+
+          const newProps = {
+            key: action.key,
+            size: buttonSize,
+            enableLoading: enableLoading,
+            disabled: isBoolean(actualActionProps.disabled)
+              ? actualActionProps.disabled
+              : getDefaultDisabled(action.key as string),
+          };
+
+          return cloneWithActionProps(action, newProps);
+        })}
+        {ellipsisSlots.length > 0 && (
+          <Dropdown
+            placement={dropDownPlacement}
+            overlay={
+              <Menu className={`${prefixCls}-more-menu`}>
+                {ellipsisSlots.map((slot, index) => {
+                  if (slot.kind === 'function-child') {
+                    const fcKey = (slot.el.key as string | number | undefined) ?? `fn-${index}`;
+                    return (
+                      <Menu.Item
+                        key={fcKey}
+                        className={`${prefixCls}-more-menu-fn`}
+                        style={{ height: 'auto', lineHeight: 'normal', paddingBlock: 4 }}
+                      >
+                        {React.cloneElement(slot.el, { key: fcKey })}
+                      </Menu.Item>
+                    );
+                  }
+
+                  const action = slot.el;
+                  const actionKey = action.key;
+                  const actionResult = findActionComponent(action);
+                  const actualAction = actionResult?.action || action;
+                  const actionProps = actualAction.props as BaseProps;
+
+                  const actionDisabled =
+                    actionProps.loading ||
+                    (isBoolean(actionProps.disabled)
+                      ? actionProps.disabled
+                      : getDefaultDisabled(action.key as string));
+
+                  const menuItemProps = omit(actionProps, [
+                    'disabled',
+                    'loading',
+                    'tooltip',
+                    'visible',
+                    'fixed',
+                    'enableLoading',
+                    'onClick',
+                    'children',
+                    'danger',
+                  ]);
+
+                  const handleMenuItemClick = (info: {
+                    domEvent: React.MouseEvent<HTMLElement>;
+                  }) => {
+                    if (actionResult?.hasWrapper) {
+                      return;
+                    }
+                    actionProps.onClick?.(info.domEvent);
+                  };
+
+                  return (
+                    <>
+                      <Menu.Item
+                        key={(actionKey as string) ?? index.toString()}
+                        // @ts-ignore
+                        onClick={handleMenuItemClick}
+                        disabled={actionDisabled}
+                        danger={!!actionProps.danger}
+                        {...menuItemProps}
+                      >
+                        {renderMenuItemContent(action, actionProps, enableLoading)}
+                      </Menu.Item>
+                      {actionProps.divider && <Menu.Divider />}
+                    </>
+                  );
+                })}
+              </Menu>
+            }
+          >
+            {moreDom}
+          </Dropdown>
+        )}
+      </Space>
+      {passthroughChildren.map((el, index) =>
+        React.cloneElement(el, {
+          key: (el.key as string | number | undefined) ?? `action-group-extra-${index}`,
+        })
       )}
-    </Space>
+    </>
   );
 };

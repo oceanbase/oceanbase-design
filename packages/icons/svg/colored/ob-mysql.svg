@@ -6,10 +6,36 @@
     <mask id="b" fill="#fff"><use xlink:href="#a" /></mask>
     <path fill="#0181FD" fill-rule="nonzero" d="M115.835 159.28c-13.164 3.06-30.643 6.94-49.76 8.838-10.757 1.068-22.043 1.514-33.37.85-11.836-.694-23.714-2.624-35.103-6.327v81.72c0 8.745 5.518 15.912 12.25 15.912h220.046c6.742 0 12.25-7.157 12.25-15.912v-94.8c-44.386-13.724-96.636 2.81-126.334 9.719h.02Z" />
     <path fill="#FFF" fill-rule="nonzero" d="M220 164 220 228 207.108647 228 207.108647 187.474786 190.480203 215.668887 181.81058 215.668887 164.891353 187.190612 164.891353 228 152 228 152 164 164.891353 164 186.150776 200.638122 207.108647 164z" />
-    <g fill-rule="nonzero">
-      <path fill="#0181FD" d="M.022 39.501C66.086 48.695 97.993 7.431 180 16.637l-.022 61.906C113.914 69.349 82.007 110.612 0 101.713l.022-62.2V39.5Z" transform="translate(30 28)" />
-      <path fill="#FFA005" d="M82.17.01C46.087 11.275 28.884 16.047.033 11.909v20.654l.717.098c30.591 4.258 53.94-2.823 78.647-10.332 2.98-.908 6.003-1.817 9.091-2.736L82.17 0v.01Z" transform="translate(30 28)" />
-      <path fill="#07C846" d="M179.228 85.307c-30.634-4.269-54.026 2.867-78.777 10.42-2.937.897-5.916 1.806-8.95 2.703L97.808 118c36.105-11.274 53.308-16.046 82.17-11.908V85.416l-.75-.11Z" transform="translate(30 28)" />
+    <g fill-rule="nonzero" transform="translate(58.5 28) scale(2.565)">
+      <path d="M23.77 0.478138V9.96814C23.77 10.2281 23.63 10.4781 23.41 10.6181C16.64 14.8281 9.03 17.8081 0.89 19.2581C0.42 19.3381 0 18.9781 0 18.5081V9.40814C0 9.04814 0.26 8.72814 0.62 8.65814C8.67 7.06814 16.23 4.11814 23.06 0.0681384C23.38 -0.121862 23.78 0.108138 23.78 0.478138H23.77Z" fill="url(#paint0_linear_ob_mysql)"/>
+      <path d="M47.55 27.4981V36.5981C47.55 36.9581 47.29 37.2781 46.93 37.3481C38.88 38.9381 31.32 41.8781 24.49 45.9381C24.17 46.1281 23.77 45.8981 23.77 45.5281V36.0381C23.77 35.7781 23.9 35.5281 24.13 35.3881C30.9 31.1781 38.51 28.1981 46.65 26.7481C47.12 26.6681 47.55 27.0281 47.55 27.4981Z" fill="url(#paint1_linear_ob_mysql)"/>
+      <path d="M47.55 8.66814V21.3881C47.55 21.7581 47.28 22.0781 46.91 22.1381C26.97 25.3781 20.59 37.7381 0.77 38.0881C0.34 38.0881 0 37.7481 0 37.3281V24.6081C0 24.2381 0.27 23.9181 0.64 23.8581C20.58 20.6181 26.96 8.25814 46.78 7.90814C47.21 7.90814 47.55 8.24814 47.55 8.66814Z" fill="url(#paint2_linear_ob_mysql)"/>
+      <defs>
+        <linearGradient id="paint0_linear_ob_mysql" x1="0.43" y1="19.2981" x2="39" y2="-13.0619" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#0096FE"/>
+          <stop offset="0.11" stop-color="#0896FE"/>
+          <stop offset="0.27" stop-color="#2197FE"/>
+          <stop offset="0.48" stop-color="#4999FE"/>
+          <stop offset="0.72" stop-color="#809BFE"/>
+          <stop offset="0.99" stop-color="#C49FFE"/>
+        </linearGradient>
+        <linearGradient id="paint1_linear_ob_mysql" x1="24.07" y1="46.0381" x2="47.11" y2="26.6981" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#0096FE"/>
+          <stop offset="0.11" stop-color="#0896FE"/>
+          <stop offset="0.27" stop-color="#2197FE"/>
+          <stop offset="0.49" stop-color="#4999FE"/>
+          <stop offset="0.73" stop-color="#809BFE"/>
+          <stop offset="1" stop-color="#C49FFE"/>
+        </linearGradient>
+        <linearGradient id="paint2_linear_ob_mysql" x1="2.63" y1="40.7381" x2="44.92" y2="5.25814" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#0096FE"/>
+          <stop offset="0.11" stop-color="#0896FE"/>
+          <stop offset="0.27" stop-color="#2197FE"/>
+          <stop offset="0.49" stop-color="#4999FE"/>
+          <stop offset="0.73" stop-color="#809BFE"/>
+          <stop offset="1" stop-color="#C49FFE"/>
+        </linearGradient>
+      </defs>
     </g>
   </g>
 </svg>

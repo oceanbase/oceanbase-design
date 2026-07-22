@@ -1,0 +1,23 @@
+# Uses pull_request_target so GITHUB_TOKEN can add labels on PRs from forks.
+# Security: this job only runs actions/labeler (no user-provided run scripts). Checkout
+# uses the base branch ref only—never the PR head—so fork code is not executed here.
+# See: https://github.com/actions/labeler#notes-regarding-pull_request_target-event
+name: PR Labeler
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  labeler:
+    if: github.repository == 'oceanbase/oceanbase-design'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+      - uses: actions/labeler@v6

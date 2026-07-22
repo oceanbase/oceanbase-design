@@ -3,7 +3,10 @@ import BasicLayout from '../BasicLayout/locale/zh-TW';
 import BatchOperationBar from '../BatchOperationBar/locale/zh-TW';
 import Dialog from '../Dialog/locale/zh-TW';
 import DocDialog from '../DocDialog/locale/zh-TW';
+import FooterToolbar from '../FooterToolbar/locale/zh-TW';
 import Highlight from '../Highlight/locale/zh-TW';
+import LightFilter from '../LightFilter/locale/zh-TW';
+import NavMenu from '../NavMenu/locale/zh-TW';
 import Login from '../Login/locale/zh-TW';
 import PageContainer from '../PageContainer/locale/zh-TW';
 import { default as Boundary, default as Password } from '../Password/locale/zh-TW';
@@ -25,6 +28,9 @@ export default {
   Dialog,
   Highlight,
   DocDialog,
+  FooterToolbar,
+  LightFilter,
+  NavMenu,
   BatchOperationBar,
   DateRanger,
 } as Locale;

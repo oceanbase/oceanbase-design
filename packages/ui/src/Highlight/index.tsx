@@ -255,8 +255,11 @@ const Highlight: React.FC<HighlightProps> = props => {
           }}
         >
           <button
+            type="button"
             disabled={copied}
             className={classNames(`${prefixCls}-copy`)}
+            aria-label={locale?.copyCode}
+            aria-pressed={copied}
             style={{
               background: `${theme === THEME_DARK ? `#2b303b` : token.colorBgLayout}`,
             }}
@@ -264,10 +267,12 @@ const Highlight: React.FC<HighlightProps> = props => {
             <CopyOutlined
               className={classNames(`${prefixCls}-copy-icon`, { scoll: copied })}
               style={{ color: `${theme === THEME_DARK ? token.colorBgLayout : `#2b303b`}` }}
+              aria-hidden
             />
             <CheckOutlined
               className={classNames(`${prefixCls}-copy-icon`)}
               style={{ color: 'rgb(63,177,99)' }}
+              aria-hidden
             />
           </button>
         </CopyToClipboard>
@@ -278,6 +283,8 @@ const Highlight: React.FC<HighlightProps> = props => {
   return wrapSSR(
     <pre
       {...customProps}
+      role="region"
+      aria-label={locale?.copyCodeRegion}
       style={{
         ...customStyle,
         position: 'relative',

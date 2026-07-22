@@ -7,7 +7,14 @@ import {
 } from '@ant-design/cssinjs';
 import { App, theme as obTheme } from '@oceanbase/design';
 import type { DirectionType } from '@oceanbase/design/es/config-provider';
-import { usePrefersColor, createSearchParams, useOutlet, useSearchParams } from 'dumi';
+import {
+  usePrefersColor,
+  createSearchParams,
+  useOutlet,
+  useSearchParams,
+  useLocale as useDumiLocale,
+  useSiteData,
+} from 'dumi';
 import { IColorValue } from 'dumi/dist/client/theme-api/usePrefersColor';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { Analytics } from '@vercel/analytics/react';
@@ -19,16 +26,29 @@ import ThemeSwitch from '../common/ThemeSwitch';
 import type { SiteContextProps, LocaleType } from '../slots/SiteContext';
 import SiteContext from '../slots/SiteContext';
 import * as utils from '../utils';
+import { getStoredLocale, setStoredLocale } from '../locale-preference';
+import useLocalePreference from '../../hooks/useLocalePreference';
 
 type Entries<T> = { [K in keyof T]: [K, T[K]] }[keyof T][];
 type SiteState = Partial<Omit<SiteContextProps, 'updateSiteContext'>>;
 
 const RESPONSIVE_MOBILE = 768;
 
-// 从 URL query 参数或 localStorage 读取语言设置
-const getInitialLocale = (searchParams?: URLSearchParams): LocaleType => {
+// 多语言时以 Dumi 路径为准；单语言场景保留 query/localStorage 回退
+const getInitialLocale = (
+  searchParams?: URLSearchParams,
+  dumiLocaleId?: string,
+  hasMultipleLocales?: boolean
+): LocaleType => {
+  if (hasMultipleLocales) {
+    if (dumiLocaleId) {
+      return dumiLocaleId === 'zh-CN' ? 'cn' : 'en';
+    }
+    return 'en';
+  }
+
   if (typeof window === 'undefined') {
-    return 'cn';
+    return 'en';
   }
 
   // 优先从 URL query 参数读取
@@ -43,15 +63,9 @@ const getInitialLocale = (searchParams?: URLSearchParams): LocaleType => {
   }
 
   // 其次从 localStorage 读取
-  if (utils.isLocalStorageNameSupported()) {
-    const savedLocale = localStorage.getItem('locale');
-    if (savedLocale === 'en-US' || savedLocale === 'en') {
-      return 'en';
-    }
-    if (savedLocale === 'zh-CN' || savedLocale === 'cn') {
-      return 'cn';
-    }
-  }
+  const stored = getStoredLocale();
+  if (stored === 'en-US') return 'en';
+  if (stored === 'zh-CN') return 'cn';
 
   // 默认根据 URL 路径判断（向后兼容）
   return utils.isZhCN(window.location.pathname) ? 'cn' : 'en';
@@ -78,11 +92,17 @@ const GlobalLayout: React.FC = () => {
   const { pathname } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [, , setPrefersColor] = usePrefersColor();
+  const dumiLocale = useDumiLocale();
+  const { locales: siteLocales } = useSiteData();
+  const hasMultipleLocales = siteLocales && siteLocales.length > 1;
+
+  useLocalePreference();
+
   const [{ theme = [], direction, isMobile, locale }, setSiteState] = useLayoutState<SiteState>({
     isMobile: false,
     direction: 'ltr',
     theme: ['light', 'motion-off'],
-    locale: getInitialLocale(searchParams),
+    locale: getInitialLocale(searchParams, dumiLocale?.id, hasMultipleLocales),
   });
 
   const updateSiteConfig = useCallback(
@@ -114,10 +134,7 @@ const GlobalLayout: React.FC = () => {
         if (key === 'locale') {
           if (value === 'en' || value === 'cn') {
             nextSearchParams.set('locale', value);
-            // 同步到 localStorage
-            if (utils.isLocalStorageNameSupported()) {
-              localStorage.setItem('locale', value === 'cn' ? 'zh-CN' : 'en-US');
-            }
+            setStoredLocale(value === 'cn' ? 'zh-CN' : 'en-US');
           }
         }
       });
@@ -144,7 +161,7 @@ const GlobalLayout: React.FC = () => {
   useEffect(() => {
     const _theme = searchParams.getAll('theme') as ThemeName[];
     const _direction = searchParams.get('direction') as DirectionType;
-    const _locale = getInitialLocale(searchParams);
+    const _locale = getInitialLocale(searchParams, dumiLocale?.id, hasMultipleLocales);
 
     setSiteState({
       theme: _theme,
@@ -163,24 +180,24 @@ const GlobalLayout: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // 监听 URL query 参数变化，同步 locale
+  // 多语言时根据 Dumi 路径同步 locale；单语言时根据 query 参数同步
   useEffect(() => {
+    if (hasMultipleLocales && dumiLocale?.id) {
+      const newLocale = dumiLocale.id === 'zh-CN' ? 'cn' : 'en';
+      if (locale !== newLocale) {
+        setSiteState({ locale: newLocale });
+      }
+      return;
+    }
     const localeParam = searchParams.get('locale');
     if (localeParam === 'en' || localeParam === 'cn') {
       const newLocale = localeParam as LocaleType;
       if (locale !== newLocale) {
         setSiteState({ locale: newLocale });
-        // 同步到 localStorage
-        if (utils.isLocalStorageNameSupported()) {
-          localStorage.setItem('locale', newLocale === 'cn' ? 'zh-CN' : 'en-US');
-        }
+        setStoredLocale(newLocale === 'cn' ? 'zh-CN' : 'en-US');
       }
-    } else if (!localeParam && locale) {
-      // 如果 URL 中没有 locale 参数，但当前有 locale 状态，保持当前状态
-      // 这种情况通常发生在用户直接访问没有 locale 参数的 URL
-      // 我们保持当前状态，不进行任何操作
     }
-  }, [searchParams, locale]);
+  }, [searchParams, locale, hasMultipleLocales, dumiLocale?.id]);
 
   const siteContextValue = useMemo(
     () => ({

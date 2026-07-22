@@ -1,0 +1,13 @@
+{
+  "name": "Button",
+  "package": "@oceanbase/design",
+  "diffLevel": "A",
+  "extendsAntd": "Button",
+  "delegateAntd": true,
+  "addedProps": [],
+  "constraints": ["import-design-not-antd"],
+  "keywords": ["button", "action", "click"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/button/index.tsx",
+  "docSource": "packages/design/src/button/index.md"
+}

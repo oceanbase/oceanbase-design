@@ -1,0 +1,86 @@
+# Machine-readable constraints for CLI, MCP, and llms-ob-constraints.txt
+# SYNC: skills/oceanbase-design/references/ASSEMBLY.md
+
+constraints:
+  - id: config-provider-root
+    module: "00"
+    severity: error
+    rule: Application root must wrap with ConfigProvider from @oceanbase/design
+    appliesTo: [app-entry]
+    antiPattern: Missing ConfigProvider for message/notification/Modal static APIs
+
+  - id: import-design-not-antd
+    module: "00"
+    severity: error
+    rule: Import components from @oceanbase/design, not antd
+    appliesTo: [all-components]
+    antiPattern: "from 'antd'" or "from '@ant-design/icons'"
+
+  - id: icons-oceanbase
+    module: icons
+    severity: error
+    rule: Import icons from @oceanbase/icons
+    appliesTo: [icons]
+    antiPattern: "from '@ant-design/icons'"
+
+  - id: card-table-inner-bordered
+    module: "03"
+    severity: warn
+    rule: When Card uses bodyStyle padding 0 with Table inside, Table must set innerBordered
+    appliesTo: [Card, Table]
+    antiPattern: Card bodyStyle={{ padding: 0 }} without Table innerBordered
+
+  - id: filter-not-select-for-bar
+    module: "08"
+    severity: suggest
+    rule: Use Filter.* for table/list filter bars, not bare Select/Checkbox
+    appliesTo: [Filter, Select]
+    antiPattern: Page-level Select as filter without Filter.ResponsiveGroup
+
+  - id: filter-controlled
+    module: "08"
+    severity: warn
+    rule: Controlled Filter items require value and onChange when syncing with table data
+    appliesTo: [Filter]
+    antiPattern: Filter with onApply but no value/onChange on items
+
+  - id: table-over-protable
+    module: "05"
+    severity: suggest
+    rule: Prefer @oceanbase/design Table over @oceanbase/ui ProTable unless request/search needed
+    appliesTo: [Table, ProTable]
+    antiPattern: ProTable without request prop or built-in search need
+
+  - id: table-batch-tool-options
+    module: "05"
+    severity: info
+    rule: Use toolOptionsRender for batch actions with rowSelection
+    appliesTo: [Table]
+    antiPattern: Custom div toolbar duplicating Table batch bar
+
+  - id: chart-provider
+    module: charts
+    severity: error
+    rule: Wrap chart usage with ChartProvider when using @oceanbase/charts with design theme
+    appliesTo: [ChartProvider]
+    antiPattern: Charts without ChartProvider under ConfigProvider
+
+  - id: ob-token-not-hex
+    module: "01"
+    severity: suggest
+    rule: Use obToken or var(--ob-*) for custom styles, not hardcoded hex/px
+    appliesTo: [styling]
+    antiPattern: Inline style with raw #hex colors
+
+package-routing:
+  - need: 基础组件、表格、筛选、表单、主题
+    package: "@oceanbase/design"
+    components: [Table, Filter, ConfigProvider, Form, Button]
+  - need: 页面布局、ProTable、PageContainer
+    package: "@oceanbase/ui"
+    components: [PageContainer, ProTable, BasicLayout, LightFilter]
+  - need: 图标
+    package: "@oceanbase/icons"
+  - need: 图表
+    package: "@oceanbase/charts"
+    note: Requires ChartProvider with design theme

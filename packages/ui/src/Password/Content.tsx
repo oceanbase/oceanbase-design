@@ -17,7 +17,9 @@ const Content: React.FC<{
   isValidating: boolean;
   value?: string;
   isTouched: boolean;
-}> = ({ rules, fieldError, isValidating, value, isTouched }) => {
+  rulesRegionId?: string;
+  rulesAriaLabel?: string;
+}> = ({ rules, fieldError, isValidating, value, isTouched, rulesRegionId, rulesAriaLabel }) => {
   const { token } = theme.useToken();
   const statusIconMap = {
     error: <CloseCircleFilled style={{ color: token.colorError }} />,
@@ -63,8 +65,13 @@ const Content: React.FC<{
   }
 
   return (
-    <div>
-      <Progress percent={value ? percent : 0} strokeColor={strokeColor} showInfo={false} />
+    <div id={rulesRegionId} role="region" aria-label={rulesAriaLabel}>
+      <Progress
+        percent={value ? percent : 0}
+        strokeColor={strokeColor}
+        showInfo={false}
+        aria-hidden
+      />
       <ul style={{ margin: 0, marginTop: '10px', listStyle: 'none', padding: '0' }}>
         <Space size={4} direction="vertical">
           {rules?.map(rule => {
@@ -84,7 +91,7 @@ const Content: React.FC<{
             return (
               <li key={`${rule.message}`}>
                 <Space size={status === 'wait' ? 14 : 8} align="start">
-                  {isValidating ? <LoadingOutlined /> : statusIconMap[status]}
+                  {isValidating ? <LoadingOutlined aria-hidden /> : statusIconMap[status]}
                   <span>{rule.message}</span>
                 </Space>
               </li>

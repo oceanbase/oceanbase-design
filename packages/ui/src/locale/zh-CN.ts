@@ -3,7 +3,10 @@ import BasicLayout from '../BasicLayout/locale/zh-CN';
 import BatchOperationBar from '../BatchOperationBar/locale/zh-CN';
 import Dialog from '../Dialog/locale/zh-CN';
 import DocDialog from '../DocDialog/locale/zh-CN';
+import FooterToolbar from '../FooterToolbar/locale/zh-CN';
 import FullscreenBox from '../FullscreenBox/locale/zh-CN';
+import LightFilter from '../LightFilter/locale/zh-CN';
+import NavMenu from '../NavMenu/locale/zh-CN';
 import Highlight from '../Highlight/locale/zh-CN';
 import Login from '../Login/locale/zh-CN';
 import PageContainer from '../PageContainer/locale/zh-CN';
@@ -29,6 +32,9 @@ export default {
   DocDialog,
   Highlight,
   FullscreenBox,
+  FooterToolbar,
+  LightFilter,
+  NavMenu,
   BatchOperationBar,
   DateRanger,
 } as Locale;

@@ -1,0 +1,14 @@
+{
+  "name": "ProTable",
+  "package": "@oceanbase/ui",
+  "diffLevel": "D",
+  "extendsAntd": null,
+  "obOnly": true,
+  "delegateAntd": false,
+  "addedProps": ["innerBordered"],
+  "constraints": ["table-over-protable"],
+  "keywords": ["protable", "table", "request", "search"],
+  "importFrom": "@oceanbase/ui",
+  "propsSource": "packages/ui/src/ProTable/index.tsx",
+  "docSource": "packages/ui/src/ProTable/index.md"
+}

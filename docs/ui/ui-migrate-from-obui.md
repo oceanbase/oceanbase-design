@@ -1,14 +1,14 @@
 ---
-title: 从 @alipay/ob-ui 迁移
+title: Migrate from @alipay/ob-ui
 order: 6
-group: 业务组件
+group: Biz Components
 ---
 
-内部包 `@alipay/ob-ui` 由于包含多种类型的组件，不便于管理和使用。因此在对外开源时，将其拆分成了 `@oceanbase/design` 基础组件库和 `@oceanbase/ui` 业务组件库，且有一定的不兼容变更，建议使用我们提供的自动化工具进行迁移。
+The internal package `@alipay/ob-ui` contains various types of components, making it difficult to manage and use. Therefore, when open-sourcing, it was split into `@oceanbase/design` (base component library) and `@oceanbase/ui` (biz component library), with some breaking changes. We recommend using our automated migration tools.
 
-## 自动化迁移
+## Automated Migration
 
-- 使用 [@oceanbase/codemod](https://github.com/oceanbase/oceanbase-design/tree/master/packages/codemod) 可以从 `@alipay/ob-ui` 一键迁移到 `@oceanbase/ui`:
+- Use [@oceanbase/codemod](https://github.com/oceanbase/oceanbase-design/tree/master/packages/codemod) to migrate from `@alipay/ob-ui` to `@oceanbase/ui` in one step:
 
 ```shell
 # Run directly through npx

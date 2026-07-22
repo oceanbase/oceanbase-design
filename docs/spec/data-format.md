@@ -1,42 +1,42 @@
 ---
-group: Design Foundation 设计基础
-subGroup: Communication 交流
-title: Data format 数据格式
+group: Design Foundation
+subGroup: Communication
+title: Data Format
 order: 19
 ---
 
-基于软件国际化（i18n）要求, 所定义的OB系统中不同类型数字和语言数据的呈现格式。
+Presentation formats for different types of numbers and language data in OB systems, defined based on software internationalization (i18n) requirements.
 
-## 日期
+## Date
 
-| 单位       | 如何显示       | 中文       | 英文       |
-| ---------- | -------------- | ---------- | ---------- |
-| 月，日，年 | 显示日期和年份 | 2012-01-14 | 01/04/2012 |
+| Unit             | How to Display        | Chinese    | English    |
+| ---------------- | --------------------- | ---------- | ---------- |
+| Month, Day, Year | Display date and year | 2012-01-14 | 01/04/2012 |
 
-## 时间
+## Time
 
-| 单位 | 如何显示 | 中文 | 英文 |
+| Unit | How to Display | Chinese | English |
 | --- | --- | --- | --- |
-| 24小时时钟 | 不显示上下午信息（AM/PM） | 14:00 |  |
-| 预估时间 | 四舍五入到最大和最近的日期或时间 | 5分钟内<br />3天前 | In 5 mintues<br />3 days ago |
-| 绝对时间 | 显示具体日期或时间 | 2012-01-14 10:00 | 01/04/2012 10:00 |
+| 24-hour clock | Do not display AM/PM | 14:00 |  |
+| Estimated time | Round to the largest and nearest date or time | 5分钟内<br />3天前 | In 5 minutes<br />3 days ago |
+| Absolute time | Display specific date or time | 2012-01-14 10:00 | 01/04/2012 10:00 |
 
-## 日期范围
+## Date Range
 
-| 范围 | 如何显示               | 中文                     | 英文                     |
-| ---- | ---------------------- | ------------------------ | ------------------------ |
-| 年   | 在开头和结尾都显示年份 | 2024-09-02 ～ 2024-10-12 | 09/02/2024 ～ 10/12/2024 |
-| 时间 | 以24小时制显示         | 11:00 - 14:30            | 11:00 - 14:30            |
+| Range | How to Display                     | Chinese                  | English                  |
+| ----- | ---------------------------------- | ------------------------ | ------------------------ |
+| Year  | Display year at both start and end | 2024-09-02 ～ 2024-10-12 | 09/02/2024 ～ 10/12/2024 |
+| Time  | Display in 24-hour format          | 11:00 - 14:30            | 11:00 - 14:30            |
 
-## 时区
+## Timezone
 
-统一以 UTC 为单位呈现时间地区的偏移，UTC 非必要信息，可基于场景定义此信息是否显示。若显示，时间需以数据格式 yyyy-mm-dd 或 mm/dd/yyyy 呈现，时区信息以括号（UTC + X ）形式呈现在时间数据右侧。
+Display timezone offset in UTC. UTC is optional; whether to display can be defined by scenario. If displayed, time should use data format yyyy-mm-dd or mm/dd/yyyy, and timezone info should appear in parentheses (UTC + X) to the right of the time data.
 
 <div style="display: flex">
   <div style="width: 50%">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/z5ZMRpKx4p8AAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Do></Do></div>
-    <div class="image-description">显示时区偏移信息时，日期时间需使用数据格式</div>
+    <div class="image-description">When displaying timezone offset, use data format for date and time</div>
   </div>
   <div style="width: 50%">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/JW-iTZGgJeoAAAAAAAAAAAAADv3-AQBr/original" />
@@ -44,9 +44,9 @@ order: 19
   </div>
 </div>
 
-## 货币符号
+## Currency Symbol
 
-英文站中，始终以【货币符号 + 货币数字】方式显示货币，符号放在数值前面。
+On English sites, always display currency as [currency symbol + amount], with the symbol before the value.
 
 <div style="display: flex">
   <div>
@@ -59,9 +59,9 @@ order: 19
   </div>
 </div>
 
-## 数字、电话号码
+## Numbers, Phone Numbers
 
-数字及电话应该始终以数字显示，不用文本代替。
+Numbers and phone numbers should always be displayed as digits, not as text.
 
 <div style="display: flex">
   <div>
@@ -74,9 +74,9 @@ order: 19
   </div>
 </div>
 
-## 地址
+## Address
 
-英文书写顺序由小到大：房间号、楼层、楼号、道路、地区、市、省、国家；中文则相反。
+English writing order: small to large (room number, floor, building, street, district, city, province, country); Chinese is the opposite.
 
 <div style="display: flex">
   <div>
@@ -89,9 +89,9 @@ order: 19
   </div>
 </div>
 
-## 品牌图标
+## Brand Icons
 
-UI组件中， 若使用品牌图标，图标需与文案分离显示；文案与图标不可同时存在于一张图片中。
+In UI components, when using brand icons, the icon should be displayed separately from the text; text and icon should not exist in the same image.
 
 <div style="display: flex">
   <div>
@@ -104,11 +104,11 @@ UI组件中， 若使用品牌图标，图标需与文案分离显示；文案�
   </div>
 </div>
 
-## 数据脱敏
+## Data Masking
 
-### 邮箱
+### Email
 
-用「\*」在 @ 前代表需要脱敏的邮箱信息。
+Use 「\*」 before @ to represent masked email information.
 
 <div style="display: flex">
   <div>
@@ -118,13 +118,13 @@ UI组件中， 若使用品牌图标，图标需与文案分离显示；文案�
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/efvRR6-GFIAAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Donot></Donot></div>
-    <div class="image-description">避免用省略号显示脱敏信息</div>
+    <div class="image-description">Avoid using ellipsis for masked information</div>
   </div>
 </div>
 
-### 银行卡
+### Bank Card
 
-信用卡和借记卡数据使用4个中线修订符\[····] 脱敏显示。
+Credit and debit card data use 4 middle-line revision symbols \[····] for masked display.
 
 <div style="display: flex">
   <div>

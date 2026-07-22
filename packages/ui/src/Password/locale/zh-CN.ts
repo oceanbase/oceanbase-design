@@ -8,5 +8,6 @@ export default {
   pleaseRememberYourPassword: '请牢记并妥善保存密码',
   copySuccessfully: '复制成功',
   copyPassword: '复制密码',
+  passwordStrengthRules: '密码强度规则',
   andKeepItProperly: '并妥善保存',
 };

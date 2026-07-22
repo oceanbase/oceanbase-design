@@ -47,6 +47,11 @@ export const genSideTipStyle: GenerateStyle<SideTipToken> = (token: SideTipToken
         transition: 'all 0.18s ease-out 0.18s',
         insetBlockStart: 0,
         insetInlineEnd: -22,
+        border: 'none',
+        padding: 0,
+        font: 'inherit',
+        appearance: 'none',
+        WebkitAppearance: 'none',
         '&:hover': {
           background: 'rgba(0, 0, 0, 0.35)',
         },
@@ -75,6 +80,10 @@ export const genSideTipStyle: GenerateStyle<SideTipToken> = (token: SideTipToken
         transition:
           'background-color 0.2s ease 0.1s, opacity 0.2s ease 0s, transform 0.2s ease 0.1s',
         userSelect: 'none',
+        '&:focus-visible': {
+          outline: `2px solid ${token.colorPrimary}`,
+          outlineOffset: 2,
+        },
         [`&${componentCls}-button-primary`]: {
           backgroundColor: `${token.colorPrimary} !important`,
         },

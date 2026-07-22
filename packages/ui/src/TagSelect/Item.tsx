@@ -71,7 +71,7 @@ const Item: React.FC<TagSelectItemProps> = ({
   const renderCover = () => {
     return coverType === 'string' ? (
       <div className={`${prefixCls}-cover`}>
-        <img src={cover as string} alt="tagselect" />
+        <img src={cover as string} alt={restProps.title ?? ''} />
       </div>
     ) : (
       cover

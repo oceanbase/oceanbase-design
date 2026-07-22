@@ -3,7 +3,8 @@
   "private": true,
   "repository": "git@github.com:oceanbase/oceanbase-design.git",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "internal/*"
   ],
   "packageManager": "pnpm@8.6.0",
   "scripts": {
@@ -16,13 +17,15 @@
     "start": "npm run dev",
     "prepare": "husky install && dumi setup",
     "prepublishOnly": "npm run build",
-    "publish": "lerna publish --pre-dist-tag experimental",
-    "publish:from-package": "lerna publish from-package --pre-dist-tag experimental",
-    "site:build": "npm run build:design && dumi build",
+    "publish": "lerna publish",
+    "publish:from-package": "lerna publish from-package",
+    "site:build": "npm run build:design && npm run generate:design-md && npm run generate:llms-codemod && npm run sync:agent-doc-md && dumi build",
+    "sync:agent-doc-md": "node scripts/sync-agent-doc-md.mjs",
     "site:deploy": "gh-pages -d site",
     "postpublish": "npm run sync:other-npm",
     "sync:other-npm": "node -e 'require(\"./scripts/sync-cnpm-and-tnpm\")()'",
     "test:prepare": "pnpm --filter \"@oceanbase/design\" build",
+    "test:a11y": "npm run test:prepare && cross-env vitest run packages/design/src/__tests__/a11y-smoke.test.tsx packages/ui/src/__tests__/a11y-smoke.test.tsx",
     "test": "npm run test:prepare && cross-env vitest",
     "test:coverage": "npm run test:prepare && cross-env TEST_LOG=none vitest --coverage",
     "test:update": "npm run test:prepare && cross-env vitest -u",
@@ -34,7 +37,21 @@
     "tsc": "tsc --noEmit",
     "tsc:clean": "tsc --build --clean",
     "locale:remove-useless": "ts-node scripts/remove-useless-locale.ts",
-    "check:ob-token-dtcg": "ts-node packages/design/scripts/verify-ob-token-alignment.ts"
+    "check:ob-token-dtcg": "ts-node packages/design/scripts/verify-ob-token-alignment.ts",
+    "check:metadata": "node scripts/check-metadata.mjs",
+    "check:skill-doc-sync": "node scripts/check-skill-doc-sync.mjs",
+    "check:agent-discovery": "node scripts/check-agent-discovery.mjs",
+    "generate:metadata": "node scripts/generate-metadata.mjs",
+    "generate:agents-md": "node scripts/generate-agents-md.mjs",
+    "test:cli": "node --test packages/cli/src/normalize/import-rewrite.test.mjs packages/cli/src/delegate/resolve-antd-cli.test.mjs packages/cli/src/delegate/antd-info.test.mjs packages/cli/src/cli.integration.test.mjs",
+    "test:agent": "pnpm run generate:metadata && pnpm run generate:design-md && pnpm run generate:llms-codemod && pnpm run sync:agent-doc-md && pnpm run check:metadata && pnpm run check:skill-doc-sync && pnpm run check:skill-props-sync && pnpm run check:agent-discovery && pnpm run test:cli",
+    "generate:llms-codemod": "node scripts/generate-llms-codemod.mjs",
+    "generate:design-md": "node scripts/generate-design-md.mjs",
+    "generate:skill-props": "node scripts/generate-skill-props.mjs",
+    "extract:added-props": "node scripts/extract-added-props.mjs",
+    "check:skill-props-sync": "node scripts/check-skill-props-sync.mjs",
+    "test:vibe-smoke": "node internal/vibe-tests/src/cli.mjs smoke && node internal/vibe-tests/src/cli.mjs compare --iteration smoke",
+    "test:vibe-run": "node internal/vibe-tests/src/cli.mjs run --configs all --fresh"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -73,6 +90,7 @@
     "antd": "^5.29.3",
     "antd-style": "^3.7.1",
     "antd-token-previewer": "^2.0.8",
+    "axe-core": "^4.10.0",
     "babel-jest": "^29.7.0",
     "babel-plugin-react-inline-svg-unique-id": "^1.5.0",
     "classnames": "^2.5.1",
@@ -123,5 +141,10 @@
     "vitest": "^2.1.9",
     "vitest-fetch-mock": "^0.2.2",
     "web-vitals": "^3.5.2"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "dumi@2.4.21": "patches/dumi@2.4.21.patch"
+    }
   }
 }

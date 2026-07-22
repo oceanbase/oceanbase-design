@@ -1,0 +1,13 @@
+{
+  "name": "Drawer",
+  "package": "@oceanbase/design",
+  "diffLevel": "B",
+  "extendsAntd": "Drawer",
+  "delegateAntd": true,
+  "addedProps": ["document", "footerExtra", "cancelText", "okText", "okButtonProps", "locale"],
+  "constraints": [],
+  "keywords": ["drawer", "panel", "slide", "document"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/drawer/index.tsx",
+  "docSource": "packages/design/src/drawer/index.md"
+}

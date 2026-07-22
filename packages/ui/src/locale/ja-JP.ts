@@ -4,7 +4,10 @@ import BatchOperationBar from '../BatchOperationBar/locale/ja-JP';
 import Boundary from '../Boundary/locale/ja-JP';
 import Dialog from '../Dialog/locale/ja-JP';
 import DocDialog from '../DocDialog/locale/ja-JP';
+import FooterToolbar from '../FooterToolbar/locale/ja-JP';
 import FullscreenBox from '../FullscreenBox/locale/ja-JP';
+import LightFilter from '../LightFilter/locale/ja-JP';
+import NavMenu from '../NavMenu/locale/ja-JP';
 import Highlight from '../Highlight/locale/ja-JP';
 import Login from '../Login/locale/ja-JP';
 import PageContainer from '../PageContainer/locale/ja-JP';
@@ -30,6 +33,9 @@ export default {
   DocDialog,
   Highlight,
   FullscreenBox,
+  FooterToolbar,
+  LightFilter,
+  NavMenu,
   BatchOperationBar,
   DateRanger,
 } as Locale;

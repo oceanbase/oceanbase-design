@@ -91,18 +91,12 @@ const DocLayout: React.FC = () => {
           className={classNames({ rtl: direction === 'rtl' })}
         />
         <title>{locale?.title}</title>
-        <link
-          sizes="144x144"
-          href="https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original"
-        />
+        <link rel="icon" type="image/svg+xml" href="/assets/oceanbase_logo.svg" />
         <meta name="description" content={locale.description} />
         <meta property="og:title" content={locale?.title} />
         <meta property="og:description" content={locale.description} />
         <meta property="og:type" content="website" />
-        <meta
-          property="og:image"
-          content="https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original"
-        />
+        <meta property="og:image" content="/assets/oceanbase_logo.svg" />
       </Helmet>
       <GlobalStyles />
       <Header />

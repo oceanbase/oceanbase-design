@@ -1,23 +1,23 @@
 ---
-title: OceanBase UI 介绍
+title: OceanBase UI Introduction
 order: 1
 group:
-  title: 业务组件
+  title: Biz Components
   order: 2
 ---
 
-OceanBase UI 是 OceanBase 前端和设计团队出品的业务资产和组件库，提炼自 OceanBase 各个产品的通用能力。
+OceanBase UI is a business asset and component library from the OceanBase frontend and design team, refined from the common capabilities of OceanBase products.
 
-## ✨ 特性
+## ✨ Features
 
-- 🌈 从业务中来，提炼自 OceanBase 各个产品的通用能力。
-- 📦 开箱即用，帮助设计开发者低成本快速搭建具备「专业感」的产品。
-- 🛡 使用 TypeScript 开发，提供完整的类型定义文件。
-- 🌍 国际化语言支持。
+- 🌈 Born from real products, refined from the common capabilities of OceanBase products.
+- 📦 Out of the box, helping designers and developers quickly build professional products at low cost.
+- 🛡 Built with TypeScript, complete type definitions provided.
+- 🌍 Internationalization support.
 
-## 支持环境
+## Supported Environments
 
-- 现代浏览器和 IE11 及以上。
+- Modern browsers and IE11+.
 - Electron
 
 <embed src="./ui-quickstart.md#L8-L100000"></embed>

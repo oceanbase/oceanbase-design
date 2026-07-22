@@ -691,89 +691,95 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
             </span>
           )}
         </div>
-        <Radio.Group
-          value={isPlay ? 'play' : ''}
-          className={`${prefix}-playback-control`}
-          buttonStyle="solid"
-        >
-          {hasRewind && (
-            <Tooltip
-              title={locale.jumpBack}
-              getPopupContainer={trigger => trigger.parentNode as HTMLElement}
-            >
-              <Radio.Button
-                value="stepBack"
-                style={{
-                  paddingInline: 8,
-                  borderInlineStart: 0,
-                  borderTopLeftRadius: 0,
-                  borderBottomLeftRadius: 0,
-                }}
-                onMouseEnter={() => setBackRadioFocused(true)}
-                onMouseLeave={() => setBackRadioFocused(false)}
-                onClick={() => {
-                  if (isPlay) {
-                    setIsPlay(false);
-                  }
-
-                  if (startTime && endTime) {
-                    const newStartTime = (startTime as Dayjs)
-                      .clone()
-                      .subtract(differenceMs, 'milliseconds');
-                    const newEndTime = startTime?.clone() as Dayjs;
-                    rangeChange([newStartTime, newEndTime]);
-                  }
-                }}
+        {(hasRewind || hasForward) && (
+          <Radio.Group
+            value={isPlay ? 'play' : ''}
+            className={`${prefix}-playback-control`}
+            buttonStyle="solid"
+          >
+            {hasRewind && (
+              <Tooltip
+                title={locale.jumpBack}
+                getPopupContainer={trigger => trigger.parentNode as HTMLElement}
               >
-                <LeftOutlined />
-              </Radio.Button>
-            </Tooltip>
-          )}
-          {hasForward && (
-            <Tooltip
-              title={locale.jumpForward}
-              getPopupContainer={trigger => trigger.parentNode as HTMLElement}
-            >
-              <Radio.Button
-                value="stepForward"
-                style={{
-                  paddingInline: 8,
-                  borderTopLeftRadius: 0,
-                  borderBottomLeftRadius: 0,
-                }}
-                // disabled={isPlay}
-                onClick={() => {
-                  if (startTime && endTime) {
-                    const newStartTime = endTime.clone() as Dayjs;
-                    const newEndTime = (endTime as Dayjs).clone().add(differenceMs);
-
-                    if (newEndTime.isBefore(new Date())) {
-                      rangeChange([newStartTime, newEndTime]);
-                    } else {
-                      setIsPlay(true);
-                      setNow();
+                <Radio.Button
+                  value="stepBack"
+                  aria-label={locale.jumpBack}
+                  style={{
+                    paddingInline: 8,
+                    borderInlineStart: 0,
+                    borderTopLeftRadius: 0,
+                    borderBottomLeftRadius: 0,
+                  }}
+                  onMouseEnter={() => setBackRadioFocused(true)}
+                  onMouseLeave={() => setBackRadioFocused(false)}
+                  onClick={() => {
+                    if (isPlay) {
+                      setIsPlay(false);
                     }
-                  }
-                }}
+
+                    if (startTime && endTime) {
+                      const newStartTime = (startTime as Dayjs)
+                        .clone()
+                        .subtract(differenceMs, 'milliseconds');
+                      const newEndTime = startTime?.clone() as Dayjs;
+                      rangeChange([newStartTime, newEndTime]);
+                    }
+                  }}
+                >
+                  <LeftOutlined aria-hidden />
+                </Radio.Button>
+              </Tooltip>
+            )}
+            {hasForward && (
+              <Tooltip
+                title={locale.jumpForward}
+                getPopupContainer={trigger => trigger.parentNode as HTMLElement}
               >
-                <RightOutlined />
-              </Radio.Button>
-            </Tooltip>
-          )}
-        </Radio.Group>
+                <Radio.Button
+                  value="stepForward"
+                  aria-label={locale.jumpForward}
+                  style={{
+                    paddingInline: 8,
+                    borderTopLeftRadius: 0,
+                    borderBottomLeftRadius: 0,
+                  }}
+                  // disabled={isPlay}
+                  onClick={() => {
+                    if (startTime && endTime) {
+                      const newStartTime = endTime.clone() as Dayjs;
+                      const newEndTime = (endTime as Dayjs).clone().add(differenceMs);
+
+                      if (newEndTime.isBefore(new Date())) {
+                        rangeChange([newStartTime, newEndTime]);
+                      } else {
+                        setIsPlay(true);
+                        setNow();
+                      }
+                    }
+                  }}
+                >
+                  <RightOutlined aria-hidden />
+                </Radio.Button>
+              </Tooltip>
+            )}
+          </Radio.Group>
+        )}
       </Space>
       {hasSync && rangeName !== CUSTOMIZE && (
         <Button
+          aria-label={locale.syncToCurrent}
           style={{ paddingInline: 8, color: token.colorTextSecondary }}
           onClick={() => {
             setNow();
           }}
         >
-          <SyncOutlined />
+          <SyncOutlined aria-hidden />
         </Button>
       )}
       {hasZoomOut && (
         <Button
+          aria-label={locale.zoomOutRange}
           disabled={!nextRangeItem}
           style={{ color: token.colorTextSecondary }}
           onClick={() => {
@@ -784,7 +790,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
               return;
             }
           }}
-          icon={<ZoomOutOutlined />}
+          icon={<ZoomOutOutlined aria-hidden />}
         />
       )}
     </Space>

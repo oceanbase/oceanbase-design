@@ -62,10 +62,7 @@ const Logo: React.FC<LogoProps> = ({ isZhCN }) => {
         css={logo}
         style={{ textDecoration: 'none' }}
       >
-        <img
-          src="https://mdn.alipayobjects.com/huamei_n8rchn/afts/img/A*d_ZTR7sdVzAAAAAAAAAAAAAADvSFAQ/original"
-          alt="logo"
-        />
+        <img src="/assets/oceanbase_logo.svg" alt="logo" />
         <Space>
           <span css={title}>OceanBase Design</span>
         </Space>

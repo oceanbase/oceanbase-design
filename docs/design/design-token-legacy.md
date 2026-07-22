@@ -1,16 +1,16 @@
 ---
-title: Design Token（旧版）
+title: Design Token (Legacy)
 order: 4
-group: 基础组件
+group: General
 ---
 
-OceanBase Design Token 由设计师进行维护和更新，在技术上支持和 [antd](https://ant.design/docs/react/customize-theme-cn) 完全一致的能力。
+OceanBase Design Token is maintained and updated by designers. Technically, it supports the same capabilities as [antd](https://ant.design/docs/react/customize-theme-cn).
 
-## 使用 Design Token
+## Using Design Token
 
-### 在 React 中使用
+### In React
 
-- 如果是函数组件，推荐使用 `useToken` hooks 来获取 Design Token:
+- For function components, use the `useToken` hook to get Design Token:
 
 ```tsx | pure
 import { Button, useToken } from '@oceanbase/design';
@@ -25,7 +25,7 @@ const App: React.FC = () => {
 export default App;
 ```
 
-- 如果是类组件，可以通过 `token` 对象来获取 Design Token:
+- For class components, use the `token` object to get Design Token:
 
 ```tsx | pure
 import { Button, ConfigProvider, token } from '@oceanbase/design';
@@ -40,9 +40,9 @@ class App extends React.Component {
 export default App;
 ```
 
-### 在非 React 中使用
+### Outside React
 
-- 在常量文件、dva model 等非 React 环境下，可以使用 `token` 对象来获取 Design Token。
+- In constant files, dva models, or other non-React environments, use the `token` object to get Design Token.
 
 ```ts
 import { token } from '@oceanbase/design';
@@ -50,15 +50,15 @@ import { token } from '@oceanbase/design';
 export const taskStatusList = [
   {
     value: 'running',
-    label: '运行中',
+    label: 'Running',
     color: token.colorPrimary,
   },
 ];
 ```
 
-### 在 less 中使用
+### In Less
 
-- 通过引用 @oceanbase/design 提供的 `less` 主题文件，可直接使用 Design Token 对应的 less 变量:
+- By importing the `less` theme file from @oceanbase/design, you can use Design Token variables directly in Less:
 
 ```less
 @import '~@oceanbase/design/es/theme/index.less';
@@ -69,17 +69,17 @@ export const taskStatusList = [
 }
 ```
 
-- 如果需要使用特定主题的 less 文件，可以在全局样式中设置 `@theme` 主题变量:
+- To use a specific theme's Less file, set the `@theme` variable in your global styles:
 
 ```less
 @theme: default | dark | compact | aliyun;
 ```
 
-- 在 VSCode 中安装 [Less IntelliSense](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-less) 插件，可支持变量提示和补全。
+- Install the [Less IntelliSense](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-less) extension in VSCode for variable hints and autocomplete.
 
 ![](https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*_37-QqtQGQUAAAAAAAAAAAAADmfOAQ/original)
 
-## Design Token 列表
+## Design Token List
 
 ### SeedToken
 
@@ -87,16 +87,16 @@ export const taskStatusList = [
 
 ### MapToken
 
-> 继承所有 SeedToken 的属性
+> Inherits all SeedToken properties
 
 <TokenTable type="map"></TokenTable>
 
 ### AliasToken
 
-> 继承所有 SeedToken 和 MapToken 的属性
+> Inherits all SeedToken and MapToken properties
 
 <TokenTable type="alias"></TokenTable>
 
-## 更多用法
+## More Usage
 
-- 主题的更多用法，请参考 antd 文档: https://ant.design/docs/react/customize-theme-cn
+- For more usage of the theme, see the antd documentation: https://ant.design/docs/react/customize-theme-cn

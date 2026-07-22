@@ -21,7 +21,7 @@ Filter 是一组轻量级的筛选组件，提供了多种筛选类型，适用�
 
 <!-- prettier-ignore -->
 <code src="./demo/select.tsx" title="单选筛选" description="`Filter.Select` 单选筛选器的基本用法。"></code>
-<code src="./demo/checkbox.tsx" title="多选筛选" description="`Filter.Checkbox` 多选筛选器，支持显示选中计数。<br />当 `options` 包含 `color` 属性时自动启用状态模式（显示重叠图标、使用 Badge 显示颜色）。"></code>
+<code src="./demo/checkbox.tsx" title="多选筛选" description="`Filter.Checkbox` 多选筛选器，支持显示选中计数。<br>当 `options` 包含 `color` 属性时自动启用状态模式（显示重叠图标、使用 Badge 显示颜色）。"></code>
 <code src="./demo/switch.tsx" title="开关筛选" description="`Filter.Switch` 开关筛选器，用于布尔值筛选场景。"></code>
 <code src="./demo/input.tsx" title="输入筛选" description="`Filter.Input` 输入筛选器，带开关控制，只有开启开关后输入的值才会生效。"></code>
 <code src="./demo/cascader.tsx" title="级联筛选" description="`Filter.Cascader` 级联筛选器，支持单选和多选模式。"></code>

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { ConfigProvider } from '@oceanbase/design';
-import React, { useContext, useMemo, useState, useEffect } from 'react';
+import React, { useContext, useId, useMemo, useState, useEffect } from 'react';
 import TagSelectContext from './TagSelectContext';
 import Item from './Item';
 import useStyle from './style';
@@ -119,11 +119,16 @@ const Group: React.FC<TagSelectGroupProps> = ({
     : children;
 
   const groupCls = classNames(`${prefix}-container`, hashId, className);
+  const titleId = useId();
 
   return wrapSSR(
     <TagSelectContext.Provider value={contextValue}>
-      <div className={groupCls}>
-        <div className={`${prefix}-title`}>{title}</div>
+      <div className={groupCls} role="group" aria-labelledby={title ? titleId : undefined}>
+        {title && (
+          <div className={`${prefix}-title`} id={titleId}>
+            {title}
+          </div>
+        )}
         {childrenNode}
       </div>
     </TagSelectContext.Provider>

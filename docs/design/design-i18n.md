@@ -1,14 +1,14 @@
 ---
-title: 国际化
+title: Internationalization
 order: 5
-group: 基础组件
+group: General
 ---
 
-`@oceanbase/design` 默认语言是中文，如果要支持其他语言，需要手动开启国际化。
+`@oceanbase/design` uses Chinese as the default language. To support other languages, you need to enable internationalization manually.
 
-## 开启国际化
+## Enable Internationalization
 
-可通过 ConfigProvider 全局配置开启国际化，`ConfigProvider` 使用 `React` 的 `context` 特性，只需在应用外围包裹一次即可全局生效。
+Enable internationalization via ConfigProvider global configuration. `ConfigProvider` uses React's `context` feature, so wrapping it once around your app makes it effective globally.
 
 ```jsx | pure
 import { ConfigProvider } from '@oceanbase/design';
@@ -21,20 +21,20 @@ return (
 );
 ```
 
-## 使用示例
+## Example
 
 <!-- prettier-ignore -->
 <code src="../../packages/design/src/locale/demo/basic.tsx"></code>
 
-## 目前支持语言
+## Supported Languages
 
-目前支持以下语言：
+The following languages are supported:
 
-| 语言     | 文件名 |
-| -------- | ------ |
-| 简体中文 | zh-CN  |
-| 繁体中文 | zh-TW  |
-| 英文     | en-US  |
-| 日文     | ja-JP  |
+| Language            | File  |
+| ------------------- | ----- |
+| Simplified Chinese  | zh-CN |
+| Traditional Chinese | zh-TW |
+| English             | en-US |
+| Japanese            | ja-JP |
 
-如当前国际化语言有问题或者需要支持其他语言，欢迎反馈给我们。
+If you encounter issues with any language or need support for additional languages, please let us know.

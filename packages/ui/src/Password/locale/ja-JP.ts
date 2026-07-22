@@ -8,5 +8,6 @@ export default {
   pleaseRememberYourPassword: 'パスワードを必ず保存してください',
   copySuccessfully: 'コピー成功',
   copyPassword: 'パスワードをコピーし',
+  passwordStrengthRules: 'パスワード強度ルール',
   andKeepItProperly: '適切に保管してください',
 };

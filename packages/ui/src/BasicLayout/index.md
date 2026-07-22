@@ -12,6 +12,7 @@ nav:
 <code src="./demo/menu-over-length.tsx" title="菜单项内容超长" description="自动省略 + tooltip。"></code>
 <code src="./demo/banner.tsx" title="带顶部 banner"></code>
 <code src="./demo/topHeader-icon.tsx" title="顶部导航 icon 模式"></code>
+<code src="./demo/menu-group.tsx" title="菜单分组" description="与 antd Menu 一致，支持 type: 'group' 分组展示。"></code>
 <code src="./demo/topHeader-title.tsx" title="带顶部标题"></code>
 <code src="./demo/subSideMenu.tsx" title="带子侧边栏的二级导航"></code>
 <code src="./demo/no-sider-and-custom-header.tsx" title="无侧边导航 & 自定义顶部导航"></code>
@@ -95,8 +96,9 @@ const App = () => {
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
-| link | 菜单对应的路径或链接 | string | - | - |
+| link | 菜单对应的路径或链接，type 为 `'group'` 时可省略 | string | - | - |
 | title | 菜单标题 | string | - | - |
+| type | 与 antd Menu 一致，设为 `'group'` 时为分组标题，不设 link，children 为该组下的菜单项 | 'group' | - | - |
 | icon | 菜单 icon | ReactNode | - | - |
 | selectedIcon | 菜单选中态 icon | ReactNode | - | - |
 | accessible | 菜单项是否渲染，常用于权限控制和条件渲染的场景 | boolean | true | - |

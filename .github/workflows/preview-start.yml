@@ -10,17 +10,25 @@ permissions:
 jobs:
   preview-start:
     permissions:
-      issues: write # for actions-cool/maintain-one-comment to modify or create issue comments
-      pull-requests: write # for actions-cool/maintain-one-comment to modify or create PR comments
+      issues: write
+      pull-requests: write
     name: start preview info
     runs-on: ubuntu-latest
     steps:
-      - name: Update status comment
-        uses: actions-cool/maintain-one-comment@v3
+      - name: Find preview comment
+        uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3
+        id: find-comment
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body-includes: '<!-- AUTO_PREVIEW_HOOK -->'
+
+      - name: Update status comment
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          edit-mode: replace
           body: |
             ⚡️ Preview Deploying...
             <img src="https://user-images.githubusercontent.com/507615/90240294-8d2abd00-de5b-11ea-8140-4840a0b2d571.gif" width="300" />
             <!-- AUTO_PREVIEW_HOOK -->
-          body-include: '<!-- AUTO_PREVIEW_HOOK -->'

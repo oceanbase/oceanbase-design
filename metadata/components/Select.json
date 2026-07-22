@@ -1,0 +1,13 @@
+{
+  "name": "Select",
+  "package": "@oceanbase/design",
+  "diffLevel": "A",
+  "extendsAntd": "Select",
+  "delegateAntd": true,
+  "addedProps": [],
+  "constraints": ["filter-not-select-for-bar"],
+  "keywords": ["select", "dropdown", "option"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/select/index.tsx",
+  "docSource": "packages/design/src/select/index.md"
+}

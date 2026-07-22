@@ -1,12 +1,12 @@
 ---
-title: 主题使用
+title: Theme Usage
 order: 3
-group: 基础组件
+group: General
 ---
 
-OceanBase Design 的设计体系遵循 Ant Design 5.0 设计规范，并在此基础上扩展出了很多具备 OceanBase 产品风格的设计规范模式，包括但不限于全局样式（色板、圆角、边框）和特定组件的视觉定制，以传递 OceanBase 科技、活力、专注和关怀的品牌特点。
+OceanBase Design follows the Ant Design 5.0 design specification and extends it with OceanBase product-style design patterns, including but not limited to global styles (color palette, radius, border) and visual customization of specific components, to convey OceanBase's brand characteristics of technology, vitality, focus, and care.
 
-## 主题配置
+## Theme Configuration
 
 ```tsx | pure
 import { ConfigProvider } from '@oceanbase/design';
@@ -20,9 +20,9 @@ export default () {
 };
 ```
 
-## 内置主题
+## Built-in Themes
 
-### 暗色主题
+### Dark Theme
 
 ```ts | pure
 import {  ConfigProvider } from '@oceanbase/design';
@@ -41,7 +41,7 @@ export default () {
 };
 ```
 
-### 紧凑主题
+### Compact Theme
 
 ```ts | pure
 import {  ConfigProvider } from '@oceanbase/design';
@@ -59,7 +59,7 @@ export default () {
 };
 ```
 
-### 阿里云主题
+### Aliyun Theme
 
 ```ts | pure
 import {  ConfigProvider } from '@oceanbase/design';
@@ -77,15 +77,15 @@ export default () {
 };
 ```
 
-### 主题预览
+### Theme Preview
 
 <!-- prettier-ignore -->
 <code src="../../packages/design/src/theme/demo/previewer.tsx"></code>
 
-## 使用 Design Token
+## Using Design Token
 
-- 请参考 [Design Token](/docs/design-token)。
+- See [Design Token](/docs/design-token).
 
-## 使用 Design Token (旧版)
+## Using Design Token (Legacy)
 
-- 请参考 [Design Token (旧版)](/docs/design-token-legacy)。
+- See [Design Token (Legacy)](/docs/design-token-legacy).

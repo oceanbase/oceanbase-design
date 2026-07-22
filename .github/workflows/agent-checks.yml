@@ -1,0 +1,38 @@
+name: Agent Checks
+
+on:
+  pull_request:
+  push:
+    branches: [master, main]
+
+jobs:
+  agent-checks:
+    if: github.repository == 'oceanbase/oceanbase-design'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.6.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --ignore-scripts
+      - name: Generate CLI metadata
+        run: pnpm run generate:metadata
+      - name: Generate llms-codemod
+        run: pnpm run generate:llms-codemod
+      - name: Metadata registry
+        run: pnpm run check:metadata
+      - name: Skill doc sync
+        run: pnpm run check:skill-doc-sync
+      - name: Sync agent doc markdown
+        run: pnpm run sync:agent-doc-md
+      - name: Agent discovery assets
+        run: pnpm run check:agent-discovery
+      - name: CLI unit tests
+        run: pnpm run test:cli
+      - name: Vibe-tests smoke
+        run: pnpm run test:vibe-smoke

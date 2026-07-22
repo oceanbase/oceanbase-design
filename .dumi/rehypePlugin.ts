@@ -70,8 +70,15 @@ function rehypeAntd(): UnifiedTransformer<HastRoot> {
         if (href?.startsWith('http')) {
           node.properties!.target = '_blank';
         }
-        // node.properties!.sourceType = tagName;
-        // node.tagName = 'LocaleLink';
+        // 内部链接：仅中文文档加 /zh-CN 前缀，英文在根路径不加前缀
+        else if (href?.startsWith('/') && !href.startsWith('/zh-CN')) {
+          const filePath = filename ?? (vFile as any).path ?? '';
+          if (/\.zh-CN\.(md|mdx)$/.test(filePath)) {
+            const newHref = `/zh-CN${href}`;
+            if (node.properties?.href) node.properties.href = newHref;
+            if (node.properties?.to) node.properties.to = newHref;
+          }
+        }
       }
       // else if (node.type === 'element' && node.tagName === 'video') {
       //   node.tagName = 'VideoPlayer';

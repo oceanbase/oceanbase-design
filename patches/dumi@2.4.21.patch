@@ -1,0 +1,13 @@
+diff --git a/dist/client/theme-api/utils.js b/dist/client/theme-api/utils.js
+index 39486fe671875538b773f61905673c42d2dbfe3b..4de056bbe7607f9e384e556b266c5621727fe4f8 100644
+--- a/dist/client/theme-api/utils.js
++++ b/dist/client/theme-api/utils.js
+@@ -35,7 +35,7 @@ export var useLocaleDocRoutes = function useLocaleDocRoutes() {
+           // base mode
+           route.path.startsWith(locale.base.slice(1));
+         });
+-        if (route.parentId === 'DocLayout' && matched.id === intl.locale) {
++        if (route.parentId === 'DocLayout' && matched && matched.id === intl.locale) {
+           ret[route.id] = route;
+         }
+         return ret;

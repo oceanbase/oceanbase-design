@@ -1,0 +1,13 @@
+{
+  "name": "Form",
+  "package": "@oceanbase/design",
+  "diffLevel": "A",
+  "extendsAntd": "Form",
+  "delegateAntd": true,
+  "addedProps": [],
+  "constraints": [],
+  "keywords": ["form", "validation", "input"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/form/index.tsx",
+  "docSource": "packages/design/src/form/index.md"
+}
