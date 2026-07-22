@@ -1,10 +1,10 @@
 import type { MenuProps } from '@oceanbase/design';
 import { Tag } from '@oceanbase/design';
-import { Link, useFullSidebarData, useSidebarData } from 'dumi';
+import { Link, useFullSidebarData, useSidebarData, useLocale as useDumiLocale } from 'dumi';
 import React, { useMemo } from 'react';
-import queryString from 'query-string';
 import useLocation from './useLocation';
 import useSiteToken from './useSiteToken';
+import * as utils from '../theme/utils';
 import { ISidebarGroup } from 'dumi/dist/client/theme-api/types';
 
 export interface UseMenuOptions {
@@ -95,12 +95,40 @@ function mergeDesignDocSidebars(
   return merged;
 }
 
+/** 过滤出当前 locale 的 sidebar 项 */
+function filterByLocale<T extends { link?: string; frontmatter?: any }>(
+  items: T[],
+  isZhCN: boolean
+): T[] {
+  return items.filter(item => utils.isSidebarItemZhCN(item) === isZhCN);
+}
+
+/** 过滤 sidebar 分组：只保留当前 locale 的 children */
+function filterGroupsByLocale(groups: ISidebarGroup[], isZhCN: boolean): ISidebarGroup[] {
+  return groups
+    .map(g => ({ ...g, children: filterByLocale(g.children || [], isZhCN) }))
+    .filter(g => (g.children?.length ?? 0) > 0);
+}
+
+/** 从 pathnameWithLocale 计算 parentPath，用于从 fullData 选取 sidebar */
+function getParentPathFromFullPath(fullPath: string): string {
+  const trimmed = fullPath.replace(/\/$/, '');
+  const parent = trimmed.replace(/\/[^/]+$/, '');
+  return parent || trimmed;
+}
+
+function applyLocaleFilter(groups: ISidebarGroup[], isZhCN: boolean): ISidebarGroup[] {
+  return filterGroupsByLocale(groups, isZhCN);
+}
+
 const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => {
   const fullData = useFullSidebarData();
-  const { pathname, search } = useLocation();
+  const { pathname, pathnameWithLocale, search } = useLocation();
   const sidebarData = useSidebarData();
+  const dumiLocale = useDumiLocale();
   const { before, after } = options;
   const { token } = useSiteToken();
+  const isZhCN = dumiLocale?.id === 'zh-CN' || utils.isZhCN(pathnameWithLocale || pathname || '');
 
   const menuItems = useMemo<MenuProps['items']>(() => {
     const isDesignDoc =
@@ -116,7 +144,18 @@ const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => 
       if (docsGroups.length || reactGroups.length) {
         sidebarItems = mergeDesignDocSidebars(docsGroups, reactGroups);
       }
+    } else {
+      const fullPath = pathnameWithLocale || pathname || '';
+      const parentPath = getParentPathFromFullPath(fullPath);
+      const fullDataSidebar = fullData[parentPath];
+      const useFullDataForPath =
+        pathname.startsWith('/docs/blog') || pathname.startsWith('/docs/design');
+      if (useFullDataForPath && fullDataSidebar) {
+        sidebarItems = [...fullDataSidebar];
+      }
     }
+
+    sidebarItems = applyLocaleFilter(sidebarItems, isZhCN);
 
     // 将设计文档未分类的放在最后
     if (pathname.startsWith('/docs/spec')) {
@@ -126,11 +165,13 @@ const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => 
 
     // 把 /changelog 拼到研发文档侧栏（AI 分组与基础组件同在 docs/design docDir）
     if (isDesignDoc) {
-      const changelogData = Object.entries(fullData).find(([key]) =>
-        key.startsWith('/changelog')
+      const changelogData = Object.entries(fullData).find(
+        ([key]) =>
+          key.includes('/changelog') &&
+          (isZhCN ? key.startsWith('/zh-CN') : !key.includes('/zh-CN'))
       )?.[1];
       if (changelogData) {
-        sidebarItems.push(...changelogData);
+        sidebarItems.push(...filterGroupsByLocale(changelogData, isZhCN));
       }
     }
 
@@ -283,9 +324,9 @@ const useMenu = (options: UseMenuOptions = {}): [MenuProps['items'], string] => 
         return result;
       }, []) ?? []
     );
-  }, [sidebarData, fullData, pathname, search, options]);
+  }, [sidebarData, fullData, pathname, pathnameWithLocale, search, options, isZhCN, token]);
 
-  return [menuItems, pathname];
+  return [menuItems, pathnameWithLocale || pathname];
 };
 
 export default useMenu;

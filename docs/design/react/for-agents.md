@@ -6,37 +6,37 @@ group:
   order: 0
 ---
 
-本页提供**可复制 Prompt**，让任意 AI 编程 Agent 高效使用 OceanBase Design。具体编码规则与组合范式见 **Skill**；组件 API 以 **ob-design mcp** 为准。
+This page provides **copy-paste prompts** so any AI coding agent can use OceanBase Design efficiently. Coding rules and composition patterns live in the **Skill**; component APIs are defined by **ob-design mcp**.
 
-## 复制这段 prompt
+## Copy this prompt
 
-复制到 Agent 对话或自动化流程中：
+Paste into your agent chat or automation flow:
 
 ```text
-你正在开发使用 @oceanbase/design 的 React 项目。组件 API、约定与文件结构可能与训练数据不一致。写任何代码前，请先阅读下列文档并遵循其中说明使用 OceanBase Design：
+You are building a React app with @oceanbase/design. Component APIs, conventions, and file layout may differ from your training data. Before writing code, read and follow:
 https://design.oceanbase.com/docs/react/for-agents.md
 https://raw.githubusercontent.com/oceanbase/oceanbase-design/master/skills/oceanbase-design/SKILL.md
 
-业务项目只配置 ob-design mcp（@oceanbase/design-cli），不要单独配置 antd MCP 或调用 antd_info。
+Configure only ob-design mcp (@oceanbase/design-cli) for business projects. Do not configure antd MCP or call antd_info.
 
-若可安装 Skill：
+If you can install Skills:
 npx skills add oceanbase/oceanbase-design
 ```
 
-## Agent 获得什么
+## What agents get
 
-### CLI — 离线知识与项目工具
+### CLI — offline knowledge and project tooling
 
-`@oceanbase/design-cli` 提供 metadata、约束、模板与迁移封装；组件 API 以 `ob-design info` / `ob_info` 为准（按 diffLevel merge）。
+`@oceanbase/design-cli` provides metadata, constraints, templates, and migration wrappers. Component APIs come from `ob-design info` / `ob_info` (merged by diffLevel).
 
 ```bash
-npm install -g @oceanbase/design-cli   # 推荐，与 antd CLI 用法一致
+npm install -g @oceanbase/design-cli   # recommended, same usage as antd CLI
 
 ob-design list
 ob-design info Table --dense
 ob-design doc Filter
 ob-design demo Table basic
-ob-design route "用户列表带筛选"
+ob-design route "user list with filters"
 ob-design constraint --dense
 ob-design token
 ob-design design.md
@@ -49,23 +49,23 @@ ob-design setup --client cursor
 ob-design mcp
 ```
 
-未全局安装时可用 `npx @oceanbase/design-cli <command>`。
+Without a global install: `npx @oceanbase/design-cli <command>`.
 
-内置页面模板：`list-filter-table`、`detail-descriptions`、`app-basic-layout`、`form-in-modal`。
+Built-in page templates: `list-filter-table`, `detail-descriptions`, `app-basic-layout`, `form-in-modal`.
 
-完整参考：[CLI](/docs/react/cli)
+Full reference: [CLI](/docs/react/cli)
 
-### design.md — 设计语言
+### design.md — design language
 
-[design.md](/docs/react/design-md) 在 [Ant Design design.md](https://ant.design/design.md) 上融合 OB 品牌色与组件约定，供 AI 设计工具使用。
+[design.md](/docs/react/design-md) extends [Ant Design design.md](https://ant.design/design.md) with OB brand color and component conventions for AI design tools.
 
-完整参考：[design.md 指南](/docs/react/design-md)
+Full reference: [design.md guide](/docs/react/design-md)
 
-### MCP Server — IDE 集成
+### MCP Server — IDE integration
 
-CLI 以 `ob-design mcp` 提供 **9 个工具**与 **2 个 Prompt**，供 Cursor、Claude Desktop 等调用。
+The CLI exposes **9 tools** and **2 prompts** via `ob-design mcp` for Cursor, Claude Desktop, and similar tools.
 
-全局安装后：
+After global install:
 
 ```json
 {
@@ -78,7 +78,7 @@ CLI 以 `ob-design mcp` 提供 **9 个工具**与 **2 个 Prompt**，供 Cursor�
 }
 ```
 
-未全局安装时：
+Without global install:
 
 ```json
 {
@@ -91,61 +91,61 @@ CLI 以 `ob-design mcp` 提供 **9 个工具**与 **2 个 Prompt**，供 Cursor�
 }
 ```
 
-完整参考：[MCP Server](/docs/react/mcp)
+Full reference: [MCP Server](/docs/react/mcp)
 
-### Skill — 叙事与组合范式
+### Skill — narrative and composition patterns
 
-`oceanbase-design` Skill 说明**为何**这样用（Filter vs LightFilter、Card+Table、迁移核对），不重复维护 props 列表。
+The `oceanbase-design` Skill explains **why** to use patterns (Filter vs LightFilter, Card+Table, migration checks) without duplicating prop lists.
 
 ```bash
 npx skills add oceanbase/oceanbase-design
 ```
 
-完整参考：[Agent Skills](/docs/design/design-skills)
+Full reference: [Agent Skills](/docs/design/design-skills)
 
-### LLMs.txt — 结构化文档
+### LLMs.txt — structured docs
 
-将完整文档灌入 AI 上下文（适合不支持 MCP 的工具）：
+Load full documentation into AI context (for tools without MCP):
 
-| 文件 | 说明 |
+| File | Description |
 | --- | --- |
-| <a href="/llms.txt" target="_blank" rel="noopener noreferrer">llms.txt</a> | 导航索引 |
-| <a href="/design.md" target="_blank" rel="noopener noreferrer">design.md</a> | 设计语言（antd + OB） |
-| <a href="/llms-full.txt" target="_blank" rel="noopener noreferrer">llms-full.txt</a> | 全量组件文档 |
-| <a href="/llms-ob-constraints.txt" target="_blank" rel="noopener noreferrer">llms-ob-constraints.txt</a> | 约束摘要 |
-| <a href="/llms-codemod.txt" target="_blank" rel="noopener noreferrer">llms-codemod.txt</a> | 迁移要点 |
+| <a href="/llms.txt" target="_blank" rel="noopener noreferrer">llms.txt</a> | Navigation index |
+| <a href="/design.md" target="_blank" rel="noopener noreferrer">design.md</a> | Design language (antd + OB) |
+| <a href="/llms-full.txt" target="_blank" rel="noopener noreferrer">llms-full.txt</a> | Full component docs |
+| <a href="/llms-ob-constraints.txt" target="_blank" rel="noopener noreferrer">llms-ob-constraints.txt</a> | Constraint summary |
+| <a href="/llms-codemod.txt" target="_blank" rel="noopener noreferrer">llms-codemod.txt</a> | Migration notes |
 
-完整参考：[LLMs.txt](/docs/react/llms)
+Full reference: [LLMs.txt](/docs/react/llms)
 
-## 一键接入
+## One-shot setup
 
 ```bash
-npm install -g @oceanbase/design-cli   # 自带 @ant-design/cli，加速 ob_info merge
-ob-design setup --client cursor   # MCP（Cursor）
-ob-design setup --client claude    # MCP（Claude Desktop）
+npm install -g @oceanbase/design-cli   # bundles @ant-design/cli for ob_info merge
+ob-design setup --client cursor   # MCP (Cursor)
+ob-design setup --client claude    # MCP (Claude Desktop)
 ob-design setup --client agents    # AGENTS.md
 npx skills add oceanbase/oceanbase-design
 ```
 
-未全局安装时，将 `ob-design` 替换为 `npx @oceanbase/design-cli`。
+Without global install, replace `ob-design` with `npx @oceanbase/design-cli`.
 
-## 禁止事项
+## Do not
 
-- **不要**配置 `@ant-design/cli mcp` 或 `antd_info`
-- **不要**从 `antd` / `@ant-design/icons` import
-- **不要**用 ProTable 替代普通 Table（除非需要 `request` / 内置搜索）
+- **Do not** configure `@ant-design/cli mcp` or `antd_info`
+- **Do not** import from `antd` / `@ant-design/icons`
+- **Do not** use ProTable instead of Table unless you need `request` / built-in search
 
-## 架构说明
+## Architecture
 
-| 层         | 载体                                      | 职责                      |
-| ---------- | ----------------------------------------- | ------------------------- |
-| 叙事层     | Skill + ASSEMBLY                          | 范式、反模式、Code Review |
-| 机器真相层 | `@oceanbase/design-cli` + `ob-design mcp` | API、demo、路由、lint     |
-| 约束层     | `metadata/constraints.yaml`               | 机器可读规则              |
+| Layer         | Carrier                                   | Responsibility                       |
+| ------------- | ----------------------------------------- | ------------------------------------ |
+| Narrative     | Skill + ASSEMBLY                          | Patterns, anti-patterns, code review |
+| Machine truth | `@oceanbase/design-cli` + `ob-design mcp` | API, demos, routing, lint            |
+| Constraints   | `metadata/constraints.yaml`               | Machine-readable rules               |
 
-## 相关文档
+## Related docs
 
-侧栏 **AI** 分组（与 Ant Design 对齐）：
+Sidebar **AI** group (aligned with Ant Design):
 
 1. [design.md](/docs/react/design-md)
 2. [LLMs.txt](/docs/react/llms)
@@ -153,4 +153,4 @@ npx skills add oceanbase/oceanbase-design
 4. [MCP Server](/docs/react/mcp)
 5. [CLI](/docs/react/cli)
 
-扩展阅读：[迁移指南](/docs/react/migrate)
+See also: [Migration guide](/docs/react/migrate)

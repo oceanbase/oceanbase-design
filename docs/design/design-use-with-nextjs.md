@@ -1,14 +1,14 @@
 ---
-title: 在 Next.js 中使用
-order: 4
-group: 基础组件
+title: Use with Next.js
+order: 3
+group: General
 ---
 
-## Turbopack 构建
+## Turbopack Build
 
-- 如果使用 `turbopack` 作为构建工具，则无需额外配置，即可正常使用 `@oceanbase/design`。
-  - Next.js 16: 默认使用 `turbopack`，详见 [Next.js 文档](https://nextjs.org/docs/app/guides/upgrading/version-16#turbopack-by-default)。
-  - Next.js 15 及以下版本: 需要手动开启 `turbopack`。
+- If you use `turbopack` as the build tool, `@oceanbase/design` works out of the box without extra config.
+  - Next.js 16: Uses `turbopack` by default. See [Next.js docs](https://nextjs.org/docs/app/guides/upgrading/version-16#turbopack-by-default).
+  - Next.js 15 and below: Enable `turbopack` manually.
 
 ```json
 // package.json
@@ -20,9 +20,9 @@ group: 基础组件
 }
 ```
 
-## Webpack 构建
+## Webpack Build
 
-- 如果没有开启 `turbopack` 构建，则 Next.js 会使用 `webpack` 构建。由于 `@oceanbase/design` 内置了字体包，需要按如下修改 Next.js 配置，以正确处理字体文件：
+- If `turbopack` is not enabled, Next.js uses `webpack`. Because `@oceanbase/design` bundles fonts, update your Next.js config to handle font files correctly:
 
 ```ts
 // next.config.ts

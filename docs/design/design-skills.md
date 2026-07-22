@@ -6,66 +6,66 @@ group:
   order: 0
 ---
 
-本仓库提供 **oceanbase-design** Skill，用于在开发、Code Review、迁移时统一 **OceanBase Design** 各包（design、ui、icons、charts、util）的使用方式，减少样式与代码差异。适用于本仓库及引用上述包的业务项目；迁移场景覆盖 `@oceanbase/codemod` 与人工核对。
+This repository provides the **oceanbase-design** Skill to unify how **OceanBase Design** packages (design, ui, icons, charts, util) are used during development, code review, and migration — reducing style and code drift. It applies to this repo and business projects that depend on these packages; migration covers `@oceanbase/codemod` and manual verification.
 
-程序化接入见侧栏 **AI** 分组（与 Ant Design 对齐）；本页为叙事与 Code Review 规范，入口见 [For Agents](/docs/react/for-agents)。
+Programmatic setup lives in the sidebar **AI** group (aligned with Ant Design). This page is narrative and code-review guidance; start at [For Agents](/docs/react/for-agents).
 
-## Skill 与 CLI 的分工
+## Skill vs CLI
 
-| 问题 | 查哪里 |
+| Question | Where to look |
 | --- | --- |
-| 为什么 Card+Table 要 `innerBordered`？ | Skill `09-combo` / ASSEMBLY |
-| `Table` 有哪些 OB 扩展 props？ | `ob-design info Table` / `ob_info`（**不以 Skill 为准**） |
-| 页面该用 Filter 还是 LightFilter？ | Skill `08-filter` + `ob-design route` |
-| 项目 MCP 怎么配？ | `ob-design setup` / For Agents |
+| Why does Card+Table need `innerBordered`? | Skill `09-combo` / ASSEMBLY |
+| What OB-extended props does `Table` have? | `ob-design info Table` / `ob_info` (**not** the Skill) |
+| Filter or LightFilter for this page? | Skill `08-filter` + `ob-design route` |
+| How to configure project MCP? | `ob-design setup` / For Agents |
 
-Skill 是**叙事与范式**；`@oceanbase/design-cli` 是**API 与约束的机器真相**。二者互补，不重复维护 props 表（props 由 `extract:added-props` → `references/generated/props-index.md` CI 生成）。
+The Skill is **narrative and patterns**; `@oceanbase/design-cli` is the **machine truth for APIs and constraints**. They complement each other — prop tables are not duplicated in the Skill (props are CI-generated via `extract:added-props` → `references/generated/props-index.md`).
 
-## vibe-tests 对 Skill 的启示
+## Lessons from vibe-tests
 
-真实 LLM 跑批中 **ob-skill-only 18/18**，说明当前 Skill 对模型已足够清晰。优先优化方向：
+In real LLM batch runs, **ob-skill-only scored 18/18**, showing the Skill is already clear enough for models. Priorities:
 
-1. **保持 Skill 精简**——不在 SKILL.md 堆 API 表；细节放 `references/`，机器索引放 `generated/props-index.md`
-2. **补强 Agent 入口**——SKILL.md 顶部指向 `ob-design setup` 与 For Agents（已加「Agent 工具链」节）
-3. **高价值约束前置**——Filter、innerBordered、图标包路由保持在「最高优先级」区块
+1. **Keep the Skill lean** — no API tables in SKILL.md; details in `references/`, machine index in `generated/props-index.md`
+2. **Strengthen Agent entry** — SKILL.md top links to `ob-design setup` and For Agents (Agent tooling section added)
+3. **Front-load high-value constraints** — Filter, innerBordered, icon package routing stay in the highest-priority block
 
-## 在外部项目中使用
+## Use in external projects
 
-若业务项目使用 `@oceanbase/design` / `@oceanbase/ui`，希望 AI 按同一套规范辅助开发，可从 **GitHub** 直接安装本 Skill，无需先 clone 整个仓库。skills 不会作为 npm 包发布，也不会随 `@oceanbase/design` 一起发布。
+If your project uses `@oceanbase/design` / `@oceanbase/ui` and you want AI to follow the same conventions, install this Skill from **GitHub** without cloning the whole repo. Skills are not published to npm and are not bundled with `@oceanbase/design`.
 
-### 安装
+### Install
 
-在业务项目根目录执行（与 [Ant Design](https://ant.design/docs/react/for-agents) 对齐，推荐）：
+In your project root (aligned with [Ant Design](https://ant.design/docs/react/for-agents), recommended):
 
 ```bash
 npx skills add oceanbase/oceanbase-design
 ```
 
-## Skill 内容结构
+## Skill layout
 
 ```
 oceanbase-design/
-├── SKILL.md                              # 入口与总览
+├── SKILL.md                              # Entry and overview
 └── references/
-    ├── ASSEMBLY.md                       # 00～09 约束汇总
-    ├── design/                           # 基础组件
-    │   ├── README.md                     # 模块导航
-    │   ├── 00-overview.md                # 概述、ConfigProvider、约定（根节点必包）
-    │   ├── 01-theme-and-token.md         # 主题与 Token
-    │   ├── 02-basic.md                   # 基础组件
-    │   ├── 03-layout-card.md             # 布局与卡片
-    │   ├── 04-form.md                    # 表单
-    │   ├── 05-data-display.md            # 数据展示
-    │   ├── 06-feedback.md                # 反馈
-    │   ├── 07-navigation.md              # 导航
-    │   ├── 08-filter.md                  # 筛选（含受控约定）
-    │   └── 09-combo.md                   # 组合用法（含 Card+Table innerBordered）
-    ├── ui.md                             # 业务组件
-    ├── icons.md                          # 图标
-    ├── util.md                           # 工具
-    ├── charts.md                         # 图表
-    ├── codemod.md                        # codemod 迁移
-    ├── agent-tooling.md                  # Agent 工具链（CLI/MCP/AGENTS.md）
+    ├── ASSEMBLY.md                       # 00–09 constraint summary
+    ├── design/                           # General components
+    │   ├── README.md                     # Module index
+    │   ├── 00-overview.md                # Overview, ConfigProvider, conventions
+    │   ├── 01-theme-and-token.md         # Theme and Token
+    │   ├── 02-basic.md                   # Basic components
+    │   ├── 03-layout-card.md             # Layout and Card
+    │   ├── 04-form.md                    # Form
+    │   ├── 05-data-display.md            # Data display
+    │   ├── 06-feedback.md                # Feedback
+    │   ├── 07-navigation.md              # Navigation
+    │   ├── 08-filter.md                  # Filter (controlled conventions)
+    │   └── 09-combo.md                   # Combos (Card+Table innerBordered)
+    ├── ui.md                             # Biz components
+    ├── icons.md                          # Icons
+    ├── util.md                           # Utilities
+    ├── charts.md                         # Charts
+    ├── codemod.md                        # Codemod migration
+    ├── agent-tooling.md                  # Agent tooling (CLI/MCP/AGENTS.md)
     └── generated/
-        └── props-index.md                # CI 生成的 OB 扩展 props 索引
+        └── props-index.md                # CI-generated OB extended props index
 ```

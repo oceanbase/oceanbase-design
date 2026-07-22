@@ -6,124 +6,123 @@ group:
   order: 0
 ---
 
-`@oceanbase/design-cli` 是 OceanBase Design 的**单体 Agent 入口**：命令行工具 + MCP 服务（`ob-design mcp`）。业务项目编写 OB 代码时，只配置此 CLI 的 MCP，不要单独配置 `@ant-design/cli mcp`。
+`@oceanbase/design-cli` is the **unified Agent entry** for OceanBase Design: CLI + MCP server (`ob-design mcp`). For OB business code, configure only this CLI's MCP — not `@ant-design/cli mcp`.
 
-> 叙事规范见 [Agent Skills](/docs/design/design-skills)；接入流程见 [For Agents](/docs/react/for-agents)。
+> Narrative conventions: [Agent Skills](/docs/design/design-skills). Setup flow: [For Agents](/docs/react/for-agents).
 
-## 安装
+## Install
 
 ```bash
 npm install -g @oceanbase/design-cli
 ```
 
-需要 Node.js `>=18`。也可以使用 `pnpm add -g @oceanbase/design-cli` 或 `bun add -g @oceanbase/design-cli` 全局安装。
+Requires Node.js `>=18`. Also: `pnpm add -g @oceanbase/design-cli` or `bun add -g @oceanbase/design-cli`.
 
-其他方式：
+Other options:
 
 ```bash
-# 无需全局安装：一次性命令
+# One-off without global install
 npx @oceanbase/design-cli <command>
 
-# 项目内 devDependency（CI / 锁定版本）
+# Project devDependency (CI / pinned version)
 pnpm add -D @oceanbase/design-cli
 pnpm exec ob-design list
 ```
 
-二进制名：`ob-design`（与 `@ant-design/cli` 的 `antd` 对标；避免与 npm 全局包 `ob` 冲突）。
+Binary name: `ob-design` (mirrors `@ant-design/cli`'s `antd`; avoids clashing with npm global `ob`).
 
-## 快速开始
+## Quick start
 
 ```bash
-ob-design list                           # 所有组件及 diffLevel
-ob-design info Table                     # 组件 Props（OB merge 后）
-ob-design doc Filter                     # OB 组件 Markdown 文档
-ob-design demo Table basic               # 可运行 Demo 源码
-ob-design route "用户列表带筛选"         # 页面意图 → 组件组合
-ob-design constraint --dense             # 设计约束
-ob-design token                          # obToken / CSS 变量
-ob-design design.md                      # 设计语言（antd + OB）
-ob-design lint ./src                     # 约定静态检查
-ob-design doctor                         # 项目健康检查
-ob-design migrate ./src                  # 封装 @oceanbase/codemod
-ob-design template list-filter-table     # 页面模板
-ob-design mcp                            # 启动 MCP 服务
-ob-design setup --client cursor          # 写入 MCP / AGENTS.md
+ob-design list                           # all components and diffLevel
+ob-design info Table                     # props (OB-merged)
+ob-design doc Filter                     # OB markdown docs
+ob-design demo Table basic               # runnable demo source
+ob-design route "user list with filters" # page intent → components
+ob-design constraint --dense             # design constraints
+ob-design token                          # obToken / CSS variables
+ob-design design.md                      # design language (antd + OB)
+ob-design lint ./src                     # static convention check
+ob-design doctor                         # project health check
+ob-design migrate ./src                  # wraps @oceanbase/codemod
+ob-design template list-filter-table     # page template
+ob-design mcp                            # start MCP server
+ob-design setup --client cursor          # write MCP / AGENTS.md
 ```
 
-## 命令一览
+## Commands
 
-| 命令                         | MCP 工具        | 用途                                        |
-| ---------------------------- | --------------- | ------------------------------------------- |
-| `ob-design list`             | —               | 已注册组件与 diffLevel                      |
-| `ob-design info <Name>`      | `ob_info`       | **组件 API 真相**（OB 扩展 props 已 merge） |
-| `ob-design doc <Name>`       | `ob_doc`        | OB 组件文档（用法/约束；不含 antd 附录）    |
-| `ob-design demo <Name> [id]` | `ob_demo`       | Demo 源码（import 已改写为 OB 包）          |
-| `ob-design route "<intent>"` | `ob_route`      | 页面意图 → 推荐组件组合                     |
-| `ob-design constraint`       | `ob_constraint` | 设计约束（ASSEMBLY）                        |
-| `ob-design token`            | `ob_token`      | obToken / CSS 变量参考                      |
-| `ob-design design.md`        | —               | 设计语言                                    |
-| `ob-design search <query>`   | `ob_search`     | 全文检索文档与元数据                        |
-| `ob-design lint <path>`      | `ob_lint`       | 约定静态检查                                |
-| `ob-design doctor`           | `ob_doctor`     | 项目健康检查（MCP/Skill/依赖）              |
-| `ob-design setup`            | —               | 写入 MCP 配置 + 生成 `AGENTS.md`            |
-| `ob-design migrate <path>`   | —               | 封装 `@oceanbase/codemod`                   |
-| `ob-design template <name>`  | —               | 页面模板（见下方）                          |
-| `ob-design mcp`              | —               | 启动 MCP 服务（stdio）                      |
+| Command                      | MCP tool        | Purpose                                        |
+| ---------------------------- | --------------- | ---------------------------------------------- |
+| `ob-design list`             | —               | Registered components and diffLevel            |
+| `ob-design info <Name>`      | `ob_info`       | **Component API truth** (OB extensions merged) |
+| `ob-design doc <Name>`       | `ob_doc`        | OB docs (usage/constraints; no antd appendix)  |
+| `ob-design demo <Name> [id]` | `ob_demo`       | Demo source (OB package imports)               |
+| `ob-design route "<intent>"` | `ob_route`      | Page intent → recommended components           |
+| `ob-design constraint`       | `ob_constraint` | Design constraints (ASSEMBLY)                  |
+| `ob-design token`            | `ob_token`      | obToken / CSS variable reference               |
+| `ob-design design.md`        | —               | Design language                                |
+| `ob-design search <query>`   | `ob_search`     | Full-text metadata and docs search             |
+| `ob-design lint <path>`      | `ob_lint`       | Static convention check                        |
+| `ob-design doctor`           | `ob_doctor`     | Project health (MCP/Skill/deps)                |
+| `ob-design setup`            | —               | Write MCP config + generate `AGENTS.md`        |
+| `ob-design migrate <path>`   | —               | Wraps `@oceanbase/codemod`                     |
+| `ob-design template <name>`  | —               | Page templates (see below)                     |
+| `ob-design mcp`              | —               | Start MCP server (stdio)                       |
 
-常用选项：`--dense`（token 友好输出）、`--json`（机器可读）。
+Common flags: `--dense` (token-friendly output), `--json` (machine-readable).
 
-### Agent 查什么用什么
+### What to use when coding
 
 ```
-写 OB 组件代码
-  ob_route "<意图>"     → 选组件
-  ob_info <Name>        → props / API（优先）
-  ob_doc <Name>         → 用法、约束、OB 差异
-  ob_demo <Name> [id]   → 可运行示例
-  ob_constraint         → 组合/布局规则（有疑虑时）
+Write OB component code
+  ob_route "<intent>"     → pick components
+  ob_info <Name>        → props / API (primary)
+  ob_doc <Name>         → usage, constraints, OB deltas
+  ob_demo <Name> [id]   → runnable example
+  ob_constraint         → composition/layout rules (when unsure)
 
-仍需 antd 完整长文档？
-  → 读 ob_doc 内的 ant.design 链接（antd **v5** 文档）
-  → 或终端 antd --version 5 doc <Name>（勿配置 antd MCP）
+Need full antd long docs?
+  → Follow ant.design links in ob_doc (antd **v5**)
+  → Or terminal: antd --version 5 doc <Name> (do not configure antd MCP)
 ```
 
-## ob_info 与 @ant-design/cli
+## ob_info and @ant-design/cli
 
-`@oceanbase/design-cli` **已捆绑** `@ant-design/cli`，供 `ob_info` 内部 merge antd **v5** API。业务侧**无需**单独安装或配置 antd MCP。
+`@oceanbase/design-cli` **bundles** `@ant-design/cli` for internal antd **v5** API merge in `ob_info`. Business projects do **not** need a separate antd MCP.
 
-解析顺序（仅 `ob_info`）：**PATH `antd` → 项目 `node_modules` → design-cli 捆绑 → `npx`**。
+Resolution order (ob_info only): **PATH `antd` → project `node_modules` → design-cli bundle → `npx`**.
 
-## 页面模板
+## Page templates
 
-| 名称                  | 场景                  |
+| Name                  | Scenario              |
 | --------------------- | --------------------- |
-| `list-filter-table`   | 列表 + Filter + Table |
-| `detail-descriptions` | 详情 + Descriptions   |
-| `app-basic-layout`    | BasicLayout 应用壳    |
-| `form-in-modal`       | Modal 内嵌表单        |
+| `list-filter-table`   | List + Filter + Table |
+| `detail-descriptions` | Detail + Descriptions |
+| `app-basic-layout`    | BasicLayout app shell |
+| `form-in-modal`       | Form inside Modal     |
 
 ```bash
 ob-design template list-filter-table
 ob-design template list-filter-table --skeleton
 ```
 
-## 一键接入
+## One-shot setup
 
 ```bash
-# 全局安装后（推荐）
 npm install -g @oceanbase/design-cli
-ob-design setup --client cursor    # MCP
-ob-design setup --client agents    # AGENTS.md
+ob-design setup --client cursor
+ob-design setup --client agents
 npx skills add oceanbase/oceanbase-design
 
-# 或未全局安装时
+# or without global install
 npx @oceanbase/design-cli setup --client cursor
 npx @oceanbase/design-cli setup --client agents
 ```
 
-## MCP 配置
+## MCP config
 
-全局安装后：
+After global install:
 
 ```json
 {
@@ -136,7 +135,7 @@ npx @oceanbase/design-cli setup --client agents
 }
 ```
 
-未全局安装时（`npx` 按需拉取，适合 CI 或锁定版本）：
+Without global install:
 
 ```json
 {
@@ -149,45 +148,45 @@ npx @oceanbase/design-cli setup --client agents
 }
 ```
 
-**禁止**同时配置 `@ant-design/cli mcp`。Ant Design CLI 仅作为 `ob_info` 的内部 delegate，对外不暴露 `antd_info`。
+**Do not** configure `@ant-design/cli mcp`. Ant Design CLI is only an internal delegate for `ob_info`.
 
-## ob_info 与 diffLevel
+## ob_info and diffLevel
 
-组件元数据位于仓库 `metadata/components/*.json`，按 diffLevel 决定 API 合并策略：
+Component metadata lives in `metadata/components/*.json`. diffLevel controls API merge:
 
-| Level | 含义         | ob_info 行为                          |
-| ----- | ------------ | ------------------------------------- |
-| A     | OB 独有组件  | OB 元数据；可选 antd merge            |
-| B     | OB 显著扩展  | OB `addedProps` + antd 基础 merge     |
-| C     | 薄封装       | 以 antd 为主，标注 OB 差异            |
-| D     | OB 独有/透传 | 仅 OB 元数据（`delegateAntd: false`） |
+| Level | Meaning                  | ob_info behavior                         |
+| ----- | ------------------------ | ---------------------------------------- |
+| A     | OB-only component        | OB metadata; optional antd merge         |
+| B     | Significant OB extension | OB `addedProps` + antd base merge        |
+| C     | Thin wrapper             | Mostly antd, OB deltas noted             |
+| D     | OB-only / passthrough    | OB metadata only (`delegateAntd: false`) |
 
-## 推荐 Agent 工作流
+## Recommended agent workflow
 
 ```
-ob-design route "<页面意图>"
-  → ob_info <组件>（API）
-  → ob_doc <组件>（用法/约束，可选）
-  → ob_constraint --dense（有疑虑时）
-  → ob-design template <name>（可选起点）
-  → 生成代码
+ob-design route "<page intent>"
+  → ob_info <component> (API)
+  → ob_doc <component> (usage/constraints, optional)
+  → ob_constraint --dense (when unsure)
+  → ob-design template <name> (optional starting point)
+  → generate code
   → ob-design lint ./src
 ```
 
-## 与 @oceanbase/codemod 的分工
+## Division with @oceanbase/codemod
 
-| 包                      | 职责                                  |
-| ----------------------- | ------------------------------------- |
-| `@oceanbase/design-cli` | 知识查询、MCP、约束、模板、项目 setup |
-| `@oceanbase/codemod`    | AST 级代码迁移（antd → design 等）    |
+| Package                 | Role                                                        |
+| ----------------------- | ----------------------------------------------------------- |
+| `@oceanbase/design-cli` | Knowledge query, MCP, constraints, templates, project setup |
+| `@oceanbase/codemod`    | AST-level migration (antd → design, etc.)                   |
 
-迁移场景：`ob-design migrate` 调用 codemod；日常开发查 API 用 `ob-design info`。
+For migration: `ob-design migrate` calls codemod; for daily dev use `ob-design info` for APIs.
 
-## 相关文档
+## Related docs
 
 - [For Agents](/docs/react/for-agents)
 - [LLMs.txt](/docs/react/llms)
 - [MCP Server](/docs/react/mcp)
 - [Agent Skills](/docs/design/design-skills)
 - [design.md](/docs/react/design-md)
-- [迁移指南](/docs/react/migrate)
+- [Migration guide](/docs/react/migrate)
