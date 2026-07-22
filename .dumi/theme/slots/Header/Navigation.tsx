@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage, Link, useLocation } from 'dumi';
+import * as utils from '../../utils';
 import { Badge } from '@oceanbase/design';
 import type { MenuProps } from '@oceanbase/design';
 import { Menu } from '@oceanbase/design';
@@ -103,17 +104,18 @@ export default ({
 
   const menuMode = isMobile ? 'inline' : 'horizontal';
 
-  const module = pathname
+  const pathnameWithoutLocale = utils.getPathWithoutLocale(pathname);
+  const module = pathnameWithoutLocale
     .split('/')
     .filter(path => path)
     .slice(0, -1)
     .join('/');
   let activeMenuItem = module || 'home';
-  if (pathname.startsWith('/changelog')) {
+  if (pathnameWithoutLocale.startsWith('/changelog')) {
     activeMenuItem = 'docs';
-  } else if (pathname.startsWith('/docs/react')) {
+  } else if (pathnameWithoutLocale.startsWith('/docs/react')) {
     activeMenuItem = 'docs';
-  } else if (pathname.startsWith('/docs/resources')) {
+  } else if (pathnameWithoutLocale.startsWith('/docs/resources')) {
     activeMenuItem = 'docs/resources';
   }
 
@@ -157,31 +159,28 @@ export default ({
     ];
   }
 
-  const items: MenuProps['items'] = [
+  const navLinks = [
+    { path: '/docs/spec/system-color', key: 'docs/spec', label: isZhCN ? '设计' : 'Design' },
+    { path: '/docs/design-introduce', key: 'docs', label: isZhCN ? '研发' : 'Development' },
+    { path: '/components/button', key: 'components', label: isZhCN ? '基础组件' : 'Components' },
     {
-      label: <Link to={`/docs/spec/system-color${search}`}>设计</Link>,
-      key: 'docs/spec',
-    },
-    {
-      label: <Link to={`/docs/design-introduce${search}`}>研发</Link>,
-      key: 'docs',
-    },
-    {
-      label: <Link to={`/components/button${search}`}>基础组件</Link>,
-      key: 'components',
-    },
-    {
-      label: <Link to={`/biz-components/basic-layout${search}`}>业务组件</Link>,
+      path: '/biz-components/basic-layout',
       key: 'biz-components',
+      label: isZhCN ? '业务组件' : 'Biz Components',
     },
+    { path: '/charts/stat', key: 'charts', label: isZhCN ? '可视化图表' : 'Charts' },
     {
-      label: <Link to={`/charts/stat${search}`}>可视化图表</Link>,
-      key: 'charts',
-    },
-    {
-      label: <Link to={`/docs/blog/chart-classification-palette-design-guide${search}`}>博客</Link>,
+      path: '/docs/blog/chart-classification-palette-design-guide',
       key: 'docs/blog',
+      label: isZhCN ? '博客' : 'Blog',
     },
+  ];
+
+  const items: MenuProps['items'] = [
+    ...navLinks.map(({ path, key, label }) => ({
+      label: <Link to={utils.getLocalizedPathname(path, isZhCN, search)}>{label}</Link>,
+      key,
+    })),
     ...(additional ?? []),
   ];
 

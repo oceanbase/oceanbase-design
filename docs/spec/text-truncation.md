@@ -1,149 +1,149 @@
 ---
-group: Design Foundation 设计基础
-subGroup: Communication 交流
-title: Text Truncation 文字截断
+group: Design Foundation
+subGroup: Communication
+title: Text Truncation
 order: 21
 ---
 
-当字符串超过容器尺寸，溢出容器时，截断或缩短内容的方式；通常，通过使用省略号（…）来完成。
+When text exceeds the container and overflows, truncation or shortening is used—typically with an ellipsis (…).
 
-## 设计原则
+## Design Principles
 
-- 清晰：使用熟悉的符号与用户交流文字无法全部显示
-- 可扩展：一直提供用户查看被截断信息的方式
+- **Clarity**: Use familiar symbols to communicate that text cannot be fully displayed
+- **Expandable**: Always provide a way for users to view truncated content
 
-## 截断方法
+## Truncation Methods
 
-共支持 2 种截断方式。
+Two truncation methods are supported.
 
-### 尾部截断
+### End Truncation
 
-句子及文本信息无法显示完整时，在尾部以“...”的方式进行字符省略。
+When sentences or text cannot be fully displayed, use "..." at the end to omit characters.
 
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/qnswRozhkcAAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Do></Do></div>
-    <div class="image-description">确保所有信息在容器内显示</div>
+    <div class="image-description">Ensure all information fits within the container</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/29XZR75lnA0AAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Donot></Donot></div>
-    <div class="image-description">避免文字溢出容器</div>
+    <div class="image-description">Avoid text overflowing the container</div>
   </div>
 </div>
 
-### 中间截断
+### Middle Truncation
 
-邮件无法显示完整时，使用中间截断的方式，为用户显示完整的域名信息。
+When emails cannot be fully displayed, use middle truncation to show the full domain to users.
 
 <div style="display: flex">
   <div style="width: 50%">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/6-v3SauTLhcAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Do></Do></div>
-    <div class="image-description">截断时保留完整的邮件域名</div>
+    <div class="image-description">Keep the full email domain when truncating</div>
   </div>
   <div style="width: 50%">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/oLOsRaGTO6UAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Donot></Donot></div>
-    <div class="image-description">避免截断邮件域名</div>
+    <div class="image-description">Avoid truncating the email domain</div>
   </div>
 </div>
 
-## 截断剖析
+## Truncation Anatomy
 
-用 3 个省略号（…）示意被截断的文本。
+Use 3 ellipsis characters (…) to indicate truncated text.
 
-### 字符限制
+### Character Limit
 
-<strong>截断文本时，保留不少于4个字符</strong>。在容器中的任何字符串中，如果没有足够的空间容纳完整拼写或用连字符连接的单词，考虑缩写文本。
+<strong>When truncating, keep at least 4 characters</strong>. In any string in the container, if there is not enough space for the full word or hyphenated word, consider abbreviating.
 
 <div style="display: flex">
   <div style="width: 50%">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/q1MDTYexsgsAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Do></Do></div>
-    <div class="image-description">截断时至少保留 4 个字符</div>
+    <div class="image-description">Keep at least 4 characters when truncating</div>
   </div>
   <div style="width: 50%">
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/q361Q7TioPUAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Donot></Donot></div>
-    <div class="image-description">避免将 “demo1.internal-el6.satellite” 截断为 “de…”</div>
+    <div class="image-description">Avoid truncating "demo1.internal-el6.satellite" to "de…"</div>
   </div>
 </div>
 
-### 符号限制
+### Symbol Limit
 
-尽可能避免在标点符号之前或之后直接截断。
+Avoid truncating directly before or after punctuation when possible.
 
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/jEW8QIM5xukAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Do></Do></div>
-    <div class="image-description">在文字后截断</div>
+    <div class="image-description">Truncate after the text</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/RoddQq0baRAAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Donot></Donot></div>
-    <div class="image-description">避免在标点后直接截断，多个符号难以分割</div>
+    <div class="image-description">Avoid truncating right after punctuation; multiple symbols are hard to split</div>
   </div>
 </div>
 
-### 扩展性
+### Expandability
 
-确保至少有一个方法供用户查看整个字符串。
+Ensure at least one way for users to view the full string.
 
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/Kuu4TrMjz7gAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Do></Do></div>
-    <div class="image-description">截断后在气泡展示完整信息</div>
+    <div class="image-description">Show full info in a popover after truncation</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/wDDRQrBDsEYAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Donot></Donot></div>
-    <div class="image-description">避免不提供查看完整信息的方式</div>
+    <div class="image-description">Avoid not providing a way to view full content</div>
   </div>
 </div>
 
-## 使用案例
+## Usage Examples
 
-### 导航
+### Navigation
 
-导航组件中的文字应完整展示，避免在导航项中使用缩写或截断的文本。
+Navigation text should be fully displayed; avoid abbreviations or truncated text in nav items.
 
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/8lCrRLWhel8AAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Do></Do></div>
-    <div class="image-description">完整显示导航文字</div>
+    <div class="image-description">Display navigation text in full</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/uOnlS5AK4mcAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Donot></Donot></div>
-    <div class="image-description">避免截断导航中的文字信息</div>
+    <div class="image-description">Avoid truncating text in navigation</div>
   </div>
 </div>
 
-### 标题
+### Headers
 
-定义表格列宽时应注意文字长度，不要截断列标题中的文本。
+When defining table column width, consider text length; do not truncate column headers.
 
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/BL5wSrmq0RgAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Do></Do></div>
-    <div class="image-description">标题文字应该完整显示，不被截断</div>
+    <div class="image-description">Header text should be fully displayed, not truncated</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/Nb-MQ6UsyjgAAAAAAAAAAAAADv3-AQBr/original" />
     <div class="image-description"><Donot></Donot></div>
-    <div class="image-description">避免以截断的方式显示标题</div>
+    <div class="image-description">Avoid displaying headers with truncation</div>
   </div>
 </div>
 
-### 链接
+### Links
 
-如果文本是链接的一部分，省略号也应该是链接的一部分。
+If the text is part of a link, the ellipsis should also be part of the link.
 
 <div style="display: flex">
   <div style="width: 50%">
@@ -156,9 +156,9 @@ order: 21
   </div>
 </div>
 
-### 帮助文字
+### Help Text
 
-对用户行为起到引导作用的帮助信息应完整展示，避免截断。
+Help text that guides user behavior should be fully displayed; avoid truncation.
 
 <div style="display: flex">
   <div>

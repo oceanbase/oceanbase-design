@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
 import { Button, Space, Typography } from '@oceanbase/design';
 import { GithubOutlined, RocketOutlined } from '@oceanbase/icons';
-import { Link } from 'dumi';
+import { Link, useLocation } from 'dumi';
 import * as React from 'react';
 import useLocale from '../../../hooks/useLocale';
+import * as utils from '../../../theme/utils';
 import useSiteToken from '../../../hooks/useSiteToken';
 import SiteContext from '../../../theme/slots/SiteContext';
 import { GroupMask } from './Group';
@@ -58,7 +59,9 @@ export interface BannerProps {
 }
 
 export default function Banner({ children }: BannerProps) {
-  const [locale] = useLocale(locales);
+  const [locale, localeType] = useLocale(locales);
+  const { search } = useLocation();
+  const isZhCN = localeType === 'cn';
   const { token } = useSiteToken();
   const styles = useStyle();
   const { isMobile } = React.useContext(SiteContext);
@@ -112,7 +115,7 @@ export default function Banner({ children }: BannerProps) {
         </Typography.Paragraph>
 
         <Space size="middle" style={{ marginBottom: token.marginFar }}>
-          <Link to="/docs/design-introduce">
+          <Link to={utils.getLocalizedPathname('/docs/design-introduce', isZhCN, search)}>
             <Button size="large" type="primary" icon={<RocketOutlined />}>
               {locale.start}
             </Button>

@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  dumi@2.4.21:
+    hash: 3ks3bkvcpkhkmp6nr7lfhankny
+    path: patches/dumi@2.4.21.patch
+
 importers:
 
   .:
@@ -115,7 +120,7 @@ importers:
         version: 1.11.19
       dumi:
         specifier: ^2.4.21
-        version: 2.4.21(@types/node@20.19.30)(@types/react@18.3.27)(prettier@3.8.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.9.3)
+        version: 2.4.21(patch_hash=3ks3bkvcpkhkmp6nr7lfhankny)(@types/node@20.19.30)(@types/react@18.3.27)(prettier@3.8.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.9.3)
       eslint-plugin-jest:
         specifier: ^28.14.0
         version: 28.14.0(typescript@5.9.3)
@@ -12560,7 +12565,7 @@ packages:
     resolution: {integrity: sha512-k2Z3z7/IcHOYASP/nDjocShdzXatmOuhkAwgYw/4KNiq36gpAKjn5MlrPkzdGH70TbcHGLGEul9b/4sYJLoS9A==}
     dev: true
 
-  /dumi@2.4.21(@types/node@20.19.30)(@types/react@18.3.27)(prettier@3.8.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.9.3):
+  /dumi@2.4.21(patch_hash=3ks3bkvcpkhkmp6nr7lfhankny)(@types/node@20.19.30)(@types/react@18.3.27)(prettier@3.8.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.9.3):
     resolution: {integrity: sha512-UM6M8B9pRxPbS4CT5DZpIOtQ8j+xH1d28PL1QNxzzK3SdbI7Ww+B+fSS/10KXLi9mPt+9/xlW7eUGCTRAwfjcg==}
     hasBin: true
     peerDependencies:
@@ -12677,6 +12682,7 @@ packages:
       - webpack-hot-middleware
       - webpack-plugin-serve
     dev: true
+    patched: true
 
   /dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}

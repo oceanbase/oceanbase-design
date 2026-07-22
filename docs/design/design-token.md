@@ -1,16 +1,16 @@
 ---
 title: Design Token
-order: 5
-group: 基础组件
+order: 4
+group: General
 ---
 
-OceanBase Design 自定义了一套完整的 Design Token，提供 CSS 变量、hooks 和静态对象三中消费方式，支持在 CSS、Less、Sass、React 组件、非 React 组件中进行使用。
+OceanBase Design provides a complete set of custom Design Tokens with three consumption methods: CSS variables, hooks, and static objects. They can be used in CSS, Less, Sass, React components, and non-React contexts.
 
-## 快速开始
+## Quick Start
 
-### 1. 确保使用 ConfigProvider
+### 1. Ensure ConfigProvider is Used
 
-CSS 变量会在 `ConfigProvider` 渲染时自动注入，确保你的应用根组件使用了 `ConfigProvider`：
+CSS variables are automatically injected when `ConfigProvider` renders. Ensure your app root uses `ConfigProvider`:
 
 ```tsx | pure
 import { ConfigProvider } from '@oceanbase/design';
@@ -24,14 +24,14 @@ export default () => {
 };
 ```
 
-### 2. 选择使用方式
+### 2. Choose Usage Method
 
-- **CSS/Less/Sass 文件**：使用 CSS 变量 `var(--ob-*)`
-- **React 组件**：使用 `obToken` 对象，支持 hooks 和静态对象两种方式。
+- **CSS/Less/Sass files**: Use CSS variables `var(--ob-*)`
+- **React components**: Use `obToken` object, supporting both hooks and static import.
 
-### 3. 基本示例
+### 3. Basic Example
 
-**在 CSS 中使用：**
+**In CSS:**
 
 ```css
 .my-button {
@@ -41,7 +41,7 @@ export default () => {
 }
 ```
 
-**在 React 函数组件中使用（Hooks 方式）：**
+**In React function components (Hooks):**
 
 ```tsx | pure
 import { useToken } from '@oceanbase/design';
@@ -63,7 +63,7 @@ const MyComponent = () => {
 };
 ```
 
-**在 React 类组件中使用（静态导入）：**
+**In React class components (Static import):**
 
 ```tsx | pure
 import { obToken } from '@oceanbase/design';
@@ -86,35 +86,35 @@ class MyComponent extends React.Component {
 }
 ```
 
-## 核心特性
+## Core Features
 
-### 开箱即用
+### Out of the Box
 
-带 `--ob-` 前缀的 CSS 变量会在 `ConfigProvider` 渲染时自动注入到 `:root`，**无需开启 CSS 变量模式**即可直接使用。只要应用中包含 `ConfigProvider` 组件，这些变量就会自动生效。
+CSS variables with the `--ob-` prefix are automatically injected into `:root` when `ConfigProvider` renders. **No CSS variable mode configuration required** — they work as soon as your app includes `ConfigProvider`.
 
-### 与 Ant Design CSS 变量的区别
+### Difference from Ant Design CSS Variables
 
-| 特性 | OceanBase CSS 变量 (`--ob-*`) | [Ant Design CSS 变量](https://5x.ant.design/docs/react/css-variables-cn) (`--ant-*`) |
+| Feature | OceanBase CSS Variables (`--ob-*`) | [Ant Design CSS Variables](https://5x.ant.design/docs/react/css-variables-cn) (`--ant-*`) |
 | --- | --- | --- |
-| 启用方式 | 自动注入，开箱即用 | 需要配置 `theme.cssVar` 开启 |
-| 命名风格 | 精简、语义化命名 | 与 Token 名称一一对应 |
-| 设计目的 | 便于业务层快速使用 | 完整暴露所有 Token |
-| 变量数量 | 精选常用变量 | 覆盖所有 Design Token |
+| Enable | Auto-injected, out of the box | Requires `theme.cssVar` config |
+| Naming | Concise, semantic | One-to-one with Token names |
+| Purpose | Quick adoption in business layer | Full exposure of all Tokens |
+| Count | Curated common variables | All Design Tokens |
 
-## 使用方式
+## Usage
 
-### 如何选择：CSS 变量 vs obToken？
+### How to Choose: CSS Variables vs obToken?
 
-| 场景                   | 推荐方式                 | 原因                      |
-| ---------------------- | ------------------------ | ------------------------- |
-| CSS/Less/Sass 样式文件 | CSS 变量 (`var(--ob-*)`) | 原生支持，无需 JavaScript |
-| React 函数组件         | `obToken`（useToken）    | 响应主题变化，类型安全    |
-| React 类组件           | `obToken`（静态导入）    | 类组件无法使用 hooks      |
-| 非 React 上下文        | `obToken`（静态导入）    | 工具函数、配置对象等      |
+| Scenario                  | Recommended                   | Reason                            |
+| ------------------------- | ----------------------------- | --------------------------------- |
+| CSS/Less/Sass files       | CSS variables (`var(--ob-*)`) | Native support, no JavaScript     |
+| React function components | `obToken` (useToken)          | Theme-aware, type-safe            |
+| React class components    | `obToken` (static import)     | Class components cannot use hooks |
+| Non-React context         | `obToken` (static import)     | Utils, config objects, etc.       |
 
 ---
 
-## 在样式文件中使用 CSS 变量
+## Using CSS Variables in Style Files
 
 ### CSS
 
@@ -127,10 +127,6 @@ class MyComponent extends React.Component {
 }
 ```
 
-.my-title { font: var(--ob-font-h1); color: var(--ob-color-text-default); }
-
-````
-
 ### Less
 
 ```less
@@ -140,7 +136,7 @@ class MyComponent extends React.Component {
   border-radius: var(--ob-radius-md);
   box-shadow: var(--ob-shadow-2);
 }
-````
+```
 
 ### Sass/SCSS
 
@@ -153,13 +149,13 @@ class MyComponent extends React.Component {
 }
 ```
 
-### React 内联样式（使用 CSS 变量）
+### React inline styles (using CSS variables)
 
 ```tsx | pure
 <div
   style={{
-    backgroundColor: 'var(--ob-color-bg-info)',
-    color: 'var(--ob-color-text-link)',
+    backgroundColor: 'var(--ob-color-info-fill)',
+    color: 'var(--ob-color-info-text)',
     padding: 'var(--ob-space-400)',
   }}
 >
@@ -167,20 +163,20 @@ class MyComponent extends React.Component {
 </div>
 ```
 
-## 在 React 组件中使用 obToken
+## Using obToken in React Components
 
-除了 CSS 变量，OceanBase Design 还提供了 `obToken` 对象，它是所有 CSS 变量的 JavaScript 表示，可以在 React 组件中直接使用，提供更好的类型支持和开发体验。
+Besides CSS variables, OceanBase Design provides the `obToken` object — the JavaScript representation of all CSS variables. It can be used directly in React components for better type support and DX.
 
-### 使用方式
+### Usage
 
-有两种方式可以获取 `obToken`：
+Two ways to get `obToken`:
 
-1. **Hooks 方式**（推荐）：通过 `useToken` hooks 获取，会根据当前主题动态更新
-2. **静态导入**：直接导入静态 `obToken` 对象，仅推荐在 React 类组件和非 React 上下文中使用
+1. **Hooks** (recommended): Via `useToken` hook, updates with theme
+2. **Static import**: Import the static `obToken` object — only for React class components and non-React contexts
 
-### Hooks 方式（推荐）
+### Hooks (Recommended)
 
-通过 `useToken` hooks 获取 `obToken`，会根据当前 `ConfigProvider` 的主题配置动态更新：
+Get `obToken` via `useToken`; it updates with `ConfigProvider` theme:
 
 ```tsx | pure
 import { useToken } from '@oceanbase/design';
@@ -192,8 +188,8 @@ const MyComponent: React.FC = () => {
   return (
     <div
       style={{
-        backgroundColor: obToken.colorBgInfo,
-        color: obToken.colorLink,
+        backgroundColor: obToken.colorInfoFill,
+        color: obToken.colorInfoText,
         padding: obToken.space400,
         borderRadius: obToken.radiusSm,
       }}
@@ -204,11 +200,11 @@ const MyComponent: React.FC = () => {
 };
 ```
 
-### 静态导入
+### Static Import
 
-直接导入静态 `obToken` 对象，**仅推荐在 React 类组件和非 React 上下文中使用**：
+Import the static `obToken` object — **only for React class components and non-React contexts**:
 
-**React 类组件中使用：**
+**In React class components:**
 
 ```tsx | pure
 import { obToken } from '@oceanbase/design';
@@ -232,12 +228,12 @@ class MyComponent extends React.Component {
 }
 ```
 
-**非 React 上下文中使用：**
+**In non-React contexts:**
 
 ```tsx | pure
 import { obToken } from '@oceanbase/design';
 
-// 在工具函数、配置对象等非 React 上下文中使用
+// Use in utils, config objects, etc.
 const styleConfig = {
   backgroundColor: obToken.colorBgDefault,
   color: obToken.colorTextDefault,
@@ -246,20 +242,20 @@ const styleConfig = {
 };
 ```
 
-### 命名规则
+### Naming Rules
 
-`obToken` 中的键名与 CSS 变量名一一对应，但去掉了 `--ob-` 前缀，并使用驼峰命名：
+`obToken` keys map 1:1 to CSS variable names, but drop the `--ob-` prefix and use camelCase:
 
-| CSS 变量                    | obToken 键名         | 说明        |
-| --------------------------- | -------------------- | ----------- |
-| `--ob-color-bg-default`     | `colorBgDefault`     | 默认背景色  |
-| `--ob-color-text-default`   | `colorTextDefault`   | 默认文本色  |
-| `--ob-color-border-default` | `colorBorderDefault` | 默认边框色  |
-| `--ob-space-400`            | `space400`           | 间距 400    |
-| `--ob-radius-sm`            | `radiusSm`           | 小圆角      |
-| `--ob-font-h1`              | `fontH1`             | H1 字体样式 |
+| CSS Variable                | obToken Key          | Description        |
+| --------------------------- | -------------------- | ------------------ |
+| `--ob-color-bg-default`     | `colorBgDefault`     | Default background |
+| `--ob-color-text-default`   | `colorTextDefault`   | Default text       |
+| `--ob-color-border-default` | `colorBorderDefault` | Default border     |
+| `--ob-space-400`            | `space400`           | Space 400          |
+| `--ob-radius-sm`            | `radiusSm`           | Small radius       |
+| `--ob-font-h1`              | `fontH1`             | H1 font            |
 
-### 在组件中使用
+### In Components
 
 ```tsx | pure
 import { useToken, Button } from '@oceanbase/design';
@@ -276,62 +272,62 @@ const CustomButton: React.FC = () => {
         borderColor: obToken.colorBorderFocus,
       }}
     >
-      自定义按钮
+      Custom Button
     </Button>
   );
 };
 ```
 
-## 最佳实践
+## Best Practices
 
-### 1. 优先使用语义化变量
+### 1. Prefer Semantic Variables
 
-推荐使用语义化的变量名，而不是直接使用颜色值：
+Use semantic variable names instead of raw color values:
 
 ```tsx
-// ✅ 推荐：使用语义化变量
+// ✅ Recommended: semantic variables
 backgroundColor: obToken.colorBgDefault;
 color: obToken.colorTextDefault;
 
-// ❌ 不推荐：直接使用基础颜色
+// ❌ Not recommended: base colors
 backgroundColor: obToken.blue1;
 color: obToken.blue6;
 ```
 
-### 2. 保持一致性
+### 2. Stay Consistent
 
-在同一项目中，尽量使用相同的 Token 来保持视觉一致性：
+Use the same Tokens across the project for visual consistency:
 
 ```tsx
-// ✅ 推荐：统一使用相同的间距变量
+// ✅ Recommended: same spacing variables
 padding: obToken.space400;
 margin: obToken.space400;
 
-// ❌ 不推荐：混用不同的间距值
+// ❌ Not recommended: mixed values
 padding: '16px';
 margin: obToken.space400;
 ```
 
-### 3. 利用类型提示
+### 3. Use Type Hints
 
-在 TypeScript 项目中，充分利用 `obToken` 的类型提示功能，避免拼写错误：
+In TypeScript, rely on `obToken` type hints to avoid typos:
 
 ```tsx
 import { obToken } from '@oceanbase/design';
 
-// ✅ TypeScript 会提供自动补全和类型检查
+// ✅ TypeScript provides autocomplete and type checking
 const color = obToken.colorBgDefault;
 
-// ❌ 字符串容易拼写错误，且没有类型检查
+// ❌ Strings are error-prone and unchecked
 const color = 'var(--ob-color-bg-default)';
 ```
 
-### 5. 优先使用 `useToken` hooks
+### 4. Prefer useToken in Function Components
 
-在 React 函数组件中，推荐使用 `useToken` hooks 获取 `obToken`：
+In React function components, use `useToken` to get `obToken`:
 
 ```tsx
-// ✅ 推荐：React 函数组件中使用 hooks，响应主题变化
+// ✅ Recommended: hooks in function components, theme-aware
 import { useToken } from '@oceanbase/design';
 
 const MyComponent = () => {
@@ -339,23 +335,23 @@ const MyComponent = () => {
   return <div style={{ backgroundColor: obToken.colorBgDefault }}>Content</div>;
 };
 
-// ⚠️ 仅在 React 类组件或非 React 上下文中使用静态导入
+// ⚠️ Use static import only in class components or non-React contexts
 import { obToken } from '@oceanbase/design';
 
-// React 类组件
+// React class component
 class MyClassComponent extends React.Component {
   render() {
     return <div style={{ backgroundColor: obToken.colorBgDefault }}>Content</div>;
   }
 }
 
-// 非 React 上下文（工具函数、配置对象等）
+// Non-React context (utils, config, etc.)
 const config = { backgroundColor: obToken.colorBgDefault };
 ```
 
-### 4. 响应式设计
+### 5. Responsive Design
 
-结合 CSS 变量和媒体查询，实现响应式设计：
+Combine CSS variables with media queries for responsive layouts:
 
 ```css
 .my-container {
@@ -369,46 +365,50 @@ const config = { backgroundColor: obToken.colorBgDefault };
 }
 ```
 
-## Design Token 列表
+## Design Token List
 
-### 基础颜色
+### Base Colors
 
 <ObTokenTable category="color"></ObTokenTable>
 
-### 语义颜色
+### Semantic Colors
 
-#### 填充色
+#### Fill
 
 <ObTokenTable category="color-bg"></ObTokenTable>
 
-#### 边框色
+#### Border
 
 <ObTokenTable category="color-border"></ObTokenTable>
 
-#### 文本色
+#### Text
 
 <ObTokenTable category="color-text"></ObTokenTable>
 
-#### 图标色
+#### Icon
 
 <ObTokenTable category="color-icon"></ObTokenTable>
 
-### 字体
+#### Status
+
+<ObTokenTable category="color-status"></ObTokenTable>
+
+### Font
 
 <ObTokenTable category="font"></ObTokenTable>
 
-### 圆角
+### Radius
 
 <ObTokenTable category="radius"></ObTokenTable>
 
-### 阴影
+### Shadow
 
 <ObTokenTable category="shadow"></ObTokenTable>
 
-### 间距
+### Space
 
 <ObTokenTable category="space"></ObTokenTable>
 
-### 组件
+### Component
 
 <ObTokenTable category="component"></ObTokenTable>

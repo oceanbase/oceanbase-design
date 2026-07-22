@@ -141,5 +141,10 @@
     "vitest": "^2.1.9",
     "vitest-fetch-mock": "^0.2.2",
     "web-vitals": "^3.5.2"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "dumi@2.4.21": "patches/dumi@2.4.21.patch"
+    }
   }
 }

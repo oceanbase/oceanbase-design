@@ -1,9 +1,10 @@
 import { useLocation as useDumiLocation } from 'dumi';
 import * as React from 'react';
 import useLocale from './useLocale';
+import * as utils from '../theme/utils';
 
-function clearPath(path: string) {
-  return path.replace('-cn', '').replace(/\/$/, '');
+function trimTrailingSlash(path: string) {
+  return path.replace(/\/$/, '') || '/';
 }
 
 export default function useLocation() {
@@ -13,11 +14,13 @@ export default function useLocation() {
 
   const getLink = React.useCallback(
     (path: string, hash?: string | { cn: string; en: string }) => {
-      let pathname = clearPath(path);
-
-      if (localeType === 'cn') {
-        pathname = `${pathname}-cn`;
-      }
+      let pathname = trimTrailingSlash(utils.getPathWithoutLocale(path));
+      pathname =
+        localeType === 'cn'
+          ? pathname === '/'
+            ? utils.ZH_CN_BASE
+            : `${utils.ZH_CN_BASE}${pathname}`
+          : pathname;
 
       if (search) {
         pathname = `${pathname}${search}`;
@@ -39,9 +42,13 @@ export default function useLocation() {
     [localeType, search]
   );
 
+  const pathnameWithoutLocale = trimTrailingSlash(utils.getPathWithoutLocale(location.pathname));
+  const pathnameWithLocale = trimTrailingSlash(location.pathname);
+
   return {
     ...location,
-    pathname: clearPath(location.pathname),
+    pathname: pathnameWithoutLocale,
+    pathnameWithLocale,
     getLink,
   };
 }
