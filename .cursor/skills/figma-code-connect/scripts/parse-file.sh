@@ -12,7 +12,7 @@ if [[ -z "$FILE" ]]; then
 fi
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-exec node "$ROOT/node_modules/@oceanbase/figma-code-connect/dist/cli.js" connect parse \
+exec node "$ROOT/node_modules/@figma/code-connect/dist/cli.js" connect parse \
   --config "$ROOT/.cursor/skills/figma-code-connect/figma.config.json" \
   --exit-on-unreadable-files \
   --file "$ROOT/$FILE"

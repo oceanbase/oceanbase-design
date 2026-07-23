@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 ENV_FILE="$SCRIPT_DIR/.env"
 CONFIG="$SCRIPT_DIR/figma.config.json"
-CLI="$ROOT/node_modules/@oceanbase/figma-code-connect/dist/cli.js"
+CLI="$ROOT/node_modules/@figma/code-connect/dist/cli.js"
 
 if [[ ! -f "$CLI" ]]; then
   echo "error: missing $CLI — run pnpm install at repo root." >&2
