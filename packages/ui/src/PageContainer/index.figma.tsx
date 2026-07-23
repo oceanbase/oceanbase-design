@@ -13,9 +13,9 @@ import { PageContainer } from '@oceanbase/ui';
 
 /**
  * Code Connect — PageContainer（2348:5411：collapsible × tabs × fliters）。
- * **`props` / `example` 内不写 `style` / `styles` / `className`**；布局与稿面像素由 **`demo/index.figma.tsx`** 等外部注入（见 `figma-component_reference.md` §3.4a）。
+ * **`props` / `example` 内不写 `style` / `styles` / `className`**；布局与稿面像素由 demo 等外部注入（见 `.cursor/skills/figma-code-connect/references/CONVENTIONS.md` §3.4a）。
  * 稿面 VARIANT 名为 **`True` / `False`** → **`figma.enum`**；`tabProps` 仅保留行为项（如 **`defaultActiveKey`**），不含 **`tabBarStyle`**。
- * **`example`**：`layout` 为 **`props` 映射出的整段子树**，须包一层 **`<div>{layout}</div>`** 作为真实 DOM 根（见 `figma-component_reference.md` §3.4）；**不在该 `div` 上写** `style` / `className`。
+ * **`example`**：`layout` 为 **`props` 映射出的整段子树**，须包一层 **`<div>{layout}</div>`** 作为真实 DOM 根（见 CONVENTIONS.md §3.4）；**不在该 `div` 上写** `style` / `className`。
  * Page: "↵PageContainer"
  */
 

@@ -6,13 +6,13 @@ export default defineConfig({
     // 默认为 esbuild 构建，需要指定使用 babel，以便 babel 插件生效
     transformer: 'babel',
     output: 'es',
-    ignores: ['**/demo/**'],
+    ignores: ['**/demo/**', '**/index.figma.tsx'],
   },
   cjs: {
     // 默认为 esbuild 构建，需要指定使用 babel，以便 babel 插件生效
     transformer: 'babel',
     output: 'lib',
-    ignores: ['**/demo/**'],
+    ignores: ['**/demo/**', '**/index.figma.tsx'],
   },
   // 构建 UMD 产物: https://github.com/umijs/father/blob/master/docs/guide/umd.md
   umd: {

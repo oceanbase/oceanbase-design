@@ -19,7 +19,7 @@ import { ObTenantOutlined } from '@oceanbase/icons';
  * Code Connect — Table：TableCell / TableGroup / TableHeader（三条 Figma 节点，三条 `figma.connect`）。
  * Default 单元格：unfold × checkbox × icon × desc 按 Figma 嵌套映射。
  *
- * 编写规则见 `skills/figma-code-connect/references/figma-component_reference.md`（§3.4c 不在本文件写 style/styles/className；预览见 `demo/*.figma.tsx`）。
+ * 编写规则见 `.cursor/skills/figma-code-connect/references/CONVENTIONS.md`（§3.4c 不在本文件写 style/styles/className；预览见 `demo/*.figma.tsx`）。
  */
 
 // Figma: "TableCell" · 2324:9665
