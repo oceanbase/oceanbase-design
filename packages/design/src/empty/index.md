@@ -42,18 +42,9 @@ nav:
 
 ## 内置图片
 
-- RESENTED_IMAGE_DEFAULT 和 PRESENTED_IMAGE_SIMPLE
-
-<p><div><img src="https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*mC4VR4Cg0GYAAAAAAAAAAAAADmfOAQ/original" /></div></p>
-
-- PRESENTED_IMAGE_COLORED
-
-<p><div><img src="https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*o6sCSpTYXgUAAAAAAAAAAAAADmfOAQ/original" /></div></p>
-
-- PRESENTED_IMAGE_DATABASE
-
-<p><div><img src="https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*i5OYS7RTQLcAAAAAAAAAAAAADmfOAQ/original" /></div></p>
-
-- PRESENTED_IMAGE_GUIDE
-
-<p><div><img src="https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*DH4BTJUbkIUAAAAAAAAAAAAADmfOAQ/original" /></div></p>
+| 常量 | 说明 | 预览 |
+| :-- | :-- | :-- |
+| `PRESENTED_IMAGE_DEFAULT`<br>`PRESENTED_IMAGE_SIMPLE` | 默认与简单空状态（图片相同） | <img src="https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*sa5TS5I_eGcAAAAAN3AAAAgAemfOAQ/original" width="120" alt="PRESENTED_IMAGE_DEFAULT" /> |
+| `PRESENTED_IMAGE_COLORED` | 页面和区块级空状态 | <img src="https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*o6sCSpTYXgUAAAAAAAAAAAAADmfOAQ/original" width="120" alt="PRESENTED_IMAGE_COLORED" /> |
+| `PRESENTED_IMAGE_DATABASE` | 数据库实例空状态 | <img src="https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*i5OYS7RTQLcAAAAAAAAAAAAADmfOAQ/original" width="120" alt="PRESENTED_IMAGE_DATABASE" /> |
+| `PRESENTED_IMAGE_GUIDE` | 功能开通等引导类场景 | <img src="https://mdn.alipayobjects.com/huamei_fhnyvh/afts/img/A*DH4BTJUbkIUAAAAAAAAAAAAADmfOAQ/original" width="120" alt="PRESENTED_IMAGE_GUIDE" /> |
