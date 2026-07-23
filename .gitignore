@@ -29,6 +29,8 @@ useless-locale.txt
 .cursor/*
 !.cursor/skills/
 !.cursor/skills/**
+!.cursor/rules/
+!.cursor/rules/**
 .claude
 AGENTS.md
 

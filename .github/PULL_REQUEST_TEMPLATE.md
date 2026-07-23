@@ -56,7 +56,9 @@ Thank you!
 ### 📝 Changelog
 
 <!--
-Describe changes from the user side, and list all potential break changes or other risks.
+User-perceivable only (one short sentence per language). Omit file paths, CI, and internal tooling.
+See .cursor/skills/changelog/SKILL.md. Pure internal work: "No user-facing changes" / "无用户可感知变更".
+List breaking changes or risks if any.
 --->
 
 | Language   | Changelog |

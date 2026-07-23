@@ -31,6 +31,16 @@ description: >-
 3. 填写 **Background and solution**、**Changelog** 的中英表格；无关联 issue 可写 `N/A`。
 4. 勾选 **Self-Check before Merge** 中已确认或明确不需要的项。
 
+## Changelog
+
+遵循 `.cursor/skills/changelog/SKILL.md`（规则摘要见 `.cursor/rules/changelog.mdc`）。
+
+- **只写用户可感知的内容**：组件 API/行为/视觉、用户会用的公开工具（CLI、MCP、Figma Code Connect）、破坏性变更。
+- **不写实现细节**：文件路径、CI/构建/Agent Skill 内部流程、组件数量清单等。
+- PR 表格：**中英文各一句**，语义一致，尽量一行说完。
+- 纯内部改动：填 `No user-facing changes` / `无用户可感知变更`。
+- 提交后在对话中输出更新日志时，用 `docs/design/design-CHANGELOG.md` 条目风格（见 changelog skill）。
+
 可将正文保存为临时文件后传给 `gh`（用完后删除临时文件，避免误提交）：
 
 ```bash
