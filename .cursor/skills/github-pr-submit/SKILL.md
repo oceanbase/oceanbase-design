@@ -2,7 +2,7 @@
 name: github-pr-submit
 internal: true
 description: >-
-  Opens and updates GitHub pull requests for this repository using GitHub CLI (gh), filling the title and body from .github/PULL_REQUEST_TEMPLATE.md and team conventions. Covers optional issue links, self-check, and post-create label editing. Use when the user wants to submit a PR, open a pull request, use gh to create a PR, or align description with the repository PR template for oceanbase/oceanbase-design.
+  Opens and updates GitHub pull requests for oceanbase/oceanbase-design using GitHub CLI (gh), fills PR body from .github/PULL_REQUEST_TEMPLATE.md, and writes user-facing changelog (PR bilingual table and post-commit chat output). Use when submitting a PR, opening a pull request, or when the user asks for 更新日志 after commit.
 ---
 
 # 向 oceanbase/oceanbase-design 提交 PR
@@ -11,6 +11,7 @@ description: >-
 
 - 本地分支已推送到 `origin`，需要开 PR 到 `master`（或指定 base）。
 - 需要按仓库模板写 **标题、描述、自检项**，并可选为 PR **补打标签**。
+- Commit 后需在对话中输出**用户可感知的更新日志**。
 
 ## 前置条件
 
@@ -45,6 +46,57 @@ gh pr create --repo oceanbase/oceanbase-design --base master --head <你的分�
 gh pr list --head <你的分支名> --base master
 gh pr view <number> --web
 ```
+
+## Changelog
+
+规则摘要见 `.cursor/rules/changelog.mdc`。核心：**只写用户可感知的内容**，实现细节写在 Background。
+
+| ✅ 写                                                | ❌ 不写                                 |
+| ---------------------------------------------------- | --------------------------------------- |
+| 组件 API / 行为 / 视觉变更                           | 文件路径、`index.figma.tsx` 等实现布局  |
+| 用户会遇到的 bug 修复                                | CI、构建、lint、内部脚本                |
+| 用户会采用的公开工具（CLI、MCP、Figma Code Connect） | Agent Skill、`publish.sh` 等内部流程    |
+| 破坏性变更与迁移说明                                 | 无用户意义的数量清单（如「38 个组件」） |
+
+无用户影响 → PR 填 `No user-facing changes` / `无用户可感知变更`；commit 后**不要**编造更新日志，除非用户明确要求。
+
+### PR Changelog 表格
+
+中英文**各一句**，语义一致，尽量一行。
+
+```markdown
+| Language | Changelog |
+| --- | --- |
+| 🇺🇸 English | 🤖 Component assets now include Figma mappings; Figma Code Connect bridges design and frontend workflows, e.g. generating spec-compliant code from Figma. |
+| 🇨🇳 Chinese | 🤖 组件资产新增对应的 Figma 映射文件，通过 Figma Code Connect 可以打通设计+前端工作流，比如基于 Figma 生成符合规范的代码。 |
+```
+
+反例（过于内部）：
+
+```markdown
+| 🇺🇸 English | Added 38 colocated index.figma.tsx files, Cursor agent skill, and CI parse/publish workflow. |
+```
+
+### Commit 后更新日志（对话）
+
+有用户可感知变更时，按 `docs/design/design-CHANGELOG.md` 风格输出：
+
+```markdown
+- <区域或组件>
+  - <emoji> <一行，用户视角>
+```
+
+或单行：
+
+```markdown
+- 🤖 组件资产新增对应的 Figma 映射文件，通过 Figma Code Connect 可以打通设计+前端工作流，比如基于 Figma 生成符合规范的代码。
+```
+
+常用 emoji：🆕 新功能 · 🐞 修复 · 💄 样式 · 🌈 主题 · 📖 文档 · ⭐️ 增强 · ♿ 无障碍
+
+正式发布时写入对应包的 `*CHANGELOG.md`（`design` / `ui` / `charts` / `codemod`）；日常 PR **不要**改这些文件，除非发版或用户明确要求。
+
+自检：npm 包或 Figma 用户不看仓库能否感知？去掉文件名后是否仍然准确？能否压成一行？
 
 ## 打标签（可选）
 
