@@ -30,7 +30,7 @@ Pure internal work → PR changelog: `No user-facing changes` / `无用户可感
 | When | Format |
 |------|--------|
 | PR body | Bilingual one-liner table per `.github/PULL_REQUEST_TEMPLATE.md` |
-| After commit (chat) | `docs/design/design-CHANGELOG.md` style — see `.cursor/skills/changelog/SKILL.md` |
+| After commit (chat) | `docs/design/design-CHANGELOG.md` style — see `.cursor/skills/github-pr-submit/SKILL.md` |
 | Official `*CHANGELOG.md` | Release maintainer only; do not edit on every PR unless requested |
 
-Full guide and examples: `.cursor/skills/changelog/SKILL.md`
+Full guide and examples: `.cursor/skills/github-pr-submit/SKILL.md`（Changelog 章节）

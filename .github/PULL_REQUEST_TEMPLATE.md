@@ -57,7 +57,7 @@ Thank you!
 
 <!--
 User-perceivable only (one short sentence per language). Omit file paths, CI, and internal tooling.
-See .cursor/skills/changelog/SKILL.md. Pure internal work: "No user-facing changes" / "无用户可感知变更".
+See .cursor/skills/github-pr-submit/SKILL.md (Changelog). Pure internal work: "No user-facing changes" / "无用户可感知变更".
 List breaking changes or risks if any.
 --->
 
