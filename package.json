@@ -149,6 +149,9 @@
     "@figma/code-connect": "^1.4.9"
   },
   "pnpm": {
+    "overrides": {
+      "jsdom": "20.0.3"
+    },
     "patchedDependencies": {
       "dumi@2.4.21": "patches/dumi@2.4.21.patch"
     }
