@@ -24,6 +24,18 @@ export const genResultStyle: GenerateStyle<ResultToken> = (token: ResultToken): 
         padding: token.paddingLG,
         borderRadius: token.borderRadiusLG,
       },
+      [`${componentCls}-icon`]: {
+        fontSize: 100,
+        lineHeight: 1,
+        '& > .anticon, & > span': {
+          fontSize: 100,
+          lineHeight: 1,
+        },
+        '& svg': {
+          width: 100,
+          height: 100,
+        },
+      },
     },
   };
 };

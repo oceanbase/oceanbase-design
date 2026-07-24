@@ -79,7 +79,7 @@ import { List, Empty } from '@oceanbase/design';
 
 ## Empty
 
-- **约束**：PRESENTED_IMAGE_COLORED（页面/区块）、PRESENTED_IMAGE_DATABASE（数据库）、PRESENTED_IMAGE_GUIDE（引导）；`title`、`steps`、`layout`（vertical/horizontal）。描述区最大宽度 600px、步骤区 1000px。**`layout="horizontal"` 时**，`children` 会渲染在底部 footer 区域（与 steps 并排）。
+- **约束**：PRESENTED_IMAGE_COLORED（页面/区块）、PRESENTED_IMAGE_DATABASE（引导新建）、PRESENTED_IMAGE_GUIDE（欢迎引导）；`title`、`steps`、`layout`（vertical/horizontal）。描述区最大宽度 600px、步骤区 1000px。**`layout="horizontal"` 时**，`children` 会渲染在底部 footer 区域（与 steps 并排）。
 - **推荐**：空状态场景**统一使用本组件**，避免业务侧自实现。
 
 ```tsx
@@ -93,13 +93,13 @@ import { Empty, Button } from '@oceanbase/design';
   <Button type="primary">创建</Button>
 </Empty>
 
-<Empty image={Empty.PRESENTED_IMAGE_DATABASE} description="暂无实例" />
+<Empty image={Empty.PRESENTED_IMAGE_DATABASE} description="暂无内容，去创建" />
 <Empty image={Empty.PRESENTED_IMAGE_GUIDE} layout="horizontal" />
 ```
 
 ## Result
 
-- **约束**：`status` 含 `processing`；403/404/500 用 `status="403"`/`"404"`/`"500"`。副标题最大宽度 600px、内容区 1000px。
+- **约束**：`status` 含 `processing`、`normal`；403/404/500 用 `status="403"`/`"404"`/`"500"`。扩展场景用 `icon={<Result.PRESENTED_IMAGE_NOT_FOUND />}` 等（`NOT_FOUND` / `NETWORK_ERROR` / `VERSION_UPDATE`）。副标题最大宽度 600px、内容区 1000px。
 - **推荐**：错误页/结果页**统一使用本组件**。
 
 ```tsx
@@ -110,4 +110,6 @@ import { Result, Button } from '@oceanbase/design';
 <Result status="403" title="无权限" />
 <Result status="500" title="服务器错误" />
 <Result status="processing" title="进行中" />
+<Result status="normal" title="正常" />
+<Result icon={<Result.PRESENTED_IMAGE_NETWORK_ERROR />} title="网络异常" />
 ```
