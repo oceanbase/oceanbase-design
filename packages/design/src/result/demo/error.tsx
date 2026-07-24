@@ -6,16 +6,18 @@ export default () => {
   return (
     <Result
       status="error"
-      title="任务执行失败"
-      subTitle="这是一段关于任务执行失败的描述"
+      title="Submission Failed"
+      subTitle="Please check and modify the following information before resubmitting."
       extra={[
         <Button type="primary" key="console">
-          主操作
+          Go Console
         </Button>,
-        <Button key="buy">次操作</Button>,
+        <Button key="buy">Buy Again</Button>,
       ]}
     >
-      <Typography.Title level={5}>出错原因</Typography.Title>
+      <Typography.Title level={5}>
+        The content you submitted has the following error:
+      </Typography.Title>
       <div
         style={{
           color: token.colorTextTertiary,

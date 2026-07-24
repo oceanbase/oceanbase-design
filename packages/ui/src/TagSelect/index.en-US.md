@@ -10,10 +10,10 @@ nav:
 <!-- prettier-ignore -->
 <code src="./demo/tagSelect-base.tsx" title="Basic"></code>
 <code src="./demo/tagSelect-group.tsx" title="Tag selector group"></code>
-<code src="./demo/tagSelect-radio" title="Radio"></code>
-<code src="./demo/tagSelect-multiple" title="Multiple"></code>
-<code src="./demo/tagSelect-img" title="Image tag"></code>
-<code src="./demo/tagSelect-size" title="Size"></code>
+<code src="./demo/tagSelect-radio.tsx" title="Radio"></code>
+<code src="./demo/tagSelect-multiple.tsx" title="Multiple"></code>
+<code src="./demo/tagSelect-img.tsx" title="Image tag"></code>
+<code src="./demo/tagSelect-size.tsx" title="Size"></code>
 
 ## API
 

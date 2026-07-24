@@ -11,47 +11,51 @@ const App: React.FC = () => {
       <div>
         <Space wrap>
           <Filter.Select
-            label="状态"
+            label="Status"
             value={selectValue}
             onChange={setSelectValue}
             options={[
-              { value: 'running', label: '运行中' },
-              { value: 'stopped', label: '已停止' },
-              { value: 'pending', label: '待处理' },
+              { value: 'running', label: 'Running' },
+              { value: 'stopped', label: 'Stopped' },
+              { value: 'pending', label: 'Pending' },
             ]}
           />
           <Filter.Select
-            label="类型"
+            label="Type"
             options={[
-              { value: 'type1', label: '类型一' },
-              { value: 'type2', label: '类型二' },
-              { value: 'disabled', label: '禁用选项', disabled: true },
+              { value: 'type1', label: 'Type 1' },
+              { value: 'type2', label: 'Type 2' },
+              { value: 'disabled', label: 'Disabled Option', disabled: true },
             ]}
           />
           <Filter.Select
-            label="禁用状态"
+            label="Disabled"
             disabled
-            options={[{ value: 'option1', label: '选项一' }]}
+            options={[{ value: 'option1', label: 'Option 1' }]}
           />
-          <Filter.Select label="加载中" loading options={[{ value: 'option1', label: '选项一' }]} />
+          <Filter.Select
+            label="Loading"
+            loading
+            options={[{ value: 'option1', label: 'Option 1' }]}
+          />
         </Space>
       </div>
       <div>
         <Space wrap>
           <Filter.Select
-            label="有边框"
+            label="Bordered"
             bordered
             options={[
-              { value: 'option1', label: '选项一' },
-              { value: 'option2', label: '选项二' },
+              { value: 'option1', label: 'Option 1' },
+              { value: 'option2', label: 'Option 2' },
             ]}
           />
           <Filter.Select
-            label="无边框"
+            label="Borderless"
             bordered={false}
             options={[
-              { value: 'option1', label: '选项一' },
-              { value: 'option2', label: '选项二' },
+              { value: 'option1', label: 'Option 1' },
+              { value: 'option2', label: 'Option 2' },
             ]}
           />
         </Space>
@@ -59,28 +63,28 @@ const App: React.FC = () => {
       <div>
         <Space wrap>
           <Filter.Select
-            label="带图标"
+            label="With Icon"
             icon={<HeaderTableOutlined />}
             options={[
-              { value: 'option1', label: '选项一' },
-              { value: 'option2', label: '选项二' },
-              { value: 'disabled', label: '禁用选项', disabled: true },
+              { value: 'option1', label: 'Option 1' },
+              { value: 'option2', label: 'Option 2' },
+              { value: 'disabled', label: 'Disabled Option', disabled: true },
             ]}
           />
           <Filter.Select
             label="footer"
             options={[
-              { value: 'option1', label: '选项一' },
-              { value: 'option2', label: '选项二' },
+              { value: 'option1', label: 'Option 1' },
+              { value: 'option2', label: 'Option 2' },
             ]}
-            footer={<Typography.Link>了解更多</Typography.Link>}
+            footer={<Typography.Link>Learn more</Typography.Link>}
           />
           <Filter.Select
-            label="隐藏后侧图标"
+            label="Hide suffix icon"
             showSuffixIcon={false}
             options={[
-              { value: 'option1', label: '选项一' },
-              { value: 'option2', label: '选项二' },
+              { value: 'option1', label: 'Option 1' },
+              { value: 'option2', label: 'Option 2' },
             ]}
           />
         </Space>
@@ -88,10 +92,16 @@ const App: React.FC = () => {
       <div>
         <Space wrap>
           <Filter.Select
-            label="内容自动缩略"
+            label="Auto ellipsis"
             options={[
-              { value: 'type1', label: '这是一个非常长的选项，用来测试内容自动缩略功能' },
-              { value: 'type2', label: '这是一个非常长的选项，用来测试内容自动缩略功能' },
+              {
+                value: 'type1',
+                label: 'This is a very long option used to test auto ellipsis',
+              },
+              {
+                value: 'type2',
+                label: 'This is a very long option used to test auto ellipsis',
+              },
             ]}
           />
         </Space>
@@ -99,17 +109,17 @@ const App: React.FC = () => {
       <div>
         <Space wrap>
           <Filter.Select
-            label="开启搜索"
+            label="Show search"
             showSearch
             options={[
-              { value: 'running', label: '运行中' },
-              { value: 'stopped', label: '已停止' },
-              { value: 'pending', label: '待处理' },
-              { value: 'completed', label: '已完成' },
-              { value: 'failed', label: '失败' },
-              { value: 'cancelled', label: '已取消' },
-              { value: 'processing', label: '处理中' },
-              { value: 'waiting', label: '等待中' },
+              { value: 'running', label: 'Running' },
+              { value: 'stopped', label: 'Stopped' },
+              { value: 'pending', label: 'Pending' },
+              { value: 'completed', label: 'Completed' },
+              { value: 'failed', label: 'Failed' },
+              { value: 'cancelled', label: 'Cancelled' },
+              { value: 'processing', label: 'Processing' },
+              { value: 'waiting', label: 'Waiting' },
             ]}
           />
         </Space>

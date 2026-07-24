@@ -21,6 +21,7 @@ markdown: |
 <code src="./demo/locale.tsx" title="Internationalization"></code>
 <code src="./demo/updateCurrentTime.tsx" title="Update time from external"></code>
 <code src="./demo/history.tsx" title="History"></code>
+<code src="./demo/copy-paste.tsx" title="Copy and paste time"></code>
 
 ## API
 

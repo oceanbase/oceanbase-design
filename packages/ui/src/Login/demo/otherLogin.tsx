@@ -18,7 +18,7 @@ export default () => {
       showRegister={showRegister}
       registerProps={{
         onFinish: values => {
-          message.success(`注册：用户名: ${values.username} 密码: ${values.password}`);
+          message.success(`Register: username: ${values.username} password: ${values.password}`);
           setShowRegister(false);
         },
         isUserExists: async account => {
@@ -29,12 +29,12 @@ export default () => {
       }}
       loginProps={{
         onFinish: values => {
-          message.success(`登录：用户名: ${values.username} 密码: ${values.password}`);
+          message.success(`Login: username: ${values.username} password: ${values.password}`);
         },
       }}
       otherLoginProps={{
         onFinish: values => {
-          message.success(`登录：用户名: ${''} 密码: ${''}`);
+          message.success(`Login: username: ${''} password: ${''}`);
         },
       }}
       showOtherLoginButton={true}

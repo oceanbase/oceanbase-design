@@ -7,17 +7,28 @@ const { Text } = Typography;
 const App: React.FC = () => {
   const [trigger, setTrigger] = useState<'click' | 'hover' | 'focus'>('click');
   const [placement, setPlacement] = useState<
-    'top' | 'bottom' | 'left' | 'right' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom'
+    | 'top'
+    | 'bottom'
+    | 'left'
+    | 'right'
+    | 'topLeft'
+    | 'topRight'
+    | 'bottomLeft'
+    | 'bottomRight'
+    | 'leftTop'
+    | 'leftBottom'
+    | 'rightTop'
+    | 'rightBottom'
   >('bottomLeft');
 
   return (
     <Space direction="vertical" size="large" style={{ width: '100%' }}>
       <div>
-        <Text>Filter 组件支持自定义触发方式和弹出位置。</Text>
+        <Text>Filter supports custom trigger and placement.</Text>
       </div>
 
       <div>
-        <Text strong>触发方式（trigger）：</Text>
+        <Text strong>Trigger mode (trigger):</Text>
         <Radio.Group
           value={trigger}
           onChange={e => setTrigger(e.target.value)}
@@ -29,19 +40,19 @@ const App: React.FC = () => {
         </Radio.Group>
         <Space wrap>
           <Filter.Select
-            label="触发方式"
+            label="Trigger mode"
             trigger={trigger}
             options={[
-              { value: 'option1', label: '选项一' },
-              { value: 'option2', label: '选项二' },
-              { value: 'option3', label: '选项三' },
+              { value: 'option1', label: 'Option 1' },
+              { value: 'option2', label: 'Option 2' },
+              { value: 'option3', label: 'Option 3' },
             ]}
           />
         </Space>
       </div>
 
       <div>
-        <Text strong>弹出位置（placement）：</Text>
+        <Text strong>Placement (placement):</Text>
         <Radio.Group
           value={placement}
           onChange={e => setPlacement(e.target.value)}
@@ -54,27 +65,27 @@ const App: React.FC = () => {
         </Radio.Group>
         <Space wrap>
           <Filter.Select
-            label="弹出位置"
+            label="Placement"
             placement={placement}
             options={[
-              { value: 'option1', label: '选项一' },
-              { value: 'option2', label: '选项二' },
-              { value: 'option3', label: '选项三' },
+              { value: 'option1', label: 'Option 1' },
+              { value: 'option2', label: 'Option 2' },
+              { value: 'option3', label: 'Option 3' },
             ]}
           />
         </Space>
       </div>
 
       <div>
-        <Text strong>组合使用：</Text>
+        <Text strong>Combined usage:</Text>
         <Space wrap>
           <Filter.Select
             label="hover + topLeft"
             trigger="hover"
             placement="topLeft"
             options={[
-              { value: 'option1', label: '选项一' },
-              { value: 'option2', label: '选项二' },
+              { value: 'option1', label: 'Option 1' },
+              { value: 'option2', label: 'Option 2' },
             ]}
           />
           <Filter.Select
@@ -82,8 +93,8 @@ const App: React.FC = () => {
             trigger="focus"
             placement="bottomRight"
             options={[
-              { value: 'option1', label: '选项一' },
-              { value: 'option2', label: '选项二' },
+              { value: 'option1', label: 'Option 1' },
+              { value: 'option2', label: 'Option 2' },
             ]}
           />
         </Space>
@@ -93,4 +104,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-

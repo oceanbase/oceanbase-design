@@ -47,14 +47,14 @@ const App: React.FC = () => {
   return (
     <Space direction="vertical" size="large" style={{ width: '100%' }}>
       <Space direction="vertical" size="small">
-        <div>自定义偏移（offset: [20, 10]）</div>
+        <div>Custom offset (offset: [20, 10])</div>
         <Cascader
           options={options}
           placeholder="Please select (custom offset)"
           builtinPlacements={{
             bottomLeft: {
               points: ['tl', 'bl'],
-              offset: [20, 10], // [x, y] 偏移量：x 向右偏移 20px，y 向下偏移 10px
+              offset: [20, 10], // [x, y] offset: x shifts right 20px, y shifts down 10px
               overflow: {
                 adjustX: true,
                 adjustY: true,
@@ -69,14 +69,14 @@ const App: React.FC = () => {
         />
       </Space>
       <Space direction="vertical" size="small">
-        <div>顶部位置自定义偏移（offset: [20, -10]）</div>
+        <div>Custom offset at top position (offset: [20, -10])</div>
         <Cascader
           options={options}
           placeholder="Please select (top with custom offset)"
           builtinPlacements={{
             topLeft: {
               points: ['bl', 'tl'],
-              offset: [20, -10], // y 向上偏移 10px
+              offset: [20, -10], // y shifts up 10px
               overflow: {
                 adjustX: true,
                 adjustY: true,

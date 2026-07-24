@@ -12,6 +12,7 @@ nav:
 <code src="./demo/menu-over-length.tsx" title="Menu item overflow" description="Auto ellipsis + tooltip."></code>
 <code src="./demo/banner.tsx" title="With top banner"></code>
 <code src="./demo/topHeader-icon.tsx" title="Top header icon mode"></code>
+<code src="./demo/menu-group.tsx" title="Menu groups" description="Same as antd Menu, supports type: 'group'."></code>
 <code src="./demo/topHeader-title.tsx" title="With top title"></code>
 <code src="./demo/subSideMenu.tsx" title="Secondary navigation with sub sidebar"></code>
 <code src="./demo/no-sider-and-custom-header.tsx" title="No sidebar & custom header"></code>

@@ -21,7 +21,7 @@ export default () => {
   const rules = [
     {
       validate: val => val?.length >= 8,
-      message: '长度至少为 8 个字符',
+      message: 'At least 8 characters',
     },
     {
       validate: val => {
@@ -30,10 +30,10 @@ export default () => {
         }
         return false;
       },
-      message: '包含小写字母(a-z)和大写字母(A-Z)',
+      message: 'Contains lowercase (a-z) and uppercase (A-Z) letters',
     },
     {
-      message: '至少包含一个数字(0-9)或是一个符号',
+      message: 'Contains at least one digit (0-9) or symbol',
       validate: val => {
         return /([0-9]|[._+@#$%])+/.test(val);
       },
@@ -42,23 +42,23 @@ export default () => {
 
   const onFinish = (values: any) => {
     const { password } = values;
-    alert(`表单校验通过 password：${password}`);
+    alert(`Form validation passed. password: ${password}`);
   };
 
   return (
     <Form onFinish={onFinish} {...formItemLayout}>
       <Form.Item
         name="password"
-        label="密码"
+        label="Password"
         rules={[
           {
             required: true,
-            message: '请输入密码',
+            message: 'Please enter password',
           },
           {
             validator: (rule, value, callback) => {
               if (value && !passed) {
-                callback('密码设置不符合要求');
+                callback('Password does not meet requirements');
               } else {
                 callback();
               }
@@ -76,7 +76,7 @@ export default () => {
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
-          提交
+          Submit
         </Button>
       </Form.Item>
     </Form>

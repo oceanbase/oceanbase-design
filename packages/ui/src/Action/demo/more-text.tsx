@@ -8,13 +8,13 @@ export default () => {
     <Action.Group
       moreText={
         <Space size={4}>
-          更多
+          More
           <DownOutlined />
         </Space>
       }
     >
       <Action.Button type="primary">action1</Action.Button>
-      <Action.Button danger>危险按钮</Action.Button>
+      <Action.Button danger>Danger Button</Action.Button>
       <Action.Button>action3</Action.Button>
       <Action.Button>action4</Action.Button>
       <Action.Button>action5</Action.Button>

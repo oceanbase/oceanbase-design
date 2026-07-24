@@ -4,7 +4,7 @@ import { Filter, Space } from '@oceanbase/design';
 const options = [
   {
     value: 'frontend',
-    label: '前端',
+    label: 'Frontend',
     children: [
       { value: 'react', label: 'React' },
       { value: 'vue', label: 'Vue' },
@@ -13,7 +13,7 @@ const options = [
   },
   {
     value: 'backend',
-    label: '后端',
+    label: 'Backend',
     children: [
       { value: 'java', label: 'Java' },
       { value: 'python', label: 'Python' },
@@ -22,7 +22,7 @@ const options = [
   },
   {
     value: 'database',
-    label: '数据库',
+    label: 'Database',
     children: [
       { value: 'mysql', label: 'MySQL' },
       { value: 'postgresql', label: 'PostgreSQL' },
@@ -34,7 +34,7 @@ const options = [
 const flatOptions = [
   {
     value: 'frontend',
-    label: '前端',
+    label: 'Frontend',
     children: [
       {
         value: 'react',
@@ -66,7 +66,7 @@ const flatOptions = [
   },
   {
     value: 'backend',
-    label: '后端',
+    label: 'Backend',
     children: [
       {
         value: 'java',
@@ -101,50 +101,55 @@ const App: React.FC = () => {
     <Space direction="vertical" size="large" style={{ width: '100%' }}>
       <Space wrap>
         <Filter.Cascader
-          label="单选级联"
+          label="Single cascader"
           value={singleValue}
           onChange={setSingleValue}
           options={options}
         />
         <Filter.Cascader
-          label="多选级联"
+          label="Multiple cascader"
           multiple
           value={multipleValue}
           onChange={setMultipleValue}
           options={options}
         />
-        <Filter.Cascader label="带计数" multiple count options={options} />
-        <Filter.Cascader label="显示总数" multiple count={{ showTotal: true }} options={options} />
-      </Space>
-
-      <Space wrap>
+        <Filter.Cascader label="With count" multiple count options={options} />
         <Filter.Cascader
-          label="单选+搜索"
-          showSearch
-          value={singleValue}
-          onChange={setSingleValue}
-          options={options}
-        />
-        <Filter.Cascader
-          label="多选+搜索"
-          showSearch
+          label="Show total"
           multiple
-          value={multipleValue}
-          onChange={setMultipleValue}
+          count={{ showTotal: true }}
           options={options}
         />
       </Space>
 
       <Space wrap>
         <Filter.Cascader
-          label="扁平化单选"
+          label="Single with search"
+          showSearch
+          value={singleValue}
+          onChange={setSingleValue}
+          options={options}
+        />
+        <Filter.Cascader
+          label="Multiple with search"
+          showSearch
+          multiple
+          value={multipleValue}
+          onChange={setMultipleValue}
+          options={options}
+        />
+      </Space>
+
+      <Space wrap>
+        <Filter.Cascader
+          label="Flat single"
           value={flatSingleValue}
           onChange={setFlatSingleValue}
           options={flatOptions}
           flat
         />
         <Filter.Cascader
-          label="扁平化多选"
+          label="Flat multiple"
           multiple
           value={flatMultipleValue}
           onChange={value => {

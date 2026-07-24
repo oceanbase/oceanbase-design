@@ -20,7 +20,7 @@ export default () => {
             ref.current.updateCurrentTime();
           }}
         >
-          从外部更新时间
+          Update time externally
         </Button>
         {timeRange.length && (
           <span>

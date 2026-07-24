@@ -7,22 +7,22 @@ const App: React.FC = () => {
 
   return (
     <Space wrap>
-      <Filter.Input label="输入筛选" value={inputValue} onChange={setInputValue} />
+      <Filter.Input label="Input filter" value={inputValue} onChange={setInputValue} />
       <Filter.Input
-        label="带占位符"
+        label="With placeholder"
         value={inputValue2}
         onChange={setInputValue2}
         inputProps={{
-          placeholder: '请输入关键词',
+          placeholder: 'Please enter keyword',
         }}
       />
-      <Filter.Input label="禁用状态" disabled value="" />
+      <Filter.Input label="Disabled" disabled value="" />
       <Filter.Input
-        label="自定义 Input 属性"
+        label="Custom Input props"
         value={inputValue}
         onChange={setInputValue}
         inputProps={{
-          placeholder: '请输入',
+          placeholder: 'Please enter',
           allowClear: true,
         }}
         switchProps={{

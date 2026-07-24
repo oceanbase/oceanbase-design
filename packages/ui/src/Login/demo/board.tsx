@@ -12,12 +12,12 @@ export default () => {
     <Login
       logo="https://gw.alipayobjects.com/zos/bmw-prod/3282eb3a-9a1e-4129-968e-be5f9e6cd1a2.svg"
       bgImage={background_img}
-      board="顶部公告"
+      board="Top announcement"
       onShowRegisterChange={setShowRegister}
       showRegister={showRegister}
       registerProps={{
         onFinish: values => {
-          message.success(`注册：用户名: ${values.username} 密码: ${values.password}`);
+          message.success(`Register: username: ${values.username} password: ${values.password}`);
           setShowRegister(false);
         },
         isUserExists: async account => {
@@ -28,7 +28,7 @@ export default () => {
       }}
       loginProps={{
         onFinish: values => {
-          message.success(`登录：用户名: ${values.username} 密码: ${values.password}`);
+          message.success(`Login: username: ${values.username} password: ${values.password}`);
         },
       }}
       enableRegister={true}

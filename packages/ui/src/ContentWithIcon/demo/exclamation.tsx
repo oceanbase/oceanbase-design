@@ -7,9 +7,9 @@ export default () => {
       <div>
         <ContentWithIcon
           iconType="exclamation"
-          content="自定义字体与 icon 大小"
+          content="Custom font and icon size"
           tooltip={{
-            title: '自定义字体与 icon 大小',
+            title: 'Custom font and icon size',
           }}
           color="#default"
           size={16}
@@ -18,9 +18,9 @@ export default () => {
       <div>
         <ContentWithIcon
           iconType="exclamation"
-          content="自定义icon 颜色"
+          content="Custom icon color"
           tooltip={{
-            title: '自定义 icon 颜色',
+            title: 'Custom icon color',
           }}
           color="#8592AD"
           exclamationColor="#f5222d"

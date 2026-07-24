@@ -29,7 +29,7 @@ function dig(path = '0', level = 3) {
 const treeData = dig();
 
 export default () => {
-  // 渲染title
+  // Render title
   const renderTitle = (nodeData: Node) => {
     if (nodeData.extra) {
       return (

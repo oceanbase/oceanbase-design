@@ -1,6 +1,6 @@
 let rollingTimes = 0;
 
-// mock 轮询接口
+// mock polling API
 async function getTaskById({ id }) {
   await sleep(1000);
   rollingTimes = rollingTimes === 3 ? 0 : rollingTimes + 1;

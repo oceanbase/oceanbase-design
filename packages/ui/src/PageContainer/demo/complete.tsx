@@ -24,7 +24,7 @@ export default () => {
     setLoading(true);
     promise.then(() => {
       setLoading(false);
-      message.success('刷新成功');
+      message.success('Refreshed successfully');
     });
     return promise;
   };
@@ -32,79 +32,79 @@ export default () => {
   const dataSource = [
     {
       key: '1',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '2',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '3',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '4',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '5',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '6',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '7',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '8',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '9',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '10',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
   ];
 
   const columns = [
     {
-      title: '姓名',
+      title: 'Name',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: '年龄',
+      title: 'Age',
       dataIndex: 'age',
       key: 'age',
     },
     {
-      title: '住址',
+      title: 'Address',
       dataIndex: 'address',
       key: 'address',
     },
@@ -114,8 +114,8 @@ export default () => {
       ghost={true}
       loading={loading}
       header={{
-        title: '页面标题',
-        subTitle: '副标题',
+        title: 'Page Title',
+        subTitle: 'Subtitle',
         onBack: () => {},
         document: 'https://www.oceanbase.com',
         reload: {
@@ -128,14 +128,14 @@ export default () => {
           items: [
             {
               href: '',
-              title: '一级页面',
+              title: 'Level 1 Page',
             },
             {
               href: '',
-              title: '二级页面',
+              title: 'Level 2 Page',
             },
             {
-              title: '当前页面',
+              title: 'Current Page',
             },
           ],
         },
@@ -144,35 +144,35 @@ export default () => {
             key="1"
             onClick={() => {
               Modal.confirm({
-                title: '确定要执行当前任务吗？',
+                title: 'Are you sure you want to run this task?',
                 onOk: () => {
                   return mockRequest().then(() => {
                     Modal.success({
-                      title: '任务提交成功！',
+                      title: 'Task submitted successfully!',
                     });
                   });
                 },
               });
             }}
           >
-            次要按钮
+            Secondary
           </Button>,
           <Button key="2" type="primary">
-            主要按钮
+            Primary
           </Button>,
           <Dropdown
             menu={{
               items: [
                 {
-                  label: '下拉菜单',
+                  label: 'Dropdown Menu',
                   key: '1',
                 },
                 {
-                  label: '下拉菜单2',
+                  label: 'Dropdown Menu 2',
                   key: '2',
                 },
                 {
-                  label: '下拉菜单3',
+                  label: 'Dropdown Menu 3',
                   key: '3',
                 },
               ],
@@ -182,7 +182,7 @@ export default () => {
           </Dropdown>,
         ],
       }}
-      footer={[<Button type="primary">提交</Button>, <Button>重置</Button>]}
+      footer={[<Button type="primary">Submit</Button>, <Button>Reset</Button>]}
       footerToolBarProps={{
         extra: 'Some extra message',
       }}
@@ -190,24 +190,24 @@ export default () => {
       <Space size={16} direction="vertical">
         <Card>
           <Descriptions>
-            <Descriptions.Item label="创建人">曲丽丽</Descriptions.Item>
-            <Descriptions.Item label="电话号码">1810000000</Descriptions.Item>
-            <Descriptions.Item label="地址">浙江省杭州市西湖区工专路</Descriptions.Item>
-            <Descriptions.Item label="关联表单">
+            <Descriptions.Item label="Creator">Lili Qu</Descriptions.Item>
+            <Descriptions.Item label="Phone">1810000000</Descriptions.Item>
+            <Descriptions.Item label="Address">New York No. 1 Lake Park</Descriptions.Item>
+            <Descriptions.Item label="Related Form">
               <a>421421</a>
             </Descriptions.Item>
-            <Descriptions.Item label="创建时间">2017-01-10</Descriptions.Item>
-            <Descriptions.Item label="备注">这是备注</Descriptions.Item>
+            <Descriptions.Item label="Created At">2017-01-10</Descriptions.Item>
+            <Descriptions.Item label="Remarks">Sample remarks</Descriptions.Item>
           </Descriptions>
         </Card>
         <Card
           tabList={[
             {
-              tab: '基本信息',
+              tab: 'Basic Info',
               key: 'base',
             },
             {
-              tab: '详细信息',
+              tab: 'Details',
               key: 'info',
             },
           ]}

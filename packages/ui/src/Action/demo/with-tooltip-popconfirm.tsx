@@ -9,7 +9,7 @@ export default () => {
         action1
       </Action.Button>
       <Popconfirm placement="bottom" title="Confirm to delete it?">
-        <Action.Button danger>危险按钮</Action.Button>
+        <Action.Button danger>Danger Button</Action.Button>
       </Popconfirm>
       <Action.Button>action3</Action.Button>
       <Action.Button tooltip="This is tooltip">action4</Action.Button>

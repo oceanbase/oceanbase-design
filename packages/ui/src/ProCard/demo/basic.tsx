@@ -53,9 +53,9 @@ export default () => {
         loading={loading}
         bordered
         headerBordered={headerBordered}
-        title={hasHeader && '默认尺寸'}
+        title={hasHeader && 'Default Size'}
         extra={hasHeader && 'extra'}
-        tooltip={hasHeader && '这是提示'}
+        tooltip={hasHeader && 'This is a tooltip'}
         style={{ width: 300 }}
         bodyStyle={bodyStyle}
       >
@@ -68,9 +68,9 @@ export default () => {
         bordered
         headerBordered={headerBordered}
         size="small"
-        title={hasHeader && '小尺寸'}
+        title={hasHeader && 'Small Size'}
         extra={hasHeader && 'extra'}
-        tooltip={hasHeader && '这是提示'}
+        tooltip={hasHeader && 'This is a tooltip'}
         style={{ width: 300, marginBlockStart: 24 }}
         bodyStyle={bodyStyle}
       >
@@ -89,9 +89,9 @@ export default () => {
         <ProCard
           loading={loading}
           headerBordered={headerBordered}
-          title={hasHeader && '无边框'}
+          title={hasHeader && 'Borderless'}
           extra={hasHeader && 'extra'}
-          tooltip={hasHeader && '这是提示'}
+          tooltip={hasHeader && 'This is a tooltip'}
           style={{ width: 300 }}
           bodyStyle={bodyStyle}
         >

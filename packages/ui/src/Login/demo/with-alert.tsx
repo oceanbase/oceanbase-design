@@ -14,11 +14,11 @@ export default () => {
       title="Welcome to OCP Express"
       description="Let's start your usage"
       alertProps={{
-        message: '登录失败，请重新输入',
+        message: 'Login failed, please try again',
       }}
       loginProps={{
         onFinish: values => {
-          message.success(`用户名: ${values.username} 密码: ${values.password}`);
+          message.success(`Username: ${values.username} Password: ${values.password}`);
         },
       }}
       showLocale={true}

@@ -114,8 +114,8 @@ export default () => {
   const alertOptionRender = ({ selectedRows, cleanSelectedRows }) => {
     return (
       <Space>
-        <Button onClick={() => console.log('selectedRows: ', selectedRows)}>批量操作</Button>
-        <Button onClick={() => cleanSelectedRows()}>批量删除</Button>
+        <Button onClick={() => console.log('selectedRows: ', selectedRows)}>Batch Operation</Button>
+        <Button onClick={() => cleanSelectedRows()}>Batch Delete</Button>
       </Space>
     );
   };

@@ -5,8 +5,8 @@ export default () => {
   return (
     <Action.Group>
       <Action.Link visible={false}>action1</Action.Link>
-      <Action.Link disabled tooltip={'禁用展示tooltip'}>
-        禁用提示
+      <Action.Link disabled tooltip={'Show tooltip when disabled'}>
+        Disabled with tooltip
       </Action.Link>
       <Action.Link
         onClick={() => {

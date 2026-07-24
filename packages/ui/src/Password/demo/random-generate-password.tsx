@@ -21,24 +21,24 @@ export default () => {
 
   const onFinish = (values: any) => {
     const { password } = values;
-    alert(`表单校验通过 password：${password}`);
+    alert(`Form validation passed. password: ${password}`);
   };
   return (
     <Form onFinish={onFinish} {...formItemLayout}>
       <Form.Item
-        label="密码"
+        label="Password"
         name="password"
         validateTrigger={['onChange', 'onValidate']}
         rules={[
           {
             required: true,
-            message: '请输入密码',
+            message: 'Please enter password',
           },
           {
             validator: (rule, value, callback) => {
               console.log(passed);
               if (value && !passed) {
-                callback('密码设置不符合要求');
+                callback('Password does not meet requirements');
               } else {
                 callback();
               }
@@ -55,7 +55,7 @@ export default () => {
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
-          提交
+          Submit
         </Button>
       </Form.Item>
     </Form>

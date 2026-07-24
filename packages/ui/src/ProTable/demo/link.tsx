@@ -6,24 +6,24 @@ import { ProTable } from '@oceanbase/ui';
 const App: React.FC = () => {
   const columns = [
     {
-      title: '姓名',
+      title: 'Name',
       dataIndex: 'name',
     },
     {
-      title: '年龄',
+      title: 'Age',
       dataIndex: 'age',
     },
     {
-      title: '住址',
+      title: 'Address',
       dataIndex: 'address',
     },
     {
-      title: '链接',
+      title: 'Link',
       dataIndex: 'link',
       render: (text: string, record: any) => {
         return (
           <a href={record.link} target="_blank" rel="noopener noreferrer">
-            链接
+            Link
           </a>
         );
       },
@@ -45,16 +45,16 @@ const App: React.FC = () => {
   for (let i = 1; i < 100; i++) {
     dataSource.push({
       key: i,
-      name: '胡彦斌' + i,
+      name: 'John Brown' + i,
       age: 32,
-      address: `西湖区湖底公园${i}号`,
+      address: `New York No. ${i} Lake Park`,
       link: 'https://www.oceanbase.com',
     });
   }
 
   return (
     <ProTable
-      headerTitle="高级表格"
+      headerTitle="Advanced Table"
       cardBordered={true}
       columns={columns}
       dataSource={dataSource}

@@ -5,13 +5,13 @@ export default () => {
   return (
     <Result
       status="processing"
-      title="任务执行中"
-      subTitle="这是一段关于任务执行中的描述"
+      title="Your operation is being processed"
+      subTitle="Please wait patiently while we complete your request."
       extra={[
         <Button type="primary" key="console">
-          主操作
+          Go Console
         </Button>,
-        <Button key="buy">次操作</Button>,
+        <Button key="buy">Buy Again</Button>,
       ]}
     />
   );

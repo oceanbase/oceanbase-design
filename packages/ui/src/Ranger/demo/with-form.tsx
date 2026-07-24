@@ -18,7 +18,7 @@ export default () => {
             Ranger.YESTERDAY,
             Ranger.TODAY,
             Ranger.TOMORROW,
-            { name: '今年', range: () => [dayjs().startOf('year'), dayjs().endOf('year')] },
+            { name: 'This year', range: () => [dayjs().startOf('year'), dayjs().endOf('year')] },
           ]}
         />
       </Form.Item>

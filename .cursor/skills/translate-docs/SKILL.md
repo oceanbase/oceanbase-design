@@ -105,6 +105,44 @@ When translating multiple files with Cursor Composer:
 - **Consistency check**: After batch translation, run "Compare keys/terms across all \*.en-US.md files. List any inconsistent translations."
 - **Review**: Always do human spot-check on P0 docs (design-introduce, quickstart, component overview).
 
+## Demo Anglicization
+
+Exposed component demos (`sidebar-locales.ts` whitelist) must use **English UI text** in `demo/*.{ts,tsx}`.
+
+### Strategy
+
+- One shared English demo per example; both `index.md` and `index.en-US.md` reference the same `src`
+- Align with ant-design demos when a counterpart exists (`ant-design/components/{name}/demo/`)
+- For OB-only components (`Filter`, `BasicLayout`, `ProTable`, etc.), use [glossary.json](glossary.json) `demoMock` entries
+
+### Translate in demos
+
+- Labels, placeholders, button text, table columns, mock data, chart categories
+- Code comments when they contain Chinese
+
+### Do NOT translate
+
+- Imports, API prop names, types
+- i18n/locale demos that intentionally show language switching
+- CJK sample text in font-rendering demos
+
+### Allowlist (keep CJK)
+
+| File                                                  | Reason                          |
+| ----------------------------------------------------- | ------------------------------- |
+| `packages/design/src/locale/demo/basic.tsx`           | Locale switching demo           |
+| `packages/design/src/typography/demo/font-family.tsx` | CJK font sample text            |
+| `packages/ui/src/DateRanger/demo/locale.tsx`          | Locale switching demo           |
+| `packages/ui/src/DateRanger/demo/copy-paste.tsx`      | Copy/paste format + locale demo |
+
+### Verification
+
+```bash
+pnpm lint:demo-locale
+```
+
+Script: `scripts/check-demo-locale.mjs` — scans exposed components only; supports `--allowlist`.
+
 ## Example
 
 **Input (excerpt):**

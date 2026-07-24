@@ -5,35 +5,35 @@ import type { ColumnConfig } from '@oceanbase/charts';
 export default () => {
   const data = [
     {
-      type: '分类一',
+      type: 'Category A',
       values: [76, 100],
     },
     {
-      type: '分类二',
+      type: 'Category B',
       values: [56, 108],
     },
     {
-      type: '分类三',
+      type: 'Category C',
       values: [38, 129],
     },
     {
-      type: '分类四',
+      type: 'Category D',
       values: [58, 155],
     },
     {
-      type: '分类五',
+      type: 'Category E',
       values: [45, 120],
     },
     {
-      type: '分类六',
+      type: 'Category F',
       values: [23, 99],
     },
     {
-      type: '分类七',
+      type: 'Category G',
       values: [18, 56],
     },
     {
-      type: '分类八',
+      type: 'Category H',
       values: [18, 34],
     },
   ];

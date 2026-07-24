@@ -11,78 +11,82 @@ const App: React.FC = () => {
   return (
     <Space direction="vertical" size="large" style={{ width: '100%' }}>
       <div>
-        <Text strong>普通模式（不折叠）：</Text>
+        <Text strong>Normal mode (no collapse):</Text>
         <Filter.Wrap>
           <Filter.Select
-            label="状态"
+            label="Status"
             value={status}
             onChange={setStatus}
             options={[
-              { value: 'running', label: '运行中' },
-              { value: 'stopped', label: '已停止' },
+              { value: 'running', label: 'Running' },
+              { value: 'stopped', label: 'Stopped' },
             ]}
           />
           <Filter.Select
-            label="类型"
+            label="Type"
             value={type}
             onChange={setType}
             options={[
-              { value: 'type1', label: '类型一' },
-              { value: 'type2', label: '类型二' },
+              { value: 'type1', label: 'Type 1' },
+              { value: 'type2', label: 'Type 2' },
             ]}
           />
         </Filter.Wrap>
       </div>
 
       <div>
-        <Text strong>折叠模式：</Text>
-        <Filter.Wrap collapsed label="筛选条件">
+        <Text strong>Collapse mode:</Text>
+        <Filter.Wrap collapsed label="Filter conditions">
           <Filter.Select
-            label="状态"
+            label="Status"
             value={status}
             onChange={setStatus}
             options={[
-              { value: 'running', label: '运行中' },
-              { value: 'stopped', label: '已停止' },
+              { value: 'running', label: 'Running' },
+              { value: 'stopped', label: 'Stopped' },
             ]}
           />
           <Filter.Select
-            label="类型"
+            label="Type"
             value={type}
             onChange={setType}
             options={[
-              { value: 'type1', label: '类型一' },
-              { value: 'type2', label: '类型二' },
+              { value: 'type1', label: 'Type 1' },
+              { value: 'type2', label: 'Type 2' },
             ]}
           />
           <Filter.Checkbox
-            label="优先级"
+            label="Priority"
             value={priority}
             onChange={setPriority}
             options={[
-              { value: 'high', label: '高' },
-              { value: 'medium', label: '中' },
-              { value: 'low', label: '低' },
+              { value: 'high', label: 'High' },
+              { value: 'medium', label: 'Medium' },
+              { value: 'low', label: 'Low' },
             ]}
           />
         </Filter.Wrap>
       </div>
 
       <div>
-        <Text strong>带额外内容：</Text>
-        <Filter.Wrap collapsed label="筛选条件" extra={<Text type="secondary">共 2 个筛选器</Text>}>
+        <Text strong>With extra content:</Text>
+        <Filter.Wrap
+          collapsed
+          label="Filter conditions"
+          extra={<Text type="secondary">2 filters total</Text>}
+        >
           <Filter.Select
-            label="状态"
+            label="Status"
             options={[
-              { value: 'running', label: '运行中' },
-              { value: 'stopped', label: '已停止' },
+              { value: 'running', label: 'Running' },
+              { value: 'stopped', label: 'Stopped' },
             ]}
           />
           <Filter.Select
-            label="类型"
+            label="Type"
             options={[
-              { value: 'type1', label: '类型一' },
-              { value: 'type2', label: '类型二' },
+              { value: 'type1', label: 'Type 1' },
+              { value: 'type2', label: 'Type 2' },
             ]}
           />
         </Filter.Wrap>

@@ -13,60 +13,60 @@ export default () => {
   const menus = [
     {
       link: '/~demos/basiclayout-demo-basic/overview',
-      title: '总览',
+      title: 'Dashboard',
       icon: <IconFont type="overview" />,
       selectedIcon: <Lottie path="/lottie/overview.json" mode="icon" loop={false} speed={3} />,
     },
     {
       link: '/~demos/basiclayout-demo-basic/tenant',
-      title: '租户管理',
+      title: 'Tenants',
       icon: <IconFont type="tenant" />,
       selectedIcon: <Lottie path="/lottie/tenant.json" mode="icon" loop={false} speed={3} />,
     },
     {
       link: '/~demos/basiclayout-demo-basic/monitor',
-      title: '监控中心',
+      title: 'Monitoring',
       icon: <Icon component={MonitorSvg} />,
       selectedIcon: <Lottie path="/lottie/monitor.json" mode="icon" loop={false} speed={3} />,
     },
     {
       link: '/~demos/basiclayout-demo-basic/diagnosis',
-      title: '诊断中心',
+      title: 'Diagnostics',
       icon: <IconFont type="diagnosis" />,
       selectedIcon: <Lottie path="/lottie/diagnosis.json" mode="icon" loop={false} speed={3} />,
       children: [
         {
           link: `/~demos/basiclayout-basic/diagnosis/realtime`,
-          title: '实时诊断',
+          title: 'Real-time',
         },
 
         {
           link: `/~demos/basiclayout-basic/diagnosis/capacity`,
-          title: '容量中心',
+          title: 'Capacity',
         },
 
         {
           link: `/~demos/basiclayout-basic/diagnosis/report`,
-          title: '报告中心',
+          title: 'Reports',
         },
       ],
     },
     {
       link: '/~demos/basiclayout-demo-basic/backup',
-      title: '备份恢复',
+      title: 'Backup',
       icon: <IconFont type="backup" />,
       selectedIcon: <Lottie path="/lottie/backup.json" mode="icon" loop={false} speed={3} />,
     },
     {
       link: '/~demos/basiclayout-demo-basic/log',
-      title: '日志服务',
+      title: 'Logs',
       icon: <IconFont type="log" />,
       selectedIcon: <Lottie path="/lottie/log.json" mode="icon" loop={false} speed={3} />,
       divider: true,
     },
     {
       link: '/~demos/basiclayout-demo-basic/property',
-      title: '系统参数',
+      title: 'Settings',
       icon: <IconFont type="property" />,
       selectedIcon: <Lottie path="/lottie/property.json" mode="icon" loop={false} speed={3} />,
     },
@@ -74,12 +74,12 @@ export default () => {
   const userMenu = (
     <Menu
       onClick={() => {
-        message.success('你点击了下拉菜单');
+        message.success('You clicked the dropdown menu');
       }}
     >
-      <Menu.Item key="profile">个人设置</Menu.Item>
-      <Menu.Item key="modifyPassword">修改密码</Menu.Item>
-      <Menu.Item key="logout">退出登录</Menu.Item>
+      <Menu.Item key="profile">Profile Settings</Menu.Item>
+      <Menu.Item key="modifyPassword">Change Password</Menu.Item>
+      <Menu.Item key="logout">Log Out</Menu.Item>
     </Menu>
   );
   return (

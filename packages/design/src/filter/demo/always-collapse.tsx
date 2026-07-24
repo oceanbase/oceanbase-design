@@ -30,8 +30,9 @@ const App: React.FC = () => {
           />
         </div>
         <Text type="secondary">
-          下面的示例中，“分类”和“来源”筛选器设置了 <code>alwaysCollapse</code> 属性，
-          无论容器宽度是否充足，它们都会被折叠到“筛选”按钮中。
+          In the example below, the &quot;Search&quot; and &quot;Dark mode&quot; filters have the{' '}
+          <code>alwaysCollapse</code> prop set. Regardless of container width, they are always
+          collapsed into the &quot;Filter&quot; button.
         </Text>
       </div>
 
@@ -53,44 +54,44 @@ const App: React.FC = () => {
           }}
         >
           <Filter.Select
-            label="状态"
+            label="Status"
             value={status}
             onChange={setStatus}
             options={[
-              { value: 'running', label: '运行中' },
-              { value: 'stopped', label: '已停止' },
+              { value: 'running', label: 'Running' },
+              { value: 'stopped', label: 'Stopped' },
             ]}
           />
           <Filter.Select
-            label="类型"
+            label="Type"
             value={type}
             onChange={setType}
             options={[
-              { value: 'type1', label: '类型一' },
-              { value: 'type2', label: '类型二' },
+              { value: 'type1', label: 'Type 1' },
+              { value: 'type2', label: 'Type 2' },
             ]}
           />
           <Filter.Checkbox
-            label="优先级"
+            label="Priority"
             value={priority}
             onChange={setPriority}
             count
             options={[
-              { value: 'high', label: '高' },
-              { value: 'medium', label: '中' },
-              { value: 'low', label: '低' },
+              { value: 'high', label: 'High' },
+              { value: 'medium', label: 'Medium' },
+              { value: 'low', label: 'Low' },
             ]}
           />
-          {/* 始终折叠的筛选器 */}
-          <Filter.Input label="搜索" value={search} onChange={setSearch} alwaysCollapse />
-          {/* 始终折叠的筛选器 */}
-          <Filter.Switch label="暗黑模式" value={darkMode} onChange={setDarkMode} alwaysCollapse />
+          {/* Always collapsed filter */}
+          <Filter.Input label="Search" value={search} onChange={setSearch} alwaysCollapse />
+          {/* Always collapsed filter */}
+          <Filter.Switch label="Dark mode" value={darkMode} onChange={setDarkMode} alwaysCollapse />
         </Filter.ResponsiveGroup>
       </div>
 
       <Text type="secondary">
-        提示：即使容器宽度足够显示所有筛选器，alwaysCollapse 为 true
-        的筛选器也会始终折叠在“筛选”按钮中。
+        Tip: Even when the container is wide enough to show all filters, filters with alwaysCollapse
+        set to true remain collapsed in the &quot;Filter&quot; button.
       </Text>
     </Space>
   );

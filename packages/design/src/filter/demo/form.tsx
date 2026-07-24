@@ -9,7 +9,7 @@ const App: React.FC = () => {
 
   const handleApply = async () => {
     const values = await form.validateFields();
-    console.log('表单值:', values);
+    console.log('Form values:', values);
   };
 
   const handleClearAll = () => {
@@ -19,7 +19,7 @@ const App: React.FC = () => {
   const categoryOptions = [
     {
       value: 'frontend',
-      label: '前端',
+      label: 'Frontend',
       children: [
         { value: 'react', label: 'React' },
         { value: 'vue', label: 'Vue' },
@@ -27,7 +27,7 @@ const App: React.FC = () => {
     },
     {
       value: 'backend',
-      label: '后端',
+      label: 'Backend',
       children: [
         { value: 'java', label: 'Java' },
         { value: 'python', label: 'Python' },
@@ -39,7 +39,8 @@ const App: React.FC = () => {
     <Flex gap={16} vertical>
       <div>
         <Text>
-          使用 <code>Form.Item</code> 包裹筛选组件，点击 Apply 按钮时会在控制台输出所有表单值。
+          Wrap filter components with <code>Form.Item</code>. Click Apply to log all form values to
+          the console.
         </Text>
       </div>
       <Space direction="vertical" size="large" style={{ width: '240px' }}>
@@ -48,57 +49,57 @@ const App: React.FC = () => {
             <Form.Item name="status" noStyle>
               <Filter.Select
                 icon={<HeaderTableOutlined />}
-                label="状态"
+                label="Status"
                 options={[
-                  { value: 'running', label: '运行中' },
-                  { value: 'stopped', label: '已停止' },
-                  { value: 'pending', label: '待处理' },
+                  { value: 'running', label: 'Running' },
+                  { value: 'stopped', label: 'Stopped' },
+                  { value: 'pending', label: 'Pending' },
                 ]}
               />
             </Form.Item>
 
             <Form.Item name="type" noStyle>
               <Filter.Select
-                label="类型"
+                label="Type"
                 options={[
-                  { value: 'type1', label: '类型一' },
-                  { value: 'type2', label: '类型二' },
+                  { value: 'type1', label: 'Type 1' },
+                  { value: 'type2', label: 'Type 2' },
                 ]}
               />
             </Form.Item>
 
             <Form.Item name="priority" noStyle>
               <Filter.Checkbox
-                label="优先级"
+                label="Priority"
                 count
                 options={[
-                  { value: 'high', label: '高' },
-                  { value: 'medium', label: '中' },
-                  { value: 'low', label: '低' },
+                  { value: 'high', label: 'High' },
+                  { value: 'medium', label: 'Medium' },
+                  { value: 'low', label: 'Low' },
                 ]}
               />
             </Form.Item>
 
             <Form.Item name="category" noStyle>
-              <Filter.Cascader label="分类" multiple count options={categoryOptions} />
+              <Filter.Cascader label="Category" multiple count options={categoryOptions} />
             </Form.Item>
 
             <Form.Item name="date" noStyle>
-              <Filter.Range label="时间段" />
+              <Filter.Range label="Date range" />
             </Form.Item>
 
             <Form.Item name="darkMode" valuePropName="checked" noStyle>
-              <Filter.Switch label="暗黑模式" />
+              <Filter.Switch label="Dark mode" />
             </Form.Item>
 
             <Form.Item name="search" noStyle>
-              <Filter.Input label="搜索" />
+              <Filter.Input label="Search" />
             </Form.Item>
           </Filter.ResponsiveGroup>
         </Form>
 
         <Text type="secondary">
-          提示：打开浏览器控制台（F12），点击 Apply 按钮查看输出的表单值。
+          Tip: Open the browser console (F12) and click Apply to see the logged form values.
         </Text>
       </Space>
     </Flex>

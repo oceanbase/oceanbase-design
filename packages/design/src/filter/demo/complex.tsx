@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const categoryOptions = [
     {
       value: 'frontend',
-      label: '前端',
+      label: 'Frontend',
       children: [
         { value: 'react', label: 'React' },
         { value: 'vue', label: 'Vue' },
@@ -21,7 +21,7 @@ const App: React.FC = () => {
     },
     {
       value: 'backend',
-      label: '后端',
+      label: 'Backend',
       children: [
         { value: 'java', label: 'Java' },
         { value: 'python', label: 'Python' },
@@ -33,7 +33,7 @@ const App: React.FC = () => {
   return (
     <Space direction="vertical" size="large" style={{ width: '100%' }}>
       <div>
-        <Text>调整容器宽度来查看响应式折叠效果：</Text>
+        <Text>Adjust container width to see responsive collapse:</Text>
         <Slider
           min={100}
           max={700}
@@ -73,51 +73,53 @@ const App: React.FC = () => {
             </Form.Item>
             <Form.Item name="status" noStyle>
               <Filter.Checkbox
-                label="状态"
+                label="Status"
                 options={[
-                  { value: 'running', label: '运行中' },
-                  { value: 'stopped', label: '已停止' },
-                  { value: 'pending', label: '待处理' },
+                  { value: 'running', label: 'Running' },
+                  { value: 'stopped', label: 'Stopped' },
+                  { value: 'pending', label: 'Pending' },
                 ]}
               />
             </Form.Item>
             <Form.Item name="type" noStyle>
               <Filter.Select
-                label="类型"
+                label="Type"
                 options={[
-                  { value: 'type1', label: '类型一' },
-                  { value: 'type2', label: '类型二' },
-                  { value: 'type3', label: '类型三' },
+                  { value: 'type1', label: 'Type 1' },
+                  { value: 'type2', label: 'Type 2' },
+                  { value: 'type3', label: 'Type 3' },
                 ]}
               />
             </Form.Item>
 
             <Form.Item name="search" noStyle>
-              <Filter.Slot label="搜索" formatValue={val => val}>
-                <Input prefix={<SearchOutlined />} placeholder="搜索..." allowClear />
+              <Filter.Slot label="Search" formatValue={val => val}>
+                <Input prefix={<SearchOutlined />} placeholder="Search..." allowClear />
               </Filter.Slot>
             </Form.Item>
 
             <Form.Item name="priority" noStyle>
               <Filter.Checkbox
-                label="优先级"
+                label="Priority"
                 count
                 options={[
-                  { value: 'high', label: '高' },
-                  { value: 'medium', label: '中' },
-                  { value: 'low', label: '低' },
+                  { value: 'high', label: 'High' },
+                  { value: 'medium', label: 'Medium' },
+                  { value: 'low', label: 'Low' },
                 ]}
               />
             </Form.Item>
             <Form.Item name="category" noStyle>
-              <Filter.Cascader label="分类" multiple count options={categoryOptions} />
+              <Filter.Cascader label="Category" multiple count options={categoryOptions} />
             </Form.Item>
-            <Button>操作</Button>
+            <Button>Action</Button>
           </Filter.ResponsiveGroup>
         </Form>
       </div>
 
-      <Text type="secondary">复杂场景，一般用于页面顶部的 Extra 处理多种场景</Text>
+      <Text type="secondary">
+        Complex scenario, typically used for page-level Extra handling multiple use cases
+      </Text>
     </Space>
   );
 };

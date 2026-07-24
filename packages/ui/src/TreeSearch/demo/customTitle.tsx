@@ -27,7 +27,7 @@ const treeData = [
       {
         title: 'Table',
         icon: <TableOutlined />,
-        extra: <a onClick={alertMsg}>测试</a>,
+        extra: <a onClick={alertMsg}>Test</a>,
         children: [
           {
             title: 'table1',
@@ -36,7 +36,7 @@ const treeData = [
           {
             title: 'table2',
             icon: <ProfileOutlined />,
-            extra: <a onClick={alertMsg}>测试</a>,
+            extra: <a onClick={alertMsg}>Test</a>,
           },
         ],
       },
@@ -63,7 +63,7 @@ const treeData = [
       {
         title: 'Table',
         icon: <TableOutlined />,
-        extra: <a onClick={alertMsg}>测试</a>,
+        extra: <a onClick={alertMsg}>Test</a>,
         children: [
           {
             title: 'table1',
@@ -94,7 +94,7 @@ const treeData = [
 ];
 
 export default () => {
-  // 渲染title
+  // Render title
   const renderTitle = (nodeData: Node) => {
     if (nodeData.extra) {
       return (
