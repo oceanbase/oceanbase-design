@@ -13,46 +13,46 @@ export default () => {
   const menus = [
     {
       link: '/~demos/basiclayout-demo-menu-group/overview',
-      title: '总览',
+      title: 'Dashboard',
       icon: <IconFont type="overview" />,
       selectedIcon: <Lottie path="/lottie/overview.json" mode="icon" loop={false} speed={3} />,
     },
     {
       type: 'group' as const,
-      title: '集群管理',
+      title: 'Cluster Management',
       children: [
         {
           link: '/~demos/basiclayout-demo-menu-group/cluster',
-          title: '集群列表',
+          title: 'Cluster List',
           icon: <IconFont type="tenant" />,
         },
         {
           link: '/~demos/basiclayout-demo-menu-group/host',
-          title: '主机列表',
+          title: 'Host List',
           icon: <IconFont type="diagnosis" />,
         },
       ],
     },
     {
       type: 'group' as const,
-      title: '运维监控',
+      title: 'Operations',
       children: [
         {
           link: '/~demos/basiclayout-demo-menu-group/monitor',
-          title: '监控中心',
+          title: 'Monitoring',
           icon: <Icon component={MonitorSvg} />,
           selectedIcon: <Lottie path="/lottie/monitor.json" mode="icon" loop={false} speed={3} />,
         },
         {
           link: '/~demos/basiclayout-demo-menu-group/backup',
-          title: '备份恢复',
+          title: 'Backup',
           icon: <IconFont type="backup" />,
         },
       ],
     },
     {
       link: '/~demos/basiclayout-demo-menu-group/property',
-      title: '系统参数',
+      title: 'Settings',
       icon: <IconFont type="property" />,
       selectedIcon: <Lottie path="/lottie/property.json" mode="icon" loop={false} speed={3} />,
     },
@@ -60,12 +60,12 @@ export default () => {
   const userMenu = (
     <Menu
       onClick={() => {
-        message.success('你点击了下拉菜单');
+        message.success('You clicked the dropdown menu');
       }}
     >
-      <Menu.Item key="profile">个人设置</Menu.Item>
-      <Menu.Item key="modifyPassword">修改密码</Menu.Item>
-      <Menu.Item key="logout">退出登录</Menu.Item>
+      <Menu.Item key="profile">Profile Settings</Menu.Item>
+      <Menu.Item key="modifyPassword">Change Password</Menu.Item>
+      <Menu.Item key="logout">Log Out</Menu.Item>
     </Menu>
   );
   return (

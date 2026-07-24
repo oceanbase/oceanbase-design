@@ -30,7 +30,7 @@ export default () => {
       loginProps={{
         onFinish: values => {
           message.success(
-            `登录：用户名: ${values.username} 密码: ${values.password} 验证码：${values.authCode}`
+            `Login: username: ${values.username} password: ${values.password} auth code: ${values.authCode}`
           );
         },
       }}

@@ -92,15 +92,8 @@ export interface BannerRecommendsProps {
   icons?: Icon[];
 }
 
-export default function BannerRecommends({}: BannerRecommendsProps) {
-  const styles = useStyle();
-  const { isMobile } = React.useContext(SiteContext);
-  const [, localeType] = useLocale();
-  const { search } = useLocation();
-  const isZhCN = localeType === 'cn';
-  const getHref = (path: string) => utils.getLocalizedPathname(path, isZhCN, search).pathname;
-
-  const items = [
+const recommendLocales = {
+  cn: [
     {
       key: 'components',
       title: '🌈 基础组件',
@@ -119,7 +112,41 @@ export default function BannerRecommends({}: BannerRecommendsProps) {
       description: '基于 Ant Design Charts 定制和扩展，是 OceanBase 的图表最佳实践',
       path: '/charts/stat',
     },
-  ];
+  ],
+  en: [
+    {
+      key: 'components',
+      title: '🌈 Components',
+      description:
+        'Customized and extended from Ant Design to form OceanBase visual and interaction style',
+      path: '/components/button',
+    },
+    {
+      key: 'biz-components',
+      title: '📦 Biz Components',
+      description:
+        'Born from business, distilled from common capabilities across OceanBase products',
+      path: '/biz-components/basic-layout',
+    },
+    {
+      key: 'charts',
+      title: '📈 Charts',
+      description:
+        'Customized and extended from Ant Design Charts — OceanBase chart best practices',
+      path: '/charts/stat',
+    },
+  ],
+};
+
+export default function BannerRecommends(_props: BannerRecommendsProps) {
+  const styles = useStyle();
+  const { isMobile } = React.useContext(SiteContext);
+  const [, localeType] = useLocale();
+  const { search } = useLocation();
+  const isZhCN = localeType === 'cn';
+  const getHref = (path: string) => utils.getLocalizedPathname(path, isZhCN, search).pathname;
+
+  const items = recommendLocales[localeType];
 
   return (
     <div>

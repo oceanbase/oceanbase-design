@@ -95,26 +95,26 @@ export default () => {
       >
         <ProFormSelect
           name="sex"
-          label="性别"
+          label="Gender"
           showSearch
           allowClear={false}
           fieldProps={{
             labelInValue: true,
           }}
           valueEnum={{
-            man: '男',
-            woman: '女',
+            man: 'Male',
+            woman: 'Female',
           }}
         />
         <ProFormSelect
           name="region"
-          label="地区"
+          label="Region"
           mode="multiple"
           valueEnum={{
-            beijing: '北京',
-            shanghai: '上海',
-            hangzhou: '杭州',
-            long: '这是一个很长的用来测试溢出的项目',
+            beijing: 'Beijing',
+            shanghai: 'Shanghai',
+            hangzhou: 'Hangzhou',
+            long: 'A long item to test overflow',
           }}
         />
         <ProFormCheckbox.Group
@@ -124,7 +124,7 @@ export default () => {
         />
         <ProFormTreeSelect
           initialValue={['0-0', '0-1']}
-          label="树形下拉选择器"
+          label="Tree Select"
           fieldProps={{
             fieldNames: {
               label: 'title',
@@ -141,15 +141,15 @@ export default () => {
           request={async () => [
             {
               value: 'zhejiang',
-              label: '浙江',
+              label: 'Zhejiang',
               children: [
                 {
                   value: 'hangzhou',
-                  label: '杭州',
+                  label: 'Hangzhou',
                   children: [
                     {
                       value: 'xihu',
-                      label: '西湖',
+                      label: 'West Lake',
                     },
                   ],
                 },
@@ -173,21 +173,21 @@ export default () => {
             },
           ]}
           name="area"
-          label="区域"
+          label="Area"
           initialValue={['zhejiang', 'hangzhou', 'xihu']}
         />
-        <ProFormSwitch name="open" label="开关" />
-        <ProFormDigit name="count" label="数量" />
-        <ProFormSlider name="range" label="范围" range />
-        <ProFormSlider name="slider" label="范围" />
-        <ProFormText name="name" label="名称" />
-        <ProFormDatePicker name="date" label="日期" />
-        <ProFormDateRangePicker name="dateRanger" label="日期范围" />
-        <ProFormDateTimePicker name="datetime" label="日期时间" />
-        <ProFormDateTimeRangePicker name="datetimeRanger" label="日期时间范围" />
-        <ProFormTimePicker name="time" label="时间" />
-        <ProFormTimePicker.RangePicker name="timeRanger" label="时间范围" />
-        <ProFormFieldSet name="name" label="姓名">
+        <ProFormSwitch name="open" label="Switch" />
+        <ProFormDigit name="count" label="Count" />
+        <ProFormSlider name="range" label="Range" range />
+        <ProFormSlider name="slider" label="Range" />
+        <ProFormText name="name" label="Name" />
+        <ProFormDatePicker name="date" label="Date" />
+        <ProFormDateRangePicker name="dateRanger" label="Date Range" />
+        <ProFormDateTimePicker name="datetime" label="Date Time" />
+        <ProFormDateTimeRangePicker name="datetimeRanger" label="Date Time Range" />
+        <ProFormTimePicker name="time" label="Time" />
+        <ProFormTimePicker.RangePicker name="timeRanger" label="Time Range" />
+        <ProFormFieldSet name="name" label="Name">
           <ProFormText />
           <ProFormText />
         </ProFormFieldSet>

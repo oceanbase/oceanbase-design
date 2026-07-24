@@ -55,7 +55,7 @@ const NotificationCenter = () => {
     return ref.current?.fetchQueueNsById(id);
   };
 
-  // mock model存储
+  // mock model storage
   (window as any).obuiMockModel.backgroundTaskManagerAPIs = {
     setNotificationPreset,
     setNotificationQueue,

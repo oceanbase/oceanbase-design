@@ -23,7 +23,7 @@ export default () => {
       </Form>
       <Action.Group buttonSize={buttonSize}>
         <Action.Button type="primary">action1</Action.Button>
-        <Action.Button danger>危险按钮</Action.Button>
+        <Action.Button danger>Danger Button</Action.Button>
         <Action.Button>action3</Action.Button>
         <Action.Button divider={true}>action4</Action.Button>
         <Action.Button>action5</Action.Button>

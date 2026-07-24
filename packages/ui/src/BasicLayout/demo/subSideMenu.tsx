@@ -12,74 +12,74 @@ export default () => {
   const menus = [
     {
       link: '/~demos/basiclayout-demo-subsidemenu/overview',
-      title: '总览',
+      title: 'Dashboard',
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/topo',
-      title: '拓扑图',
+      title: 'Topology',
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/tenant',
-      title: '租户管理',
+      title: 'Tenants',
       divider: true,
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/monitor',
-      title: '性能监控',
+      title: 'Performance',
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/report',
-      title: '性能报告',
+      title: 'Reports',
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/resource',
-      title: '资源管理',
+      title: 'Resources',
       divider: true,
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/health',
-      title: '健康巡检',
+      title: 'Health Check',
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/compaction',
-      title: '合并管理',
+      title: 'Compaction',
       divider: true,
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/backup',
-      title: '备份恢复',
+      title: 'Backup',
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/parameter',
-      title: '参数管理',
+      title: 'Parameters',
     },
   ];
   const subSidemenus = [
     {
       link: '/~demos/basiclayout-demo-subsidemenu/overview',
-      title: '总览',
+      title: 'Dashboard',
       icon: <IconFont type="overview" />,
       selectedIcon: <Lottie path="/lottie/overview.json" mode="icon" loop={false} speed={3} />,
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/sub-side-cluster',
-      title: '集群',
+      title: 'Clusters',
       icon: <IconFont type="cluster" />,
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/sub-side-tenant',
-      title: '租户',
+      title: 'Tenants',
       icon: <IconFont type="tenant" />,
       selectedIcon: <Lottie path="/lottie/tenant.json" mode="icon" loop={false} speed={3} />,
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/sub-side-host',
-      title: '主机',
+      title: 'Hosts',
       icon: <IconFont type="host" />,
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/sub-side-package',
-      title: '软件包',
+      title: 'Packages',
       icon: <IconFont type="package" />,
     },
     {
@@ -89,43 +89,43 @@ export default () => {
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/sub-side-backup',
-      title: '备份恢复',
+      title: 'Backup',
       icon: <IconFont type="backup" />,
       selectedIcon: <Lottie path="/lottie/backup.json" mode="icon" loop={false} speed={3} />,
     },
     {
       link: '/~demos/basiclayout-demo-subsidemenu/sub-side-system',
-      title: '系统管理',
+      title: 'System',
       icon: <IconFont type="system" />,
       children: [
         {
           link: '/~demos/basiclayout-demo-subsidemenu/sub-side-alarm',
-          title: '告警',
+          title: 'Alerts',
         },
         {
           link: '/~demos/basiclayout-demo-subsidemenu/sub-side-task',
-          title: '任务',
+          title: 'Tasks',
         },
         {
           link: '/~demos/basiclayout-demo-subsidemenu/sub-side-inspection',
-          title: '巡检',
+          title: 'Inspection',
           divider: true,
         },
         {
           link: '/~demos/basiclayout-demo-subsidemenu/sub-side-log',
-          title: '日志服务',
+          title: 'Logs',
         },
         {
           link: '/~demos/basiclayout-demo-subsidemenu/sub-side-auth',
-          title: '安全',
+          title: 'Security',
         },
         {
           link: '/~demos/basiclayout-demo-subsidemenu/sub-side-property',
-          title: '系统参数',
+          title: 'Settings',
         },
         {
           link: '/~demos/basiclayout-demo-subsidemenu/sub-side-auditEvent',
-          title: '历史事件',
+          title: 'History',
         },
       ],
     },
@@ -133,12 +133,12 @@ export default () => {
   const userMenu = (
     <Menu
       onClick={() => {
-        message.success('你点击了下拉菜单');
+        message.success('You clicked the dropdown menu');
       }}
     >
-      <Menu.Item key="profile">个人设置</Menu.Item>
-      <Menu.Item key="modifyPassword">修改密码</Menu.Item>
-      <Menu.Item key="logout">退出登录</Menu.Item>
+      <Menu.Item key="profile">Profile Settings</Menu.Item>
+      <Menu.Item key="modifyPassword">Change Password</Menu.Item>
+      <Menu.Item key="logout">Log Out</Menu.Item>
     </Menu>
   );
   const sideHeader = (

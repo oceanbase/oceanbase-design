@@ -100,9 +100,9 @@ const App: React.FC = () => {
 
   const toolOptionsRender = (size: SizeType) => {
     return [
-      <Button size={size}>批量删除</Button>,
-      <Button size={size}>批量更新</Button>,
-      <Button size={size}>批量重启</Button>,
+      <Button size={size}>Batch Delete</Button>,
+      <Button size={size}>Batch Update</Button>,
+      <Button size={size}>Batch Restart</Button>,
     ];
   };
 

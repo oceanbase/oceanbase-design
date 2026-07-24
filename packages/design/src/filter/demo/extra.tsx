@@ -9,42 +9,42 @@ const App: React.FC = () => {
 
   return (
     <Space wrap>
-      {/* 带提示图标的筛选器 */}
+      {/* Filter with tooltip icon */}
       <Filter.Select
-        label="状态"
+        label="Status"
         value={status}
         onChange={setStatus}
         extra={
-          <Tooltip title="选择任务的状态">
+          <Tooltip title="Select the task status">
             <QuestionCircleOutlined style={{ color: '#8592ad', cursor: 'help' }} />
           </Tooltip>
         }
         options={[
-          { value: 'running', label: '运行中' },
-          { value: 'stopped', label: '已停止' },
-          { value: 'pending', label: '待处理' },
+          { value: 'running', label: 'Running' },
+          { value: 'stopped', label: 'Stopped' },
+          { value: 'pending', label: 'Pending' },
         ]}
       />
 
-      {/* 带标签的筛选器 */}
+      {/* Filter with tag */}
       <Filter.Select
-        label="类型"
+        label="Type"
         value={type}
         onChange={setType}
         extra={
           <Tag color="blue" style={{ margin: 0 }}>
-            重要
+            Important
           </Tag>
         }
         options={[
-          { value: 'type1', label: '类型一' },
-          { value: 'type2', label: '类型二' },
+          { value: 'type1', label: 'Type 1' },
+          { value: 'type2', label: 'Type 2' },
         ]}
       />
 
-      {/* 带额外操作的筛选器 */}
+      {/* Filter with extra action */}
       <Filter.Checkbox
-        label="额外操作"
+        label="Extra action"
         value={priority}
         onChange={setPriority}
         extra={
@@ -53,9 +53,9 @@ const App: React.FC = () => {
           </Button>
         }
         options={[
-          { value: 'high', label: '高' },
-          { value: 'medium', label: '中' },
-          { value: 'low', label: '低' },
+          { value: 'high', label: 'High' },
+          { value: 'medium', label: 'Medium' },
+          { value: 'low', label: 'Low' },
         ]}
       />
     </Space>

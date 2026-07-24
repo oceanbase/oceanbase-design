@@ -6,7 +6,7 @@ const App: React.FC = () => {
   const [values, setValues] = useState<string[]>([]);
   const [statusValues, setStatusValues] = useState<string[]>([]);
 
-  // 状态选项（包含 color 属性，自动启用状态模式）
+  // Status options (with color property, enables status mode automatically)
   const statusOptions = [
     {
       label: 'success',
@@ -34,27 +34,27 @@ const App: React.FC = () => {
     <Space direction="vertical" size="large" style={{ width: '100%' }}>
       <Space wrap>
         <Filter.Checkbox
-          label="标签"
+          label="Tags"
           value={values}
           onChange={setValues}
           options={[
-            { value: 'tag1', label: '标签一' },
-            { value: 'tag2', label: '标签二' },
-            { value: 'tag3', label: '标签三' },
-            { value: 'tag4', label: '标签四' },
+            { value: 'tag1', label: 'Tag 1' },
+            { value: 'tag2', label: 'Tag 2' },
+            { value: 'tag3', label: 'Tag 3' },
+            { value: 'tag4', label: 'Tag 4' },
           ]}
         />
         <Filter.Checkbox
-          label="带计数"
+          label="With count"
           count
           options={[
-            { value: 'item1', label: '选项一' },
-            { value: 'item2', label: '选项二' },
-            { value: 'item3', label: '选项三' },
+            { value: 'item1', label: 'Option 1' },
+            { value: 'item2', label: 'Option 2' },
+            { value: 'item3', label: 'Option 3' },
           ]}
         />
         <Filter.Checkbox
-          label="显示总数"
+          label="Show total"
           count={{ showTotal: true }}
           options={[
             { value: 'a', label: 'A' },
@@ -67,20 +67,20 @@ const App: React.FC = () => {
 
       <Space wrap>
         <Filter.Checkbox
-          label="状态模式"
+          label="Status mode"
           value={statusValues}
           onChange={setStatusValues}
           options={statusOptions}
         />
         <Filter.Checkbox
-          label="状态模式-带计数"
+          label="Status mode with count"
           value={statusValues}
           onChange={setStatusValues}
           count
           options={statusOptions}
         />
         <Filter.Checkbox
-          label="状态模式-显示总数"
+          label="Status mode show total"
           value={statusValues}
           onChange={setStatusValues}
           count={{ showTotal: true }}
@@ -90,21 +90,21 @@ const App: React.FC = () => {
 
       <Space wrap>
         <Filter.Checkbox
-          label="开启搜索"
+          label="Show search"
           showSearch
           options={[
-            { value: 'tag1', label: '标签一' },
-            { value: 'tag2', label: '标签二' },
-            { value: 'tag3', label: '标签三' },
-            { value: 'tag4', label: '标签四' },
-            { value: 'tag5', label: '标签五' },
-            { value: 'tag6', label: '标签六' },
-            { value: 'tag7', label: '标签七' },
-            { value: 'tag8', label: '标签八' },
+            { value: 'tag1', label: 'Tag 1' },
+            { value: 'tag2', label: 'Tag 2' },
+            { value: 'tag3', label: 'Tag 3' },
+            { value: 'tag4', label: 'Tag 4' },
+            { value: 'tag5', label: 'Tag 5' },
+            { value: 'tag6', label: 'Tag 6' },
+            { value: 'tag7', label: 'Tag 7' },
+            { value: 'tag8', label: 'Tag 8' },
           ]}
         />
         <Filter.Checkbox
-          label="状态搜索"
+          label="Status search"
           showSearch
           value={statusValues}
           onChange={setStatusValues}

@@ -5,29 +5,29 @@ import { EllipsisOutlined } from '@oceanbase/icons';
 const App: React.FC = () => {
   const columns = [
     {
-      title: '姓名',
+      title: 'Name',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: '年龄',
+      title: 'Age',
       dataIndex: 'age',
       key: 'age',
     },
     {
-      title: '住址',
+      title: 'Address',
       dataIndex: 'address',
       key: 'address',
     },
     {
-      title: '操作',
+      title: 'Action',
       dataIndex: 'action',
       render: (text: string, record: any) => {
         return (
           <Space>
-            <Button size="middle">编辑</Button>
-            <Button shape="circle">编辑</Button>
-            <Button shape="round">编辑</Button>
+            <Button size="middle">Edit</Button>
+            <Button shape="circle">Edit</Button>
+            <Button shape="round">Edit</Button>
             <Button icon={<EllipsisOutlined />}></Button>
             <Button shape="circle" icon={<EllipsisOutlined />}></Button>
             <Button shape="round" icon={<EllipsisOutlined />}></Button>
@@ -41,9 +41,9 @@ const App: React.FC = () => {
   for (let i = 1; i < 100; i++) {
     dataSource.push({
       key: i,
-      name: '胡彦斌' + i,
+      name: 'John Brown' + i,
       age: 32,
-      address: `西湖区湖底公园${i}号`,
+      address: `New York No. ${i} Lake Park`,
     });
   }
 

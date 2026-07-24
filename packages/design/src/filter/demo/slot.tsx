@@ -50,10 +50,10 @@ const App: React.FC = () => {
 
   return (
     <Flex vertical gap={24}>
-      {/* dropdownRender 模式：自定义内容展示在 FilterButton + Popover 中 */}
+      {/* dropdownRender mode: custom content in FilterButton + Popover */}
       <Space wrap>
         <Filter.Slot
-          label="标签"
+          label="Tags"
           icon={<TagOutlined />}
           value={tags}
           onChange={setTags}
@@ -61,20 +61,20 @@ const App: React.FC = () => {
           dropdownRender={<TagPicker />}
         />
         <Filter.Slot
-          label="评分"
+          label="Rating"
           value={rating}
           onChange={setRating}
-          formatValue={val => `${val} 星及以上`}
+          formatValue={val => `${val} stars and above`}
           dropdownRender={<Rate />}
         />
-        <Filter.Slot label="禁用状态" disabled dropdownRender={<div>自定义内容</div>} />
-        <Filter.Slot label="加载中" loading dropdownRender={<div>自定义内容</div>} />
+        <Filter.Slot label="Disabled" disabled dropdownRender={<div>Custom content</div>} />
+        <Filter.Slot label="Loading" loading dropdownRender={<div>Custom content</div>} />
       </Space>
 
-      {/* children 直接渲染模式 + 响应式折叠 */}
+      {/* children render mode + responsive collapse */}
       <div>
         <Text>
-          通过 <code>children</code> 直接渲染自定义内容，调整宽度查看折叠效果：
+          Render custom content via <code>children</code>. Adjust width to see collapse behavior:
         </Text>
         <Slider
           min={100}
@@ -94,23 +94,28 @@ const App: React.FC = () => {
         }}
       >
         <Filter.ResponsiveGroup gap={8} showActions={false}>
-          <Filter.Slot label="搜索" value={keyword} onChange={setKeyword} formatValue={val => val}>
+          <Filter.Slot
+            label="Search"
+            value={keyword}
+            onChange={setKeyword}
+            formatValue={val => val}
+          >
             <Input
               prefix={<SearchOutlined />}
-              placeholder="搜索..."
+              placeholder="Search..."
               allowClear
               style={{ width: 160 }}
             />
           </Filter.Slot>
           <Filter.Select
-            label="状态"
+            label="Status"
             options={[
-              { value: 'open', label: '开启' },
-              { value: 'closed', label: '关闭' },
+              { value: 'open', label: 'Open' },
+              { value: 'closed', label: 'Closed' },
             ]}
           />
           <Filter.Slot
-            label="标签"
+            label="Tags"
             icon={<TagOutlined />}
             value={tags}
             onChange={setTags}
@@ -118,11 +123,11 @@ const App: React.FC = () => {
             dropdownRender={<TagPicker />}
           />
           <Filter.Select
-            label="优先级"
+            label="Priority"
             options={[
-              { value: 'high', label: '高' },
-              { value: 'medium', label: '中' },
-              { value: 'low', label: '低' },
+              { value: 'high', label: 'High' },
+              { value: 'medium', label: 'Medium' },
+              { value: 'low', label: 'Low' },
             ]}
           />
         </Filter.ResponsiveGroup>

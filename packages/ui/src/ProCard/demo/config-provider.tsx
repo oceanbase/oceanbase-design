@@ -30,9 +30,9 @@ export default () => {
       <ProCard
         bordered={bordered}
         headerBordered={divided}
-        title="这是标题"
+        title="Title"
         extra="extra"
-        tooltip="这是提示"
+        tooltip="This is a tooltip"
         style={{ width: 300 }}
       >
         <div>Card content</div>

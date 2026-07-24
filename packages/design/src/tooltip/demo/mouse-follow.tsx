@@ -31,8 +31,8 @@ const App: React.FC = () => {
                 padding: '100px 24px',
               }}
             >
-              <h2>普通内容</h2>
-              <div>Tooltip 位置默认为鼠标右下角</div>
+              <h2>Normal content</h2>
+              <div>Tooltip is positioned at the bottom-right of the cursor by default</div>
             </Card>
           </Tooltip>
         </Col>
@@ -48,8 +48,8 @@ const App: React.FC = () => {
                 padding: '100px 24px',
               }}
             >
-              <h2>较长内容</h2>
-              <div>Tooltip 位置会根据鼠标移动自动调整</div>
+              <h2>Long content</h2>
+              <div>Tooltip position adjusts automatically as the mouse moves</div>
             </Card>
           </Tooltip>
         </Col>

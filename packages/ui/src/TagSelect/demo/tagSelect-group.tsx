@@ -4,15 +4,15 @@ import { TagSelect } from '@oceanbase/ui';
 export default () => {
   const option = [
     {
-      label: '未选中选项',
+      label: 'Unselected Option',
       value: 1,
     },
     {
-      label: '未选中选项',
+      label: 'Unselected Option',
       value: 2,
     },
     {
-      label: '未选中选项',
+      label: 'Unselected Option',
       value: 3,
     },
   ];
@@ -23,7 +23,7 @@ export default () => {
 
   return (
     <TagSelect.Group
-      title="我是一个标题"
+      title="I am a title"
       options={option}
       onChange={handleChange}
       value={checked}

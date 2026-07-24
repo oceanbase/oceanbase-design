@@ -4,10 +4,10 @@ import { ContentWithQuestion } from '@oceanbase/ui';
 export default () => {
   return (
     <ContentWithQuestion
-      content="付费服务占比"
+      content="Paid service ratio"
       tooltip={{
         title:
-          '登记的服务人天中有服务包归属的百分比，计算公式为 (有服务包归属的服务人天总和)/(已投入人天)',
+          'Percentage of registered service person-days attributed to a service package, calculated as (total person-days with a service package) / (total person-days invested)',
       }}
       prefixIcon={true}
       suffixIcon={null}

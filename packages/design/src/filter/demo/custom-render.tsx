@@ -5,9 +5,9 @@ const App: React.FC = () => {
   const [value, setValue] = useState<string>('');
 
   const options = [
-    { value: 'success', label: '成功' },
-    { value: 'warning', label: '警告' },
-    { value: 'error', label: '错误' },
+    { value: 'success', label: 'Success' },
+    { value: 'warning', label: 'Warning' },
+    { value: 'error', label: 'Error' },
   ];
 
   const colorMap: Record<string, string> = {
@@ -19,7 +19,7 @@ const App: React.FC = () => {
   return (
     <Space wrap>
       <Filter.Select
-        label="自定义渲染"
+        label="Custom render"
         value={value}
         onChange={setValue}
         options={options}

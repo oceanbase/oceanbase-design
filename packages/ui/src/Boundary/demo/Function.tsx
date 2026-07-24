@@ -5,22 +5,22 @@ export default () => {
   const [state, setState] = useState('NOT_OPEN');
   const MONITOR_OPEN_CONFIG = {
     NOT_OPEN: {
-      title: '未开启性能监控',
+      title: 'Performance monitoring is not enabled',
       imageUrl:
         'https://gw.alipayobjects.com/mdn/rms_6fd3f1/afts/img/A*EIJaSJDIP2kAAAAAAAAAAAAAARQnAQ',
-      buttonText: '开启性能监控',
+      buttonText: 'Enable performance monitoring',
     },
     PENDING: {
-      title: '开启性能监控提交成功',
+      title: 'Performance monitoring enabled successfully',
       imageUrl:
         'https://gw.alipayobjects.com/mdn/rms_6fd3f1/afts/img/A*Qf2zSKyaJYwAAAAAAAAAAAAAARQnAQ',
       buttonText: '',
     },
     CANNOT_ACCESS: {
-      title: '性能监控开启失败',
+      title: 'Failed to enable performance monitoring',
       imageUrl:
         'https://gw.alipayobjects.com/mdn/rms_6fd3f1/afts/img/A*pwK7QqOf-dwAAAAAAAAAAAAAARQnAQ',
-      buttonText: '重新开启性能监控',
+      buttonText: 'Re-enable performance monitoring',
     },
   };
 

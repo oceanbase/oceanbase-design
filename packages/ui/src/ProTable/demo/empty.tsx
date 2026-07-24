@@ -4,23 +4,25 @@ import { ProTable } from '@oceanbase/ui';
 const App: React.FC = () => {
   const columns = [
     {
-      title: '姓名',
+      title: 'Name',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: '年龄',
+      title: 'Age',
       dataIndex: 'age',
       key: 'age',
     },
     {
-      title: '住址',
+      title: 'Address',
       dataIndex: 'address',
       key: 'address',
     },
   ];
 
-  return <ProTable headerTitle="高级表格" cardBordered={true} columns={columns} dataSource={[]} />;
+  return (
+    <ProTable headerTitle="Advanced Table" cardBordered={true} columns={columns} dataSource={[]} />
+  );
 };
 
 export default App;

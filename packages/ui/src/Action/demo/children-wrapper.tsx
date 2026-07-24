@@ -66,14 +66,14 @@ export default () => {
   return (
     <Space direction="vertical" size="middle">
       <Space align="center" size="small">
-        <span>显示「条件展示」操作项</span>
+        <span>Show conditional action item</span>
         <Switch checked={showConditionalAction} onChange={setShowConditionalAction} />
       </Space>
       <Action.Group>
         <>
           <Action.Button>action1</Action.Button>
-          <Action.Button disabled tooltip={'禁用展示tooltip'}>
-            禁用提示
+          <Action.Button disabled tooltip={'Show tooltip when disabled'}>
+            Disabled with tooltip
           </Action.Button>
           <Action.Button
             onClick={() => {
@@ -82,7 +82,9 @@ export default () => {
           >
             action3
           </Action.Button>
-          {showConditionalAction && <Action.Button key="cond-true">条件展示</Action.Button>}
+          {showConditionalAction && (
+            <Action.Button key="cond-true">Conditional action</Action.Button>
+          )}
           <ActionButton4 />
           <ActionButton5 />
         </>
@@ -90,8 +92,8 @@ export default () => {
       <Action.Group>
         <>
           <Action.Link>action1</Action.Link>
-          <Action.Link disabled tooltip={'禁用展示tooltip'}>
-            禁用提示
+          <Action.Link disabled tooltip={'Show tooltip when disabled'}>
+            Disabled with tooltip
           </Action.Link>
           <Action.Link
             onClick={() => {
@@ -100,7 +102,9 @@ export default () => {
           >
             action3
           </Action.Link>
-          {showConditionalAction && <Action.Link key="cond-true-link">条件展示</Action.Link>}
+          {showConditionalAction && (
+            <Action.Link key="cond-true-link">Conditional action</Action.Link>
+          )}
           <ActionLink4 />
           <ActionLink5 />
         </>

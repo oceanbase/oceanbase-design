@@ -15,9 +15,9 @@ exports[`PageContainer > basic 1`] = `
       >
         <span
           class="ant-page-header-heading-title"
-          title="页面标题"
+          title="Page Title"
         >
-          页面标题
+          Page Title
         </span>
       </div>
       <span
@@ -34,7 +34,7 @@ exports[`PageContainer > basic 1`] = `
               type="button"
             >
               <span>
-                次要按钮
+                Secondary
               </span>
             </button>
           </div>
@@ -46,7 +46,7 @@ exports[`PageContainer > basic 1`] = `
               type="button"
             >
               <span>
-                主要按钮
+                Primary
               </span>
             </button>
           </div>
@@ -110,7 +110,7 @@ exports[`PageContainer > basic 1`] = `
                 <div
                   class="ant-descriptions-title"
                 >
-                  基本信息
+                  Basic Info
                 </div>
               </div>
               <div
@@ -131,7 +131,7 @@ exports[`PageContainer > basic 1`] = `
                           <span
                             class="ant-descriptions-item-label"
                           >
-                            创建人
+                            Creator
                           </span>
                           <span
                             class="ant-descriptions-item-content"
@@ -140,7 +140,7 @@ exports[`PageContainer > basic 1`] = `
                               aria-describedby="test-id"
                               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                             >
-                              曲丽丽
+                              Lili Qu
                             </span>
                           </span>
                         </div>
@@ -155,7 +155,7 @@ exports[`PageContainer > basic 1`] = `
                           <span
                             class="ant-descriptions-item-label"
                           >
-                            电话号码
+                            Phone
                           </span>
                           <span
                             class="ant-descriptions-item-content"
@@ -179,7 +179,7 @@ exports[`PageContainer > basic 1`] = `
                           <span
                             class="ant-descriptions-item-label"
                           >
-                            地址
+                            Address
                           </span>
                           <span
                             class="ant-descriptions-item-content"
@@ -188,7 +188,7 @@ exports[`PageContainer > basic 1`] = `
                               aria-describedby="test-id"
                               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                             >
-                              浙江省杭州市西湖区工专路
+                              New York No. 1 Lake Park
                             </span>
                           </span>
                         </div>
@@ -207,7 +207,7 @@ exports[`PageContainer > basic 1`] = `
                           <span
                             class="ant-descriptions-item-label"
                           >
-                            关联表单
+                            Related Form
                           </span>
                           <span
                             class="ant-descriptions-item-content"
@@ -233,7 +233,7 @@ exports[`PageContainer > basic 1`] = `
                           <span
                             class="ant-descriptions-item-label"
                           >
-                            创建时间
+                            Created At
                           </span>
                           <span
                             class="ant-descriptions-item-content"
@@ -257,7 +257,7 @@ exports[`PageContainer > basic 1`] = `
                           <span
                             class="ant-descriptions-item-label"
                           >
-                            备注
+                            Remarks
                           </span>
                           <span
                             class="ant-descriptions-item-content"
@@ -266,7 +266,7 @@ exports[`PageContainer > basic 1`] = `
                               aria-describedby="test-id"
                               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                             >
-                              这是备注
+                              Sample remarks
                             </span>
                           </span>
                         </div>
@@ -299,9 +299,9 @@ exports[`PageContainer > title 1`] = `
       >
         <span
           class="ant-page-header-heading-title"
-          title="页面标题"
+          title="Page Title"
         >
-          页面标题
+          Page Title
         </span>
       </div>
     </div>
@@ -330,7 +330,7 @@ exports[`PageContainer > title 1`] = `
                 <div
                   class="ant-descriptions-title"
                 >
-                  基本信息
+                  Basic Info
                 </div>
               </div>
               <div
@@ -351,7 +351,7 @@ exports[`PageContainer > title 1`] = `
                           <span
                             class="ant-descriptions-item-label"
                           >
-                            创建人
+                            Creator
                           </span>
                           <span
                             class="ant-descriptions-item-content"
@@ -360,7 +360,7 @@ exports[`PageContainer > title 1`] = `
                               aria-describedby="test-id"
                               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                             >
-                              曲丽丽
+                              Lili Qu
                             </span>
                           </span>
                         </div>
@@ -375,7 +375,7 @@ exports[`PageContainer > title 1`] = `
                           <span
                             class="ant-descriptions-item-label"
                           >
-                            电话号码
+                            Phone
                           </span>
                           <span
                             class="ant-descriptions-item-content"
@@ -399,7 +399,7 @@ exports[`PageContainer > title 1`] = `
                           <span
                             class="ant-descriptions-item-label"
                           >
-                            地址
+                            Address
                           </span>
                           <span
                             class="ant-descriptions-item-content"
@@ -408,7 +408,7 @@ exports[`PageContainer > title 1`] = `
                               aria-describedby="test-id"
                               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                             >
-                              浙江省杭州市西湖区工专路
+                              New York No. 1 Lake Park
                             </span>
                           </span>
                         </div>
@@ -427,7 +427,7 @@ exports[`PageContainer > title 1`] = `
                           <span
                             class="ant-descriptions-item-label"
                           >
-                            关联表单
+                            Related Form
                           </span>
                           <span
                             class="ant-descriptions-item-content"
@@ -453,7 +453,7 @@ exports[`PageContainer > title 1`] = `
                           <span
                             class="ant-descriptions-item-label"
                           >
-                            创建时间
+                            Created At
                           </span>
                           <span
                             class="ant-descriptions-item-content"
@@ -477,7 +477,7 @@ exports[`PageContainer > title 1`] = `
                           <span
                             class="ant-descriptions-item-label"
                           >
-                            备注
+                            Remarks
                           </span>
                           <span
                             class="ant-descriptions-item-content"
@@ -486,7 +486,7 @@ exports[`PageContainer > title 1`] = `
                               aria-describedby="test-id"
                               class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
                             >
-                              这是备注
+                              Sample remarks
                             </span>
                           </span>
                         </div>

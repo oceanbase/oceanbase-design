@@ -14,7 +14,7 @@ const App: React.FC = () => {
   const categoryOptions = [
     {
       value: 'frontend',
-      label: '前端',
+      label: 'Frontend',
       children: [
         { value: 'react', label: 'React' },
         { value: 'vue', label: 'Vue' },
@@ -23,7 +23,7 @@ const App: React.FC = () => {
     },
     {
       value: 'backend',
-      label: '后端',
+      label: 'Backend',
       children: [
         { value: 'java', label: 'Java' },
         { value: 'python', label: 'Python' },
@@ -35,7 +35,7 @@ const App: React.FC = () => {
   return (
     <Space direction="vertical" size="large" style={{ width: '100%' }}>
       <div>
-        <Text>调整容器宽度来查看响应式折叠效果：</Text>
+        <Text>Adjust container width to see responsive collapse:</Text>
         <Slider
           min={100}
           max={700}
@@ -70,38 +70,38 @@ const App: React.FC = () => {
           }}
         >
           <Filter.Select
-            label="状态"
+            label="Status"
             value={status}
             onChange={setStatus}
             options={[
-              { value: 'running', label: '运行中' },
-              { value: 'stopped', label: '已停止' },
-              { value: 'pending', label: '待处理' },
+              { value: 'running', label: 'Running' },
+              { value: 'stopped', label: 'Stopped' },
+              { value: 'pending', label: 'Pending' },
             ]}
           />
           <Filter.Select
-            label="类型"
+            label="Type"
             value={type}
             onChange={setType}
             options={[
-              { value: 'type1', label: '类型一' },
-              { value: 'type2', label: '类型二' },
-              { value: 'type3', label: '类型三' },
+              { value: 'type1', label: 'Type 1' },
+              { value: 'type2', label: 'Type 2' },
+              { value: 'type3', label: 'Type 3' },
             ]}
           />
           <Filter.Checkbox
-            label="优先级"
+            label="Priority"
             value={priority}
             onChange={setPriority}
             count
             options={[
-              { value: 'high', label: '高' },
-              { value: 'medium', label: '中' },
-              { value: 'low', label: '低' },
+              { value: 'high', label: 'High' },
+              { value: 'medium', label: 'Medium' },
+              { value: 'low', label: 'Low' },
             ]}
           />
           <Filter.Cascader
-            label="分类"
+            label="Category"
             value={category}
             onChange={setCategory}
             multiple
@@ -109,17 +109,18 @@ const App: React.FC = () => {
             options={categoryOptions}
           />
           <Filter.Select
-            label="来源"
+            label="Source"
             options={[
-              { value: 'internal', label: '内部' },
-              { value: 'external', label: '外部' },
+              { value: 'internal', label: 'Internal' },
+              { value: 'external', label: 'External' },
             ]}
           />
         </Filter.ResponsiveGroup>
       </div>
 
       <Text type="secondary">
-        当容器宽度不足以显示所有筛选器时，后面的筛选器会自动折叠到“筛选”按钮中。
+        When the container is too narrow to show all filters, the remaining filters are
+        automatically collapsed into the &quot;Filter&quot; button.
       </Text>
     </Space>
   );

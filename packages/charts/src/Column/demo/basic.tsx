@@ -5,35 +5,35 @@ import type { ColumnConfig } from '@oceanbase/charts';
 export default () => {
   const data = [
     {
-      type: '家具',
+      type: 'Furniture',
       sales: 38,
     },
     {
-      type: '粮油',
+      type: 'Groceries',
       sales: 52,
     },
     {
-      type: '生鲜',
+      type: 'Fresh',
       sales: 61,
     },
     {
-      type: '美容',
+      type: 'Beauty',
       sales: 145,
     },
     {
-      type: '母婴',
+      type: 'Baby',
       sales: 48,
     },
     {
-      type: '食品',
+      type: 'Food',
       sales: 38,
     },
     {
-      type: '饮料',
+      type: 'Beverages',
       sales: 38,
     },
     {
-      type: '清洁',
+      type: 'Cleaning',
       sales: 38,
     },
   ];
@@ -42,7 +42,7 @@ export default () => {
     xField: 'type',
     yField: 'sales',
     label: {
-      // 可手动配置 label 数据标签位置
+      // Position of data labels can be set manually
       position: 'top',
     },
   };

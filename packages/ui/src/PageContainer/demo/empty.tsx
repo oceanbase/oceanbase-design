@@ -9,7 +9,7 @@ export default () => {
   return (
     <PageContainer
       header={{
-        title: '总览',
+        title: 'Dashboard',
       }}
     >
       <Card
@@ -20,8 +20,8 @@ export default () => {
           height: 'calc(100vh - 72px - 24px)',
         }}
       >
-        <Empty image={Empty.PRESENTED_IMAGE_COLORED} title="创建第一个集群">
-          <Button type="primary">立即创建</Button>
+        <Empty image={Empty.PRESENTED_IMAGE_COLORED} title="Create your first cluster">
+          <Button type="primary">Create Now</Button>
         </Empty>
       </Card>
     </PageContainer>

@@ -5,27 +5,27 @@ const Demo: React.FC = () => {
   const [count, setCount] = useState(1);
   const [data, setData] = useState([
     {
-      type: '分类一',
+      type: 'Category A',
       value: 27,
     },
     {
-      type: '分类二',
+      type: 'Category B',
       value: 25,
     },
     {
-      type: '分类三',
+      type: 'Category C',
       value: 18,
     },
     {
-      type: '分类四',
+      type: 'Category D',
       value: 15,
     },
     {
-      type: '分类五',
+      type: 'Category E',
       value: 10,
     },
     {
-      type: '其他',
+      type: 'Other',
       value: 5,
     },
   ]);
@@ -50,21 +50,21 @@ const Demo: React.FC = () => {
           marginLeft: 8,
         }}
       >
-        外部状态改变不会重新渲染
+        External state changes will not re-render
       </button>
       <button
         onClick={() => {
           setData([
             {
-              type: '分类四',
+              type: 'Category D',
               value: 15,
             },
             {
-              type: '分类五',
+              type: 'Category E',
               value: 10,
             },
             {
-              type: '其他',
+              type: 'Other',
               value: Math.random() * 100,
             },
           ]);
@@ -73,7 +73,7 @@ const Demo: React.FC = () => {
           marginLeft: 8,
         }}
       >
-        数据改变重新渲染
+        Data changes trigger re-render
       </button>
       <Pie {...config} />
     </div>

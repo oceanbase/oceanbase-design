@@ -27,35 +27,35 @@ const App: React.FC = () => {
 
   const columns: ColumnsType<Record<string, any>> = [
     {
-      title: '姓名',
+      title: 'Name',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: '年龄',
+      title: 'Age',
       dataIndex: 'age',
       key: 'age',
     },
     {
-      title: '住址',
+      title: 'Address',
       dataIndex: 'address',
       key: 'address',
     },
   ];
 
-  // 开启 rowspan 时使用 4 行，与 demo/rowspan.tsx 数据行数一致，便于两两合并
+  // Use 4 rows when rowspan is enabled, matching demo/rowspan.tsx for pairwise merge
   const rowCount = hasData ? (rowspan ? 4 : 5) : 0;
   const dataSource: Record<string, any>[] = [];
   for (let i = 1; i <= rowCount; i++) {
     dataSource.push({
       key: i,
-      name: '胡彦斌' + i,
+      name: 'John Brown' + i,
       age: 32,
-      address: `西湖区湖底公园${i}号`,
+      address: `New York No. ${i} Lake Park`,
     });
   }
 
-  // 参考 dynamic-settings 的 scroll 配置
+  // Scroll config aligned with dynamic-settings demo
   const scroll: { x?: number | string; y?: number | string } = {};
   if (yScroll) {
     scroll.y = 240;
@@ -69,7 +69,7 @@ const App: React.FC = () => {
     tableColumns[0].fixed = 'left';
     tableColumns[tableColumns.length - 1].fixed = 'right';
   }
-  // 第一列行合并，onCell 规则与 demo/rowspan.tsx 一致
+  // Rowspan on the first column; onCell rules match demo/rowspan.tsx
   if (rowspan) {
     const rowspanOnCell: NonNullable<ColumnsType<Record<string, any>>[number]['onCell']> = (
       _,

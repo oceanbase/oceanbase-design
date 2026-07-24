@@ -6,7 +6,7 @@ export default () => {
   const linkOnClick = useCallback(() => {
     const promise: Promise<void> = new Promise(resolve => {
       setTimeout(() => {
-        message.success('成功点击link');
+        message.success('Link clicked successfully');
         resolve();
       }, 2000);
     });
@@ -27,7 +27,7 @@ export default () => {
       <Action.Link key="action4" onClick={linkOnClick}>
         action4
       </Action.Link>
-      {/** 基础 loading 控制 */}
+      {/** Basic loading control */}
       <Action.Link key="action5" loading>
         action5
       </Action.Link>

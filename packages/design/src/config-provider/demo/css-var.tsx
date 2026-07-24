@@ -8,21 +8,24 @@ const CssVarDemo: React.FC = () => {
   return (
     <div>
       <Card
-        title="CSS 变量模式配置"
+        title="CSS Variable Mode Configuration"
         style={{ marginBottom: 24 }}
         extra={
           <Space>
-            <span>启用 CSS 变量:</span>
+            <span>Enable CSS Variables:</span>
             <Switch checked={cssVarEnabled} onChange={setCssVarEnabled} />
-            <span>启用 Hash:</span>
+            <span>Enable Hash:</span>
             <Switch checked={hashed} onChange={setHashed} disabled={!cssVarEnabled} />
           </Space>
         }
       >
-        <p>CSS 变量模式允许使用 CSS 自定义属性来动态切换主题，无需重新渲染组件。</p>
         <p>
-          启用后，你可以在浏览器开发者工具中看到生成的 CSS 变量，例如：
-          <code>--ant-color-primary</code>、<code>--ant-color-success</code> 等。
+          CSS variable mode allows you to switch themes dynamically using CSS custom properties
+          without re-rendering components.
+        </p>
+        <p>
+          After enabling, you can see generated CSS variables in browser DevTools, for example:
+          <code>--ant-color-primary</code>, <code>--ant-color-success</code>, etc.
         </p>
       </Card>
 
@@ -35,7 +38,7 @@ const CssVarDemo: React.FC = () => {
           },
         }}
       >
-        <Card title="组件示例">
+        <Card title="Component Examples">
           <Space direction="vertical" size="middle" style={{ width: '100%' }}>
             <Space>
               <Button type="primary">Primary Button</Button>
@@ -62,18 +65,22 @@ const CssVarDemo: React.FC = () => {
       </ConfigProvider>
 
       {cssVarEnabled && (
-        <Card title="使用提示" style={{ marginTop: 24 }}>
+        <Card title="Usage Tips" style={{ marginTop: 24 }}>
           <ul>
             <li>
-              在浏览器开发者工具中，检查元素可以看到生成的 CSS 变量，例如：
+              In browser DevTools, inspect elements to see generated CSS variables, for example:
               <code>--ant-color-primary</code>
             </li>
-            <li>可以通过修改 CSS 变量来动态改变主题，无需重新渲染组件</li>
             <li>
-              在 React 16/17 中，需要手动指定 <code>key</code> 属性以确保主题隔离
+              You can dynamically change the theme by modifying CSS variables without re-rendering
+              components
             </li>
             <li>
-              当只使用单一版本时，可以设置 <code>hashed: false</code> 来减少样式表大小
+              In React 16/17, manually specify the <code>key</code> prop to ensure theme isolation
+            </li>
+            <li>
+              When using a single version only, set <code>hashed: false</code> to reduce stylesheet
+              size
             </li>
           </ul>
         </Card>
