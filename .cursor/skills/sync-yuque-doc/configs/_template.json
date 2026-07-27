@@ -1,0 +1,19 @@
+{
+  "slug": "example",
+  "yuqueUrl": "https://yuque.antfin.com/<group>/<book>/<doc-slug>",
+  "outputs": {
+    "zh-CN": "docs/spec/example.zh-CN.md",
+    "en": "docs/spec/example.md"
+  },
+  "huameiSpaceId": "S_nZdyOe",
+  "skipImages": [],
+  "stripBlocks": [],
+  "frontmatter": {
+    "zh-CN": "---\ngroup: Design Foundation 设计基础\nsubGroup: Example 示例\ntitle: Example 示例\norder: 99\n---",
+    "en": "---\ngroup: Design Foundation\nsubGroup: Example\ntitle: Example\norder: 99\n---"
+  },
+  "siteIntro": {
+    "zh-CN": "",
+    "en": ""
+  }
+}

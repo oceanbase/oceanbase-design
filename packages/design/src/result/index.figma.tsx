@@ -20,6 +20,7 @@ figma.connect(Result, '<FIGMA_OCEANBASE_RESULT>', {
       error: 'error',
       warning: 'warning',
       processing: 'processing',
+      normal: 'normal',
       '403': '403',
       '404': '404',
       '500': '500',
@@ -29,6 +30,7 @@ figma.connect(Result, '<FIGMA_OCEANBASE_RESULT>', {
       error: 'Error',
       warning: 'Warning',
       processing: 'Processing',
+      normal: 'Normal',
       '403': '403',
       '404': '404',
       '500': '500',
@@ -57,7 +59,7 @@ figma.connect(Result, '<FIGMA_OCEANBASE_RESULTEMPTY>', {
     emptyNode: figma.enum('status', {
       页面无数据: (
         <Result
-          icon={<Skeleton.Avatar active size={160} shape="square" />}
+          icon={<Skeleton.Avatar active size={100} shape="square" />}
           title="Create Instance"
           subTitle="Here is the description.Here is the description."
           extra={
@@ -71,7 +73,7 @@ figma.connect(Result, '<FIGMA_OCEANBASE_RESULTEMPTY>', {
       ),
       欢迎使用: (
         <Flex gap={32} align="center">
-          <Skeleton.Avatar active size={160} shape="round" />
+          <Skeleton.Avatar active size={100} shape="round" />
           <Flex vertical flex="1">
             <Result
               title="Welcome"
@@ -89,7 +91,7 @@ figma.connect(Result, '<FIGMA_OCEANBASE_RESULTEMPTY>', {
       ),
       区块无数据: (
         <Result
-          icon={<Skeleton.Avatar active size={56} shape="square" />}
+          icon={<Skeleton.Avatar active size={48} shape="square" />}
           title={<Typography.Text type="secondary">No data.</Typography.Text>}
         />
       ),

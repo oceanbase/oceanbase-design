@@ -219,6 +219,10 @@ async function generateLLms(api: IApi) {
   const designMd = path.join(root, 'public/design.md');
   if (fs.existsSync(designMd)) {
     fs.copyFileSync(designMd, path.join(siteDir, 'design.md'));
+    // Mirror for direct /zh-CN/design.md access (locale-prefixed guess URLs)
+    const zhDir = path.join(siteDir, 'zh-CN');
+    fs.mkdirSync(zhDir, { recursive: true });
+    fs.copyFileSync(designMd, path.join(zhDir, 'design.md'));
   }
 
   api.logger.event(

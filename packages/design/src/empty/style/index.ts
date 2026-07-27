@@ -11,7 +11,7 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
   return {
     [`${componentCls}`]: {
       [`${componentCls}-image`]: {
-        height: 160,
+        height: 100,
         marginBottom: 0,
       },
       [`${componentCls}-description`]: {
@@ -77,6 +77,9 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+      [`${componentCls}-image`]: {
+        height: 200,
+      },
       [`${componentCls}-description`]: {
         marginLeft: token.marginXXL,
         textAlign: 'left',
@@ -91,7 +94,8 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
 
     [`${componentCls}-small`]: {
       [`${componentCls}-image`]: {
-        height: 54,
+        height: 48,
+        color: colorTextTertiary,
       },
     },
   };

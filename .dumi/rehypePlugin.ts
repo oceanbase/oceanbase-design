@@ -2,6 +2,14 @@ import assert from 'assert';
 import type { HastRoot, UnifiedTransformer } from 'dumi';
 import { unistUtilVisit } from 'dumi';
 
+/** Agent/static assets live at site root — never prefix with /zh-CN */
+function shouldSkipLocalePrefix(href: string): boolean {
+  if (href.startsWith('/.well-known/')) return true;
+  // Raw .md / .txt exports (design.md, llms.txt, /components/foo.md, /docs/**/*.md)
+  if (/\.(md|txt)$/.test(href)) return true;
+  return false;
+}
+
 /**
  * plugin for modify hast tree when docs compiling
  */
@@ -71,7 +79,11 @@ function rehypeAntd(): UnifiedTransformer<HastRoot> {
           node.properties!.target = '_blank';
         }
         // 内部链接：仅中文文档加 /zh-CN 前缀，英文在根路径不加前缀
-        else if (href?.startsWith('/') && !href.startsWith('/zh-CN')) {
+        else if (
+          href?.startsWith('/') &&
+          !href.startsWith('/zh-CN') &&
+          !shouldSkipLocalePrefix(href)
+        ) {
           const filePath = filename ?? (vFile as any).path ?? '';
           if (/\.zh-CN\.(md|mdx)$/.test(filePath)) {
             const newHref = `/zh-CN${href}`;
