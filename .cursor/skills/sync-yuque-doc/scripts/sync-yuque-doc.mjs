@@ -4,6 +4,7 @@
  *
  * Usage:
  *   node sync-yuque-doc.mjs --config <config.json> --body <yuque-body.md>
+ *   node sync-yuque-doc.mjs --config <config.json> --body-stdin
  *   node sync-yuque-doc.mjs --config <config.json> --body <yuque-body.md> --url-map <map.json>
  *   node sync-yuque-doc.mjs --config <config.json> --body <yuque-body.md> --skip-upload
  *
@@ -27,10 +28,11 @@ function parseArgs(argv) {
     else if (a === '--url-map') args.urlMap = argv[++i];
     else if (a === '--skip-upload') args.skipUpload = true;
     else if (a === '--dry-run') args.dryRun = true;
+    else if (a === '--body-stdin') args.bodyStdin = true;
     else throw new Error(`Unknown arg: ${a}`);
   }
-  if (!args.config || !args.body) {
-    throw new Error('Required: --config <json> --body <yuque-body.md>');
+  if (!args.config || (!args.body && !args.bodyStdin)) {
+    throw new Error('Required: --config <json> and --body <yuque-body.md> or --body-stdin');
   }
   return args;
 }
@@ -180,8 +182,12 @@ async function main() {
     ? args.config
     : path.resolve(process.cwd(), args.config);
   const config = loadJson(configPath);
-  const bodyPath = path.isAbsolute(args.body) ? args.body : path.resolve(process.cwd(), args.body);
-  const body = fs.readFileSync(bodyPath, 'utf8');
+  const body = args.bodyStdin
+    ? fs.readFileSync(0, 'utf8')
+    : fs.readFileSync(
+        path.isAbsolute(args.body) ? args.body : path.resolve(process.cwd(), args.body),
+        'utf8',
+      );
 
   const skipSet = new Set(config.skipImages || []);
   const imageUrls = extractImageUrls(body).filter((u) => !skipSet.has(u.split('/').pop()));

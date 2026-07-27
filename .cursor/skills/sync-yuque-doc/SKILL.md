@@ -23,12 +23,13 @@ CDN pattern: `https://mdn.alipayobjects.com/huamei_qpzozj/afts/img/.../original`
 
 ```bash
 # 1. Agent: fetch Yuque body via MCP → save to /tmp/yuque-body.md
-# 2. Run sync (download images → Huamei → write zh-CN)
+# 2. Generate ephemeral config → /tmp/sync-yuque-doc-{slug}.json (from _template + existing spec frontmatter)
+# 3. Run sync (download images → Huamei → write zh-CN)
 node .cursor/skills/sync-yuque-doc/scripts/sync-yuque-doc.mjs \
-  --config .cursor/skills/sync-yuque-doc/configs/product-graphic.json \
+  --config /tmp/sync-yuque-doc-product-graphic.json \
   --body /tmp/yuque-body.md
 
-# 3. Generate English with translate-docs skill (docs/spec/product-graphic.zh-CN.md → product-graphic.md)
+# 4. Generate English with translate-docs skill (docs/spec/product-graphic.zh-CN.md → product-graphic.md)
 ```
 
 ## Workflow
@@ -39,11 +40,11 @@ Copy this checklist and complete every step:
 Sync progress:
 - [ ] 1. Resolve Yuque URL → doc_id
 - [ ] 2. Fetch body (format=md) + save to temp file
-- [ ] 3. Load or create sync config for target slug
+- [ ] 3. Generate ephemeral sync config in `/tmp/sync-yuque-doc-{slug}.json` (do not keep under `configs/`)
 - [ ] 4. Run sync-yuque-doc.mjs (images + transform + write zh-CN)
 - [ ] 5. Generate English (`translate-docs` skill)
 - [ ] 6. Validate (grep + dev preview)
-- [ ] 7. Remove temp assets; do NOT commit url-map / downloaded images
+- [ ] 7. Remove temp assets; do NOT commit url-map / downloaded images / sync config JSON
 ```
 
 ### Step 1–2: Fetch from Yuque
@@ -55,9 +56,13 @@ skylark_doc_detail({ doc_id, format: "md" }) → save body to /tmp/yuque-body.md
 
 Use `format: "md"` (not `ymd`) unless you need section-level editing via `skylark_doc_section_*`.
 
-### Step 3: Config
+### Step 3: Config (ephemeral)
 
-Copy [configs/\_template.json](configs/_template.json) → `configs/{slug}.json`. Set:
+**Do not** save `{slug}.json` under `configs/`. Each sync run:
+
+1. Copy [configs/\_template.json](configs/_template.json) → `/tmp/sync-yuque-doc-{slug}.json`
+2. Set fields below (read **existing** `docs/spec/{slug}.zh-CN.md` for `frontmatter` / `siteIntro` when re-syncing)
+3. Delete the temp config when done (or leave in `/tmp`)
 
 - `outputs.zh-CN` — e.g. `docs/spec/product-graphic.zh-CN.md`
 - `outputs.en` — e.g. `docs/spec/product-graphic.md`
@@ -67,13 +72,11 @@ Copy [configs/\_template.json](configs/_template.json) → `configs/{slug}.json`
 - `skipImages` — filenames that 404 on Yuque CDN (screenshots only; keep illustration)
 - `stripBlocks` — regex list (e.g. Figma `:::tips` blocks)
 
-See [product-graphic.json](configs/product-graphic.json) for a real example.
-
 ### Step 4: Run sync script
 
 ```bash
 node .cursor/skills/sync-yuque-doc/scripts/sync-yuque-doc.mjs \
-  --config .cursor/skills/sync-yuque-doc/configs/{slug}.json \
+  --config /tmp/sync-yuque-doc-{slug}.json \
   --body /tmp/yuque-body.md \
   [--url-map /tmp/huamei-url-map.json]   # skip download/upload if map exists
 ```
@@ -146,6 +149,7 @@ Full reference: [references/TRANSFORM-RULES.md](references/TRANSFORM-RULES.md)
 
 - Commit downloaded images under `public/assets/spec/`
 - Commit `/tmp/huamei-url-map.json` (regenerate on sync)
+- Keep per-doc sync config under `configs/` (only `_template.json` belongs there)
 - Replace tables with flex layouts for “prettier” rendering
 - Add Figma / Yuque links unless user asks
 - Use `subAssets[0]` WebP for spec docs — use **`asset.assetUrl` (`/original`)** for consistency with existing spec pages
@@ -181,7 +185,7 @@ Yuque MD (intranetproxy URLs)
 
 | Scenario | Tool |
 | --- | --- |
-| First sync / Yuque structure changed | Update config `stripBlocks` / `skipImages`, re-run sync script |
+| First sync / Yuque structure changed | Regenerate `/tmp/sync-yuque-doc-{slug}.json` (`stripBlocks` / `skipImages`), re-run sync |
 | CDN URLs changed | Re-run sync with existing `--url-map` |
 | Dumi-only layout (flex rows, `.product-graphic-spec`) | Edit `docs/spec/*.zh-CN.md` directly; then `translate-docs` for EN |
 
@@ -191,7 +195,7 @@ Yuque MD (intranetproxy URLs)
 2. **MCP auth**: if `skylark_*` fails, ask user to authenticate 语雀 MCP first.
 3. **huamei not found**: `source ~/.zshrc; tnpm i -g @alipay/huamei-cli`
 4. After sync, summarize: files written, image count, skipped images, stripped blocks.
-5. Changelog: spec doc sync is user-facing → mention in PR/design-CHANGELOG if part of a release task.
+5. Changelog: spec doc sync is user-facing → mention in **PR changelog table**; do not edit `docs/design/design-CHANGELOG*.md` unless doing a release pass.
 
 ## Related
 

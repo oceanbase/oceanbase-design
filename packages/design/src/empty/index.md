@@ -27,6 +27,7 @@ nav:
 <code src="./demo/steps.tsx" title="步骤提示"></code>
 <code src="./demo/over-length.tsx" title="超长内容" description="为了避免无限拉伸，限制描述区的最大宽度为 600px、步骤区的最大宽度为 1000px。"></code>
 <code src="./demo/horizontal.tsx" title="横向布局" description="图片为 PRESENTED_IMAGE_GUIDE，常用于功能开通等引导类场景。"></code>
+<code src="./demo/responsive.tsx" title="横向自适应" description="horizontal 布局在容器变窄时自动切换为纵向布局，并在更窄时隐藏插图。"></code>
 <code src="./demo/with-page-container.tsx" title="和页容器搭配使用"></code>
 <code src="./demo/config-provider.tsx" title="全局组件的 Empty 样式"></code>
 

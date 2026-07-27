@@ -18,6 +18,7 @@ dist
 site
 server
 .doc
+.tmp/
 .dumi/tmp
 .dumi/tmp-test
 .dumi/tmp-production
@@ -47,3 +48,7 @@ metadata/.extracted-props.json
 # Figma Code Connect — local secrets & CLI cache
 .cursor/skills/figma-code-connect/.env
 .cursor/skills/figma-code-connect/.figma-publish-deps/
+
+# Yuque sync — only _template.json is tracked; per-doc configs are ephemeral (/tmp)
+.cursor/skills/sync-yuque-doc/configs/*
+!.cursor/skills/sync-yuque-doc/configs/_template.json
