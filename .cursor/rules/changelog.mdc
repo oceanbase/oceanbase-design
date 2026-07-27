@@ -29,8 +29,17 @@ Pure internal work → PR changelog: `No user-facing changes` / `无用户可感
 
 | When | Format |
 |------|--------|
-| PR body | Bilingual one-liner table per `.github/PULL_REQUEST_TEMPLATE.md` |
-| After commit (chat) | `docs/design/design-CHANGELOG.md` style — see `.cursor/skills/github-pr-submit/SKILL.md` |
-| Official `*CHANGELOG.md` | Release maintainer only; do not edit on every PR unless requested |
+| PR body | Bilingual table per `.github/PULL_REQUEST_TEMPLATE.md`; cell content is **raw markdown** aligned with `docs/design/design-CHANGELOG.md` (see `.cursor/skills/github-pr-submit/SKILL.md`) |
+| After commit (chat) | Same **style** as `docs/design/design-CHANGELOG.md` — output in chat only; **do not edit** changelog files |
+| `docs/design/design-CHANGELOG.md` / `.zh-CN.md` | **Release only** — batch update when cutting a release; never on feature PRs or after commit unless user explicitly asks for a release changelog pass |
+| Package `*CHANGELOG.md` (`design` / `ui` / `charts` / `codemod`) | Release maintainer only; do not edit on every PR unless requested |
+
+## Do not auto-edit changelog files
+
+Agents and contributors **must not** modify `docs/design/design-CHANGELOG.md`, `docs/design/design-CHANGELOG.zh-CN.md`, or package `*CHANGELOG.md` as part of normal feature work, commit follow-up, or “done” cleanup.
+
+- **During development / PR:** changelog lives in the **PR body table** only.
+- **After commit:** if the user asks for 更新日志, reply in **chat** using the design-CHANGELOG **format** — do not write into repo files.
+- **At release:** release maintainer consolidates entries into the official changelog files in one pass.
 
 Full guide and examples: `.cursor/skills/github-pr-submit/SKILL.md`（Changelog 章节）

@@ -338,9 +338,9 @@ exports[`Empty > should render PRESENTED_IMAGE_GUIDE correctly 1`] = `
     >
       <svg
         fill="none"
-        height="200"
+        height="160"
         viewBox="0 0 100 100"
-        width="200"
+        width="160"
         xmlns="http://www.w3.org/2000/svg"
       >
         <g
@@ -737,9 +737,9 @@ exports[`Empty > should render horizontal layout with guide image 1`] = `
     >
       <svg
         fill="none"
-        height="200"
+        height="160"
         viewBox="0 0 100 100"
-        width="200"
+        width="160"
         xmlns="http://www.w3.org/2000/svg"
       >
         <g

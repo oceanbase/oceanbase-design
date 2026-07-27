@@ -27,6 +27,7 @@ nav:
 <code src="./demo/steps.tsx" title="Step Hints"></code>
 <code src="./demo/over-length.tsx" title="Over-length Content" description="Max width 600px for description, 1000px for steps to avoid infinite stretch."></code>
 <code src="./demo/horizontal.tsx" title="Horizontal Layout" description="Image is PRESENTED_IMAGE_GUIDE, for onboarding scenarios like feature activation."></code>
+<code src="./demo/responsive.tsx" title="Horizontal Responsive" description="Horizontal layout stacks vertically when the container narrows, then hides the illustration at smaller widths."></code>
 <code src="./demo/with-page-container.tsx" title="With Page Container"></code>
 <code src="./demo/config-provider.tsx" title="Empty Style in ConfigProvider"></code>
 

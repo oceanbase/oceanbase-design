@@ -5,18 +5,29 @@ import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type EmptyToken = FullToken<'Badge'>;
 
+/** Horizontal layout stacks vertically below this container width. */
+const EMPTY_HORIZONTAL_STACK_WIDTH = 560;
+/** Horizontal layout hides illustration below this container width. */
+const EMPTY_HORIZONTAL_HIDE_IMAGE_WIDTH = 400;
+
 export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSSObject => {
   const { antCls, componentCls, colorTextTertiary, colorText, colorTextSecondary, calc } = token;
+
+  const horizontalStackQuery = `@container (max-width: ${EMPTY_HORIZONTAL_STACK_WIDTH}px)`;
+  const horizontalHideImageQuery = `@container (max-width: ${EMPTY_HORIZONTAL_HIDE_IMAGE_WIDTH}px)`;
 
   return {
     [`${componentCls}`]: {
       [`${componentCls}-image`]: {
-        height: 100,
+        height: 140,
         marginBottom: 0,
+        '& svg': {
+          height: 140,
+          width: 140,
+        },
       },
       [`${componentCls}-description`]: {
-        // ensure description content color is correct always
-        color: colorTextTertiary,
+        color: colorTextSecondary,
         [`${componentCls}-title`]: {
           color: token.colorText,
           fontWeight: token.fontWeightStrong,
@@ -25,11 +36,16 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
           marginTop: token.marginLG,
         },
         [`${componentCls}-description-content`]: {
-          color: colorTextTertiary,
+          color: colorTextSecondary,
+          fontSize: token.fontSize,
+          lineHeight: token.lineHeight,
           fontWeight: token.fontWeightWeak,
           maxWidth: 600,
           margin: '0px auto',
-          marginTop: token.marginXS,
+          marginTop: token.marginXXS,
+        },
+        [`${componentCls}-footer`]: {
+          marginTop: token.margin,
         },
         [`${antCls}-steps`]: {
           maxWidth: 1000,
@@ -74,20 +90,53 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
     },
 
     [`${componentCls}-horizontal`]: {
+      containerType: 'inline-size',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       [`${componentCls}-image`]: {
-        height: 200,
+        height: 160,
+        flexShrink: 0,
+        '& svg': {
+          height: 160,
+          width: 160,
+        },
       },
       [`${componentCls}-description`]: {
-        marginLeft: token.marginXXL,
+        marginLeft: token.marginXL,
+        minWidth: 400,
         textAlign: 'left',
         [`${componentCls}-title`]: {
           marginTop: 0,
         },
         [`${componentCls}-description-content`]: {
-          marginTop: token.margin,
+          marginTop: token.marginXXS,
+        },
+      },
+    },
+
+    [horizontalStackQuery]: {
+      [`${componentCls}-horizontal`]: {
+        flexDirection: 'column',
+        [`${componentCls}-image`]: {
+          marginBottom: 0,
+        },
+        [`${componentCls}-description`]: {
+          marginLeft: 0,
+          marginTop: token.marginLG,
+          minWidth: 'auto',
+          textAlign: 'center',
+        },
+      },
+    },
+
+    [horizontalHideImageQuery]: {
+      [`${componentCls}-horizontal`]: {
+        [`${componentCls}-image`]: {
+          display: 'none',
+        },
+        [`${componentCls}-description`]: {
+          marginTop: 0,
         },
       },
     },
@@ -96,6 +145,10 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
       [`${componentCls}-image`]: {
         height: 48,
         color: colorTextTertiary,
+        '& svg': {
+          height: 48,
+          width: 48,
+        },
       },
     },
   };

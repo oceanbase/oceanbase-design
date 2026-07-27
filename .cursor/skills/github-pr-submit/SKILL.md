@@ -62,14 +62,34 @@ gh pr view <number> --web
 
 ### PR Changelog 表格
 
-中英文**各一句**，语义一致，尽量一行。
+表格仍是中英两列；**单元格内写 markdown 原文**（与 `docs/design/design-CHANGELOG.md` / `.zh-CN.md` 同一套表述），不要用一句长段落概括。
+
+**版式规则**
+
+1. **措辞**：与官方 changelog 一致——按组件/区域分组、`emoji` 前缀、用户可感知的行为/视觉/API 变更；可带 PR 链接 `[#1234](url)`。
+2. **换行**：GitHub PR 表格单元格不支持多行 markdown，用 `<br/>` 换行。
+3. **子项缩进**：嵌套列表用 `&nbsp;&nbsp;-` 前缀（两个 `&nbsp;` + 空格 + `-`），与 #1504 等历史 PR 一致。
+4. **语义**：中英文条目一一对应，结构相同（同级组件、同级子项数量一致）。
+
+**单组件示例**
+
+```markdown
+| Language   | Changelog                         |
+| ---------- | --------------------------------- |
+| 🇺🇸 English | - 💄 Updated Empty illustrations. |
+| 🇨🇳 Chinese | - 💄 更新 Empty 插图。            |
+```
+
+**多组件 + 子项示例**（参考 [#1504](https://github.com/oceanbase/oceanbase-design/pull/1504)、[#1505](https://github.com/oceanbase/oceanbase-design/pull/1505)）：
 
 ```markdown
 | Language | Changelog |
 | --- | --- |
-| 🇺🇸 English | 🤖 Component assets now include Figma mappings; Figma Code Connect bridges design and frontend workflows, e.g. generating spec-compliant code from Figma. |
-| 🇨🇳 Chinese | 🤖 组件资产新增对应的 Figma 映射文件，通过 Figma Code Connect 可以打通设计+前端工作流，比如基于 Figma 生成符合规范的代码。 |
+| 🇺🇸 English | - Empty<br/>&nbsp;&nbsp;- 💄 Aligned illustration sizes (140px vertical, 160px horizontal), description color, and title/description/footer spacing with OBUI 2.0 spec.<br/>&nbsp;&nbsp;- 💄 Horizontal layout stacks vertically at container width ≤560px and hides illustration at ≤400px.<br/>- Result<br/>&nbsp;&nbsp;- 💄 Aligned icon size (140px) and title/subtitle/extra spacing with Empty OBUI 2.0 spec. |
+| 🇨🇳 Chinese | - Empty<br/>&nbsp;&nbsp;- 💄 对齐 OBUI 2.0 规范的插图尺寸（纵向 140px、横向 160px）、描述文本颜色与标题/描述/操作区间距。<br/>&nbsp;&nbsp;- 💄 横向布局在容器宽度 ≤560px 时纵向堆叠，≤400px 时隐藏插图。<br/>- Result<br/>&nbsp;&nbsp;- 💄 对齐 OBUI 2.0 规范的图标尺寸（140px）以及与 Empty 一致的标题、副标题和操作区间距。 |
 ```
+
+无用户影响 → 单元格填 `No user-facing changes` / `无用户可感知变更`。
 
 反例（过于内部）：
 
@@ -77,9 +97,15 @@ gh pr view <number> --web
 | 🇺🇸 English | Added 38 colocated index.figma.tsx files, Cursor agent skill, and CI parse/publish workflow. |
 ```
 
+反例（表格里只写一句长文、未按 changelog 分组缩进）：
+
+```markdown
+| 🇺🇸 English | 💄 Empty horizontal layout adapts to narrow containers; Empty and Result spacing align with OBUI 2.0 spec. |
+```
+
 ### Commit 后更新日志（对话）
 
-有用户可感知变更时，按 `docs/design/design-CHANGELOG.md` 风格输出：
+有用户可感知变更时，在**对话中**按 `docs/design/design-CHANGELOG.md` 的**版式**输出（勿写入仓库文件）：
 
 ```markdown
 - <区域或组件>
@@ -94,9 +120,9 @@ gh pr view <number> --web
 
 常用 emoji：🆕 新功能 · 🐞 修复 · 💄 样式 · 🌈 主题 · 📖 文档 · ⭐️ 增强 · ♿ 无障碍
 
-正式发布时写入对应包的 `*CHANGELOG.md`（`design` / `ui` / `charts` / `codemod`）；日常 PR **不要**改这些文件，除非发版或用户明确要求。
+正式发布时由发版负责人**统一**写入 `docs/design/design-CHANGELOG.md` / `.zh-CN.md` 及各包的 `*CHANGELOG.md`；日常 PR 与 commit 后**不要**改这些文件，除非用户明确要求做发版 changelog 整理。
 
-自检：npm 包或 Figma 用户不看仓库能否感知？去掉文件名后是否仍然准确？能否压成一行？
+自检：npm 包或 Figma 用户不看仓库能否感知？去掉文件名后是否仍然准确？中英文结构是否对齐？
 
 ## 打标签（可选）
 
