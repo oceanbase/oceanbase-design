@@ -30,28 +30,13 @@ nav:
 
 ### 通过 status 使用
 
-| status       | 说明       |
-| :----------- | :--------- |
-| `success`    | 成功       |
-| `error`      | 失败       |
-| `warning`    | 警告       |
-| `processing` | 进行中     |
-| `normal`     | 正常       |
-| `403`        | 无权限     |
-| `404`        | 页面未找到 |
-| `500`        | 服务器错误 |
+<code src="./demo/built-in-images-status.tsx" inline></code>
 
 ### 通过 icon 使用
 
 通过 `icon={<Result.PRESENTED_IMAGE_* />}` 使用：
 
-| 常量                             | 说明       |
-| :------------------------------- | :--------- |
-| `PRESENTED_IMAGE_NOT_FOUND`      | 资源不存在 |
-| `PRESENTED_IMAGE_NETWORK_ERROR`  | 网络异常   |
-| `PRESENTED_IMAGE_VERSION_UPDATE` | 版本更新   |
-
-<code src="./demo/built-in-images.tsx" inline></code>
+<code src="./demo/built-in-images-icon.tsx" inline></code>
 
 ## API
 

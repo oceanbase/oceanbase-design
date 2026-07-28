@@ -2,18 +2,20 @@
 
 import { figma } from '@figma/code-connect';
 import {
-  CheckCircleFilled,
-  CloseCircleFilled,
+  CheckCircleOutlined,
+  CloseCircleOutlined,
   CloseOutlined,
-  ExclamationCircleFilled,
+  ExclamationCircleOutlined,
+  InfoCircleOutlined,
 } from '@oceanbase/icons';
-import { Button, Card, Flex, Space, Typography } from '@oceanbase/design';
+import { Card, Flex, Typography } from '@oceanbase/design';
 
 /**
- * Code Connect — Notification（5026:7081：type × actions 卡片；与设计稿控件名一致，含 Figma 拼写 ture）。
+ * Code Connect — Notification OBUI 2.0（5026:7081：type × actions；与设计稿控件名一致，含 Figma 拼写 ture）。
+ * Notification 为全局 API，无独立 React 组件，故以 Card 承载稿面结构。
  * Page: "↵Notification"
  *
- * 稿面像素见 `demo/index.figma.tsx`（§3.4a）；本文件不挂 style / className / styles（§3.4c）。
+ * 稿面像素见 demo 文档；本文件不挂 style / className / styles（§3.4c）。
  */
 
 // Figma: "Notification" · 5026:7081
@@ -23,8 +25,9 @@ figma.connect(Card, '<FIGMA_OCEANBASE_NOTIFICATION>', {
     children: figma.enum('type', {
       default: figma.enum('actions', {
         ture: (
-          <Flex vertical gap={24}>
-            <Flex vertical gap={12}>
+          <Flex gap={8} align="flex-start">
+            <InfoCircleOutlined />
+            <Flex vertical flex="1" gap={4}>
               <Flex justify="space-between" align="center" gap={16}>
                 <Typography.Text strong ellipsis>
                   {figma.string('title')}
@@ -33,57 +36,42 @@ figma.connect(Card, '<FIGMA_OCEANBASE_NOTIFICATION>', {
               </Flex>
               <Typography.Text type="secondary">{figma.string('description')}</Typography.Text>
             </Flex>
-            <Flex justify="flex-end">
-              <Space size={8}>
-                <Button size="small">Cancel</Button>
-                <Button type="primary" size="small">
-                  Confirm
-                </Button>
-              </Space>
-            </Flex>
           </Flex>
         ),
         false: (
-          <Flex vertical gap={12}>
-            <Flex justify="space-between" align="center" gap={16}>
-              <Typography.Text strong ellipsis>
-                {figma.string('title')}
-              </Typography.Text>
-              <CloseOutlined />
+          <Flex gap={8} align="flex-start">
+            <InfoCircleOutlined />
+            <Flex vertical flex="1" gap={4}>
+              <Flex justify="space-between" align="center" gap={16}>
+                <Typography.Text strong ellipsis>
+                  {figma.string('title')}
+                </Typography.Text>
+                <CloseOutlined />
+              </Flex>
+              <Typography.Text type="secondary">{figma.string('description')}</Typography.Text>
             </Flex>
-            <Typography.Text type="secondary">{figma.string('description')}</Typography.Text>
           </Flex>
         ),
       }),
       alert: figma.enum('actions', {
         ture: (
-          <Flex vertical gap={24}>
-            <Flex gap={16} align="flex-start">
-              <ExclamationCircleFilled />
-              <Flex vertical flex="1" gap={12}>
-                <Flex justify="space-between" align="center" gap={16}>
-                  <Typography.Text strong ellipsis>
-                    {figma.string('title')}
-                  </Typography.Text>
-                  <CloseOutlined />
-                </Flex>
-                <Typography.Text type="secondary">{figma.string('description')}</Typography.Text>
+          <Flex gap={8} align="flex-start">
+            <ExclamationCircleOutlined />
+            <Flex vertical flex="1" gap={4}>
+              <Flex justify="space-between" align="center" gap={16}>
+                <Typography.Text strong ellipsis>
+                  {figma.string('title')}
+                </Typography.Text>
+                <CloseOutlined />
               </Flex>
-            </Flex>
-            <Flex justify="flex-end">
-              <Space size={8}>
-                <Button size="small">Cancel</Button>
-                <Button type="primary" size="small">
-                  Confirm
-                </Button>
-              </Space>
+              <Typography.Text type="secondary">{figma.string('description')}</Typography.Text>
             </Flex>
           </Flex>
         ),
         false: (
-          <Flex gap={16} align="flex-start">
-            <ExclamationCircleFilled />
-            <Flex vertical flex="1" gap={12}>
+          <Flex gap={8} align="flex-start">
+            <ExclamationCircleOutlined />
+            <Flex vertical flex="1" gap={4}>
               <Flex justify="space-between" align="center" gap={16}>
                 <Typography.Text strong ellipsis>
                   {figma.string('title')}
@@ -97,33 +85,23 @@ figma.connect(Card, '<FIGMA_OCEANBASE_NOTIFICATION>', {
       }),
       success: figma.enum('actions', {
         ture: (
-          <Flex vertical gap={24}>
-            <Flex gap={16} align="flex-start">
-              <CheckCircleFilled />
-              <Flex vertical flex="1" gap={12}>
-                <Flex justify="space-between" align="center" gap={16}>
-                  <Typography.Text strong ellipsis>
-                    {figma.string('title')}
-                  </Typography.Text>
-                  <CloseOutlined />
-                </Flex>
-                <Typography.Text type="secondary">{figma.string('description')}</Typography.Text>
+          <Flex gap={8} align="flex-start">
+            <CheckCircleOutlined />
+            <Flex vertical flex="1" gap={4}>
+              <Flex justify="space-between" align="center" gap={16}>
+                <Typography.Text strong ellipsis>
+                  {figma.string('title')}
+                </Typography.Text>
+                <CloseOutlined />
               </Flex>
-            </Flex>
-            <Flex justify="flex-end">
-              <Space size={8}>
-                <Button size="small">Cancel</Button>
-                <Button type="primary" size="small">
-                  Confirm
-                </Button>
-              </Space>
+              <Typography.Text type="secondary">{figma.string('description')}</Typography.Text>
             </Flex>
           </Flex>
         ),
         false: (
-          <Flex gap={16} align="flex-start">
-            <CheckCircleFilled />
-            <Flex vertical flex="1" gap={12}>
+          <Flex gap={8} align="flex-start">
+            <CheckCircleOutlined />
+            <Flex vertical flex="1" gap={4}>
               <Flex justify="space-between" align="center" gap={16}>
                 <Typography.Text strong ellipsis>
                   {figma.string('title')}
@@ -137,33 +115,23 @@ figma.connect(Card, '<FIGMA_OCEANBASE_NOTIFICATION>', {
       }),
       error: figma.enum('actions', {
         ture: (
-          <Flex vertical gap={24}>
-            <Flex gap={16} align="flex-start">
-              <CloseCircleFilled />
-              <Flex vertical flex="1" gap={12}>
-                <Flex justify="space-between" align="center" gap={16}>
-                  <Typography.Text strong ellipsis>
-                    {figma.string('title')}
-                  </Typography.Text>
-                  <CloseOutlined />
-                </Flex>
-                <Typography.Text type="secondary">{figma.string('description')}</Typography.Text>
+          <Flex gap={8} align="flex-start">
+            <CloseCircleOutlined />
+            <Flex vertical flex="1" gap={4}>
+              <Flex justify="space-between" align="center" gap={16}>
+                <Typography.Text strong ellipsis>
+                  {figma.string('title')}
+                </Typography.Text>
+                <CloseOutlined />
               </Flex>
-            </Flex>
-            <Flex justify="flex-end">
-              <Space size={8}>
-                <Button size="small">Cancel</Button>
-                <Button type="primary" size="small">
-                  Confirm
-                </Button>
-              </Space>
+              <Typography.Text type="secondary">{figma.string('description')}</Typography.Text>
             </Flex>
           </Flex>
         ),
         false: (
-          <Flex gap={16} align="flex-start">
-            <CloseCircleFilled />
-            <Flex vertical flex="1" gap={12}>
+          <Flex gap={8} align="flex-start">
+            <CloseCircleOutlined />
+            <Flex vertical flex="1" gap={4}>
               <Flex justify="space-between" align="center" gap={16}>
                 <Typography.Text strong ellipsis>
                   {figma.string('title')}

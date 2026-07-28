@@ -33,4 +33,10 @@ export default {
     apply: '确定',
     clearAll: '清空',
   },
+  Notification: {
+    showMore: '展开',
+    copy: '复制',
+    copied: '已复制',
+    copyFailed: '复制失败',
+  },
 } as Locale;

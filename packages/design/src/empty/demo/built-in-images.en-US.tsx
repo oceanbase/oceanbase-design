@@ -6,32 +6,32 @@ const dataSource: BuiltInImageRow[] = [
   {
     key: 'default',
     name: 'PRESENTED_IMAGE_DEFAULT / PRESENTED_IMAGE_SIMPLE',
-    description: '默认与简单空状态',
+    description: 'Default/simple',
     image: Empty.PRESENTED_IMAGE_DEFAULT,
   },
   {
     key: 'colored',
     name: 'PRESENTED_IMAGE_COLORED',
-    description: '页面和区块级空状态',
+    description: 'Page/block empty state',
     image: Empty.PRESENTED_IMAGE_COLORED,
   },
   {
     key: 'database',
     name: 'PRESENTED_IMAGE_DATABASE',
-    description: '引导新建',
+    description: 'Guide to create',
     image: Empty.PRESENTED_IMAGE_DATABASE,
   },
   {
     key: 'guide',
     name: 'PRESENTED_IMAGE_GUIDE',
-    description: '功能开通等引导类场景',
+    description: 'Onboarding / welcome',
     image: Empty.PRESENTED_IMAGE_GUIDE,
   },
 ];
 
 export default () => (
   <BuiltInImageTable
-    columns={{ name: '常量', description: '说明', preview: '预览' }}
+    columns={{ name: 'Constant', description: 'Description', preview: 'Preview' }}
     dataSource={dataSource}
   />
 );

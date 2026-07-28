@@ -19,6 +19,7 @@ site
 server
 .doc
 .tmp/
+tmp/
 .dumi/tmp
 .dumi/tmp-test
 .dumi/tmp-production
