@@ -33,4 +33,10 @@ export default {
     apply: 'Apply',
     clearAll: 'Clear All',
   },
+  Notification: {
+    showMore: 'Show more',
+    copy: 'Copy',
+    copied: 'Copied',
+    copyFailed: 'Copy failed',
+  },
 } as Locale;

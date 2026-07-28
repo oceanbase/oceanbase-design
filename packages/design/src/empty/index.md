@@ -33,13 +33,6 @@ nav:
 
 ## 内置插图
 
-| 常量                                                  | 说明                 |
-| :---------------------------------------------------- | :------------------- |
-| `PRESENTED_IMAGE_DEFAULT`<br>`PRESENTED_IMAGE_SIMPLE` | 默认与简单空状态     |
-| `PRESENTED_IMAGE_COLORED`                             | 页面和区块级空状态   |
-| `PRESENTED_IMAGE_DATABASE`                            | 引导新建             |
-| `PRESENTED_IMAGE_GUIDE`                               | 功能开通等引导类场景 |
-
 <code src="./demo/built-in-images.tsx" inline></code>
 
 ## API

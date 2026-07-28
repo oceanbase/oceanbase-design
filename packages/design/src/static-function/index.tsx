@@ -7,10 +7,14 @@ import {
 } from 'antd';
 import type { MessageInstance } from 'antd/es/message/interface';
 import type { ModalStaticFunctions } from 'antd/es/modal/confirm';
-import type { NotificationInstance } from 'antd/es/notification/interface';
 import formatToken from 'antd/lib/theme/util/alias';
 import ConfigProvider from '../config-provider';
 import useModalStyle from '../modal/style';
+import { createObNotification } from '../notification/createObNotification';
+import { ensureNotificationConfig } from '../notification/ensureNotificationConfig';
+import useNotificationStyle from '../notification/style';
+import { useObNotification } from '../notification/useObNotification';
+import type { ObNotificationInstance } from '../notification/interface';
 import { genObToken } from '../theme/obToken';
 import theme from '../theme';
 import defaultTheme from '../theme/default';
@@ -35,9 +39,14 @@ let obToken = genObToken(token as GlobalToken);
 let message: MessageInstance & {
   useMessage: typeof antMessage.useMessage;
 } = antMessage;
-let notification: NotificationInstance & {
-  useNotification: typeof antNotification.useNotification;
-} = antNotification;
+let notification: ObNotificationInstance & {
+  useNotification: typeof useObNotification;
+} = {
+  ...createObNotification(antNotification),
+  useNotification: useObNotification,
+};
+
+ensureNotificationConfig();
 let modal: Omit<ModalStaticFunctions, 'warn'> & {
   useModal: typeof AntModal.useModal;
 } = AntModal;
@@ -49,9 +58,11 @@ export default () => {
 
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('modal');
+  const notificationPrefixCls = getPrefixCls('notification');
 
   // register Modal style, ensure static function can also apply style
   useModalStyle(prefixCls);
+  useNotificationStyle(notificationPrefixCls);
 
   const staticFunction = App.useApp();
   // replace antd's static methods, support consuming ConfigProvider configuration
@@ -60,8 +71,8 @@ export default () => {
     useMessage: antMessage.useMessage,
   };
   notification = {
-    ...staticFunction.notification,
-    useNotification: antNotification.useNotification,
+    ...createObNotification(staticFunction.notification),
+    useNotification: useObNotification,
   };
   modal = {
     ...staticFunction.modal,

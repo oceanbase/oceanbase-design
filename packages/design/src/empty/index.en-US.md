@@ -33,14 +33,7 @@ nav:
 
 ## Built-in Illustrations
 
-| Constant                                              | Description            |
-| :---------------------------------------------------- | :--------------------- |
-| `PRESENTED_IMAGE_DEFAULT`<br>`PRESENTED_IMAGE_SIMPLE` | Default/simple         |
-| `PRESENTED_IMAGE_COLORED`                             | Page/block empty state |
-| `PRESENTED_IMAGE_DATABASE`                            | Guide to create        |
-| `PRESENTED_IMAGE_GUIDE`                               | Onboarding / welcome   |
-
-<code src="./demo/built-in-images.tsx" inline></code>
+<code src="./demo/built-in-images.en-US.tsx" inline></code>
 
 ## API
 

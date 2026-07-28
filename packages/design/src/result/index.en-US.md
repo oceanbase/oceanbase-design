@@ -30,28 +30,13 @@ nav:
 
 ### Via status
 
-| status       | Description    |
-| :----------- | :------------- |
-| `success`    | Success        |
-| `error`      | Error          |
-| `warning`    | Warning        |
-| `processing` | Processing     |
-| `normal`     | Normal         |
-| `403`        | No permission  |
-| `404`        | Page not found |
-| `500`        | Server error   |
+<code src="./demo/built-in-images-status.en-US.tsx" inline></code>
 
 ### Via icon
 
 Use via `icon={<Result.PRESENTED_IMAGE_* />}`:
 
-| Constant                         | Description        |
-| :------------------------------- | :----------------- |
-| `PRESENTED_IMAGE_NOT_FOUND`      | Resource not found |
-| `PRESENTED_IMAGE_NETWORK_ERROR`  | Network error      |
-| `PRESENTED_IMAGE_VERSION_UPDATE` | Version update     |
-
-<code src="./demo/built-in-images.tsx" inline></code>
+<code src="./demo/built-in-images-icon.en-US.tsx" inline></code>
 
 ## API
 

@@ -27,6 +27,13 @@ export interface FilterLocale {
   clearAll?: string;
 }
 
+export interface NotificationLocale {
+  showMore?: string;
+  copy?: string;
+  copied?: string;
+  copyFailed?: string;
+}
+
 export interface Locale extends AntLocale {
   global?: GlobalLocale;
   Pagination?: PaginationLocale;
@@ -38,6 +45,7 @@ export interface Locale extends AntLocale {
   Table?: TableLocale;
   Card?: CardLocale;
   Filter?: FilterLocale;
+  Notification?: NotificationLocale;
 }
 
 export { default as useLocale } from './useLocale';

@@ -356,7 +356,8 @@ const defaultTheme: ThemeConfig = {
       borderRadiusLG: borderRadiusMD,
     },
     Notification: {
-      borderRadiusLG: borderRadiusMD,
+      borderRadiusLG: borderRadiusLG,
+      width: 350,
       colorSuccessBg: white,
       colorErrorBg: white,
       colorInfoBg: white,
