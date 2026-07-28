@@ -12,7 +12,7 @@ export type {
   NotificationPlacement,
 } from 'antd/es/notification/interface';
 
-export type NotificationType = 'info' | 'success' | 'warning' | 'error' | 'processing';
+export type NotificationType = 'info' | 'success' | 'warning' | 'error' | 'loading';
 
 export interface ErrorDetailItem {
   label: string;
@@ -34,6 +34,6 @@ export interface ObNotificationInstance extends NotificationInstance {
   info: ObNotificationMethod;
   warning: ObNotificationMethod;
   open: ObNotificationMethod;
-  processing: ObNotificationMethod;
+  loading: ObNotificationMethod;
   config?: (config: NotificationConfig | GlobalConfigProps) => void;
 }

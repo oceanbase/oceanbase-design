@@ -79,7 +79,7 @@ export const wrapNotificationArgs = ({
   });
 
   const duration = resolveDuration(type, content.description ?? restArgs.description, args);
-  const noticeType = type === 'processing' ? undefined : type;
+  const noticeType = type === 'loading' ? undefined : type;
 
   const defaultIcon = icon ?? iconMap[type];
   let iconNode: React.ReactNode = defaultIcon;

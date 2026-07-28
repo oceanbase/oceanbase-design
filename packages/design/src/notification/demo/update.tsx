@@ -7,14 +7,14 @@ export default () => {
   return (
     <Button
       onClick={() => {
-        notification.processing({
+        notification.loading({
           key: UPDATE_KEY,
           message: 'Exporting report',
           description: 'Progress: 20%',
         });
 
         setTimeout(() => {
-          notification.processing({
+          notification.loading({
             key: UPDATE_KEY,
             message: 'Exporting report',
             description: 'Progress: 60%',

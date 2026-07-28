@@ -109,10 +109,9 @@ const componentsGroups: BilingualGroup[] = [
     zh: '反馈',
     children: [
       { en: 'Alert', zh: 'Alert 警告提示', link: '/components/alert' },
-      { en: 'Message', zh: 'Message 全局提示', link: '/components/message' },
+      { en: 'Notification', zh: 'Notification 通知提醒框', link: '/components/notification' },
       { en: 'Modal', zh: 'Modal 对话框', link: '/components/modal' },
       { en: 'Drawer', zh: 'Drawer 抽屉', link: '/components/drawer' },
-      { en: 'Notification', zh: 'Notification 通知提醒框', link: '/components/notification' },
       { en: 'Popconfirm', zh: 'Popconfirm 气泡确认框', link: '/components/popconfirm' },
       { en: 'Progress', zh: 'Progress 进度条', link: '/components/progress' },
       { en: 'Result', zh: 'Result 结果', link: '/components/result' },

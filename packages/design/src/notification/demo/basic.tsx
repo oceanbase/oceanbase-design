@@ -48,13 +48,13 @@ export default () => {
       </Button>
       <Button
         onClick={() => {
-          notification.processing({
+          notification.loading({
             message: 'Exporting report',
             description: 'Estimated time remaining: about 2 minutes.',
           });
         }}
       >
-        Processing
+        Loading
       </Button>
     </Space>
   );

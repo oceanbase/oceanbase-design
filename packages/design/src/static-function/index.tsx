@@ -1,11 +1,8 @@
 import React, { useContext } from 'react';
-import {
-  App,
-  message as antMessage,
-  Modal as AntModal,
-  notification as antNotification,
-} from 'antd';
+import { App, Modal as AntModal, notification as antNotification } from 'antd';
 import type { MessageInstance } from 'antd/es/message/interface';
+import { createMessageCompat } from '../message/createMessageCompat';
+import { useMessageCompat } from '../message/useMessageCompat';
 import type { ModalStaticFunctions } from 'antd/es/modal/confirm';
 import formatToken from 'antd/lib/theme/util/alias';
 import ConfigProvider from '../config-provider';
@@ -36,14 +33,17 @@ const mapToken = {
 let token = formatToken(mapToken);
 let obToken = genObToken(token as GlobalToken);
 
-let message: MessageInstance & {
-  useMessage: typeof antMessage.useMessage;
-} = antMessage;
 let notification: ObNotificationInstance & {
   useNotification: typeof useObNotification;
 } = {
   ...createObNotification(antNotification),
   useNotification: useObNotification,
+};
+let message: MessageInstance & {
+  useMessage: typeof useMessageCompat;
+} = {
+  ...createMessageCompat(notification),
+  useMessage: useMessageCompat,
 };
 
 ensureNotificationConfig();
@@ -66,13 +66,13 @@ export default () => {
 
   const staticFunction = App.useApp();
   // replace antd's static methods, support consuming ConfigProvider configuration
-  message = {
-    ...staticFunction.message,
-    useMessage: antMessage.useMessage,
-  };
   notification = {
     ...createObNotification(staticFunction.notification),
     useNotification: useObNotification,
+  };
+  message = {
+    ...createMessageCompat(notification),
+    useMessage: useMessageCompat,
   };
   modal = {
     ...staticFunction.modal,
