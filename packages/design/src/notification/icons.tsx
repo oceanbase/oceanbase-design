@@ -13,5 +13,5 @@ export const iconMap: Record<NotificationType, React.ReactNode> = {
   info: <InfoCircleOutlined />,
   error: <CloseCircleOutlined />,
   warning: <ExclamationCircleOutlined />,
-  processing: <LoadingOutlined spin />,
+  loading: <LoadingOutlined spin />,
 };

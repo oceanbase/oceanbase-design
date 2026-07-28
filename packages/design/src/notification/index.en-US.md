@@ -9,17 +9,18 @@ Use notifications for non-blocking task results or system feedback that can reac
 
 - 🔥 Extends antd [Notification](https://ant.design/components/notification) with OBUI 2.0 capabilities.
 - 💄 Default placement is bottom left, fixed width 350px, linear icons with auto-close progress bar, and links in title/description automatically use the type color style.
-- 🆕 Add `notification.processing` method to display long-running process status.
+- 🆕 Add `notification.loading` method to display long-running process status.
 - 🆕 Add `errorDetails` property to display error information, supporting copy as Markdown format.
 - 🆕 Add `dedupeKey` property to deduplicate notifications.
+- 📌 **Use `notification` for all notification scenarios**; `message` remains as a compatibility alias implemented via Notification.
 
 ## Examples
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx" title="Basic" description="Five types — info, success, warning, error, and processing — for common scenarios."></code>
+<code src="./demo/basic.tsx" title="Basic" description="Five types — info, success, warning, error, and loading — for common scenarios."></code>
 <code src="./demo/placement.tsx" title="Placement" description="Defaults to `bottomLeft`."></code>
 <code src="./demo/auto-close.tsx" title="Auto close" description="5s for title only, 10s with description; errors do not auto close; pause on hover."></code>
-<code src="./demo/update.tsx" title="Update content" description="Use `key` to update the same notification, e.g. processing progress."></code>
+<code src="./demo/update.tsx" title="Update content" description="Use `key` to update the same notification, e.g. loading progress."></code>
 <code src="./demo/error-details.tsx" title="Error details" description="Structured diagnostics for warning / error with collapse and Markdown copy."></code>
 <code src="./demo/actions.tsx" title="Text link actions" description="Custom `<a>` or `Typography.Link` in `message` / `description`; styles match the notification type."></code>
 <code src="./demo/dedupe.tsx" title="Dedupe" description="`dedupeKey` skips duplicates per type; different from `key`, which replaces in place."></code>
@@ -34,7 +35,7 @@ Use notifications for non-blocking task results or system feedback that can reac
 | success | Write succeeded | Create / save / submit success; 5s when title only |
 | warning | Pay attention | Quota, permission, network issues; use `dedupeKey` for repeated alerts |
 | error | Something went wrong | Does not auto close; include reassurance, cause, and next steps |
-| processing | In progress | Long-running tasks; show ETA or stage, update via `key` |
+| loading | In progress | Long-running tasks; show ETA or stage, update via `key` |
 
 ## API
 
@@ -52,7 +53,7 @@ Use notifications for non-blocking task results or system feedback that can reac
 |  | `key` | `dedupeKey` |
 | --- | --- | --- |
 | Same value called again | **Replaces** the existing notification | **Skips** the new notification |
-| Typical use | Processing progress, export stage updates | Polling alerts, error storm prevention |
+| Typical use | Loading progress, export stage updates | Polling alerts, error storm prevention |
 | After close | Can open a new notification with the same key | Can open again with the same dedupeKey |
 
 ### ErrorDetailItem
@@ -82,5 +83,16 @@ Pass `duration` explicitly to override the auto-close strategy above.
 
 ### Methods
 
-- `notification.processing(config)`: Show in-progress notification.
+- `notification.loading(config)`: Show in-progress notification.
 - `notification.useNotification()`: Returns a Hook API and `contextHolder`; insert `contextHolder` into the tree to consume ConfigProvider context.
+
+### Message compatibility
+
+| Legacy | Recommended |
+| --- | --- |
+| `message.success('Saved')` | `notification.success({ message: 'Saved' })` |
+| `message.error('Failed')` | `notification.error({ message: 'Failed' })` |
+| `message.loading('Processing', 0)` | `notification.loading({ message: 'Processing', duration: 0 })` |
+| `message.useMessage()` | `notification.useNotification()` |
+
+`message` remains as an antd Message-compatible alias implemented via Notification; prefer `notification` for new code.

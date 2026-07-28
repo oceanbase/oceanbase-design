@@ -18,10 +18,10 @@ const NOTIFICATION_CONTENT_GAP = 4;
 const STACK_GAP = 8;
 const NOTIFICATION_SHADOW = '0 6px 8px rgba(19, 33, 57, 0.1)';
 
-type NotificationVisualType = 'success' | 'info' | 'warning' | 'error' | 'processing';
+type NotificationVisualType = 'success' | 'info' | 'warning' | 'error' | 'loading';
 
 const getNotificationTypeColor = (type: NotificationVisualType, token: NotificationToken) =>
-  type === 'processing' ? token.colorPrimary : token[`color${upperFirst(type)}Text`];
+  type === 'loading' ? token.colorPrimary : token[`color${upperFirst(type)}Text`];
 
 const genNotificationTypeStyle = (
   type: NotificationVisualType,
@@ -30,9 +30,9 @@ const genNotificationTypeStyle = (
 ): CSSObject => {
   const textColor = getNotificationTypeColor(type, token);
   const hoverColor =
-    type === 'processing' ? token.colorPrimaryHover : token[`color${upperFirst(type)}TextHover`];
+    type === 'loading' ? token.colorPrimaryHover : token[`color${upperFirst(type)}TextHover`];
   const activeColor =
-    type === 'processing' ? token.colorPrimaryActive : token[`color${upperFirst(type)}TextActive`];
+    type === 'loading' ? token.colorPrimaryActive : token[`color${upperFirst(type)}TextActive`];
   const typeNoticeSelector = `${noticeCls}-wrapper ${noticeCls}-${type}`;
   const linkStyle = {
     color: textColor,
@@ -79,7 +79,7 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
   const progressBottomRadius = `0 0 ${bottomRadius} ${bottomRadius}`;
 
   const typeStyles = (
-    ['success', 'info', 'warning', 'error', 'processing'] as const
+    ['success', 'info', 'warning', 'error', 'loading'] as const
   ).reduce<CSSObject>((acc, type) => {
     return {
       ...acc,

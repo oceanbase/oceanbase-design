@@ -14,7 +14,7 @@ const openWithType = (
 ) => {
   const wrapped = wrapNotificationArgs({ type, args });
 
-  if (type === 'processing') {
+  if (type === 'loading') {
     base.open(wrapped);
     return;
   }
@@ -77,7 +77,7 @@ export const createObNotification = (base: NotificationInstance): ObNotification
     error: wrap('error'),
     info: wrap('info'),
     warning: wrap('warning'),
-    processing: wrap('processing'),
+    loading: wrap('loading'),
     destroy: (key?: React.Key) => {
       if (key === undefined) {
         activeDedupeKeys.clear();

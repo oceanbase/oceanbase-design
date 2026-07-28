@@ -5,15 +5,23 @@ nav:
   path: /components
 ---
 
-- 🔥 Fully inherits antd [Message](https://ant.design/components/message-cn) capabilities and API, seamless migration.
-- 💄 Custom theme and styles, aligned with OceanBase Design specification.
-- 🆕 `message.method()` static method supports ConfigProvider global config.
+<code src="./demo/deprecated-notice.en-US.tsx" inline></code>
+
+## Overview
+
+- 🔥 Compatible with antd [Message](https://ant.design/components/message) call sites; existing code keeps working.
+- 💄 Internally forwards to [Notification](/components/notification) with OBUI 2.0 styles and behavior.
+- 📌 Prefer `notification` for all new notification scenarios.
 
 ## Code Examples
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx" title="Basic"></code>
+<code src="./demo/basic.tsx" title="Compatibility" description="message methods still work but render as Notification."></code>
 
 ## API
 
-- See antd Message docs: https://ant.design/components/message-cn
+- Compatible with antd Message static methods and `message.useMessage()`; params and return semantics are preserved.
+- `message.*` maps to `notification.*`: `content` → `message`, and forwards `duration`, `key`, `icon`, `style`, `className`, `onClose`, `onClick`, etc.
+- `message.loading()` maps to `notification.loading()`.
+- `message.config()` forwards `duration`, `maxCount`, `rtl`, `getContainer`, `prefixCls`; `top` maps to `placement: 'top'` and `top` offset (`transitionName` has no notification equivalent and is ignored in dev with a warning).
+- For notification scenarios, use the [Notification API](/components/notification#api).
