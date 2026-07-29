@@ -131,6 +131,13 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         [`${componentCls}-column-title`]: {
           flex: 'initial',
         },
+        [`${componentCls}-column-title-tooltip-icon`]: {
+          cursor: 'help',
+          color: token.colorIcon,
+          ['&:hover']: {
+            color: token.colorIconHover,
+          },
+        },
         [`${componentCls}-filter-column`]: {
           justifyContent: 'flex-start',
         },

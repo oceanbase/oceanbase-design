@@ -14,6 +14,7 @@ markdown: |
 - 🔥 完全继承 antd [Alert](https://ant.design/components/alert-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 - 🆕 设置 `column.ellipsis`，开启自动省略，并使用 Tooltip 展示全部内容。
+- 🆕 设置 `column.tooltip`，在列头展示帮助说明。
 - 🆕 新增 `批量操作栏`，可配置选中对象、批量操作项等，详见 [API](#api)。
 
 ## 代码演示
@@ -23,6 +24,7 @@ markdown: |
 <code src="./demo/bordered.tsx" title="带边框" description="添加表格边框线。"></code>
 <code src="./demo/inner-bordered.tsx" title="带内部边框" description="仅表格内部添加边框线，常和带边框的 Card 一起使用，以避免外部边框重复。"></code>
 <code src="./demo/ellipsis.tsx" title="单元格自动省略" description="设置 `column.ellipsis` 可以让单元格内容根据宽度自动省略，并使用 Tooltip 展示全部内容。`说明`: 列头缩略暂不支持和排序筛选一起使用。"></code>
+<code src="./demo/column-tooltip.tsx" title="列头帮助提示" description="通过 `column.tooltip` 在列头展示帮助说明，可与排序、筛选一起使用。"></code>
 <code src="./demo/fixed-columns-header-tables.tsx" title="固定头和列"></code>
 <code src="./demo/filter-and-sorter.tsx" title="筛选和排序"></code>
 <code src="./demo/row-selection.tsx" title="选择和操作"></code>
@@ -55,5 +57,11 @@ markdown: |
 | toolOptionsRender | 渲染工具栏，支持返回一个 dom 数组，会自动增加 margin | (selectedRowKeys, selectedRows) => ReactNode[] | - | - |
 | toolAlertRender | 渲染 alert 提示信息 | ((selectedRowKeys, selectedRows) => ReactNode) \| false，设置 false 取消 alert 提示 | - | - |
 | toolSelectedContent | 渲染展开内容 | (selectedRowKeys, selectedRows) => ReactNode | - | - |
+
+### Column
+
+| 参数    | 说明         | 类型                | 默认值 | 版本 |
+| :------ | :----------- | :------------------ | :----- | :--- |
+| tooltip | 列头帮助提示 | `ColumnTooltipType` | -      | -    |
 
 - 详见 antd Table 文档: https://ant.design/components/table-cn
