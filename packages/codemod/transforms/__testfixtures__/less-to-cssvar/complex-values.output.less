@@ -1,20 +1,20 @@
 .card {
-  padding: var(--ant-padding-sm) var(--ant-padding-lg);
-  border: 1px solid var(--ant-color-border);
-  border-radius: var(--ant-border-radius-lg);
-  box-shadow: var(--ant-box-shadow);
-  font-size: var(--ant-font-size-lg);
-  line-height: var(--ant-line-height);
+  padding: var(--ob-space-300) var(--ob-space-500);
+  border: 1px solid var(--ob-color-border-default);
+  border-radius: var(--ob-radius-lg);
+  box-shadow: var(--ob-shadow-2);
+  font-size: var(--ob-font-size-400);
+  line-height: var(--ob-font-line-height-500);
 }
 
 .text {
-  color: var(--ant-color-text-secondary);
-  font-weight: var(--ant-font-weight-strong);
+  color: var(--ob-color-text-label);
+  font-weight: var(--ob-font-weight-lg);
 }
 
-@media (max-width: var(--ant-screen-md)) {
+@media (max-width: @screenMD) {
   .card {
-    padding: var(--ant-padding-xs);
+    padding: var(--ob-space-200);
   }
 }
 

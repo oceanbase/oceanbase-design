@@ -21,6 +21,7 @@ const { getDependencies } = require('../transforms/utils/marker');
 const { lessToToken } = require('../transforms/less-to-token');
 const { lessToCssvar } = require('../transforms/less-to-cssvar');
 const { sassToCssvar } = require('../transforms/sass-to-cssvar');
+const { tokenToObtoken } = require('../transforms/token-to-obtoken');
 
 // jscodeshift codemod scripts dir
 const transformersDir = path.join(__dirname, '../transforms');
@@ -28,7 +29,18 @@ const transformersDir = path.join(__dirname, '../transforms');
 // jscodeshift bin#--ignore-config
 const ignoreConfig = path.join(__dirname, './codemod.ignore');
 
-const transformers = [
+const defaultObTransformers = [
+  'antd-and-ob-charts-to-oceanbase-charts',
+  'antd-to-oceanbase-design',
+  'obui-to-oceanbase-design-and-ui',
+  'obutil-to-oceanbase-util',
+  'techui-and-pro-components-to-oceanbase-ui',
+  'style-to-token',
+  'less-to-cssvar',
+  'sass-to-cssvar',
+];
+
+const defaultAntdTransformers = [
   'antd-and-ob-charts-to-oceanbase-charts',
   'antd-to-oceanbase-design',
   'obui-to-oceanbase-design-and-ui',
@@ -39,11 +51,30 @@ const transformers = [
 ];
 
 // Transformers that must be explicitly specified via --transformer option
-// These are not run by default
-const explicitTransformers = ['less-to-cssvar', 'sass-to-cssvar'];
+const explicitTransformers = ['less-to-token', 'token-to-obtoken'];
 
 // All available transformers
-const allTransformers = [...transformers, ...explicitTransformers];
+const allTransformers = [
+  ...new Set([...defaultObTransformers, ...defaultAntdTransformers, ...explicitTransformers]),
+];
+
+function shouldSkipInstall(args = {}) {
+  return [args['skip-install'], args.skipInstall, args['no-install'], args.noInstall].some(
+    value => value === true || value === 'true'
+  );
+}
+
+function getTokenTarget(args = {}) {
+  const tokenTarget = args['token-target'] || args.tokenTarget || 'ob';
+  return tokenTarget === 'antd' ? 'antd' : 'ob';
+}
+
+function resolveTransformers(args = {}) {
+  if (args.transformer) {
+    return args.transformer.split(',').filter(transformer => allTransformers.includes(transformer));
+  }
+  return getTokenTarget(args) === 'antd' ? defaultAntdTransformers : defaultObTransformers;
+}
 
 const dependencyProperties = [
   'dependencies',
@@ -111,33 +142,38 @@ function getRunnerArgs(transformerPath, parser = 'babylon', options = {}) {
 }
 
 async function run(filePath, args = {}) {
-  // When --transformer is specified, filter against all available transformers
-  // Otherwise, use default transformers only (excluding explicit-only ones like less-to-cssvar)
-  const targetTransformers = args.transformer
-    ? args.transformer.split(',').filter(transformer => allTransformers.includes(transformer))
-    : transformers;
+  const tokenTarget = getTokenTarget(args);
+  const targetTransformers = resolveTransformers(args);
+
   for (const transformer of targetTransformers) {
-    await transform(transformer, 'babylon', filePath, args);
+    await transform(transformer, 'babylon', filePath, {
+      ...args,
+      tokenTarget,
+    });
   }
-  // Return executed transformers for checking if we should skip dependency detection
   return targetTransformers;
 }
 
 async function transform(transformer, parser, filePath, options) {
   console.log(chalk.bgGreen.bold('Transform'), transformer);
   const transformerPath = path.join(transformersDir, `${transformer}.js`);
+  const tokenTarget = options.tokenTarget || getTokenTarget(options);
+  const defaultPrefix = tokenTarget === 'antd' ? 'ant' : 'ob';
 
   const args = getRunnerArgs(transformerPath, parser, {
     ...options,
+    tokenTarget,
   });
 
   try {
     if (transformer === 'less-to-token') {
       await lessToToken(filePath);
+    } else if (transformer === 'token-to-obtoken') {
+      await tokenToObtoken(filePath);
     } else if (transformer === 'less-to-cssvar') {
       // less-to-cssvar options:
-      // --prefix: CSS variable prefix (default: 'ant')
-      // --rename-to: Target format: 'css', 'scss', or false to keep .less (default: 'css')
+      // --prefix: CSS variable prefix (default: ob, or ant when --token-target=antd)
+      // --rename-to: Target format: 'css', 'scss', or false to keep .less (default: false)
       // --add-module: Whether to add .module suffix when renaming (default: true)
       //   - true (default): auto-detect based on import style (CSS Module vs global)
       //   - false: skip detection, never add .module
@@ -149,8 +185,8 @@ async function transform(transformer, parser, filePath, options) {
       // Default is true (auto-detect), false means skip detection
       let addModuleOption = addModuleValue !== false && addModuleValue !== 'false';
 
-      // Parse --rename-to option: 'css', 'scss', or false
-      let renameToOption = 'css'; // default
+      // Parse --rename-to option: 'css', 'scss', or false (default: keep .less)
+      let renameToOption = false;
       const renameToValue = options['rename-to'] ?? options.renameTo;
       if (renameToValue === false || renameToValue === 'false') {
         renameToOption = false;
@@ -173,17 +209,19 @@ async function transform(transformer, parser, filePath, options) {
       }
 
       const lessToCssvarOptions = {
-        prefix: options.prefix || 'ant',
+        prefix: options.prefix || defaultPrefix,
         renameTo: renameToOption,
         addModule: addModuleOption,
-        _explicitAddModule: hasExplicitAddModule, // Pass flag to indicate explicit user choice
+        _explicitAddModule: hasExplicitAddModule,
+        useSemanticOb: tokenTarget !== 'antd',
       };
       await lessToCssvar(filePath, lessToCssvarOptions);
     } else if (transformer === 'sass-to-cssvar') {
       // sass-to-cssvar options:
-      // --prefix: CSS variable prefix (default: 'ant')
+      // --prefix: CSS variable prefix (default: ob, or ant when --token-target=antd)
       const sassToCssvarOptions = {
-        prefix: options.prefix || 'ant',
+        prefix: options.prefix || defaultPrefix,
+        useSemanticOb: tokenTarget !== 'antd',
       };
       await sassToCssvar(filePath, sassToCssvarOptions);
     } else {
@@ -191,7 +229,11 @@ async function transform(transformer, parser, filePath, options) {
         console.log(`Running jscodeshift with: ${JSON.stringify(args)}`);
       }
       // js part
-      await jscodeshift(transformerPath, [filePath], args);
+      await jscodeshift(transformerPath, [filePath], {
+        ...args,
+        tokenTarget,
+        printOptions: require('../transforms/utils/config').printOptions,
+      });
     }
     console.log();
   } catch (err) {
@@ -403,15 +445,16 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
  * --transformer=t1,t2   // specify target transformer
  * --ignore-config       // ignore config file
  *
- * less-to-cssvar specific options:
- * --prefix=ant          // CSS variable prefix (default: 'ant'), e.g. var(--ant-color-primary)
- * --rename-to           // target format: 'css' (default), 'scss', or false to keep .less
+ * --token-target=ob|antd  // default ob; antd restores legacy token migration
+ * --skip-install          // skip dependency install/upgrade after codemod
+ * --no-install            // alias of --skip-install
+ * --rename-to           // target format: false (default, keep .less), 'css', or 'scss'
  * --add-module          // add .module suffix when renaming (default: true)
  *                       // true: auto-detect based on import style (CSS Module vs global)
  *                       // false: skip detection, never add .module
  *
  * sass-to-cssvar specific options:
- * --prefix=ant          // CSS variable prefix (default: 'ant'), e.g. var(--ant-color-primary)
+ * --prefix=ob             // CSS variable prefix (default ob; ant when --token-target=antd)
  */
 
 async function bootstrap() {
@@ -469,7 +512,7 @@ async function bootstrap() {
     executedTransformers.length > 0 &&
     executedTransformers.every(t => explicitTransformers.includes(t));
 
-  if (!onlyExplicitTransformers) {
+  if (!onlyExplicitTransformers && !shouldSkipInstall(args)) {
     try {
       console.log('----------- Dependencies Alert -----------\n');
       const depsList = await getDependencies();
@@ -481,6 +524,8 @@ async function bootstrap() {
     } catch (err) {
       console.log('skip summary due to', err);
     }
+  } else if (shouldSkipInstall(args)) {
+    console.log(chalk.gray('\nSkipping dependency install (--skip-install)\n'));
   }
 
   console.log(`\n----------- Thanks for using @oceanbase/codemod ${pkg.version} -----------`);

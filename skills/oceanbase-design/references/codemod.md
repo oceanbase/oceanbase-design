@@ -2,7 +2,7 @@
 
 ## 定位
 
-OceanBase Design 的**自动化迁移工具**，用于将存量项目从 antd、obui、techui、pro-components、ob-charts、obutil 等迁移到 `@oceanbase/design`、`@oceanbase/ui`、`@oceanbase/charts`、`@oceanbase/util`，以及将样式从 Less/Sass 迁移到 token 或 CSS 变量。
+OceanBase Design 的**自动化迁移工具**，用于将存量项目从 antd、obui、techui、pro-components、ob-charts、obutil 等迁移到 `@oceanbase/design`、`@oceanbase/ui`、`@oceanbase/charts`、`@oceanbase/util`，以及将样式从 Less/Sass 迁移到 **obToken** / **OB 语义 CSS 变量**（`var(--ob-*)`）。
 
 ## 版本要求
 
@@ -23,18 +23,23 @@ npx codemod <path>
 ## 何时使用
 
 - **迁移/升级**：项目从 antd、@alipay/ob-ui 迁移到 @oceanbase/design，从 @alipay/tech-ui、@ant-design/pro-components 迁移到 @oceanbase/ui，从 @ant-design/charts、@alipay/ob-charts 迁移到 @oceanbase/charts。
-- **样式迁移**：Less/Sass 中的变量迁移到 design token 或 CSS 变量（less-to-token、less-to-cssvar、sass-to-cssvar）；代码中的 antd style/useToken 迁移到 design 的 theme.useToken（style-to-token）。
+- **样式迁移（默认）**：内联样式硬编码色值 → `obToken.xxx` + `useToken()`；Less/Sass 硬编码或变量 → `var(--ob-*)` 语义 CSS 变量。若业务仍 `import { theme } from 'antd'`（由 webpack alias 指向 design），codemod **自动保留** `theme.useToken()`，只改写 `obToken` 解构与成员访问。
+- **二次升级**：已有 `token.xxx` / `var(--ant-*)` 的存量代码，显式运行 `token-to-obtoken` 升级到 obToken。
+- **兼容旧行为**：`--token-target=antd` 恢复 antd token（`token` + `theme.useToken()`、`less-to-token`、`--prefix=ant`）。
 
 ## 基本用法
 
 在**目标项目根目录**或**要迁移的目录**下执行，传入路径为当前目录或子目录。**命令中须指定版本 `@oceanbase/codemod@^1.0.0-alpha.0`**：
 
 ```bash
-# 迁移当前目录
+# 迁移当前目录（默认 obToken + OB CSS 变量）
 npx @oceanbase/codemod@^1.0.0-alpha.0 .
 
 # 仅迁移 src 目录
 npx @oceanbase/codemod@^1.0.0-alpha.0 ./src
+
+# 兼容旧 antd token 迁移
+npx @oceanbase/codemod@^1.0.0-alpha.0 . --token-target=antd
 ```
 
 - **默认会检查 git 工作区干净**（无未提交修改），否则会拒绝执行，避免误覆盖。确需跳过时使用 `--force`（谨慎使用）。
@@ -49,30 +54,34 @@ npx @oceanbase/codemod@^1.0.0-alpha.0 ./src
 | obui-to-oceanbase-design-and-ui | 旧 @oceanbase/ui (obui) → design + ui | ✅ |
 | obutil-to-oceanbase-util | @oceanbase/obutil → @oceanbase/util | ✅ |
 | techui-and-pro-components-to-oceanbase-ui | techui、pro-components → @oceanbase/ui | ✅ |
-| style-to-token | antd style/useToken → design theme.useToken | ✅ |
-| less-to-token | Less 变量 → design token 引用 | ✅ |
-| less-to-cssvar | Less → CSS 变量（需显式指定） | 否 |
-| sass-to-cssvar | Sass → CSS 变量（需显式指定） | 否 |
+| style-to-token | 硬编码样式 → `obToken`（antd alias 保留 `theme.useToken()`） | ✅ |
+| less-to-cssvar | Less → `var(--ob-*)`（**默认保留 `.less` 扩展名**，仅改内容） | ✅ |
+| sass-to-cssvar | Sass/Scss → `var(--ob-*)` | ✅ |
+| less-to-token | Less → antd `@token`（兼容） | 否，需 `--token-target=antd` 或显式指定 |
+| token-to-obtoken | `token` / `var(--ant-*)` → `obToken` / `var(--ob-*)` | 否，需显式指定 |
 
 仅执行部分 transformer 时，使用 `--transformer`，多个用逗号分隔：
 
 ```bash
 npx @oceanbase/codemod@^1.0.0-alpha.0 . --transformer=antd-to-oceanbase-design,obutil-to-oceanbase-util
-npx @oceanbase/codemod@^1.0.0-alpha.0 . --transformer=less-to-cssvar --prefix=ant
+npx @oceanbase/codemod@^1.0.0-alpha.0 . --transformer=token-to-obtoken
+npx @oceanbase/codemod@^1.0.0-alpha.0 . --transformer=less-to-cssvar --rename-to=css --prefix=ob
 ```
 
 ## 常用选项
 
-| 选项                      | 说明                                                          |
-| ------------------------- | ------------------------------------------------------------- |
-| `--force`                 | 跳过 git 工作区检查（慎用）                                   |
-| `--transformer=t1,t2`     | 只运行指定的 transformer                                      |
-| `--disablePrettier=false` | 运行后执行 Prettier 格式化                                    |
-| `--cpus=N`                | 并行进程数（默认与 CPU 相关）                                 |
-| `--prefix=ant`            | less-to-cssvar / sass-to-cssvar 的 CSS 变量前缀（默认 `ant`） |
+| 选项                              | 说明                                                         |
+| --------------------------------- | ------------------------------------------------------------ |
+| `--force`                         | 跳过 git 工作区检查（慎用）                                  |
+| `--transformer=t1,t2`             | 只运行指定的 transformer                                     |
+| `--token-target=ob\|antd`         | 默认 `ob`；`antd` 恢复旧 antd token 迁移行为                 |
+| `--prefix=ob`                     | less-to-cssvar / sass-to-cssvar 的 CSS 变量前缀（默认 `ob`） |
+| `--skip-install` / `--no-install` | 跳过依赖安装/升级（仅做代码转换时推荐）                      |
+| `--disablePrettier=false`         | 运行后执行 Prettier 格式化                                   |
+| `--cpus=N`                        | 并行进程数（默认与 CPU 相关）                                |
 
-less-to-cssvar 还支持 `--rename-to`、`--add-module` 等，详见包内文档或 `packages/codemod` 源码。
+less-to-cssvar 还支持 `--rename-to`（默认 `false` 保留 `.less`；需改扩展名时传 `--rename-to=css`）、`--add-module` 等，详见 `packages/codemod/README.md`。
 
 ## 与 design 规范的关系
 
-执行 codemod 后，迁移结果应满足本 skill 中的使用规范：从 `@oceanbase/design` 引入组件与 theme、根节点 ConfigProvider、表格用 Table、筛选用 Filter、图标用 @oceanbase/icons 等。迁移完成后建议按 [design 概述](design/00-overview.md) 与各 reference 做一次人工核对与修正。
+执行 codemod 后，迁移结果应满足本 skill 中的使用规范：从 `@oceanbase/design` 引入组件；函数组件用 `useToken()` 或 `theme.useToken()` 的 `obToken`（dataphin 等 antd alias 场景可继续 `import { theme } from 'antd'`）；根节点 ConfigProvider；自定义样式优先 `obToken` 或 `var(--ob-*)`；表格用 Table、筛选用 Filter、图标用 @oceanbase/icons 等。迁移完成后建议按 [design 概述](design/00-overview.md) 与各 reference 做一次人工核对与修正。

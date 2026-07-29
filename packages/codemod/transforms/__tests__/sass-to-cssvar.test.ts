@@ -4,19 +4,15 @@ import { transform, camelToKebab, SASS_TOKENS } from '../sass-to-cssvar';
 
 const testUnit = 'sass-to-cssvar';
 
-// Tests with default prefix 'ant'
-const defaultPrefixTests = ['basic', 'no-transform'];
-
-// Tests with custom prefix
-const customPrefixTests = ['custom-prefix'];
+const defaultPrefixTests = ['basic', 'no-transform', 'custom-prefix'];
 
 describe(testUnit, () => {
-  describe('with default prefix (ant)', () => {
+  describe('with default prefix (ob)', () => {
     defaultPrefixTests.forEach(test => {
       it(test, async () => {
         const { content: result } = await transform(
           path.join(__dirname, `../__testfixtures__/sass-to-cssvar/${test}.input.scss`),
-          { prefix: 'ant' }
+          { prefix: 'ob' }
         );
         const output = fs.readFileSync(
           path.join(__dirname, `../__testfixtures__/sass-to-cssvar/${test}.output.scss`),
@@ -27,15 +23,15 @@ describe(testUnit, () => {
     });
   });
 
-  describe('with custom prefix (ob)', () => {
-    customPrefixTests.forEach(test => {
+  describe('with legacy ant prefix', () => {
+    ['basic', 'custom-prefix'].forEach(test => {
       it(test, async () => {
         const { content: result } = await transform(
           path.join(__dirname, `../__testfixtures__/sass-to-cssvar/${test}.input.scss`),
-          { prefix: 'ob' }
+          { prefix: 'ant', useSemanticOb: false }
         );
         const output = fs.readFileSync(
-          path.join(__dirname, `../__testfixtures__/sass-to-cssvar/${test}.output.scss`),
+          path.join(__dirname, `../__testfixtures__/sass-to-cssvar/${test}.output.ant.scss`),
           'utf-8'
         );
         expect(result).toEqual(output);
@@ -59,7 +55,6 @@ describe(testUnit, () => {
     });
 
     it('should be loaded from @oceanbase/design theme', () => {
-      // SASS_TOKENS should be an array with significant length
       expect(Array.isArray(SASS_TOKENS)).toBe(true);
       expect(SASS_TOKENS.length).toBeGreaterThan(50);
     });

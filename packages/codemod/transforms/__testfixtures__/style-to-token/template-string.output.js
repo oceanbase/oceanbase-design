@@ -1,12 +1,12 @@
-import { theme, token } from '@oceanbase/design';
+import { obToken, useToken } from '@oceanbase/design';
 import React from 'react';
 
 const Component = () => {
-  const { token } = theme.useToken();
+  const { obToken } = useToken();
   return (
     <div
       style={{
-        border: `1px solid ${token.colorTextSecondary}`,
+        border: `1px solid ${obToken.colorTextLabel}`,
       }}
     />
   );
@@ -16,7 +16,7 @@ const getComponent = () => {
   return (
     <div
       style={{
-        border: `1px solid ${token.colorTextSecondary}`,
+        border: `1px solid ${obToken.colorTextLabel}`,
       }}
     />
   );

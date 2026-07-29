@@ -1,17 +1,44 @@
 const { upperFirst } = require('lodash');
 const { addSubmoduleImport } = require('./utils');
 const { tokenParse, propertyTokenParse } = require('./utils/token');
+const { hexToObToken, obPropertyTokenParse } = require('./utils/ob-token-map');
 const { printOptions } = require('./utils/config');
+const {
+  getHookInjectionConfig,
+  ensureThemeInAntdAliasImport,
+  migrateObTokenDestructuring,
+} = require('./utils/ob-token-destructure');
 
-// 判断当前 path 是否为顶层 BlockStatement
+function getStyleTokenConfig(options = {}) {
+  const isAntd = options.tokenTarget === 'antd';
+  return {
+    isAntd,
+    identifier: isAntd ? 'token' : 'obToken',
+    staticImport: isAntd ? 'token' : 'obToken',
+    hookImport: isAntd ? 'theme' : 'useToken',
+    hookStatement: isAntd ? 'const { token } = theme.useToken()' : 'const { obToken } = useToken()',
+    resolveToken(value, propertyName) {
+      if (isAntd) {
+        const propertyResult = propertyTokenParse(propertyName, value);
+        if (propertyResult) {
+          return propertyResult.token;
+        }
+        return tokenParse(value).token;
+      }
+      const propertyResult = obPropertyTokenParse(propertyName, value);
+      if (propertyResult) {
+        return propertyResult.obToken;
+      }
+      return hexToObToken(value, { propertyName });
+    },
+  };
+}
+
 function isTopBlockStatement(path) {
-  // 判断当前节点类型是否为 BlockStatement
   const isBlockStatement = path.value.type === 'BlockStatement';
   let isTop = isBlockStatement && true;
   path = path.parentPath;
-  // 向上遍历父节点，直到遇到 Program 节点
   while (isTop && path.value.type !== 'Program') {
-    // 如果父节点也是 BlockStatement，则当前不是顶层 BlockStatement
     if (path.value.type === 'BlockStatement') {
       isTop = false;
       break;
@@ -21,57 +48,50 @@ function isTopBlockStatement(path) {
   return isTop;
 }
 
-// 判断字符串首字母是否为大写
+function isInsideCreateStyles(path) {
+  let current = path.parentPath;
+  while (current) {
+    if (current.value?.type === 'CallExpression' && current.value.callee?.name === 'createStyles') {
+      return true;
+    }
+    current = current.parentPath;
+  }
+  return false;
+}
+
 function isFirstUpperCase(str) {
   return upperFirst(str) === str;
 }
 
-// ref: https://github.com/facebook/jscodeshift/issues/403#issuecomment-991759561
 function shorthandProperty(property) {
   property.shorthand = true;
   return property;
 }
 
-// 包装 JSX 属性值
-function wrapJSXValue(value, isJSXAttribute) {
-  return isJSXAttribute ? `{${value}}` : value;
-}
-
-// 检查是否为 React 组件或 Hook
 function isReactComponentOrHook(functionName, path) {
-  // 如果有函数名，检查是否以大写字母开头或以 use 开头
   if (functionName) {
     return isFirstUpperCase(functionName) || functionName.startsWith('use');
   }
-
-  // 对于匿名函数，检查是否是 export default function () {} 的形式
-  // 而不是 export default () => {} 的形式
   if (path) {
     const parentType = path.parentPath.value?.type;
     if (parentType === 'FunctionDeclaration') {
-      // export default function () {} - 认为是 React 组件
       return true;
     }
     if (parentType === 'ArrowFunctionExpression') {
-      // export default () => {} - 不认为是 React 组件
       return false;
     }
   }
-
-  // 其他情况，默认不认为是 React 组件
   return false;
 }
 
-// 检查 BlockStatement 中是否包含 token 使用
-function hasTokenUsage(j, path) {
+function hasTokenUsage(j, path, config) {
   return (
     j(path).find(j.MemberExpression, {
-      object: { name: 'token' },
+      object: { name: config.identifier },
     }).length > 0
   );
 }
 
-// 检查 BlockStatement 中是否包含 useToken 语句
 function hasUseTokenStatement(j, path) {
   return (
     j(path).find(j.Identifier, {
@@ -80,7 +100,6 @@ function hasUseTokenStatement(j, path) {
   );
 }
 
-// 获取函数名称
 function getFunctionName(path) {
   const parentType = path.parentPath.value?.type;
   if (parentType === 'FunctionDeclaration') {
@@ -92,21 +111,23 @@ function getFunctionName(path) {
   return undefined;
 }
 
-// 创建 token 对象模式
-function createTokenObjectPattern(j) {
+function createTokenObjectPattern(j, config) {
+  if (config.isAntd) {
+    return j.objectPattern([
+      shorthandProperty(j.property('init', j.identifier('token'), j.identifier('token'))),
+    ]);
+  }
   return j.objectPattern([
     shorthandProperty(j.property('init', j.identifier('token'), j.identifier('token'))),
+    shorthandProperty(j.property('init', j.identifier('obToken'), j.identifier('obToken'))),
   ]);
 }
 
-// 检查对象模式中是否包含 token 属性
-function hasTokenInObjectPattern(param) {
-  return param.properties.some(p => p.type === 'ObjectProperty' && p.key && p.key.name === 'token');
+function hasTokenInObjectPattern(param, key = 'token') {
+  return param.properties.some(p => p.type === 'ObjectProperty' && p.key && p.key.name === key);
 }
 
-function processCreateStylesParams(j, root) {
-  const processedCreateStyles = new Set();
-
+function processCreateStylesParams(j, root, config) {
   root
     .find(j.CallExpression, {
       callee: { name: 'createStyles' },
@@ -114,55 +135,70 @@ function processCreateStylesParams(j, root) {
     .forEach(path => {
       const arrowFunc = path.value.arguments[0];
       if (arrowFunc && arrowFunc.type === 'ArrowFunctionExpression') {
-        processedCreateStyles.add(path);
-
         if (arrowFunc.params.length > 0) {
           const param = arrowFunc.params[0];
-          if (param.type === 'ObjectPattern' && !hasTokenInObjectPattern(param)) {
-            // 如果参数对象中没有 token 属性，则插入 token 属性
-            param.properties.push(
-              shorthandProperty(j.property('init', j.identifier('token'), j.identifier('token')))
-            );
+          if (param.type === 'ObjectPattern') {
+            if (!hasTokenInObjectPattern(param, 'token')) {
+              param.properties.push(
+                shorthandProperty(j.property('init', j.identifier('token'), j.identifier('token')))
+              );
+            }
+            if (!config.isAntd && !hasTokenInObjectPattern(param, 'obToken')) {
+              param.properties.push(
+                shorthandProperty(
+                  j.property('init', j.identifier('obToken'), j.identifier('obToken'))
+                )
+              );
+            }
           } else if (param.type !== 'ObjectPattern') {
-            // 如果参数不是对象结构，则替换为 { token }
-            arrowFunc.params[0] = createTokenObjectPattern(j);
+            arrowFunc.params[0] = createTokenObjectPattern(j, config);
           }
         } else {
-          // 如果没有参数，则插入 { token }
-          arrowFunc.params = [createTokenObjectPattern(j)];
+          arrowFunc.params = [createTokenObjectPattern(j, config)];
         }
       }
     });
-
-  return processedCreateStyles;
 }
 
-// 添加 token 导入到 BlockStatement
-function addTokenImportToBlockStatement(j, root, path) {
+function hasObTokenHookStatement(j, path) {
+  return (
+    hasUseTokenStatement(j, path) ||
+    j(path).find(j.CallExpression, {
+      callee: {
+        type: 'MemberExpression',
+        object: { name: 'theme' },
+        property: { name: 'useToken' },
+      },
+    }).length > 0
+  );
+}
+
+function addTokenImportToBlockStatement(j, root, path, config) {
   const includeJSXElement = j(path).find(j.JSXElement).length > 0;
   const functionName = getFunctionName(path);
 
   if (includeJSXElement && isReactComponentOrHook(functionName, path)) {
-    const insertString = 'const { token } = theme.useToken()';
-    path.get('body').value.unshift(j.expressionStatement(j.identifier(insertString)));
-    addSubmoduleImport(j, root, {
-      moduleName: '@oceanbase/design',
-      importedName: 'theme',
-      importKind: 'value',
-    });
+    path.get('body').value.unshift(j.expressionStatement(j.identifier(config.hookStatement)));
+
+    if (config.preserveThemeHook) {
+      ensureThemeInAntdAliasImport(j, root);
+    } else {
+      addSubmoduleImport(j, root, {
+        moduleName: '@oceanbase/design',
+        importedName: config.hookImport,
+        importKind: 'value',
+      });
+    }
   } else if (includeJSXElement) {
-    // 对于非 React 组件的函数，直接导入 token
     addSubmoduleImport(j, root, {
       moduleName: '@oceanbase/design',
-      importedName: 'token',
+      importedName: config.staticImport,
       importKind: 'value',
     });
   }
 }
 
-// 为函数组件和类组件添加 token 到现有导入
-function addTokenToExistingImport(j, root) {
-  // 检查是否已经导入了 useToken 或 theme
+function addTokenToExistingImport(j, root, config) {
   const hasUseTokenImport =
     root
       .find(j.ImportDeclaration, {
@@ -172,87 +208,129 @@ function addTokenToExistingImport(j, root) {
         imported: { name: 'useToken' },
       }).length > 0;
 
-  const hasThemeImport =
+  const hasHookImport =
     root
       .find(j.ImportDeclaration, {
         source: { value: '@oceanbase/design' },
       })
       .find(j.ImportSpecifier, {
-        imported: { name: 'theme' },
+        imported: { name: config.hookImport },
       }).length > 0;
 
-  // 如果已经有 useToken 或 theme 导入，不需要添加 token 导入
-  if (hasUseTokenImport || hasThemeImport) {
+  if (hasUseTokenImport || hasHookImport) {
     return;
   }
 
-  // 查找所有从 @oceanbase/design 的导入
-  const importDeclarations = root.find(j.ImportDeclaration, {
-    source: { value: '@oceanbase/design' },
-  });
-
-  if (importDeclarations.length === 0) {
-    return;
-  }
-
-  importDeclarations.forEach(importPath => {
-    const specifiers = importPath.value.specifiers;
-
-    // 检查是否已经有 token 导入
-    const hasTokenImport = specifiers.some(
-      spec => spec.type === 'ImportSpecifier' && spec.imported.name === 'token'
-    );
-
-    if (!hasTokenImport) {
-      // 添加 token 导入
-      const tokenSpecifier = j.importSpecifier(j.identifier('token'));
-      specifiers.push(tokenSpecifier);
-    }
-  });
+  root
+    .find(j.ImportDeclaration, {
+      source: { value: '@oceanbase/design' },
+    })
+    .forEach(importPath => {
+      const specifiers = importPath.value.specifiers;
+      const hasStaticImport = specifiers.some(
+        spec => spec.type === 'ImportSpecifier' && spec.imported.name === config.staticImport
+      );
+      if (!hasStaticImport) {
+        specifiers.push(j.importSpecifier(j.identifier(config.staticImport)));
+      }
+    });
 }
 
-// 处理字符串字面量的 token 替换
-function processStringLiterals(j, root) {
+function getPropertyNameFromPath(path) {
+  let current = path.parentPath;
+  while (current) {
+    if (current.value?.type === 'ObjectProperty' && current.value.key?.type === 'Identifier') {
+      return current.value.key.name;
+    }
+    if (current.value?.type === 'JSXAttribute' && current.value.name?.type === 'JSXIdentifier') {
+      return current.value.name.name;
+    }
+    current = current.parentPath;
+  }
+  return undefined;
+}
+
+function createTokenMemberExpression(j, config, tokenKey) {
+  return j.memberExpression(j.identifier(config.identifier), j.identifier(tokenKey));
+}
+
+function processStringLiterals(j, root, config) {
   let hasChanged = false;
 
   const stringList = root.find(j.StringLiteral, {
     value: value => {
-      const { token } = tokenParse(value);
-      return !!token;
+      return !!value;
     },
   });
 
-  if (stringList.length > 0) {
-    stringList.replaceWith(path => {
-      hasChanged = true;
-      const { key, token, formattedValue } = tokenParse(path.value.value);
-      const isJSXAttribute = path.parentPath.value.type === 'JSXAttribute';
+  stringList.forEach(path => {
+    if (!config.isAntd && isInsideCreateStyles(path)) {
+      return;
+    }
+    const propertyName = getPropertyNameFromPath(path);
+    const value = path.value.value;
+    const tokenKey = config.resolveToken(value, propertyName);
+    if (!tokenKey) {
+      return;
+    }
 
-      if (formattedValue === key) {
-        // 完全匹配的情况，直接返回 token.xxx
-        const memberExpression = j.memberExpression(j.identifier('token'), j.identifier(token));
-        return isJSXAttribute ? j.jsxExpressionContainer(memberExpression) : memberExpression;
-      } else {
-        // 部分匹配的情况，返回模板字符串
-        const beforeToken = formattedValue.replace(key, '');
-        const templateString = j.templateLiteral(
+    hasChanged = true;
+    const isJSXAttribute = path.parentPath.value.type === 'JSXAttribute';
+    const { key } = config.isAntd ? tokenParse(value) : { key: null };
+    const formattedValue = value.toLowerCase().replace(/\s/g, '');
+
+    if (config.isAntd && key && formattedValue === key) {
+      const memberExpression = createTokenMemberExpression(j, config, tokenKey);
+      j(path).replaceWith(
+        isJSXAttribute ? j.jsxExpressionContainer(memberExpression) : memberExpression
+      );
+      return;
+    }
+
+    if (config.isAntd && key && value.includes(key) && formattedValue !== key) {
+      const prefix = value.substring(0, value.indexOf(key));
+      const suffix = value.substring(value.indexOf(key) + key.length);
+      const tpl = j.templateLiteral(
+        [
+          j.templateElement({ raw: prefix, cooked: prefix }, false),
+          j.templateElement({ raw: suffix, cooked: suffix }, true),
+        ],
+        [createTokenMemberExpression(j, config, tokenKey)]
+      );
+      j(path).replaceWith(isJSXAttribute ? j.jsxExpressionContainer(tpl) : tpl);
+      return;
+    }
+
+    if (!config.isAntd && tokenKey) {
+      const parsed = tokenParse(value);
+      if (parsed.key && value.includes(parsed.key) && value.trim() !== parsed.key) {
+        const prefix = value.substring(0, value.indexOf(parsed.key));
+        const suffix = value.substring(value.indexOf(parsed.key) + parsed.key.length);
+        const tpl = j.templateLiteral(
           [
-            j.templateElement({ raw: beforeToken, cooked: beforeToken }, false),
-            j.templateElement({ raw: '', cooked: '' }, true),
+            j.templateElement({ raw: prefix, cooked: prefix }, false),
+            j.templateElement({ raw: suffix, cooked: suffix }, true),
           ],
-          [j.memberExpression(j.identifier('token'), j.identifier(token))]
+          [createTokenMemberExpression(j, config, tokenKey)]
         );
-        return isJSXAttribute ? j.jsxExpressionContainer(templateString) : templateString;
+        j(path).replaceWith(isJSXAttribute ? j.jsxExpressionContainer(tpl) : tpl);
+        return;
       }
-    });
 
-    // 为包含 token 使用的顶级 BlockStatement 添加导入
+      const memberExpression = createTokenMemberExpression(j, config, tokenKey);
+      j(path).replaceWith(
+        isJSXAttribute ? j.jsxExpressionContainer(memberExpression) : memberExpression
+      );
+    }
+  });
+
+  if (hasChanged) {
     root
       .find(j.BlockStatement)
       .filter(path => isTopBlockStatement(path))
       .forEach(path => {
-        if (hasTokenUsage(j, path) && !hasUseTokenStatement(j, path)) {
-          addTokenImportToBlockStatement(j, root, path);
+        if (hasTokenUsage(j, path, config) && !hasObTokenHookStatement(j, path)) {
+          addTokenImportToBlockStatement(j, root, path, config);
         }
       });
   }
@@ -260,114 +338,79 @@ function processStringLiterals(j, root) {
   return hasChanged;
 }
 
-// 处理模板字符串中的颜色值
-function processTemplateLiterals(j, root) {
+function processTemplateLiterals(j, root, config) {
   let hasChanged = false;
 
-  const templateList = root.find(j.TemplateLiteral);
+  root.find(j.TemplateLiteral).forEach(path => {
+    if (!config.isAntd && isInsideCreateStyles(path)) {
+      return;
+    }
 
-  if (templateList.length > 0) {
-    templateList.forEach(path => {
-      const templateLiteral = path.value;
-      const quasis = templateLiteral.quasis;
-      const expressions = templateLiteral.expressions || [];
+    const templateLiteral = path.value;
+    const quasis = templateLiteral.quasis;
+    const expressions = templateLiteral.expressions || [];
+    let needsReconstruction = false;
+    const newQuasis = [];
+    const newExpressions = [];
 
-      // 检查每个模板字符串片段是否包含需要转换的颜色值
-      let needsReconstruction = false;
-      const newQuasis = [];
-      const newExpressions = [];
-
-      for (let i = 0; i < quasis.length; i++) {
-        const quasi = quasis[i];
-        let value = quasi.value.raw;
-
-        // 查找需要转换的颜色值
-        const colorMatch = value.match(
-          /rgba?\([^)]+\)|#[0-9a-fA-F]{3,8}|rgb\([^)]+\)|hsl\([^)]+\)|hsla?\([^)]+\)/g
-        );
-        if (colorMatch) {
-          hasChanged = true;
-          needsReconstruction = true;
-
-          // 收集所有需要替换的匹配项及其 token
-          const replacements = [];
-          colorMatch.forEach(match => {
-            const { token } = tokenParse(match);
-            if (token) {
-              const index = value.indexOf(match);
-              replacements.push({ index, match, token });
-            }
-          });
-
-          // 按位置排序，从后往前处理以避免位置偏移
-          replacements.sort((a, b) => b.index - a.index);
-
-          let processedValue = value;
-          replacements.forEach(({ index, match, token }) => {
-            const before = processedValue.substring(0, index);
-            const after = processedValue.substring(index + match.length);
-
-            // 如果前面有内容，创建一个 quasi
-            if (before) {
-              newQuasis.push(j.templateElement({ raw: before, cooked: before }, false));
-            }
-
-            // 创建 token 表达式
-            newExpressions.push(j.memberExpression(j.identifier('token'), j.identifier(token)));
-
-            // 剩余部分继续处理
-            processedValue = after;
-          });
-
-          // 如果有剩余部分，添加到 quasis
-          if (processedValue || newQuasis.length === 0) {
-            const isTail = i === quasis.length - 1 && expressions.length === 0;
-            newQuasis.push(
-              j.templateElement({ raw: processedValue || '', cooked: processedValue || '' }, isTail)
-            );
-          } else if (newQuasis.length > 0) {
-            // 确保最后一个 quasi 标记为 tail（如果这是最后一个 quasi 且没有更多表达式）
-            const isTail = i === quasis.length - 1 && expressions.length === 0;
-            if (isTail) {
-              const lastQuasi = newQuasis[newQuasis.length - 1];
-              lastQuasi.tail = true;
-            }
+    for (let i = 0; i < quasis.length; i++) {
+      const quasi = quasis[i];
+      let value = quasi.value.raw;
+      const colorMatch = value.match(
+        /rgba?\([^)]+\)|#[0-9a-fA-F]{3,8}|rgb\([^)]+\)|hsl\([^)]+\)|hsla?\([^)]+\)/g
+      );
+      if (colorMatch) {
+        hasChanged = true;
+        needsReconstruction = true;
+        const replacements = [];
+        colorMatch.forEach(match => {
+          const tokenKey = config.resolveToken(match);
+          if (tokenKey) {
+            replacements.push({ index: value.indexOf(match), match, tokenKey });
           }
-        } else {
-          // 如果没有颜色值需要转换，保持原样
-          newQuasis.push(quasi);
-          if (i < expressions.length) {
-            newExpressions.push(expressions[i]);
+        });
+        replacements.sort((a, b) => b.index - a.index);
+
+        let processedValue = value;
+        replacements.forEach(({ index, match, tokenKey }) => {
+          const before = processedValue.substring(0, index);
+          const after = processedValue.substring(index + match.length);
+          if (before) {
+            newQuasis.push(j.templateElement({ raw: before, cooked: before }, false));
           }
+          newExpressions.push(createTokenMemberExpression(j, config, tokenKey));
+          processedValue = after;
+        });
+
+        if (processedValue || newQuasis.length === 0) {
+          newQuasis.push(
+            j.templateElement({ raw: processedValue || '', cooked: processedValue || '' }, true)
+          );
+        }
+      } else {
+        newQuasis.push(quasi);
+        if (i < expressions.length) {
+          newExpressions.push(expressions[i]);
         }
       }
+    }
 
-      // 如果需要重构，替换整个模板字符串
-      if (needsReconstruction) {
-        // 确保最后一个 quasi 标记为 tail
-        if (newQuasis.length > 0) {
-          const lastQuasi = newQuasis[newQuasis.length - 1];
-          lastQuasi.tail = true;
-        }
-
-        // 合并原有的表达式（如果有）
-        const allExpressions = [...newExpressions];
-        // 添加原有的表达式（在 quasis 之后）
-        for (let i = 0; i < expressions.length; i++) {
-          allExpressions.push(expressions[i]);
-        }
-
-        path.replace(j.templateLiteral(newQuasis, allExpressions));
+    if (needsReconstruction) {
+      if (newQuasis.length > 0) {
+        newQuasis[newQuasis.length - 1].tail = true;
       }
-    });
+      const allExpressions = [...newExpressions, ...expressions];
+      path.replace(j.templateLiteral(newQuasis, allExpressions));
+    }
+  });
 
-    // 为包含 token 使用的顶级 BlockStatement 添加导入
+  if (hasChanged) {
     root
       .find(j.BlockStatement)
       .filter(path => isTopBlockStatement(path))
       .forEach(path => {
-        if (hasTokenUsage(j, path) && !hasUseTokenStatement(j, path)) {
-          addTokenImportToBlockStatement(j, root, path);
+        if (hasTokenUsage(j, path, config) && !hasObTokenHookStatement(j, path)) {
+          addTokenImportToBlockStatement(j, root, path, config);
         }
       });
   }
@@ -375,254 +418,203 @@ function processTemplateLiterals(j, root) {
   return hasChanged;
 }
 
-function importComponent(j, root, options) {
+function processObjectProperties(j, root, config) {
   let hasChanged = false;
 
-  // 处理字符串字面量
-  hasChanged = processStringLiterals(j, root) || hasChanged;
-
-  // 处理模板字符串中的颜色值
-  hasChanged = processTemplateLiterals(j, root) || hasChanged;
-
-  // 处理对象属性值（如 fontSize: 14）
-  const objectPropertyChanged = processObjectProperties(j, root);
-  hasChanged = objectPropertyChanged || hasChanged;
-
-  return hasChanged;
-}
-
-// 处理对象属性
-function processObjectProperties(j, root) {
-  let hasChanged = false;
-
-  // 处理数字字面量
   const numericPropertyList = root.find(j.ObjectProperty, {
     key: { type: 'Identifier' },
     value: { type: 'NumericLiteral' },
   });
 
-  if (numericPropertyList.length > 0) {
-    numericPropertyList.replaceWith(path => {
-      const propertyName = path.value.key.name;
-      const propertyValue = path.value.value.value;
+  numericPropertyList.forEach(path => {
+    if (!config.isAntd && isInsideCreateStyles(path)) {
+      return;
+    }
+    const propertyName = path.value.key.name;
+    const propertyValue = path.value.value.value;
+    const tokenKey = config.resolveToken(String(propertyValue), propertyName);
+    if (tokenKey) {
+      hasChanged = true;
+      path.value.value = createTokenMemberExpression(j, config, tokenKey);
+    }
+  });
 
-      const tokenResult = propertyTokenParse(propertyName, propertyValue);
-      if (tokenResult) {
-        hasChanged = true;
-        const isJSXAttribute = path.parentPath.value.type === 'JSXAttribute';
-        const memberExpression = j.memberExpression(
-          j.identifier('token'),
-          j.identifier(tokenResult.token)
-        );
-        return j.objectProperty(j.identifier(propertyName), memberExpression);
-      }
-      return path.value;
-    });
-  }
-
-  // 处理字符串字面量（如 fontSize: '14px'）
   const stringPropertyList = root.find(j.ObjectProperty, {
     key: { type: 'Identifier' },
     value: { type: 'StringLiteral' },
   });
 
-  if (stringPropertyList.length > 0) {
-    stringPropertyList.replaceWith(path => {
-      const propertyName = path.value.key.name;
-      const propertyValue = path.value.value.value;
-
-      const tokenResult = propertyTokenParse(propertyName, propertyValue);
-      if (tokenResult) {
-        hasChanged = true;
-        const isJSXAttribute = path.parentPath.value.type === 'JSXAttribute';
-        const memberExpression = j.memberExpression(
-          j.identifier('token'),
-          j.identifier(tokenResult.token)
-        );
-        return j.objectProperty(j.identifier(propertyName), memberExpression);
-      }
-      return path.value;
-    });
-  }
+  stringPropertyList.forEach(path => {
+    if (!config.isAntd && isInsideCreateStyles(path)) {
+      return;
+    }
+    const propertyName = path.value.key.name;
+    const propertyValue = path.value.value.value;
+    const tokenKey = config.resolveToken(propertyValue, propertyName);
+    if (tokenKey) {
+      hasChanged = true;
+      path.value.value = createTokenMemberExpression(j, config, tokenKey);
+    }
+  });
 
   return hasChanged;
 }
 
-// 为对象属性添加 token 导入
-function addTokenImportsForObjectProperties(j, root) {
-  // 处理 BlockStatement 中的 token 使用
+function addTokenImportsForObjectProperties(j, root, config) {
   root
     .find(j.BlockStatement)
     .filter(path => isTopBlockStatement(path))
     .forEach(path => {
-      if (hasTokenUsage(j, path) && !hasUseTokenStatement(j, path)) {
+      if (hasTokenUsage(j, path, config) && !hasObTokenHookStatement(j, path)) {
         const calleeName = path.parentPath.parentPath?.parentPath?.value?.callee?.name;
-        // 跳过 createStyles 的情况，因为已经在上面处理了
         if (calleeName !== 'createStyles') {
-          addTokenImportToBlockStatement(j, root, path);
+          addTokenImportToBlockStatement(j, root, path, config);
         }
       }
     });
 
-  // 处理顶层导出语句中的 token 使用
   const hasTokenUsageInRoot =
     root.find(j.MemberExpression, {
-      object: { name: 'token' },
+      object: { name: config.identifier },
     }).length > 0;
 
-  if (hasTokenUsageInRoot) {
-    // 检查是否应该添加顶层 token 导入
-    if (shouldAddTopLevelTokenImport(j, root)) {
-      // 检查是否有 @oceanbase/design 的导入
+  if (hasTokenUsageInRoot && shouldAddTopLevelTokenImport(j, root, config)) {
+    const hasOceanbaseImport =
+      root.find(j.ImportDeclaration, {
+        source: { value: '@oceanbase/design' },
+      }).length > 0;
+
+    if (hasOceanbaseImport) {
+      addTokenToExistingImport(j, root, config);
+    } else {
+      addTopLevelTokenImport(j, root, config);
+    }
+  }
+}
+
+function shouldAddTopLevelTokenImport(j, root, config) {
+  const hasCreateStyles =
+    root.find(j.CallExpression, {
+      callee: { name: 'createStyles' },
+    }).length > 0;
+
+  const hasHookUsage =
+    root.find(j.CallExpression, {
+      callee: {
+        type: 'MemberExpression',
+        object: { name: config.hookImport === 'theme' ? 'theme' : 'useToken' },
+        property: { name: config.hookImport === 'theme' ? 'useToken' : undefined },
+      },
+    }).length > 0 || root.find(j.Identifier, { name: 'useToken' }).length > 0;
+
+  const hasHookImport =
+    root
+      .find(j.ImportDeclaration, {
+        source: { value: '@oceanbase/design' },
+      })
+      .find(j.ImportSpecifier, {
+        imported: { name: config.hookImport },
+      }).length > 0;
+
+  const hasStaticImport =
+    root
+      .find(j.ImportDeclaration, {
+        source: { value: '@oceanbase/design' },
+      })
+      .find(j.ImportSpecifier, {
+        imported: { name: config.staticImport },
+      }).length > 0;
+
+  if (hasStaticImport) {
+    return false;
+  }
+
+  if (hasCreateStyles || hasHookUsage || hasHookImport) {
+    return false;
+  }
+
+  return (
+    root.find(j.MemberExpression, {
+      object: { name: config.identifier },
+    }).length > 0
+  );
+}
+
+function addTopLevelTokenImport(j, root, config) {
+  addSubmoduleImport(j, root, {
+    moduleName: '@oceanbase/design',
+    importedName: config.staticImport,
+    importKind: 'value',
+  });
+}
+
+function importComponent(j, root, config) {
+  let hasChanged = false;
+  hasChanged = processStringLiterals(j, root, config) || hasChanged;
+  hasChanged = processTemplateLiterals(j, root, config) || hasChanged;
+  hasChanged = processObjectProperties(j, root, config) || hasChanged;
+  return hasChanged;
+}
+
+module.exports = (file, api, options) => {
+  const j = api.jscodeshift;
+  const source = typeof file === 'string' ? file : file.source;
+  const root = j(source);
+  const config = getStyleTokenConfig(options);
+  if (!config.isAntd) {
+    Object.assign(config, getHookInjectionConfig(j, root));
+  }
+
+  let hasChanged = false;
+  hasChanged = importComponent(j, root, config) || hasChanged;
+  if (!config.isAntd) {
+    hasChanged = migrateObTokenDestructuring(j, root) || hasChanged;
+  }
+
+  if (hasChanged) {
+    processCreateStylesParams(j, root, config);
+  }
+
+  if (hasChanged) {
+    const hasOtherTokenLogic =
+      root.find(j.CallExpression, {
+        callee: { name: 'createStyles' },
+      }).length > 0 ||
+      root.find(j.Identifier, { name: 'useToken' }).length > 0 ||
+      root
+        .find(j.ImportDeclaration, {
+          source: { value: '@oceanbase/design' },
+        })
+        .find(j.ImportSpecifier, {
+          imported: { name: config.hookImport },
+        }).length > 0;
+
+    if (!hasOtherTokenLogic) {
+      addTokenImportsForObjectProperties(j, root, config);
+    }
+  }
+
+  if (hasChanged) {
+    const hasUsage =
+      root.find(j.MemberExpression, {
+        object: { name: config.identifier },
+      }).length > 0;
+
+    if (hasUsage && shouldAddTopLevelTokenImport(j, root, config)) {
       const hasOceanbaseImport =
         root.find(j.ImportDeclaration, {
           source: { value: '@oceanbase/design' },
         }).length > 0;
 
       if (hasOceanbaseImport) {
-        // 如果有 @oceanbase/design 导入，添加到现有导入
-        addTokenToExistingImport(j, root);
+        addTokenToExistingImport(j, root, config);
       } else {
-        // 如果没有 @oceanbase/design 导入，添加顶层 token 导入
-        addTopLevelTokenImport(j, root);
-      }
-    }
-  }
-}
-
-// 检查是否应该添加顶层 token 导入
-function shouldAddTopLevelTokenImport(j, root) {
-  // 检查是否有 createStyles 调用
-  const hasCreateStyles =
-    root.find(j.CallExpression, {
-      callee: { name: 'createStyles' },
-    }).length > 0;
-
-  // 检查是否使用了 theme.useToken()
-  const hasThemeUseToken =
-    root.find(j.CallExpression, {
-      callee: {
-        type: 'MemberExpression',
-        object: { name: 'theme' },
-        property: { name: 'useToken' },
-      },
-    }).length > 0;
-
-  // 检查是否导入了 theme
-  const hasThemeImport =
-    root
-      .find(j.ImportDeclaration, {
-        source: { value: '@oceanbase/design' },
-      })
-      .find(j.ImportSpecifier, {
-        imported: { name: 'theme' },
-      }).length > 0;
-
-  // 检查是否已经导入了 token
-  const hasTokenImport =
-    root
-      .find(j.ImportDeclaration, {
-        source: { value: '@oceanbase/design' },
-      })
-      .find(j.ImportSpecifier, {
-        imported: { name: 'token' },
-      }).length > 0;
-
-  // 检查是否有 token.xxx 的使用
-  const hasTokenUsage =
-    root.find(j.MemberExpression, {
-      object: { name: 'token' },
-    }).length > 0;
-
-  // 如果已经有 token 导入，不需要添加
-  if (hasTokenImport) {
-    return false;
-  }
-
-  // 如果有 createStyles 或 theme.useToken() 或 theme 导入，不需要添加顶层 token 导入
-  if (hasCreateStyles || hasThemeUseToken || hasThemeImport) {
-    return false;
-  }
-
-  // 如果有 token.xxx 的使用，需要添加导入
-  return hasTokenUsage;
-}
-
-// 添加顶层 token 导入
-function addTopLevelTokenImport(j, root) {
-  addSubmoduleImport(j, root, {
-    moduleName: '@oceanbase/design',
-    importedName: 'token',
-    importKind: 'value',
-  });
-}
-
-module.exports = (file, api, options) => {
-  const j = api.jscodeshift;
-  const root = j(file.source);
-
-  let hasChanged = false;
-  hasChanged = importComponent(j, root, options) || hasChanged;
-
-  // 处理 createStyles 函数的参数
-  if (hasChanged) {
-    processCreateStylesParams(j, root);
-  }
-
-  // 为对象属性添加 token 导入（只在没有其他 token 导入逻辑时调用）
-  if (hasChanged) {
-    // 检查是否已经有其他 token 导入逻辑在处理
-    const hasOtherTokenLogic =
-      root.find(j.CallExpression, {
-        callee: { name: 'createStyles' },
-      }).length > 0 ||
-      root.find(j.CallExpression, {
-        callee: {
-          type: 'MemberExpression',
-          object: { name: 'theme' },
-          property: { name: 'useToken' },
-        },
-      }).length > 0 ||
-      root
-        .find(j.ImportDeclaration, {
-          source: { value: '@oceanbase/design' },
-        })
-        .find(j.ImportSpecifier, {
-          imported: { name: 'theme' },
-        }).length > 0;
-
-    if (!hasOtherTokenLogic) {
-      addTokenImportsForObjectProperties(j, root);
-    }
-  }
-
-  // 如果有变化，检查是否需要添加 token 导入
-  if (hasChanged) {
-    // 检查是否有 token 使用
-    const hasTokenUsage =
-      root.find(j.MemberExpression, {
-        object: { name: 'token' },
-      }).length > 0;
-
-    if (hasTokenUsage) {
-      // 使用 shouldAddTopLevelTokenImport 函数来判断是否需要添加 token 导入
-      if (shouldAddTopLevelTokenImport(j, root)) {
-        // 检查是否有 @oceanbase/design 的导入
-        const hasOceanbaseImport =
-          root.find(j.ImportDeclaration, {
-            source: { value: '@oceanbase/design' },
-          }).length > 0;
-
-        if (hasOceanbaseImport) {
-          // 如果有 @oceanbase/design 导入，添加到现有导入
-          addTokenToExistingImport(j, root);
-        } else {
-          // 如果没有 @oceanbase/design 导入，添加顶层 token 导入
-          addTopLevelTokenImport(j, root);
-        }
+        addTopLevelTokenImport(j, root, config);
       }
     }
   }
 
   return hasChanged ? root.toSource(options.printOptions || printOptions) : null;
 };
+
+module.exports.getStyleTokenConfig = getStyleTokenConfig;

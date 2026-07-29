@@ -138,6 +138,21 @@ const TOKEN_MAP = {
   '#132039': 'colorText',
   '#364563': 'colorTextSecondary',
   '#8592ad': 'colorTextTertiary',
+  // dataphin / common product UI colors
+  '#0c4bff': 'colorInfo',
+  '#3485ff': 'colorInfo',
+  '#1664ff': 'colorInfo',
+  '#6ca0f5': 'colorInfo',
+  '#a186ff': 'colorInfo',
+  '#eaba19': 'colorWarning',
+  '#999': 'colorTextTertiary',
+  '#999999': 'colorTextTertiary',
+  '#a4a4a4': 'colorTextTertiary',
+  '#7c8087': 'colorTextSecondary',
+  '#2bc048': 'colorSuccess',
+  '#ff4343': 'colorError',
+  '#f15533': 'colorError',
+  '#ff4b61': 'colorError',
 };
 
 const TOKEN_MAP_KEYS = Object.keys(TOKEN_MAP).map(key => formatValue(key));
