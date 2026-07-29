@@ -10,7 +10,6 @@ import {
 
 const testUnit = 'less-to-cssvar';
 
-// Tests with default prefix 'ant'
 const defaultPrefixTests = [
   'basic',
   'status-colors',
@@ -24,18 +23,16 @@ const defaultPrefixTests = [
   'mixed-values',
   'multiple-imports',
   'fill-tokens',
+  'custom-prefix',
 ];
 
-// Tests with custom prefix
-const customPrefixTests = ['custom-prefix'];
-
 describe(testUnit, () => {
-  describe('with default prefix (ant)', () => {
+  describe('with default prefix (ob)', () => {
     defaultPrefixTests.forEach(test => {
       it(test, async () => {
         const { content: result } = await transform(
           path.join(__dirname, `../__testfixtures__/less-to-cssvar/${test}.input.less`),
-          { prefix: 'ant' }
+          { prefix: 'ob' }
         );
         const output = fs.readFileSync(
           path.join(__dirname, `../__testfixtures__/less-to-cssvar/${test}.output.less`),
@@ -46,15 +43,15 @@ describe(testUnit, () => {
     });
   });
 
-  describe('with custom prefix (ob)', () => {
-    customPrefixTests.forEach(test => {
+  describe('with legacy ant prefix', () => {
+    ['basic', 'custom-prefix'].forEach(test => {
       it(test, async () => {
         const { content: result } = await transform(
           path.join(__dirname, `../__testfixtures__/less-to-cssvar/${test}.input.less`),
-          { prefix: 'ob' }
+          { prefix: 'ant', useSemanticOb: false }
         );
         const output = fs.readFileSync(
-          path.join(__dirname, `../__testfixtures__/less-to-cssvar/${test}.output.less`),
+          path.join(__dirname, `../__testfixtures__/less-to-cssvar/${test}.output.ant.less`),
           'utf-8'
         );
         expect(result).toEqual(output);
@@ -122,7 +119,6 @@ describe(testUnit, () => {
     });
 
     it('should be loaded from @oceanbase/design theme', () => {
-      // LESS_TOKENS should be an array with significant length
       expect(Array.isArray(LESS_TOKENS)).toBe(true);
       expect(LESS_TOKENS.length).toBeGreaterThan(50);
     });
@@ -145,17 +141,11 @@ describe(testUnit, () => {
       const filePath = '/path/to/style.module.less';
       expect(getNewCssPath(filePath, false, 'css')).toBe('/path/to/style.module.css');
       expect(getNewCssPath(filePath, false, 'scss')).toBe('/path/to/style.module.scss');
-      // shouldAddModule is ignored when file already has .module
       expect(getNewCssPath(filePath, true, 'css')).toBe('/path/to/style.module.css');
     });
 
     it('should disable addModule when renameTo is false', async () => {
-      // When renameTo is false, addModule should be automatically disabled
-      // This is tested implicitly - if renameTo is false, no renaming happens,
-      // so addModule logic is never executed
       const filePath = '/path/to/style.less';
-      // When not renaming, the path should remain unchanged
-      // This test verifies the logic doesn't try to add .module when not renaming
       expect(filePath).toBe('/path/to/style.less');
     });
   });
@@ -163,17 +153,14 @@ describe(testUnit, () => {
   describe('comment conversion for different formats', () => {
     it('should convert comments for CSS output', async () => {
       const testFile = path.join(__dirname, '../__testfixtures__/less-to-cssvar/basic.input.less');
-      const { content } = await transform(testFile, { prefix: 'ant' });
-      // When output is CSS, comments should be converted
+      const { content } = await transform(testFile, { prefix: 'ob' });
       const cssContent = convertLessCommentsToCss(content);
       expect(cssContent).not.toContain('//');
     });
 
     it('should keep comments for SCSS output', async () => {
       const testFile = path.join(__dirname, '../__testfixtures__/less-to-cssvar/basic.input.less');
-      const { content } = await transform(testFile, { prefix: 'ant' });
-      // When output is SCSS, comments should remain as //
-      // (This is handled in lessToCssvar, not in transform)
+      const { content } = await transform(testFile, { prefix: 'ob' });
       expect(content).toBeDefined();
     });
   });

@@ -1,29 +1,29 @@
-import { token } from '@oceanbase/design';
+import { obToken } from '@oceanbase/design';
 function getColorList() {
   return [
     {
       type: 'info',
-      color: token.colorInfo,
+      color: obToken.colorTextLink,
     },
     {
       type: 'success',
-      color: token.colorSuccess,
+      color: obToken.colorTextSuccess,
     },
     {
       type: 'warning',
-      color: token.colorWarning,
+      color: obToken.colorTextWarning,
     },
     {
       type: 'error',
-      color: token.colorError,
+      color: obToken.colorTextError,
     },
     {
       type: 'border',
-      color: `1px solid ${token.colorBorder}`,
+      color: `1px solid ${obToken.colorBorderDefault}`,
     },
     {
       type: 'fontSize',
-      fontSize: token.fontSize,
+      fontSize: obToken.fontSize325,
     },
   ];
 }

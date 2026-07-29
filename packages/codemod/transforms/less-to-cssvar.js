@@ -5,6 +5,7 @@ const postcssLess = require('postcss-less');
 const isDirectory = require('is-directory');
 const { glob } = require('glob');
 const { shouldExcludePath } = require('./utils/path-utils');
+const { transformStyleValue } = require('./utils/css-value-transform');
 
 /**
  * Get Less tokens from @oceanbase/design theme Less file
@@ -95,28 +96,12 @@ const findAllLessFiles = dir => {
  * @param {string} prefix - CSS variable prefix (default: 'ant')
  * @returns {string} - Transformed value with CSS variables
  */
-function transformLessVarToCssVar(value, prefix = 'ant') {
-  if (!value || typeof value !== 'string') {
-    return value;
-  }
-
-  let result = value;
-
-  // Match Less variables like @colorPrimary, @fontSize, etc.
-  // Support both @tokenName and @{tokenName} syntax
-  const lessVarRegex = /@\{?([a-zA-Z][a-zA-Z0-9]*)\}?/g;
-
-  result = result.replace(lessVarRegex, (match, varName) => {
-    // Check if this is a known token
-    if (LESS_TOKENS.includes(varName)) {
-      const kebabName = camelToKebab(varName);
-      return `var(--${prefix}-${kebabName})`;
-    }
-    // Return original if not a known token
-    return match;
+function transformLessVarToCssVar(value, prefix = 'ob', propertyName, options = {}) {
+  const { value: result, changed } = transformStyleValue(value, prefix, propertyName, LESS_TOKENS, {
+    ...options,
+    varPrefix: '@',
   });
-
-  return result;
+  return changed ? result : value;
 }
 
 /**
@@ -127,23 +112,30 @@ function transformLessVarToCssVar(value, prefix = 'ant') {
  * @returns {Promise<string>} - Transformed content
  */
 async function transform(file, options = {}) {
-  const { prefix = 'ant' } = options;
+  const { prefix = 'ob', useSemanticOb = true } = options;
   const content = fs.readFileSync(file, 'utf-8');
   const { root: ast } = await postcss([]).process(content, {
     syntax: postcssLess,
     from: file,
   });
 
-  // Track whether any transformations were made
   let hasTransformations = false;
 
-  // Traverse AST
   ast.walk(node => {
     if (node.type === 'decl') {
-      // Transform property values that contain Less variables
-      const newValue = transformLessVarToCssVar(node.value, prefix);
-      if (newValue !== node.value) {
-        node.value = newValue;
+      const propertyName = node.prop.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+      const { value, changed } = transformStyleValue(
+        node.value,
+        prefix,
+        propertyName,
+        LESS_TOKENS,
+        {
+          useSemanticOb,
+          varPrefix: '@',
+        }
+      );
+      if (changed) {
+        node.value = value;
         hasTransformations = true;
       }
     } else if (node.type === 'atrule') {
@@ -161,7 +153,9 @@ async function transform(file, options = {}) {
       }
       // Transform Less variables in at-rule params (e.g., media queries)
       if (node.params) {
-        const newParams = transformLessVarToCssVar(node.params, prefix);
+        const newParams = transformLessVarToCssVar(node.params, prefix, undefined, {
+          useSemanticOb,
+        });
         if (newParams !== node.params) {
           node.params = newParams;
           hasTransformations = true;
@@ -420,14 +414,20 @@ function getNewCssPath(filePath, shouldAddModule, outputFormat = 'css') {
  * @param {string} file - File or directory path
  * @param {object} options - Transform options
  * @param {string} options.prefix - CSS variable prefix (default: 'ant')
- * @param {string|boolean} options.renameTo - Target format: 'css', 'scss', or false to keep .less (default: 'css')
+ * @param {string|boolean} options.renameTo - Target format: 'css', 'scss', or false to keep .less (default: false)
  * @param {boolean} options.addModule - Whether to add .module suffix when renaming (default: true)
  *   - true (default): Auto-detect based on import style (CSS Module import → .module.css/.scss, global import → .css/.scss)
  *   - false: Skip detection, never add .module suffix
  * @param {boolean} options._explicitAddModule - Internal flag: whether addModule was explicitly specified by user
  */
 async function lessToCssvar(file, options = {}) {
-  let { prefix = 'ant', renameTo = 'css', addModule = true, _explicitAddModule = false } = options;
+  let {
+    prefix = 'ob',
+    renameTo = false,
+    addModule = true,
+    _explicitAddModule = false,
+    useSemanticOb = true,
+  } = options;
   const allLessFiles = findAllLessFiles(file);
   const renamedFiles = [];
   const baseDir = isDirectory.sync(file) ? file : path.dirname(file);
@@ -450,7 +450,7 @@ async function lessToCssvar(file, options = {}) {
   }
 
   for await (const item of allLessFiles) {
-    let { content, hasTransformations } = await transform(item, { prefix });
+    let { content, hasTransformations } = await transform(item, { prefix, useSemanticOb });
 
     // If renaming to CSS, convert Less comments
     // Note: SCSS supports // comments, so only convert for CSS

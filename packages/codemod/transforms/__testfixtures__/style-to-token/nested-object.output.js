@@ -1,11 +1,11 @@
-import { token } from '@oceanbase/design';
+import { obToken } from '@oceanbase/design';
 export const DefaultLineConfig = {
   annotations: [
     {
       text: {
         style: {
-          fill: token.colorInfo,
-          fontSize: token.fontSizeSM,
+          fill: obToken.colorTextLink,
+          fontSize: obToken.fontSize300,
         },
       },
     },

@@ -1,6 +1,6 @@
 .container {
   color: $unknownVariable;
-  background: #ffffff;
+  background: var(--ob-color-bg-default);
   border: 1px solid $customVar;
 }
 

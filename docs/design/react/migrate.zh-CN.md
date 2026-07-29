@@ -25,12 +25,16 @@ npx @oceanbase/codemod@^1.0.0-alpha.0 ./src
 
 ### 常用 transformer
 
-| Transformer                               | 说明                           |
-| ----------------------------------------- | ------------------------------ |
-| antd-to-oceanbase-design                  | antd → @oceanbase/design       |
+| Transformer | 说明 |
+| --- | --- |
+| antd-to-oceanbase-design | antd → @oceanbase/design |
 | techui-and-pro-components-to-oceanbase-ui | pro-components → @oceanbase/ui |
-| obutil-to-oceanbase-util                  | obutil → @oceanbase/util       |
-| style-to-token                            | antd useToken → design theme   |
+| obutil-to-oceanbase-util | obutil → @oceanbase/util |
+| style-to-token | 硬编码样式 → `obToken`（默认；antd alias 场景保留 `theme.useToken()`） |
+| less-to-cssvar / sass-to-cssvar | Less/Sass → `var(--ob-*)`（默认执行，保留 `.less`） |
+| token-to-obtoken | 显式：`token.xxx` / `var(--ant-*)` → `obToken` / `var(--ob-*)` |
+
+常用选项：`--token-target=ob|antd`（默认 ob）、`--skip-install`（仅转换、不装依赖）、`--force`（跳过 git 检查）。
 
 仅运行部分 transformer：
 

@@ -25,12 +25,16 @@ npx @oceanbase/codemod@^1.0.0-alpha.0 ./src
 
 ### Common transformers
 
-| Transformer                               | Description                    |
-| ----------------------------------------- | ------------------------------ |
-| antd-to-oceanbase-design                  | antd → @oceanbase/design       |
+| Transformer | Description |
+| --- | --- |
+| antd-to-oceanbase-design | antd → @oceanbase/design |
 | techui-and-pro-components-to-oceanbase-ui | pro-components → @oceanbase/ui |
-| obutil-to-oceanbase-util                  | obutil → @oceanbase/util       |
-| style-to-token                            | antd useToken → design theme   |
+| obutil-to-oceanbase-util | obutil → @oceanbase/util |
+| style-to-token | Inline styles → `obToken` (default; keeps `theme.useToken()` with antd alias) |
+| less-to-cssvar / sass-to-cssvar | Less/Sass → `var(--ob-*)` (default pipeline, keeps `.less`) |
+| token-to-obtoken | Explicit: `token.xxx` / `var(--ant-*)` → `obToken` / `var(--ob-*)` |
+
+Common flags: `--token-target=ob|antd` (default ob), `--skip-install` (transform only), `--force` (skip git check).
 
 Run specific transformers only:
 

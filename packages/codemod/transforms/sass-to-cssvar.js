@@ -4,6 +4,7 @@ const postcss = require('postcss');
 const postcssScss = require('postcss-scss');
 const isDirectory = require('is-directory');
 const { shouldExcludePath } = require('./utils/path-utils');
+const { transformStyleValue } = require('./utils/css-value-transform');
 
 /**
  * Get SASS/SCSS tokens from @oceanbase/design theme Less file
@@ -95,28 +96,12 @@ const findAllSassFiles = dir => {
  * @param {string} prefix - CSS variable prefix (default: 'ant')
  * @returns {string} - Transformed value with CSS variables
  */
-function transformSassVarToCssVar(value, prefix = 'ant') {
-  if (!value || typeof value !== 'string') {
-    return value;
-  }
-
-  let result = value;
-
-  // Match SASS variables like $colorPrimary, $fontSize, etc.
-  // Support both $tokenName and #{tokenName} syntax
-  const sassVarRegex = /\$([a-zA-Z][a-zA-Z0-9]*)/g;
-
-  result = result.replace(sassVarRegex, (match, varName) => {
-    // Check if this is a known token
-    if (SASS_TOKENS.includes(varName)) {
-      const kebabName = camelToKebab(varName);
-      return `var(--${prefix}-${kebabName})`;
-    }
-    // Return original if not a known token
-    return match;
+function transformSassVarToCssVar(value, prefix = 'ob', propertyName, options = {}) {
+  const { value: result, changed } = transformStyleValue(value, prefix, propertyName, SASS_TOKENS, {
+    ...options,
+    varPrefix: '$',
   });
-
-  return result;
+  return changed ? result : value;
 }
 
 /**
@@ -127,29 +112,38 @@ function transformSassVarToCssVar(value, prefix = 'ant') {
  * @returns {Promise<{content: string, hasTransformations: boolean}>} - Transformed content
  */
 async function transform(file, options = {}) {
-  const { prefix = 'ant' } = options;
+  const { prefix = 'ob', useSemanticOb = true } = options;
   const content = fs.readFileSync(file, 'utf-8');
   const { root: ast } = await postcss([]).process(content, {
     syntax: postcssScss,
     from: file,
   });
 
-  // Track whether any transformations were made
   let hasTransformations = false;
 
-  // Traverse AST
   ast.walk(node => {
     if (node.type === 'decl') {
-      // Transform property values that contain SASS variables
-      const newValue = transformSassVarToCssVar(node.value, prefix);
-      if (newValue !== node.value) {
-        node.value = newValue;
+      const propertyName = node.prop.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+      const { value, changed } = transformStyleValue(
+        node.value,
+        prefix,
+        propertyName,
+        SASS_TOKENS,
+        {
+          useSemanticOb,
+          varPrefix: '$',
+        }
+      );
+      if (changed) {
+        node.value = value;
         hasTransformations = true;
       }
     } else if (node.type === 'atrule') {
       // Transform SASS variables in at-rule params (e.g., media queries)
       if (node.params) {
-        const newParams = transformSassVarToCssVar(node.params, prefix);
+        const newParams = transformSassVarToCssVar(node.params, prefix, undefined, {
+          useSemanticOb,
+        });
         if (newParams !== node.params) {
           node.params = newParams;
           hasTransformations = true;
@@ -171,11 +165,11 @@ async function transform(file, options = {}) {
  * @param {string} options.prefix - CSS variable prefix (default: 'ant')
  */
 async function sassToCssvar(file, options = {}) {
-  const { prefix = 'ant' } = options;
+  const { prefix = 'ob', useSemanticOb = true } = options;
   const allSassFiles = findAllSassFiles(file);
 
   for (const item of allSassFiles) {
-    const { content, hasTransformations } = await transform(item, { prefix });
+    const { content, hasTransformations } = await transform(item, { prefix, useSemanticOb });
 
     if (hasTransformations) {
       fs.writeFileSync(item, content);
