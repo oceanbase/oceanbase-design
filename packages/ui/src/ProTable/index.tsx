@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { ProTable as AntProTable } from '@ant-design/pro-components';
 import type { ProTableProps as AntProTableProps } from '@ant-design/pro-components';
 import { ConfigProvider, Empty, Table } from '@oceanbase/design';
@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import { isEmpty, merge } from 'lodash';
 import useLightFilterStyle from '../LightFilter/style';
 import useStyle from './style';
+import { columnsHaveTooltip, stripColumnTooltip } from './columnTooltip';
+import { createObTableViewRender } from './obTableViewRender';
 
 export interface ProTableProps<T, U, ValueType> extends AntProTableProps<T, U, ValueType> {
   innerBordered?: boolean;
@@ -33,6 +35,8 @@ function ProTable<T, U, ValueType>({
   prefixCls: customizePrefixCls,
   tableClassName,
   className,
+  tableViewRender: userTableViewRender,
+  columns,
   ...restProps
 }: ProTableProps<T, U, ValueType>) {
   const { getPrefixCls, card: contextCard } = useContext(ConfigProvider.ConfigContext);
@@ -68,6 +72,44 @@ function ProTable<T, U, ValueType>({
     typeof outerCardProps === 'boolean' ? {} : outerCardProps
   );
   const proCardCls = getPrefixCls('pro-card', customizePrefixCls);
+
+  const emptyTextNode = (
+    <div className={`${tablePrefixCls}-empty-wrapper`}>
+      {typeof emptyText === 'function' ? emptyText() : emptyText}
+    </div>
+  );
+
+  const hasColumnTooltip = useMemo(() => columnsHaveTooltip(columns), [columns]);
+
+  const columnsWithoutTooltip = useMemo(
+    () => (hasColumnTooltip ? stripColumnTooltip(columns) : columns),
+    [columns, hasColumnTooltip]
+  );
+
+  const tableViewRender = useMemo(() => {
+    if (!hasColumnTooltip && !userTableViewRender) {
+      return undefined;
+    }
+    return createObTableViewRender({
+      columns,
+      mergeTooltip: hasColumnTooltip,
+      innerBordered,
+      tableCls,
+      pagination,
+      restLocale,
+      emptyTextNode,
+      userTableViewRender,
+    });
+  }, [
+    columns,
+    hasColumnTooltip,
+    userTableViewRender,
+    innerBordered,
+    tableCls,
+    pagination,
+    restLocale,
+    emptyTextNode,
+  ]);
 
   return tableWrapCSSVar(
     lightFilterWrapSSR(
@@ -125,15 +167,13 @@ function ProTable<T, U, ValueType>({
           footer={footer}
           locale={{
             ...restLocale,
-            emptyText: (
-              <div className={`${tablePrefixCls}-empty-wrapper`}>
-                {typeof emptyText === 'function' ? emptyText() : emptyText}
-              </div>
-            ),
+            emptyText: emptyTextNode,
           }}
+          tableViewRender={tableViewRender}
           prefixCls={customizePrefixCls}
           tableClassName={tableCls}
           className={proTableCls}
+          columns={columnsWithoutTooltip}
           {...restProps}
         />
       )

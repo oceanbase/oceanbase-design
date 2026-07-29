@@ -1,6 +1,6 @@
 import { Popover, Space, Table as AntTable, theme } from 'antd';
 import type { TableProps as AntTableProps } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import type { ColumnsType, ColumnType } from 'antd/es/table';
 import type { RowSelectMethod, TableLocale as AntTableLocale } from 'antd/es/table/interface';
 import type { Reference } from 'rc-table';
 import type Summary from 'rc-table/es/Footer/Summary';
@@ -17,6 +17,12 @@ import type { AnyObject } from '../_util/type';
 import useDefaultPagination from './hooks/useDefaultPagination';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import enUS from '../locale/en-US';
+import { injectColumnTitleTooltip } from './ColumnTitleWithTooltip';
+import type { ColumnTooltipType } from './ColumnTitleWithTooltip';
+
+export type { ColumnTooltipType } from './ColumnTitleWithTooltip';
+export type OBColumnType<T> = ColumnType<T> & { tooltip?: ColumnTooltipType };
+export type OBTableColumnsType<T> = OBColumnType<T>[];
 
 export * from 'antd/es/table';
 
@@ -287,7 +293,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   // 递归处理嵌套的 columns，为所有层级的列添加排序和筛选图标
   const processColumn = React.useCallback(
     (item: any): any => {
-      const newItem = { ...item };
+      const newItem = injectColumnTitleTooltip(item, prefixCls);
       // 自定义排序图标，根据排序状态高亮不同的图标
       if (item.sorter && !item.sortIcon) {
         newItem.sortIcon = ({ sortOrder }: { sortOrder?: 'ascend' | 'descend' }) => (

@@ -14,6 +14,7 @@ markdown: |
 - 🔥 Fully inherits antd [Table](https://ant.design/components/table-cn) capabilities and API, seamless migration.
 - 💄 Custom theme and styles, aligned with OceanBase Design specification.
 - 🆕 Set `column.ellipsis` for auto-ellipsis with Tooltip.
+- 🆕 Set `column.tooltip` for column header help.
 - 🆕 New batch action bar for selected items and batch actions, see [API](#api).
 
 ## Code Examples
@@ -23,6 +24,7 @@ markdown: |
 <code src="./demo/bordered.tsx" title="Bordered" description="Add table borders."></code>
 <code src="./demo/inner-bordered.tsx" title="Inner Bordered" description="Borders only inside table, often with bordered Card."></code>
 <code src="./demo/ellipsis.tsx" title="Cell Ellipsis" description="`column.ellipsis` enables auto-ellipsis with Tooltip. Note: column header ellipsis does not support sort/filter yet."></code>
+<code src="./demo/column-tooltip.tsx" title="Column Header Tooltip" description="Use `column.tooltip` for column header help. Works with sort and filter."></code>
 <code src="./demo/fixed-columns-header-tables.tsx" title="Fixed Header and Columns"></code>
 <code src="./demo/filter-and-sorter.tsx" title="Filter and Sort"></code>
 <code src="./demo/row-selection.tsx" title="Selection and Actions"></code>
@@ -55,5 +57,11 @@ markdown: |
 | toolOptionsRender | Render toolbar, returns dom array with auto margin | (selectedRowKeys, selectedRows) => ReactNode[] | - | - |
 | toolAlertRender | Render alert | ((selectedRowKeys, selectedRows) => ReactNode) \| false | - | - |
 | toolSelectedContent | Render expanded content | (selectedRowKeys, selectedRows) => ReactNode | - | - |
+
+### Column
+
+| Property | Description                | Type                | Default | Version |
+| :------- | :------------------------- | :------------------ | :------ | :------ |
+| tooltip  | Column header help tooltip | `ColumnTooltipType` | -       | -       |
 
 - See antd Table docs: https://ant.design/components/table-cn
