@@ -44,6 +44,8 @@ import type { NavigateFunction } from './navigate';
 import type { Locale } from '../locale';
 import GlobalStyle from '../style/global';
 import CssVariablesStyle from '../theme/obToken';
+import type { OBFormConfig } from '../form/validateMode';
+import { DEFAULT_REVALIDATE_MODE, DEFAULT_VALIDATE_MODE } from '../form/validateMode';
 
 export * from './navigate';
 export * from 'antd/es/config-provider/context';
@@ -80,6 +82,9 @@ export interface ConfigConsumerProps extends AntConfigConsumerProps {
   locale?: Locale;
 }
 
+export type { OBFormConfig } from '../form/validateMode';
+export type { FormReValidateMode, FormValidateMode } from '../form/validateMode';
+
 export interface ConfigProviderProps extends AntConfigProviderProps {
   theme?: ThemeConfig;
   locale?: Locale;
@@ -92,6 +97,7 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   pagination?: PaginationConfig;
   spin?: SpinConfig;
   table?: TableConfig;
+  form?: AntConfigProviderProps['form'] & OBFormConfig;
   // StyleProvider props
   styleProviderProps?: StyleProviderProps;
   appProps?: AppProps;
@@ -347,6 +353,8 @@ const ConfigProvider: ConfigProviderType = ({
         {},
         {
           requiredMark: 'optional',
+          validateMode: DEFAULT_VALIDATE_MODE,
+          reValidateMode: DEFAULT_REVALIDATE_MODE,
         } as ConfigProviderProps['form'],
         parentContext.form,
         form
