@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Form, Input } from '@oceanbase/design';
 import { Password } from '@oceanbase/ui';
 
 export default () => {
   const [form] = Form.useForm();
   const { validateFields } = form;
-  const [passed, setPassed] = useState(false);
   const formItemLayout = {
     labelCol: {
       span: 4,
@@ -32,35 +31,17 @@ export default () => {
     <Form form={form} {...formItemLayout}>
       <Form.Item
         name="username"
-        label="Username"
-        rules={[{ required: true, message: 'Please enter username' }]}
+        label="用户名"
+        rules={[{ required: true, message: '请输入用户名' }]}
       >
         <Input />
       </Form.Item>
-      <Form.Item
-        name="password"
-        label="Password"
-        rules={[
-          {
-            required: true,
-            message: 'Please enter password',
-          },
-          {
-            validator: (rule, value, callback) => {
-              if (value && !passed) {
-                callback('Password does not meet requirements');
-              } else {
-                callback();
-              }
-            },
-          },
-        ]}
-      >
-        <Password onValidate={setPassed} />
+      <Form.Item name="password" label="密码" rules={[{ required: true, message: '请输入密码' }]}>
+        <Password />
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" onClick={onSubmit}>
-          Submit
+          提交
         </Button>
       </Form.Item>
     </Form>
