@@ -1,19 +1,32 @@
-import { Button, Input, message, Popover, Space, Typography } from '@oceanbase/design';
+import { Button, Form, Input, Popover, Space, Typography, theme } from '@oceanbase/design';
 import type { PasswordProps as InputPasswordProps } from '@oceanbase/design/es/input';
 import RandExp from 'randexp';
-import React, { useId, useState } from 'react';
-import { theme } from '@oceanbase/design';
+import React, { useCallback, useEffect, useId, useState } from 'react';
 import { CheckOutlined, CopyOutlined } from '@oceanbase/icons';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import type { Validator } from './Content';
-import Content from './Content';
+import Content, {
+  analyzeCloudPassword,
+  getCloudPasswordValidators,
+  type CloudPasswordLocale,
+  type PasswordRiskLevel,
+  type Validator,
+} from './Content';
 import zhCN from './locale/zh-CN';
 
-export interface PasswordLocale {
-  lengthRuleMessage: string;
-  charRuleMessage: string;
-  strengthRuleMessage: string;
+type FormItemInputContextValue = {
+  status?: string;
+  isFormItemInput?: boolean;
+};
+
+const FormItemInputContext =
+  (
+    Form.Item.useStatus as typeof Form.Item.useStatus & {
+      Context?: React.Context<FormItemInputContextValue>;
+    }
+  ).Context ?? React.createContext<FormItemInputContextValue>({});
+
+export interface PasswordLocale extends CloudPasswordLocale {
   placeholder: string;
   generatePlaceholder: string;
   randomlyGenerate: string;
@@ -21,6 +34,7 @@ export interface PasswordLocale {
   copySuccessfully: string;
   copyPassword: string;
   passwordStrengthRules: string;
+  confirmMismatchMessage: string;
 }
 
 export interface PasswordProps extends LocaleWrapperProps, Omit<InputPasswordProps, 'onChange'> {
@@ -28,9 +42,10 @@ export interface PasswordProps extends LocaleWrapperProps, Omit<InputPasswordPro
   onChange?: (value?: string) => void;
   generatePassword?: () => string;
   rules?: Validator[];
-  onValidate?: (passed: boolean) => void;
   generatePasswordRegex?: RegExp;
   locale?: PasswordLocale;
+  /** `new` shows strength popover; `plain` is a simple password input for current password. */
+  mode?: 'new' | 'plain';
 }
 
 const Password: React.FC<PasswordProps> = ({
@@ -39,149 +54,191 @@ const Password: React.FC<PasswordProps> = ({
   rules,
   onChange,
   generatePassword,
-  onValidate,
   generatePasswordRegex,
+  mode = 'new',
+  onFocus: restOnFocus,
+  onBlur: restOnBlur,
+  autoComplete: autoCompleteProp,
+  readOnly: readOnlyProp,
   ...restProps
 }) => {
   const { token } = theme.useToken();
-  const [fieldError, setFieldError] = useState<string[]>([]);
-  const [isValidating, setIsValidating] = useState(false);
-  const [isTouched, setIsTouched] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [hasBlurred, setHasBlurred] = useState(false);
+  const [displayValue, setDisplayValue] = useState<string | undefined>(value);
   const strengthRulesId = useId();
+  const formItemStatus = React.useContext(FormItemInputContext);
+  const isInFormItem = Boolean(formItemStatus?.isFormItemInput);
+  const formHasError = isInFormItem && formItemStatus?.status === 'error';
 
-  const defaultRules: Validator[] = [
-    {
-      validate: (val?: string) => val?.length >= 8 && val?.length <= 32,
-      message: locale.lengthRuleMessage,
-    },
-    {
-      validate: (val?: string) => /^[0-9a-zA-Z~!@#%^&*_\-+=|(){}\[\]:;,.?/`$'"<>\\]+$/.test(val),
-      message: locale.charRuleMessage,
-    },
-    {
-      validate: (val?: string) =>
-        /(?=(.*[a-z]){2,})(?=(.*[A-Z]){2,})(?=(.*\d){2,})(?=(.*[~!@#%^&*_\-+=|(){}\[\]:;,.?/`$'"<>\\]){2,})/.test(
-          val
-        ),
-      message: locale.strengthRuleMessage,
-    },
-  ];
-  const newRules = rules || defaultRules;
+  useEffect(() => {
+    setDisplayValue(value);
+  }, [value]);
 
-  const handleChange = (newValue?: string) => {
-    if (!isTouched) {
-      setIsTouched(true);
-    }
-    setIsValidating(true);
-    const newFieldError = newRules
-      .map(rule => {
-        // 规则校验通过，返回空的校验信息
-        if (rule.validate(newValue)) {
-          return undefined;
-        }
-        // 规则校验不通过，返回对应的校验信息
-        return rule.message;
-      })
-      .filter(ruleMessage => ruleMessage);
-    setIsValidating(false);
-    setFieldError(newFieldError);
-    onValidate?.(newFieldError.length === 0);
-    onChange?.(newValue);
-  };
+  const cloudLocale = locale!;
+  const activeRules = rules || getCloudPasswordValidators(cloudLocale);
 
-  // 根据正则表达式获取符合要求的随机密码
+  const getAnalysis = useCallback(
+    (newValue?: string, interactive = false) => {
+      if (mode === 'plain') {
+        const empty = !newValue;
+        return {
+          passed: !empty,
+          failedRuleCount: empty ? 1 : 0,
+          riskLevel: (empty ? 'none' : 'success') as PasswordRiskLevel,
+          fieldError: empty && interactive ? cloudLocale.emptyMessage : undefined,
+          ruleStatuses: [],
+          fieldErrors: [],
+        };
+      }
+      return analyzeCloudPassword(newValue, cloudLocale, { touched: interactive });
+    },
+    [cloudLocale, mode]
+  );
+
+  const popoverInteractive = Boolean(displayValue) || isFocused;
+  const analysis = getAnalysis(displayValue, popoverInteractive || hasBlurred);
+  const blurFeedbackMessage = hasBlurred && !formHasError ? analysis.fieldError : undefined;
+  const showRememberHint =
+    mode === 'new' &&
+    value &&
+    analysis.passed &&
+    !blurFeedbackMessage &&
+    !formHasError &&
+    hasBlurred;
+
   const getRandomPassword = () => {
-    const newValue = new RandExp(generatePasswordRegex).gen();
-    // 由于生成密码的库目前不支持包含前后断言的正则表达式，因此需要多次生成密码，直到符合密码强度要求
-    if (generatePasswordRegex.test(newValue)) {
+    const newValue = new RandExp(generatePasswordRegex!).gen();
+    if (generatePasswordRegex!.test(newValue)) {
       return newValue;
     }
     return getRandomPassword();
   };
 
+  const passwordInput = (
+    <Input.Password
+      {...restProps}
+      value={value}
+      autoComplete={autoCompleteProp ?? (mode === 'plain' ? 'current-password' : 'new-password')}
+      readOnly={readOnlyProp}
+      aria-haspopup={mode === 'new' ? 'dialog' : undefined}
+      aria-describedby={mode === 'new' ? strengthRulesId : undefined}
+      onChange={e => {
+        const newValue = e?.target?.value;
+        setDisplayValue(newValue);
+        onChange?.(newValue);
+      }}
+      onFocus={e => {
+        setIsFocused(true);
+        restOnFocus?.(e);
+      }}
+      onBlur={e => {
+        setHasBlurred(true);
+        setIsFocused(false);
+        restOnBlur?.(e);
+      }}
+      placeholder={
+        generatePasswordRegex ? cloudLocale.generatePlaceholder : cloudLocale.placeholder
+      }
+    />
+  );
+
   return (
-    <>
+    <div style={{ position: 'relative', width: '100%' }}>
       <div style={{ display: 'flex' }}>
-        <Popover
-          trigger="click"
-          placement="right"
-          // ref: https://github.com/ant-design/ant-design/issues/5899
-          // @ts-ignore
-          popupAlign={{
-            offset: [16, 0],
-          }}
-          content={
-            <Content
-              isTouched={isTouched}
-              value={value}
-              isValidating={isValidating}
-              rules={newRules}
-              fieldError={fieldError}
-              rulesRegionId={strengthRulesId}
-              rulesAriaLabel={locale.passwordStrengthRules}
-            />
-          }
-          overlayStyle={{ maxWidth: 400 }}
-          overlayInnerStyle={{
-            padding: `${token.padding / 2}px ${token.padding}px ${token.padding}px ${token.padding}px`,
-          }}
-        >
-          <Input.Password
-            value={value}
-            autoComplete="new-password"
-            aria-haspopup="dialog"
-            aria-describedby={strengthRulesId}
-            onChange={e => {
-              handleChange(e?.target?.value);
+        {mode === 'new' ? (
+          <Popover
+            open={isFocused}
+            onOpenChange={open => {
+              if (!open) {
+                setIsFocused(false);
+              }
             }}
-            placeholder={generatePasswordRegex ? locale.generatePlaceholder : locale.placeholder}
-            {...restProps}
-          />
-        </Popover>
+            trigger={[]}
+            placement="rightTop"
+            // ref: https://github.com/ant-design/ant-design/issues/5899
+            // @ts-ignore
+            popupAlign={{
+              offset: [16, 0],
+            }}
+            content={
+              <Content
+                isTouched={popoverInteractive}
+                value={displayValue}
+                isValidating={false}
+                rules={activeRules}
+                ruleStatuses={analysis.ruleStatuses}
+                riskLevel={analysis.riskLevel}
+                rulesRegionId={strengthRulesId}
+                rulesAriaLabel={cloudLocale.passwordStrengthRules}
+              />
+            }
+            overlayStyle={{ maxWidth: 400 }}
+            overlayInnerStyle={{
+              padding: `${token.padding / 2}px ${token.padding}px ${token.padding}px ${token.padding}px`,
+            }}
+          >
+            {passwordInput}
+          </Popover>
+        ) : (
+          passwordInput
+        )}
         {generatePasswordRegex && (
           <Button
             onClick={() => {
-              if (generatePassword instanceof Function) {
-                handleChange(generatePassword());
-              } else {
-                handleChange(getRandomPassword());
-              }
+              setHasBlurred(true);
+              const newValue =
+                generatePassword instanceof Function ? generatePassword() : getRandomPassword();
+              setDisplayValue(newValue);
+              onChange?.(newValue);
             }}
             style={{ marginLeft: 8 }}
           >
-            {locale.randomlyGenerate}
+            {cloudLocale.randomlyGenerate}
           </Button>
         )}
       </div>
-      {value && fieldError?.length === 0 && (
+      {(blurFeedbackMessage || showRememberHint) && (
         <div
           style={{
-            fontSize: token.fontSizeSM,
-            color: token.colorTextDescription,
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            width: '100%',
             marginTop: token.marginXXS,
+            fontSize: token.fontSizeSM,
+            lineHeight: token.lineHeight,
           }}
         >
-          {locale.pleaseRememberYourPassword}
-          <Typography.Text
-            copyable={{
-              text: value,
-              icon: [
-                <Space key="copy" size={token.marginXXS}>
-                  <CopyOutlined aria-hidden />
-                  <a>{locale.copyPassword}</a>
-                </Space>,
-                <Space key="copy-success" size={token.marginXXS}>
-                  <CheckOutlined aria-hidden />
-                  <a>{locale.copyPassword}</a>
-                </Space>,
-              ],
-              tooltips: [locale.copyPassword, locale.copySuccessfully],
-            }}
-            style={{ marginLeft: token.marginXXS }}
-          />
+          {showRememberHint ? (
+            <div style={{ color: token.colorTextDescription }}>
+              {cloudLocale.pleaseRememberYourPassword}
+              <Typography.Text
+                copyable={{
+                  text: value,
+                  icon: [
+                    <Space key="copy" size={token.marginXXS}>
+                      <CopyOutlined aria-hidden />
+                      <a>{cloudLocale.copyPassword}</a>
+                    </Space>,
+                    <Space key="copy-success" size={token.marginXXS}>
+                      <CheckOutlined aria-hidden />
+                      <a>{cloudLocale.copyPassword}</a>
+                    </Space>,
+                  ],
+                  tooltips: [cloudLocale.copyPassword, cloudLocale.copySuccessfully],
+                }}
+                style={{ marginLeft: token.marginXXS }}
+              />
+            </div>
+          ) : (
+            <div role="alert" style={{ color: token.colorError }}>
+              {blurFeedbackMessage}
+            </div>
+          )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

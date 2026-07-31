@@ -6,8 +6,10 @@ const App: React.FC = () => {
     <Space direction="vertical" style={{ width: '100%' }}>
       <div>Input.Password</div>
       <Input.Password />
-      <div>Input.Password with autoComplete="new-password"</div>
+      <div>Input.Password autoComplete=&quot;new-password&quot;</div>
       <Input.Password autoComplete="new-password" />
+      <div>Input.Password autoComplete=&quot;current-password&quot;</div>
+      <Input.Password autoComplete="current-password" />
     </Space>
   );
 };
