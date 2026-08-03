@@ -40,9 +40,14 @@ ob-design doc Filter                     # OB 组件 Markdown 文档
 ob-design demo Table basic               # 可运行 Demo 源码
 ob-design route "用户列表带筛选"         # 页面意图 → 组件组合
 ob-design constraint --dense             # 设计约束
-ob-design token                          # obToken / CSS 变量
+ob-design token                          # obToken / CSS 变量（摘要）
+ob-design token --json                   # 完整 --ob-* 列表 + 迁移 hints
+ob-design token --check --ob-color-text-description
+ob-design lint ./src                     # JS 规则 + CSS token 校验（默认）
+ob-design lint ./src --code-only         # 仅 JS 规则
+ob-design lint ./src --styles            # 仅 CSS token 校验
+ob-design migrate --rule ob-css-tokens ./src
 ob-design design.md                      # 设计语言（antd + OB）
-ob-design lint ./src                     # 约定静态检查
 ob-design doctor                         # 项目健康检查
 ob-design migrate ./src                  # 封装 @oceanbase/codemod
 ob-design template list-filter-table     # 页面模板
@@ -52,23 +57,23 @@ ob-design setup --client cursor          # 写入 MCP / AGENTS.md
 
 ## 命令一览
 
-| 命令                         | MCP 工具        | 用途                                        |
-| ---------------------------- | --------------- | ------------------------------------------- |
-| `ob-design list`             | —               | 已注册组件与 diffLevel                      |
-| `ob-design info <Name>`      | `ob_info`       | **组件 API 真相**（OB 扩展 props 已 merge） |
-| `ob-design doc <Name>`       | `ob_doc`        | OB 组件文档（用法/约束；不含 antd 附录）    |
-| `ob-design demo <Name> [id]` | `ob_demo`       | Demo 源码（import 已改写为 OB 包）          |
-| `ob-design route "<intent>"` | `ob_route`      | 页面意图 → 推荐组件组合                     |
-| `ob-design constraint`       | `ob_constraint` | 设计约束（ASSEMBLY）                        |
-| `ob-design token`            | `ob_token`      | obToken / CSS 变量参考                      |
-| `ob-design design.md`        | —               | 设计语言                                    |
-| `ob-design search <query>`   | `ob_search`     | 全文检索文档与元数据                        |
-| `ob-design lint <path>`      | `ob_lint`       | 约定静态检查                                |
-| `ob-design doctor`           | `ob_doctor`     | 项目健康检查（MCP/Skill/依赖）              |
-| `ob-design setup`            | —               | 写入 MCP 配置 + 生成 `AGENTS.md`            |
-| `ob-design migrate <path>`   | —               | 封装 `@oceanbase/codemod`                   |
-| `ob-design template <name>`  | —               | 页面模板（见下方）                          |
-| `ob-design mcp`              | —               | 启动 MCP 服务（stdio）                      |
+| 命令 | MCP 工具 | 用途 |
+| --- | --- | --- |
+| `ob-design list` | — | 已注册组件与 diffLevel |
+| `ob-design info <Name>` | `ob_info` | **组件 API 真相**（OB 扩展 props 已 merge） |
+| `ob-design doc <Name>` | `ob_doc` | OB 组件文档（用法/约束；不含 antd 附录） |
+| `ob-design demo <Name> [id]` | `ob_demo` | Demo 源码（import 已改写为 OB 包） |
+| `ob-design route "<intent>"` | `ob_route` | 页面意图 → 推荐组件组合 |
+| `ob-design constraint` | `ob_constraint` | 设计约束（ASSEMBLY） |
+| `ob-design token` | `ob_token` | 运行时 `--ob-*` 列表、分类、hints、`check` |
+| `ob-design design.md` | — | 设计语言 |
+| `ob-design search <query>` | `ob_search` | 全文检索文档与元数据 |
+| `ob-design lint <path>` | `ob_lint` | JS 约定 + CSS token 校验（默认） |
+| `ob-design doctor` | `ob_doctor` | 项目健康检查（MCP/Skill/依赖） |
+| `ob-design setup` | — | 写入 MCP 配置 + 生成 `AGENTS.md` |
+| `ob-design migrate <path>` | — | 封装 `@oceanbase/codemod`（`--rule ob-css-tokens`） |
+| `ob-design template <name>` | — | 页面模板（见下方） |
+| `ob-design mcp` | — | 启动 MCP 服务（stdio） |
 
 常用选项：`--dense`（token 友好输出）、`--json`（机器可读）。
 
@@ -169,6 +174,7 @@ ob-design route "<页面意图>"
   → ob_info <组件>（API）
   → ob_doc <组件>（用法/约束，可选）
   → ob_constraint --dense（有疑虑时）
+  → ob-design token --dense（写自定义样式前）
   → ob-design template <name>（可选起点）
   → 生成代码
   → ob-design lint ./src

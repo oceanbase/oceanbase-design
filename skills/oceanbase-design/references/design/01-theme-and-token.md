@@ -58,6 +58,14 @@ import { ConfigProvider, theme } from '@oceanbase/design';
 
 **注意**：勿混用 antd 的 `useToken` 与 design 的 `theme.useToken()`；design 的 `useToken` 返回 `obToken`，antd 的返回 `token`。
 
+## 禁止项
+
+- **禁止** `var(--ant-*)` 与 antd `token.xxx`（seed token）
+- **禁止** 按 antd 命名习惯发明 `--ob-*`（如 `--ob-color-text-tertiary`）
+- **禁止** `--ob-padding-*` / `--ob-margin-*`（用 `--ob-space-*`）
+
+误用对照与 lint 命令见 [css-tokens.md](../css-tokens.md)。完整 token 列表：`ob-design token --json`。
+
 ## CSS 变量（var(--ob-\*)）
 
 ConfigProvider 渲染时自动注入到 `:root`，无需额外配置：
@@ -209,4 +217,4 @@ obToken 键名与 CSS 变量对应，去掉 `--ob-` 前缀，驼峰命名：
 
 中性色 gray1～gray10、蓝色 blue1～blue6、绿色 green1～green6、橙色 orange1～orange6、红色 red1～red6、紫色 fuchsia1～fuchsia6。优先使用语义化 token。
 
-完整列表见 design 官网。
+完整运行时列表见 `ob-design token --json` 或 [css-tokens.md](../css-tokens.md)。

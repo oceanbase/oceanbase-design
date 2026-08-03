@@ -59,12 +59,15 @@ npx @oceanbase/codemod@^1.0.0-alpha.0 . --token-target=antd
 | sass-to-cssvar | Sass/Scss → `var(--ob-*)` | ✅ |
 | less-to-token | Less → antd `@token`（兼容） | 否，需 `--token-target=antd` 或显式指定 |
 | token-to-obtoken | `token` / `var(--ant-*)` → `obToken` / `var(--ob-*)` | 否，需显式指定 |
+| ob-css-tokens | 已知非法 `--ob-*` 别名 → 合法运行时 token（映射表见 css-token-migration-hints） | 否，需显式指定 |
 
 仅执行部分 transformer 时，使用 `--transformer`，多个用逗号分隔：
 
 ```bash
 npx @oceanbase/codemod@^1.0.0-alpha.0 . --transformer=antd-to-oceanbase-design,obutil-to-oceanbase-util
 npx @oceanbase/codemod@^1.0.0-alpha.0 . --transformer=token-to-obtoken
+npx @oceanbase/codemod@^1.0.0-alpha.0 . --transformer=ob-css-tokens
+ob-design migrate --rule ob-css-tokens ./src
 npx @oceanbase/codemod@^1.0.0-alpha.0 . --transformer=less-to-cssvar --rename-to=css --prefix=ob
 ```
 

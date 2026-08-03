@@ -5,7 +5,7 @@
 | 模块 | 关键约束 | 详见 |
 | --- | --- | --- |
 | **概述** | 根节点用 ConfigProvider；theme/card/table/spin 等可全局配置；主题与 Token 见 01-theme-and-token | [00-overview](design/00-overview.md) |
-| **主题与 Token** | isDark/isCompact/isAliyun；CSS 变量 var(--ob-\*)；obToken、useToken；优先语义化 token | [01-theme-and-token](design/01-theme-and-token.md) |
+| **主题与 Token** | 仅 `var(--ob-*)` / obToken；禁止 `var(--ant-*)` 与发明 token；写样式前 `ob_token` 查表 | [01-theme-and-token](design/01-theme-and-token.md) · [css-tokens](../css-tokens.md) |
 | **基础** | Button 主按钮每区最多一个；Space.Compact 紧凑布局；Grid gutter 推荐 (16+8n)px；Typography 辅助用 caption；Tag 状态用 status、长文案用 ellipsis | [02-basic](design/02-basic.md) |
 | **布局与卡片** | Card 无内边距（bodyStyle={{ padding: 0 }}）时内嵌 Table 必须 innerBordered；ConfigProvider 默认内嵌 App | [03-layout-card](design/03-layout-card.md) |
 | **表单** | Form 提交按钮用 htmlType="submit"；Input showCount 默认 formatter；InputNumber 用 addonBefore/addonAfter；表单内用 Select/Checkbox，筛选用 Filter.\* | [04-form](design/04-form.md) |

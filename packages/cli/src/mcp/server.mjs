@@ -80,18 +80,28 @@ const TOOLS = [
   },
   {
     name: 'ob_token',
-    description: 'obToken and theme token reference',
+    description: 'obToken and runtime --ob-* CSS variable reference (full list, categories, migration hints)',
     inputSchema: {
       type: 'object',
-      properties: { dense: { type: 'boolean' } },
+      properties: {
+        dense: { type: 'boolean' },
+        json: { type: 'boolean' },
+        check: { type: 'string', description: 'Validate a single --ob-* token name' },
+      },
     },
   },
   {
     name: 'ob_lint',
-    description: 'Static lint for OB import and convention violations',
+    description: 'Static lint for OB import, convention, and CSS token violations',
     inputSchema: {
       type: 'object',
-      properties: { target: { type: 'string', default: './src' } },
+      properties: {
+        target: { type: 'string', default: './src' },
+        includeStyles: { type: 'boolean', default: true },
+        json: { type: 'boolean' },
+        codeOnly: { type: 'boolean' },
+        stylesOnly: { type: 'boolean' },
+      },
     },
   },
   {
@@ -156,10 +166,18 @@ export async function startMcpServer() {
             constraintCommand({ dense: true, json: false });
             break;
           case 'ob_token':
-            await tokenCommand({ dense: args.dense, json: false });
+            await tokenCommand({
+              dense: args.dense,
+              json: args.json ?? !!args.check,
+              check: args.check,
+            });
             break;
           case 'ob_lint':
-            lintCommand(args.target || './src', { json: false });
+            lintCommand(args.target || './src', {
+              json: args.json,
+              codeOnly: args.codeOnly || args.includeStyles === false,
+              stylesOnly: args.stylesOnly,
+            });
             break;
           case 'ob_search':
             searchCommand(args.query, { dense: args.dense, json: !args.dense });

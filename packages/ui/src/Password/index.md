@@ -17,53 +17,10 @@ nav:
 
 ## 默认密码规则
 
-内置默认规则对齐多云密码规范（**Breaking**：原默认长度为 8~32、各类字符至少 2 个）：
-
 - 长度为 **8~20** 个字符
 - 只能包含字母、数字和特殊字符（`! @ # $ % ^ & * ( ) _ - + = [ ] { } | \ : ; " ' < > , . ? ~ `）
 - 大写字母、小写字母、数字、特殊字符，**至少包含 3 种**
 - 禁止空格、Tab、换行、emoji、中文等（失焦时报错，不单独展示为气泡规则）
-
-聚焦时通过气泡展示上述三条规则及强度进度。默认 `autoComplete="new-password"`，减轻浏览器已保存密码下拉遮挡气泡；当前密码使用 `autoComplete="current-password"` 时不展示强度气泡。
-
-租户建库等 **8~64** 场景请通过 `rules` / `generatePasswordRegex` 自定义覆盖。
-
-## 与 Form 集成
-
-校验时机由 Form 默认 `validateMode` 处理（提交前不报错，提交失败后输入实时更新）。`Password` 负责规则气泡、强度与文案；在 `Form.Item` 的 `rules` 中配置校验即可：
-
-```tsx
-import { Form } from '@oceanbase/design';
-import { Password } from '@oceanbase/ui';
-
-<Form>
-  <Form.Item
-    name="password"
-    rules={[
-      { required: true, message: passwordLocale.emptyMessage },
-      { pattern: passwordPattern, message: passwordLocale.genericFailMessage },
-    ]}
-  >
-    <Password />
-  </Form.Item>
-</Form>;
-```
-
-文案可来自 `ConfigProvider` 的 `locale.Password`（`emptyMessage`、`genericFailMessage`、`forbiddenCharsMessage` 等）。自定义 `rules` / `generatePasswordRegex` 时，在 `Form.Item` 中用对应的 `validator` 或 `pattern` 与组件 `rules` 保持一致。
-
-- **新密码**：`<Password />`（默认 `autoComplete="new-password"`）；在 `Form.Item` 内与 `Input` 用法相同，失焦规则分析与「请牢记密码」会自动写入 `Form.Item` explain，与校验文案共用同一区域。
-
-```tsx
-<Form.Item name="password" rules={[...]}>
-  <Password />
-</Form.Item>
-```
-
-非 `Form.Item` 场景下，失焦文案仍以内联方式展示在控件下方。
-
-- **当前密码**：`<Password autoComplete="current-password" />`，仅 `required`，不校验格式（允许空格等）；准确性由提交时接口报错映射到字段。
-- **确认密码**：`Input.Password` + 一致性 `validator`。
-- **注册表单**：`Login` 的 `RegisterForm` 已内置多云密码校验，可直接使用。
 
 ## API
 

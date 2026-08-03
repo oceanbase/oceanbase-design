@@ -1,5 +1,6 @@
 # Machine-readable constraints for CLI, MCP, and llms-ob-constraints.txt
 # SYNC: skills/oceanbase-design/references/ASSEMBLY.md
+# SYNC: skills/oceanbase-design/references/css-tokens.md
 
 constraints:
   - id: config-provider-root
@@ -71,6 +72,27 @@ constraints:
     rule: Use obToken or var(--ob-*) for custom styles, not hardcoded hex/px
     appliesTo: [styling]
     antiPattern: Inline style with raw #hex colors
+
+  - id: ob-css-var-valid
+    module: "01"
+    severity: error
+    rule: var(--ob-*) names must exist in @oceanbase/design runtime CSS variables
+    appliesTo: [styling]
+    antiPattern: var(--ob-color-text-tertiary) — not injected at runtime
+
+  - id: ob-space-not-padding
+    module: "01"
+    severity: error
+    rule: Use --ob-space-* for spacing, not --ob-padding-* or --ob-margin-*
+    appliesTo: [styling]
+    antiPattern: var(--ob-padding-m)
+
+  - id: ob-token-not-antd
+    module: "01"
+    severity: error
+    rule: Use obToken or var(--ob-*), not antd token or var(--ant-*)
+    appliesTo: [styling]
+    antiPattern: var(--ant-color-text) or token.colorText from antd useToken
 
 package-routing:
   - need: 基础组件、表格、筛选、表单、主题

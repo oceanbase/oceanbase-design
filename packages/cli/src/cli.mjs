@@ -52,15 +52,23 @@ export async function runCli(argv) {
     (query, opts) => searchCommand(query, opts),
   );
 
-  globalFlags(program.command('token').description('obToken reference')).action(async (_, opts) =>
-    tokenCommand(opts),
-  );
+  globalFlags(program.command('token').description('obToken reference'))
+    .option('--check <name>', 'Validate a single --ob-* CSS variable name')
+    .action(async (opts) => tokenCommand(opts));
 
   program
     .command('lint [target]')
     .description('Lint OB conventions')
     .option('--json', 'JSON output')
-    .action((target = './src', opts) => lintCommand(target, opts));
+    .option('--code-only', 'Only JS/TS convention rules')
+    .option('--styles', 'Only CSS token rules in style files and inline var()')
+    .action((target = './src', opts) =>
+      lintCommand(target, {
+        json: opts.json,
+        codeOnly: opts.codeOnly,
+        stylesOnly: opts.styles,
+      }),
+    );
 
   globalFlags(program.command('doctor').description('Project health check')).action((_, opts) =>
     doctorCommand(opts),
@@ -76,7 +84,10 @@ export async function runCli(argv) {
     .command('migrate [target]')
     .description('Run @oceanbase/codemod')
     .option('--dry', 'Dry run')
-    .action((target = './src', opts) => migrateCommand(target, { dryRun: opts.dry }));
+    .option('--rule <rule>', 'Codemod rule (e.g. ob-css-tokens)')
+    .action((target = './src', opts) =>
+      migrateCommand(target, { dryRun: opts.dry, rule: opts.rule }),
+    );
 
   program
     .command('template <name>')

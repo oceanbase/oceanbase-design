@@ -4,6 +4,7 @@ design 包按功能模块拆分，各文件含约束、场景与代码示例。*
 
 | 文件 | 内容 |
 | --- | --- |
+| [css-tokens.md](../css-tokens.md) | CSS Token 规范：`var(--ob-*)` 书写规则、误用对照、lint / migrate |
 | [00-overview.md](00-overview.md) | 概述：定位、ConfigProvider、模块划分 |
 | [01-theme-and-token.md](01-theme-and-token.md) | 主题配置（isDark、isCompact、isAliyun、algorithm）、Design Token（CSS 变量、obToken、useToken、Token 列表） |
 | [02-basic.md](02-basic.md) | Alert、Button、Space、Grid、Typography、Tag、Divider |

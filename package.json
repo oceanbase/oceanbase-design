@@ -44,7 +44,7 @@
     "check:agent-discovery": "node scripts/check-agent-discovery.mjs",
     "generate:metadata": "node scripts/generate-metadata.mjs",
     "generate:agents-md": "node scripts/generate-agents-md.mjs",
-    "test:cli": "node --test packages/cli/src/normalize/import-rewrite.test.mjs packages/cli/src/delegate/resolve-antd-cli.test.mjs packages/cli/src/delegate/antd-info.test.mjs packages/cli/src/cli.integration.test.mjs",
+    "test:cli": "node --test packages/cli/src/lib/css-tokens.test.mjs scripts/lib/parse-ob-token-meta.test.mjs packages/cli/src/normalize/import-rewrite.test.mjs packages/cli/src/delegate/resolve-antd-cli.test.mjs packages/cli/src/delegate/antd-info.test.mjs packages/cli/src/cli.integration.test.mjs packages/codemod/transforms/__tests__/ob-css-tokens.test.cjs",
     "test:agent": "pnpm run generate:metadata && pnpm run generate:design-md && pnpm run generate:llms-codemod && pnpm run sync:agent-doc-md && pnpm run check:metadata && pnpm run check:skill-doc-sync && pnpm run check:skill-props-sync && pnpm run check:agent-discovery && pnpm run test:cli",
     "generate:llms-codemod": "node scripts/generate-llms-codemod.mjs",
     "generate:design-md": "node scripts/generate-design-md.mjs",

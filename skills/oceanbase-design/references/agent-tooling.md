@@ -71,23 +71,23 @@ npx skills add oceanbase/oceanbase-design
 
 ## 命令一览
 
-| 命令                          | MCP 工具        | 用途                                 |
-| ----------------------------- | --------------- | ------------------------------------ |
-| `ob-design list`              | —               | 已注册组件与 diffLevel               |
-| `ob-design info <Name>`       | `ob_info`       | **组件 API 真相**（OB 扩展已 merge） |
-| `ob-design doc <Name>`        | `ob_doc`        | OB 组件文档（用法/约束）             |
-| `ob-design demo <Name> [id]`  | `ob_demo`       | Demo 源码（import 已改写为 OB）      |
-| `ob-design route "<intent>"`  | `ob_route`      | 页面意图 → 推荐组件                  |
-| `ob-design constraint`        | `ob_constraint` | ASSEMBLY 设计约束                    |
-| `ob-design token [Component]` | `ob_token`      | obToken / CSS 变量                   |
-| `ob-design design.md`         | —               | 设计语言（antd + OB）                |
-| `ob-design search <query>`    | `ob_search`     | 全文检索                             |
-| `ob-design lint <path>`       | `ob_lint`       | 约定静态检查                         |
-| `ob-design doctor`            | `ob_doctor`     | 依赖与健康（MCP/Skill/版本）         |
-| `ob-design setup`             | —               | 写入 MCP + `AGENTS.md`               |
-| `ob-design migrate <path>`    | —               | 封装 `@oceanbase/codemod`            |
-| `ob-design template <name>`   | —               | 页面模板                             |
-| `ob-design mcp`               | —               | 启动 MCP（stdio）                    |
+| 命令 | MCP 工具 | 用途 |
+| --- | --- | --- |
+| `ob-design list` | — | 已注册组件与 diffLevel |
+| `ob-design info <Name>` | `ob_info` | **组件 API 真相**（OB 扩展已 merge） |
+| `ob-design doc <Name>` | `ob_doc` | OB 组件文档（用法/约束） |
+| `ob-design demo <Name> [id]` | `ob_demo` | Demo 源码（import 已改写为 OB） |
+| `ob-design route "<intent>"` | `ob_route` | 页面意图 → 推荐组件 |
+| `ob-design constraint` | `ob_constraint` | ASSEMBLY 设计约束 |
+| `ob-design token` | `ob_token` | 运行时 `--ob-*` 列表、分类、migration hints、`check` |
+| `ob-design design.md` | — | 设计语言（antd + OB） |
+| `ob-design search <query>` | `ob_search` | 全文检索 |
+| `ob-design lint <path>` | `ob_lint` | 约定 + CSS token 静态检查（默认含样式） |
+| `ob-design doctor` | `ob_doctor` | 依赖与健康（MCP/Skill/版本） |
+| `ob-design setup` | — | 写入 MCP + `AGENTS.md` |
+| `ob-design migrate <path>` | — | 封装 `@oceanbase/codemod` |
+| `ob-design template <name>` | — | 页面模板 |
+| `ob-design mcp` | — | 启动 MCP（stdio） |
 
 常用选项：`--dense`（省 token）、`--json`（机器可读）。
 
@@ -101,10 +101,16 @@ npx skills add oceanbase/oceanbase-design
   ob_demo <Name> [id]     → 可运行示例
   ob_constraint --dense   → 组合/布局规则（有疑虑时）
 
+涉及自定义样式（CSS/SCSS/内联 style）
+  ob_token --dense / ob-design token --json  → 合法 --ob-* 列表
+  ob_lint ./src                              → 提交前校验（默认含样式 token）
+
 仍需 antd 完整长文档？
   → 读 ob_doc 内的 ant.design 链接（antd v5）
   → 或终端 antd doc <Name>（勿配置 antd MCP）
 ```
+
+`ob_token` 参数：`dense`、`json`、`check`（单 token 校验）。`ob_lint` 参数：`includeStyles`（默认 true）、`codeOnly`、`stylesOnly`、`json`。
 
 ## 推荐工作流
 
@@ -117,6 +123,8 @@ ob-design route "<页面意图>"
   → 生成代码
   → ob-design lint ./src
 ```
+
+样式 token 规范见 [css-tokens.md](css-tokens.md)。
 
 ## 页面模板
 
