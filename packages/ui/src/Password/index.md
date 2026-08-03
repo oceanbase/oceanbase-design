@@ -51,7 +51,16 @@ import { Password } from '@oceanbase/ui';
 
 文案可来自 `ConfigProvider` 的 `locale.Password`（`emptyMessage`、`genericFailMessage`、`forbiddenCharsMessage` 等）。自定义 `rules` / `generatePasswordRegex` 时，在 `Form.Item` 中用对应的 `validator` 或 `pattern` 与组件 `rules` 保持一致。
 
-- **新密码**：`<Password />`（`mode="new"`）；Form 校验报错由 `Form.Item` explain 展示；失焦后的规则分析文案与「请牢记并妥善保存密码」以绝对定位输出在输入框下方，不占文档流高度、不挤压布局。
+- **新密码**：`<Password />`（`mode="new"`）；在 `Form.Item` 内与 `Input` 用法相同，失焦规则分析与「请牢记密码」会自动写入 `Form.Item` explain，与校验文案共用同一区域。
+
+```tsx
+<Form.Item name="password" rules={[...]}>
+  <Password />
+</Form.Item>
+```
+
+非 `Form.Item` 场景下，失焦文案仍以内联方式展示在控件下方。
+
 - **当前密码**：`<Password mode="plain" />`，仅 `required`，不校验格式（允许空格等）；准确性由提交时接口报错映射到字段。
 - **确认密码**：`Input.Password` + 一致性 `validator`。
 - **注册表单**：`Login` 的 `RegisterForm` 已内置多云密码校验，可直接使用。

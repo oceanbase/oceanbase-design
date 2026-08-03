@@ -1,8 +1,11 @@
-import { Button, Form, Input, Popover, Space, Typography, theme } from '@oceanbase/design';
+import { Button, Form, Input, Popover, theme } from '@oceanbase/design';
+import {
+  useFormItemChildFeedback,
+  type FormItemChildFeedback,
+} from '@oceanbase/design/form/FormItemChildFeedback';
 import type { PasswordProps as InputPasswordProps } from '@oceanbase/design/es/input';
 import RandExp from 'randexp';
-import React, { useCallback, useEffect, useId, useState } from 'react';
-import { CheckOutlined, CopyOutlined } from '@oceanbase/icons';
+import React, { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import Content, {
@@ -13,10 +16,12 @@ import Content, {
   type Validator,
 } from './Content';
 import zhCN from './locale/zh-CN';
+import { PasswordRememberHint } from './RememberHint';
 
 type FormItemInputContextValue = {
   status?: string;
   isFormItemInput?: boolean;
+  errors?: string[];
 };
 
 const FormItemInputContext =
@@ -67,9 +72,10 @@ const Password: React.FC<PasswordProps> = ({
   const [hasBlurred, setHasBlurred] = useState(false);
   const [displayValue, setDisplayValue] = useState<string | undefined>(value);
   const strengthRulesId = useId();
+  const formItemChildFeedback = useFormItemChildFeedback();
   const formItemStatus = React.useContext(FormItemInputContext);
   const isInFormItem = Boolean(formItemStatus?.isFormItemInput);
-  const formHasError = isInFormItem && formItemStatus?.status === 'error';
+  const formHasError = isInFormItem && (formItemStatus?.errors?.length ?? 0) > 0;
 
   useEffect(() => {
     setDisplayValue(value);
@@ -101,11 +107,34 @@ const Password: React.FC<PasswordProps> = ({
   const blurFeedbackMessage = hasBlurred && !formHasError ? analysis.fieldError : undefined;
   const showRememberHint =
     mode === 'new' &&
-    value &&
+    displayValue &&
     analysis.passed &&
     !blurFeedbackMessage &&
     !formHasError &&
     hasBlurred;
+
+  const fieldFeedback = useMemo((): FormItemChildFeedback => {
+    if (formHasError) return null;
+    if (blurFeedbackMessage) return { help: blurFeedbackMessage, validateStatus: 'error' };
+    if (showRememberHint) {
+      return {
+        help: <PasswordRememberHint value={displayValue} locale={cloudLocale} />,
+      };
+    }
+    return null;
+  }, [formHasError, blurFeedbackMessage, showRememberHint, displayValue, cloudLocale]);
+
+  useEffect(() => {
+    if (!formItemChildFeedback) return;
+    formItemChildFeedback.setFeedback(fieldFeedback);
+  }, [formItemChildFeedback, fieldFeedback]);
+
+  useEffect(() => {
+    if (!formItemChildFeedback) return;
+    return () => formItemChildFeedback.setFeedback(null);
+  }, [formItemChildFeedback]);
+
+  const showInlineFeedback = !formItemChildFeedback && (blurFeedbackMessage || showRememberHint);
 
   const getRandomPassword = () => {
     const newValue = new RandExp(generatePasswordRegex!).gen();
@@ -144,7 +173,7 @@ const Password: React.FC<PasswordProps> = ({
   );
 
   return (
-    <div style={{ position: 'relative', width: '100%' }}>
+    <div style={{ width: '100%' }}>
       <div style={{ display: 'flex' }}>
         {mode === 'new' ? (
           <Popover
@@ -198,39 +227,16 @@ const Password: React.FC<PasswordProps> = ({
           </Button>
         )}
       </div>
-      {(blurFeedbackMessage || showRememberHint) && (
+      {showInlineFeedback && (
         <div
           style={{
-            position: 'absolute',
-            top: '100%',
-            left: 0,
-            width: '100%',
             marginTop: token.marginXXS,
             fontSize: token.fontSizeSM,
-            lineHeight: token.lineHeight,
+            lineHeight: token.lineHeightSM,
           }}
         >
           {showRememberHint ? (
-            <div style={{ color: token.colorTextDescription }}>
-              {cloudLocale.pleaseRememberYourPassword}
-              <Typography.Text
-                copyable={{
-                  text: value,
-                  icon: [
-                    <Space key="copy" size={token.marginXXS}>
-                      <CopyOutlined aria-hidden />
-                      <a>{cloudLocale.copyPassword}</a>
-                    </Space>,
-                    <Space key="copy-success" size={token.marginXXS}>
-                      <CheckOutlined aria-hidden />
-                      <a>{cloudLocale.copyPassword}</a>
-                    </Space>,
-                  ],
-                  tooltips: [cloudLocale.copyPassword, cloudLocale.copySuccessfully],
-                }}
-                style={{ marginLeft: token.marginXXS }}
-              />
-            </div>
+            <PasswordRememberHint value={displayValue} locale={cloudLocale} />
           ) : (
             <div role="alert" style={{ color: token.colorError }}>
               {blurFeedbackMessage}

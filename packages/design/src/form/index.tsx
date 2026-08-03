@@ -22,6 +22,8 @@ import {
 export * from 'antd/es/form';
 export type { FormItemProps } from './FormItem';
 export type { FormReValidateMode, FormValidateMode, OBFormConfig } from './validateMode';
+export { useFormItemChildFeedback } from './FormItemChildFeedback';
+export type { FormItemChildFeedback } from './FormItemChildFeedback';
 
 export type FormProps = AntFormProps & {
   validateMode?: FormValidateMode;

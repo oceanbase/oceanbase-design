@@ -9,6 +9,10 @@ import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import type { TooltipProps } from '../tooltip';
 import { useTooltipTypeList } from '../tooltip/hooks/useTooltipTypeList';
+import {
+  FormItemChildFeedbackProvider,
+  useFormItemChildFeedbackState,
+} from './FormItemChildFeedback';
 import useStyle from './style';
 
 const AntFormItem = AntForm.Item;
@@ -40,8 +44,13 @@ const FormItem: CompoundedComponent = ({
   layout: externalLayout,
   prefixCls: customizePrefixCls,
   className,
+  help: propHelp,
+  validateStatus: propValidateStatus,
   ...restProps
 }) => {
+  const { childFeedback, contextValue } = useFormItemChildFeedbackState();
+  const mergedHelp = childFeedback?.help ?? propHelp;
+  const mergedValidateStatus = childFeedback?.validateStatus ?? propValidateStatus;
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
 
   const prefixCls = getPrefixCls('form', customizePrefixCls);
@@ -100,6 +109,8 @@ const FormItem: CompoundedComponent = ({
         )
       }
       tooltip={tooltip}
+      help={mergedHelp}
+      validateStatus={mergedValidateStatus}
       // auto set required for Switch children to hide optional mark
       // @ts-ignore
       required={isPlainObject(children) && children.type?.__ANT_SWITCH ? true : undefined}
@@ -107,7 +118,9 @@ const FormItem: CompoundedComponent = ({
       className={formItemCls}
       {...restProps}
     >
-      {children}
+      <FormItemChildFeedbackProvider contextValue={contextValue}>
+        {children}
+      </FormItemChildFeedbackProvider>
     </AntFormItem>
   );
 };

@@ -49,7 +49,16 @@ import { Password } from '@oceanbase/ui';
 
 Use `ConfigProvider` `locale.Password` for messages (`emptyMessage`, `genericFailMessage`, `forbiddenCharsMessage`, etc.). For custom `rules` / `generatePasswordRegex`, keep `Form.Item` validators or patterns aligned with the component `rules`.
 
-- **New password**: `<Password />` (`mode="new"`). Form validation errors use `Form.Item` explain. Blur rule messages and the copy hint are absolutely positioned below the input (no document-flow height).
+- **New password**: `<Password />` (`mode="new"`). Inside `Form.Item`, use it like `Input` — blur rule messages and the copy hint are written to `Form.Item` explain automatically.
+
+```tsx
+<Form.Item name="password" rules={[...]}>
+  <Password />
+</Form.Item>
+```
+
+Outside `Form.Item`, blur feedback stays inline below the control.
+
 - **Current password**: `<Password mode="plain" />` with `required` only; map API accuracy errors on submit.
 - **Confirm password**: `Input.Password` + match validator.
 - **Registration**: `Login` `RegisterForm` includes cloud password validation out of the box.
