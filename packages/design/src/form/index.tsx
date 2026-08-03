@@ -4,6 +4,7 @@ import type { FormProps as AntFormProps } from 'antd/es/form';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import Item from './FormItem';
+import { useFormItemChildFeedback } from './FormItemChildFeedback';
 import useStyle from './style';
 import type { FormReValidateMode, FormValidateMode, OBFormConfig } from './validateMode';
 import {
@@ -35,6 +36,7 @@ type CompoundedComponent = React.FC<FormProps> & {
   useForm: typeof AntForm.useForm;
   useFormInstance: typeof AntForm.useFormInstance;
   useWatch: typeof AntForm.useWatch;
+  useFormItemChildFeedback: typeof useFormItemChildFeedback;
   Provider: typeof AntForm.Provider;
   create: typeof AntForm.create;
 };
@@ -177,6 +179,7 @@ Form.ErrorList = AntForm.ErrorList;
 Form.useForm = AntForm.useForm;
 Form.useFormInstance = AntForm.useFormInstance;
 Form.useWatch = AntForm.useWatch;
+Form.useFormItemChildFeedback = useFormItemChildFeedback;
 Form.Provider = AntForm.Provider;
 Form.create = AntForm.create;
 

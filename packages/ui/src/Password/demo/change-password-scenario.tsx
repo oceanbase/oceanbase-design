@@ -24,7 +24,7 @@ export default () => {
             label="Current password"
             rules={[{ required: true, message: 'Please enter current password' }]}
           >
-            <Password mode="plain" />
+            <Password autoComplete="current-password" />
           </Form.Item>
           <Form.Item
             name="newPassword"

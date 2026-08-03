@@ -9,6 +9,10 @@ import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import type { TooltipProps } from '../tooltip';
 import { useTooltipTypeList } from '../tooltip/hooks/useTooltipTypeList';
+import {
+  FormItemChildFeedbackProvider,
+  useFormItemChildFeedbackState,
+} from './FormItemChildFeedback';
 import useStyle from './style';
 
 const AntFormItem = AntForm.Item;
@@ -40,8 +44,17 @@ const FormItem: CompoundedComponent = ({
   layout: externalLayout,
   prefixCls: customizePrefixCls,
   className,
+  help: propHelp,
+  validateStatus: propValidateStatus,
   ...restProps
 }) => {
+  const { childFeedback, contextValue } = useFormItemChildFeedbackState();
+  // Child feedback is opt-in (e.g. Password blur hints). When absent, props pass through unchanged.
+  const mergedHelp = childFeedback != null ? (childFeedback.help ?? propHelp) : propHelp;
+  const mergedValidateStatus =
+    childFeedback != null
+      ? (childFeedback.validateStatus ?? propValidateStatus)
+      : propValidateStatus;
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
 
   const prefixCls = getPrefixCls('form', customizePrefixCls);
@@ -86,29 +99,33 @@ const FormItem: CompoundedComponent = ({
     ) : null;
 
   return wrapCSSVar(
-    <AntFormItem
-      layout={layout}
-      label={
-        actionContent || descriptionContent ? (
-          <div>
-            {label}
-            {actionContent}
-            {descriptionContent}
-          </div>
-        ) : (
-          label
-        )
-      }
-      tooltip={tooltip}
-      // auto set required for Switch children to hide optional mark
-      // @ts-ignore
-      required={isPlainObject(children) && children.type?.__ANT_SWITCH ? true : undefined}
-      prefixCls={customizePrefixCls}
-      className={formItemCls}
-      {...restProps}
-    >
-      {children}
-    </AntFormItem>
+    <FormItemChildFeedbackProvider contextValue={contextValue}>
+      <AntFormItem
+        layout={layout}
+        label={
+          actionContent || descriptionContent ? (
+            <div>
+              {label}
+              {actionContent}
+              {descriptionContent}
+            </div>
+          ) : (
+            label
+          )
+        }
+        tooltip={tooltip}
+        help={mergedHelp}
+        validateStatus={mergedValidateStatus}
+        // auto set required for Switch children to hide optional mark
+        // @ts-ignore
+        required={isPlainObject(children) && children.type?.__ANT_SWITCH ? true : undefined}
+        prefixCls={customizePrefixCls}
+        className={formItemCls}
+        {...restProps}
+      >
+        {children}
+      </AntFormItem>
+    </FormItemChildFeedbackProvider>
   );
 };
 
