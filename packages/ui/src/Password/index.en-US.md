@@ -24,7 +24,9 @@ Built-in defaults follow the multi-cloud password spec (**Breaking**: was length
 - **At least 3 of 4** classes: uppercase, lowercase, digits, special characters
 - No spaces, tabs, newlines, emoji, or CJK characters (shown on blur; not listed as a separate popover rule)
 
-On focus, a popover shows the three rules above and a strength bar. `mode="new"` defaults to `autoComplete="new-password"` to reduce saved-password dropdown overlap. For tenant DB accounts (**8–64**, etc.), override with custom `rules` / `generatePasswordRegex`.
+On focus, a popover shows the three rules above and a strength bar. Defaults to `autoComplete="new-password"` to reduce saved-password dropdown overlap; `autoComplete="current-password"` skips the strength popover for current-password fields.
+
+For tenant DB accounts (**8–64**, etc.), override with custom `rules` / `generatePasswordRegex`.
 
 ## Form integration
 
@@ -49,8 +51,17 @@ import { Password } from '@oceanbase/ui';
 
 Use `ConfigProvider` `locale.Password` for messages (`emptyMessage`, `genericFailMessage`, `forbiddenCharsMessage`, etc.). For custom `rules` / `generatePasswordRegex`, keep `Form.Item` validators or patterns aligned with the component `rules`.
 
-- **New password**: `<Password />` (`mode="new"`). Form validation errors use `Form.Item` explain. Blur rule messages and the copy hint are absolutely positioned below the input (no document-flow height).
-- **Current password**: `<Password mode="plain" />` with `required` only; map API accuracy errors on submit.
+- **New password**: `<Password />` (default `autoComplete="new-password"`). Inside `Form.Item`, use it like `Input` — blur rule messages and the copy hint are written to `Form.Item` explain automatically.
+
+```tsx
+<Form.Item name="password" rules={[...]}>
+  <Password />
+</Form.Item>
+```
+
+Outside `Form.Item`, blur feedback stays inline below the control.
+
+- **Current password**: `<Password autoComplete="current-password" />` with `required` only; map API accuracy errors on submit.
 - **Confirm password**: `Input.Password` + match validator.
 - **Registration**: `Login` `RegisterForm` includes cloud password validation out of the box.
 
@@ -58,7 +69,7 @@ Use `ConfigProvider` `locale.Password` for messages (`emptyMessage`, `genericFai
 
 | Property | Description | Type | Default | Version |
 | :-- | :-- | :-- | :-- | :-- |
-| mode | `new` shows strength popover on focus; `plain` is a simple input | `'new' \| 'plain'` | `'new'` | - |
+| autoComplete | Browser autofill hint; `new-password` shows strength popover, `current-password` is a plain current-password field | string | `'new-password'` | - |
 | rules | Rules shown in the popover (UI only; Form handles validation timing) | [Validator](password#validator)[] | Cloud defaults | - |
 | generatePasswordRegex | Regex for random password; non-empty shows generate button | RegExp | - | - |
 | value | Password value | string | - | - |

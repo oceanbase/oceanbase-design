@@ -1,8 +1,8 @@
-import { Button, Form, Input, Popover, Space, Typography, theme } from '@oceanbase/design';
+import { Button, Form, Input, Popover, theme } from '@oceanbase/design';
+import type { FormItemChildFeedback } from '@oceanbase/design/es/form/FormItemChildFeedback';
 import type { PasswordProps as InputPasswordProps } from '@oceanbase/design/es/input';
 import RandExp from 'randexp';
-import React, { useCallback, useEffect, useId, useState } from 'react';
-import { CheckOutlined, CopyOutlined } from '@oceanbase/icons';
+import React, { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import Content, {
@@ -13,10 +13,12 @@ import Content, {
   type Validator,
 } from './Content';
 import zhCN from './locale/zh-CN';
+import { PasswordRememberHint } from './RememberHint';
 
 type FormItemInputContextValue = {
   status?: string;
   isFormItemInput?: boolean;
+  errors?: string[];
 };
 
 const FormItemInputContext =
@@ -44,8 +46,6 @@ export interface PasswordProps extends LocaleWrapperProps, Omit<InputPasswordPro
   rules?: Validator[];
   generatePasswordRegex?: RegExp;
   locale?: PasswordLocale;
-  /** `new` shows strength popover; `plain` is a simple password input for current password. */
-  mode?: 'new' | 'plain';
 }
 
 const Password: React.FC<PasswordProps> = ({
@@ -55,7 +55,6 @@ const Password: React.FC<PasswordProps> = ({
   onChange,
   generatePassword,
   generatePasswordRegex,
-  mode = 'new',
   onFocus: restOnFocus,
   onBlur: restOnBlur,
   autoComplete: autoCompleteProp,
@@ -63,13 +62,16 @@ const Password: React.FC<PasswordProps> = ({
   ...restProps
 }) => {
   const { token } = theme.useToken();
+  const autoComplete = autoCompleteProp ?? 'new-password';
+  const isCurrentPassword = autoComplete === 'current-password';
   const [isFocused, setIsFocused] = useState(false);
   const [hasBlurred, setHasBlurred] = useState(false);
   const [displayValue, setDisplayValue] = useState<string | undefined>(value);
   const strengthRulesId = useId();
+  const formItemChildFeedback = Form.useFormItemChildFeedback();
   const formItemStatus = React.useContext(FormItemInputContext);
   const isInFormItem = Boolean(formItemStatus?.isFormItemInput);
-  const formHasError = isInFormItem && formItemStatus?.status === 'error';
+  const formHasError = isInFormItem && (formItemStatus?.errors?.length ?? 0) > 0;
 
   useEffect(() => {
     setDisplayValue(value);
@@ -80,7 +82,7 @@ const Password: React.FC<PasswordProps> = ({
 
   const getAnalysis = useCallback(
     (newValue?: string, interactive = false) => {
-      if (mode === 'plain') {
+      if (isCurrentPassword) {
         const empty = !newValue;
         return {
           passed: !empty,
@@ -93,19 +95,42 @@ const Password: React.FC<PasswordProps> = ({
       }
       return analyzeCloudPassword(newValue, cloudLocale, { touched: interactive });
     },
-    [cloudLocale, mode]
+    [cloudLocale, isCurrentPassword]
   );
 
   const popoverInteractive = Boolean(displayValue) || isFocused;
   const analysis = getAnalysis(displayValue, popoverInteractive || hasBlurred);
   const blurFeedbackMessage = hasBlurred && !formHasError ? analysis.fieldError : undefined;
   const showRememberHint =
-    mode === 'new' &&
-    value &&
+    !isCurrentPassword &&
+    displayValue &&
     analysis.passed &&
     !blurFeedbackMessage &&
     !formHasError &&
     hasBlurred;
+
+  const fieldFeedback = useMemo((): FormItemChildFeedback => {
+    if (formHasError) return null;
+    if (blurFeedbackMessage) return { help: blurFeedbackMessage, validateStatus: 'error' };
+    if (showRememberHint) {
+      return {
+        help: <PasswordRememberHint value={displayValue} locale={cloudLocale} />,
+      };
+    }
+    return null;
+  }, [formHasError, blurFeedbackMessage, showRememberHint, displayValue, cloudLocale]);
+
+  useEffect(() => {
+    if (!formItemChildFeedback) return;
+    formItemChildFeedback.setFeedback(fieldFeedback);
+  }, [formItemChildFeedback, fieldFeedback]);
+
+  useEffect(() => {
+    if (!formItemChildFeedback) return;
+    return () => formItemChildFeedback.setFeedback(null);
+  }, [formItemChildFeedback]);
+
+  const showInlineFeedback = !formItemChildFeedback && (blurFeedbackMessage || showRememberHint);
 
   const getRandomPassword = () => {
     const newValue = new RandExp(generatePasswordRegex!).gen();
@@ -119,10 +144,10 @@ const Password: React.FC<PasswordProps> = ({
     <Input.Password
       {...restProps}
       value={value}
-      autoComplete={autoCompleteProp ?? (mode === 'plain' ? 'current-password' : 'new-password')}
+      autoComplete={autoComplete}
       readOnly={readOnlyProp}
-      aria-haspopup={mode === 'new' ? 'dialog' : undefined}
-      aria-describedby={mode === 'new' ? strengthRulesId : undefined}
+      aria-haspopup={!isCurrentPassword ? 'dialog' : undefined}
+      aria-describedby={!isCurrentPassword ? strengthRulesId : undefined}
       onChange={e => {
         const newValue = e?.target?.value;
         setDisplayValue(newValue);
@@ -144,9 +169,9 @@ const Password: React.FC<PasswordProps> = ({
   );
 
   return (
-    <div style={{ position: 'relative', width: '100%' }}>
+    <div style={{ width: '100%' }}>
       <div style={{ display: 'flex' }}>
-        {mode === 'new' ? (
+        {!isCurrentPassword ? (
           <Popover
             open={isFocused}
             onOpenChange={open => {
@@ -198,39 +223,16 @@ const Password: React.FC<PasswordProps> = ({
           </Button>
         )}
       </div>
-      {(blurFeedbackMessage || showRememberHint) && (
+      {showInlineFeedback && (
         <div
           style={{
-            position: 'absolute',
-            top: '100%',
-            left: 0,
-            width: '100%',
             marginTop: token.marginXXS,
             fontSize: token.fontSizeSM,
-            lineHeight: token.lineHeight,
+            lineHeight: token.lineHeightSM,
           }}
         >
           {showRememberHint ? (
-            <div style={{ color: token.colorTextDescription }}>
-              {cloudLocale.pleaseRememberYourPassword}
-              <Typography.Text
-                copyable={{
-                  text: value,
-                  icon: [
-                    <Space key="copy" size={token.marginXXS}>
-                      <CopyOutlined aria-hidden />
-                      <a>{cloudLocale.copyPassword}</a>
-                    </Space>,
-                    <Space key="copy-success" size={token.marginXXS}>
-                      <CheckOutlined aria-hidden />
-                      <a>{cloudLocale.copyPassword}</a>
-                    </Space>,
-                  ],
-                  tooltips: [cloudLocale.copyPassword, cloudLocale.copySuccessfully],
-                }}
-                style={{ marginLeft: token.marginXXS }}
-              />
-            </div>
+            <PasswordRememberHint value={displayValue} locale={cloudLocale} />
           ) : (
             <div role="alert" style={{ color: token.colorError }}>
               {blurFeedbackMessage}

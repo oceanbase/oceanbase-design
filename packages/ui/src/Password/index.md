@@ -24,7 +24,7 @@ nav:
 - 大写字母、小写字母、数字、特殊字符，**至少包含 3 种**
 - 禁止空格、Tab、换行、emoji、中文等（失焦时报错，不单独展示为气泡规则）
 
-聚焦时通过气泡展示上述三条规则及强度进度。`mode="new"` 默认 `autoComplete="new-password"`，减轻浏览器已保存密码下拉遮挡气泡。
+聚焦时通过气泡展示上述三条规则及强度进度。默认 `autoComplete="new-password"`，减轻浏览器已保存密码下拉遮挡气泡；当前密码使用 `autoComplete="current-password"` 时不展示强度气泡。
 
 租户建库等 **8~64** 场景请通过 `rules` / `generatePasswordRegex` 自定义覆盖。
 
@@ -51,8 +51,17 @@ import { Password } from '@oceanbase/ui';
 
 文案可来自 `ConfigProvider` 的 `locale.Password`（`emptyMessage`、`genericFailMessage`、`forbiddenCharsMessage` 等）。自定义 `rules` / `generatePasswordRegex` 时，在 `Form.Item` 中用对应的 `validator` 或 `pattern` 与组件 `rules` 保持一致。
 
-- **新密码**：`<Password />`（`mode="new"`）；Form 校验报错由 `Form.Item` explain 展示；失焦后的规则分析文案与「请牢记并妥善保存密码」以绝对定位输出在输入框下方，不占文档流高度、不挤压布局。
-- **当前密码**：`<Password mode="plain" />`，仅 `required`，不校验格式（允许空格等）；准确性由提交时接口报错映射到字段。
+- **新密码**：`<Password />`（默认 `autoComplete="new-password"`）；在 `Form.Item` 内与 `Input` 用法相同，失焦规则分析与「请牢记密码」会自动写入 `Form.Item` explain，与校验文案共用同一区域。
+
+```tsx
+<Form.Item name="password" rules={[...]}>
+  <Password />
+</Form.Item>
+```
+
+非 `Form.Item` 场景下，失焦文案仍以内联方式展示在控件下方。
+
+- **当前密码**：`<Password autoComplete="current-password" />`，仅 `required`，不校验格式（允许空格等）；准确性由提交时接口报错映射到字段。
 - **确认密码**：`Input.Password` + 一致性 `validator`。
 - **注册表单**：`Login` 的 `RegisterForm` 已内置多云密码校验，可直接使用。
 
@@ -60,7 +69,7 @@ import { Password } from '@oceanbase/ui';
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
-| mode | `new` 聚焦展示规则气泡；`plain` 为简单密码输入（当前密码） | `'new' \| 'plain'` | `'new'` | - |
+| autoComplete | 浏览器自动填充提示；`new-password` 展示强度气泡，`current-password` 为简单当前密码输入 | string | `'new-password'` | - |
 | rules | 气泡内展示的密码规则（仅 UI，校验时机由 Form 负责） | [Validator](password#validator)[] | 多云默认规则 | - |
 | generatePasswordRegex | 随机生成密码的正则表达式，不为空则展示随机生成的按钮 | RegExp | - | - |
 | value | 密码框内容 | string | - | - |
