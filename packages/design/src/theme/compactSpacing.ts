@@ -1,6 +1,6 @@
 import theme from './index';
 
-const compactTheme = {
+const compactSpacingTheme = {
   token: theme.defaultSeed,
   components: {
     InputNumber: {
@@ -14,4 +14,4 @@ const compactTheme = {
   },
 };
 
-export default compactTheme;
+export default compactSpacingTheme;

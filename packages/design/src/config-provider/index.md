@@ -16,12 +16,13 @@ nav:
 - 🆕 新增 `table.selectionColumnWidth` 属性，用于配置表格的选择列宽度。
 - 🆕 新增 `styleProviderProps` 属性，一般用于配置 [StyleProvider](https://github.com/ant-design/cssinjs#styleprovider) 的 `hashPriority` 和 `transformers` 属性实现样式降级，来兼容 Chrome 88 以下的低版本浏览器，详见 [antd v5 样式兼容说明](https://ant-design.antgroup.com/docs/react/compatible-style-cn)。
 - 🆕 新增 `appProps` 属性，用于配置内嵌的 [App 组件属性](https://ant-design.antgroup.com/components/app-cn#app)。
-- 🆕 按 `locale` 自动调整正文字号与表格单元格字号：`zh` / `ja` / `ko`（含 `zh-cn`、`ja-JP` 等）下默认正文 **14px**、表格单元格 **14px**；其它 locale（如 `en`、`de`）与英文一致，为 **13px / 12px**。
+- 🆕 按 `locale` 自动调整排版：导出 `defaultTheme`（标准，14px）与 `compactTheme`（紧凑，Inter 字体 + 13px）；默认随语言生效，也可通过 `theme={defaultTheme}` / `theme={compactTheme}` 手动覆盖。`compactTheme` 为 locale 排版 preset，与 `theme.isCompact`（间距算法）无关。
 
 ## 代码演示
 
 <!-- prettier-ignore -->
 <code src="../locale/demo/basic.tsx" title="国际化"></code>
+<code src="./demo/locale-typography-theme.tsx" title="Locale 排版主题" description="切换 locale 与 defaultTheme / compactTheme；默认随语言自动应用排版 preset。"></code>
 <code src="./demo/size.tsx" title="尺寸"></code>
 <code src="./demo/theme.tsx" title="主题"></code>
 <code src="./demo/css-var.tsx" title="CSS 变量模式"></code>
@@ -165,5 +166,16 @@ CSS 变量模式支持通过 CSS 类实现静态主题切换，无需 JavaScript
 | table | Table 全局配置 | `{ selectionColumnWidth?: width; className?: string; style?: React.CSSProperties; }` | - | - |
 | styleProviderProps | [StyleProvider 配置](https://github.com/ant-design/cssinjs#styleprovider)，一般用于配置 `hashPriority` 和 `transformers` 属性实现样式降级 | [StyleProviderProps](https://github.com/ant-design/cssinjs/blob/master/src/StyleContext.tsx#L88) | - | - |
 | appProps | 内嵌的 App 组件属性 | [AppProps](https://ant-design.antgroup.com/components/app-cn#app) | - | - |
+
+### Locale 排版主题
+
+| 导出           | 说明                                                                          |
+| :------------- | :---------------------------------------------------------------------------- |
+| `defaultTheme` | Cn-like（zh/ja/ko）标准排版：14px 正文与表格单元格；**字体随 locale**         |
+| `compactTheme` | En-like 紧凑排版：13px 正文与表格单元格；**字体随 locale**（非 Inter 硬编码） |
+
+- 未传 `theme` 时按 `locale` 自动 merge 对应 preset；传入 `defaultTheme` / `compactTheme` 后锁定**字号/表格单元格**排版，**字体与字重仍随 locale**。
+- 与 preset 组合其它 `theme` 字段时使用展开：`theme={{ ...compactTheme, isDark: true }}`；覆盖 `token` 时需合并 preset 已有字段：`token: { ...compactTheme.token, colorPrimary: '#0064c8' }`。
+- `theme.isCompact` 为间距紧凑算法，与 `compactTheme` 无关。
 
 - 更多 API 详见 antd ConfigProvider 文档: https://ant.design/components/config-provider-cn

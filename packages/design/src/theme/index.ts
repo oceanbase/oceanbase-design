@@ -3,7 +3,7 @@ import type { Theme } from '@ant-design/cssinjs';
 import { pick } from 'lodash';
 // umi 插件只能 import 支持 CommonJS 语法库和文件，因此需要使用 lib 产物
 import type { SeedToken } from 'antd/lib/theme/interface';
-import defaultTheme from './default';
+import seedTheme from './default';
 import type { GlobalToken, AliasToken } from './interface';
 import { genObToken } from './obToken';
 
@@ -12,7 +12,7 @@ export * from 'antd/lib/theme';
 
 const seedTokenKeys = Object.keys(theme.defaultSeed);
 const seedToken = {
-  ...pick(defaultTheme.token, seedTokenKeys),
+  ...pick(seedTheme.token, seedTokenKeys),
   // some special seed token should set to ''
   // ref: https://github.com/ant-design/ant-design/blob/master/components/theme/themes/seed.ts#L32
   colorBgBase: '',

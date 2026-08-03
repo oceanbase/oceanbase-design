@@ -23,22 +23,10 @@ import { merge } from 'lodash';
 import App from '../app';
 import StaticFunction from '../static-function';
 import themeConfig from '../theme';
-import defaultTheme, {
-  fontFamilyEn,
-  fontSizeCn,
-  fontHeightCn,
-  lineHeightCn,
-  fontSizeEn,
-  fontWeightWeakEn,
-  fontWeightEn,
-  fontWeightStrongEn,
-  isCnLikeLocale,
-  isEnLikeLocale,
-  tableCellFontSizeEn,
-} from '../theme/default';
+import seedTheme from '../theme/default';
 import darkTheme from '../theme/dark';
-import compactTheme from '../theme/compact';
-import type { GlobalToken } from '../theme/interface';
+import compactSpacingTheme from '../theme/compactSpacing';
+import { isTypographyThemeLocked, resolveLocaleTypographyPatch } from '../theme/localeTypography';
 import DefaultRenderEmpty from './DefaultRenderEmpty';
 import type { NavigateFunction } from './navigate';
 import type { Locale } from '../locale';
@@ -52,6 +40,8 @@ export * from 'antd/es/config-provider/context';
 export * from 'antd/es/config-provider/SizeContext';
 export * from 'antd/es/config-provider/DisabledContext';
 export * from 'antd/es/config-provider';
+
+export { compactTheme, defaultTheme } from '../theme/localeTypography';
 
 export interface ThemeConfig extends AntThemeConfig {
   isAliyun?: boolean;
@@ -125,85 +115,6 @@ export type ConfigProviderType = React.FC<ConfigProviderProps> & {
   useConfig: typeof AntConfigProvider.useConfig;
 };
 
-/** `en` / `en-gb` → `tokenValueEn`（与 `fontFamilyEn` 等一致）。 */
-const getLocaleTokenValue = (
-  mergedThemeToken: GlobalToken,
-  locale: Locale,
-  tokenKey: string,
-  tokenValue: string | number,
-  tokenValueEn: string | number
-) => {
-  return tokenValue !== mergedThemeToken[tokenKey]
-    ? { [tokenKey]: tokenValue }
-    : ['en', 'en-gb'].includes(locale.locale)
-      ? { [tokenKey]: tokenValueEn }
-      : {};
-};
-
-/** Cn（zh/ja/ko）且仍为拉丁基线 `tokenValueEn` 时 → `tokenValueCn`，结构上与 {@link getLocaleTokenValue} 对称。 */
-const getLocaleTokenValueCn = (
-  mergedThemeToken: GlobalToken,
-  locale: Locale,
-  tokenKey: string,
-  tokenValue: string | number | undefined,
-  tokenValueEn: number,
-  tokenValueCn: number
-) => {
-  return tokenValue !== mergedThemeToken[tokenKey]
-    ? { [tokenKey]: tokenValue }
-    : isCnLikeLocale(locale.locale) && (tokenValue === undefined || tokenValue === tokenValueEn)
-      ? { [tokenKey]: tokenValueCn }
-      : {};
-};
-
-/**
- * 按 locale 合并主题补丁：Cn 正文/表内字号、英文 Table 内嵌控件与分页对齐（`localeEnEmbeddedControls`）。
- * 供单测与 ConfigProvider 共用。
- */
-export function getLocaleFontSizeThemePatch(
-  mergedLocale: Locale,
-  mergedTheme: ThemeConfig,
-  resolvedFontSize: number | undefined
-): ThemeConfig {
-  const tokenPatch = getLocaleTokenValueCn(
-    (mergedTheme.token ?? {}) as GlobalToken,
-    mergedLocale,
-    'fontSize',
-    resolvedFontSize,
-    fontSizeEn,
-    fontSizeCn
-  );
-
-  const patch: ThemeConfig = {};
-  if ('fontSize' in tokenPatch && tokenPatch.fontSize !== undefined) {
-    patch.token = {
-      fontSize: tokenPatch.fontSize as number,
-      lineHeight: lineHeightCn,
-      fontHeight: fontHeightCn,
-    } as ThemeConfig['token'];
-  }
-
-  const tablePatch: NonNullable<ThemeConfig['components']>['Table'] = {};
-
-  const cellFs = mergedTheme.components?.Table?.cellFontSize;
-  if (
-    (cellFs === undefined || cellFs === tableCellFontSizeEn) &&
-    isCnLikeLocale(mergedLocale.locale)
-  ) {
-    Object.assign(tablePatch, { cellFontSize: fontSizeCn });
-  }
-
-  if (isEnLikeLocale(mergedLocale.locale)) {
-    Object.assign(tablePatch, { localeEnEmbeddedControls: true });
-  }
-
-  if (Object.keys(tablePatch as object).length > 0) {
-    patch.components = { Table: tablePatch };
-  }
-
-  return patch;
-}
-
 const ConfigProvider: ConfigProviderType = ({
   children,
   theme,
@@ -236,23 +147,23 @@ const ConfigProvider: ConfigProviderType = ({
             token: {
               ...darkTheme.token,
               ...Object.fromEntries(
-                Object.entries(defaultTheme.token).filter(
+                Object.entries(seedTheme.token).filter(
                   ([key]) => !key?.toLowerCase()?.startsWith('color')
                 )
               ),
             },
           }
       : undefined;
-  const compactThemeConfig =
+  const compactSpacingThemeConfig =
     isCompact && !isAliyun
       ? isDark
-        ? compactTheme
+        ? compactSpacingTheme
         : {
-            ...compactTheme,
+            ...compactSpacingTheme,
             token: {
-              ...compactTheme.token,
+              ...compactSpacingTheme.token,
               ...Object.fromEntries(
-                Object.entries(defaultTheme.token).filter(
+                Object.entries(seedTheme.token).filter(
                   ([key]) =>
                     key?.toLowerCase()?.startsWith('color') &&
                     !['colorBgBase', 'colorTextBase'].includes(key)
@@ -263,11 +174,11 @@ const ConfigProvider: ConfigProviderType = ({
       : undefined;
   const mergedTheme = merge(
     {},
-    isAliyun ? {} : isDark || isCompact ? themeConfig.defaultSeed : defaultTheme,
+    isAliyun ? {} : isDark || isCompact ? themeConfig.defaultSeed : seedTheme,
     parentContext.theme,
     aliyunThemeConfig,
     darkThemeConfig,
-    compactThemeConfig,
+    compactSpacingThemeConfig,
     theme
   );
 
@@ -283,43 +194,22 @@ const ConfigProvider: ConfigProviderType = ({
   const mergedStyleProviderProps = merge({}, parentStyleContext, styleProviderProps);
   const mergedLocale = merge({}, parentContext.locale, locale);
 
-  const resolvedAntTheme = merge(
-    {},
+  const typographyLocked = isTypographyThemeLocked(mergedTheme);
+  const resolvedTokens = {
+    fontFamily,
+    fontWeightWeak,
+    fontWeight,
+    fontWeightStrong,
+  };
+  const localeTypographyPatch = resolveLocaleTypographyPatch(
+    mergedLocale,
     mergedTheme,
-    getLocaleFontSizeThemePatch(mergedLocale, mergedTheme, fontSize),
-    {
-      token: {
-        ...getLocaleTokenValue(
-          mergedTheme.token || {},
-          mergedLocale,
-          'fontFamily',
-          fontFamily,
-          fontFamilyEn
-        ),
-        ...getLocaleTokenValue(
-          mergedTheme.token || {},
-          mergedLocale,
-          'fontWeightWeak',
-          fontWeightWeak,
-          fontWeightWeakEn
-        ),
-        ...getLocaleTokenValue(
-          mergedTheme.token || {},
-          mergedLocale,
-          'fontWeight',
-          fontWeight,
-          fontWeightEn
-        ),
-        ...getLocaleTokenValue(
-          mergedTheme.token || {},
-          mergedLocale,
-          'fontWeightStrong',
-          fontWeightStrong,
-          fontWeightStrongEn
-        ),
-      },
-    } as ConfigProviderProps['theme']
+    fontSize,
+    resolvedTokens,
+    { sizeLocked: typographyLocked }
   );
+
+  const resolvedAntTheme = merge({}, mergedTheme, localeTypographyPatch);
 
   // cssVar 模式下 App 必须有真实 DOM 节点挂载 cssVarCls，component={false} 会导致变量作用域丢失
   const cssVarEnabled = Boolean(resolvedAntTheme?.cssVar);
