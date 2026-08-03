@@ -40,11 +40,16 @@ ob-design doc Filter                     # OB markdown docs
 ob-design demo Table basic               # runnable demo source
 ob-design route "user list with filters" # page intent → components
 ob-design constraint --dense             # design constraints
-ob-design token                          # obToken / CSS variables
+ob-design token                          # obToken / CSS variables (summary)
+ob-design token --json                   # full --ob-* list + migration hints
+ob-design token --check --ob-color-text-description
+ob-design lint ./src                     # JS rules + CSS token check (default)
+ob-design lint ./src --code-only         # JS rules only
+ob-design lint ./src --styles            # CSS token rules only
+ob-design migrate --rule ob-css-tokens ./src
 ob-design design.md                      # design language (antd + OB)
-ob-design lint ./src                     # static convention check
 ob-design doctor                         # project health check
-ob-design migrate ./src                  # wraps @oceanbase/codemod
+ob-design migrate ./src                  # wraps @oceanbase/codemod (default rules)
 ob-design template list-filter-table     # page template
 ob-design mcp                            # start MCP server
 ob-design setup --client cursor          # write MCP / AGENTS.md
@@ -52,23 +57,23 @@ ob-design setup --client cursor          # write MCP / AGENTS.md
 
 ## Commands
 
-| Command                      | MCP tool        | Purpose                                        |
-| ---------------------------- | --------------- | ---------------------------------------------- |
-| `ob-design list`             | —               | Registered components and diffLevel            |
-| `ob-design info <Name>`      | `ob_info`       | **Component API truth** (OB extensions merged) |
-| `ob-design doc <Name>`       | `ob_doc`        | OB docs (usage/constraints; no antd appendix)  |
-| `ob-design demo <Name> [id]` | `ob_demo`       | Demo source (OB package imports)               |
-| `ob-design route "<intent>"` | `ob_route`      | Page intent → recommended components           |
-| `ob-design constraint`       | `ob_constraint` | Design constraints (ASSEMBLY)                  |
-| `ob-design token`            | `ob_token`      | obToken / CSS variable reference               |
-| `ob-design design.md`        | —               | Design language                                |
-| `ob-design search <query>`   | `ob_search`     | Full-text metadata and docs search             |
-| `ob-design lint <path>`      | `ob_lint`       | Static convention check                        |
-| `ob-design doctor`           | `ob_doctor`     | Project health (MCP/Skill/deps)                |
-| `ob-design setup`            | —               | Write MCP config + generate `AGENTS.md`        |
-| `ob-design migrate <path>`   | —               | Wraps `@oceanbase/codemod`                     |
-| `ob-design template <name>`  | —               | Page templates (see below)                     |
-| `ob-design mcp`              | —               | Start MCP server (stdio)                       |
+| Command | MCP tool | Purpose |
+| --- | --- | --- |
+| `ob-design list` | — | Registered components and diffLevel |
+| `ob-design info <Name>` | `ob_info` | **Component API truth** (OB extensions merged) |
+| `ob-design doc <Name>` | `ob_doc` | OB docs (usage/constraints; no antd appendix) |
+| `ob-design demo <Name> [id]` | `ob_demo` | Demo source (OB package imports) |
+| `ob-design route "<intent>"` | `ob_route` | Page intent → recommended components |
+| `ob-design constraint` | `ob_constraint` | Design constraints (ASSEMBLY) |
+| `ob-design token` | `ob_token` | Runtime `--ob-*` list, categories, hints, `check` |
+| `ob-design design.md` | — | Design language |
+| `ob-design search <query>` | `ob_search` | Full-text metadata and docs search |
+| `ob-design lint <path>` | `ob_lint` | JS conventions + CSS token check (default) |
+| `ob-design doctor` | `ob_doctor` | Project health (MCP/Skill/deps) |
+| `ob-design setup` | — | Write MCP config + generate `AGENTS.md` |
+| `ob-design migrate <path>` | — | Wraps `@oceanbase/codemod` (`--rule ob-css-tokens`) |
+| `ob-design template <name>` | — | Page templates (see below) |
+| `ob-design mcp` | — | Start MCP server (stdio) |
 
 Common flags: `--dense` (token-friendly output), `--json` (machine-readable).
 
@@ -168,6 +173,7 @@ ob-design route "<page intent>"
   → ob_info <component> (API)
   → ob_doc <component> (usage/constraints, optional)
   → ob_constraint --dense (when unsure)
+  → ob-design token --dense (before custom styles)
   → ob-design template <name> (optional starting point)
   → generate code
   → ob-design lint ./src

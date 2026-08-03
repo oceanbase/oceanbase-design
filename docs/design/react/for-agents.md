@@ -19,6 +19,8 @@ https://raw.githubusercontent.com/oceanbase/oceanbase-design/master/skills/ocean
 
 Configure only ob-design mcp (@oceanbase/design-cli) for business projects. Do not configure antd MCP or call antd_info.
 
+Before writing custom styles, call ob_token or ob-design token for valid --ob-* names. Do not invent tokens or use var(--ant-*).
+
 If you can install Skills:
 npx skills add oceanbase/oceanbase-design
 ```
@@ -38,9 +40,8 @@ ob-design doc Filter
 ob-design demo Table basic
 ob-design route "user list with filters"
 ob-design constraint --dense
-ob-design token
-ob-design design.md
-ob-design search Filter
+ob-design token --json
+ob-design token --check --ob-color-text-description
 ob-design lint ./src
 ob-design doctor
 ob-design migrate ./src

@@ -3,6 +3,7 @@ name: oceanbase-design
 description: >
   Use when the user's task involves OceanBase Design (@oceanbase/design, @oceanbase/ui, @oceanbase/icons, @oceanbase/charts) — writing OB components, reviewing OB code, querying ob_info/ob_doc via ob-design mcp, migrating from antd/obui/techui, or configuring agent tooling. Triggers on OceanBase Design, OBUI, Table, Filter, ConfigProvider, codemod, obToken, ob-design mcp, AGENTS.md, For Agents.
 
+
 allowed-tools:
   - Bash(ob-design *)
   - Bash(npx @oceanbase/design-cli *)
@@ -57,6 +58,7 @@ ob-design route "<页面意图>"
   → ob-design info <Component>     # API 真相
   → ob-design doc <Component>        # 用法/约束（可选）
   → ob-design constraint --dense     # 有疑虑时
+  → ob-design token --dense          # 涉及自定义样式时
   → ob-design template <name>        # 可选起点
   → 生成代码
   → ob-design lint ./src
@@ -95,6 +97,7 @@ ob-design route "<页面意图>"
 - **Card + Table**：Card 使用 `bodyStyle={{ padding: 0 }}` 时，Table **必须**设 `innerBordered`，否则边框错乱。
 - **筛选**：列表/页面筛选用 `Filter.*`（design）或 `LightFilter`（ui 轻量场景），**不要**用裸 `Select` 充当筛选条。
 - **表格**：静态数据用 `Table`；仅当需要 `request`、内置搜索等能力时用 `ProTable`（ui）。
+- **样式 Token**：自定义样式只用 `var(--ob-*)` / `obToken`；禁止 antd `token` / `var(--ant-*)`；写样式前 `ob-design token` 或 MCP `ob_token` 查表；提交前 `ob-design lint`（见 [css-tokens.md](references/css-tokens.md)）。
 - **迁移**：从 antd/obui/techui 迁移时，先运行 `@oceanbase/codemod`，再按本 skill 做人工核对。
 
 ## 快速规范
@@ -114,7 +117,7 @@ ob-design route "<页面意图>"
 - **@oceanbase/codemod**：自动化迁移工具，见 [references/codemod.md](references/codemod.md)。用于从 antd、obui、techui、pro-components 等迁移到 design/ui/util/charts，以及 Less/Sass 转 token 或 CSS 变量。执行时须指定版本 `@oceanbase/codemod@^1.0.0-alpha.0`。
 - **@oceanbase/design-cli**：Agent CLI 与 MCP（`ob-design`），见 [references/agent-tooling.md](references/agent-tooling.md)。
 
-在修改或新增组件、做 Code Review、统一样式与导入方式时，按需查阅上述 reference 以保持与 design 及各包使用规范一致。存量项目迁移时先运行 codemod，再按 design 与各包规范做人工核对。本 skill 的 reference 位于 `references/`；design 细则入口为 [references/design/README.md](references/design/README.md)；**机器可读的 OB 扩展 props 索引（CI 生成）**见 [references/generated/props-index.md](references/generated/props-index.md)；**关键约束一句话汇编**见 [references/ASSEMBLY.md](references/ASSEMBLY.md)。高价值约定（ConfigProvider 必包、图标来源、Card+Table innerBordered、Filter 受控）已融入各相关 reference。
+在修改或新增组件、做 Code Review、统一样式与导入方式时，按需查阅上述 reference 以保持与 design 及各包使用规范一致。存量项目迁移时先运行 codemod，再按 design 与各包规范做人工核对。本 skill 的 reference 位于 `references/`；**CSS Token 规范与误用对照**见 [references/css-tokens.md](references/css-tokens.md)；design 细则入口为 [references/design/README.md](references/design/README.md)；**机器可读的 OB 扩展 props 索引（CI 生成）**见 [references/generated/props-index.md](references/generated/props-index.md)；**关键约束一句话汇编**见 [references/ASSEMBLY.md](references/ASSEMBLY.md)。高价值约定（ConfigProvider 必包、图标来源、Card+Table innerBordered、Filter 受控）已融入各相关 reference。
 
 ## 何时不用 / 例外
 

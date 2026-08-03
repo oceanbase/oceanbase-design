@@ -55,17 +55,17 @@ ob-design mcp
 
 ## MCP tools (9)
 
-| Tool            | Description                                                                  |
-| --------------- | ---------------------------------------------------------------------------- |
-| `ob_info`       | **Single source of component API** (OB-merged props by diffLevel)            |
-| `ob_doc`        | OB component docs (usage/constraints; full antd via `ob_info` or antd links) |
-| `ob_demo`       | Demo source (imports rewritten to `@oceanbase/design`, etc.)                 |
-| `ob_route`      | Page intent → recommended component set                                      |
-| `ob_constraint` | ASSEMBLY / `constraints.yaml` design rules                                   |
-| `ob_token`      | obToken and CSS variables                                                    |
-| `ob_search`     | Full-text search over metadata and docs                                      |
-| `ob_lint`       | Static convention checks (antd imports, icon packages, etc.)                 |
-| `ob_doctor`     | Project health (OB deps, antd CLI availability for ob_info)                  |
+| Tool            | Description                                                                    |
+| --------------- | ------------------------------------------------------------------------------ |
+| `ob_info`       | **Single source of component API** (OB-merged props by diffLevel)              |
+| `ob_doc`        | OB component docs (usage/constraints; full antd via `ob_info` or antd links)   |
+| `ob_demo`       | Demo source (imports rewritten to `@oceanbase/design`, etc.)                   |
+| `ob_route`      | Page intent → recommended component set                                        |
+| `ob_constraint` | ASSEMBLY / `constraints.yaml` design rules                                     |
+| `ob_token`      | Runtime `--ob-*` list, categories, migration hints; `json` / `check` / `dense` |
+| `ob_search`     | Full-text search over metadata and docs                                        |
+| `ob_lint`       | JS conventions + CSS token scan (default); `codeOnly` / `stylesOnly` flags     |
+| `ob_doctor`     | Project health (OB deps, antd CLI availability for ob_info)                    |
 
 ## MCP prompts (2)
 
@@ -80,6 +80,7 @@ ob-design mcp
 ob_route "<page intent>"
   → ob_info <Component>
   → ob_constraint (when unsure, prefer --dense)
+  → ob_token (before custom styles: valid --ob-* names)
   → generate code
   → ob_lint ./src
 ```

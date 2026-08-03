@@ -47,3 +47,27 @@ test('ob-design info Filter is diffLevel D without antd delegate', () => {
   assert.equal(data.diffLevel, 'D');
   assert.equal(data.obOnly, true);
 });
+
+test('ob-design token --json returns runtime css vars', () => {
+  const out = runOb('token', '--json');
+  const data = JSON.parse(out);
+  assert.ok(data.count >= 173);
+  assert.ok(data.tokens.includes('--ob-color-text-description'));
+  assert.ok(data.migrationHints['--ob-color-text-tertiary']);
+});
+
+test('ob-design lint flags invalid css token in scss', async () => {
+  const { mkdtempSync, writeFileSync, rmSync } = await import('node:fs');
+  const { join } = await import('node:path');
+  const { tmpdir } = await import('node:os');
+  const dir = mkdtempSync(join(tmpdir(), 'ob-lint-'));
+  writeFileSync(join(dir, 'bad.scss'), '.x { color: var(--ob-color-text-tertiary); }');
+  try {
+    runOb('lint', dir, '--styles');
+    assert.fail('expected lint to fail');
+  } catch (err) {
+    assert.match(String(err), /--ob-color-text-description/);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});

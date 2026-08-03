@@ -22,6 +22,7 @@ const { lessToToken } = require('../transforms/less-to-token');
 const { lessToCssvar } = require('../transforms/less-to-cssvar');
 const { sassToCssvar } = require('../transforms/sass-to-cssvar');
 const { tokenToObtoken } = require('../transforms/token-to-obtoken');
+const { obCssTokens } = require('../transforms/ob-css-tokens');
 
 // jscodeshift codemod scripts dir
 const transformersDir = path.join(__dirname, '../transforms');
@@ -51,7 +52,7 @@ const defaultAntdTransformers = [
 ];
 
 // Transformers that must be explicitly specified via --transformer option
-const explicitTransformers = ['less-to-token', 'token-to-obtoken'];
+const explicitTransformers = ['less-to-token', 'token-to-obtoken', 'ob-css-tokens'];
 
 // All available transformers
 const allTransformers = [
@@ -224,6 +225,8 @@ async function transform(transformer, parser, filePath, options) {
         useSemanticOb: tokenTarget !== 'antd',
       };
       await sassToCssvar(filePath, sassToCssvarOptions);
+    } else if (transformer === 'ob-css-tokens') {
+      await obCssTokens(filePath, { dry: options.dry === true || options.dry === 'true' });
     } else {
       if (process.env.NODE_ENV === 'local') {
         console.log(`Running jscodeshift with: ${JSON.stringify(args)}`);

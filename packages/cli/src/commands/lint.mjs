@@ -1,7 +1,13 @@
-import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { join, extname } from 'node:path';
+import { readFileSync, existsSync, statSync } from 'node:fs';
+import { extname } from 'node:path';
+import {
+  scanCssVarUsage,
+  walkFiles,
+  STYLE_EXTENSIONS,
+  JS_EXTENSIONS,
+} from '../lib/css-tokens.mjs';
 
-const RULES = [
+const CODE_RULES = [
   {
     id: 'import-design-not-antd',
     test: (content, file) => {
@@ -48,32 +54,66 @@ const RULES = [
   },
 ];
 
-function walk(dir, files = []) {
-  for (const entry of readdirSync(dir)) {
-    const p = join(dir, entry);
-    const st = statSync(p);
-    if (st.isDirectory() && entry !== 'node_modules') walk(p, files);
-    else if (['.tsx', '.ts', '.jsx', '.js'].includes(extname(p))) files.push(p);
+function lintFile(file, { includeCode, includeStyles }) {
+  const issues = [];
+  const content = readFileSync(file, 'utf8');
+  const ext = extname(file);
+
+  if (includeCode && JS_EXTENSIONS.has(ext)) {
+    for (const rule of CODE_RULES) {
+      for (const issue of rule.test(content, file)) {
+        issues.push({ ...issue, ruleId: rule.id });
+      }
+    }
+    issues.push(...scanCssVarUsage(content, file));
+  } else if (includeStyles && STYLE_EXTENSIONS.has(ext)) {
+    issues.push(...scanCssVarUsage(content, file));
   }
-  return files;
+
+  return issues;
 }
 
-export function lintCommand(target, { json }) {
+function collectFiles(target, { includeCode, includeStyles }) {
+  const extensions = new Set();
+  if (includeCode) {
+    for (const e of JS_EXTENSIONS) extensions.add(e);
+  }
+  if (includeStyles) {
+    for (const e of STYLE_EXTENSIONS) extensions.add(e);
+  }
+  const st = statSync(target);
+  if (st.isDirectory()) {
+    return walkFiles(target, extensions);
+  }
+  return [target];
+}
+
+function formatHumanIssue(issue) {
+  const loc = issue.line ? `${issue.file}:${issue.line}` : issue.file;
+  return `${loc}: ${issue.message}`;
+}
+
+export function lintCommand(target, { json, codeOnly, stylesOnly } = {}) {
+  if (!existsSync(target)) {
+    console.error(`Target not found: ${target}`);
+    process.exitCode = 1;
+    return;
+  }
+
+  const includeCode = !stylesOnly;
+  const includeStyles = !codeOnly;
+  const files = collectFiles(target, { includeCode, includeStyles });
   const issues = [];
-  const files = walk(target);
 
   for (const file of files) {
-    const content = readFileSync(file, 'utf8');
-    for (const rule of RULES) {
-      issues.push(...rule.test(content, file));
-    }
+    issues.push(...lintFile(file, { includeCode, includeStyles }));
   }
 
   if (json) {
     console.log(JSON.stringify({ issues, count: issues.length }, null, 2));
   } else {
     for (const i of issues) {
-      console.log(`${i.file}: ${i.message}`);
+      console.log(formatHumanIssue(i));
     }
     if (!issues.length) console.log('No issues found.');
   }

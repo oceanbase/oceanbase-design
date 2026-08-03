@@ -35,6 +35,7 @@ export default defineConfig({
     exclude: [
       '**/node_modules/**',
       'packages/cli/**',
+      '**/*.test.cjs',
       '**/Area/__tests__/ref.test.tsx',
       '**/DualAxes/__tests__/ref.test.tsx',
       '**/Line/__tests__/ref.test.tsx',

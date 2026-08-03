@@ -11,7 +11,7 @@ design 是 OceanBase Design 的设计系统与基础组件库，提供按钮、�
 ## 入口与主题
 
 - **ConfigProvider**：应用入口应使用 `ConfigProvider`（从 `@oceanbase/design` 引入）包裹，message、notification、Modal 等静态方法及 obToken/CSS 变量会消费其上下文；未包裹时会导致主题错乱或静态方法无法正确渲染。**主题与 Token** 详见 [01-theme-and-token.md](01-theme-and-token.md)。
-- **主题与样式**：业务侧写样式时，使用 `theme.useToken()` 或 `useToken()` 获取 **obToken**，优先语义化 token，不推荐手写基础色值；勿混用 antd 与 design 的 `useToken`。
+- **主题与样式**：业务侧写样式时，使用 `theme.useToken()` 或 `useToken()` 获取 **obToken**，优先语义化 token，不推荐手写基础色值；勿混用 antd 与 design 的 `useToken`。CSS 文件只用 `var(--ob-*)`，禁止 `var(--ant-*)`（见 [css-tokens.md](../css-tokens.md)）。
 
 **约定：根节点必包 ConfigProvider**。错误示例：根节点未包 ConfigProvider 即使用 `message.success()` 等。正确：在根组件用 `<ConfigProvider><App /></ConfigProvider>` 包裹。例外：纯展示/脚本且不调用 message/notification/Modal 且不消费 obToken 时可暂不包裹，上线前应补齐。
 

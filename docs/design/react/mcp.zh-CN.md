@@ -62,9 +62,9 @@ ob-design mcp
 | `ob_demo`       | Demo 源码（import 已改写为 `@oceanbase/design` 等）                        |
 | `ob_route`      | 页面意图 → 推荐组件组合                                                    |
 | `ob_constraint` | ASSEMBLY / `constraints.yaml` 设计约束                                     |
-| `ob_token`      | obToken 与 CSS 变量                                                        |
+| `ob_token`      | 运行时 `--ob-*` 列表、分类、迁移 hints；支持 `json` / `check` / `dense`    |
 | `ob_search`     | 全文检索元数据与文档                                                       |
-| `ob_lint`       | 静态约定检查（antd 导入、图标包等）                                        |
+| `ob_lint`       | JS 约定 + CSS token 扫描（默认）；`codeOnly` / `stylesOnly` 可收窄范围     |
 | `ob_doctor`     | 项目健康检查（OB 依赖、antd CLI 是否可用于 ob_info）                       |
 
 ## MCP Prompts（2）
@@ -80,6 +80,7 @@ ob-design mcp
 ob_route "<页面意图>"
   → ob_info <Component>
   → ob_constraint（有疑虑时，建议 --dense）
+  → ob_token（写自定义样式前：查合法 --ob-* 名称）
   → 生成代码
   → ob_lint ./src
 ```
