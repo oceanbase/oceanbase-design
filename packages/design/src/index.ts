@@ -24,6 +24,7 @@ export type { AppProps } from './app';
 
 export { default as ConfigProvider } from './config-provider';
 export type { ConfigProviderProps, ConfigConsumerProps, ThemeConfig } from './config-provider';
+export { compactTheme, defaultTheme } from './theme/localeTypography';
 
 export { default as Descriptions } from './descriptions';
 export type {

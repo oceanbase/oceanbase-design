@@ -97,14 +97,14 @@ export const fontSizeEn = 13;
 /** Table 单元格字号（非 Cn），与 components.Table.cellFontSize 默认值一致 */
 export const tableCellFontSizeEn = fontSizeSM;
 
-/** Cn 正文/表内字号等 locale 主题补丁（由 config-provider `getLocaleFontSizeThemePatch` 消费） */
+/** Cn 正文/表内字号等 locale 主题补丁（由 `localeTypography` 消费） */
 export const fontSizeCn = 14;
 export const fontHeightCn = 22;
 export const lineHeightCn = fontHeightCn / fontSizeCn;
 
 const lineHeightSM = 20 / 12;
 
-const defaultTheme: ThemeConfig = {
+const seedTheme: ThemeConfig = {
   token: {
     fontFamily: `-apple-system, 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
     fontFamilyCode: `Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace`,
@@ -454,16 +454,16 @@ const defaultTheme: ThemeConfig = {
   },
 };
 
-defaultTheme.token = {
-  ...defaultTheme.token,
+seedTheme.token = {
+  ...seedTheme.token,
   // preset colors below should be same with semantic colors
-  blue: defaultTheme?.token?.colorInfo,
-  green: defaultTheme?.token?.colorSuccess,
-  yellow: defaultTheme?.token?.colorWarning,
-  red: defaultTheme?.token?.colorError,
+  blue: seedTheme?.token?.colorInfo,
+  green: seedTheme?.token?.colorSuccess,
+  yellow: seedTheme?.token?.colorWarning,
+  red: seedTheme?.token?.colorError,
 };
 
-export default formatTheme(defaultTheme);
+export default formatTheme(seedTheme);
 
 /**
  * Whether the BCP 47 locale should use Cn typography sizing (14px body + table cells; zh/ja/ko).

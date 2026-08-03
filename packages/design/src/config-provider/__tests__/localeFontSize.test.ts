@@ -1,14 +1,4 @@
-import type { ThemeConfig } from 'antd/es/config-provider';
-import defaultTheme from '../../theme/default';
-import zhCN from '../../locale/zh-CN';
-import enUS from '../../locale/en-US';
-import {
-  fontSizeEn,
-  tableCellFontSizeEn,
-  isCnLikeLocale,
-  isEnLikeLocale,
-} from '../../theme/default';
-import { getLocaleFontSizeThemePatch } from '../index';
+import { isCnLikeLocale, isEnLikeLocale } from '../../theme/default';
 
 describe('isCnLikeLocale', () => {
   it('matches zh / ja / ko primary subtags', () => {
@@ -45,69 +35,5 @@ describe('isEnLikeLocale', () => {
     expect(isEnLikeLocale('de-DE')).toBe(false);
     expect(isEnLikeLocale('')).toBe(false);
     expect(isEnLikeLocale(undefined)).toBe(false);
-  });
-});
-
-describe('getLocaleFontSizeThemePatch', () => {
-  const baseTheme = defaultTheme as ThemeConfig;
-  const resolvedFs = baseTheme.token?.fontSize;
-
-  it('returns Cn locale patch for zh locale', () => {
-    const patch = getLocaleFontSizeThemePatch(
-      zhCN as Parameters<typeof getLocaleFontSizeThemePatch>[0],
-      baseTheme,
-      resolvedFs
-    );
-    expect(patch.token?.fontSize).toBe(14);
-    expect(patch.token?.fontHeight).toBe(22);
-    expect(patch.components?.Table?.cellFontSize).toBe(14);
-  });
-
-  it('returns only Table localeEnEmbeddedControls for en locale', () => {
-    expect(
-      getLocaleFontSizeThemePatch(
-        enUS as Parameters<typeof getLocaleFontSizeThemePatch>[0],
-        baseTheme,
-        resolvedFs
-      )
-    ).toEqual({
-      components: { Table: { localeEnEmbeddedControls: true } },
-    });
-  });
-
-  it('does not override custom body fontSize', () => {
-    const custom: ThemeConfig = {
-      ...baseTheme,
-      token: { ...baseTheme.token, fontSize: 16 },
-    };
-    const patch = getLocaleFontSizeThemePatch(
-      zhCN as Parameters<typeof getLocaleFontSizeThemePatch>[0],
-      custom,
-      custom.token?.fontSize
-    );
-    expect(patch.token).toBeUndefined();
-    expect(patch.components?.Table?.cellFontSize).toBe(14);
-  });
-
-  it('does not override custom Table cellFontSize', () => {
-    const custom: ThemeConfig = {
-      ...baseTheme,
-      components: {
-        ...baseTheme.components,
-        Table: { ...baseTheme.components?.Table, cellFontSize: 13 },
-      },
-    };
-    const patch = getLocaleFontSizeThemePatch(
-      zhCN as Parameters<typeof getLocaleFontSizeThemePatch>[0],
-      custom,
-      custom.token?.fontSize
-    );
-    expect(patch.token?.fontSize).toBe(14);
-    expect(patch.components).toBeUndefined();
-  });
-
-  it('uses defaults from defaultTheme for guard values', () => {
-    expect(fontSizeEn).toBe(13);
-    expect(tableCellFontSizeEn).toBe(12);
   });
 });

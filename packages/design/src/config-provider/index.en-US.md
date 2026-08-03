@@ -17,10 +17,13 @@ nav:
 - 🆕 `styleProviderProps` for [StyleProvider](https://github.com/ant-design/cssinjs#styleprovider) config (e.g. `hashPriority`, `transformers`) for style fallback on Chrome < 88. See [antd v5 style compatibility](https://ant-design.antgroup.com/docs/react/compatible-style-cn).
 - 🆕 `appProps` for embedded [App component props](https://ant-design.antgroup.com/components/app-cn#app).
 
+- 🆕 Locale typography presets `defaultTheme` / `compactTheme`: auto-applied by `locale`, or pass via `theme` to override. `compactTheme` is locale typography, not `theme.isCompact` (spacing).
+
 ## Code Examples
 
 <!-- prettier-ignore -->
 <code src="../locale/demo/basic.tsx" title="Internationalization"></code>
+<code src="./demo/locale-typography-theme.tsx" title="Locale typography theme" description="Switch locale and defaultTheme / compactTheme presets."></code>
 <code src="./demo/size.tsx" title="Size"></code>
 <code src="./demo/theme.tsx" title="Theme"></code>
 <code src="./demo/css-var.tsx" title="CSS Variable Mode"></code>
@@ -164,5 +167,16 @@ CSS variable mode supports static theme switching via CSS classes, no JavaScript
 | table | Table global config | `{ selectionColumnWidth?: width; className?: string; style?: React.CSSProperties; }` | - | - |
 | styleProviderProps | [StyleProvider](https://github.com/ant-design/cssinjs#styleprovider) config (e.g. `hashPriority`, `transformers`) for style fallback | [StyleProviderProps](https://github.com/ant-design/cssinjs/blob/master/src/StyleContext.tsx#L88) | - | - |
 | appProps | Embedded App component props | [AppProps](https://ant-design.antgroup.com/components/app-cn#app) | - | - |
+
+### Locale typography presets
+
+| Export | Description |
+| :-- | :-- |
+| `defaultTheme` | Cn-like (zh/ja/ko) standard typography: 14px body and table cells; **font follows locale** |
+| `compactTheme` | Compact typography: 13px body and table cells; **font follows locale** |
+
+- When `theme` is omitted, the matching preset is merged from `locale` automatically.
+- Pass `theme={defaultTheme}` or `theme={compactTheme}` to lock **font size / table cell** typography; **font family and weights still follow `locale`**.
+- Combine with other theme fields via spread: `theme={{ ...compactTheme, isDark: true }}`; when overriding `token`, merge preset fields: `token: { ...compactTheme.token, colorPrimary: '#0064c8' }`.
 
 - More API: https://ant.design/components/config-provider-cn
