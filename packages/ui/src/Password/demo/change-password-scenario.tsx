@@ -9,13 +9,11 @@ export default () => {
   return (
     <>
       <Button type="primary" onClick={() => setOpen(true)}>
-        修改密码
+        Change password
       </Button>
       <Modal
         open={open}
-        title="修改密码"
-        okText="确定"
-        cancelText="取消"
+        title="Change password"
         onCancel={() => setOpen(false)}
         onOk={() => form.validateFields()}
         destroyOnClose
@@ -23,29 +21,29 @@ export default () => {
         <Form form={form} layout="vertical" requiredMark={false}>
           <Form.Item
             name="currentPassword"
-            label="当前密码"
-            rules={[{ required: true, message: '请输入当前密码' }]}
+            label="Current password"
+            rules={[{ required: true, message: 'Please enter current password' }]}
           >
             <Password mode="plain" />
           </Form.Item>
           <Form.Item
             name="newPassword"
-            label="新密码"
-            rules={[{ required: true, message: '请输入新密码' }]}
+            label="New password"
+            rules={[{ required: true, message: 'Please enter new password' }]}
           >
             <Password />
           </Form.Item>
           <Form.Item
             name="confirmPassword"
-            label="确认新密码"
+            label="Confirm new password"
             dependencies={['newPassword']}
             rules={[
-              { required: true, message: '请再次输入新密码' },
+              { required: true, message: 'Please enter new password again' },
               {
                 validator: (_, value) => {
                   const pwd = form.getFieldValue('newPassword');
                   if (value !== pwd) {
-                    return Promise.reject(new Error('两次输入的密码不一致'));
+                    return Promise.reject(new Error('The two passwords do not match'));
                   }
                   return Promise.resolve();
                 },

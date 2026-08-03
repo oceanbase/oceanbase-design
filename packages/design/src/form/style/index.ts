@@ -10,7 +10,10 @@ export const genFormStyle: GenerateStyle<FormToken> = (token: FormToken): CSSObj
     [componentCls]: {
       // extra style
       [`${componentCls}-item-explain, ${componentCls}-item-extra`]: {
-        paddingTop: token.paddingXXS,
+        paddingTop: calc(token.controlHeightSM)
+          .sub(token.fontSizeSM * token.lineHeightSM)
+          .div(2)
+          .equal(),
         fontSize: token.fontSizeSM,
         lineHeight: token.lineHeightSM,
       },

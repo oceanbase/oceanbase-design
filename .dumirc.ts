@@ -31,8 +31,8 @@ export default defineConfig({
   extraBabelPlugins: ['react-inline-svg-unique-id'],
   chainWebpack: config => {
     const esPath = path.join(__dirname, 'packages/design/es');
-    const libPath = path.join(__dirname, 'packages/design/es');
-    // AntdAliasWebpackPlugin depends es and lib of @oceanbase/design
+    const libPath = path.join(__dirname, 'packages/design/lib');
+    // AntdAliasWebpackPlugin depends on built es/lib of @oceanbase/design
     if (fs.existsSync(esPath) && fs.existsSync(libPath)) {
       config.plugin('antd-alias').use(AntdAliasWebpackPlugin);
     }

@@ -82,8 +82,7 @@ export const genModalStyle: GenerateStyle<ModalToken> = (token: ModalToken): CSS
           },
         },
         [`${componentCls}-body`]: {
-          marginInline: 0,
-          marginBlock: 0,
+          marginInline: calc(token.marginLG).mul(-1).equal(),
           paddingInline: token.paddingLG,
           paddingBlock: token.paddingLG,
         },
