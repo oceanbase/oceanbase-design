@@ -21,7 +21,4 @@ nav:
 ## API
 
 - 兼容 antd Message 静态方法与 `message.useMessage()`，参数与返回值语义保持一致。
-- `message.*` 会映射为 `notification.*`：`content` → `message`，并转发 `duration`、`key`、`icon`、`style`、`className`、`onClose`、`onClick` 等字段。
-- `message.loading()` 映射为 `notification.loading()`。
-- `message.config()` 会转发 `duration`、`maxCount`、`rtl`、`getContainer`、`prefixCls`；`top` 会映射为 `placement: 'top'` 与 `top` 偏移（`transitionName` 无 notification 等价项，开发环境会提示忽略）。
 - 通知场景请改用 [Notification API](/components/notification#api)。

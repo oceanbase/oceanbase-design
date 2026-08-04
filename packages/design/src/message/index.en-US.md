@@ -21,7 +21,4 @@ nav:
 ## API
 
 - Compatible with antd Message static methods and `message.useMessage()`; params and return semantics are preserved.
-- `message.*` maps to `notification.*`: `content` → `message`, and forwards `duration`, `key`, `icon`, `style`, `className`, `onClose`, `onClick`, etc.
-- `message.loading()` maps to `notification.loading()`.
-- `message.config()` forwards `duration`, `maxCount`, `rtl`, `getContainer`, `prefixCls`; `top` maps to `placement: 'top'` and `top` offset (`transitionName` has no notification equivalent and is ignored in dev with a warning).
 - For notification scenarios, use the [Notification API](/components/notification#api).
