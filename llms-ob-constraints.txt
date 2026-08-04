@@ -1,0 +1,137 @@
+# OceanBase Design Constraints
+
+Machine-readable constraints for AI agents. Use ob_constraint MCP tool for full detail.
+
+## constraints.yaml
+
+# Machine-readable constraints for CLI, MCP, and llms-ob-constraints.txt
+# SYNC: skills/oceanbase-design/references/ASSEMBLY.md
+# SYNC: skills/oceanbase-design/references/css-tokens.md
+
+constraints:
+  - id: config-provider-root
+    module: "00"
+    severity: error
+    rule: Application root must wrap with ConfigProvider from @oceanbase/design
+    appliesTo: [app-entry]
+    antiPattern: Missing ConfigProvider for message/notification/Modal static APIs
+
+  - id: import-design-not-antd
+    module: "00"
+    severity: error
+    rule: Import components from @oceanbase/design, not antd
+    appliesTo: [all-components]
+    antiPattern: "from 'antd'" or "from '@ant-design/icons'"
+
+  - id: icons-oceanbase
+    module: icons
+    severity: error
+    rule: Import icons from @oceanbase/icons
+    appliesTo: [icons]
+    antiPattern: "from '@ant-design/icons'"
+
+  - id: card-table-inner-bordered
+    module: "03"
+    severity: warn
+    rule: When Card uses bodyStyle padding 0 with Table inside, Table must set innerBordered
+    appliesTo: [Card, Table]
+    antiPattern: Card bodyStyle={{ padding: 0 }} without Table innerBordered
+
+  - id: filter-not-select-for-bar
+    module: "08"
+    severity: suggest
+    rule: Use Filter.* for table/list filter bars, not bare Select/Checkbox
+    appliesTo: [Filter, Select]
+    antiPattern: Page-level Select as filter without Filter.ResponsiveGroup
+
+  - id: filter-controlled
+    module: "08"
+    severity: warn
+    rule: Controlled Filter items require value and onChange when syncing with table data
+    appliesTo: [Filter]
+    antiPattern: Filter with onApply but no value/onChange on items
+
+  - id: table-over-protable
+    module: "05"
+    severity: suggest
+    rule: Prefer @oceanbase/design Table over @oceanbase/ui ProTable unless request/search needed
+    appliesTo: [Table, ProTable]
+    antiPattern: ProTable without request prop or built-in search need
+
+  - id: table-batch-tool-options
+    module: "05"
+    severity: info
+    rule: Use toolOptionsRender for batch actions with rowSelection
+    appliesTo: [Table]
+    antiPattern: Custom div toolbar duplicating Table batch bar
+
+  - id: chart-provider
+    module: charts
+    severity: error
+    rule: Wrap chart usage with ChartProvider when using @oceanbase/charts with design theme
+    appliesTo: [ChartProvider]
+    antiPattern: Charts without ChartProvider under ConfigProvider
+
+  - id: ob-token-not-hex
+    module: "01"
+    severity: suggest
+    rule: Use obToken or var(--ob-*) for custom styles, not hardcoded hex/px
+    appliesTo: [styling]
+    antiPattern: Inline style with raw #hex colors
+
+  - id: ob-css-var-valid
+    module: "01"
+    severity: error
+    rule: var(--ob-*) names must exist in @oceanbase/design runtime CSS variables
+    appliesTo: [styling]
+    antiPattern: var(--ob-color-text-tertiary) — not injected at runtime
+
+  - id: ob-space-not-padding
+    module: "01"
+    severity: error
+    rule: Use --ob-space-* for spacing, not --ob-padding-* or --ob-margin-*
+    appliesTo: [styling]
+    antiPattern: var(--ob-padding-m)
+
+  - id: ob-token-not-antd
+    module: "01"
+    severity: error
+    rule: Use obToken or var(--ob-*), not antd token or var(--ant-*)
+    appliesTo: [styling]
+    antiPattern: var(--ant-color-text) or token.colorText from antd useToken
+
+package-routing:
+  - need: 基础组件、表格、筛选、表单、主题
+    package: "@oceanbase/design"
+    components: [Table, Filter, ConfigProvider, Form, Button]
+  - need: 页面布局、ProTable、PageContainer
+    package: "@oceanbase/ui"
+    components: [PageContainer, ProTable, BasicLayout, LightFilter]
+  - need: 图标
+    package: "@oceanbase/icons"
+  - need: 图表
+    package: "@oceanbase/charts"
+    note: Requires ChartProvider with design theme
+
+## diffLevel summary
+
+- **Alert** (@oceanbase/design, diffLevel C): addedProps ghost, mini
+- **BasicLayout** (@oceanbase/ui, diffLevel D): addedProps logoUrl, iconUrl, banner, menus, topHeader, sideHeader
+- **Button** (@oceanbase/design, diffLevel A)
+- **Card** (@oceanbase/design, diffLevel B): addedProps subTitle, document, divided, gray, collapsible, defaultCollapsed, collapsed, onCollapse
+- **ConfigProvider** (@oceanbase/design, diffLevel B): addedProps navigate, hideOnSinglePage, card, spin, table, styleProviderProps, appProps, theme.isAliyun, theme.isDark, theme.isCompact
+- **Descriptions** (@oceanbase/design, diffLevel B): addedProps collapsible, collapsed, defaultCollapsed, onCollapse, contentAlign
+- **Drawer** (@oceanbase/design, diffLevel B): addedProps document, footerExtra, cancelText, okText, okButtonProps, locale
+- **Dropdown** (@oceanbase/design, diffLevel A)
+- **Empty** (@oceanbase/design, diffLevel C): addedProps title, steps, layout
+- **Filter** (@oceanbase/design, diffLevel D): addedProps icon, label, bordered, footer, extra, collapsible, alwaysCollapse, showSuffixIcon, allowClear
+- **Form** (@oceanbase/design, diffLevel A)
+- **Input** (@oceanbase/design, diffLevel A)
+- **LightFilter** (@oceanbase/ui, diffLevel D): addedProps filterAriaLabel
+- **Modal** (@oceanbase/design, diffLevel B): addedProps extra, document
+- **PageContainer** (@oceanbase/ui, diffLevel D): addedProps header, locale
+- **ProTable** (@oceanbase/ui, diffLevel D): addedProps innerBordered
+- **Result** (@oceanbase/design, diffLevel C): addedProps status
+- **Select** (@oceanbase/design, diffLevel A)
+- **Spin** (@oceanbase/design, diffLevel C): addedProps gray
+- **Table** (@oceanbase/design, diffLevel B): addedProps innerBordered, cancelText, collapseText, openText, hiddenCancelBtn, toolOptionsRender, toolAlertRender, toolSelectedContent
