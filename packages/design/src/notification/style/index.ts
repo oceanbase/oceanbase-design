@@ -6,16 +6,7 @@ import { upperFirst } from 'lodash';
 
 export type NotificationToken = FullToken<'Notification'>;
 
-const NOTIFICATION_WIDTH = 350;
-const NOTIFICATION_ICON_SIZE = 16;
-const NOTIFICATION_TITLE_FONT_SIZE = 14;
-const NOTIFICATION_TITLE_LINE_HEIGHT = 20;
-const NOTIFICATION_PADDING_BLOCK = 12;
-const NOTIFICATION_PADDING_INLINE = 16;
-const NOTIFICATION_ICON_GAP = 8;
-const NOTIFICATION_TITLE_CLOSE_GAP = 16;
-const NOTIFICATION_CONTENT_GAP = 4;
-const STACK_GAP = 8;
+/** Figma shadow-2 on Notification; differs from token.boxShadowSecondary until aligned globally. */
 const NOTIFICATION_SHADOW = '0 6px 8px rgba(19, 33, 57, 0.1)';
 
 type NotificationVisualType = 'success' | 'info' | 'warning' | 'error' | 'loading';
@@ -72,9 +63,23 @@ const genNotificationTypeStyle = (
 export const genNotificationStyle: GenerateStyle<NotificationToken> = (
   token: NotificationToken
 ): CSSObject => {
-  const { componentCls, calc } = token;
+  const {
+    componentCls,
+    calc,
+    width = 350,
+    paddingSM,
+    padding,
+    paddingXS,
+    paddingXXS,
+    fontSize,
+    fontSizeLG,
+    fontSizeHeading5,
+    lineHeightHeading5,
+  } = token;
   const noticeCls = `${componentCls}-notice`;
-  const titleCloseReserve = calc(NOTIFICATION_TITLE_CLOSE_GAP).add(NOTIFICATION_ICON_SIZE).equal();
+  // font-line-height-500 (20px) — fixed across locales; do not use fontHeight (22px in Cn).
+  const titleLineHeight = calc(fontSizeHeading5).mul(lineHeightHeading5).equal();
+  const titleCloseReserve = calc(padding).add(fontSizeLG).equal();
   const bottomRadius = unit(token.borderRadiusLG);
   const progressBottomRadius = `0 0 ${bottomRadius} ${bottomRadius}`;
 
@@ -91,24 +96,20 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
     [componentCls]: {
       ...typeStyles,
       [`${noticeCls}-wrapper`]: {
-        marginBottom: STACK_GAP,
-        width: NOTIFICATION_WIDTH,
-        maxWidth: NOTIFICATION_WIDTH,
+        marginBottom: paddingXS,
+        width,
+        maxWidth: width,
         [`${noticeCls}`]: {
-          position: 'relative',
-          width: NOTIFICATION_WIDTH,
-          maxWidth: NOTIFICATION_WIDTH,
-          padding: `${unit(NOTIFICATION_PADDING_BLOCK)} ${unit(NOTIFICATION_PADDING_INLINE)}`,
-          borderRadius: token.borderRadiusLG,
+          width,
+          maxWidth: width,
+          padding: `${unit(paddingSM)} ${unit(padding)}`,
           boxShadow: NOTIFICATION_SHADOW,
-          background: token.colorBgElevated,
-          overflow: 'hidden',
         },
         [`${noticeCls}-with-icon`]: {
           display: 'grid',
-          gridTemplateColumns: `${unit(NOTIFICATION_ICON_SIZE)} minmax(0, 1fr)`,
-          columnGap: NOTIFICATION_ICON_GAP,
-          rowGap: NOTIFICATION_CONTENT_GAP,
+          gridTemplateColumns: `${unit(fontSizeLG)} minmax(0, 1fr)`,
+          columnGap: paddingXS,
+          rowGap: paddingXXS,
           alignItems: 'start',
         },
         [`${noticeCls}-icon`]: {
@@ -118,10 +119,10 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
           alignSelf: 'start',
           marginInlineEnd: 0,
           marginTop: 0,
-          width: NOTIFICATION_ICON_SIZE,
-          fontSize: NOTIFICATION_ICON_SIZE,
+          width: fontSizeLG,
+          fontSize: fontSizeLG,
           lineHeight: 1,
-          height: NOTIFICATION_TITLE_LINE_HEIGHT,
+          height: titleLineHeight,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -129,7 +130,7 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: NOTIFICATION_ICON_SIZE,
+            fontSize: fontSizeLG,
             lineHeight: 1,
           },
         },
@@ -139,51 +140,39 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
           marginInlineStart: 0,
           marginBottom: 0,
           paddingInlineEnd: titleCloseReserve,
-          minHeight: NOTIFICATION_TITLE_LINE_HEIGHT,
-          fontSize: NOTIFICATION_TITLE_FONT_SIZE,
+          minHeight: titleLineHeight,
+          fontSize,
           fontWeight: token.fontWeightStrong,
-          lineHeight: unit(NOTIFICATION_TITLE_LINE_HEIGHT),
+          lineHeight: unit(titleLineHeight),
           color: token.colorText,
-          wordBreak: 'break-word',
-          a: {
-            textDecoration: 'underline',
-          },
         },
         [`${noticeCls}-description`]: {
           gridColumn: '2',
           gridRow: '2',
           marginInlineStart: 0,
           marginTop: 0,
-          fontSize: token.fontSize,
-          lineHeight: unit(NOTIFICATION_TITLE_LINE_HEIGHT),
+          fontSize,
+          lineHeight: unit(titleLineHeight),
           color: token.colorText,
-          wordBreak: 'break-word',
-          a: {
-            textDecoration: 'underline',
-          },
         },
         [`${noticeCls}-with-icon ${noticeCls}-message`]: {
           marginInlineStart: 0,
-          fontSize: NOTIFICATION_TITLE_FONT_SIZE,
+          fontSize,
         },
         [`${noticeCls}-with-icon ${noticeCls}-description`]: {
           marginInlineStart: 0,
-          fontSize: token.fontSize,
         },
-        [`${noticeCls}-closable ${noticeCls}-message`]: {
-          paddingInlineEnd: titleCloseReserve,
-        },
+        // Close aligns to title first line: top = paddingSM, height = titleLineHeight.
         [`${noticeCls}-close`]: {
-          top: NOTIFICATION_PADDING_BLOCK,
-          insetInlineEnd: NOTIFICATION_PADDING_INLINE,
-          width: NOTIFICATION_ICON_SIZE,
-          height: NOTIFICATION_ICON_SIZE,
-          fontSize: NOTIFICATION_ICON_SIZE,
+          top: paddingSM,
+          insetInlineEnd: padding,
+          width: fontSizeLG,
+          height: titleLineHeight,
+          fontSize: fontSizeLG,
           lineHeight: 1,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'none',
           '&:hover': {
             backgroundColor: 'transparent',
             color: token.colorIconHover,
@@ -191,7 +180,6 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
         },
         [`${noticeCls}-progress`]: {
           position: 'absolute',
-          display: 'block',
           blockSize: 2,
           insetInlineStart: 0,
           insetInlineEnd: 0,
@@ -199,9 +187,6 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
           left: 0,
           right: 0,
           bottom: 0,
-          appearance: 'none',
-          backgroundColor: 'transparent',
-          border: 0,
           borderRadius: progressBottomRadius,
           overflow: 'hidden',
           clipPath: `inset(0 round 0 0 ${bottomRadius} ${bottomRadius})`,
@@ -223,8 +208,8 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
         [`& > ${componentCls}-notice-wrapper`]: {
           '&:not(:nth-last-child(-n + 1))': {
             '&:after': {
-              height: STACK_GAP,
-              bottom: calc(STACK_GAP).mul(-1).equal(),
+              height: paddingXS,
+              bottom: calc(paddingXS).mul(-1).equal(),
             },
           },
         },
@@ -232,9 +217,8 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
       [`${noticeCls}-error-details`]: {
         marginTop: token.marginXXS,
         color: token.colorTextTertiary,
-        fontSize: token.fontSize,
-        lineHeight: unit(NOTIFICATION_TITLE_LINE_HEIGHT),
-        wordBreak: 'break-word',
+        fontSize,
+        lineHeight: unit(titleLineHeight),
       },
       [`${noticeCls}-error-details-line`]: {
         display: 'block',
