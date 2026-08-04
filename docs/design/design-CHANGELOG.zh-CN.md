@@ -8,6 +8,44 @@ group: 基础组件
 
 ---
 
+## 1.1.0
+
+`2026-08-04`
+
+- AI / Agent
+  - 📖 推荐全局安装 `ob-design` 以加速 MCP 启动。[#1499](https://github.com/oceanbase/oceanbase-design/pull/1499)
+  - ⭐️ Agent Skill 重命名为 `oceanbase-design`（`npx skills add oceanbase/oceanbase-design`）。[#1500](https://github.com/oceanbase/oceanbase-design/pull/1500)
+  - 🤖 `ob-design lint` 校验样式中的 `var(--ob-*)`；`ob-design token` 支持 `--json`、`--check` 查询运行时 CSS 变量。[#1517](https://github.com/oceanbase/oceanbase-design/pull/1517)
+- 🤖 Figma Code Connect 映射打通设计与前端工作流。[#1502](https://github.com/oceanbase/oceanbase-design/pull/1502)
+- 🌐 文档站点支持英文 (`/`) 与中文 (`/zh-CN`) 双语言，首页支持语言偏好。[#1501](https://github.com/oceanbase/oceanbase-design/pull/1501)
+- 主题
+  - 🆕 导出 `defaultTheme` 与 `compactTheme` locale 排版 preset。[#1516](https://github.com/oceanbase/oceanbase-design/pull/1516)
+  - 🐞 修复英文 locale 下自定义 `token.fontFamily` 被覆盖的问题。[#1516](https://github.com/oceanbase/oceanbase-design/pull/1516)
+- Empty
+  - 💄 更新插图。[#1504](https://github.com/oceanbase/oceanbase-design/pull/1504)
+  - 💄 优化插图尺寸、描述文本颜色与标题/描述/操作区间距。[#1505](https://github.com/oceanbase/oceanbase-design/pull/1505)
+  - 💄 窄容器下横向布局自适应（≤560px 纵向堆叠，≤400px 隐藏插图）。[#1505](https://github.com/oceanbase/oceanbase-design/pull/1505)
+- Result
+  - 💄 更新插图；新增 `PRESENTED_IMAGE_NOT_FOUND`、`PRESENTED_IMAGE_NETWORK_ERROR`、`PRESENTED_IMAGE_VERSION_UPDATE` 等场景预设。[#1504](https://github.com/oceanbase/oceanbase-design/pull/1504)
+  - 🆕 `status` 新增 `normal` 状态及其插图。[#1504](https://github.com/oceanbase/oceanbase-design/pull/1504)
+  - 💄 对齐与 Empty 一致的图标尺寸与间距。[#1505](https://github.com/oceanbase/oceanbase-design/pull/1505)
+- Form
+  - 🆕 新增 `validateMode` / `reValidateMode`；支持 ConfigProvider 全局配置。[#1512](https://github.com/oceanbase/oceanbase-design/pull/1512)
+  - 🆕 `Form.Item` explain 可展示子控件内置的失焦提示与辅助说明。[#1515](https://github.com/oceanbase/oceanbase-design/pull/1515)
+  - 💄 调整 explain/extra 内边距，与控件行高度对齐。[#1514](https://github.com/oceanbase/oceanbase-design/pull/1514)
+- Input
+  - 💄 更新 `Input.Search` 样式与交互。[#1508](https://github.com/oceanbase/oceanbase-design/pull/1508)
+- Message
+  - 🔄 Message API 保持兼容，展示效果改为 Notification（含 `useMessage`）。[#1507](https://github.com/oceanbase/oceanbase-design/pull/1507)
+  - 📌 Message 文档标注弃用，请迁移至 Notification。[#1507](https://github.com/oceanbase/oceanbase-design/pull/1507)
+- Notification
+  - 💄 默认左下角展示，固定宽度 350px，线性图标与自动关闭进度条；标题/描述内链接使用类型色。[#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
+  - 🆕 新增 `notification.loading` 用于进行中反馈。[#1507](https://github.com/oceanbase/oceanbase-design/pull/1507)
+  - 🆕 新增 `errorDetails`，支持复制为 Markdown。[#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
+  - 🆕 新增 `dedupeKey` 去除重复弹出。[#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
+- Table
+  - 🆕 新增 `column.tooltip`，在列头展示帮助说明。[#1509](https://github.com/oceanbase/oceanbase-design/pull/1509)
+
 ## 1.0.0
 
 `2026-07-17`

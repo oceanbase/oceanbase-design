@@ -8,6 +8,44 @@ group: General
 
 ---
 
+## 1.1.0
+
+`2026-08-04`
+
+- AI / Agent
+  - 📖 Recommend global `ob-design` install for faster MCP startup. [#1499](https://github.com/oceanbase/oceanbase-design/pull/1499)
+  - ⭐️ Agent skill renamed to `oceanbase-design` (`npx skills add oceanbase/oceanbase-design`). [#1500](https://github.com/oceanbase/oceanbase-design/pull/1500)
+  - 🤖 `ob-design lint` validates `var(--ob-*)` in styles; `ob-design token` lists runtime CSS variables with `--json` and `--check`. [#1517](https://github.com/oceanbase/oceanbase-design/pull/1517)
+- 🤖 Figma Code Connect mappings bridge design and frontend workflows. [#1502](https://github.com/oceanbase/oceanbase-design/pull/1502)
+- 🌐 Bilingual documentation site with `/zh-CN` routing and homepage locale preference. [#1501](https://github.com/oceanbase/oceanbase-design/pull/1501)
+- Theme
+  - 🆕 Export `defaultTheme` and `compactTheme` locale typography presets. [#1516](https://github.com/oceanbase/oceanbase-design/pull/1516)
+  - 🐞 Fixed custom `token.fontFamily` on English locales not being preserved. [#1516](https://github.com/oceanbase/oceanbase-design/pull/1516)
+- Empty
+  - 💄 Updated illustrations. [#1504](https://github.com/oceanbase/oceanbase-design/pull/1504)
+  - 💄 Improved illustration sizing, description color, and title/description/footer spacing. [#1505](https://github.com/oceanbase/oceanbase-design/pull/1505)
+  - 💄 Horizontal layout adapts on narrow containers (stacks at ≤560px, hides illustration at ≤400px). [#1505](https://github.com/oceanbase/oceanbase-design/pull/1505)
+- Result
+  - 💄 Updated illustrations; added presets such as `PRESENTED_IMAGE_NOT_FOUND`, `PRESENTED_IMAGE_NETWORK_ERROR`, and `PRESENTED_IMAGE_VERSION_UPDATE`. [#1504](https://github.com/oceanbase/oceanbase-design/pull/1504)
+  - 🆕 `status` adds `normal` with its illustration. [#1504](https://github.com/oceanbase/oceanbase-design/pull/1504)
+  - 💄 Aligned icon size and spacing with Empty. [#1505](https://github.com/oceanbase/oceanbase-design/pull/1505)
+- Form
+  - 🆕 Added `validateMode` and `reValidateMode`; ConfigProvider global defaults supported. [#1512](https://github.com/oceanbase/oceanbase-design/pull/1512)
+  - 🆕 `Form.Item` explain shows built-in blur and hint feedback from child controls. [#1515](https://github.com/oceanbase/oceanbase-design/pull/1515)
+  - 💄 Aligned explain/extra padding with control height. [#1514](https://github.com/oceanbase/oceanbase-design/pull/1514)
+- Input
+  - 💄 Updated `Input.Search` styling and interaction. [#1508](https://github.com/oceanbase/oceanbase-design/pull/1508)
+- Message
+  - 🔄 Message API remains compatible but displays via Notification (including `useMessage`). [#1507](https://github.com/oceanbase/oceanbase-design/pull/1507)
+  - 📌 Message documented as deprecated; migrate to Notification. [#1507](https://github.com/oceanbase/oceanbase-design/pull/1507)
+- Notification
+  - 💄 Default bottom-left placement, fixed width 350px, linear icons with auto-close progress bar; links in title/description use type color. [#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
+  - 🆕 Added `notification.loading` for in-progress feedback. [#1507](https://github.com/oceanbase/oceanbase-design/pull/1507)
+  - 🆕 Added `errorDetails` with Markdown copy support. [#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
+  - 🆕 Added `dedupeKey` to deduplicate notifications. [#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
+- Table
+  - 🆕 Added `column.tooltip` for column header help. [#1509](https://github.com/oceanbase/oceanbase-design/pull/1509)
+
 ## 1.0.0
 
 `2026-07-17`

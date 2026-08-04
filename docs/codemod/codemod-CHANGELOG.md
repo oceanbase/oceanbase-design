@@ -8,6 +8,16 @@ group: Codemod
 
 ---
 
+## 1.1.0
+
+`2026-08-04`
+
+- 🆕 Default style migration outputs `obToken` and `var(--ob-*)` instead of antd tokens. [#1510](https://github.com/oceanbase/oceanbase-design/pull/1510)
+  - Added `token-to-obtoken` for upgrading existing `token.xxx` / `var(--ant-*)` code.
+  - `less-to-cssvar` / `sass-to-cssvar` included in the default pipeline.
+  - `--token-target=antd` restores legacy antd token output.
+- 🆕 Added `ob-css-tokens` transformer. [#1517](https://github.com/oceanbase/oceanbase-design/pull/1517)
+
 ## 1.0.0-alpha.10
 
 `2025-12-19`
