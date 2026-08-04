@@ -8,6 +8,21 @@ group: 业务组件
 
 ---
 
+## 1.1.0
+
+`2026-08-04`
+
+- Login
+  - ✨ 接入 Password 组件与多云密码校验。[#1513](https://github.com/oceanbase/oceanbase-design/pull/1513)
+- Password
+  - 💥 默认规则对齐多云规范（8–20 位、四类至少 3 种；原为 8–32、各类至少 2 种）。[#1513](https://github.com/oceanbase/oceanbase-design/pull/1513)
+  - ✨ 修改密码场景：`mode="plain"` 当前密码、失焦反馈与牢记/复制提示。[#1513](https://github.com/oceanbase/oceanbase-design/pull/1513)
+  - 🆕 失焦校验与「请牢记密码」提示自动写入 `Form.Item` explain。[#1515](https://github.com/oceanbase/oceanbase-design/pull/1515)
+  - 🆕 默认 `autoComplete="new-password"`（聚焦展示强度气泡）；当前密码使用 `current-password`。[#1515](https://github.com/oceanbase/oceanbase-design/pull/1515)
+  - 🌐 更新四语言校验文案。[#1513](https://github.com/oceanbase/oceanbase-design/pull/1513)
+- ProTable
+  - 🆕 支持 `column.tooltip`，列头帮助图标与 Table 一致。[#1509](https://github.com/oceanbase/oceanbase-design/pull/1509)
+
 ## 1.0.0-alpha.20
 
 `2026-06-14`

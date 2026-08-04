@@ -8,6 +8,16 @@ group: 自动化迁移工具
 
 ---
 
+## 1.1.0
+
+`2026-08-04`
+
+- 🆕 默认样式迁移输出 `obToken` 与 `var(--ob-*)`，替代 antd token。[#1510](https://github.com/oceanbase/oceanbase-design/pull/1510)
+  - 新增 `token-to-obtoken`，用于升级存量 `token.xxx` / `var(--ant-*)` 代码。
+  - `less-to-cssvar` / `sass-to-cssvar` 纳入默认流水线。
+  - `--token-target=antd` 可恢复 antd token 输出。
+- 🆕 新增 `ob-css-tokens` transformer。[#1517](https://github.com/oceanbase/oceanbase-design/pull/1517)
+
 ## 1.0.0-alpha.10
 
 `2025-12-19`

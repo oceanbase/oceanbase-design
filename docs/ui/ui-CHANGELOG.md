@@ -8,6 +8,21 @@ group: Biz Components
 
 ---
 
+## 1.1.0
+
+`2026-08-04`
+
+- Login
+  - ✨ RegisterForm uses Password component and shared cloud password validation. [#1513](https://github.com/oceanbase/oceanbase-design/pull/1513)
+- Password
+  - 💥 Default rules align with multi-cloud spec (8–20 chars, 3-of-4 types; was 8–32 and 2-of-4). [#1513](https://github.com/oceanbase/oceanbase-design/pull/1513)
+  - ✨ Change-password flow: `mode="plain"` for current password, blur feedback, and remember/copy hint. [#1513](https://github.com/oceanbase/oceanbase-design/pull/1513)
+  - 🆕 Blur validation and "remember your password" hint appear in `Form.Item` explain automatically. [#1515](https://github.com/oceanbase/oceanbase-design/pull/1515)
+  - 🆕 Defaults `autoComplete="new-password"` (strength on focus); use `current-password` for current-password fields. [#1515](https://github.com/oceanbase/oceanbase-design/pull/1515)
+  - 🌐 Updated validation messages (zh-CN, en-US, zh-TW, ja-JP). [#1513](https://github.com/oceanbase/oceanbase-design/pull/1513)
+- ProTable
+  - 🆕 Supports `column.tooltip` with the same header help icon as Table. [#1509](https://github.com/oceanbase/oceanbase-design/pull/1509)
+
 ## 1.0.0-alpha.20
 
 `2026-06-14`
