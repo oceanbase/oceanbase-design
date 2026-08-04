@@ -1,6 +1,6 @@
 import { merge } from 'lodash';
+import type { Locale as AntLocale } from 'antd/es/locale';
 import type { ThemeConfig } from '../config-provider/context';
-import type { Locale } from '../locale';
 import type { AliasToken, GlobalToken } from './interface';
 import seedTheme, {
   fontFamilyEn,
@@ -15,6 +15,8 @@ import seedTheme, {
   isEnLikeLocale,
   tableCellFontSizeEn,
 } from './default';
+
+type LocaleCodeCarrier = Pick<AntLocale, 'locale'>;
 
 const OB_TYPOGRAPHY_PRESET_KEY = '__obTypographyPreset' as const;
 
@@ -76,7 +78,7 @@ export function isTypographyThemeLocked(theme?: ThemeConfig): boolean {
 
 const getLocaleTokenValue = (
   mergedThemeToken: GlobalToken,
-  locale: Locale,
+  locale: LocaleCodeCarrier,
   tokenKey: string,
   tokenValue: string | number,
   tokenValueEn: string | number,
@@ -96,7 +98,7 @@ const getLocaleTokenValue = (
 
 const getLocaleTokenValueCn = (
   mergedThemeToken: GlobalToken,
-  locale: Locale,
+  locale: LocaleCodeCarrier,
   tokenKey: string,
   tokenValue: string | number | undefined,
   tokenValueEn: number,
@@ -113,7 +115,7 @@ const getLocaleTokenValueCn = (
  * Locale font-family and font-weight patch (always applied; follows locale).
  */
 function resolveLocaleFontPatch(
-  mergedLocale: Locale,
+  mergedLocale: LocaleCodeCarrier,
   mergedTheme: ThemeConfig,
   resolvedTokens: LocaleFontTokens
 ): ThemeConfig {
@@ -158,7 +160,7 @@ function resolveLocaleFontPatch(
 }
 
 /** Table locale alignment patch (always applied; follows locale). */
-function getLocaleTableLocalePatch(mergedLocale: Locale): ThemeConfig {
+function getLocaleTableLocalePatch(mergedLocale: LocaleCodeCarrier): ThemeConfig {
   if (!isEnLikeLocale(mergedLocale.locale)) {
     return {};
   }
@@ -176,7 +178,7 @@ function getLocaleTableLocalePatch(mergedLocale: Locale): ThemeConfig {
  * font and table locale alignment always follow locale.
  */
 export function resolveLocaleTypographyPatch(
-  mergedLocale: Locale,
+  mergedLocale: LocaleCodeCarrier,
   mergedTheme: ThemeConfig,
   resolvedFontSize: number | undefined,
   resolvedTokens: LocaleFontTokens,
@@ -193,7 +195,7 @@ export function resolveLocaleTypographyPatch(
 }
 
 function getLocaleFontSizeThemePatch(
-  mergedLocale: Locale,
+  mergedLocale: LocaleCodeCarrier,
   mergedTheme: ThemeConfig,
   resolvedFontSize: number | undefined
 ): ThemeConfig {
