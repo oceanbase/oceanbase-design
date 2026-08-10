@@ -21,8 +21,6 @@ const optionsWithDisabled = [
 const App: React.FC = () => (
   <>
     <Checkbox.Group options={options} defaultValue={['Pear']} onChange={onChange} />
-    <br />
-    <br />
     <Checkbox.Group
       options={optionsWithDisabled}
       disabled

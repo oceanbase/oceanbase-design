@@ -191,10 +191,13 @@ const genGlobalStyle = (
             color: token.colorIcon,
           },
         },
-      // handle upload icon style
+      // handle upload icon style, exclude icons inside Button trigger
       [`${uploadComponentCls}`]: {
         [`${iconCls}`]: {
           color: token.colorIcon,
+        },
+        [`${buttonComponentCls} ${iconCls}`]: {
+          color: 'inherit',
         },
       },
     },

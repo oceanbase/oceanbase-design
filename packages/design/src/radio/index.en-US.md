@@ -15,9 +15,9 @@ demo:
 
 <!-- prettier-ignore -->
 <code src="./demo/radio.tsx" title="Radio"></code>
+<code src="./demo/over-length.tsx" title="Over-length Content"></code>
 <code src="./demo/radio-button.tsx" title="Radio Button"></code>
 <code src="./demo/radio-button-icon.tsx" title="Radio Button with Icon"></code>
-<code src="./demo/over-length.tsx" title="Over-length Content"></code>
 
 ## API
 
