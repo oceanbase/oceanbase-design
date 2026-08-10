@@ -15,9 +15,9 @@ demo:
 
 <!-- prettier-ignore -->
 <code src="./demo/radio.tsx" title="单选"></code>
+<code src="./demo/over-length.tsx" title="超长内容"></code>
 <code src="./demo/radio-button.tsx" title="单选按钮"></code>
 <code src="./demo/radio-button-icon.tsx" title="带图标的单选按钮"></code>
-<code src="./demo/over-length.tsx" title="超长内容"></code>
 
 ## API
 
