@@ -1,4 +1,5 @@
 import type { CSSObject } from '@ant-design/cssinjs';
+import { unit } from '@ant-design/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/interface';
 import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
@@ -6,17 +7,21 @@ export type RadioToken = FullToken<'Radio'>;
 
 export const genRadioStyle: GenerateStyle<RadioToken> = (token: RadioToken): CSSObject => {
   const { iconCls, componentCls, radioSize, fontSize, fontSizeLG, lineHeight, calc } = token;
-  const marginBottom = calc(calc(fontSize).mul(lineHeight).equal())
+  const controlSize = unit(radioSize || fontSizeLG);
+  const marginTop = calc(fontSize)
+    .mul(lineHeight)
     .sub(radioSize || fontSizeLG)
-    .div(-2)
-    .sub(1)
+    .div(2)
     .equal();
   return {
     [`${componentCls}-wrapper`]: {
+      alignItems: 'flex-start',
       [`${componentCls}`]: {
-        alignSelf: 'baseline',
-        [`${componentCls}-inner`]: {
-          marginBottom,
+        alignSelf: 'flex-start',
+        lineHeight: 'inherit',
+        marginTop,
+        '@supports (height: 1lh)': {
+          marginTop: `calc((1lh - ${controlSize}) / 2)`,
         },
       },
       [`&:hover ${componentCls}:not(${componentCls}-disabled):not(${componentCls}-checked) ${componentCls}-inner`]:

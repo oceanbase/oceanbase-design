@@ -6,19 +6,18 @@ import { genStyleHooks } from '../../_util/genComponentStyleHook';
 export type CheckboxToken = FullToken<'Checkbox'>;
 
 export const genCheckboxStyle: GenerateStyle<CheckboxToken> = (token: CheckboxToken): CSSObject => {
-  const { componentCls, fontSize, lineHeight, lineWidth, controlInteractiveSize, calc } = token;
-  const translateY = calc(fontSize)
-    .mul(lineHeight)
-    .sub(controlInteractiveSize)
-    .sub(lineWidth)
-    .div(2)
-    .equal();
+  const { componentCls, fontSize, lineHeight, controlInteractiveSize, calc } = token;
+  const controlSize = unit(controlInteractiveSize);
+  const marginTop = calc(fontSize).mul(lineHeight).sub(controlInteractiveSize).div(2).equal();
   return {
     [`${componentCls}-wrapper`]: {
+      alignItems: 'flex-start',
       [`${componentCls}`]: {
-        alignSelf: 'baseline',
-        [`${componentCls}-inner`]: {
-          transform: `translate(0px, ${unit(translateY)})`,
+        alignSelf: 'flex-start',
+        lineHeight: 'inherit',
+        marginTop,
+        '@supports (height: 1lh)': {
+          marginTop: `calc((1lh - ${controlSize}) / 2)`,
         },
       },
       [`&:hover ${componentCls}:not(${componentCls}-disabled):not(${componentCls}-checked) ${componentCls}-inner`]:
