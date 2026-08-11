@@ -11,6 +11,7 @@ export * from 'antd/es/typography/Text';
 
 export interface TextProps extends AntTextProps {
   caption?: boolean;
+  block?: boolean;
 }
 
 type CompoundedComponent = React.ForwardRefExoticComponent<
@@ -22,13 +23,13 @@ type CompoundedComponent = React.ForwardRefExoticComponent<
 
 const Text = React.forwardRef<HTMLSpanElement, TextProps>(
   (
-    { editable, caption, prefixCls: customizePrefixCls, className, children, ...restProps },
+    { editable, caption, block, prefixCls: customizePrefixCls, className, children, ...restProps },
     ref
   ) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography', customizePrefixCls);
     const [wrapCSSVar] = useStyle(prefixCls);
-    const typographyCls = useClassName(prefixCls, className, editable, caption);
+    const typographyCls = useClassName(prefixCls, className, editable, caption, block);
 
     return wrapCSSVar(
       <AntText

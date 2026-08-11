@@ -32,6 +32,9 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
       lineHeight: token.lineHeightSM,
       fontWeight: token.fontWeightWeak,
     },
+    [`${componentCls}-block`]: {
+      display: 'block',
+    },
     [`${componentCls}${componentCls}-editable-text:not(${componentCls}-edit-content)`]: {
       '&:hover': {
         background: token.colorBgContainer,
@@ -46,7 +49,7 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
         marginTop: negativeMarginOffset,
         marginBottom: calc('1em').sub(marginOffset).equal(),
       },
-      'span&:hover': {
+      'span&:hover:not(${componentCls}-block)': {
         display: 'inline-block',
         height: token.controlHeight,
         marginTop: negativeMarginOffset,
