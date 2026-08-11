@@ -28,6 +28,8 @@ const Password = forwardRef<InputRef, PasswordProps>(
       readOnly,
       onFocus,
       onBlur,
+      onClick,
+      onKeyDown,
       ...restProps
     },
     ref
@@ -51,10 +53,9 @@ const Password = forwardRef<InputRef, PasswordProps>(
       setAutofillLocked(preventSavedPasswordDropdown);
     }, [preventSavedPasswordDropdown]);
 
+    // 保持锁定直到用户真正开始交互。若在 focus 阶段就移除 readonly，Chrome 会在
+    // 焦点处理完成后仍把该字段视为密码字段并弹出已保存密码下拉。
     const handleFocus: AntPasswordProps['onFocus'] = e => {
-      if (preventSavedPasswordDropdown) {
-        setAutofillLocked(false);
-      }
       onFocus?.(e);
     };
 
@@ -63,6 +64,20 @@ const Password = forwardRef<InputRef, PasswordProps>(
         setAutofillLocked(true);
       }
       onBlur?.(e);
+    };
+
+    const handleClick: AntPasswordProps['onClick'] = e => {
+      if (preventSavedPasswordDropdown) {
+        setAutofillLocked(false);
+      }
+      onClick?.(e);
+    };
+
+    const handleKeyDown: AntPasswordProps['onKeyDown'] = e => {
+      if (preventSavedPasswordDropdown) {
+        setAutofillLocked(false);
+      }
+      onKeyDown?.(e);
     };
 
     return wrapCSSVar(
@@ -75,6 +90,8 @@ const Password = forwardRef<InputRef, PasswordProps>(
         readOnly={readOnly ?? (preventSavedPasswordDropdown && autofillLocked)}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
         {...(preventSavedPasswordDropdown
           ? {
               'data-lpignore': 'true',
