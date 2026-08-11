@@ -6,13 +6,15 @@ const useClassName = (
   prefixCls: string,
   className: string,
   editable?: BlockProps['editable'],
-  caption?: boolean
+  caption?: boolean,
+  block?: boolean
 ) => {
   const typographyCls = classNames(
     {
       [`${prefixCls}-editable-text`]:
         typeof editable === 'object' && editable?.triggerType?.includes('text'),
       [`${prefixCls}-caption`]: caption,
+      [`${prefixCls}-block`]: block,
     },
     className
   );

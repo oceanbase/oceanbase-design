@@ -9,7 +9,9 @@ const { Link: AntLink } = AntTypography;
 
 export * from 'antd/es/typography/Link';
 
-export interface LinkProps extends AntLinkProps {}
+export interface LinkProps extends AntLinkProps {
+  block?: boolean;
+}
 
 type CompoundedComponent = React.ForwardRefExoticComponent<
   LinkProps & React.RefAttributes<HTMLElement>
@@ -19,11 +21,11 @@ type CompoundedComponent = React.ForwardRefExoticComponent<
 };
 
 const Link = React.forwardRef<HTMLElement, LinkProps>(
-  ({ editable, prefixCls: customizePrefixCls, className, children, ...restProps }, ref) => {
+  ({ editable, block, prefixCls: customizePrefixCls, className, children, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography', customizePrefixCls);
     const [wrapCSSVar] = useStyle(prefixCls);
-    const typographyCls = useClassName(prefixCls, className, editable);
+    const typographyCls = useClassName(prefixCls, className, editable, undefined, block);
 
     return wrapCSSVar(
       <AntLink
