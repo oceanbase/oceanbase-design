@@ -20,6 +20,10 @@ export const genInputStyle: GenerateStyle<InputToken> = (token: InputToken): CSS
         },
       },
     },
+    // 密码以 text 型输入呈现，借助 text-security 遮蔽文本，浏览器不将其识别为密码框
+    [`${componentCls}-text-security`]: {
+      WebkitTextSecurity: 'disc',
+    },
   };
 };
 

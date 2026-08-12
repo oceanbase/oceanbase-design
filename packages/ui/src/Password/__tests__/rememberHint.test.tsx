@@ -11,7 +11,7 @@ describe('Password remember hint in Form.Item', () => {
   it('shows remember hint in Form.Item explain after valid blur', async () => {
     const user = userEvent.setup();
 
-    render(
+    const { container } = render(
       <Form>
         <Form.Item name="password" label="Password">
           <Password />
@@ -19,8 +19,11 @@ describe('Password remember hint in Form.Item', () => {
       </Form>
     );
 
-    const passwordInput = document.querySelector('input[type="password"]') as HTMLInputElement;
+    const passwordInput = container.querySelector('.ant-input-password input') as HTMLInputElement;
     expect(passwordInput).toBeTruthy();
+    // 密码以 text 型输入 + text-security 遮蔽呈现，浏览器不将其识别为密码框
+    expect(passwordInput.getAttribute('type')).toBe('text');
+    expect(passwordInput.classList.contains('ant-input-text-security')).toBe(true);
 
     await user.type(passwordInput, VALID_PASSWORD);
     await user.tab();
