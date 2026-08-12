@@ -11,7 +11,6 @@ export const genCheckboxStyle: GenerateStyle<CheckboxToken> = (token: CheckboxTo
   const marginTop = calc(fontSize).mul(lineHeight).sub(controlInteractiveSize).div(2).equal();
   return {
     [`${componentCls}-wrapper`]: {
-      alignItems: 'flex-start',
       [`${componentCls}`]: {
         alignSelf: 'flex-start',
         lineHeight: 'inherit',

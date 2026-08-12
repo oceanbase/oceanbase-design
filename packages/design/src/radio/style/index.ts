@@ -15,7 +15,6 @@ export const genRadioStyle: GenerateStyle<RadioToken> = (token: RadioToken): CSS
     .equal();
   return {
     [`${componentCls}-wrapper`]: {
-      alignItems: 'flex-start',
       [`${componentCls}`]: {
         alignSelf: 'flex-start',
         lineHeight: 'inherit',
