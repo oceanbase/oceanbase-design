@@ -57,7 +57,7 @@ export { default as List } from './list';
 export type { ListProps } from './list';
 
 export { default as Table } from './table';
-export type { TableProps } from './table';
+export type { TableProps, TableColumnsType } from './table';
 
 export { default as Tabs } from './tabs';
 export type { TabsProps } from './tabs';

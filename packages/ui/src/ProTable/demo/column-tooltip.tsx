@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProTable } from '@oceanbase/ui';
-import type { OBTableColumnsType } from '@oceanbase/design/es/table';
+import type { TableColumnsType } from '@oceanbase/design';
 
 interface DataType {
   key: React.Key;
@@ -16,7 +16,7 @@ const dataSource: DataType[] = [
   { key: '3', name: 'Jane', age: 28, amount: 800, address: '30 Baker Street' },
 ];
 
-const columns: OBTableColumnsType<DataType> = [
+const columns: TableColumnsType<DataType> = [
   {
     title: 'Name',
     dataIndex: 'name',

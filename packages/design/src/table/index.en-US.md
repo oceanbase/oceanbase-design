@@ -64,4 +64,6 @@ markdown: |
 | :------- | :------------------------- | :------------------ | :------ | :------ |
 | tooltip  | Column header help tooltip | `ColumnTooltipType` | -       | -       |
 
+- `tooltip` semantics align with `Form.Item.tooltip`: pass a `ReactNode` (incl. JSX) as tooltip content, or `{ title, icon }` to customize content and trigger icon.
+
 - See antd Table docs: https://ant.design/components/table-cn

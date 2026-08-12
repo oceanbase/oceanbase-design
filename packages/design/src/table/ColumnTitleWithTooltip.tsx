@@ -7,6 +7,11 @@ import type { TooltipProps } from '../tooltip';
 import type { WrapperTooltipProps } from '../form/FormItem';
 import { useTooltipTypeList } from '../tooltip/hooks/useTooltipTypeList';
 
+/**
+ * 列头帮助提示，语义与 Form.Item.tooltip 对齐：
+ * - ReactNode（含 JSX）作为 Tooltip 提示内容，触发图标默认为问号；
+ * - WrapperTooltipProps 通过 `title` 指定内容、`icon` 自定义触发图标。
+ */
 export type ColumnTooltipType = WrapperTooltipProps | ReactNode;
 
 export function getColumnTooltip(column: Record<string, any>): ColumnTooltipType | undefined {
@@ -19,7 +24,8 @@ export function isValidColumnTooltip(
   if (tooltip == null || tooltip === '') {
     return false;
   }
-  if (React.isValidElement(tooltip)) {
+  // 字符串、JSX、数组等 ReactNode 均视为有效提示内容
+  if (React.isValidElement(tooltip) || Array.isArray(tooltip)) {
     return true;
   }
   if (typeof tooltip === 'object') {
@@ -50,14 +56,12 @@ export const ColumnTitleWithTooltip: React.FC<ColumnTitleWithTooltipProps> = ({
   const iconCls = `${prefixCls}-column-title-tooltip-icon`;
 
   const renderTooltipTrigger = () => {
-    if (React.isValidElement(tooltip)) {
-      return tooltip;
-    }
-
     let tooltipProps: TooltipProps = { placement: 'top', title: '' };
     let icon: ReactNode = <QuestionCircleOutlined className={iconCls} />;
 
-    if (typeof tooltip === 'object') {
+    // 与 Form.Item.tooltip 语义对齐：只有普通对象按 WrapperTooltipProps 解析，
+    // 字符串、JSX 与数组一律作为 Tooltip 内容（title），而不是当作触发元素直接平铺渲染
+    if (typeof tooltip === 'object' && !React.isValidElement(tooltip) && !Array.isArray(tooltip)) {
       const {
         icon: customIcon,
         type,

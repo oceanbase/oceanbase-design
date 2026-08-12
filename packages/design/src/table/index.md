@@ -64,4 +64,6 @@ markdown: |
 | :------ | :----------- | :------------------ | :----- | :--- |
 | tooltip | 列头帮助提示 | `ColumnTooltipType` | -      | -    |
 
+- `tooltip` 语义与 `Form.Item.tooltip` 对齐：可直接传入 `ReactNode`（含 JSX）作为提示内容，也可传入 `{ title, icon }` 自定义内容与触发图标。
+
 - 详见 antd Table 文档: https://ant.design/components/table-cn
