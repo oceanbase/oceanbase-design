@@ -1,6 +1,6 @@
 import { Popover, Space, Table as AntTable, theme } from 'antd';
 import type { TableProps as AntTableProps } from 'antd';
-import type { ColumnsType, ColumnType } from 'antd/es/table';
+import type { ColumnsType, ColumnGroupType, ColumnType } from 'antd/es/table';
 import type { RowSelectMethod, TableLocale as AntTableLocale } from 'antd/es/table/interface';
 import type { Reference } from 'rc-table';
 import type Summary from 'rc-table/es/Footer/Summary';
@@ -21,8 +21,15 @@ import { injectColumnTitleTooltip } from './ColumnTitleWithTooltip';
 import type { ColumnTooltipType } from './ColumnTitleWithTooltip';
 
 export type { ColumnTooltipType } from './ColumnTitleWithTooltip';
-export type OBColumnType<T> = ColumnType<T> & { tooltip?: ColumnTooltipType };
-export type OBTableColumnsType<T> = OBColumnType<T>[];
+
+// 内部辅助类型，对外只暴露 TableColumnsType（antd 无同名导出，不冲突）
+type TableColumnType<T> = ColumnType<T> & { tooltip?: ColumnTooltipType };
+type TableColumnGroupType<T> = Omit<ColumnGroupType<T>, 'children'> & {
+  children: TableColumnsType<T>;
+  tooltip?: ColumnTooltipType;
+};
+/** 与 antd ColumnsType 对齐的列配置数组类型，额外支持表头 tooltip（含分组列） */
+export type TableColumnsType<T = AnyObject> = (TableColumnGroupType<T> | TableColumnType<T>)[];
 
 export * from 'antd/es/table';
 
@@ -148,7 +155,7 @@ export interface TableLocale extends AntTableLocale {
 
 export interface TableProps<T> extends AntTableProps<T> {
   innerBordered?: boolean;
-  columns?: ColumnsType<T>;
+  columns?: TableColumnsType<T>;
   cancelText?: string;
   collapseText?: string;
   openText?: string;

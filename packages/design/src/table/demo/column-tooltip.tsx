@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from '@oceanbase/design';
-import type { OBTableColumnsType } from '@oceanbase/design/es/table';
+import type { TableColumnsType } from '@oceanbase/design';
 
 interface DataType {
   key: React.Key;
@@ -16,7 +16,7 @@ const dataSource: DataType[] = [
   { key: '3', name: 'Jane', age: 28, amount: 800, address: '30 Baker Street' },
 ];
 
-const columns: OBTableColumnsType<DataType> = [
+const columns: TableColumnsType<DataType> = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -42,6 +42,11 @@ const columns: OBTableColumnsType<DataType> = [
   {
     title: 'Address',
     dataIndex: 'address',
+    tooltip: (
+      <div>
+        Address help, <b>ReactNode</b> is supported
+      </div>
+    ),
   },
 ];
 

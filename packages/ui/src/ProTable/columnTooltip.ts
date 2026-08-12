@@ -1,3 +1,5 @@
+import React from 'react';
+
 type ColumnLike = Record<string, any>;
 
 function getColumnTooltip(column: ColumnLike) {
@@ -8,7 +10,11 @@ function isValidColumnTooltip(tooltip: unknown): boolean {
   if (tooltip == null || tooltip === '') {
     return false;
   }
-  if (typeof tooltip === 'object' && tooltip !== null && !Array.isArray(tooltip)) {
+  // 与 @oceanbase/design ColumnTitleWithTooltip 保持一致：JSX/数组等 ReactNode 视为有效内容
+  if (React.isValidElement(tooltip) || Array.isArray(tooltip)) {
+    return true;
+  }
+  if (typeof tooltip === 'object' && tooltip !== null) {
     const { title, icon } = tooltip as { title?: unknown; icon?: unknown };
     if (icon) {
       return true;
