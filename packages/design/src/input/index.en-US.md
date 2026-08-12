@@ -16,7 +16,7 @@ demo:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="Basic" description="Default `placeholder` filled."></code>
 <code src="./demo/search.tsx" title="Search"></code>
-<code src="./demo/password.tsx" title="Password" description='Use `autoComplete="new-password"` for new-password fields; Input.Password applies extra hints to reduce saved-password dropdown overlap. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).'></code>
+<code src="./demo/password.tsx" title="Password" description='For new-password fields, set `autoComplete="new-password"` to disable browser autofill, password manager, and saved-password dropdown prompts. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).'></code>
 <code src="./demo/presuffix.tsx" title="Prefix and Suffix" description="Add prefix or suffix icon to input."></code>
 <code src="./demo/showCount.tsx" title="Character Count" description="Cannot input beyond max length."></code>
 <code src="./demo/allowClear.tsx" title="Clear Icon" description="One-click clear input."></code>
@@ -27,4 +27,4 @@ demo:
 
 ### Input.Password extensions
 
-When `autoComplete="new-password"`, the component also uses readOnly-until-focus and password-manager `data-*` hints to reduce saved-password dropdown overlap beyond the standard autocomplete value.
+The password is rendered as a text input masked with text-security, so browsers do not treat it as a password field and no saved-password dropdown appears on focus. When `autoComplete="new-password"`, the component also attaches password-manager `data-*` hints to avoid misdetection by third-party password managers.

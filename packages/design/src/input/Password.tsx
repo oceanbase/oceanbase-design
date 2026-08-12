@@ -1,7 +1,11 @@
 import React, { forwardRef, useContext, useEffect, useState } from 'react';
 import { Input as AntInput } from 'antd';
+import type { InputRef } from 'antd';
 import type { PasswordProps as AntPasswordProps } from 'antd/es/input/Password';
-import type { InputLocale, InputRef } from './Input';
+import DisabledContext from 'antd/es/config-provider/DisabledContext';
+import { EyeInvisibleOutlined, EyeOutlined } from '@oceanbase/icons';
+import classNames from 'classnames';
+import type { InputLocale } from './Input';
 import ConfigProvider from '../config-provider';
 import type { ConfigConsumerProps } from '../config-provider';
 import defaultLocale from '../locale/en-US';
@@ -18,6 +22,14 @@ function isNewPasswordField(autoComplete?: string): boolean {
   return autoComplete === 'new-password';
 }
 
+const defaultIconRender = (visible: boolean) =>
+  visible ? <EyeOutlined /> : <EyeInvisibleOutlined />;
+
+const actionMap = {
+  click: 'onClick',
+  hover: 'onMouseOver',
+} as const;
+
 const Password = forwardRef<InputRef, PasswordProps>(
   (
     {
@@ -25,9 +37,13 @@ const Password = forwardRef<InputRef, PasswordProps>(
       locale: customLocale,
       showCount,
       autoComplete,
-      readOnly,
-      onFocus,
-      onBlur,
+      action = 'click',
+      visibilityToggle = true,
+      iconRender = defaultIconRender,
+      suffix,
+      className,
+      size,
+      disabled: customDisabled,
       ...restProps
     },
     ref
@@ -35,10 +51,9 @@ const Password = forwardRef<InputRef, PasswordProps>(
     const { getPrefixCls, locale: contextLocale } = useContext<ConfigConsumerProps>(
       ConfigProvider.ConfigContext
     );
-    const prefixCls = getPrefixCls('input', customizePrefixCls);
-    const [wrapCSSVar] = useStyle(prefixCls);
-    const preventSavedPasswordDropdown = isNewPasswordField(autoComplete);
-    const [autofillLocked, setAutofillLocked] = useState(preventSavedPasswordDropdown);
+    const inputPrefixCls = getPrefixCls('input', customizePrefixCls);
+    const prefixCls = getPrefixCls('input-password', customizePrefixCls);
+    const [wrapCSSVar] = useStyle(inputPrefixCls);
     const inputLocale: InputLocale = {
       placeholder:
         contextLocale?.global?.inputPlaceholder || defaultLocale.global?.inputPlaceholder,
@@ -47,35 +62,78 @@ const Password = forwardRef<InputRef, PasswordProps>(
       ...customLocale,
     };
 
+    // 以 type="text" + -webkit-text-security 呈现密码遮蔽，
+    // 避免浏览器识别为原生密码框而弹出密码保存/填充下拉
+    const disabled = useContext(DisabledContext);
+    const mergedDisabled = customDisabled ?? disabled;
+
+    const visibilityControlled =
+      typeof visibilityToggle === 'object' && visibilityToggle.visible !== undefined;
+    const [visible, setVisible] = useState<boolean>(() =>
+      visibilityControlled ? (visibilityToggle.visible ?? false) : false
+    );
+
     useEffect(() => {
-      setAutofillLocked(preventSavedPasswordDropdown);
-    }, [preventSavedPasswordDropdown]);
-
-    const handleFocus: AntPasswordProps['onFocus'] = e => {
-      if (preventSavedPasswordDropdown) {
-        setAutofillLocked(false);
+      if (visibilityControlled) {
+        setVisible(visibilityToggle.visible ?? false);
       }
-      onFocus?.(e);
+    }, [visibilityControlled, visibilityToggle]);
+
+    const onVisibleChange = () => {
+      if (mergedDisabled) {
+        return;
+      }
+      const nextVisible = !visible;
+      setVisible(nextVisible);
+      if (typeof visibilityToggle === 'object') {
+        visibilityToggle.onVisibleChange?.(nextVisible);
+      }
     };
 
-    const handleBlur: AntPasswordProps['onBlur'] = e => {
-      if (preventSavedPasswordDropdown) {
-        setAutofillLocked(true);
-      }
-      onBlur?.(e);
+    const getIcon = (iconPrefixCls: string) => {
+      const icon = iconRender(visible);
+      const iconTrigger = actionMap[action];
+      const iconProps = {
+        className: `${iconPrefixCls}-icon`,
+        key: 'passwordIcon',
+        onMouseDown: (e: React.MouseEvent<HTMLElement>) => {
+          // 防止点击图标时输入框失焦
+          e.preventDefault();
+        },
+        onMouseUp: (e: React.MouseEvent<HTMLElement>) => {
+          // 防止光标位置变化
+          e.preventDefault();
+        },
+        [iconTrigger]: onVisibleChange,
+      };
+      return React.cloneElement(React.isValidElement(icon) ? icon : <span>{icon}</span>, iconProps);
     };
+
+    const inputClassName = classNames(prefixCls, className, {
+      [`${prefixCls}-${size}`]: !!size,
+    });
+
+    const suffixIcon = visibilityToggle && getIcon(prefixCls);
 
     return wrapCSSVar(
-      <AntInput.Password
+      <AntInput
         ref={ref}
+        type="text"
         prefixCls={customizePrefixCls}
+        className={inputClassName}
+        size={size}
         placeholder={inputLocale.placeholder}
         showCount={showCount === true ? { formatter: showCountFormatter } : showCount}
         autoComplete={autoComplete}
-        readOnly={readOnly ?? (preventSavedPasswordDropdown && autofillLocked)}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        {...(preventSavedPasswordDropdown
+        disabled={customDisabled}
+        suffix={
+          <>
+            {suffixIcon}
+            {suffix}
+          </>
+        }
+        classNames={{ input: visible ? undefined : `${inputPrefixCls}-text-security` }}
+        {...(isNewPasswordField(autoComplete)
           ? {
               'data-lpignore': 'true',
               'data-1p-ignore': 'true',
