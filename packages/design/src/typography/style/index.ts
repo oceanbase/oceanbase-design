@@ -13,7 +13,7 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
     .sub(calc(fontSize).mul(lineHeight).equal())
     .div(2)
     .equal();
-  const paddingTop = calc(marginOffset).sub(token.lineWidth).equal();
+  const paddingBlock = calc(marginOffset).sub(token.lineWidth).equal();
   const paddingInline = calc(token.paddingSM).sub(token.lineWidth).equal();
   const negativeMarginOffset = calc(marginOffset).mul(-1).equal();
 
@@ -42,22 +42,22 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
         borderRadius: token.borderRadius,
         position: 'relative',
         insetInlineStart: calc(token.paddingSM).mul(-1).equal(),
-        padding: `${paddingTop} ${paddingInline}`,
+        paddingBlock,
+        paddingInline,
       },
       'div&:hover': {
-        height: token.controlHeight,
         marginTop: negativeMarginOffset,
-        marginBottom: calc('1em').sub(marginOffset).equal(),
+        // should use css calc instead token calc
+        marginBottom: `calc(1em - ${marginOffset}px)`,
       },
       'span&:hover:not(${componentCls}-block)': {
         display: 'inline-block',
-        height: token.controlHeight,
         marginTop: negativeMarginOffset,
         marginBottom: negativeMarginOffset,
       },
       'h1&:hover, h2&:hover, h3&:hover, h4&:hover, h5&:hover': {
-        marginTop: `${negativeMarginOffset} !important`,
-        marginBottom: `${negativeMarginOffset} !important`,
+        marginTop: `${unit(negativeMarginOffset)} !important`,
+        marginBottom: `${unit(negativeMarginOffset)} !important`,
       },
     },
     [`${componentCls}${componentCls}-edit-content`]: {
@@ -65,7 +65,8 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
         insetInlineStart: calc(token.paddingSM).mul(-1).equal(),
         insetBlockStart: 0,
         marginTop: negativeMarginOffset,
-        marginBottom: calc('1em').sub(marginOffset).equal(),
+        // should use css calc instead token calc
+        marginBottom: `calc(1em - ${marginOffset}px)`,
       },
       [`${componentCls}-span&`]: {
         insetInlineStart: calc(token.paddingSM).mul(-1).equal(),
@@ -77,8 +78,8 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
         {
           insetInlineStart: calc(token.paddingSM).mul(-1).equal(),
           insetBlockStart: 0,
-          marginTop: `${negativeMarginOffset} !important`,
-          marginBottom: `${negativeMarginOffset} !important`,
+          marginTop: `${unit(negativeMarginOffset)} !important`,
+          marginBottom: `${unit(negativeMarginOffset)} !important`,
         },
     },
   };
