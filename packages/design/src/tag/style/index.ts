@@ -69,6 +69,25 @@ export const genTagStyle = (token: TagToken): CSSObject => {
           maxWidth: `calc(100% - ${unit(token.marginSM)})`,
         },
       },
+      [`&${componentCls}-ellipsis-css`]: {
+        maxWidth: '100%',
+        overflow: 'hidden',
+        verticalAlign: 'bottom',
+        [`${componentCls}-ellipsis-css-content`]: {
+          display: 'inline-block',
+          maxWidth: '100%',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          verticalAlign: 'bottom',
+        },
+      },
+      [`&${componentCls}-closable${componentCls}-ellipsis-css`]: {
+        [`${componentCls}-ellipsis-css-content`]: {
+          // maxWidth should match (close icon left margin + tag right padding)
+          maxWidth: `calc(100% - ${unit(token.marginSM)})`,
+        },
+      },
       ['&-checkable']: {
         borderColor: 'transparent',
       },
