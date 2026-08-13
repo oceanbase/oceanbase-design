@@ -344,6 +344,7 @@ exports[`PageContainer > extra and footer 1`] = `
         >
           <div
             class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small ant-space-not-support-gap"
+            style="--space-gap-row: 8px; --space-gap-column: 8px;"
           >
             <div
               class="ant-space-item"

@@ -12,18 +12,20 @@
     position: fixed;
     z-index: 900;
     background: #fff;
-    inset-block-start: 0;
-    inset-inline-end: 0;
-    inset-block-end: 0;
-    inset-inline-start: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
   .@{prefix}-box-header {
     display: flex;
     height: 64px;
     .@{prefix}-box-header-left {
       flex: 1;
-      padding-block: 20px;
-      padding-inline: 24px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 24px;
+      padding-right: 24px;
     }
     .@{prefix}-box-header-icon {
       cursor: pointer;
@@ -32,13 +34,13 @@
       font-weight: 500;
       font-size: 16px;
       line-height: 24px;
-      margin-inline-start: 24px;
+      margin-left: 24px;
     }
     .@{prefix}-box-header-extra {
       flex: 2;
       line-height: 64px;
       text-align: end;
-      padding-inline-end: 24px;
+      padding-right: 24px;
     }
   }
 }

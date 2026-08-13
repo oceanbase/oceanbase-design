@@ -20,19 +20,19 @@
   @keyframes copy-button-trans {
     0% {
       opacity: 0.8;
-      margin-block-start: 0;
+      margin-top: 0;
     }
     10% {
       opacity: 0.8;
-      margin-block-start: -16px;
+      margin-top: -16px;
     }
     90% {
       opacity: 0.8;
-      margin-block-start: -16px;
+      margin-top: -16px;
     }
     100% {
       opacity: 0.8;
-      margin-block-start: 0;
+      margin-top: 0;
     }
   }
 
@@ -55,7 +55,7 @@
     }
 
     .@{prefix}-light-index {
-      border-inline-end: 1px solid rgba(0, 0, 0, 0.05);
+      border-right: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     display: block;
@@ -143,12 +143,16 @@
     text-align: end;
     background: rgba(255, 255, 255, 0.03);
     user-select: none;
-    padding-block: 2px;
-    padding-inline: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
   .@{prefix}-content {
-    padding-block: 2px;
-    padding-inline: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
   .@{prefix}-copy {
     position: absolute;
@@ -163,8 +167,8 @@
     cursor: pointer;
     opacity: 0.6;
     transition: opacity 0.2s;
-    inset-block-start: 16px;
-    inset-inline-end: 16px;
+    top: 16px;
+    right: 16px;
 
     &:hover {
       opacity: 0.8;
@@ -195,7 +199,7 @@
     border-radius: ~'@{borderRadius}px';
 
     &.@{prefix}-index {
-      border-inline-end: 1px solid rgba(255, 255, 255, 0.05);
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     /* Ocean Comment */
@@ -283,8 +287,10 @@
     .@{prefix}-diff-index,
     .@{prefix}-diff-mark,
     .@{prefix}-diff-code {
-      padding-block: 2px;
-      padding-inline: 8px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      padding-left: 8px;
+      padding-right: 8px;
     }
 
     .@{prefix}-diff-index,
@@ -320,11 +326,11 @@
 
       .@{prefix}-diff-index {
         background: rgba(0, 0, 0, 0.01);
-        border-inline-end: 1px solid rgba(0, 0, 0, 0.05);
-        border-inline-start: 1px solid rgba(0, 0, 0, 0.1);
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        border-left: 1px solid rgba(0, 0, 0, 0.1);
 
         &:first-child {
-          border-inline-start: none;
+          border-left: none;
         }
       }
 
@@ -354,11 +360,11 @@
 
       .@{prefix}-diff-index {
         background: rgba(255, 255, 255, 0.01);
-        border-inline-end: 1px solid rgba(255, 255, 255, 0.05);
-        border-inline-start: 1px solid rgba(255, 255, 255, 0.1);
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
 
         &:first-child {
-          border-inline-start: none;
+          border-left: none;
         }
       }
 

@@ -20,7 +20,7 @@ const PageLoading: React.FC<PageLoadingProps> = ({
         position: 'absolute',
         // horizontal align
         // 36px is 1/2 of large Spin width
-        insetInlineStart: 'calc(50% - 36px)',
+        left: 'calc(50% - 36px)',
         // vertical align
         // 27px is 1/2 of large Spin height
         top: 'calc(50% - 27px)',

@@ -100,7 +100,8 @@ function ProTable<T, U, ValueType>({
               cardProps?.className
             ),
             bodyStyle: {
-              paddingBlock: 0,
+              paddingTop: 0,
+              paddingBottom: 0,
               ...cardProps?.bodyStyle,
             },
           }}
