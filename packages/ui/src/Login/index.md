@@ -37,6 +37,8 @@ nav:
 | showOtherLoginButton | 是否显示第三方登录按钮 | boolean | - | - |
 | authCodeImg | 验证码图片 URL 地址 | string | - | - |
 | onAuthCodeImgChange | 刷新验证码回调 | function | - | - |
+| showLocale | 是否展示语言切换入口 | boolean | - | - |
+| locales | 自定义语言列表 | Locale[] | - | - |
 | isMobile | 是否为移动端 | boolean | false | - |
 
 ### LoginProps
