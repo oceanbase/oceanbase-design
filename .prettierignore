@@ -6,6 +6,8 @@ node_modules
 packages/design/src/theme/style/*.less
 # icons 包下的源码都是自动生成，无需格式化 
 packages/icons/src
+# icons 生成后恢复用的 a11y 组件副本，与 src 受同一格式化策略约束，避免双副本漂移
+packages/icons/scripts/a11y/
 .secignore
 LICENSE
 es
