@@ -405,7 +405,12 @@ export default ({
                       <Menu.Item
                         key={fcKey}
                         className={`${prefixCls}-more-menu-fn`}
-                        style={{ height: 'auto', lineHeight: 'normal', paddingBlock: 4 }}
+                        style={{
+                          height: 'auto',
+                          lineHeight: 'normal',
+                          paddingTop: 4,
+                          paddingBottom: 4,
+                        }}
                       >
                         {React.cloneElement(slot.el, { key: fcKey })}
                       </Menu.Item>

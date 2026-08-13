@@ -706,8 +706,9 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   value="stepBack"
                   aria-label={locale.jumpBack}
                   style={{
-                    paddingInline: 8,
-                    borderInlineStart: 0,
+                    paddingLeft: 8,
+                    paddingRight: 8,
+                    borderLeft: 0,
                     borderTopLeftRadius: 0,
                     borderBottomLeftRadius: 0,
                   }}
@@ -740,7 +741,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   value="stepForward"
                   aria-label={locale.jumpForward}
                   style={{
-                    paddingInline: 8,
+                    paddingLeft: 8,
+                    paddingRight: 8,
                     borderTopLeftRadius: 0,
                     borderBottomLeftRadius: 0,
                   }}
@@ -769,7 +771,11 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
       {hasSync && rangeName !== CUSTOMIZE && (
         <Button
           aria-label={locale.syncToCurrent}
-          style={{ paddingInline: 8, color: token.colorTextSecondary }}
+          style={{
+            paddingLeft: 8,
+            paddingRight: 8,
+            color: token.colorTextSecondary,
+          }}
           onClick={() => {
             setNow();
           }}
