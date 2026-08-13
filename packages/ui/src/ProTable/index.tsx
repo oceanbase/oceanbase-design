@@ -11,6 +11,8 @@ import { createObTableViewRender } from './obTableViewRender';
 
 export interface ProTableProps<T, U, ValueType> extends AntProTableProps<T, U, ValueType> {
   innerBordered?: boolean;
+  /** 设置外围边框（即 ProCard 边框，分页器包含在边框内），内部保持无边框样式 */
+  outerBordered?: boolean;
 }
 
 // type CompoundedComponent = React.FC<ProTableProps<T, U, ValueType>> & typeof AntProTable;
@@ -25,6 +27,7 @@ function ProTable<T, U, ValueType>({
   size,
   bordered,
   innerBordered,
+  outerBordered,
   cardBordered,
   expandable,
   rowSelection,
@@ -120,7 +123,10 @@ function ProTable<T, U, ValueType>({
           size={size}
           bordered={bordered || innerBordered}
           cardBordered={
-            cardBordered ?? (contextCard?.variant ? contextCard?.variant === 'outlined' : undefined)
+            outerBordered
+              ? true
+              : (cardBordered ??
+                (contextCard?.variant ? contextCard?.variant === 'outlined' : undefined))
           }
           form={{
             // query form should remove required mark

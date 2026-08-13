@@ -12,6 +12,7 @@ import { FilterOutlined, SwapLeftOutlined, SwapRightOutlined } from '@oceanbase/
 import ConfigProvider from '../config-provider';
 import Typography from '../typography';
 import Empty from '../empty';
+import Card from '../card';
 import useStyle from './style';
 import type { AnyObject } from '../_util/type';
 import useDefaultPagination from './hooks/useDefaultPagination';
@@ -155,6 +156,8 @@ export interface TableLocale extends AntTableLocale {
 
 export interface TableProps<T> extends AntTableProps<T> {
   innerBordered?: boolean;
+  /** 设置外围边框（分页器包含在边框内），内部保持无边框样式，可代替 Card bordered + bodyStyle padding 0 + Table 的组合 */
+  outerBordered?: boolean;
   columns?: TableColumnsType<T>;
   cancelText?: string;
   collapseText?: string;
@@ -167,11 +170,13 @@ export interface TableProps<T> extends AntTableProps<T> {
 }
 
 function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.Ref<Reference>) {
+  const { style, id, ...tableSpread } = props;
   const {
     locale: customLocale,
     size,
     bordered,
     innerBordered,
+    outerBordered,
     dataSource,
     columns,
     footer,
@@ -285,7 +290,8 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
       [`${prefixCls}-has-empty`]: noData,
       [`${prefixCls}-virtual`]: !!virtual,
     },
-    className
+    // outerBordered 时用户 className 挂外层 Card，内部 wrapper 仅保留功能 class
+    outerBordered ? undefined : className
   );
 
   const [openPopover, setOpenPopover] = useState<boolean>(false);
@@ -462,9 +468,9 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
     );
   };
 
-  return wrapCSSVar(
+  const tableNode = (
     <AntTable
-      {...props}
+      {...tableSpread}
       ref={ref}
       prefixCls={customizePrefixCls}
       className={tableCls}
@@ -480,6 +486,9 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
       bordered={bordered || innerBordered}
       dataSource={dataSource}
       columns={newColumns}
+      // outerBordered 时 style/id 挂外层 Card，内部不重复挂载
+      style={outerBordered ? undefined : style}
+      id={outerBordered ? undefined : id}
       rowClassName={(...args) => {
         return classNames(
           typeof rowClassName === 'function' ? rowClassName(...args) : rowClassName,
@@ -539,6 +548,23 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
       }
     />
   );
+
+  const outerNode = outerBordered ? (
+    <Card
+      bordered
+      bodyStyle={{ padding: 0 }}
+      size={size === 'small' ? 'small' : 'default'}
+      className={classNames(className, `${prefixCls}-outer-bordered`)}
+      style={style}
+      id={id}
+    >
+      {tableNode}
+    </Card>
+  ) : (
+    tableNode
+  );
+
+  return wrapCSSVar(outerNode);
 }
 
 const ForwardTable = React.forwardRef(Table) as <RecordType extends AnyObject = AnyObject>(

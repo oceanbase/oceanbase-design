@@ -86,6 +86,7 @@
       "pagination",
       "spin",
       "table",
+      "form",
       "styleProviderProps",
       "appProps"
     ],
@@ -98,6 +99,7 @@
       "pagination",
       "spin",
       "table",
+      "form",
       "styleProviderProps",
       "appProps"
     ]
@@ -213,8 +215,8 @@
   },
   "ProTable": {
     "source": "packages/ui/src/ProTable/index.tsx",
-    "props": ["innerBordered"],
-    "allInterfaceProps": ["innerBordered"]
+    "props": ["innerBordered", "outerBordered"],
+    "allInterfaceProps": ["innerBordered", "outerBordered"]
   },
   "Result": {
     "source": "packages/design/src/result/index.tsx",
@@ -235,6 +237,7 @@
     "source": "packages/design/src/table/index.tsx",
     "props": [
       "innerBordered",
+      "outerBordered",
       "cancelText",
       "collapseText",
       "openText",
@@ -245,6 +248,7 @@
     ],
     "allInterfaceProps": [
       "innerBordered",
+      "outerBordered",
       "columns",
       "cancelText",
       "collapseText",

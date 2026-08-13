@@ -6,6 +6,7 @@
   "delegateAntd": true,
   "addedProps": [
     "innerBordered",
+    "outerBordered",
     "cancelText",
     "collapseText",
     "openText",
