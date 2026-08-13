@@ -33,6 +33,7 @@ export function createObTableViewRender<T, U, ValueType>({
         {...props}
         columns={mergeTooltip ? mergeColumnTooltip(props.columns, columns) : props.columns}
         innerBordered={innerBordered}
+        // 外层边框由 ProCard（cardBordered）提供，内部 Table 不再自包边框，避免 tooltip 列场景双边框
         className={classNames(tableCls, props.className)}
         pagination={pagination}
         locale={{

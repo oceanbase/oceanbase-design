@@ -19,11 +19,11 @@
 | LightFilter | @oceanbase/ui | D | filterAriaLabel | filter-not-select-for-bar |
 | Modal | @oceanbase/design | B | extra, document | — |
 | PageContainer | @oceanbase/ui | D | header, locale | — |
-| ProTable | @oceanbase/ui | D | innerBordered | table-over-protable |
+| ProTable | @oceanbase/ui | D | innerBordered, outerBordered | table-over-protable |
 | Result | @oceanbase/design | C | status | — |
 | Select | @oceanbase/design | A | — | filter-not-select-for-bar |
 | Spin | @oceanbase/design | C | gray | — |
-| Table | @oceanbase/design | B | innerBordered, cancelText, collapseText, openText, hiddenCancelBtn, toolOptionsRender, toolAlertRender, toolSelectedContent | card-table-inner-bordered, table-over-protable, table-batch-tool-options |
+| Table | @oceanbase/design | B | innerBordered, outerBordered, cancelText, collapseText, openText, hiddenCancelBtn, toolOptionsRender, toolAlertRender, toolSelectedContent | card-table-inner-bordered, table-over-protable, table-batch-tool-options |
 
 ## diffLevel legend
 

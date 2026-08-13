@@ -21,8 +21,9 @@ markdown: |
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本"></code>
-<code src="./demo/bordered.tsx" title="带边框" description="添加表格边框线。"></code>
-<code src="./demo/inner-bordered.tsx" title="带内部边框" description="仅表格内部添加边框线，常和带边框的 Card 一起使用，以避免外部边框重复。"></code>
+<code src="./demo/bordered.tsx" title="带边框" description="添加表格边框线。注意：带边框（bordered）不含外层边框，与 outerBordered + innerBordered 不同。"></code>
+<code src="./demo/outer-bordered.tsx" title="带外部边框" description="仅外围添加边框（分页器包含在边框内），内部保持无边框样式，可代替 Card bordered + bodyStyle padding 0 + Table 的组合。"></code>
+<code src="./demo/inner-bordered.tsx" title="带内部边框" description="仅表格内部添加边框线，常和带边框的 Card 一起使用，以避免外部边框重复；可与 outerBordered 叠加实现外框 + 全网格。"></code>
 <code src="./demo/ellipsis.tsx" title="单元格自动省略" description="设置 `column.ellipsis` 可以让单元格内容根据宽度自动省略，并使用 Tooltip 展示全部内容。`说明`: 列头缩略暂不支持和排序筛选一起使用。"></code>
 <code src="./demo/column-tooltip.tsx" title="列头帮助提示" description="通过 `column.tooltip` 在列头展示帮助说明，可与排序、筛选一起使用。"></code>
 <code src="./demo/fixed-columns-header-tables.tsx" title="固定头和列"></code>
@@ -48,6 +49,7 @@ markdown: |
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
 | innerBordered | 带内部边框 | boolean | - | - |
+| outerBordered | 设置外围边框（分页器包含在边框内），内部保持无边框样式，可代替 Card bordered + bodyStyle padding 0 + Table 的组合 | boolean | - | - |
 | pagination | 分页配置 | ReactNode | {} | - |
 | cancelText | 选择表格中 `取消` 按钮文案 | ReactNode | - | - |
 | collapseText | 选择表格中 `收起` 按钮文案 | ReactNode | - | - |

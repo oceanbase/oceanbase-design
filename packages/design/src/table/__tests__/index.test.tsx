@@ -118,4 +118,26 @@ describe('Table', () => {
     expect(container.querySelector('.ant-table-inner-bordered .ant-table-bordered')).toBeTruthy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
+
+  it('outerBordered should work', () => {
+    const { container, asFragment } = render(<TableTest outerBordered={true} />);
+    // 外层 Card 边框
+    expect(container.querySelector('.ant-card-bordered')).toBeTruthy();
+    expect(container.querySelector('.ant-table-outer-bordered')).toBeTruthy();
+    // 内部表格保持无边框样式
+    expect(container.querySelector('.ant-table-outer-bordered .ant-table-bordered')).toBeFalsy();
+    // 分页器在 Card 内（外框包含分页器）
+    expect(container.querySelector('.ant-card-body .ant-pagination')).toBeTruthy();
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
+
+  it('outerBordered + innerBordered should work', () => {
+    const { container, asFragment } = render(
+      <TableTest outerBordered={true} innerBordered={true} />
+    );
+    // 外框 + 内部全网格
+    expect(container.querySelector('.ant-card-bordered')).toBeTruthy();
+    expect(container.querySelector('.ant-table-outer-bordered .ant-table-bordered')).toBeTruthy();
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
 });

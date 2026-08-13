@@ -52,8 +52,8 @@ const App: React.FC = () => {
   const { token } = theme.useToken();
   return (
     <>
-      <Table columns={columns} dataSource={data} innerBordered />
-      <Divider>with Card</Divider>
+      <Table columns={columns} dataSource={data} outerBordered />
+      <Divider>等价于 Card bordered + bodyStyle padding 0 + Table</Divider>
       <div
         style={{
           padding: 24,
@@ -62,11 +62,9 @@ const App: React.FC = () => {
         }}
       >
         <Card bordered={true} bodyStyle={{ padding: 0 }}>
-          <Table columns={columns} dataSource={data} innerBordered />
+          <Table columns={columns} dataSource={data} />
         </Card>
       </div>
-      <Divider>outerBordered + innerBordered</Divider>
-      <Table columns={columns} dataSource={data} outerBordered innerBordered />
     </>
   );
 };

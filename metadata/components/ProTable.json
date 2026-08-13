@@ -5,7 +5,7 @@
   "extendsAntd": null,
   "obOnly": true,
   "delegateAntd": false,
-  "addedProps": ["innerBordered"],
+  "addedProps": ["innerBordered", "outerBordered"],
   "constraints": ["table-over-protable"],
   "keywords": ["protable", "table", "request", "search"],
   "importFrom": "@oceanbase/ui",

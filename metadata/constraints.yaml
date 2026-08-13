@@ -27,7 +27,7 @@ constraints:
   - id: card-table-inner-bordered
     module: "03"
     severity: warn
-    rule: When Card uses bodyStyle padding 0 with Table inside, Table must set innerBordered
+    rule: When Card uses bodyStyle padding 0 with Table inside, Table must set innerBordered (or use Table outerBordered instead of the Card wrapper)
     appliesTo: [Card, Table]
     antiPattern: Card bodyStyle={{ padding: 0 }} without Table innerBordered
 
