@@ -55,7 +55,7 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
         borderBottomRightRadius: 0,
       },
       [`${componentCls}-play`]: {
-        padding: '3px 11px 3px',
+        padding: '2px 11px 2px',
       },
       [`${componentCls}-picker-input`]: {
         maxWidth: 125,
