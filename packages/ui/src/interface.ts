@@ -1,1 +1,1 @@
-export type Locale = 'zh-TW' | 'zh-CN' | 'en-US';
+export type Locale = 'en-US' | 'ja-JP' | 'zh-CN' | 'zh-TW';

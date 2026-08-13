@@ -9,20 +9,20 @@ export const genSpaceStyle: GenerateStyle<SpaceToken> = (token: SpaceToken): CSS
   return {
     [`${componentCls}-not-support-gap${componentCls}-horizontal`]: {
       [`${componentCls}-item:not(:last-child)`]: {
-        marginRight: '8px',
+        marginRight: 'var(--space-gap-column)',
       },
       [`${componentCls}-item-split`]: {
-        marginRight: '8px',
+        marginRight: 'var(--space-gap-column)',
       },
     },
     [`${componentCls}-not-support-gap${componentCls}-vertical`]: {
       [`${componentCls}-item:not(:last-child)`]: {
-        marginBottom: '16px',
+        marginBottom: 'var(--space-gap-row)',
       },
     },
     [`${componentCls}-not-support-gap${componentCls}-wrap`]: {
       [`${componentCls}-item`]: {
-        marginBottom: '16px',
+        marginBottom: 'var(--space-gap-row)',
       },
     },
   };

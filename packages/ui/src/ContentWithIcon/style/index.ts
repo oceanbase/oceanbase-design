@@ -36,4 +36,3 @@ export default (prefixCls: string) => {
   });
   return useStyle(prefixCls);
 };
-

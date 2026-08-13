@@ -5,10 +5,17 @@ import type { OBToken } from '../../_util/genComponentStyleHook';
 
 export type WelcomeToken = OBToken;
 
-export const genWelcomeStyle: GenerateStyle<WelcomeToken> = (
-  token: WelcomeToken
-): CSSObject => {
-  const { componentCls, antCls, colorBgContainer, colorText, colorTextSecondary, colorTextTertiary, colorTextQuaternary, colorPrimary } = token;
+export const genWelcomeStyle: GenerateStyle<WelcomeToken> = (token: WelcomeToken): CSSObject => {
+  const {
+    componentCls,
+    antCls,
+    colorBgContainer,
+    colorText,
+    colorTextSecondary,
+    colorTextTertiary,
+    colorTextQuaternary,
+    colorPrimary,
+  } = token;
 
   return {
     [`${componentCls}-container`]: {
@@ -167,4 +174,3 @@ export default (prefixCls: string) => {
   });
   return useStyle(prefixCls);
 };
-

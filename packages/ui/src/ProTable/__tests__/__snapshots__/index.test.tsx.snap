@@ -362,7 +362,7 @@ exports[`ProTable > ConfigProvider pagination should work 1`] = `
   >
     <div
       class="ant-pro-card-body"
-      style="padding-block: 0;"
+      style="padding-top: 0px; padding-bottom: 0px;"
     >
       <div
         class="ant-pro-table-list-toolbar"
@@ -1297,7 +1297,7 @@ exports[`ProTable > default pagination should work 1`] = `
   >
     <div
       class="ant-pro-card-body"
-      style="padding-block: 0;"
+      style="padding-top: 0px; padding-bottom: 0px;"
     >
       <div
         class="ant-pro-table-list-toolbar"
@@ -2264,7 +2264,7 @@ exports[`ProTable > innerBordered should work 1`] = `
   >
     <div
       class="ant-pro-card-body"
-      style="padding-block: 0;"
+      style="padding-top: 0px; padding-bottom: 0px;"
     >
       <div
         class="ant-pro-table-list-toolbar"
@@ -3231,7 +3231,7 @@ exports[`ProTable > outerBordered + innerBordered should work 1`] = `
   >
     <div
       class="ant-pro-card-body"
-      style="padding-block: 0;"
+      style="padding-top: 0px; padding-bottom: 0px;"
     >
       <div
         class="ant-pro-table-list-toolbar"
@@ -4198,7 +4198,7 @@ exports[`ProTable > outerBordered should work 1`] = `
   >
     <div
       class="ant-pro-card-body"
-      style="padding-block: 0;"
+      style="padding-top: 0px; padding-bottom: 0px;"
     >
       <div
         class="ant-pro-table-list-toolbar"
@@ -5060,7 +5060,7 @@ exports[`ProTable > outerBordered with column tooltip should keep single outer b
   >
     <div
       class="ant-pro-card-body"
-      style="padding-block: 0;"
+      style="padding-top: 0px; padding-bottom: 0px;"
     >
       <div
         class="ant-pro-table-list-toolbar"
@@ -5192,7 +5192,7 @@ exports[`ProTable > outerBordered with column tooltip should keep single outer b
                         >
                           <div
                             class="ant-space ant-space-horizontal ant-space-align-center ant-space-not-support-gap"
-                            style="column-gap: 4px; row-gap: 4px;"
+                            style="column-gap: 4px; row-gap: 4px; --space-gap-row: 4px; --space-gap-column: 4px;"
                           >
                             <div
                               class="ant-space-item"
@@ -5252,7 +5252,7 @@ exports[`ProTable > outerBordered with column tooltip should keep single outer b
                           >
                             <div
                               class="ant-space ant-space-horizontal ant-space-align-center ant-space-not-support-gap"
-                              style="column-gap: 4px; row-gap: 4px;"
+                              style="column-gap: 4px; row-gap: 4px; --space-gap-row: 4px; --space-gap-column: 4px;"
                             >
                               <div
                                 class="ant-space-item"
@@ -6070,7 +6070,7 @@ exports[`ProTable > render 1`] = `
   >
     <div
       class="ant-pro-card-body"
-      style="padding-block: 0;"
+      style="padding-top: 0px; padding-bottom: 0px;"
     >
       <div
         class="ant-pro-table-list-toolbar"
