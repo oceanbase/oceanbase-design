@@ -8,6 +8,31 @@ group: General
 
 ---
 
+## 1.2.0
+
+`2026-08-13`
+
+- Chrome 83 Compatibility
+  - 🆕 Added Flex component with `gap` fallback to `margin` on browsers without flex `gap` support (e.g. Chrome 83). [#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+  - 💄 Space fallback margins now honor custom `size` on browsers without flex `gap` support. [#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+  - 🐞 Fixed Table default pagination total text breaking on browsers below Chrome 85 (replaced `replaceAll` with `split`/`join`). [#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+  - 📖 Added low-version browser (Chrome 83) style compatibility demo and migration guidance in ConfigProvider. [#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- Table
+  - 🆕 Added `outerBordered` to show outer borders in addition to `innerBordered` column borders. [#1533](https://github.com/oceanbase/oceanbase-design/pull/1533)
+  - 🆕 Aligned `column.tooltip` semantics with `Form.Item.tooltip` (text or config object). [#1532](https://github.com/oceanbase/oceanbase-design/pull/1532)
+- Typography
+  - 🆕 Added `block` prop to `Text` and `Link`. [#1525](https://github.com/oceanbase/oceanbase-design/pull/1525)
+  - 🐞 Added missing units to editable padding and margins. [#1530](https://github.com/oceanbase/oceanbase-design/pull/1530)
+- Tag
+  - 🆕 Added lightweight CSS ellipsis mode to prevent content overflow. [#1529](https://github.com/oceanbase/oceanbase-design/pull/1529)
+- Radio / Checkbox
+  - 🐞 Restored baseline alignment of Radio and Checkbox wrappers. [#1531](https://github.com/oceanbase/oceanbase-design/pull/1531)
+  - 🐞 Top-aligned Radio and Checkbox labels for multi-line content. [#1522](https://github.com/oceanbase/oceanbase-design/pull/1522)
+- Input.Password
+  - 🐞 Renders as a text input until user interaction to suppress the saved-password dropdown. [#1528](https://github.com/oceanbase/oceanbase-design/pull/1528)
+- Upload
+  - 🐞 Preserved Button icon color inside Upload. [#1523](https://github.com/oceanbase/oceanbase-design/pull/1523)
+
 ## 1.1.0
 
 `2026-08-04`
@@ -40,6 +65,7 @@ group: General
   - 📌 Message documented as deprecated; migrate to Notification. [#1507](https://github.com/oceanbase/oceanbase-design/pull/1507)
 - Notification
   - 💄 Default bottom-left placement, fixed width 350px, linear icons with auto-close progress bar; links in title/description use type color. [#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
+  - 💄 Aligned Notification styles with design tokens and fixed close icon alignment. [#1520](https://github.com/oceanbase/oceanbase-design/pull/1520)
   - 🆕 Added `notification.loading` for in-progress feedback. [#1507](https://github.com/oceanbase/oceanbase-design/pull/1507)
   - 🆕 Added `errorDetails` with Markdown copy support. [#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
   - 🆕 Added `dedupeKey` to deduplicate notifications. [#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
@@ -454,6 +480,25 @@ group: General
 - 💄 Removed Empty and Result large size styles. [#1175](https://github.com/oceanbase/oceanbase-design/pull/1175)
 - 💄 Updated Table styles: removed zebra striping, added row dividers, adjusted cell spacing, etc. [#1176](https://github.com/oceanbase/oceanbase-design/pull/1176)
 - 💄 Adjusted Tabs font color and ink bar length. [#1177](https://github.com/oceanbase/oceanbase-design/pull/1177)
+
+## 0.4.22
+
+`2026-08-13`
+
+- Flex
+  - 🆕 Added Flex component, fully inheriting antd Flex capabilities and API with seamless switching. [#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+  - 💄 Low-version browser compatibility: falls back to a `margin` solution on browsers without flex `gap` support (e.g. Chrome 83). [#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- 💄 Space spacing fallback also applies to custom `size` on browsers without flex `gap` support. [#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- 🐞 Fixed Table default pagination total text rendering abnormally on low-version browsers (below Chrome 85) due to unsupported `replaceAll`. [#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- 📖 Added low-version browser (Chrome 83) style compatibility demo and integration guidance in ConfigProvider. [#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+
+## 0.4.21
+
+`2026-06-14`
+
+- Spin
+  - 💄 Updated Spin loading animation (gray/color). [#1484](https://github.com/oceanbase/oceanbase-design/pull/1484)
+  - 🐞 Fixed Spin background being opaque in dark theme. [#1484](https://github.com/oceanbase/oceanbase-design/pull/1484)
 
 ## 0.4.20
 

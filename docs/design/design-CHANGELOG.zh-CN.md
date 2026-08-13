@@ -8,6 +8,31 @@ group: 基础组件
 
 ---
 
+## 1.2.0
+
+`2026-08-13`
+
+- Chrome 83 兼容
+  - 🆕 新增 Flex 组件，在不支持 `gap` 弹性布局的浏览器（如 Chrome 83）中自动降级为 `margin` 方案。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+  - 💄 Space 在不支持 `gap` 的浏览器中的间距降级方案，自定义 `size` 时同样生效。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+  - 🐞 修复 Table 默认分页的合计文案在低版本浏览器（Chrome 85 以下）中因不支持 `replaceAll` 语法而渲染异常的问题。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+  - 📖 ConfigProvider 新增低版本浏览器（Chrome 83）样式兼容示例和接入说明。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- Table
+  - 🆕 新增 `outerBordered`，在 `innerBordered` 列边框之外展示外部边框。[#1533](https://github.com/oceanbase/oceanbase-design/pull/1533)
+  - 🆕 `column.tooltip` 语义与 `Form.Item.tooltip` 对齐（支持文本或配置对象）。[#1532](https://github.com/oceanbase/oceanbase-design/pull/1532)
+- Typography
+  - 🆕 `Text` 和 `Link` 新增 `block` 属性。[#1525](https://github.com/oceanbase/oceanbase-design/pull/1525)
+  - 🐞 修复编辑态内边距和外边距缺少单位的问题。[#1530](https://github.com/oceanbase/oceanbase-design/pull/1530)
+- Tag
+  - 🆕 新增轻量级 CSS 省略模式，避免内容溢出。[#1529](https://github.com/oceanbase/oceanbase-design/pull/1529)
+- Radio / Checkbox
+  - 🐞 恢复 Radio 和 Checkbox 包裹容器的基线对齐。[#1531](https://github.com/oceanbase/oceanbase-design/pull/1531)
+  - 🐞 多行标签时 Radio 和 Checkbox 顶对齐。[#1522](https://github.com/oceanbase/oceanbase-design/pull/1522)
+- Input.Password
+  - 🐞 用户交互前以纯文本输入渲染，抑制浏览器保存密码下拉框。[#1528](https://github.com/oceanbase/oceanbase-design/pull/1528)
+- Upload
+  - 🐞 修复 Upload 内 Button 图标颜色被覆盖的问题。[#1523](https://github.com/oceanbase/oceanbase-design/pull/1523)
+
 ## 1.1.0
 
 `2026-08-04`
@@ -40,6 +65,7 @@ group: 基础组件
   - 📌 Message 文档标注弃用，请迁移至 Notification。[#1507](https://github.com/oceanbase/oceanbase-design/pull/1507)
 - Notification
   - 💄 默认左下角展示，固定宽度 350px，线性图标与自动关闭进度条；标题/描述内链接使用类型色。[#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
+  - 💄 Notification 样式对齐设计 token，修复关闭图标对齐。[#1520](https://github.com/oceanbase/oceanbase-design/pull/1520)
   - 🆕 新增 `notification.loading` 用于进行中反馈。[#1507](https://github.com/oceanbase/oceanbase-design/pull/1507)
   - 🆕 新增 `errorDetails`，支持复制为 Markdown。[#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
   - 🆕 新增 `dedupeKey` 去除重复弹出。[#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
@@ -454,6 +480,25 @@ group: 基础组件
 - 💄 去掉 Empty 和 Result 的大尺寸样式。[#1175](https://github.com/oceanbase/oceanbase-design/pull/1175)
 - 💄 更新 Table 样式，包括去掉斑马纹、增加行分隔线、调整单元格间距等。[#1176](https://github.com/oceanbase/oceanbase-design/pull/1176)
 - 💄 调整 Tabs 的字体颜色和火柴棍长度。[#1177](https://github.com/oceanbase/oceanbase-design/pull/1177)
+
+## 0.4.22
+
+`2026-08-13`
+
+- Flex
+  - 🆕 新增 Flex 组件，完整继承 antd Flex 的能力和 API，可无缝切换。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+  - 💄 低版本浏览器兼容：在不支持 `gap` 弹性布局的浏览器（如 Chrome 83）中，自动降级为 `margin` 方案。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- 💄 优化 Space 在不支持 `gap` 的浏览器中的间距降级方案，自定义 `size` 时同样生效。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- 🐞 修复 Table 默认分页的合计文案在低版本浏览器（Chrome 85 以下）中因不支持 `replaceAll` 语法而渲染异常的问题。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- 📖 ConfigProvider 新增低版本浏览器（Chrome 83）样式兼容示例和接入说明。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+
+## 0.4.21
+
+`2026-06-14`
+
+- Spin
+  - 💄 更新 Spin 的加载动画（灰色/彩色）。[#1484](https://github.com/oceanbase/oceanbase-design/pull/1484)
+  - 🐞 修复 Spin 在暗色主题下背景不透明的问题。[#1484](https://github.com/oceanbase/oceanbase-design/pull/1484)
 
 ## 0.4.20
 
