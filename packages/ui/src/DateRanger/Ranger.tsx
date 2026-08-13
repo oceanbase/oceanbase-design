@@ -683,8 +683,9 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
               <Radio.Button
                 value="stepBack"
                 style={{
-                  paddingInline: 8,
-                  borderInlineStart: 0,
+                  paddingLeft: 8,
+                  paddingRight: 8,
+                  borderLeft: 0,
                   borderTopLeftRadius: 0,
                   borderBottomLeftRadius: 0,
                 }}
@@ -716,7 +717,8 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
               <Radio.Button
                 value="stepForward"
                 style={{
-                  paddingInline: 8,
+                  paddingLeft: 8,
+                  paddingRight: 8,
                   borderTopLeftRadius: 0,
                   borderBottomLeftRadius: 0,
                 }}
@@ -743,7 +745,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
       </Space>
       {hasSync && rangeName !== CUSTOMIZE && (
         <Button
-          style={{ paddingInline: 8, color: token.colorTextSecondary }}
+          style={{ paddingLeft: 8, paddingRight: 8, color: token.colorTextSecondary }}
           onClick={() => {
             setNow();
           }}

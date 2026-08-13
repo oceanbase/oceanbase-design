@@ -7,8 +7,8 @@
   z-index: 0;
   font-size: 14px;
   cursor: pointer;
-  inset-inline-end: 24px;
-  inset-block-end: 24px;
+  right: 24px;
+  bottom: 24px;
 
   &.@{prefix}-container-dragged {
     cursor: grab;
@@ -23,7 +23,7 @@
   }
 
   &.@{prefix}-container-hide-not-dragged:hover {
-    inset-inline-end: 0 !important;
+    right: 0 !important;
   }
 
   .@{prefix}-hide {
@@ -40,8 +40,8 @@
     cursor: pointer;
     opacity: 0;
     transition: all 0.18s ease-out 0.18s;
-    inset-block-start: 0;
-    inset-inline-end: -22px;
+    top: 0;
+    right: -22px;
 
     &:hover {
       background: rgba(0, 0, 0, 0.35);
@@ -100,8 +100,8 @@
       height: 56px;
       color: #006aff;
       font-size: 56px;
-      inset-block-start: 0;
-      inset-inline-end: 0;
+      top: 0;
+      right: 0;
 
       &.@{prefix}-button-loading-primary {
         color: #fff;
@@ -124,7 +124,7 @@
       opacity: 0;
       transition: all 0.3s linear;
       user-select: none;
-      inset-block-start: 50%;
+      top: 50%;
 
       &.@{prefix}-button-close-primary {
         color: #fff;
@@ -154,7 +154,7 @@
       opacity: 1;
       transition: all 0.3s linear;
       user-select: none;
-      inset-block-start: 50%;
+      top: 50%;
 
       &.@{prefix}-button-icon-open {
         transform: translateY(-50%) scale(0.4) rotate(45deg);

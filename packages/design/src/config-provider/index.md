@@ -24,6 +24,7 @@ nav:
 <code src="./demo/spin.tsx" title="Spin"></code>
 <code src="./demo/card.tsx" title="Card"></code>
 <code src="../empty/demo/config-provider.tsx" title="空状态"></code>
+<code src="./demo/style-provider.tsx" title="低版本浏览器样式兼容"></code>
 
 ### 样式前缀
 
@@ -57,3 +58,12 @@ export default App;
 | appProps | 内嵌的 App 组件属性 | [AppProps](https://ant-design.antgroup.com/components/app-cn#app) | - | - |
 
 - 更多 API 详见 antd ConfigProvider 文档: https://ant.design/components/config-provider-cn
+
+### 低版本浏览器（Chrome 83）兼容说明
+
+antd 5.x 默认使用 `:where()` 选择器（Chrome 88+）与 CSS 逻辑属性（Chrome 87+），在低版本浏览器（如 Chrome 83）中需要按以下方式接入：
+
+- **样式降级**：通过 `styleProviderProps` 配置 `hashPriority: 'high'`（规避 `:where()` 选择器，适用于 Chrome 88 以下）与 `legacyLogicalPropertiesTransformer`（将 cssinjs 生成的逻辑属性转为物理属性），参考上方「低版本浏览器样式兼容」示例。
+- **弹性间距**：`gap` 弹性布局（`flex`/`grid`）在 Chrome 84 以下无效。请优先使用本库封装的 `Flex` 组件（自动检测浏览器能力，不支持时降级为 `margin` 方案）或 `Space` 组件（自定义 `size` 时同样降级），避免直接使用裸 antd `Flex`。
+- **已知副作用**：配置 `hashPriority: 'high'` 后，`:where()` 选择器不再包裹样式，Popover 等浮层组件注入的 `position: fixed` 样式可能覆盖业务侧样式；如遇定位异常，可在业务样式上使用 `!important` 或改用 `right` 等物理属性定位。
+- **业务侧编译配置**：`@oceanbase/util` 依赖 `query-string@9`（产物含 Chrome 85+ 语法），需在 Umi 的 `extraBabelIncludes` 中按嵌套绝对路径引入该依赖，库侧无需改动代码。
