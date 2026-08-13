@@ -9,6 +9,7 @@ on:
   push:
     branches:
       - 'master'
+      - '0.x'
 
 permissions:
   contents: read
