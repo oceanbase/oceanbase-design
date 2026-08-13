@@ -8,6 +8,18 @@ group: 业务组件
 
 ---
 
+## 1.2.0
+
+`2026-08-13`
+
+- Chrome 83 兼容
+  - 💄 将 PageLoading、DateRanger、ProTable、SideTip、FullscreenBox 和 Highlight 组件中的逻辑属性和内联样式转换为物理属性，修复低版本浏览器样式显示异常。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+  - 💄 将 Action.Group、DateRanger 中剩余的逻辑属性转换为物理属性。[#1538](https://github.com/oceanbase/oceanbase-design/pull/1538)
+- Login
+  - 🌐 Login 和 BasicLayout 的语种切换下拉框新增日语 (ja-JP) 支持。[#1534](https://github.com/oceanbase/oceanbase-design/pull/1534)
+- DateRanger
+  - 🐞 播放按钮垂直内边距收紧为 2px。[#1539](https://github.com/oceanbase/oceanbase-design/pull/1539)
+
 ## 1.1.0
 
 `2026-08-04`
@@ -167,6 +179,20 @@ group: 业务组件
 `2025-09-08`
 
 - 💄 去掉 FooterToolbar 和 PageContainer 的大尺寸样式。[#1175](https://github.com/oceanbase/oceanbase-design/pull/1175)
+
+## 0.4.26
+
+`2026-08-13`
+
+- 💄 兼容低版本浏览器（Chrome 83）：将 PageLoading、DateRanger、ProTable、SideTip、FullscreenBox 和 Highlight 组件中的逻辑属性和内联样式转换为物理属性，修复样式显示异常。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- 🌐 Login 和 BasicLayout 的语种切换下拉框新增日语 (ja-JP) 支持。[#1534](https://github.com/oceanbase/oceanbase-design/pull/1534)
+
+## 0.4.25
+
+`2026-06-14`
+
+- 💄 替换默认品牌 logo 资产（`oceanbase_logo`、`oceanbase_logo_dark`、`oceanbase_watermark`），采用新蓝紫渐变品牌标识。[#1486](https://github.com/oceanbase/oceanbase-design/pull/1486)
+- 💄 更新 Highlight demo 中的 logo CDN 链接。[#1486](https://github.com/oceanbase/oceanbase-design/pull/1486)
 
 ## 0.4.24
 

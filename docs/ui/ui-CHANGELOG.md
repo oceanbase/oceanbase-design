@@ -8,6 +8,18 @@ group: Biz Components
 
 ---
 
+## 1.2.0
+
+`2026-08-13`
+
+- Chrome 83 Compatibility
+  - 💄 Converted inline styles and logical properties to physical ones in PageLoading, DateRanger, ProTable, SideTip, FullscreenBox, and Highlight to fix style issues on low-version browsers. [#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+  - 💄 Converted remaining logical properties to physical ones in Action.Group and DateRanger. [#1538](https://github.com/oceanbase/oceanbase-design/pull/1538)
+- Login
+  - 🌐 Added Japanese (ja-JP) to the locale dropdown of Login and BasicLayout. [#1534](https://github.com/oceanbase/oceanbase-design/pull/1534)
+- DateRanger
+  - 🐞 Tightened play button vertical padding to 2px. [#1539](https://github.com/oceanbase/oceanbase-design/pull/1539)
+
 ## 1.1.0
 
 `2026-08-04`
@@ -167,6 +179,20 @@ group: Biz Components
 `2025-09-08`
 
 - 💄 Remove large-size styles from FooterToolbar and PageContainer. [#1175](https://github.com/oceanbase/oceanbase-design/pull/1175)
+
+## 0.4.26
+
+`2026-08-13`
+
+- 💄 Low-version browser (Chrome 83) compatibility: converted logical properties and inline styles to physical ones in PageLoading, DateRanger, ProTable, SideTip, FullscreenBox, and Highlight to fix style issues. [#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- 🌐 Added Japanese (ja-JP) support to the locale dropdown of Login and BasicLayout. [#1534](https://github.com/oceanbase/oceanbase-design/pull/1534)
+
+## 0.4.25
+
+`2026-06-14`
+
+- 💄 Replaced default brand logo assets (`oceanbase_logo`, `oceanbase_logo_dark`, `oceanbase_watermark`) with the new blue-purple gradient brand identity. [#1486](https://github.com/oceanbase/oceanbase-design/pull/1486)
+- 💄 Updated the logo CDN link in the Highlight demo. [#1486](https://github.com/oceanbase/oceanbase-design/pull/1486)
 
 ## 0.4.24
 
