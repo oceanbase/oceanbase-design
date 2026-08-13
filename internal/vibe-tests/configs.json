@@ -1,0 +1,32 @@
+{
+  "baseline-antd": {
+    "description": "Pure antd, no OB conventions",
+    "mcp": [],
+    "skill": false,
+    "agentsMd": false
+  },
+  "ob-skill-only": {
+    "description": "oceanbase-design Skill only",
+    "mcp": [],
+    "skill": true,
+    "agentsMd": false
+  },
+  "ob-agents-md": {
+    "description": "AGENTS.md only",
+    "mcp": [],
+    "skill": false,
+    "agentsMd": true
+  },
+  "ob-mcp-only": {
+    "description": "Single ob-design mcp only (primary acceptance)",
+    "mcp": ["oceanbase-design"],
+    "skill": false,
+    "agentsMd": false
+  },
+  "ob-full": {
+    "description": "Skill + AGENTS.md + ob-design mcp",
+    "mcp": ["oceanbase-design"],
+    "skill": true,
+    "agentsMd": true
+  }
+}

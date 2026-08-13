@@ -1,72 +1,72 @@
 ---
-group: Design Principles 设计原则
-title: 高效操作
+group: Design Principles
+title: Efficient Operations
 order: 2
 ---
 
-通过简化产品操作流程和减少用户操作步骤等方式，提升高频场景任务完成的效率，帮助用户更快、更轻松地完成工作是提升用户体验的关键。
+Improve task completion efficiency in high-frequency scenarios by simplifying product operation flows and reducing user steps. Helping users complete work faster and more easily is key to improving user experience.
 
-## 简化流程
+## Simplify Flow
 
-通过整合重复步骤、缩短任务路径、减少不必要的跳转等方式，简化操作流程，提升操作效率。
+Simplify operation flow and improve efficiency by consolidating repeated steps, shortening task paths, and reducing unnecessary navigation.
 
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/luHDSZyp3wQAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center">点击即编辑，减少非必要的弹窗</div>
+    <div class="image-description-center">Click to edit, reduce unnecessary modals</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/n2AOS6icp9AAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center">通过模态/非模态框，减少不必要的页面跳转</div>
+    <div class="image-description-center">Reduce unnecessary page navigation through modal/non-modal dialogs</div>
   </div>
 </div>
 
-## 提供快捷操作
+## Provide Shortcuts
 
-针对用户高频操作的功能，可提供快捷入口、快捷键、快捷选项等方式，帮助用户提高操作效率。
+For high-frequency operations, provide shortcut entries, keyboard shortcuts, or quick options to help users improve efficiency.
 
 <div style="display: flex">
   <div>
-    <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/ut6NSLY3CVAAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center">为高频操作提供快捷键</div>
+    <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/ut6NSLY3CVAAAAAAAAAAAAADv3-AQBr/original" />
+    <div class="image-description-center">Provide keyboard shortcuts for high-frequency operations</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/zkb9TaQWoUEAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center">为高频输入场景提供快捷选项</div>
+    <div class="image-description-center">Provide quick options for high-frequency input scenarios</div>
   </div>
 </div>
 
-## 提供模板
+## Provide Templates
 
-通过提供模板，帮助用户快速创建对象，降低用户从头开始重复配置的操作成本。
+Help users quickly create objects through templates, reducing the cost of repeated configuration from scratch.
 
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/O4tuRb5GQyMAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center">提供内置告警样例模板，提升告警创建效率</div>
+    <div class="image-description-center">Provide built-in alert sample templates to improve alert creation efficiency</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/8q5RT6DXhpsAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center">支持用户创建数据源模板并引用，提高配置效率</div>
+    <div class="image-description-center">Support users creating data source templates and referencing them to improve configuration efficiency</div>
   </div>
 </div>
 
-## 自动化操作
+## Automated Operations
 
-为用户提供自动化的输入、智能生成与分析解读等能力，帮助用户减少操作需要花费的精力和时间。
+Provide users with automated input, intelligent generation, and analysis capabilities to help reduce the effort and time required for operations.
 
 <div style="display: flex">
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/GDDTQZQzXWwAAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center">自动生成密码</div>
+    <div class="image-description-center">Auto-generate password</div>
   </div>
   <div>
     <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/2o7iQYBZ2l0AAAAAAAAAAAAADv3-AQBr/original" />
-    <div class="image-description-center">通过 AI 自动生成代码</div>
+    <div class="image-description-center">Auto-generate code through AI</div>
   </div>
 </div>
 <br />
 <div>
   <img src="https://mdn.alipayobjects.com/oceanbase_design/afts/img/Wur4SolB4WsAAAAAAAAAAAAADv3-AQBr/original" />
-  <div class="image-description-center">通过 AI 自动为用户分析问题</div>
+  <div class="image-description-center">Auto-analyze issues for users through AI</div>
 </div>

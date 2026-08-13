@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { TreeSelect } from '@oceanbase/design';
+import { TreeSelect, theme } from '@oceanbase/design';
 
 const App: React.FC = () => {
+  const { token } = theme.useToken();
   const [value, setValue] = useState<string>();
 
   const onChange = (newValue: string) => {
@@ -33,7 +34,7 @@ const App: React.FC = () => {
           children: [
             {
               value: 'leaf3',
-              title: <b style={{ color: '#006AFF' }}>leaf3</b>,
+              title: <b style={{ color: token.colorInfo }}>leaf3</b>,
             },
           ],
         },

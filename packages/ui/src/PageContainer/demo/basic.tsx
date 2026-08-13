@@ -1,6 +1,3 @@
-/**
- * iframe: 600
- */
 import React from 'react';
 import { Button, Card, Descriptions, Dropdown } from '@oceanbase/design';
 import { PageContainer } from '@oceanbase/ui';
@@ -11,48 +8,46 @@ export default () => {
     <PageContainer
       ghost={false}
       header={{
-        title: '页面标题',
+        title: 'Page Title',
         extra: [
-          <Button key="1">次要按钮</Button>,
+          <Button key="1">Secondary</Button>,
           <Button key="2" type="primary">
-            主要按钮
+            Primary
           </Button>,
           <Dropdown
             menu={{
               items: [
                 {
-                  label: '下拉菜单',
+                  label: 'Dropdown Menu',
                   key: '1',
                 },
                 {
-                  label: '下拉菜单2',
+                  label: 'Dropdown Menu 2',
                   key: '2',
                 },
                 {
-                  label: '下拉菜单3',
+                  label: 'Dropdown Menu 3',
                   key: '3',
                 },
               ],
             }}
           >
-            <Button key="3" style={{ padding: '0 8px' }}>
-              <EllipsisOutlined />
-            </Button>
+            <Button key="3" icon={<EllipsisOutlined />} />
           </Dropdown>,
         ],
       }}
-      footer={[<Button>重置</Button>, <Button type="primary">提交</Button>]}
+      footer={[<Button>Reset</Button>, <Button type="primary">Submit</Button>]}
     >
-      <Card bordered={false}>
-        <Descriptions title="基本信息">
-          <Descriptions.Item label="创建人">曲丽丽</Descriptions.Item>
-          <Descriptions.Item label="电话号码">1810000000</Descriptions.Item>
-          <Descriptions.Item label="地址">浙江省杭州市西湖区工专路</Descriptions.Item>
-          <Descriptions.Item label="关联表单">
+      <Card>
+        <Descriptions title="Basic Info">
+          <Descriptions.Item label="Creator">Lili Qu</Descriptions.Item>
+          <Descriptions.Item label="Phone">1810000000</Descriptions.Item>
+          <Descriptions.Item label="Address">New York No. 1 Lake Park</Descriptions.Item>
+          <Descriptions.Item label="Related Form">
             <a>421421</a>
           </Descriptions.Item>
-          <Descriptions.Item label="创建时间">2017-01-10</Descriptions.Item>
-          <Descriptions.Item label="备注">这是备注</Descriptions.Item>
+          <Descriptions.Item label="Created At">2017-01-10</Descriptions.Item>
+          <Descriptions.Item label="Remarks">Sample remarks</Descriptions.Item>
         </Descriptions>
       </Card>
     </PageContainer>

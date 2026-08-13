@@ -4,6 +4,7 @@
   "app.theme.switch.aliyun": "阿里云主题",
   "app.theme.switch.motion.on": "动画开启",
   "app.theme.switch.motion.off": "动画关闭",
+  "app.theme.switch.cssVar": "CSS 变量模式",
   "app.theme.switch.font.default": "默认字体",
   "app.theme.switch.font.custom": "定制字体",
   "app.header.menu.more": "更多",

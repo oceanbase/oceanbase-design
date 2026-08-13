@@ -10,86 +10,88 @@ export default () => {
     {
       image:
         'https://gw-office.alipayobjects.com/bmw-prod/4e085e0f-8e35-4fe6-925c-cdc2c2036cef.png',
-      title: '专业管理平台',
-      description: '以 OB 为核心的专业数据库管理平台',
+      title: 'Professional Management Platform',
+      description: 'A professional database management platform built around OceanBase',
     },
     {
       image:
         'https://gw-office.alipayobjects.com/bmw-prod/4e085e0f-8e35-4fe6-925c-cdc2c2036cef.png',
-      title: '全生命周期管理',
-      description: '为 OB 提供从部署、运维、升级到删除的全生命周期管理',
+      title: 'Full Lifecycle Management',
+      description:
+        'Provides full lifecycle management for OceanBase from deployment and operations to upgrade and removal',
     },
     {
       image:
         'https://gw-office.alipayobjects.com/bmw-prod/4e085e0f-8e35-4fe6-925c-cdc2c2036cef.png',
-      title: '更高效率，更低成本',
-      description: '提高用户管理 OB 效率，降低企业IT运维成本',
+      title: 'Higher Efficiency, Lower Cost',
+      description:
+        'Improve OceanBase management efficiency and reduce enterprise IT operations costs',
     },
   ];
   const steps = [
     {
-      title: '创建集群',
-      description: '在租户内创建数据库，数据库即可对接应用。',
+      title: 'Create Cluster',
+      description: 'Create a database within a tenant to connect it to your application.',
     },
     {
-      title: '创建租户',
-      description: '在租户内创建数据库，数据库即可对接应用。',
+      title: 'Create Tenant',
+      description: 'Create a database within a tenant to connect it to your application.',
     },
     {
-      title: '创建数据库',
-      description: '在租户内创建数据库，数据库即可对接应用。',
+      title: 'Create Database',
+      description: 'Create a database within a tenant to connect it to your application.',
     },
     {
-      title: '连接数据库',
-      description: '在租户内创建数据库，数据库即可对接应用。',
+      title: 'Connect Database',
+      description: 'Create a database within a tenant to connect it to your application.',
     },
   ];
   const helps = [
     {
-      title: '创建新的集群',
-      link: 'https://www.alipay.com',
+      title: 'Create a New Cluster',
+      link: 'https://www.oceanbase.com',
     },
     {
-      title: '创建新的租户',
-      link: 'https://www.alipay.com',
+      title: 'Create a New Tenant',
+      link: 'https://www.oceanbase.com',
     },
     {
-      title: '管理集群',
-      link: 'https://www.alipay.com',
+      title: 'Manage Clusters',
+      link: 'https://www.oceanbase.com',
     },
     {
-      title: '管理租户',
-      link: 'https://www.alipay.com',
+      title: 'Manage Tenants',
+      link: 'https://www.oceanbase.com',
     },
     {
-      title: '查看任务',
-      link: 'https://www.alipay.com',
+      title: 'View Tasks',
+      link: 'https://www.oceanbase.com',
     },
     {
-      title: '查看告警',
-      link: 'https://www.alipay.com',
+      title: 'View Alerts',
+      link: 'https://www.oceanbase.com',
     },
     {
-      title: '添加新用户',
-      link: 'https://www.alipay.com',
+      title: 'Add New User',
+      link: 'https://www.oceanbase.com',
     },
     {
-      title: '查看更多',
-      link: 'https://www.alipay.com',
+      title: 'View More',
+      link: 'https://www.oceanbase.com',
       isMore: true,
     },
   ];
   return (
     <Welcome
-      title="Hi，欢迎使用 OceanBase 云平台"
-      description="OceanBase 云平台 (OceanBase Cloud Platform，OCP) 是用于管控 OceanBase 数据库集群的平台。通过 OCP，您可以对 OceanBase 集群进行安装、部署、监控、告警等全生命周期管理。我们致力于提供高效的管理服务，为您创造更多价值。"
+      title="Hi, welcome to OceanBase Cloud Platform"
+      description="OceanBase Cloud Platform (OCP) is a platform for managing OceanBase database clusters. With OCP, you can install, deploy, monitor, and alert on OceanBase clusters throughout their full lifecycle. We are committed to providing efficient management services that create more value for you."
       bgImage="https://gw-office.alipayobjects.com/bmw-prod/37822958-2b90-4414-a61b-581c0b744c13.png"
       introduces={introduces}
       steps={steps}
-      buttonText="创建集群"
+      buttonText="Create Cluster"
       buttonProps={{
         onClick: () => {
-          message.success('你点击了按钮');
+          message.success('You clicked the button');
         },
       }}
       helps={helps}

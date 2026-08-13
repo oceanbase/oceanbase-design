@@ -8,7 +8,7 @@ export interface IconFontProps {
 }
 
 const CustomIcon = createFromIconfontCN({
-  // 在 iconfont.cn 上生成
+  // Generated on iconfont.cn
   scriptUrl: '//at.alicdn.com/t/a/font_3786261_ifhixq9j5c.js',
 });
 

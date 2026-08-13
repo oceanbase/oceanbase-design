@@ -15,10 +15,10 @@ const Slider = React.forwardRef<SliderRef, AntSliderSingleProps | AntSliderRange
   ({ prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('slider', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const sliderCls = classNames(className);
 
-    return wrapSSR(
+    return wrapCSSVar(
       <AntSlider ref={ref} prefixCls={customizePrefixCls} className={sliderCls} {...restProps} />
     );
   }

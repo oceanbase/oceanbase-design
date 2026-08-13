@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Form, Input } from '@oceanbase/design';
 import { Password } from '@oceanbase/ui';
+
+const rules = [
+  {
+    validate: (val?: string) => Boolean(val && val.length >= 8),
+    message: 'At least 8 characters',
+  },
+  {
+    validate: (val?: string) => Boolean(val && /[a-z]+/.test(val) && /[A-Z]+/.test(val)),
+    message: 'Contains lowercase (a-z) and uppercase (A-Z) letters',
+  },
+  {
+    message: 'Contains at least one digit (0-9) or symbol',
+    validate: (val?: string) => Boolean(val && /([0-9]|[._+@#$%])+/.test(val)),
+  },
+];
 
 export default () => {
   const [form] = Form.useForm();
   const { validateFields } = form;
-  const [passed, setPassed] = useState(false);
   const formItemLayout = {
     labelCol: {
       span: 4,
@@ -21,32 +35,10 @@ export default () => {
     },
   };
 
-  const rules = [
-    {
-      validate: val => val?.length >= 8,
-      message: '长度至少为 8 个字符',
-    },
-    {
-      validate: val => {
-        if (/[a-z]+/.test(val) && /[A-Z]+/.test(val)) {
-          return true;
-        }
-        return false;
-      },
-      message: '包含小写字母(a-z)和大写字母(A-Z)',
-    },
-    {
-      message: '至少包含一个数字(0-9)或是一个符号',
-      validate: val => {
-        return /([0-9]|[._+@#$%])+/.test(val);
-      },
-    },
-  ];
-
   const onSubmit = () => {
     validateFields().then(values => {
       const { username, password } = values;
-      alert(`表单校验通过 username：${username}, password：${password}`);
+      alert(`Form validation passed. username: ${username}, password: ${password}`);
     });
   };
 
@@ -54,35 +46,34 @@ export default () => {
     <Form form={form} {...formItemLayout}>
       <Form.Item
         name="username"
-        label="用户名"
-        rules={[{ required: true, message: '请输入用户名' }]}
+        label="Username"
+        rules={[{ required: true, message: 'Please enter username' }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
         name="password"
-        label="密码"
+        label="Password"
         rules={[
+          { required: true, message: 'Please enter password' },
           {
-            required: true,
-            message: '请输入密码',
-          },
-          {
-            validator: (rule, value, callback) => {
-              if (value && !passed) {
-                callback('密码设置不符合要求');
-              } else {
-                callback();
+            validator: async (_, value) => {
+              if (!value) {
+                return;
+              }
+              const failed = rules.find(rule => !rule.validate(value));
+              if (failed) {
+                throw new Error(failed.message);
               }
             },
           },
         ]}
       >
-        <Password rules={rules} onValidate={setPassed} />
+        <Password rules={rules} />
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" onClick={onSubmit}>
-          提交
+          Submit
         </Button>
       </Form.Item>
     </Form>

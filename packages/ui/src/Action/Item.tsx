@@ -1,7 +1,7 @@
 import { LoadingOutlined } from '@oceanbase/icons';
 import { Button, Tooltip, Typography } from '@oceanbase/design';
 import type { ButtonProps } from '@oceanbase/design';
-import React from 'react';
+import React, { useState } from 'react';
 
 export interface BaseProps extends ButtonProps {
   /** 是否显示 */
@@ -16,76 +16,83 @@ export interface BaseProps extends ButtonProps {
   divider?: boolean;
 }
 
-export class ActionButton extends React.PureComponent<BaseProps> {
-  static __DISPLAY_NAME = 'button';
-  state = {
-    loading: false,
+export const ActionButton: React.FC<BaseProps> & { __DISPLAY_NAME?: string } = ({
+  children,
+  onClick,
+  enableLoading = true,
+  tooltip,
+  loading,
+  ...restProps
+}) => {
+  const [internalLoading, setInternalLoading] = useState(false);
+
+  const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const handle = onClick?.(e);
+
+    if (enableLoading && (handle as Promise<void>)?.then) {
+      setInternalLoading(true);
+
+      (handle as Promise<void>).then(() => {
+        setInternalLoading(false);
+      });
+    }
   };
-  render() {
-    const { children, onClick, enableLoading = true, tooltip, loading, ...restProps } = this.props;
-    return (
-      <Tooltip placement="top" title={tooltip}>
-        <Button
-          loading={enableLoading && (loading || this.state.loading)}
-          onClick={e => {
-            const handle = onClick?.(e);
 
-            if (enableLoading && (handle as Promise<void>)?.then) {
-              this.setState({ loading: true });
-
-              (handle as Promise<void>).then(() => {
-                this.setState({ loading: false });
-              });
-            }
-          }}
-          {...restProps}
-        >
-          {children}
-        </Button>
-      </Tooltip>
-    );
-  }
-}
-
-export class ActionLink extends React.PureComponent<BaseProps> {
-  static __DISPLAY_NAME = 'link';
-  state = {
-    loading: false,
-    disabled: false,
-  };
-  render() {
-    const {
-      disabled,
-      onClick,
-      children,
-      enableLoading = true,
-      tooltip,
-      loading,
-      type,
-      style,
-      ...restProps
-    } = this.props;
-    return (
-      <Typography.Link
-        style={{ padding: 0, ...style }}
-        disabled={loading || disabled || this.state.disabled}
-        onClick={e => {
-          const handle = onClick?.(e);
-
-          if (enableLoading && (handle as Promise<void>)?.then) {
-            this.setState({ loading: true, disabled: true });
-
-            (handle as Promise<void>).then(() => {
-              this.setState({ loading: false, disabled: false });
-            });
-          }
-        }}
+  return (
+    <Tooltip placement="top" title={tooltip}>
+      <Button
+        loading={enableLoading && (loading || internalLoading)}
+        onClick={handleClick}
         {...restProps}
       >
-        <Tooltip placement="top" title={tooltip}>
-          {loading || this.state.disabled ? <LoadingOutlined /> : ''} {children}
-        </Tooltip>
-      </Typography.Link>
-    );
-  }
-}
+        {children}
+      </Button>
+    </Tooltip>
+  );
+};
+
+ActionButton.__DISPLAY_NAME = 'button';
+
+export const ActionLink: React.FC<BaseProps> & { __DISPLAY_NAME?: string } = ({
+  disabled,
+  onClick,
+  children,
+  enableLoading = true,
+  tooltip,
+  loading,
+  type,
+  style,
+  ...restProps
+}) => {
+  const [internalLoading, setInternalLoading] = useState(false);
+  const [internalDisabled, setInternalDisabled] = useState(false);
+
+  const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const handle = onClick?.(e);
+
+    if (enableLoading && (handle as Promise<void>)?.then) {
+      setInternalLoading(true);
+      setInternalDisabled(true);
+
+      (handle as Promise<void>).then(() => {
+        setInternalLoading(false);
+        setInternalDisabled(false);
+      });
+    }
+  };
+
+  return (
+    <Typography.Link
+      style={{ padding: 0, ...style }}
+      disabled={loading || disabled || internalDisabled}
+      onClick={handleClick}
+      {...restProps}
+    >
+      <Tooltip placement="top" title={tooltip}>
+        {loading || internalDisabled ? <LoadingOutlined /> : ''} {children}
+      </Tooltip>
+    </Typography.Link>
+  );
+};
+
+ActionLink.__DISPLAY_NAME = 'link';

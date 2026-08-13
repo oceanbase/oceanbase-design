@@ -1,0 +1,18 @@
+.container {
+  color: var(--ob-color-text-link);
+  background: var(--ob-color-bg-default);
+  border-color: var(--ob-color-border-default);
+  font-size: var(--ob-font-size-325);
+}
+
+.status {
+  &.success {
+    color: var(--ob-color-text-success);
+    background: var(--ob-color-bg-success);
+  }
+  &.error {
+    color: var(--ob-color-text-error);
+    background: var(--ob-color-bg-error);
+  }
+}
+

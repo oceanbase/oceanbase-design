@@ -8,18 +8,21 @@ nav:
 - 🔥 完全继承 pro-components [PageContainer](https://procomponents.ant.design/components/page-container) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
 - 📢 默认关闭 `footerToolBarProps.portalDom`，即底部操作栏默认渲染到父元素，而不是 `body`。
-- 🆕 新增 `header.reload` 属性，用于刷新整个页面。
+- 🆕 新增 `header.reload` 属性，用于设置页面刷新。
+- 🆕 新增 `header.document` 属性，用于设置文档链接。
 - 🆕 内置 `header.itemRender`，默认支持 `hashHistory` 和 `browserHistory`，但要求项目安装 `react-router`。详见 [说明](https://ant.design/components/breadcrumb-cn#%E5%92%8C-browserhistory-%E9%85%8D%E5%90%88)。
 
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/basic.tsx" title="基本" description="包含标题、操作区、内容区、页脚。"></code>
+<code src="./demo/basic.tsx" iframe="600" title="基本" description="包含标题、操作区、内容区、页脚。"></code>
+<code src="./demo/onBack.tsx" iframe="600" title="返回"></code>
+<code src="./demo/reload.tsx" iframe="600" title="页面刷新"></code>
+<code src="./demo/document.tsx" iframe="600" title="文档链接" description="支持文档链接、事件回调和 ReactNode 三种使用场景。"></code>
 <code src="./demo/complete.tsx" iframe="600" title="完整使用" description="包含面包屑、页面返回、reload 刷新等，并支持页面滚动。"></code>
 <code src="./demo/with-tabs.tsx" iframe="600" title="和 Tabs 组合使用"></code>
 <code src="./demo/header-less.tsx" iframe="600" title="无 PageHeader" description="头部内容为空。"></code>
 <code src="./demo/empty.tsx" title="空页面"></code>
-<code src="./demo/extra-footer.tsx" title="页头和页脚操作区" description="位于页头和页脚操作区的组件尺寸为 `large`，字体大小为 `middle`。" debug></code>
 <code src="./demo/title.tsx" title="title 属性" description="样式需要符合预期。" debug></code>
 
 ## 与路由搭配使用
@@ -68,6 +71,7 @@ const App = () => {
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
-| header.reload | 配置页面刷新 | boolean \| [IconComponentProps](https://ant.design/components/icon-cn#api) \| ReactNode | - | - |
+| header.reload | 页面刷新 | boolean \| [IconComponentProps](https://ant.design/components/icon-cn#api) \| ReactNode | - | - |
+| header.document | 文档链接，支持字符串链接、点击事件回调和 ReactNode | string \| MouseEventHandler\<HTMLAnchorElement\> \| ReactNode | - | - |
 
 - 更多 API 详见 pro-components PageContainer 文档: https://procomponents.ant.design/components/page-container

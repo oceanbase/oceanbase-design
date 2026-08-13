@@ -47,7 +47,7 @@ const columns: ColumnsType<DataType> = [
     dataIndex: 'address',
     key: 'address 4',
     ellipsis: true,
-    // ellipsis 默认使用的 Tooltip 如果不满足预期，可以自定义 Tooltip
+    // Customize Tooltip when the default ellipsis Tooltip does not meet expectations
     render: address => (
       <Tooltip placement="topLeft" title="Custom your tooltip">
         <a>{address}</a>

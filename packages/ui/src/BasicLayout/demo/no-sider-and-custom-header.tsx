@@ -16,19 +16,19 @@ export default () => {
 
   const NEW_METADB_OCP_INSTALL = [
     {
-      title: 'MetaDB 配置',
+      title: 'MetaDB Configuration',
     },
     {
-      title: '环境预检查',
+      title: 'Environment Pre-check',
     },
     {
-      title: 'MetaDB 部署',
+      title: 'MetaDB Deployment',
     },
     {
-      title: 'OCP 配置',
+      title: 'OCP Configuration',
     },
     {
-      title: 'OCP 部署',
+      title: 'OCP Deployment',
     },
   ];
   const getIcon = (key: number) => {
@@ -45,11 +45,11 @@ export default () => {
           <Space size={24}>
             <Space style={{ color: '#5C6B8A', cursor: 'pointer' }}>
               <HomeOutlined />
-              访问官网
+              Visit Website
             </Space>
             <Space style={{ color: '#5C6B8A', cursor: 'pointer' }}>
               <ReadOutlined />
-              帮助中心
+              Help Center
             </Space>
           </Space>
         ),
@@ -60,7 +60,7 @@ export default () => {
       <PageContainer
         ghost={true}
         header={{
-          title: '页面标题',
+          title: 'Page Title',
         }}
         footer={[
           <Button
@@ -69,7 +69,7 @@ export default () => {
               setCurrent(current > 0 ? current - 1 : 0);
             }}
           >
-            上一步
+            Previous
           </Button>,
           <Button
             key="next"
@@ -78,7 +78,7 @@ export default () => {
               setCurrent(current >= 4 ? current : current + 1);
             }}
           >
-            下一步
+            Next
           </Button>,
         ]}
       >

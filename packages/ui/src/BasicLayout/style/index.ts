@@ -28,13 +28,35 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
     footerBarStyle[`${componentCls}${componentCls}-sider-${width}`] = {
       [`${proComponentsCls}-footer-bar`]: {
         // footer bar width adapt to sider width of BasicLayout
-        width: width === 0 ? '100%' : `calc(100% - ${width}px - 24px)`,
+        width: width === 0 ? '100%' : `calc(100% - ${width}px - 32px)`,
         transition: `width ${motionDurationSlow}`,
       },
     };
   });
 
   return {
+    '@keyframes activeGradientAnimation': {
+      '0%': {
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '0% 100%',
+      },
+      '100%': {
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100% 100%',
+      },
+    },
+    '@keyframes selectedGradientAnimation': {
+      '0%': {
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '0% 100%',
+        borderRadius: 0,
+      },
+      '100%': {
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100% 100%',
+        borderRadius: token.borderRadiusLG,
+      },
+    },
     [`${componentCls}-banner-wrapper`]: {
       position: 'fixed',
       top: 0,
@@ -113,6 +135,11 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               borderRadius: '10px',
               cursor: 'pointer',
               opacity: 0,
+              font: 'inherit',
+              padding: 0,
+              margin: 0,
+              appearance: 'none',
+              WebkitAppearance: 'none',
               // 设置展开/收起按钮中的图标大小
               [iconCls]: {
                 fontSize: 'px',
@@ -131,32 +158,19 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               backgroundColor: 'transparent',
               borderRight: 'none',
 
-              [`${antCls}-menu-item`]: {
+              [`${antCls}-menu-submenu, ${antCls}-menu-item`]: {
                 width: '100%',
                 marginTop: 0,
                 marginRight: 'auto',
                 marginLeft: 'auto',
                 color: colorText,
                 backgroundColor: 'transparent',
-                [iconCls]: {
+                [`${antCls}-menu-title-content ${iconCls}`]: {
                   // 图标尺寸设为 18px，因为设计侧给到的图标内侧有间距，需要适当加大尺寸
                   width: '18px',
                   height: '18px',
                   fontSize: '18px',
-                },
-              },
-              [`${antCls}-menu-submenu`]: {
-                width: '100%',
-                marginTop: 0,
-                marginRight: 'auto',
-                marginLeft: 'auto',
-                color: colorText,
-                backgroundColor: 'transparent',
-                [iconCls]: {
-                  // 图标尺寸设为 18px，因为设计侧给到的图标内侧有间距，需要适当加大尺寸
-                  width: '18px',
-                  height: '18px',
-                  fontSize: '18px',
+                  marginBottom: 10,
                 },
               },
               [`${antCls}-menu-submenu > ${antCls}-menu-submenu-title`]: {
@@ -206,7 +220,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               [`${antCls}-menu-item-active, ${antCls}-menu-submenu-active > ${antCls}-menu-submenu-title`]:
                 {
                   color: `${colorText} !important`,
-                  fontWeight: 600,
+                  fontWeight: token.fontWeightStrong,
                   animation: 'activeGradientAnimation 0.1s',
                   // .border-gradient(linear-gradient(to right, #E9EDF6, @colorBgLayout), linear-gradient(90deg, #C6CDD9, @colorBgLayout), 0.5px, solid, 8px 0 0 8px),
                   backgroundImage: `linear-gradient(to right,#E9EDF6, ${colorBgLayout}),linear-gradient(90deg,#C6CDD9,${colorBgLayout})`,
@@ -219,7 +233,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
               // 菜单项选中样式
               [`${antCls}-menu-item-selected`]: {
                 color: `${colorPrimary} !important`,
-                fontWeight: 600,
+                fontWeight: token.fontWeightStrong,
                 animation: 'selectedGradientAnimation 0.5s',
                 // .border-gradient(linear-gradient(to right, #E5EEFF, #F4F8FF), linear-gradient(90deg, @colorPrimaryBorder, @colorBgLayout), 0.5px, solid, 8px 0 0 8px),
                 backgroundImage: `linear-gradient(to right,#E5EEFF,#F4F8FF),linear-gradient(90deg,${colorPrimaryBorder},${colorBgLayout})`,
@@ -373,6 +387,10 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
           backgroundColor: colorBgLayout,
           transition: 'all 0.3s',
         },
+        [`${componentCls}-content-main`]: {
+          display: 'block',
+          minHeight: '100%',
+        },
       },
     },
 
@@ -416,7 +434,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
         },
         [`${antCls}-menu-item-active`]: {
           color: 'colorText !important',
-          fontWeight: 600,
+          fontWeight: token.fontWeightStrong,
           animation: 'activeGradientAnimation 0.1s',
           // .border-gradient(linear-gradient(to right, #E9EDF6, colorBgLayout), linear-gradient(90deg, #C6CDD9, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
           backgroundImage: `linear-gradient(to right, #E9EDF6, ${colorBgLayout}), linear-gradient(90deg, #C6CDD9, ${colorBgLayout})`,
@@ -428,7 +446,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
         },
         [`${antCls}-menu-submenu-active > & ${antCls}-menu-submenu-title`]: {
           color: 'colorText !important',
-          fontWeight: 600,
+          fontWeight: token.fontWeightStrong,
           animation: 'activeGradientAnimation 0.1s',
           // .border-gradient(linear-gradient(to right, #E9EDF6, colorBgLayout), linear-gradient(90deg, #C6CDD9, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
           backgroundImage: `linear-gradient(to right, #E9EDF6, ${colorBgLayout}), linear-gradient(90deg, #C6CDD9, ${colorBgLayout})`,
@@ -441,7 +459,7 @@ export const genBasicLayoutStyle: GenerateStyle<BasicLayoutToken> = (
 
         [`${antCls}-menu-item-selected`]: {
           color: `${colorPrimary} !important`,
-          fontWeight: 600,
+          fontWeight: token.fontWeightStrong,
           animation: 'selectedGradientAnimation 0.1s',
           // .border-gradient(linear-gradient(to right, #E5EEFF, #F4F8FF), linear-gradient(90deg, @colorPrimaryBorder, colorBgLayout), 0.5px, solid, 8px 0 0 8px),
           backgroundImage: `linear-gradient(to right,#E5EEFF,#F4F8FF),linear-gradient(90deg,${colorPrimaryBorder},${colorBgLayout})`,

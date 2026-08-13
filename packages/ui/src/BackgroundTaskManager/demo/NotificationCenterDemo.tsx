@@ -5,8 +5,8 @@ import NotificationCenter from './NotificationCenter';
 export default () => {
   const onBtnClick = useCallback(() => {
     const id = `${Math.round(Math.random() * 1000)}`;
-    message.info(`id为: ${id}的任务已经提交成功，请等候处理...`);
-    // 实际使用通过引入model的方法来调用
+    message.info(`Task ${id} submitted successfully. Please wait...`);
+    // In production, call via the model
     (window as any).obuiMockModel?.backgroundTaskManagerAPIs?.pushNotificationQueue?.({
       [id]: 'download_task',
     });

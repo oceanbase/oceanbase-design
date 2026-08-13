@@ -6,6 +6,7 @@ export default {
   global: {
     ...jaJP.global,
     inputPlaceholder: '入力してください',
+    viewDocument: 'ドキュメントを見る',
   },
   Pagination: {
     ...jaJP.Pagination,
@@ -24,5 +25,12 @@ export default {
       collapse: '折りたたむ',
       open: '展開',
     },
+  },
+  Filter: {
+    pleaseSelect: '選択してください',
+    open: '開く',
+    filters: 'フィルター',
+    apply: '確定',
+    clearAll: 'すべてクリア',
   },
 } as Locale;

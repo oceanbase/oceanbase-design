@@ -1,14 +1,43 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import type { FullToken, GenerateStyle } from '../../theme/interface';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type FormToken = FullToken<'Form'>;
 
 export const genFormStyle: GenerateStyle<FormToken> = (token: FormToken): CSSObject => {
-  const { componentCls } = token;
+  const { componentCls, calc } = token;
   return {
+    [componentCls]: {
+      // extra style
+      [`${componentCls}-item-explain, ${componentCls}-item-extra`]: {
+        paddingTop: calc(token.controlHeightSM)
+          .sub(token.fontSizeSM * token.lineHeightSM)
+          .div(2)
+          .equal(),
+        fontSize: token.fontSizeSM,
+        lineHeight: token.lineHeightSM,
+      },
+      [`${componentCls}-item-explain + ${componentCls}-item-extra`]: {
+        paddingTop: 0,
+      },
+    },
+    // vertical layout style
     [`${componentCls}${componentCls}-vertical`]: {
       [`${componentCls}-item:not(${componentCls}-item-horizontal)`]: {
+        // description style
+        [`${componentCls}-item-control-input`]: {
+          minHeight: 'auto',
+        },
+        [`${componentCls}-item-label`]: {
+          paddingBottom: calc(token.paddingXXS).add(2).equal(),
+        },
+        [`${componentCls}-item-description`]: {
+          paddingTop: token.paddingXXS,
+          fontSize: token.fontSizeSM,
+          lineHeight: token.lineHeightSM,
+          color: token.colorTextDescription,
+        },
+        // action style
         [`${componentCls}-item-label > label`]: {
           width: '100%',
           [`${componentCls}-item-action`]: {
@@ -21,9 +50,6 @@ export const genFormStyle: GenerateStyle<FormToken> = (token: FormToken): CSSObj
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Form', token => {
-    return [genFormStyle(token as FormToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Form', token => {
+  return [genFormStyle(token as FormToken)];
+});

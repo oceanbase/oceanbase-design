@@ -1,5 +1,5 @@
-import { Button } from '@oceanbase/design';
-import React, { useMemo } from 'react';
+import { Button, ConfigProvider } from '@oceanbase/design';
+import React, { useContext, useMemo } from 'react';
 import type { LocaleWrapperProps } from '../../locale/LocaleWrapper';
 import LocaleWrapper from '../../locale/LocaleWrapper';
 import type { CodeType } from '../constant';
@@ -7,6 +7,7 @@ import { CODE_PRESET } from '../constant';
 import type { BoundaryLocale } from '../IBoundary';
 import zhCN from '../locale/zh-CN';
 import classNames from 'classnames';
+import useStyle from '../style';
 
 export interface IBoundaryCode extends LocaleWrapperProps, React.HTMLProps<HTMLDivElement> {
   code: CodeType;
@@ -21,6 +22,9 @@ export interface IBoundaryCode extends LocaleWrapperProps, React.HTMLProps<HTMLD
 const BoundaryCode: React.FC<IBoundaryCode> = props => {
   const { children, onClick, code, imageUrl, title, buttonText, locale, className, ...restProps } =
     props;
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('boundary');
+  const { wrapSSR } = useStyle(prefixCls);
 
   const info = useMemo(() => {
     const data = CODE_PRESET(locale);
@@ -28,17 +32,17 @@ const BoundaryCode: React.FC<IBoundaryCode> = props => {
     return data[code];
   }, [code, locale]);
 
-  return (
+  return wrapSSR(
     <div
       className={classNames(
         'boundary-container',
         'boundary-code',
-        `ob-boundary-${code}`,
+        `${prefixCls}-${code}`,
         className
       )}
       {...restProps}
     >
-      <div className="empty">
+      <div className="boundary-empty">
         <img src={imageUrl || info.imageUrl} />
         <h4>{title || info.title}</h4>
         {children}

@@ -1,0 +1,13 @@
+{
+  "name": "Empty",
+  "package": "@oceanbase/design",
+  "diffLevel": "C",
+  "extendsAntd": "Empty",
+  "delegateAntd": true,
+  "addedProps": ["title", "steps", "layout"],
+  "constraints": [],
+  "keywords": ["empty", "placeholder", "no-data"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/empty/index.tsx",
+  "docSource": "packages/design/src/empty/index.md"
+}

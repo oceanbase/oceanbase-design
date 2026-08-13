@@ -4,6 +4,7 @@
   "app.theme.switch.aliyun": "Aliyun theme",
   "app.theme.switch.motion.on": "Motion On",
   "app.theme.switch.motion.off": "Motion Off",
+  "app.theme.switch.cssVar": "CSS Variables Mode",
   "app.theme.switch.font.default": "Default Font",
   "app.theme.switch.font.custom": "Custom Font",
   "app.header.menu.more": "More",

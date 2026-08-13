@@ -1,1 +1,2 @@
-@import '~antd/dist/reset.css';
+/* antd/dist/reset.css is imported in global.tsx */
+/* reserve this file for compatibility with antd */

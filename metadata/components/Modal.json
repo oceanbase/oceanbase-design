@@ -1,0 +1,13 @@
+{
+  "name": "Modal",
+  "package": "@oceanbase/design",
+  "diffLevel": "B",
+  "extendsAntd": "Modal",
+  "delegateAntd": true,
+  "addedProps": ["extra", "document"],
+  "constraints": [],
+  "keywords": ["modal", "dialog", "popup", "document"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/modal/Modal.tsx",
+  "docSource": "packages/design/src/modal/index.md"
+}

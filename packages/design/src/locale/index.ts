@@ -6,15 +6,32 @@ import type { InputNumberLocale } from '../input-number';
 import type { SelectLocale } from '../select';
 import type { TreeSelectLocale } from '../tree-select';
 import type { TableLocale } from '../table';
+import type { CardLocale } from '../card';
 
 export * from 'antd/es/locale';
 
 export type GlobalLocale = AntLocale['global'] & {
   inputPlaceholder?: string;
+  viewDocument?: string;
 };
 
 export interface PaginationLocale extends AntPaginationLocale {
   total?: string;
+}
+
+export interface FilterLocale {
+  pleaseSelect?: string;
+  open?: string;
+  filters?: string;
+  apply?: string;
+  clearAll?: string;
+}
+
+export interface NotificationLocale {
+  showMore?: string;
+  copy?: string;
+  copied?: string;
+  copyFailed?: string;
 }
 
 export interface Locale extends AntLocale {
@@ -26,6 +43,9 @@ export interface Locale extends AntLocale {
   Select?: SelectLocale;
   TreeSelect?: TreeSelectLocale;
   Table?: TableLocale;
+  Card?: CardLocale;
+  Filter?: FilterLocale;
+  Notification?: NotificationLocale;
 }
 
 export { default as useLocale } from './useLocale';

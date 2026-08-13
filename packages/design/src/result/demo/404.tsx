@@ -6,8 +6,8 @@ export default () => {
     <Result
       status="404"
       title="404"
-      subTitle="集群已被删除，页面无法打开"
-      extra={<Button type="primary">返回首页</Button>}
+      subTitle="Sorry, the page you visited does not exist."
+      extra={<Button type="primary">Back Home</Button>}
     />
   );
 };

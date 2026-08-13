@@ -1,0 +1,255 @@
+import type { ReactNode } from 'react';
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { Flex, Popover } from 'antd';
+import Spin from '../../spin';
+import theme from '../../theme';
+import { CloseOutlined, DownOutlined, LoadingOutlined } from '@oceanbase/icons';
+import classNames from 'classnames';
+import { useFilterContext } from '../FilterContext';
+import useFilterStyle, { getFilterCls } from '../style';
+import type { BaseFilterProps, InternalFilterProps } from '../type';
+
+export interface FilterButtonRef {
+  closePopover: () => void;
+}
+
+interface FilterButtonProps extends BaseFilterProps, InternalFilterProps {
+  children?: ReactNode;
+  /** 清除回调 */
+  onClear?: () => void;
+  /** 下拉内容 */
+  content?: ReactNode;
+  /** 是否禁用 */
+  disabled?: boolean;
+  /** 是否加载中 */
+  loading?: boolean;
+  /** 是否已选中值 */
+  selected?: boolean;
+  /** 额外内容，显示在标签旁边 */
+  extra?: ReactNode;
+  /** 选择后是否自动关闭弹出层 */
+  autoCloseOnSelect?: boolean;
+  /** 选择回调，当选择项时调用，如果 autoCloseOnSelect 为 true，调用后会自动关闭弹出层 */
+  onSelect?: () => void;
+  /** 是否显示标签下方的分割线，默认 false */
+  showLabelDivider?: boolean;
+  /** 是否显示后缀图标区域（包括下拉箭头和清除图标），默认 true */
+  showSuffixIcon?: boolean;
+  /** 是否为 flat 模式（内部使用） */
+  _isFlat?: boolean;
+  style?: React.CSSProperties;
+}
+
+const FilterButton = forwardRef<FilterButtonRef, FilterButtonProps>(
+  (
+    {
+      children,
+      icon,
+      label,
+      bordered = true,
+      onClear,
+      content,
+      footer,
+      trigger = 'click',
+      placement = 'bottomLeft',
+      disabled = false,
+      loading = false,
+      selected = false,
+      extra,
+      autoCloseOnSelect = false,
+      onSelect,
+      showLabelDivider = false,
+      showSuffixIcon = true,
+      _isInWrapComponent = false,
+      _isFlat = false,
+      style,
+      allowClear = true,
+      ...restProps
+    },
+    ref
+  ) => {
+    const { token } = theme.useToken();
+    const { isCollapsed } = useFilterContext();
+    const [open, setOpen] = useState(false);
+    const [popoverWidth, setPopoverWidth] = useState<number | undefined>();
+    const { wrapSSR, prefixCls } = useFilterStyle();
+    const innerRef = useRef<HTMLDivElement>(null);
+
+    // 从 restProps 中提取 onOpenChange，避免被 Popover 的 onOpenChange 覆盖
+    const { onOpenChange: externalOnOpenChange, ...popoverProps } = restProps;
+
+    const handleClearClick = (e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      onClear?.();
+      setOpen(false);
+    };
+
+    const closePopover = useCallback(() => {
+      setOpen(false);
+      // 通知外部组件 Popover 已关闭，确保 Tooltip hook 状态同步
+      externalOnOpenChange?.(false);
+    }, [externalOnOpenChange]);
+
+    // 通过 ref 暴露关闭方法
+    useImperativeHandle(
+      ref,
+      () => ({
+        closePopover,
+      }),
+      [closePopover]
+    );
+
+    // 处理 popover 状态变化
+    const handleOpenChange = (newOpen: boolean) => {
+      if (!disabled) {
+        setOpen(newOpen);
+        externalOnOpenChange?.(newOpen);
+      }
+    };
+
+    // 折叠模式下实时监听按钮宽度变化，同步到 Popover 面板宽度
+    useEffect(() => {
+      if (!open || !isCollapsed || _isInWrapComponent || !innerRef.current) {
+        return;
+      }
+      const el = innerRef.current;
+      setPopoverWidth(el.offsetWidth);
+      const observer = new ResizeObserver(() => {
+        setPopoverWidth(el.offsetWidth);
+      });
+      observer.observe(el);
+      return () => observer.disconnect();
+    }, [open, isCollapsed, _isInWrapComponent]);
+
+    // 使用 useMemo 缓存 content，避免每次都重新创建
+    const popoverContent = useMemo(
+      () => (
+        <>
+          {!_isFlat && (!isCollapsed || _isInWrapComponent) && (
+            <Flex
+              justify="space-between"
+              align="center"
+              className={classNames(
+                getFilterCls(prefixCls, 'button-label-wrapper'),
+                showLabelDivider ? '' : getFilterCls(prefixCls, 'button-label-wrapper-no-border')
+              )}
+            >
+              <div style={{ fontSize: token.fontSizeSM }}>{label}</div>
+              <div>{extra}</div>
+            </Flex>
+          )}
+          {content}
+          {footer && (
+            <div
+              style={{
+                padding: '8px 16px',
+                borderTop: `1px solid ${token.colorFillSecondary}`,
+              }}
+            >
+              {footer}
+            </div>
+          )}
+        </>
+      ),
+      [
+        content,
+        footer,
+        label,
+        extra,
+        isCollapsed,
+        prefixCls,
+        showLabelDivider,
+        token,
+        _isFlat,
+        _isInWrapComponent,
+      ]
+    );
+
+    return wrapSSR(
+      <Popover
+        arrow={false}
+        placement={placement}
+        trigger={trigger}
+        content={popoverContent}
+        open={open && !disabled}
+        onOpenChange={handleOpenChange}
+        forceRender={_isInWrapComponent}
+        styles={{
+          body: {
+            padding: 0,
+            maxWidth: 300,
+            minWidth: 120,
+            ...(isCollapsed && !_isInWrapComponent && popoverWidth ? { width: popoverWidth } : {}),
+          },
+        }}
+        {...popoverProps}
+      >
+        <div ref={innerRef}>
+          <div
+            className={classNames(
+              getFilterCls(prefixCls, 'button'),
+              bordered && getFilterCls(prefixCls, 'border'),
+              open && getFilterCls(prefixCls, 'active'),
+              disabled && getFilterCls(prefixCls, 'disabled'),
+              selected &&
+                bordered &&
+                (!isCollapsed || _isInWrapComponent) &&
+                getFilterCls(prefixCls, 'selected')
+            )}
+            style={style}
+          >
+            <Flex align="center" justify="space-between" style={{ width: '100%' }}>
+              {icon && <div className={getFilterCls(prefixCls, 'button-prefix-icon')}>{icon}</div>}
+              <Flex
+                gap={8}
+                align="center"
+                flex={1}
+                className={getFilterCls(prefixCls, 'text-ellipsis')}
+              >
+                {children}
+              </Flex>
+              {loading ? (
+                <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
+                  <Spin
+                    indicator={<LoadingOutlined style={{ fontSize: token.fontSizeSM }} spin />}
+                  />
+                </div>
+              ) : showSuffixIcon ? (
+                <div className={getFilterCls(prefixCls, 'icon-wrapper')}>
+                  <DownOutlined
+                    className={selected && allowClear ? getFilterCls(prefixCls, 'arrow-icon') : ''}
+                    style={disabled ? { color: 'var(--ob-color-icon-disabled)' } : undefined}
+                  />
+                  {selected && allowClear && (
+                    <div
+                      className={getFilterCls(prefixCls, 'clear-icon')}
+                      onClick={e => {
+                        if (!disabled) {
+                          handleClearClick(e);
+                        }
+                      }}
+                    >
+                      <CloseOutlined />
+                    </div>
+                  )}
+                </div>
+              ) : null}
+            </Flex>
+          </div>
+        </div>
+      </Popover>
+    );
+  }
+);
+
+FilterButton.displayName = 'FilterButton';
+
+export default FilterButton;

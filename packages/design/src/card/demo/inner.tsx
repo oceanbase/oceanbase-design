@@ -25,6 +25,18 @@ const App: React.FC = () => (
         Inner Card content
       </Card>
     </Card>
+    <br />
+    <Card title="Card title" divided={false}>
+      <Card
+        title="Inner Card title"
+        tabList={[
+          { key: '1', label: 'Tab 1' },
+          { key: '2', label: 'Tab 2' },
+        ]}
+      >
+        Inner Card content
+      </Card>
+    </Card>
   </>
 );
 

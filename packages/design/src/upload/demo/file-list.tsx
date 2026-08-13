@@ -39,7 +39,9 @@ const App: React.FC = () => {
   };
   return (
     <Upload {...props} fileList={fileList}>
-      <Button icon={<UploadOutlined />}>Upload</Button>
+      <Button type="primary" icon={<UploadOutlined />}>
+        Upload
+      </Button>
     </Upload>
   );
 };

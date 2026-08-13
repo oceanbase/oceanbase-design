@@ -6,8 +6,8 @@ export default () => {
     <Result
       status="500"
       title="500"
-      subTitle="服务器发生了错误"
-      extra={<Button type="primary">返回首页</Button>}
+      subTitle="Sorry, something went wrong."
+      extra={<Button type="primary">Back Home</Button>}
     />
   );
 };

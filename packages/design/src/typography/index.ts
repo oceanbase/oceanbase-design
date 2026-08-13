@@ -1,4 +1,4 @@
-import { Typography } from 'antd';
+import { Typography as OriginTypography } from 'antd';
 import Text from './Text';
 import Link from './Link';
 import Title from './Title';
@@ -10,6 +10,15 @@ export * from 'antd/es/typography/Text';
 export * from 'antd/es/typography/Paragraph';
 export * from 'antd/es/typography/Link';
 export * from 'antd/es/typography/Title';
+
+export type TypographyType = typeof OriginTypography & {
+  Text: typeof Text;
+  Link: typeof Link;
+  Title: typeof Title;
+  Paragraph: typeof Paragraph;
+};
+
+const Typography = OriginTypography as TypographyType;
 
 Typography.Text = Text;
 Typography.Link = Link;

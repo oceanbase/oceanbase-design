@@ -19,7 +19,7 @@ export default () => {
         <Liquid
           height={200}
           shape="rect"
-          title="内存"
+          title="Memory"
           percent={0.6}
           warningPercent={0.6}
           dangerPercent={0.9}
@@ -29,7 +29,7 @@ export default () => {
         <Liquid
           height={200}
           shape="rect"
-          title="磁盘"
+          title="Disk"
           percent={0.3}
           warningPercent={0.6}
           dangerPercent={0.9}

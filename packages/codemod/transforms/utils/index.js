@@ -136,6 +136,14 @@ function addModuleImport(j, root, { pkgName, importSpecifier, importKind, before
             return 1;
           }
 
+          // 特殊处理：token 总是放在最后
+          if (a.imported && a.imported.name === 'token') {
+            return 1;
+          }
+          if (b.imported && b.imported.name === 'token') {
+            return -1;
+          }
+
           return a.imported.name.localeCompare(b.imported.name);
         });
         const importStatement = j.importDeclaration(mergedImportSpecifiers, j.literal(pkgName));

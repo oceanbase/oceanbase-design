@@ -67,7 +67,7 @@ const Tabs = React.forwardRef<TabsRef, TabsProps>(
   ) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('tabs', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const tabsCls = classNames(className, {
       [`${prefixCls}-no-divider`]: !divider,
     });
@@ -122,7 +122,7 @@ const Tabs = React.forwardRef<TabsRef, TabsProps>(
       return item;
     });
 
-    return wrapSSR(
+    return wrapCSSVar(
       <AntTabs
         ref={ref}
         items={newItems as AntTabsProps['items']}

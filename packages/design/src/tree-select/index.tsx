@@ -44,10 +44,10 @@ const InternalTreeSelect = React.forwardRef<BaseSelectRef, TreeSelectProps>(
     };
 
     const prefixCls = getPrefixCls('tree-select', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const treeSelectCls = classNames(className);
 
-    return wrapSSR(
+    return wrapCSSVar(
       <AntTreeSelect
         ref={ref}
         placeholder={treeSelectLocale.placeholder}

@@ -1,26 +1,75 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { unit } from '@ant-design/cssinjs';
+import type { FullToken, GenerateStyle } from '../../theme/interface';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type DrawerToken = FullToken<'Drawer'>;
 
 export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): CSSObject => {
-  const { componentCls } = token;
-  const boxShadowBottom =
-    '0 2px 4px 0 rgba(54,69,99,0.04), 0 1px 6px -1px rgba(54,69,99,0.04), 0 1px 2px 0 rgba(54,69,99,0.06)';
-  const boxShadowTop =
-    '0 -2px 4px 0 rgba(54,69,99,0.04), 0 -1px 6px -1px rgba(54,69,99,0.04), 0 -1px 2px 0 rgba(54,69,99,0.06)';
+  const { componentCls, antCls, iconCls, fontSizeHeading3, colorSplit, calc } = token;
+  const contentPadding = token.paddingLG;
+  const boxShadowTop = '0 -1px 2px 0 rgba(19, 33, 57, 0.1)';
+  const boxShadowBottom = '0 1px 2px 0 rgba(19, 33, 57, 0.1)';
 
   return {
     [`${componentCls}`]: {
       // should be wrapped by `${componentCls}-content` to overwritten antd style
       [`${componentCls}-content`]: {
+        // to avoid x scroll
+        overflow: 'initial',
         [`${componentCls}-header`]: {
-          padding: '16px 24px',
+          position: 'relative',
+          padding: `${unit(token.padding)} ${unit(token.paddingLG)}`,
           borderBottom: 'none',
           transition: `box-shadow ${token.motionDurationMid}`,
           // ensure header box-shadow cover body content
           zIndex: 10,
+          [`${componentCls}-title`]: {
+            fontSize: fontSizeHeading3,
+            [iconCls]: {
+              fontSize: token.fontSizeLG,
+            },
+          },
+          [`${componentCls}-title-wrapper`]: {
+            display: 'flex',
+            alignItems: 'center',
+          },
+          [`${componentCls}-title-content`]: {
+            lineHeight: token.lineHeightLG,
+            marginInlineEnd: token.marginXS,
+          },
+          [`${componentCls}-document-divider`]: {
+            marginInline: 0,
+            height: token.size,
+          },
+          [`${componentCls}-document-icon`]: {
+            display: 'inline-block',
+            color: token.colorIcon,
+            fontSize: token.fontSizeLG,
+            cursor: 'pointer',
+            '&:hover': {
+              color: token.colorLinkHover,
+            },
+            '&:active': {
+              color: token.colorLinkActive,
+            },
+          },
+          [`${componentCls}-document-default-icon`]: {
+            marginTop: (token.controlHeight - token.fontSizeLG) / 2,
+          },
+          // 标题栏底部增加分割线
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '1px',
+            backgroundColor: colorSplit,
+            // 使用负margin让分割线贯通到content边缘
+            marginLeft: calc(token.paddingLG).mul(-1).equal(),
+            marginRight: calc(token.paddingLG).mul(-1).equal(),
+          },
         },
         [`${componentCls}-header-shadow`]: {
           boxShadow: boxShadowBottom,
@@ -31,12 +80,12 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
           flexDirection: 'column',
         },
         [`${componentCls}-body-content`]: {
-          padding: '8px 24px 24px 24px',
+          padding: contentPadding,
           overflow: 'auto',
         },
         [`${componentCls}-footer-container`]: {
           position: 'sticky',
-          padding: '16px 24px',
+          padding: `${unit(token.padding)} ${unit(token.paddingLG)}`,
           transition: `box-shadow ${token.motionDurationMid}`,
           // ensure footer box-shadow cover body content
           zIndex: 10,
@@ -47,25 +96,31 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
             alignItems: 'center',
           },
         },
+        // footer 跟随内容或滚动到底部时，padding-top 设为 0
+        [`${componentCls}-footer-container-no-padding-top`]: {
+          paddingTop: 0,
+        },
         [`${componentCls}-footer-container-shadow`]: {
           boxShadow: boxShadowTop,
         },
+      },
+    },
+    [`${componentCls}${componentCls}-loading`]: {
+      [`${componentCls}-body > ${antCls}-skeleton`]: {
+        padding: contentPadding,
       },
     },
     [`${componentCls}${componentCls}-with-footer`]: {
       // should be wrapped by `${componentCls}-content` to overwritten antd style
       [`${componentCls}-content`]: {
         [`${componentCls}-body-content`]: {
-          padding: '8px 24px 8px 24px',
+          paddingBottom: token.paddingXS,
         },
       },
     },
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Drawer', token => {
-    return [genDrawerStyle(token as DrawerToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Drawer', token => {
+  return [genDrawerStyle(token as DrawerToken)];
+});

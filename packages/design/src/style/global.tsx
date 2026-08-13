@@ -1,0 +1,233 @@
+import React from 'react';
+import { useStyleRegister } from '@ant-design/cssinjs';
+import type { CSSInterpolation } from '@ant-design/cssinjs';
+import themeConfig from '../theme';
+import type { GlobalToken } from '../theme/interface';
+import interRegular from '../fonts/Inter-Regular.woff2';
+import interMedium from '../fonts/Inter-Medium.woff2';
+import interSemibold from '../fonts/Inter-SemiBold.woff2';
+import consolas from '../fonts/Consolas.woff2';
+import helveticaNeue from '../fonts/HelveticaNeue.woff2';
+import 'antd/dist/reset.css';
+
+const genGlobalStyle = (
+  token: GlobalToken,
+  prefixCls?: string,
+  iconPrefixCls?: string
+): CSSInterpolation => {
+  const antCls = `.${prefixCls}`;
+  const iconCls = `.${iconPrefixCls}`;
+  const buttonComponentCls = `${antCls}-btn`;
+  const typographyComponentCls = `${antCls}-typography`;
+  const menuComponentCls = `${antCls}-menu`;
+  const pickerComponentCls = `${antCls}-picker`;
+  const collapseComponentCls = `${antCls}-collapse`;
+  const paginationComponentCls = `${antCls}-pagination`;
+  const selectComponentCls = `${antCls}-select`;
+  const treeComponentCls = `${antCls}-tree`;
+  const treeSelectComponentCls = `${antCls}-select-tree`;
+  const uploadComponentCls = `${antCls}-upload`;
+  return [
+    {
+      '@font-face': {
+        fontFamily: 'Inter',
+        fontStyle: 'lighter',
+        fontWeight: 300,
+        // load priority: local font > self-hosting font > remote font
+        src: `local('Inter'), url(${interRegular}) format('woff2'), url('https://mdn.alipayobjects.com/huamei_fhnyvh/afts/file/A*ucHoQ4exBNYAAAAARtAAAAgAemfOAQ/Inter-Regular.woff2') format('woff2')`,
+        fontDisplay: 'swap',
+      },
+    },
+    {
+      '@font-face': {
+        fontFamily: 'Inter',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        src: `local('Inter'), url(${interMedium}) format('woff2'), url('https://mdn.alipayobjects.com/huamei_fhnyvh/afts/file/A*GboAQ56sQbkAAAAARwAAAAgAemfOAQ/Inter-Medium.woff2') format('woff2')`,
+        fontDisplay: 'swap',
+      },
+    },
+    {
+      '@font-face': {
+        fontFamily: 'Inter',
+        fontStyle: 'medium',
+        fontWeight: 500,
+        src: `local('Inter'), url(${interMedium}) format('woff2'), url('https://mdn.alipayobjects.com/huamei_fhnyvh/afts/file/A*GboAQ56sQbkAAAAARwAAAAgAemfOAQ/Inter-Medium.woff2') format('woff2')`,
+        fontDisplay: 'swap',
+      },
+    },
+    {
+      '@font-face': {
+        fontFamily: 'Inter',
+        fontStyle: 'semibold',
+        fontWeight: 600,
+        src: `local('Inter'), url(${interSemibold}) format('woff2'), url('https://mdn.alipayobjects.com/huamei_fhnyvh/afts/file/A*tcOIT5gLQl4AAAAARwAAAAgAemfOAQ/Inter-SemiBold.woff2') format('woff2')`,
+        fontDisplay: 'swap',
+      },
+    },
+    {
+      '@font-face': {
+        fontFamily: 'Consolas',
+        src: `local('Consolas'), url(${consolas}) format('woff2'), url('https://mdn.alipayobjects.com/huamei_fhnyvh/afts/file/A*R8bMTqAdGWgAAAAAAAAAAAAADmfOAQ/Consolas.woff2') format('woff2')`,
+        fontDisplay: 'swap',
+      },
+    },
+    {
+      '@font-face': {
+        fontFamily: 'Helvetica Neue',
+        src: `local('Helvetica Neue'), url(${helveticaNeue}) format('woff2'), url('https://mdn.alipayobjects.com/huamei_fhnyvh/afts/file/A*3EzqR6aYJMkAAAAAAAAAAAAADmfOAQ/HelveticaNeue.woff2') format('woff2')`,
+        fontDisplay: 'swap',
+      },
+    },
+    {
+      'pre, code, kbd, samp': {
+        fontFamily: token.fontFamilyCode,
+      },
+      'input::placeholder': {
+        // affact all placeholder excluding select
+        fontWeight: token.fontWeightWeak,
+      },
+      // WCAG 2.4.7: native / non-ant focusables still need a visible ring (antd controls use token lineWidthFocus)
+      // [[
+      //   `button:not([class^="${prefixCls}-"]):not([class*=" ${prefixCls}-"]):focus-visible`,
+      //   `a:not([class^="${prefixCls}-"]):not([class*=" ${prefixCls}-"]):focus-visible`,
+      //   `textarea:not([class^="${prefixCls}-"]):not([class*=" ${prefixCls}-"]):focus-visible`,
+      //   `select:not([class^="${prefixCls}-"]):not([class*=" ${prefixCls}-"]):focus-visible`,
+      //   `input:not([class^="${prefixCls}-"]):not([class*=" ${prefixCls}-"]):focus-visible`,
+      //   `[role="button"]:not([class^="${prefixCls}-"]):not([class*=" ${prefixCls}-"]):focus-visible`,
+      // ].join(', ')]: {
+      //   outline: `${token.lineWidthFocus ?? 2}px solid ${token.colorPrimary}`,
+      //   outlineOffset: 2,
+      // },
+      '*': {
+        scrollbarColor: `${token.colorFillSecondary} transparent`,
+      },
+      '.rc-virtual-list-scrollbar-thumb': {
+        background: `${token.colorFillSecondary} !important`,
+      },
+      // handle font-size: 12px font weight
+      [`[style*='font-size: 12px']`]: {
+        fontWeight: token.fontWeightWeak,
+      },
+      // link with href or data-aspm-param^="obcloud_openLink= show underline on hover
+      // except disabled and antd element
+      'a[href], a[data-aspm-param^="obcloud_openLink="]': {
+        [`&:not([disabled]):not([class^="${prefixCls}-"]):hover`]: {
+          textDecoration: 'underline',
+        },
+      },
+      // handle link style in button
+      [`${buttonComponentCls}${buttonComponentCls}-link:not(${buttonComponentCls}-disabled)`]: {
+        '&[href], &[data-aspm-param^="obcloud_openLink="]': {
+          '&:hover': {
+            textDecoration: 'underline',
+          },
+        },
+      },
+      // handle link style in typography
+      [`${typographyComponentCls}:not(${typographyComponentCls}-disabled)`]: {
+        '&[href], &[data-aspm-param^="obcloud_openLink="]': {
+          '&:hover': {
+            textDecoration: 'underline',
+          },
+        },
+      },
+      // handle link style in menu
+      [`${menuComponentCls}`]: {
+        [`${menuComponentCls}-item`]: {
+          [`${menuComponentCls}-title-content`]: {
+            'a:hover': {
+              textDecoration: 'none',
+            },
+          },
+        },
+      },
+      // handle pagination prev and next icon style
+      [`${paginationComponentCls}`]: {
+        [`${paginationComponentCls}-prev:not(${paginationComponentCls}-disabled), ${paginationComponentCls}-next:not(${paginationComponentCls}-disabled)`]:
+          {
+            [`${paginationComponentCls}-item-link`]: {
+              color: token.colorIcon,
+            },
+          },
+      },
+      // handle select open style
+      [`${selectComponentCls}${selectComponentCls}-single${selectComponentCls}-open ${selectComponentCls}-selection-item`]:
+        {
+          color: token.colorTextSecondary,
+        },
+      // handle picker clear icon style, work for DatePicker and TimePicker
+      [`${pickerComponentCls}`]: {
+        [`${pickerComponentCls}-clear ${iconCls}`]: {
+          color: token.gray7,
+          ['&:hover']: {
+            color: token.gray8,
+          },
+        },
+      },
+      [`${collapseComponentCls}`]: {
+        [`${collapseComponentCls}-item ${collapseComponentCls}-header ${collapseComponentCls}-expand-icon, ${collapseComponentCls}-extra`]:
+          {
+            [`${iconCls}`]: {
+              color: token.colorIcon,
+              '&:hover': {
+                color: token.colorIconHover,
+              },
+            },
+          },
+      },
+      // handle tree and tree select icon style
+      [`${treeComponentCls} ${treeComponentCls}-switcher, ${treeSelectComponentCls} ${treeSelectComponentCls}-switcher`]:
+        {
+          [`${iconCls}`]: {
+            color: token.colorIcon,
+            // to avoid icon to be hidden when hover
+            position: 'relative',
+          },
+        },
+      [`${treeComponentCls} ${treeComponentCls}-iconEle, ${treeSelectComponentCls} ${treeSelectComponentCls}-iconEle`]:
+        {
+          [`${iconCls}`]: {
+            color: token.colorIcon,
+          },
+        },
+      // handle upload icon style, exclude icons inside Button trigger
+      [`${uploadComponentCls}`]: {
+        [`${iconCls}`]: {
+          color: token.colorIcon,
+        },
+        [`${buttonComponentCls} ${iconCls}`]: {
+          color: 'inherit',
+        },
+      },
+    },
+  ];
+};
+
+export interface GlobalStyleProps {
+  prefixCls?: string;
+  iconPrefixCls?: string;
+}
+
+const GlobalStyle: React.FC<GlobalStyleProps> = ({
+  prefixCls = 'ant',
+  iconPrefixCls = 'anticon',
+}) => {
+  const { theme, token } = themeConfig.useToken();
+
+  const wrapSSR = useStyleRegister(
+    {
+      theme,
+      token,
+      path: ['global'],
+      hashId: '', // Empty hashId for global styles
+      order: -1000, // Inject before other styles
+    },
+    () => genGlobalStyle(token, prefixCls, iconPrefixCls)
+  );
+
+  return wrapSSR(<></>);
+};
+
+export { GlobalStyle };
+export default GlobalStyle;

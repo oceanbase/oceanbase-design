@@ -4,17 +4,17 @@ import { Divider, Table } from '@oceanbase/design';
 const App: React.FC = () => {
   const columns = [
     {
-      title: '姓名',
+      title: 'Name',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: '年龄',
+      title: 'Age',
       dataIndex: 'age',
       key: 'age',
     },
     {
-      title: '住址',
+      title: 'Address',
       dataIndex: 'address',
       key: 'address',
     },
@@ -31,7 +31,9 @@ const App: React.FC = () => {
           expandedRowRender: () => <Table columns={columns} dataSource={[]} />,
           defaultExpandedRowKeys: ['0'],
         }}
-        dataSource={[{ key: '0', name: '胡彦斌', age: 32, address: `西湖区湖底公园` }]}
+        dataSource={[
+          { key: '0', name: 'John Brown', age: 32, address: 'New York No. 1 Lake Park' },
+        ]}
       />
     </>
   );

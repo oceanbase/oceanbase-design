@@ -1,0 +1,92 @@
+[
+  {
+    "id": "filter-table-list",
+    "category": "filter",
+    "prompt": "Build a user list page with filter bar and table using OceanBase Design."
+  },
+  {
+    "id": "card-inner-bordered",
+    "category": "card-table",
+    "prompt": "Card with padding 0 wrapping a data table — use OceanBase Design."
+  },
+  {
+    "id": "config-provider-app",
+    "category": "config",
+    "prompt": "Create app root with global config for OceanBase Design message and theme."
+  },
+  {
+    "id": "filter-controlled",
+    "category": "filter",
+    "prompt": "Controlled filter items syncing with table query params."
+  },
+  {
+    "id": "table-batch-actions",
+    "category": "table",
+    "prompt": "Table with row selection and batch delete using toolOptionsRender."
+  },
+  {
+    "id": "page-container-detail",
+    "category": "layout",
+    "prompt": "Detail page with PageContainer and Descriptions."
+  },
+  {
+    "id": "basic-layout-shell",
+    "category": "layout",
+    "prompt": "App shell with sidebar menu using OceanBase UI layout."
+  },
+  {
+    "id": "form-modal-create",
+    "category": "form",
+    "prompt": "Create entity form inside Modal."
+  },
+  {
+    "id": "ob-icons-button",
+    "category": "icons",
+    "prompt": "Primary button with search icon from correct OB icon package."
+  },
+  {
+    "id": "spin-loading",
+    "category": "feedback",
+    "prompt": "Loading state with OB Spin gray indicator."
+  },
+  {
+    "id": "empty-guide",
+    "category": "feedback",
+    "prompt": "Empty state with steps guide layout."
+  },
+  {
+    "id": "alert-mini",
+    "category": "feedback",
+    "prompt": "Inline mini ghost alert for form validation summary."
+  },
+  {
+    "id": "config-aliyun-theme",
+    "category": "theme",
+    "prompt": "ConfigProvider with Aliyun theme flag for cloud console."
+  },
+  {
+    "id": "protable-vs-table",
+    "category": "table",
+    "prompt": "Static data table — choose correct OB table component."
+  },
+  {
+    "id": "light-filter-bar",
+    "category": "filter",
+    "prompt": "Pro list page light filter using @oceanbase/ui."
+  },
+  {
+    "id": "result-404",
+    "category": "feedback",
+    "prompt": "404 result page with OB Result component."
+  },
+  {
+    "id": "dropdown-actions",
+    "category": "navigation",
+    "prompt": "Row action dropdown menu in table toolbar."
+  },
+  {
+    "id": "select-not-filter",
+    "category": "filter",
+    "prompt": "Multi-criteria list filter — avoid wrong component choice."
+  }
+]

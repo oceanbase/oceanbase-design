@@ -61,10 +61,12 @@ const App: React.FC = () => {
           backgroundColor: token.colorBgLayout,
         }}
       >
-        <Card bordered={false} bodyStyle={{ padding: 0 }}>
+        <Card bordered={true} bodyStyle={{ padding: 0 }}>
           <Table columns={columns} dataSource={data} innerBordered />
         </Card>
       </div>
+      <Divider>outerBordered + innerBordered</Divider>
+      <Table columns={columns} dataSource={data} outerBordered innerBordered />
     </>
   );
 };

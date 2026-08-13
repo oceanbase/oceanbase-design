@@ -28,28 +28,73 @@ const GlobalStyle: React.FC = () => {
           max-height: 100%;
         }
 
-        .markdown > div[style^='display: flex'] {
+        .markdown > div[style*='display: flex'] {
           gap: 32px;
+          align-items: stretch;
         }
 
-        // 暂时去掉段落图片的阴影
-        // .markdown p > img {
-        //   margin: 24px 0;
-        //   box-shadow: 0 8px 20px rgba(143, 168, 191, 0.35);
-        // }
+        .markdown > div[style*='display: flex'] > div {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
 
-        // .markdown p > img.markdown-inline-image {
-        //   margin: 0;
-        //   box-shadow: none;
-        // }
+        .markdown > div[style*='display: flex'] > div > img {
+          display: block;
+          margin: 0 auto;
+          max-width: 100%;
+        }
+
+        .markdown > div[style*='display: flex'] > div > .image-description-center {
+          margin-top: auto;
+          padding-top: 8px;
+        }
 
         .markdown .image-description {
+          width: 100%;
           color: ${token.colorTextDescription};
         }
 
         .markdown .image-description-center {
           color: ${token.colorTextDescription};
           text-align: center;
+        }
+
+        /* product-graphic spec: Yuque-like scenario tables (screenshot + illustration per cell) */
+        .markdown .product-graphic-spec {
+          overflow-x: auto;
+          margin: 16px 0 24px;
+
+          table {
+            table-layout: fixed;
+            min-width: 720px;
+          }
+
+          table td {
+            text-align: center;
+            vertical-align: top;
+            padding: 12px 8px;
+          }
+
+          /* Screenshot (no alt) fills cell; illustration (with alt) stays icon-sized */
+          table td img {
+            max-width: none !important;
+            height: auto;
+            display: block;
+            margin: 0 auto 8px;
+          }
+
+          table td img[alt=''] {
+            width: 100%;
+          }
+
+          table td img[alt]:not([alt='']) {
+            width: 100px;
+          }
+
+          table td img:last-child {
+            margin-bottom: 0;
+          }
         }
 
         .markdown h1 {
@@ -309,7 +354,8 @@ const GlobalStyle: React.FC = () => {
           clear: both;
         }
 
-        .markdown .dumi-default-table {
+        .markdown .dumi-default-table,
+        .dumi-default-table {
           table {
             margin: 0;
             overflow-x: auto;
@@ -375,7 +421,6 @@ const GlobalStyle: React.FC = () => {
             td {
               border-width: 1px 0;
               &:first-child {
-                width: 18%;
                 min-width: 58px;
                 color: #595959;
                 font-weight: 600;
@@ -383,32 +428,26 @@ const GlobalStyle: React.FC = () => {
               }
 
               &:nth-child(2) {
-                width: 55%;
                 min-width: 160px;
               }
 
               &:nth-child(3) {
-                width: 22%;
                 color: ${token.magenta7};
                 font-size: ${Math.max(token.fontSize - 1, 12)}px;
               }
 
               &:nth-child(4) {
-                width: 15%;
                 font-size: ${Math.max(token.fontSize - 1, 12)}px;
               }
 
               &:nth-child(5) {
-                width: 8%;
                 font-size: ${Math.max(token.fontSize - 1, 12)}px;
               }
 
               &:nth-last-child(3):first-child {
-                width: 38%;
               }
 
               &:nth-last-child(3):first-child ~ td:nth-last-child(2) {
-                width: 70%;
               }
             }
           }

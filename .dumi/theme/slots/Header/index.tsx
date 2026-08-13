@@ -2,13 +2,13 @@ import { GithubOutlined, MenuOutlined } from '@oceanbase/icons';
 import { ClassNames, css } from '@emotion/react';
 import { Col, Popover, Row } from '@oceanbase/design';
 import classNames from 'classnames';
-import { useLocation, useSiteData } from 'dumi';
+import { history, useLocation, useLocale as useDumiLocale, useSiteData } from 'dumi';
 import DumiSearchBar from 'dumi/theme-default/slots/SearchBar';
-import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import useLocale from '../../../hooks/useLocale';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import useSiteToken from '../../../hooks/useSiteToken';
 import DirectionIcon from '../../common/DirectionIcon';
 import * as utils from '../../utils';
+import { setStoredLocale, toLocalizedPath } from '../../locale-preference';
 import type { SiteContextProps } from '../SiteContext';
 import SiteContext from '../SiteContext';
 import Logo from './Logo';
@@ -118,7 +118,6 @@ interface HeaderState {
 // ================================= Header =================================
 const Header: React.FC = () => {
   const [isClient, setIsClient] = React.useState(false);
-  const [, lang] = useLocale();
 
   const { pkg } = useSiteData();
 
@@ -127,7 +126,8 @@ const Header: React.FC = () => {
     windowWidth: 1400,
     searching: false,
   });
-  const { direction, isMobile, updateSiteConfig } = useContext<SiteContextProps>(SiteContext);
+  const { direction, isMobile, locale, updateSiteConfig } =
+    useContext<SiteContextProps>(SiteContext);
   const location = useLocation();
   const { pathname, search } = location;
 
@@ -178,20 +178,23 @@ const Header: React.FC = () => {
     window.location.href = urlObj.href.replace(/\/$/, '');
   }, []);
 
-  const onLangChange = useCallback(() => {
-    const currentProtocol = `${window.location.protocol}//`;
-    const currentHref = window.location.href.slice(currentProtocol.length);
+  const dumiLocale = useDumiLocale();
+  const { locales: siteLocales } = useSiteData();
 
-    if (utils.isLocalStorageNameSupported()) {
-      localStorage.setItem('locale', utils.isZhCN(pathname) ? 'en-US' : 'zh-CN');
+  const onLangChange = useCallback(() => {
+    if (siteLocales && siteLocales.length > 1) {
+      const targetLocale = siteLocales.find(l => l.id !== dumiLocale.id);
+      if (targetLocale) {
+        const stored = targetLocale.id === 'zh-CN' ? 'zh-CN' : 'en-US';
+        history.push(toLocalizedPath(history.location.pathname, stored) + (search || ''));
+        setStoredLocale(stored);
+        return;
+      }
     }
-    window.location.href =
-      currentProtocol +
-      currentHref.replace(
-        window.location.pathname,
-        utils.getLocalizedPathname(pathname, !utils.isZhCN(pathname), search).pathname
-      );
-  }, [location]);
+    // 单语言时回退到 query 参数方式
+    const newLocale = locale === 'cn' ? 'en' : 'cn';
+    updateSiteConfig({ locale: newLocale });
+  }, [locale, updateSiteConfig, dumiLocale, siteLocales, search]);
 
   const nextDirectionText = useMemo<string>(
     () => (direction !== 'rtl' ? 'RTL' : 'LTR'),
@@ -205,8 +208,10 @@ const Header: React.FC = () => {
 
   const { menuVisible, windowWidth, searching } = headerState;
 
-  const isHome = ['', 'index', 'index-cn'].includes(pathname);
-  const isZhCN = lang === 'cn';
+  const pathnameWithoutLocale = utils.getPathWithoutLocale(pathname);
+  const isHome = ['', '/', 'index', 'index-cn'].includes(pathnameWithoutLocale);
+  // 使用新的 locale 状态，而不是从 URL 路径判断
+  const isZhCN = locale === 'cn';
   const isRTL = direction === 'rtl';
   let responsive: null | 'narrow' | 'crowded' = null;
   if (windowWidth < RESPONSIVE_XS) {
@@ -241,15 +246,15 @@ const Header: React.FC = () => {
   let menu = [
     navigationNode,
     <More key="more" {...sharedProps} />,
-    // <SwitchBtn
-    //   key="lang"
-    //   onClick={onLangChange}
-    //   value={utils.isZhCN(pathname) ? 1 : 2}
-    //   label1="中"
-    //   label2="En"
-    //   tooltip1="中文 / English"
-    //   tooltip2="English / 中文"
-    // />,
+    <SwitchBtn
+      key="lang"
+      onClick={onLangChange}
+      value={locale === 'cn' ? 1 : 2}
+      label1="中"
+      label2="En"
+      tooltip1="中文 / English"
+      tooltip2="English / 中文"
+    />,
     <SwitchBtn
       key="direction"
       onClick={onDirectionChange}

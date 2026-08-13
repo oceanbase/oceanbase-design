@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/ui",
-  "version": "0.4.26",
+  "version": "1.1.0",
   "description": "The UI library based on OceanBase Design",
   "keywords": [
     "oceanbase",
@@ -30,17 +30,14 @@
     "README.md",
     "LICENSE"
   ],
-  "sideEffects": [
-    "**/*.less",
-    "**/*.css"
-  ],
+  "sideEffects": false,
   "scripts": {
-    "build": "NODE_OPTIONS=--max_old_space_size=4096 father build"
+    "build": "NODE_OPTIONS=--max_old_space_size=4096 father build && node ../../scripts/post-process-use-client.js ui"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.24.0",
     "@ant-design/pro-components": "^2.8.10",
-    "@antv/g6": "3.4.10",
+    "@inline-svg-unique-id/react": "^1.2.3",
     "@oceanbase/design": "workspace:^",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",

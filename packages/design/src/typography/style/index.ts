@@ -1,14 +1,21 @@
-import type { FullToken, GenerateStyle } from 'antd/lib/theme/internal';
+import type { FullToken, GenerateStyle } from '../../theme/interface';
 import type { CSSObject } from '@ant-design/cssinjs';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { unit } from '@ant-design/cssinjs';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type TypographyToken = FullToken<'Typography'>;
 
 export const genTypographyStyle: GenerateStyle<TypographyToken> = (
   token: TypographyToken
 ): CSSObject => {
-  const { componentCls, controlHeight, fontSize, lineHeight } = token;
-  const marginOffset = (controlHeight - fontSize * lineHeight) / 2;
+  const { componentCls, controlHeight, fontSize, lineHeight, calc } = token;
+  const marginOffset = calc(controlHeight)
+    .sub(calc(fontSize).mul(lineHeight).equal())
+    .div(2)
+    .equal();
+  const paddingBlock = calc(marginOffset).sub(token.lineWidth).equal();
+  const paddingInline = calc(token.paddingSM).sub(token.lineWidth).equal();
+  const negativeMarginOffset = calc(marginOffset).mul(-1).equal();
 
   return {
     // inherit color and lineHeight from parent instead of fixed colorText
@@ -20,58 +27,64 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
         fontSize: token.fontSize,
       },
     },
+    [`${componentCls}-caption`]: {
+      fontSize: token.fontSizeSM,
+      lineHeight: token.lineHeightSM,
+      fontWeight: token.fontWeightWeak,
+    },
+    [`${componentCls}-block`]: {
+      display: 'block',
+    },
     [`${componentCls}${componentCls}-editable-text:not(${componentCls}-edit-content)`]: {
       '&:hover': {
         background: token.colorBgContainer,
-        border: `${token.lineWidth}px ${token.lineType} ${token.colorBorder}`,
+        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorder}`,
         borderRadius: token.borderRadius,
         position: 'relative',
-        insetInlineStart: -token.paddingSM,
-        padding: `${marginOffset - token.lineWidth}px ${token.paddingSM - token.lineWidth}px`,
+        insetInlineStart: calc(token.paddingSM).mul(-1).equal(),
+        paddingBlock,
+        paddingInline,
       },
       'div&:hover': {
-        height: token.controlHeight,
-        marginTop: -marginOffset,
+        marginTop: negativeMarginOffset,
+        // should use css calc instead token calc
         marginBottom: `calc(1em - ${marginOffset}px)`,
       },
-      'span&:hover': {
+      'span&:hover:not(${componentCls}-block)': {
         display: 'inline-block',
-        height: token.controlHeight,
-        marginTop: -marginOffset,
-        marginBottom: -marginOffset,
+        marginTop: negativeMarginOffset,
+        marginBottom: negativeMarginOffset,
       },
       'h1&:hover, h2&:hover, h3&:hover, h4&:hover, h5&:hover': {
-        marginTop: `${-marginOffset}px !important`,
-        marginBottom: `${-marginOffset}px !important`,
+        marginTop: `${unit(negativeMarginOffset)} !important`,
+        marginBottom: `${unit(negativeMarginOffset)} !important`,
       },
     },
     [`${componentCls}${componentCls}-edit-content`]: {
       [`${componentCls}-div&`]: {
-        insetInlineStart: -token.paddingSM,
+        insetInlineStart: calc(token.paddingSM).mul(-1).equal(),
         insetBlockStart: 0,
-        marginTop: -marginOffset,
+        marginTop: negativeMarginOffset,
+        // should use css calc instead token calc
         marginBottom: `calc(1em - ${marginOffset}px)`,
       },
       [`${componentCls}-span&`]: {
-        insetInlineStart: -token.paddingSM,
+        insetInlineStart: calc(token.paddingSM).mul(-1).equal(),
         insetBlockStart: 0,
-        marginTop: -marginOffset,
-        marginBottom: -marginOffset,
+        marginTop: negativeMarginOffset,
+        marginBottom: negativeMarginOffset,
       },
       [`${componentCls}-h1&, ${componentCls}-h2&, ${componentCls}-h3&, ${componentCls}-h4&, ${componentCls}-h5&`]:
         {
-          insetInlineStart: -token.paddingSM,
+          insetInlineStart: calc(token.paddingSM).mul(-1).equal(),
           insetBlockStart: 0,
-          marginTop: `${-marginOffset}px !important`,
-          marginBottom: `${-marginOffset}px !important`,
+          marginTop: `${unit(negativeMarginOffset)} !important`,
+          marginBottom: `${unit(negativeMarginOffset)} !important`,
         },
     },
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Typography', token => {
-    return [genTypographyStyle(token as TypographyToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Typography', token => {
+  return [genTypographyStyle(token as TypographyToken)];
+});

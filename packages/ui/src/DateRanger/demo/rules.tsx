@@ -14,7 +14,7 @@ export default () => {
 
             return null;
           },
-          message: '时间跨度不能超过一天',
+          message: 'Time range cannot exceed one day',
         },
       ]}
     />

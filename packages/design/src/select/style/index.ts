@@ -1,23 +1,34 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import type { FullToken, GenerateStyle } from '../../theme/interface';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type SelectToken = FullToken<'Select'>;
 
 export const genSelectStyle: GenerateStyle<SelectToken> = (token: SelectToken): CSSObject => {
-  const { componentCls } = token;
+  const { antCls, componentCls } = token;
+  const tagCls = `${antCls}-tag`;
   return {
     [`${componentCls}`]: {
-      [`${componentCls}-arrow${componentCls}-arrow-loading`]: {
+      [`${componentCls}-selection-placeholder`]: {
+        fontWeight: token.fontWeightWeak,
+      },
+      [`${componentCls}-clear`]: {
         color: token.colorTextTertiary,
+      },
+      [`${componentCls}-selector`]: {
+        [`${tagCls}`]: {
+          marginInlineEnd: token.marginXXS,
+        },
+      },
+    },
+    [`${componentCls}${componentCls}-disabled`]: {
+      [`${componentCls}-arrow`]: {
+        color: token.colorTextDisabled,
       },
     },
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Select', token => {
-    return [genSelectStyle(token as SelectToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Select', token => {
+  return [genSelectStyle(token as SelectToken)];
+});

@@ -22,7 +22,7 @@ const App: React.FC = () => (
       ellipsis={{
         tooltip: {
           placement: 'topLeft',
-          title: 'Custom Title',
+          title: 'This is custom tooltip',
         },
       }}
       style={{

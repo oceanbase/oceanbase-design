@@ -71,9 +71,10 @@ const App: React.FC = () => {
         </Form.Item>
         <Form.Item label="divided">
           <Switch
+            size="small"
             checked={divided}
-            onChange={e => {
-              setDivided(e);
+            onChange={value => {
+              setDivided(value);
             }}
           />
         </Form.Item>

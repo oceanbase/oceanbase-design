@@ -1,12 +1,11 @@
 import { ClockCircleOutlined, DownOutlined } from '@oceanbase/icons';
-import { Dropdown, Menu, Select, Space } from '@oceanbase/design';
+import { ConfigProvider, Dropdown, Menu, Select, Space } from '@oceanbase/design';
 import classnames from 'classnames';
 import dayjs from 'dayjs';
 import { noop } from 'lodash';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
-import { getPrefix } from '../_util';
 import { CUSTOMIZE } from './constant';
 import type { RangeValue } from './Ranger';
 import type { RangeOption } from './typing';
@@ -34,8 +33,6 @@ export interface QuickPickerProps extends LocaleWrapperProps {
   size?: 'small' | 'large' | 'middle';
 }
 
-const prefix = getPrefix('ranger-quick-picker');
-
 const RangeDropdown = ({
   selects,
   onChange,
@@ -44,6 +41,8 @@ const RangeDropdown = ({
   locale = {},
   ...rest
 }: SelectProps) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefix = getPrefixCls('ranger-quick-picker');
   const menu = (
     <Menu
       onClick={e => {
@@ -80,6 +79,8 @@ const RangeSelect = ({
   size,
   ...rest
 }: SelectProps) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefix = getPrefixCls('ranger-quick-picker');
   const handleChange = (nextValue: string) => {
     onChange(nextValue);
   };

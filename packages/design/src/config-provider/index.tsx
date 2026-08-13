@@ -1,5 +1,5 @@
 import React from 'react';
-import { App, ConfigProvider as AntConfigProvider } from 'antd';
+import { ConfigProvider as AntConfigProvider } from 'antd';
 import type {
   ConfigProviderProps as AntConfigProviderProps,
   ConfigConsumerProps as AntConfigConsumerProps,
@@ -8,6 +8,7 @@ import type {
 import type {
   ComponentStyleConfig,
   CardConfig as AntCardConfig,
+  TableConfig as AntTableConfig,
 } from 'antd/es/config-provider/context';
 import type { AppProps } from 'antd/es/app';
 import type { PaginationConfig } from 'antd/es/pagination';
@@ -19,13 +20,20 @@ import type { StyleContextProps } from '@ant-design/cssinjs/es/StyleContext';
 import { CaretRightOutlined } from '@oceanbase/icons';
 import aliyunTheme from '@oceanbase/aliyun-theme';
 import { merge } from 'lodash';
+import App from '../app';
 import StaticFunction from '../static-function';
 import themeConfig from '../theme';
-import defaultTheme, { fontFamilyEn } from '../theme/default';
+import seedTheme from '../theme/default';
 import darkTheme from '../theme/dark';
+import compactSpacingTheme from '../theme/compactSpacing';
+import { isTypographyThemeLocked, resolveLocaleTypographyPatch } from '../theme/localeTypography';
 import DefaultRenderEmpty from './DefaultRenderEmpty';
 import type { NavigateFunction } from './navigate';
 import type { Locale } from '../locale';
+import GlobalStyle from '../style/global';
+import CssVariablesStyle from '../theme/obToken';
+import type { OBFormConfig } from '../form/validateMode';
+import { DEFAULT_REVALIDATE_MODE, DEFAULT_VALIDATE_MODE } from '../form/validateMode';
 
 export * from './navigate';
 export * from 'antd/es/config-provider/context';
@@ -33,9 +41,12 @@ export * from 'antd/es/config-provider/SizeContext';
 export * from 'antd/es/config-provider/DisabledContext';
 export * from 'antd/es/config-provider';
 
+export { compactTheme, defaultTheme } from '../theme/localeTypography';
+
 export interface ThemeConfig extends AntThemeConfig {
-  isDark?: boolean;
   isAliyun?: boolean;
+  isDark?: boolean;
+  isCompact?: boolean;
 }
 
 export type CardConfig = AntCardConfig & {
@@ -46,7 +57,7 @@ export type SpinConfig = ComponentStyleConfig & {
   indicator?: SpinIndicator;
 };
 
-export type TableConfig = ComponentStyleConfig & {
+export type TableConfig = AntTableConfig & {
   selectionColumnWidth?: number;
 };
 
@@ -61,6 +72,9 @@ export interface ConfigConsumerProps extends AntConfigConsumerProps {
   locale?: Locale;
 }
 
+export type { OBFormConfig } from '../form/validateMode';
+export type { FormReValidateMode, FormValidateMode } from '../form/validateMode';
+
 export interface ConfigProviderProps extends AntConfigProviderProps {
   theme?: ThemeConfig;
   locale?: Locale;
@@ -73,6 +87,7 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   pagination?: PaginationConfig;
   spin?: SpinConfig;
   table?: TableConfig;
+  form?: AntConfigProviderProps['form'] & OBFormConfig;
   // StyleProvider props
   styleProviderProps?: StyleProviderProps;
   appProps?: AppProps;
@@ -104,6 +119,7 @@ const ConfigProvider: ConfigProviderType = ({
   children,
   theme,
   locale,
+  wave,
   navigate,
   hideOnSinglePage,
   card,
@@ -120,27 +136,100 @@ const ConfigProvider: ConfigProviderType = ({
   const parentContext = React.useContext<ConfigConsumerProps>(AntConfigProvider.ConfigContext);
   const parentExtendedContext =
     React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
-  const { isDark, isAliyun } = merge({}, parentContext.theme, theme);
-  const customTheme = isAliyun ? aliyunTheme : isDark ? darkTheme : undefined;
+  const { isAliyun, isDark, isCompact } = merge({}, parentContext.theme, theme);
+  const aliyunThemeConfig = isAliyun ? aliyunTheme : undefined;
+  const darkThemeConfig =
+    isDark && !isAliyun
+      ? isCompact
+        ? darkTheme
+        : {
+            ...darkTheme,
+            token: {
+              ...darkTheme.token,
+              ...Object.fromEntries(
+                Object.entries(seedTheme.token).filter(
+                  ([key]) => !key?.toLowerCase()?.startsWith('color')
+                )
+              ),
+            },
+          }
+      : undefined;
+  const compactSpacingThemeConfig =
+    isCompact && !isAliyun
+      ? isDark
+        ? compactSpacingTheme
+        : {
+            ...compactSpacingTheme,
+            token: {
+              ...compactSpacingTheme.token,
+              ...Object.fromEntries(
+                Object.entries(seedTheme.token).filter(
+                  ([key]) =>
+                    key?.toLowerCase()?.startsWith('color') &&
+                    !['colorBgBase', 'colorTextBase'].includes(key)
+                )
+              ),
+            },
+          }
+      : undefined;
   const mergedTheme = merge(
     {},
-    customTheme ? {} : defaultTheme,
+    isAliyun ? {} : isDark || isCompact ? themeConfig.defaultSeed : seedTheme,
     parentContext.theme,
-    customTheme,
+    aliyunThemeConfig,
+    darkThemeConfig,
+    compactSpacingThemeConfig,
     theme
   );
 
   const { token } = themeConfig.useToken();
   const fontFamily = mergedTheme.token?.fontFamily || token.fontFamily;
+  const fontSize = mergedTheme.token?.fontSize ?? token.fontSize;
+  const fontWeightWeak = mergedTheme.token?.fontWeightWeak || token.fontWeightWeak;
+  const fontWeight = mergedTheme.token?.fontWeight || token.fontWeight;
+  const fontWeightStrong = mergedTheme.token?.fontWeightStrong || token.fontWeightStrong;
 
   // inherit from parent StyleProvider
   const parentStyleContext = React.useContext<StyleContextProps>(StyleContext);
   const mergedStyleProviderProps = merge({}, parentStyleContext, styleProviderProps);
   const mergedLocale = merge({}, parentContext.locale, locale);
 
+  const typographyLocked = isTypographyThemeLocked(mergedTheme);
+  const resolvedTokens = {
+    fontFamily,
+    fontWeightWeak,
+    fontWeight,
+    fontWeightStrong,
+  };
+  const localeTypographyPatch = resolveLocaleTypographyPatch(
+    mergedLocale,
+    mergedTheme,
+    fontSize,
+    resolvedTokens,
+    { sizeLocked: typographyLocked }
+  );
+
+  const resolvedAntTheme = merge({}, mergedTheme, localeTypographyPatch);
+
+  // cssVar 模式下 App 必须有真实 DOM 节点挂载 cssVarCls，component={false} 会导致变量作用域丢失
+  const cssVarEnabled = Boolean(resolvedAntTheme?.cssVar);
+  const resolvedAppProps: AppProps = merge(
+    {},
+    cssVarEnabled ? { component: 'div' as const } : { component: false as const },
+    appProps
+  );
+
   return (
     <AntConfigProvider
       locale={mergedLocale}
+      wave={merge(
+        {},
+        {
+          disabled: true,
+        } as ConfigProviderProps['wave'],
+        parentContext.wave,
+        wave
+      )}
       card={merge({}, parentContext.card, card)}
       collapse={merge(
         {},
@@ -154,32 +243,38 @@ const ConfigProvider: ConfigProviderType = ({
         {},
         {
           requiredMark: 'optional',
+          validateMode: DEFAULT_VALIDATE_MODE,
+          reValidateMode: DEFAULT_REVALIDATE_MODE,
         } as ConfigProviderProps['form'],
         parentContext.form,
         form
       )}
       spin={merge({}, parentContext.spin, spin)}
-      table={merge({}, parentContext.table, table)}
-      tabs={merge(
-        {},
-        {
-          indicatorSize: (origin: number) => (origin >= 24 ? origin - 16 : origin),
-        } as ConfigProviderProps['tabs'],
-        parentContext.tabs,
-        tabs
-      )}
-      theme={merge({}, mergedTheme, {
-        token:
-          // custom fontFamily
-          fontFamily !== defaultTheme.token.fontFamily
-            ? { fontFamily }
-            : // use fontFamilyEn for en
-              ['en', 'en-gb'].includes(mergedLocale.locale)
-              ? {
-                  fontFamily: fontFamilyEn,
-                }
-              : {},
-      } as ConfigProviderProps['theme']['token'])}
+      table={
+        merge(
+          {},
+          {
+            expandable: {
+              expandIcon: ({ expandable, expanded, onExpand, record }) =>
+                expandable && (
+                  <CaretRightOutlined
+                    onClick={e => onExpand(record, e)}
+                    style={{
+                      // marginRight: mergedTheme.token?.marginXS || 8,
+                      transition: `transform 0.2s`,
+                      transform: expanded ? 'rotate(90deg)' : undefined,
+                      color: mergedTheme.token?.colorIcon || mergedTheme.token?.colorTextSecondary,
+                    }}
+                  />
+                ),
+            },
+          },
+          parentContext.table,
+          table
+        ) as TableConfig
+      }
+      tabs={merge({}, parentContext.tabs, tabs)}
+      theme={resolvedAntTheme}
       renderEmpty={
         parentContext.renderEmpty ||
         (componentName => <DefaultRenderEmpty componentName={componentName} />)
@@ -199,9 +294,13 @@ const ConfigProvider: ConfigProviderType = ({
         }}
       >
         <StyleProvider {...mergedStyleProviderProps}>
+          {/* Inject CSS variables via cssinjs */}
+          <CssVariablesStyle />
+          {/* Inject global styles via cssinjs */}
+          <GlobalStyle prefixCls={restProps.prefixCls} iconPrefixCls={restProps.iconPrefixCls} />
           {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
           {/* ref: https://ant.design/components/app */}
-          <App component={false} {...appProps}>
+          <App {...resolvedAppProps}>
             {children}
             {parentExtendedContext.injectStaticFunction && <StaticFunction />}
           </App>

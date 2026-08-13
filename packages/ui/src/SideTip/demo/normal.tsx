@@ -1,5 +1,4 @@
 /**
- * title: 普通按钮模式
  * iframe: true
  */
 import React from 'react';

@@ -19,7 +19,7 @@ import zhCN from './locale/zh-CN';
 import useStyle from './style';
 
 const { Content, Sider } = Layout;
-const { SubMenu, Item } = Menu;
+const { SubMenu, Item, ItemGroup } = Menu;
 
 export interface SiderHeaderProps {
   backUrl: string;
@@ -32,12 +32,14 @@ export interface SiderHeaderProps {
 }
 
 export interface MenuItem {
-  link: string;
+  link?: string;
   title: string;
   icon?: React.ReactNode;
   selectedIcon?: React.ReactNode;
   accessible?: boolean;
   divider?: boolean;
+  /** 与 antd Menu 一致，设为 'group' 时渲染为分组标题，children 为该组下的菜单项 */
+  type?: 'group';
   children?: MenuItem[];
 }
 
@@ -90,6 +92,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   subSideMenus,
   className,
   prefixCls: customizePrefixCls,
+  locale,
   ...restProps
 }) => {
   const { token } = theme.useToken();
@@ -142,11 +145,15 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
     let keys = [];
     (menuList || []).forEach(item => {
       const itemChildren = item.children || [];
-      const childrenKeys = itemChildren.map(child => child.link);
-      if (childrenKeys.includes(selectedKey)) {
-        keys = [...keys, item.link];
+      if (item.type === 'group') {
+        keys = [...keys, ...getParentKeys(itemChildren, selectedKey)];
       } else {
-        keys = [...keys, getParentKeys(itemChildren, selectedKey)];
+        const childrenKeys = itemChildren.map(child => child.link).filter(Boolean);
+        if (childrenKeys.includes(selectedKey)) {
+          keys = [...keys, item.link];
+        } else {
+          keys = [...keys, ...getParentKeys(itemChildren, selectedKey)];
+        }
       }
     });
     return keys;
@@ -155,13 +162,19 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
   const getFlatMenuKeys = (menuList: MenuItem[]) => {
     let keys = [];
     (menuList || []).forEach(item => {
-      if (item.children) {
-        keys = keys.concat(getFlatMenuKeys(item.children));
+      if (item.type === 'group') {
+        keys = keys.concat(getFlatMenuKeys(item.children || []));
+      } else {
+        if (item.children) {
+          keys = keys.concat(getFlatMenuKeys(item.children));
+        }
+        keys.push(item.link || '');
       }
-      keys.push(item.link || '');
     });
     return keys;
   };
+
+  const isCurrentMenuPage = (link?: string) => !!link && selectedKeys[0] === link;
 
   // 渲染菜单中的图标
   const renderIcon = (item: MenuItem, isSubSider = false) => {
@@ -177,9 +190,15 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
 
   // 渲染菜单
   const renderMenu = (data: MenuItem[]) => {
-    return data.reduce((pre, item) => {
+    return data.reduce((pre, item, index) => {
       const { accessible = true } = item;
-      if (
+      if (item.type === 'group' && item.children?.length && accessible) {
+        pre.push(
+          <ItemGroup key={item.title ?? `group-${index}`} title={item.title}>
+            {renderMenu(item.children)}
+          </ItemGroup>
+        );
+      } else if (
         item.children &&
         (isNullValue(item.accessible)
           ? // 如果子菜单本身没有设置 accessible，但只要其 children 之一可访问，则子菜单仍然展示
@@ -212,11 +231,12 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
             {renderMenu(item.children)}
           </SubMenu>
         );
-      } else if (!item.children && accessible) {
+      } else if (!item.children && accessible && item.link) {
         pre.push(
           <Item
             data-testid="menu.item"
             key={item.link}
+            aria-current={isCurrentMenuPage(item.link) ? 'page' : undefined}
             onClick={() => {
               if (pathname !== item.link) {
                 navigate?.(item.link);
@@ -261,9 +281,15 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
 
   // 渲染收起菜单
   const renderCollapsedMenu = (data: MenuItem[], isSubSider = false) => {
-    return data.reduce((pre, item) => {
+    return data.reduce((pre, item, index) => {
       const { accessible = true } = item;
-      if (
+      if (item.type === 'group' && item.children?.length && accessible) {
+        pre.push(
+          <ItemGroup key={item.title ?? `group-${index}`} title={item.title}>
+            {renderMenu(item.children)}
+          </ItemGroup>
+        );
+      } else if (
         item.children &&
         (isNullValue(item.accessible)
           ? // 如果子菜单本身没有设置 accessible，但只要其 children 之一可访问，则子菜单仍然展示
@@ -275,11 +301,12 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
             {renderMenu(item.children)}
           </SubMenu>
         );
-      } else if (!item.children && accessible) {
+      } else if (!item.children && accessible && item.link) {
         pre.push(
           <Item
             data-testid="menu.item"
             key={item.link}
+            aria-current={isCurrentMenuPage(item.link) ? 'page' : undefined}
             onClick={() => {
               if (pathname !== item.link) {
                 navigate?.(item.link);
@@ -351,6 +378,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
                     [`${prefixCls}-sider-collapsed`]: collapsed,
                     [`${prefixCls}-sider-has-sub-sider`]: subSideMenus,
                   })}
+                  role="navigation"
+                  aria-label={locale?.sideNavigation}
                 >
                   <div className={`${prefixCls}-sider-wrapper`}>
                     {/* 子侧边栏菜单 */}
@@ -412,16 +441,21 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
                           </div>
                         </div>
                         <div className={`${prefixCls}-sider-border`}>
-                          <div
+                          <button
+                            type="button"
                             className={`${prefixCls}-sider-collapse`}
+                            aria-expanded={!collapsed}
+                            aria-label={collapsed ? locale?.expandSider : locale?.collapseSider}
                             onClick={() => {
                               setCollapsed(!collapsed);
                               // 导航展开/收起时，重置 openKeys
                               setOpenKeys([]);
                             }}
                           >
-                            {collapsed ? <RightOutlined /> : <LeftOutlined />}
-                          </div>
+                            <span aria-hidden>
+                              {collapsed ? <RightOutlined /> : <LeftOutlined />}
+                            </span>
+                          </button>
                         </div>
                       </div>
                     )}
@@ -434,7 +468,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({
                   marginLeft: siderWidth,
                 }}
               >
-                {children}
+                <main className={`${prefixCls}-content-main`}>{children}</main>
               </Content>
             </Layout>
           </div>

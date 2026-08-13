@@ -1,6 +1,6 @@
 import { GlobalOutlined } from '@oceanbase/icons';
 import { findByValue } from '@oceanbase/util';
-import { Dropdown, Menu, Space } from '@oceanbase/design';
+import { Dropdown, Menu, Space, theme } from '@oceanbase/design';
 import type { DropdownProps } from '@oceanbase/design/es/dropdown';
 import React from 'react';
 import { LOCALE_LIST } from '../constant';
@@ -19,6 +19,7 @@ const LocaleDropdown: React.FC<LocaleDropdownProps> = ({
   className,
   ...restProps
 }) => {
+  const { token } = theme.useToken();
   // 语言切换菜单
   const localeMenu = (
     <Menu
@@ -40,7 +41,7 @@ const LocaleDropdown: React.FC<LocaleDropdownProps> = ({
             width: 28,
             height: 28,
             fontSize: 12,
-            fontWeight: 500,
+            fontWeight: token.fontWeightStrong,
             lineHeight: '28px',
             textAlign: 'center',
             border: '0.88px solid #ced4e1',

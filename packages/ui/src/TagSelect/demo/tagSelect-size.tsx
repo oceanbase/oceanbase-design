@@ -4,30 +4,30 @@ import { TagSelect } from '@oceanbase/ui';
 export default () => {
   const option = [
     {
-      label: '已选中项',
+      label: 'Selected Item',
       value: 1,
     },
     {
-      label: '未选中项',
+      label: 'Unselected Item',
       value: 2,
     },
     {
-      label: '未选中项',
+      label: 'Unselected Item',
       value: 3,
     },
     {
-      label: '未选中项',
+      label: 'Unselected Item',
       value: 4,
     },
   ];
   return (
     <div>
       <div>
-        <div>单选</div>
+        <div>Single Select</div>
         <TagSelect.Group title="small" options={option} size="small" defaultValue={1} />
         <TagSelect.Group title="middle" options={option} size="middle" defaultValue={1} />
         <TagSelect.Group title="large" options={option} size="large" defaultValue={1} />
-        <div style={{ marginTop: 20 }}>图片样式</div>
+        <div style={{ marginTop: 20 }}>Image Style</div>
         <TagSelect.Group defaultValue={'tag1'} size="small">
           <TagSelect.Item
             value="tag1"
@@ -90,7 +90,7 @@ export default () => {
         </TagSelect.Group>
       </div>
       <div>
-        <div style={{ marginTop: 20 }}>多选</div>
+        <div style={{ marginTop: 20 }}>Multiple Select</div>
         <TagSelect.Group title="small" options={option} size="small" defaultValue={[1]} multiple />
         <TagSelect.Group
           title="middle"
@@ -100,7 +100,7 @@ export default () => {
           multiple
         />
         <TagSelect.Group title="large" options={option} size="large" defaultValue={[1]} multiple />
-        <div style={{ marginTop: 20 }}>图片样式</div>
+        <div style={{ marginTop: 20 }}>Image Style</div>
         <TagSelect.Group defaultValue={'tag1'} size="small" multiple>
           <TagSelect.Item
             value="tag1"

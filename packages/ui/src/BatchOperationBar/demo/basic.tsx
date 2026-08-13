@@ -79,9 +79,9 @@ export default () => {
     return (
       <Space>
         <Button type="primary" onClick={() => console.log('selectedRows: ', selectedRows)}>
-          批量操作
+          Batch Operation
         </Button>
-        <Button onClick={() => cleanSelectedRows()}>批量删除</Button>
+        <Button onClick={() => cleanSelectedRows()}>Batch Delete</Button>
       </Space>
     );
   };

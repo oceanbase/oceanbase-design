@@ -1,5 +1,4 @@
 /**
- * title: ToolTip
  * iframe: true
  */
 import React from 'react';

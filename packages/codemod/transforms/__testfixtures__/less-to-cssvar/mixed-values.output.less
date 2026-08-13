@@ -1,0 +1,19 @@
+.card {
+  // Mixed with fixed values
+  padding: 8px var(--ob-space-300) 16px var(--ob-space-500);
+  margin: var(--ob-space-200) auto;
+  border: 1px solid var(--ob-color-border-default);
+  border-radius: var(--ob-radius-sm) 0 0 var(--ob-radius-sm);
+
+  // Transition with tokens
+  transition: all @motionDurationMid @motionEaseInOut;
+
+  // Box shadow
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), var(--ob-shadow-2);
+}
+
+.text {
+  font: var(--ob-font-weight-md) var(--ob-font-size-325)/var(--ob-font-line-height-500) @fontFamily;
+  color: var(--ob-color-text-default);
+}
+

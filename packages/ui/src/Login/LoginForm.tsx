@@ -8,11 +8,9 @@ import { Alert, Button, Form, Input, Space } from '@oceanbase/design';
 import type { FormProps, InputProps } from '@oceanbase/design';
 import type { PasswordProps } from '@oceanbase/design/es/input';
 import classNames from 'classnames';
-import React, { useState } from 'react';
-import { theme } from '@oceanbase/design';
+import React, { useContext, useState } from 'react';
+import { ConfigProvider, theme } from '@oceanbase/design';
 import type { LoginLocale } from '.';
-import { getPrefix } from '../_util';
-import './index.less';
 
 export interface Values {
   username: string;
@@ -36,8 +34,6 @@ export interface ILoginFormProps extends FormProps {
   };
 }
 
-const prefix = getPrefix('login');
-
 const Login: React.FC<ILoginFormProps> = ({
   loading,
   locale,
@@ -51,6 +47,8 @@ const Login: React.FC<ILoginFormProps> = ({
   passwordOptional = false,
   ...restProps
 }) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('login');
   const { token } = theme.useToken();
   const [focusInput, setFocusInput] = useState('');
 
@@ -58,13 +56,18 @@ const Login: React.FC<ILoginFormProps> = ({
     <Form
       layout="vertical"
       hideRequiredMark={true}
-      className={`${prefix}-form`}
+      className={`${prefixCls}-form`}
       style={{ paddingLeft: showAuthCode ? 96 : 0 }}
       {...restProps}
       data-testid="login.form"
     >
       {errorMessage && (
-        <Alert type="error" showIcon={true} className={`${prefix}-alert`} message={errorMessage} />
+        <Alert
+          type="error"
+          showIcon={true}
+          className={`${prefixCls}-alert`}
+          message={errorMessage}
+        />
       )}
       {/* @ts-ignore  */}
       <Form.Item
@@ -77,6 +80,7 @@ const Login: React.FC<ILoginFormProps> = ({
         ]}
       >
         <Input
+          size="large"
           prefix={<UserOutlined style={{ color: token.colorIcon }} />}
           placeholder={locale.usernamePlaceholder}
           onFocus={() => {
@@ -86,7 +90,7 @@ const Login: React.FC<ILoginFormProps> = ({
             setFocusInput('');
           }}
           className={classNames({
-            [`${prefix}-focus-input`]: focusInput === 'username',
+            [`${prefixCls}-form-focus-input`]: focusInput === 'username',
           })}
           {...(componentProps?.username || {})}
         />
@@ -106,6 +110,7 @@ const Login: React.FC<ILoginFormProps> = ({
         }
       >
         <Input.Password
+          size="large"
           visibilityToggle={true}
           autoComplete="current-password"
           prefix={<LockOutlined style={{ color: token.colorIcon }} />}
@@ -116,12 +121,12 @@ const Login: React.FC<ILoginFormProps> = ({
           onBlur={() => {
             setFocusInput('');
           }}
-          className={focusInput === 'password' ? `${prefix}-focus-input` : ''}
+          className={focusInput === 'password' ? `${prefixCls}-form-focus-input` : ''}
           {...(componentProps?.password || {})}
         />
       </Form.Item>
       {showAuthCode && (
-        <Space className={`${prefix}-auth-code`}>
+        <Space className={`${prefixCls}-auth-code`}>
           {/* @ts-ignore  */}
           <Form.Item
             name="authCode"
@@ -133,6 +138,7 @@ const Login: React.FC<ILoginFormProps> = ({
             ]}
           >
             <Input
+              size="large"
               prefix={<SafetyCertificateOutlined style={{ color: token.colorIcon }} />}
               placeholder="请输入验证码"
               onFocus={() => {
@@ -142,14 +148,14 @@ const Login: React.FC<ILoginFormProps> = ({
                 setFocusInput('');
               }}
               className={classNames({
-                [`${prefix}-focus-input`]: focusInput === 'authCode',
+                [`${prefixCls}-form-focus-input`]: focusInput === 'authCode',
               })}
               {...(componentProps?.authCode || {})}
             />
           </Form.Item>
-          <div className={classNames(`${prefix}-code-btn`)}>
+          <div className={classNames(`${prefixCls}-code-btn`)}>
             <img src={authCodeImg} alt="" width="96" height="38" />
-            <div className={`${prefix}-code-mask`} onClick={onAuthCodeImgChange}>
+            <div className={`${prefixCls}-code-mask`} onClick={onAuthCodeImgChange}>
               <SyncOutlined />
             </div>
           </div>
@@ -159,10 +165,11 @@ const Login: React.FC<ILoginFormProps> = ({
         <Button
           // 按下回车键，即可触发点击事件
           htmlType="submit"
+          size="large"
           loading={loading}
           type="primary"
           block={true}
-          className={`${prefix}-submit-btn`}
+          className={`${prefixCls}-submit-btn`}
         >
           {locale.loginText}
         </Button>
@@ -171,11 +178,12 @@ const Login: React.FC<ILoginFormProps> = ({
         <Form.Item>
           <Button
             htmlType="button"
+            size="large"
             loading={otherLoginProps.loading}
             type="primary"
             block={true}
             onClick={otherLoginProps.onFinish}
-            className={`${prefix}-submit-btn`}
+            className={`${prefixCls}-submit-btn`}
           >
             {locale.otherLoginText}
           </Button>

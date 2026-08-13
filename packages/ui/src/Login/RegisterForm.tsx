@@ -1,17 +1,22 @@
-import { Alert, Button, Form, Input } from '@oceanbase/design';
+import { Alert, Button, ConfigProvider, Form, Input } from '@oceanbase/design';
 import type { FormProps, RuleObject } from '@oceanbase/design/es/form';
 import { isFunction, toString } from 'lodash';
-import React, { useCallback } from 'react';
-import { getPrefix } from '../_util';
+import React, { useCallback, useContext, useMemo } from 'react';
+import Password, { type PasswordLocale } from '../Password';
+import zhCN from '../Password/locale/zh-CN';
+import {
+  CLOUD_PASSWORD_REGEX,
+  createCloudPasswordValidator,
+  type CloudPasswordLocale,
+} from '../Password/Content';
 import type { LoginLocale } from './index';
-import './index.less';
 
 /**
- * 冗余的转义符可以增强正则的可读性
+ * Cloud password regex aligned with {@link CLOUD_PASSWORD_REGEX}.
+ * Prefer `analyzeCloudPassword` for validation.
  */
 // eslint-disable-next-line
-export const PASSWORD_REGEX =
-  /^(?=(.*[a-z]){2,})(?=(.*[A-Z]){2,})(?=(.*\d){2,})(?=(.*[ !"#\$%&'\(\)\*\+,-\./:;<=>\?@\[\\\]\^_`\{\|\}~]){2,})[A-Za-z\d !"#\$%&'\(\)\*\+,-\./:;<=>\?@\[\\\]\^_`\{\|\}~]{8,32}$/;
+export const PASSWORD_REGEX = CLOUD_PASSWORD_REGEX;
 
 export interface IRegisterFormProps extends FormProps {
   locale?: LoginLocale;
@@ -27,8 +32,6 @@ export interface IRegisterFormProps extends FormProps {
   errorMessage?: React.ReactNode | string;
 }
 
-const prefix = getPrefix('login');
-
 const Register: React.FC<IRegisterFormProps> = ({
   isUserExists,
   locale,
@@ -37,7 +40,26 @@ const Register: React.FC<IRegisterFormProps> = ({
   errorMessage,
   ...restProps
 }) => {
+  const { getPrefixCls, locale: antLocale } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('login');
   const [form] = Form.useForm();
+  const passwordLocaleFromContext = (
+    antLocale as { Password?: Partial<PasswordLocale> } | undefined
+  )?.Password;
+  const passwordMessages = useMemo<PasswordLocale>(
+    () => ({
+      ...zhCN,
+      ...passwordLocaleFromContext,
+    }),
+    [passwordLocaleFromContext]
+  );
+  const passwordCloudLocale = useMemo<CloudPasswordLocale>(
+    () => ({
+      ...passwordMessages,
+      emptyMessage: locale.passwordMessage,
+    }),
+    [passwordMessages, locale.passwordMessage]
+  );
 
   const handleValidateAccount = useCallback(
     async (rule: RuleObject, value: string) => {
@@ -49,41 +71,49 @@ const Register: React.FC<IRegisterFormProps> = ({
         throw new Error(locale.userExistMessage);
       }
     },
-    [isUserExists]
+    [isUserExists, locale.userExistMessage]
+  );
+
+  const handleValidatePassword = useCallback(
+    (_: RuleObject, value?: string) => {
+      if (passwordRule) {
+        if (!value || !passwordRule.pattern.test(value)) {
+          return Promise.reject(new Error(passwordRule.message));
+        }
+        return Promise.resolve();
+      }
+      return createCloudPasswordValidator(passwordCloudLocale)(_, value);
+    },
+    [passwordCloudLocale, passwordRule]
   );
 
   const handleValidateConfirmPassword = useCallback(
-    (rule, value, callback) => {
-      if (!form) {
-        callback();
-        return;
-      }
-      const pwd = (form as any).getFieldValue('password');
+    (_: RuleObject, value?: string) => {
+      const pwd = form.getFieldValue('password');
       if (toString(value) !== toString(pwd)) {
-        callback(locale.samePasswordMessage);
-        return;
+        return Promise.reject(new Error(passwordMessages.confirmMismatchMessage));
       }
-      callback();
+      return Promise.resolve();
     },
-    [form]
+    [form, passwordMessages.confirmMismatchMessage]
   );
-
-  const passwordRegexpRule = passwordRule || {
-    pattern: PASSWORD_REGEX,
-    message: locale.passwordHelp,
-  };
 
   return (
     <Form
       layout="vertical"
       requiredMark={false}
-      className={`${prefix}-form`}
+      className={`${prefixCls}-form`}
       form={form}
       {...restProps}
       data-testid="login.register"
     >
       {errorMessage && (
-        <Alert type="error" showIcon={true} className={`${prefix}-alert`} message={errorMessage} />
+        <Alert
+          type="error"
+          showIcon={true}
+          className={`${prefixCls}-alert`}
+          message={errorMessage}
+        />
       )}
       <Form.Item
         name="username"
@@ -110,23 +140,24 @@ const Register: React.FC<IRegisterFormProps> = ({
           },
         ]}
       >
-        <Input autoComplete="new-account" autoFocus />
+        <Input size="large" autoComplete="new-account" autoFocus />
       </Form.Item>
       <Form.Item
         name="password"
         label={locale.passwordLabel}
         dependencies={['confirmPassword']}
-        help={passwordRegexpRule.message}
         validateFirst
         rules={[
           {
             required: true,
             message: locale.passwordMessage,
           },
-          passwordRegexpRule,
+          {
+            validator: handleValidatePassword,
+          },
         ]}
       >
-        <Input.Password visibilityToggle={true} autoComplete="new-password" />
+        <Password size="large" visibilityToggle />
       </Form.Item>
       <Form.Item
         name="confirmPassword"
@@ -143,15 +174,15 @@ const Register: React.FC<IRegisterFormProps> = ({
           },
         ]}
       >
-        <Input.Password visibilityToggle={true} autoComplete="new-password" />
+        <Input.Password size="large" visibilityToggle={true} autoComplete="new-password" />
       </Form.Item>
       <Button
-        // 按下回车键，即可触发点击事件
         htmlType="submit"
+        size="large"
         loading={loading}
         type="primary"
         block={true}
-        className={`${prefix}-submit-btn`}
+        className={`${prefixCls}-submit-btn`}
       >
         {locale.registerBtn}
       </Button>

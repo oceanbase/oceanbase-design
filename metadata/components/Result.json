@@ -1,0 +1,13 @@
+{
+  "name": "Result",
+  "package": "@oceanbase/design",
+  "diffLevel": "C",
+  "extendsAntd": "Result",
+  "delegateAntd": true,
+  "addedProps": ["status"],
+  "constraints": [],
+  "keywords": ["result", "success", "error", "403", "404", "500", "processing"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/result/index.tsx",
+  "docSource": "packages/design/src/result/index.md"
+}

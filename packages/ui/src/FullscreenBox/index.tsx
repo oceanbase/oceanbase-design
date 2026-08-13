@@ -1,14 +1,13 @@
 import { FullscreenExitOutlined, FullscreenOutlined } from '@oceanbase/icons';
+import { ConfigProvider } from '@oceanbase/design';
 import classnames from 'classnames';
 import type { ReactNode } from 'react';
-import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { useContext, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import screenFull from 'screenfull';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix } from '../_util';
+import useStyle from './style';
 import zhCN from './locale/zh-CN';
-// @ts-ignore
-import './index.less';
 
 export type FullscreenModeType = 'viewport' | 'browser';
 
@@ -47,22 +46,23 @@ export interface FullscreenBoxProps extends LocaleWrapperProps {
   children?: any;
 }
 
-const prefix = getPrefix('fullscreen-box');
-
 const FullscreenBox = React.forwardRef<FullscreenBoxRef, FullscreenBoxProps>(
-  ({ style, header, className, defaultMode, children, onChange }, ref) => {
+  ({ style, header, className, defaultMode, children, onChange, locale }, ref) => {
+    const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+    const prefixCls = getPrefixCls('fullscreen-box');
+    const { wrapSSR } = useStyle(prefixCls);
     const [innerFullscreen, setInnerFullscreen] = useState(false);
-    const containerRef = useRef();
+    const containerRef = useRef<HTMLDivElement>(null);
     const fullscreenMode: string = defaultMode || 'viewport';
 
-    useEffect(() => {
-      // 添加事件监听
-      screenFull.on('change', handleFullscreenChange);
-      return () => {
-        // 移除事件监听
-        screenFull.off('change', handleFullscreenChange);
-      };
-    }, []);
+    /**
+     * 通知外部
+     */
+    const emitChange = (fullscreen: boolean) => {
+      if (onChange) {
+        onChange(fullscreen);
+      }
+    };
 
     /**
      * 处理全屏模式切换完成后动作
@@ -74,6 +74,16 @@ const FullscreenBox = React.forwardRef<FullscreenBoxRef, FullscreenBoxProps>(
       });
       emitChange(isFullscreen);
     };
+
+    useEffect(() => {
+      // 添加事件监听
+      screenFull.on('change', handleFullscreenChange);
+      return () => {
+        // 移除事件监听
+        screenFull.off('change', handleFullscreenChange);
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const toggleFullscreen = () => {
       changeFullscreen(!innerFullscreen);
@@ -104,15 +114,6 @@ const FullscreenBox = React.forwardRef<FullscreenBoxRef, FullscreenBoxProps>(
       return Promise.resolve(fullscreen);
     };
 
-    /**
-     * 通知外部
-     */
-    const emitChange = (fullscreen: boolean) => {
-      if (onChange) {
-        onChange(fullscreen);
-      }
-    };
-
     // 向组件外部暴露 refresh 属性函数，可通过 ref 引用
     useImperativeHandle(ref, () => ({
       changeFullscreen: (fullscreen: boolean) => {
@@ -120,17 +121,19 @@ const FullscreenBox = React.forwardRef<FullscreenBoxRef, FullscreenBoxProps>(
       },
     }));
 
-    const icon = innerFullscreen ? (
-      <FullscreenExitOutlined className={`${prefix}-header-icon`} onClick={toggleFullscreen} />
-    ) : (
-      <FullscreenOutlined className={`${prefix}-header-icon`} onClick={toggleFullscreen} />
-    );
+    const fullscreenLabel = innerFullscreen ? locale?.exitFullscreen : locale?.enterFullscreen;
+    const fullscreenIcon = innerFullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />;
 
-    if (innerFullscreen) {
-      document.body.classList.add(`${prefix}-body-overflow-hidden`);
-    } else {
-      document.body.classList.remove(`${prefix}-body-overflow-hidden`);
-    }
+    useEffect(() => {
+      if (innerFullscreen) {
+        document.body.classList.add(`${prefixCls}-body-overflow-hidden`);
+      } else {
+        document.body.classList.remove(`${prefixCls}-body-overflow-hidden`);
+      }
+      return () => {
+        document.body.classList.remove(`${prefixCls}-body-overflow-hidden`);
+      };
+    }, [innerFullscreen, prefixCls]);
 
     const isComplexHeader = header && ((header as any).title || (header as any).extra);
     const isStringHeader = typeof header === 'string';
@@ -146,23 +149,34 @@ const FullscreenBox = React.forwardRef<FullscreenBoxRef, FullscreenBoxProps>(
       const title = isStringHeader ? header : isComplexHeader && (header as any).title;
       const extra = isComplexHeader && (header as any).extra;
       headerContent = (
-        <div className={`${prefix}-header`} data-testid="header">
-          <div className={`${prefix}-header-left`}>
-            {icon}
-            {title && <span className={`${prefix}-header-title `}>{title}</span>}
+        <div className={`${prefixCls}-header`} data-testid="header">
+          <div className={`${prefixCls}-header-left`}>
+            <button
+              type="button"
+              className={`${prefixCls}-header-icon-btn`}
+              aria-label={fullscreenLabel}
+              aria-pressed={innerFullscreen}
+              onClick={toggleFullscreen}
+            >
+              <span className={`${prefixCls}-header-icon`} aria-hidden>
+                {fullscreenIcon}
+              </span>
+            </button>
+            {title && <span className={`${prefixCls}-header-title`}>{title}</span>}
           </div>
-          {isComplexHeader && extra && <div className={`${prefix}-header-extra`}>{extra}</div>}
+          {isComplexHeader && extra && <div className={`${prefixCls}-header-extra`}>{extra}</div>}
         </div>
       );
     }
 
-    return (
+    return wrapSSR(
       <div
         ref={containerRef}
         style={style}
-        className={classnames(prefix, className, {
-          [`${prefix}-fullscreen`]: innerFullscreen,
+        className={classnames(prefixCls, className, {
+          [`${prefixCls}-fullscreen`]: innerFullscreen,
         })}
+        aria-live="polite"
       >
         {headerContent}
         {children}

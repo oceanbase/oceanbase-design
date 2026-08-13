@@ -1,521 +1,949 @@
 ---
-title: 更新日志
+title: Changelog
 order: 6
-group: 基础组件
+group: General
 ---
 
-`@oceanbase/design` 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/) 语义化版本规范。
+`@oceanbase/design` strictly follows [Semantic Versioning 2.0.0](http://semver.org/).
 
 ---
 
-## 0.4.22
+## 1.1.0
 
-`2026-08-13`
+`2026-08-04`
 
-- Flex
-  - 🆕 新增 Flex 组件，完整继承 antd Flex 的能力和 API，可无缝切换。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
-  - 💄 低版本浏览器兼容：在不支持 `gap` 弹性布局的浏览器（如 Chrome 83）中，自动降级为 `margin` 方案。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
-- 💄 优化 Space 在不支持 `gap` 的浏览器中的间距降级方案，自定义 `size` 时同样生效。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
-- 🐞 修复 Table 默认分页的合计文案在低版本浏览器（Chrome 85 以下）中因不支持 `replaceAll` 语法而渲染异常的问题。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
-- 📖 ConfigProvider 新增低版本浏览器（Chrome 83）样式兼容示例和接入说明。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- AI / Agent
+  - 📖 Recommend global `ob-design` install for faster MCP startup. [#1499](https://github.com/oceanbase/oceanbase-design/pull/1499)
+  - ⭐️ Agent skill renamed to `oceanbase-design` (`npx skills add oceanbase/oceanbase-design`). [#1500](https://github.com/oceanbase/oceanbase-design/pull/1500)
+  - 🤖 `ob-design lint` validates `var(--ob-*)` in styles; `ob-design token` lists runtime CSS variables with `--json` and `--check`. [#1517](https://github.com/oceanbase/oceanbase-design/pull/1517)
+- 🤖 Figma Code Connect mappings bridge design and frontend workflows. [#1502](https://github.com/oceanbase/oceanbase-design/pull/1502)
+- 🌐 Bilingual documentation site with `/zh-CN` routing and homepage locale preference. [#1501](https://github.com/oceanbase/oceanbase-design/pull/1501)
+- Theme
+  - 🆕 Export `defaultTheme` and `compactTheme` locale typography presets. [#1516](https://github.com/oceanbase/oceanbase-design/pull/1516)
+  - 🐞 Fixed custom `token.fontFamily` on English locales not being preserved. [#1516](https://github.com/oceanbase/oceanbase-design/pull/1516)
+- Empty
+  - 💄 Updated illustrations. [#1504](https://github.com/oceanbase/oceanbase-design/pull/1504)
+  - 💄 Improved illustration sizing, description color, and title/description/footer spacing. [#1505](https://github.com/oceanbase/oceanbase-design/pull/1505)
+  - 💄 Horizontal layout adapts on narrow containers (stacks at ≤560px, hides illustration at ≤400px). [#1505](https://github.com/oceanbase/oceanbase-design/pull/1505)
+- Result
+  - 💄 Updated illustrations; added presets such as `PRESENTED_IMAGE_NOT_FOUND`, `PRESENTED_IMAGE_NETWORK_ERROR`, and `PRESENTED_IMAGE_VERSION_UPDATE`. [#1504](https://github.com/oceanbase/oceanbase-design/pull/1504)
+  - 🆕 `status` adds `normal` with its illustration. [#1504](https://github.com/oceanbase/oceanbase-design/pull/1504)
+  - 💄 Aligned icon size and spacing with Empty. [#1505](https://github.com/oceanbase/oceanbase-design/pull/1505)
+- Form
+  - 🆕 Added `validateMode` and `reValidateMode`; ConfigProvider global defaults supported. [#1512](https://github.com/oceanbase/oceanbase-design/pull/1512)
+  - 🆕 `Form.Item` explain shows built-in blur and hint feedback from child controls. [#1515](https://github.com/oceanbase/oceanbase-design/pull/1515)
+  - 💄 Aligned explain/extra padding with control height. [#1514](https://github.com/oceanbase/oceanbase-design/pull/1514)
+- Input
+  - 💄 Updated `Input.Search` styling and interaction. [#1508](https://github.com/oceanbase/oceanbase-design/pull/1508)
+- Message
+  - 🔄 Message API remains compatible but displays via Notification (including `useMessage`). [#1507](https://github.com/oceanbase/oceanbase-design/pull/1507)
+  - 📌 Message documented as deprecated; migrate to Notification. [#1507](https://github.com/oceanbase/oceanbase-design/pull/1507)
+- Notification
+  - 💄 Default bottom-left placement, fixed width 350px, linear icons with auto-close progress bar; links in title/description use type color. [#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
+  - 🆕 Added `notification.loading` for in-progress feedback. [#1507](https://github.com/oceanbase/oceanbase-design/pull/1507)
+  - 🆕 Added `errorDetails` with Markdown copy support. [#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
+  - 🆕 Added `dedupeKey` to deduplicate notifications. [#1506](https://github.com/oceanbase/oceanbase-design/pull/1506)
+- Table
+  - 🆕 Added `column.tooltip` for column header help. [#1509](https://github.com/oceanbase/oceanbase-design/pull/1509)
 
-## 0.4.21
+## 1.0.0
+
+`2026-07-17`
+
+- AI / Agent
+  - 🆕 Added `@oceanbase/design-cli` CLI for component API lookup, docs, demos, page routing, and design constraint checks.
+  - 🆕 Added MCP server (IDE key `oceanbase-design`) with `ob_info`, `ob_doc`, `ob_constraint`, `ob_route`, and more tools; configure only this MCP when writing OB business code.
+  - 📖 Added `For Agents`, `design.md`, `LLMs.txt`, `MCP Server`, and `CLI` docs.
+
+## 1.0.0-alpha.22
+
+`2026-06-17`
+
+- Theme
+  - 🐞 Fixed ConfigProvider when cssVar is enabled, nested App with `component={false}` breaking CSS variable scope. [#1495](https://github.com/oceanbase/oceanbase-design/pull/1495)
+- Spin
+  - 🐞 Fixed Spin default Lottie indicator occasionally rendering at 360px original size. [#1494](https://github.com/oceanbase/oceanbase-design/pull/1494)
+
+## 1.0.0-alpha.21
+
+`2026-06-16`
+
+- Theme
+  - 🐞 Fixed extra global focus-visible outline on native HTML elements. [#1492](https://github.com/oceanbase/oceanbase-design/pull/1492)
+
+## 1.0.0-alpha.20
 
 `2026-06-14`
 
+- Accessibility
+  - 🌈 Theme: Improved keyboard focus visibility and hover contrast for Select, Slider, and more. [#1483](https://github.com/oceanbase/oceanbase-design/pull/1483)
+  - 📖 Docs: Added [Accessibility guide](https://oceanbase-design-v1.vercel.app/docs/design-accessibility) and [WCAG audit report](https://oceanbase-design-v1.vercel.app/wcag-audit-report.html). [#1483](https://github.com/oceanbase/oceanbase-design/pull/1483)
+  - ✅ Added automated accessibility tests. [#1483](https://github.com/oceanbase/oceanbase-design/pull/1483)
 - Spin
-  - 💄 更新 Spin 的加载动画（灰色/彩色）。[#1484](https://github.com/oceanbase/oceanbase-design/pull/1484)
-  - 🐞 修复 Spin 在暗色主题下背景不透明的问题。[#1484](https://github.com/oceanbase/oceanbase-design/pull/1484)
+  - 💄 Updated Spin loading animations (gray/color). [#1484](https://github.com/oceanbase/oceanbase-design/pull/1484)
+- Skeleton
+  - 💄 Improved Skeleton block skeleton border radius. [#1485](https://github.com/oceanbase/oceanbase-design/pull/1485)
+- [Icon] ♿ Improved decorative vs semantic icon accessibility. [#1483](https://github.com/oceanbase/oceanbase-design/pull/1483)
+- [Icon] 💄 Updated OceanBase brand logo. [#1486](https://github.com/oceanbase/oceanbase-design/pull/1486)
+
+## 1.0.0-alpha.19
+
+`2026-04-07`
+
+- Theme
+  - 🌈 Aligned with design-side [Design Token](https://design-token-system.vercel.app/), including missing tokens and corrected token values. [#1462](https://github.com/oceanbase/oceanbase-design/pull/1462)
+  - 🐞 Fixed ConfigProvider theme CSS variable mode causing component styles to be lost. [#1463](https://github.com/oceanbase/oceanbase-design/pull/1463)
+- Table
+  - 🐞 Fixed Table first-column row merge `padding-left` misalignment in Card. [#1466](https://github.com/oceanbase/oceanbase-design/pull/1466)
+  - 💄 Improved Table button and page-size select styles in Chinese locale. [#1467](https://github.com/oceanbase/oceanbase-design/pull/1467)
+
+## 1.0.0-alpha.18
+
+`2026-03-31`
+
+- 🌈 Chinese, Japanese, and Korean body and table font size set to `14px`, distinct from English. [#1458](https://github.com/oceanbase/oceanbase-design/pull/1458)
+- Filter
+  - 🆕 Filter.Input Added `showSwitch` prop to control whether the switch is shown. [#1452](https://github.com/oceanbase/oceanbase-design/pull/1452) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🆕 Added Filter.Slot component for custom dropdown panels. [#1446](https://github.com/oceanbase/oceanbase-design/pull/1446) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🆕 Filter Added `allowClear` prop to control whether the clear icon is shown. [#1447](https://github.com/oceanbase/oceanbase-design/pull/1447) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - ⭐️ Filter.Cascader pass-through props to Cascader.Panel. [#1447](https://github.com/oceanbase/oceanbase-design/pull/1447) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 💄 Improved Filter.Select dropdown panel width defaults to container width. [#1444](https://github.com/oceanbase/oceanbase-design/pull/1444) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 💄 Removed Filter.Cascader selected background color. [#1444](https://github.com/oceanbase/oceanbase-design/pull/1444) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+
+## 1.0.0-alpha.17
+
+`2026-03-03`
+
+- 🤖 Added `oceanbase-design-usage` skills for style and component conventions; see [usage docs](https://oceanbase-design-v1.vercel.app/docs/design-skills). [#1439](https://github.com/oceanbase/oceanbase-design/pull/1439)
+- 🐞 Fixed Alert `closeIcon`-only close icon styles not applying. [#1440](https://github.com/oceanbase/oceanbase-design/pull/1440)
+- Filter
+  - 💄 Improved Filter.Checkbox merging same-color options. [#1442](https://github.com/oceanbase/oceanbase-design/pull/1442) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 💄 Improved Filter.ResponsiveGroup last non-Filter item position in ResponsiveGroup. [#1438](https://github.com/oceanbase/oceanbase-design/pull/1438) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+
+## 1.0.0-alpha.16
+
+`2026-02-11`
+
+- Filter
+  - 🆕 Filter.Cascader Added `flat` prop for flat cascader display in 3+ level scenarios. [#1425](https://github.com/oceanbase/oceanbase-design/pull/1425) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🐞 Fixed Filter `showCount` prop not working under ResponsiveGroup. [#1435](https://github.com/oceanbase/oceanbase-design/pull/1435) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+
+## 1.0.0-alpha.15
+
+`2026-02-05`
+
+- 💄 Improved Button border and background on hover. [#1428](https://github.com/oceanbase/oceanbase-design/pull/1428)
+- 🐞 Fixed Card nested Card styles incorrect due to parent Card styles. [#1430](https://github.com/oceanbase/oceanbase-design/pull/1430)
+- Filter
+  - 🔥 Filter Added `showSearch` prop for dropdown search. [#1424](https://github.com/oceanbase/oceanbase-design/pull/1424) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🌐 Filter i18n support for copy. [#1432](https://github.com/oceanbase/oceanbase-design/pull/1432)
+  - 💄 Improved Filter.Checkbox horizontal spacing of tag container in collapsed mode. [#1432](https://github.com/oceanbase/oceanbase-design/pull/1432)
+  - 💄 Improved popover min-width `200px` => `120px`. [#1432](https://github.com/oceanbase/oceanbase-design/pull/1432)
+- 💄 Improved Radio, InputNumber, Collapse, Tree, and TreeSelect icon colors. [#1429](https://github.com/oceanbase/oceanbase-design/pull/1429)
+- Table
+  - 🐞 Fixed Table pagination right margin not applying with Card. [#1427](https://github.com/oceanbase/oceanbase-design/pull/1427)
+  - 💄 Improved Table border radius in Card without pagination or horizontal scroll. [#1431](https://github.com/oceanbase/oceanbase-design/pull/1431)
+
+## 1.0.0-alpha.14
+
+`2026-01-22`
+
+- Theme
+  - 🌈 Removed click wave effect on Button, Switch, Radio, and Checkbox. [#1408](https://github.com/oceanbase/oceanbase-design/pull/1408)
+  - 🌈 Removed Input, InputNumber, Select, TreeSelect, DatePicker, TimePicker, and Cascader `activeShadow` active shadow. [#1409](https://github.com/oceanbase/oceanbase-design/pull/1409)
+  - 🐞 Fixed incorrect `less` variables for some tokens. [#1416](https://github.com/oceanbase/oceanbase-design/pull/1416)
+- Button
+  - 💄 Improved Button loading state styles. [#1419](https://github.com/oceanbase/oceanbase-design/pull/1419)
+  - 💄 Improved Button hover background for outlined and dashed types. [#1420](https://github.com/oceanbase/oceanbase-design/pull/1420)
+- 💄 Improved Button, Collapse action, Tree and TreeSelect expand/collapse icon colors. [#1415](https://github.com/oceanbase/oceanbase-design/pull/1415)
+- Filter
+  - 🆕 Filter.ResponsiveGroup Added `showCount` prop to control whether count is shown. [#1402](https://github.com/oceanbase/oceanbase-design/pull/1402) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 🐞 Fixed incorrect collapsed panel font weight. [#1402](https://github.com/oceanbase/oceanbase-design/pull/1402) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 💄 Improved Filter border color aligned with Select. [#1414](https://github.com/oceanbase/oceanbase-design/pull/1414)
+- 💄 Improved Input and Select disabled icon colors. [#1410](https://github.com/oceanbase/oceanbase-design/pull/1410)
+- InputNumber
+  - 💄 Improved InputNumber stepper button hover border color. [#1411](https://github.com/oceanbase/oceanbase-design/pull/1411)
+  - 💄 Improved InputNumber addon font colors. [#1412](https://github.com/oceanbase/oceanbase-design/pull/1412)
+- 💄 Fixed Modal doc icon not vertically centered. [#1405](https://github.com/oceanbase/oceanbase-design/pull/1405)
+- 💄 Improved Radio.Button icon colors. [#1413](https://github.com/oceanbase/oceanbase-design/pull/1413)
+- 💄 Updated Segmented track, item, and label colors. [#1417](https://github.com/oceanbase/oceanbase-design/pull/1417)
+- 💄 Improved Select selected tag font color. [#1418](https://github.com/oceanbase/oceanbase-design/pull/1418)
+- 💄 Transfer border radius set to `6px`. [#1404](https://github.com/oceanbase/oceanbase-design/pull/1404)
+- Table [#1422](https://github.com/oceanbase/oceanbase-design/pull/1422)
+  - 💄 Improved bordered Table border radius with row/col merge, virtual scroll, and grouped headers.
+  - 💄 Improved grouped header vertical dividers; body keeps only last column divider.
+  - 💄 Fixed fixed columns not fully covering columns behind in rounded Table.
+  - 💄 Custom sort icons `<SwapRightOutlined />` and `<SwapLeftOutlined />`, highlighting different icons for ascend/descend.
+  - 💄 Custom filter icon `<FilterOutlined />`.
+  - 💄 Improved virtual scroll Table bottom radius and border.
+
+## 1.0.0-alpha.13
+
+`2026-01-05`
+
+- 🛠 Fixed `use client;` directive order in ESM/CJS builds to avoid SSR errors. [#1380](https://github.com/oceanbase/oceanbase-design/pull/1380)
+- Theme
+  - 🌈 Updated Design Token `controlItemBgActiveHover` => `#f5f7fc` to improve Dropdown selected item hover background. [#1382](https://github.com/oceanbase/oceanbase-design/pull/1382)
+  - 🌈 Improved `12px` font line height set to 20px for Breadcrumb, Descriptions, Empty, Form, Table, Typography, etc. [#1386](https://github.com/oceanbase/oceanbase-design/pull/1386)
+- 💄 Improved Alert `mini` mode styles aligned with design spec. [#1388](https://github.com/oceanbase/oceanbase-design/pull/1388)
+- Button
+  - 💄 Improved `outlined` and `dashed` Button loading background. [#1400](https://github.com/oceanbase/oceanbase-design/pull/1400)
+  - 💄 Improved small Button icon size. [#1400](https://github.com/oceanbase/oceanbase-design/pull/1400)
+- 💄 DatePicker & TimePicker linear icon color set to gray8 `#5c6b8a`. [#1385](https://github.com/oceanbase/oceanbase-design/pull/1385)
+- 🆕 Drawer Added `document` prop for doc link next to title. [#1390](https://github.com/oceanbase/oceanbase-design/pull/1390)
+- 💄 Improved Dropdown.Button primary button hover divider style. [#1399](https://github.com/oceanbase/oceanbase-design/pull/1399)
+- Filter
+  - 🆕 Filter Added `showSuffixIcon` prop to control whether suffix icons (arrow and clear) are shown. [#1378](https://github.com/oceanbase/oceanbase-design/pull/1378) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 📢 FilterProvider props and useFilterContext return renamed `isWrapped` => `isCollapsed`. [#1379](https://github.com/oceanbase/oceanbase-design/pull/1379) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+  - 💄 Improved collapsed container width calculation for better responsiveness. [#1379](https://github.com/oceanbase/oceanbase-design/pull/1379) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+- 💄 Input, InputNumber, and Select focus border color set to blue4 `#0d6cf2`. [#1392](https://github.com/oceanbase/oceanbase-design/pull/1392)
+- Modal
+  - 🆕 Modal Added `document` prop for doc link next to title. [#1390](https://github.com/oceanbase/oceanbase-design/pull/1390)
+  - 💄 Modal title icon size set to 16px instead of inheriting 18px title. [#1391](https://github.com/oceanbase/oceanbase-design/pull/1391)
+- Radio
+  - 🆕 Radio.Button Added `icon` prop. [#1398](https://github.com/oceanbase/oceanbase-design/pull/1398)
+  - 💄 Radio.Button horizontal spacing set to 12px, aligned with Button. [#1398](https://github.com/oceanbase/oceanbase-design/pull/1398)
+  - 💄 Improved Radio radio dot vertical alignment. [#1398](https://github.com/oceanbase/oceanbase-design/pull/1398)
+  - 💄 Improved Radio selected item hover background. [#1393](https://github.com/oceanbase/oceanbase-design/pull/1393)
+- 💄 Improved Select custom tag spacing. [#1381](https://github.com/oceanbase/oceanbase-design/pull/1381)
+- 💄 Improved Switch unchecked hover background. [#1393](https://github.com/oceanbase/oceanbase-design/pull/1393)
+- Table
+  - 💄 Removed extra bottom border for paginated-less Table in bordered Card with zero body padding. [#1383](https://github.com/oceanbase/oceanbase-design/pull/1383)
+  - 💄 Removed extra bottom border for empty Table in bordered Card with zero body padding. [#1383](https://github.com/oceanbase/oceanbase-design/pull/1383)
+
+## 1.0.0-alpha.12
+
+`2025-12-25`
+
+- 🔥 Added Filter component with multiple filter types for tables and lists. [#1363](https://github.com/oceanbase/oceanbase-design/pull/1363) [@Richard-Zhang1019](https://github.com/Richard-Zhang1019)
+- Theme
+  - 🆕 `theme.useToken()` Added `obToken` return for consuming new Design Tokens in function components and hooks. [#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)
+  - 🆕 Added `obToken` static object for class components and non-React contexts. [#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)
+  - 📝 Added [Design Token usage docs](https://oceanbase-design-v1.vercel.app/docs/design-token) with full token list and usage. [#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)
+  - 📢 CSS variable renamed `--ob-spacing-negative-25` => `--ob-space-negative-25`. [#1376](https://github.com/oceanbase/oceanbase-design/pull/1376)
+  - 🐞 Fixed CSS variable `--ob-font-weight-**` incorrect values; removed extra `px` unit. [#1375](https://github.com/oceanbase/oceanbase-design/pull/1375)
+
+## 1.0.0-alpha.11
+
+`2025-12-23`
+
+- 🛠 Added `use client` directive to ESM/CJS build output for SSR. [#1362](https://github.com/oceanbase/oceanbase-design/pull/1362)
+- Theme:
+  - ⭐️ `fontWeight` less theme variables now reference `--ob-font-weight-**` CSS variables for dynamic values. [#1364](https://github.com/oceanbase/oceanbase-design/pull/1364)
+  - 🌈 CSS variable token updates: [#1365](https://github.com/oceanbase/oceanbase-design/pull/1365)
+    - `--ob-color-text-info` renamed to `--ob-color-text-description`.
+    - `--ob-color-bg-active` renamed to `--ob-color-bg-selected`.
+    - `--ob-color-border-hover` value changed from blue-4 to grey-7.
+- Alert
+  - 💄 Improved `mini` Alert height. [#1369](https://github.com/oceanbase/oceanbase-design/pull/1369)
+  - 💄 Improved Alert vertical spacing when `extra` without `description`. [#1369](https://github.com/oceanbase/oceanbase-design/pull/1369)
+  - 💄 Improved Alert content and action max width. [#1370](https://github.com/oceanbase/oceanbase-design/pull/1370)
+- Badge
+  - 🆕 Badge Added `progressProps` prop for progress info in icon mode `processing` state. [#1368](https://github.com/oceanbase/oceanbase-design/pull/1368)
+  - 💄 Badge 1px padding around status dot for 10px total size. [#1368](https://github.com/oceanbase/oceanbase-design/pull/1368)
+  - 💄 Updated Badge `processing` status icon. [#1368](https://github.com/oceanbase/oceanbase-design/pull/1368)
+- 💄 Improved Card title line height set to 24px. [#1371](https://github.com/oceanbase/oceanbase-design/pull/1371)
+- 💄 Improved Modal spacing when no title/footer. [#1372](https://github.com/oceanbase/oceanbase-design/pull/1372)
+- 🐞 Fixed Table some styles not applying. [#1367](https://github.com/oceanbase/oceanbase-design/pull/1367)
+- 💄 Improved capsule Tag height. [#1366](https://github.com/oceanbase/oceanbase-design/pull/1366)
+
+## 1.0.0-alpha.10
+
+`2025-12-19`
+
+- Theme:
+  - 🌈 Updated neutral/functional colors and hover/active/border/nav tokens; unified hover border to `gray7`. [#1345](https://github.com/oceanbase/oceanbase-design/pull/1345)
+  - 🌈 Link hover/active color set to `blue5`. [#1345](https://github.com/oceanbase/oceanbase-design/pull/1345)
+  - 🌈 Reduced `placeholder` font weight in English locale. [#1354](https://github.com/oceanbase/oceanbase-design/pull/1354)
+  - 🌈 Added `[style*='font-size: 12px']` global style rule for automatic font weight in some cases. [#1346](https://github.com/oceanbase/oceanbase-design/pull/1346)
+  - 🌈 Updated `lineHeight` line-height Design Tokens aligned with font sizes. [#1347](https://github.com/oceanbase/oceanbase-design/pull/1347)
+  - 🐞 Fixed incorrect `colorIcon` variable values in less theme files. [#1345](https://github.com/oceanbase/oceanbase-design/pull/1345)
+- 💄 Alert status icon size set to 14px. [#1351](https://github.com/oceanbase/oceanbase-design/pull/1351)
+- 💄 Badge removed `processing` dot animation. [#1359](https://github.com/oceanbase/oceanbase-design/pull/1359)
+- Button
+  - 💄 Outlined & dashed button hover border set to `gray7`. [#1345](https://github.com/oceanbase/oceanbase-design/pull/1345)
+  - 💄 Outlined & dashed preset-color buttons: hover fill with inverted text.
+- 🆕 Card Added `document` prop for document link. [#1352](https://github.com/oceanbase/oceanbase-design/pull/1352)
+- 💄 Checkbox / Radio hover border color set to `gray7`. [#1345](https://github.com/oceanbase/oceanbase-design/pull/1345)
+- 💄 Improved Descriptions left-aligned content spacing and title size at all sizes. [#1358](https://github.com/oceanbase/oceanbase-design/pull/1358)
+- 💄 Improved Dropdown.Button divider style when primary button. [#1355](https://github.com/oceanbase/oceanbase-design/pull/1355)
+- 💄 Reduced Empty description font weight in English locale. [#1349](https://github.com/oceanbase/oceanbase-design/pull/1349)
+- Input & Select [#1350](https://github.com/oceanbase/oceanbase-design/pull/1350)
+  - 💄 Improved Input prefix/suffix font size and color.
+  - 💄 Improved Input clear icon color.
+  - 💄 Improved Select clear icon color.
+- 💄 Input, InputNumber, Select, DatePicker hover/active border set to `gray7`. [#1345](https://github.com/oceanbase/oceanbase-design/pull/1345)
+- 💄 Improved message border radius. [#1344](https://github.com/oceanbase/oceanbase-design/pull/1344)
+- 💄 Improved notification background and border radius. [#1344](https://github.com/oceanbase/oceanbase-design/pull/1344)
+- Table
+  - 💄 Buttons under Table default to small size styles. [#1338](https://github.com/oceanbase/oceanbase-design/pull/1338)
+  - 💄 Improved Table spacing in divider-less Card and ProCard. [#1339](https://github.com/oceanbase/oceanbase-design/pull/1339)
+  - 💄 Improved Table pagination styles, including font size, height, and spacing. [#1357](https://github.com/oceanbase/oceanbase-design/pull/1357)
+- 💄 Tabs labels deepen font weight on `hover`. [#1356](https://github.com/oceanbase/oceanbase-design/pull/1356)
+- Tag
+  - 🆕 Tag Added `critical` status color for severe scenarios such as critical alerts. [#1348](https://github.com/oceanbase/oceanbase-design/pull/1348)
+  - 💄 Improved Tag font weight. [#1347](https://github.com/oceanbase/oceanbase-design/pull/1347)
+  - 💄 Improved capsule Tag font weight, font color, and border color. [#1347](https://github.com/oceanbase/oceanbase-design/pull/1347)
+- 🆕 Typography.Text Added `caption` prop for auxiliary description scenarios. [#1346](https://github.com/oceanbase/oceanbase-design/pull/1346)
+- 🛠 Refactored style generation following antd: migrated `genComponentStyleHook` to `genStyleHooks` for better flexibility and consistency. [#1343](https://github.com/oceanbase/oceanbase-design/pull/1343)
+
+## 1.0.0-alpha.9
+
+`2025-12-11`
+
+- 🔥 CSS variables:
+  - 🆕 Added `--ob-*` prefixed CSS variable system with concise, semantic Design Tokens for business consumption and Figma token-mapped styles. [#1330](https://github.com/oceanbase/oceanbase-design/pull/1330)
+  - 📝 Added CSS variable docs with usage guide and full variable list. [#1330](https://github.com/oceanbase/oceanbase-design/pull/1330)
+- 💄 Button content and icon spacing changed `8` => `4`. [#1319](https://github.com/oceanbase/oceanbase-design/pull/1319)
+- Card
+  - 🆕 Card Added `subTitle` prop for subtitle. [#1327](https://github.com/oceanbase/oceanbase-design/pull/1327)
+  - 🆕 Card Added `gray` prop for gray background mode. [#1320](https://github.com/oceanbase/oceanbase-design/pull/1320)
+  - 💄 Improved Card expand/collapse interaction to avoid height jitter. [#1320](https://github.com/oceanbase/oceanbase-design/pull/1320)
+  - 💄 Card `tabs` size aligned with card size. [#1320](https://github.com/oceanbase/oceanbase-design/pull/1320)
+- 🐞 Fixed Checkbox checkbox not vertically aligned. [#1316](https://github.com/oceanbase/oceanbase-design/pull/1316)
+- Descriptions
+  - 🆕 Descriptions Added `collapsible` prop for content expand/collapse. [#1331](https://github.com/oceanbase/oceanbase-design/pull/1331)
+  - 🆕 Descriptions Added `contentAlign` prop for left-aligned content. [#1332](https://github.com/oceanbase/oceanbase-design/pull/1332)
+  - 💄 Improved Descriptions title area bottom spacing at all sizes. [#1332](https://github.com/oceanbase/oceanbase-design/pull/1332)
+- Drawer
+  - 🐞 Fixed Drawer content area unexpected horizontal scroll. [#1329](https://github.com/oceanbase/oceanbase-design/pull/1329)
+  - 💄 Drawer title icon size set to `16px` instead of inheriting 18px title. [#1329](https://github.com/oceanbase/oceanbase-design/pull/1329)
+  - 💄 Updated Drawer content area scroll `box-shadow`. [#1329](https://github.com/oceanbase/oceanbase-design/pull/1329)
+- 🐞 Fixed Slider left and right labels not aligned. [#1328](https://github.com/oceanbase/oceanbase-design/pull/1328)
+- Table
+  - ⭐️ Table enables horizontal scroll by default when no ellipsis columns. [#1318](https://github.com/oceanbase/oceanbase-design/pull/1318)
+  - 🐞 Fixed Table nested sub-table style alignment under fixed columns. [#1334](https://github.com/oceanbase/oceanbase-design/pull/1334)
+  - 💄 Improved tree Table expand icon spacing. [#1317](https://github.com/oceanbase/oceanbase-design/pull/1317)
+- 💄 Improved horizontal Tabs label inner spacing. [#1321](https://github.com/oceanbase/oceanbase-design/pull/1321)
+- 💄 Improved Tag line height aligned with design spec. [#1314](https://github.com/oceanbase/oceanbase-design/pull/1314)
+
+## 1.0.0-alpha.8
+
+`2025-12-08`
+
+- Theme:
+  - 🐞 Fixed token `fontWeightWeak` incorrect value in English locale. [#1308](https://github.com/oceanbase/oceanbase-design/pull/1308)
+  - 🐞 Fixed `Inter-Medium` and `Inter-SemiBold` remote font URLs incorrect. [#1309](https://github.com/oceanbase/oceanbase-design/pull/1309)
+- 🐞 Fixed Form.Item `renderProps` not working. [#1310](https://github.com/oceanbase/oceanbase-design/pull/1310)
+
+## 1.0.0-alpha.7
+
+`2025-12-04`
+
+- 📝 Updated docs for using with Next.js. [#1291](https://github.com/oceanbase/oceanbase-design/pull/1291)
+- 🌈 Globally updated English font weights, including:
+  - Updated `Inter` font files, style definitions, and weights. [#1304](https://github.com/oceanbase/oceanbase-design/pull/1304)
+  - Changed auxiliary description weight token `fontWeightWeak` `300 => 400`. [#1304](https://github.com/oceanbase/oceanbase-design/pull/1304)
+  - Adapted font weights at component level in Table, Descriptions, PageContainer, ProTable, etc. [#1304](https://github.com/oceanbase/oceanbase-design/pull/1304)
+- 🌈 `<a>` links with `href` or `data-aspm-param^="obcloud_openLink=` show underline on hover. [#1297](https://github.com/oceanbase/oceanbase-design/pull/1297)
+- 🐞 Fixed Alert icon display incorrect when `type` is not set. [#1296](https://github.com/oceanbase/oceanbase-design/pull/1296)
+- 💄 Improved Form.Item validation message font size and spacing. [#1293](https://github.com/oceanbase/oceanbase-design/pull/1293)
+- Input
+  - 💄 Improved Input suffix font size. [#1294](https://github.com/oceanbase/oceanbase-design/pull/1294)
+  - 💄 Input `showCount` default format changed `count / maxLength` => `count/maxLength`. [#1294](https://github.com/oceanbase/oceanbase-design/pull/1294)
+- 💄 Improved InputNumber addon font size and color. [#1295](https://github.com/oceanbase/oceanbase-design/pull/1295)
+
+## 1.0.0-alpha.6
+
+`2025-12-01`
+
+- 🛠 Refactored global styles: migrated `global.css` to CSS-in-JS injection for better flexibility and consistency, and support in non-Webpack frameworks (e.g. Next.js, Vite). [#1283](https://github.com/oceanbase/oceanbase-design/pull/1283)
+- 📝 Added Cascader and Tooltip custom offset examples. [#1287](https://github.com/oceanbase/oceanbase-design/pull/1287)
+- 🐞 Fixed Alert `action` area position incorrect. [#1284](https://github.com/oceanbase/oceanbase-design/pull/1284)
+- 💄 Improved dark and compact themes. [#1285](https://github.com/oceanbase/oceanbase-design/pull/1285)
+- 💄 Removed Button `box-shadow`. [#1288](https://github.com/oceanbase/oceanbase-design/pull/1288)
+- 💄 Improved DatePicker, Dropdown, Popover, Select, Tooltip, and Menu popup border radius. [#1289](https://github.com/oceanbase/oceanbase-design/pull/1289)
+- 💄 Improved large Input and InputNumber border radius. [#1289](https://github.com/oceanbase/oceanbase-design/pull/1289)
+
+## 1.0.0-alpha.5
+
+`2025-11-28`
+
+- Theme:
+  - 🆕 Added CSS variable mode support via ConfigProvider `theme.cssVar`. [#1280](https://github.com/oceanbase/oceanbase-design/pull/1280)
+  - 🛠 Refactored Design Token style computation using dedicated functions (cal, unit, etc.) for CSS variable mode. [#1281](https://github.com/oceanbase/oceanbase-design/pull/1281)
+  - 📝 Added CSS variable mode usage docs and examples. [#1280](https://github.com/oceanbase/oceanbase-design/pull/1280)
+
+## 1.0.0-alpha.4
+
+`2025-11-27`
+
+- 🌐 Site supports Chinese/English language switching. [#1265](https://github.com/oceanbase/oceanbase-design/pull/1265)
+- Theme
+  - 🌈 Updated Design Token tertiary fill `colorFillTertiary` and quaternary fill `colorFillQuaternary` values. [#1273](https://github.com/oceanbase/oceanbase-design/pull/1273)
+  - 🌈 Updated Design Token layout background `colorBgLayout` value. [#1275](https://github.com/oceanbase/oceanbase-design/pull/1275)
+  - 💄 Improved font weight styles using Design Token `fontWeight` and `fontWeightStrong` instead of hardcoded values. [#1265](https://github.com/oceanbase/oceanbase-design/pull/1265)
+- Alert
+  - 🔥 New Alert component with updated colors, fonts, spacing, etc. [#1266](https://github.com/oceanbase/oceanbase-design/pull/1266)
+  - 🆕 Added `mini` prop for ultra-light info mode: more compact, borderless, width fits content. [#1266](https://github.com/oceanbase/oceanbase-design/pull/1266)
+  - 🗑️ Removed `colored` prop support. [#1266](https://github.com/oceanbase/oceanbase-design/pull/1266)
+  - 💄 Moved action buttons from top-right to below content. [#1266](https://github.com/oceanbase/oceanbase-design/pull/1266)
+  - 💄 Alert links default to underline; link color matches message. [#1266](https://github.com/oceanbase/oceanbase-design/pull/1266)
+- Badge
+  - 💄 Badge status dot size changed to `8px`. [#1267](https://github.com/oceanbase/oceanbase-design/pull/1267)
+  - 💄 Improved Badge `default` status dot color. [#1267](https://github.com/oceanbase/oceanbase-design/pull/1267)
+- Card
+  - 🔥 New Card component with updated styles per design spec; adjusted title, content, and tabs spacing. [#1270](https://github.com/oceanbase/oceanbase-design/pull/1270)
+  - 🆕 Added `collapsible` prop for content expand/collapse. [#1270](https://github.com/oceanbase/oceanbase-design/pull/1270)
+- 💄 Collapse updated expand icon color. [#1274](https://github.com/oceanbase/oceanbase-design/pull/1274)
+- 🔥 New Drawer component with updated styles: title divider, title font size `16px => 18px`, content spacing, etc. [#1269](https://github.com/oceanbase/oceanbase-design/pull/1269)
+- Form
+  - 🆕 Form.Item Added `description` prop for description before form control. [#1272](https://github.com/oceanbase/oceanbase-design/pull/1272)
+  - 💄 Form.Item `extra` font size and spacing updated per design spec. [#1272](https://github.com/oceanbase/oceanbase-design/pull/1272)
+- Modal
+  - 🔥 New Modal component with updated styles: title divider, title font size `16px => 18px`, improved content spacing, etc. [#1268](https://github.com/oceanbase/oceanbase-design/pull/1268)
+  - 🐞 Fixed Modal static method styles not applying without `<Modal />`; styles must be registered in global config. [#1271](https://github.com/oceanbase/oceanbase-design/pull/1271)
+  - 💄 Modal static methods use linear icons instead of filled icons. [#1268](https://github.com/oceanbase/oceanbase-design/pull/1268)
+- 💄 Table uses `CaretRightOutlined` as expand icon. [#1274](https://github.com/oceanbase/oceanbase-design/pull/1274)
+- 💄 Improved Tabs vertical tab divider spacing. [#1263](https://github.com/oceanbase/oceanbase-design/pull/1263)
+- Tag
+  - 🆕 Tag Added `pill` prop for capsule tag style. [#1264](https://github.com/oceanbase/oceanbase-design/pull/1264)
+  - 💄 Non-capsule Tag font weight bolded. [#1264](https://github.com/oceanbase/oceanbase-design/pull/1264)
+
+## 1.0.0-alpha.3
+
+`2025-10-23`
+
+- Design Token
+  - 🌈 Updated functional and neutral color related Design Tokens. [#1244](https://github.com/oceanbase/oceanbase-design/pull/1244)
+  - 🌈 Updated `lineHeight` and `controlHeightSM` related Design Tokens. [#1245](https://github.com/oceanbase/oceanbase-design/pull/1245)
+  - 🌈 Updated controlHeightSM control height `20` => `24`. [#1249](https://github.com/oceanbase/oceanbase-design/pull/1249)
+  - 🌈 Updated Menu `groupTitleColor` group title color `#8592AD` => `#5C6B8A`. [#1223](https://github.com/oceanbase/oceanbase-design/pull/1223)
+  - 🌈 Updated `fontWeight` and `fontWeightStrong` Design Tokens with locale-specific values for Chinese/English. [#1246](https://github.com/oceanbase/oceanbase-design/pull/1246)
+  - 🌈 Added custom Design Tokens `fontWeightWeak`, `borderRadiusMD`, and colorFuchsia related tokens. [#1247](https://github.com/oceanbase/oceanbase-design/pull/1247)
+- 🔥 New Tag component with improved colors, spacing, icons, etc. [#1251](https://github.com/oceanbase/oceanbase-design/pull/1251)
+- 💄 Improved multi-select tag styles in Select, TreeSelect, and Cascader. [#1251](https://github.com/oceanbase/oceanbase-design/pull/1251)
+- Button
+  - 💄 Improved Button inline spacing and border radius. [#1248](https://github.com/oceanbase/oceanbase-design/pull/1248)
+  - 💄 Small Button font size `13` => `12`. [#1250](https://github.com/oceanbase/oceanbase-design/pull/1250)
+- 💄 Bordered Card nested border radius decrements progressively. [#1235](https://github.com/oceanbase/oceanbase-design/pull/1235)
+- 💄 Improved Drawer loading spacing styles. [#1238](https://github.com/oceanbase/oceanbase-design/pull/1238)
+- 🐞 Fixed duplicate class names in App, Drawer, Empty, and Result components. [#1254](https://github.com/oceanbase/oceanbase-design/pull/1254)
+
+## 1.0.0-alpha.2
+
+`2025-09-24`
+
+- Design Token
+  - 🌈 Updated `fontSizeLG` and `fontSizeHeading` font sizes. [#1200](https://github.com/oceanbase/oceanbase-design/pull/1200)
+  - 🌈 Updated `controlHeight` control height `32` => `28`. [#1201](https://github.com/oceanbase/oceanbase-design/pull/1201)
+  - 🌈 Updated `borderRadiusLG` large border radius `6` => `8`. [#1206](https://github.com/oceanbase/oceanbase-design/pull/1206)
+  - 🌈 Updated Table `cellPaddingBlock` cell vertical padding. [#1208](https://github.com/oceanbase/oceanbase-design/pull/1208)
+- Badge
+  - 🐞 Fixed Badge status text font size not inheriting parent, for easier composition. [#1214](https://github.com/oceanbase/oceanbase-design/pull/1214)
+  - 💄 Adjusted Badge `processing` state color and dot size. [#1205](https://github.com/oceanbase/oceanbase-design/pull/1205)
+- Card
+  - 💄 Card `tabs` default size changed to `middle`. [#1216](https://github.com/oceanbase/oceanbase-design/pull/1216)
+  - 💄 Improved Card nested border radius; inner card radius decrements progressively. [#1211](https://github.com/oceanbase/oceanbase-design/pull/1211)
+- 💄 Improved Descriptions `label` font color and vertical layout spacing. [#1204](https://github.com/oceanbase/oceanbase-design/pull/1204)
+- 💄 Skeleton block border radius `2` => `4`. [#1212](https://github.com/oceanbase/oceanbase-design/pull/1212)
+
+## 1.0.0-alpha.1
+
+`2025-09-10`
+
+- 🌈 Updated theme, text, and fill color related Design Tokens. [#1186](https://github.com/oceanbase/oceanbase-design/pull/1186)
+- 🌈 [Icon] Updated two-tone icon theme color `#006AFF` => `#0D6CF2`. [#1191](https://github.com/oceanbase/oceanbase-design/pull/1191)
+
+## 1.0.0-alpha.0
+
+`2025-09-08`
+
+- 🌈 Updated theme, font size, and border radius related Design Tokens. [#1174](https://github.com/oceanbase/oceanbase-design/pull/1174)
+- 💄 Removed Button custom styles including shadow, border, and background. [#1173](https://github.com/oceanbase/oceanbase-design/pull/1173)
+- 💄 Removed Empty and Result large size styles. [#1175](https://github.com/oceanbase/oceanbase-design/pull/1175)
+- 💄 Updated Table styles: removed zebra striping, added row dividers, adjusted cell spacing, etc. [#1176](https://github.com/oceanbase/oceanbase-design/pull/1176)
+- 💄 Adjusted Tabs font color and ink bar length. [#1177](https://github.com/oceanbase/oceanbase-design/pull/1177)
 
 ## 0.4.20
 
 `2026-01-05`
 
-- 🐞 修复 Tag 内容超长省略并且可关闭时的样式问题。[#1394](https://github.com/oceanbase/oceanbase-design/pull/1394)
+- 🐞 Fixed Tag ellipsis and closable style issues when content overflows. [#1394](https://github.com/oceanbase/oceanbase-design/pull/1394)
 
 ## 0.4.19
 
 `2025-12-04`
 
-- 🌐 优化日语 (ja-JP) 的文案翻译。[#1299](https://github.com/oceanbase/oceanbase-design/pull/1299)
+- 🌐 Improved Japanese (ja-JP) locale copy. [#1299](https://github.com/oceanbase/oceanbase-design/pull/1299)
 - Segmented
-  - 🐞 修复 Segmented 带 `icon` 时的样式问题。[#1300](https://github.com/oceanbase/oceanbase-design/pull/1300)
-  - ⭐️ Segmented 默认开启 `ellipsis` 省略和 tooltip。[#1300](https://github.com/oceanbase/oceanbase-design/pull/1300)
-- 💄 优化 Typography 切换编辑态时的位置抖动。[#1301](https://github.com/oceanbase/oceanbase-design/pull/1301)
+  - 🐞 Fixed Segmented style issues with `icon`. [#1300](https://github.com/oceanbase/oceanbase-design/pull/1300)
+  - ⭐️ Segmented enables `ellipsis` and tooltip by default. [#1300](https://github.com/oceanbase/oceanbase-design/pull/1300)
+- 💄 Improved Typography position jitter when switching to edit mode. [#1301](https://github.com/oceanbase/oceanbase-design/pull/1301)
 
 ## 0.4.18
 
 `2025-11-24`
 
-- 🌐 新增日语 (ja-JP) 国际化支持。[#1258](https://github.com/oceanbase/oceanbase-design/pull/1258)
+- 🌐 Added Japanese (ja-JP) internationalization support. [#1258](https://github.com/oceanbase/oceanbase-design/pull/1258)
 
 ## 0.4.17
 
 `2025-09-24`
 
 - Tabs
-  - 🆕 Tabs 新增 `divider` 属性，用于设置分割线。[#1179](https://github.com/oceanbase/oceanbase-design/pull/1179)
-  - 🐞 修复 Tabs `ref` 不生效的问题。[#1178](https://github.com/oceanbase/oceanbase-design/pull/1178)
-- 🐞 修复 Typography `Text` 和 `Paragraph` 类名样式 (行高、字体颜色和大小) 不生效的问题。[#1180](https://github.com/oceanbase/oceanbase-design/pull/1180)
+  - 🆕 Tabs Added `divider` prop for divider line. [#1179](https://github.com/oceanbase/oceanbase-design/pull/1179)
+  - 🐞 Fixed Tabs `ref` not working. [#1178](https://github.com/oceanbase/oceanbase-design/pull/1178)
+- 🐞 Fixed Typography `Text` and `Paragraph` class name styles (line height, font color, size) not applying. [#1180](https://github.com/oceanbase/oceanbase-design/pull/1180)
 - TypeScript
-  - 🤖 导出 FormItem 类型，以兼容 antd 的类型用法。[#1171](https://github.com/oceanbase/oceanbase-design/pull/1171)
+  - 🤖 Exported FormItem type for antd-compatible type usage. [#1171](https://github.com/oceanbase/oceanbase-design/pull/1171)
 
 ## 0.4.16
 
 `2025-08-29`
 
-- ⭐️ 优化自定义字体的加载顺序为 `系统字体 -> 自托管字体 -> 在线字体`，避免发起网络请求。[#1158](https://github.com/oceanbase/oceanbase-design/pull/1158)
-- 🐞 修复 Descriptions.Item 子元素为 Typography 时复制 tooltip 位置不正确的问题。[#1159](https://github.com/oceanbase/oceanbase-design/pull/1159)
-- 🐞 修复 `sideEffects` 配置问题，以支持 tree shaking。[#1161](https://github.com/oceanbase/oceanbase-design/pull/1161)
+- ⭐️ Optimized custom font load order to `system fonts -> self-hosted fonts -> online fonts` to avoid network requests. [#1158](https://github.com/oceanbase/oceanbase-design/pull/1158)
+- 🐞 Fixed Descriptions.Item copy tooltip position incorrect when child is Typography. [#1159](https://github.com/oceanbase/oceanbase-design/pull/1159)
+- 🐞 Fixed `sideEffects` config for tree shaking. [#1161](https://github.com/oceanbase/oceanbase-design/pull/1161)
 
 ## 0.4.15
 
 `2025-08-21`
 
-- 🐞 修复 Form.Item `action` 属性在 antd 5.27.0 版本下不生效的问题。[#1141](https://github.com/oceanbase/oceanbase-design/pull/1141)
+- 🐞 Fixed Form.Item `action` prop not working on antd 5.27.0. [#1141](https://github.com/oceanbase/oceanbase-design/pull/1141)
 
 ## 0.4.14
 
 `2025-08-07`
 
-- 🆕 Modal 新增 `extra` 属性，用于设置底部额外内容。[#1130](https://github.com/oceanbase/oceanbase-design/pull/1121)
-- 🐞 修复 Tag 设置 `font-size` 样式不生效的问题。[#1121](https://github.com/oceanbase/oceanbase-design/pull/1121)
+- 🆕 Modal Added `extra` prop for extra bottom content. [#1130](https://github.com/oceanbase/oceanbase-design/pull/1121)
+- 🐞 Fixed Tag `font-size` style not applying. [#1121](https://github.com/oceanbase/oceanbase-design/pull/1121)
 
 ## 0.4.13
 
 `2025-07-27`
 
-- 🆕 Segmented `options` 新增 `badge` 属性，用于设置选项卡后面的徽标。[#1100](https://github.com/oceanbase/oceanbase-design/pull/1100) [@wzc520pyfm](https://github.com/wzc520pyfm)
-- 🆕 Tabs `options` 新增 `badge` 属性，用于设置选项卡后面的徽标。原 `tag` 属性标记为即将废弃，后续不推荐使用。[#1110](https://github.com/oceanbase/oceanbase-design/pull/1110) [@wzc520pyfm](https://github.com/wzc520pyfm)
-- 💄 优化 Slider 在最大值和最小值相等时的 `marks` 样式。[#1105](https://github.com/oceanbase/oceanbase-design/pull/1105)
+- 🆕 Segmented `options` Added `badge` prop for badge after tab label. [#1100](https://github.com/oceanbase/oceanbase-design/pull/1100) [@wzc520pyfm](https://github.com/wzc520pyfm)
+- 🆕 Tabs `options` Added `badge` prop for badge after tab label. Original `tag` prop deprecated. [#1110](https://github.com/oceanbase/oceanbase-design/pull/1110) [@wzc520pyfm](https://github.com/wzc520pyfm)
+- 💄 Improved Slider `marks` styles when min equals max. [#1105](https://github.com/oceanbase/oceanbase-design/pull/1105)
 
 ## 0.4.12
 
 `2025-07-10`
 
-- 🐞 修复 `boxShadow` 相关 Design Token 不正确的问题。[#1096](https://github.com/oceanbase/oceanbase-design/pull/1096)
-- 💄 更新 boxShadowTertiary token 的值。[#1097](https://github.com/oceanbase/oceanbase-design/pull/1097)
+- 🐞 Fixed incorrect `boxShadow` related Design Tokens. [#1096](https://github.com/oceanbase/oceanbase-design/pull/1096)
+- 💄 Updated boxShadowTertiary token value. [#1097](https://github.com/oceanbase/oceanbase-design/pull/1097)
 
 ## 0.4.11
 
 `2025-07-01`
 
-- 🐞 修复 Form.Item `layout` 属性不生效的问题。[#1085](https://github.com/oceanbase/oceanbase-design/pull/1085)
-- 🐞 修复 Table 已排序列头的分割线丢失的问题。[#1076](https://github.com/oceanbase/oceanbase-design/pull/1076) [@wzc520pyfm](https://github.com/wzc520pyfm)
+- 🐞 Fixed Form.Item `layout` prop not working. [#1085](https://github.com/oceanbase/oceanbase-design/pull/1085)
+- 🐞 Fixed Table sorted column header divider missing. [#1076](https://github.com/oceanbase/oceanbase-design/pull/1076) [@wzc520pyfm](https://github.com/wzc520pyfm)
 
 ## 0.4.10
 
 `2025-04-18`
 
-- 📖 新增 AutoComplete 的示例和文档。[#1012](https://github.com/oceanbase/oceanbase-design/pull/1012)
-- 📖 新增 Anchor 的文档和示例。[#1013](https://github.com/oceanbase/oceanbase-design/pull/1013)
-- 📖 新增 Steps 的文档和示例。[#1014](https://github.com/oceanbase/oceanbase-design/pull/1014)
-- 📖 新增 Menu 的文档和示例。[#1015](https://github.com/oceanbase/oceanbase-design/pull/1015)
-- 📖 新增 Pagination 的文档和示例。[#1016](https://github.com/oceanbase/oceanbase-design/pull/1016)
-- 📖 新增 Upload 的文档和示例。[#1017](https://github.com/oceanbase/oceanbase-design/pull/1017)
-- 📖 新增 Tree 的文档和示例。[#1018](https://github.com/oceanbase/oceanbase-design/pull/1018)
-- 📖 新增 TreeSelect 的文档和示例。[#1019](https://github.com/oceanbase/oceanbase-design/pull/1019)
-- 📖 [图标] 展示更多的图标。[#1024](https://github.com/oceanbase/oceanbase-design/pull/1024)
-- 🆕 Form.Item 新增 `action` 属性，用于设置操作项。[#1028](https://github.com/oceanbase/oceanbase-design/pull/1028)
+- 📖 Added AutoComplete examples and docs. [#1012](https://github.com/oceanbase/oceanbase-design/pull/1012)
+- 📖 Added Anchor docs and examples. [#1013](https://github.com/oceanbase/oceanbase-design/pull/1013)
+- 📖 Added Steps docs and examples. [#1014](https://github.com/oceanbase/oceanbase-design/pull/1014)
+- 📖 Added Menu docs and examples. [#1015](https://github.com/oceanbase/oceanbase-design/pull/1015)
+- 📖 Added Pagination docs and examples. [#1016](https://github.com/oceanbase/oceanbase-design/pull/1016)
+- 📖 Added Upload docs and examples. [#1017](https://github.com/oceanbase/oceanbase-design/pull/1017)
+- 📖 Added Tree docs and examples. [#1018](https://github.com/oceanbase/oceanbase-design/pull/1018)
+- 📖 Added TreeSelect docs and examples. [#1019](https://github.com/oceanbase/oceanbase-design/pull/1019)
+- 📖 [Icon] Show more icons. [#1024](https://github.com/oceanbase/oceanbase-design/pull/1024)
+- 🆕 Form.Item Added `action` prop for action items. [#1028](https://github.com/oceanbase/oceanbase-design/pull/1028)
 - Table
-  - 🆕 Table 新增 `innerBordered` 属性，用于设置内部边框。[#1036](https://github.com/oceanbase/oceanbase-design/pull/1036)
-  - 💄 优化 Table 在无水平间距卡片内的样式，包括第一列和卡片标题对齐、最后一列和卡片操作区对齐、分页器左右增加间距。[#1030](https://github.com/oceanbase/oceanbase-design/pull/1030)
-  - 💄 带边框 Table 的表头改为灰底。[#1035](https://github.com/oceanbase/oceanbase-design/pull/1035)
-- 🐞 修复多个 Empty 同时出现时 svg id 冲突导致插图展示异常的问题。[#1027](https://github.com/oceanbase/oceanbase-design/pull/1027)
-- 🐞 修复编辑态的 Typography 在 Descriptions 内被遮挡和没有垂直居中的问题。[#1033](https://github.com/oceanbase/oceanbase-design/pull/1033)
-- 💄 优化 Descriptions 在垂直布局下的间距，并且多列垂直和单列垂直的间距不同。[#1031](https://github.com/oceanbase/oceanbase-design/pull/1031) [#1032](https://github.com/oceanbase/oceanbase-design/pull/1032)
+  - 🆕 Table Added `innerBordered` prop for inner borders. [#1036](https://github.com/oceanbase/oceanbase-design/pull/1036)
+  - 💄 Improved Table styles in zero horizontal padding Card: first column aligned with title, last column with actions, pagination side spacing. [#1030](https://github.com/oceanbase/oceanbase-design/pull/1030)
+  - 💄 Bordered Table header changed to gray background. [#1035](https://github.com/oceanbase/oceanbase-design/pull/1035)
+- 🐞 Fixed multiple Empty instances causing svg id conflict and illustration display issues. [#1027](https://github.com/oceanbase/oceanbase-design/pull/1027)
+- 🐞 Fixed editable Typography clipped and not vertically centered in Descriptions. [#1033](https://github.com/oceanbase/oceanbase-design/pull/1033)
+- 💄 Improved Descriptions vertical layout spacing; multi-column and single-column vertical spacing differ. [#1031](https://github.com/oceanbase/oceanbase-design/pull/1031) [#1032](https://github.com/oceanbase/oceanbase-design/pull/1032)
 
 ## 0.4.9
 
 `2025-02-20`
 
-- 📖 Table 设计文档新增 `高亮显式` 规范。[#986](https://github.com/oceanbase/oceanbase-design/pull/986)
-- 📖 Typography 新增可复制和在 Modal 中编辑的示例。[#985](https://github.com/oceanbase/oceanbase-design/pull/985)
-- ⭐️ ConfigProvider 移除 `injectStaticFunction` 属性，改为自动判断是否注入可消费全局配置的静态方法。[#981](https://github.com/oceanbase/oceanbase-design/pull/981)
+- 📖 Table design docs added `highlight emphasis` guideline. [#986](https://github.com/oceanbase/oceanbase-design/pull/986)
+- 📖 Typography added copyable and edit-in-Modal examples. [#985](https://github.com/oceanbase/oceanbase-design/pull/985)
+- ⭐️ ConfigProvider removed `injectStaticFunction` prop; auto-detects whether to inject static methods that consume global config. [#981](https://github.com/oceanbase/oceanbase-design/pull/981)
 - Table
-  - 🐞 修复 Table 可展开&固定列时的间距问题。[#982](https://github.com/oceanbase/oceanbase-design/pull/982)
-  - 🐞 修复 Table 可展开&可滚动时不应该展示斑马条的问题。[#983](https://github.com/oceanbase/oceanbase-design/pull/983)
-- 💄 Alert 改为使用线性图标，以对齐最新的设计规范。[#987](https://github.com/oceanbase/oceanbase-design/pull/987)
-- 💄 Dropdown.Button 默认图标改为 `DownOutlined` 向下箭头。[#984](https://github.com/oceanbase/oceanbase-design/pull/984)
+  - 🐞 Fixed Table expandable & fixed column spacing. [#982](https://github.com/oceanbase/oceanbase-design/pull/982)
+  - 🐞 Fixed Table expandable & scrollable should not show zebra stripes. [#983](https://github.com/oceanbase/oceanbase-design/pull/983)
+- 💄 Alert uses linear icons aligned with latest design spec. [#987](https://github.com/oceanbase/oceanbase-design/pull/987)
+- 💄 Dropdown.Button default icon changed to `DownOutlined`. [#984](https://github.com/oceanbase/oceanbase-design/pull/984)
 
 ## 0.4.8
 
 `2025-02-13`
 
-- 📖 优化设计基础、设计原则和组件设计文档的内容和样式。[#966](https://github.com/oceanbase/oceanbase-design/pull/966)
-- 🐞 修复 `@ctrl/tinycolor` 依赖缺失的问题。[#973](https://github.com/oceanbase/oceanbase-design/pull/973)
+- 📖 Improved design foundations, principles, and component design docs content and styles. [#966](https://github.com/oceanbase/oceanbase-design/pull/966)
+- 🐞 Fixed missing `@ctrl/tinycolor` dependency. [#973](https://github.com/oceanbase/oceanbase-design/pull/973)
 - Tooltip:
-  - 🔨 去掉 Tooltip `mouseFollow` 模式下控制台出现的 NaN 告警。[#968](https://github.com/oceanbase/oceanbase-design/pull/968)
-  - 🔨 将 [react-sticky-mouse-tooltip](https://github.com/marlo22/react-sticky-mouse-tooltip) 代码内置到 Tooltip，避免控制台告警和错误都指向 `MouseTooltip.jsx`、干扰问题排查。[#969](https://github.com/oceanbase/oceanbase-design/pull/969)
+  - 🔨 Removed NaN warning in Tooltip `mouseFollow` mode console. [#968](https://github.com/oceanbase/oceanbase-design/pull/968)
+  - 🔨 Inlined [react-sticky-mouse-tooltip](https://github.com/marlo22/react-sticky-mouse-tooltip) into Tooltip to avoid console warnings/errors pointing to `MouseTooltip.jsx` and interfering with debugging. [#969](https://github.com/oceanbase/oceanbase-design/pull/969)
 
 ## 0.4.7
 
 `2025-02-05`
 
-- 🔥 新增 11 篇设计规范文档，包括 5 篇设计原则、6 篇设计基础。[#954](https://github.com/oceanbase/oceanbase-design/pull/954)
-- 🔥 新增 6 篇组件规范文档，包括 Alert、Button、Tabs、Table、Modal 和 DateRanger。[#955](https://github.com/oceanbase/oceanbase-design/pull/955)
-- 📖 优化官网在移动端的样式和访问体验。[#956](https://github.com/oceanbase/oceanbase-design/pull/956)
-- 💄 默认去掉 Form.Item 包裹 Switch 时的可选样式。[#949](https://github.com/oceanbase/oceanbase-design/pull/949)
-- 💄 优化 Table 空状态的高度，大中小尺寸分别为 360px、260px 和 160px。[#947](https://github.com/oceanbase/oceanbase-design/pull/947)
+- 🔥 Added 11 design guideline docs: 5 design principles and 6 design foundations. [#954](https://github.com/oceanbase/oceanbase-design/pull/954)
+- 🔥 Added 6 component guideline docs: Alert, Button, Tabs, Table, Modal, and DateRanger. [#955](https://github.com/oceanbase/oceanbase-design/pull/955)
+- 📖 Improved site mobile styles and browsing experience. [#956](https://github.com/oceanbase/oceanbase-design/pull/956)
+- 💄 Removed optional styles by default when Form.Item wraps Switch. [#949](https://github.com/oceanbase/oceanbase-design/pull/949)
+- 💄 Improved Table empty state height: large/middle/small are 360px, 260px, and 160px. [#947](https://github.com/oceanbase/oceanbase-design/pull/947)
 
 ## 0.4.6
 
 `2025-01-15`
 
-- 🌈 自定义 Tabs `horizontalItemGutter` token 值，全局设置页标签间隙。[#935](https://github.com/oceanbase/oceanbase-design/pull/935)
-- 🆕 ConfigProvider 新增 `card.divided` 属性，用于配置 Card 是否展示分割线。[#939](https://github.com/oceanbase/oceanbase-design/pull/939)
+- 🌈 Custom Tabs `horizontalItemGutter` token for global tab gap. [#935](https://github.com/oceanbase/oceanbase-design/pull/935)
+- 🆕 ConfigProvider Added `card.divided` prop to configure Card divider display. [#939](https://github.com/oceanbase/oceanbase-design/pull/939)
 - Table
-  - 🐞 修复中小尺寸的可展开 Table 单元格高度不正确的问题。[#924](https://github.com/oceanbase/oceanbase-design/pull/924)
-  - 💄 Table 点击行可展开时，设置行样式为 `cursor: pointer`。[#925](https://github.com/oceanbase/oceanbase-design/pull/925)
-  - 💄 优化 Table 在无分割线 Card 和 ProCard 内的间距。[#933](https://github.com/oceanbase/oceanbase-design/pull/933)
-  - 💄 优化 Table 在无间距 ProCard 内的样式，包括第一列和卡片标题对齐、最后一列和卡片操作区对齐、分页器左右增加间距。[#923](https://github.com/oceanbase/oceanbase-design/pull/923)
-  - 💄 优化 Table 顶部圆角的样式。[#941](https://github.com/oceanbase/oceanbase-design/pull/941)
+  - 🐞 Fixed middle/small expandable Table cell height incorrect. [#924](https://github.com/oceanbase/oceanbase-design/pull/924)
+  - 💄 Table row style set to `cursor: pointer` when row click expands. [#925](https://github.com/oceanbase/oceanbase-design/pull/925)
+  - 💄 Improved Table spacing in divider-less Card and ProCard. [#933](https://github.com/oceanbase/oceanbase-design/pull/933)
+  - 💄 Improved Table styles in zero-padding ProCard: first column aligned with title, last column with actions, pagination side spacing. [#923](https://github.com/oceanbase/oceanbase-design/pull/923)
+  - 💄 Improved Table top border radius. [#941](https://github.com/oceanbase/oceanbase-design/pull/941)
 
 ## 0.4.5
 
 `2024-12-30`
 
-- 🐞 修复 Table 底部圆角和列左侧内间距不正确的问题。[#910](https://github.com/oceanbase/oceanbase-design/pull/910)
+- 🐞 Fixed Table bottom border radius and column left padding incorrect. [#910](https://github.com/oceanbase/oceanbase-design/pull/910)
 
 ## 0.4.4
 
 `2024-12-16`
 
-- 🐞 修复 antd 重置样式的引入路径 `antd/dist/reset.css` => `~antd/dist/reset.css`，以适配 Umi 3 和 Bigfish 3 的解析逻辑。[#894](https://github.com/oceanbase/oceanbase-design/pull/894)
+- 🐞 Fixed antd reset styles import path `antd/dist/reset.css` => `~antd/dist/reset.css` for Umi 3 and Bigfish 3 resolution. [#894](https://github.com/oceanbase/oceanbase-design/pull/894)
 
 ## 0.4.3
 
 `2024-12-14`
 
-- 📖 修复 demo 展开全部代码不生效的问题。[#888](https://github.com/oceanbase/oceanbase-design/pull/888)
-- 📖 修复部分组件不展示 demo 操作栏的问题。[#888](https://github.com/oceanbase/oceanbase-design/pull/888)
-- ⚡ 设置 `sideEffects`，以支持 tree shaking。[#886](https://github.com/oceanbase/oceanbase-design/pull/886)
+- 📖 Fixed demo expand all code not working. [#888](https://github.com/oceanbase/oceanbase-design/pull/888)
+- 📖 Fixed some components not showing demo action bar. [#888](https://github.com/oceanbase/oceanbase-design/pull/888)
+- ⚡ Set `sideEffects` to support tree shaking. [#886](https://github.com/oceanbase/oceanbase-design/pull/886)
 - Collapse [#882](https://github.com/oceanbase/oceanbase-design/pull/882)
-  - 📖 新增 Collapse 的文档和示例。
-  - 💄 将 Collapse 默认展开图标改为实心箭头。
-  - 💄 弱化 Collapse 边框，将边框颜色改为 `#E2E8F3`。
+  - 📖 Added Collapse docs and examples.
+  - 💄 Collapse default expand icon changed to solid arrow.
+  - 💄 Softened Collapse border color to `#E2E8F3`.
 - Table
-  - 🐞 修复普通 Table 的单元格出现底部边框的问题。[#879](https://github.com/oceanbase/oceanbase-design/pull/879)
-  - 💄 优化 Table 带边框时的底部圆角样式。[#880](https://github.com/oceanbase/oceanbase-design/pull/880)
-  - 💄 优化 Table 空状态在 Popover、Tooltip 下的高度。[#891](https://github.com/oceanbase/oceanbase-design/pull/891)
+  - 🐞 Fixed normal Table cells showing bottom border. [#879](https://github.com/oceanbase/oceanbase-design/pull/879)
+  - 💄 Improved Table bordered bottom border radius. [#880](https://github.com/oceanbase/oceanbase-design/pull/880)
+  - 💄 Improved Table empty state height in Popover and Tooltip. [#891](https://github.com/oceanbase/oceanbase-design/pull/891)
 
 ## 0.4.2
 
 `2024-11-29`
 
-- 📖 新增 DatePicker 的文档和示例。[#852](https://github.com/oceanbase/oceanbase-design/pull/852)
-- 📖 新增 TimePicker 的文档和示例。[#853](https://github.com/oceanbase/oceanbase-design/pull/853)
-- 📖 新增 Popconfirm 的文档和示例。[#851](https://github.com/oceanbase/oceanbase-design/pull/851)
-- 📖 新增 Popover 的文档和示例。[#850](https://github.com/oceanbase/oceanbase-design/pull/850)
-- 📖 新增 Progress 的文档和示例。[#834](https://github.com/oceanbase/oceanbase-design/pull/834)
-- 🌈 将 Design Token lineWidthFocus 设为 0，以去掉组件聚焦时的线条样式。[#841](https://github.com/oceanbase/oceanbase-design/pull/841)
-- ⭐️ 优先从系统加载 `Inter`、`Consolas` 和 `Helvetica Neue` 字体。[#861](https://github.com/oceanbase/oceanbase-design/pull/861)
-- 🐞 修复 Slider 两端标签的对齐样式在部分场景下不生效的问题。[#832](https://github.com/oceanbase/oceanbase-design/pull/832)
-- 💄 将全局的滚动条颜色改为 `#e2e8f3`。[#846](https://github.com/oceanbase/oceanbase-design/pull/846)
+- 📖 Added DatePicker docs and examples. [#852](https://github.com/oceanbase/oceanbase-design/pull/852)
+- 📖 Added TimePicker docs and examples. [#853](https://github.com/oceanbase/oceanbase-design/pull/853)
+- 📖 Added Popconfirm docs and examples. [#851](https://github.com/oceanbase/oceanbase-design/pull/851)
+- 📖 Added Popover docs and examples. [#850](https://github.com/oceanbase/oceanbase-design/pull/850)
+- 📖 Added Progress docs and examples. [#834](https://github.com/oceanbase/oceanbase-design/pull/834)
+- 🌈 Design Token lineWidthFocus set to 0 to remove component focus line styles. [#841](https://github.com/oceanbase/oceanbase-design/pull/841)
+- ⭐️ Prefer loading `Inter`, `Consolas`, and `Helvetica Neue` from system fonts. [#861](https://github.com/oceanbase/oceanbase-design/pull/861)
+- 🐞 Fixed Slider end label alignment not applying in some scenarios. [#832](https://github.com/oceanbase/oceanbase-design/pull/832)
+- 💄 Global scrollbar color changed to `#e2e8f3`. [#846](https://github.com/oceanbase/oceanbase-design/pull/846)
 - Empty
-  - 💄 Empty 主标题的字体大小从 24px 调整为 20px。[#845](https://github.com/oceanbase/oceanbase-design/pull/845)
-  - 💄 优化 Empty 超长内容的样式，限制描述区的最大宽度为 600px、步骤区的最大宽度为 1000px。[#844](https://github.com/oceanbase/oceanbase-design/pull/844)
+  - 💄 Empty main title font size changed from 24px to 20px. [#845](https://github.com/oceanbase/oceanbase-design/pull/845)
+  - 💄 Improved Empty long content styles: description max width 600px, steps max width 1000px. [#844](https://github.com/oceanbase/oceanbase-design/pull/844)
 - Result
-  - 💄 Result 主标题的字体大小从 24px 调整为 20px。[#845](https://github.com/oceanbase/oceanbase-design/pull/845)
-  - 💄 优化 Result 超长内容的样式，限制副标题的最大宽度为 600px、内容区的最大宽度为 1000px。[#842](https://github.com/oceanbase/oceanbase-design/pull/842)
-- 💄 优化 Switch 未选中态的背景色，和置灰态的背景色进行区分。[#833](https://github.com/oceanbase/oceanbase-design/pull/833)
+  - 💄 Result main title font size changed from 24px to 20px. [#845](https://github.com/oceanbase/oceanbase-design/pull/845)
+  - 💄 Improved Result long content styles: subtitle max width 600px, content max width 1000px. [#842](https://github.com/oceanbase/oceanbase-design/pull/842)
+- 💄 Improved Switch unchecked background to distinguish from disabled state. [#833](https://github.com/oceanbase/oceanbase-design/pull/833)
 - Table
-  - 💄 优化 Table 嵌套子表格和可展开内容的样式，以对齐最新的设计规范。[#865](https://github.com/oceanbase/oceanbase-design/pull/865)
-  - 💄 将 Table 虚拟滚动条的颜色改为 `#e2e8f3`，和全局滚动条保持一致。[#864](https://github.com/oceanbase/oceanbase-design/pull/864)
+  - 💄 Improved Table nested sub-table and expandable content styles per latest design spec. [#865](https://github.com/oceanbase/oceanbase-design/pull/865)
+  - 💄 Table virtual scrollbar color changed to `#e2e8f3` to match global scrollbar. [#864](https://github.com/oceanbase/oceanbase-design/pull/864)
 - Tooltip
-  - 🐞 修复 Tooltip 开启 `mouseFollow` 后没有继承 `.ant-tooltip` 类名和样式的问题。[#849](https://github.com/oceanbase/oceanbase-design/pull/849)
-  - 💄 优化 Tooltip 可关闭图标的颜色样式。[#848](https://github.com/oceanbase/oceanbase-design/pull/848)
-  - 💄 限制 Tooltip 的最大宽度为 300px、最大高度为 250px，内容超出时横向折行、纵向滚动。[#847](https://github.com/oceanbase/oceanbase-design/pull/847)
+  - 🐞 Fixed Tooltip with `mouseFollow` not inheriting `.ant-tooltip` class and styles. [#849](https://github.com/oceanbase/oceanbase-design/pull/849)
+  - 💄 Improved Tooltip closable icon color. [#848](https://github.com/oceanbase/oceanbase-design/pull/848)
+  - 💄 Tooltip max width 300px, max height 250px; overflow wraps horizontally and scrolls vertically. [#847](https://github.com/oceanbase/oceanbase-design/pull/847)
 - Typography
-  - 💄 Typography 编辑模式文本触发器增加 hover 边框，以提示用户可以点击进行编辑。[#839](https://github.com/oceanbase/oceanbase-design/pull/839)
-  - 💄 优化 Typography 编辑模式样式，避免只读态和编辑态之间切换时出现抖动。[#839](https://github.com/oceanbase/oceanbase-design/pull/839)
-- 🔨 打包后的 `dist` 目录增加 `reset.css` 样式文件，以对齐 antd。[#855](https://github.com/oceanbase/oceanbase-design/pull/855)
-- 🔨 适配 CodeSandbox 环境下编译报错、无法预览的问题。[#855](https://github.com/oceanbase/oceanbase-design/pull/855)
+  - 💄 Typography edit mode text trigger shows hover border to indicate click-to-edit. [#839](https://github.com/oceanbase/oceanbase-design/pull/839)
+  - 💄 Improved Typography edit mode styles to avoid jitter between read-only and edit modes. [#839](https://github.com/oceanbase/oceanbase-design/pull/839)
+- 🔨 Added `reset.css` to `dist` output to align with antd. [#855](https://github.com/oceanbase/oceanbase-design/pull/855)
+- 🔨 Fixed CodeSandbox compile errors preventing preview. [#855](https://github.com/oceanbase/oceanbase-design/pull/855)
 
 ## 0.4.1
 
 `2024-11-11`
 
-- 📖 新增 Checkbox 的文档和示例。[#812](https://github.com/oceanbase/oceanbase-design/pull/812)
-- 📖 新增 Dropdown 的文档和示例。[#803](https://github.com/oceanbase/oceanbase-design/pull/803)
-- 📖 新增 Slider 的文档和示例。[#815](https://github.com/oceanbase/oceanbase-design/pull/815)
-- ⭐️ ConfigProvider 新增 `appProps` 属性，用于控制内嵌 App 是否渲染组件、以便让被包裹元素继承 `.ant-app` 样式。[#824](https://github.com/oceanbase/oceanbase-design/pull/824)
-- 🐞 去掉自定义的 Design Token `fontSizeHeading` 和 `lineHeightHeading`，修复标题大小错误的问题。[#813](https://github.com/oceanbase/oceanbase-design/pull/813)
-- 🐞 修复 Dropdown.Button 为主按钮时分割线超出和背景色不正确的问题。[#803](https://github.com/oceanbase/oceanbase-design/pull/803)
-- 🐞 [图标] 删除自定义的 UserOutlined 图标，避免和 `@ant-design/icons` 图标冲突以及在 Login 组件中的展示异常。[#802](https://github.com/oceanbase/oceanbase-design/pull/802)
-- 💄 弱化 Breadcrumb 最后一项的字体颜色，将其改为 `#5c6b8a`。[#816](https://github.com/oceanbase/oceanbase-design/pull/816)
+- 📖 Added Checkbox docs and examples. [#812](https://github.com/oceanbase/oceanbase-design/pull/812)
+- 📖 Added Dropdown docs and examples. [#803](https://github.com/oceanbase/oceanbase-design/pull/803)
+- 📖 Added Slider docs and examples. [#815](https://github.com/oceanbase/oceanbase-design/pull/815)
+- ⭐️ ConfigProvider Added `appProps` prop to control whether embedded App renders components so wrapped elements inherit `.ant-app` styles. [#824](https://github.com/oceanbase/oceanbase-design/pull/824)
+- 🐞 Removed custom Design Tokens `fontSizeHeading` and `lineHeightHeading`; fixed incorrect heading sizes. [#813](https://github.com/oceanbase/oceanbase-design/pull/813)
+- 🐞 Fixed Dropdown.Button divider overflow and background color when primary button. [#803](https://github.com/oceanbase/oceanbase-design/pull/803)
+- 🐞 [Icon] Removed custom UserOutlined icon to avoid conflict with `@ant-design/icons` and display issues in Login. [#802](https://github.com/oceanbase/oceanbase-design/pull/802)
+- 💄 Softened Breadcrumb last item font color to `#5c6b8a`. [#816](https://github.com/oceanbase/oceanbase-design/pull/816)
 - Card
-  - 💄 优化小尺寸 Card 带页签时的头部间距样式。[#821](https://github.com/oceanbase/oceanbase-design/pull/821)
-  - 💄 优化 Card 无分割线时的底部间距。[#819](https://github.com/oceanbase/oceanbase-design/pull/819)
-- 💄 优化 Checkbox 超长内容的垂直对齐样式，从居中对齐改为顶部对齐。[#812](https://github.com/oceanbase/oceanbase-design/pull/812)
-- 💄 更新 Empty 的默认插图。[#814](https://github.com/oceanbase/oceanbase-design/pull/814)
-- 💄 优化 Radio 超长内容的垂直对齐样式，从居中对齐改为顶部对齐。[#811](https://github.com/oceanbase/oceanbase-design/pull/811)
-- 💄 优化 Slider 轨道覆盖部分的颜色，以及左右两端的标签对齐样式。[#815](https://github.com/oceanbase/oceanbase-design/pull/815)
+  - 💄 Improved small Card with tabs header spacing. [#821](https://github.com/oceanbase/oceanbase-design/pull/821)
+  - 💄 Improved Card bottom spacing without divider. [#819](https://github.com/oceanbase/oceanbase-design/pull/819)
+- 💄 Improved Checkbox long content vertical alignment from center to top. [#812](https://github.com/oceanbase/oceanbase-design/pull/812)
+- 💄 Updated Empty default illustration. [#814](https://github.com/oceanbase/oceanbase-design/pull/814)
+- 💄 Improved Radio long content vertical alignment from center to top. [#811](https://github.com/oceanbase/oceanbase-design/pull/811)
+- 💄 Improved Slider track fill color and end label alignment. [#815](https://github.com/oceanbase/oceanbase-design/pull/815)
 - Table
-  - 💄 优化 Table 底部分割线的展示逻辑，无分页器时也应该展示。[#822](https://github.com/oceanbase/oceanbase-design/pull/822)
-  - 💄 将非嵌套 Table 的空状态最小高度设为 `360px`。[#818](https://github.com/oceanbase/oceanbase-design/pull/818)
+  - 💄 Improved Table bottom divider logic; should show even without pagination. [#822](https://github.com/oceanbase/oceanbase-design/pull/822)
+  - 💄 Non-nested Table empty state min height set to `360px`. [#818](https://github.com/oceanbase/oceanbase-design/pull/818)
 
 ## 0.4.0
 
 `2024-10-09`
 
-- 📖 新增 Skeleton 的文档和示例。[#724](https://github.com/oceanbase/oceanbase-design/pull/724)
-- 📖 新增 Divider 的示例和文档。[#723](https://github.com/oceanbase/oceanbase-design/pull/723)
-- 支持 Next.js:
-  - 📖 新增 @oceanbase/design 在 Nextjs 中的 [使用文档](https://design.oceanbase.com/docs/design-use-with-nextjs) 和 [项目模板](https://stackblitz.com/edit/nextjs-oceanbase-design)。[#785](https://github.com/oceanbase/oceanbase-design/pull/785)
-  - 🔨 lottie-web 改为懒加载，以支持 Next.js 的 SSR 服务端渲染。[#751](https://github.com/oceanbase/oceanbase-design/pull/751)
-  - 🔨 所有组件均显式引入 React，以适配 Next.js 构建。[#783](https://github.com/oceanbase/oceanbase-design/pull/783)
-- Design Token 更新:
-  - 🌈 更新 `fontSizeHeading` 和 `lineHeightHeading`，减小标题的字体大小和行高。[#727](https://github.com/oceanbase/oceanbase-design/pull/727)
-  - 🌈 更新 Tag `defaultColor` 为 `#5c6b8a`，弱化字体颜色。[#786](https://github.com/oceanbase/oceanbase-design/pull/786)
-  - 🌈 更新 Tooltip `colorBgSpotlight` 为 `#ffffff`、`colorTextLightSolid` 为 `#132039`，将默认背景改为白色、默认字体改为黑色。[#653](https://github.com/oceanbase/oceanbase-design/pull/653)
-- 字体更新:
-  - ⭐️ 更新默认字体、英文字体和代码字体，并且会根据语言设置自动切换默认字体和英文字体。[#726](https://github.com/oceanbase/oceanbase-design/pull/726)
-  - ⭐️ 内置 `Inter`、`Consolas` 和 `Helvetica Neue` 字体，保证字体效果一致性。[#732](https://github.com/oceanbase/oceanbase-design/pull/732)
-- 图标更新:
-  - 🔥 新增 36 个线框图标、37 个实底图标和 76 个彩色图标。[#733](https://github.com/oceanbase/oceanbase-design/pull/733)
-- 🆕 Tabs `items` 和 `TabPane` 新增 `divider` 属性，用于设置选项卡为分割线。[#659](https://github.com/oceanbase/oceanbase-design/pull/659)
-- 🐞 将 `@theme` less 变量改为延迟加载，修复其无法被覆盖的问题。[#725](https://github.com/oceanbase/oceanbase-design/pull/725)
+- 📖 Added Skeleton docs and examples. [#724](https://github.com/oceanbase/oceanbase-design/pull/724)
+- 📖 Added Divider examples and docs. [#723](https://github.com/oceanbase/oceanbase-design/pull/723)
+- Next.js support:
+  - 📖 Added @oceanbase/design [usage docs](https://design.oceanbase.com/docs/design-use-with-nextjs) and [project template](https://stackblitz.com/edit/nextjs-oceanbase-design) for Next.js. [#785](https://github.com/oceanbase/oceanbase-design/pull/785)
+  - 🔨 lottie-web lazy-loaded to support Next.js SSR. [#751](https://github.com/oceanbase/oceanbase-design/pull/751)
+  - 🔨 All components explicitly import React for Next.js builds. [#783](https://github.com/oceanbase/oceanbase-design/pull/783)
+- Design Token updates:
+  - 🌈 Updated `fontSizeHeading` and `lineHeightHeading`; reduced heading font size and line height. [#727](https://github.com/oceanbase/oceanbase-design/pull/727)
+  - 🌈 Updated Tag `defaultColor` to `#5c6b8a` to soften font color. [#786](https://github.com/oceanbase/oceanbase-design/pull/786)
+  - 🌈 Updated Tooltip `colorBgSpotlight` to `#ffffff`, `colorTextLightSolid` to `#132039`; default background white, text black. [#653](https://github.com/oceanbase/oceanbase-design/pull/653)
+- Font updates:
+  - ⭐️ Updated default, English, and code fonts with automatic locale-based switching. [#726](https://github.com/oceanbase/oceanbase-design/pull/726)
+  - ⭐️ Bundled `Inter`, `Consolas`, and `Helvetica Neue` fonts for consistent rendering. [#732](https://github.com/oceanbase/oceanbase-design/pull/732)
+- Icon updates:
+  - 🔥 Added 36 outline icons, 37 filled icons, and 76 colored icons. [#733](https://github.com/oceanbase/oceanbase-design/pull/733)
+- 🆕 Tabs `items` and `TabPane` Added `divider` prop for tab dividers. [#659](https://github.com/oceanbase/oceanbase-design/pull/659)
+- 🐞 `@theme` less variables changed to lazy load; fixed inability to override. [#725](https://github.com/oceanbase/oceanbase-design/pull/725)
 
 ## 0.3.8
 
 `2024-09-23`
 
-- 🔥 新增 `设计` 和 `博客` 模块，并上线 10 篇设计规范文档和 2 篇博客。[#682](https://github.com/oceanbase/oceanbase-design/pull/682)
-- 📖 主题文档新增 Design Token 列表，便于开发侧查阅。[#701](https://github.com/oceanbase/oceanbase-design/pull/701)
-- 💄 升级 [@oceanbase/aliyun-theme](https://www.npmjs.com/package/@oceanbase/aliyun-theme) 主题包，并更新阿里云主题的 less 样式文件。[#668](https://github.com/oceanbase/oceanbase-design/pull/668)
-- 🐞 修复 Space 在新版浏览器下可能出现的间距抖动问题。[#722](https://github.com/oceanbase/oceanbase-design/pull/722)
-- 🐞 修复 Tag 同时设置 `icon` 和 `ellipsis` 时省略样式异常的问题。[#687](https://github.com/oceanbase/oceanbase-design/pull/687) [@linhf123](https://github.com/linhf123)
+- 🔥 Added `Design` and `Blog` modules with 10 design guideline docs and 2 blog posts. [#682](https://github.com/oceanbase/oceanbase-design/pull/682)
+- 📖 Theme docs added Design Token list for developer reference. [#701](https://github.com/oceanbase/oceanbase-design/pull/701)
+- 💄 Upgraded [@oceanbase/aliyun-theme](https://www.npmjs.com/package/@oceanbase/aliyun-theme) and updated Aliyun theme less styles. [#668](https://github.com/oceanbase/oceanbase-design/pull/668)
+- 🐞 Fixed Space spacing jitter in newer browsers. [#722](https://github.com/oceanbase/oceanbase-design/pull/722)
+- 🐞 Fixed Tag ellipsis style issues when both `icon` and `ellipsis` are set. [#687](https://github.com/oceanbase/oceanbase-design/pull/687) [@linhf123](https://github.com/linhf123)
 
 ## 0.3.7
 
 `2024-07-26`
 
-- 📖 补充 Button、Input 和 Switch 的示例和文档。[#640](https://github.com/oceanbase/oceanbase-design/pull/640) [#657](https://github.com/oceanbase/oceanbase-design/pull/657) [#658](https://github.com/oceanbase/oceanbase-design/pull/658)
-- 📖 新增阿里云和 less 主题使用文档，优化暗色主题使用文档。[#644](https://github.com/oceanbase/oceanbase-design/pull/644)
-- ⭐️ 新增阿里云主题的 less 变量文件，方便在 less 中使用。[#643](https://github.com/oceanbase/oceanbase-design/pull/643)
-- 💄 更新 Design Token `colorBgBase` 的颜色值 `#132039` => `#000000`。[#642](https://github.com/oceanbase/oceanbase-design/pull/642)
-- 💄 优化 Table 表头的字体颜色，以对齐设计规范。[#641](https://github.com/oceanbase/oceanbase-design/pull/641)
+- 📖 Added Button, Input, and Switch examples and docs. [#640](https://github.com/oceanbase/oceanbase-design/pull/640) [#657](https://github.com/oceanbase/oceanbase-design/pull/657) [#658](https://github.com/oceanbase/oceanbase-design/pull/658)
+- 📖 Added Aliyun and less theme usage docs; improved dark theme usage docs. [#644](https://github.com/oceanbase/oceanbase-design/pull/644)
+- ⭐️ Added Aliyun theme less variable file for use in less. [#643](https://github.com/oceanbase/oceanbase-design/pull/643)
+- 💄 Updated Design Token `colorBgBase` color `#132039` => `#000000`. [#642](https://github.com/oceanbase/oceanbase-design/pull/642)
+- 💄 Improved Table header font color aligned with design spec. [#641](https://github.com/oceanbase/oceanbase-design/pull/641)
 
 ## 0.3.6
 
 `2024-07-10`
 
-- 🐞 修复 Table 空状态插图缺失的问题。[#630](https://github.com/oceanbase/oceanbase-design/pull/630)
+- 🐞 Fixed Table empty state illustration missing. [#630](https://github.com/oceanbase/oceanbase-design/pull/630)
 
 ## 0.3.5
 
 `2024-06-27`
 
-- 🆕 ConfigProvider 新增 `theme.isAliyun` 属性，用于开启阿里云主题。[#602](https://github.com/oceanbase/oceanbase-design/pull/602)
-- 🐞 修复 Modal, message, notification 静态函数无法触发的问题。[#606](https://github.com/oceanbase/oceanbase-design/pull/606)
+- 🆕 ConfigProvider Added `theme.isAliyun` prop to enable Aliyun theme. [#602](https://github.com/oceanbase/oceanbase-design/pull/602)
+- 🐞 Fixed Modal, message, notification static functions not triggering. [#606](https://github.com/oceanbase/oceanbase-design/pull/606)
 - Table
-  - 🐞 修复 Table 批量操作栏未关联 `rowSelection` 的问题。[#591](https://github.com/oceanbase/oceanbase-design/pull/591)
-  - 🐞 修复 Table 批量操作栏国际化不生效的问题。[#591](https://github.com/oceanbase/oceanbase-design/pull/591)
-  - 💄 优化 Table 在无间距卡片内的展示样式，包括第一列和卡片标题对齐、最后一列和卡片操作区对齐、分页器左右增加间距。[#618](https://github.com/oceanbase/oceanbase-design/pull/618)
-- 💄 优化 Alert 的间距样式，以对齐设计规范。[#615](https://github.com/oceanbase/oceanbase-design/pull/615)
+  - 🐞 Fixed Table batch action bar not linked to `rowSelection`. [#591](https://github.com/oceanbase/oceanbase-design/pull/591)
+  - 🐞 Fixed Table batch action bar i18n not working. [#591](https://github.com/oceanbase/oceanbase-design/pull/591)
+  - 💄 Improved Table display in zero-padding Card: first column aligned with title, last column with actions, pagination side spacing. [#618](https://github.com/oceanbase/oceanbase-design/pull/618)
+- 💄 Improved Alert spacing aligned with design spec. [#615](https://github.com/oceanbase/oceanbase-design/pull/615)
 - Empty
-  - ⭐️ Empty 新增 PRESENTED_IMAGE_DATABASE 插图，用于数据库实例的空状态场景。[#607](https://github.com/oceanbase/oceanbase-design/pull/607)
-  - 💄 更新 Empty 的 PRESENTED_IMAGE_COLORED 插图。[#607](https://github.com/oceanbase/oceanbase-design/pull/607)
-  - 💄 优化 Empty 操作区的按钮样式，加大行高和圆角。[#608](https://github.com/oceanbase/oceanbase-design/pull/608)
-- 💄 优化 Result 样式，包括标题加粗、加大操作区的按钮行高和圆角。[#609](https://github.com/oceanbase/oceanbase-design/pull/609)
-- 💄 优化 Select 加载器的颜色，使其更具识别度。[#616](https://github.com/oceanbase/oceanbase-design/pull/616)
+  - ⭐️ Empty Added PRESENTED_IMAGE_DATABASE illustration for database instance empty states. [#607](https://github.com/oceanbase/oceanbase-design/pull/607)
+  - 💄 Updated Empty PRESENTED_IMAGE_COLORED illustration. [#607](https://github.com/oceanbase/oceanbase-design/pull/607)
+  - 💄 Improved Empty action button styles with larger line height and border radius. [#608](https://github.com/oceanbase/oceanbase-design/pull/608)
+- 💄 Improved Result styles: bold title, larger action button line height and border radius. [#609](https://github.com/oceanbase/oceanbase-design/pull/609)
+- 💄 Improved Select loader color for better visibility. [#616](https://github.com/oceanbase/oceanbase-design/pull/616)
 
 ## 0.3.4
 
 `2024-05-11`
 
-- 💄 优化 Empty 步骤提示的背景颜色，以对齐设计规范。[#586](https://github.com/oceanbase/oceanbase-design/pull/587)
-- 💄 将 Breadcrumb 字体大小改为 12px，以对齐设计规范。[#587](https://github.com/oceanbase/oceanbase-design/pull/587)
+- 💄 Improved Empty step tip background color aligned with design spec. [#586](https://github.com/oceanbase/oceanbase-design/pull/587)
+- 💄 Breadcrumb font size changed to 12px aligned with design spec. [#587](https://github.com/oceanbase/oceanbase-design/pull/587)
 
 ## 0.3.3
 
 `2024-04-25`
 
 - ConfigProvider
-  - 🐞 修复 ConfigProvider 开启 `theme.customFont` 并且多次嵌套后 `fontFamily` 不正确的问题。[#572](https://github.com/oceanbase/oceanbase-design/pull/572)
-  - 🐞 修复 ConfigProvider 自定义 `theme.token.fontFamily` 不生效的问题。[#573](https://github.com/oceanbase/oceanbase-design/pull/573)
-  - 🐞 修复 ConfigProvider 多次使用会默认多次注入 StaticFunction，导致 Modal、message 和 notification 静态方法不会正常展示的问题。[#574](https://github.com/oceanbase/oceanbase-design/pull/574)
-- 🐞 修复主题 Token `boxShadowSecondary` 通过静态 token 对象和 less 变量访问时值不正确的问题。[#569](https://github.com/oceanbase/oceanbase-design/pull/569)
-- 💄 优化 Radio.Button 选中置灰态的背景颜色，避免和字体颜色区分不清。[#570](https://github.com/oceanbase/oceanbase-design/pull/570)
+  - 🐞 Fixed ConfigProvider `theme.customFont` with nested usage causing incorrect `fontFamily`. [#572](https://github.com/oceanbase/oceanbase-design/pull/572)
+  - 🐞 Fixed ConfigProvider custom `theme.token.fontFamily` not applying. [#573](https://github.com/oceanbase/oceanbase-design/pull/573)
+  - 🐞 Fixed ConfigProvider multiple usage injecting StaticFunction multiple times, breaking Modal, message, and notification static methods. [#574](https://github.com/oceanbase/oceanbase-design/pull/574)
+- 🐞 Fixed theme Token `boxShadowSecondary` incorrect via static token object and less variables. [#569](https://github.com/oceanbase/oceanbase-design/pull/569)
+- 💄 Improved Radio.Button selected disabled background to distinguish from font color. [#570](https://github.com/oceanbase/oceanbase-design/pull/570)
 
 ## 0.3.2
 
 `2024-04-12`
 
-- 📢 Input `placeholder` 默认为 `请输入`。[#540](https://github.com/oceanbase/oceanbase-design/pull/540)
-- 📢 InputNumber `placeholder` 默认为 `请输入`。[#548](https://github.com/oceanbase/oceanbase-design/pull/548)
-- 📢 Select `placeholder` 默认为 `请选择`。[#546](https://github.com/oceanbase/oceanbase-design/pull/546)
-- 📢 TreeSelect `placeholder` 默认为 `请选择`。[#547](https://github.com/oceanbase/oceanbase-design/pull/547)
+- 📢 Input `placeholder` defaults to `Please enter`. [#540](https://github.com/oceanbase/oceanbase-design/pull/540)
+- 📢 InputNumber `placeholder` defaults to `Please enter`. [#548](https://github.com/oceanbase/oceanbase-design/pull/548)
+- 📢 Select `placeholder` defaults to `Please select`. [#546](https://github.com/oceanbase/oceanbase-design/pull/546)
+- 📢 TreeSelect `placeholder` defaults to `Please select`. [#547](https://github.com/oceanbase/oceanbase-design/pull/547)
 - ConfigProvider
-  - 🆕 ConfigProvider 新增 `locale.Input.placeholder` 属性，用于配置 Input 的默认 placeholder。[#540](https://github.com/oceanbase/oceanbase-design/pull/540)
-  - 🆕 ConfigProvider 新增 `locale.global.inputPlaceholder` 和 `locale.InputNumber.placeholder` 属性，用于配置 InputNumber 的默认 placeholder。[#548](https://github.com/oceanbase/oceanbase-design/pull/548)
-  - 🆕 ConfigProvider 新增 `locale.Select.placeholder` 属性，用于配置 Select 的默认 placeholder。[#546](https://github.com/oceanbase/oceanbase-design/pull/546)
-  - 🆕 ConfigProvider 新增 `locale.TreeSelect.placeholder` 属性，用于配置 Select 的默认 `placeholder`。[#547](https://github.com/oceanbase/oceanbase-design/pull/547)
-- 🐞 修复主题 Token `boxShadow` 和 `boxShadowSecondary` 通过静态 token 对象和 less 变量访问时值不正确的问题。[#552](https://github.com/oceanbase/oceanbase-design/pull/552)
-- 💄 优化 Select、TreeSelect 和 Cascader 多选项的背景色和边框色，以对齐设计规范。[#553](https://github.com/oceanbase/oceanbase-design/pull/553)
-- 💄 Table 分页器配置默认改为 `{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '50', '100'], showTotal: total => \`共 ${total} 条\` }`。
+  - 🆕 ConfigProvider Added `locale.Input.placeholder` prop for Input default placeholder. [#540](https://github.com/oceanbase/oceanbase-design/pull/540)
+  - 🆕 ConfigProvider Added `locale.global.inputPlaceholder` and `locale.InputNumber.placeholder` props for InputNumber default placeholder. [#548](https://github.com/oceanbase/oceanbase-design/pull/548)
+  - 🆕 ConfigProvider Added `locale.Select.placeholder` prop for Select default placeholder. [#546](https://github.com/oceanbase/oceanbase-design/pull/546)
+  - 🆕 ConfigProvider Added `locale.TreeSelect.placeholder` prop for TreeSelect default `placeholder`. [#547](https://github.com/oceanbase/oceanbase-design/pull/547)
+- 🐞 Fixed theme Token `boxShadow` and `boxShadowSecondary` incorrect via static token object and less variables. [#552](https://github.com/oceanbase/oceanbase-design/pull/552)
+- 💄 Improved Select, TreeSelect, and Cascader multi-select background and border colors aligned with design spec. [#553](https://github.com/oceanbase/oceanbase-design/pull/553)
+- 💄 Table pagination defaults to `{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '50', '100'], showTotal: total => \`Total ${total} items\` }`.
 
 ## 0.3.1
 
 `2024-03-29`
 
 - ConfigProvider
-  - 🆕 新增 `theme.customFont` 属性，用于开启 `Source Sans Pro` 定制字体以提升展示效果，仅支持线上应用和英文环境。[#536](https://github.com/oceanbase/oceanbase-design/pull/536)
-  - 🐞 ConfigProvider `form.requiredMark` 属性的默认值改为 `optional`，以修复可选样式在 ProForm 没有默认开启的问题。[#535](https://github.com/oceanbase/oceanbase-design/pull/535)
+  - 🆕 Added `theme.customFont` prop to enable `Source Sans Pro` custom font for online apps and English locale only. [#536](https://github.com/oceanbase/oceanbase-design/pull/536)
+  - 🐞 ConfigProvider `form.requiredMark` default changed to `optional` to fix optional styles not enabled by default in ProForm. [#535](https://github.com/oceanbase/oceanbase-design/pull/535)
 - Empty
-  - ⭐️ Empty 新增 `PRESENTED_IMAGE_GUIDE` 内置图片，用于功能开通等引导类场景。[#532](https://github.com/oceanbase/oceanbase-design/pull/532)
-  - 🐞 修复 Empty `style` 属性不生效的问题。[#529](https://github.com/oceanbase/oceanbase-design/pull/529)
-- 📢 Form `preserve` 属性的默认值改为 `false`。[#534](https://github.com/oceanbase/oceanbase-design/pull/534)
+  - ⭐️ Empty Added `PRESENTED_IMAGE_GUIDE` built-in image for feature activation and guide scenarios. [#532](https://github.com/oceanbase/oceanbase-design/pull/532)
+  - 🐞 Fixed Empty `style` prop not applying. [#529](https://github.com/oceanbase/oceanbase-design/pull/529)
+- 📢 Form `preserve` prop default changed to `false`. [#534](https://github.com/oceanbase/oceanbase-design/pull/534)
 - Modal
-  - 📢 Modal `destroyOnClose` 属性的默认值改为 `true`。[#530](https://github.com/oceanbase/oceanbase-design/pull/530)
-  - 🐞 修复 Modal `footer` 为 `false` 时未去掉页脚 DOM 的问题。[#531](https://github.com/oceanbase/oceanbase-design/pull/531)
+  - 📢 Modal `destroyOnClose` prop default changed to `true`. [#530](https://github.com/oceanbase/oceanbase-design/pull/530)
+  - 🐞 Fixed Modal `footer` as `false` not removing footer DOM. [#531](https://github.com/oceanbase/oceanbase-design/pull/531)
 
 ## 0.3.0
 
 `2024-03-22`
 
-- ⭐️ 去掉所有组件的重置样式，避免被 Tooltip、Popover、Space、Dropdown 等组件包裹时字体大小、颜色被覆盖。[#450](https://github.com/oceanbase/oceanbase-design/pull/450)
-- ⭐️ 组件的样式加载顺序改为 -900，保证自定义样式的优先级高于 antd。[#464](https://github.com/oceanbase/oceanbase-design/pull/464)
-- 🌈 更新中性色板，包括 Design Token 以及 less 主题变量。[#484](https://github.com/oceanbase/oceanbase-design/pull/484)
-- 🔥 新版 Empty 组件 [#465](https://github.com/oceanbase/oceanbase-design/pull/465)
-  - 💄 定制插图、主题和样式，以符合 OceanBase Design 设计规范。
-  - 🆕 新增 `title` 属性，用于设置空状态标题。
-  - 🆕 新增 `steps` 属性，用于设置步骤提示。
-  - 🆕 新增 `layout` 属性，用于设置空状态布局，默认为 vertical。
-  - 🆕 通过 ConfigProvider `renderEmpty` 定制全局组件的空状态。[#467](https://github.com/oceanbase/oceanbase-design/pull/467)
-- 🔥 新版 Result 组件 [#476](https://github.com/oceanbase/oceanbase-design/pull/476)
-  - 💄 定制插图、主题和样式，以符合 OceanBase Design 设计规范。
-  - 🆕 `status` 属性新增 `processing` 枚举值，用于设置进行中的状态。
+- ⭐️ Removed all component reset styles to avoid font size/color override when wrapped by Tooltip, Popover, Space, Dropdown, etc. [#450](https://github.com/oceanbase/oceanbase-design/pull/450)
+- ⭐️ Component style load order set to -900 so custom styles take priority over antd. [#464](https://github.com/oceanbase/oceanbase-design/pull/464)
+- 🌈 Updated neutral color palette including Design Tokens and less theme variables. [#484](https://github.com/oceanbase/oceanbase-design/pull/484)
+- 🔥 New Empty component [#465](https://github.com/oceanbase/oceanbase-design/pull/465)
+  - 💄 Custom illustrations, theme, and styles per OceanBase Design spec.
+  - 🆕 Added `title` prop for empty state title.
+  - 🆕 Added `steps` prop for step tips.
+  - 🆕 Added `layout` prop for empty state layout; default `vertical`.
+  - 🆕 Customize global component empty states via ConfigProvider `renderEmpty`. [#467](https://github.com/oceanbase/oceanbase-design/pull/467)
+- 🔥 New Result component [#476](https://github.com/oceanbase/oceanbase-design/pull/476)
+  - 💄 Custom illustrations, theme, and styles per OceanBase Design spec.
+  - 🆕 `status` prop added `processing` enum for in-progress state.
 - Spin
-  - 💄 更新 Spin 的加载动画，包括灰色和彩色动画。[#512](https://github.com/oceanbase/oceanbase-design/pull/512)
-  - 💄 Spin 的默认加载指示符从彩色动画改为灰色动画。[#491](https://github.com/oceanbase/oceanbase-design/pull/491)
+  - 💄 Updated Spin loading animations (gray and color). [#512](https://github.com/oceanbase/oceanbase-design/pull/512)
+  - 💄 Spin default indicator changed from color animation to gray animation. [#491](https://github.com/oceanbase/oceanbase-design/pull/491)
 - Table
-  - 🐞 修复 Table 的 loading 动画没有水平和垂直居中的问题。[#518](https://github.com/oceanbase/oceanbase-design/pull/518)
-  - 💄 Table 处于 `loading` 时隐藏空状态。[#518](https://github.com/oceanbase/oceanbase-design/pull/518)
-- 💄 优化 Badge default 状态的颜色，并更新 default 状态和 warning 状态的图标。[#500](https://github.com/oceanbase/oceanbase-design/pull/500)
-- [Icon] 🆕 新增 `EllipsisCircleFilled` 图标。[#499](https://github.com/oceanbase/oceanbase-design/pull/499)
+  - 🐞 Fixed Table loading animation not horizontally and vertically centered. [#518](https://github.com/oceanbase/oceanbase-design/pull/518)
+  - 💄 Table hides empty state when `loading`. [#518](https://github.com/oceanbase/oceanbase-design/pull/518)
+- 💄 Improved Badge default state color; updated default and warning state icons. [#500](https://github.com/oceanbase/oceanbase-design/pull/500)
+- [Icon] 🆕 Added `EllipsisCircleFilled` icon. [#499](https://github.com/oceanbase/oceanbase-design/pull/499)
 
 ## 0.2.37
 
 `2024-01-30`
 
-- 🆕 新增 injectStaticFunction 属性，用于配置 message、notification 和 Modal 静态方法是否可以消费全局配置，默认开启。[#446](https://github.com/oceanbase/oceanbase-design/pull/446)
-- 🐞 修复 Typography 的样式优先级，保证字体和行高默认继承父元素，便于和其他组件组合使用。[#428](https://github.com/oceanbase/oceanbase-design/pull/428) [@wdyea-ya](https://github.com/wdyea-ya)
-- 🐞 修复 Table 选中行和 `hover` 行的背景色不一致的问题。[#455](https://github.com/oceanbase/oceanbase-design/pull/455)
+- 🆕 Added `injectStaticFunction` prop to configure whether message, notification, and Modal static methods consume global config; enabled by default. [#446](https://github.com/oceanbase/oceanbase-design/pull/446)
+- 🐞 Fixed Typography style priority so font and line height inherit parent by default for easier composition. [#428](https://github.com/oceanbase/oceanbase-design/pull/428) [@wdyea-ya](https://github.com/wdyea-ya)
+- 🐞 Fixed Table selected row and `hover` row background color inconsistency. [#455](https://github.com/oceanbase/oceanbase-design/pull/455)
 
 ## 0.2.36
 
 `2024-01-19`
 
-- 💄 ConfigProvider 内嵌的 App 组件不再创建 DOM 节点，避免增加一层 DOM 结构影响子元素的样式表现。[#431](https://github.com/oceanbase/oceanbase-design/pull/431)
+- 💄 ConfigProvider embedded App component no longer creates DOM nodes, avoiding extra DOM layer affecting child styles. [#431](https://github.com/oceanbase/oceanbase-design/pull/431)
 
 ## 0.2.35
 
 `2024-01-18`
 
-- 🆕 ConfigProvider 新增 `table.selectionColumnWidth` 属性，用于配置表格的展开列宽度。[#421](https://github.com/oceanbase/oceanbase-design/pull/421)
+- 🆕 ConfigProvider Added `table.selectionColumnWidth` prop for table selection column width. [#421](https://github.com/oceanbase/oceanbase-design/pull/421)
 - Table
-  - 🐞 修复 Table 可展开时底部出现重复边框的问题。[#420](https://github.com/oceanbase/oceanbase-design/pull/420)
-  - 💄 优化 Table 在无间距卡片内的展示样式，包括第一列和卡片标题对齐、最后一列和卡片操作区对齐、分页器左右增加间距。[#422](https://github.com/oceanbase/oceanbase-design/pull/422)
-  - 💄 减小 Table 单元格的纵向内间距，以对齐设计规范。[#425](https://github.com/oceanbase/oceanbase-design/pull/425)
-- 💄 Modal 去掉最大高度限制，高度超出时内容滚动改由上层控制。[#411](https://github.com/oceanbase/oceanbase-design/pull/411)
+  - 🐞 Fixed Table duplicate bottom border when expandable. [#420](https://github.com/oceanbase/oceanbase-design/pull/420)
+  - 💄 Improved Table display in zero-padding Card: first column aligned with title, last column with actions, pagination side spacing. [#422](https://github.com/oceanbase/oceanbase-design/pull/422)
+  - 💄 Reduced Table cell vertical padding aligned with design spec. [#425](https://github.com/oceanbase/oceanbase-design/pull/425)
+- 💄 Modal removed max height limit; content scroll controlled by parent when height exceeds. [#411](https://github.com/oceanbase/oceanbase-design/pull/411)
 
 ## 0.2.34
 
 `2024-01-12`
 
 - Drawer
-  - 🆕 新增 `footerExtra` 属性，用于设置抽屉底部的额外内容，仅默认页脚生效。[#408](https://github.com/oceanbase/oceanbase-design/pull/408)
-  - 📢 调整页脚的 DOM 结构，并将原先的 `.ant-drawer-footer-content` 类名改为 `.ant-drawer-footer-container`。[#408](https://github.com/oceanbase/oceanbase-design/pull/408)
-- 🐞 修复 Tooltip `title` 为空时仍然展示的问题。[#405](https://github.com/oceanbase/oceanbase-design/pull/405) [@linhf123](https://github.com/linhf123)
+  - 🆕 Added `footerExtra` prop for extra drawer footer content; default footer only. [#408](https://github.com/oceanbase/oceanbase-design/pull/408)
+  - 📢 Adjusted footer DOM structure; renamed `.ant-drawer-footer-content` to `.ant-drawer-footer-container`. [#408](https://github.com/oceanbase/oceanbase-design/pull/408)
+- 🐞 Fixed Tooltip still showing when `title` is empty. [#405](https://github.com/oceanbase/oceanbase-design/pull/405) [@linhf123](https://github.com/linhf123)
 
 ## 0.2.33
 
 `2023-12-28`
 
-- 🐞 ConfigProvider `hideOnSinglePage` 默认值改为 `false`，避免统一去掉分页器带来的问题。[#388](https://github.com/oceanbase/oceanbase-design/pull/388)
-- 🐞 修复 Table 只有一页数据且存在批量操作或 `pageSize` 切换时分页器被隐藏的问题。[#389](https://github.com/oceanbase/oceanbase-design/pull/389)
-- 🐞 修复 List 只有一页数据且存在 `pageSize` 切换时分页器被隐藏的问题。[#390](https://github.com/oceanbase/oceanbase-design/pull/390)
-- 💄 更新 Design Token，新增 `fontHeight`、`fontHeightLG` 和 `fontHeightSM` less 变量。[#381](https://github.com/oceanbase/oceanbase-design/pull/381)
+- 🐞 ConfigProvider `hideOnSinglePage` default changed to `false` to avoid issues from globally hiding pagination. [#388](https://github.com/oceanbase/oceanbase-design/pull/388)
+- 🐞 Fixed Table pagination hidden when single page with batch actions or `pageSize` change. [#389](https://github.com/oceanbase/oceanbase-design/pull/389)
+- 🐞 Fixed List pagination hidden when single page with `pageSize` change. [#390](https://github.com/oceanbase/oceanbase-design/pull/390)
+- 💄 Updated Design Tokens; added `fontHeight`, `fontHeightLG`, and `fontHeightSM` less variables. [#381](https://github.com/oceanbase/oceanbase-design/pull/381)
 
 ## 0.2.32
 
 `2023-12-14`
 
-- 🔥 Space 和 Grid 组件的间距样式兼容 Chrome 84 以下的浏览器。[#344](https://github.com/oceanbase/oceanbase-design/pull/344) [@wdyea-ya](https://github.com/wdyea-ya)
-- 🌈 更新默认主题的功能色板，包括 Design Token 和 less 变量。[#354](https://github.com/oceanbase/oceanbase-design/pull/354)
+- 🔥 Space and Grid spacing styles compatible with browsers below Chrome 84. [#344](https://github.com/oceanbase/oceanbase-design/pull/344) [@wdyea-ya](https://github.com/wdyea-ya)
+- 🌈 Updated default theme functional color palette including Design Tokens and less variables. [#354](https://github.com/oceanbase/oceanbase-design/pull/354)
 - Tag
-  - 🆕 Tag 新增 `ellipsis` 属性，用于配置内容溢出时的省略和 Tooltip 提示。[#361](https://github.com/oceanbase/oceanbase-design/pull/361)
-  - 🐞 修复 Tag 字体大小不正确的问题。[#360](https://github.com/oceanbase/oceanbase-design/pull/360)
-- 🐞 修复 Select 在多选模式和 `large` & `small` 尺寸下，选中项缺少边框样式的问题。[#332](https://github.com/oceanbase/oceanbase-design/pull/332) [@wdyea-ya](https://github.com/wdyea-ya)
-- 💄 优化 Button 样式，包括更新主按钮的渐变色，并去除 `box-shadow` 阴影。[#352](https://github.com/oceanbase/oceanbase-design/pull/352)
+  - 🆕 Tag Added `ellipsis` prop for overflow ellipsis and Tooltip. [#361](https://github.com/oceanbase/oceanbase-design/pull/361)
+  - 🐞 Fixed Tag incorrect font size. [#360](https://github.com/oceanbase/oceanbase-design/pull/360)
+- 🐞 Fixed Select multi-select mode missing border styles at `large` & `small` sizes. [#332](https://github.com/oceanbase/oceanbase-design/pull/332) [@wdyea-ya](https://github.com/wdyea-ya)
+- 💄 Improved Button styles: updated primary gradient and removed `box-shadow`. [#352](https://github.com/oceanbase/oceanbase-design/pull/352)
 - TypeScript
-  - 🤖 导出 SpaceProps、SpaceSize、ColProps、ColSize 和 RowProps 的类型定义。[#344](https://github.com/oceanbase/oceanbase-design/pull/344)
+  - 🤖 Exported SpaceProps, SpaceSize, ColProps, ColSize, and RowProps types. [#344](https://github.com/oceanbase/oceanbase-design/pull/344)
 
 ## 0.2.31
 
 `2023-12-08`
 
-- 🆕 ConfigProvider 新增 `styleProviderProps` 属性，一般用于配置 StyleProvider 的 `hashPriority` 和 `transformers` 属性实现样式降级，来兼容 Chrome 88 以下的低版本浏览器。[#343](https://github.com/oceanbase/oceanbase-design/pull/343)
-- 🐞 修复 Drawer 的分隔阴影没有跟随内容和窗口尺寸变化实时更新的问题。[#337](https://github.com/oceanbase/oceanbase-design/pull/337)
-- 🐞 修复 Form `hideRequiredMark` 优先级低于 ConfigProvider `form.requiredMark` 的问题。[#349](https://github.com/oceanbase/oceanbase-design/pull/349)
+- 🆕 ConfigProvider Added `styleProviderProps` prop, typically for StyleProvider `hashPriority` and `transformers` for style downgrade to support browsers below Chrome 88. [#343](https://github.com/oceanbase/oceanbase-design/pull/343)
+- 🐞 Fixed Drawer separator shadow not updating in real time with content and window size. [#337](https://github.com/oceanbase/oceanbase-design/pull/337)
+- 🐞 Fixed Form `hideRequiredMark` priority lower than ConfigProvider `form.requiredMark`. [#349](https://github.com/oceanbase/oceanbase-design/pull/349)
 
 ## 0.2.30
 
 `2023-11-30`
 
-- 🌈 更新功能色板，包括 Design Token 和 less 变量。
-- 🔥 实现新版 Drawer 的样式和交互。[#319](https://github.com/oceanbase/oceanbase-design/pull/319)
-  - 优化页头、内容区和页脚的间距。
-  - 当内容区高度大于抽屉高度时，页脚置底展示；当内容区高度小于抽屉高度时，页脚跟随内容展示。
-  - 内容区滚动时，动态设置页头和页脚的阴影，实现和内容区的分隔效果。
-  - 页脚操作区的主按钮位置居左。
-- 📢 Form 默认开启 `requiredMark: optional` 可选样式。[#312](https://github.com/oceanbase/oceanbase-design/pull/312)
-- 📢 Table 和 List 默认开启 `pagination.hideOnSinglePage`，即只有一页数据时会隐藏分页器。[#330](https://github.com/oceanbase/oceanbase-design/pull/330)
-- 🆕 ConfigProvider 支持全局配置 `hideOnSinglePage`。[#330](https://github.com/oceanbase/oceanbase-design/pull/330)
-- 🆕 Segmented `options` 选项新增 `ellipsis` 属性，用于配置内容溢出时的省略和 Tooltip 提示。[#227](https://github.com/oceanbase/oceanbase-design/pull/227) [@TianWuwt](https://github.com/TianWuwt)
+- 🌈 Updated functional color palette including Design Tokens and less variables.
+- 🔥 Implemented new Drawer styles and interaction. [#319](https://github.com/oceanbase/oceanbase-design/pull/319)
+  - Improved header, content, and footer spacing.
+  - Footer sticks to bottom when content exceeds drawer height; follows content when shorter.
+  - Dynamic header/footer shadow on content scroll for separation effect.
+  - Primary button in footer actions aligned left.
+- 📢 Form enables `requiredMark: optional` by default. [#312](https://github.com/oceanbase/oceanbase-design/pull/312)
+- 📢 Table and List enable `pagination.hideOnSinglePage` by default; pagination hidden on single page. [#330](https://github.com/oceanbase/oceanbase-design/pull/330)
+- 🆕 ConfigProvider supports global `hideOnSinglePage` config. [#330](https://github.com/oceanbase/oceanbase-design/pull/330)
+- 🆕 Segmented `options` Added `ellipsis` prop for overflow ellipsis and Tooltip. [#227](https://github.com/oceanbase/oceanbase-design/pull/227) [@TianWuwt](https://github.com/TianWuwt)
 - Descriptions
-  - 🆕 Descriptions `items` 新增 `contentProps` 属性，用于设置省略、编辑、复制等内容属性，仅无边框模式下生效。[#329](https://github.com/oceanbase/oceanbase-design/pull/329)
-  - 💄 Descriptions 垂直布局下默认去掉 `colon` 冒号。[#328](https://github.com/oceanbase/oceanbase-design/pull/328)
+  - 🆕 Descriptions `items` Added `contentProps` prop for ellipsis, edit, copy, etc.; borderless mode only. [#329](https://github.com/oceanbase/oceanbase-design/pull/329)
+  - 💄 Descriptions vertical layout removes `colon` by default. [#328](https://github.com/oceanbase/oceanbase-design/pull/328)
 - Badge
-  - 🐞 修复开启状态图标时间距样式不生效的问题。[#300](https://github.com/oceanbase/oceanbase-design/pull/300)
-  - 💄 状态文本的默认字体颜色，会继承父元素的设置，而不总是 `token.colorText`，便于和其他组件组合使用。[#322](https://github.com/oceanbase/oceanbase-design/pull/322)
+  - 🐞 Fixed status icon spacing not applying. [#300](https://github.com/oceanbase/oceanbase-design/pull/300)
+  - 💄 Status text default font color inherits parent instead of always `token.colorText` for easier composition. [#322](https://github.com/oceanbase/oceanbase-design/pull/322)
 - Card
-  - 🐞 修复 Card 分隔线可能会被内容区遮挡的问题。[#326](https://github.com/oceanbase/oceanbase-design/pull/326)
-  - 💄 去掉无边框内部卡片的阴影，优化嵌套卡片的样式效果。[#325](https://github.com/oceanbase/oceanbase-design/pull/325)
-- 💄 Typography.Text 和 Typography.Paragraph 的默认字体颜色和行高，会继承父元素的设置，而不总是 `token.colorText` 和 `token.lineHeight`，便于和其他组件组合使用。[#321](https://github.com/oceanbase/oceanbase-design/pull/321)
+  - 🐞 Fixed Card divider possibly covered by content area. [#326](https://github.com/oceanbase/oceanbase-design/pull/326)
+  - 💄 Removed borderless inner card shadow; improved nested card styles. [#325](https://github.com/oceanbase/oceanbase-design/pull/325)
+- 💄 Typography.Text and Typography.Paragraph default font color and line height inherit parent instead of always `token.colorText` and `token.lineHeight` for easier composition. [#321](https://github.com/oceanbase/oceanbase-design/pull/321)
 - TypeScript
-  - 🤖 导出 AlertProps、CardProps、ConfigProviderProps、DescriptionsItemProps、FormItemProps、ModalProps、ModalProgressProps、DrawerProps、TableProps、TabsProps、TagProps、TooltipProps、SpinProps 和 BadgeProps 等扩展组件的 TS 类型。[#311](https://github.com/oceanbase/oceanbase-design/pull/311)
+  - 🤖 Exported AlertProps, CardProps, ConfigProviderProps, DescriptionsItemProps, FormItemProps, ModalProps, ModalProgressProps, DrawerProps, TableProps, TabsProps, TagProps, TooltipProps, SpinProps, BadgeProps, and other extended component TS types. [#311](https://github.com/oceanbase/oceanbase-design/pull/311)
 
 ## 0.2.29
 
 `2023-11-17`
 
-- 🐞 修复 Drawer 部分样式不生效的问题。[#298](https://github.com/oceanbase/oceanbase-design/pull/298)
+- 🐞 Fixed Drawer some styles not applying. [#298](https://github.com/oceanbase/oceanbase-design/pull/298)
 
 ## 0.2.28
 
 `2023-11-14`
 
-- 🌈 新增主题预览和编辑器，便于主题调试和预览。[#287](https://github.com/oceanbase/oceanbase-design/pull/287)
-- 💄 优化 Drawer 的标题、内容区和页脚样式，以符合设计规范。[#283](https://github.com/oceanbase/oceanbase-design/pull/283) [@Vanleehao](https://github.com/Vanleehao)
+- 🌈 Added theme preview and editor for theme debugging and preview. [#287](https://github.com/oceanbase/oceanbase-design/pull/287)
+- 💄 Improved Drawer title, content, and footer styles per design spec. [#283](https://github.com/oceanbase/oceanbase-design/pull/283) [@Vanleehao](https://github.com/Vanleehao)
 
 ## 0.2.27
 
 `2023-11-09`
 
-- 🌈 更新中性色板，包括 Design Token 以及 less 主题变量。[#272](https://github.com/oceanbase/oceanbase-design/pull/272)
+- 🌈 Updated neutral color palette including Design Tokens and less theme variables. [#272](https://github.com/oceanbase/oceanbase-design/pull/272)
 - 🔥 Drawer [#228](https://github.com/oceanbase/oceanbase-design/pull/228) [@Vanleehao](https://github.com/Vanleehao)
-  - 🌈 定制主题和样式，符合 OceanBase Design 设计规范。
-  - 🆕 新增 `footer` 属性，用于设置抽屉的底部内容，默认为 `取消` 和 `确定` 按钮。
-  - 🆕 新增 `onOk` 和 `onCancel` 属性，用于设置 `取消` 和 `确定` 按钮的回调。
-  - 🆕 新增 `cancelText` 和 `okText` 属性，用于设置 `取消` 和 `确定` 按钮的文字。
-  - 🆕 新增 `okButtonProps` 属性，用于设置 `确定` 按钮的属性。
-  - 🆕 新增 `confirmLoading` 属性，用于设置 `确定` 按钮的加载态。
-- 🆕 全局设置 Spin 的加载指示符为 OceanBase 加载动画。[#273](https://github.com/oceanbase/oceanbase-design/pull/273)
-- 🆕 Badge、Button、Card、Select、Table、Tag 和 Tooltip 支持转发 `ref`。[#259](https://github.com/oceanbase/oceanbase-design/pull/259) [@linhf123](https://github.com/linhf123)
-- 💄 优化 Modal 确认对话框的内容区样式。[#275](https://github.com/oceanbase/oceanbase-design/pull/275)
+  - 🌈 Custom theme and styles per OceanBase Design spec.
+  - 🆕 Added `footer` prop for drawer footer content; defaults to `Cancel` and `OK` buttons.
+  - 🆕 Added `onOk` and `onCancel` props for `Cancel` and `OK` button callbacks.
+  - 🆕 Added `cancelText` and `okText` props for `Cancel` and `OK` button text.
+  - 🆕 Added `okButtonProps` prop for `OK` button props.
+  - 🆕 Added `confirmLoading` prop for `OK` button loading state.
+- 🆕 Globally set Spin indicator to OceanBase loading animation. [#273](https://github.com/oceanbase/oceanbase-design/pull/273)
+- 🆕 Badge, Button, Card, Select, Table, Tag, and Tooltip support `ref` forwarding. [#259](https://github.com/oceanbase/oceanbase-design/pull/259) [@linhf123](https://github.com/linhf123)
+- 💄 Improved Modal confirm dialog content area styles. [#275](https://github.com/oceanbase/oceanbase-design/pull/275)
 
 ## 0.2.26
 
@@ -525,13 +953,13 @@ group: 基础组件
 
 `2023-10-31`
 
-- 🔥 新增 Tag 组件，优化 border 样式以弱化边框，内容超长支持自动省略，可通过 `ellipsis` 属性进行控制。[#113](https://github.com/oceanbase/oceanbase-design/pull/113) [@wdyea-ya](https://github.com/wdyea-ya)
-- 🐞 修复 Tooltip 未兼容 `visible` 属性导致显示和隐藏无法受控的问题。[#231](https://github.com/oceanbase/oceanbase-design/pull/231)
+- 🔥 Added Tag component with softened borders, auto ellipsis for long content via `ellipsis` prop. [#113](https://github.com/oceanbase/oceanbase-design/pull/113) [@wdyea-ya](https://github.com/wdyea-ya)
+- 🐞 Fixed Tooltip not supporting `visible` prop for controlled show/hide. [#231](https://github.com/oceanbase/oceanbase-design/pull/231)
 
 ## 0.2.24
 
 `2023-10-26`
 
 - Table
-  - 🐞 修复 `columns` 为空时，Table 执行报错、导致页面白屏的问题。[#206](https://github.com/oceanbase/oceanbase-design/pull/206)
-  - 💄 优化带边框的 Table 样式，去掉其底部多余的 border。[#207](https://github.com/oceanbase/oceanbase-design/pull/207)
+  - 🐞 Fixed Table crash and white screen when `columns` is empty. [#206](https://github.com/oceanbase/oceanbase-design/pull/206)
+  - 💄 Improved bordered Table styles; removed extra bottom border. [#207](https://github.com/oceanbase/oceanbase-design/pull/207)

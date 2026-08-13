@@ -61,10 +61,28 @@ export interface BackgroundTaskManagerRef {
 interface IProps {
   rollingFrequency?: number;
   prefix: Namespace;
+  /** 后台任务队列变化时供读屏器播报的文案模板，`{count}` 为任务数 */
+  taskStatusTemplate?: string;
 }
 
+const visuallyHiddenStyle: React.CSSProperties = {
+  position: 'absolute',
+  width: 1,
+  height: 1,
+  padding: 0,
+  margin: -1,
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  whiteSpace: 'nowrap',
+  border: 0,
+};
+
 export default forwardRef<BackgroundTaskManagerRef, IProps>((props, ref) => {
-  const { rollingFrequency = REFRESH_FREQUENCY.EXTREMELY, prefix } = props;
+  const {
+    rollingFrequency = REFRESH_FREQUENCY.EXTREMELY,
+    prefix,
+    taskStatusTemplate = '{count} background tasks in progress',
+  } = props;
   // 任务管理器的任务队列
   const [queue, setQueue] = useState<ITaskMgrQueue>({});
   // 任务管理器的行为预设
@@ -198,5 +216,15 @@ export default forwardRef<BackgroundTaskManagerRef, IProps>((props, ref) => {
     };
   }, [queue, preset]);
 
-  return <>{!!taskQueue.length && <RefreshMan run={run} rollingFrequency={rollingFrequency} />}</>;
+  const statusMessage =
+    taskQueue.length > 0 ? taskStatusTemplate.replace('{count}', String(taskQueue.length)) : '';
+
+  return (
+    <>
+      <div role="status" aria-live="polite" aria-atomic="true" style={visuallyHiddenStyle}>
+        {statusMessage}
+      </div>
+      {!!taskQueue.length && <RefreshMan run={run} rollingFrequency={rollingFrequency} />}
+    </>
+  );
 });

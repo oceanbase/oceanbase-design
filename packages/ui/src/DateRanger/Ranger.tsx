@@ -1,6 +1,14 @@
-import React, { useEffect, useRef, useState, useImperativeHandle, useMemo } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useImperativeHandle,
+  useMemo,
+} from 'react';
 import {
   Button,
+  ConfigProvider,
   DatePicker,
   Divider,
   Dropdown,
@@ -25,12 +33,12 @@ import {
 import type { RangePickerProps } from '@oceanbase/design/es/date-picker';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
 import { findIndex, isEqual as _isEqual, isNil, noop, omit } from 'lodash';
 import type { Moment } from 'moment';
 import moment from 'moment';
 import classNames from 'classnames';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix } from '../_util';
 import {
   CUSTOMIZE,
   DATE_TIME_FORMAT,
@@ -50,12 +58,13 @@ import {
   YEAR_DATE_TIME_FORMAT_CN,
   YEAR_DATE_TIME_SECOND_FORMAT_CN,
 } from './constant';
+import EditableDateTimeInput from './EditableDateTimeInput';
 import type { RangeOption } from './typing';
 import type { Rule } from './PickerPanel';
 import InternalPickerPanel from './PickerPanel';
 import zhCN from './locale/zh-CN';
 import enUS from './locale/en-US';
-import './index.less';
+import useStyle from './style';
 import { useClickAway } from 'ahooks';
 import { useLocalStorageState } from '@oceanbase/util';
 
@@ -72,7 +81,7 @@ export type RangeDateValue = {
 
 export interface DateRangerProps extends Omit<
   RangePickerProps,
-  'mode' | 'picker' | 'value' | 'defaultValue'
+  'mode' | 'picker' | 'value' | 'defaultValue' | 'variant'
 > {
   // 数据相关
   selects?: RangeOption[];
@@ -109,6 +118,8 @@ export interface DateRangerProps extends Omit<
   value?: RangeValue;
   defaultValue?: RangeValue;
   size?: 'small' | 'large' | 'middle';
+  /** 边框变体，默认实线，可配置为 dashed 虚线 */
+  variant?: 'dashed';
   tooltipProps?: TooltipProps;
   autoAdjustOverflow?: boolean;
   overlayClassName?: string;
@@ -118,9 +129,11 @@ export interface DateRangerProps extends Omit<
 
 const DefaultMaxHistoryCapacity = 20;
 
-const prefix = getPrefix('date-ranger');
-
 const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('date-ranger');
+  const { wrapSSR } = useStyle(prefixCls);
+  const prefix = prefixCls;
   const {
     selects = [
       NEAR_1_MINUTES,
@@ -152,6 +165,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     size,
     //固定 rangeName
     stickRangeName = false,
+    variant,
     tooltipProps,
     isMoment: isMomentProps,
     rules,
@@ -199,6 +213,10 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   const rangeRef = useRef(null);
   const popRef = useRef(null);
   const labelRef = useRef(null);
+  const editableInputRef = useRef<{
+    hasPastedValue: boolean;
+    confirmPastedValue: () => void;
+  } | null>(null);
 
   // 没有 selects 时，回退到普通 RangePicker, 当前时间选项为自定义时，应该显示 RangePicker
   const [isPlay, setIsPlay] = useState(rangeName !== CUSTOMIZE);
@@ -212,8 +230,9 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     }
     return false;
   }, [historyProp]);
+  const localStorageKey = `${prefixCls}-date-ranger-history`;
   const [rangeHistory, setRangeHistory] = useLocalStorageState<RangeValueFormat[]>(
-    'ob-design-date-ranger-local-storage-range-history-state',
+    localStorageKey,
     { defaultValue: [], listenStorageChange: true }
   );
 
@@ -416,11 +435,12 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
         })
       : selects[rangeNameIndex + 1];
 
-  return (
+  return wrapSSR(
     <Space
       className={classNames(rest.className, {
         [prefix]: true,
         [`${prefix}-show-range`]: true,
+        [`${prefix}-dashed`]: variant === 'dashed',
         [`${prefix}-back-radio-focused`]: backRadioFocused,
       })}
       style={rest.style}
@@ -562,15 +582,24 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                     rules={rules}
                     hideSecond={hideSecond}
                     onOk={vList => {
-                      setIsPlay(false);
-                      handleNameChange(CUSTOMIZE);
-                      rangeChange(
-                        vList.map(v => {
-                          return isMoment ? moment(v) : dayjs(v);
-                        }) as RangeValue
-                      );
+                      // 如果有粘贴值，优先使用粘贴值
+                      if (editableInputRef.current?.hasPastedValue) {
+                        editableInputRef.current.confirmPastedValue();
+                        setIsPlay(false);
+                        handleNameChange(CUSTOMIZE);
+                        closeTooltip();
+                      } else {
+                        // 否则使用面板中的值
+                        setIsPlay(false);
+                        handleNameChange(CUSTOMIZE);
+                        rangeChange(
+                          vList.map(v => {
+                            return isMoment ? moment(v) : dayjs(v);
+                          }) as RangeValue
+                        );
 
-                      closeTooltip();
+                        closeTooltip();
+                      }
                     }}
                     onCancel={() => {
                       closeTooltip();
@@ -630,131 +659,127 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
             </Space>
           </Dropdown>
           {(!simpleMode || !isPlay) && (
-            <span
-              ref={rangeRef}
-              onClick={() => {
-                setOpen(true);
-                setTooltipOpen(true);
-              }}
-            >
-              {/* @ts-ignore  */}
-              <DatePicker.RangePicker
-                className={classNames(`${prefix}-picker`)}
-                style={{
-                  // pointerEvents: 'none',
-                  border: 0,
+            <span ref={rangeRef} className={`${prefix}-editable-wrapper`}>
+              <EditableDateTimeInput
+                ref={editableInputRef}
+                prefixCls={prefixCls}
+                value={innerValue as [Dayjs | Moment | null, Dayjs | Moment | null]}
+                onChange={newValue => {
+                  datePickerChange(newValue as RangeValue);
                 }}
-                format={v => {
-                  // format 会影响布局，原先采用 v.year() === new Date().getFullYear() 进行判断，value 一共会传入三次(range0 range1 now), 会传入最新的时间导致判断异常
-                  if (hideYear && isThisYear) {
-                    return hideSecond
-                      ? v.format(isCn ? DATE_TIME_FORMAT_CN : DATE_TIME_FORMAT)
-                      : v.format(isCn ? DATE_TIME_SECOND_FORMAT_CN : DATE_TIME_SECOND_FORMAT);
-                  }
-                  return hideSecond
-                    ? v.format(isCn ? YEAR_DATE_TIME_FORMAT_CN : YEAR_DATE_TIME_FORMAT)
-                    : v.format(
-                        isCn ? YEAR_DATE_TIME_SECOND_FORMAT_CN : YEAR_DATE_TIME_SECOND_FORMAT
-                      );
+                hideYear={hideYear && isThisYear}
+                hideSecond={hideSecond}
+                isMoment={isMoment}
+                isCn={isCn}
+                format={(rest?.format as string) || YEAR_DATE_TIME_SECOND_FORMAT_CN}
+                open={open}
+                onClick={() => {
+                  setOpen(true);
+                  setTooltipOpen(true);
                 }}
-                // @ts-ignore
-                value={innerValue}
-                onChange={datePickerChange}
-                allowClear={false}
-                size={size}
-                suffixIcon={null}
-                // 透传 props 到 antd Ranger
-                {...omit(rest, 'value', 'onChange', 'style', 'className')}
-                open={false}
+                {...omit(
+                  rest,
+                  'value',
+                  'onChange',
+                  'style',
+                  'className',
+                  'onClick',
+                  'disabled',
+                  'format'
+                )}
               />
             </span>
           )}
         </div>
-        <Radio.Group
-          value={isPlay ? 'play' : ''}
-          className={`${prefix}-playback-control`}
-          buttonStyle="solid"
-        >
-          {hasRewind && (
-            <Tooltip
-              title={locale.jumpBack}
-              getPopupContainer={trigger => trigger.parentNode as HTMLElement}
-            >
-              <Radio.Button
-                value="stepBack"
-                style={{
-                  paddingLeft: 8,
-                  paddingRight: 8,
-                  borderLeft: 0,
-                  borderTopLeftRadius: 0,
-                  borderBottomLeftRadius: 0,
-                }}
-                onMouseEnter={() => setBackRadioFocused(true)}
-                onMouseLeave={() => setBackRadioFocused(false)}
-                onClick={() => {
-                  if (isPlay) {
-                    setIsPlay(false);
-                  }
-
-                  if (startTime && endTime) {
-                    const newStartTime = (startTime as Dayjs)
-                      .clone()
-                      .subtract(differenceMs, 'milliseconds');
-                    const newEndTime = startTime?.clone() as Dayjs;
-                    rangeChange([newStartTime, newEndTime]);
-                  }
-                }}
+        {(hasRewind || hasForward) && (
+          <Radio.Group
+            value={isPlay ? 'play' : ''}
+            className={`${prefix}-playback-control`}
+            buttonStyle="solid"
+          >
+            {hasRewind && (
+              <Tooltip
+                title={locale.jumpBack}
+                getPopupContainer={trigger => trigger.parentNode as HTMLElement}
               >
-                <LeftOutlined />
-              </Radio.Button>
-            </Tooltip>
-          )}
-          {hasForward && (
-            <Tooltip
-              title={locale.jumpForward}
-              getPopupContainer={trigger => trigger.parentNode as HTMLElement}
-            >
-              <Radio.Button
-                value="stepForward"
-                style={{
-                  paddingLeft: 8,
-                  paddingRight: 8,
-                  borderTopLeftRadius: 0,
-                  borderBottomLeftRadius: 0,
-                }}
-                // disabled={isPlay}
-                onClick={() => {
-                  if (startTime && endTime) {
-                    const newStartTime = endTime.clone() as Dayjs;
-                    const newEndTime = (endTime as Dayjs).clone().add(differenceMs);
-
-                    if (newEndTime.isBefore(new Date())) {
-                      rangeChange([newStartTime, newEndTime]);
-                    } else {
-                      setIsPlay(true);
-                      setNow();
+                <Radio.Button
+                  value="stepBack"
+                  aria-label={locale.jumpBack}
+                  style={{
+                    paddingInline: 8,
+                    borderInlineStart: 0,
+                    borderTopLeftRadius: 0,
+                    borderBottomLeftRadius: 0,
+                  }}
+                  onMouseEnter={() => setBackRadioFocused(true)}
+                  onMouseLeave={() => setBackRadioFocused(false)}
+                  onClick={() => {
+                    if (isPlay) {
+                      setIsPlay(false);
                     }
-                  }
-                }}
+
+                    if (startTime && endTime) {
+                      const newStartTime = (startTime as Dayjs)
+                        .clone()
+                        .subtract(differenceMs, 'milliseconds');
+                      const newEndTime = startTime?.clone() as Dayjs;
+                      rangeChange([newStartTime, newEndTime]);
+                    }
+                  }}
+                >
+                  <LeftOutlined aria-hidden />
+                </Radio.Button>
+              </Tooltip>
+            )}
+            {hasForward && (
+              <Tooltip
+                title={locale.jumpForward}
+                getPopupContainer={trigger => trigger.parentNode as HTMLElement}
               >
-                <RightOutlined />
-              </Radio.Button>
-            </Tooltip>
-          )}
-        </Radio.Group>
+                <Radio.Button
+                  value="stepForward"
+                  aria-label={locale.jumpForward}
+                  style={{
+                    paddingInline: 8,
+                    borderTopLeftRadius: 0,
+                    borderBottomLeftRadius: 0,
+                  }}
+                  // disabled={isPlay}
+                  onClick={() => {
+                    if (startTime && endTime) {
+                      const newStartTime = endTime.clone() as Dayjs;
+                      const newEndTime = (endTime as Dayjs).clone().add(differenceMs);
+
+                      if (newEndTime.isBefore(new Date())) {
+                        rangeChange([newStartTime, newEndTime]);
+                      } else {
+                        setIsPlay(true);
+                        setNow();
+                      }
+                    }
+                  }}
+                >
+                  <RightOutlined aria-hidden />
+                </Radio.Button>
+              </Tooltip>
+            )}
+          </Radio.Group>
+        )}
       </Space>
       {hasSync && rangeName !== CUSTOMIZE && (
         <Button
-          style={{ paddingLeft: 8, paddingRight: 8, color: token.colorTextSecondary }}
+          aria-label={locale.syncToCurrent}
+          style={{ paddingInline: 8, color: token.colorTextSecondary }}
           onClick={() => {
             setNow();
           }}
         >
-          <SyncOutlined />
+          <SyncOutlined aria-hidden />
         </Button>
       )}
       {hasZoomOut && (
         <Button
+          aria-label={locale.zoomOutRange}
           disabled={!nextRangeItem}
           style={{ color: token.colorTextSecondary }}
           onClick={() => {
@@ -765,7 +790,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
               return;
             }
           }}
-          icon={<ZoomOutOutlined />}
+          icon={<ZoomOutOutlined aria-hidden />}
         />
       )}
     </Space>

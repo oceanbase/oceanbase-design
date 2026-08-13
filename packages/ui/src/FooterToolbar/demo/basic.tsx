@@ -15,8 +15,8 @@ export default () => {
       }}
     >
       <FooterToolbar extra="Some extra message">
-        <Button>Cancel</Button>
         <Button type="primary">Ok</Button>
+        <Button>Cancel</Button>
       </FooterToolbar>
     </div>
   );

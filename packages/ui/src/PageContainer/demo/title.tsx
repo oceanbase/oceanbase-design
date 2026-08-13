@@ -9,19 +9,19 @@ export default () => {
   return (
     <PageContainer
       ghost={false}
-      title="页面标题"
-      footer={[<Button>重置</Button>, <Button type="primary">提交</Button>]}
+      title="Page Title"
+      footer={[<Button type="primary">Submit</Button>, <Button>Reset</Button>]}
     >
-      <Card bordered={false}>
-        <Descriptions title="基本信息">
-          <Descriptions.Item label="创建人">曲丽丽</Descriptions.Item>
-          <Descriptions.Item label="电话号码">1810000000</Descriptions.Item>
-          <Descriptions.Item label="地址">浙江省杭州市西湖区工专路</Descriptions.Item>
-          <Descriptions.Item label="关联表单">
+      <Card>
+        <Descriptions title="Basic Info">
+          <Descriptions.Item label="Creator">Lili Qu</Descriptions.Item>
+          <Descriptions.Item label="Phone">1810000000</Descriptions.Item>
+          <Descriptions.Item label="Address">New York No. 1 Lake Park</Descriptions.Item>
+          <Descriptions.Item label="Related Form">
             <a>421421</a>
           </Descriptions.Item>
-          <Descriptions.Item label="创建时间">2017-01-10</Descriptions.Item>
-          <Descriptions.Item label="备注">这是备注</Descriptions.Item>
+          <Descriptions.Item label="Created At">2017-01-10</Descriptions.Item>
+          <Descriptions.Item label="Remarks">Sample remarks</Descriptions.Item>
         </Descriptions>
       </Card>
     </PageContainer>

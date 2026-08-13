@@ -1,13 +1,97 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import { unit } from '@ant-design/cssinjs';
+import { prepareComponentToken as antdPrepareComponentTokenImport } from 'antd/es/table/style';
+import type { FullToken, GlobalToken } from '../../theme/interface';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type TableToken = FullToken<'Table'>;
+
+const antdPrepareComponentToken = antdPrepareComponentTokenImport as unknown as (
+  token: GlobalToken
+) => Record<string, unknown>;
+
+/**
+ * `genStyleHooks` 注册名为 `OB-Table`，`@ant-design/cssinjs-utils` 的 getComponentToken 只合并 `token.OB-Table`，
+ * 而 ConfigProvider 的 `theme.components.Table` 挂在 `token.Table` 上。若不合并，自定义 Table 组件 token（含
+ * `localeEnEmbeddedControls`）不会进入样式计算。
+ */
+function prepareComponentToken(token: GlobalToken) {
+  const base = antdPrepareComponentToken(token);
+  const tableCfg = (token as unknown as Record<string, unknown>).Table;
+  if (!tableCfg || typeof tableCfg !== 'object' || Array.isArray(tableCfg)) {
+    return base;
+  }
+  const { theme: _nestedTheme, ...tableOverrides } = tableCfg as Record<string, unknown>;
+  return { ...base, ...tableOverrides };
+}
+
+/**
+ * 单元格是否与全局正文同档（`cellFontSize === token.fontSize`）。
+ */
+const isTableCellBodyFontScale = (token: TableToken): boolean =>
+  token.cellFontSize === token.fontSize;
+
+const getTableCellLineHeight = (token: TableToken): number =>
+  isTableCellBodyFontScale(token) ? token.lineHeight : token.lineHeightSM;
+
+const getTableEmbeddedControlHeight = (token: TableToken): number =>
+  isTableCellBodyFontScale(token) ? token.controlHeight : token.controlHeightSM;
+
+const genSmallBtnStyle = (token: TableToken): CSSObject => {
+  if (!token.localeEnEmbeddedControls) {
+    return {};
+  }
+  const { antCls } = token;
+  const cellLineHeight = getTableCellLineHeight(token);
+  const controlH = getTableEmbeddedControlHeight(token);
+  return {
+    [`${antCls}-btn:not(${antCls}-btn-sm):not(${antCls}-btn-lg)`]: {
+      height: controlH,
+      fontSize: token.cellFontSize,
+      lineHeight: cellLineHeight,
+      [`&:not(${antCls}-btn-icon-only):not(${antCls}-btn-circle)`]: {
+        paddingInline: token.paddingXS,
+      },
+      [`&${antCls}-btn-icon-only`]: {
+        width: controlH,
+      },
+      [`&${antCls}-btn-circle`]: {
+        minWidth: controlH,
+      },
+    },
+  };
+};
+
+/** 英文 locale 下分页条与 page size Select 与单元格内嵌控件对齐的样式（与 {@link genSmallBtnStyle} 同开关）。 */
+const genSmallPaginationStyle = (token: TableToken): CSSObject => {
+  if (!token.localeEnEmbeddedControls) {
+    return {};
+  }
+  const { antCls, calc } = token;
+  const embeddedControlH = getTableEmbeddedControlHeight(token);
+  return {
+    fontSize: token.cellFontSize,
+    [`${antCls}-pagination-item, ${antCls}-pagination-total-text, ${antCls}-pagination-prev, ${antCls}-pagination-next`]:
+      {
+        height: embeddedControlH,
+        minWidth: embeddedControlH,
+        lineHeight: unit(calc(embeddedControlH).sub(calc(token.lineWidth).mul(2)).equal()),
+      },
+    [`${antCls}-pagination-options ${antCls}-select-single`]: {
+      height: embeddedControlH,
+      [`${antCls}-select-selector`]: {
+        fontSize: token.cellFontSize,
+        paddingInline: calc(token.paddingXS).sub(token.lineWidth).equal(),
+      },
+    },
+  };
+};
 
 export const genTableStyle = (token: TableToken): CSSObject => {
   const {
     antCls,
     componentCls,
+    iconCls,
     colorText,
     colorBgBase,
     colorTextSecondary,
@@ -19,10 +103,13 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     padding,
     marginLG,
     marginXS,
+    calc,
   } = token;
+  const cellLineHeight = getTableCellLineHeight(token);
   return {
     // 表格通用样式
     [`${componentCls}-wrapper ${componentCls}`]: {
+      lineHeight: cellLineHeight,
       color: colorText,
       backgroundColor: colorBgBase,
       borderRadius: borderRadiusLG,
@@ -33,14 +120,50 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       // head 样式
       [`${componentCls}-thead > tr`]: {
         ['th']: {
-          // 弱化列标题
           color: colorTextSecondary,
-          fontWeight: 'normal',
+          fontWeight: token.fontWeight,
           backgroundColor: colorBgBase,
+          [iconCls]: {
+            fontSize: token.fontSize,
+            color: token.colorIcon,
+          },
+        },
+        [`${componentCls}-column-title`]: {
+          flex: 'initial',
+        },
+        [`${componentCls}-column-title-tooltip-icon`]: {
+          cursor: 'help',
+          color: token.colorIcon,
+          ['&:hover']: {
+            color: token.colorIconHover,
+          },
+        },
+        [`${componentCls}-filter-column`]: {
+          justifyContent: 'flex-start',
         },
         // 去掉排序列表头的灰色背景
         [`th${componentCls}-column-has-sorters`]: {
           backgroundColor: colorBgBase,
+          ['&:hover']: {
+            backgroundColor: colorBgBase,
+          },
+        },
+        [`${componentCls}-column-sorters`]: {
+          justifyContent: 'flex-start',
+          backgroundColor: colorBgBase,
+          [`&:hover ${componentCls}-column-sorter`]: {
+            [iconCls]: {
+              color: token.colorIconHover,
+            },
+          },
+        },
+        [`${componentCls}-filter-trigger`]: {
+          color: token.colorIcon,
+          [`&:hover`]: {
+            [iconCls]: {
+              color: token.colorIconHover,
+            },
+          },
         },
         // 保留排序列表头分割线
         [`th${componentCls}-column-sort:before`]: {
@@ -52,26 +175,12 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       },
       // body 样式
       [`${componentCls}-tbody`]: {
-        // 斑马纹样式
-        [`tr:nth-child(2n + 1):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${antCls}-descriptions-row) > td`]:
-          {
-            backgroundColor: colorBgBase,
-          },
-        [`tr:nth-child(2n):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${componentCls}-expanded-row):not(${antCls}-descriptions-row) > td`]:
-          {
-            backgroundColor: colorFillQuaternary,
-          },
-        // hover 行样式
-        [`tr:not(${componentCls}-placeholder):not(${componentCls}-expanded-row):not(${antCls}-descriptions-row):hover > td`]:
-          {
-            backgroundColor: `${colorPrimaryBg} !important`,
-          },
-        // 选中行样式
-        [`tr${componentCls}-row-selected > td`]: {
-          backgroundColor: `${colorPrimaryBg} !important`,
-        },
         [`${componentCls}-tbody-virtual-scrollbar ${componentCls}-tbody-virtual-scrollbar-thumb`]: {
           background: `${token.colorFillSecondary} !important`,
+        },
+        // for custom expand icon
+        [`${componentCls}-row-indent+${iconCls}`]: {
+          marginInlineEnd: token.marginXS,
         },
         // expandRowByClick 行样式
         [`tr${componentCls}-expand-row-by-click`]: {
@@ -86,12 +195,23 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         },
         // 为了避免行展开/收起时出现 border 动画，覆盖 antd 默认配置，仅设置背景色动画
         [`tr > td`]: {
+          fontWeight: token.fontWeight,
           transition: `background ${token.motionDurationMid}`,
+          // remove sort column background color
+          [`&${antCls}-table-column-sort`]: {
+            backgroundColor: colorBgBase,
+          },
+          a: {
+            fontWeight: token.fontWeightStrong,
+            // work for ProTable link style；与单元格字号一致
+            fontSize: token.cellFontSize,
+          },
         },
+        ...genSmallBtnStyle(token),
         // empty style
         [`${componentCls}-placeholder td`]: {},
         [`${componentCls}-empty-wrapper`]: {
-          minHeight: 360 - token.paddingSM * 2,
+          minHeight: calc(360).sub(calc(token.paddingXS).mul(2).equal()).equal(),
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -99,9 +219,15 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         // 嵌套子表格样式
         [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
           borderBottom: 'none',
-          // 设置嵌套子表格的表头背景色
+          // 设置嵌套子表格的背景色
           [`${componentCls}-thead > tr > th`]: {
             backgroundColor: token.colorFillQuaternary,
+          },
+          [`${componentCls}-tbody > tr > td`]: {
+            backgroundColor: token.colorFillQuaternary,
+          },
+          [`${componentCls}-tbody > tr:hover > td`]: {
+            backgroundColor: token.colorFillTertiary,
           },
           // 去掉表头左右单元格的圆角
           [`${componentCls}-thead > tr:first-child > th:first-child`]: {
@@ -122,7 +248,7 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     [`${componentCls}-wrapper ${componentCls}${componentCls}-middle`]: {
       [`${componentCls}-tbody`]: {
         [`${componentCls}-empty-wrapper`]: {
-          minHeight: 260 - token.paddingXS * 2,
+          minHeight: calc(260).sub(calc(token.paddingXS).mul(2).equal()).equal(),
         },
       },
     },
@@ -131,51 +257,37 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     [`${componentCls}-wrapper ${componentCls}${componentCls}-small`]: {
       [`${componentCls}-tbody`]: {
         [`${componentCls}-empty-wrapper`]: {
-          minHeight: 160 - token.paddingXXS * 2,
+          minHeight: calc(160).sub(calc(token.paddingXXS).mul(2).equal()).equal(),
         },
       },
     },
-
-    // 滚动表格样式
-    // 由于滚动表格会在 tbody 下最前面多一个 tr 元素，因此需要设置相反的斑马条样式
-    // .ant-table-scroll-horizontal: 水平滚动
-    // .ant-table-fixed-header: 垂直滚动
-    [`${componentCls}-wrapper ${componentCls}${componentCls}-scroll-horizontal, ${componentCls}-wrapper ${componentCls}${componentCls}-fixed-header`]:
-      {
-        [`${componentCls}-tbody`]: {
-          // 斑马纹样式
-          [`tr:nth-child(2n + 1):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${antCls}-descriptions-row) > td`]:
-            {
-              backgroundColor: colorFillQuaternary,
-            },
-          [`tr:nth-child(2n):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${componentCls}-expanded-row):not(${antCls}-descriptions-row) > td`]:
-            {
-              backgroundColor: colorBgBase,
-            },
-        },
-      },
 
     // 带边框的表格样式
     [`${componentCls}-wrapper ${componentCls}${componentCls}-bordered`]: {
-      [`${componentCls}-thead > tr`]: {
-        ['th']: {
-          backgroundColor: colorFillQuaternary,
-        },
-      },
       [`${componentCls}-footer`]: {
-        borderRadius: `0px 0px ${token.borderRadiusLG}px ${token.borderRadiusLG}px`,
+        borderRadius: `0px 0px ${unit(token.borderRadiusLG)} ${unit(token.borderRadiusLG)}`,
       },
     },
+
+    // 表头分组的表格（thead 中有多个 tr），去掉 tbody 的纵向分割线，保留最后一列的纵向分割线
+    // 通过 Table 组件上的 ant-table-thead-multiple-rows 类选择，避免使用 :has() 在部分环境下产生无效选择器
+    [`${componentCls}-wrapper${componentCls}-thead-multiple-rows ${componentCls}${componentCls}-bordered`]:
+      {
+        [`${componentCls}-tbody > tr > td:not(${componentCls}-cell-last-column)`]: {
+          borderInlineEnd: 'none',
+        },
+      },
 
     // 带内部边框的表格样式
     [`${componentCls}-wrapper${componentCls}-inner-bordered ${componentCls}-bordered`]: {
       [`${componentCls}-container`]: {
         borderInlineStart: 'none',
         borderTop: 'none',
-        [`${componentCls}-thead > tr > th, ${componentCls}-tbody > tr > td`]: {
-          ['&:last-child']: {
-            borderInlineEnd: 'none',
-          },
+        // 使用 last-column 类名选择视觉上的最后一列，而不是 :last-child
+        // 因为 :last-child 在有 rowspan 时会选中 DOM 中的最后一个单元格，而不是视觉上的最后一列
+        [`${componentCls}-thead > tr > th${componentCls}-cell-last-column,
+          ${componentCls}-tbody > tr > td${componentCls}-cell-last-column`]: {
+          borderInlineEnd: 'none',
         },
       },
     },
@@ -186,13 +298,13 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       [`${componentCls}-thead, ${componentCls}-tbody`]: {
         ['td, th']: {
           [`&${componentCls}-row-expand-icon-cell`]: {
-            backgroundColor: colorBgBase,
             // 设置 paddingRight 即可
             paddingRight: token.paddingXS,
           },
-          // 紧跟在选择列或展开列后的第一列，左侧间距减小为 8px
+          // 紧跟在选择/展开列后的「逻辑首列」左侧缩进为 8px；首列 rowspan 时续行第一个 td 实为第二列，勿用纯 + 相邻否则会误伤
           [`&${componentCls}-selection-column, &${componentCls}-row-expand-icon-cell`]: {
-            [`& + td, & + th`]: {
+            [`& + td:not([data-ob-user-col]), & + th:not([data-ob-user-col]),
+              & + td[data-ob-user-col="0"], & + th[data-ob-user-col="0"]`]: {
               paddingLeft: token.paddingXS,
             },
           },
@@ -200,80 +312,165 @@ export const genTableStyle = (token: TableToken): CSSObject => {
       },
     },
 
-    // 以下样式在 https://design.oceanbase.com/components/table#table-demo-rowspan 场景下还存在问题，先注释掉
-    // 带边框、不带 footer、没有行列合并的表格样式
-    // [`${componentCls}-wrapper:not(${componentCls}-has-footer):not(${componentCls}-has-on-cell) ${componentCls}${componentCls}-bordered`]:
-    //   {
-    //     // 表格容器设置圆角
-    //     [`${componentCls}-container`]: {
-    //       borderRadius: token.borderRadiusLG,
-    //     },
-    //     [`${componentCls}-tbody`]: {
-    //       // 最后一行左右单元格增加圆角
-    //       [`tr:last-child >*:first-child`]: {
-    //         borderEndStartRadius: token.borderRadiusLG,
-    //       },
-    //       [`tr:last-child >*:last-child`]: {
-    //         borderEndEndRadius: token.borderRadiusLG,
-    //       },
-    //     },
-    //   },
-
-    // 非可展开表格、不带 footer 表格、非空表格、不带边框表格: 底部添加分隔线，并去掉底部圆角
-    [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
+    // 带边框（非内部边框）、不带 footer 的表格样式
+    [`${componentCls}-wrapper:not(${componentCls}-has-footer):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
       {
-        borderBottom: `1px solid ${colorBorderSecondary}`,
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0,
+        // 表格容器设置圆角
+        [`${componentCls}-container`]: {
+          borderRadius: token.borderRadiusLG,
+        },
       },
 
-    // 去掉非展开表格的边框
-    [`${componentCls}-wrapper:not(${componentCls}-expandable)`]: {
-      [`${componentCls}:not(${componentCls}-bordered)`]: {
-        [`${componentCls}-tbody`]: {
-          [`tr:not(${componentCls}-measure-row) > td`]: {
-            border: 'none',
+    [`${componentCls}-wrapper:not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
+      {
+        [`${componentCls}-container`]: {
+          // ::after 伪元素用于固定列时的阴影效果，表格带边框时去掉左上角和右上角的圆角
+          ['&::before, &::after']: {
+            borderStartStartRadius: token.borderRadiusMD,
+            borderStartEndRadius: token.borderRadiusMD,
+          },
+          [`${componentCls}-content`]: {
+            borderStartStartRadius: token.borderRadiusLG,
+            borderStartEndRadius: token.borderRadiusLG,
           },
         },
       },
-    },
+
+    // 带边框（非内部边框）、不带 footer 的虚拟滚动表格样式
+    [`${componentCls}-wrapper${componentCls}-virtual:not(${componentCls}-has-footer):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
+      {
+        // 虚拟滚动容器设置底部圆角和边框
+        [`${componentCls}-tbody-virtual-holder`]: {
+          borderEndStartRadius: token.borderRadiusLG,
+          borderEndEndRadius: token.borderRadiusLG,
+          borderBottom: `1px solid ${token.colorBorderSecondary}`,
+        },
+        [`${componentCls}-tbody-virtual::after`]: {
+          borderBottom: 'none',
+        },
+      },
+
+    // 非虚拟滚动、带边框（非内部边框）、不带 footer、首/末列无 rowSpan 覆盖最后一行
+    [`${componentCls}-wrapper:not(${componentCls}-has-footer):not(${componentCls}-has-rowspan-first):not(${componentCls}-has-rowspan-last):not(${componentCls}-has-rowspan-both):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
+      {
+        [`${componentCls}-tbody`]: {
+          // 最后一行左下角单元格增加圆角
+          [`tr:last-child > *:first-child`]: {
+            borderEndStartRadius: token.borderRadiusLG,
+          },
+          // 最后一行右下角单元格增加圆角
+          [`tr:last-child > *:last-child`]: {
+            borderEndEndRadius: token.borderRadiusLG,
+          },
+        },
+      },
+
+    // 非虚拟滚动、带边框、不带 footer：首列或双端 rowSpan 时的左下角（延伸到最后一行的首列格）
+    [`${componentCls}-wrapper:is(${componentCls}-has-rowspan-first, ${componentCls}-has-rowspan-both):not(${componentCls}-has-footer):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
+      {
+        [`${componentCls}-tbody`]: {
+          // 有 rowspan 且延伸到最后一行的第一列单元格，设置左下角圆角
+          // 覆盖 rowspan 2-10 的常见场景
+          [`tr:nth-last-child(2) > td[rowspan="2"]:first-child,
+            tr:nth-last-child(3) > td[rowspan="3"]:first-child,
+            tr:nth-last-child(4) > td[rowspan="4"]:first-child,
+            tr:nth-last-child(5) > td[rowspan="5"]:first-child,
+            tr:nth-last-child(6) > td[rowspan="6"]:first-child,
+            tr:nth-last-child(7) > td[rowspan="7"]:first-child,
+            tr:nth-last-child(8) > td[rowspan="8"]:first-child,
+            tr:nth-last-child(9) > td[rowspan="9"]:first-child,
+            tr:nth-last-child(10) > td[rowspan="10"]:first-child,
+            tr:last-child > td[rowspan]:first-child`]: {
+            borderEndStartRadius: token.borderRadiusLG,
+          },
+        },
+      },
+
+    // 末列或双端 rowSpan 时的右下角
+    [`${componentCls}-wrapper:is(${componentCls}-has-rowspan-last, ${componentCls}-has-rowspan-both):not(${componentCls}-has-footer):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
+      {
+        [`${componentCls}-tbody`]: {
+          // 有 rowspan 且延伸到最后一行的最后一列单元格，设置右下角圆角
+          // 覆盖 rowspan 2-10 的常见场景
+          [`tr:nth-last-child(2) > td[rowspan="2"]${componentCls}-cell-last-column,
+            tr:nth-last-child(3) > td[rowspan="3"]${componentCls}-cell-last-column,
+            tr:nth-last-child(4) > td[rowspan="4"]${componentCls}-cell-last-column,
+            tr:nth-last-child(5) > td[rowspan="5"]${componentCls}-cell-last-column,
+            tr:nth-last-child(6) > td[rowspan="6"]${componentCls}-cell-last-column,
+            tr:nth-last-child(7) > td[rowspan="7"]${componentCls}-cell-last-column,
+            tr:nth-last-child(8) > td[rowspan="8"]${componentCls}-cell-last-column,
+            tr:nth-last-child(9) > td[rowspan="9"]${componentCls}-cell-last-column,
+            tr:nth-last-child(10) > td[rowspan="10"]${componentCls}-cell-last-column,
+            tr:last-child > td[rowspan]${componentCls}-cell-last-column`]: {
+            borderEndEndRadius: token.borderRadiusLG,
+          },
+        },
+      },
+
+    // 仅首列 rowSpan：最后一行右下角圆角
+    [`${componentCls}-wrapper${componentCls}-has-rowspan-first:not(${componentCls}-has-footer):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
+      {
+        [`${componentCls}-tbody`]: {
+          // 最后一行右下角单元格增加圆角
+          [`tr:last-child > td${componentCls}-cell-last-column`]: {
+            borderEndEndRadius: token.borderRadiusLG,
+          },
+        },
+      },
+
+    // 仅末列 rowSpan：最后一行左下角圆角
+    [`${componentCls}-wrapper${componentCls}-has-rowspan-last:not(${componentCls}-has-footer):not(${componentCls}-virtual):not(${componentCls}-inner-bordered) ${componentCls}${componentCls}-bordered`]:
+      {
+        [`${componentCls}-tbody`]: {
+          // 最后一行左下角单元格增加圆角
+          [`tr:last-child > *:first-child`]: {
+            borderEndStartRadius: token.borderRadiusLG,
+          },
+        },
+      },
+
+    // 非可展开表格、不带 footer 表格、带分页器表格、非空表格、不带边框表格: 去掉底部圆角
+    [`${componentCls}-wrapper:not(${componentCls}-expandable):not(${componentCls}-has-footer):not(${componentCls}-no-pagination) ${componentCls}:not(${componentCls}-bordered):not(${componentCls}-empty)`]:
+      {
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
+      },
 
     // 可展开表格样式
     [`${componentCls}-wrapper${componentCls}-expandable`]: {
       [`${componentCls}`]: {
         [`${componentCls}-tbody`]: {
-          // 去掉斑马纹
-          [`tr:nth-child(n):not(${componentCls}-placeholder):not(${componentCls}-row-selected):not(${componentCls}-expanded-row)`]:
-            {
-              ['& > td']: {
-                backgroundColor: colorBgBase,
-              },
-              ['&:hover']: {
-                td: {
-                  backgroundColor: colorPrimaryBg,
-                },
-              },
-            },
           [`${componentCls}-expanded-row > td`]: {
             // 除内嵌子表格外，设置其他内嵌元素样式
             [`& > *:not(${componentCls}-wrapper):not(${componentCls}-expanded-row-fixed)`]: {
-              marginLeft: token.marginXL + token.lineWidth * 2,
+              marginLeft: calc(token.marginXL).add(calc(token.lineWidth).mul(2).equal()).equal(),
             },
             [`& > *${componentCls}-expanded-row-fixed`]: {
-              paddingLeft: token.marginXL + token.lineWidth * 2 + token.padding,
+              paddingLeft: calc(token.marginXL)
+                .add(calc(token.lineWidth).mul(2).equal())
+                .add(token.padding)
+                .equal(),
+              margin: `-${unit(token.marginXS)} -${unit(token.margin)}`,
             },
           },
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.margin + token.lineWidth * 2,
+            marginLeft: calc(token.margin).add(calc(token.lineWidth).mul(2).equal()).equal(),
           },
+          [`tr > td > ${componentCls}-expanded-row-fixed > ${componentCls}-wrapper:only-child ${componentCls}`]:
+            {
+              marginLeft: -token.padding,
+            },
         },
       },
       [`${componentCls}-middle, ${componentCls}-small`]: {
         [`${componentCls}-tbody`]: {
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.margin + token.lineWidth * 2 + token.margin,
+            marginLeft: calc(token.margin)
+              .add(calc(token.lineWidth).mul(2).equal())
+              .add(token.margin)
+              .equal(),
           },
         },
       },
@@ -286,15 +483,25 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           [`${componentCls}-expanded-row > td`]: {
             // 除内嵌子表格外，设置其他内嵌元素样式
             [`& > *:not(${componentCls}-wrapper):not(${componentCls}-expanded-row-fixed)`]: {
-              marginLeft: token.marginXL + token.marginXL + token.lineWidth * 2,
+              marginLeft: calc(token.marginXL)
+                .add(token.marginXL)
+                .add(calc(token.lineWidth).mul(2).equal())
+                .equal(),
             },
             [`& > *${componentCls}-expanded-row-fixed`]: {
-              paddingLeft: token.marginXL + token.marginXL + token.lineWidth * 2 + token.padding,
+              paddingLeft: calc(token.marginXL)
+                .add(token.marginXL)
+                .add(calc(token.lineWidth).mul(2).equal())
+                .add(token.padding)
+                .equal(),
             },
           },
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.margin + token.marginXL + token.lineWidth * 2,
+            marginLeft: calc(token.margin)
+              .add(token.marginXL)
+              .add(calc(token.lineWidth).mul(2).equal())
+              .equal(),
           },
         },
       },
@@ -302,7 +509,11 @@ export const genTableStyle = (token: TableToken): CSSObject => {
         [`${componentCls}-tbody`]: {
           // 嵌套子表格和父表格第一列对齐
           [`tr > td > ${componentCls}-wrapper:only-child ${componentCls}`]: {
-            marginLeft: token.margin + token.marginXL + token.lineWidth * 2 + token.margin,
+            marginLeft: calc(token.margin)
+              .add(token.marginXL)
+              .add(calc(token.lineWidth).mul(2).equal())
+              .add(token.margin)
+              .equal(),
           },
         },
       },
@@ -322,8 +533,13 @@ export const genTableStyle = (token: TableToken): CSSObject => {
     [`${componentCls}-wrapper`]: {
       [`${componentCls}-pagination`]: {
         [`&${antCls}-pagination`]: {
-          padding: `${padding}px 0`,
-          margin: '0 !important',
+          padding: `${unit(token.paddingSM)} 0`,
+          margin: 0,
+          // 带边框和带内部边框的 Table，分页器右侧间距设为 token.marginLG
+          [`${componentCls}-wrapper${componentCls}-has-bordered &`]: {
+            marginInlineEnd: marginLG,
+          },
+          ...genSmallPaginationStyle(token),
         },
         // 批量操作栏样式
         [`${componentCls}-batch-operation-bar`]: {
@@ -331,14 +547,8 @@ export const genTableStyle = (token: TableToken): CSSObject => {
           left: 0,
           display: 'inline-block',
           marginRight: marginLG,
-          [`${componentCls}-batch-operation-selection`]: {
-            color: colorTextSecondary,
-            fontWeight: 500,
-            [`${componentCls}-batch-operation-selection-count`]: {
-              margin: `0 ${marginXS}px`,
-              color: colorLink,
-            },
-          },
+          [`${componentCls}-batch-operation-selection`]: {},
+          ...genSmallBtnStyle(token),
         },
       },
     },
@@ -361,9 +571,9 @@ export const genTableStyle = (token: TableToken): CSSObject => {
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Table', token => {
-    return [genTableStyle(token as TableToken)];
-  });
-  return useStyle(prefixCls);
-};
+// 经 genComponentStyleHook 注册为 ['Table','oceanbase']：合并 components.Table，且不与 antd 主 Table 样式钩子冲突。
+export default genStyleHooks(
+  'Table',
+  token => [genTableStyle(token as TableToken)],
+  prepareComponentToken
+);

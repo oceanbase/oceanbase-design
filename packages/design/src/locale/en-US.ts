@@ -6,6 +6,7 @@ export default {
   global: {
     ...enUS.global,
     inputPlaceholder: 'Please enter',
+    viewDocument: 'View Document',
   },
   Pagination: {
     ...enUS.Pagination,
@@ -24,5 +25,18 @@ export default {
       collapse: 'Collapse',
       open: 'Open',
     },
+  },
+  Filter: {
+    pleaseSelect: 'Please select',
+    open: 'Open',
+    filters: 'Filters',
+    apply: 'Apply',
+    clearAll: 'Clear All',
+  },
+  Notification: {
+    showMore: 'Show more',
+    copy: 'Copy',
+    copied: 'Copied',
+    copyFailed: 'Copy failed',
   },
 } as Locale;

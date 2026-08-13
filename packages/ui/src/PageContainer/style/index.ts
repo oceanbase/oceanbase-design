@@ -1,6 +1,5 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import type { PageContainerToken } from '@ant-design/pro-layout/es/components/PageContainer/style';
-import { genLargeStyle } from '@oceanbase/design';
 import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import { genFooterToolbarStyle } from '../../FooterToolbar/style';
@@ -13,13 +12,10 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
     proComponentsCls,
     componentCls,
     colorBgLayout,
-    fontSizeHeading3,
-    controlHeightLG,
+    fontSizeHeading2,
     padding,
     paddingLG,
   } = token;
-  const height = controlHeightLG;
-  const lineHeight = `${controlHeightLG}px`;
 
   return {
     [`${componentCls}`]: {
@@ -28,48 +24,77 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
       [`${proComponentsCls}-grid-content`]: {
         minHeight: 'auto',
       },
-      [`${componentCls}-warp-page-header,${componentCls}-wrap-page-header`]: {
-        // 减小内容区左右两侧间距
-        paddingInlineStart: `${paddingLG}px !important`,
-        paddingInlineEnd: `${paddingLG}px !important`,
-        paddingBlockStart: `${padding}px !important`,
-        paddingBlockEnd: `${padding}px !important`,
-        [`${antCls}-page-header-breadcrumb`]: {
-          // overwritten pro-components style
-          paddingBlockStart: 0,
+      [`${antCls}-page-header${componentCls}-warp-page-header, ${antCls}-page-header${componentCls}-wrap-page-header`]:
+        {
+          // 减小内容区左右两侧间距
+          paddingInlineStart: `${token.paddingXL}px`,
+          paddingInlineEnd: `${token.paddingXL}px`,
+          paddingBlockStart: `${paddingLG}px`,
+          paddingBlockEnd: `${padding}px`,
+          [`${antCls}-page-header-breadcrumb`]: {
+            // overwritten pro-components style
+            paddingBlockStart: 0,
+          },
+          // remove paddingBlockStart for page header
+          [`${antCls}-page-header-heading`]: {
+            paddingBlockStart: 0,
+          },
+          [`${antCls}-page-header-heading-title`]: {
+            fontSize: fontSizeHeading2,
+            fontWeight: token.fontWeightStrong,
+            marginInlineEnd: token.marginXS,
+          },
+          [`${antCls}-page-header-heading-sub-title`]: {
+            fontSize: token.fontSize,
+          },
+          [`${antCls}-page-header-heading-reload`]: {
+            cursor: 'pointer',
+            fontSize: token.fontSizeLG,
+            marginTop: token.marginXXS,
+          },
+          [`${antCls}-page-header-heading-document-divider`]: {
+            marginInline: 0,
+            height: token.size,
+          },
+          [`${antCls}-page-header-heading-document-icon`]: {
+            display: 'inline-block',
+            color: token.colorIcon,
+            fontSize: token.fontSizeLG,
+            cursor: 'pointer',
+            '&:hover': {
+              color: token.colorLinkHover,
+            },
+            '&:active': {
+              color: token.colorLinkActive,
+            },
+          },
+          [`${antCls}-page-header-heading-document-default-icon`]: {
+            marginBottom: -3,
+          },
+          [`${antCls}-page-header-heading-left`]: {
+            marginBlock: 0,
+          },
+          [`${antCls}-page-header-heading-extra`]: {
+            marginBlock: 0,
+          },
+          [`${antCls}-page-header-footer`]: {
+            marginBlockStart: 0,
+            [`${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
+              borderBottom: `1px solid ${token.colorBorderSecondary}`,
+            },
+          },
         },
-        // remove paddingBlockStart for page header
-        [`${antCls}-page-header-heading`]: {
-          paddingBlockStart: 0,
-        },
-        [`${antCls}-page-header-heading-title`]: {
-          fontSize: fontSizeHeading3,
-          marginInlineEnd: token.marginXS,
-        },
-        [`${antCls}-page-header-heading-reload`]: {
-          cursor: 'pointer',
-          fontSize: token.fontSizeLG,
-          marginTop: token.marginXXS,
-        },
-        [`${antCls}-page-header-heading-extra`]: {
-          height,
-          lineHeight,
-          marginBlock: 0,
-          // extra operation style
-          ...genLargeStyle(token),
-        },
-        [`${antCls}-page-header-footer`]: {
-          marginBlockStart: 0,
-        },
-      },
       [`${componentCls}-children-container`]: {
-        paddingInline: paddingLG,
+        paddingInline: token.paddingXL,
         paddingBlockStart: 0,
-        paddingBlockEnd: paddingLG,
+        paddingBlockEnd: padding,
         // set top tabs style when it is PageContainer's first child
         [`& > ${antCls}-tabs-top:not(${antCls}-tabs-card):first-child`]: {
           // equal to page header paddingBlockEnd
           marginTop: -padding,
+        },
+        [`& > ${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
+          borderBottom: `1px solid ${token.colorBorderSecondary}`,
         },
       },
     },
@@ -80,6 +105,23 @@ export const genPageContainerStyle: GenerateStyle<PageContainerToken> = (
     },
     [`${componentCls}-with-footer `]: {
       paddingBottom: 64,
+    },
+    // tabs pull through when the width is not overflow
+    [`${componentCls}:not(${componentCls}-max-width)`]: {
+      [`${componentCls}-warp-page-header,${componentCls}-wrap-page-header`]: {
+        [`${antCls}-page-header-footer`]: {
+          [`${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
+            left: -token.paddingXL,
+            right: -token.paddingXL,
+          },
+        },
+      },
+      [`${componentCls}-children-container`]: {
+        [`& > ${antCls}-tabs-top > ${antCls}-tabs-nav::before`]: {
+          left: -token.paddingXL,
+          right: -token.paddingXL,
+        },
+      },
     },
     ...(genFooterToolbarStyle({
       ...token,

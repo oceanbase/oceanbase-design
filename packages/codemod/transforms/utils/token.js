@@ -35,17 +35,25 @@ const TOKEN_MAP = {
   '#1677ff': 'colorInfo',
   '#1890ff': 'colorInfo',
   '#40a9ff': 'colorInfo',
+  '#006aff': 'colorInfo',
+  '#1843ff': 'colorInfo',
+  '#597ef7': 'colorInfo',
   '#f7f9fb': 'colorInfoBg',
+  '#91a9f8': 'colorInfoBg',
   '#e6f7ff': 'colorInfoBgHover',
   '#f3f9ff': 'colorInfoBgHover',
   '#e6f7ff': 'colorInfoBgHover',
   '#73d13d': 'colorSuccess',
   '#52c41a': 'colorSuccess',
   '#faad14': 'colorWarning',
+  '#ffa940': 'colorWarning',
   '#fef6e7': 'colorWarningBg',
+  '#fed59c': 'colorWarningBg',
   '#ff4d4f': 'colorError',
   '#f5222d': 'colorError',
   '#f8636b': 'colorError',
+  '#f93939': 'colorError',
+  '#eb4444': 'colorError',
   '#d9d9d9': 'colorBorder',
   '#bfbfbf': 'colorBorder',
   '#e8e8e8': 'colorBorder',
@@ -57,6 +65,7 @@ const TOKEN_MAP = {
   '#f0f2f5': 'colorBgLayout',
   '#fafafa': 'colorBgLayout',
   '#f7f8fc': 'colorBgLayout',
+  '#f3f6fc': 'colorBgLayout',
   'rgb(250,250,250)': 'colorBgLayout',
   '#ffffff': 'colorBgContainer',
   '#fff': 'colorBgContainer',
@@ -65,7 +74,9 @@ const TOKEN_MAP = {
   'rgba(0,0,0,0.85)': 'colorText',
   'rgba(0,0,0,0.65)': 'colorTextSecondary',
   'rgba(0,0,0,0.45)': 'colorTextTertiary',
-  '#5c6b8a': 'colorTextTertiary',
+  '#5c6b8a': 'colorTextSecondary',
+  '#5C6B8A': 'colorTextSecondary',
+  '#ced5e3': '@colorTextPlaceholder',
   'rgba(0,0,0,0.25)': 'colorTextQuaternary',
   'rgba(0,0,0,.85)': 'colorText',
   'rgba(0,0,0,.65)': 'colorTextSecondary',
@@ -95,6 +106,7 @@ const TOKEN_MAP = {
   'rgba(0,0,0,0.06)': 'colorFillSecondary',
   'rgba(0,0,0,0.04)': 'colorFillTertiary',
   'rgba(0,0,0,0.02)': 'colorFillQuaternary',
+  'rgba(0,0,0,0.03)': 'colorFillQuaternary',
   '#f5f6fa': 'colorBgLayout',
   '#edeff2': 'colorBgLayout',
   // obui legacy style => token
@@ -120,12 +132,27 @@ const TOKEN_MAP = {
   '#cdd5e4': 'colorBorder',
   '#f5f8fe': 'colorBgLayout',
   '#f5f7fa': 'colorBgLayout',
+  '#f8fafe': 'colorBgLayout',
   'rgba(140,140,140,0.1)': 'colorBgLayout',
   'rgb(240,242,245)': 'colorBgLayout',
   '#132039': 'colorText',
   '#364563': 'colorTextSecondary',
   '#8592ad': 'colorTextTertiary',
-  '#f8fafe': 'colorFillQuaternary',
+  // dataphin / common product UI colors
+  '#0c4bff': 'colorInfo',
+  '#3485ff': 'colorInfo',
+  '#1664ff': 'colorInfo',
+  '#6ca0f5': 'colorInfo',
+  '#a186ff': 'colorInfo',
+  '#eaba19': 'colorWarning',
+  '#999': 'colorTextTertiary',
+  '#999999': 'colorTextTertiary',
+  '#a4a4a4': 'colorTextTertiary',
+  '#7c8087': 'colorTextSecondary',
+  '#2bc048': 'colorSuccess',
+  '#ff4343': 'colorError',
+  '#f15533': 'colorError',
+  '#ff4b61': 'colorError',
 };
 
 const TOKEN_MAP_KEYS = Object.keys(TOKEN_MAP).map(key => formatValue(key));
@@ -158,9 +185,58 @@ function tokenParse(value) {
   };
 }
 
+// 基于属性名和数值的 token 映射
+const PROPERTY_TOKEN_MAP = {
+  fontSize: {
+    11: 'fontSizeSM',
+    12: 'fontSizeSM',
+    13: 'fontSize',
+    14: 'fontSize',
+    15: 'fontSizeLG',
+    16: 'fontSizeLG',
+  },
+  fontWeight: {
+    300: 'fontWeightWeak',
+    400: 'fontWeight',
+    500: 'fontWeightStrong',
+    600: 'fontWeightStrong',
+  },
+  borderRadius: {
+    2: 'borderRadiusSM',
+    4: 'borderRadius',
+    6: 'borderRadiusMD',
+    8: 'borderRadiusLG',
+  },
+};
+
+function propertyTokenParse(propertyName, value) {
+  // 基于属性名和数值的 token 解析
+  const propertyMap = PROPERTY_TOKEN_MAP[propertyName];
+  if (!propertyMap) {
+    return null;
+  }
+
+  const stringValue = String(value);
+  // 提取数值部分（去掉单位）
+  const numericValue = stringValue.replace(/[^\d.]/g, '');
+  const token = propertyMap[numericValue];
+  if (!token) {
+    return null;
+  }
+
+  return {
+    key: stringValue,
+    token,
+    formattedValue: stringValue,
+    propertyName,
+  };
+}
+
 module.exports = {
   TOKEN_MAP,
   TOKEN_MAP_KEYS,
   tokenParse,
+  PROPERTY_TOKEN_MAP,
+  propertyTokenParse,
   isLower,
 };

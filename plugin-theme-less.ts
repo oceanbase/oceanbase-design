@@ -4,13 +4,30 @@ import { isNil, omitBy } from 'lodash';
 // umi 插件只能 import 支持 CommonJS 语法库和文件，因此需要使用 lib 产物
 import formatToken from 'antd/lib/theme/util/alias';
 // @ts-ignore
-import theme from './.dumi/tmp/plugin-theme-less/index.js';
+import theme from './.dumi/tmp/plugin-theme-less/theme/index.js';
 // @ts-ignore
-import defaultTheme from './.dumi/tmp/plugin-theme-less/default.js';
+import defaultTheme from './.dumi/tmp/plugin-theme-less/theme/default.js';
 // @ts-ignore
-import darkTheme from './.dumi/tmp/plugin-theme-less/dark.js';
+import darkTheme from './.dumi/tmp/plugin-theme-less/theme/dark.js';
 // @ts-ignore
-import aliyunTheme from './.dumi/tmp/plugin-theme-less/aliyun.js';
+import aliyunTheme from './.dumi/tmp/plugin-theme-less/theme/aliyun.js';
+
+function unit(key: string, value: string | number) {
+  if (
+    typeof value === 'number' &&
+    !key.startsWith('lineHeight') &&
+    !key.startsWith('zIndex') &&
+    !key.startsWith('opacity') &&
+    !key.startsWith('motion') &&
+    !key.startsWith('fontWeight')
+  ) {
+    return `${value}px`;
+  }
+  if (typeof value === 'number' && key.startsWith('motion')) {
+    return `${value}s`;
+  }
+  return value;
+}
 
 export default (api: IApi) => {
   // 生成 default.less、dark.less 和 compact.less 主题文件
@@ -67,6 +84,14 @@ export default (api: IApi) => {
             : // 对于非暗色主题，需要覆盖部分 Alias Token 的值
               omitBy(
                 {
+                  colorIcon: item.token.colorIcon,
+                  colorBgTextHover: item.token.colorBgTextHover,
+                  colorBgTextActive: item.token.colorBgTextActive,
+                  colorBgContainerDisabled: item.token.colorBgContainerDisabled,
+                  controlItemBgHover: item.token.controlItemBgHover,
+                  controlItemBgActive: item.token.controlItemBgActive,
+                  controlItemBgActiveHover: item.token.controlItemBgActiveHover,
+                  lineWidthFocus: item.token.lineWidthFocus,
                   boxShadow: item.token.boxShadow,
                   boxShadowSecondary: item.token.boxShadowSecondary,
                   boxShadowTertiary: item.token.boxShadowTertiary,
@@ -78,8 +103,17 @@ export default (api: IApi) => {
 
       let lessString = '';
       Object.keys(aliasToken).forEach(key => {
-        const value = aliasToken[key];
-        lessString += `@${key}: ${value};\n`;
+        // fontWeight 相关的变量需要引用 CSS 变量，因为英文环境下的值不同
+        if (key === 'fontWeightWeak') {
+          lessString += `@${key}: var(--ob-font-weight-sm);\n`;
+        } else if (key === 'fontWeight') {
+          lessString += `@${key}: var(--ob-font-weight-md);\n`;
+        } else if (key === 'fontWeightStrong') {
+          lessString += `@${key}: var(--ob-font-weight-lg);\n`;
+        } else {
+          const value = unit(key, aliasToken[key]);
+          lessString += `@${key}: ${value};\n`;
+        }
       });
 
       fs.writeFileSync(`packages/design/src/theme/style/${item.theme}.less`, lessString);

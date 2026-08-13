@@ -16,6 +16,7 @@ demo:
 <code src="./demo/basic.tsx" title="基本"></code>
 <code src="./demo/dropdown-button.tsx" title="Dropdown.Button 下拉菜单按钮"></code>
 <code src="./demo/dropdown-with-button.tsx" title="带下拉框的按钮"></code>
+<code src="./demo/selectable.tsx" title="菜单可选中" description="通过设置 `selectable` 属性设置菜单可选中。"></code>
 
 ## API
 

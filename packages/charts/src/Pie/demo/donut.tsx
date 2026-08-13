@@ -6,27 +6,27 @@ import { Col, Row } from '@oceanbase/design';
 export default () => {
   const data = [
     {
-      type: '分类一',
+      type: 'Category A',
       value: 32,
     },
     {
-      type: '分类二',
+      type: 'Category B',
       value: 25,
     },
     {
-      type: '分类三',
+      type: 'Category C',
       value: 18,
     },
     {
-      type: '分类四',
+      type: 'Category D',
       value: 15,
     },
     {
-      type: '分类五',
+      type: 'Category E',
       value: 20,
     },
     {
-      type: '其他',
+      type: 'Other',
       value: 5,
     },
   ];

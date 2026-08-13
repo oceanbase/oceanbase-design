@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Form, Input } from '@oceanbase/design';
 import { Password } from '@oceanbase/ui';
 
 export default () => {
   const [form] = Form.useForm();
   const { validateFields } = form;
-  const [passed, setPassed] = useState(false);
   const formItemLayout = {
     labelCol: {
       span: 4,
@@ -24,7 +23,7 @@ export default () => {
   const onSubmit = () => {
     validateFields().then(values => {
       const { username, password } = values;
-      alert(`表单校验通过 username：${username}, password：${password}`);
+      alert(`Form validation passed. username: ${username}, password: ${password}`);
     });
   };
 
@@ -32,35 +31,21 @@ export default () => {
     <Form form={form} {...formItemLayout}>
       <Form.Item
         name="username"
-        label="用户名"
-        rules={[{ required: true, message: '请输入用户名' }]}
+        label="Username"
+        rules={[{ required: true, message: 'Please enter username' }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
         name="password"
-        label="密码"
-        rules={[
-          {
-            required: true,
-            message: '请输入密码',
-          },
-          {
-            validator: (rule, value, callback) => {
-              if (value && !passed) {
-                callback('密码设置不符合要求');
-              } else {
-                callback();
-              }
-            },
-          },
-        ]}
+        label="Password"
+        rules={[{ required: true, message: 'Please enter password' }]}
       >
-        <Password onValidate={setPassed} />
+        <Password />
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" onClick={onSubmit}>
-          提交
+          Submit
         </Button>
       </Form.Item>
     </Form>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TreeSearch } from '@oceanbase/ui';
 import type { DataNode } from '@oceanbase/design/es/tree';
-import './style.less';
+import './style.css';
 
 interface Node extends DataNode {
   extra: React.ReactNode;
@@ -29,7 +29,7 @@ function dig(path = '0', level = 3) {
 const treeData = dig();
 
 export default () => {
-  // 渲染title
+  // Render title
   const renderTitle = (nodeData: Node) => {
     if (nodeData.extra) {
       return (

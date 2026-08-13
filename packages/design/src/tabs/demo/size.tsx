@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 type SizeType = 'small' | 'middle' | 'large';
 
 const App: React.FC = () => {
-  const [size, setSize] = useState<SizeType>('small');
+  const [size, setSize] = useState<SizeType>('middle');
 
   const onChange = (e: RadioChangeEvent) => {
     setSize(e.target.value);

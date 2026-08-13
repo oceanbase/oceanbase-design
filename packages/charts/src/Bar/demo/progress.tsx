@@ -5,23 +5,23 @@ import { Col, Row } from '@oceanbase/design';
 export default () => {
   const data = [
     {
-      type: '短跑',
+      type: 'Sprint',
       value: 0.95,
     },
     {
-      type: '长跑',
+      type: 'Marathon',
       value: 0.72,
     },
     {
-      type: '足球',
+      type: 'Soccer',
       value: 0.64,
     },
     {
-      type: '篮球',
+      type: 'Basketball',
       value: 0.32,
     },
     {
-      type: '网球',
+      type: 'Tennis',
       value: 0.21,
     },
   ];
@@ -31,7 +31,7 @@ export default () => {
     yField: 'type',
     meta: {
       value: {
-        alias: '比赛进度',
+        alias: 'Match Progress',
       },
     },
   };

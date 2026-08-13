@@ -32,7 +32,7 @@ const Spin = ({
   const isGrayIndicator = isDefaultIndicator && gray;
 
   const prefixCls = getPrefixCls('spin', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
+  const [wrapCSSVar] = useStyle(prefixCls);
   const spinCls = classNames(
     {
       [`${prefixCls}-oceanbase`]: isDefaultIndicator,
@@ -41,7 +41,7 @@ const Spin = ({
     className
   );
 
-  return wrapSSR(
+  return wrapCSSVar(
     <AntSpin
       prefixCls={customizePrefixCls}
       className={spinCls}

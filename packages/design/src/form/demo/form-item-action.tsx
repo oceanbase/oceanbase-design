@@ -49,7 +49,7 @@ const App: React.FC = () => (
             size="small"
             style={{
               // same with label height to avoid overflow
-              height: 22,
+              height: 20,
             }}
           >
             <Space>

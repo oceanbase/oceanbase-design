@@ -1,5 +1,4 @@
 /**
- * title: 禁止拖拽
  * iframe: true
  */
 import { SideTip } from '@oceanbase/ui';

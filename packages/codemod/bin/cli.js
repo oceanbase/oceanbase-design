@@ -13,11 +13,16 @@ const { run: jscodeshift } = require('jscodeshift/src/Runner');
 const execa = require('execa');
 const isDirectory = require('is-directory');
 const commandExistsSync = require('command-exists').sync;
+const { readPackageUp } = require('read-pkg-up');
 
 const pkg = require('../package.json');
 const pkgUpgradeList = require('./upgrade-list');
 const { getDependencies } = require('../transforms/utils/marker');
 const { lessToToken } = require('../transforms/less-to-token');
+const { lessToCssvar } = require('../transforms/less-to-cssvar');
+const { sassToCssvar } = require('../transforms/sass-to-cssvar');
+const { tokenToObtoken } = require('../transforms/token-to-obtoken');
+const { obCssTokens } = require('../transforms/ob-css-tokens');
 
 // jscodeshift codemod scripts dir
 const transformersDir = path.join(__dirname, '../transforms');
@@ -25,7 +30,18 @@ const transformersDir = path.join(__dirname, '../transforms');
 // jscodeshift bin#--ignore-config
 const ignoreConfig = path.join(__dirname, './codemod.ignore');
 
-const transformers = [
+const defaultObTransformers = [
+  'antd-and-ob-charts-to-oceanbase-charts',
+  'antd-to-oceanbase-design',
+  'obui-to-oceanbase-design-and-ui',
+  'obutil-to-oceanbase-util',
+  'techui-and-pro-components-to-oceanbase-ui',
+  'style-to-token',
+  'less-to-cssvar',
+  'sass-to-cssvar',
+];
+
+const defaultAntdTransformers = [
   'antd-and-ob-charts-to-oceanbase-charts',
   'antd-to-oceanbase-design',
   'obui-to-oceanbase-design-and-ui',
@@ -34,6 +50,32 @@ const transformers = [
   'style-to-token',
   'less-to-token',
 ];
+
+// Transformers that must be explicitly specified via --transformer option
+const explicitTransformers = ['less-to-token', 'token-to-obtoken', 'ob-css-tokens'];
+
+// All available transformers
+const allTransformers = [
+  ...new Set([...defaultObTransformers, ...defaultAntdTransformers, ...explicitTransformers]),
+];
+
+function shouldSkipInstall(args = {}) {
+  return [args['skip-install'], args.skipInstall, args['no-install'], args.noInstall].some(
+    value => value === true || value === 'true'
+  );
+}
+
+function getTokenTarget(args = {}) {
+  const tokenTarget = args['token-target'] || args.tokenTarget || 'ob';
+  return tokenTarget === 'antd' ? 'antd' : 'ob';
+}
+
+function resolveTransformers(args = {}) {
+  if (args.transformer) {
+    return args.transformer.split(',').filter(transformer => allTransformers.includes(transformer));
+  }
+  return getTokenTarget(args) === 'antd' ? defaultAntdTransformers : defaultObTransformers;
+}
 
 const dependencyProperties = [
   'dependencies',
@@ -101,31 +143,100 @@ function getRunnerArgs(transformerPath, parser = 'babylon', options = {}) {
 }
 
 async function run(filePath, args = {}) {
-  const targetTransformers =
-    args.transformer?.split(',')?.filter(transformer => transformers.includes(transformer)) ||
-    transformers;
+  const tokenTarget = getTokenTarget(args);
+  const targetTransformers = resolveTransformers(args);
+
   for (const transformer of targetTransformers) {
-    await transform(transformer, 'babylon', filePath, args);
+    await transform(transformer, 'babylon', filePath, {
+      ...args,
+      tokenTarget,
+    });
   }
+  return targetTransformers;
 }
 
 async function transform(transformer, parser, filePath, options) {
   console.log(chalk.bgGreen.bold('Transform'), transformer);
   const transformerPath = path.join(transformersDir, `${transformer}.js`);
+  const tokenTarget = options.tokenTarget || getTokenTarget(options);
+  const defaultPrefix = tokenTarget === 'antd' ? 'ant' : 'ob';
 
   const args = getRunnerArgs(transformerPath, parser, {
     ...options,
+    tokenTarget,
   });
 
   try {
     if (transformer === 'less-to-token') {
       await lessToToken(filePath);
+    } else if (transformer === 'token-to-obtoken') {
+      await tokenToObtoken(filePath);
+    } else if (transformer === 'less-to-cssvar') {
+      // less-to-cssvar options:
+      // --prefix: CSS variable prefix (default: ob, or ant when --token-target=antd)
+      // --rename-to: Target format: 'css', 'scss', or false to keep .less (default: false)
+      // --add-module: Whether to add .module suffix when renaming (default: true)
+      //   - true (default): auto-detect based on import style (CSS Module vs global)
+      //   - false: skip detection, never add .module
+
+      // Check if user explicitly specified --add-module
+      const hasExplicitAddModule =
+        options['add-module'] !== undefined || options.addModule !== undefined;
+      const addModuleValue = options['add-module'] ?? options.addModule;
+      // Default is true (auto-detect), false means skip detection
+      let addModuleOption = addModuleValue !== false && addModuleValue !== 'false';
+
+      // Parse --rename-to option: 'css', 'scss', or false (default: keep .less)
+      let renameToOption = false;
+      const renameToValue = options['rename-to'] ?? options.renameTo;
+      if (renameToValue === false || renameToValue === 'false') {
+        renameToOption = false;
+        // When renameTo is false, disable addModule by default (only if not explicitly specified)
+        if (!hasExplicitAddModule && addModuleOption === true) {
+          addModuleOption = false;
+        }
+      } else if (renameToValue === 'scss' || renameToValue === true) {
+        renameToOption = renameToValue === 'scss' ? 'scss' : 'css';
+      } else if (typeof renameToValue === 'string') {
+        renameToOption = renameToValue.toLowerCase() === 'scss' ? 'scss' : 'css';
+      }
+      // Backward compatibility: support --rename-to-css=false
+      else if (options['rename-to-css'] === false || options.renameToCss === false) {
+        renameToOption = false;
+        // When renameTo is false, disable addModule by default (only if not explicitly specified)
+        if (!hasExplicitAddModule && addModuleOption === true) {
+          addModuleOption = false;
+        }
+      }
+
+      const lessToCssvarOptions = {
+        prefix: options.prefix || defaultPrefix,
+        renameTo: renameToOption,
+        addModule: addModuleOption,
+        _explicitAddModule: hasExplicitAddModule,
+        useSemanticOb: tokenTarget !== 'antd',
+      };
+      await lessToCssvar(filePath, lessToCssvarOptions);
+    } else if (transformer === 'sass-to-cssvar') {
+      // sass-to-cssvar options:
+      // --prefix: CSS variable prefix (default: ob, or ant when --token-target=antd)
+      const sassToCssvarOptions = {
+        prefix: options.prefix || defaultPrefix,
+        useSemanticOb: tokenTarget !== 'antd',
+      };
+      await sassToCssvar(filePath, sassToCssvarOptions);
+    } else if (transformer === 'ob-css-tokens') {
+      await obCssTokens(filePath, { dry: options.dry === true || options.dry === 'true' });
     } else {
       if (process.env.NODE_ENV === 'local') {
         console.log(`Running jscodeshift with: ${JSON.stringify(args)}`);
       }
       // js part
-      await jscodeshift(transformerPath, [filePath], args);
+      await jscodeshift(transformerPath, [filePath], {
+        ...args,
+        tokenTarget,
+        printOptions: require('../transforms/utils/config').printOptions,
+      });
     }
     console.log();
   } catch (err) {
@@ -138,18 +249,79 @@ async function transform(transformer, parser, filePath, options) {
   }
 }
 
+/**
+ * Detect which package manager to use
+ * Priority:
+ * 1. Check lockfile files (pnpm-lock.yaml, yarn.lock, package-lock.json)
+ * 2. Check package.json packageManager field
+ * 3. Check if commands exist (pnpm > yarn > tnpm > npm)
+ * @param {string} cwd - Current working directory
+ * @returns {Promise<string>} - Package manager command name
+ */
+async function detectPackageManager(cwd) {
+  // 1. Check for lockfiles
+  const lockfiles = {
+    'pnpm-lock.yaml': 'pnpm',
+    'yarn.lock': 'yarn',
+    'package-lock.json': 'npm',
+  };
+
+  for (const [lockfile, manager] of Object.entries(lockfiles)) {
+    const lockfilePath = path.join(cwd, lockfile);
+    if (fs.existsSync(lockfilePath)) {
+      if (commandExistsSync(manager)) {
+        return manager;
+      }
+    }
+  }
+
+  // 2. Check package.json for packageManager field
+  try {
+    const { readPackageUp } = await import('read-pkg-up');
+    const pkgResult = await readPackageUp({ cwd });
+    if (pkgResult?.packageJson?.packageManager) {
+      const packageManager = pkgResult.packageJson.packageManager;
+      // Format: "pnpm@8.6.0" or "yarn@3.0.0"
+      const manager = packageManager.split('@')[0];
+      if (commandExistsSync(manager)) {
+        return manager;
+      }
+    }
+  } catch (e) {
+    // Ignore errors
+  }
+
+  // 3. Check if commands exist in priority order
+  const managers = ['pnpm', 'yarn', 'tnpm', 'npm'];
+  for (const manager of managers) {
+    if (commandExistsSync(manager)) {
+      return manager;
+    }
+  }
+
+  // Fallback to npm
+  return 'npm';
+}
+
 async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
   const result = [];
   const cwd = path.join(process.cwd(), targetDir);
   const { readPackageUp } = await import('read-pkg-up');
-  const closetPkgJson = await readPackageUp({ cwd });
+  let closetPkgJson;
+  try {
+    closetPkgJson = await readPackageUp({ cwd });
+  } catch (err) {
+    // 处理无效的 package.json 文件（如版本格式错误）
+    console.log(chalk.yellow(`Warning: Failed to read package.json: ${err.message}`));
+    closetPkgJson = null;
+  }
 
   let pkgJsonPath;
   if (!closetPkgJson) {
     pkgJsonPath = "we didn't find your package.json";
     // unknown dependency property
-    result.push(['install', '@oceanbase/design', pkgUpgradeList['@oceanbase/design']]);
-    result.push(['install', '@oceanbase/ui', pkgUpgradeList['@oceanbase/ui']]);
+    result.push(['install', '@oceanbase/design', pkgUpgradeList['@oceanbase/design'].version]);
+    result.push(['install', '@oceanbase/ui', pkgUpgradeList['@oceanbase/ui'].version]);
     if (needOBCharts) {
       result.push(['install', '@oceanbase/charts', pkgUpgradeList['@oceanbase/charts'].version]);
     }
@@ -219,7 +391,7 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
     )
   );
   console.log(`> Update package.json file: ${pkgJsonPath} \n`);
-  const npmCommand = commandExistsSync('tnpm') ? 'tnpm' : 'npm';
+  const npmCommand = await detectPackageManager(cwd);
 
   // install dependencies
   console.log(`New package installing...\n`);
@@ -241,23 +413,51 @@ async function upgradeDetect(targetDir, needOBCharts, needObUtil) {
   console.log(`\nNew package installed!\n`);
 
   // uninstall dependencies
-  console.log(`Deprecated package uninstalling...\n`);
-  const uninstallDependencies = ['@alipay/ob-ui', '@alipay/ob-util', '@alipay/ob-charts'];
-  console.log(uninstallDependencies.map(n => `* ${n}`).join('\n'));
-  console.log('\n');
-  await execa(npmCommand, ['uninstall', ...uninstallDependencies, '--save'], {
-    stdio: 'inherit',
-  });
-  console.log(`\nDeprecated package uninstalled!\n`);
+  const deprecatedPackages = ['@alipay/ob-ui', '@alipay/ob-util', '@alipay/ob-charts'];
+  const uninstallDependencies = [];
+
+  if (closetPkgJson) {
+    const { packageJson } = closetPkgJson;
+    deprecatedPackages.forEach(depName => {
+      dependencyProperties.forEach(property => {
+        const versionRange = _.get(packageJson, `${property}.${depName}`);
+        if (versionRange && !uninstallDependencies.includes(depName)) {
+          uninstallDependencies.push(depName);
+        }
+      });
+    });
+  }
+  // 如果没有找到 package.json，跳过卸载操作（无法确定包是否存在）
+
+  if (uninstallDependencies.length > 0) {
+    console.log(`Deprecated package uninstalling...\n`);
+    console.log(uninstallDependencies.map(n => `* ${n}`).join('\n'));
+    console.log('\n');
+    await execa(npmCommand, ['uninstall', ...uninstallDependencies, '--save'], {
+      stdio: 'inherit',
+    });
+    console.log(`\nDeprecated package uninstalled!\n`);
+  }
 }
 
 /**
  * options
  * --force               // force skip git checking (dangerously)
  * --cpus=1              // specify cpus cores to use
- * --disablePrettier     // disable prettier
+ * --disablePrettier     // disable prettier (default: true, use --disablePrettier=false to enable)
  * --transformer=t1,t2   // specify target transformer
  * --ignore-config       // ignore config file
+ *
+ * --token-target=ob|antd  // default ob; antd restores legacy token migration
+ * --skip-install          // skip dependency install/upgrade after codemod
+ * --no-install            // alias of --skip-install
+ * --rename-to           // target format: false (default, keep .less), 'css', or 'scss'
+ * --add-module          // add .module suffix when renaming (default: true)
+ *                       // true: auto-detect based on import style (CSS Module vs global)
+ *                       // false: skip detection, never add .module
+ *
+ * sass-to-cssvar specific options:
+ * --prefix=ob             // CSS variable prefix (default ob; ant when --token-target=antd)
  */
 
 async function bootstrap() {
@@ -289,9 +489,12 @@ async function bootstrap() {
     process.exit(1);
   }
 
-  await run(dir, args);
+  const executedTransformers = await run(dir, args);
 
-  if (!args.disablePrettier) {
+  // Default: disablePrettier is true (don't run prettier by default)
+  // User can enable prettier by passing --disablePrettier=false
+  const shouldRunPrettier = args.disablePrettier === false || args.disablePrettier === 'false';
+  if (shouldRunPrettier) {
     console.log('----------- Prettier Format -----------\n');
     console.log('[Prettier] format files running...');
     try {
@@ -305,19 +508,30 @@ async function bootstrap() {
     }
   }
 
-  try {
-    console.log('----------- Dependencies Alert -----------\n');
-    const depsList = await getDependencies();
-    await upgradeDetect(
-      dir,
-      depsList.includes('@oceanbase/charts'),
-      depsList.includes('@oceanbase/util')
-    );
-  } catch (err) {
-    console.log('skip summary due to', err);
-  } finally {
-    console.log(`\n----------- Thanks for using @oceanbase/codemod ${pkg.version} -----------`);
+  // Skip dependency detection if only explicit transformers are executed
+  // Explicit transformers (less-to-cssvar, sass-to-cssvar) only do code transformation
+  // and don't require dependency installation
+  const onlyExplicitTransformers =
+    executedTransformers.length > 0 &&
+    executedTransformers.every(t => explicitTransformers.includes(t));
+
+  if (!onlyExplicitTransformers && !shouldSkipInstall(args)) {
+    try {
+      console.log('----------- Dependencies Alert -----------\n');
+      const depsList = await getDependencies();
+      await upgradeDetect(
+        dir,
+        depsList.includes('@oceanbase/charts'),
+        depsList.includes('@oceanbase/util')
+      );
+    } catch (err) {
+      console.log('skip summary due to', err);
+    }
+  } else if (shouldSkipInstall(args)) {
+    console.log(chalk.gray('\nSkipping dependency install (--skip-install)\n'));
   }
+
+  console.log(`\n----------- Thanks for using @oceanbase/codemod ${pkg.version} -----------`);
 }
 
 module.exports = {

@@ -1,15 +1,13 @@
+import { ConfigProvider } from '@oceanbase/design';
 import classNames from 'classnames';
 import { diffLines } from 'diff';
 import hljs from 'highlight.js/lib/core';
 import warning from 'rc-util/lib/warning';
-import React, { useEffect, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import type { HighlightProps } from '..';
 import { languageMap } from '..';
-import { getPrefix } from '../../_util';
 import { useKeyDownCopyEvent } from '../useKeyDownCopyEvent';
 import DiffCells from './DiffCells';
-// @ts-ignore
-import '../index.less';
 
 const MAX_MERGE_TIMES = 10000;
 
@@ -78,7 +76,8 @@ const DiffView: React.FC<DiffViewProps> = ({
   height,
   startRowIndex: baseStartRowIndex = 1,
 }: DiffViewProps) => {
-  const prefixCls = getPrefix('highlight');
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = customizePrefixCls || getPrefixCls('highlight');
   const diffPrefixCls = `${prefixCls}-diff`;
 
   const [report, setReport] = React.useState<{

@@ -1,10 +1,10 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { Card } from '@oceanbase/design';
-import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import type { OBToken } from '../../_util/genComponentStyleHook';
+import { genProCardStyle } from '../../ProCard/style';
 
-export const genProTableStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObject => {
+export const genProTableStyle = (token: OBToken): CSSObject => {
   const { antCls, componentCls, proComponentsCls } = token;
   const proCardComponentCls = `${proComponentsCls}-card`;
   return {
@@ -15,11 +15,27 @@ export const genProTableStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObj
           flexDirection: 'row-reverse',
         },
       },
+      // Remove nested ProCard box-shadow
+      [`& > ${proCardComponentCls}, ${proCardComponentCls}${componentCls}-search-light-filter`]: {
+        boxShadow: 'none !important',
+      },
+
+      [`${proCardComponentCls}:not(${proCardComponentCls}-no-divider)`]: {
+        [`${proCardComponentCls}-body`]: {
+          [`${componentCls}-list-toolbar-container`]: {
+            borderBottom: `${token.lineWidth}px solid ${token.colorBorderSecondary}`,
+          },
+        },
+      },
+
       [`${proCardComponentCls}${proCardComponentCls}-no-padding`]: {
         [`${proCardComponentCls}-body`]: {
           paddingInline: 0,
           [`${componentCls}-list-toolbar-container`]: {
             paddingInline: token.paddingLG,
+            [`${componentCls}-list-toolbar-title`]: {
+              fontWeight: token.fontWeightStrong,
+            },
           },
         },
         ...Card.genTableStyle(token.paddingLG, {
@@ -28,6 +44,7 @@ export const genProTableStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObj
         }),
       },
     },
+    ...genProCardStyle(token, proCardComponentCls),
   };
 };
 

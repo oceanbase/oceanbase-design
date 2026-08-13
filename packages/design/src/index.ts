@@ -1,5 +1,3 @@
-import './global.css';
-
 export * from 'antd';
 export { version } from '../package.json';
 
@@ -24,8 +22,12 @@ export type { TypographyProps } from './typography';
 export { default as Card } from './card';
 export type { CardProps } from './card';
 
+export { default as App } from './app';
+export type { AppProps } from './app';
+
 export { default as ConfigProvider } from './config-provider';
 export type { ConfigProviderProps, ConfigConsumerProps, ThemeConfig } from './config-provider';
+export { compactTheme, defaultTheme } from './theme/localeTypography';
 
 export { default as Descriptions } from './descriptions';
 export type {
@@ -46,13 +48,19 @@ export type { ModalProps, ModalFuncProps, ModalProgressProps } from './modal';
 export { default as Drawer } from './drawer';
 export type { DrawerProps } from './drawer';
 
-export { message, notification, token } from './static-function';
+export { message, notification, token, obToken } from './static-function';
+export type {
+  ErrorDetailItem,
+  NotificationType,
+  ObNotificationArgs,
+  ObNotificationInstance,
+} from './notification/interface';
 
 export { default as List } from './list';
 export type { ListProps } from './list';
 
 export { default as Table } from './table';
-export type { TableProps } from './table';
+export type { TableProps, TableColumnsType } from './table';
 
 export { default as Tabs } from './tabs';
 export type { TabsProps } from './tabs';
@@ -108,6 +116,19 @@ export type { BadgeProps } from './badge';
 export { default as Lottie } from './lottie';
 export type { LottieProps, LottieRef } from './lottie';
 
+export { default as Filter, FilterProvider, useFilterContext } from './filter';
+export type {
+  BaseFilterProps,
+  FilterSelectProps,
+  FilterCheckboxProps,
+  FilterCascaderProps,
+  FilterSwitchProps,
+  FilterRangeProps,
+  FilterInputProps,
+  FilterWrapProps,
+  ResponsiveFilterGroupProps,
+} from './filter';
+
 export { default as theme } from './theme';
 
 import theme from './theme';
@@ -116,4 +137,3 @@ const { useToken } = theme;
 export { useToken };
 
 export type { PresetStatusColorType } from 'antd/es/_util/colors';
-export { genLargeStyle } from './_util/genStyle';

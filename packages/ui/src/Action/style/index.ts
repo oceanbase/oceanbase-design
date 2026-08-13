@@ -1,9 +1,8 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import type { OBToken } from '../../_util/genComponentStyleHook';
 
-export const genActionStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObject => {
+export const genActionStyle = (token: OBToken): CSSObject => {
   const { componentCls, antCls } = token;
   const paddingVertical = (token.controlHeight - token.fontSize * token.lineHeight) / 2;
   const paddingHorizontal = token.paddingSM;
