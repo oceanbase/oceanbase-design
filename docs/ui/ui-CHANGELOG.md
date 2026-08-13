@@ -8,6 +8,13 @@ group: 业务组件
 
 ---
 
+## 0.4.26
+
+`2026-08-13`
+
+- 🌐 Login 和 BasicLayout 的语种切换下拉框新增日语 (ja-JP) 支持。[#1534](https://github.com/oceanbase/oceanbase-design/pull/1534)
+- 💄 兼容低版本浏览器（Chrome 83）：将 PageLoading、DateRanger、ProTable、SideTip、FullscreenBox 和 Highlight 组件中的逻辑属性和内联样式转换为物理属性，修复样式显示异常。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+
 ## 0.4.25
 
 `2026-06-14`

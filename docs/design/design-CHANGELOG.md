@@ -8,6 +8,17 @@ group: 基础组件
 
 ---
 
+## 0.4.22
+
+`2026-08-13`
+
+- Flex
+  - 🆕 新增 Flex 组件，完整继承 antd Flex 的能力和 API，可无缝切换。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+  - 💄 低版本浏览器兼容：在不支持 `gap` 弹性布局的浏览器（如 Chrome 83）中，自动降级为 `margin` 方案。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- 💄 优化 Space 在不支持 `gap` 的浏览器中的间距降级方案，自定义 `size` 时同样生效。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- 🐞 修复 Table 默认分页的合计文案在低版本浏览器（Chrome 85 以下）中因不支持 `replaceAll` 语法而渲染异常的问题。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+- 📖 ConfigProvider 新增低版本浏览器（Chrome 83）样式兼容示例和接入说明。[#1535](https://github.com/oceanbase/oceanbase-design/pull/1535)
+
 ## 0.4.21
 
 `2026-06-14`
