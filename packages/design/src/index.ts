@@ -10,6 +10,9 @@ export type { ButtonProps } from './button';
 export { default as Space } from './space';
 export type { SpaceProps, SpaceSize } from './space';
 
+export { default as Flex } from './flex';
+export type { FlexProps } from './flex';
+
 export { Col, Row } from './grid';
 export type { ColProps, RowProps, ColSize } from './grid';
 

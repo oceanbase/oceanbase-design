@@ -43,10 +43,7 @@ export const getCurrentLevelOptions = (
 /**
  * 检查路径是否在选中值中
  */
-export const hasSelectedInPath = (
-  currentValue: string[][],
-  currentPath: string[]
-): boolean => {
+export const hasSelectedInPath = (currentValue: string[][], currentPath: string[]): boolean => {
   return currentValue.some(selectedPath => {
     if (selectedPath.length < currentPath.length) return false;
     return currentPath.every((val, idx) => selectedPath[idx] === val);

@@ -114,12 +114,7 @@ for (let i = 0; i < 100; i++) {
 }
 
 const App: React.FC = () => (
-  <Table
-    bordered={true}
-    columns={columns}
-    dataSource={data}
-    scroll={{ x: 'calc(700px + 50%)' }}
-  />
+  <Table bordered={true} columns={columns} dataSource={data} scroll={{ x: 'calc(700px + 50%)' }} />
 );
 
 export default App;

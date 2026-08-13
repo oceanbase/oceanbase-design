@@ -116,6 +116,7 @@ const App = () => {
 | docsPath | 帮助文档首页对应的 path 路径，为空则不展示文档菜单 | string | - | - |
 | pdfPath | 帮助文档下载对应的 path 路径，默认优先使用路径中的文件名 | string | - | - |
 | showLocale | 是否展示国际化切换入口 | boolean | false | - |
+| locales | 自定义语言列表 | Locale[] | - | - |
 | username | 用户名 | string | - | - |
 | userMenu | 用户下拉菜单 | ReactNode | - | - |
 | appData | 产品信息 | [AppData](basic-layout#appdata) | - | - |

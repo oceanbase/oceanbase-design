@@ -18,10 +18,7 @@ export const countLeafNodes = (options: CascaderOption[]): number => {
 /**
  * 收集所有叶子节点的完整路径
  */
-export const collectLeafPaths = (
-  options: CascaderOption[],
-  basePath: string[]
-): string[][] => {
+export const collectLeafPaths = (options: CascaderOption[], basePath: string[]): string[][] => {
   const paths: string[][] = [];
   options.forEach(opt => {
     const optPath = [...basePath, opt.value];
@@ -37,10 +34,7 @@ export const collectLeafPaths = (
 /**
  * 统计选中的子节点数量
  */
-export const countSelectedChildren = (
-  currentValue: string[][],
-  currentPath: string[]
-): number => {
+export const countSelectedChildren = (currentValue: string[][], currentPath: string[]): number => {
   return currentValue.filter(selectedPath => {
     if (selectedPath.length <= currentPath.length) return false;
     return currentPath.every((val, idx) => selectedPath[idx] === val);

@@ -20,4 +20,10 @@ export const LOCALE_LIST = [
     shortLabel: '繁体',
     minLabel: '繁',
   },
+  {
+    value: 'ja-JP',
+    label: '日本語',
+    shortLabel: '日本語',
+    minLabel: '日',
+  },
 ];
