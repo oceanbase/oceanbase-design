@@ -1,19 +1,15 @@
 import { CloseOutlined } from '@oceanbase/icons';
-import { Badge, Tooltip } from '@oceanbase/design';
+import { Badge, ConfigProvider, Tooltip } from '@oceanbase/design';
 import type { BadgeProps } from '@oceanbase/design/es/badge/index';
 import type { TooltipPropsWithTitle } from '@oceanbase/design/es/tooltip/index';
 import classnames from 'classnames';
-import React, { createRef, useEffect, useState } from 'react';
+import React, { createRef, useCallback, useContext, useEffect, useState } from 'react';
 import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { getPrefix } from '../_util';
+import useStyle from './style';
 import Dragger from './Dragger';
 import IconLoading from './IconLoading';
 import zhCN from './locale/zh-CN';
-// @ts-ignore
-import './index.less';
-
-const STORE_SIDETIP_HIDE = 'ob-sidetip-hide';
 
 export type SideTipType = 'primary' | 'default';
 export type SideTipSize = 'small' | 'default';
@@ -173,12 +169,11 @@ export interface SideTipState {
   hovered?: boolean;
 }
 
-const getLocalStorageKey = (id?: string) => {
-  return [`${STORE_SIDETIP_HIDE}`, id].join('-');
-};
-
 const SideTip: React.FC<SideTipProps> = props => {
   const buttonRef = createRef<HTMLDivElement>();
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('sidetip');
+  const { wrapSSR } = useStyle(prefixCls);
 
   const {
     defaultHide,
@@ -205,24 +200,35 @@ const SideTip: React.FC<SideTipProps> = props => {
     disabled = false,
     draggable = true,
     getPopupContainer,
+    locale,
   } = props;
 
-  const [hide, setHide] = useState(
-    hideable
-      ? defaultHide === undefined
-        ? window.localStorage.getItem(getLocalStorageKey(id)) === 'true'
-        : !!defaultHide
-      : false
+  const getLocalStorageKey = useCallback(
+    (localId?: string) => {
+      return [`${prefixCls}-hide`, localId].join('-');
+    },
+    [prefixCls]
   );
+
+  // Avoid SSR issue: same initial value on server and client, then sync from localStorage in useEffect
+  const [hide, setHide] = useState(hideable ? !!defaultHide : false);
   const [hovered, setHovered] = useState<boolean>(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined' || !hideable) return;
+    if (defaultHide === undefined) {
+      setHide(window.localStorage.getItem(getLocalStorageKey(id)) === 'true');
+    }
+  }, [hideable, defaultHide, id, getLocalStorageKey]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
     if (hide) {
       window.localStorage.setItem(getLocalStorageKey(id), 'true');
     } else {
       window.localStorage.removeItem(getLocalStorageKey(id));
     }
-  }, [hide]);
+  }, [hide, id, getLocalStorageKey]);
 
   const hideSideTip = () => {
     setHide(true);
@@ -265,12 +271,22 @@ const SideTip: React.FC<SideTipProps> = props => {
     return '';
   };
 
-  const prefix = getPrefix('sidetip');
-
   const typeCls = getTypeCls(type);
   const sizeCls = getSizeCls(size);
 
-  const buttonPrefix = `${prefix}-button`;
+  const toggleAriaLabel =
+    typeof tooltip?.title === 'string' && tooltip.title.trim()
+      ? tooltip.title
+      : locale?.toggleLabel;
+
+  const onInnerKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (disabled) return;
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    onButtonClick(e);
+  };
+
+  const buttonPrefix = `${prefixCls}-button`;
 
   // icon
   const iconClassName = classnames(
@@ -281,15 +297,15 @@ const SideTip: React.FC<SideTipProps> = props => {
     sizeCls && `${buttonPrefix}-icon-${sizeCls}`
   );
   // 接受三种形式的icon
-  const iconDom = (
+  const iconDom = icon ? (
     <span className={iconClassName}>
       {React.isValidElement(icon) ? (
         icon
-      ) : (
-        <img src={icon as string} alt="icon" width="100%" height="100%" />
-      )}
+      ) : typeof icon === 'string' && icon ? (
+        <img src={icon} alt="" width="100%" height="100%" />
+      ) : null}
     </span>
-  );
+  ) : null;
 
   // close 按钮
   const closeClassName = classnames(`${buttonPrefix}-close`, {
@@ -311,11 +327,24 @@ const SideTip: React.FC<SideTipProps> = props => {
 
   // 内部 Icon
   const InnerButton = (
-    <div className={buttonClassName} ref={buttonRef} style={buttonStyle}>
+    <div
+      className={buttonClassName}
+      ref={buttonRef}
+      style={buttonStyle}
+      role="button"
+      tabIndex={disabled ? -1 : 0}
+      aria-disabled={disabled || undefined}
+      aria-expanded={!!(open || visible)}
+      aria-haspopup="dialog"
+      aria-label={toggleAriaLabel}
+      onKeyDown={onInnerKeyDown}
+    >
       {loading && <IconLoading className={loadingClassName} />}
       <>
         {iconDom}
-        <CloseOutlined className={closeClassName} />
+        <span aria-hidden>
+          <CloseOutlined className={closeClassName} />
+        </span>
       </>
     </div>
   );
@@ -329,18 +358,28 @@ const SideTip: React.FC<SideTipProps> = props => {
     InnerButton
   );
 
-  const hideIconClassName = classnames(`${prefix}-hide`, {
-    [`${prefix}-hide-hovered`]: hovered,
+  const hideIconClassName = classnames(`${prefixCls}-hide`, {
+    [`${prefixCls}-hide-hovered`]: hovered,
   });
 
   // 隐藏按钮
   const hideIcon = (
-    <div id="ui-mini-hide" onClick={hideSideTip} className={hideIconClassName}>
-      <div className={`${prefix}-hide-icon`} />
-    </div>
+    <button
+      type="button"
+      id="ui-mini-hide"
+      onClick={hideSideTip}
+      className={hideIconClassName}
+      aria-label={locale?.hideFloatingButton}
+    >
+      <span className={`${prefixCls}-hide-icon`} aria-hidden />
+    </button>
   );
 
-  return (
+  const containerClassName = classnames(className, {
+    [`${prefixCls}-container-disabled`]: disabled,
+  });
+
+  return wrapSSR(
     <Dragger
       id={id}
       open={open || visible}
@@ -351,12 +390,12 @@ const SideTip: React.FC<SideTipProps> = props => {
       onMouseLeave={handleMouseLeave}
       style={style}
       position={position}
-      prefix={prefix}
+      prefix={prefixCls}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
       onDrag={onDrag}
       getPopupContainer={getPopupContainer}
-      className={className}
+      className={containerClassName}
       draggable={draggable}
     >
       {tooltip && tooltip.title ? (

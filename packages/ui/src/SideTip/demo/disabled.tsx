@@ -1,5 +1,4 @@
 /**
- * title: 不可用
  * iframe: true
  */
 import React from 'react';

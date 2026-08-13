@@ -7,10 +7,10 @@ export default () => {
       <div>
         <ContentWithIcon
           iconType="info"
-          content="info 提示"
+          content="Info tip"
           tooltip={{
             title:
-              '登记的服务人天中有服务包归属的百分比，计算公式为 (有服务包归属的服务人天总和)/(已投入人天)',
+              'Percentage of registered service person-days attributed to a service package, calculated as (total person-days with a service package) / (total person-days invested)',
             overlayStyle: { maxWidth: '330px' },
           }}
           color="default"
@@ -20,10 +20,10 @@ export default () => {
       <div>
         <ContentWithIcon
           iconType="info"
-          content="自定义info 图标颜色"
+          content="Custom info icon color"
           tooltip={{
             title:
-              '登记的服务人天中有服务包归属的百分比，计算公式为 (有服务包归属的服务人天总和)/(已投入人天)',
+              'Percentage of registered service person-days attributed to a service package, calculated as (total person-days with a service package) / (total person-days invested)',
             overlayStyle: { maxWidth: '330px' },
           }}
           color="default"

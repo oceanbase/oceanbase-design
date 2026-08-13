@@ -22,10 +22,10 @@ const Paragraph = React.forwardRef<HTMLElement, ParagraphProps>(
   ({ editable, prefixCls: customizePrefixCls, className, children, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const typographyCls = useClassName(prefixCls, className, editable);
 
-    return wrapSSR(
+    return wrapCSSVar(
       <AntParagraph
         ref={ref}
         editable={editable}

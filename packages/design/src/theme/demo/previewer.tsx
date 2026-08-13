@@ -5,7 +5,7 @@
 import React from 'react';
 import { ConfigProvider } from '@oceanbase/design';
 import { Previewer } from 'antd-token-previewer';
-import './previewer.less';
+import './previewer.css';
 
 export default () => {
   return (

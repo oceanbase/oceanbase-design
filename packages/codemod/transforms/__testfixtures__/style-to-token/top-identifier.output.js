@@ -1,11 +1,12 @@
-import { token } from '@oceanbase/design';
-const color = token.colorBgLayout;
-const border = `1px solid ${token.colorBgLayout}`;
+import { obToken } from '@oceanbase/design';
+const color = obToken.colorBgPrimary;
+const border = `1px solid ${obToken.colorBgPrimary}`;
 
 const colorMap = {
-  info: token.colorInfo,
-  success: token.colorSuccess,
-  warning: token.colorWarning,
-  error: token.colorError,
-  border: `1px solid ${token.colorBorder}`,
+  info: obToken.colorTextLink,
+  success: obToken.colorTextSuccess,
+  warning: obToken.colorTextWarning,
+  error: obToken.colorTextError,
+  border: `1px solid ${obToken.colorBorderDefault}`,
+  fontSize: obToken.fontSize325,
 };

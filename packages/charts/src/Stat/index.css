@@ -1,0 +1,43 @@
+.ob-stat {
+  position: relative;
+  border-radius: 3px;
+}
+.ob-stat .ob-stat-content {
+  width: 100%;
+}
+.ob-stat .ob-stat-chart {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.ob-stat-horizontal .ob-stat-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ob-stat-no-chart {
+  display: flex;
+  align-items: center;
+}
+
+.ob-stat-center .ob-stat-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ob-stat-horizontal.ob-stat-center .ob-stat-content .ob-stat-title {
+  padding-right: 0.75ch;
+}
+
+.ob-stat-vertical.ob-stat-center .ob-stat-content {
+  display: block;
+  text-align: center;
+}
+
+.ob-stat-background {
+  color: #fff;
+}

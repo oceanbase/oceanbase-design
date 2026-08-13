@@ -8,5 +8,7 @@ config/wrapper.js
 .dumi/tmp-test
 .dumi/tmp-production
 demo/
+**/index.figma.tsx
 __test__/
 antd-alias-webpack-plugin.js
+babel-plugin-add-use-client.js

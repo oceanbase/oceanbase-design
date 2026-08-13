@@ -1,30 +1,29 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import type { FullToken, GenerateStyle } from '../../theme/interface';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type BadgeToken = FullToken<'Badge'>;
 
 export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSSObject => {
   const { componentCls } = token;
-  // dot size is larger than antd
-  const dotSize = token.fontSizeLG / 2;
   return {
     [`${componentCls}`]: {
-      // inherit color from parent instead of fixed colorText
+      // make status text inherit parent style
       color: 'inherit',
+      fontSize: 'inherit',
     },
     [`${componentCls}${componentCls}-status`]: {
       // dot style
       [`${componentCls}-status-dot`]: {
-        width: dotSize,
-        height: dotSize,
-        [`&${componentCls}-status-default`]: {
-          backgroundColor: token.colorFill,
-        },
+        margin: 1,
+        [`&${componentCls}-status-default`]: {},
+      },
+      [`${componentCls}-status-processing::after`]: {
+        // remove animation for processing status dot
+        display: 'none',
       },
       // icon style
       [`${componentCls}-status-icon`]: {
-        fontSize: token.fontSizeSM,
         // remove dot style
         backgroundColor: 'transparent',
         ['&::after']: {
@@ -49,16 +48,14 @@ export const genBadgeStyle: GenerateStyle<BadgeToken> = (token: BadgeToken): CSS
 
       [`${componentCls}-status-text`]: {
         marginInlineStart: token.marginXS,
-        // inherit color from parent instead of fixed colorText
+        // inherit style from parent
         color: 'inherit',
+        fontSize: 'inherit',
       },
     },
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Badge', token => {
-    return [genBadgeStyle(token as BadgeToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Badge', token => {
+  return [genBadgeStyle(token as BadgeToken)];
+});

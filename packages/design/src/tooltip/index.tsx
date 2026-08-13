@@ -57,10 +57,10 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>(
 
     const { prefixCls: customizePrefixCls } = restProps;
     const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
-    const { wrapSSR, hashId } = useStyle(prefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
 
     const tooltipCls = classNames(className);
-    const mouseTooltipCls = classNames(prefixCls, className, hashId);
+    const mouseTooltipCls = classNames(prefixCls, className);
     const [innerOpen, setInnerOpen] = useState(open ?? visible ?? defaultOpen ?? defaultVisible);
 
     // 同步 ant-design noTitle 逻辑
@@ -100,7 +100,7 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>(
 
     const typeList = useTooltipTypeList();
     const typeItem = typeList.find(item => item.type === type);
-    return wrapSSR(
+    return wrapCSSVar(
       mouseFollow ? (
         <MouseTooltip
           title={title}

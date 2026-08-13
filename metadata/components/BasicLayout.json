@@ -1,0 +1,14 @@
+{
+  "name": "BasicLayout",
+  "package": "@oceanbase/ui",
+  "diffLevel": "D",
+  "extendsAntd": null,
+  "obOnly": true,
+  "delegateAntd": false,
+  "addedProps": ["logoUrl", "iconUrl", "banner", "menus", "topHeader", "sideHeader"],
+  "constraints": [],
+  "keywords": ["layout", "sidebar", "menu", "app-shell"],
+  "importFrom": "@oceanbase/ui",
+  "propsSource": "packages/ui/src/BasicLayout/index.tsx",
+  "docSource": "packages/ui/src/BasicLayout/index.md"
+}

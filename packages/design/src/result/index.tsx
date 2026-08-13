@@ -13,39 +13,48 @@ import Processing from './Processing';
 import Image403 from './403';
 import Image404 from './404';
 import Image500 from './500';
+import ResourceNotFound from './ResourceNotFound';
+import NetworkError from './NetworkError';
+import VersionUpdate from './VersionUpdate';
+import Normal from './Normal';
 import useStyle from './style';
 
 export * from 'antd/es/result';
 
-export type ResultStatusType = AntResultStatusType | 'processing';
+export type ResultStatusType = AntResultStatusType | 'processing' | 'normal';
 
 export interface ResultProps extends Omit<AntResultProps, 'status'> {
   status?: ResultStatusType;
 }
 
-export interface ResultType extends React.FC<ResultProps> {
+export type ResultType = React.FC<ResultProps> & {
   PRESENTED_IMAGE_403: typeof Image403;
   PRESENTED_IMAGE_404: typeof Image404;
   PRESENTED_IMAGE_500: typeof Image500;
-}
+  PRESENTED_IMAGE_NOT_FOUND: typeof ResourceNotFound;
+  PRESENTED_IMAGE_NETWORK_ERROR: typeof NetworkError;
+  PRESENTED_IMAGE_VERSION_UPDATE: typeof VersionUpdate;
+  PRESENTED_IMAGE_NORMAL: typeof Normal;
+};
 
-const Result: ResultType = ({ status, prefixCls: customizePrefixCls, ...restProps }) => {
+const Result: ResultType = ({ prefixCls: customizePrefixCls, className, status, ...restProps }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('result', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
-  const resultCls = classNames(prefixCls);
+  const [wrapCSSVar] = useStyle(prefixCls);
+  const resultCls = classNames(className);
 
   const statusMap = {
     success: <Success />,
     error: <Error />,
     warning: <Warning />,
     processing: <Processing />,
+    normal: <Normal />,
     403: <Image403 />,
     404: <Image404 />,
     500: <Image500 />,
   };
 
-  return wrapSSR(
+  return wrapCSSVar(
     <AntResult
       icon={statusMap[status]}
       prefixCls={customizePrefixCls}
@@ -58,6 +67,10 @@ const Result: ResultType = ({ status, prefixCls: customizePrefixCls, ...restProp
 Result.PRESENTED_IMAGE_403 = Image403;
 Result.PRESENTED_IMAGE_404 = Image404;
 Result.PRESENTED_IMAGE_500 = Image500;
+Result.PRESENTED_IMAGE_NOT_FOUND = ResourceNotFound;
+Result.PRESENTED_IMAGE_NETWORK_ERROR = NetworkError;
+Result.PRESENTED_IMAGE_VERSION_UPDATE = VersionUpdate;
+Result.PRESENTED_IMAGE_NORMAL = Normal;
 
 if (process.env.NODE_ENV !== 'production') {
   Result.displayName = AntResult.displayName;

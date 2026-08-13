@@ -21,13 +21,13 @@ export default () => {
       >
         <Result
           status="success"
-          title="任务执行成功"
-          subTitle="这是一段关于任务执行成功的描述"
+          title="Successfully Purchased Cloud Server ECS!"
+          subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
           extra={[
             <Button type="primary" key="console">
-              主操作
+              Go Console
             </Button>,
-            <Button key="buy">次操作</Button>,
+            <Button key="buy">Buy Again</Button>,
           ]}
         />
       </Card>

@@ -1,56 +1,61 @@
-import { mergeToken, type FullToken } from 'antd/es/theme/internal';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
-import { genPresetColor } from 'antd/lib/theme/internal';
-import { getWeakenBorderColor } from '../../_util/getWeakenBorderColor';
-import { unit, type CSSObject } from '@ant-design/cssinjs';
+import type { CSSObject } from '@ant-design/cssinjs';
+import { unit } from '@ant-design/cssinjs';
+import { mergeToken } from 'antd/es/theme/internal';
+import type { FullToken } from '../../theme/interface';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
-export type TagToken = FullToken<'Tag'> & {
-  tagPaddingHorizontal: number;
-};
+export type TagToken = FullToken<'Tag'>;
 
-const getTagBorderColor = (color: string) => {
-  return getWeakenBorderColor(color);
-};
+type TagPresetStatus = 'success' | 'processing' | 'error' | 'warning' | 'critical';
 
-const genTagPresetStatusStyle = (
-  token: TagToken,
-  status: 'success' | 'processing' | 'error' | 'warning'
-) => {
-  const borderColorMap = {
+const genTagPresetStatusStyle = (token: TagToken, status: TagPresetStatus) => {
+  const colorMap: Record<TagPresetStatus, string> = {
+    success: token.colorSuccessText,
+    processing: token.colorInfoText,
+    warning: token.colorWarningText,
+    error: token.colorErrorText,
+    critical: token.colorFuchsiaText,
+  };
+  const bgMap: Record<TagPresetStatus, string> = {
+    success: token.colorSuccessBg,
+    processing: token.colorInfoBg,
+    warning: token.colorWarningBg,
+    error: token.colorErrorBg,
+    critical: token.colorFuchsiaBg,
+  };
+  const borderMap: Record<TagPresetStatus, string> = {
     success: token.colorSuccessBorder,
     processing: token.colorInfoBorder,
-    error: token.colorErrorBorder,
     warning: token.colorWarningBorder,
+    error: token.colorErrorBorder,
+    critical: token.colorFuchsiaBorder,
   };
   return {
     [`${token.componentCls}${token.componentCls}-${status}`]: {
-      borderColor: getTagBorderColor(borderColorMap[status]),
+      color: colorMap[status],
+      background: bgMap[status],
+      borderColor: borderMap[status],
+      [`&${token.componentCls}-borderless`]: {
+        borderColor: 'transparent',
+      },
     },
   };
 };
 
-const genPresetStyle = (token: TagToken) =>
-  genPresetColor(token, (colorKey, { lightBorderColor }) => {
-    return {
-      [`${token.componentCls}${token.componentCls}-${colorKey}`]: {
-        borderColor: getTagBorderColor(lightBorderColor),
-      },
-    };
-  });
-
 export const genTagStyle = (token: TagToken): CSSObject => {
-  const { antCls, componentCls, tagPaddingHorizontal, lineWidth, calc } = token;
+  const { antCls, iconCls, componentCls } = token;
   const typographyComponentCls = `${antCls}-typography`;
 
-  const paddingInline = calc(tagPaddingHorizontal).sub(lineWidth).equal();
   return {
     [`${componentCls}`]: {
       paddingInline: token.paddingXS,
-      borderColor: getTagBorderColor(token.colorBorder),
       fontSize: token.fontSizeSM,
+      [`${componentCls}-close-icon${iconCls}`]: {
+        marginInlineStart: token.marginXXS,
+      },
       [`${antCls}-typography`]: {
         [`${componentCls}-icon`]: {
-          marginInlineEnd: paddingInline,
+          marginInlineEnd: token.marginXXS,
         },
       },
       ['&-ellipsis']: {
@@ -60,7 +65,27 @@ export const genTagStyle = (token: TagToken): CSSObject => {
       ['&-closable&-ellipsis']: {
         verticalAlign: 'bottom',
         [`${typographyComponentCls}`]: {
-          maxWidth: `calc(100% - ${unit(token.margin)})`,
+          // maxWidth should match (close icon left margin + tag right padding)
+          maxWidth: `calc(100% - ${unit(token.marginSM)})`,
+        },
+      },
+      [`&${componentCls}-ellipsis-css`]: {
+        maxWidth: '100%',
+        overflow: 'hidden',
+        verticalAlign: 'bottom',
+        [`${componentCls}-ellipsis-css-content`]: {
+          display: 'inline-block',
+          maxWidth: '100%',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          verticalAlign: 'bottom',
+        },
+      },
+      [`&${componentCls}-closable${componentCls}-ellipsis-css`]: {
+        [`${componentCls}-ellipsis-css-content`]: {
+          // maxWidth should match (close icon left margin + tag right padding)
+          maxWidth: `calc(100% - ${unit(token.marginSM)})`,
         },
       },
       ['&-checkable']: {
@@ -72,24 +97,27 @@ export const genTagStyle = (token: TagToken): CSSObject => {
       ['&-borderless']: {
         borderColor: 'transparent',
       },
+      ['&-pill']: {
+        borderRadius: 100,
+        marginInlineEnd: token.marginXXS,
+        borderColor: token.colorBorderSecondary,
+        color: token.colorTextSecondary,
+        // pill tag use smaller line-height
+        lineHeight: unit(token.fontHeightSM),
+      },
     },
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Tag', (token: TagToken) => {
-    const tagToken = mergeToken<TagToken>(token, {
-      tagPaddingHorizontal: 8, // Fixed padding.
-    });
+export default genStyleHooks('Tag', (token: TagToken) => {
+  const tagToken = mergeToken<TagToken>(token, {});
 
-    return [
-      genTagStyle(tagToken),
-      genPresetStyle(tagToken),
-      genTagPresetStatusStyle(tagToken, 'success'),
-      genTagPresetStatusStyle(tagToken, 'error'),
-      genTagPresetStatusStyle(tagToken, 'processing'),
-      genTagPresetStatusStyle(tagToken, 'warning'),
-    ];
-  });
-  return useStyle(prefixCls);
-};
+  return [
+    genTagStyle(tagToken),
+    genTagPresetStatusStyle(tagToken, 'success'),
+    genTagPresetStatusStyle(tagToken, 'error'),
+    genTagPresetStatusStyle(tagToken, 'processing'),
+    genTagPresetStatusStyle(tagToken, 'warning'),
+    genTagPresetStatusStyle(tagToken, 'critical'),
+  ];
+});

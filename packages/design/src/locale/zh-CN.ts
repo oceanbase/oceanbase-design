@@ -6,6 +6,7 @@ export default {
   global: {
     ...zhCN.global,
     inputPlaceholder: '请输入',
+    viewDocument: '查看文档',
   },
   Pagination: {
     ...zhCN.Pagination,
@@ -24,5 +25,18 @@ export default {
       collapse: '收起',
       open: '展开',
     },
+  },
+  Filter: {
+    pleaseSelect: '请选择',
+    open: '开启',
+    filters: '筛选',
+    apply: '确定',
+    clearAll: '清空',
+  },
+  Notification: {
+    showMore: '展开',
+    copy: '复制',
+    copied: '已复制',
+    copyFailed: '复制失败',
   },
 } as Locale;

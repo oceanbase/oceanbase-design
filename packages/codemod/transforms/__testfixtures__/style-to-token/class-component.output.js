@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Button, token } from '@oceanbase/design';
+import { Alert, Button, obToken } from '@oceanbase/design';
 
 class Demo extends React.PureComponent {
   constructor(props) {
@@ -10,8 +10,8 @@ class Demo extends React.PureComponent {
   render() {
     return (
       <div>
-        <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBorder}` }} />
-        <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
+        <Alert style={{ color: obToken.colorTextDefault, background: obToken.colorBgSecondary, backgroundColor: obToken.colorBgHoverSecondary, border: `1px solid ${obToken.colorBorderDefault}`, fontSize: obToken.fontSize325 }} />
+        <Button style={{ color: obToken.colorTextLink, background: obToken.colorTextSuccess, backgroundColor: obToken.colorTextWarning, borderColor: obToken.colorTextError, fontSize: obToken.fontSize300 }}></Button>
       </div>
     );
   }

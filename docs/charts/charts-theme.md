@@ -1,24 +1,24 @@
 ---
-title: 主题使用
+title: Theme Usage
 order: 9
-group: 可视化图表
+group: Charts
 ---
 
-OceanBase Charts 的设计体系遵循 AntV 设计规范，并在此基础上扩展出了很多具备 OceanBase 产品风格的设计规范模式，包括但不限于全局样式（色板、圆角、边框）和特定图表的视觉定制，以传递 OceanBase 科技、活力、专注和关怀的品牌特点。
+OceanBase Charts follows the AntV design specification and extends it with OceanBase product-style design patterns, including but not limited to global styles (color palette, radius, border) and visual customization of specific charts, to convey OceanBase's brand characteristics of technology, vitality, focus, and care.
 
-## 使用主题配置
+## Theme Configuration
 
 ```tsx | pure
 import { ChartProvider, useTheme } from '@oceanbase/charts';
 
 export default () {
-  // 获取主题配置
+  // Get theme config
   const themeConfig = useTheme();
-  // 主题色
+  // Theme color
   console.log(themeConfig.defaultColor);
-  // 折线图线宽
+  // Line chart line width
   console.log(themeConfig.styleSheet.lineBorder);
-  // 设置主题
+  // Set theme
   return (
     <>
       <ChartProvider theme="light">
@@ -35,4 +35,4 @@ export default () {
 };
 ```
 
-- 主题的全量 Token 可参考 https://github.com/oceanbase/charts/blob/master/src/theme/index.ts#L29 。
+- For full theme tokens, see https://github.com/oceanbase/charts/blob/master/src/theme/index.ts#L29 .

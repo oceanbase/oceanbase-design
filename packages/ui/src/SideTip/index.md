@@ -36,9 +36,9 @@ nav:
 
 <code src="./demo/small.tsx"></code>
 
-### 操作选单
+### 操作选项
 
-操作选单要根据按钮的相对位置而变，需要使用 `id` 标记按钮，然后 `DropDown` 下拉选项的 `getPopupContainer` 方法设定其相对的 pop 位置。
+操作选项要根据按钮的相对位置而变，需要使用 `id` 标记按钮，然后 `DropDown` 下拉选项的 `getPopupContainer` 方法设定其相对的 pop 位置。
 
 <code src="./demo/operation.tsx"></code>
 

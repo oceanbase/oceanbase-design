@@ -18,6 +18,9 @@ Before run codemod, you'd better make sure to commit your local git changes firs
 npx -p @oceanbase/codemod codemod src
 # options
 # --transformer=t1,t2     // run specify transformers
+# --token-target=ob|antd  // default ob; antd restores legacy antd token migration
+# --skip-install          // skip dependency install/upgrade after codemod
+# --prefix=ob             // cssvar prefix (default ob)
 # --disablePrettier       // disable prettier
 # --ignore-config         // ignore config file
 ```
@@ -25,7 +28,13 @@ npx -p @oceanbase/codemod codemod src
 Run specific transformers:
 
 ```shell
-npx -p @oceanbase/codemod codemod src --transformer=style-to-token,less-to-token
+npx -p @oceanbase/codemod codemod src --transformer=token-to-obtoken
+```
+
+Legacy antd token migration:
+
+```shell
+npx -p @oceanbase/codemod codemod src --token-target=antd
 ```
 
 Ignore config file:
@@ -168,119 +177,27 @@ import utils and hooks from `@alipay/ob-util` to `@oceanbase/util`. Additionally
 
 ### `style-to-token`
 
-transform fixed style to antd v5 design token.
+Transform fixed inline styles to **obToken** (default). Injects `useToken()` for `@oceanbase/design` imports, or `theme.useToken()` when `theme` comes from `antd` / `@alipay/bigfish/antd` (webpack alias). Use `--token-target=antd` for legacy `token` output.
 
 - React function components:
 
 ```diff
   import React from 'react';
 - import { Alert, Button } from '@oceanbase/design';
-+ import { Alert, Button, theme } from '@oceanbase/design';
++ import { Alert, Button, useToken } from '@oceanbase/design';
 
   const Demo = () => {
-+   const { token } = theme.useToken();
++   const { obToken } = useToken();
     return (
--     <div>
--       <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '1px solid #d9d9d9' }} />
--       <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4d4f' }}></Button>
--     </div>
-+     <div>
-+       <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBorder}` }} />
-+       <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
-+     </div>
+-     <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', border: '1px solid #d9d9d9', fontSize: 14 }} />
++     <Alert style={{ color: obToken.colorTextDefault, border: `1px solid ${obToken.colorBorderDefault}`, fontSize: obToken.fontSize325 }} />
     );
   };
-
-export default Demo;
-```
-
-- React class components:
-
-```diff
-  import React from 'react';
-- import { Alert, Button } from '@oceanbase/design';
-+ import { Alert, Button, token } from '@oceanbase/design';
-
-  class Demo extends React.PureComponent {
-    constructor(props) {
-      super(props);
-      this.state = {};
-    }
-
-    render() {
-      return (
--       <div>
--         <Alert style={{ color: 'rgba(0, 0, 0, 0.85)', background: 'rgba(0, 0, 0,0.65)', backgroundColor: 'rgba(0,0,0,0.45)', border: '#d9d9d9' }} />
--         <Button style={{ color: '#1890ff', background: '#52c41a', backgroundColor: '#faad14', borderColor: '#ff4d4f' }}></Button>
--         <div color="#fafafa" border="1px solid #fafafa" />
--       </div>
-+       <div>
-+         <Alert style={{ color: token.colorText, background: token.colorTextSecondary, backgroundColor: token.colorTextTertiary, border: `1px solid ${token.colorBgLayout}` }} />
-+         <Button style={{ color: token.colorInfo, background: token.colorSuccess, backgroundColor: token.colorWarning, borderColor: token.colorError }}></Button>
-+         <div color={token.colorBgLayout} border={`1px solid ${token.colorBgLayout}`} />
-+       </div>
-      );
-    }
-  }
-
-  export default Demo;
-```
-
-- Static file (not react components):
-
-```diff
-+ import { token } from '@oceanbase/design';
-- const color = '#fafafa';
-- const border = '1px solid #fafafa';
-+ const color = token.colorBgLayout;
-+ const border = `1px solid ${token.colorBgLayout}`;
-  const colorMap = {
--   info: '#1890ff',
--   success: '#52c41a',
--   warning: '#faad14',
--   error: '#ff4d4f',
--   border: '1px solid #d9d9d9',
-+   info: token.colorInfo,
-+   success: token.colorSuccess,
-+   warning: token.colorWarning,
-+   error: token.colorError,
-+   border: `1px solid ${token.colorBorder}`,
-  };
-
-  function getColorList() {
-    return [
-      {
-        type: 'info',
--       color: '#1890ff',
-+       color: token.colorInfo,
-      },
-      {
-        type: 'success',
--       color: '#52c41a',
-+       color: token.colorSuccess,
-      },
-      {
-        type: 'warning',
--       color: '#faad14',
-+       color: token.colorWarning,
-      },
-      {
-        type: 'error',
--       color: '#ff4d4f',
-+       color: token.colorError,
-      },
-      {
-        type: 'border',
--       color: '1px solid #d9d9d9',
-+       color: `1px solid ${token.colorBorder}`,
-      },
-    ];
-  }
 ```
 
 ### `less-to-token`
 
-transform fixed less style to antd v5 design token.
+> Explicit only. Not run by default. Use `--token-target=antd` or `--transformer=less-to-token` for legacy Less `@token` migration.
 
 ```diff
 + @import '~@oceanbase/design/es/theme/index.less';
@@ -289,19 +206,225 @@ transform fixed less style to antd v5 design token.
 -   background: #52c41a;
 -   background-color: #faad14;
 -   border-color: #ff4d4f;
+-   font-size: 14px;
 +   color: @colorInfo;
 +   background: @colorSuccess;
 +   background-color: @colorWarning;
 +   border-color: @colorError;
++   font-size: @fontSize;
     .content {
 -     color: rgba(0, 0, 0, 0.85);
 -     background: rgba(0, 0, 0,0.65);
 -     background-color: rgba(0,0,0,0.45);
 -     border: 1px solid #d9d9d9;
+-     font-size: 12px;
 +     color: @colorText;
 +     background: @colorTextSecondary;
 +     background-color: @colorTextTertiary;
 +     border: 1px solid @colorBorder;
++     font-size: @fontSizeSM;
     }
   }
+```
+
+### `less-to-cssvar`
+
+Transform Less hardcoded values / `@variables` to OB semantic CSS variables like `var(--ob-color-text-default)`. **Runs by default** in the main codemod pipeline (keeps `.less` extension; use `--rename-to=css` to rename files).
+
+```shell
+# Explicit run with file rename
+npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --rename-to=css
+
+# Output as .scss instead of .css
+npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --rename-to=scss
+
+# With custom prefix (default: ob)
+npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --prefix=ob
+
+# Never add .module suffix (skip auto-detection)
+npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --add-module=false
+
+# Keep .less extension (disable renaming)
+npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --rename-to=false
+
+# Combine options: output as .scss with custom prefix
+npx -p @oceanbase/codemod codemod src --transformer=less-to-cssvar --rename-to=scss --prefix=ob
+```
+
+**Options:**
+
+| Option         | Description                                              | Default |
+| -------------- | -------------------------------------------------------- | ------- |
+| `--prefix`     | CSS variable prefix, e.g. `var(--ob-color-text-default)` | `ob`    |
+| `--rename-to`  | Target format: `css`, `scss`, or `false` to keep `.less` | `false` |
+| `--add-module` | Add `.module` suffix when renaming                       | `true`  |
+
+**`--rename-to` 说明：**
+
+| 值      | 行为                                  | 示例                        |
+| ------- | ------------------------------------- | --------------------------- |
+| `false` | 保持 `.less` 扩展名，不重命名（默认） | `style.less` → `style.less` |
+| `css`   | 输出为 `.css` 文件                    | `style.less` → `style.css`  |
+| `scss`  | 输出为 `.scss` 文件                   | `style.less` → `style.scss` |
+
+**`--add-module` 说明：**
+
+| 值      | 行为                                         |
+| ------- | -------------------------------------------- |
+| `true`  | 自动检测：根据导入方式判断是否添加 `.module` |
+| `false` | 跳过检测：统一不添加 `.module`               |
+
+**注意**：当 `--rename-to=false` 时，如果用户没有显式指定 `--add-module`，则 `--add-module` 会自动设置为 `false`（因为不重命名文件时，添加 `.module` 后缀没有意义）。如果用户显式指定了 `--add-module`，则使用用户指定的值。
+
+**自动检测规则：**
+
+| 导入方式                                       | 结果（CSS）      | 结果（SCSS）      |
+| ---------------------------------------------- | ---------------- | ----------------- |
+| `import styles from './xxx.less'` (CSS Module) | `xxx.module.css` | `xxx.module.scss` |
+| `import './xxx.less'` (全局样式)               | `xxx.css`        | `xxx.scss`        |
+| `global.less` / `reset.less` 等常见全局文件名  | `xxx.css`        | `xxx.scss`        |
+
+**Important Notes:**
+
+When `--rename-to` is set to `css` or `scss` (explicit `--transformer=less-to-cssvar` without default pipeline):
+
+1. **Comment conversion**:
+   - For `.css` output: Less single-line comments (`//`) will be automatically converted to CSS block comments (`/* */`).
+   - For `.scss` output: Comments are kept as `//` (SCSS supports single-line comments).
+2. **`:global` syntax**: CSS Modules `:global` syntax will continue to work in `.module.css` or `.module.scss` files.
+3. **Import references**: Import references in JS/TS/JSX/TSX files will be **automatically updated**:
+
+```diff
+- import './style.less';
++ import './style.css';  // or './style.scss' if --rename-to=scss
+```
+
+**Example:**
+
+```diff
+  .container {
+-   color: #1890ff;
+-   background: #ffffff;
+-   border: 1px solid #d9d9d9;
+-   font-size: 14px;
++   color: var(--ob-color-text-link);
++   background: var(--ob-color-bg-default);
++   border: 1px solid var(--ob-color-border-default);
++   font-size: var(--ob-font-size-325);
+  }
+
+  .status {
+    &.success {
+-     color: #52c41a;
+-     background: #f6ffed;
++     color: var(--ob-color-text-success);
++     background: var(--ob-color-bg-success);
+    }
+    &.error {
+-     color: #ff4d4f;
+-     background: #fff2f0;
++     color: var(--ob-color-text-error);
++     background: var(--ob-color-bg-error);
+    }
+  }
+```
+
+### `sass-to-cssvar`
+
+Transform SASS/SCSS hardcoded values / `$variables` to OB semantic CSS variables like `var(--ob-color-text-default)`. **Runs by default** in the main codemod pipeline.
+
+```shell
+# Basic usage
+npx -p @oceanbase/codemod codemod src --transformer=sass-to-cssvar
+
+# With custom prefix (default: ob)
+npx -p @oceanbase/codemod codemod src --transformer=sass-to-cssvar --prefix=ob
+```
+
+**Options:**
+
+| Option     | Description                                              | Default |
+| ---------- | -------------------------------------------------------- | ------- |
+| `--prefix` | CSS variable prefix, e.g. `var(--ob-color-text-default)` | `ob`    |
+
+**Important Notes:**
+
+1. **File format**: Supports both `.sass` and `.scss` files.
+2. **Variable syntax**: Converts SASS variables (`$variableName`) to CSS variables (`var(--prefix-variable-name)`).
+3. **Token matching**: Only converts variables that match tokens from `@oceanbase/design` theme.
+4. **No file renaming**: Files keep their original `.sass` or `.scss` extension.
+
+**Example:**
+
+```diff
+  .container {
+-   color: $colorPrimary;
+-   background: $colorBgContainer;
+-   border-color: $colorBorder;
+-   font-size: $fontSize;
++   color: var(--ob-color-text-link);
++   background: var(--ob-color-bg-default);
++   border-color: var(--ob-color-border-default);
++   font-size: var(--ob-font-size-325);
+  }
+
+  .status {
+    &.success {
+-     color: $colorSuccess;
+-     background: $colorSuccessBg;
++     color: var(--ob-color-text-success);
++     background: var(--ob-color-bg-success);
+    }
+    &.error {
+-     color: $colorError;
+-     background: $colorErrorBg;
++     color: var(--ob-color-text-error);
++     background: var(--ob-color-bg-error);
+    }
+  }
+```
+
+### `token-to-obtoken`
+
+Upgrade existing antd token usage to OB semantic tokens. **Not run by default** — use `--transformer=token-to-obtoken` explicitly.
+
+Typical use cases:
+
+- Code already migrated with `--token-target=antd` or hand-written `token.xxx`
+- `createStyles` bodies still using `token.xxx` (this transformer rewrites them to `obToken.xxx`)
+- Styles with `var(--ant-*)` that need `var(--ob-*)`
+
+```shell
+# JS/TS token → obToken
+npx -p @oceanbase/codemod codemod src --transformer=token-to-obtoken
+
+# Combined with cssvar prefix migration
+npx -p @oceanbase/codemod codemod src --transformer=token-to-obtoken,less-to-cssvar --prefix=ob
+```
+
+**Example** (`@oceanbase/design` import — keeps `theme.useToken()`):
+
+```diff
+  import { Alert, theme } from '@oceanbase/design';
+
+  const Demo = () => {
+-   const { token } = theme.useToken();
++   const { obToken } = theme.useToken();
+    return (
+-     <Alert style={{ color: token.colorText, border: `1px solid ${token.colorBorder}` }} />
++     <Alert style={{ color: obToken.colorTextDefault, border: `1px solid ${obToken.colorBorderDefault}` }} />
+    );
+  };
+```
+
+**Example** (`antd` import with webpack alias — import unchanged):
+
+```diff
+  import { Collapse, theme } from 'antd';
+
+  const Demo = () => {
+-   const { token } = theme.useToken();
++   const { obToken } = theme.useToken();
+    return <Collapse style={{ borderRadius: obToken.radiusLg }} />;
+  };
 ```

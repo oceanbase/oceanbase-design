@@ -1,0 +1,13 @@
+{
+  "name": "Alert",
+  "package": "@oceanbase/design",
+  "diffLevel": "C",
+  "extendsAntd": "Alert",
+  "delegateAntd": true,
+  "addedProps": ["ghost", "mini"],
+  "constraints": [],
+  "keywords": ["alert", "message", "notification"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/alert/index.tsx",
+  "docSource": "packages/design/src/alert/index.md"
+}

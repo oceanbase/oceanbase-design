@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken } from 'antd/es/theme/internal';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import type { FullToken } from '../../theme/interface';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type TabsToken = FullToken<'Tabs'>;
 
@@ -17,15 +17,22 @@ export const genTabsStyle = (token: Partial<TabsToken>): CSSObject => {
           },
         },
       },
+      [`&${componentCls}-left, &${componentCls}-right`]: {
+        [`${componentCls}-tab[data-node-key^=divider-]`]: {
+          paddingBlock: 0,
+        },
+      },
       [`${componentCls}-tab`]: {
+        [`${componentCls}-tab-btn:hover`]: {
+          textShadow: '0 0 0.25px currentcolor',
+        },
         /** @deprecated */
         [`${componentCls}-tab-tag`]: {
           color: colorTextSecondary,
-          fontFamily: 'PingFangSC',
           fontSize: 12,
           borderRadius: 12,
           marginInlineEnd: 0,
-          height: 20,
+          height: token.controlHeightSM,
         },
         [`${componentCls}-tab-badge`]: {
           [`>${antCls}-badge-count`]: {
@@ -70,9 +77,6 @@ export const genTabsStyle = (token: Partial<TabsToken>): CSSObject => {
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Tabs', token => {
-    return [genTabsStyle(token as TabsToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Tabs', token => {
+  return [genTabsStyle(token as TabsToken)];
+});

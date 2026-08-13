@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconFont } from '@oceanbase/ui';
-import './basic.less';
+import './basic.css';
 
 export default () => {
   return (

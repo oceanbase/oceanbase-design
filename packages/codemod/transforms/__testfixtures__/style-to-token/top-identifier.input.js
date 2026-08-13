@@ -7,4 +7,5 @@ const colorMap = {
   warning: '#faad14',
   error: '#ff4d4f',
   border: '1px solid #d9d9d9',
+  fontSize: 14,
 };

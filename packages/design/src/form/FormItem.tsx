@@ -9,6 +9,10 @@ import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import type { TooltipProps } from '../tooltip';
 import { useTooltipTypeList } from '../tooltip/hooks/useTooltipTypeList';
+import {
+  FormItemChildFeedbackProvider,
+  useFormItemChildFeedbackState,
+} from './FormItemChildFeedback';
 import useStyle from './style';
 
 const AntFormItem = AntForm.Item;
@@ -24,6 +28,7 @@ export type LabelTooltipType = WrapperTooltipProps | React.ReactNode;
 export interface FormItemProps extends AntFormItemProps {
   tooltip?: WrapperTooltipProps | ReactNode;
   action?: ReactNode;
+  description?: ReactNode;
 }
 
 type CompoundedComponent = React.FC<FormItemProps> & {
@@ -35,16 +40,28 @@ const FormItem: CompoundedComponent = ({
   label,
   tooltip,
   action,
+  description,
   layout: externalLayout,
   prefixCls: customizePrefixCls,
   className,
+  help: propHelp,
+  validateStatus: propValidateStatus,
   ...restProps
 }) => {
+  const { childFeedback, contextValue } = useFormItemChildFeedbackState();
+  // Child feedback is opt-in (e.g. Password blur hints). When absent, props pass through unchanged.
+  const mergedHelp = childFeedback != null ? (childFeedback.help ?? propHelp) : propHelp;
+  const mergedValidateStatus =
+    childFeedback != null
+      ? (childFeedback.validateStatus ?? propValidateStatus)
+      : propValidateStatus;
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
 
   const prefixCls = getPrefixCls('form', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
-  const formItemCls = classNames(className);
+  const [wrapCSSVar] = useStyle(prefixCls);
+  const formItemCls = classNames(className, {
+    [`${prefixCls}-item-has-description`]: !!description,
+  });
 
   const {
     layout: contextLayout,
@@ -70,29 +87,45 @@ const FormItem: CompoundedComponent = ({
     };
   }
 
-  return wrapSSR(
-    <AntFormItem
-      layout={layout}
-      label={
-        action && (layout === 'vertical' || vertical) ? (
-          <>
-            {label}
-            {action && <span className={`${prefixCls}-item-action`}>{action}</span>}
-          </>
-        ) : (
-          label
-        )
-      }
-      tooltip={tooltip}
-      // auto set required for Switch children to hide optional mark
-      // @ts-ignore
-      required={isPlainObject(children) && children.type?.__ANT_SWITCH ? true : undefined}
-      prefixCls={customizePrefixCls}
-      className={formItemCls}
-      {...restProps}
-    >
-      {children}
-    </AntFormItem>
+  // description config - only show in vertical layout
+  const isVertical = layout === 'vertical' || vertical;
+  const descriptionContent: ReactNode =
+    description && isVertical ? (
+      <div className={`${prefixCls}-item-description`}>{description}</div>
+    ) : null;
+  const actionContent: ReactNode =
+    action && (layout === 'vertical' || vertical) ? (
+      <span className={`${prefixCls}-item-action`}>{action}</span>
+    ) : null;
+
+  return wrapCSSVar(
+    <FormItemChildFeedbackProvider contextValue={contextValue}>
+      <AntFormItem
+        layout={layout}
+        label={
+          actionContent || descriptionContent ? (
+            <div>
+              {label}
+              {actionContent}
+              {descriptionContent}
+            </div>
+          ) : (
+            label
+          )
+        }
+        tooltip={tooltip}
+        help={mergedHelp}
+        validateStatus={mergedValidateStatus}
+        // auto set required for Switch children to hide optional mark
+        // @ts-ignore
+        required={isPlainObject(children) && children.type?.__ANT_SWITCH ? true : undefined}
+        prefixCls={customizePrefixCls}
+        className={formItemCls}
+        {...restProps}
+      >
+        {children}
+      </AntFormItem>
+    </FormItemChildFeedbackProvider>
   );
 };
 

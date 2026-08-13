@@ -31,8 +31,11 @@ export default defineConfig({
     globalSetup: [path.join(__dirname, 'tests/globalSetup.ts')],
     // exclude part of charts tests for now
     // ref: https://github.com/antvis/L7/issues/2332
+    // exclude use-client.test.ts as it requires build outputs and should run separately
     exclude: [
       '**/node_modules/**',
+      'packages/cli/**',
+      '**/*.test.cjs',
       '**/Area/__tests__/ref.test.tsx',
       '**/DualAxes/__tests__/ref.test.tsx',
       '**/Line/__tests__/ref.test.tsx',

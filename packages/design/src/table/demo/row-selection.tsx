@@ -6,74 +6,78 @@ const App: React.FC = () => {
   const dataSource = [
     {
       key: '1',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '2',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'London No. 1 Lake Park',
     },
     {
       key: '3',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '4',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'London No. 1 Lake Park',
     },
     {
       key: '5',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '6',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'London No. 1 Lake Park',
     },
     {
       key: '7',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '8',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'London No. 1 Lake Park',
     },
   ];
 
   const columns = [
     {
-      title: '姓名',
+      title: 'Name',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: '年龄',
+      title: 'Age',
       dataIndex: 'age',
       key: 'age',
     },
     {
-      title: '住址',
+      title: 'Address',
       dataIndex: 'address',
       key: 'address',
     },
   ];
 
   const toolOptionsRender = (action: any) => {
-    return [<Button>批量删除</Button>, <Button>批量更新</Button>, <Button>批量重启</Button>];
+    return [
+      <Button>Batch Delete</Button>,
+      <Button>Batch Update</Button>,
+      <Button>Batch Restart</Button>,
+    ];
   };
 
   const toolSelectedContent = (selectedRowKeys: any, selectedRows: any) => {

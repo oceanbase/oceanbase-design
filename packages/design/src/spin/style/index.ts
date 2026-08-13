@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import type { FullToken, GenerateStyle } from '../../theme/interface';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type SpinToken = FullToken<'Spin'> & {
   spinDotSize: number;
@@ -18,6 +18,12 @@ const genSizeStyle = (spinDotSize: number, token: SpinToken): CSSObject => {
       [`${componentCls}-dot`]: {
         width: spinDotWidth,
         height: spinDotHight,
+        overflow: 'hidden',
+        lineHeight: 0,
+        [`> div`]: {
+          width: '100%',
+          height: '100%',
+        },
       },
       [`${componentCls}-text`]: {
         width: spinDotWidth,
@@ -71,23 +77,21 @@ export const genSpinStyle: GenerateStyle<SpinToken> = (token: SpinToken): CSSObj
   };
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('Spin', token => {
-    // should expand by 2x for oceanbase indicator
-    // because it's inner padding is smaller than antd default indicator
-    // const ratio = 3;
-    return [
-      genSpinStyle({
-        ...token,
-        // https://github.com/ant-design/ant-design/blob/master/components/spin/style/index.tsx#L238
-        // spinDotSize: (token.controlHeightLG / 2) * ratio,
-        // spinDotSizeSM: token.controlHeightLG * 0.35 * ratio,
-        // spinDotSizeLG: token.controlHeight * ratio,
-        spinDotSize: token.controlHeight * 1.75, // 56,
-        spinDotSizeSM: token.controlHeight * 1.125, // 36
-        spinDotSizeLG: token.controlHeight * 2.25, // 72
-      } as SpinToken),
-    ];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Spin', token => {
+  // should expand by 2x for oceanbase indicator
+  // because it's inner padding is smaller than antd default indicator
+  // const ratio = 3;
+  const { calc } = token;
+  return [
+    genSpinStyle({
+      ...token,
+      // https://github.com/ant-design/ant-design/blob/master/components/spin/style/index.tsx#L238
+      // spinDotSize: (token.controlHeightLG / 2) * ratio,
+      // spinDotSizeSM: token.controlHeightLG * 0.35 * ratio,
+      // spinDotSizeLG: token.controlHeight * ratio,
+      spinDotSize: calc(token.controlHeight).mul(1.75).equal(), // 56,
+      spinDotSizeSM: calc(token.controlHeight).mul(1.125).equal(), // 36
+      spinDotSizeLG: calc(token.controlHeight).mul(2.25).equal(), // 72
+    } as SpinToken),
+  ];
+});

@@ -1,0 +1,49 @@
+# SYNC: skills/oceanbase-design/references/css-tokens.md
+# Common invalid --ob-* aliases and antd-style names → valid runtime CSS variables
+
+hints:
+  # antd colorTextTertiary habit
+  --ob-color-text-tertiary: --ob-color-text-description
+  --ob-color-text-secondary: --ob-color-text-navigation
+  --ob-color-text: --ob-color-text-default
+  --ob-color-bg-layout: --ob-color-bg-primary
+  --ob-color-bg-container: --ob-color-bg-default
+  --ob-color-fill-alter: --ob-color-bg-hover-secondary
+  --ob-color-primary: --ob-gray-10
+  --ob-color-border: --ob-color-border-default
+  --ob-page-padding-inline: --ob-space-400
+  --ob-padding-xxs: --ob-space-100
+  --ob-padding-xs: --ob-space-150
+  --ob-padding-sm: --ob-space-200
+  --ob-padding: --ob-space-300
+  --ob-padding-md: --ob-space-300
+  --ob-padding-m: --ob-space-400
+  --ob-padding-lg: --ob-space-500
+  --ob-padding-l: --ob-space-500
+  --ob-padding-xl: --ob-space-800
+  --ob-margin-xxs: --ob-space-100
+  --ob-margin-xs: --ob-space-150
+  --ob-margin-sm: --ob-space-200
+  --ob-margin: --ob-space-300
+  --ob-margin-md: --ob-space-300
+  --ob-margin-m: --ob-space-400
+  --ob-margin-lg: --ob-space-500
+  --ob-margin-l: --ob-space-500
+  --ob-margin-xl: --ob-space-600
+  --ob-border-radius-s: --ob-radius-sm
+  --ob-border-radius-m: --ob-radius-md
+  --ob-border-radius-l: --ob-radius-lg
+  --ob-font-size-350: --ob-font-size-325
+  --ob-font-line-height-400: --ob-font-line-height-500
+  --ob-font-body1-size: --ob-font-body1
+  --ob-font-body2-size: --ob-font-body2
+  --ob-shadow-popover: --ob-shadow-2
+
+rules:
+  - "Use var(--ob-*) or obToken only; do not use var(--ant-*) or antd token.xxx"
+  - "Spacing: use --ob-space-* (50/100/150/200/300/400/500/600/800), not --ob-padding-* or --ob-margin-*"
+  - "Text colors: default / navigation / label / description / link"
+  - "Background: primary (page), default (container), hover / hover-secondary"
+  - "Border radius: --ob-radius-sm | md | lg"
+  - "Border: --ob-color-border-default | hover | focus"
+  - "When unsure, run ob-design token or MCP ob_token; do not invent token names"

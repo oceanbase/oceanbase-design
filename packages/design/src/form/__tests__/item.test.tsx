@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { ConfigProvider, Form, Input } from '@oceanbase/design';
+import { Form, Input } from '@oceanbase/design';
 import type { FormItemProps } from '@oceanbase/design';
 
 const FormItemTest: React.FC<FormItemProps> = props => (

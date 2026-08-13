@@ -33,12 +33,12 @@ const App: React.FC = () => {
           fontSize: 32,
         }}
       >
-        <Divider>默认字体</Divider>
+        <Divider>Default font</Divider>
         <div>
           <Text style={{ display: 'block' }}>奥星贝斯设计系统</Text>
           <Text>OceanBase Design System</Text>
         </div>
-        <Divider>英文站字体（根据 en 语言设置自动生效）</Divider>
+        <Divider>English site font (auto-applied when locale is en)</Divider>
         <div>
           <ConfigProvider
             locale={{
@@ -48,9 +48,9 @@ const App: React.FC = () => {
             <Text>OceanBase Design System</Text>
           </ConfigProvider>
         </div>
-        <Divider>代码字体（在 code 标签下自动生效）</Divider>
+        <Divider>Code font (auto-applied under code tag)</Divider>
         <Text code>OceanBase Design System</Text>
-        <Divider>数字字体（需要手动设置）</Divider>
+        <Divider>Number font (manual setup required)</Divider>
         <div
           style={{
             fontFamily: 'Helvetica Neue',

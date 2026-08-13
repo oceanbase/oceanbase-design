@@ -12,6 +12,23 @@
 - [@oceanbase/charts](https://design.oceanbase.com/docs/charts-introduce)
 - [@oceanbase/util](https://github.com/oceanbase/oceanbase-design/tree/master/packages/util)
 - [@oceanbase/codemod](https://github.com/oceanbase/oceanbase-design/tree/master/packages/codemod)
+- [@oceanbase/design-cli](https://github.com/oceanbase/oceanbase-design/tree/master/packages/cli) — Agent CLI & MCP ([docs](https://design.oceanbase.com/docs/react/cli))
+
+## 🤖 For AI Agents
+
+| Doc | Description |
+| --- | --- |
+| [For Agents](https://design.oceanbase.com/docs/react/for-agents) | Copy-paste prompt + capability overview |
+| [LLMs.txt](https://design.oceanbase.com/docs/react/llms) | Structured documentation index |
+| [MCP Server](https://design.oceanbase.com/docs/react/mcp) | `ob-design mcp` setup and tools |
+| [CLI](https://design.oceanbase.com/docs/react/cli) | `ob-design` command reference |
+| [Agent Skills](https://design.oceanbase.com/docs/design/design-skills) | `oceanbase-design` Skill |
+
+```bash
+npm install -g @oceanbase/design-cli
+ob-design setup --client cursor
+npx skills add oceanbase/oceanbase-design
+```
 
 ## ⌨️ Development
 

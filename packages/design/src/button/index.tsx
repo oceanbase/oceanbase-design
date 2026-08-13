@@ -10,13 +10,21 @@ export * from 'antd/es/button';
 export type ButtonProps = AntButtonProps;
 
 const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-  ({ prefixCls: customizePrefixCls, className, ...restProps }, ref) => {
-    const { theme, getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  ({ prefixCls: customizePrefixCls, className, type, loading, disabled, ...restProps }, ref) => {
+    const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('btn', customizePrefixCls);
-    const { wrapSSR } = useStyle(prefixCls, theme?.isAliyun);
+    const [wrapCSSVar] = useStyle(prefixCls);
     const buttonCls = classNames(className);
-    return wrapSSR(
-      <AntButton ref={ref} prefixCls={customizePrefixCls} className={buttonCls} {...restProps} />
+    return wrapCSSVar(
+      <AntButton
+        ref={ref}
+        prefixCls={customizePrefixCls}
+        className={buttonCls}
+        type={type}
+        loading={loading}
+        disabled={disabled ?? (loading && type !== 'primary')}
+        {...restProps}
+      />
     );
   }
 );

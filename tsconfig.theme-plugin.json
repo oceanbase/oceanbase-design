@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": false,
+    "outDir": "./.dumi/tmp/plugin-theme-less"
+  },
+  "include": [
+    "packages/design/src/theme/index.ts",
+    "packages/design/src/theme/default.ts",
+    "packages/design/src/theme/dark.ts",
+    "packages/design/src/theme/aliyun.ts"
+  ]
+}

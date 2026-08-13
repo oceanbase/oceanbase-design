@@ -1,0 +1,249 @@
+import type { CSSObject } from '@ant-design/cssinjs';
+import { unit } from '@ant-design/cssinjs';
+import type { FullToken, GenerateStyle } from '../../theme/interface';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
+import { upperFirst } from 'lodash';
+
+export type NotificationToken = FullToken<'Notification'>;
+
+/** Figma shadow-2 on Notification; differs from token.boxShadowSecondary until aligned globally. */
+const NOTIFICATION_SHADOW = '0 6px 8px rgba(19, 33, 57, 0.1)';
+
+type NotificationVisualType = 'success' | 'info' | 'warning' | 'error' | 'loading';
+
+const getNotificationTypeColor = (type: NotificationVisualType, token: NotificationToken) =>
+  type === 'loading' ? token.colorPrimary : token[`color${upperFirst(type)}Text`];
+
+const genNotificationTypeStyle = (
+  type: NotificationVisualType,
+  token: NotificationToken,
+  noticeCls: string
+): CSSObject => {
+  const textColor = getNotificationTypeColor(type, token);
+  const hoverColor =
+    type === 'loading' ? token.colorPrimaryHover : token[`color${upperFirst(type)}TextHover`];
+  const activeColor =
+    type === 'loading' ? token.colorPrimaryActive : token[`color${upperFirst(type)}TextActive`];
+  const typeNoticeSelector = `${noticeCls}-wrapper ${noticeCls}-${type}`;
+  const linkStyle = {
+    color: textColor,
+    textDecoration: 'underline',
+    '&:hover': {
+      color: hoverColor,
+    },
+    '&:active': {
+      color: activeColor,
+    },
+  };
+
+  return {
+    [typeNoticeSelector]: {
+      [`${noticeCls}-message`]: {
+        color: textColor,
+        a: linkStyle,
+        [`${token.antCls}-typography-link`]: linkStyle,
+      },
+      [`${noticeCls}-description`]: {
+        a: linkStyle,
+        [`${token.antCls}-typography-link`]: linkStyle,
+      },
+      [`${noticeCls}-icon`]: {
+        color: textColor,
+        [`${token.iconCls}`]: {
+          color: textColor,
+        },
+      },
+      [`${noticeCls}-icon-${type}`]: {
+        color: textColor,
+      },
+    },
+  };
+};
+
+export const genNotificationStyle: GenerateStyle<NotificationToken> = (
+  token: NotificationToken
+): CSSObject => {
+  const {
+    componentCls,
+    calc,
+    width = 350,
+    paddingSM,
+    padding,
+    paddingXS,
+    paddingXXS,
+    fontSize,
+    fontSizeLG,
+    fontSizeHeading5,
+    lineHeightHeading5,
+  } = token;
+  const noticeCls = `${componentCls}-notice`;
+  // font-line-height-500 (20px) — fixed across locales; do not use fontHeight (22px in Cn).
+  const titleLineHeight = calc(fontSizeHeading5).mul(lineHeightHeading5).equal();
+  const titleCloseReserve = calc(padding).add(fontSizeLG).equal();
+  const bottomRadius = unit(token.borderRadiusLG);
+  const progressBottomRadius = `0 0 ${bottomRadius} ${bottomRadius}`;
+
+  const typeStyles = (
+    ['success', 'info', 'warning', 'error', 'loading'] as const
+  ).reduce<CSSObject>((acc, type) => {
+    return {
+      ...acc,
+      ...genNotificationTypeStyle(type, token, noticeCls),
+    };
+  }, {});
+
+  return {
+    [componentCls]: {
+      ...typeStyles,
+      [`${noticeCls}-wrapper`]: {
+        marginBottom: paddingXS,
+        width,
+        maxWidth: width,
+        [`${noticeCls}`]: {
+          width,
+          maxWidth: width,
+          padding: `${unit(paddingSM)} ${unit(padding)}`,
+          boxShadow: NOTIFICATION_SHADOW,
+        },
+        [`${noticeCls}-with-icon`]: {
+          display: 'grid',
+          gridTemplateColumns: `${unit(fontSizeLG)} minmax(0, 1fr)`,
+          columnGap: paddingXS,
+          rowGap: paddingXXS,
+          alignItems: 'start',
+        },
+        [`${noticeCls}-icon`]: {
+          position: 'static',
+          gridColumn: '1',
+          gridRow: '1',
+          alignSelf: 'start',
+          marginInlineEnd: 0,
+          marginTop: 0,
+          width: fontSizeLG,
+          fontSize: fontSizeLG,
+          lineHeight: 1,
+          height: titleLineHeight,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          [`${token.iconCls}`]: {
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: fontSizeLG,
+            lineHeight: 1,
+          },
+        },
+        [`${noticeCls}-message`]: {
+          gridColumn: '2',
+          gridRow: '1',
+          marginInlineStart: 0,
+          marginBottom: 0,
+          paddingInlineEnd: titleCloseReserve,
+          minHeight: titleLineHeight,
+          fontSize,
+          fontWeight: token.fontWeightStrong,
+          lineHeight: unit(titleLineHeight),
+          color: token.colorText,
+        },
+        [`${noticeCls}-description`]: {
+          gridColumn: '2',
+          gridRow: '2',
+          marginInlineStart: 0,
+          marginTop: 0,
+          fontSize,
+          lineHeight: unit(titleLineHeight),
+          color: token.colorText,
+        },
+        [`${noticeCls}-with-icon ${noticeCls}-message`]: {
+          marginInlineStart: 0,
+          fontSize,
+        },
+        [`${noticeCls}-with-icon ${noticeCls}-description`]: {
+          marginInlineStart: 0,
+        },
+        // Close aligns to title first line: top = paddingSM, height = titleLineHeight.
+        [`${noticeCls}-close`]: {
+          top: paddingSM,
+          insetInlineEnd: padding,
+          width: fontSizeLG,
+          height: titleLineHeight,
+          fontSize: fontSizeLG,
+          lineHeight: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          '&:hover': {
+            backgroundColor: 'transparent',
+            color: token.colorIconHover,
+          },
+        },
+        [`${noticeCls}-progress`]: {
+          position: 'absolute',
+          blockSize: 2,
+          insetInlineStart: 0,
+          insetInlineEnd: 0,
+          inlineSize: '100%',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          borderRadius: progressBottomRadius,
+          overflow: 'hidden',
+          clipPath: `inset(0 round 0 0 ${bottomRadius} ${bottomRadius})`,
+          '&, &::-webkit-progress-bar': {
+            backgroundColor: 'transparent',
+            borderRadius: progressBottomRadius,
+          },
+          '&::-moz-progress-bar': {
+            background: token.gray6,
+            borderBottomLeftRadius: token.borderRadiusLG,
+          },
+          '&::-webkit-progress-value': {
+            borderBottomLeftRadius: token.borderRadiusLG,
+            background: token.gray6,
+          },
+        },
+      },
+      [`${componentCls}-stack${componentCls}-stack-expanded`]: {
+        [`& > ${componentCls}-notice-wrapper`]: {
+          '&:not(:nth-last-child(-n + 1))': {
+            '&:after': {
+              height: paddingXS,
+              bottom: calc(paddingXS).mul(-1).equal(),
+            },
+          },
+        },
+      },
+      [`${noticeCls}-error-details`]: {
+        marginTop: token.marginXXS,
+        color: token.colorTextTertiary,
+        fontSize,
+        lineHeight: unit(titleLineHeight),
+      },
+      [`${noticeCls}-error-details-line`]: {
+        display: 'block',
+      },
+      [`${noticeCls}-error-details-collapsed`]: {
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
+      },
+      [`${noticeCls}-error-details-actions`]: {
+        marginTop: token.marginXXS,
+        display: 'flex',
+        gap: token.marginSM,
+      },
+      [`${noticeCls}-error-details-action`]: {
+        color: token.colorPrimary,
+        cursor: 'pointer',
+        '&:hover': {
+          color: token.colorPrimaryHover,
+        },
+      },
+    },
+  };
+};
+
+export default genStyleHooks('Notification', token => {
+  return [genNotificationStyle(token as NotificationToken)];
+});

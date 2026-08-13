@@ -22,11 +22,14 @@ const App: React.FC = () => {
         <Tag bordered={false} color="success">
           success
         </Tag>
+        <Tag bordered={false} color="warning">
+          warning
+        </Tag>
         <Tag bordered={false} color="error">
           error
         </Tag>
-        <Tag bordered={false} color="warning">
-          warning
+        <Tag bordered={false} color="critical">
+          critical
         </Tag>
         <Tag bordered={false} color="magenta">
           magenta

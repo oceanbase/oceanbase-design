@@ -1,52 +1,77 @@
-import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import type { CSSObject } from '@ant-design/cssinjs';
+import type { FullToken, GenerateStyle, PresetColorKey } from '../../theme/interface';
+import { PresetColors } from '../../theme/interface';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type ButtonToken = FullToken<'Button'>;
 
-export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) => {
+export const genPresetColorStyle = (token: ButtonToken): Record<string, CSSObject> => {
   const { componentCls } = token;
-  // primary button className
-  const primaryBtnCls = `${componentCls}${componentCls}-primary:not([disabled]):not(${componentCls}-disabled):not(${componentCls}-dangerous):not(${componentCls}-background-ghost)`;
-  const primaryAndCompactItemBtnCls = `${componentCls}-compact-item${primaryBtnCls}`;
+  const addPresetColors = ['primary', 'dangerous'];
+
+  return [...PresetColors, ...addPresetColors].reduce(
+    (prev: Record<string, CSSObject>, colorKey: PresetColorKey) => {
+      const colorKeyMap = {
+        primary: 'blue',
+        dangerous: 'red',
+      };
+      const bgColor = addPresetColors.includes(colorKey)
+        ? token[`${colorKeyMap[colorKey]}5`]
+        : token[`${colorKey}7`];
+      return {
+        ...prev,
+        [`&${componentCls}-color-${colorKey}:hover`]: {
+          color: token.colorTextLightSolid,
+          background: bgColor,
+          borderColor: bgColor,
+        },
+      };
+    },
+    {}
+  );
+};
+
+export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) => {
+  const { iconCls, componentCls } = token;
   return {
     [`${componentCls}`]: {
       // remove box-shadow for button
       boxShadow: 'none !important',
-    },
-    // primary button
-    [`${primaryBtnCls}`]: {
-      background: 'linear-gradient(-59deg, #002BFF 0%, #0080FF 100%)',
-      border: 'none',
-      ['&:hover']: {
-        background: 'linear-gradient(120deg, #1AA0FF 0%, #1A53FF 100%)',
+      // loading style for not primary button
+      [`&${componentCls}-loading:not(${componentCls}-primary)`]: {
+        opacity: 1,
       },
-      ['&:active']: {
-        background: 'linear-gradient(120deg, #0060E6 0%, #0013E6 100%)',
+      // button outlined and dashed style
+      [`&${componentCls}-variant-outlined, &${componentCls}-variant-dashed`]: {
+        // disabled style
+        [`&:not(:disabled):not(${componentCls}-disabled)`]: {
+          [`&:not(${componentCls}-loading):hover`]: {
+            ...genPresetColorStyle(token),
+          },
+          [`&${componentCls}-color-default`]: {
+            '&:hover': {
+              borderColor: token.gray7,
+              color: token.colorText,
+            },
+            [iconCls]: {
+              color: token.colorIcon,
+            },
+          },
+        },
+      },
+      // button loading and solid style
+      [`&${componentCls}-variant-solid:not(:disabled):not(${componentCls}-disabled):hover`]: {
+        ...genPresetColorStyle(token),
       },
     },
-    // primary button in compact item
-    [`${primaryBtnCls}${componentCls}-compact-last-item`]: {
-      background: 'linear-gradient(-59deg, #002BFF 0%, #002BFF 100%)',
-      ['&:hover']: {
-        background: 'linear-gradient(120deg, #1AA0FF 0%, #1A53FF 100%)',
+    [`${componentCls}${componentCls}-sm`]: {
+      [`${componentCls}-icon`]: {
+        fontSize: token.fontSize,
       },
-      ['&:active']: {
-        background: 'linear-gradient(120deg, #0060E6 0%, #0013E6 100%)',
-      },
-    },
-    [`${primaryAndCompactItemBtnCls}+${primaryAndCompactItemBtnCls}:before`]: {
-      height: '100%',
-      top: 0,
-    },
-    [`${primaryAndCompactItemBtnCls}:hover`]: {
-      zIndex: 0,
     },
   };
 };
 
-export default (prefixCls: string, isAliyun?: boolean) => {
-  const useStyle = genComponentStyleHook('Button', token => {
-    return isAliyun ? [] : [genButtonStyle(token as ButtonToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('Button', token => {
+  return [genButtonStyle(token as ButtonToken)];
+});

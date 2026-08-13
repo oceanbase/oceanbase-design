@@ -1,0 +1,13 @@
+{
+  "name": "Dropdown",
+  "package": "@oceanbase/design",
+  "diffLevel": "A",
+  "extendsAntd": "Dropdown",
+  "delegateAntd": true,
+  "addedProps": [],
+  "constraints": [],
+  "keywords": ["dropdown", "menu", "overlay"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/dropdown/index.tsx",
+  "docSource": "packages/design/src/dropdown/index.md"
+}

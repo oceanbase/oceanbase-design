@@ -1,11 +1,11 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { Card, Tabs } from '@oceanbase/design';
-import type { GenerateStyle } from '@oceanbase/design/es/theme';
 import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
 import type { OBToken } from '../../_util/genComponentStyleHook';
 
-export const genProCardStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObject => {
-  const { componentCls, antCls, prefixCls } = token;
+export const genProCardStyle = (token: OBToken, outerComponentCls?: string): CSSObject => {
+  const { componentCls: innerComponentCls, antCls, prefixCls } = token;
+  const componentCls = outerComponentCls || innerComponentCls;
   const tableComponentCls = `${antCls}-table`;
   const tabsComponentCls = `${antCls}-tabs`;
   const tabsPrefixCls = `${prefixCls}-tabs`;
@@ -14,6 +14,19 @@ export const genProCardStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObje
     // need add `div` to make style work
     [`div${componentCls}`]: {
       borderRadius: token.borderRadiusLG,
+    },
+    [`${componentCls}${componentCls}-no-divider`]: {
+      [`${componentCls}-header`]: {
+        paddingBlockStart: token.paddingLG,
+      },
+    },
+    [`${componentCls}${componentCls}-size-small${componentCls}-no-divider`]: {
+      [`${componentCls}-header`]: {
+        paddingBlockStart: token.paddingSM,
+      },
+    },
+    [`${componentCls}${componentCls}-border`]: {
+      border: `${token.lineWidth}px solid ${token.colorBorderSecondary}`,
     },
     [`${componentCls}:not(${componentCls}-border):not(${componentCls}-ghost)`]: {
       boxShadow:
@@ -44,7 +57,7 @@ export const genProCardStyle: GenerateStyle<OBToken> = (token: OBToken): CSSObje
       [`${componentCls}-body`]: {
         [`& > ${tableComponentCls}-wrapper ${tableComponentCls}:not(${tableComponentCls}-bordered):first-child`]:
           {
-            marginTop: -token.marginSM,
+            marginTop: -token.Table?.cellPaddingBlock,
           },
       },
     },

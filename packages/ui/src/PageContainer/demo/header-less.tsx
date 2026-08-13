@@ -6,79 +6,79 @@ export default () => {
   const dataSource = [
     {
       key: '1',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '2',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '3',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '4',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '5',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '6',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '7',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '8',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '9',
-      name: '胡彦斌',
+      name: 'John Brown',
       age: 32,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
     {
       key: '10',
-      name: '胡彦祖',
+      name: 'Jim Green',
       age: 42,
-      address: '西湖区湖底公园1号',
+      address: 'New York No. 1 Lake Park',
     },
   ];
 
   const columns = [
     {
-      title: '姓名',
+      title: 'Name',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: '年龄',
+      title: 'Age',
       dataIndex: 'age',
       key: 'age',
     },
     {
-      title: '住址',
+      title: 'Address',
       dataIndex: 'address',
       key: 'address',
     },
@@ -86,14 +86,13 @@ export default () => {
   return (
     <PageContainer>
       <Card
-        bordered={false}
         tabList={[
           {
-            tab: '基本信息',
+            tab: 'Basic Info',
             key: 'base',
           },
           {
-            tab: '详细信息',
+            tab: 'Details',
             key: 'info',
           },
         ]}

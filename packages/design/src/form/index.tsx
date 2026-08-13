@@ -1,15 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext, useRef } from 'react';
 import { Form as AntForm } from 'antd';
 import type { FormProps as AntFormProps } from 'antd/es/form';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import Item from './FormItem';
+import { useFormItemChildFeedback } from './FormItemChildFeedback';
 import useStyle from './style';
+import type { FormReValidateMode, FormValidateMode, OBFormConfig } from './validateMode';
+import {
+  markFormSubmitted,
+  needsValidateModeFormInstance,
+  revalidateOnChange,
+  resolveReValidateMode,
+  resolveValidateMode,
+  resolveValidateTrigger,
+  shouldInjectRevalidateOnChange,
+  shouldTrackSubmitAttempt,
+  syncBlurredFieldsFromFieldsChange,
+  syncSubmittedFromFieldsChange,
+} from './validateMode';
 
 export * from 'antd/es/form';
 export type { FormItemProps } from './FormItem';
+export type { FormReValidateMode, FormValidateMode, OBFormConfig } from './validateMode';
 
-export type FormProps = AntFormProps;
+export type FormProps = AntFormProps & {
+  validateMode?: FormValidateMode;
+  reValidateMode?: FormReValidateMode;
+};
 
 type CompoundedComponent = React.FC<FormProps> & {
   Item: typeof Item;
@@ -18,6 +36,7 @@ type CompoundedComponent = React.FC<FormProps> & {
   useForm: typeof AntForm.useForm;
   useFormInstance: typeof AntForm.useFormInstance;
   useWatch: typeof AntForm.useWatch;
+  useFormItemChildFeedback: typeof useFormItemChildFeedback;
   Provider: typeof AntForm.Provider;
   create: typeof AntForm.create;
 };
@@ -26,15 +45,107 @@ const Form: CompoundedComponent = ({
   hideRequiredMark,
   prefixCls: customizePrefixCls,
   className,
+  validateMode: propValidateMode,
+  reValidateMode: propReValidateMode,
+  validateTrigger: propValidateTrigger,
+  onValuesChange,
+  onFieldsChange,
+  onFinish,
+  onFinishFailed,
+  form: propForm,
   ...restProps
 }) => {
   const { getPrefixCls, form: contextForm } = useContext(ConfigProvider.ConfigContext);
+  const obFormConfig = contextForm as OBFormConfig | undefined;
+
+  const validateMode = resolveValidateMode(propValidateMode, obFormConfig?.validateMode);
+  const reValidateMode = resolveReValidateMode(propReValidateMode, obFormConfig?.reValidateMode);
+  const resolvedValidateTrigger = resolveValidateTrigger(validateMode, propValidateTrigger);
+  const injectRevalidate = shouldInjectRevalidateOnChange(
+    validateMode,
+    reValidateMode,
+    propValidateTrigger
+  );
+  const trackSubmitAttempt = shouldTrackSubmitAttempt(
+    validateMode,
+    reValidateMode,
+    propValidateTrigger
+  );
+  const trackBlurredFields = validateMode === 'onTouched' && propValidateTrigger === undefined;
+
+  const [fallbackForm] = AntForm.useForm();
+  const needsFormInstance = needsValidateModeFormInstance(
+    validateMode,
+    injectRevalidate,
+    propValidateTrigger
+  );
+  const mergedForm = needsFormInstance ? (propForm ?? fallbackForm) : propForm;
+
+  const blurredFieldsRef = useRef(new Set<string>());
+  const submittedRef = useRef(false);
+
+  const markSubmittedIfNeeded = useCallback(() => {
+    if (trackSubmitAttempt) {
+      markFormSubmitted(submittedRef);
+    }
+  }, [trackSubmitAttempt]);
+
+  const handleFinish = useCallback(
+    (...args: Parameters<NonNullable<AntFormProps['onFinish']>>) => {
+      markSubmittedIfNeeded();
+      onFinish?.(...args);
+    },
+    [markSubmittedIfNeeded, onFinish]
+  );
+
+  const handleFinishFailed = useCallback(
+    (...args: Parameters<NonNullable<AntFormProps['onFinishFailed']>>) => {
+      markSubmittedIfNeeded();
+      onFinishFailed?.(...args);
+    },
+    [markSubmittedIfNeeded, onFinishFailed]
+  );
+
+  const handleFieldsChange = useCallback(
+    (
+      changedFields: Parameters<NonNullable<AntFormProps['onFieldsChange']>>[0],
+      allFields: Parameters<NonNullable<AntFormProps['onFieldsChange']>>[1]
+    ) => {
+      if (trackBlurredFields) {
+        syncBlurredFieldsFromFieldsChange(blurredFieldsRef.current, changedFields, validateMode);
+      }
+      if (trackSubmitAttempt) {
+        syncSubmittedFromFieldsChange(submittedRef, changedFields, allFields);
+      }
+      onFieldsChange?.(changedFields, allFields);
+    },
+    [onFieldsChange, trackBlurredFields, trackSubmitAttempt, validateMode]
+  );
+
+  const handleValuesChange = useCallback(
+    (
+      changedValues: Parameters<NonNullable<AntFormProps['onValuesChange']>>[0],
+      allValues: Parameters<NonNullable<AntFormProps['onValuesChange']>>[1]
+    ) => {
+      if (injectRevalidate && mergedForm) {
+        revalidateOnChange(mergedForm, {
+          validateMode,
+          reValidateMode,
+          blurredFields: blurredFieldsRef.current,
+          changedValues,
+          submitted: submittedRef.current,
+        });
+      }
+      onValuesChange?.(changedValues, allValues);
+    },
+    [injectRevalidate, mergedForm, onValuesChange, reValidateMode, validateMode]
+  );
 
   const prefixCls = getPrefixCls('form', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
+  const [wrapCSSVar] = useStyle(prefixCls);
   const formCls = classNames(className);
 
-  return wrapSSR(
+  return wrapCSSVar(
     // @ts-ignore to ignore children type error
     <AntForm
       requiredMark={
@@ -49,6 +160,14 @@ const Form: CompoundedComponent = ({
       preserve={false}
       prefixCls={customizePrefixCls}
       className={formCls}
+      form={mergedForm}
+      validateTrigger={resolvedValidateTrigger}
+      onValuesChange={injectRevalidate ? handleValuesChange : onValuesChange}
+      onFieldsChange={
+        trackBlurredFields || trackSubmitAttempt ? handleFieldsChange : onFieldsChange
+      }
+      onFinish={trackSubmitAttempt ? handleFinish : onFinish}
+      onFinishFailed={trackSubmitAttempt ? handleFinishFailed : onFinishFailed}
       {...restProps}
     />
   );
@@ -60,6 +179,7 @@ Form.ErrorList = AntForm.ErrorList;
 Form.useForm = AntForm.useForm;
 Form.useFormInstance = AntForm.useFormInstance;
 Form.useWatch = AntForm.useWatch;
+Form.useFormItemChildFeedback = useFormItemChildFeedback;
 Form.Provider = AntForm.Provider;
 Form.create = AntForm.create;
 

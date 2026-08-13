@@ -18,7 +18,7 @@ export default () => {
     setLoading(true);
     promise.then(() => {
       setLoading(false);
-      message.success('刷新成功');
+      message.success('Refreshed successfully');
     });
   };
   return (
@@ -26,7 +26,7 @@ export default () => {
       ghost={false}
       loading={loading}
       header={{
-        title: '页面标题',
+        title: 'Page Title',
         reload: {
           spin: loading,
           onClick: () => {
@@ -37,43 +37,41 @@ export default () => {
           items: [
             {
               href: '',
-              title: '一级页面',
+              title: 'Level 1 Page',
             },
             {
               href: '',
-              title: '二级页面',
+              title: 'Level 2 Page',
             },
             {
-              title: '当前页面',
+              title: 'Current Page',
             },
           ],
         },
         extra: [
-          <Button key="1">次要按钮</Button>,
+          <Button key="1">Secondary</Button>,
           <Button key="2" type="primary">
-            主要按钮
+            Primary
           </Button>,
           <Dropdown
             menu={{
               items: [
                 {
-                  label: '下拉菜单',
+                  label: 'Dropdown Menu',
                   key: '1',
                 },
                 {
-                  label: '下拉菜单2',
+                  label: 'Dropdown Menu 2',
                   key: '2',
                 },
                 {
-                  label: '下拉菜单3',
+                  label: 'Dropdown Menu 3',
                   key: '3',
                 },
               ],
             }}
           >
-            <Button key="3" style={{ padding: '0 8px' }}>
-              <EllipsisOutlined />
-            </Button>
+            <Button key="3" icon={<EllipsisOutlined />} />
           </Dropdown>,
         ],
       }}
@@ -83,20 +81,12 @@ export default () => {
           {
             key: '1',
             label: 'Tab 1',
-            children: (
-              <Card bordered={false} bodyStyle={{ height: '100vh' }}>
-                This is content of Tab 1
-              </Card>
-            ),
+            children: <Card bodyStyle={{ height: '100vh' }}>This is content of Tab 1</Card>,
           },
           {
             key: '2',
             label: 'Tab 2',
-            children: (
-              <Card bordered={false} bodyStyle={{ height: '100vh' }}>
-                This is content of Tab 2
-              </Card>
-            ),
+            children: <Card bodyStyle={{ height: '100vh' }}>This is content of Tab 2</Card>,
           },
         ]}
         tabBarExtraContent="This is tabBarExtraContent content"

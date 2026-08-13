@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from '@oceanbase/design';
+import { Button, Table } from '@oceanbase/design';
 import { ColumnProps } from '@oceanbase/design/es/table';
 
 interface DataType {
@@ -72,7 +72,7 @@ const App: React.FC = () => {
       key: 'operation',
       fixed: 'right',
       width: 100,
-      render: () => <a>action</a>,
+      render: () => <Button>Action</Button>,
     },
   ];
 

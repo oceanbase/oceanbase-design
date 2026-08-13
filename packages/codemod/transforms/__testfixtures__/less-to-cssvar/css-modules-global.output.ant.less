@@ -1,0 +1,19 @@
+.container {
+  color: var(--ant-color-text);
+}
+
+:global {
+  .ant-btn {
+    background: var(--ant-color-primary);
+    border-radius: var(--ant-border-radius);
+  }
+}
+
+:global(.ant-modal) {
+  background: var(--ant-color-bg-elevated);
+}
+
+.local :global(.external) {
+  color: var(--ant-color-text-secondary);
+}
+

@@ -1,24 +1,29 @@
-import React from 'react';
-import {
-  App,
-  message as antMessage,
-  Modal as AntModal,
-  notification as antNotification,
-} from 'antd';
+import React, { useContext } from 'react';
+import { App, Modal as AntModal, notification as antNotification } from 'antd';
 import type { MessageInstance } from 'antd/es/message/interface';
+import { createMessageCompat } from '../message/createMessageCompat';
+import { useMessageCompat } from '../message/useMessageCompat';
 import type { ModalStaticFunctions } from 'antd/es/modal/confirm';
-import type { NotificationInstance } from 'antd/es/notification/interface';
 import formatToken from 'antd/lib/theme/util/alias';
+import ConfigProvider from '../config-provider';
+import useModalStyle from '../modal/style';
+import { createObNotification } from '../notification/createObNotification';
+import { ensureNotificationConfig } from '../notification/ensureNotificationConfig';
+import useNotificationStyle from '../notification/style';
+import { useObNotification } from '../notification/useObNotification';
+import type { ObNotificationInstance } from '../notification/interface';
+import { genObToken } from '../theme/obToken';
 import theme from '../theme';
 import defaultTheme from '../theme/default';
+import type { GlobalToken } from '../theme/interface';
 
 const { defaultAlgorithm, defaultSeed, useToken } = theme;
 
-// 设置默认 token
+// set default token
 const mapToken = {
   ...defaultAlgorithm(defaultSeed),
   ...defaultTheme.token,
-  // 需要覆盖部分 Alias Token 的值
+  // need to override some Alias Token values
   override: {
     boxShadow: defaultTheme.token?.boxShadow,
     boxShadowSecondary: defaultTheme.token?.boxShadowSecondary,
@@ -26,30 +31,48 @@ const mapToken = {
   },
 };
 let token = formatToken(mapToken);
+let obToken = genObToken(token as GlobalToken);
 
+let notification: ObNotificationInstance & {
+  useNotification: typeof useObNotification;
+} = {
+  ...createObNotification(antNotification),
+  useNotification: useObNotification,
+};
 let message: MessageInstance & {
-  useMessage: typeof antMessage.useMessage;
-} = antMessage;
-let notification: NotificationInstance & {
-  useNotification: typeof antNotification.useNotification;
-} = antNotification;
+  useMessage: typeof useMessageCompat;
+} = {
+  ...createMessageCompat(notification),
+  useMessage: useMessageCompat,
+};
+
+ensureNotificationConfig();
 let modal: Omit<ModalStaticFunctions, 'warn'> & {
   useModal: typeof AntModal.useModal;
 } = AntModal;
 
 export default () => {
-  // 自动注入 useToken，避免每次使用都要声明一遍，比较繁琐
+  // automatically inject useToken, avoid declaring it every time
   token = useToken().token;
+  obToken = genObToken(token as GlobalToken);
+
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('modal');
+  const notificationPrefixCls = getPrefixCls('notification');
+
+  // register Modal style, ensure static function can also apply style
+  useModalStyle(prefixCls);
+  useNotificationStyle(notificationPrefixCls);
 
   const staticFunction = App.useApp();
-  // 替换 antd 的静态方法，支持消费 ConfigProvider 配置
-  message = {
-    ...staticFunction.message,
-    useMessage: antMessage.useMessage,
-  };
+  // replace antd's static methods, support consuming ConfigProvider configuration
   notification = {
-    ...staticFunction.notification,
-    useNotification: antNotification.useNotification,
+    ...createObNotification(staticFunction.notification),
+    useNotification: useObNotification,
+  };
+  message = {
+    ...createMessageCompat(notification),
+    useMessage: useMessageCompat,
   };
   modal = {
     ...staticFunction.modal,
@@ -59,4 +82,4 @@ export default () => {
   return null;
 };
 
-export { token, message, notification, modal };
+export { token, obToken, message, notification, modal };

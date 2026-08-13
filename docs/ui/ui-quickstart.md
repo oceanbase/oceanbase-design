@@ -1,12 +1,12 @@
 ---
-title: 快速上手
+title: Quick Start
 order: 2
-group: 业务组件
+group: Biz Components
 ---
 
-## 使用 CodeSandbox 快速创建
+## Quick Create with CodeSandbox
 
-- 可以使用我们提供的 [CodeSandbox 模板](https://codesandbox.io/s/oceanbase-ui-reproduction-template-cknd9y) 快速创建和预览。
+- Use our [CodeSandbox template](https://codesandbox.io/s/oceanbase-ui-reproduction-template-cknd9y) to quickly create and preview.
 
 <iframe src="https://codesandbox.io/embed/oceanbase-ui-reproduction-template-cknd9y?fontsize=14&hidenavigation=1&theme=dark"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
@@ -15,15 +15,15 @@ group: 业务组件
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
    ></iframe>
 
-## 在项目中使用
+## Use in Your Project
 
-### 安装
+### Installation
 
 ```bash
 $ npm i @oceanbase/ui --save
 ```
 
-### 示例
+### Example
 
 ```jsx | pure
 import { Lottie } from '@oceanbase/ui';

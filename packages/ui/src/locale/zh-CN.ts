@@ -3,8 +3,10 @@ import BasicLayout from '../BasicLayout/locale/zh-CN';
 import BatchOperationBar from '../BatchOperationBar/locale/zh-CN';
 import Dialog from '../Dialog/locale/zh-CN';
 import DocDialog from '../DocDialog/locale/zh-CN';
+import FooterToolbar from '../FooterToolbar/locale/zh-CN';
 import FullscreenBox from '../FullscreenBox/locale/zh-CN';
-import GraphToolbar from '../GraphToolbar/locale/zh-CN';
+import LightFilter from '../LightFilter/locale/zh-CN';
+import NavMenu from '../NavMenu/locale/zh-CN';
 import Highlight from '../Highlight/locale/zh-CN';
 import Login from '../Login/locale/zh-CN';
 import PageContainer from '../PageContainer/locale/zh-CN';
@@ -12,7 +14,6 @@ import { default as Boundary, default as Password } from '../Password/locale/zh-
 import Ranger from '../Ranger/locale/zh-CN';
 import DateRanger from '../DateRanger/locale/zh-CN';
 import SideTip from '../SideTip/locale/zh-CN';
-import TaskGraph from '../TaskGraph/locale/zh-CN';
 import Welcome from '../Welcome/locale/zh-CN';
 import type { Locale } from './index';
 
@@ -23,8 +24,6 @@ export default {
   PageContainer,
   Login,
   Welcome,
-  GraphToolbar,
-  TaskGraph,
   Ranger,
   Password,
   Boundary,
@@ -33,6 +32,9 @@ export default {
   DocDialog,
   Highlight,
   FullscreenBox,
+  FooterToolbar,
+  LightFilter,
+  NavMenu,
   BatchOperationBar,
   DateRanger,
 } as Locale;

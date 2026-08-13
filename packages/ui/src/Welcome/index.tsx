@@ -1,11 +1,11 @@
 import { PlusOutlined } from '@oceanbase/icons';
-import { Button, Card, Col, Row } from '@oceanbase/design';
+import { Button, Card, Col, ConfigProvider, Row } from '@oceanbase/design';
 import type { ButtonProps } from '@oceanbase/design/es/button';
 import classNames from 'classnames';
-import React from 'react';
+import React, { useContext } from 'react';
 import LocaleWrapper from '../locale/LocaleWrapper';
-import { directTo, getPrefix } from '../_util';
-import './index.less';
+import { directTo } from '../_util';
+import useStyle from './style';
 import zhCN from './locale/zh-CN';
 import type { WelcomeStepProps } from './step';
 import Step from './step';
@@ -66,8 +66,6 @@ export interface WelcomeProps {
   style?: React.CSSProperties;
 }
 
-const prefix = getPrefix('welcome');
-
 const Welcome: React.FC<WelcomeProps> = ({
   title,
   description,
@@ -82,16 +80,19 @@ const Welcome: React.FC<WelcomeProps> = ({
   className,
   ...restProps
 }) => {
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('welcome');
+  const { wrapSSR } = useStyle(prefixCls);
   const isDefault = stepType === 'default';
   const renderStep = (item, index) => {
     const DefaultStep = () => (
-      <Col span={12} data-testid="steps" key={item.title} className={`${prefix}-item`}>
-        <div className={`${prefix}-order-wrapper`}>
-          <div className={`${prefix}-order`}>{index + 1}</div>
+      <Col span={12} data-testid="steps" key={item.title} className={`${prefixCls}-item`}>
+        <div className={`${prefixCls}-order-wrapper`}>
+          <div className={`${prefixCls}-order`}>{index + 1}</div>
         </div>
         <span>
-          <h3 className={`${prefix}-title`}>{item.title}</h3>
-          <p className={`${prefix}-description`}>{item.description}</p>
+          <h3 className={`${prefixCls}-title`}>{item.title}</h3>
+          <p className={`${prefixCls}-description`}>{item.description}</p>
         </span>
       </Col>
     );
@@ -114,41 +115,41 @@ const Welcome: React.FC<WelcomeProps> = ({
     return StepItem;
   };
 
-  return (
-    <div className={`${`${prefix}-container`} ${className}`} {...restProps}>
+  return wrapSSR(
+    <div className={`${prefixCls}-container ${className || ''}`} {...restProps}>
       <Row
-        className={`${prefix}-page-header`}
+        className={`${prefixCls}-page-header`}
         style={{
           backgroundImage: `url("${bgImage}")`,
         }}
       >
-        <Col span={24} className={`${prefix}-title`}>
+        <Col span={24} className={`${prefixCls}-title`}>
           <div>{title}</div>
         </Col>
-        <Col span={16} className={`${prefix}-description`}>
+        <Col span={16} className={`${prefixCls}-description`}>
           <p>{description}</p>
         </Col>
       </Row>
-      <Card bordered={false} className={`${prefix}-introduce`}>
+      <Card bordered={false} className={`${prefixCls}-introduce`}>
         <Row gutter={78}>
           {introduces.map(item => (
-            <Col span={8} key={item.image} className={`${prefix}-item`} data-testid="introduces">
+            <Col span={8} key={item.image} className={`${prefixCls}-item`} data-testid="introduces">
               <img src={item.image} alt="" height={80} />
               <span>
-                <h3 className={`${prefix}-title`}>{item.title}</h3>
-                <p className={`${prefix}-description`}>{item.description}</p>
+                <h3 className={`${prefixCls}-title`}>{item.title}</h3>
+                <p className={`${prefixCls}-description`}>{item.description}</p>
               </span>
             </Col>
           ))}
         </Row>
       </Card>
-      <Row className={`${prefix}-content`}>
-        <Col span={14} className={isDefault ? `${prefix}-left` : `${prefix}-border-right`}>
+      <Row className={`${prefixCls}-content`}>
+        <Col span={14} className={isDefault ? `${prefixCls}-left` : 'borderRight'}>
           <Row justify="space-around">
             {steps.map((item, index) => renderStep(item, index))}
             {isDefault && (
               <Col span={24}>
-                <div className={`${prefix}-btn-wrapper`}>
+                <div className={`${prefixCls}-btn-wrapper`}>
                   <Button
                     size="large"
                     type="primary"
@@ -163,8 +164,8 @@ const Welcome: React.FC<WelcomeProps> = ({
             )}
           </Row>
         </Col>
-        <Col span={10} className={`${prefix}-right`}>
-          <h3 className={`${prefix}-title`}>{locale.helpTitle}</h3>
+        <Col span={10} className={`${prefixCls}-right`}>
+          <h3 className={`${prefixCls}-title`}>{locale.helpTitle}</h3>
           {helps.map(item => (
             <Button
               key={item.title}
@@ -173,7 +174,7 @@ const Welcome: React.FC<WelcomeProps> = ({
                 directTo(item.link);
               }}
               className={classNames({
-                [`${prefix}-more`]: !!item.isMore,
+                [`${prefixCls}-more`]: !!item.isMore,
               })}
               data-testid="helps"
             >

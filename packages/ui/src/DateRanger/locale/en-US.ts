@@ -12,5 +12,7 @@ export default {
   current: 'Current',
   jumpBack: 'Previous Interval',
   jumpForward: 'Next Interval',
+  syncToCurrent: 'Sync to current time',
+  zoomOutRange: 'Expand time range',
   ...en_US,
 };

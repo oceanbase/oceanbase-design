@@ -1,31 +1,76 @@
 import { Modal as AntModal } from 'antd';
 import type { ModalFuncProps, ModalProps as AntModalProps } from 'antd/es/modal';
+import {
+  ExclamationCircleOutlined,
+  CloseCircleOutlined,
+  CheckCircleOutlined,
+  InfoCircleOutlined,
+} from '@oceanbase/icons';
 import classNames from 'classnames';
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import ConfigProvider from '../config-provider';
+import type { ConfigConsumerProps } from '../config-provider';
 import Space from '../space';
 import { modal } from '../static-function';
+import { Document, type DocumentType } from '../_util';
 import useStyle from './style';
 
 export interface ModalProps extends AntModalProps {
   extra?: React.ReactNode;
+  document?: DocumentType;
 }
 
 const Modal = ({
+  title,
   extra,
   footer,
+  document,
   prefixCls: customizePrefixCls,
   className,
   ...restProps
 }: ModalProps) => {
-  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const { getPrefixCls, locale: contextLocale } = useContext<ConfigConsumerProps>(
+    ConfigProvider.ConfigContext
+  );
   const prefixCls = getPrefixCls('modal', customizePrefixCls);
-  const { wrapSSR } = useStyle(prefixCls);
-  const modalCls = classNames(className);
+  const [wrapCSSVar] = useStyle(prefixCls);
 
-  return wrapSSR(
+  const viewDocument = contextLocale?.global?.viewDocument;
+
+  const modalTitle = useMemo(() => {
+    if (!title && !document) {
+      return title;
+    }
+    if (!title) {
+      return null;
+    }
+    if (!document) {
+      return title;
+    }
+
+    return (
+      <div
+        className={`${prefixCls}-title-wrapper`}
+        style={{ display: 'flex', alignItems: 'center' }}
+      >
+        <span className={`${prefixCls}-title-content`}>{title}</span>
+        <Document document={document} prefixCls={prefixCls} viewDocument={viewDocument} />
+      </div>
+    );
+  }, [title, document, prefixCls, viewDocument]);
+
+  const modalCls = classNames(
+    {
+      [`${prefixCls}-no-title`]: !title && !document,
+      [`${prefixCls}-no-footer`]: footer === false || footer === null,
+    },
+    className
+  );
+
+  return wrapCSSVar(
     <AntModal
       destroyOnClose={true}
+      title={modalTitle}
       // convert false to null to hide .ant-modal-footer dom
       // ref: https://github.com/ant-design/ant-design/blob/master/components/modal/Modal.tsx#L105
       footer={
@@ -49,13 +94,37 @@ const Modal = ({
 
 // 替换 Modal 上的静态方法，支持消费 ConfigProvider 配置
 // 注意: 不能使用 Modal.info = modal.info 进行属性赋值，需要新建函数赋值，否则仍然无法消费 ConfigProvider 配置
-Modal.info = (props: ModalFuncProps) => modal.info(props);
-Modal.success = (props: ModalFuncProps) => modal.success(props);
-Modal.error = (props: ModalFuncProps) => modal.error(props);
-Modal.warning = (props: ModalFuncProps) => modal.warning(props);
-Modal.warn = (props: ModalFuncProps) => modal.warning(props);
-Modal.confirm = (props: ModalFuncProps) => modal.confirm(props);
-
+Modal.info = (props: ModalFuncProps) =>
+  modal.info({
+    // use outlined icon
+    icon: <InfoCircleOutlined />,
+    ...props,
+  });
+Modal.success = (props: ModalFuncProps) =>
+  modal.success({
+    icon: <CheckCircleOutlined />,
+    ...props,
+  });
+Modal.error = (props: ModalFuncProps) =>
+  modal.error({
+    icon: <CloseCircleOutlined />,
+    ...props,
+  });
+Modal.warning = (props: ModalFuncProps) =>
+  modal.warning({
+    icon: <ExclamationCircleOutlined />,
+    ...props,
+  });
+Modal.warn = (props: ModalFuncProps) =>
+  modal.warning({
+    icon: <ExclamationCircleOutlined />,
+    ...props,
+  });
+Modal.confirm = (props: ModalFuncProps) =>
+  modal.confirm({
+    icon: <ExclamationCircleOutlined />,
+    ...props,
+  });
 Modal.useModal = AntModal.useModal;
 Modal.destroyAll = AntModal.destroyAll;
 Modal.config = AntModal.config;

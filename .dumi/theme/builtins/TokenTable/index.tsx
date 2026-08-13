@@ -55,11 +55,13 @@ export function useColumns(): Exclude<TableProps<TokenData>['columns'], undefine
       title: locale.token,
       key: 'name',
       dataIndex: 'name',
+      width: '25%',
     },
     {
       title: locale.description,
       key: 'desc',
       dataIndex: 'desc',
+      width: '35%',
     },
     {
       title: locale.type,
@@ -70,6 +72,8 @@ export function useColumns(): Exclude<TableProps<TokenData>['columns'], undefine
     {
       title: locale.value,
       key: 'value',
+      dataIndex: 'value',
+      width: '25%',
       render: (_, record) => {
         const isColor =
           typeof record.value === 'string' &&
@@ -100,7 +104,15 @@ const TokenTable: FC<TokenTableProps> = ({ type }) => {
     [type, lang]
   );
 
-  return <Table dataSource={data} columns={columns} pagination={false} bordered />;
+  return (
+    <Table
+      dataSource={data}
+      columns={columns}
+      pagination={false}
+      bordered
+      scroll={{ x: undefined }}
+    />
+  );
 };
 
 export default TokenTable;

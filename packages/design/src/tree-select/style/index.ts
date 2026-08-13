@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
-import type { FullToken, GenerateStyle } from 'antd/es/theme/internal';
-import { genComponentStyleHook } from '../../_util/genComponentStyleHook';
+import type { FullToken, GenerateStyle } from '../../theme/interface';
+import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type TreeSelectToken = FullToken<'TreeSelect'>;
 
@@ -10,9 +10,6 @@ export const genTreeSelectStyle: GenerateStyle<TreeSelectToken> = (
   return {};
 };
 
-export default (prefixCls: string) => {
-  const useStyle = genComponentStyleHook('TreeSelect', token => {
-    return [genTreeSelectStyle(token as TreeSelectToken)];
-  });
-  return useStyle(prefixCls);
-};
+export default genStyleHooks('TreeSelect', token => {
+  return [genTreeSelectStyle(token as TreeSelectToken)];
+});

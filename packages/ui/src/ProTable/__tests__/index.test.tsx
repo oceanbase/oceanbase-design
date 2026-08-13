@@ -88,4 +88,36 @@ describe('ProTable', () => {
     expect(container.querySelector('.ant-table-inner-bordered .ant-table-bordered')).toBeTruthy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
+
+  it('outerBordered should work', () => {
+    const { container, asFragment } = render(<ProTableTest outerBordered={true} />);
+    // outerBordered 即 ProCard 边框
+    expect(container.querySelector('.ant-pro-card-border')).toBeTruthy();
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
+
+  it('outerBordered + innerBordered should work', () => {
+    const { container, asFragment } = render(
+      <ProTableTest outerBordered={true} innerBordered={true} />
+    );
+    // 外框 + 内部全网格
+    expect(container.querySelector('.ant-pro-card-border')).toBeTruthy();
+    expect(container.querySelector('.ant-table-inner-bordered .ant-table-bordered')).toBeTruthy();
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
+
+  it('outerBordered with column tooltip should keep single outer border', () => {
+    const tooltipColumns = [
+      { title: 'Name', dataIndex: 'name', tooltip: 'the name column' },
+      { title: 'Age', dataIndex: 'age' },
+    ];
+    const { container, asFragment } = render(
+      <ProTableTest columns={tooltipColumns} outerBordered={true} />
+    );
+    // tooltip 列走 tableViewRender 渲染内部 Table，外层边框仍由 ProCard 提供
+    expect(container.querySelector('.ant-pro-card-border')).toBeTruthy();
+    // 内部不再自包 Card，避免双边框
+    expect(container.querySelector('.ant-card-bordered')).toBeFalsy();
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
 });

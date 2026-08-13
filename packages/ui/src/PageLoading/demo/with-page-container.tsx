@@ -13,7 +13,7 @@ export default () => {
       ghost={false}
       loading={loading}
       header={{
-        title: '页面标题',
+        title: 'Page Title',
         reload: {
           spin: loading,
         },
@@ -21,47 +21,45 @@ export default () => {
           items: [
             {
               href: '',
-              title: '一级页面',
+              title: 'Level 1 Page',
             },
             {
               href: '',
-              title: '二级页面',
+              title: 'Level 2 Page',
             },
             {
-              title: '当前页面',
+              title: 'Current Page',
             },
           ],
         },
         extra: [
-          <Button key="1">次要按钮</Button>,
+          <Button key="1">Secondary</Button>,
           <Button key="2" type="primary">
-            主要按钮
+            Primary
           </Button>,
           <Dropdown
             menu={{
               items: [
                 {
-                  label: '下拉菜单',
+                  label: 'Dropdown Menu',
                   key: '1',
                 },
                 {
-                  label: '下拉菜单2',
+                  label: 'Dropdown Menu 2',
                   key: '2',
                 },
                 {
-                  label: '下拉菜单3',
+                  label: 'Dropdown Menu 3',
                   key: '3',
                 },
               ],
             }}
           >
-            <Button key="3" style={{ padding: '0 8px' }}>
-              <EllipsisOutlined />
-            </Button>
+            <Button key="3" icon={<EllipsisOutlined />} />
           </Dropdown>,
         ],
       }}
-      footer={[<Button>重置</Button>, <Button type="primary">提交</Button>]}
+      footer={[<Button>Reset</Button>, <Button type="primary">Submit</Button>]}
     />
   );
 };

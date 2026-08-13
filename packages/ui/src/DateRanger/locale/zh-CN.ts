@@ -12,5 +12,7 @@ export default {
   current: '当前',
   jumpBack: '向前跳转一个时间区间',
   jumpForward: '向后跳转一个时间区间',
+  syncToCurrent: '同步到当前时间',
+  zoomOutRange: '放大时间范围',
   ...zh_CN,
 };

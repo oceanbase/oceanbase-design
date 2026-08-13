@@ -6,12 +6,12 @@ export default () => {
     <>
       <ContentWithIcon
         iconType="question"
-        content="付费服务占比"
+        content="Paid service ratio"
         popOver={{
           content: (
             <div>
-              <span style={{ marginRight: '4px' }}>这是一段文案描述带有超链接</span>
-              <a>查看帮助文档</a>
+              <span style={{ marginRight: '4px' }}>Description text with a hyperlink</span>
+              <a>View help documentation</a>
             </div>
           ),
           overlayStyle: { maxWidth: '180px' },

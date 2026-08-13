@@ -36,59 +36,59 @@ export default () => {
         treeData={[
           {
             value: 'hello',
-            title: '你好',
+            title: 'Hello',
             children: [
-              { value: 'world', title: '世界' },
-              { value: 'name', title: '名称' },
+              { value: 'world', title: 'World' },
+              { value: 'name', title: 'Name' },
             ],
           },
           {
             value: 'hello1',
-            title: '你好',
+            title: 'Hello',
             children: [
-              { value: 'world', title: '世界' },
-              { value: 'name', title: '名称' },
+              { value: 'world', title: 'World' },
+              { value: 'name', title: 'Name' },
             ],
           },
           {
             value: 'hello2',
-            title: '你好',
+            title: 'Hello',
             children: [
-              { value: 'world', title: '世界' },
-              { value: 'name', title: '名称' },
+              { value: 'world', title: 'World' },
+              { value: 'name', title: 'Name' },
             ],
           },
           {
             value: 'hello3',
-            title: '你好',
+            title: 'Hello',
             children: [
-              { value: 'world', title: '世界' },
-              { value: 'name', title: '名称' },
+              { value: 'world', title: 'World' },
+              { value: 'name', title: 'Name' },
             ],
           },
           {
             value: 'hello4',
-            title: '你好',
+            title: 'Hello',
             children: [
-              { value: 'world', title: '世界' },
-              { value: 'name', title: '名称' },
+              { value: 'world', title: 'World' },
+              { value: 'name', title: 'Name' },
             ],
           },
-          { value: 'say', title: '说' },
+          { value: 'say', title: 'Say' },
         ]}
       />
       <Divider style={{ margin: '12px 0' }} />
       <Button onClick={checkAll} style={{ marginRight: 12 }}>
-        全选
+        Select All
       </Button>
       <Button onClick={invertSelect} style={{ marginRight: 12 }}>
-        反选
+        Invert Selection
       </Button>
       <Button onClick={reset} style={{ marginRight: 12 }}>
-        重置
+        Reset
       </Button>
       <Button type="primary" onClick={submit}>
-        确定
+        Submit
       </Button>
     </div>
   );

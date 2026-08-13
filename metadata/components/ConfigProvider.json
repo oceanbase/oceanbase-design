@@ -1,0 +1,24 @@
+{
+  "name": "ConfigProvider",
+  "package": "@oceanbase/design",
+  "diffLevel": "B",
+  "extendsAntd": "ConfigProvider",
+  "delegateAntd": true,
+  "addedProps": [
+    "navigate",
+    "hideOnSinglePage",
+    "card",
+    "spin",
+    "table",
+    "styleProviderProps",
+    "appProps",
+    "theme.isAliyun",
+    "theme.isDark",
+    "theme.isCompact"
+  ],
+  "constraints": ["config-provider-root"],
+  "keywords": ["config", "theme", "locale", "isAliyun", "isDark", "isCompact"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/config-provider/index.tsx",
+  "docSource": "packages/design/src/config-provider/index.md"
+}

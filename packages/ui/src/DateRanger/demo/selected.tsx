@@ -20,7 +20,7 @@ export default () => (
     selects={[
       NEAR_1_MINUTES,
       {
-        label: '近 15 分钟',
+        label: 'Last 15 Minutes',
         enLabel: 'Last 15 Minutes',
         rangeLabel: '15m',
         name: 'NEAR_15_MINUTES',

@@ -4,6 +4,7 @@ import { ProCard } from '@oceanbase/ui';
 
 export default () => {
   const { token } = theme.useToken();
+  const [loading, setLoading] = useState(false);
   const [hasHeader, setHasHeader] = useState(true);
   const [headerBordered, setHeaderBordered] = useState(false);
   const [hasPadding, setHasPadding] = useState(true);
@@ -11,6 +12,15 @@ export default () => {
   return (
     <>
       <Form layout="inline" style={{ marginBottom: 16 }}>
+        <Form.Item label="loading" required={true}>
+          <Switch
+            size="small"
+            value={loading}
+            onChange={value => {
+              setLoading(value);
+            }}
+          />
+        </Form.Item>
         <Form.Item label="has header" required={true}>
           <Switch
             size="small"
@@ -40,11 +50,12 @@ export default () => {
         </Form.Item>
       </Form>
       <ProCard
+        loading={loading}
         bordered
         headerBordered={headerBordered}
-        title={hasHeader && '默认尺寸'}
+        title={hasHeader && 'Default Size'}
         extra={hasHeader && 'extra'}
-        tooltip={hasHeader && '这是提示'}
+        tooltip={hasHeader && 'This is a tooltip'}
         style={{ width: 300 }}
         bodyStyle={bodyStyle}
       >
@@ -53,12 +64,13 @@ export default () => {
         <div>Card content</div>
       </ProCard>
       <ProCard
+        loading={loading}
         bordered
         headerBordered={headerBordered}
         size="small"
-        title={hasHeader && '小尺寸'}
+        title={hasHeader && 'Small Size'}
         extra={hasHeader && 'extra'}
-        tooltip={hasHeader && '这是提示'}
+        tooltip={hasHeader && 'This is a tooltip'}
         style={{ width: 300, marginBlockStart: 24 }}
         bodyStyle={bodyStyle}
       >
@@ -75,10 +87,11 @@ export default () => {
         }}
       >
         <ProCard
+          loading={loading}
           headerBordered={headerBordered}
-          title={hasHeader && '无边框'}
+          title={hasHeader && 'Borderless'}
           extra={hasHeader && 'extra'}
-          tooltip={hasHeader && '这是提示'}
+          tooltip={hasHeader && 'This is a tooltip'}
           style={{ width: 300 }}
           bodyStyle={bodyStyle}
         >

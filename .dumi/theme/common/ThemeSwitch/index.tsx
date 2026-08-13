@@ -1,11 +1,11 @@
 import { FloatButton } from '@oceanbase/design';
-import Icon, { CloudOutlined } from '@ant-design/icons';
+import Icon, { CloudOutlined, CodeOutlined } from '@ant-design/icons';
 import { CompactTheme, DarkTheme, Motion } from 'antd-token-previewer/es/icons';
 import { FormattedMessage } from 'dumi';
 import React from 'react';
 import ThemeIcon from './ThemeIcon';
 
-export type ThemeName = 'light' | 'dark' | 'compact' | 'aliyun' | 'motion-off';
+export type ThemeName = 'light' | 'dark' | 'compact' | 'aliyun' | 'motion-off' | 'css-var';
 
 export type ThemeSwitchProps = {
   value?: ThemeName[];
@@ -30,7 +30,8 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = (props: ThemeSwitchProps) => {
         }}
         tooltip={<FormattedMessage id="app.theme.switch.dark" />}
       />
-      <FloatButton
+      {/* TODO: compact theme has some issues, comment out for now */}
+      {/* <FloatButton
         icon={<CompactTheme />}
         type={value.includes('compact') ? 'primary' : 'default'}
         onClick={() => {
@@ -41,7 +42,7 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = (props: ThemeSwitchProps) => {
           }
         }}
         tooltip={<FormattedMessage id="app.theme.switch.compact" />}
-      />
+      /> */}
       <FloatButton
         icon={<CloudOutlined />}
         type={value.includes('aliyun') ? 'primary' : 'default'}
@@ -72,6 +73,18 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = (props: ThemeSwitchProps) => {
             id={isMotionOff ? 'app.theme.switch.motion.off' : 'app.theme.switch.motion.on'}
           />
         }
+      />
+      <FloatButton
+        icon={<CodeOutlined />}
+        type={value.includes('css-var') ? 'primary' : 'default'}
+        onClick={() => {
+          if (value.includes('css-var')) {
+            onChange(value.filter(theme => theme !== 'css-var'));
+          } else {
+            onChange([...value, 'css-var']);
+          }
+        }}
+        tooltip={<FormattedMessage id="app.theme.switch.cssVar" />}
       />
     </FloatButton.Group>
   );

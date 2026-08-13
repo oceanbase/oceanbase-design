@@ -8,7 +8,7 @@ export default () => {
 
   return (
     <TagSelect.Item value="tag3" onChange={handleChange}>
-      未选中项
+      Unselected Item
     </TagSelect.Item>
   );
 };

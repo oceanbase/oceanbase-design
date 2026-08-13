@@ -1,0 +1,13 @@
+{
+  "name": "Input",
+  "package": "@oceanbase/design",
+  "diffLevel": "A",
+  "extendsAntd": "Input",
+  "delegateAntd": true,
+  "addedProps": [],
+  "constraints": [],
+  "keywords": ["input", "text", "form"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/input/index.tsx",
+  "docSource": "packages/design/src/input/index.md"
+}

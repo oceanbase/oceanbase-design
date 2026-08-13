@@ -1,14 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { ProTable as AntProTable } from '@ant-design/pro-components';
 import type { ProTableProps as AntProTableProps } from '@ant-design/pro-components';
 import { ConfigProvider, Empty, Table } from '@oceanbase/design';
 import classNames from 'classnames';
-import { isEmpty } from 'lodash';
+import { isEmpty, merge } from 'lodash';
 import useLightFilterStyle from '../LightFilter/style';
 import useStyle from './style';
+import { columnsHaveTooltip, stripColumnTooltip } from './columnTooltip';
+import { createObTableViewRender } from './obTableViewRender';
 
 export interface ProTableProps<T, U, ValueType> extends AntProTableProps<T, U, ValueType> {
   innerBordered?: boolean;
+  /** 设置外围边框（即 ProCard 边框，分页器包含在边框内），内部保持无边框样式 */
+  outerBordered?: boolean;
 }
 
 // type CompoundedComponent = React.FC<ProTableProps<T, U, ValueType>> & typeof AntProTable;
@@ -23,6 +27,8 @@ function ProTable<T, U, ValueType>({
   size,
   bordered,
   innerBordered,
+  outerBordered,
+  cardBordered,
   expandable,
   rowSelection,
   pagination: customPagination,
@@ -32,13 +38,15 @@ function ProTable<T, U, ValueType>({
   prefixCls: customizePrefixCls,
   tableClassName,
   className,
+  tableViewRender: userTableViewRender,
+  columns,
   ...restProps
 }: ProTableProps<T, U, ValueType>) {
-  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const { getPrefixCls, card: contextCard } = useContext(ConfigProvider.ConfigContext);
 
   // customize Table style
   const tablePrefixCls = getPrefixCls('table', customizePrefixCls);
-  const { wrapSSR: tableWrapSSR } = Table.useStyle(tablePrefixCls);
+  const [tableWrapCSSVar] = Table.useStyle(tablePrefixCls);
   const pagination = Table.useDefaultPagination(customPagination);
   const tableCls = classNames(
     {
@@ -61,10 +69,52 @@ function ProTable<T, U, ValueType>({
   const { emptyText = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />, ...restLocale } =
     locale || {};
 
-  const cardProps = typeof outerCardProps === 'boolean' ? {} : outerCardProps;
+  const cardProps = merge(
+    {},
+    contextCard,
+    typeof outerCardProps === 'boolean' ? {} : outerCardProps
+  );
   const proCardCls = getPrefixCls('pro-card', customizePrefixCls);
 
-  return tableWrapSSR(
+  const emptyTextNode = (
+    <div className={`${tablePrefixCls}-empty-wrapper`}>
+      {typeof emptyText === 'function' ? emptyText() : emptyText}
+    </div>
+  );
+
+  const hasColumnTooltip = useMemo(() => columnsHaveTooltip(columns), [columns]);
+
+  const columnsWithoutTooltip = useMemo(
+    () => (hasColumnTooltip ? stripColumnTooltip(columns) : columns),
+    [columns, hasColumnTooltip]
+  );
+
+  const tableViewRender = useMemo(() => {
+    if (!hasColumnTooltip && !userTableViewRender) {
+      return undefined;
+    }
+    return createObTableViewRender({
+      columns,
+      mergeTooltip: hasColumnTooltip,
+      innerBordered,
+      tableCls,
+      pagination,
+      restLocale,
+      emptyTextNode,
+      userTableViewRender,
+    });
+  }, [
+    columns,
+    hasColumnTooltip,
+    userTableViewRender,
+    innerBordered,
+    tableCls,
+    pagination,
+    restLocale,
+    emptyTextNode,
+  ]);
+
+  return tableWrapCSSVar(
     lightFilterWrapSSR(
       wrapSSR(
         <AntProTable
@@ -72,6 +122,12 @@ function ProTable<T, U, ValueType>({
           defaultSize="large"
           size={size}
           bordered={bordered || innerBordered}
+          cardBordered={
+            outerBordered
+              ? true
+              : (cardBordered ??
+                (contextCard?.variant ? contextCard?.variant === 'outlined' : undefined))
+          }
           form={{
             // query form should remove required mark
             requiredMark: false,
@@ -93,7 +149,7 @@ function ProTable<T, U, ValueType>({
                   optionsRender ||
                   toolbar ||
                   toolBarRender,
-                [`${proCardCls}-no-divider`]: !cardProps?.headerBordered,
+                [`${proCardCls}-no-divider`]: !cardProps?.headerBordered && !cardProps?.divided,
                 [`${proCardCls}-no-padding`]: true,
                 [`${proCardCls}-contain-tabs`]: !!cardProps?.tabs,
               },
@@ -118,15 +174,13 @@ function ProTable<T, U, ValueType>({
           footer={footer}
           locale={{
             ...restLocale,
-            emptyText: (
-              <div className={`${tablePrefixCls}-empty-wrapper`}>
-                {typeof emptyText === 'function' ? emptyText() : emptyText}
-              </div>
-            ),
+            emptyText: emptyTextNode,
           }}
+          tableViewRender={tableViewRender}
           prefixCls={customizePrefixCls}
           tableClassName={tableCls}
           className={proTableCls}
+          columns={columnsWithoutTooltip}
           {...restProps}
         />
       )

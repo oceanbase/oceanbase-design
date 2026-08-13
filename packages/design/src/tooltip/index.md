@@ -20,6 +20,7 @@ nav:
 <code src="./demo/close-icon.tsx" title="关闭按钮" description="Tooltip 可以通过设置 closeIcon 变为可关闭 Tooltip, 并支持自定义关闭按钮，设置为 true 时将使用默认关闭按钮。可关闭 Tooltip 具有 onClose 事件。"></code>
 <code src="./demo/type.tsx" title="Tooltip 类型" description="Tooltip 有五种类型：default、info、success、warning 和 error，以满足不同场景的提示需求。"></code>
 <code src="./demo/mouse-follow.tsx" title="鼠标跟随" description="设置 `mouseFollow: true` 可开启鼠标跟随，此时会去掉箭头，并且 `placement`、`open` 和 `trigger` 等属性也将失效。"></code>
+<code src="./demo/custom-offset.tsx" title="自定义偏移" description="通过 `align.offset` 属性可以自定义 Tooltip 的偏移量。`offset` 格式为 `[x, y]`，单位为像素，x 为正数向右偏移，y 为正数向下偏移。"></code>
 
 ## API
 

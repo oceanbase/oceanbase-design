@@ -1,0 +1,27 @@
+.button {
+  height: var(--ob-space-600);
+  background: var(--ob-color-bg-default);
+
+  &:hover {
+    background: @controlItemBgHover;
+  }
+
+  &:active {
+    background: @controlItemBgActive;
+  }
+
+  &.disabled {
+    background: @controlItemBgActiveDisabled;
+  }
+}
+
+.input {
+  height: var(--ob-space-500);
+  padding: 0 @controlPaddingHorizontal;
+}
+
+.select {
+  height: var(--ob-space-800);
+  padding: 0 @controlPaddingHorizontalSM;
+}
+

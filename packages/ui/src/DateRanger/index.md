@@ -21,6 +21,7 @@ markdown: |
 <code src="./demo/locale.tsx" title="国际化"></code>
 <code src="./demo/updateCurrentTime.tsx" title="从外部更新时间"></code>
 <code src="./demo/history.tsx" title="历史记录"></code>
+<code src="./demo/copy-paste.tsx" title="复制粘贴时间"></code>
 
 ## API
 
@@ -48,6 +49,7 @@ markdown: |
 | overlayClassName | 选择面板根元素的类名称 | string | - | - |
 | overlayStyle | 选择面板根元素的样式 | CSSProperties | - | - |
 | ref | updateCurrentTime 手动更新当前时间 | function | - | - |
+| variant | 边框变体 | 'dashed' | - | - |
 | history | 开启历史记录, 可以配置最大保留的记录条数，默认20条 | boolean \| { capacity: number } | false | - |
 | 其他 antd/RangePicker 的 `props` | [antd-RangePicker](https://ant.design/components/date-picker-cn/#RangePicker) | - | - | - |
 

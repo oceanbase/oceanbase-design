@@ -6,6 +6,7 @@ export default {
   global: {
     ...zhTW.global,
     inputPlaceholder: '請輸入',
+    viewDocument: '查看文檔',
   },
   Pagination: {
     ...zhTW.Pagination,
@@ -24,5 +25,12 @@ export default {
       collapse: '收起',
       open: '展開',
     },
+  },
+  Filter: {
+    pleaseSelect: '請選擇',
+    open: '開啟',
+    filters: '篩選',
+    apply: '確定',
+    clearAll: '清空',
   },
 } as Locale;

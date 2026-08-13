@@ -1,0 +1,23 @@
+{
+  "name": "Table",
+  "package": "@oceanbase/design",
+  "diffLevel": "B",
+  "extendsAntd": "Table",
+  "delegateAntd": true,
+  "addedProps": [
+    "innerBordered",
+    "outerBordered",
+    "cancelText",
+    "collapseText",
+    "openText",
+    "hiddenCancelBtn",
+    "toolOptionsRender",
+    "toolAlertRender",
+    "toolSelectedContent"
+  ],
+  "constraints": ["card-table-inner-bordered", "table-over-protable", "table-batch-tool-options"],
+  "keywords": ["table", "grid", "data", "innerBordered", "batch"],
+  "importFrom": "@oceanbase/design",
+  "propsSource": "packages/design/src/table/index.tsx",
+  "docSource": "packages/design/src/table/index.md"
+}

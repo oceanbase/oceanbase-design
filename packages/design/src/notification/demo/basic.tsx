@@ -1,56 +1,61 @@
 import React from 'react';
-import { Button, ConfigProvider, notification, Space, theme } from '@oceanbase/design';
+import { Button, Space, notification } from '@oceanbase/design';
 
 export default () => {
-  // 在应用外围包裹一次 ConfigProvider 即可
   return (
-    <ConfigProvider>
-      <Space>
-        <Button
-          onClick={() => {
-            notification.info({
-              message: 'Notification Title',
-              description:
-                'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-            });
-          }}
-        >
-          Info
-        </Button>
-        <Button
-          onClick={() => {
-            notification.success({
-              message: 'Notification Title',
-              description:
-                'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-            });
-          }}
-        >
-          Success
-        </Button>
-        <Button
-          onClick={() => {
-            notification.error({
-              message: 'Notification Title',
-              description:
-                'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-            });
-          }}
-        >
-          Error
-        </Button>
-        <Button
-          onClick={() => {
-            notification.warning({
-              message: 'Notification Title',
-              description:
-                'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-            });
-          }}
-        >
-          Warning
-        </Button>
-      </Space>
-    </ConfigProvider>
+    <Space wrap>
+      <Button
+        onClick={() => {
+          notification.info({
+            message: 'Background sync completed',
+            description:
+              '3 records were updated while you were on another page. Refresh the list to see the latest data.',
+          });
+        }}
+      >
+        Info
+      </Button>
+      <Button
+        onClick={() => {
+          notification.success({
+            message: 'Instance created successfully',
+          });
+        }}
+      >
+        Success
+      </Button>
+      <Button
+        onClick={() => {
+          notification.warning({
+            message: 'Quota is almost full',
+            description:
+              'You have used 90% of the storage quota. Clean up unused backups or upgrade your plan.',
+          });
+        }}
+      >
+        Warning
+      </Button>
+      <Button
+        onClick={() => {
+          notification.error({
+            message: 'Unable to save changes',
+            description:
+              'The request failed due to a network timeout. Your draft is still saved locally.',
+          });
+        }}
+      >
+        Error
+      </Button>
+      <Button
+        onClick={() => {
+          notification.loading({
+            message: 'Exporting report',
+            description: 'Estimated time remaining: about 2 minutes.',
+          });
+        }}
+      >
+        Loading
+      </Button>
+    </Space>
   );
 };

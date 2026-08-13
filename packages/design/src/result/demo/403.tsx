@@ -6,8 +6,8 @@ export default () => {
     <Result
       status="403"
       title="403"
-      subTitle="数据传输服务需要云资源的访问权限"
-      extra={<Button type="primary">前往 RAM 角色授权</Button>}
+      subTitle="Sorry, you are not authorized to access this page."
+      extra={<Button type="primary">Back Home</Button>}
     />
   );
 };

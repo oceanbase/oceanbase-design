@@ -1,0 +1,34 @@
+.fill-example {
+  background: var(--ob-color-bg-secondary);
+
+  &.secondary {
+    background: var(--ob-color-bg-hover-secondary);
+  }
+
+  &.tertiary {
+    background: var(--ob-color-bg-focus);
+  }
+
+  &.quaternary {
+    background: var(--ob-color-bg-primary);
+  }
+
+  &.content {
+    background: var(--ob-color-bg-secondary);
+  }
+
+  &.alter {
+    background: var(--ob-color-bg-primary);
+  }
+}
+
+.text-bg {
+  &:hover {
+    background: @colorBgTextHover;
+  }
+
+  &:active {
+    background: @colorBgTextActive;
+  }
+}
+

@@ -4,8 +4,10 @@ import BatchOperationBar from '../BatchOperationBar/locale/ja-JP';
 import Boundary from '../Boundary/locale/ja-JP';
 import Dialog from '../Dialog/locale/ja-JP';
 import DocDialog from '../DocDialog/locale/ja-JP';
+import FooterToolbar from '../FooterToolbar/locale/ja-JP';
 import FullscreenBox from '../FullscreenBox/locale/ja-JP';
-import GraphToolbar from '../GraphToolbar/locale/ja-JP';
+import LightFilter from '../LightFilter/locale/ja-JP';
+import NavMenu from '../NavMenu/locale/ja-JP';
 import Highlight from '../Highlight/locale/ja-JP';
 import Login from '../Login/locale/ja-JP';
 import PageContainer from '../PageContainer/locale/ja-JP';
@@ -13,7 +15,6 @@ import Password from '../Password/locale/ja-JP';
 import Ranger from '../Ranger/locale/ja-JP';
 import DateRanger from '../DateRanger/locale/ja-JP';
 import SideTip from '../SideTip/locale/ja-JP';
-import TaskGraph from '../TaskGraph/locale/ja-JP';
 import Welcome from '../Welcome/locale/ja-JP';
 import type { Locale } from './index';
 
@@ -24,8 +25,6 @@ export default {
   PageContainer,
   Login,
   Welcome,
-  GraphToolbar,
-  TaskGraph,
   Ranger,
   Password,
   Boundary,
@@ -34,6 +33,9 @@ export default {
   DocDialog,
   Highlight,
   FullscreenBox,
+  FooterToolbar,
+  LightFilter,
+  NavMenu,
   BatchOperationBar,
   DateRanger,
 } as Locale;

@@ -1,0 +1,18 @@
+.container {
+  color: var(--ant-color-primary);
+  background: var(--ant-color-bg-container);
+  border-color: var(--ant-color-border);
+  font-size: var(--ant-font-size);
+}
+
+.status {
+  &.success {
+    color: var(--ant-color-success);
+    background: var(--ant-color-success-bg);
+  }
+  &.error {
+    color: var(--ant-color-error);
+    background: var(--ant-color-error-bg);
+  }
+}
+

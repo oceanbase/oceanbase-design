@@ -1,12 +1,12 @@
-import { Menu } from '@oceanbase/design';
+import { ConfigProvider, Menu } from '@oceanbase/design';
 import { isArray } from 'lodash';
 import { pathToRegexp } from 'path-to-regexp';
-import React, { useCallback, useEffect, useState } from 'react';
-import { getPrefix } from '../_util';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
+import LocaleWrapper from '../locale/LocaleWrapper';
 import useNavigate from '../_util/useNavigate';
-import './index.less';
-
-const prefix = getPrefix('menu');
+import useStyle from './style';
+import zhCN from './locale/zh-CN';
 
 export interface NavMenuItem {
   key: string;
@@ -19,23 +19,35 @@ export interface NavMenuItem {
   children?: NavMenuItem[];
 }
 
-export interface NavMenuProps {
+export interface NavMenuProps extends LocaleWrapperProps {
   menuList: NavMenuItem[];
   className?: string;
   style?: React.CSSProperties;
+  /** 覆盖 locale 中的导航 landmark 可访问名称 */
+  navigationAriaLabel?: string;
 }
 
-export default (props: NavMenuProps) => {
-  const { menuList, className, style } = props;
+const NavMenu = (props: NavMenuProps) => {
+  const { menuList, className, style, navigationAriaLabel, locale } = props;
+  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  const prefixCls = getPrefixCls('menu');
+  const { wrapSSR } = useStyle(prefixCls);
   const [selectedKeys, setSelectedKeys] = useState(['0']);
   const [menus, setMenus] = useState([]);
-  const location = window.location;
+  // Avoid SSR issue: only read window.location on client (e.g. Next.js)
+  const [location, setLocation] = useState<{ pathname: string } | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setLocation({ pathname: window.location.pathname });
+    }
+  }, []);
 
   const navigate = useNavigate();
 
   const preProcess = useCallback(
     list => {
-      const { pathname } = location;
+      const pathname = location?.pathname ?? '';
       try {
         for (let i = 0; i < list.length; i++) {
           const { link, openNewTab, href, key, children } = list[i];
@@ -83,8 +95,13 @@ export default (props: NavMenuProps) => {
     [navigate]
   );
 
-  return (
-    <div className={`${prefix}-container ${className}`} style={style}>
+  return wrapSSR(
+    <div
+      className={`${prefixCls}-container ${className || ''}`}
+      style={style}
+      role="navigation"
+      aria-label={navigationAriaLabel ?? locale?.navigationLabel}
+    >
       <Menu
         style={{ height: '100%', borderRight: 0 }}
         defaultSelectedKeys={['0']}
@@ -112,3 +129,8 @@ export default (props: NavMenuProps) => {
     </div>
   );
 };
+
+export default LocaleWrapper({
+  componentName: 'NavMenu',
+  defaultLocale: zhCN,
+})(NavMenu);
