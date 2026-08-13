@@ -7,6 +7,8 @@ function shouldSkipLocalePrefix(href: string): boolean {
   if (href.startsWith('/.well-known/')) return true;
   // Raw .md / .txt exports (design.md, llms.txt, /components/foo.md, /docs/**/*.md)
   if (/\.(md|txt)$/.test(href)) return true;
+  // Static files in public/ (wcag-audit-report.html etc.) live at site root
+  if (/\.html$/.test(href)) return true;
   return false;
 }
 
