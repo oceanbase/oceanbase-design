@@ -24,9 +24,10 @@ nav:
 
 ## API
 
-| Property      | Description  | Type                           | Default | Version |
-| :------------ | :----------- | :----------------------------- | :------ | :------ |
-| defaultSize   | Default size | `large` \| `middle` \| `small` | `large` | -       |
-| innerBordered | Inner border | boolean                        | -       | -       |
+| Property | Description | Type | Default | Version |
+| :-- | :-- | :-- | :-- | :-- |
+| defaultSize | Default size | `large` \| `middle` \| `small` | `large` | - |
+| innerBordered | Inner border | boolean | - | - |
+| outerBordered | Outer border (the ProCard border, pagination included), interior keeps borderless style | boolean | - | - |
 
 - More API: https://procomponents.ant.design/components/table

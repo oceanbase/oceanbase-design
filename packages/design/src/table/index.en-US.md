@@ -21,8 +21,9 @@ markdown: |
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="Basic"></code>
-<code src="./demo/bordered.tsx" title="Bordered" description="Add table borders."></code>
-<code src="./demo/inner-bordered.tsx" title="Inner Bordered" description="Borders only inside table, often with bordered Card."></code>
+<code src="./demo/bordered.tsx" title="Bordered" description="Add table borders. Note: bordered has no outer frame, unlike outerBordered + innerBordered."></code>
+<code src="./demo/outer-bordered.tsx" title="Outer Bordered" description="Border only around the table (pagination included), interior keeps borderless style; a replacement for Card bordered + bodyStyle padding 0 + Table."></code>
+<code src="./demo/inner-bordered.tsx" title="Inner Bordered" description="Borders only inside table, often with bordered Card to avoid a duplicated outer border; can be stacked with outerBordered for an outer frame plus full grid."></code>
 <code src="./demo/ellipsis.tsx" title="Cell Ellipsis" description="`column.ellipsis` enables auto-ellipsis with Tooltip. Note: column header ellipsis does not support sort/filter yet."></code>
 <code src="./demo/column-tooltip.tsx" title="Column Header Tooltip" description="Use `column.tooltip` for column header help. Works with sort and filter."></code>
 <code src="./demo/fixed-columns-header-tables.tsx" title="Fixed Header and Columns"></code>
@@ -48,6 +49,7 @@ markdown: |
 | Property | Description | Type | Default | Version |
 | :-- | :-- | :-- | :-- | :-- |
 | innerBordered | Inner borders | boolean | - | - |
+| outerBordered | Outer border (pagination included), interior keeps borderless style; a replacement for Card bordered + bodyStyle padding 0 + Table | boolean | - | - |
 | pagination | Pagination config | ReactNode | {} | - |
 | cancelText | Cancel button text in selection | ReactNode | - | - |
 | collapseText | Collapse button text in selection | ReactNode | - | - |
