@@ -1,4 +1,8 @@
+import { createRequire } from 'node:module';
 import { Command } from 'commander';
+
+const require = createRequire(import.meta.url);
+const { version } = require('../package.json');
 import { infoCommand } from './commands/info.mjs';
 import { docCommand } from './commands/doc.mjs';
 import { demoCommand } from './commands/demo.mjs';
@@ -21,7 +25,7 @@ function globalFlags(cmd) {
 
 export async function runCli(argv) {
   const program = new Command();
-  program.name('ob-design').description('OceanBase Design CLI').version('0.1.0-alpha.1');
+  program.name('ob-design').description('OceanBase Design CLI').version(version);
 
   globalFlags(program.command('info <name>').description('Merged OB component API')).action(
     async (name, opts) => infoCommand(name, opts),
