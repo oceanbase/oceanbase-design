@@ -1,6 +1,7 @@
 import type { FormInstance } from 'antd/es/form';
 import type { NamePath } from 'antd/es/form/interface';
 import type { FormProps as AntFormProps } from 'antd/es/form';
+import { withSkipScrollOnError } from './scrollToFirstError';
 
 type FieldChangeMeta = {
   name?: NamePath;
@@ -304,15 +305,8 @@ export function revalidateOnChange(
   if (names.length > 0) {
     // Defer until rc-field-form commits changed values (aligns with RHF async field updates)
     queueMicrotask(() => {
-      form.validateFields(names).catch(() => {});
+      // Internal revalidation must not scroll to the first error on failure.
+      withSkipScrollOnError(form, () => form.validateFields(names)).catch(() => {});
     });
   }
-}
-
-export function needsValidateModeFormInstance(
-  validateMode: FormValidateMode,
-  injectRevalidate: boolean,
-  explicitTrigger?: AntFormProps['validateTrigger']
-): boolean {
-  return injectRevalidate || (validateMode === 'onTouched' && explicitTrigger === undefined);
 }

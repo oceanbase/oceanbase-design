@@ -12,12 +12,12 @@ nav:
 - 🆕 Form.Item `tooltip` adds `type` prop for different Tooltip types, see [Tooltip docs](/components/Tooltip).
 - 🆕 Form.Item adds `description` prop for description before form control.
 - 🆕 Form adds `validateMode` / `reValidateMode`, aligned with [react-hook-form](https://react-hook-form.com/docs/useform). Defaults: `validateMode="onSubmit"` + `reValidateMode="onChange"`. Configure globally via [ConfigProvider](/components/config-provider) `form.validateMode`.
+- 🆕 Form `scrollToFirstError` scrolls to the first error field on validation failure: antd only triggers it on `form.submit()` failure, while `@oceanbase/design` also triggers it when calling `form.validateFields()` directly (e.g. Modal `onOk`). Enabled by default; opt out via `scrollToFirstError={false}` or the global [ConfigProvider](/components/config-provider) `form.scrollToFirstError`.
 
 ## Code Examples
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="Basic" description="Default optional style."></code>
-<code src="./demo/validate-mode.tsx" title="Validation modes" description="Aligned with react-hook-form `mode` / `reValidateMode`; no errors until submit by default."></code>
 <code src="./demo/requiredMark-same-with-antd.tsx" title="Required Style" description="Set via `requiredMark`."></code>
 <code src="./demo/form-item-description.tsx" title="Description" description="Set description before form control via Form.Item `description`."></code>
 <code src="./demo/form-item-extra.tsx" title="Extra Info" description="Set extra info after form control via Form.Item `extra`."></code>
@@ -28,6 +28,7 @@ nav:
 <code src="./demo/control-hooks.tsx" title="Form Methods"></code>
 <code src="./demo/hideRequiredMark.tsx" title="hideRequiredMark" debug></code>
 <code src="./demo/pro-form.tsx" title="ProForm" debug></code>
+<code src="./demo/validate-mode.tsx" title="Validation modes" description="Aligned with react-hook-form `mode` / `reValidateMode`; no errors until submit by default." debug></code>
 
 ## API
 
@@ -42,7 +43,7 @@ Explicit `validateTrigger` takes precedence. Use `validateMode="onChange"` to re
 
 ### ConfigProvider
 
-Use `form.validateMode` / `form.reValidateMode` on ConfigProvider for global defaults. Applies only to `Form` from `@oceanbase/design` (not ProForm or other components that use antd Form internally).
+Use `form.validateMode` / `form.reValidateMode` / `form.scrollToFirstError` on ConfigProvider for global defaults. Applies only to `Form` from `@oceanbase/design` (not ProForm or other components that use antd Form internally).
 
 ### Form.Item
 
