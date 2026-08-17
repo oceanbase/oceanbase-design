@@ -21,10 +21,10 @@ nav:
 <code src="./demo/placement.tsx" title="位置" description="默认 `bottomLeft`。"></code>
 <code src="./demo/auto-close.tsx" title="自动关闭" description="仅标题 5s、含描述 10s；error 默认不自动关闭；悬停暂停倒计时。"></code>
 <code src="./demo/update.tsx" title="更新消息内容" description="通过 `key` 更新同一条通知，适用于 loading 等进度场景。"></code>
-<code src="./demo/error-details.tsx" title="异常明细" description="warning / error 可附加结构化诊断信息，支持折叠展开与 Markdown 复制。"></code>
 <code src="./demo/actions.tsx" title="文字链操作" description="在 `message` / `description` 中插入 `<a>` 或 `Typography.Link`，样式自动按通知类型着色。"></code>
-<code src="./demo/dedupe.tsx" title="去重" description="`dedupeKey` 在同类型下去除重复弹出；与 `key`（替换）语义不同。"></code>
+<code src="./demo/error-details.tsx" title="异常明细" description="warning / error 可附加结构化诊断信息，支持折叠展开与 Markdown 复制。"></code>
 <code src="./demo/stack.tsx" title="堆叠" description="最多堆叠 3 条，悬停展开。"></code>
+<code src="./demo/dedupe.tsx" title="去重" description="`dedupeKey` 在同类型下去除重复弹出；与 `key`（替换）语义不同。"></code>
 <code src="./demo/hooks.tsx" title="Hooks" description="通过 `notification.useNotification()` 获取可消费 ConfigProvider 上下文的实例。"></code>
 
 ## 通知类型
