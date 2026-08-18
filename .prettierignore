@@ -6,6 +6,9 @@ node_modules
 packages/design/src/theme/style/*.less
 # icons 包下的源码都是自动生成，无需格式化 
 packages/icons/src
+# CLI metadata 与 skill 引用产物由生成器负责格式，避免 prettier 改写后与生成输出不一致
+packages/cli/src/metadata/*.json
+skills/oceanbase-design/references/generated/
 .secignore
 LICENSE
 es
