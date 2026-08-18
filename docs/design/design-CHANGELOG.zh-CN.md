@@ -8,6 +8,19 @@ group: 基础组件
 
 ---
 
+## 1.3.0
+
+`2026-08-18`
+
+- AI / Agent
+  - 🐞 `ob-design -V` 现在显示实际安装的包版本，不再固定输出过期的 `0.1.0-alpha.1`。[#1545](https://github.com/oceanbase/oceanbase-design/pull/1545)
+- Form
+  - 🆕 `scrollToFirstError` 对直接调用 `validateFields()` 校验失败同样生效（如 Modal `onOk` 场景），默认开启。[#1546](https://github.com/oceanbase/oceanbase-design/pull/1546)
+- Notification
+  - 🐞 修复自动关闭进度条与卡片圆角贴合的问题。[#1547](https://github.com/oceanbase/oceanbase-design/pull/1547)
+  - 🐞 修复 Notification 异常明细的展开 / 复制操作色未跟随通知类型色的问题。[#1547](https://github.com/oceanbase/oceanbase-design/pull/1547)
+  - 🐞 修复标题字体大小、左侧间距等样式不生效的问题。[#1547](https://github.com/oceanbase/oceanbase-design/pull/1547)
+
 ## 1.2.0
 
 `2026-08-13`
