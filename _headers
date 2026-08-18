@@ -1,0 +1,39 @@
+/*
+  Agent discovery headers for design.oceanbase.com
+*/
+/*
+  Link: </.well-known/agent-card.json>; rel="describedby"; type="application/json"
+  Link: </.well-known/mcp/server-card.json>; rel="mcp-server"; type="application/json"
+  Link: </design.md>; rel="design-language"; type="text/markdown"
+  Link: </llms.txt>; rel="service-doc"; type="text/plain"
+  Link: </llms-full.txt>; rel="service-desc"; type="text/plain"
+  Link: </llms-ob-constraints.txt>; rel="constraints"; type="text/plain"
+*/
+
+/.well-known/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/design.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+
+/docs/**/*.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+
+/for-agents.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+
+/llms-codemod.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
