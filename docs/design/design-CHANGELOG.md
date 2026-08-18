@@ -8,6 +8,19 @@ group: General
 
 ---
 
+## 1.3.0
+
+`2026-08-18`
+
+- AI / Agent
+  - 🐞 `ob-design -V` now reports the real installed package version instead of a stale `0.1.0-alpha.1`. [#1545](https://github.com/oceanbase/oceanbase-design/pull/1545)
+- Form
+  - 🆕 `scrollToFirstError` now also scrolls to the first error field when `validateFields()` fails directly (e.g. Modal `onOk`), enabled by default. [#1546](https://github.com/oceanbase/oceanbase-design/pull/1546)
+- Notification
+  - 🐞 Fixed countdown progress bar clipping to hug the card rounded corners. [#1547](https://github.com/oceanbase/oceanbase-design/pull/1547)
+  - 🐞 Fixed error-details actions (expand / copy) not following the notification type color. [#1547](https://github.com/oceanbase/oceanbase-design/pull/1547)
+  - 🐞 Fixed title font size and left spacing styles not taking effect. [#1547](https://github.com/oceanbase/oceanbase-design/pull/1547)
+
 ## 1.2.0
 
 `2026-08-13`
