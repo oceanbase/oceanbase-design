@@ -21,10 +21,10 @@ Use notifications for non-blocking task results or system feedback that can reac
 <code src="./demo/placement.tsx" title="Placement" description="Defaults to `bottomLeft`."></code>
 <code src="./demo/auto-close.tsx" title="Auto close" description="5s for title only, 10s with description; errors do not auto close; pause on hover."></code>
 <code src="./demo/update.tsx" title="Update content" description="Use `key` to update the same notification, e.g. loading progress."></code>
-<code src="./demo/error-details.tsx" title="Error details" description="Structured diagnostics for warning / error with collapse and Markdown copy."></code>
 <code src="./demo/actions.tsx" title="Text link actions" description="Custom `<a>` or `Typography.Link` in `message` / `description`; styles match the notification type."></code>
-<code src="./demo/dedupe.tsx" title="Dedupe" description="`dedupeKey` skips duplicates per type; different from `key`, which replaces in place."></code>
+<code src="./demo/error-details.tsx" title="Error details" description="Structured diagnostics for warning / error with collapse and Markdown copy."></code>
 <code src="./demo/stack.tsx" title="Stack" description="Up to 3 stacked notifications."></code>
+<code src="./demo/dedupe.tsx" title="Dedupe" description="`dedupeKey` skips duplicates per type; different from `key`, which replaces in place."></code>
 <code src="./demo/hooks.tsx" title="Hooks" description="Use `notification.useNotification()` to access ConfigProvider context."></code>
 
 ## Notification types

@@ -1,15 +1,15 @@
-import React, { useCallback, useContext, useRef } from 'react';
+import React, { useCallback, useContext, useLayoutEffect, useRef } from 'react';
 import { Form as AntForm } from 'antd';
 import type { FormProps as AntFormProps } from 'antd/es/form';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
 import Item from './FormItem';
 import { useFormItemChildFeedback } from './FormItemChildFeedback';
+import { patchScrollOnValidateError, setScrollToFirstErrorFlag } from './scrollToFirstError';
 import useStyle from './style';
 import type { FormReValidateMode, FormValidateMode, OBFormConfig } from './validateMode';
 import {
   markFormSubmitted,
-  needsValidateModeFormInstance,
   revalidateOnChange,
   resolveReValidateMode,
   resolveValidateMode,
@@ -53,6 +53,7 @@ const Form: CompoundedComponent = ({
   onFinish,
   onFinishFailed,
   form: propForm,
+  scrollToFirstError,
   ...restProps
 }) => {
   const { getPrefixCls, form: contextForm } = useContext(ConfigProvider.ConfigContext);
@@ -74,12 +75,11 @@ const Form: CompoundedComponent = ({
   const trackBlurredFields = validateMode === 'onTouched' && propValidateTrigger === undefined;
 
   const [fallbackForm] = AntForm.useForm();
-  const needsFormInstance = needsValidateModeFormInstance(
-    validateMode,
-    injectRevalidate,
-    propValidateTrigger
-  );
-  const mergedForm = needsFormInstance ? (propForm ?? fallbackForm) : propForm;
+  const mergedForm = propForm ?? fallbackForm;
+
+  // Scroll to the first error field by default; explicitly opt out via
+  // `scrollToFirstError={false}` or a global `form.scrollToFirstError: false`.
+  const mergedScrollToFirstError = scrollToFirstError ?? contextForm?.scrollToFirstError ?? true;
 
   const blurredFieldsRef = useRef(new Set<string>());
   const submittedRef = useRef(false);
@@ -145,6 +145,11 @@ const Form: CompoundedComponent = ({
   const [wrapCSSVar] = useStyle(prefixCls);
   const formCls = classNames(className);
 
+  useLayoutEffect(() => {
+    patchScrollOnValidateError(mergedForm);
+    setScrollToFirstErrorFlag(mergedForm, mergedScrollToFirstError);
+  }, [mergedForm, mergedScrollToFirstError]);
+
   return wrapCSSVar(
     // @ts-ignore to ignore children type error
     <AntForm
@@ -161,6 +166,7 @@ const Form: CompoundedComponent = ({
       prefixCls={customizePrefixCls}
       className={formCls}
       form={mergedForm}
+      scrollToFirstError={mergedScrollToFirstError}
       validateTrigger={resolvedValidateTrigger}
       onValuesChange={injectRevalidate ? handleValuesChange : onValuesChange}
       onFieldsChange={

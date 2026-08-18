@@ -1,8 +1,14 @@
 {
   "Alert": {
     "source": "packages/design/src/alert/index.tsx",
-    "props": ["ghost", "mini"],
-    "allInterfaceProps": ["ghost", "mini"]
+    "props": [
+      "ghost",
+      "mini"
+    ],
+    "allInterfaceProps": [
+      "ghost",
+      "mini"
+    ]
   },
   "BasicLayout": {
     "source": "packages/ui/src/BasicLayout/index.tsx",
@@ -156,8 +162,16 @@
   },
   "Empty": {
     "source": "packages/design/src/empty/index.tsx",
-    "props": ["title", "steps", "layout"],
-    "allInterfaceProps": ["title", "steps", "layout"]
+    "props": [
+      "title",
+      "steps",
+      "layout"
+    ],
+    "allInterfaceProps": [
+      "title",
+      "steps",
+      "layout"
+    ]
   },
   "Filter": {
     "source": "packages/design/src/filter/type.ts",
@@ -205,33 +219,63 @@
   },
   "Modal": {
     "source": "packages/design/src/modal/Modal.tsx",
-    "props": ["extra", "document"],
-    "allInterfaceProps": ["extra", "document"]
+    "props": [
+      "extra",
+      "document"
+    ],
+    "allInterfaceProps": [
+      "extra",
+      "document"
+    ]
   },
   "PageContainer": {
     "source": "packages/ui/src/PageContainer/index.tsx",
-    "props": ["header", "locale"],
-    "allInterfaceProps": ["header", "locale"]
+    "props": [
+      "header",
+      "locale"
+    ],
+    "allInterfaceProps": [
+      "header",
+      "locale"
+    ]
   },
   "ProTable": {
     "source": "packages/ui/src/ProTable/index.tsx",
-    "props": ["innerBordered", "outerBordered"],
-    "allInterfaceProps": ["innerBordered", "outerBordered"]
+    "props": [
+      "innerBordered",
+      "outerBordered"
+    ],
+    "allInterfaceProps": [
+      "innerBordered",
+      "outerBordered"
+    ]
   },
   "Result": {
     "source": "packages/design/src/result/index.tsx",
-    "props": ["status"],
-    "allInterfaceProps": ["status"]
+    "props": [
+      "status"
+    ],
+    "allInterfaceProps": [
+      "status"
+    ]
   },
   "Select": {
     "source": "packages/design/src/select/index.tsx",
-    "props": ["locale"],
-    "allInterfaceProps": ["locale"]
+    "props": [
+      "locale"
+    ],
+    "allInterfaceProps": [
+      "locale"
+    ]
   },
   "Spin": {
     "source": "packages/design/src/spin/index.tsx",
-    "props": ["gray"],
-    "allInterfaceProps": ["gray"]
+    "props": [
+      "gray"
+    ],
+    "allInterfaceProps": [
+      "gray"
+    ]
   },
   "Table": {
     "source": "packages/design/src/table/index.tsx",

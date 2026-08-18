@@ -8,6 +8,9 @@ packages/design/src/theme/style/*.less
 packages/icons/src
 # icons 生成后恢复用的 a11y 组件副本，与 src 受同一格式化策略约束，避免双副本漂移
 packages/icons/scripts/a11y/
+# CLI metadata 与 skill 引用产物由生成器负责格式，避免 prettier 改写后与生成输出不一致
+packages/cli/src/metadata/*.json
+skills/oceanbase-design/references/generated/
 .secignore
 LICENSE
 es

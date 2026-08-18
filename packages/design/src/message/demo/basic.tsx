@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button, Space, message } from '@oceanbase/design';
 
 export default () => {

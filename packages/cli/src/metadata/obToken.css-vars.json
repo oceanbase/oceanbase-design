@@ -307,7 +307,11 @@
       "--ob-shadow-1-top",
       "--ob-shadow-2"
     ],
-    "radius": ["--ob-radius-lg", "--ob-radius-md", "--ob-radius-sm"],
+    "radius": [
+      "--ob-radius-lg",
+      "--ob-radius-md",
+      "--ob-radius-sm"
+    ],
     "space": [
       "--ob-space-0",
       "--ob-space-100",

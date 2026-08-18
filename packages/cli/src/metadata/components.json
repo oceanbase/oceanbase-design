@@ -5,9 +5,16 @@
     "diffLevel": "C",
     "extendsAntd": "Alert",
     "delegateAntd": true,
-    "addedProps": ["ghost", "mini"],
+    "addedProps": [
+      "ghost",
+      "mini"
+    ],
     "constraints": [],
-    "keywords": ["alert", "message", "notification"],
+    "keywords": [
+      "alert",
+      "message",
+      "notification"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/alert/index.tsx",
     "docSource": "packages/design/src/alert/index.md"
@@ -19,9 +26,21 @@
     "extendsAntd": null,
     "obOnly": true,
     "delegateAntd": false,
-    "addedProps": ["logoUrl", "iconUrl", "banner", "menus", "topHeader", "sideHeader"],
+    "addedProps": [
+      "logoUrl",
+      "iconUrl",
+      "banner",
+      "menus",
+      "topHeader",
+      "sideHeader"
+    ],
     "constraints": [],
-    "keywords": ["layout", "sidebar", "menu", "app-shell"],
+    "keywords": [
+      "layout",
+      "sidebar",
+      "menu",
+      "app-shell"
+    ],
     "importFrom": "@oceanbase/ui",
     "propsSource": "packages/ui/src/BasicLayout/index.tsx",
     "docSource": "packages/ui/src/BasicLayout/index.md"
@@ -33,8 +52,14 @@
     "extendsAntd": "Button",
     "delegateAntd": true,
     "addedProps": [],
-    "constraints": ["import-design-not-antd"],
-    "keywords": ["button", "action", "click"],
+    "constraints": [
+      "import-design-not-antd"
+    ],
+    "keywords": [
+      "button",
+      "action",
+      "click"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/button/index.tsx",
     "docSource": "packages/design/src/button/index.md"
@@ -55,8 +80,15 @@
       "collapsed",
       "onCollapse"
     ],
-    "constraints": ["card-table-inner-bordered"],
-    "keywords": ["card", "container", "collapsible", "document"],
+    "constraints": [
+      "card-table-inner-bordered"
+    ],
+    "keywords": [
+      "card",
+      "container",
+      "collapsible",
+      "document"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/card/index.tsx",
     "docSource": "packages/design/src/card/index.md"
@@ -79,8 +111,17 @@
       "theme.isDark",
       "theme.isCompact"
     ],
-    "constraints": ["config-provider-root"],
-    "keywords": ["config", "theme", "locale", "isAliyun", "isDark", "isCompact"],
+    "constraints": [
+      "config-provider-root"
+    ],
+    "keywords": [
+      "config",
+      "theme",
+      "locale",
+      "isAliyun",
+      "isDark",
+      "isCompact"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/config-provider/index.tsx",
     "docSource": "packages/design/src/config-provider/index.md"
@@ -91,9 +132,20 @@
     "diffLevel": "B",
     "extendsAntd": "Descriptions",
     "delegateAntd": true,
-    "addedProps": ["collapsible", "collapsed", "defaultCollapsed", "onCollapse", "contentAlign"],
+    "addedProps": [
+      "collapsible",
+      "collapsed",
+      "defaultCollapsed",
+      "onCollapse",
+      "contentAlign"
+    ],
     "constraints": [],
-    "keywords": ["descriptions", "detail", "label-value", "collapsible"],
+    "keywords": [
+      "descriptions",
+      "detail",
+      "label-value",
+      "collapsible"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/descriptions/index.tsx",
     "docSource": "packages/design/src/descriptions/index.md"
@@ -104,9 +156,21 @@
     "diffLevel": "B",
     "extendsAntd": "Drawer",
     "delegateAntd": true,
-    "addedProps": ["document", "footerExtra", "cancelText", "okText", "okButtonProps", "locale"],
+    "addedProps": [
+      "document",
+      "footerExtra",
+      "cancelText",
+      "okText",
+      "okButtonProps",
+      "locale"
+    ],
     "constraints": [],
-    "keywords": ["drawer", "panel", "slide", "document"],
+    "keywords": [
+      "drawer",
+      "panel",
+      "slide",
+      "document"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/drawer/index.tsx",
     "docSource": "packages/design/src/drawer/index.md"
@@ -119,7 +183,11 @@
     "delegateAntd": true,
     "addedProps": [],
     "constraints": [],
-    "keywords": ["dropdown", "menu", "overlay"],
+    "keywords": [
+      "dropdown",
+      "menu",
+      "overlay"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/dropdown/index.tsx",
     "docSource": "packages/design/src/dropdown/index.md"
@@ -130,9 +198,17 @@
     "diffLevel": "C",
     "extendsAntd": "Empty",
     "delegateAntd": true,
-    "addedProps": ["title", "steps", "layout"],
+    "addedProps": [
+      "title",
+      "steps",
+      "layout"
+    ],
     "constraints": [],
-    "keywords": ["empty", "placeholder", "no-data"],
+    "keywords": [
+      "empty",
+      "placeholder",
+      "no-data"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/empty/index.tsx",
     "docSource": "packages/design/src/empty/index.md"
@@ -155,8 +231,17 @@
       "showSuffixIcon",
       "allowClear"
     ],
-    "constraints": ["filter-not-select-for-bar", "filter-controlled"],
-    "keywords": ["filter", "search", "table", "list", "筛选"],
+    "constraints": [
+      "filter-not-select-for-bar",
+      "filter-controlled"
+    ],
+    "keywords": [
+      "filter",
+      "search",
+      "table",
+      "list",
+      "筛选"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/filter/type.ts",
     "docSource": "packages/design/src/filter/index.md"
@@ -169,7 +254,11 @@
     "delegateAntd": true,
     "addedProps": [],
     "constraints": [],
-    "keywords": ["form", "validation", "input"],
+    "keywords": [
+      "form",
+      "validation",
+      "input"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/form/index.tsx",
     "docSource": "packages/design/src/form/index.md"
@@ -182,7 +271,11 @@
     "delegateAntd": true,
     "addedProps": [],
     "constraints": [],
-    "keywords": ["input", "text", "form"],
+    "keywords": [
+      "input",
+      "text",
+      "form"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/input/index.tsx",
     "docSource": "packages/design/src/input/index.md"
@@ -194,10 +287,19 @@
     "extendsAntd": null,
     "obOnly": true,
     "delegateAntd": false,
-    "addedProps": ["filterAriaLabel"],
+    "addedProps": [
+      "filterAriaLabel"
+    ],
     "addedPropsManual": true,
-    "constraints": ["filter-not-select-for-bar"],
-    "keywords": ["filter", "light", "search", "pro"],
+    "constraints": [
+      "filter-not-select-for-bar"
+    ],
+    "keywords": [
+      "filter",
+      "light",
+      "search",
+      "pro"
+    ],
     "importFrom": "@oceanbase/ui",
     "propsSource": "packages/ui/src/LightFilter/index.tsx",
     "docSource": "packages/ui/src/LightFilter/index.md"
@@ -208,9 +310,17 @@
     "diffLevel": "B",
     "extendsAntd": "Modal",
     "delegateAntd": true,
-    "addedProps": ["extra", "document"],
+    "addedProps": [
+      "extra",
+      "document"
+    ],
     "constraints": [],
-    "keywords": ["modal", "dialog", "popup", "document"],
+    "keywords": [
+      "modal",
+      "dialog",
+      "popup",
+      "document"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/modal/Modal.tsx",
     "docSource": "packages/design/src/modal/index.md"
@@ -222,9 +332,17 @@
     "extendsAntd": null,
     "obOnly": true,
     "delegateAntd": false,
-    "addedProps": ["header", "locale"],
+    "addedProps": [
+      "header",
+      "locale"
+    ],
     "constraints": [],
-    "keywords": ["page", "layout", "container", "header"],
+    "keywords": [
+      "page",
+      "layout",
+      "container",
+      "header"
+    ],
     "importFrom": "@oceanbase/ui",
     "propsSource": "packages/ui/src/PageContainer/index.tsx",
     "docSource": "packages/ui/src/PageContainer/index.md"
@@ -236,9 +354,19 @@
     "extendsAntd": null,
     "obOnly": true,
     "delegateAntd": false,
-    "addedProps": ["innerBordered", "outerBordered"],
-    "constraints": ["table-over-protable"],
-    "keywords": ["protable", "table", "request", "search"],
+    "addedProps": [
+      "innerBordered",
+      "outerBordered"
+    ],
+    "constraints": [
+      "table-over-protable"
+    ],
+    "keywords": [
+      "protable",
+      "table",
+      "request",
+      "search"
+    ],
     "importFrom": "@oceanbase/ui",
     "propsSource": "packages/ui/src/ProTable/index.tsx",
     "docSource": "packages/ui/src/ProTable/index.md"
@@ -249,9 +377,19 @@
     "diffLevel": "C",
     "extendsAntd": "Result",
     "delegateAntd": true,
-    "addedProps": ["status"],
+    "addedProps": [
+      "status"
+    ],
     "constraints": [],
-    "keywords": ["result", "success", "error", "403", "404", "500", "processing"],
+    "keywords": [
+      "result",
+      "success",
+      "error",
+      "403",
+      "404",
+      "500",
+      "processing"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/result/index.tsx",
     "docSource": "packages/design/src/result/index.md"
@@ -263,8 +401,14 @@
     "extendsAntd": "Select",
     "delegateAntd": true,
     "addedProps": [],
-    "constraints": ["filter-not-select-for-bar"],
-    "keywords": ["select", "dropdown", "option"],
+    "constraints": [
+      "filter-not-select-for-bar"
+    ],
+    "keywords": [
+      "select",
+      "dropdown",
+      "option"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/select/index.tsx",
     "docSource": "packages/design/src/select/index.md"
@@ -275,9 +419,15 @@
     "diffLevel": "C",
     "extendsAntd": "Spin",
     "delegateAntd": true,
-    "addedProps": ["gray"],
+    "addedProps": [
+      "gray"
+    ],
     "constraints": [],
-    "keywords": ["loading", "spinner", "lottie"],
+    "keywords": [
+      "loading",
+      "spinner",
+      "lottie"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/spin/index.tsx",
     "docSource": "packages/design/src/spin/index.md"
@@ -299,8 +449,18 @@
       "toolAlertRender",
       "toolSelectedContent"
     ],
-    "constraints": ["card-table-inner-bordered", "table-over-protable", "table-batch-tool-options"],
-    "keywords": ["table", "grid", "data", "innerBordered", "batch"],
+    "constraints": [
+      "card-table-inner-bordered",
+      "table-over-protable",
+      "table-batch-tool-options"
+    ],
+    "keywords": [
+      "table",
+      "grid",
+      "data",
+      "innerBordered",
+      "batch"
+    ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/table/index.tsx",
     "docSource": "packages/design/src/table/index.md"
