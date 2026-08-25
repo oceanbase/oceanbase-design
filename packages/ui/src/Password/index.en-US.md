@@ -27,7 +27,7 @@ nav:
 | Property | Description | Type | Default | Version |
 | :-- | :-- | :-- | :-- | :-- |
 | autoComplete | Browser autofill hint; `new-password` shows strength popover, `current-password` is a plain current-password field | string | `'new-password'` | - |
-| rules | Rules shown in the popover (UI only; Form handles validation timing) | [Validator](password#validator)[] | Cloud defaults | - |
+| rules | Custom password validation rules; when provided, the strength popover and blur validation follow these rules; defaults to the built-in cloud rules | [Validator](password#validator)[] | Cloud defaults | - |
 | generatePasswordRegex | Regex for random password; non-empty shows generate button | RegExp | - | - |
 | value | Password value | string | - | - |
 | onChange | Value change callback | (value?: string) => void | - | - |

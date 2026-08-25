@@ -66,7 +66,7 @@ export { default as LightFilter } from './LightFilter';
 export type { LightFilterProps } from './LightFilter';
 
 export { default as Password } from './Password';
-export type { PasswordProps } from './Password';
+export type { PasswordProps, Validator } from './Password';
 
 export { default as Ranger } from './Ranger';
 export type { RangerProps } from './Ranger';

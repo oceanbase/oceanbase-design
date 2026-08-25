@@ -2,10 +2,12 @@ import { describe, expect, it } from 'vitest';
 import enUS from '../locale/en-US';
 import {
   analyzeCloudPassword,
+  analyzeCustomPassword,
   CLOUD_PASSWORD_REGEX,
   hasForbiddenPasswordChars,
   validateCloudPasswordLength,
   validateCloudPasswordStrength,
+  type Validator,
 } from '../Content';
 
 const locale = {
@@ -84,5 +86,103 @@ describe('passwordRules', () => {
     expect(validateCloudPasswordLength('12345678')).toBe(true);
     expect(validateCloudPasswordLength('12345678901234567890')).toBe(true);
     expect(validateCloudPasswordLength('123456789012345678901')).toBe(false);
+  });
+});
+
+describe('custom rules', () => {
+  const customRules: Validator[] = [
+    {
+      validate: (val?: string) => Boolean(val && val.length >= 6),
+      message: 'At least 6 characters',
+    },
+    {
+      validate: (val?: string) => Boolean(val && /[A-Z]/.test(val)),
+      message: 'Contains uppercase letter',
+    },
+  ];
+
+  it('passes when all custom rules pass', () => {
+    const analysis = analyzeCustomPassword('Abcdef', customRules, locale, { touched: true });
+    expect(analysis.passed).toBe(true);
+    expect(analysis.riskLevel).toBe('success');
+    expect(analysis.ruleStatuses).toEqual(['pass', 'pass']);
+    expect(analysis.fieldError).toBeUndefined();
+  });
+
+  it('reports the failing custom rule message, not the built-in cloud rules', () => {
+    // 'abcdef' would pass several built-in cloud rules but fails the uppercase custom rule
+    const analysis = analyzeCustomPassword('abcdef', customRules, locale, { touched: true });
+    expect(analysis.passed).toBe(false);
+    expect(analysis.failedRuleCount).toBe(1);
+    expect(analysis.fieldError).toBe('Contains uppercase letter');
+    expect(analysis.riskLevel).toBe('medium');
+  });
+
+  it('returns the generic message when multiple custom rules fail', () => {
+    const analysis = analyzeCustomPassword('ab', customRules, locale, { touched: true });
+    expect(analysis.passed).toBe(false);
+    expect(analysis.failedRuleCount).toBeGreaterThanOrEqual(2);
+    expect(analysis.fieldError).toBe(locale.genericFailMessage);
+    expect(analysis.riskLevel).toBe('high');
+  });
+
+  it('keeps wait state before touch and returns empty message after touch', () => {
+    const untouched = analyzeCustomPassword('ab', customRules, locale, { touched: false });
+    expect(untouched.ruleStatuses.every(status => status === 'wait')).toBe(true);
+    expect(untouched.fieldError).toBeUndefined();
+
+    const empty = analyzeCustomPassword('', customRules, locale, { touched: true });
+    expect(empty.passed).toBe(false);
+    expect(empty.fieldError).toBe(locale.emptyMessage);
+  });
+
+  it('does not fail validation when only optional rules are unmet', () => {
+    const rulesWithOptional: Validator[] = [
+      {
+        validate: (val?: string) => Boolean(val && val.length >= 6),
+        message: 'At least 6 characters',
+      },
+      {
+        validate: (val?: string) => Boolean(val && /[A-Z]/.test(val)),
+        message: 'Contains uppercase letter',
+      },
+      {
+        validate: (val?: string) => Boolean(val && /[._+@#$%]/.test(val)),
+        message: 'Contains a special character',
+        optional: true,
+      },
+    ];
+
+    const analysis = analyzeCustomPassword('Abcdef', rulesWithOptional, locale, { touched: true });
+    expect(analysis.passed).toBe(true);
+    expect(analysis.failedRuleCount).toBe(0);
+    expect(analysis.riskLevel).toBe('success');
+    expect(analysis.fieldError).toBeUndefined();
+    // 未满足的可选规则展示为 wait，不阻塞校验
+    expect(analysis.ruleStatuses).toEqual(['pass', 'pass', 'wait']);
+  });
+
+  it('reports the required rule message even when an optional rule also fails', () => {
+    const rulesWithOptional: Validator[] = [
+      {
+        validate: (val?: string) => Boolean(val && val.length >= 6),
+        message: 'At least 6 characters',
+      },
+      {
+        validate: (val?: string) => Boolean(val && /[A-Z]/.test(val)),
+        message: 'Contains uppercase letter',
+      },
+      {
+        validate: (val?: string) => Boolean(val && /[._+@#$%]/.test(val)),
+        message: 'Contains a special character',
+        optional: true,
+      },
+    ];
+
+    // 仅长度规则（必填）未满足，可选规则也未满足，但不影响必填规则错误提示
+    const analysis = analyzeCustomPassword('Abc', rulesWithOptional, locale, { touched: true });
+    expect(analysis.passed).toBe(false);
+    expect(analysis.failedRuleCount).toBe(1);
+    expect(analysis.fieldError).toBe('At least 6 characters');
   });
 });
