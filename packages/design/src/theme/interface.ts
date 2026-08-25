@@ -173,3 +173,13 @@ declare module 'antd/es/table/style' {
     localeEnEmbeddedControls?: boolean;
   }
 }
+
+declare module 'antd/es/notification/style' {
+  export interface ComponentToken {
+    /**
+     * 提醒框内容区域的最大高度，超出后内部滚动。
+     * @descEN Max height of the Notification content area; scrolls inside when exceeded.
+     */
+    maxHeight?: number | string;
+  }
+}

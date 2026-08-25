@@ -26,6 +26,7 @@ Use notifications for non-blocking task results or system feedback that can reac
 <code src="./demo/stack.tsx" title="Stack" description="Up to 3 stacked notifications."></code>
 <code src="./demo/dedupe.tsx" title="Dedupe" description="`dedupeKey` skips duplicates per type; different from `key`, which replaces in place."></code>
 <code src="./demo/hooks.tsx" title="Hooks" description="Use `notification.useNotification()` to access ConfigProvider context."></code>
+<code src="./demo/max-height.tsx" title="Content max height" description="Content scrolls inside when exceeding 320px; close button and progress stay fixed." debug></code>
 
 ## Notification types
 
@@ -78,6 +79,7 @@ Use notifications for non-blocking task results or system feedback that can reac
 | showProgress                | enabled when auto closing          |
 | pauseOnHover                | `true`                             |
 | closable                    | `true` (close button always shown) |
+| content max height          | `320px`, scrolls inside beyond     |
 
 Pass `duration` explicitly to override the auto-close strategy above.
 
