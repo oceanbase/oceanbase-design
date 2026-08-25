@@ -8,6 +8,14 @@ group: 业务组件
 
 ---
 
+## 1.4.0
+
+`2026-08-25`
+
+- Password
+  - 🆕 自定义 `rules` 现在真正参与校验：强度气泡与失焦校验均按自定义规则执行（此前仅展示）；未传入时使用内置多云规则。[#1549](https://github.com/oceanbase/oceanbase-design/pull/1549)
+  - 🆕 导出 `Validator` 类型，便于编写类型安全的自定义规则。[#1549](https://github.com/oceanbase/oceanbase-design/pull/1549)
+
 ## 1.2.0
 
 `2026-08-13`

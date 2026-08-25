@@ -8,6 +8,14 @@ group: Biz Components
 
 ---
 
+## 1.4.0
+
+`2026-08-25`
+
+- Password
+  - 🆕 Custom `rules` now drive the strength popover and on-blur validation (previously display-only); built-in multi-cloud rules apply when omitted. [#1549](https://github.com/oceanbase/oceanbase-design/pull/1549)
+  - 🆕 Exported the `Validator` type for typed custom rules. [#1549](https://github.com/oceanbase/oceanbase-design/pull/1549)
+
 ## 1.2.0
 
 `2026-08-13`
