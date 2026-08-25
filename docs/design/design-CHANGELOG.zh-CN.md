@@ -8,6 +8,16 @@ group: 基础组件
 
 ---
 
+## 1.4.0
+
+`2026-08-25`
+
+- ConfigProvider
+  - 🐞 避免访问 `ConfigProvider.SizeContext` 时触发 antd 弃用警告。[#1550](https://github.com/oceanbase/oceanbase-design/pull/1550)
+- Notification
+  - 🆕 新增 `maxHeight` token（默认 `320px`）；内容超出上限后内容区内部滚动，关闭按钮与自动关闭进度条保持固定在卡片边缘。[#1551](https://github.com/oceanbase/oceanbase-design/pull/1551)
+  - 🐞 修复 Notification 样式（如宽度、间距）被 antd 默认样式覆盖不生效的问题。[#1552](https://github.com/oceanbase/oceanbase-design/pull/1552)
+
 ## 1.3.0
 
 `2026-08-18`

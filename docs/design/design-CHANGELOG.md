@@ -8,6 +8,16 @@ group: General
 
 ---
 
+## 1.4.0
+
+`2026-08-25`
+
+- ConfigProvider
+  - 🐞 Avoided the antd deprecation warning emitted when accessing `ConfigProvider.SizeContext`. [#1550](https://github.com/oceanbase/oceanbase-design/pull/1550)
+- Notification
+  - 🆕 Added `maxHeight` token (default `320px`); when content exceeds the limit it scrolls inside the content area while the close button and auto-close progress bar stay fixed at the card edge. [#1551](https://github.com/oceanbase/oceanbase-design/pull/1551)
+  - 🐞 Fixed Notification styles (e.g. width, spacing) being overridden by antd's default styles. [#1552](https://github.com/oceanbase/oceanbase-design/pull/1552)
+
 ## 1.3.0
 
 `2026-08-18`
