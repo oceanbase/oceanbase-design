@@ -11,10 +11,18 @@ export type NotificationToken = FullToken<'Notification'> & {
    * @descEN Stack layer of Notification
    */
   notificationStackLayer: number;
+  /**
+   * @desc 提醒框内容区域最大高度，超出后内部滚动
+   * @descEN Max height of the Notification content area, scrolls inside when exceeded
+   */
+  maxHeight: number | string;
 };
 
 /** Figma shadow-2 on Notification; differs from token.boxShadowSecondary until aligned globally. */
 const NOTIFICATION_SHADOW = '0 6px 8px rgba(19, 33, 57, 0.1)';
+
+/** Default max height of the Notification content area before internal scrolling kicks in. */
+const NOTIFICATION_MAX_HEIGHT = 320;
 
 type NotificationVisualType = 'success' | 'info' | 'warning' | 'error' | 'loading';
 
@@ -85,6 +93,7 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
     componentCls,
     calc,
     width = 350,
+    maxHeight = NOTIFICATION_MAX_HEIGHT,
     paddingSM,
     padding,
     paddingXS,
@@ -125,6 +134,13 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
           maxWidth: width,
           padding: `${unit(paddingSM)} ${unit(padding)}`,
           boxShadow: NOTIFICATION_SHADOW,
+          [`${noticeCls}-content`]: {
+            // Cap the content height and scroll inside when it overflows,
+            // so the card never grows without bound (close / progress stay fixed).
+            maxHeight,
+            overflowY: 'auto',
+            overflowX: 'hidden',
+          },
           [`${noticeCls}-with-icon`]: {
             display: 'grid',
             gridTemplateColumns: `${unit(fontSizeLG)} minmax(0, 1fr)`,

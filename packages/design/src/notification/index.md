@@ -26,6 +26,7 @@ nav:
 <code src="./demo/stack.tsx" title="堆叠" description="最多堆叠 3 条，悬停展开。"></code>
 <code src="./demo/dedupe.tsx" title="去重" description="`dedupeKey` 在同类型下去除重复弹出；与 `key`（替换）语义不同。"></code>
 <code src="./demo/hooks.tsx" title="Hooks" description="通过 `notification.useNotification()` 获取可消费 ConfigProvider 上下文的实例。"></code>
+<code src="./demo/max-height.tsx" title="内容最大高度" description="内容超过 320px 时内容区内部滚动，关闭按钮与进度条保持固定。" debug></code>
 
 ## 通知类型
 
@@ -66,18 +67,19 @@ nav:
 
 ### 默认行为
 
-| 行为               | 默认值                     |
-| ------------------ | -------------------------- |
-| placement          | `bottomLeft`               |
-| bottom             | `24`                       |
-| width              | `350px`                    |
-| stack              | 最多 3 条，展开间距 8px    |
-| duration（仅标题） | `5`                        |
-| duration（含描述） | `10`                       |
-| duration（error）  | `0`（不自动关闭）          |
-| showProgress       | 自动关闭时启用             |
-| pauseOnHover       | `true`                     |
-| closable           | `true`（始终显示关闭按钮） |
+| 行为               | 默认值                        |
+| ------------------ | ----------------------------- |
+| placement          | `bottomLeft`                  |
+| bottom             | `24`                          |
+| width              | `350px`                       |
+| stack              | 最多 3 条，展开间距 8px       |
+| duration（仅标题） | `5`                           |
+| duration（含描述） | `10`                          |
+| duration（error）  | `0`（不自动关闭）             |
+| showProgress       | 自动关闭时启用                |
+| pauseOnHover       | `true`                        |
+| closable           | `true`（始终显示关闭按钮）    |
+| 内容最大高度       | `320px`，超出后内容区内部滚动 |
 
 传入 `duration` 可覆盖以上自动关闭策略。
 

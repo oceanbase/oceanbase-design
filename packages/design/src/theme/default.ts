@@ -358,6 +358,9 @@ const seedTheme: ThemeConfig = {
     Notification: {
       borderRadiusLG: borderRadiusLG,
       width: 350,
+      // 内容区域最大高度，超出后内部滚动
+      // Max height of the content area; scrolls inside when exceeded
+      maxHeight: 320,
       colorSuccessBg: white,
       colorErrorBg: white,
       colorInfoBg: white,
