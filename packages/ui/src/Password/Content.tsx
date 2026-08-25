@@ -107,9 +107,24 @@ function resolveFieldError(
   if (!value) return locale.emptyMessage;
   if (hasForbiddenPasswordChars(value)) return locale.forbiddenCharsMessage;
 
-  const failedRules = validators.filter(rule => !rule.validate(value));
+  const failedRules = validators.filter(rule => !rule.optional && !rule.validate(value));
   if (failedRules.length >= 2) return locale.genericFailMessage;
   if (!validateCloudPasswordLength(value)) return locale.lengthRuleMessage;
+  if (failedRules.length === 1) return formatRuleFieldError(failedRules[0]);
+  return undefined;
+}
+
+/** Field error resolution driven purely by caller-provided (custom) rules. */
+function resolveCustomFieldError(
+  value: string | undefined,
+  locale: CloudPasswordLocale,
+  validators: Validator[],
+  touched: boolean
+): string | undefined {
+  if (!touched) return undefined;
+  if (!value) return locale.emptyMessage;
+  const failedRules = validators.filter(rule => !rule.optional && !rule.validate(value));
+  if (failedRules.length >= 2) return locale.genericFailMessage;
   if (failedRules.length === 1) return formatRuleFieldError(failedRules[0]);
   return undefined;
 }
@@ -125,6 +140,32 @@ function resolveRiskLevel(
   return 'high';
 }
 
+/** Shared core: map a value through a validator list into statuses and failure counts.
+ * Optional rules never block validation: they are excluded from the failure count and
+ * render as `wait` when unmet (Content also renders them neutrally). */
+function analyzeWithValidators(
+  value: string | undefined,
+  validators: Validator[],
+  touched: boolean
+): Pick<CloudPasswordAnalysis, 'failedRuleCount' | 'ruleStatuses' | 'fieldErrors'> {
+  const fieldFailures = validators
+    .filter(rule => !rule.optional)
+    .map(rule => (rule.validate(value) ? undefined : rule.message))
+    .filter((message): message is string => Boolean(message));
+
+  const ruleStatuses: PasswordRuleStatus[] = validators.map(rule => {
+    if (!touched || !value) return 'wait';
+    if (rule.validate(value)) return 'pass';
+    return rule.optional ? 'wait' : 'fail';
+  });
+
+  return {
+    failedRuleCount: fieldFailures.length,
+    ruleStatuses,
+    fieldErrors: fieldFailures,
+  };
+}
+
 export function analyzeCloudPassword(
   value: string | undefined,
   locale: CloudPasswordLocale,
@@ -132,16 +173,11 @@ export function analyzeCloudPassword(
 ): CloudPasswordAnalysis {
   const touched = options?.touched ?? true;
   const validators = getCloudPasswordValidators(locale);
-  const fieldFailures = validators
-    .map(rule => (rule.validate(value) ? undefined : rule.message))
-    .filter((message): message is string => Boolean(message));
-
-  const ruleStatuses: PasswordRuleStatus[] = validators.map(rule => {
-    if (!touched || !value) return 'wait';
-    return rule.validate(value) ? 'pass' : 'fail';
-  });
-
-  const failedRuleCount = fieldFailures.length;
+  const { failedRuleCount, ruleStatuses, fieldErrors } = analyzeWithValidators(
+    value,
+    validators,
+    touched
+  );
   const passed = Boolean(value) && failedRuleCount === 0 && !hasForbiddenPasswordChars(value);
 
   return {
@@ -150,7 +186,40 @@ export function analyzeCloudPassword(
     riskLevel: resolveRiskLevel(value, failedRuleCount, touched),
     fieldError: passed ? undefined : resolveFieldError(value, locale, validators, touched),
     ruleStatuses,
-    fieldErrors: fieldFailures,
+    fieldErrors,
+  };
+}
+
+/** Analyze a value against caller-provided (custom) rules only, bypassing the built-in cloud rules. */
+export function analyzeCustomPassword(
+  value: string | undefined,
+  validators: Validator[],
+  locale: CloudPasswordLocale,
+  options?: { touched?: boolean }
+): CloudPasswordAnalysis {
+  const touched = options?.touched ?? true;
+  const { failedRuleCount, ruleStatuses, fieldErrors } = analyzeWithValidators(
+    value,
+    validators,
+    touched
+  );
+  const passed = Boolean(value) && failedRuleCount === 0;
+  const riskLevel: PasswordRiskLevel =
+    !value || !touched
+      ? 'none'
+      : failedRuleCount === 0
+        ? 'success'
+        : failedRuleCount === 1
+          ? 'medium'
+          : 'high';
+
+  return {
+    passed,
+    failedRuleCount,
+    riskLevel,
+    fieldError: passed ? undefined : resolveCustomFieldError(value, locale, validators, touched),
+    ruleStatuses,
+    fieldErrors,
   };
 }
 

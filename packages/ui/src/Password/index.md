@@ -27,7 +27,7 @@ nav:
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
 | autoComplete | 浏览器自动填充提示；`new-password` 展示强度气泡，`current-password` 为简单当前密码输入 | string | `'new-password'` | - |
-| rules | 气泡内展示的密码规则（仅 UI，校验时机由 Form 负责） | [Validator](password#validator)[] | 多云默认规则 | - |
+| rules | 自定义密码校验规则；传入后强度气泡与失焦校验均按自定义规则执行，未传入时使用内置多云规则 | [Validator](password#validator)[] | 多云默认规则 | - |
 | generatePasswordRegex | 随机生成密码的正则表达式，不为空则展示随机生成的按钮 | RegExp | - | - |
 | value | 密码框内容 | string | - | - |
 | onChange | 密码框内容变化的回调 | (value?: string) => void | - | - |

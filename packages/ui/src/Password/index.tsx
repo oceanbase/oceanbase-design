@@ -7,6 +7,7 @@ import type { LocaleWrapperProps } from '../locale/LocaleWrapper';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import Content, {
   analyzeCloudPassword,
+  analyzeCustomPassword,
   getCloudPasswordValidators,
   type CloudPasswordLocale,
   type PasswordRiskLevel,
@@ -93,9 +94,12 @@ const Password: React.FC<PasswordProps> = ({
           fieldErrors: [],
         };
       }
+      if (rules) {
+        return analyzeCustomPassword(newValue, rules, cloudLocale, { touched: interactive });
+      }
       return analyzeCloudPassword(newValue, cloudLocale, { touched: interactive });
     },
-    [cloudLocale, isCurrentPassword]
+    [cloudLocale, isCurrentPassword, rules]
   );
 
   const popoverInteractive = Boolean(displayValue) || isFocused;
@@ -248,3 +252,5 @@ export default LocaleWrapper({
   componentName: 'Password',
   defaultLocale: zhCN,
 })(Password);
+
+export type { Validator } from './Content';
