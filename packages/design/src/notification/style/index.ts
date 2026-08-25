@@ -119,7 +119,9 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
   }, {});
 
   return {
-    [componentCls]: {
+    // Root selector is doubled (`${componentCls}${componentCls}`) to out-rank antd's
+    // own notification styles, which otherwise override ours.
+    [`${componentCls}${componentCls}`]: {
       [`${noticeCls}-wrapper`]: {
         marginBottom: paddingXS,
         width,
