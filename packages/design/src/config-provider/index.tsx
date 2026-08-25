@@ -20,6 +20,7 @@ import type { StyleContextProps } from '@ant-design/cssinjs/es/StyleContext';
 import { CaretRightOutlined } from '@oceanbase/icons';
 import aliyunTheme from '@oceanbase/aliyun-theme';
 import { merge } from 'lodash';
+import SizeContext from 'antd/es/config-provider/SizeContext';
 import App from '../app';
 import StaticFunction from '../static-function';
 import themeConfig from '../theme';
@@ -110,7 +111,7 @@ export type ConfigProviderType = React.FC<ConfigProviderProps> & {
   ExtendedConfigContext: typeof ExtendedConfigContext;
 } & {
   ConfigContext: React.Context<ConfigConsumerProps>;
-  SizeContext: typeof AntConfigProvider.SizeContext;
+  SizeContext: typeof SizeContext;
   config: typeof AntConfigProvider.config;
   useConfig: typeof AntConfigProvider.useConfig;
 };
@@ -312,7 +313,9 @@ const ConfigProvider: ConfigProviderType = ({
 
 ConfigProvider.ConfigContext = AntConfigProvider.ConfigContext;
 ConfigProvider.ExtendedConfigContext = ExtendedConfigContext;
-ConfigProvider.SizeContext = AntConfigProvider.SizeContext;
+// Read SizeContext from the module directly instead of `AntConfigProvider.SizeContext`,
+// which triggers antd's deprecated getter (`ConfigProvider.SizeContext`) and logs a warning.
+ConfigProvider.SizeContext = SizeContext;
 ConfigProvider.config = AntConfigProvider.config;
 ConfigProvider.useConfig = AntConfigProvider.useConfig;
 
