@@ -66,9 +66,6 @@ export const genDrawerStyle: GenerateStyle<DrawerToken> = (token: DrawerToken): 
             right: 0,
             height: '1px',
             backgroundColor: colorSplit,
-            // 使用负margin让分割线贯通到content边缘
-            marginLeft: calc(token.paddingLG).mul(-1).equal(),
-            marginRight: calc(token.paddingLG).mul(-1).equal(),
           },
         },
         [`${componentCls}-header-shadow`]: {
