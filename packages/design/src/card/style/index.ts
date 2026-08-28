@@ -13,12 +13,37 @@ export const genTableStyle = (padding: number, token: Partial<CardToken>): CSSOb
   const { antCls } = token;
   const tableComponentCls = `${antCls}-table`;
   const cellInline = token.Table?.cellPaddingInline ?? token.padding ?? token.paddingSM ?? 16;
-
+  // Pad the first column (selection / expand cells) to align with the Card content area.
+  // Avoid token.calc: this helper is reused by ProCard / ProTable whose useStyle does not inject calc.
+  // Build a CSS calc() string via unit() so it works in both modes:
+  // - non cssVar: token is a number, unit() adds px -> calc(24px + 14px + 8px)
+  // - cssVar: token is a var(--ob-*) string, unit() passes it through -> calc(var(...) + var(...) + var(...))
+  // token is Partial; alias tokens always exist at runtime, ?? 0 is only for the type.
+  const unitVal = (value?: number | string) => unit(value ?? 0);
   return {
     [`${tableComponentCls}-wrapper`]: {
       [`${tableComponentCls}`]: {
-        [`${tableComponentCls}-thead > tr > th:first-child`]: { paddingLeft: padding },
-        [`${tableComponentCls}-tbody > tr > td:first-child`]: { paddingLeft: padding },
+        // Widen the selection column to fit the 24px first-column padding + checkbox + 8px right padding.
+        // antd locks it to controlHeight (28px) by default, which makes the checkbox overflow
+        // into the adjacent column.
+        [`${tableComponentCls}-selection-col`]: {
+          width: `calc(${unitVal(padding)} + ${unitVal(token.controlInteractiveSize)} + ${unitVal(token.paddingXS)})`,
+          [`&${tableComponentCls}-selection-col-with-dropdown`]: {
+            width: `calc(${unitVal(padding)} + ${unitVal(token.controlInteractiveSize)} + ${unitVal(token.paddingXS)} + ${unitVal(token.fontSizeIcon)} + (${unitVal(token.padding)} / 4))`,
+          },
+        },
+        [`${tableComponentCls}-thead > tr > th:first-child`]: {
+          paddingLeft: padding,
+        },
+        [`${tableComponentCls}-tbody > tr > td:first-child`]: {
+          paddingLeft: padding,
+        },
+        // Pad the measure-row first cell too: if only real cells are padded while the
+        // measure row keeps its default padding, fixed-column ColGroup locks the column
+        // to the measured width and squeezes the checkbox / expand icon into the neighbor.
+        [`${tableComponentCls}-tbody > tr${tableComponentCls}-measure-row > th:first-child`]: {
+          paddingLeft: padding,
+        },
         [`${tableComponentCls}-tbody > tr > td:first-child[data-ob-user-col]:not([data-ob-user-col="0"])`]:
           {
             paddingLeft: cellInline,

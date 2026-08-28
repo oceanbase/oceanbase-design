@@ -140,4 +140,48 @@ describe('Table', () => {
     expect(container.querySelector('.ant-table-outer-bordered .ant-table-bordered')).toBeTruthy();
     expect(asFragment().firstChild).toMatchSnapshot();
   });
+
+  it('outerBordered with fixed columns and rowSelection should align selection column and not overlap', () => {
+    const fixedColumns = [
+      { title: 'Name', dataIndex: 'name', fixed: 'left' as const, width: 120 },
+      { title: 'Age', dataIndex: 'age' },
+      { title: 'Address', dataIndex: 'address' },
+    ];
+    const { container } = render(
+      <Table
+        columns={fixedColumns}
+        dataSource={dataSource}
+        outerBordered
+        rowSelection={{}}
+        scroll={{ x: 800 }}
+      />
+    );
+    const selCell = container.querySelector(
+      '.ant-table-tbody .ant-table-selection-column'
+    ) as HTMLElement;
+    const selTh = container.querySelector(
+      '.ant-table-thead .ant-table-selection-column'
+    ) as HTMLElement;
+    // Selection column width must fit 24px first-column padding + checkbox + 8px right padding = 46px.
+    // Before the fix, antd locked it to controlHeight (28px), so the checkbox overflowed the column.
+    // In non-cssVar mode unit() appends px and yields calc(24px + 14px + 8px); jsdom does not evaluate calc().
+    const selCol = container.querySelector('.ant-table-selection-col') as HTMLElement;
+    expect(getComputedStyle(selCol).width).toBe('calc(24px + 14px + 8px)');
+    // Selection column as first column aligns with the Card content area (24px), not flush to the edge.
+    expect(getComputedStyle(selCell).paddingLeft).toBe('24px');
+    expect(getComputedStyle(selTh).paddingLeft).toBe('24px');
+    // Measure-row first cell is padded to match the real cell, so the fixed-column ColGroup
+    // does not lock the column to the narrower measured width and squeeze the checkbox out.
+    const measureCell = container.querySelector(
+      '.ant-table-tbody .ant-table-measure-row > th:first-child'
+    ) as HTMLElement;
+    expect(getComputedStyle(measureCell).paddingLeft).toBe('24px');
+    // First logical column after the selection column keeps the design-default 8px indent.
+    const nameCell = container.querySelectorAll(
+      '.ant-table-tbody .ant-table-cell'
+    )[1] as HTMLElement;
+    const nameTh = container.querySelectorAll('.ant-table-thead .ant-table-cell')[1] as HTMLElement;
+    expect(getComputedStyle(nameCell).paddingLeft).toBe('8px');
+    expect(getComputedStyle(nameTh).paddingLeft).toBe('8px');
+  });
 });
