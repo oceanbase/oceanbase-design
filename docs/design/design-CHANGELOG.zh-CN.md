@@ -8,6 +8,15 @@ group: 基础组件
 
 ---
 
+## 1.4.1
+
+`2026-08-28`
+
+- Drawer
+  - 🐞 修复标题栏底部分割线超出标题栏内容边缘的问题。[#1554](https://github.com/oceanbase/oceanbase-design/pull/1554)
+- Table
+  - 🐞 修复 `outerBordered` 与固定列、选择列同时使用时，选择列与内容首列重叠的问题。[#1555](https://github.com/oceanbase/oceanbase-design/pull/1555)
+
 ## 1.4.0
 
 `2026-08-25`

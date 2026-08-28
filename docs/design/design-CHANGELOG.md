@@ -8,6 +8,15 @@ group: General
 
 ---
 
+## 1.4.1
+
+`2026-08-28`
+
+- Drawer
+  - 🐞 Fixed the header bottom divider overrunning the header content edges. [#1554](https://github.com/oceanbase/oceanbase-design/pull/1554)
+- Table
+  - 🐞 Fixed the selection column overlapping the first content column when `outerBordered` is combined with fixed columns and row selection. [#1555](https://github.com/oceanbase/oceanbase-design/pull/1555)
+
 ## 1.4.0
 
 `2026-08-25`
