@@ -43,7 +43,7 @@ Explicit `validateTrigger` takes precedence. Use `validateMode="onChange"` to re
 
 ### ConfigProvider
 
-Use `form.validateMode` / `form.reValidateMode` / `form.scrollToFirstError` on ConfigProvider for global defaults. Applies only to `Form` from `@oceanbase/design` (not ProForm or other components that use antd Form internally).
+Use `form.validateMode` / `form.reValidateMode` / `form.scrollToFirstError` / `form.preserve` on ConfigProvider for global defaults. Applies only to `Form` from `@oceanbase/design` (not ProForm or other components that use antd Form internally). `preserve` precedence: Form prop > ConfigProvider `form.preserve` > default `false`.
 
 ### Form.Item
 
