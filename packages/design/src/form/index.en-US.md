@@ -7,7 +7,7 @@ nav:
 
 - 🔥 Fully inherits antd [Form](https://ant.design/components/form-cn) capabilities and API, seamless migration.
 - 💄 Custom theme and styles, aligned with OceanBase Design specification.
-- 📢 Form `preserve` defaults to `true`.
+- 📢 Form `preserve` defaults to `false`.
 - 📢 Form `requiredMark` defaults to `optional` style.
 - 🆕 Form.Item `tooltip` adds `type` prop for different Tooltip types, see [Tooltip docs](/components/Tooltip).
 - 🆕 Form.Item adds `description` prop for description before form control.
