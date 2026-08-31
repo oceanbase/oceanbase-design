@@ -43,7 +43,7 @@ nav:
 
 ### ConfigProvider
 
-可通过 `ConfigProvider` 的 `form.validateMode` / `form.reValidateMode` / `form.scrollToFirstError` 全局配置，仅对 `@oceanbase/design` 的 `Form` 生效（ProForm 等内部使用 antd Form 的组件不适用）。
+可通过 `ConfigProvider` 的 `form.validateMode` / `form.reValidateMode` / `form.scrollToFirstError` / `form.preserve` 全局配置，仅对 `@oceanbase/design` 的 `Form` 生效（ProForm 等内部使用 antd Form 的组件不适用）。`preserve` 优先级：Form 组件 prop > ConfigProvider `form.preserve` > 默认值 `false`。
 
 ### Form.Item
 

@@ -22,6 +22,8 @@ export const DEFAULT_REVALIDATE_MODE: FormReValidateMode = 'onChange';
 export type OBFormConfig = {
   validateMode?: FormValidateMode;
   reValidateMode?: FormReValidateMode;
+  /** Preserve field values when fields unmount (antd default `true`, OB default `false`). */
+  preserve?: boolean;
 };
 
 export function resolveValidateMode(

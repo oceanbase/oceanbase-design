@@ -60,6 +60,7 @@ const InternalForm = forwardRef<FormRef, FormProps>((props, ref) => {
     onFinishFailed,
     form: propForm,
     scrollToFirstError,
+    preserve: propPreserve,
     ...restProps
   } = props;
   const { getPrefixCls, form: contextForm } = useContext(ConfigProvider.ConfigContext);
@@ -86,6 +87,9 @@ const InternalForm = forwardRef<FormRef, FormProps>((props, ref) => {
   // Scroll to the first error field by default; explicitly opt out via
   // `scrollToFirstError={false}` or a global `form.scrollToFirstError: false`.
   const mergedScrollToFirstError = scrollToFirstError ?? contextForm?.scrollToFirstError ?? true;
+
+  // Preserve unmounted field values. Precedence: Form prop > ConfigProvider `form.preserve` > OB default `false`.
+  const mergedPreserve = propPreserve ?? obFormConfig?.preserve ?? false;
 
   const blurredFieldsRef = useRef(new Set<string>());
   const submittedRef = useRef(false);
@@ -169,7 +173,7 @@ const InternalForm = forwardRef<FormRef, FormProps>((props, ref) => {
             : 'optional'
       }
       hideRequiredMark={hideRequiredMark}
-      preserve={false}
+      preserve={mergedPreserve}
       prefixCls={customizePrefixCls}
       className={formCls}
       form={mergedForm}
