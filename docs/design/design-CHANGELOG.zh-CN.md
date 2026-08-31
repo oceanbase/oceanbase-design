@@ -8,6 +8,13 @@ group: 基础组件
 
 ---
 
+## Unreleased
+
+- ConfigProvider
+  - 🆕 新增全局 `form.preserve` 配置，控制字段卸载后是否保留字段值；`Form` 的 `preserve` 属性优先级更高，默认仍不保留字段值。[#1557](https://github.com/oceanbase/oceanbase-design/pull/1557)
+- Form
+  - 🐞 修复 `ref` 未透传到底层 antd 表单实例的问题，现在可通过 `ref` 获取表单实例与原生 `<form>` 元素。[#1558](https://github.com/oceanbase/oceanbase-design/pull/1558)
+
 ## 1.4.1
 
 `2026-08-28`

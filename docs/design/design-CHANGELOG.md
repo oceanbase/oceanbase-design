@@ -8,6 +8,13 @@ group: General
 
 ---
 
+## Unreleased
+
+- ConfigProvider
+  - 🆕 Added global `form.preserve` config to control whether unmounted field values are kept; the `Form` `preserve` prop takes precedence, and values are still dropped by default. [#1557](https://github.com/oceanbase/oceanbase-design/pull/1557)
+- Form
+  - 🐞 Forwarded `ref` to the underlying antd form instance, exposing the form instance and the native `<form>` element. [#1558](https://github.com/oceanbase/oceanbase-design/pull/1558)
+
 ## 1.4.1
 
 `2026-08-28`
