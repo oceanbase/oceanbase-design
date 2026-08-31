@@ -85,4 +85,35 @@ describe('Form', () => {
     expect(typeof ref.current?.validateFields).toBe('function');
     expect(ref.current?.nativeElement).toBe(container.querySelector('form'));
   });
+
+  // Type-only regression guard: Form / Form.Item must keep antd's generic <Values>
+  // inference (validated by `tsc --noEmit`, not by vitest at runtime).
+  it('keeps antd-style generic typing for Form and Form.Item', () => {
+    const TypedForm = () => {
+      const [form] = Form.useForm<{ name: string }>();
+      return (
+        <Form
+          form={form}
+          onFinish={values => {
+            // Values must be inferred from the form instance, not `any`.
+            // @ts-expect-error inferred Values has no `nonexistentProp`
+            expect(values.nonexistentProp).toBeUndefined();
+            return undefined;
+          }}
+        />
+      );
+    };
+    render(<TypedForm />);
+
+    render(
+      <Form.Item name="name">
+        {fieldForm => {
+          // render-prop form instance must be typed, not `any`.
+          // @ts-expect-error FormInstance has no `nonexistentMethod`
+          expect(fieldForm.nonexistentMethod).toBeUndefined();
+          return null;
+        }}
+      </Form.Item>
+    );
+  });
 });

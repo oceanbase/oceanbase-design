@@ -7,7 +7,7 @@ nav:
 
 - 🔥 完全继承 antd [Form](https://ant.design/components/form-cn) 的能力和 API，可无缝切换。
 - 💄 定制主题和样式，符合 OceanBase Design 设计规范。
-- 📢 Form `preserve` 属性的默认值为 `true`。
+- 📢 Form `preserve` 属性的默认值为 `false`。
 - 📢 Form `requiredMark` 默认为 `optional` 可选样式。
 - 🆕 Form.Item `tooltip` 新增 `type` 属性，支持不同类型的 Tooltip 提示，详见 [Tooltip 文档](/components/Tooltip)。
 - 🆕 Form.Item 新增 `description` 属性，用于设置表单控件前的描述信息。
