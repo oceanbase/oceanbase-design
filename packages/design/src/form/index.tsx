@@ -24,7 +24,7 @@ export * from 'antd/es/form';
 export type { FormItemProps } from './FormItem';
 export type { FormReValidateMode, FormValidateMode, OBFormConfig } from './validateMode';
 
-export type FormProps = AntFormProps & {
+export type FormProps<Values = any> = AntFormProps<Values> & {
   validateMode?: FormValidateMode;
   reValidateMode?: FormReValidateMode;
 };
@@ -32,19 +32,22 @@ export type FormProps = AntFormProps & {
 /** Ref exposed by the underlying antd Form: the form instance plus the native `<form>` element. */
 type FormRef = React.ComponentRef<typeof AntForm>;
 
-type CompoundedComponent = React.ForwardRefExoticComponent<
-  React.PropsWithoutRef<FormProps> & React.RefAttributes<FormRef>
-> & {
-  Item: typeof Item;
-  List: typeof AntForm.List;
-  ErrorList: typeof AntForm.ErrorList;
-  useForm: typeof AntForm.useForm;
-  useFormInstance: typeof AntForm.useFormInstance;
-  useWatch: typeof AntForm.useWatch;
-  useFormItemChildFeedback: typeof useFormItemChildFeedback;
-  Provider: typeof AntForm.Provider;
-  create: typeof AntForm.create;
-};
+type FormComponent = <Values = any>(
+  props: React.PropsWithChildren<FormProps<Values>> & React.RefAttributes<FormRef>
+) => React.ReactElement;
+
+type CompoundedComponent = FormComponent &
+  Pick<React.FC, 'displayName'> & {
+    Item: typeof Item;
+    List: typeof AntForm.List;
+    ErrorList: typeof AntForm.ErrorList;
+    useForm: typeof AntForm.useForm;
+    useFormInstance: typeof AntForm.useFormInstance;
+    useWatch: typeof AntForm.useWatch;
+    useFormItemChildFeedback: typeof useFormItemChildFeedback;
+    Provider: typeof AntForm.Provider;
+    create: typeof AntForm.create;
+  };
 
 const InternalForm = forwardRef<FormRef, FormProps>((props, ref) => {
   const {
@@ -190,7 +193,9 @@ const InternalForm = forwardRef<FormRef, FormProps>((props, ref) => {
   );
 });
 
-const Form: CompoundedComponent = InternalForm as typeof Form;
+// `InternalForm` is a non-generic forwardRef wrapper; the public Form keeps antd's
+// generic <Values> call signature so consumers get the same type inference.
+const Form: CompoundedComponent = InternalForm as unknown as CompoundedComponent;
 
 if (process.env.NODE_ENV !== 'production') {
   Form.displayName = 'Form';

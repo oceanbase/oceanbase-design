@@ -25,17 +25,19 @@ export type WrapperTooltipProps = Omit<TooltipProps, 'mouseFollow'> & {
 
 export type LabelTooltipType = WrapperTooltipProps | React.ReactNode;
 
-export interface FormItemProps extends AntFormItemProps {
+export interface FormItemProps<Values = any> extends AntFormItemProps<Values> {
   tooltip?: WrapperTooltipProps | ReactNode;
   action?: ReactNode;
   description?: ReactNode;
 }
 
-type CompoundedComponent = React.FC<FormItemProps> & {
+type FormItemComponent = <Values = any>(props: FormItemProps<Values>) => React.ReactElement;
+
+type CompoundedComponent = FormItemComponent & {
   useStatus: typeof AntFormItem.useStatus;
 };
 
-const FormItem: CompoundedComponent = ({
+const InternalFormItem = ({
   children,
   label,
   tooltip,
@@ -47,7 +49,7 @@ const FormItem: CompoundedComponent = ({
   help: propHelp,
   validateStatus: propValidateStatus,
   ...restProps
-}) => {
+}: FormItemProps) => {
   const { childFeedback, contextValue } = useFormItemChildFeedbackState();
   // Child feedback is opt-in (e.g. Password blur hints). When absent, props pass through unchanged.
   const mergedHelp = childFeedback != null ? (childFeedback.help ?? propHelp) : propHelp;
@@ -128,6 +130,8 @@ const FormItem: CompoundedComponent = ({
     </FormItemChildFeedbackProvider>
   );
 };
+
+const FormItem: CompoundedComponent = InternalFormItem as CompoundedComponent;
 
 FormItem.useStatus = AntFormItem.useStatus;
 
