@@ -71,4 +71,18 @@ describe('Form', () => {
     );
     expect(asFragment().firstChild).toMatchSnapshot();
   });
+
+  it('ref should forward to the underlying antd form', () => {
+    const ref = React.createRef<React.ComponentRef<typeof Form>>();
+    const { container } = render(
+      <Form ref={ref}>
+        <Form.Item label="Name" name="name">
+          <Input />
+        </Form.Item>
+      </Form>
+    );
+    expect(ref.current).toBeTruthy();
+    expect(typeof ref.current?.validateFields).toBe('function');
+    expect(ref.current?.nativeElement).toBe(container.querySelector('form'));
+  });
 });
