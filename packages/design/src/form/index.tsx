@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useLayoutEffect, useRef } from 'react';
+import React, { forwardRef, useCallback, useContext, useLayoutEffect, useRef } from 'react';
 import { Form as AntForm } from 'antd';
 import type { FormProps as AntFormProps } from 'antd/es/form';
 import classNames from 'classnames';
@@ -29,7 +29,12 @@ export type FormProps = AntFormProps & {
   reValidateMode?: FormReValidateMode;
 };
 
-type CompoundedComponent = React.FC<FormProps> & {
+/** Ref exposed by the underlying antd Form: the form instance plus the native `<form>` element. */
+type FormRef = React.ComponentRef<typeof AntForm>;
+
+type CompoundedComponent = React.ForwardRefExoticComponent<
+  React.PropsWithoutRef<FormProps> & React.RefAttributes<FormRef>
+> & {
   Item: typeof Item;
   List: typeof AntForm.List;
   ErrorList: typeof AntForm.ErrorList;
@@ -41,22 +46,23 @@ type CompoundedComponent = React.FC<FormProps> & {
   create: typeof AntForm.create;
 };
 
-const Form: CompoundedComponent = ({
-  hideRequiredMark,
-  prefixCls: customizePrefixCls,
-  className,
-  validateMode: propValidateMode,
-  reValidateMode: propReValidateMode,
-  validateTrigger: propValidateTrigger,
-  onValuesChange,
-  onFieldsChange,
-  onFinish,
-  onFinishFailed,
-  form: propForm,
-  scrollToFirstError,
-  preserve: propPreserve,
-  ...restProps
-}) => {
+const InternalForm = forwardRef<FormRef, FormProps>((props, ref) => {
+  const {
+    hideRequiredMark,
+    prefixCls: customizePrefixCls,
+    className,
+    validateMode: propValidateMode,
+    reValidateMode: propReValidateMode,
+    validateTrigger: propValidateTrigger,
+    onValuesChange,
+    onFieldsChange,
+    onFinish,
+    onFinishFailed,
+    form: propForm,
+    scrollToFirstError,
+    preserve: propPreserve,
+    ...restProps
+  } = props;
   const { getPrefixCls, form: contextForm } = useContext(ConfigProvider.ConfigContext);
   const obFormConfig = contextForm as OBFormConfig | undefined;
 
@@ -157,6 +163,7 @@ const Form: CompoundedComponent = ({
   return wrapCSSVar(
     // @ts-ignore to ignore children type error
     <AntForm
+      ref={ref}
       requiredMark={
         // could remove hideRequiredMark logic after https://github.com/ant-design/ant-design/pull/46299 is published
         hideRequiredMark
@@ -181,7 +188,13 @@ const Form: CompoundedComponent = ({
       {...restProps}
     />
   );
-};
+});
+
+const Form: CompoundedComponent = InternalForm as typeof Form;
+
+if (process.env.NODE_ENV !== 'production') {
+  Form.displayName = 'Form';
+}
 
 Form.Item = Item;
 Form.List = AntForm.List;
