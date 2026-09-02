@@ -8,6 +8,15 @@ group: 基础组件
 
 ---
 
+## 1.4.3
+
+`2026-09-02`
+
+- Input.Password
+  - 🐞 修复非 `new-password` 场景（如登录）浏览器密码无法自动填充的问题。[#1561](https://github.com/oceanbase/oceanbase-design/pull/1561)
+- Table
+  - 🐞 修复行列合并 Table 在无边距 Card 内且无分页时末行底边不完整的问题。[#1562](https://github.com/oceanbase/oceanbase-design/pull/1562)
+
 ## 1.4.2
 
 `2026-08-31`

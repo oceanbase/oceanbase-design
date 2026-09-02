@@ -8,6 +8,15 @@ group: General
 
 ---
 
+## 1.4.3
+
+`2026-09-02`
+
+- Input.Password
+  - 🐞 Fixed browser password autofill for non-`new-password` fields (e.g. login). [#1561](https://github.com/oceanbase/oceanbase-design/pull/1561)
+- Table
+  - 🐞 Fixed incomplete bottom border when a row-span merged Table without pagination is placed in a bordered Card with zero body bottom padding. [#1562](https://github.com/oceanbase/oceanbase-design/pull/1562)
+
 ## 1.4.2
 
 `2026-08-31`
