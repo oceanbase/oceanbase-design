@@ -4,9 +4,9 @@ import type { TextAreaProps as AntTextAreaProps } from 'antd/es/input/TextArea';
 import type { InputLocale, InputRef } from './Input';
 import ConfigProvider from '../config-provider';
 import type { ConfigConsumerProps } from '../config-provider';
-import defaultLocale from '../locale/en-US';
 import { showCountFormatter } from './Input';
 import useStyle from './style';
+import { resolveInputLocale } from './resolveInputLocale';
 
 export * from 'antd/es/input/TextArea';
 
@@ -21,13 +21,7 @@ const TextArea = forwardRef<InputRef, TextAreaProps>(
     );
     const prefixCls = getPrefixCls('input', customizePrefixCls);
     const [wrapCSSVar] = useStyle(prefixCls);
-    const inputLocale: InputLocale = {
-      placeholder:
-        contextLocale?.global?.inputPlaceholder || defaultLocale.global?.inputPlaceholder,
-      ...defaultLocale.Input,
-      ...contextLocale?.Input,
-      ...customLocale,
-    };
+    const inputLocale = resolveInputLocale(contextLocale, customLocale);
 
     return wrapCSSVar(
       <AntInput.TextArea
