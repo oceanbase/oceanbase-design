@@ -1,5 +1,5 @@
-import React from 'react';
-import { Table } from '@oceanbase/design';
+import React, { useState } from 'react';
+import { Card, Form, Switch, Table } from '@oceanbase/design';
 import type { ColumnsType } from '@oceanbase/design/es/table';
 
 interface DataType {
@@ -113,6 +113,26 @@ const data: DataType[] = [
   },
 ];
 
-const App: React.FC = () => <Table columns={columns} dataSource={data} bordered />;
+const App: React.FC = () => {
+  const [pagination, setPagination] = useState(false);
+
+  return (
+    <>
+      <Form layout="inline" style={{ marginBottom: 16 }}>
+        <Form.Item label="Pagination">
+          <Switch size="small" checked={pagination} onChange={setPagination} />
+        </Form.Item>
+      </Form>
+      <Card bordered bodyStyle={{ padding: 0 }}>
+        <Table
+          columns={columns}
+          dataSource={data}
+          bordered
+          pagination={pagination ? { pageSize: 3 } : false}
+        />
+      </Card>
+    </>
+  );
+};
 
 export default App;
