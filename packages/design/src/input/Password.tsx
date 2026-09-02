@@ -6,6 +6,7 @@ import type { InputLocale } from './Input';
 import ConfigProvider from '../config-provider';
 import type { ConfigConsumerProps } from '../config-provider';
 import { showCountFormatter } from './Input';
+import NewPassword from './NewPassword';
 import useStyle from './style';
 import { resolveInputLocale } from './resolveInputLocale';
 
@@ -19,38 +20,38 @@ function isNewPasswordField(autoComplete?: string): boolean {
   return autoComplete === 'new-password';
 }
 
-const NEW_PASSWORD_MANAGER_ATTRS = {
-  'data-lpignore': 'true',
-  'data-1p-ignore': 'true',
-  'data-bwignore': 'true',
-  'data-form-type': 'other',
-} as const;
+const Password = forwardRef<InputRef, PasswordProps>((props, ref) => {
+  const {
+    prefixCls: customizePrefixCls,
+    locale: customLocale,
+    showCount,
+    autoComplete,
+    ...restProps
+  } = props;
 
-const Password = forwardRef<InputRef, PasswordProps>(
-  (
-    { prefixCls: customizePrefixCls, locale: customLocale, showCount, autoComplete, ...restProps },
-    ref
-  ) => {
-    const { getPrefixCls, locale: contextLocale } = useContext<ConfigConsumerProps>(
-      ConfigProvider.ConfigContext
-    );
-    const inputPrefixCls = getPrefixCls('input', customizePrefixCls);
-    const [wrapCSSVar] = useStyle(inputPrefixCls);
-    const inputLocale = resolveInputLocale(contextLocale, customLocale);
+  const { getPrefixCls, locale: contextLocale } = useContext<ConfigConsumerProps>(
+    ConfigProvider.ConfigContext
+  );
+  const inputPrefixCls = getPrefixCls('input', customizePrefixCls);
+  const [wrapCSSVar] = useStyle(inputPrefixCls);
 
-    return wrapCSSVar(
-      <AntInput.Password
-        ref={ref}
-        prefixCls={customizePrefixCls}
-        placeholder={inputLocale.placeholder}
-        showCount={showCount === true ? { formatter: showCountFormatter } : showCount}
-        autoComplete={autoComplete}
-        {...restProps}
-        {...(isNewPasswordField(autoComplete) ? NEW_PASSWORD_MANAGER_ATTRS : {})}
-      />
-    );
+  if (isNewPasswordField(autoComplete)) {
+    return wrapCSSVar(<NewPassword ref={ref} {...props} />);
   }
-);
+
+  const inputLocale = resolveInputLocale(contextLocale, customLocale);
+
+  return wrapCSSVar(
+    <AntInput.Password
+      ref={ref}
+      prefixCls={customizePrefixCls}
+      placeholder={inputLocale.placeholder}
+      showCount={showCount === true ? { formatter: showCountFormatter } : showCount}
+      autoComplete={autoComplete}
+      {...restProps}
+    />
+  );
+});
 
 if (process.env.NODE_ENV !== 'production') {
   Password.displayName = 'Password';

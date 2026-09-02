@@ -28,10 +28,11 @@ describe('Input.Password', () => {
     expect(input.getAttribute('type')).toBe('password');
   });
 
-  it('renders new-password as native password input', () => {
+  it('renders new-password as text input masked by -webkit-text-security', () => {
     const { container } = render(<Input.Password autoComplete="new-password" />);
     const input = container.querySelector('.ant-input-password input') as HTMLInputElement;
-    expect(input.getAttribute('type')).toBe('password');
+    expect(input.getAttribute('type')).toBe('text');
+    expect(input.classList.contains('ant-input-text-security')).toBe(true);
   });
 
   it('reveals plain text when visibility toggled for new-password', () => {
@@ -39,13 +40,13 @@ describe('Input.Password', () => {
       <Input.Password autoComplete="new-password" defaultValue="password" />
     );
     const input = container.querySelector('.ant-input-password input') as HTMLInputElement;
-    expect(input.getAttribute('type')).toBe('password');
+    expect(input.classList.contains('ant-input-text-security')).toBe(true);
 
     fireEvent.click(container.querySelector('.ant-input-password-icon') as HTMLElement);
-    expect(input.getAttribute('type')).toBe('text');
+    expect(input.classList.contains('ant-input-text-security')).toBe(false);
 
     fireEvent.click(container.querySelector('.ant-input-password-icon') as HTMLElement);
-    expect(input.getAttribute('type')).toBe('password');
+    expect(input.classList.contains('ant-input-text-security')).toBe(true);
   });
 
   it('keeps third-party password manager ignore attrs for new-password', () => {

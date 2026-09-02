@@ -21,7 +21,8 @@ describe('Password remember hint in Form.Item', () => {
 
     const passwordInput = container.querySelector('.ant-input-password input') as HTMLInputElement;
     expect(passwordInput).toBeTruthy();
-    expect(passwordInput.getAttribute('type')).toBe('password');
+    expect(passwordInput.getAttribute('type')).toBe('text');
+    expect(passwordInput.classList.contains('ant-input-text-security')).toBe(true);
 
     await user.type(passwordInput, VALID_PASSWORD);
     await user.tab();
