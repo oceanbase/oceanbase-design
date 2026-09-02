@@ -27,4 +27,4 @@ demo:
 
 ### Input.Password 扩展
 
-密码框以 text 型输入 + text-security 遮蔽呈现，浏览器不会将其识别为密码框，focus 时不会弹出已保存密码下拉。`autoComplete="new-password"` 时，组件会附加密码管理器 `data-*` hint，进一步避免第三方密码管理器误识别。
+默认与 antd 一致，委托 `Input.Password` 实现，`type="password"` 支持浏览器密码自动填充。`autoComplete="new-password"` 时额外附加密码管理器 `data-*` hint，避免第三方密码管理器误识别。

@@ -27,4 +27,4 @@ demo:
 
 ### Input.Password extensions
 
-The password is rendered as a text input masked with text-security, so browsers do not treat it as a password field and no saved-password dropdown appears on focus. When `autoComplete="new-password"`, the component also attaches password-manager `data-*` hints to avoid misdetection by third-party password managers.
+Matches antd via `Input.Password` with native `type="password"` for browser autofill. When `autoComplete="new-password"`, password-manager `data-*` hints are attached to reduce misdetection by third-party password managers.

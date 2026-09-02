@@ -4,8 +4,8 @@ import type { InputProps as AntInputProps, InputRef } from 'antd';
 import type { ShowCountFormatter } from 'rc-input/es/interface';
 import ConfigProvider from '../config-provider';
 import type { ConfigConsumerProps } from '../config-provider';
-import defaultLocale from '../locale/en-US';
 import useStyle from './style';
+import { resolveInputLocale } from './resolveInputLocale';
 
 export * from 'antd/es/input/Input';
 
@@ -26,13 +26,7 @@ const Input = forwardRef<InputRef, InputProps>(
     const { getPrefixCls, locale: contextLocale } = useContext<ConfigConsumerProps>(
       ConfigProvider.ConfigContext
     );
-    const inputLocale: InputLocale = {
-      placeholder:
-        contextLocale?.global?.inputPlaceholder || defaultLocale.global?.inputPlaceholder,
-      ...defaultLocale.Input,
-      ...contextLocale?.Input,
-      ...customLocale,
-    };
+    const inputLocale = resolveInputLocale(contextLocale, customLocale);
     const prefixCls = getPrefixCls('input', customizePrefixCls);
     const [wrapCSSVar] = useStyle(prefixCls);
 

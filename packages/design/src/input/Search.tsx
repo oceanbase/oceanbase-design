@@ -6,10 +6,10 @@ import { composeRef } from 'rc-util/lib/ref';
 import type { SearchProps as AntSearchProps } from 'antd/es/input/Search';
 import ConfigProvider from '../config-provider';
 import type { ConfigConsumerProps } from '../config-provider';
-import defaultLocale from '../locale/en-US';
 import InternalInput, { showCountFormatter } from './Input';
 import type { InputLocale, InputRef } from './Input';
 import useStyle from './style';
+import { resolveInputLocale } from './resolveInputLocale';
 
 export * from 'antd/es/input/Search';
 
@@ -48,12 +48,7 @@ const Search = forwardRef<InputRef, SearchProps>((props, ref) => {
   const inputRef = useRef<InputRef>(null);
   const composedRef = useRef(false);
 
-  const inputLocale: InputLocale = {
-    placeholder: contextLocale?.global?.inputPlaceholder || defaultLocale.global?.inputPlaceholder,
-    ...defaultLocale.Input,
-    ...contextLocale?.Input,
-    ...customLocale,
-  };
+  const inputLocale = resolveInputLocale(contextLocale, customLocale);
 
   if (!enterButton && !addonAfter) {
     const handleChange: AntSearchProps['onChange'] = e => {
