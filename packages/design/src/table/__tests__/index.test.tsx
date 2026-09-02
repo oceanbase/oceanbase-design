@@ -184,4 +184,64 @@ describe('Table', () => {
     expect(getComputedStyle(nameCell).paddingLeft).toBe('8px');
     expect(getComputedStyle(nameTh).paddingLeft).toBe('8px');
   });
+
+  it('should not set has-rowspan class without row merge', () => {
+    const { container } = render(
+      <Table columns={columns} dataSource={dataSource.slice(0, 2)} pagination={false} />
+    );
+    expect(container.querySelector('.ant-table-has-rowspan')).toBeFalsy();
+    expect(container.querySelector('.ant-table-has-rowspan-first')).toBeFalsy();
+    expect(container.querySelector('.ant-table-has-rowspan-last')).toBeFalsy();
+  });
+
+  it('should set has-rowspan class when any column has rowSpan merge', () => {
+    const rowSpanColumns = [
+      { title: 'Name', dataIndex: 'name' },
+      {
+        title: 'Tel',
+        dataIndex: 'tel',
+        onCell: (_: unknown, index?: number) => {
+          if (index === 0) {
+            return { rowSpan: 2 };
+          }
+          if (index === 1) {
+            return { rowSpan: 0 };
+          }
+          return {};
+        },
+      },
+      { title: 'Address', dataIndex: 'address' },
+    ];
+    const rowSpanData = [
+      { key: '1', name: 'A', tel: '111', address: 'Addr 1' },
+      { key: '2', name: 'B', tel: '222', address: 'Addr 2' },
+    ];
+    const { container } = render(
+      <Table columns={rowSpanColumns} dataSource={rowSpanData} pagination={false} />
+    );
+    expect(container.querySelector('.ant-table-wrapper.ant-table-has-rowspan')).toBeTruthy();
+    expect(container.querySelector('.ant-table-has-rowspan-first')).toBeFalsy();
+    expect(container.querySelector('.ant-table-has-rowspan-last')).toBeFalsy();
+  });
+
+  it('should set has-rowspan-first when first column has rowSpan merge', () => {
+    const rowSpanColumns = [
+      {
+        title: 'Name',
+        dataIndex: 'name',
+        onCell: (_: unknown, index?: number) =>
+          index === 0 ? { rowSpan: 2 } : index === 1 ? { rowSpan: 0 } : {},
+      },
+      { title: 'Age', dataIndex: 'age' },
+    ];
+    const rowSpanData = [
+      { key: '1', name: 'A', age: 1 },
+      { key: '2', name: 'B', age: 2 },
+    ];
+    const { container } = render(
+      <Table columns={rowSpanColumns} dataSource={rowSpanData} pagination={false} />
+    );
+    expect(container.querySelector('.ant-table-wrapper.ant-table-has-rowspan')).toBeTruthy();
+    expect(container.querySelector('.ant-table-has-rowspan-first')).toBeTruthy();
+  });
 });

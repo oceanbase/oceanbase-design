@@ -232,14 +232,17 @@ export const genCardStyle: GenerateStyle<CardToken> = (token: CardToken): CSSObj
     // no body padding bottom and bordered card
     [`${componentCls}${componentCls}-bordered${componentCls}-no-body-padding-bottom`]: {
       [`> ${componentCls}-body`]: {
-        // fix double border when Table has no pagination
-        [`> ${tableComponentCls}-wrapper${tableComponentCls}-no-pagination`]: {
-          [`${tableComponentCls}`]: {
-            [`${tableComponentCls}-tbody > tr:last-child > td`]: {
-              borderBottom: 'none',
+        // Remove last-row td bottom border when there is no pagination, to avoid double border with Card.
+        // Row/column merge tables cannot use built-in pagination (pagination breaks merge semantics), so they are always no-pagination;
+        // tr:last-child then does not include every visual bottom-edge cell — do not strip border-bottom or the bottom edge looks broken.
+        [`> ${tableComponentCls}-wrapper${tableComponentCls}-no-pagination:not(${tableComponentCls}-has-rowspan)`]:
+          {
+            [`${tableComponentCls}`]: {
+              [`${tableComponentCls}-tbody > tr:last-child > td`]: {
+                borderBottom: 'none',
+              },
             },
           },
-        },
         // fix double border when Table has no data
         [`> ${tableComponentCls}-wrapper${tableComponentCls}-has-empty`]: {
           [`${tableComponentCls}`]: {

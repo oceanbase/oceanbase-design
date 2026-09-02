@@ -34,53 +34,6 @@ export type TableColumnsType<T = AnyObject> = (TableColumnGroupType<T> | TableCo
 
 export * from 'antd/es/table';
 
-/** 第一个非 hidden 的叶子列（支持 column 分组） */
-function getFirstLeafColumn<T extends AnyObject>(
-  cols: ColumnsType<T> | undefined
-): AnyObject | null {
-  if (!cols) {
-    return null;
-  }
-  for (const item of cols as AnyObject[]) {
-    if (item.hidden) {
-      continue;
-    }
-    if (item.children?.length) {
-      const found = getFirstLeafColumn(item.children as ColumnsType<T>);
-      if (found) {
-        return found;
-      }
-    } else {
-      return item;
-    }
-  }
-  return null;
-}
-
-/** 最后一个非 hidden 的叶子列 */
-function getLastLeafColumn<T extends AnyObject>(
-  cols: ColumnsType<T> | undefined
-): AnyObject | null {
-  if (!cols) {
-    return null;
-  }
-  for (let i = cols.length - 1; i >= 0; i--) {
-    const item = cols[i] as AnyObject;
-    if (item.hidden) {
-      continue;
-    }
-    if (item.children?.length) {
-      const found = getLastLeafColumn(item.children as ColumnsType<T>);
-      if (found) {
-        return found;
-      }
-    } else {
-      return item;
-    }
-  }
-  return null;
-}
-
 /** 叶子列数量（与 rc-table 扁平列顺序一致：深度优先跳过 hidden） */
 function countLeafColumns<T extends AnyObject>(cols: ColumnsType<T> | undefined): number {
   if (!cols?.length) {
@@ -101,6 +54,81 @@ function countLeafColumns<T extends AnyObject>(cols: ColumnsType<T> | undefined)
   };
   walk(cols);
   return n;
+}
+
+function isRowSpanMerge(rowSpan: unknown): boolean {
+  return rowSpan === 0 || (typeof rowSpan === 'number' && rowSpan > 1);
+}
+
+interface ColumnRowSpanMeta {
+  needsColMeta: boolean;
+  hasAnyRowSpan: boolean;
+  hasFirstColumnRowSpan: boolean;
+  hasLastColumnRowSpan: boolean;
+}
+
+/** Single pass over leaf columns; aggregates rowspan-related class and data-* injection flags. */
+function analyzeColumnRowSpan<T extends AnyObject>(
+  cols: ColumnsType<T> | undefined,
+  data: readonly T[] | undefined
+): ColumnRowSpanMeta {
+  const empty: ColumnRowSpanMeta = {
+    needsColMeta: false,
+    hasAnyRowSpan: false,
+    hasFirstColumnRowSpan: false,
+    hasLastColumnRowSpan: false,
+  };
+  if (!cols?.length || !data?.length) {
+    return empty;
+  }
+
+  const tailIdx = countLeafColumns(cols) - 1;
+  let leafIndex = 0;
+  let hasAnyRowSpan = false;
+  let hasFirstColumnRowSpan = false;
+  let hasLastColumnRowSpan = false;
+
+  const walk = (items: ColumnsType<T>): void => {
+    for (const item of items as AnyObject[]) {
+      if (item.hidden) {
+        continue;
+      }
+      if (item.children?.length) {
+        walk(item.children as ColumnsType<T>);
+        continue;
+      }
+      const myIndex = leafIndex;
+      leafIndex += 1;
+      if (typeof item.onCell !== 'function') {
+        continue;
+      }
+      let colHasRowSpan = false;
+      for (let i = 0; i < data.length; i++) {
+        if (isRowSpanMerge(item.onCell(data[i], i)?.rowSpan)) {
+          colHasRowSpan = true;
+          break;
+        }
+      }
+      if (!colHasRowSpan) {
+        continue;
+      }
+      hasAnyRowSpan = true;
+      if (myIndex === 0) {
+        hasFirstColumnRowSpan = true;
+      }
+      if (myIndex === tailIdx) {
+        hasLastColumnRowSpan = true;
+      }
+    }
+  };
+  walk(cols);
+
+  return {
+    hasAnyRowSpan,
+    hasFirstColumnRowSpan,
+    hasLastColumnRowSpan,
+    needsColMeta: hasFirstColumnRowSpan || hasLastColumnRowSpan,
+  };
 }
 
 /**
@@ -219,38 +247,9 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   const noPagination = pagination === false || pagination === null;
   const noData = dataSource?.length === 0;
 
-  /** 基于原始 columns 检测，避免依赖注入后的 onCell；needsColMeta 为真时才注入 data-* */
-  const { needsColMeta, hasFirstColumnRowSpan, hasLastColumnRowSpan } = React.useMemo(() => {
-    const empty = {
-      needsColMeta: false,
-      hasFirstColumnRowSpan: false,
-      hasLastColumnRowSpan: false,
-    };
-    if (!columns?.length || !dataSource?.length) {
-      return empty;
-    }
-    const firstCol = getFirstLeafColumn(columns);
-    const lastCol = getLastLeafColumn(columns);
-    const leafHasRowSpan = (col: AnyObject | null) => {
-      if (typeof col?.onCell !== 'function') {
-        return false;
-      }
-      for (let i = 0; i < dataSource.length; i++) {
-        const rs = col.onCell(dataSource[i], i)?.rowSpan;
-        if (rs === 0 || (typeof rs === 'number' && rs > 1)) {
-          return true;
-        }
-      }
-      return false;
-    };
-    const first = leafHasRowSpan(firstCol);
-    const last = firstCol === lastCol ? first : leafHasRowSpan(lastCol);
-    return {
-      needsColMeta: first || last,
-      hasFirstColumnRowSpan: first,
-      hasLastColumnRowSpan: last,
-    };
-  }, [columns, dataSource]);
+  /** Detect from raw columns before injected onCell wrappers are applied */
+  const { needsColMeta, hasAnyRowSpan, hasFirstColumnRowSpan, hasLastColumnRowSpan } =
+    React.useMemo(() => analyzeColumnRowSpan(columns, dataSource), [columns, dataSource]);
 
   const columnsWithCellMeta = React.useMemo(
     () => (needsColMeta ? injectUserColumnCellMeta(columns) : columns),
@@ -283,6 +282,7 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
       [`${prefixCls}-expandable`]: !isEmpty(expandable),
       [`${prefixCls}-selectable`]: !!rowSelection,
       [`${prefixCls}-has-footer`]: !!footer,
+      [`${prefixCls}-has-rowspan`]: hasAnyRowSpan,
       ...(rowspanSuffix ? { [`${prefixCls}-has-rowspan-${rowspanSuffix}`]: true } : {}),
       [`${prefixCls}-thead-multiple-rows`]: hasMultipleTheadRows,
       [`${prefixCls}-inner-bordered`]: innerBordered,
