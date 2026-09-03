@@ -162,6 +162,36 @@ describe('custom rules', () => {
     expect(analysis.ruleStatuses).toEqual(['pass', 'pass', 'wait']);
   });
 
+  it('does not invoke custom validate before touch or when value is undefined', () => {
+    const unsafeRules: Validator[] = [
+      {
+        validate: (val?: string) => {
+          // Mirrors consumer validators that call .match without a null guard.
+          const uppercaseMatch = (val as string).match(/[A-Z]/g) || [];
+          return uppercaseMatch.length >= 1;
+        },
+        message: 'Contains uppercase letter',
+      },
+    ];
+
+    expect(() =>
+      analyzeCustomPassword(undefined, unsafeRules, locale, { touched: false })
+    ).not.toThrow();
+    const untouched = analyzeCustomPassword(undefined, unsafeRules, locale, { touched: false });
+    expect(untouched.failedRuleCount).toBe(0);
+    expect(untouched.ruleStatuses).toEqual(['wait']);
+    expect(untouched.fieldError).toBeUndefined();
+
+    // Blur-empty path: touched but no value must also skip validate calls.
+    expect(() =>
+      analyzeCustomPassword(undefined, unsafeRules, locale, { touched: true })
+    ).not.toThrow();
+    const blurred = analyzeCustomPassword(undefined, unsafeRules, locale, { touched: true });
+    expect(blurred.failedRuleCount).toBe(0);
+    expect(blurred.ruleStatuses).toEqual(['wait']);
+    expect(blurred.fieldError).toBe(locale.emptyMessage);
+  });
+
   it('reports the required rule message even when an optional rule also fails', () => {
     const rulesWithOptional: Validator[] = [
       {

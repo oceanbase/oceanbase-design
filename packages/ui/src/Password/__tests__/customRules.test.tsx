@@ -13,7 +13,30 @@ const customRules = [
   },
 ];
 
+const unsafeMatchRules = [
+  {
+    validate: (val?: string) => {
+      // Mirrors consumer validators that call .match without a null guard.
+      const uppercaseMatch = (val as string).match(/[A-Z]/g) || [];
+      return uppercaseMatch.length >= 1;
+    },
+    message: 'Contains uppercase letter',
+  },
+];
+
 describe('Password custom rules', () => {
+  it('mounts safely when custom validate uses match on an undefined value', () => {
+    expect(() =>
+      render(
+        <Form>
+          <Form.Item name="password" label="Password">
+            <Password rules={unsafeMatchRules} />
+          </Form.Item>
+        </Form>
+      )
+    ).not.toThrow();
+  });
+
   it('validates against custom rules instead of the built-in cloud rules', async () => {
     const user = userEvent.setup();
 
@@ -32,7 +55,11 @@ describe('Password custom rules', () => {
     await user.tab();
 
     await waitFor(() => {
-      expect(screen.getByText(CUSTOM_RULE_MESSAGE, { exact: false })).toBeTruthy();
+      // Blur feedback surfaces through the Form.Item explain area; scope the query
+      // there instead of the whole document, where the popover rules list may
+      // briefly carry the same text while its close animation settles.
+      const explainError = container.querySelector('.ant-form-item-explain-error');
+      expect(explainError?.textContent).toContain(CUSTOM_RULE_MESSAGE);
     });
   });
 });
