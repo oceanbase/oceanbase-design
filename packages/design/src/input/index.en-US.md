@@ -27,4 +27,4 @@ demo:
 
 ### Input.Password extensions
 
-Matches antd via `Input.Password` with native `type="password"` for browser autofill. When `autoComplete="new-password"`, password-manager `data-*` hints are attached to reduce misdetection by third-party password managers.
+Matches antd via `Input.Password` with native `type="password"` for browser autofill. When `autoComplete="new-password"`, the input is text masked with text-security to suppress the saved-password dropdown, with password-manager `data-*` hints.

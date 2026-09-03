@@ -20,6 +20,10 @@ export const genInputStyle: GenerateStyle<InputToken> = (token: InputToken): CSS
         },
       },
     },
+    // new-password: text input + text-security mask to avoid browser saved-password dropdown
+    [`${componentCls}-text-security`]: {
+      WebkitTextSecurity: 'disc',
+    },
   };
 };
 
