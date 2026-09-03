@@ -148,16 +148,24 @@ function analyzeWithValidators(
   validators: Validator[],
   touched: boolean
 ): Pick<CloudPasswordAnalysis, 'failedRuleCount' | 'ruleStatuses' | 'fieldErrors'> {
+  // Until the field is touched with a value, rules are not evaluated: validators
+  // from consumers may not guard against undefined (e.g. calling .match directly).
+  if (!touched || !value) {
+    return {
+      failedRuleCount: 0,
+      ruleStatuses: validators.map(() => 'wait'),
+      fieldErrors: [],
+    };
+  }
+
   const fieldFailures = validators
     .filter(rule => !rule.optional)
     .map(rule => (rule.validate(value) ? undefined : rule.message))
     .filter((message): message is string => Boolean(message));
 
-  const ruleStatuses: PasswordRuleStatus[] = validators.map(rule => {
-    if (!touched || !value) return 'wait';
-    if (rule.validate(value)) return 'pass';
-    return rule.optional ? 'wait' : 'fail';
-  });
+  const ruleStatuses: PasswordRuleStatus[] = validators.map(rule =>
+    rule.validate(value) ? 'pass' : rule.optional ? 'wait' : 'fail'
+  );
 
   return {
     failedRuleCount: fieldFailures.length,
