@@ -167,6 +167,16 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
   const isCn = locale.antLocale === 'zh-cn';
   const isEN = locale.antLocale === 'en';
 
+  // Resolve the quick-option label from the component locale first, keyed by the Chinese label
+  // so it also works for locales like ja-JP. When there is no dictionary entry, use the enLabel
+  // for English and fall back to the original (Chinese) label for other locales.
+  const getQuickLabel = (item?: RangeOption) => {
+    if (!item) {
+      return '';
+    }
+    return locale[item.label] || (isEN ? item.enLabel || item.label : item.label);
+  };
+
   // 是否为 moment 时间对象
   const isMoment =
     moment.isMoment(defaultValue?.[0]) ||
@@ -350,32 +360,38 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
     return `${differenceSeconds}s`;
   };
 
+  // Compose the custom-range description (e.g. "near N years/months/weeks/hours/minutes/seconds")
+  // from templates stored in the DateRanger locale files, so no language branch is hardcoded here.
+  const formatNearlyRange = (count: number, template?: string) => {
+    return template?.replace(/\{0\}/g, String(count)) ?? '';
+  };
+
   const getCustomizeLabel = () => {
     if (differenceYears > 0) {
-      return isEN ? `Nearly ${differenceYears} years` : `近 ${differenceYears} 年`;
+      return formatNearlyRange(differenceYears, locale.nearlyYears);
     }
 
     if (differenceMonths > 0) {
-      return isEN ? `Nearly ${differenceMonths} months` : `近 ${differenceMonths} 月`;
+      return formatNearlyRange(differenceMonths, locale.nearlyMonths);
     }
 
     if (differenceWeeks > 0) {
-      return isEN ? `Nearly ${differenceWeeks} weeks` : `近 ${differenceWeeks} 周`;
+      return formatNearlyRange(differenceWeeks, locale.nearlyWeeks);
     }
 
     if (differenceHours > 0) {
-      return isEN ? `Nearly ${differenceHours} hours` : `近 ${differenceHours} 小时`;
+      return formatNearlyRange(differenceHours, locale.nearlyHours);
     }
 
     if (differenceMinutes > 0) {
-      return isEN ? `Nearly ${differenceMinutes} minutes` : `近 ${differenceMinutes} 分`;
+      return formatNearlyRange(differenceMinutes, locale.nearlyMinutes);
     }
 
-    return isEN ? `Nearly ${differenceSeconds} seconds` : `近 ${differenceSeconds} 秒`;
+    return formatNearlyRange(differenceSeconds, locale.nearlySeconds);
   };
 
   const getHistoryTitle = () => {
-    return isEN ? 'History records' : '历史记录';
+    return locale.history;
   };
 
   const setNow = () => {
@@ -395,12 +411,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
 
   const currentRange = selects.find(_item => _item.name === rangeName);
   const rangeLabel = rangeName === CUSTOMIZE ? getCustomizeRangeLabel() : currentRange?.rangeLabel;
-  const label =
-    rangeName === CUSTOMIZE
-      ? getCustomizeLabel()
-      : isEN
-        ? currentRange.enLabel || currentRange.label
-        : currentRange.label;
+  const label = rangeName === CUSTOMIZE ? getCustomizeLabel() : getQuickLabel(currentRange);
 
   const thisYear = new Date().getFullYear();
   const isThisYear = startTime?.year() === thisYear && endTime?.year() === thisYear;
@@ -603,7 +614,7 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                         {hasTagInPicker && (
                           <span className={`${prefix}-label`}>{item.rangeLabel}</span>
                         )}
-                        {isEN ? item.enLabel || item.label : item.label}
+                        {getQuickLabel(item)}
                       </Space>
                     ),
                   };
