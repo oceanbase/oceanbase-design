@@ -14,5 +14,13 @@ export default {
   jumpForward: '向後跳轉一個時間區間',
   syncToCurrent: '同步到當前時間',
   zoomOutRange: '放大時間範圍',
+  history: '歷史記錄',
+  // Template for the custom-range description, where {0} is replaced with the actual value.
+  nearlyYears: '近 {0} 年',
+  nearlyMonths: '近 {0} 個月',
+  nearlyWeeks: '近 {0} 週',
+  nearlyHours: '近 {0} 小時',
+  nearlyMinutes: '近 {0} 分',
+  nearlySeconds: '近 {0} 秒',
   ...zh_TW,
 };
