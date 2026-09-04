@@ -8,6 +8,12 @@ group: 业务组件
 
 ---
 
+## 0.4.27
+
+`2026-09-04`
+
+- 🌐 DateRanger 的快捷选项、自定义时间范围的描述文案（如"近 30 天"）及"历史记录"标题新增日语 (ja-JP) 支持。[#1566](https://github.com/oceanbase/oceanbase-design/pull/1566)
+
 ## 0.4.26
 
 `2026-08-13`
