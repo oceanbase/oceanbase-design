@@ -8,6 +8,13 @@ group: General
 
 ---
 
+## 1.4.4
+
+`2026-09-04`
+
+- Input.Password
+  - 🐞 Fixed `autoComplete="new-password"` fields (e.g. create / change password) offering the browser's saved-password dropdown; such inputs are now masked in place via `text-security` instead. [#1564](https://github.com/oceanbase/oceanbase-design/pull/1564)
+
 ## 1.4.3
 
 `2026-09-02`

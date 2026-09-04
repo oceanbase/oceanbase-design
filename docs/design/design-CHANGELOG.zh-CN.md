@@ -8,6 +8,13 @@ group: 基础组件
 
 ---
 
+## 1.4.4
+
+`2026-09-04`
+
+- Input.Password
+  - 🐞 修复 `autoComplete="new-password"`（如设置/修改密码）的密码框会弹出浏览器"已保存密码"下拉的问题，此类输入框改为通过 `text-security` 遮蔽输入内容。[#1564](https://github.com/oceanbase/oceanbase-design/pull/1564)
+
 ## 1.4.3
 
 `2026-09-02`
