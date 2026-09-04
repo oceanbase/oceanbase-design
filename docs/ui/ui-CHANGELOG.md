@@ -8,6 +8,15 @@ group: Biz Components
 
 ---
 
+## 1.4.4
+
+`2026-09-04`
+
+- DateRanger
+  - 🌐 Quick options, custom-range descriptions (e.g. "Nearly 30 days") and the "History records" title now follow the active locale, with Japanese (ja-JP) support added. [#1566](https://github.com/oceanbase/oceanbase-design/pull/1566)
+- Password
+  - 🐞 Custom `rules` are now evaluated only after the field is touched with a value, avoiding premature strength/error feedback on empty fields. [#1565](https://github.com/oceanbase/oceanbase-design/pull/1565)
+
 ## 1.4.0
 
 `2026-08-25`
