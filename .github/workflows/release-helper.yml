@@ -26,7 +26,11 @@ jobs:
       - name: Release Oceanbase Design
         uses: dengfuping/monorepo-release-helper@v1
         with:
-          branch: 'master'
+          # The changelog must be fetched from the branch that actually contains
+          # the release tag/version (e.g. 0.x publishes live on the 0.x branch,
+          # not master). Hardcoding a single branch yields an empty changelog
+          # whenever a Publish push happens on the other branch.
+          branch: ${{ github.ref_name }}
           changelogs: 'docs/design/design-CHANGELOG.md, docs/ui/ui-CHANGELOG.md, docs/charts/charts-CHANGELOG.md, docs/codemod/codemod-CHANGELOG.md'
           dingding-changelogs: 'docs/design/design-CHANGELOG.md, docs/ui/ui-CHANGELOG.md, docs/charts/charts-CHANGELOG.md, docs/codemod/codemod-CHANGELOG.md'
           dingding-token: ${{ secrets.DINGDING_BOT_TOKEN }}
