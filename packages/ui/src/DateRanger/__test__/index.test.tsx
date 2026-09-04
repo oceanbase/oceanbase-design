@@ -1,7 +1,9 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+import { ConfigProvider } from '@oceanbase/design';
 import { DateRanger } from '@oceanbase/ui';
 import { NEAR_1_MINUTES, NEAR_30_MINUTES } from '../constant';
+import jaJP from '../locale/ja-JP';
 import dayjs from 'dayjs';
 
 describe('DateRanger', () => {
@@ -42,6 +44,70 @@ describe('DateRanger', () => {
     // As simple mode
     expect(container.querySelector('.ob-date-ranger-play')).toBeTruthy();
     expect(container.querySelector('.ob-date-ranger-picker')).toBeFalsy();
+  });
+  suite('Locale' /** i18n */, () => {
+    const jaLocale = {
+      locale: 'ja',
+      DateRanger: jaJP,
+    };
+    it('Should render Japanese quick option labels under ja-JP locale' /** Quick option labels should render in Japanese under ja-JP */, () => {
+      const { container } = render(
+        <ConfigProvider locale={jaLocale as any}>
+          <DateRanger simpleMode />
+        </ConfigProvider>
+      );
+      // NEAR_1_MINUTES is the default quick value in simple mode
+      expect(container.querySelector('.ob-date-ranger-play').textContent).toBe(jaJP['近 1 分钟']);
+    });
+    it('Should display Japanese quick options in the dropdown under ja-JP locale' /** Dropdown quick options should render in Japanese under ja-JP */, () => {
+      const { container } = render(
+        <ConfigProvider locale={jaLocale as any}>
+          <DateRanger simpleMode />
+        </ConfigProvider>
+      );
+      const dropdownTrigger = container.querySelector(
+        '.ob-date-ranger-wrapper > .ant-dropdown-trigger'
+      );
+      fireEvent.click(dropdownTrigger);
+      const dropdownLayerPicker = document.querySelector('.ob-date-ranger-dropdown-picker');
+      const menuItems = dropdownLayerPicker.querySelectorAll('.ant-dropdown-menu-item');
+      expect(menuItems.length).toBeGreaterThan(0);
+      // The first two quick options are NEAR_1_MINUTES and NEAR_30_MINUTES
+      expect(menuItems[0].textContent).toBe(jaJP['近 1 分钟']);
+      expect(menuItems[1].textContent).toBe(jaJP['近 30 分钟']);
+    });
+    it('Should render the Japanese history entry under ja-JP locale' /** History entry should render in Japanese under ja-JP */, () => {
+      const { container } = render(
+        <ConfigProvider locale={jaLocale as any}>
+          <DateRanger simpleMode history />
+        </ConfigProvider>
+      );
+      const dropdownTrigger = container.querySelector(
+        '.ob-date-ranger-wrapper > .ant-dropdown-trigger'
+      );
+      fireEvent.click(dropdownTrigger);
+      const dropdownLayerPicker = document.querySelector('.ob-date-ranger-dropdown-picker');
+      expect(dropdownLayerPicker.textContent).toContain(jaJP.history);
+      expect(dropdownLayerPicker.textContent).not.toContain('历史记录');
+    });
+    it('Should render the Japanese custom range description under ja-JP locale' /** Custom range description should render in Japanese under ja-JP */, () => {
+      const { container } = render(
+        <ConfigProvider locale={jaLocale as any}>
+          <DateRanger simpleMode defaultValue={[dayjs().subtract(30, 'minute'), dayjs()]} />
+        </ConfigProvider>
+      );
+      // Clicking forward when the current range (last 30 minutes) would end in the future
+      // switches to play mode and shows the custom-range description
+      const forwardButton = Array.from(
+        container.querySelectorAll('.ob-date-ranger-playback-control label')
+      ).find(label => {
+        return label.querySelector('input[value="stepForward"]');
+      });
+      fireEvent.click(forwardButton);
+      expect(container.querySelector('.ob-date-ranger-play').textContent).toBe(
+        jaJP.nearlyMinutes.replace('{0}', '30')
+      );
+    });
   });
   it('Support setting default value' /** 支持设置默认时间值 */, () => {
     const { container } = render(
