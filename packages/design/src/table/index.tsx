@@ -326,9 +326,11 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
           </span>
         );
       }
-      // 自定义筛选图标
+      // 自定义筛选图标，根据筛选激活状态高亮图标
       if ((item.filters || item.filterDropdown) && !item.filterIcon) {
-        newItem.filterIcon = () => <FilterOutlined />;
+        newItem.filterIcon = (filtered: boolean) => (
+          <FilterOutlined style={filtered ? { color: token.colorPrimary } : {}} />
+        );
       }
       // 递归处理 children
       if (item.children && Array.isArray(item.children)) {
