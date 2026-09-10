@@ -1,10 +1,11 @@
 import React from 'react';
 import { Button, Form, Input, Radio, Space, Typography } from '@oceanbase/design';
-import type { FormValidateMode } from '@oceanbase/design';
 
-const modes: FormValidateMode[] = ['onSubmit', 'onBlur', 'onChange', 'onTouched', 'all'];
+const modes = ['onSubmit', 'onBlur', 'onChange', 'onTouched', 'all'] as const;
 
-const modeDescriptions: Record<FormValidateMode, string> = {
+type Mode = (typeof modes)[number];
+
+const modeDescriptions: Record<Mode, string> = {
   onSubmit: 'Submit before showing errors; live update after failed submit (default).',
   onBlur: 'Validate on blur.',
   onChange: 'Validate on every change (antd legacy default).',
@@ -13,7 +14,7 @@ const modeDescriptions: Record<FormValidateMode, string> = {
 };
 
 export default () => {
-  const [mode, setMode] = React.useState<FormValidateMode>('onSubmit');
+  const [mode, setMode] = React.useState<Mode>('onSubmit');
 
   return (
     <Space direction="vertical" size="large" style={{ width: '100%', maxWidth: 480 }}>
