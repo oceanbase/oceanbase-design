@@ -22,27 +22,10 @@ import {
 } from 'fs';
 import { join, dirname } from 'path';
 import { tmpdir } from 'os';
-import formatToken from 'antd/lib/theme/util/alias';
-import designTheme from '../src/theme/index';
-import defaultTheme from '../src/theme/default';
 import { genCssVariablesStyle } from '../src/theme/obToken';
-import type { GlobalToken } from '../src/theme/interface';
+import { getDefaultGlobalToken } from '../src/theme/tokenData';
 
 // ----- DTCG vs genCssVariablesStyle（供测试 import）-----
-
-export function getDefaultGlobalToken(): GlobalToken {
-  const { defaultAlgorithm, defaultSeed } = designTheme;
-  const mapToken = {
-    ...defaultAlgorithm(defaultSeed),
-    ...defaultTheme.token,
-    override: {
-      boxShadow: defaultTheme.token?.boxShadow,
-      boxShadowSecondary: defaultTheme.token?.boxShadowSecondary,
-      boxShadowTertiary: defaultTheme.token?.boxShadowTertiary,
-    },
-  };
-  return formatToken(mapToken) as GlobalToken;
-}
 
 /** 从 genCssVariablesStyle 收集 `:root` 上的 `--ob-*` 名（与运行时注入一致） */
 export function collectGenCssVariableNames(prefix = 'ob'): Set<string> {

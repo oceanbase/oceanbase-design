@@ -80,8 +80,8 @@ export async function runCli(argv) {
 
   program
     .command('setup')
-    .description('Write ob-design mcp + AGENTS.md (no antd mcp)')
-    .option('--client <client>', 'cursor | claude | agents | all', 'all')
+    .description('Write ob-design mcp + AGENTS.md + editor hints')
+    .option('--client <client>', 'cursor | vscode | claude | agents | all', 'all')
     .action((opts) => setupCommand(opts.client));
 
   program

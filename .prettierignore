@@ -10,6 +10,8 @@ packages/icons/src
 packages/icons/scripts/a11y/
 # CLI metadata 与 skill 引用产物由生成器负责格式，避免 prettier 改写后与生成输出不一致
 packages/cli/src/metadata/*.json
+# design token IDE 提示产物由生成器负责格式，避免与生成输出不一致
+packages/design/tokens/
 skills/oceanbase-design/references/generated/
 .secignore
 LICENSE

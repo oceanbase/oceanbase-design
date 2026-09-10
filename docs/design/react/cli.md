@@ -53,6 +53,7 @@ ob-design migrate ./src                  # wraps @oceanbase/codemod (default rul
 ob-design template list-filter-table     # page template
 ob-design mcp                            # start MCP server
 ob-design setup --client cursor          # write MCP / AGENTS.md
+ob-design setup --client vscode          # write .vscode editor hints (settings + extensions)
 ```
 
 ## Commands
@@ -70,7 +71,7 @@ ob-design setup --client cursor          # write MCP / AGENTS.md
 | `ob-design search <query>` | `ob_search` | Full-text metadata and docs search |
 | `ob-design lint <path>` | `ob_lint` | JS conventions + CSS token check (default) |
 | `ob-design doctor` | `ob_doctor` | Project health (MCP/Skill/deps) |
-| `ob-design setup` | — | Write MCP config + generate `AGENTS.md` |
+| `ob-design setup` | — | Write MCP config + generate `AGENTS.md` + `.vscode` editor hints |
 | `ob-design migrate <path>` | — | Wraps `@oceanbase/codemod` (`--rule ob-css-tokens`) |
 | `ob-design template <name>` | — | Page templates (see below) |
 | `ob-design mcp` | — | Start MCP server (stdio) |
@@ -118,11 +119,13 @@ ob-design template list-filter-table --skeleton
 npm install -g @oceanbase/design-cli
 ob-design setup --client cursor
 ob-design setup --client agents
+ob-design setup --client vscode   # --ob-* hints in .vscode/
 npx skills add oceanbase/oceanbase-design
 
 # or without global install
 npx @oceanbase/design-cli setup --client cursor
 npx @oceanbase/design-cli setup --client agents
+npx @oceanbase/design-cli setup --client vscode
 ```
 
 ## MCP config

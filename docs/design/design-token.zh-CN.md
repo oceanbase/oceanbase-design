@@ -369,6 +369,53 @@ const config = { backgroundColor: obToken.colorBgDefault };
 }
 ```
 
+## 编辑器编码提示（IDE IntelliSense）
+
+`--ob-*` 由 `ConfigProvider` 在运行时注入，源码里没有可静态扫描的声明文件，所以编辑器默认不会对 `var(--ob-*)` 给出补全。`@oceanbase/design` 包内提供了两份**工具无关**的产物，值取默认主题（与运行时注入一致），仅供编辑器提示，**请勿在运行时样式中引用**：
+
+| 产物 | 路径 | 用途 |
+| --- | --- | --- |
+| CSS 变量声明文件 | `@oceanbase/design/tokens/ob-css-vars.reference.css` | 标准 `:root { --ob-*: … }` 声明，任何能扫描或索引 CSS 变量的工具都可消费 |
+| CSS custom data | `@oceanbase/design/tokens/ob-css-vars.css-data.json` | VS Code custom data（schema v1.1），供 `css.customData` 及其生态消费 |
+
+不同工具只是这两份产物的消费者，按所用工具接入即可，无需改动产物。
+
+### 自动接入
+
+`ob-design setup` 会写好 VS Code 系列的配置，该文件建议提交到仓库，团队成员 `git clone` 后即生效（Cursor 同样读取 `.vscode/`）：
+
+```bash
+ob-design setup                  # MCP + AGENTS.md + .vscode/settings.json（client 为 all）
+ob-design setup --client vscode  # 只写编辑器提示配置
+```
+
+它会把 `"css.customData": ["node_modules/@oceanbase/design/tokens/ob-css-vars.css-data.json"]` 合并进 `.vscode/settings.json`，不动你的其它配置项。若尚未安装 `@oceanbase/design`，或该文件里已有注释（JSONC），setup 会跳过并打印需要手动添加的内容。
+
+它还会往 `.vscode/extensions.json` 写一条**可选**推荐 `vunguyentuan.vscode-css-variables`——能补全 `var()` 参数的正是这类扩展。这只是提示而非依赖：VS Code 只会询问是否安装，该条目可以删除，也可以换成其它扫描工作区的工具。若 `extensions.json` 里已有注释（JSONC），setup 同样会跳过。
+
+### 各工具接入方式
+
+| 方案 | 接入方式 |
+| --- | --- |
+| VS Code / Cursor `css.customData` | 由 `ob-design setup` 写入，或手动添加 JSON 路径。对 CSS / SCSS / Less 文档都生效，增强属性名补全和 `--ob-*` 声明上的 hover |
+| 扫描工作区的 CSS 变量补全扩展（如 CSS Variable Autocomplete） | 由 `ob-design setup` 写入 `.vscode/extensions.json` 的可选推荐（可安全删除）。再把 `cssVariables.themeFiles` 指向包内 `ob-css-vars.reference.css`，或把该文件放进工程。不同工具是否索引 `node_modules` 不一致，请以实际工具为准 |
+| WebStorm / IntelliJ | 把 reference.css 放进工程，并确认 IDE 能识别 `:root` 声明——IDE 默认不索引 `node_modules` |
+| React 内联 `style={{}}` | 字符串没有 CSS 语义，无法补全，建议改用 `obToken`（自带类型提示） |
+
+### 哪些能自动、哪些不能
+
+内置语言服务的 `var()` 参数补全只读取**当前同一份文档**里的 `--x:` 声明：它不扫描工作区，也不会合并 `@import` 进来的文件（Sass/Less 变量跳转同样是同文件范围）。因此单靠一个 npm 包无法让 `var(--ob-*)` 出现下拉——属性名和 hover 靠 `css.customData`，`var()` 参数补全必须靠会扫描工作区的扩展。
+
+若要完全不依赖编辑器配置，就在 CI 里校验。`ob-design lint` 能查出 `.css`/`.less`/`.scss` 以及内联字符串（如 `<div style={{ color: 'var(--ob-x)' }} />`）中的非法 `var(--ob-*)` 名、`--ob-padding-*` 误用和 antd 变量，并给出正确 token：
+
+```json
+"scripts": { "lint:ob": "ob-design lint ./src" }
+```
+
+`ob-design lint` 只接受一个目标路径，请用源码根目录调用一次，不要挂在逐文件的 glob 钩子上。
+
+补全列表只包含文档收录的推荐变量，已废弃的兼容变量不会出现。产物由 `pnpm run generate:ide-tokens` 生成，并有测试保证与源码同步。
+
 ## Design Token 列表
 
 ### 基础颜色
