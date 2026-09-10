@@ -26,6 +26,7 @@
     "es",
     "lib",
     "dist",
+    "tokens",
     "package.json",
     "README.md",
     "LICENSE"

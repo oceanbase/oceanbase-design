@@ -11,7 +11,7 @@
     "build": "pnpm --filter \"@oceanbase/**\" build",
     "build:watch": "pnpm --filter \"@oceanbase/**\" build --watch",
     "build:design": "pnpm --filter \"@oceanbase/design\" build",
-    "ci": "npm run tsc && npm run lint && npm run lint:demo-locale && npm run test && npm run test:site-locale",
+    "ci": "npm run tsc && npm run lint && npm run check:ob-css-vars && npm run lint:demo-locale && npm run test && npm run test:site-locale",
     "deploy": "npm run site:build && npm run site:deploy",
     "dev": "tsc -p tsconfig.theme-plugin.json && cross-env DUMI_ENV=theme dumi dev",
     "start": "npm run dev",
@@ -41,11 +41,13 @@
     "check:ob-token-dtcg": "ts-node packages/design/scripts/verify-ob-token-alignment.ts",
     "lint:demo-locale": "node scripts/check-demo-locale.mjs",
     "check:metadata": "node scripts/check-metadata.mjs",
+    "check:ob-css-vars": "node scripts/check-ob-css-vars.mjs",
     "check:skill-doc-sync": "node scripts/check-skill-doc-sync.mjs",
     "check:agent-discovery": "node scripts/check-agent-discovery.mjs",
     "generate:metadata": "node scripts/generate-metadata.mjs",
+    "generate:ide-tokens": "ts-node packages/design/scripts/generate-ide-tokens.ts",
     "generate:agents-md": "node scripts/generate-agents-md.mjs",
-    "test:cli": "node --test packages/cli/src/lib/css-tokens.test.mjs scripts/lib/parse-ob-token-meta.test.mjs packages/cli/src/normalize/import-rewrite.test.mjs packages/cli/src/delegate/resolve-antd-cli.test.mjs packages/cli/src/delegate/antd-info.test.mjs packages/cli/src/cli.integration.test.mjs packages/codemod/transforms/__tests__/ob-css-tokens.test.cjs",
+    "test:cli": "node --test packages/cli/src/lib/css-tokens.test.mjs packages/cli/src/normalize/import-rewrite.test.mjs packages/cli/src/delegate/resolve-antd-cli.test.mjs packages/cli/src/delegate/antd-info.test.mjs packages/cli/src/cli.integration.test.mjs packages/codemod/transforms/__tests__/ob-css-tokens.test.cjs",
     "test:agent": "pnpm run generate:metadata && pnpm run generate:design-md && pnpm run generate:llms-codemod && pnpm run sync:agent-doc-md && pnpm run check:metadata && pnpm run check:skill-doc-sync && pnpm run check:skill-props-sync && pnpm run check:agent-discovery && pnpm run test:cli",
     "generate:llms-codemod": "node scripts/generate-llms-codemod.mjs",
     "generate:design-md": "node scripts/generate-design-md.mjs",
@@ -61,6 +63,9 @@
     "figma:publish:dry-run": "bash .cursor/skills/figma-code-connect/publish.sh --dry-run"
   },
   "lint-staged": {
+    "*.{css,less,scss,ts,tsx,js,jsx}": [
+      "node scripts/check-ob-css-vars.mjs"
+    ],
     "*.{js,jsx,ts,tsx}": [
       "eslint"
     ],
