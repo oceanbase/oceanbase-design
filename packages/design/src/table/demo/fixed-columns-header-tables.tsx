@@ -57,7 +57,6 @@ const App: React.FC = () => {
       dataIndex: 'age',
       key: 'age',
       fixed: 'left',
-      sorter: true,
     },
     { title: 'Column 1', dataIndex: 'address', key: '1' },
     { title: 'Column 2', dataIndex: 'address', key: '2' },
