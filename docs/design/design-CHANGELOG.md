@@ -8,6 +8,22 @@ group: General
 
 ---
 
+## 1.5.0
+
+`2026-09-10`
+
+- AI / Agent
+  - 🆕 `ob-design setup --client vscode` writes `.vscode` editor hints for `--ob-*` variables: it merges `css.customData` into `.vscode/settings.json` and recommends a CSS variable extension in `.vscode/extensions.json`, keeping your other keys and skipping JSONC files. [#1575](https://github.com/oceanbase/oceanbase-design/pull/1575)
+- Theme
+  - 🆕 Ships editor-hint artifacts for `--ob-*` variables: a `:root` reference stylesheet and VS Code custom data (schema v1.1), so `var(--ob-*)` gets completion, hover and preview. Documented tokens only, values matching the default theme. [#1575](https://github.com/oceanbase/oceanbase-design/pull/1575)
+- 🌐 Fixed the English flash on the documentation site homepage: visitors in a Chinese-language environment now open `/zh-CN` directly. [#1574](https://github.com/oceanbase/oceanbase-design/pull/1574)
+- Form
+  - 🐞 Fixed the injected revalidation throwing `RangeError: Maximum call stack size exceeded` when a changed value contains a circular reference, such as a `labelInValue` `Select` whose label is a React node. [#1576](https://github.com/oceanbase/oceanbase-design/pull/1576)
+  - 🐞 `onValuesChange` is no longer wrapped, so the consumer callback always runs when the injected revalidation is active. [#1576](https://github.com/oceanbase/oceanbase-design/pull/1576)
+  - 🐞 Fixed `resetFields()` not clearing the submitted state: after a full reset the field counts as untouched and does not revalidate on change, including when the `Form` unmounts and remounts with the same `Form.useForm()` instance. [#1576](https://github.com/oceanbase/oceanbase-design/pull/1576)
+- Table
+  - 🐞 Fixed the filter icon not highlighting when a column filter is active — it now shows in the primary color, like the sort icon. [#1572](https://github.com/oceanbase/oceanbase-design/pull/1572)
+
 ## 1.4.4
 
 `2026-09-04`

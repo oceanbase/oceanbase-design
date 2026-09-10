@@ -8,6 +8,22 @@ group: 基础组件
 
 ---
 
+## 1.5.0
+
+`2026-09-10`
+
+- AI / Agent
+  - 🆕 `ob-design setup --client vscode` 写入 `.vscode` 中 `--ob-*` 变量的编辑器提示：把 `css.customData` 合并进 `.vscode/settings.json`，并在 `.vscode/extensions.json` 中推荐 CSS 变量扩展；保留原有配置，JSONC 文件会跳过。[#1575](https://github.com/oceanbase/oceanbase-design/pull/1575)
+- 主题
+  - 🆕 新增 `--ob-*` 变量的编辑器提示产物：`:root` 参考样式表与 VS Code custom data（schema v1.1），`var(--ob-*)` 可获得补全、悬浮说明与预览。仅含已文档化变量，取值与默认主题一致。[#1575](https://github.com/oceanbase/oceanbase-design/pull/1575)
+- 🌐 修复文档站点首页的英文闪动：中文环境的访问者直接进入 `/zh-CN`。[#1574](https://github.com/oceanbase/oceanbase-design/pull/1574)
+- Form
+  - 🐞 修复注入的校验在变更值包含循环引用时抛出 `RangeError: Maximum call stack size exceeded` 的问题，例如 `labelInValue` 的 `Select` 以 React 节点作为 label。[#1576](https://github.com/oceanbase/oceanbase-design/pull/1576)
+  - 🐞 不再包装 `onValuesChange`，注入校验生效时用户回调也会正常执行。[#1576](https://github.com/oceanbase/oceanbase-design/pull/1576)
+  - 🐞 修复 `resetFields()` 未重置提交状态的问题：完整重置后字段视为未触碰，变更时不再触发校验；Form 卸载后使用同一 `Form.useForm()` 实例重新挂载时同样成立。[#1576](https://github.com/oceanbase/oceanbase-design/pull/1576)
+- Table
+  - 🐞 修复筛选激活时列筛选图标不高亮的问题，现与排序图标一致以主色高亮显示。[#1572](https://github.com/oceanbase/oceanbase-design/pull/1572)
+
 ## 1.4.4
 
 `2026-09-04`
