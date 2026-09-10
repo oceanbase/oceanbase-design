@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/codemod",
-  "version": "1.4.4",
+  "version": "1.5.0",
   "description": "Codemod for OceanBase Design upgrade",
   "keywords": [
     "oceanbase",
