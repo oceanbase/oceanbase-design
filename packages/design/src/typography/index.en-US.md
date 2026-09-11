@@ -9,6 +9,7 @@ nav:
 - 💄 Custom theme and styles, aligned with OceanBase Design specification.
 - 🆕 Typography.Text adds `caption` prop for auxiliary description.
 - 🆕 Typography.Text and Typography.Link add `block` prop for occupying a whole line.
+- 🆕 Typography.Text, Typography.Paragraph and Typography.Title show a Tooltip with the full text by default when `ellipsis` is enabled. Customize the tooltip content and placement with `ellipsis.tooltip`, or set it to `false` to disable (recommended when you already wrap Typography in your own Tooltip, to avoid two tooltips).
 - 📢 Typography.Text and Typography.Paragraph default font color and line height inherit from parent instead of always `token.colorText` and `token.lineHeight`, for easier composition.
 
 ## Code Examples
@@ -18,6 +19,7 @@ nav:
 <code src="./demo/text.tsx" title="Text and Link"></code>
 <code src="./demo/text-caption.tsx" title="Caption" description="Set via `caption` for auxiliary description. Font size 12px, weight auto by locale."></code>
 <code src="./demo/text-block.tsx" title="Block Text" description="Set via `block` to occupy a whole line."></code>
+<code src="./demo/ellipsis.tsx" title="Ellipsis" description="Supports single line, multiple line and expandable ellipsis. A Tooltip with the full text is shown by default on overflow when `ellipsis` is enabled."></code>
 <code src="./demo/copyable.tsx" title="Copyable"></code>
 <code src="./demo/editable.tsx" title="Editable"></code>
 <code src="./demo/editable-modal.tsx" title="Edit in Modal"></code>
@@ -28,15 +30,17 @@ nav:
 
 ### Typography.Text
 
-| Property | Description           | Type    | Default | Version |
-| :------- | :-------------------- | :------ | :------ | :------ |
-| caption  | Auxiliary description | boolean | false   | -       |
-| block    | Occupy a whole line   | boolean | false   | -       |
+| Property | Description | Type | Default | Version |
+| :-- | :-- | :-- | :-- | :-- |
+| caption | Auxiliary description | boolean | false | - |
+| block | Occupy a whole line | boolean | false | - |
+| ellipsis | Auto ellipsis on overflow with a Tooltip by default, disable it with `tooltip: false` | boolean \| [EllipsisConfig](https://ant.design/components/typography-cn#ellipsis) | false | - |
 
 ### Typography.Link
 
-| Property | Description         | Type    | Default | Version |
-| :------- | :------------------ | :------ | :------ | :------ |
-| block    | Occupy a whole line | boolean | false   | -       |
+| Property | Description               | Type    | Default | Version |
+| :------- | :------------------------ | :------ | :------ | :------ |
+| block    | Occupy a whole line       | boolean | false   | -       |
+| ellipsis | Auto ellipsis on overflow | boolean | false   | -       |
 
 - See antd Typography docs for more API: https://ant.design/components/typography-cn
