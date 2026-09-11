@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Typography as AntTypography } from 'antd';
 import type { ParagraphProps as AntParagraphProps } from 'antd/es/typography/Paragraph';
 import ConfigProvider from '../config-provider';
+import { getEllipsisConfig } from '../_util/getEllipsisConfig';
 import useClassName from './hooks/useClassName';
 import useStyle from './style';
 
@@ -19,7 +20,10 @@ type CompoundedComponent = React.ForwardRefExoticComponent<
 };
 
 const Paragraph = React.forwardRef<HTMLElement, ParagraphProps>(
-  ({ editable, prefixCls: customizePrefixCls, className, children, ...restProps }, ref) => {
+  (
+    { editable, ellipsis, prefixCls: customizePrefixCls, className, children, ...restProps },
+    ref
+  ) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('typography', customizePrefixCls);
     const [wrapCSSVar] = useStyle(prefixCls);
@@ -29,6 +33,7 @@ const Paragraph = React.forwardRef<HTMLElement, ParagraphProps>(
       <AntParagraph
         ref={ref}
         editable={editable}
+        ellipsis={getEllipsisConfig(ellipsis, children)}
         prefixCls={customizePrefixCls}
         className={typographyCls}
         {...restProps}

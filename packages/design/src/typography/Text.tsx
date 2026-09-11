@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Typography as AntTypography } from 'antd';
 import type { TextProps as AntTextProps } from 'antd/es/typography/Text';
 import ConfigProvider from '../config-provider';
+import { getEllipsisConfig } from '../_util/getEllipsisConfig';
 import useClassName from './hooks/useClassName';
 import useStyle from './style';
 
@@ -23,7 +24,16 @@ type CompoundedComponent = React.ForwardRefExoticComponent<
 
 const Text = React.forwardRef<HTMLSpanElement, TextProps>(
   (
-    { editable, caption, block, prefixCls: customizePrefixCls, className, children, ...restProps },
+    {
+      editable,
+      ellipsis,
+      caption,
+      block,
+      prefixCls: customizePrefixCls,
+      className,
+      children,
+      ...restProps
+    },
     ref
   ) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -35,6 +45,7 @@ const Text = React.forwardRef<HTMLSpanElement, TextProps>(
       <AntText
         ref={ref}
         editable={editable}
+        ellipsis={getEllipsisConfig(ellipsis, children)}
         prefixCls={customizePrefixCls}
         className={typographyCls}
         {...restProps}
