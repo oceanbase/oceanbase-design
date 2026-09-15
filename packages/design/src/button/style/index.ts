@@ -48,7 +48,7 @@ export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) =
           [`&:not(${componentCls}-loading):hover`]: {
             ...genPresetColorStyle(token),
           },
-          [`&${componentCls}-color-default`]: {
+          [`&${componentCls}-color-default:not(${componentCls}-background-ghost)`]: {
             '&:hover': {
               borderColor: token.gray7,
               color: token.colorText,
