@@ -23,7 +23,6 @@ import { injectColumnTitleTooltip } from './ColumnTitleWithTooltip';
 import type { ColumnTooltipType } from './ColumnTitleWithTooltip';
 
 export type { ColumnTooltipType } from './ColumnTitleWithTooltip';
-export type { OBTablePaginationConfig } from './hooks/useDefaultPagination';
 
 // 内部辅助类型，对外只暴露 TableColumnsType（antd 无同名导出，不冲突）
 type TableColumnType<T> = ColumnType<T> & { tooltip?: ColumnTooltipType };

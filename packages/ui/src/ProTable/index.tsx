@@ -2,7 +2,7 @@ import React, { useContext, useMemo } from 'react';
 import { ProTable as AntProTable } from '@ant-design/pro-components';
 import type { ProTableProps as AntProTableProps } from '@ant-design/pro-components';
 import { ConfigProvider, Empty, Table } from '@oceanbase/design';
-import type { OBTablePaginationConfig } from '@oceanbase/design';
+import type { TableProps } from '@oceanbase/design';
 import classNames from 'classnames';
 import { isEmpty, merge } from 'lodash';
 import useLightFilterStyle from '../LightFilter/style';
@@ -17,8 +17,8 @@ export interface ProTableProps<T, U, ValueType> extends Omit<
   innerBordered?: boolean;
   /** 设置外围边框（即 ProCard 边框，分页器包含在边框内），内部保持无边框样式 */
   outerBordered?: boolean;
-  /** 分页配置；`showTotal` 传 `false` 关闭总数展示，不传则展示默认文案 */
-  pagination?: false | OBTablePaginationConfig;
+  /** 分页配置，与 Table 的 `pagination` 一致；`showTotal` 传 `false` 关闭总数展示 */
+  pagination?: TableProps<any>['pagination'];
 }
 
 // type CompoundedComponent = React.FC<ProTableProps<T, U, ValueType>> & typeof AntProTable;

@@ -50,7 +50,7 @@ markdown: |
 | :-- | :-- | :-- | :-- | :-- |
 | innerBordered | 带内部边框 | boolean | - | - |
 | outerBordered | 设置外围边框（分页器包含在边框内），内部保持无边框样式，可代替 Card bordered + bodyStyle padding 0 + Table 的组合 | boolean | - | - |
-| pagination | 分页配置，`showTotal` 传 `false` 可关闭总数展示 | `OBTablePaginationConfig` \| false | {} | - |
+| pagination | 分页配置，`showTotal` 传 `false` 可关闭总数展示 | `TablePaginationConfig` \| false | {} | - |
 | cancelText | 选择表格中 `取消` 按钮文案 | ReactNode | - | - |
 | collapseText | 选择表格中 `收起` 按钮文案 | ReactNode | - | - |
 | openText | 选择表格中 `展开` 按钮文案 | ReactNode | - | - |

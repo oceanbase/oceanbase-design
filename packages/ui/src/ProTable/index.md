@@ -29,6 +29,5 @@ nav:
 | defaultSize | 默认尺寸 | `large` \| `middle` \| `small` | `large` | - |
 | innerBordered | 带内部边框 | boolean | - | - |
 | outerBordered | 设置外围边框（即 ProCard 边框，分页器包含在边框内），内部保持无边框样式 | boolean | - | - |
-| pagination | 分页配置，`showTotal` 传 `false` 可关闭总数展示 | `OBTablePaginationConfig` \| false | - | - |
 
 - 更多 API 详见 pro-components ProTable 文档: https://procomponents.ant.design/components/table

@@ -29,6 +29,5 @@ nav:
 | defaultSize | Default size | `large` \| `middle` \| `small` | `large` | - |
 | innerBordered | Inner border | boolean | - | - |
 | outerBordered | Outer border (the ProCard border, pagination included), interior keeps borderless style | boolean | - | - |
-| pagination | Pagination config; pass `showTotal: false` to hide the total | `OBTablePaginationConfig` \| false | - | - |
 
 - More API: https://procomponents.ant.design/components/table
