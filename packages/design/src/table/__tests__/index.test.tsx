@@ -1,7 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { ConfigProvider, Table } from '@oceanbase/design';
+import { ConfigProvider, Table, compactTheme } from '@oceanbase/design';
 import type { TableProps } from '@oceanbase/design';
+import zhCN from '../../locale/zh-CN';
+import enUS from '../../locale/en-US';
 
 const columns = [
   {
@@ -42,6 +44,45 @@ describe('Table', () => {
   it('render empty', () => {
     const { container } = render(<TableTest dataSource={[]} />);
     expect(container.querySelector('.ant-table-empty-wrapper')).toBeTruthy();
+  });
+
+  it('table cell font size keeps the same scale for default, middle and small size', () => {
+    const getCellFontSize = (node: React.ReactElement, size?: TableProps<any>['size']): string => {
+      const { container, unmount } = render(
+        size ? React.cloneElement(node, { size } as any) : node
+      );
+      const cellFontSize = getComputedStyle(
+        container.querySelector('.ant-table') as HTMLElement
+      ).fontSize;
+      unmount();
+      return cellFontSize;
+    };
+    const enTable = (
+      <ConfigProvider locale={enUS}>
+        <TableTest />
+      </ConfigProvider>
+    );
+    const zhTable = (
+      <ConfigProvider locale={zhCN}>
+        <TableTest />
+      </ConfigProvider>
+    );
+    // antd 会让 cellFontSizeSM / cellFontSizeMD 默认回落到 token.fontSize，若不显式指定，
+    // 小/中尺寸的表格字号会变成正文的 13px，比默认尺寸的 12px 更大
+    expect(getCellFontSize(enTable)).toBe('12px');
+    expect(getCellFontSize(enTable, 'middle')).toBe('12px');
+    expect(getCellFontSize(enTable, 'small')).toBe('12px');
+    // 中文排版下正文和单元格同为 14px，三个尺寸保持一致
+    expect(getCellFontSize(zhTable)).toBe('14px');
+    expect(getCellFontSize(zhTable, 'middle')).toBe('14px');
+    expect(getCellFontSize(zhTable, 'small')).toBe('14px');
+    // compactTheme 锁定了非中文排版，同样不受 locale 影响
+    const compactTable = (
+      <ConfigProvider locale={zhCN} theme={compactTheme}>
+        <TableTest />
+      </ConfigProvider>
+    );
+    expect(getCellFontSize(compactTable, 'small')).toBe('12px');
   });
 
   it('hideOnSinglePage should be false by default', () => {

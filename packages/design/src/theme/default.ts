@@ -97,6 +97,19 @@ export const fontSizeEn = 13;
 /** Table 单元格字号（非 Cn），与 components.Table.cellFontSize 默认值一致 */
 export const tableCellFontSizeEn = fontSizeSM;
 
+/**
+ * Table 单元格字号 token：默认、中、小三个尺寸共用同一档。
+ *
+ * antd 的 Table 会让 `cellFontSizeSM` / `cellFontSizeMD` 默认回落到全局 `token.fontSize`，而 OBUI 的
+ * 单元格字号与正文字号并不同档（非中文 12、中文 14 / 14）。不显式指定的话，`size="small"`
+ * 或 `size="middle"` 的表格字号反而比默认尺寸更大。
+ */
+export const getTableCellFontTokens = (fontSize: number) => ({
+  cellFontSize: fontSize,
+  cellFontSizeSM: fontSize,
+  cellFontSizeMD: fontSize,
+});
+
 /** Cn 正文/表内字号等 locale 主题补丁（由 `localeTypography` 消费） */
 export const fontSizeCn = 14;
 export const fontHeightCn = 22;
@@ -419,7 +432,7 @@ const seedTheme: ThemeConfig = {
       borderRadiusSM: borderRadius,
     },
     Table: {
-      cellFontSize: fontSizeSM,
+      ...getTableCellFontTokens(fontSizeSM),
       headerSplitColor: 'transparent',
       cellPaddingBlock: 8,
       cellPaddingInline: 16,
