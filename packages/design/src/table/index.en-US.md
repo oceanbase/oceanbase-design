@@ -50,7 +50,7 @@ markdown: |
 | :-- | :-- | :-- | :-- | :-- |
 | innerBordered | Inner borders | boolean | - | - |
 | outerBordered | Outer border (pagination included), interior keeps borderless style; a replacement for Card bordered + bodyStyle padding 0 + Table | boolean | - | - |
-| pagination | Pagination config | ReactNode | {} | - |
+| pagination | Pagination config; pass `showTotal: false` to hide the total | `OBTablePaginationConfig` \| false | {} | - |
 | cancelText | Cancel button text in selection | ReactNode | - | - |
 | collapseText | Collapse button text in selection | ReactNode | - | - |
 | openText | Expand button text in selection | ReactNode | - | - |

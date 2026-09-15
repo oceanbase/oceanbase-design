@@ -107,10 +107,108 @@ describe('Table', () => {
       </ConfigProvider>
     );
     // pagination.showTotal
-    expect(container.querySelector('.ant-pagination-total-text').textContent).toBe('');
+    expect(container.querySelector('.ant-pagination-total-text')).toBeFalsy();
     // pagination.showSizeChanger
     expect(container.querySelector('.ant-pagination-options')).toBeFalsy();
     expect(asFragment().firstChild).toMatchSnapshot();
+  });
+
+  it('pagination.showTotal should show default total when it is not set', () => {
+    const { container } = render(<TableTest pagination={{ showSizeChanger: false }} />);
+    // 不传 showTotal 时保留默认文案，与显式传 undefined / false 区分
+    expect(container.querySelector('.ant-pagination-total-text').textContent).toBe('99 in Total');
+  });
+
+  it('pagination.showTotal could be disabled by undefined', () => {
+    const { container } = render(<TableTest pagination={{ showTotal: undefined }} />);
+    // 显式传 undefined 会覆盖默认文案（靠 useDefaultPagination 的对象展开保留该键），不渲染总数占位元素
+    expect(container.querySelector('.ant-pagination-total-text')).toBeFalsy();
+  });
+
+  it('pagination.showTotal could be disabled by false', () => {
+    const { container } = render(<TableTest pagination={{ showTotal: false }} />);
+    // false 是对外推荐的关闭方式，内部会归一化为 undefined
+    expect(container.querySelector('.ant-pagination-total-text')).toBeFalsy();
+  });
+
+  it('ConfigProvider pagination.showTotal could be disabled by false', () => {
+    const { container } = render(
+      <ConfigProvider pagination={{ showTotal: false }}>
+        <TableTest />
+      </ConfigProvider>
+    );
+    expect(container.querySelector('.ant-pagination-total-text')).toBeFalsy();
+  });
+
+  it('ConfigProvider pagination.showTotal could be customized', () => {
+    const { container } = render(
+      <ConfigProvider pagination={{ showTotal: total => `ctx ${total}` }}>
+        <TableTest />
+      </ConfigProvider>
+    );
+    expect(container.querySelector('.ant-pagination-total-text').textContent).toBe('ctx 99');
+  });
+
+  it('pagination.showTotal false should override ConfigProvider showTotal', () => {
+    const { container } = render(
+      <ConfigProvider pagination={{ showTotal: total => `ctx ${total}` }}>
+        <TableTest pagination={{ showTotal: false }} />
+      </ConfigProvider>
+    );
+    // 组件级分页配置优先于 ConfigProvider，可关闭上下文传入的总数文案
+    expect(container.querySelector('.ant-pagination-total-text')).toBeFalsy();
+  });
+
+  it('pagination.showTotal could be customized', () => {
+    const { container } = render(
+      <TableTest pagination={{ showTotal: total => `共 ${total} 条` }} />
+    );
+    expect(container.querySelector('.ant-pagination-total-text').textContent).toBe('共 99 条');
+  });
+
+  it('default total should coexist with batch operation bar', () => {
+    const { container } = render(<TableTest rowSelection={{ selectedRowKeys: ['1'] }} />);
+    const totalSlot = container.querySelector('.ant-pagination-total-text');
+    // 批量操作栏与默认总数文案共用分页器总数插槽，两者都要渲染
+    expect(totalSlot?.querySelector('.ant-table-batch-operation-bar')).toBeTruthy();
+    expect(totalSlot?.textContent).toContain('99 in Total');
+  });
+
+  it('batch operation bar should render in pagination total slot when showTotal is disabled', () => {
+    const { container } = render(
+      <TableTest
+        pagination={{ showTotal: undefined }}
+        rowSelection={{
+          selectedRowKeys: ['1'],
+        }}
+      />
+    );
+    // 有选中项时，批量操作栏占用分页器总数插槽
+    expect(container.querySelector('.ant-pagination-total-text')).toBeTruthy();
+    expect(container.querySelector('.ant-table-batch-operation-bar')).toBeTruthy();
+  });
+
+  it('batch operation bar should render in pagination total slot when showTotal is false', () => {
+    const { container } = render(
+      <TableTest
+        pagination={{ showTotal: false }}
+        rowSelection={{
+          selectedRowKeys: ['1'],
+        }}
+      />
+    );
+    // 关闭总数不影响批量操作栏，有选中项时插槽仍然渲染
+    expect(container.querySelector('.ant-pagination-total-text')).toBeTruthy();
+    expect(container.querySelector('.ant-table-batch-operation-bar')).toBeTruthy();
+    // 关闭总数后不应再留下空的占位 span（批量操作栏内的 span 层级更深）
+    expect(container.querySelector('.ant-pagination-total-text > div > span')).toBeFalsy();
+  });
+
+  it('pagination total slot should be hidden when showTotal is disabled and no row selected', () => {
+    const { container } = render(
+      <TableTest pagination={{ showTotal: undefined }} rowSelection={{}} />
+    );
+    expect(container.querySelector('.ant-pagination-total-text')).toBeFalsy();
   });
 
   it('innerBordered should work', () => {

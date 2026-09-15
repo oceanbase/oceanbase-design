@@ -76,6 +76,14 @@ export interface ConfigConsumerProps extends AntConfigConsumerProps {
 export type { OBFormConfig } from '../form/validateMode';
 export type { FormReValidateMode, FormValidateMode } from '../form/validateMode';
 
+/**
+ * 分页配置：在 antd PaginationConfig 基础上，`showTotal` 额外支持传 `false` 关闭总数展示。
+ * Table 会把这里的配置合并进分页器，`false` 归一化为不渲染总数文案。
+ */
+export type OBPaginationConfig = Omit<PaginationConfig, 'showTotal'> & {
+  showTotal?: PaginationConfig['showTotal'] | false;
+};
+
 export interface ConfigProviderProps extends AntConfigProviderProps {
   theme?: ThemeConfig;
   locale?: Locale;
@@ -85,7 +93,8 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   navigate?: NavigateFunction;
   hideOnSinglePage?: boolean;
   card?: CardConfig;
-  pagination?: PaginationConfig;
+  /** 分页配置；`showTotal` 传 `false` 关闭总数展示 */
+  pagination?: OBPaginationConfig;
   spin?: SpinConfig;
   table?: TableConfig;
   form?: AntConfigProviderProps['form'] & OBFormConfig;
