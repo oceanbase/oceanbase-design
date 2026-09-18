@@ -31,14 +31,14 @@ npx @oceanbase/codemod@^1.0.0-alpha.0 ./src
 
 ### Common transformers
 
-| Transformer                               | Description                                                              |
-| ----------------------------------------- | ------------------------------------------------------------------------ |
-| antd-to-oceanbase-design                  | antd → @oceanbase/design                                                 |
-| techui-and-pro-components-to-oceanbase-ui | pro-components → @oceanbase/ui                                           |
-| obutil-to-oceanbase-util                  | obutil → @oceanbase/util                                                 |
-| style-to-token                            | Inline styles → `obToken` (default; keeps `theme.useToken()` with antd alias) |
-| less-to-cssvar / sass-to-cssvar           | Less/Sass → `var(--ob-*)` (default pipeline, keeps `.less`)              |
-| token-to-obtoken                          | Explicit: `token.xxx` / `var(--ant-*)` → `obToken` / `var(--ob-*)`       |
+| Transformer | Description |
+| --- | --- |
+| antd-to-oceanbase-design | antd → @oceanbase/design |
+| techui-and-pro-components-to-oceanbase-ui | pro-components → @oceanbase/ui |
+| obutil-to-oceanbase-util | obutil → @oceanbase/util |
+| style-to-token | Inline styles → `obToken` (default; keeps `theme.useToken()` with antd alias) |
+| less-to-cssvar / sass-to-cssvar | Less/Sass → `var(--ob-*)` (default pipeline, keeps `.less`) |
+| token-to-obtoken | Explicit: `token.xxx` / `var(--ant-*)` → `obToken` / `var(--ob-*)` |
 
 Common flags: `--token-target=ob|antd` (default ob), `--skip-install` (transform only), `--force` (skip git check).
 
@@ -123,26 +123,29 @@ npx @oceanbase/codemod@^1.0.0-alpha.0 . --token-target=antd
 | sass-to-cssvar | Sass/Scss → `var(--ob-*)` | ✅ |
 | less-to-token | Less → antd `@token`（兼容） | 否，需 `--token-target=antd` 或显式指定 |
 | token-to-obtoken | `token` / `var(--ant-*)` → `obToken` / `var(--ob-*)` | 否，需显式指定 |
+| ob-css-tokens | 已知非法 `--ob-*` 别名 → 合法运行时 token（映射表见 css-token-migration-hints） | 否，需显式指定 |
 
 仅执行部分 transformer 时，使用 `--transformer`，多个用逗号分隔：
 
 ```bash
 npx @oceanbase/codemod@^1.0.0-alpha.0 . --transformer=antd-to-oceanbase-design,obutil-to-oceanbase-util
 npx @oceanbase/codemod@^1.0.0-alpha.0 . --transformer=token-to-obtoken
+npx @oceanbase/codemod@^1.0.0-alpha.0 . --transformer=ob-css-tokens
+ob-design migrate --rule ob-css-tokens ./src
 npx @oceanbase/codemod@^1.0.0-alpha.0 . --transformer=less-to-cssvar --rename-to=css --prefix=ob
 ```
 
 ## 常用选项
 
-| 选项                      | 说明                                                          |
-| ------------------------- | ------------------------------------------------------------- |
-| `--force`                 | 跳过 git 工作区检查（慎用）                                   |
-| `--transformer=t1,t2`     | 只运行指定的 transformer                                      |
-| `--token-target=ob\|antd` | 默认 `ob`；`antd` 恢复旧 antd token 迁移行为                  |
-| `--prefix=ob`             | less-to-cssvar / sass-to-cssvar 的 CSS 变量前缀（默认 `ob`）  |
-| `--skip-install` / `--no-install` | 跳过依赖安装/升级（仅做代码转换时推荐） |
-| `--disablePrettier=false` | 运行后执行 Prettier 格式化                                    |
-| `--cpus=N`                | 并行进程数（默认与 CPU 相关）                                 |
+| 选项                              | 说明                                                         |
+| --------------------------------- | ------------------------------------------------------------ |
+| `--force`                         | 跳过 git 工作区检查（慎用）                                  |
+| `--transformer=t1,t2`             | 只运行指定的 transformer                                     |
+| `--token-target=ob\|antd`         | 默认 `ob`；`antd` 恢复旧 antd token 迁移行为                 |
+| `--prefix=ob`                     | less-to-cssvar / sass-to-cssvar 的 CSS 变量前缀（默认 `ob`） |
+| `--skip-install` / `--no-install` | 跳过依赖安装/升级（仅做代码转换时推荐）                      |
+| `--disablePrettier=false`         | 运行后执行 Prettier 格式化                                   |
+| `--cpus=N`                        | 并行进程数（默认与 CPU 相关）                                |
 
 less-to-cssvar 还支持 `--rename-to`（默认 `false` 保留 `.less`；需改扩展名时传 `--rename-to=css`）、`--add-module` 等，详见 `packages/codemod/README.md`。
 
