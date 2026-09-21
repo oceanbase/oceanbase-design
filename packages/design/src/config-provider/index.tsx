@@ -23,6 +23,8 @@ import { merge } from 'lodash';
 import SizeContext from 'antd/es/config-provider/SizeContext';
 import App from '../app';
 import StaticFunction from '../static-function';
+import { NotificationDurationContext } from '../notification/durationContext';
+import type { ObNotificationProviderConfig } from '../notification/interface';
 import themeConfig from '../theme';
 import seedTheme from '../theme/default';
 import darkTheme from '../theme/dark';
@@ -87,6 +89,11 @@ export type OBPaginationConfig = Omit<PaginationConfig, 'showTotal'> & {
 export interface ConfigProviderProps extends AntConfigProviderProps {
   theme?: ThemeConfig;
   locale?: Locale;
+  /**
+   * 通知全局配置，`duration` 额外支持按类型配置：
+   * `<ConfigProvider notification={{ duration: { error: 3 } }}>`
+   */
+  notification?: ObNotificationProviderConfig;
   // set global route navigate function
   // for react-router-dom v5: history.push
   // for react-router-dom v6: navigate
@@ -140,12 +147,17 @@ const ConfigProvider: ConfigProviderType = ({
   tabs,
   styleProviderProps,
   appProps,
+  notification,
   ...restProps
 }) => {
   // inherit from parent ConfigProvider
   const parentContext = React.useContext<ConfigConsumerProps>(AntConfigProvider.ConfigContext);
   const parentExtendedContext =
     React.useContext<ExtendedConfigConsumerProps>(ExtendedConfigContext);
+  const parentNotificationDuration = React.useContext(NotificationDurationContext);
+  // duration 由 OB 侧解析，不能下传给 antd ConfigProvider；其余配置透传（antd 只消费 className / style / closeIcon）
+  const { duration: notificationDuration, ...restNotificationConfig } = notification ?? {};
+  const mergedNotificationDuration = notificationDuration ?? parentNotificationDuration;
   const { isAliyun, isDark, isCompact } = merge({}, parentContext.theme, theme);
   const aliyunThemeConfig = isAliyun ? aliyunTheme : undefined;
   const darkThemeConfig =
@@ -284,6 +296,7 @@ const ConfigProvider: ConfigProviderType = ({
         ) as TableConfig
       }
       tabs={merge({}, parentContext.tabs, tabs)}
+      notification={notification === undefined ? undefined : restNotificationConfig}
       theme={resolvedAntTheme}
       renderEmpty={
         parentContext.renderEmpty ||
@@ -303,18 +316,20 @@ const ConfigProvider: ConfigProviderType = ({
           injectStaticFunction: false,
         }}
       >
-        <StyleProvider {...mergedStyleProviderProps}>
-          {/* Inject CSS variables via cssinjs */}
-          <CssVariablesStyle />
-          {/* Inject global styles via cssinjs */}
-          <GlobalStyle prefixCls={restProps.prefixCls} iconPrefixCls={restProps.iconPrefixCls} />
-          {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
-          {/* ref: https://ant.design/components/app */}
-          <App {...resolvedAppProps}>
-            {children}
-            {parentExtendedContext.injectStaticFunction && <StaticFunction />}
-          </App>
-        </StyleProvider>
+        <NotificationDurationContext.Provider value={mergedNotificationDuration}>
+          <StyleProvider {...mergedStyleProviderProps}>
+            {/* Inject CSS variables via cssinjs */}
+            <CssVariablesStyle />
+            {/* Inject global styles via cssinjs */}
+            <GlobalStyle prefixCls={restProps.prefixCls} iconPrefixCls={restProps.iconPrefixCls} />
+            {/* Nested App component for static function of message, notification and Modal to consume ConfigProvider config */}
+            {/* ref: https://ant.design/components/app */}
+            <App {...resolvedAppProps}>
+              {children}
+              {parentExtendedContext.injectStaticFunction && <StaticFunction />}
+            </App>
+          </StyleProvider>
+        </NotificationDurationContext.Provider>
       </ExtendedConfigContext.Provider>
     </AntConfigProvider>
   );

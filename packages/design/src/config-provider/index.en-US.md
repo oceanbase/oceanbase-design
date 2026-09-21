@@ -167,6 +167,7 @@ CSS variable mode supports static theme switching via CSS classes, no JavaScript
 | table | Table global config | `{ selectionColumnWidth?: width; className?: string; style?: React.CSSProperties; }` | - | - |
 | styleProviderProps | [StyleProvider](https://github.com/ant-design/cssinjs#styleprovider) config (e.g. `hashPriority`, `transformers`) for style fallback | [StyleProviderProps](https://github.com/ant-design/cssinjs/blob/master/src/StyleContext.tsx#L88) | - | - |
 | appProps | Embedded App component props | [AppProps](https://ant-design.antgroup.com/components/app-cn#app) | - | - |
+| notification | Notification global config. Only `className`, `style`, and `closeIcon` are forwarded to antd; `duration` also accepts a per-type value: `number \| { default?, info?, success?, warning?, error?, loading? }` | [NotificationConfig](https://ant.design/components/config-provider#configprovider) \| - | - |
 
 ### Locale typography presets
 

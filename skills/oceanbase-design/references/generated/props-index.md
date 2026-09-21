@@ -8,7 +8,7 @@
 | BasicLayout | @oceanbase/ui | D | logoUrl, iconUrl, banner, menus, topHeader, sideHeader | — |
 | Button | @oceanbase/design | A | — | import-design-not-antd |
 | Card | @oceanbase/design | B | subTitle, document, divided, gray, collapsible, defaultCollapsed, collapsed, onCollapse | card-table-inner-bordered |
-| ConfigProvider | @oceanbase/design | B | navigate, hideOnSinglePage, card, spin, table, styleProviderProps, appProps, theme.isAliyun, theme.isDark, theme.isCompact | config-provider-root |
+| ConfigProvider | @oceanbase/design | B | navigate, hideOnSinglePage, card, spin, table, styleProviderProps, appProps, theme.isAliyun, theme.isDark, theme.isCompact, notification.duration | config-provider-root |
 | Descriptions | @oceanbase/design | B | collapsible, collapsed, defaultCollapsed, onCollapse, contentAlign | — |
 | Drawer | @oceanbase/design | B | document, footerExtra, cancelText, okText, okButtonProps, locale | — |
 | Dropdown | @oceanbase/design | A | — | — |

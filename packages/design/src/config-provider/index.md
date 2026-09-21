@@ -167,6 +167,7 @@ CSS 变量模式支持通过 CSS 类实现静态主题切换，无需 JavaScript
 | table | Table 全局配置 | `{ selectionColumnWidth?: width; className?: string; style?: React.CSSProperties; }` | - | - |
 | styleProviderProps | [StyleProvider 配置](https://github.com/ant-design/cssinjs#styleprovider)，一般用于配置 `hashPriority` 和 `transformers` 属性实现样式降级 | [StyleProviderProps](https://github.com/ant-design/cssinjs/blob/master/src/StyleContext.tsx#L88) | - | - |
 | appProps | 内嵌的 App 组件属性 | [AppProps](https://ant-design.antgroup.com/components/app-cn#app) | - | - |
+| notification | 通知全局配置。仅 `className`、`style`、`closeIcon` 透传给 antd，`duration` 额外支持按类型配置：`number \| { default?, info?, success?, warning?, error?, loading? }` | [NotificationConfig](https://ant.design/components/config-provider-cn#configprovider) \| - | - |
 
 ### Locale 排版主题
 
