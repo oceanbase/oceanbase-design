@@ -4,12 +4,7 @@ import { ensureNotificationConfig } from './ensureNotificationConfig';
 import useNotificationStyle from './style';
 
 export * from 'antd/es/notification';
-export type {
-  ErrorDetailItem,
-  NotificationType,
-  ObNotificationArgs,
-  ObNotificationInstance,
-} from './interface';
+export type { ErrorDetailItem, NotificationType } from './interface';
 
 export { createObNotification } from './createObNotification';
 export { iconMap } from './icons';

@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import { App, Modal as AntModal, notification as antNotification } from 'antd';
-import type { MessageInstance } from 'antd/es/message/interface';
 import { createMessageCompat } from '../message/createMessageCompat';
 import { useMessageCompat } from '../message/useMessageCompat';
+import type { ObMessageInstance } from '../message/interface';
 import type { ModalStaticFunctions } from 'antd/es/modal/confirm';
 import formatToken from 'antd/lib/theme/util/alias';
 import ConfigProvider from '../config-provider';
 import useModalStyle from '../modal/style';
 import { createObNotification } from '../notification/createObNotification';
+import { NotificationDurationContext } from '../notification/durationContext';
 import { ensureNotificationConfig } from '../notification/ensureNotificationConfig';
 import useNotificationStyle from '../notification/style';
 import { useObNotification } from '../notification/useObNotification';
@@ -39,7 +40,7 @@ let notification: ObNotificationInstance & {
   ...createObNotification(antNotification),
   useNotification: useObNotification,
 };
-let message: MessageInstance & {
+let message: ObMessageInstance & {
   useMessage: typeof useMessageCompat;
 } = {
   ...createMessageCompat(notification),
@@ -56,6 +57,9 @@ export default () => {
   token = useToken().token;
   obToken = genObToken(token as GlobalToken);
 
+  // consume notification duration configured by ConfigProvider
+  const notificationDuration = useContext(NotificationDurationContext);
+
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('modal');
   const notificationPrefixCls = getPrefixCls('notification');
@@ -67,7 +71,7 @@ export default () => {
   const staticFunction = App.useApp();
   // replace antd's static methods, support consuming ConfigProvider configuration
   notification = {
-    ...createObNotification(staticFunction.notification),
+    ...createObNotification(staticFunction.notification, { durations: [notificationDuration] }),
     useNotification: useObNotification,
   };
   message = {

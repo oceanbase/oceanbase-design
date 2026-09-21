@@ -109,7 +109,8 @@
       "appProps",
       "theme.isAliyun",
       "theme.isDark",
-      "theme.isCompact"
+      "theme.isCompact",
+      "notification.duration"
     ],
     "constraints": [
       "config-provider-root"
@@ -120,7 +121,9 @@
       "locale",
       "isAliyun",
       "isDark",
-      "isCompact"
+      "isCompact",
+      "notification",
+      "duration"
     ],
     "importFrom": "@oceanbase/design",
     "propsSource": "packages/design/src/config-provider/index.tsx",

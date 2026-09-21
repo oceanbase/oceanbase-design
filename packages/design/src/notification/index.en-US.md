@@ -12,6 +12,7 @@ Use notifications for non-blocking task results or system feedback that can reac
 - 🆕 Add `notification.loading` method to display long-running process status.
 - 🆕 Add `errorDetails` property to display error information, supporting copy as Markdown format.
 - 🆕 Add `dedupeKey` property to deduplicate notifications.
+- 🆕 Configure the default auto-close duration per type globally with `ConfigProvider` / `notification.config` / `message.config`.
 - 📌 **Use `notification` for all notification scenarios**; `message` remains as a compatibility alias implemented via Notification.
 
 ## Examples
@@ -27,6 +28,7 @@ Use notifications for non-blocking task results or system feedback that can reac
 <code src="./demo/dedupe.tsx" title="Dedupe" description="`dedupeKey` skips duplicates per type; different from `key`, which replaces in place."></code>
 <code src="./demo/hooks.tsx" title="Hooks" description="Use `notification.useNotification()` to access ConfigProvider context."></code>
 <code src="./demo/max-height.tsx" title="Content max height" description="Content scrolls inside when exceeding 320px; close button and progress stay fixed." debug></code>
+<code src="./demo/global-duration.tsx" title="Configure duration globally" description="Set `notification.duration` of `ConfigProvider` per type, e.g. 5s for errors and 3s for the rest."></code>
 
 ## Notification types
 
@@ -81,11 +83,53 @@ Use notifications for non-blocking task results or system feedback that can reac
 | closable                    | `true` (close button always shown) |
 | content max height          | `320px`, scrolls inside beyond     |
 
-Pass `duration` explicitly to override the auto-close strategy above.
+Pass `duration` explicitly to override the auto-close strategy above, or configure it globally.
+
+### Configure duration globally
+
+`duration` accepts a number or a per-type object, and can be configured globally instead of per call.
+
+| Entry | Description |
+| --- | --- |
+| `notification` prop of `ConfigProvider` | Declarative; set it on the app root. Static methods read the outermost `ConfigProvider`, while `useNotification` reads the nearest one |
+| `notification.config` | Imperative global config; applies to static methods and hooks |
+| `message.config` | Compatibility entry sharing the same global config with `notification.config` |
+
+```tsx | pure
+// 1. ConfigProvider: close errors in 3s, other types in 5s
+import { ConfigProvider } from '@oceanbase/design';
+
+const App = () => (
+  <ConfigProvider notification={{ duration: { error: 3, default: 5 } }}>
+    <YourApp />
+  </ConfigProvider>
+);
+```
+
+```tsx | pure
+// 2. notification.config: 3s for all types
+notification.config({ duration: 3 });
+
+// 3. message.config: only error takes effect (message forwards to notification)
+message.config({ duration: { error: 3 } });
+```
+
+Priority of `duration`, from highest to lowest:
+
+1. `duration` of a single call, e.g. `notification.error({ message: 'Failed', duration: 8 })`
+2. Instance level `duration` of `notification.useNotification(config)`
+3. `ConfigProvider notification.duration`
+4. Global `duration` of `notification.config` / `message.config`
+5. Built-in strategy: 5s for title only, 10s with description, no auto close for errors
+
+When a single call has no `duration`, the levels are searched by type, from highest to lowest: a level that does not configure the type falls through to the next one, and within a level an unconfigured type falls back to `default`. The built-in strategy applies only when no configured level matches. `duration: 0` means no auto close. Repeated `notification.config` / `message.config` calls merge per type, while a number replaces the whole config.
+
+For example, with `ConfigProvider notification={{ duration: { error: 3 } }}` and `notification.config({ duration: { success: 2 } })`, errors close in 3s and successes in 2s.
 
 ### Methods
 
 - `notification.loading(config)`: Show in-progress notification.
+- `notification.config(config)`: Global config; `duration` accepts a number or a per-type object.
 - `notification.useNotification()`: Returns a Hook API and `contextHolder`; insert `contextHolder` into the tree to consume ConfigProvider context.
 
 ### Message compatibility
@@ -96,5 +140,6 @@ Pass `duration` explicitly to override the auto-close strategy above.
 | `message.error('Failed')` | `notification.error({ message: 'Failed' })` |
 | `message.loading('Processing', 0)` | `notification.loading({ message: 'Processing', duration: 0 })` |
 | `message.useMessage()` | `notification.useNotification()` |
+| `message.config({ duration })` | `notification.config({ duration })` |
 
 `message` remains as an antd Message-compatible alias implemented via Notification; prefer `notification` for new code.

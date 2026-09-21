@@ -14,10 +14,20 @@
     "appProps",
     "theme.isAliyun",
     "theme.isDark",
-    "theme.isCompact"
+    "theme.isCompact",
+    "notification.duration"
   ],
   "constraints": ["config-provider-root"],
-  "keywords": ["config", "theme", "locale", "isAliyun", "isDark", "isCompact"],
+  "keywords": [
+    "config",
+    "theme",
+    "locale",
+    "isAliyun",
+    "isDark",
+    "isCompact",
+    "notification",
+    "duration"
+  ],
   "importFrom": "@oceanbase/design",
   "propsSource": "packages/design/src/config-provider/index.tsx",
   "docSource": "packages/design/src/config-provider/index.md"

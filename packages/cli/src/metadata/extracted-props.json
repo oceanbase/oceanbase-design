@@ -86,6 +86,7 @@
     "source": "packages/design/src/config-provider/index.tsx",
     "props": [
       "theme",
+      "notification",
       "navigate",
       "hideOnSinglePage",
       "card",
@@ -99,6 +100,7 @@
     "allInterfaceProps": [
       "theme",
       "locale",
+      "notification",
       "navigate",
       "hideOnSinglePage",
       "card",
@@ -243,11 +245,13 @@
     "source": "packages/ui/src/ProTable/index.tsx",
     "props": [
       "innerBordered",
-      "outerBordered"
+      "outerBordered",
+      "pagination"
     ],
     "allInterfaceProps": [
       "innerBordered",
-      "outerBordered"
+      "outerBordered",
+      "pagination"
     ]
   },
   "Result": {
@@ -282,6 +286,7 @@
     "props": [
       "innerBordered",
       "outerBordered",
+      "pagination",
       "cancelText",
       "collapseText",
       "openText",
@@ -293,6 +298,7 @@
     "allInterfaceProps": [
       "innerBordered",
       "outerBordered",
+      "pagination",
       "columns",
       "cancelText",
       "collapseText",

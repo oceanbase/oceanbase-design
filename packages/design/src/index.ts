@@ -49,12 +49,7 @@ export { default as Drawer } from './drawer';
 export type { DrawerProps } from './drawer';
 
 export { message, notification, token, obToken } from './static-function';
-export type {
-  ErrorDetailItem,
-  NotificationType,
-  ObNotificationArgs,
-  ObNotificationInstance,
-} from './notification/interface';
+export type { ErrorDetailItem, NotificationType } from './notification/interface';
 
 export { default as List } from './list';
 export type { ListProps } from './list';
