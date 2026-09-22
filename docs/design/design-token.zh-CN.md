@@ -125,11 +125,12 @@ class MyComponent extends React.Component {
   border-radius: var(--ob-radius-sm);
   padding: var(--ob-space-200) var(--ob-space-300);
 }
+
+.my-title {
+  font: var(--ob-font-h1);
+  color: var(--ob-color-text-default);
+}
 ```
-
-.my-title { font: var(--ob-font-h1); color: var(--ob-color-text-default); }
-
-````
 
 ### Less
 
@@ -140,7 +141,7 @@ class MyComponent extends React.Component {
   border-radius: var(--ob-radius-md);
   box-shadow: var(--ob-shadow-2);
 }
-````
+```
 
 ### Sass/SCSS
 
@@ -401,20 +402,6 @@ ob-design setup --client vscode  # 只写编辑器提示配置
 | 扫描工作区的 CSS 变量补全扩展（如 CSS Variable Autocomplete） | 由 `ob-design setup` 写入 `.vscode/extensions.json` 的可选推荐（可安全删除）。再把 `cssVariables.themeFiles` 指向包内 `ob-css-vars.reference.css`，或把该文件放进工程。不同工具是否索引 `node_modules` 不一致，请以实际工具为准 |
 | WebStorm / IntelliJ | 把 reference.css 放进工程，并确认 IDE 能识别 `:root` 声明——IDE 默认不索引 `node_modules` |
 | React 内联 `style={{}}` | 字符串没有 CSS 语义，无法补全，建议改用 `obToken`（自带类型提示） |
-
-### 哪些能自动、哪些不能
-
-内置语言服务的 `var()` 参数补全只读取**当前同一份文档**里的 `--x:` 声明：它不扫描工作区，也不会合并 `@import` 进来的文件（Sass/Less 变量跳转同样是同文件范围）。因此单靠一个 npm 包无法让 `var(--ob-*)` 出现下拉——属性名和 hover 靠 `css.customData`，`var()` 参数补全必须靠会扫描工作区的扩展。
-
-若要完全不依赖编辑器配置，就在 CI 里校验。`ob-design lint` 能查出 `.css`/`.less`/`.scss` 以及内联字符串（如 `<div style={{ color: 'var(--ob-x)' }} />`）中的非法 `var(--ob-*)` 名、`--ob-padding-*` 误用和 antd 变量，并给出正确 token：
-
-```json
-"scripts": { "lint:ob": "ob-design lint ./src" }
-```
-
-`ob-design lint` 只接受一个目标路径，请用源码根目录调用一次，不要挂在逐文件的 glob 钩子上。
-
-补全列表只包含文档收录的推荐变量，已废弃的兼容变量不会出现。产物由 `pnpm run generate:ide-tokens` 生成，并有测试保证与源码同步。
 
 ## Design Token 列表
 
