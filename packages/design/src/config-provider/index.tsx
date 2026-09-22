@@ -64,6 +64,13 @@ export type TableConfig = AntTableConfig & {
   selectionColumnWidth?: number;
 };
 
+export type TypographyConfig = ComponentStyleConfig & {
+  copyable?: {
+    /** 仅在 hover 文本或键盘聚焦时展示复制入口 */
+    hover?: boolean;
+  };
+};
+
 export interface ConfigConsumerProps extends AntConfigConsumerProps {
   theme?: ThemeConfig;
   navigate?: NavigateFunction;
@@ -71,6 +78,7 @@ export interface ConfigConsumerProps extends AntConfigConsumerProps {
   card?: CardConfig;
   spin?: SpinConfig;
   table?: TableConfig;
+  typography?: TypographyConfig;
   builtInApp?: boolean;
   locale?: Locale;
 }
@@ -104,6 +112,7 @@ export interface ConfigProviderProps extends AntConfigProviderProps {
   pagination?: OBPaginationConfig;
   spin?: SpinConfig;
   table?: TableConfig;
+  typography?: TypographyConfig;
   form?: AntConfigProviderProps['form'] & OBFormConfig;
   // StyleProvider props
   styleProviderProps?: StyleProviderProps;
@@ -144,6 +153,7 @@ const ConfigProvider: ConfigProviderType = ({
   form,
   spin,
   table,
+  typography,
   tabs,
   styleProviderProps,
   appProps,
@@ -295,6 +305,7 @@ const ConfigProvider: ConfigProviderType = ({
           table
         ) as TableConfig
       }
+      typography={merge({}, parentContext.typography, typography)}
       tabs={merge({}, parentContext.tabs, tabs)}
       notification={notification === undefined ? undefined : restNotificationConfig}
       theme={resolvedAntTheme}

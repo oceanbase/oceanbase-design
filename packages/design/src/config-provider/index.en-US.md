@@ -11,6 +11,7 @@ nav:
 - 🆕 `theme.isAliyun` to enable Aliyun theme.
 - 🆕 CSS variable mode via `theme.cssVar`. See [CSS Variable Mode](#css-variable-mode).
 - 🆕 `card.divided` to control Card divider visibility.
+- 🆕 `typography.copyable.hover` to show Typography copy entry only on hover or keyboard focus globally.
 - 🆕 `locale.Input.placeholder` for default Input placeholder.
 - 🆕 `locale.Card.viewDocument` for Card document link text.
 - 🆕 `table.selectionColumnWidth` for table selection column width.
@@ -29,6 +30,7 @@ nav:
 <code src="./demo/css-var.tsx" title="CSS Variable Mode"></code>
 <code src="./demo/spin.tsx" title="Spin"></code>
 <code src="./demo/card.tsx" title="Card"></code>
+<code src="./demo/typography.tsx" title="Typography" description="Use `typography.copyable.hover` to show the copy entry only on hover or keyboard focus globally; component-level `copyable.hover` can override."></code>
 <code src="../empty/demo/config-provider.tsx" title="Empty"></code>
 
 ### Style Prefix
@@ -163,6 +165,7 @@ CSS variable mode supports static theme switching via CSS classes, no JavaScript
 | theme.isAliyun | Enable Aliyun theme | boolean | - | 0.3.5 |
 | locale.Input.placeholder | Default Input placeholder | string | - | 0.3.2 |
 | card | Card global config | `{ divided?: boolean; classNames?: Record<string, string>; styles?: Record<string, React.CSSProperties>; }` | - | - |
+| typography | Typography global config | `{ copyable?: { hover?: boolean }; className?: string; style?: React.CSSProperties; }` | - | - |
 | spin | Spin global config | `{ indicator?: ReactNode; className?: string; style?: React.CSSProperties; }` | - | - |
 | table | Table global config | `{ selectionColumnWidth?: width; className?: string; style?: React.CSSProperties; }` | - | - |
 | styleProviderProps | [StyleProvider](https://github.com/ant-design/cssinjs#styleprovider) config (e.g. `hashPriority`, `transformers`) for style fallback | [StyleProviderProps](https://github.com/ant-design/cssinjs/blob/master/src/StyleContext.tsx#L88) | - | - |
