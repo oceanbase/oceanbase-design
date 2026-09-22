@@ -11,6 +11,9 @@ export * from 'antd/es/typography/Paragraph';
 export * from 'antd/es/typography/Link';
 export * from 'antd/es/typography/Title';
 
+// 覆盖 antd 的 CopyConfig，增加 OceanBase 扩展的 hover 配置
+export type { CopyConfig, Copyable } from '../_util/getCopyableConfig';
+
 export type TypographyType = typeof OriginTypography & {
   Text: typeof Text;
   Link: typeof Link;

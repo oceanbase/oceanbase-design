@@ -11,6 +11,7 @@ nav:
 - 🆕 新增 `theme.isAliyun` 属性，用于开启阿里云主题。
 - 🆕 支持 CSS 变量模式，通过 `theme.cssVar` 配置启用，详见 [CSS 变量模式](#css-变量模式)。
 - 🆕 新增 `card.divided` 属性，用于配置 Card 是否展示分割线。
+- 🆕 新增 `typography.copyable.hover` 属性，用于全局配置 Typography 复制入口是否仅在 hover 或键盘聚焦时展示。
 - 🆕 新增 `locale.Input.placeholder` 属性，用于配置 Input 的默认 `placeholder`。
 - 🆕 新增 `locale.Card.viewDocument` 属性，用于配置 Card 文档链接的提示文本。
 - 🆕 新增 `table.selectionColumnWidth` 属性，用于配置表格的选择列宽度。
@@ -28,6 +29,7 @@ nav:
 <code src="./demo/css-var.tsx" title="CSS 变量模式"></code>
 <code src="./demo/spin.tsx" title="Spin"></code>
 <code src="./demo/card.tsx" title="Card"></code>
+<code src="./demo/typography.tsx" title="Typography" description="通过 `typography.copyable.hover` 全局配置复制入口仅在 hover 或键盘聚焦时展示；组件级 `copyable.hover` 可覆盖。"></code>
 <code src="../empty/demo/config-provider.tsx" title="空状态"></code>
 <code src="./demo/style-provider.tsx" title="低版本浏览器样式兼容"></code>
 
@@ -163,6 +165,7 @@ CSS 变量模式支持通过 CSS 类实现静态主题切换，无需 JavaScript
 | theme.isAliyun | 用于开启阿里云主题 | boolean | - | 0.3.5 |
 | locale.Input.placeholder | 用于配置 Input 的默认 `placeholder` | string | - | 0.3.2 |
 | card | Card 全局配置 | `{ divided?: boolean; classNames?: Record<string, string>; styles?: Record<string, React.CSSProperties>; }` | - | - |
+| typography | Typography 全局配置 | `{ copyable?: { hover?: boolean }; className?: string; style?: React.CSSProperties; }` | - | - |
 | spin | Spin 全局配置 | `{ indicator?: ReactNode; className?: string; style?: React.CSSProperties; }` | - | - |
 | table | Table 全局配置 | `{ selectionColumnWidth?: width; className?: string; style?: React.CSSProperties; }` | - | - |
 | styleProviderProps | [StyleProvider 配置](https://github.com/ant-design/cssinjs#styleprovider)，一般用于配置 `hashPriority` 和 `transformers` 属性实现样式降级 | [StyleProviderProps](https://github.com/ant-design/cssinjs/blob/master/src/StyleContext.tsx#L88) | - | - |

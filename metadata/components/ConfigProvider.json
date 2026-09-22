@@ -10,6 +10,7 @@
     "card",
     "spin",
     "table",
+    "typography",
     "styleProviderProps",
     "appProps",
     "theme.isAliyun",

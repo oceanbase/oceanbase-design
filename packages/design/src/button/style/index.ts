@@ -53,12 +53,19 @@ export const genButtonStyle: GenerateStyle<ButtonToken> = (token: ButtonToken) =
               borderColor: token.gray7,
               color: token.colorText,
             },
-            [iconCls]: {
-              color: token.colorIcon,
-            },
           },
         },
       },
+      // default color icon for outlined, dashed and text button
+      [`&${componentCls}-color-default:not(:disabled):not(${componentCls}-disabled):not(${componentCls}-background-ghost)`]:
+        {
+          [`&${componentCls}-variant-outlined, &${componentCls}-variant-dashed, &${componentCls}-variant-text`]:
+            {
+              [iconCls]: {
+                color: token.colorIcon,
+              },
+            },
+        },
       // button loading and solid style
       [`&${componentCls}-variant-solid:not(:disabled):not(${componentCls}-disabled):hover`]: {
         ...genPresetColorStyle(token),
