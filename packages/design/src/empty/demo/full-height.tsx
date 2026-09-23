@@ -3,7 +3,7 @@ import { Button, Card, Empty } from '@oceanbase/design';
 
 export default () => {
   return (
-    <Card title="Cluster List" bodyStyle={{ height: 320 }}>
+    <Card bodyStyle={{ height: 600 }}>
       <Empty
         fullHeight
         image={Empty.PRESENTED_IMAGE_COLORED}
