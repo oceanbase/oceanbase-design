@@ -3,6 +3,7 @@ import type { CheckboxProps as AntCheckboxProps, CheckboxRef } from 'antd/es/che
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
+import CheckboxGroup from './CheckboxGroup';
 import useStyle from './style';
 
 export * from 'antd/es/checkbox';
@@ -27,7 +28,7 @@ const InternalCheckbox = React.forwardRef<CheckboxRef, AntCheckboxProps>(
 
 const Checkbox = InternalCheckbox as typeof Checkbox;
 
-Checkbox.Group = AntCheckbox.Group;
+Checkbox.Group = CheckboxGroup;
 // @ts-ignore
 Checkbox.__ANT_CHECKBOX = AntCheckbox.__ANT_CHECKBOX;
 
