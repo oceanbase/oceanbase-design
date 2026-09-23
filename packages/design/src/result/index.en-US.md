@@ -9,6 +9,7 @@ nav:
 - 💄 Custom illustration, theme and styles, aligned with OceanBase Design specification.
 - 🆕 `status` prop adds `processing` and `normal` enum values.
 - 🆕 Added `PRESENTED_IMAGE_NOT_FOUND`, `PRESENTED_IMAGE_NETWORK_ERROR`, `PRESENTED_IMAGE_VERSION_UPDATE` built-in illustrations.
+- 🆕 New `fullHeight` prop to fill the parent container height and center the content.
 
 ## Code Examples
 
@@ -24,6 +25,7 @@ nav:
 <code src="./demo/presented-images.tsx" title="More Built-in Illustrations" description="Use PRESENTED_IMAGE_* via icon prop."></code>
 <code src="./demo/icon.tsx" title="Custom Icon"></code>
 <code src="./demo/over-length.tsx" title="Over-length Content" description="Max width 600px for subtitle, 1000px for content to avoid infinite stretch."></code>
+<code src="./demo/full-height.tsx" title="Full Height" description="With fullHeight, the result fills the parent container height and centers the content."></code>
 <code src="./demo/with-page-container.tsx" title="With Page Container"></code>
 
 ## Built-in Illustrations
@@ -43,5 +45,6 @@ Use via `icon={<Result.PRESENTED_IMAGE_* />}`:
 | Parameter | Description | Type | Default | Version |
 | :-- | :-- | :-- | :-- | :-- |
 | status | Status | success \| error \| warning \| processing \| normal \| info \| 403 \| 404 \| 500 | info | - |
+| fullHeight | Fill the parent container height and center the content | boolean | false | - |
 
 - More API see antd Result docs: https://ant.design/components/result-cn

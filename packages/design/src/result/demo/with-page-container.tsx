@@ -14,12 +14,10 @@ export default () => {
         bordered={false}
         bodyStyle={{
           height: 'calc(100vh - 96px)',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
         }}
       >
         <Result
+          fullHeight
           status="success"
           title="Successfully Purchased Cloud Server ECS!"
           subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."

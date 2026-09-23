@@ -14,12 +14,10 @@ export default () => {
         bordered={false}
         bodyStyle={{
           height: 'calc(100vh - 96px)',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
         }}
       >
         <Empty
+          fullHeight
           image={Empty.PRESENTED_IMAGE_COLORED}
           title="Create Your Cluster"
           description="There is no cluster, welcome to create one!"

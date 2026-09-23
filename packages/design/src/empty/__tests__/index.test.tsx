@@ -25,4 +25,12 @@ describe('Empty', () => {
     expect(container.querySelector('.ant-empty-horizontal')).toBeTruthy();
     expect(asFragment()).toMatchSnapshot();
   });
+
+  it('should render full height layout when fullHeight is true', () => {
+    const { container, asFragment } = render(
+      <Empty fullHeight image={Empty.PRESENTED_IMAGE_COLORED} description="No data" />
+    );
+    expect(container.querySelector('.ant-empty-full-height')).toBeTruthy();
+    expect(asFragment()).toMatchSnapshot();
+  });
 });

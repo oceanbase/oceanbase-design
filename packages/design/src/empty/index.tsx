@@ -25,6 +25,7 @@ export interface EmptyProps extends AntEmptyProps {
   title?: React.ReactNode;
   steps?: StepProps[];
   layout?: 'horizontal' | 'vertical';
+  fullHeight?: boolean;
 }
 
 type CompoundedComponent = React.FC<EmptyProps> & {
@@ -43,6 +44,7 @@ const Empty: CompoundedComponent = props => {
     description = locale.description,
     steps,
     layout = 'vertical',
+    fullHeight,
     children,
     prefixCls: customizePrefixCls,
     className,
@@ -56,6 +58,7 @@ const Empty: CompoundedComponent = props => {
     {
       [`${prefixCls}-horizontal`]: isHorizontal,
       [`${prefixCls}-small`]: image === defaultEmptyImg || image === simpleEmptyImg,
+      [`${prefixCls}-full-height`]: fullHeight,
     },
     className
   );

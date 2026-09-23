@@ -8,11 +8,11 @@
 | BasicLayout | @oceanbase/ui | D | logoUrl, iconUrl, banner, menus, topHeader, sideHeader | — |
 | Button | @oceanbase/design | A | — | import-design-not-antd |
 | Card | @oceanbase/design | B | subTitle, document, divided, gray, collapsible, defaultCollapsed, collapsed, onCollapse | card-table-inner-bordered |
-| ConfigProvider | @oceanbase/design | B | navigate, hideOnSinglePage, card, spin, table, styleProviderProps, appProps, theme.isAliyun, theme.isDark, theme.isCompact, notification.duration | config-provider-root |
+| ConfigProvider | @oceanbase/design | B | navigate, hideOnSinglePage, card, spin, table, typography, styleProviderProps, appProps, theme.isAliyun, theme.isDark, theme.isCompact, notification.duration | config-provider-root |
 | Descriptions | @oceanbase/design | B | collapsible, collapsed, defaultCollapsed, onCollapse, contentAlign | — |
 | Drawer | @oceanbase/design | B | document, footerExtra, cancelText, okText, okButtonProps, locale | — |
 | Dropdown | @oceanbase/design | A | — | — |
-| Empty | @oceanbase/design | C | title, steps, layout | — |
+| Empty | @oceanbase/design | C | title, steps, layout, fullHeight | — |
 | Filter | @oceanbase/design | D | icon, label, bordered, footer, extra, collapsible, alwaysCollapse, showSuffixIcon, allowClear | filter-not-select-for-bar, filter-controlled |
 | Form | @oceanbase/design | A | — | — |
 | Input | @oceanbase/design | A | — | — |
@@ -20,7 +20,7 @@
 | Modal | @oceanbase/design | B | extra, document | — |
 | PageContainer | @oceanbase/ui | D | header, locale | — |
 | ProTable | @oceanbase/ui | D | innerBordered, outerBordered | table-over-protable |
-| Result | @oceanbase/design | C | status | — |
+| Result | @oceanbase/design | C | status, fullHeight | — |
 | Select | @oceanbase/design | A | — | filter-not-select-for-bar |
 | Spin | @oceanbase/design | C | gray | — |
 | Table | @oceanbase/design | B | innerBordered, outerBordered, cancelText, collapseText, openText, hiddenCancelBtn, toolOptionsRender, toolAlertRender, toolSelectedContent | card-table-inner-bordered, table-over-protable, table-batch-tool-options |

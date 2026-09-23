@@ -93,6 +93,7 @@
       "pagination",
       "spin",
       "table",
+      "typography",
       "form",
       "styleProviderProps",
       "appProps"
@@ -107,6 +108,7 @@
       "pagination",
       "spin",
       "table",
+      "typography",
       "form",
       "styleProviderProps",
       "appProps"
@@ -167,12 +169,14 @@
     "props": [
       "title",
       "steps",
-      "layout"
+      "layout",
+      "fullHeight"
     ],
     "allInterfaceProps": [
       "title",
       "steps",
-      "layout"
+      "layout",
+      "fullHeight"
     ]
   },
   "Filter": {
@@ -257,10 +261,12 @@
   "Result": {
     "source": "packages/design/src/result/index.tsx",
     "props": [
-      "status"
+      "status",
+      "fullHeight"
     ],
     "allInterfaceProps": [
-      "status"
+      "status",
+      "fullHeight"
     ]
   },
   "Select": {

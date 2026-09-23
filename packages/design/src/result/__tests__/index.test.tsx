@@ -19,4 +19,12 @@ describe('Result', () => {
     const { asFragment } = render(<Result icon={<Icon />} title="Title" />);
     expect(asFragment()).toMatchSnapshot();
   });
+
+  it('should render full height layout when fullHeight is true', () => {
+    const { container, asFragment } = render(
+      <Result fullHeight status="success" title="Title" subTitle="Sub title" />
+    );
+    expect(container.querySelector('.ant-result-full-height')).toBeTruthy();
+    expect(asFragment()).toMatchSnapshot();
+  });
 });
