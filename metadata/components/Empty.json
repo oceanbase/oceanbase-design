@@ -4,7 +4,7 @@
   "diffLevel": "C",
   "extendsAntd": "Empty",
   "delegateAntd": true,
-  "addedProps": ["title", "steps", "layout"],
+  "addedProps": ["title", "steps", "layout", "fullHeight"],
   "constraints": [],
   "keywords": ["empty", "placeholder", "no-data"],
   "importFrom": "@oceanbase/design",

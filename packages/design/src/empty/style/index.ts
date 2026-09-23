@@ -151,6 +151,18 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
         },
       },
     },
+
+    [`${componentCls}-full-height`]: {
+      minHeight: '100%',
+      // override the built-in vertical margin of antd Empty, to keep content centered in a fixed-height container
+      marginBlock: 0,
+    },
+
+    // horizontal layout centers content with flex already
+    [`${componentCls}-full-height:not(${componentCls}-horizontal)`]: {
+      display: 'grid',
+      alignContent: 'center',
+    },
   };
 };
 

@@ -25,6 +25,7 @@ export type ResultStatusType = AntResultStatusType | 'processing' | 'normal';
 
 export interface ResultProps extends Omit<AntResultProps, 'status'> {
   status?: ResultStatusType;
+  fullHeight?: boolean;
 }
 
 export type ResultType = React.FC<ResultProps> & {
@@ -37,11 +38,22 @@ export type ResultType = React.FC<ResultProps> & {
   PRESENTED_IMAGE_NORMAL: typeof Normal;
 };
 
-const Result: ResultType = ({ prefixCls: customizePrefixCls, className, status, ...restProps }) => {
+const Result: ResultType = ({
+  prefixCls: customizePrefixCls,
+  className,
+  status,
+  fullHeight,
+  ...restProps
+}) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
   const prefixCls = getPrefixCls('result', customizePrefixCls);
   const [wrapCSSVar] = useStyle(prefixCls);
-  const resultCls = classNames(className);
+  const resultCls = classNames(
+    {
+      [`${prefixCls}-full-height`]: fullHeight,
+    },
+    className
+  );
 
   const statusMap = {
     success: <Success />,

@@ -4,7 +4,7 @@
   "diffLevel": "C",
   "extendsAntd": "Result",
   "delegateAntd": true,
-  "addedProps": ["status"],
+  "addedProps": ["status", "fullHeight"],
   "constraints": [],
   "keywords": ["result", "success", "error", "403", "404", "500", "processing"],
   "importFrom": "@oceanbase/design",

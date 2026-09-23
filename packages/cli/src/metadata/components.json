@@ -105,6 +105,7 @@
       "card",
       "spin",
       "table",
+      "typography",
       "styleProviderProps",
       "appProps",
       "theme.isAliyun",
@@ -204,7 +205,8 @@
     "addedProps": [
       "title",
       "steps",
-      "layout"
+      "layout",
+      "fullHeight"
     ],
     "constraints": [],
     "keywords": [
@@ -381,7 +383,8 @@
     "extendsAntd": "Result",
     "delegateAntd": true,
     "addedProps": [
-      "status"
+      "status",
+      "fullHeight"
     ],
     "constraints": [],
     "keywords": [
