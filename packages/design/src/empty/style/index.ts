@@ -5,15 +5,25 @@ import { genStyleHooks } from '../../_util/genComponentStyleHook';
 
 export type EmptyToken = FullToken<'Badge'>;
 
-/** Horizontal layout stacks vertically below this container width. */
-const EMPTY_HORIZONTAL_STACK_WIDTH = 560;
+/** Illustration size in horizontal layout. */
+const EMPTY_HORIZONTAL_IMAGE_SIZE = 160;
+/** Minimum text width kept in horizontal layout, it also defines the stacking breakpoint. */
+const EMPTY_HORIZONTAL_DESCRIPTION_MIN_WIDTH = 400;
 /** Horizontal layout hides illustration below this container width. */
 const EMPTY_HORIZONTAL_HIDE_IMAGE_WIDTH = 400;
 
 export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSSObject => {
   const { antCls, componentCls, colorTextTertiary, colorText, colorTextSecondary, calc } = token;
 
-  const horizontalStackQuery = `@container (max-width: ${EMPTY_HORIZONTAL_STACK_WIDTH}px)`;
+  // An element can't be restyled by the container query of its own containment context,
+  // so the horizontal layout is stacked by flex-wrap instead of switching `flexDirection`
+  // on the container itself: the description keeps a minimum width and wraps onto a new
+  // line below the illustration once the container can't fit both anymore.
+  // The breakpoint is derived from the same values as that wrap point, to keep the stacked
+  // layout and the container query in sync.
+  const horizontalStackWidth =
+    EMPTY_HORIZONTAL_IMAGE_SIZE + EMPTY_HORIZONTAL_DESCRIPTION_MIN_WIDTH + token.marginXL;
+  const horizontalStackQuery = `@container (max-width: ${horizontalStackWidth}px)`;
   const horizontalHideImageQuery = `@container (max-width: ${EMPTY_HORIZONTAL_HIDE_IMAGE_WIDTH}px)`;
 
   return {
@@ -92,19 +102,26 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
     [`${componentCls}-horizontal`]: {
       containerType: 'inline-size',
       display: 'flex',
+      // stacked layout is driven by the wrapping of the description, see `horizontalStackWidth`
+      flexWrap: 'wrap',
       justifyContent: 'center',
       alignItems: 'center',
+      // keeps the stacked illustration and description as one centered group, e.g. with fullHeight
+      alignContent: 'center',
       [`${componentCls}-image`]: {
-        height: 160,
+        height: EMPTY_HORIZONTAL_IMAGE_SIZE,
         flexShrink: 0,
         '& svg': {
-          height: 160,
-          width: 160,
+          height: EMPTY_HORIZONTAL_IMAGE_SIZE,
+          width: EMPTY_HORIZONTAL_IMAGE_SIZE,
         },
       },
       [`${componentCls}-description`]: {
         marginLeft: token.marginXL,
-        minWidth: 400,
+        // preferred width of the text block, it makes the description wrap below the illustration
+        // as soon as the container gets narrower than the stacking breakpoint
+        flex: `1 1 ${EMPTY_HORIZONTAL_DESCRIPTION_MIN_WIDTH}px`,
+        minWidth: 0,
         textAlign: 'left',
         [`${componentCls}-title`]: {
           marginTop: 0,
@@ -117,14 +134,13 @@ export const genEmptyStyle: GenerateStyle<EmptyToken> = (token: EmptyToken): CSS
 
     [horizontalStackQuery]: {
       [`${componentCls}-horizontal`]: {
-        flexDirection: 'column',
         [`${componentCls}-image`]: {
           marginBottom: 0,
         },
         [`${componentCls}-description`]: {
+          flexBasis: '100%',
           marginLeft: 0,
           marginTop: token.marginLG,
-          minWidth: 'auto',
           textAlign: 'center',
         },
       },
