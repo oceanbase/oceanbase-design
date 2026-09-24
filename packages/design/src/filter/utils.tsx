@@ -1,5 +1,6 @@
 import { ClockCircleOutlined, FilterOutlined } from '@oceanbase/icons';
 import type { CSSProperties, ReactNode } from 'react';
+import type { FilterLocale } from '../locale';
 
 export const getIcon = (icon?: 'time' | 'filter') => {
   switch (icon) {
@@ -70,9 +71,10 @@ export const generateFilterId = (
 
 /**
  * 获取 Filter 组件的占位符文案
+ * @param filterLocale Filter 国际化文案
  */
-export const getPlaceholder = (): string => {
-  return '请选择';
+export const getPlaceholder = (filterLocale?: FilterLocale): string => {
+  return filterLocale?.pleaseSelect || '请选择';
 };
 
 /**

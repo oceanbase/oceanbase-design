@@ -247,7 +247,7 @@ const App = () => {
 | defaultValue | 默认筛选值 | `any` | - |
 | onChange | 值变化回调 | `(value: any) => void` | - |
 | formatValue | 将 value 格式化为展示文本，用于 FilterButton 标签和折叠态 Tooltip | `(value: any) => string` | - |
-| placeholder | 未选值时的占位文本 | `string` | `'请选择'` |
+| placeholder | 未选值时的占位文本 | `string` | 国际化 `Filter.pleaseSelect` 文案 |
 
 **使用示例：**
 

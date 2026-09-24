@@ -246,7 +246,7 @@ Custom filter slot. Integrates custom components via `value`/`onChange` on Filte
 | defaultValue | Default filter value | `any` | - |
 | onChange | Value change callback | `(value: any) => void` | - |
 | formatValue | Format value for display (FilterButton label, collapsed Tooltip) | `(value: any) => string` | - |
-| placeholder | Placeholder when no value | `string` | `'请选择'` |
+| placeholder | Placeholder when no value | `string` | Locale `Filter.pleaseSelect` text |
 
 **Example:**
 

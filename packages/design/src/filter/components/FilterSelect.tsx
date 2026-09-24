@@ -7,6 +7,7 @@ import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
 import { useFilterCollapsed } from '../hooks/useFilterCollapsed';
+import { useFilterLocale } from '../hooks/useFilterLocale';
 import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
@@ -57,6 +58,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
   const isCollapsed = useFilterCollapsed(_isCollapsed);
   const { token } = theme.useToken();
   const { prefixCls } = useFilterStyle();
+  const filterLocale = useFilterLocale();
   const filterButtonRef = useRef<FilterButtonRef>(null);
   const { updateFilterValue } = useFilterContext();
   const filterId = useMemo(() => generateFilterId('select', label), [label]);
@@ -124,7 +126,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
       {showSearch && (
         <div style={{ marginInline: 4, marginBottom: 8 }}>
           <Input
-            placeholder="搜索"
+            placeholder={filterLocale.search}
             prefix={<SearchOutlined />}
             allowClear
             value={searchKeyword}
@@ -136,7 +138,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
       {filteredOptions.length === 0 ? (
         <Empty
           image={Empty.PRESENTED_IMAGE_SIMPLE}
-          description="无匹配结果"
+          description={filterLocale.noResult}
           style={{ padding: '16px 0' }}
         />
       ) : (
@@ -195,7 +197,7 @@ const FilterSelect: FC<FilterSelectProps> = ({
             className={getFilterCls(prefixCls, 'text-ellipsis')}
             style={getWrappedValueStyle(hasValue)}
           >
-            {hasValue ? currentLabel : getPlaceholder()}
+            {hasValue ? currentLabel : getPlaceholder(filterLocale)}
           </span>
         </FilterButton>
       </div>
