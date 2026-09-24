@@ -32,6 +32,8 @@ export default {
     filters: 'Filters',
     apply: 'Apply',
     clearAll: 'Clear All',
+    search: 'Search',
+    noResult: 'No matching results',
   },
   Notification: {
     showMore: 'Show more',

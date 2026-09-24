@@ -5,6 +5,7 @@ import Empty from '../../../empty';
 import { SearchOutlined } from '@oceanbase/icons';
 import { useFilterContext } from '../../FilterContext';
 import { useFilterCollapsed } from '../../hooks/useFilterCollapsed';
+import { useFilterLocale } from '../../hooks/useFilterLocale';
 import { useFilterTooltip } from '../../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../../style';
 import {
@@ -42,6 +43,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
   ...restProps
 }) => {
   const isCollapsed = useFilterCollapsed(_isCollapsed);
+  const filterLocale = useFilterLocale();
   const { prefixCls } = useFilterStyle();
   const { token } = theme.useToken();
   const filterButtonRef = useRef<FilterButtonRef>(null);
@@ -270,7 +272,7 @@ const FilterCascader: React.FC<FilterCascaderProps> = ({
             className={getFilterCls(prefixCls, 'text-ellipsis')}
             style={getWrappedValueStyle(hasValue)}
           >
-            {hasValue ? getSelectedLabel() : getPlaceholder()}
+            {hasValue ? getSelectedLabel() : getPlaceholder(filterLocale)}
           </span>
         </FilterButton>
       </div>

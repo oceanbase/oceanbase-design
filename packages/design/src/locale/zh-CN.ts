@@ -32,6 +32,8 @@ export default {
     filters: '筛选',
     apply: '确定',
     clearAll: '清空',
+    search: '搜索',
+    noResult: '无匹配结果',
   },
   Notification: {
     showMore: '展开',

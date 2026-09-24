@@ -1,12 +1,10 @@
 import type { ReactNode } from 'react';
-import React, { useContext } from 'react';
+import React from 'react';
 import { Flex } from 'antd';
 import Tag from '../../tag';
 import Tooltip from '../../tooltip';
 import theme from '../../theme';
-import ConfigProvider from '../../config-provider';
-import type { Locale } from '../../locale';
-import enUS from '../../locale/en-US';
+import { useFilterLocale } from '../hooks/useFilterLocale';
 
 export interface TagItem {
   label: ReactNode;
@@ -35,8 +33,7 @@ const WrappedTagsDisplay: React.FC<WrappedTagsDisplayProps> = ({
   tagMaxWidth = 80,
 }) => {
   const { token } = theme.useToken();
-  const { locale: contextLocale } = useContext(ConfigProvider.ConfigContext);
-  const filterLocale = (contextLocale as Locale)?.Filter || enUS.Filter;
+  const filterLocale = useFilterLocale();
   const hasValue = tags.length > 0;
   const visibleTags = tags.slice(0, maxVisibleTags);
   const hiddenTags = tags.slice(maxVisibleTags);
