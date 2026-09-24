@@ -94,6 +94,15 @@ export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
         alignItems: 'center',
         height: calc(token.fontSize).mul(token.lineHeight).equal(),
       },
+      // css 省略模式：纯 CSS 单行截断 + 原生 title，避免每个描述项都挂 Typography 的溢出测量和 Tooltip
+      [`${componentCls}-item-content-css-ellipsis`]: {
+        display: 'block',
+        flex: 1,
+        minWidth: 0,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+      },
     },
     [`${componentCls}${componentCls}-middle`]: {
       [`${componentCls}-header`]: {
@@ -143,6 +152,8 @@ export const genDescriptionsStyle: GenerateStyle<DescriptionsToken> = (
       },
       [`${componentCls}-item-content`]: {
         paddingBottom: token.padding,
+        // 网格布局下允许内容收缩，css 省略模式才能出现省略号
+        minWidth: 0,
       },
       [`&${componentCls}-middle`]: {
         [`${componentCls}-item-label`]: {
