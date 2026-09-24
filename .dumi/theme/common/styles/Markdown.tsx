@@ -422,7 +422,7 @@ const GlobalStyle: React.FC = () => {
               border-width: 1px 0;
               &:first-child {
                 min-width: 58px;
-                color: #595959;
+                color: ${token.colorTextSecondary};
                 font-weight: 600;
                 white-space: nowrap;
               }

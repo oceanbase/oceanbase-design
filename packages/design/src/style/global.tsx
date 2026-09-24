@@ -142,6 +142,14 @@ const genGlobalStyle = (
           },
         },
       },
+      // handle menu icon style, use colorIcon to keep it same with icon in Button
+      // dark menu、disabled、selected and danger item keep their own color
+      [`${menuComponentCls}:not(${menuComponentCls}-dark)`]: {
+        [`${menuComponentCls}-item:not(${menuComponentCls}-item-disabled):not(${menuComponentCls}-item-selected):not(${menuComponentCls}-item-danger) > ${menuComponentCls}-item-icon, ${menuComponentCls}-submenu:not(${menuComponentCls}-submenu-disabled):not(${menuComponentCls}-submenu-selected) > ${menuComponentCls}-submenu-title > ${menuComponentCls}-item-icon`]:
+          {
+            color: token.colorIcon,
+          },
+      },
       // handle pagination prev and next icon style
       [`${paginationComponentCls}`]: {
         [`${paginationComponentCls}-prev:not(${paginationComponentCls}-disabled), ${paginationComponentCls}-next:not(${paginationComponentCls}-disabled)`]:

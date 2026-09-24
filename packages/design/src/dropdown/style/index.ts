@@ -8,6 +8,7 @@ export const genDropdownStyle: GenerateStyle<DropdownToken> = (token: DropdownTo
   const { antCls, componentCls, lineWidth } = token;
   const btnComponentCls = `${antCls}-btn`;
   const selector = `${btnComponentCls}-compact-item${btnComponentCls}-primary:not([disabled])`;
+  const menuComponentCls = `${componentCls}-menu`;
 
   return {
     [`${componentCls}-button`]: {
@@ -22,6 +23,14 @@ export const genDropdownStyle: GenerateStyle<DropdownToken> = (token: DropdownTo
           zIndex: 2,
         },
       },
+    },
+    // handle dropdown menu icon style, use colorIcon to keep it same with icon in Menu and Button
+    // dark menu、disabled、selected and danger item keep their own color
+    [`${menuComponentCls}:not(${menuComponentCls}-dark)`]: {
+      [`${menuComponentCls}-item:not(${menuComponentCls}-item-disabled):not(${menuComponentCls}-item-selected):not(${menuComponentCls}-item-danger) > ${menuComponentCls}-item-icon, ${menuComponentCls}-submenu:not(${menuComponentCls}-submenu-disabled):not(${menuComponentCls}-submenu-selected) > ${menuComponentCls}-submenu-title > ${menuComponentCls}-item-icon`]:
+        {
+          color: token.colorIcon,
+        },
     },
   };
 };
