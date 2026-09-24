@@ -426,6 +426,9 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
   const showTotalFn = pagination === false ? undefined : pagination.showTotal;
   /** 有选中项时，批量操作栏会占用分页器的「总数」插槽 */
   const hasBatchOperationBar = !isEmpty(rowSelection) && !isEmpty(currentSelectedRowKeys);
+  /** 左侧分组是否有内容：alert / 默认已选文案 / 取消按钮 / 展开收起；全为空时不渲染空 Space，避免白留间距 */
+  const hasBatchOperationLeftContent =
+    toolAlertRender !== false || !hiddenCancelBtn || Boolean(toolSelectedContent);
 
   const renderOptionsBar = (total: number, range: [number, number]) => {
     if (!hasBatchOperationBar) {
@@ -435,37 +438,39 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
     return (
       <div>
         <div className={`${prefixCls}-batch-operation-bar`}>
-          <Space
-            size={8}
-            style={{
-              marginRight: 24,
-            }}
-          >
-            {toolAlertRender && toolAlertRender(currentSelectedRowKeys, currentSelectedRows)}
-            {!toolAlertRender && toolAlertRender !== false && (
-              <span className={`${prefixCls}-batch-operation-selection`}>
-                {`${batchOperationBar?.selected} ${currentSelectedRowKeys?.length || 0} ${batchOperationBar?.object}`}
-              </span>
-            )}
-            {!hiddenCancelBtn && (
-              <a onClick={handleOptionsCancel}>{cancelText ?? batchOperationBar?.cancel}</a>
-            )}
-            {toolSelectedContent && (
-              <Popover
-                placement="top"
-                overlayClassName={`${prefixCls}-batch-operation-selection-popover`}
-                content={toolSelectedContent?.(currentSelectedRowKeys, currentSelectedRows)}
-                trigger="click"
-                open={openPopover}
-              >
-                <a onClick={() => setOpenPopover(!openPopover)}>
-                  {openPopover
-                    ? (collapseText ?? batchOperationBar?.collapse)
-                    : (openText ?? batchOperationBar?.open)}
-                </a>
-              </Popover>
-            )}
-          </Space>
+          {hasBatchOperationLeftContent && (
+            <Space
+              size={8}
+              style={{
+                marginRight: 24,
+              }}
+            >
+              {toolAlertRender && toolAlertRender(currentSelectedRowKeys, currentSelectedRows)}
+              {!toolAlertRender && toolAlertRender !== false && (
+                <span className={`${prefixCls}-batch-operation-selection`}>
+                  {`${batchOperationBar?.selected} ${currentSelectedRowKeys?.length || 0} ${batchOperationBar?.object}`}
+                </span>
+              )}
+              {!hiddenCancelBtn && (
+                <a onClick={handleOptionsCancel}>{cancelText ?? batchOperationBar?.cancel}</a>
+              )}
+              {toolSelectedContent && (
+                <Popover
+                  placement="top"
+                  overlayClassName={`${prefixCls}-batch-operation-selection-popover`}
+                  content={toolSelectedContent?.(currentSelectedRowKeys, currentSelectedRows)}
+                  trigger="click"
+                  open={openPopover}
+                >
+                  <a onClick={() => setOpenPopover(!openPopover)}>
+                    {openPopover
+                      ? (collapseText ?? batchOperationBar?.collapse)
+                      : (openText ?? batchOperationBar?.open)}
+                  </a>
+                </Popover>
+              )}
+            </Space>
+          )}
           {toolOptionsRender && (
             <Space size={8}>
               {toolOptionsRender?.(currentSelectedRowKeys, currentSelectedRows)}

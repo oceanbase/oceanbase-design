@@ -245,6 +245,27 @@ describe('Table', () => {
     expect(container.querySelector('.ant-pagination-total-text > div > span')).toBeFalsy();
   });
 
+  it('batch operation bar should not render empty left group', () => {
+    // 默认渲染 alert 或默认已选文案，左侧分组存在
+    const { container: defaultContainer } = render(
+      <TableTest rowSelection={{ selectedRowKeys: ['1'] }} />
+    );
+    expect(
+      defaultContainer.querySelector('.ant-table-batch-operation-bar .ant-space')
+    ).toBeTruthy();
+
+    // alert 关闭且隐藏取消按钮时左侧分组没有内容，不应残留空 Space（其 marginRight 会白占间距）
+    const { container } = render(
+      <TableTest
+        toolAlertRender={false}
+        hiddenCancelBtn={true}
+        rowSelection={{ selectedRowKeys: ['1'] }}
+      />
+    );
+    expect(container.querySelector('.ant-table-batch-operation-bar')).toBeTruthy();
+    expect(container.querySelector('.ant-table-batch-operation-bar .ant-space')).toBeFalsy();
+  });
+
   it('pagination total slot should be hidden when showTotal is disabled and no row selected', () => {
     const { container } = render(
       <TableTest pagination={{ showTotal: undefined }} rowSelection={{}} />
