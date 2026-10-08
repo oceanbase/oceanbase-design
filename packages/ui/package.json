@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/ui",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "The UI library based on OceanBase Design",
   "keywords": [
     "oceanbase",
@@ -38,6 +38,7 @@
     "@ant-design/cssinjs": "^1.24.0",
     "@ant-design/pro-components": "^2.8.10",
     "@inline-svg-unique-id/react": "^1.2.3",
+    "@microlink/react-json-view": "^1.31.40",
     "@oceanbase/design": "workspace:^",
     "@oceanbase/icons": "workspace:^",
     "@oceanbase/util": "workspace:^",
@@ -55,7 +56,6 @@
     "rc-picker": "^4.11.3",
     "rc-util": "^5.44.4",
     "react-copy-to-clipboard": "^5.1.0",
-    "@microlink/react-json-view": "^1.31.40",
     "react-split-pane": "^0.1.92",
     "screenfull": "^6.0.2"
   },

@@ -6660,6 +6660,7 @@ packages:
     transitivePeerDependencies:
       - '@types/react'
     dev: false
+
   /@microsoft/api-extractor-model@7.28.17(@types/node@20.19.30):
     resolution:
       {
@@ -12827,7 +12828,6 @@ packages:
       }
     dev: false
 
-
   /asn1.js@4.10.1:
     resolution:
       {
@@ -13250,7 +13250,6 @@ packages:
         integrity: sha512-1ugUSr8BHXRnK23KfuYS+gVMC3LB8QGH9W1iGtDPsNWoQbgtXSExkBu2aDR4epiGWZOjZsj6lDl/N/AqqTC3UA==,
       }
     dev: true
-
 
   /base64-js@1.5.1:
     resolution:
@@ -14486,6 +14485,7 @@ packages:
       color-convert: 2.0.1
       color-string: 1.9.1
     dev: false
+
   /colord@2.9.3:
     resolution:
       {
@@ -18514,9 +18514,6 @@ packages:
       bser: 2.1.1
     dev: true
 
-
-
-
   /fdir@6.5.0(picomatch@4.0.3):
     resolution:
       {
@@ -18858,7 +18855,6 @@ packages:
       }
     engines: { node: '>=0.4.0' }
     dev: false
-
 
   /fmin@0.0.2:
     resolution:
@@ -23147,7 +23143,6 @@ packages:
       }
     dev: false
 
-
   /lodash.debounce@4.0.8:
     resolution:
       {
@@ -23167,7 +23162,6 @@ packages:
         integrity: sha512-uHaJFihxmJcEX3kT4I23ABqKKalJ/zDrDg0lsFtc1h+3uw49SIJ5beyhx5ExVRti3AvKoOJngIj7xz3oylPdWQ==,
       }
     dev: true
-
 
   /lodash.get@4.4.2:
     resolution:
@@ -28150,7 +28144,6 @@ packages:
       retry: 0.12.0
     dev: true
 
-
   /prompts@2.4.2:
     resolution:
       {
@@ -28295,7 +28288,6 @@ packages:
         integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==,
       }
     engines: { node: '>=6' }
-
 
   /q@1.5.1:
     resolution:
@@ -29313,7 +29305,6 @@ packages:
       strip-json-comments: 2.0.1
     dev: false
 
-
   /react-base16-styling@0.10.0:
     resolution:
       {
@@ -29325,6 +29316,7 @@ packages:
       csstype: 3.2.3
       lodash-es: 4.17.22
     dev: false
+
   /react-color@2.17.1(react@18.3.1):
     resolution:
       {
@@ -29563,7 +29555,6 @@ packages:
       {
         integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==,
       }
-
 
   /react-lifecycles-compat@3.0.4:
     resolution:
@@ -33826,7 +33817,6 @@ packages:
       }
     hasBin: true
     dev: false
-
 
   /uglify-js@2.8.29:
     resolution:
