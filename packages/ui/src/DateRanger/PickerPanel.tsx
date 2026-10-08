@@ -1,30 +1,19 @@
 import type { Dayjs } from 'dayjs';
 import type { Moment } from 'moment';
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import dayjsGenerateConfig from 'rc-picker/es/generate/dayjs';
 import momentGenerateConfig from 'rc-picker/es/generate/moment';
 import useCSSVarCls from 'antd/es/config-provider/hooks/useCSSVarCls';
 import useStyle from 'antd/es/date-picker/style/index';
 import { PickerPanel } from 'rc-picker';
 import classNames from 'classnames';
-import {
-  Alert,
-  Button,
-  Col,
-  ConfigProvider,
-  DatePicker,
-  Divider,
-  Form,
-  Input,
-  Row,
-  Space,
-  TimePicker,
-} from '@oceanbase/design';
+import { Alert, Button, Col, ConfigProvider, Divider, Form, Row, Space } from '@oceanbase/design';
 import { noop } from 'lodash';
 import moment from 'moment';
 import dayjs from 'dayjs';
 import { DATE_TIME_MONTH_FORMAT, DATE_TIME_MONTH_FORMAT_CN } from './constant';
 import type { RangeValue } from './Ranger';
+import SegmentedInput from './SegmentedInput';
 type ValidateTrigger = 'submit' | 'valueChange';
 
 type MaybeArray<T> = T | T[];
@@ -74,6 +63,15 @@ const useClickFSA = () => {
 
   return [state, next] as const;
 };
+
+/**
+ * 把 time 的时分秒套到 date 上,返回新实例(不修改入参)。
+ * 日期草稿按 DATE_FORMAT 解析出来是当天 00:00:00,若直接写回 calendarValue,
+ * 随之触发的 setFormatDateToForm 会把用户已填的时间一起覆盖成 00:00:00。
+ */
+function applyTime(date: Moment | Dayjs, time: Moment | Dayjs) {
+  return date.clone().hour(time.hour()).minute(time.minute()).second(time.second()).millisecond(0);
+}
 
 const prefixCls = 'ant-picker';
 const TIME_FORMAT = 'HH:mm:ss';
@@ -160,6 +158,14 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     });
   };
 
+  // 日期文本提交:只改日期,保留用户当前填写的时间(见 applyTime 的说明)
+  const commitDate = (index: 0 | 1, date: Moment | Dayjs) => {
+    const time: Moment | Dayjs | undefined = form.getFieldValue(
+      index === 0 ? 'startTime' : 'endTime'
+    );
+    setCalendarValue(prev => fillIndex(prev, index, time ? applyTime(date, time) : date));
+  };
+
   useEffect(() => {
     setFormatDateToForm();
   }, [calendarValue?.[0]?.valueOf(), calendarValue?.[1]?.valueOf()]);
@@ -179,10 +185,76 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     const date = getDateInstance(v, DATE_FORMAT, true);
     return date.isValid() ? date.format(DATE_FORMAT) : null;
   };
-  const validateInputDate = e => {
-    const v = e.target.value;
-    return formatDate(v);
+
+  // 整体确认:等价点击确认按钮(校验表单并回调 onOk,由确认按钮与"无输入框聚焦时回车"共用)
+  const confirmAll = () => {
+    form.validateFields().then(values => {
+      const { startDate, startTime, endDate, endTime } = values;
+
+      // 组合日期和时间
+      const startDateTime = `${formatDate(startDate)} ${startTime.format(TIME_FORMAT)}`;
+      const endDateTime = `${formatDate(endDate)} ${endTime.format(TIME_FORMAT)}`;
+
+      // 对完整的日期时间进行排序，保证开始时间在结束时间之前
+      const startMoment = getDateInstance(startDateTime, `${DATE_FORMAT} ${TIME_FORMAT}`);
+      const endMoment = getDateInstance(endDateTime, `${DATE_FORMAT} ${TIME_FORMAT}`);
+
+      const [start, end] =
+        startMoment.valueOf() <= endMoment.valueOf()
+          ? [startDateTime, endDateTime]
+          : [endDateTime, startDateTime];
+
+      let errorList = [];
+      let message = '';
+      rules?.some(item => {
+        if (typeof item?.validator === 'function') {
+          const errorType = item.validator([start, end]);
+          if (errorType) {
+            errorList = Array.isArray(errorType) ? errorType : [errorType];
+            message = item.message;
+            return true;
+          }
+        }
+        return false;
+      });
+
+      if (errorList.length > 0) {
+        setErrorTypeList(errorList.includes('all') ? ALL_ERROR_TYPE_LIST : errorList);
+        setErrorMessage(message);
+      } else {
+        setErrorMessage('');
+        setErrorTypeList([]);
+        onOk([start, end]);
+      }
+    });
   };
+
+  // 整体确认最新实现放至 ref,避免全局监听随渲染反复重挂
+  const confirmAllRef = useRef(confirmAll);
+  confirmAllRef.current = confirmAll;
+
+  // 面板打开期间,没有任何控件消费回车时按下回车 → 整体确认(等价点击确认按钮)。
+  // 分段输入框处理回车时会 preventDefault(确认该输入框并失焦),不在此触发。
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Enter' || e.defaultPrevented) return;
+      const active = document.activeElement as HTMLElement | null;
+      // 焦点仍在输入框/按钮上时,回车交给它们自己处理(按钮会被原生点击)
+      if (
+        active &&
+        (active.tagName === 'INPUT' ||
+          active.tagName === 'TEXTAREA' ||
+          active.tagName === 'BUTTON' ||
+          active.isContentEditable)
+      ) {
+        return;
+      }
+      e.preventDefault();
+      confirmAllRef.current();
+    };
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
 
   return (
     <div className={classNames(prefix)}>
@@ -203,26 +275,10 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 style={{ marginBottom: 8 }}
                 rules={[{ required: true }]}
               >
-                <DatePicker
-                  format={{
-                    format: DATE_FORMAT,
-                    type: 'mask',
-                  }}
-                  style={{ width: 128 }}
-                  open={false}
-                  suffixIcon={null}
-                  allowClear={false}
-                  onBlur={e => {
-                    const v = validateInputDate(e);
-                    if (v) {
-                      form.setFieldValue('startDate', getDateInstance(v));
-                      setCalendarValue(([, eDate]) => {
-                        return [getDateInstance(v), eDate] as [Dayjs, Dayjs];
-                      });
-                    } else {
-                      setFormatDateToForm();
-                    }
-                  }}
+                <SegmentedInput
+                  format={DATE_FORMAT}
+                  isMoment={isMoment}
+                  onCommit={v => commitDate(0, v)}
                 />
               </Form.Item>
             </Col>
@@ -235,17 +291,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 initialValue={defaultS || defaultTime}
                 rules={[{ required: true }]}
               >
-                <TimePicker
-                  allowClear={false}
-                  suffixIcon={null}
-                  needConfirm={false}
-                  getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
-                  style={{ width: '100%' }}
-                  format={{
-                    format: hideSecond ? 'HH:mm' : 'HH:mm:ss',
-                    type: 'mask',
-                  }}
-                />
+                <SegmentedInput format={hideSecond ? 'HH:mm' : 'HH:mm:ss'} isMoment={isMoment} />
               </Form.Item>
             </Col>
           </Row>
@@ -259,26 +305,10 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 validateStatus={errorTypeMap['endDate']}
                 rules={[{ required: true }]}
               >
-                <DatePicker
-                  format={{
-                    format: DATE_FORMAT,
-                    type: 'mask',
-                  }}
-                  style={{ width: 128 }}
-                  open={false}
-                  suffixIcon={null}
-                  allowClear={false}
-                  onBlur={e => {
-                    const v = validateInputDate(e);
-                    if (v) {
-                      form.setFieldValue('endDate', getDateInstance(v));
-                      setCalendarValue(([sDate]) => {
-                        return [sDate, getDateInstance(v)] as [Dayjs, Dayjs];
-                      });
-                    } else {
-                      setFormatDateToForm();
-                    }
-                  }}
+                <SegmentedInput
+                  format={DATE_FORMAT}
+                  isMoment={isMoment}
+                  onCommit={v => commitDate(1, v)}
                 />
               </Form.Item>
             </Col>
@@ -291,17 +321,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 initialValue={defaultE || defaultTime}
                 rules={[{ required: true }]}
               >
-                <TimePicker
-                  allowClear={false}
-                  suffixIcon={null}
-                  needConfirm={false}
-                  getPopupContainer={triggerNode => triggerNode.parentNode as HTMLElement}
-                  style={{ width: '100%' }}
-                  format={{
-                    format: hideSecond ? 'HH:mm' : 'HH:mm:ss',
-                    type: 'mask',
-                  }}
-                />
+                <SegmentedInput format={hideSecond ? 'HH:mm' : 'HH:mm:ss'} isMoment={isMoment} />
               </Form.Item>
             </Col>
           </Row>
@@ -371,51 +391,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
         >
           {locale.cancel}
         </Button>
-        <Button
-          size="small"
-          type="primary"
-          onClick={() => {
-            form.validateFields().then(values => {
-              const { startDate, startTime, endDate, endTime } = values;
-
-              // 组合日期和时间
-              const startDateTime = `${formatDate(startDate)} ${startTime.format(TIME_FORMAT)}`;
-              const endDateTime = `${formatDate(endDate)} ${endTime.format(TIME_FORMAT)}`;
-
-              // 对完整的日期时间进行排序，保证开始时间在结束时间之前
-              const startMoment = getDateInstance(startDateTime, `${DATE_FORMAT} ${TIME_FORMAT}`);
-              const endMoment = getDateInstance(endDateTime, `${DATE_FORMAT} ${TIME_FORMAT}`);
-
-              const [start, end] =
-                startMoment.valueOf() <= endMoment.valueOf()
-                  ? [startDateTime, endDateTime]
-                  : [endDateTime, startDateTime];
-
-              let errorList = [];
-              let message = '';
-              rules?.some(item => {
-                if (typeof item?.validator === 'function') {
-                  const errorType = item.validator([start, end]);
-                  if (errorType) {
-                    errorList = Array.isArray(errorType) ? errorType : [errorType];
-                    message = item.message;
-                    return true;
-                  }
-                }
-                return false;
-              });
-
-              if (errorList.length > 0) {
-                setErrorTypeList(errorList.includes('all') ? ALL_ERROR_TYPE_LIST : errorList);
-                setErrorMessage(message);
-              } else {
-                setErrorMessage('');
-                setErrorTypeList([]);
-                onOk([start, end]);
-              }
-            });
-          }}
-        >
+        <Button size="small" type="primary" onClick={confirmAll}>
           {locale.confirm}
         </Button>
       </Space>

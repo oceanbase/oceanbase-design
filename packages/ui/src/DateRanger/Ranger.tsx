@@ -781,18 +781,12 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
       </Space>
       {hasSync && rangeName !== CUSTOMIZE && (
         <Button
-          aria-label={locale.syncToCurrent}
-          style={{
-            paddingLeft: 8,
-            paddingRight: 8,
-            color: token.colorTextSecondary,
-          }}
+          icon={<SyncOutlined aria-hidden />}
           onClick={() => {
             setNow();
           }}
-        >
-          <SyncOutlined aria-hidden />
-        </Button>
+          aria-label={locale.syncToCurrent}
+        />
       )}
       {hasZoomOut && (
         <Button
