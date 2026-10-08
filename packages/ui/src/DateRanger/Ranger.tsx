@@ -717,8 +717,6 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   value="stepBack"
                   aria-label={locale.jumpBack}
                   style={{
-                    paddingLeft: 8,
-                    paddingRight: 8,
                     borderLeft: 0,
                     borderTopLeftRadius: 0,
                     borderBottomLeftRadius: 0,
@@ -752,8 +750,6 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                   value="stepForward"
                   aria-label={locale.jumpForward}
                   style={{
-                    paddingLeft: 8,
-                    paddingRight: 8,
                     borderTopLeftRadius: 0,
                     borderBottomLeftRadius: 0,
                   }}
