@@ -1,8 +1,44 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import { DateRanger } from '@oceanbase/ui';
-import { NEAR_1_MINUTES, NEAR_30_MINUTES } from '../constant';
+import { DATE_TIME_MONTH_FORMAT_CN, NEAR_1_MINUTES, NEAR_30_MINUTES } from '../constant';
 import dayjs from 'dayjs';
+import moment from 'moment';
+import { buildSegments } from '../hooks/segments';
+
+/** 面板内容由 antd Dropdown 挂载到 body 上,所以这里从 document 取 */
+const getPanelInputs = () => {
+  const panel = document.querySelector('.ant-date-ranger-dropdown-picker');
+  return Array.from(panel.querySelectorAll('input')) as HTMLInputElement[];
+};
+
+/** 打开面板,返回其中的 4 个输入框(开始日期/时间、结束日期/时间) */
+const openPanel = (container: HTMLElement) => {
+  const dropdownTrigger = container.querySelector(
+    '.ant-date-ranger-wrapper > .ant-dropdown-trigger'
+  );
+  fireEvent.click(dropdownTrigger);
+  return getPanelInputs();
+};
+
+/** 把开始日期改成 2024-10-13(日期段由 format 算出,不写死字符偏移) */
+const typeStartDate = (inputs: HTMLInputElement[]) => {
+  const startDate = inputs[0];
+  // 面板默认是中文日期格式,日期是第 3 段
+  const daySegment = buildSegments(startDate.value, DATE_TIME_MONTH_FORMAT_CN)[2];
+  startDate.setSelectionRange(daySegment.start, daySegment.end);
+  fireEvent.click(startDate);
+  fireEvent.keyDown(startDate, { key: '1' });
+  fireEvent.keyDown(startDate, { key: '3' });
+};
+
+/** 打开面板,把开始日期改为 2024-10-13 并回车确认该输入框,返回面板中的 4 个输入框 */
+const editStartDate = (container: HTMLElement) => {
+  const inputs = openPanel(container);
+  typeStartDate(inputs);
+  fireEvent.keyDown(inputs[0], { key: 'Enter' });
+  return inputs;
+};
 
 describe('DateRanger', () => {
   it('Display normally' /** 成功渲染组件 */, async () => {
@@ -17,6 +53,59 @@ describe('DateRanger', () => {
     fireEvent.click(dropdownTrigger);
     expect(dropdownTrigger.classList.contains('ant-dropdown-open')).toBeTruthy();
     expect(document.querySelector('.ant-date-ranger-dropdown-picker')).toBeTruthy();
+  });
+  it('Should keep the time when editing the date (dayjs)' /** 修改日期后应保留原有时间(dayjs) */, () => {
+    const { container } = render(
+      <DateRanger defaultValue={[dayjs('2024-10-12 08:30:00'), dayjs('2024-10-20 18:00:00')]} />
+    );
+    const inputs = editStartDate(container);
+    // 日期生效,时间不应被重置为 00:00:00
+    expect(inputs.map(input => input.value)).toStrictEqual([
+      '2024-10-13',
+      '08:30:00',
+      '2024-10-20',
+      '18:00:00',
+    ]);
+  });
+  it('Should keep the time when editing the date (moment)' /** 修改日期后应保留原有时间(moment) */, () => {
+    const { container } = render(
+      <DateRanger defaultValue={[moment('2024-10-12 08:30:00'), moment('2024-10-20 18:00:00')]} />
+    );
+    const inputs = editStartDate(container);
+    expect(inputs.map(input => input.value)).toStrictEqual([
+      '2024-10-13',
+      '08:30:00',
+      '2024-10-20',
+      '18:00:00',
+    ]);
+  });
+  it('Should confirm the input first, then the whole panel on a second Enter' /** 回车两阶段:第一次确认所属输入框,第二次整体确认面板 */, async () => {
+    const onChange = vi.fn();
+    const { container } = render(
+      <DateRanger
+        defaultValue={[dayjs('2024-10-12 08:30:00'), dayjs('2024-10-20 18:00:00')]}
+        onChange={onChange}
+      />
+    );
+    const inputs = openPanel(container);
+    // 打开面板本身会回调一次,这里只关心回车带来的变化
+    const callsBeforeEdit = onChange.mock.calls.length;
+
+    // 第一次回车在输入框内按下,只确认该输入框
+    typeStartDate(inputs);
+    fireEvent.keyDown(inputs[0], { key: 'Enter' });
+    expect(inputs[0].value).toBe('2024-10-13');
+    expect(onChange.mock.calls.length).toBe(callsBeforeEdit);
+
+    // 此时没有输入框处于输入态,再次回车由面板整体确认
+    fireEvent.keyDown(document.body, { key: 'Enter' });
+
+    await waitFor(() => expect(onChange.mock.calls.length).toBe(callsBeforeEdit + 1));
+    const confirmedRange = onChange.mock.calls[callsBeforeEdit][0];
+    expect(confirmedRange.map(v => v.format('YYYY-MM-DD HH:mm:ss'))).toStrictEqual([
+      '2024-10-13 08:30:00',
+      '2024-10-20 18:00:00',
+    ]);
   });
   it('Support setting default quick value' /** 支持设置默认的快捷选项值 */, () => {
     // NEAR_1_MINUTES is default value of defaultQuickValue

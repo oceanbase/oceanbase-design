@@ -64,6 +64,15 @@ const useClickFSA = () => {
   return [state, next] as const;
 };
 
+/**
+ * 把 time 的时分秒套到 date 上,返回新实例(不修改入参)。
+ * 日期草稿按 DATE_FORMAT 解析出来是当天 00:00:00,若直接写回 calendarValue,
+ * 随之触发的 setFormatDateToForm 会把用户已填的时间一起覆盖成 00:00:00。
+ */
+function applyTime(date: Moment | Dayjs, time: Moment | Dayjs) {
+  return date.clone().hour(time.hour()).minute(time.minute()).second(time.second()).millisecond(0);
+}
+
 const prefixCls = 'ant-picker';
 const TIME_FORMAT = 'HH:mm:ss';
 
@@ -149,6 +158,14 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
     });
   };
 
+  // 日期文本提交:只改日期,保留用户当前填写的时间(见 applyTime 的说明)
+  const commitDate = (index: 0 | 1, date: Moment | Dayjs) => {
+    const time: Moment | Dayjs | undefined = form.getFieldValue(
+      index === 0 ? 'startTime' : 'endTime'
+    );
+    setCalendarValue(prev => fillIndex(prev, index, time ? applyTime(date, time) : date));
+  };
+
   useEffect(() => {
     setFormatDateToForm();
   }, [calendarValue?.[0]?.valueOf(), calendarValue?.[1]?.valueOf()]);
@@ -216,12 +233,13 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
   const confirmAllRef = useRef(confirmAll);
   confirmAllRef.current = confirmAll;
 
-  // 气泡打开期间,没有任何输入框处于激活输入状态时按下回车 → 整体确认(等价点击确认按钮)。
-  // 输入框聚焦时回车由 SegmentedInput 自行处理(确认该输入框并失焦),不在此触发。
+  // 面板打开期间,没有任何控件消费回车时按下回车 → 整体确认(等价点击确认按钮)。
+  // 分段输入框处理回车时会 preventDefault(确认该输入框并失焦),不在此触发。
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== 'Enter') return;
+      if (e.key !== 'Enter' || e.defaultPrevented) return;
       const active = document.activeElement as HTMLElement | null;
+      // 焦点仍在输入框/按钮上时,回车交给它们自己处理(按钮会被原生点击)
       if (
         active &&
         (active.tagName === 'INPUT' ||
@@ -247,14 +265,6 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
           requiredMark={false}
           style={{ width: 280 }}
           form={form}
-          // 阻止点击表单标题(label)时默认聚焦关联输入框:
-          // 仅点击输入框本体内会激活编辑,点击标题及其他区域不激活
-          onClickCapture={e => {
-            const target = e.target as HTMLElement;
-            if (typeof target.closest === 'function' && target.closest('.ant-form-item-label')) {
-              e.preventDefault();
-            }
-          }}
         >
           <Row gutter={12} style={{ marginBottom: 4 }}>
             <Col span={12} style={{ paddingLeft: 12 }}>
@@ -268,12 +278,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 <SegmentedInput
                   format={DATE_FORMAT}
                   isMoment={isMoment}
-                  onCommit={v => {
-                    // 提交日期后同步日历高亮(原 DatePicker onBlur 行为)
-                    setCalendarValue(([, eDate]) => {
-                      return [v, eDate] as [Dayjs, Dayjs];
-                    });
-                  }}
+                  onCommit={v => commitDate(0, v)}
                 />
               </Form.Item>
             </Col>
@@ -303,12 +308,7 @@ const InternalPickerPanel = (props: PickerPanelProps) => {
                 <SegmentedInput
                   format={DATE_FORMAT}
                   isMoment={isMoment}
-                  onCommit={v => {
-                    // 提交日期后同步日历高亮(原 DatePicker onBlur 行为)
-                    setCalendarValue(([sDate]) => {
-                      return [sDate, v] as [Dayjs, Dayjs];
-                    });
-                  }}
+                  onCommit={v => commitDate(1, v)}
                 />
               </Form.Item>
             </Col>
