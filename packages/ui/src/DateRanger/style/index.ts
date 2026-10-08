@@ -111,8 +111,10 @@ export const genDateRangerStyle: GenerateStyle<DateRangerToken> = (
         display: 'flex',
         flexWrap: 'nowrap',
         [`${antCls}-radio-button-wrapper`]: {
-          paddingInline: 8,
+          paddingInline: 0,
           color: colorTextSecondary,
+          width: token.controlHeight,
+          textAlign: 'center',
           transition: 'all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1)',
           '&:hover': {
             borderColor: token.gray7,
