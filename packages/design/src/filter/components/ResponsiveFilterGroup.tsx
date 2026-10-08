@@ -3,7 +3,6 @@ import React, {
   Children,
   isValidElement,
   useCallback,
-  useContext,
   useEffect,
   useLayoutEffect,
   useMemo,
@@ -15,15 +14,14 @@ import { FilterOutlined } from '@oceanbase/icons';
 import Button from '../../button';
 import FilterWrap from './FilterWrap';
 import type { FilterButtonRef } from './FilterButton';
-import ConfigProvider from '../../config-provider';
 import type { FilterLocale } from '../../locale';
-import defaultLocale from '../../locale/en-US';
 import {
   FilterProvider,
   type FilterComponentName,
   type FilterValue,
   type FilterValueItem,
 } from '../FilterContext';
+import { useFilterLocale } from '../hooks/useFilterLocale';
 
 export interface ResponsiveFilterGroupProps {
   children: ReactNode;
@@ -110,12 +108,7 @@ const ResponsiveFilterGroup: FC<ResponsiveFilterGroupProps> = ({
   showCount = true,
   locale: customLocale,
 }) => {
-  const { locale: contextLocale } = useContext(ConfigProvider.ConfigContext);
-  const filterLocale: FilterLocale = {
-    ...defaultLocale.Filter,
-    ...contextLocale?.Filter,
-    ...customLocale,
-  };
+  const filterLocale = useFilterLocale(customLocale);
   const filterLabel = label ?? filterLocale?.filters;
 
   const containerRef = useRef<HTMLDivElement>(null);

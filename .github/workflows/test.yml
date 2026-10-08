@@ -24,4 +24,5 @@ jobs:
       - name: Run test
         run: |
           pnpm install
+          pnpm run check:ob-css-vars
           pnpm run test

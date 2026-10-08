@@ -5,6 +5,7 @@ import { withSkipScrollOnError } from './scrollToFirstError';
 
 type FieldChangeMeta = {
   name?: NamePath;
+  value?: unknown;
   touched?: boolean;
   errors?: string[];
   warnings?: string[];
@@ -148,67 +149,115 @@ export function deserializeNamePath(key: string): NamePath {
   return JSON.parse(key) as NamePath;
 }
 
-/** Collect leaf field name paths from `onValuesChange` changedValues. */
-export function getChangedNamePaths(
-  changedValues: Record<string, unknown>,
-  prefix: NamePath = []
+/**
+ * Collect the field name paths whose value actually changed, from `onFieldsChange` changedFields.
+ *
+ * rc-field-form emits `onFieldsChange` for value updates as well as validation-state updates
+ * (validating / errors / warnings), and only the former should trigger revalidation. A validation
+ * update reports the unchanged value, so comparing against the last value seen for the field
+ * separates the two. Fields seen for the first time only seed `previousValues`; they are not
+ * reported as changed, which matches "nothing to clear before a field has ever been validated".
+ *
+ * Comparing by identity mirrors rc-field-form's own change detection (`newValue !== value`): it only
+ * dispatches a value update when the reference (or primitive) differs.
+ */
+export function collectValueChangedNames(
+  changedFields: FieldChangeMeta[],
+  previousValues: Map<string, unknown>
 ): NamePath[] {
-  const paths: NamePath[] = [];
-  Object.keys(changedValues).forEach(key => {
-    const value = changedValues[key];
-    const path: NamePath = [...(Array.isArray(prefix) ? prefix : [prefix]), key];
-    if (
-      value !== null &&
-      typeof value === 'object' &&
-      !Array.isArray(value) &&
-      !(value instanceof Date)
-    ) {
-      paths.push(...getChangedNamePaths(value as Record<string, unknown>, path));
-    } else {
-      paths.push(path);
+  const names: NamePath[] = [];
+  changedFields.forEach(field => {
+    if (field.name === undefined) {
+      return;
+    }
+    const key = serializeNamePath(field.name);
+    const isKnown = previousValues.has(key);
+    const previousValue = previousValues.get(key);
+    previousValues.set(key, field.value);
+    if (isKnown && !Object.is(previousValue, field.value)) {
+      names.push(field.name);
     }
   });
-  return paths;
+  return names;
 }
 
+/** State tracked by the injected revalidation, keyed by `serializeNamePath` where applicable. */
+export type TrackedFormState = {
+  /** Fields the user has blurred. */
+  blurredFields: Set<string>;
+  /** Last value seen per field. */
+  previousValues: Map<string, unknown>;
+  /** Whether form submit was attempted (react-hook-form `isSubmitted`). */
+  submitted: { current: boolean };
+};
+
 /**
- * Whether form submit was attempted (aligns with react-hook-form `isSubmitted`).
- * Clear on full `resetFields()` only, not partial `resetFields(['field'])` (aligns with RHF `reset` vs `resetField`).
+ * Tracking state is keyed by form instance rather than held in component refs: the instance outlives
+ * any single `Form` mount, so the patched `resetFields()` must always clear the exact state that
+ * `onFieldsChange` reads — including after the `Form` unmounts and remounts (`Modal` / `Drawer` /
+ * `Tab`) while the consumer keeps the same `Form.useForm()` instance.
  */
-export function syncSubmittedFromFieldsChange(
-  submitted: { current: boolean },
-  changedFields: FieldChangeMeta[],
-  allFields: FieldChangeMeta[] = []
-): void {
-  if (!submitted.current) {
+const trackedFormStates = new WeakMap<FormInstance, TrackedFormState>();
+
+export function getTrackedFormState(form: FormInstance): TrackedFormState {
+  let tracked = trackedFormStates.get(form);
+  if (!tracked) {
+    tracked = {
+      blurredFields: new Set<string>(),
+      previousValues: new Map<string, unknown>(),
+      submitted: { current: false },
+    };
+    trackedFormStates.set(form, tracked);
+  }
+  return tracked;
+}
+
+const RESET_FIELDS_PATCHED = Symbol('oceanbase.form.resetFieldsPatched');
+
+type PatchedForm = FormInstance & Record<symbol, unknown>;
+
+/**
+ * `resetFields()` mutates field internals without emitting `onFieldsChange` (unlike value updates and
+ * validations), so the tracked state cannot be cleared from `handleFieldsChange`. Patch the instance
+ * method instead, mirroring react-hook-form: a full `reset()` clears everything, while
+ * `resetFields([name])` (like `resetField`) clears only that field and keeps the submit state.
+ */
+export function patchResetFieldsTracking(form: FormInstance): void {
+  const flags = form as unknown as PatchedForm;
+  if (flags[RESET_FIELDS_PATCHED]) {
     return;
   }
+  flags[RESET_FIELDS_PATCHED] = true;
 
-  const resetInChange = changedFields.filter(
-    field => field.name !== undefined && field.touched === false
-  );
-  if (resetInChange.length === 0) {
-    return;
-  }
-
-  if (allFields.length === 0) {
-    submitted.current = false;
-    return;
-  }
-
-  const resetKeys = new Set(resetInChange.map(field => serializeNamePath(field.name!)));
-  const allFieldKeys = allFields
-    .filter(field => field.name !== undefined)
-    .map(field => serializeNamePath(field.name!));
-
-  if (allFieldKeys.length > 0 && allFieldKeys.every(key => resetKeys.has(key))) {
-    submitted.current = false;
-  }
+  const originalResetFields = form.resetFields;
+  flags.resetFields = ((nameList?: NamePath[]) => {
+    const result = originalResetFields.call(form, nameList);
+    const tracked = getTrackedFormState(form);
+    if (nameList === undefined) {
+      tracked.blurredFields.clear();
+      tracked.previousValues.clear();
+      tracked.submitted.current = false;
+    } else {
+      nameList.forEach(name => {
+        const key = serializeNamePath(name);
+        tracked.blurredFields.delete(key);
+        // Re-seed with the post-reset value. Dropping the entry instead would make the next change
+        // look like a first sighting, and `collectValueChangedNames` never reports those, so the
+        // first edit after a partial reset would silently skip revalidation.
+        tracked.previousValues.set(key, form.getFieldValue(name));
+      });
+    }
+    return result;
+  }) as typeof originalResetFields;
 }
 
 /**
- * Track fields touched by the user (for onTouched), aligned with RHF `touchedFields`.
- * Add on blur / touch (`touched: true`); remove on reset (`touched: false`).
+ * Track fields the user has blurred (react-hook-form `touchedFields`).
+ *
+ * rc-field-form sets a field's `touched` flag on every change, so `touched` cannot tell a blur apart
+ * from typing. A blur instead runs the configured `onBlur` validation, which is observable as an
+ * in-flight `validating` update and, once it settles, as errors. Fields without rules run no
+ * validation, but they have nothing to validate either.
  */
 export function syncBlurredFieldsFromFieldsChange(
   blurredFields: Set<string>,
@@ -227,12 +276,7 @@ export function syncBlurredFieldsFromFieldsChange(
       blurredFields.delete(key);
       return;
     }
-    if (field.touched === true) {
-      blurredFields.add(key);
-      return;
-    }
-    // rc-field-form may omit `touched` when blur is the first interaction (e.g. blur empty input).
-    if (field.errors && field.errors.length > 0) {
+    if (field.validating === true || (field.errors && field.errors.length > 0)) {
       blurredFields.add(key);
     }
   });
@@ -253,12 +297,12 @@ export function getFieldsToRevalidateOnChange(
   validateMode: FormValidateMode,
   blurredFields: Set<string>,
   options: {
-    changedValues?: Record<string, unknown>;
+    changedNames?: NamePath[];
     submitted?: boolean;
   } = {}
 ): NamePath[] {
-  const { changedValues, submitted } = options;
-  const changedNames = changedValues ? getChangedNamePaths(changedValues) : [];
+  const { changedNames = [], submitted } = options;
+
   if (changedNames.length === 0) {
     return [];
   }
@@ -287,11 +331,11 @@ export function revalidateOnChange(
     validateMode: FormValidateMode;
     reValidateMode: FormReValidateMode;
     blurredFields: Set<string>;
-    changedValues?: Record<string, unknown>;
+    changedNames?: NamePath[];
     submitted?: boolean;
   }
 ): void {
-  const { validateMode, reValidateMode, blurredFields, changedValues, submitted } = options;
+  const { validateMode, reValidateMode, blurredFields, changedNames, submitted } = options;
   const shouldRevalidateOnChange =
     reValidateMode === 'onChange' || (!submitted && validateMode === 'onTouched');
   if (!shouldRevalidateOnChange) {
@@ -301,7 +345,7 @@ export function revalidateOnChange(
     return;
   }
   const names = getFieldsToRevalidateOnChange(form, validateMode, blurredFields, {
-    changedValues,
+    changedNames,
     submitted,
   });
   if (names.length > 0) {

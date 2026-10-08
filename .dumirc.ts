@@ -5,6 +5,7 @@ import AntdAliasWebpackPlugin from './antd-alias-webpack-plugin';
 import rehypePlugin from './.dumi/rehypePlugin';
 import remarkPlugin from './.dumi/remarkPlugin';
 import { localizedSidebars } from './.dumi/sidebar-locales';
+import { LOCALE_REDIRECT_SCRIPT } from './.dumi/theme/locale-redirect-script';
 
 export default defineConfig({
   mfsu: {
@@ -52,6 +53,8 @@ export default defineConfig({
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "n5kn7gme0s");`,
+    // Redirect zh-preferring visitors to /zh-CN before first paint (locale-redirect-script.ts)
+    LOCALE_REDIRECT_SCRIPT,
   ],
   metas: [
     {

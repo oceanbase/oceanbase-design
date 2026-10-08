@@ -124,6 +124,7 @@ npm install -g @oceanbase/design-cli   # 自带 @ant-design/cli，加速 ob_info
 ob-design setup --client cursor   # MCP（Cursor）
 ob-design setup --client claude    # MCP（Claude Desktop）
 ob-design setup --client agents    # AGENTS.md
+ob-design setup --client vscode    # .vscode 内的 --ob-* 编码提示
 npx skills add oceanbase/oceanbase-design
 ```
 

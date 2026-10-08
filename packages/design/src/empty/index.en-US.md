@@ -14,6 +14,7 @@ nav:
 - 🆕 New `title` prop for empty state title.
 - 🆕 New `steps` prop for step hints.
 - 🆕 New `layout` prop for empty state layout, default `vertical`.
+- 🆕 New `fullHeight` prop to fill the parent container height and center the content.
 
 ## Code Examples
 
@@ -28,6 +29,7 @@ nav:
 <code src="./demo/over-length.tsx" title="Over-length Content" description="Max width 600px for description, 1000px for steps to avoid infinite stretch."></code>
 <code src="./demo/horizontal.tsx" title="Horizontal Layout" description="Image is PRESENTED_IMAGE_GUIDE, for onboarding scenarios like feature activation."></code>
 <code src="./demo/responsive.tsx" title="Horizontal Responsive" description="Horizontal layout stacks vertically when the container narrows, then hides the illustration at smaller widths."></code>
+<code src="./demo/full-height.tsx" title="Full Height" description="With fullHeight, the empty state fills the parent container height and centers the content."></code>
 <code src="./demo/with-page-container.tsx" title="With Page Container"></code>
 <code src="./demo/config-provider.tsx" title="Empty Style in ConfigProvider"></code>
 
@@ -42,5 +44,6 @@ nav:
 | title | Title | React.ReactNode | - | - |
 | steps | Step hints | [StepItem](https://ant-design.antgroup.com/components/steps-cn#stepitem)[] | - | - |
 | layout | Layout | vertical \| horizontal | vertical | - |
+| fullHeight | Fill the parent container height and center the content | boolean | false | - |
 
 - More API see antd Empty docs: https://ant.design/components/Empty-cn

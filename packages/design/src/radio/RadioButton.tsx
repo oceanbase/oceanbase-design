@@ -4,6 +4,7 @@ import type { RadioRef } from 'antd/es/radio';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
+import useStyle from './style';
 
 export interface RadioButtonProps extends AntRadioButtonProps {
   icon?: React.ReactNode;
@@ -13,6 +14,7 @@ const RadioButton = React.forwardRef<RadioRef, RadioButtonProps>(
   ({ prefixCls: customizePrefixCls, className, icon, children, ...restProps }, ref) => {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
+    const [wrapCSSVar] = useStyle(prefixCls);
 
     const hasChildren = React.Children.count(children) > 0;
     const isIconOnly = icon && !hasChildren;
@@ -26,7 +28,7 @@ const RadioButton = React.forwardRef<RadioRef, RadioButtonProps>(
       className
     );
 
-    return (
+    return wrapCSSVar(
       <AntRadio.Button
         ref={ref}
         prefixCls={customizePrefixCls}

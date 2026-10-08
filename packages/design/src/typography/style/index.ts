@@ -8,7 +8,7 @@ export type TypographyToken = FullToken<'Typography'>;
 export const genTypographyStyle: GenerateStyle<TypographyToken> = (
   token: TypographyToken
 ): CSSObject => {
-  const { componentCls, controlHeight, fontSize, lineHeight, calc } = token;
+  const { componentCls, controlHeight, fontSize, lineHeight, motionDurationMid, calc } = token;
   const marginOffset = calc(controlHeight)
     .sub(calc(fontSize).mul(lineHeight).equal())
     .div(2)
@@ -34,6 +34,21 @@ export const genTypographyStyle: GenerateStyle<TypographyToken> = (
     },
     [`${componentCls}-block`]: {
       display: 'block',
+    },
+    [`${componentCls}-copyable-hover`]: {
+      // 触摸设备没有 hover，仅在支持 hover 的设备上隐藏复制入口
+      '@media (hover: hover)': {
+        [`${componentCls}-copy`]: {
+          opacity: 0,
+          transition: `opacity ${motionDurationMid} ease-in-out`,
+        },
+      },
+      // 复制入口隐藏时仍可聚焦，键盘操作聚焦后展示
+      '&:hover, &:focus-within': {
+        [`${componentCls}-copy`]: {
+          opacity: 1,
+        },
+      },
     },
     [`${componentCls}${componentCls}-editable-text:not(${componentCls}-edit-content)`]: {
       '&:hover': {

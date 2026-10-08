@@ -105,7 +105,7 @@ describe('validateMode RHF alignment (field selection)', () => {
     expect(
       getFieldsToRevalidateOnChange(formWithErrors(['name', 'email']), 'onSubmit', new Set(), {
         submitted: true,
-        changedValues: { name: 'new' },
+        changedNames: [['name']],
       })
     ).toEqual([['name']]);
   });
@@ -115,7 +115,7 @@ describe('validateMode RHF alignment (field selection)', () => {
     expect(
       getFieldsToRevalidateOnChange({ getFieldsError: () => [] } as never, 'onTouched', blurred, {
         submitted: false,
-        changedValues: { name: '' },
+        changedNames: [['name']],
       })
     ).toEqual([['name']]);
   });
@@ -124,7 +124,7 @@ describe('validateMode RHF alignment (field selection)', () => {
     expect(
       getFieldsToRevalidateOnChange(formWithErrors(['name']), 'onTouched', new Set(), {
         submitted: false,
-        changedValues: { name: 'valid' },
+        changedNames: [['name']],
       })
     ).toEqual([['name']]);
   });

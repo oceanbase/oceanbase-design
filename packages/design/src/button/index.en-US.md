@@ -25,6 +25,7 @@ markdown: |
 <code src="./demo/loading.tsx" title="Loading" description="Set loading state via `loading` prop."></code>
 <code src="./demo/disabled.tsx" title="Disabled" description="Add `disabled` to make the button unavailable; styles change accordingly."></code>
 <code src="./demo/danger.tsx" title="Danger Button" description="Control via `danger` prop instead of button type."></code>
+<code src="./demo/ghost.tsx" title="Ghost Button" description="The `ghost` prop makes the button background transparent, commonly used on colored backgrounds."></code>
 <code src="./demo/icon.tsx" title="Icon Button" description="Control icon position via `iconPosition` prop."></code>
 <code src="./demo/dropdown.tsx" title="Button with Dropdown" description="More examples: [Dropdown.Button](/components/dropdown#dropdown-demo-dropdown-button)."></code>
 

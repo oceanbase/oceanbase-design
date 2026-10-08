@@ -83,6 +83,11 @@ describe('ProTable', () => {
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 
+  it('pagination.showTotal could be disabled by false', () => {
+    const { container } = render(<ProTableTest pagination={{ showTotal: false }} />);
+    expect(container.querySelector('.ant-pagination-total-text')).toBeFalsy();
+  });
+
   it('innerBordered should work', () => {
     const { container, asFragment } = render(<ProTableTest innerBordered={true} />);
     expect(container.querySelector('.ant-table-inner-bordered .ant-table-bordered')).toBeTruthy();

@@ -10,6 +10,7 @@ import { getFilterCls } from '../../../style';
 import type { CascaderOption } from '../types';
 import type { FilterButtonRef } from '../../FilterButton';
 import { MAX_HEIGHT, PADDING_VERTICAL, PADDING_HORIZONTAL, GAP_SIZE_SMALL } from '../constants';
+import { useFilterLocale } from '../../../hooks/useFilterLocale';
 
 interface NormalCascaderContentProps {
   options: CascaderOption[];
@@ -48,6 +49,7 @@ export const NormalCascaderContent: React.FC<NormalCascaderContentProps> = ({
   onSearchChange,
 }) => {
   const { token } = theme.useToken();
+  const filterLocale = useFilterLocale();
 
   return (
     <div
@@ -60,7 +62,7 @@ export const NormalCascaderContent: React.FC<NormalCascaderContentProps> = ({
       {showSearch && (
         <div style={{ marginInline: 12, marginBottom: 8 }}>
           <Input
-            placeholder="搜索"
+            placeholder={filterLocale.search}
             prefix={<SearchOutlined />}
             allowClear
             value={searchKeyword}
@@ -72,7 +74,7 @@ export const NormalCascaderContent: React.FC<NormalCascaderContentProps> = ({
       {options.length === 0 ? (
         <Empty
           image={Empty.PRESENTED_IMAGE_SIMPLE}
-          description="无匹配结果"
+          description={filterLocale.noResult}
           style={{ padding: '16px 0' }}
         />
       ) : (

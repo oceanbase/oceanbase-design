@@ -53,6 +53,7 @@ ob-design migrate ./src                  # 封装 @oceanbase/codemod
 ob-design template list-filter-table     # 页面模板
 ob-design mcp                            # 启动 MCP 服务
 ob-design setup --client cursor          # 写入 MCP / AGENTS.md
+ob-design setup --client vscode          # 写入 .vscode 编辑器提示（settings + extensions）
 ```
 
 ## 命令一览
@@ -70,7 +71,7 @@ ob-design setup --client cursor          # 写入 MCP / AGENTS.md
 | `ob-design search <query>` | `ob_search` | 全文检索文档与元数据 |
 | `ob-design lint <path>` | `ob_lint` | JS 约定 + CSS token 校验（默认） |
 | `ob-design doctor` | `ob_doctor` | 项目健康检查（MCP/Skill/依赖） |
-| `ob-design setup` | — | 写入 MCP 配置 + 生成 `AGENTS.md` |
+| `ob-design setup` | — | 写入 MCP 配置 + 生成 `AGENTS.md` + `.vscode` 编辑器提示 |
 | `ob-design migrate <path>` | — | 封装 `@oceanbase/codemod`（`--rule ob-css-tokens`） |
 | `ob-design template <name>` | — | 页面模板（见下方） |
 | `ob-design mcp` | — | 启动 MCP 服务（stdio） |
@@ -119,11 +120,13 @@ ob-design template list-filter-table --skeleton
 npm install -g @oceanbase/design-cli
 ob-design setup --client cursor    # MCP
 ob-design setup --client agents    # AGENTS.md
+ob-design setup --client vscode    # .vscode 内的 --ob-* 提示
 npx skills add oceanbase/oceanbase-design
 
 # 或未全局安装时
 npx @oceanbase/design-cli setup --client cursor
 npx @oceanbase/design-cli setup --client agents
+npx @oceanbase/design-cli setup --client vscode
 ```
 
 ## MCP 配置

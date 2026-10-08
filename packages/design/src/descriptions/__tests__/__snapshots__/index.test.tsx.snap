@@ -256,6 +256,58 @@ exports[`Descriptions > contentProps should work for items 1`] = `
 </div>
 `;
 
+exports[`Descriptions > css ellipsis renders lightweight structure without typography 1`] = `
+<div
+  class="ant-descriptions ant-descriptions-horizontal"
+>
+  <div
+    class="ant-descriptions-header"
+  >
+    <div
+      class="ant-descriptions-title"
+    >
+      User Info
+    </div>
+  </div>
+  <div
+    class="ant-descriptions-view"
+  >
+    <table>
+      <tbody>
+        <tr
+          class="ant-descriptions-row"
+        >
+          <td
+            class="ant-descriptions-item"
+            colspan="3"
+          >
+            <div
+              class="ant-descriptions-item-container"
+            >
+              <span
+                class="ant-descriptions-item-label"
+              >
+                Address
+              </span>
+              <span
+                class="ant-descriptions-item-content"
+              >
+                <span
+                  class="ant-descriptions-item-content-css-ellipsis"
+                  title="No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China"
+                >
+                  No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+                </span>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
 exports[`Descriptions > remove colon for vertical layout by default for Descriptions.Item 1`] = `
 <div
   class="ant-descriptions ant-descriptions-vertical"

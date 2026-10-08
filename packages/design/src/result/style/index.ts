@@ -50,6 +50,12 @@ export const genResultStyle: GenerateStyle<ResultToken> = (token: ResultToken): 
         borderRadius: token.borderRadiusLG,
       },
     },
+
+    [`${componentCls}-full-height`]: {
+      minHeight: '100%',
+      display: 'grid',
+      alignContent: 'center',
+    },
   };
 };
 

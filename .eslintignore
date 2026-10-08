@@ -12,3 +12,5 @@ demo/
 __test__/
 antd-alias-webpack-plugin.js
 babel-plugin-add-use-client.js
+# root scripts/ is outside the tsconfig project (see tsconfig.json "exclude"), so type-aware lint cannot parse TS there
+/scripts/**/*.ts

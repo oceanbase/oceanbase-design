@@ -332,11 +332,6 @@ exports[`Table > ConfigProvider pagination should work 1`] = `
         class="ant-pagination ant-pagination-end ant-table-pagination"
       >
         <li
-          class="ant-pagination-total-text"
-        >
-          <span />
-        </li>
-        <li
           aria-disabled="true"
           class="ant-pagination-prev ant-pagination-disabled"
           title="Previous Page"

@@ -1,0 +1,597 @@
+{
+  "version": 1.1,
+  "properties": [
+    {
+      "name": "--ob-white",
+      "description": "白色 / White"
+    },
+    {
+      "name": "--ob-black",
+      "description": "黑色 / Black"
+    },
+    {
+      "name": "--ob-gray-1",
+      "description": "页面底色 / Page background"
+    },
+    {
+      "name": "--ob-gray-2",
+      "description": "侧边导航底色、悬停态、禁用态 / Side nav bg, hover, disabled"
+    },
+    {
+      "name": "--ob-gray-3",
+      "description": "子表格悬停态 / Sub-table hover"
+    },
+    {
+      "name": "--ob-gray-4",
+      "description": "二级边框色、分割线、卡片边框 / Secondary border, divider, card border"
+    },
+    {
+      "name": "--ob-gray-5",
+      "description": "一级边框色 / Primary border"
+    },
+    {
+      "name": "--ob-gray-6",
+      "description": "四级文本：输入框暗文、禁用文本 / Placeholder, disabled text"
+    },
+    {
+      "name": "--ob-gray-7",
+      "description": "三级文本：表单提示信息 / Form hint text"
+    },
+    {
+      "name": "--ob-gray-8",
+      "description": "二级文本：表头文字 / Table header"
+    },
+    {
+      "name": "--ob-gray-9",
+      "description": "导航默认态文字色 / Nav default text"
+    },
+    {
+      "name": "--ob-gray-10",
+      "description": "一级文本 / Primary text"
+    },
+    {
+      "name": "--ob-blue-1",
+      "description": "蓝色-填充 / Blue-fill"
+    },
+    {
+      "name": "--ob-blue-2",
+      "description": "蓝色-备用色 / Blue-secondary"
+    },
+    {
+      "name": "--ob-blue-3",
+      "description": "蓝色-描边 / Blue-border"
+    },
+    {
+      "name": "--ob-blue-4",
+      "description": "蓝色-默认 / Blue-default"
+    },
+    {
+      "name": "--ob-blue-5",
+      "description": "蓝色-悬停、激活 / Blue-hover, active"
+    },
+    {
+      "name": "--ob-blue-6",
+      "description": "蓝色-文字 / Blue-text"
+    },
+    {
+      "name": "--ob-green-1",
+      "description": "绿色-填充 / Green-fill"
+    },
+    {
+      "name": "--ob-green-2",
+      "description": "绿色-备用色 / Green-secondary"
+    },
+    {
+      "name": "--ob-green-3",
+      "description": "绿色-描边 / Green-border"
+    },
+    {
+      "name": "--ob-green-4",
+      "description": "绿色-默认 / Green-default"
+    },
+    {
+      "name": "--ob-green-5",
+      "description": "绿色-备用色 / Green-secondary"
+    },
+    {
+      "name": "--ob-green-6",
+      "description": "绿色-文字 / Green-text"
+    },
+    {
+      "name": "--ob-orange-1",
+      "description": "橙色-填充 / Orange-fill"
+    },
+    {
+      "name": "--ob-orange-2",
+      "description": "橙色-备用色 / Orange-secondary"
+    },
+    {
+      "name": "--ob-orange-3",
+      "description": "橙色-描边 / Orange-border"
+    },
+    {
+      "name": "--ob-orange-4",
+      "description": "橙色-默认 / Orange-default"
+    },
+    {
+      "name": "--ob-orange-5",
+      "description": "橙色-备用色 / Orange-secondary"
+    },
+    {
+      "name": "--ob-orange-6",
+      "description": "橙色-文字 / Orange-text"
+    },
+    {
+      "name": "--ob-red-1",
+      "description": "红色-填充 / Red-fill"
+    },
+    {
+      "name": "--ob-red-2",
+      "description": "红色-备用色 / Red-secondary"
+    },
+    {
+      "name": "--ob-red-3",
+      "description": "红色-描边 / Red-border"
+    },
+    {
+      "name": "--ob-red-4",
+      "description": "红色-默认 / Red-default"
+    },
+    {
+      "name": "--ob-red-5",
+      "description": "红色-备用色 / Red-secondary"
+    },
+    {
+      "name": "--ob-red-6",
+      "description": "红色-文字 / Red-text"
+    },
+    {
+      "name": "--ob-fuchsia-1",
+      "description": "紫红色-填充 / Fuchsia-fill"
+    },
+    {
+      "name": "--ob-fuchsia-2",
+      "description": "紫红色-备用色 / Fuchsia-secondary"
+    },
+    {
+      "name": "--ob-fuchsia-3",
+      "description": "紫红色-描边 / Fuchsia-border"
+    },
+    {
+      "name": "--ob-fuchsia-4",
+      "description": "紫红色-默认 / Fuchsia-default"
+    },
+    {
+      "name": "--ob-fuchsia-5",
+      "description": "紫红色-备用色 / Fuchsia-secondary"
+    },
+    {
+      "name": "--ob-fuchsia-6",
+      "description": "紫红色-文字 / Fuchsia-text"
+    },
+    {
+      "name": "--ob-color-bg-default",
+      "description": "默认背景色 / Default background"
+    },
+    {
+      "name": "--ob-color-bg-primary",
+      "description": "一级背景色 / Primary background"
+    },
+    {
+      "name": "--ob-color-bg-secondary",
+      "description": "二级背景色 / Secondary background"
+    },
+    {
+      "name": "--ob-color-bg-hover",
+      "description": "悬停背景色 / Hover background"
+    },
+    {
+      "name": "--ob-color-bg-hover-secondary",
+      "description": "二级悬停背景色 / Secondary hover bg"
+    },
+    {
+      "name": "--ob-color-bg-focus",
+      "description": "聚焦背景色 / Focus background"
+    },
+    {
+      "name": "--ob-color-bg-selected",
+      "description": "选中背景色 / Selected background"
+    },
+    {
+      "name": "--ob-color-bg-disabled",
+      "description": "禁用背景色 / Disabled background"
+    },
+    {
+      "name": "--ob-color-bg-info",
+      "description": "信息背景色 / Info background"
+    },
+    {
+      "name": "--ob-color-bg-success",
+      "description": "成功背景色 / Success background"
+    },
+    {
+      "name": "--ob-color-bg-warning",
+      "description": "警告背景色 / Warning background"
+    },
+    {
+      "name": "--ob-color-bg-error",
+      "description": "错误背景色 / Error background"
+    },
+    {
+      "name": "--ob-color-divider",
+      "description": "分割线颜色 / Divider color"
+    },
+    {
+      "name": "--ob-color-border-default",
+      "description": "默认边框色 / Default border"
+    },
+    {
+      "name": "--ob-color-border-container",
+      "description": "容器边框色 / Container border"
+    },
+    {
+      "name": "--ob-color-border-inverse",
+      "description": "反色边框 / Inverse border"
+    },
+    {
+      "name": "--ob-color-border-hover",
+      "description": "悬停边框色 / Hover border"
+    },
+    {
+      "name": "--ob-color-border-selected",
+      "description": "选中边框色 / Selected border"
+    },
+    {
+      "name": "--ob-color-border-focus",
+      "description": "聚焦边框色 / Focus border"
+    },
+    {
+      "name": "--ob-color-border-success",
+      "description": "成功边框色 / Success border"
+    },
+    {
+      "name": "--ob-color-border-error",
+      "description": "错误边框色 / Error border"
+    },
+    {
+      "name": "--ob-color-border-warning",
+      "description": "警告边框色 / Warning border"
+    },
+    {
+      "name": "--ob-color-text-default",
+      "description": "默认文本色 / Default text"
+    },
+    {
+      "name": "--ob-color-text-navigation",
+      "description": "导航文本色 / Navigation text"
+    },
+    {
+      "name": "--ob-color-text-label",
+      "description": "标签文本色 / Label text"
+    },
+    {
+      "name": "--ob-color-text-description",
+      "description": "描述文本色 / Description text"
+    },
+    {
+      "name": "--ob-color-text-disabled",
+      "description": "禁用文本色 / Disabled text"
+    },
+    {
+      "name": "--ob-color-text-focus",
+      "description": "聚焦文本色 / Focus text"
+    },
+    {
+      "name": "--ob-color-text-selected",
+      "description": "选中文本色 / Selected text"
+    },
+    {
+      "name": "--ob-color-text-link",
+      "description": "链接文本色 / Link text"
+    },
+    {
+      "name": "--ob-color-text-inverse",
+      "description": "反色文本 / Inverse text"
+    },
+    {
+      "name": "--ob-color-text-disabled-selected",
+      "description": "禁用且选中时的文本色 / Disabled selected text"
+    },
+    {
+      "name": "--ob-color-text-success",
+      "description": "成功文本色 / Success text"
+    },
+    {
+      "name": "--ob-color-text-error",
+      "description": "错误文本色 / Error text"
+    },
+    {
+      "name": "--ob-color-text-warning",
+      "description": "警告文本色 / Warning text"
+    },
+    {
+      "name": "--ob-color-icon-default",
+      "description": "默认图标色 / Default icon"
+    },
+    {
+      "name": "--ob-color-icon-hover",
+      "description": "悬停图标色 / Hover icon"
+    },
+    {
+      "name": "--ob-color-icon-disabled",
+      "description": "禁用图标色 / Disabled icon"
+    },
+    {
+      "name": "--ob-color-icon-focus",
+      "description": "聚焦图标色 / Focus icon"
+    },
+    {
+      "name": "--ob-color-icon-inverse",
+      "description": "反色图标 / Inverse icon"
+    },
+    {
+      "name": "--ob-color-icon-info",
+      "description": "信息图标色 / Info icon"
+    },
+    {
+      "name": "--ob-color-icon-warning",
+      "description": "警告图标色 / Warning icon"
+    },
+    {
+      "name": "--ob-color-icon-success",
+      "description": "成功图标色 / Success icon"
+    },
+    {
+      "name": "--ob-color-icon-error",
+      "description": "错误图标色 / Error icon"
+    },
+    {
+      "name": "--ob-color-icon-critical",
+      "description": "严重/警示图标色 / Critical icon"
+    },
+    {
+      "name": "--ob-font-family-default",
+      "description": "默认字体 / Default font family"
+    },
+    {
+      "name": "--ob-font-family-code",
+      "description": "代码字体 / Code font family"
+    },
+    {
+      "name": "--ob-font-weight-sm",
+      "description": "弱字重 / Light font weight"
+    },
+    {
+      "name": "--ob-font-weight-md",
+      "description": "默认字重 / Default font weight"
+    },
+    {
+      "name": "--ob-font-weight-lg",
+      "description": "强字重 / Bold font weight"
+    },
+    {
+      "name": "--ob-font-size-300",
+      "description": "小号字体 / Small font size"
+    },
+    {
+      "name": "--ob-font-size-325",
+      "description": "默认字体 / Default font size"
+    },
+    {
+      "name": "--ob-font-size-400",
+      "description": "大号字体 / Large font size"
+    },
+    {
+      "name": "--ob-font-size-450",
+      "description": "标题3字体 / Heading 3 font size"
+    },
+    {
+      "name": "--ob-font-size-500",
+      "description": "标题2字体 / Heading 2 font size"
+    },
+    {
+      "name": "--ob-font-line-height-500",
+      "description": "行高500 / Line height 500"
+    },
+    {
+      "name": "--ob-font-line-height-600",
+      "description": "行高600 / Line height 600"
+    },
+    {
+      "name": "--ob-font-line-height-650",
+      "description": "行高650 / Line height 650"
+    },
+    {
+      "name": "--ob-font-line-height-700",
+      "description": "行高700 / Line height 700"
+    },
+    {
+      "name": "--ob-font-h1",
+      "description": "页容器一级标题 / Page heading 1"
+    },
+    {
+      "name": "--ob-font-h2",
+      "description": "页容器二级标题、抽屉弹窗标题 / Page heading 2, drawer title"
+    },
+    {
+      "name": "--ob-font-h3",
+      "description": "卡片标题、表单一级分组标题 / Card title, form group 1"
+    },
+    {
+      "name": "--ob-font-h4",
+      "description": "表单二级分组标题 / Form group 2"
+    },
+    {
+      "name": "--ob-font-body1",
+      "description": "常规正文 / Body text"
+    },
+    {
+      "name": "--ob-font-body2",
+      "description": "表格文本 / Table text"
+    },
+    {
+      "name": "--ob-font-caption",
+      "description": "描述 / Caption"
+    },
+    {
+      "name": "--ob-font-body-code",
+      "description": "代码样式 / Code typography"
+    },
+    {
+      "name": "--ob-shadow-1-top",
+      "description": "顶部阴影 / Top shadow"
+    },
+    {
+      "name": "--ob-shadow-1-bottom",
+      "description": "底部阴影 / Bottom shadow"
+    },
+    {
+      "name": "--ob-shadow-1-left",
+      "description": "左侧阴影 / Left shadow"
+    },
+    {
+      "name": "--ob-shadow-1-right",
+      "description": "右侧阴影 / Right shadow"
+    },
+    {
+      "name": "--ob-shadow-2",
+      "description": "二级阴影 / Secondary shadow"
+    },
+    {
+      "name": "--ob-radius-sm",
+      "description": "小圆角 / Small radius"
+    },
+    {
+      "name": "--ob-radius-md",
+      "description": "中圆角 / Medium radius"
+    },
+    {
+      "name": "--ob-radius-lg",
+      "description": "大圆角 / Large radius"
+    },
+    {
+      "name": "--ob-space-0",
+      "description": "间距 0 / Space 0"
+    },
+    {
+      "name": "--ob-space-50",
+      "description": "间距 50 / Space 50"
+    },
+    {
+      "name": "--ob-space-100",
+      "description": "间距 100 / Space 100"
+    },
+    {
+      "name": "--ob-space-150",
+      "description": "间距 150 / Space 150"
+    },
+    {
+      "name": "--ob-space-200",
+      "description": "间距 200 / Space 200"
+    },
+    {
+      "name": "--ob-space-300",
+      "description": "间距 300 / Space 300"
+    },
+    {
+      "name": "--ob-space-400",
+      "description": "间距400 / Space 400"
+    },
+    {
+      "name": "--ob-space-500",
+      "description": "间距 500 / Space 500"
+    },
+    {
+      "name": "--ob-space-600",
+      "description": "间距 600 / Space 600"
+    },
+    {
+      "name": "--ob-space-800",
+      "description": "间距 800 / Space 800"
+    },
+    {
+      "name": "--ob-navi-color-bg",
+      "description": "导航背景色 / Navigation bg"
+    },
+    {
+      "name": "--ob-navi-color-bg-hover",
+      "description": "导航悬停背景色 / Navigation hover bg"
+    },
+    {
+      "name": "--ob-navi-color-bg-focus",
+      "description": "导航聚焦背景色 / Navigation focus bg"
+    },
+    {
+      "name": "--ob-btn-color-primary-bg",
+      "description": "主按钮背景色 / Primary button bg"
+    },
+    {
+      "name": "--ob-btn-color-primary-bg-hover",
+      "description": "主按钮悬停背景色 / Primary button hover bg"
+    },
+    {
+      "name": "--ob-btn-color-primary-bg-disabled",
+      "description": "主按钮禁用背景色 / Primary button disabled bg"
+    },
+    {
+      "name": "--ob-btn-color-primary-text",
+      "description": "主按钮文本色 / Primary button text"
+    },
+    {
+      "name": "--ob-btn-color-primary-icon",
+      "description": "主按钮图标色 / Primary button icon"
+    },
+    {
+      "name": "--ob-btn-color-secondary-border",
+      "description": "次按钮边框色 / Secondary button border"
+    },
+    {
+      "name": "--ob-btn-color-secondary-text",
+      "description": "次按钮文本色 / Secondary button text"
+    },
+    {
+      "name": "--ob-btn-color-secondary-icon",
+      "description": "次按钮图标色 / Secondary button icon"
+    },
+    {
+      "name": "--ob-btn-color-danger-border",
+      "description": "危险按钮边框色 / Danger button border"
+    },
+    {
+      "name": "--ob-btn-color-danger-text",
+      "description": "危险按钮文本色 / Danger button text"
+    },
+    {
+      "name": "--ob-progress-color-bg-default",
+      "description": "进度条默认背景色 / Progress default bg"
+    },
+    {
+      "name": "--ob-progress-color-bg-loading",
+      "description": "进度条加载背景色 / Progress loading bg"
+    },
+    {
+      "name": "--ob-progress-color-bg-success",
+      "description": "进度条成功背景色 / Progress success bg"
+    },
+    {
+      "name": "--ob-progress-color-bg-error",
+      "description": "进度条错误背景色 / Progress error bg"
+    },
+    {
+      "name": "--ob-switch-color-bg-default",
+      "description": "开关默认背景色 / Switch default bg"
+    },
+    {
+      "name": "--ob-switch-color-bg-disabled",
+      "description": "开关禁用背景色 / Switch disabled bg"
+    },
+    {
+      "name": "--ob-switch-color-bg-active",
+      "description": "开关激活背景色 / Switch active bg"
+    },
+    {
+      "name": "--ob-switch-color-bg-disabled-selected",
+      "description": "开关禁用选中背景色 / Switch disabled selected bg"
+    }
+  ]
+}

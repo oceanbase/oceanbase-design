@@ -17,6 +17,7 @@ nav:
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx" title="基本" description="简单展示。"></code>
 <code src="./demo/content.tsx" title="内容展示" description="内容超长自动省略，并展示 `Tooltip`。同时通过 `contentProps` 可设置省略、编辑、复制等内容属性。"></code>
+<code src="./demo/ellipsis-css.tsx" title="轻量级省略" description="`contentProps.ellipsis='css'` 走纯 CSS 截断 + 原生 title，无测量与 Tooltip 开销，适合描述项数量多的场景；可通过组件级 `contentProps` 统一设置，单项 `contentProps` 可覆盖。单项开启 `copyable` 或 `editable` 时，该描述项回退为完整模式，保证内联操作按钮不被裁掉。"></code>
 <code src="./demo/collapsible.tsx" title="可折叠" description="支持内容区的展开和收起。"></code>
 <code src="./demo/content-align.tsx" title="内容左对齐" description="设置 `contentAlign` 为 `left` 可以让内容左对齐，并且总是为单列模式。"></code>
 <code src="./demo/popover.tsx" title="在 Popover 中使用" description="内容左对齐 + 小尺寸。"></code>
@@ -35,11 +36,12 @@ nav:
 | defaultCollapsed | 是否默认折叠 | boolean | false | - |
 | onCollapse | 折叠状态改变回调 | (collapsed: boolean) => void | - | - |
 | contentAlign | 内容对齐方式，设置为 `left` 时根据最长 label 宽度对齐 | `left` | - | - |
+| contentProps | 所有描述项的默认内容属性，可被单项 `contentProps` 覆盖；仅无边框模式生效 | [TextProps](https://ant.design/components/typography-cn#typographytext) | - | - |
 
 ### items 和 Descriptions.Item
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
-| contentProps | 内容属性，仅无边框模式生效 | [TextProps](https://ant.design/components/typography-cn#typographytext) | - | - |
+| contentProps | 内容属性，仅无边框模式生效。`ellipsis='css'` 为轻量模式：纯 CSS 单行截断 + 原生 `title`（字符串内容自动派生），无 Tooltip、无测量开销，适合描述项数量多的场景；同时开启 `copyable` 或 `editable` 时回退为完整模式 | [TextProps](https://ant.design/components/typography-cn#typographytext) | - | - |
 
 - 更多 API 详见 antd Descriptions 文档: https://ant.design/components/descriptions-cn

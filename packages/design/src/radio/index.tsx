@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import React, { useContext } from 'react';
 import ConfigProvider from '../config-provider';
 import RadioButton from './RadioButton';
+import RadioGroup from './RadioGroup';
 import useStyle from './style';
 
 export * from 'antd/es/radio';
@@ -24,7 +25,7 @@ const InternalRadio = React.forwardRef<RadioRef, AntRadioProps>(
 const Radio = InternalRadio as typeof AntRadio & { Button: typeof RadioButton };
 
 Radio.Button = RadioButton;
-Radio.Group = AntRadio.Group;
+Radio.Group = RadioGroup;
 // @ts-ignore
 Radio.__ANT_RADIO = AntRadio.__ANT_RADIO;
 

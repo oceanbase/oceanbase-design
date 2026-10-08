@@ -14,7 +14,7 @@ mkdirSync(srcDir, { recursive: true });
 
 execSync('node scripts/extract-added-props.mjs', { cwd: root, stdio: 'inherit' });
 execSync('node scripts/generate-skill-props.mjs', { cwd: root, stdio: 'inherit' });
-execSync('node scripts/extract-ob-css-vars.mjs', { cwd: root, stdio: 'inherit' });
+execSync('npx ts-node scripts/extract-ob-css-vars.ts', { cwd: root, stdio: 'inherit' });
 
 const components = {};
 for (const file of readdirSync(join(root, 'metadata/components')).filter((f) => f.endsWith('.json'))) {

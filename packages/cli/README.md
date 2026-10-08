@@ -41,7 +41,7 @@ pnpm add -D @oceanbase/design-cli && pnpm exec ob-design list
 | `ob-design constraint` | ASSEMBLY constraints |
 | `ob-design token` | obToken reference |
 | `ob-design lint` / `ob-design doctor` | Conventions and health |
-| `ob-design setup` | Write ob-design mcp + AGENTS.md (`@ant-design/cli` bundled) |
+| `ob-design setup` | Write ob-design mcp + AGENTS.md + `.vscode` editor hints (`@ant-design/cli` bundled) |
 | `ob-design migrate` | `@oceanbase/codemod` wrapper |
 | `ob-design template <name>` | Page templates |
 | `ob-design mcp` | MCP server (stdio) |

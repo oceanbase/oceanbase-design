@@ -1,17 +1,16 @@
 import type { Key, MouseEvent } from 'react';
 import type {
   ArgsProps as MessageArgsProps,
-  ConfigOptions,
   JointContent,
-  MessageInstance,
   NoticeType,
 } from 'antd/es/message/interface';
-import type { NotificationConfig } from 'antd/es/notification/interface';
 import type {
   NotificationType,
   ObNotificationArgs,
+  ObNotificationConfig,
   ObNotificationInstance,
 } from '../notification/interface';
+import type { ObMessageConfig, ObMessageInstance } from './interface';
 import { wrapPromiseFn } from './wrapPromiseFn';
 
 let keyIndex = 0;
@@ -105,13 +104,13 @@ const openWithNotification = (
   });
 };
 
-export const mapMessageConfigToNotification = (config?: ConfigOptions): NotificationConfig => {
+export const mapMessageConfigToNotification = (config?: ObMessageConfig): ObNotificationConfig => {
   if (!config) {
     return {};
   }
 
   const { top, duration, prefixCls, getContainer, maxCount, rtl, transitionName } = config;
-  const notificationConfig: NotificationConfig = {
+  const notificationConfig: ObNotificationConfig = {
     duration,
     prefixCls,
     getContainer,
@@ -136,11 +135,7 @@ export const mapMessageConfigToNotification = (config?: ConfigOptions): Notifica
   return notificationConfig;
 };
 
-export const createMessageCompat = (
-  notification: ObNotificationInstance
-): MessageInstance & {
-  config: (config: ConfigOptions) => void;
-} => {
+export const createMessageCompat = (notification: ObNotificationInstance): ObMessageInstance => {
   const openMessage = (
     type: NoticeType | undefined,
     content: JointContent,

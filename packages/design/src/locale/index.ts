@@ -25,6 +25,10 @@ export interface FilterLocale {
   filters?: string;
   apply?: string;
   clearAll?: string;
+  /** 搜索框占位文案 */
+  search?: string;
+  /** 无匹配结果文案 */
+  noResult?: string;
 }
 
 export interface NotificationLocale {

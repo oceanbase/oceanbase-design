@@ -125,6 +125,7 @@ npm install -g @oceanbase/design-cli   # bundles @ant-design/cli for ob_info mer
 ob-design setup --client cursor   # MCP (Cursor)
 ob-design setup --client claude    # MCP (Claude Desktop)
 ob-design setup --client agents    # AGENTS.md
+ob-design setup --client vscode    # .vscode editor hints for --ob-*
 npx skills add oceanbase/oceanbase-design
 ```
 

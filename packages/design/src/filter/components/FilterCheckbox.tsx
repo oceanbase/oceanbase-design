@@ -9,6 +9,7 @@ import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
 import { useFilterCollapsed } from '../hooks/useFilterCollapsed';
+import { useFilterLocale } from '../hooks/useFilterLocale';
 import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
@@ -55,6 +56,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
   const { prefixCls } = useFilterStyle();
   const { token } = theme.useToken();
   const { updateFilterValue } = useFilterContext();
+  const filterLocale = useFilterLocale();
   const filterId = useMemo(() => generateFilterId('checkbox', label), [label]);
   const stableOptionsKey = useMemo(() => getStableOptionsKey(options), [options]);
 
@@ -257,7 +259,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
         {showSearch && (
           <div style={{ marginInline: 4, marginBottom: 8 }}>
             <Input
-              placeholder="搜索"
+              placeholder={filterLocale.search}
               prefix={<SearchOutlined />}
               allowClear
               value={searchKeyword}
@@ -269,7 +271,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
         {filteredOptions.length === 0 ? (
           <Empty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
-            description="无匹配结果"
+            description={filterLocale.noResult}
             style={{ padding: '16px 0' }}
           />
         ) : (
@@ -315,6 +317,8 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
       prefixCls,
       token.colorTextDisabled,
       isStatusMode,
+      filterLocale.search,
+      filterLocale.noResult,
     ]
   );
 

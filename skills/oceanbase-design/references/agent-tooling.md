@@ -36,6 +36,7 @@ npm install -g @oceanbase/design-cli   # Node >= 18
 npm install -g @oceanbase/design-cli
 ob-design setup --client cursor
 ob-design setup --client agents
+ob-design setup --client vscode   # .vscode 内的 --ob-* 编码提示（建议提交）
 npx skills add oceanbase/oceanbase-design
 ```
 

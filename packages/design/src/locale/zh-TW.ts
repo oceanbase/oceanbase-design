@@ -32,5 +32,7 @@ export default {
     filters: '篩選',
     apply: '確定',
     clearAll: '清空',
+    search: '搜尋',
+    noResult: '無匹配結果',
   },
 } as Locale;

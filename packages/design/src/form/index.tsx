@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useContext, useLayoutEffect, useRef } from 'react';
+import React, { forwardRef, useCallback, useContext, useLayoutEffect } from 'react';
 import { Form as AntForm } from 'antd';
 import type { FormProps as AntFormProps } from 'antd/es/form';
 import classNames from 'classnames';
@@ -9,7 +9,10 @@ import { patchScrollOnValidateError, setScrollToFirstErrorFlag } from './scrollT
 import useStyle from './style';
 import type { FormReValidateMode, FormValidateMode, OBFormConfig } from './validateMode';
 import {
+  collectValueChangedNames,
+  getTrackedFormState,
   markFormSubmitted,
+  patchResetFieldsTracking,
   revalidateOnChange,
   resolveReValidateMode,
   resolveValidateMode,
@@ -17,7 +20,6 @@ import {
   shouldInjectRevalidateOnChange,
   shouldTrackSubmitAttempt,
   syncBlurredFieldsFromFieldsChange,
-  syncSubmittedFromFieldsChange,
 } from './validateMode';
 
 export * from 'antd/es/form';
@@ -94,14 +96,12 @@ const InternalForm = forwardRef<FormRef, FormProps>((props, ref) => {
   // Preserve unmounted field values. Precedence: Form prop > ConfigProvider `form.preserve` > OB default `false`.
   const mergedPreserve = propPreserve ?? obFormConfig?.preserve ?? false;
 
-  const blurredFieldsRef = useRef(new Set<string>());
-  const submittedRef = useRef(false);
-
   const markSubmittedIfNeeded = useCallback(() => {
     if (trackSubmitAttempt) {
-      markFormSubmitted(submittedRef);
+      // Tracking state is keyed by the form instance, so it agrees with the patched `resetFields`.
+      markFormSubmitted(getTrackedFormState(mergedForm).submitted);
     }
-  }, [trackSubmitAttempt]);
+  }, [mergedForm, trackSubmitAttempt]);
 
   const handleFinish = useCallback(
     (...args: Parameters<NonNullable<AntFormProps['onFinish']>>) => {
@@ -124,34 +124,24 @@ const InternalForm = forwardRef<FormRef, FormProps>((props, ref) => {
       changedFields: Parameters<NonNullable<AntFormProps['onFieldsChange']>>[0],
       allFields: Parameters<NonNullable<AntFormProps['onFieldsChange']>>[1]
     ) => {
+      const tracked = getTrackedFormState(mergedForm);
       if (trackBlurredFields) {
-        syncBlurredFieldsFromFieldsChange(blurredFieldsRef.current, changedFields, validateMode);
+        syncBlurredFieldsFromFieldsChange(tracked.blurredFields, changedFields, validateMode);
       }
-      if (trackSubmitAttempt) {
-        syncSubmittedFromFieldsChange(submittedRef, changedFields, allFields);
-      }
-      onFieldsChange?.(changedFields, allFields);
-    },
-    [onFieldsChange, trackBlurredFields, trackSubmitAttempt, validateMode]
-  );
-
-  const handleValuesChange = useCallback(
-    (
-      changedValues: Parameters<NonNullable<AntFormProps['onValuesChange']>>[0],
-      allValues: Parameters<NonNullable<AntFormProps['onValuesChange']>>[1]
-    ) => {
-      if (injectRevalidate && mergedForm) {
+      if (injectRevalidate) {
+        // `changedFields` also fires for validation-state updates, which must not revalidate again.
+        // The changed names come straight from rc-field-form instead of being re-derived from values.
         revalidateOnChange(mergedForm, {
           validateMode,
           reValidateMode,
-          blurredFields: blurredFieldsRef.current,
-          changedValues,
-          submitted: submittedRef.current,
+          blurredFields: tracked.blurredFields,
+          changedNames: collectValueChangedNames(changedFields, tracked.previousValues),
+          submitted: tracked.submitted.current,
         });
       }
-      onValuesChange?.(changedValues, allValues);
+      onFieldsChange?.(changedFields, allFields);
     },
-    [injectRevalidate, mergedForm, onValuesChange, reValidateMode, validateMode]
+    [injectRevalidate, mergedForm, onFieldsChange, reValidateMode, trackBlurredFields, validateMode]
   );
 
   const prefixCls = getPrefixCls('form', customizePrefixCls);
@@ -161,6 +151,7 @@ const InternalForm = forwardRef<FormRef, FormProps>((props, ref) => {
   useLayoutEffect(() => {
     patchScrollOnValidateError(mergedForm);
     setScrollToFirstErrorFlag(mergedForm, mergedScrollToFirstError);
+    patchResetFieldsTracking(mergedForm);
   }, [mergedForm, mergedScrollToFirstError]);
 
   return wrapCSSVar(
@@ -182,7 +173,7 @@ const InternalForm = forwardRef<FormRef, FormProps>((props, ref) => {
       form={mergedForm}
       scrollToFirstError={mergedScrollToFirstError}
       validateTrigger={resolvedValidateTrigger}
-      onValuesChange={injectRevalidate ? handleValuesChange : onValuesChange}
+      onValuesChange={onValuesChange}
       onFieldsChange={
         trackBlurredFields || trackSubmitAttempt ? handleFieldsChange : onFieldsChange
       }

@@ -8,6 +8,15 @@ group: 业务组件
 
 ---
 
+## 1.4.4
+
+`2026-09-04`
+
+- DateRanger
+  - 🌐 快捷选项、自定义时间范围描述（如“近 30 天”）及“历史记录”标题支持跟随当前语言，并新增日语 (ja-JP) 支持。[#1566](https://github.com/oceanbase/oceanbase-design/pull/1566)
+- Password
+  - 🐞 自定义 `rules` 仅在字段被触碰且输入内容后才执行校验，避免空值时提前触发强度/错误提示。[#1565](https://github.com/oceanbase/oceanbase-design/pull/1565)
+
 ## 1.4.0
 
 `2026-08-25`

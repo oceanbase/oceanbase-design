@@ -16,6 +16,7 @@ import Card from '../card';
 import useStyle from './style';
 import type { AnyObject } from '../_util/type';
 import useDefaultPagination from './hooks/useDefaultPagination';
+import type { OBTablePaginationConfig } from './hooks/useDefaultPagination';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import enUS from '../locale/en-US';
 import { injectColumnTitleTooltip } from './ColumnTitleWithTooltip';
@@ -182,10 +183,12 @@ export interface TableLocale extends AntTableLocale {
   };
 }
 
-export interface TableProps<T> extends AntTableProps<T> {
+export interface TableProps<T> extends Omit<AntTableProps<T>, 'pagination'> {
   innerBordered?: boolean;
   /** 设置外围边框（分页器包含在边框内），内部保持无边框样式，可代替 Card bordered + bodyStyle padding 0 + Table 的组合 */
   outerBordered?: boolean;
+  /** 分页配置；`showTotal` 传 `false` 关闭总数展示，不传则展示默认文案 */
+  pagination?: false | OBTablePaginationConfig;
   columns?: TableColumnsType<T>;
   cancelText?: string;
   collapseText?: string;
@@ -326,9 +329,11 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
           </span>
         );
       }
-      // 自定义筛选图标
+      // 自定义筛选图标，根据筛选激活状态高亮图标
       if ((item.filters || item.filterDropdown) && !item.filterIcon) {
-        newItem.filterIcon = () => <FilterOutlined />;
+        newItem.filterIcon = (filtered: boolean) => (
+          <FilterOutlined style={filtered ? { color: token.colorPrimary } : {}} />
+        );
       }
       // 递归处理 children
       if (item.children && Array.isArray(item.children)) {
@@ -414,56 +419,66 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
     }
   }, [currentSelectedRows]);
 
+  /**
+   * 分页器总数文案：useDefaultPagination 已把「不展示」（显式 undefined / false）统一归一化为 undefined，
+   * 因此这里直接用合并结果；不传 showTotal 时它是默认文案函数，「不传」和「显式关闭」是两种状态。
+   */
+  const showTotalFn = pagination === false ? undefined : pagination.showTotal;
+  /** 有选中项时，批量操作栏会占用分页器的「总数」插槽 */
+  const hasBatchOperationBar = !isEmpty(rowSelection) && !isEmpty(currentSelectedRowKeys);
+  /** 左侧分组是否有内容：alert / 默认已选文案 / 取消按钮 / 展开收起；全为空时不渲染空 Space，避免白留间距 */
+  const hasBatchOperationLeftContent =
+    toolAlertRender !== false || !hiddenCancelBtn || Boolean(toolSelectedContent);
+
   const renderOptionsBar = (total: number, range: [number, number]) => {
-    if (isEmpty(rowSelection) || isEmpty(currentSelectedRowKeys)) {
-      return (
-        // @ts-ignore
-        <span>{pagination && pagination?.showTotal && pagination?.showTotal(total, range)}</span>
-      );
+    if (!hasBatchOperationBar) {
+      return <span>{showTotalFn?.(total, range)}</span>;
     }
 
     return (
       <div>
         <div className={`${prefixCls}-batch-operation-bar`}>
-          <Space
-            size={8}
-            style={{
-              marginRight: 24,
-            }}
-          >
-            {toolAlertRender && toolAlertRender(currentSelectedRowKeys, currentSelectedRows)}
-            {!toolAlertRender && toolAlertRender !== false && (
-              <span className={`${prefixCls}-batch-operation-selection`}>
-                {`${batchOperationBar?.selected} ${currentSelectedRowKeys?.length || 0} ${batchOperationBar?.object}`}
-              </span>
-            )}
-            {!hiddenCancelBtn && (
-              <a onClick={handleOptionsCancel}>{cancelText ?? batchOperationBar?.cancel}</a>
-            )}
-            {toolSelectedContent && (
-              <Popover
-                placement="top"
-                overlayClassName={`${prefixCls}-batch-operation-selection-popover`}
-                content={toolSelectedContent?.(currentSelectedRowKeys, currentSelectedRows)}
-                trigger="click"
-                open={openPopover}
-              >
-                <a onClick={() => setOpenPopover(!openPopover)}>
-                  {openPopover
-                    ? (collapseText ?? batchOperationBar?.collapse)
-                    : (openText ?? batchOperationBar?.open)}
-                </a>
-              </Popover>
-            )}
-          </Space>
+          {hasBatchOperationLeftContent && (
+            <Space
+              size={8}
+              style={{
+                marginRight: 24,
+              }}
+            >
+              {toolAlertRender && toolAlertRender(currentSelectedRowKeys, currentSelectedRows)}
+              {!toolAlertRender && toolAlertRender !== false && (
+                <span className={`${prefixCls}-batch-operation-selection`}>
+                  {`${batchOperationBar?.selected} ${currentSelectedRowKeys?.length || 0} ${batchOperationBar?.object}`}
+                </span>
+              )}
+              {!hiddenCancelBtn && (
+                <a onClick={handleOptionsCancel}>{cancelText ?? batchOperationBar?.cancel}</a>
+              )}
+              {toolSelectedContent && (
+                <Popover
+                  placement="top"
+                  overlayClassName={`${prefixCls}-batch-operation-selection-popover`}
+                  content={toolSelectedContent?.(currentSelectedRowKeys, currentSelectedRows)}
+                  trigger="click"
+                  open={openPopover}
+                >
+                  <a onClick={() => setOpenPopover(!openPopover)}>
+                    {openPopover
+                      ? (collapseText ?? batchOperationBar?.collapse)
+                      : (openText ?? batchOperationBar?.open)}
+                  </a>
+                </Popover>
+              )}
+            </Space>
+          )}
           {toolOptionsRender && (
             <Space size={8}>
               {toolOptionsRender?.(currentSelectedRowKeys, currentSelectedRows)}
             </Space>
           )}
         </div>
-        {/* @ts-ignore */}
-        <span>{pagination && pagination?.showTotal && pagination?.showTotal(total, range)}</span>
+        {/* 关闭总数时不渲染空的占位 span */}
+        {showTotalFn && <span>{showTotalFn(total, range)}</span>}
       </div>
     );
   };
@@ -543,7 +558,9 @@ function Table<T extends Record<string, any>>(props: TableProps<T>, ref: React.R
                   : pagination?.hideOnSinglePage !== undefined
                     ? pagination?.hideOnSinglePage
                     : extendedContext.hideOnSinglePage,
-              showTotal: renderOptionsBar,
+              // antd 只要拿到函数就会渲染 .ant-pagination-total-text 占位元素（OB 样式下会占出空白），
+              // 所以仅当有总数文案或批量操作栏要占用该插槽时才传函数，否则必须传 undefined
+              showTotal: showTotalFn || hasBatchOperationBar ? renderOptionsBar : undefined,
             }
       }
     />

@@ -1,26 +1,18 @@
 import type { NotificationConfig, NotificationInstance } from 'antd/es/notification/interface';
 import { notification as antNotification } from 'antd';
+import { getConfiguredNotificationDuration, setGlobalNotificationDuration } from './durationConfig';
 import { OB_NOTIFICATION_DEFAULT_CONFIG, wrapNotificationArgs } from './wrapNotificationArgs';
-import type { NotificationType, ObNotificationArgs, ObNotificationInstance } from './interface';
+import type {
+  NotificationType,
+  ObNotificationArgs,
+  ObNotificationConfig,
+  ObNotificationDuration,
+  ObNotificationInstance,
+} from './interface';
 
 const activeDedupeKeys = new Set<string>();
 
 const getDedupeScopeKey = (type: NotificationType, dedupeKey: string) => `${type}:${dedupeKey}`;
-
-const openWithType = (
-  base: NotificationInstance,
-  type: NotificationType,
-  args: ObNotificationArgs
-) => {
-  const wrapped = wrapNotificationArgs({ type, args });
-
-  if (type === 'loading') {
-    base.open(wrapped);
-    return;
-  }
-
-  base[type](wrapped);
-};
 
 const shouldSkipDedupe = (type: NotificationType, args: ObNotificationArgs) => {
   if (!args.dedupeKey) {
@@ -56,39 +48,67 @@ const attachDedupeCleanup = (type: NotificationType, args: ObNotificationArgs) =
   };
 };
 
-export const createObNotification = (base: NotificationInstance): ObNotificationInstance => {
-  const wrap = (type: NotificationType) => (args: ObNotificationArgs) => {
+export interface CreateObNotificationOptions {
+  /**
+   * 实例级默认自动关闭时长，按优先级从高到低传入；
+   * notification.config 的全局配置由 durationConfig 固定作为最后一级。
+   */
+  durations?: ObNotificationDuration[];
+}
+
+export const createObNotification = (
+  base: NotificationInstance,
+  options: CreateObNotificationOptions = {}
+): ObNotificationInstance => {
+  const { durations = [] } = options;
+
+  // duration 在每次弹出时解析，保证后置的 notification.config() 也能生效
+  const openNotification = (type: NotificationType, args: ObNotificationArgs) => {
     if (shouldSkipDedupe(type, args)) {
       return;
     }
-    openWithType(base, type, attachDedupeCleanup(type, args));
+    const wrapped = wrapNotificationArgs({
+      type,
+      args: attachDedupeCleanup(type, args),
+      configuredDuration: getConfiguredNotificationDuration(type, ...durations),
+    });
+
+    if (type === 'loading') {
+      base.open(wrapped);
+      return;
+    }
+
+    base[type](wrapped);
   };
+
+  const handle = (type: NotificationType) => (args: ObNotificationArgs) =>
+    openNotification(type, args);
 
   return {
     ...base,
-    open: (args: ObNotificationArgs) => {
-      const type = (args.type as NotificationType) || 'info';
-      if (shouldSkipDedupe(type, args)) {
-        return;
-      }
-      openWithType(base, type, attachDedupeCleanup(type, args));
-    },
-    success: wrap('success'),
-    error: wrap('error'),
-    info: wrap('info'),
-    warning: wrap('warning'),
-    loading: wrap('loading'),
+    open: (args: ObNotificationArgs) =>
+      openNotification((args.type as NotificationType) || 'info', args),
+    success: handle('success'),
+    error: handle('error'),
+    info: handle('info'),
+    warning: handle('warning'),
+    loading: handle('loading'),
     destroy: (key?: React.Key) => {
       if (key === undefined) {
         activeDedupeKeys.clear();
       }
       base.destroy(key);
     },
-    config: (config: NotificationConfig) => {
+    config: (config?: ObNotificationConfig) => {
+      const { duration: configDuration, ...restConfig } = config ?? {};
+      // duration 由 OB 侧解析（数字整体覆盖、对象按类型合并），对所有静态方法与 hooks 实例生效
+      setGlobalNotificationDuration(configDuration);
       antNotification.config({
         ...OB_NOTIFICATION_DEFAULT_CONFIG,
-        ...config,
-        stack: config.stack ?? OB_NOTIFICATION_DEFAULT_CONFIG.stack,
+        ...restConfig,
+        // OB 通知始终显式传入 duration，这里的数字镜像只为宿主中直接使用原生 antd 通知时的默认值保持与改动前一致
+        ...(typeof configDuration === 'number' ? { duration: configDuration } : {}),
+        stack: restConfig.stack ?? OB_NOTIFICATION_DEFAULT_CONFIG.stack,
       } as NotificationConfig);
     },
   };

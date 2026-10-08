@@ -32,5 +32,7 @@ export default {
     filters: 'フィルター',
     apply: '確定',
     clearAll: 'すべてクリア',
+    search: '検索',
+    noResult: '一致する結果がありません',
   },
 } as Locale;

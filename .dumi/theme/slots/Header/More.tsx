@@ -22,6 +22,14 @@ const useStyle = (rtl?: boolean) => ({
 export const getEcosystemGroup = (): MenuProps['items'] => [
   {
     label: (
+      <a href="https://oceanbase-design-v0.vercel.app/" target="_blank" rel="noopener noreferrer">
+        0.x
+      </a>
+    ),
+    key: '0.x',
+  },
+  {
+    label: (
       <a href="http://ant.design" target="_blank" rel="noopener noreferrer">
         Ant Design
       </a>

@@ -9,6 +9,7 @@ nav:
 - 💄 定制插图、主题和样式，以符合 OceanBase Design 设计规范。
 - 🆕 `status` 属性新增 `processing`、`normal` 枚举值。
 - 🆕 新增 `PRESENTED_IMAGE_NOT_FOUND`、`PRESENTED_IMAGE_NETWORK_ERROR`、`PRESENTED_IMAGE_VERSION_UPDATE` 内置插图。
+- 🆕 新增 `fullHeight` 属性，用于撑满父容器高度，并将内容整体居中。
 
 ## 代码演示
 
@@ -24,6 +25,7 @@ nav:
 <code src="./demo/presented-images.tsx" title="更多内置插图" description="通过 icon 使用 PRESENTED_IMAGE_* 常量。"></code>
 <code src="./demo/icon.tsx" title="自定义 icon"></code>
 <code src="./demo/over-length.tsx" title="超长内容" description="为了避免无限拉伸，限制副标题的最大宽度为 600px、内容区的最大宽度为 1000px。"></code>
+<code src="./demo/full-height.tsx" title="撑满父容器高度" description="设置 fullHeight 后，结果页会撑满父容器高度，并将内容整体居中。"></code>
 <code src="./demo/with-page-container.tsx" title="和页容器搭配使用"></code>
 
 ## 内置插图
@@ -43,5 +45,6 @@ nav:
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |
 | status | 状态 | success \| error \| warning \| processing \| normal \| info \| 403 \| 404 \| 500 | info | - |
+| fullHeight | 撑满父容器高度，并将内容整体居中 | boolean | false | - |
 
 - 更多 API 详见 antd Result 文档: https://ant.design/components/result-cn

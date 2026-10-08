@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import type { ConfigOptions } from 'antd/es/message/interface';
 import { useObNotification } from '../notification/useObNotification';
 import { createMessageCompat, mapMessageConfigToNotification } from './createMessageCompat';
+import type { ObMessageConfig } from './interface';
 
-export const useMessageCompat = (messageConfig?: ConfigOptions) => {
+export const useMessageCompat = (messageConfig?: ObMessageConfig) => {
   const [notificationApi, holder] = useObNotification(
     mapMessageConfigToNotification(messageConfig)
   );

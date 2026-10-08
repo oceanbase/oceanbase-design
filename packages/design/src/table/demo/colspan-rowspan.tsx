@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Form, Switch, Table } from '@oceanbase/design';
+import { Form, Switch, Table } from '@oceanbase/design';
 import type { ColumnsType } from '@oceanbase/design/es/table';
 
 interface DataType {
@@ -123,14 +123,12 @@ const App: React.FC = () => {
           <Switch size="small" checked={pagination} onChange={setPagination} />
         </Form.Item>
       </Form>
-      <Card bordered bodyStyle={{ padding: 0 }}>
-        <Table
-          columns={columns}
-          dataSource={data}
-          bordered
-          pagination={pagination ? { pageSize: 3 } : false}
-        />
-      </Card>
+      <Table
+        columns={columns}
+        dataSource={data}
+        bordered
+        pagination={pagination ? { pageSize: 3 } : false}
+      />
     </>
   );
 };

@@ -8,16 +8,17 @@ import React, { useContext, useState, useCallback, useMemo } from 'react';
 import { CaretRightFilled } from '@oceanbase/icons';
 import ConfigProvider from '../config-provider';
 import theme from '../theme';
-import type { TextProps } from '../typography/Text';
 import DescriptionsItem from './Item';
 import useItems from './hooks/useItems';
 import useStyle from './style';
+import type { DescriptionsContentProps } from './types';
 
 export * from 'antd/es/descriptions';
 export type { DescriptionsItemProps } from './Item';
+export type { DescriptionsContentProps } from './types';
 
 export interface DescriptionsItemType extends AntDescriptionsItemType {
-  contentProps?: TextProps;
+  contentProps?: DescriptionsContentProps;
 }
 
 export interface DescriptionsProps extends AntDescriptionsProps {
@@ -32,6 +33,8 @@ export interface DescriptionsProps extends AntDescriptionsProps {
   onCollapse?: (collapsed: boolean) => void;
   /** Content alignment, when set to 'left', all content values will be aligned to the left based on the longest label width */
   contentAlign?: 'left';
+  /** Default content props for all items, can be overridden by each item's `contentProps` */
+  contentProps?: DescriptionsContentProps;
 }
 
 type CompoundedComponent = React.FC<DescriptionsProps> & {
@@ -53,6 +56,7 @@ const Descriptions: CompoundedComponent = ({
   defaultCollapsed,
   onCollapse,
   contentAlign,
+  contentProps,
   ...restProps
 }) => {
   const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
@@ -72,7 +76,7 @@ const Descriptions: CompoundedComponent = ({
     onCollapse?.(newCollapsed);
   }, [collapsed, outerCollapsed, onCollapse]);
 
-  const newItems = useItems(items, children, bordered);
+  const newItems = useItems(items, children, { bordered, prefixCls, contentProps });
 
   const descriptionsTitle = useMemo(() => {
     if (!collapsible) {

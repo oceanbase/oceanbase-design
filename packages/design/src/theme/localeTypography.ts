@@ -11,6 +11,7 @@ import seedTheme, {
   fontWeightWeakEn,
   fontWeightEn,
   fontWeightStrongEn,
+  getTableCellFontTokens,
   isCnLikeLocale,
   isEnLikeLocale,
   tableCellFontSizeEn,
@@ -35,9 +36,7 @@ export const defaultTheme: TypographyThemeConfig = {
     fontHeight: fontHeightCn,
   },
   components: {
-    Table: {
-      cellFontSize: fontSizeCn,
-    },
+    Table: getTableCellFontTokens(fontSizeCn),
   },
 };
 
@@ -59,9 +58,7 @@ export const compactTheme: TypographyThemeConfig = {
     fontHeight: seedToken.fontHeight,
   },
   components: {
-    Table: {
-      cellFontSize: tableCellFontSizeEn,
-    },
+    Table: getTableCellFontTokens(tableCellFontSizeEn),
   },
 };
 
@@ -224,7 +221,7 @@ function getLocaleFontSizeThemePatch(
     (cellFs === undefined || cellFs === tableCellFontSizeEn) &&
     isCnLikeLocale(mergedLocale.locale)
   ) {
-    Object.assign(tablePatch, { cellFontSize: fontSizeCn });
+    Object.assign(tablePatch, getTableCellFontTokens(fontSizeCn));
   }
 
   if (Object.keys(tablePatch as object).length > 0) {

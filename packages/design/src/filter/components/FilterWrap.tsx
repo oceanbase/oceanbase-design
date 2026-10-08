@@ -1,16 +1,14 @@
 import type { FC, ReactNode } from 'react';
-import React, { Children, isValidElement, useCallback, useContext, useMemo } from 'react';
+import React, { Children, isValidElement, useCallback, useMemo } from 'react';
 import { Flex } from 'antd';
 import theme from '../../theme';
-import ConfigProvider from '../../config-provider';
-import type { Locale } from '../../locale';
-import enUS from '../../locale/en-US';
 import {
   FilterProvider,
   useFilterContext,
   type FilterComponentName,
   type FilterValue,
 } from '../FilterContext';
+import { useFilterLocale } from '../hooks/useFilterLocale';
 import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import type { BaseFilterProps } from '../type';
 import FilterButton from './FilterButton';
@@ -48,8 +46,7 @@ const FilterWrap: FC<FilterWrapProps> = ({
   ...restProps
 }) => {
   const { token } = theme.useToken();
-  const { locale: contextLocale } = useContext(ConfigProvider.ConfigContext);
-  const filterLocale = (contextLocale as Locale)?.Filter || enUS.Filter;
+  const filterLocale = useFilterLocale();
   // 始终调用 Hook，但只在折叠模式下使用 filterValues
   const contextValue = useFilterContext();
   const { prefixCls } = useFilterStyle();

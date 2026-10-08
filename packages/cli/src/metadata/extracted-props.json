@@ -86,12 +86,14 @@
     "source": "packages/design/src/config-provider/index.tsx",
     "props": [
       "theme",
+      "notification",
       "navigate",
       "hideOnSinglePage",
       "card",
       "pagination",
       "spin",
       "table",
+      "typography",
       "form",
       "styleProviderProps",
       "appProps"
@@ -99,12 +101,14 @@
     "allInterfaceProps": [
       "theme",
       "locale",
+      "notification",
       "navigate",
       "hideOnSinglePage",
       "card",
       "pagination",
       "spin",
       "table",
+      "typography",
       "form",
       "styleProviderProps",
       "appProps"
@@ -165,12 +169,14 @@
     "props": [
       "title",
       "steps",
-      "layout"
+      "layout",
+      "fullHeight"
     ],
     "allInterfaceProps": [
       "title",
       "steps",
-      "layout"
+      "layout",
+      "fullHeight"
     ]
   },
   "Filter": {
@@ -243,20 +249,24 @@
     "source": "packages/ui/src/ProTable/index.tsx",
     "props": [
       "innerBordered",
-      "outerBordered"
+      "outerBordered",
+      "pagination"
     ],
     "allInterfaceProps": [
       "innerBordered",
-      "outerBordered"
+      "outerBordered",
+      "pagination"
     ]
   },
   "Result": {
     "source": "packages/design/src/result/index.tsx",
     "props": [
-      "status"
+      "status",
+      "fullHeight"
     ],
     "allInterfaceProps": [
-      "status"
+      "status",
+      "fullHeight"
     ]
   },
   "Select": {
@@ -282,6 +292,7 @@
     "props": [
       "innerBordered",
       "outerBordered",
+      "pagination",
       "cancelText",
       "collapseText",
       "openText",
@@ -293,6 +304,7 @@
     "allInterfaceProps": [
       "innerBordered",
       "outerBordered",
+      "pagination",
       "columns",
       "cancelText",
       "collapseText",

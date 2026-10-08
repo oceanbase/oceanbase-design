@@ -17,13 +17,21 @@ export const OB_NOTIFICATION_DEFAULT_CONFIG = {
 const hasRenderableContent = (node: React.ReactNode) =>
   node !== undefined && node !== null && node !== false && node !== '';
 
+/**
+ * 解析自动关闭时长，优先级：单次调用 duration > 已配置的 duration（由
+ * `getConfiguredNotificationDuration` 统一解析）> 内置策略。
+ */
 export const resolveDuration = (
   type: NotificationType,
   description: React.ReactNode | undefined,
-  args: ObNotificationArgs
+  args: ObNotificationArgs,
+  configuredDuration?: number
 ): number | null => {
   if (args.duration !== undefined && args.duration !== null) {
     return args.duration;
+  }
+  if (configuredDuration !== undefined) {
+    return configuredDuration;
   }
   if (type === 'error') {
     return 0;
@@ -38,12 +46,15 @@ export interface WrapNotificationArgsOptions {
   type: NotificationType;
   args: ObNotificationArgs;
   prefixCls?: string;
+  /** 已配置的默认自动关闭时长（实例级优先于全局），未传时回退到内置策略 */
+  configuredDuration?: number;
 }
 
 export const wrapNotificationArgs = ({
   type,
   args,
   prefixCls = 'ant-notification-notice',
+  configuredDuration,
 }: WrapNotificationArgsOptions): ArgsProps => {
   const {
     errorDetails,
@@ -78,7 +89,12 @@ export const wrapNotificationArgs = ({
     },
   });
 
-  const duration = resolveDuration(type, content.description ?? restArgs.description, args);
+  const resolvedDuration = resolveDuration(
+    type,
+    content.description ?? restArgs.description,
+    args,
+    configuredDuration
+  );
   const noticeType = type === 'loading' ? undefined : type;
 
   const defaultIcon = icon ?? iconMap[type];
@@ -96,9 +112,11 @@ export const wrapNotificationArgs = ({
     ...content,
     ...OB_NOTIFICATION_DEFAULT_CONFIG,
     type: noticeType,
-    duration,
+    duration: resolvedDuration,
     showProgress:
-      duration !== null && duration > 0 ? (args.showProgress ?? true) : args.showProgress,
+      resolvedDuration !== null && resolvedDuration > 0
+        ? (args.showProgress ?? true)
+        : args.showProgress,
     pauseOnHover: args.pauseOnHover ?? OB_NOTIFICATION_DEFAULT_CONFIG.pauseOnHover,
     closable: args.closable ?? OB_NOTIFICATION_DEFAULT_CONFIG.closable,
     closeIcon: closeIcon ?? <CloseOutlined />,

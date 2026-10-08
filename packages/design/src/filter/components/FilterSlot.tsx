@@ -5,6 +5,7 @@ import type { FilterComponentName } from '../FilterContext';
 import { useControlledState } from '../hooks/useControlledState';
 import { useFilterContext } from '../FilterContext';
 import { useFilterCollapsed } from '../hooks/useFilterCollapsed';
+import { useFilterLocale } from '../hooks/useFilterLocale';
 import { useFilterTooltip } from '../hooks/useFilterTooltip';
 import useFilterStyle, { getFilterCls } from '../style';
 import type { BaseFilterProps, InternalFilterProps } from '../type';
@@ -53,6 +54,7 @@ const FilterSlot: FC<FilterSlotProps> = ({
   ...restProps
 }) => {
   const isCollapsed = useFilterCollapsed(_isCollapsed);
+  const filterLocale = useFilterLocale();
   const { token } = theme.useToken();
   const { prefixCls } = useFilterStyle();
   const filterButtonRef = useRef<FilterButtonRef>(null);
@@ -171,7 +173,7 @@ const FilterSlot: FC<FilterSlotProps> = ({
             className={getFilterCls(prefixCls, 'text-ellipsis')}
             style={getWrappedValueStyle(hasValue)}
           >
-            {hasValue ? displayText : placeholder || getPlaceholder()}
+            {hasValue ? displayText : placeholder || getPlaceholder(filterLocale)}
           </span>
         </FilterButton>
       </div>

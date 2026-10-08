@@ -29,6 +29,26 @@ describe('locale typography presets', () => {
     expect(isTypographyThemeLocked({ isDark: true })).toBe(false);
   });
 
+  it('typography presets keep table cell font in the same scale for every size', () => {
+    // antd 默认把 cellFontSizeSM / cellFontSizeMD 回落到 token.fontSize，预设里必须显式补齐，
+    // 否则 size="small" / size="middle" 的表格字号会比默认尺寸更大
+    expect(seedTheme.components?.Table).toMatchObject({
+      cellFontSize: 12,
+      cellFontSizeSM: 12,
+      cellFontSizeMD: 12,
+    });
+    expect(defaultTheme.components?.Table).toMatchObject({
+      cellFontSize: 14,
+      cellFontSizeSM: 14,
+      cellFontSizeMD: 14,
+    });
+    expect(compactTheme.components?.Table).toMatchObject({
+      cellFontSize: 12,
+      cellFontSizeSM: 12,
+      cellFontSizeMD: 12,
+    });
+  });
+
   it('resolveLocaleTypographyPatch returns Cn patch for zh locale', () => {
     const baseTheme = seedTheme as ThemeConfig;
     const patch = resolveLocaleTypographyPatch(
@@ -40,6 +60,8 @@ describe('locale typography presets', () => {
     expect(patch.token?.fontSize).toBe(14);
     expect(patch.token?.fontHeight).toBe(22);
     expect(patch.components?.Table?.cellFontSize).toBe(14);
+    expect(patch.components?.Table?.cellFontSizeSM).toBe(14);
+    expect(patch.components?.Table?.cellFontSizeMD).toBe(14);
   });
 
   it('resolveLocaleTypographyPatch returns en typography patch', () => {
@@ -141,6 +163,8 @@ describe('locale typography presets', () => {
     });
     expect(patch.token?.fontSize).toBeUndefined();
     expect(patch.components?.Table?.cellFontSize).toBe(14);
+    expect(patch.components?.Table?.cellFontSizeSM).toBe(14);
+    expect(patch.components?.Table?.cellFontSizeMD).toBe(14);
   });
 
   it('custom fontFamily guard skips locale fontFamily patch for en', () => {
