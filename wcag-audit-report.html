@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OceanBase 组件库 WCAG 2.1 可访问性审计报告</title>
+<style>
+  :root {
+    --ob-primary: #0d6cf2;
+    --ob-primary-hover: #0852bb;
+    --ob-primary-active: #0852bb;
+    --ob-success: #16b882;
+    --ob-warning: #f49f25;
+    --ob-error: #eb4242;
+    --ob-text: #132039;
+    --ob-text-secondary: #5c6b8a;
+    --ob-text-tertiary: #8592ad;
+    --ob-text-quaternary: #b6c0d4;
+    --ob-bg: #FFFFFF;
+    --ob-bg-layout: #fbfcfe;
+    --ob-border: #CDD5E4;
+    --ob-border-secondary: #E2E8F3;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    --radius: 8px;
+    --radius-lg: 12px;
+    --shadow-sm: 0 1px 3px rgba(19,32,57,0.06), 0 1px 2px rgba(19,32,57,0.04);
+    --shadow-md: 0 4px 12px rgba(19,32,57,0.08), 0 2px 4px rgba(19,32,57,0.04);
+    --shadow-lg: 0 8px 24px rgba(19,32,57,0.10), 0 4px 8px rgba(19,32,57,0.05);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--ob-text);
+    background: var(--ob-bg-layout);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0d6cf2 0%, #0852bb 100%);
+    color: white;
+    padding: 48px 0 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40px;
+    background: var(--ob-bg-layout);
+    border-radius: 24px 24px 0 0;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    opacity: 0.85;
+    font-weight: 400;
+  }
+  .header .meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+    font-size: 13px;
+    opacity: 0.75;
+  }
+  .header .meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* Score ring */
+  .score-ring {
+    position: absolute;
+    right: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
+    height: 120px;
+  }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring .ring-bg {
+    fill: none;
+    stroke: rgba(255,255,255,0.2);
+    stroke-width: 6;
+  }
+  .score-ring .ring-fill {
+    fill: none;
+    stroke: white;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-dasharray: 314;
+    stroke-dashoffset: 157;
+    transition: stroke-dashoffset 1s ease;
+  }
+  .score-ring .ring-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1;
+  }
+  .score-ring .ring-text small {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.8;
+    margin-top: 2px;
+  }
+
+  /* Main content */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 32px 80px;
+  }
+
+  /* Section */
+  .section {
+    background: var(--ob-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 32px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(205,213,228,0.4);
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+  .section-title .icon.blue { background: #EAF1FF; color: #0d6cf2; }
+  .section-title .icon.green { background: #EEF8F5; color: #16b882; }
+  .section-title .icon.orange { background: #FFF5E5; color: #FF9700; }
+  .section-title .icon.red { background: #FFEBEB; color: #FF4B4B; }
+  .section-title .icon.gray { background: #F5F8FE; color: #8592AD; }
+
+  /* Table */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--ob-border-secondary);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th {
+    background: var(--ob-bg-layout);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ob-text-secondary);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--ob-border-secondary);
+    white-space: nowrap;
+  }
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ob-border-secondary);
+    vertical-align: middle;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(245,248,254,0.5); }
+
+  /* Badges */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .badge.pass { background: #EEF8F5; color: #00995E; }
+  .badge.warn { background: #FFF5E5; color: #CC7A00; }
+  .badge.fail { background: #FFEBEB; color: #D91A1A; }
+  .badge.info { background: #EAF1FF; color: #0d6cf2; }
+  .badge.neutral { background: #F5F8FE; color: #8592AD; }
+  .badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  /* Contrast swatches */
+  .swatch-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--ob-border-secondary);
+    min-width: 200px;
+  }
+  .swatch-color {
+    width: 32px; height: 32px;
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.08);
+    flex-shrink: 0;
+  }
+  .swatch-info { flex: 1; }
+  .swatch-name { font-size: 13px; font-weight: 600; color: var(--ob-text); }
+  .swatch-value { font-size: 11px; color: var(--ob-text-tertiary); font-family: var(--font-mono); }
+  .swatch-ratio {
+    font-size: 13px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+  }
+
+  /* Grid */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* Card stat */
+  .stat-card {
+    background: var(--ob-bg-layout);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-card .num.blue { color: var(--ob-primary); }
+  .stat-card .num.green { color: var(--ob-success); }
+  .stat-card .num.orange { color: var(--ob-warning); }
+  .stat-card .num.red { color: var(--ob-error); }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--ob-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    height: 8px;
+    background: var(--ob-border-secondary);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .progress-bar .fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s ease;
+  }
+  .progress-bar .fill.blue { background: var(--ob-primary); }
+  .progress-bar .fill.green { background: var(--ob-success); }
+  .progress-bar .fill.orange { background: var(--ob-warning); }
+  .progress-bar .fill.red { background: var(--ob-error); }
+
+  /* Detail list */
+  .detail-list { list-style: none; }
+  .detail-list li {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--ob-border-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+  }
+  .detail-list li:last-child { border-bottom: none; }
+  .detail-list .marker {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .detail-list .marker.pass { background: #EEF8F5; color: #00995E; }
+  .detail-list .marker.warn { background: #FFF5E5; color: #CC7A00; }
+  .detail-list .marker.fail { background: #FFEBEB; color: #D91A1A; }
+  .detail-list .marker.info { background: #EAF1FF; color: #0d6cf2; }
+
+  /* Note box */
+  .note {
+    background: var(--ob-bg-layout);
+    border-left: 3px solid var(--ob-primary);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--ob-text-secondary);
+    margin-top: 16px;
+  }
+  .note strong { color: var(--ob-text); }
+
+  /* Component grid */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .comp-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    border: 1px solid var(--ob-border-secondary);
+    font-size: 13px;
+    background: var(--ob-bg);
+  }
+  .comp-item .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .comp-item .dot.pass { background: var(--ob-success); }
+  .comp-item .dot.warn { background: var(--ob-warning); }
+  .comp-item .dot.unknown { background: var(--ob-text-quaternary); }
+
+  /* Recommendation */
+  .rec {
+    padding: 16px 20px;
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .rec:last-child { margin-bottom: 0; }
+  .rec.p1 { background: #FFEBEB; border: 1px solid #FFB3B3; }
+  .rec.p2 { background: #FFF5E5; border: 1px solid #FFD699; }
+  .rec.p3 { background: #EAF1FF; border: 1px solid #B3CCFF; }
+  .rec .priority {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .rec.p1 .priority { background: #FF4B4B; color: white; }
+  .rec.p2 .priority { background: #f49f25; color: white; }
+  .rec.p3 .priority { background: #0d6cf2; color: white; }
+  .rec .rec-text { flex: 1; }
+  .rec .rec-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+  .rec .rec-desc { font-size: 13px; color: var(--ob-text-secondary); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 0;
+    font-size: 12px;
+    color: var(--ob-text-tertiary);
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--ob-border-secondary);
+    padding-bottom: 0;
+  }
+  .tab {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ob-text-tertiary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--ob-text-secondary); }
+  .tab.active {
+    color: var(--ob-primary);
+    border-bottom-color: var(--ob-primary);
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .score-ring { display: none; }
+    .header h1 { font-size: 24px; }
+    .section { padding: 20px; }
+    .main { padding: 16px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-inner">
+    <h1>OceanBase 组件库 WCAG 2.1 可访问性审计报告</h1>
+    <div class="subtitle">Monorepo：packages/design（@oceanbase/design）+ packages/ui（@oceanbase/ui）+ packages/icons · 依赖 antd ^5.29.3（与根 package.json 一致）</div>
+    <div class="meta">
+      <span>📅 2026-06-12（复评）</span>
+      <span>📦 antd v5.29.3</span>
+      <span>🎯 WCAG 2.1 Level AA</span>
+      <span>📐 37 项 WCAG 2.1 AA 准则映射</span>
+    </div>
+  </div>
+  <div class="score-ring">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle class="ring-bg" cx="60" cy="60" r="50"/>
+      <circle class="ring-fill" cx="60" cy="60" r="50" style="stroke-dashoffset: 110;"/>
+    </svg>
+    <div class="ring-text">65<small>/ 100</small></div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- 1. Executive Summary -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon blue">📊</span>
+      执行摘要
+    </div>
+    <div class="grid-3" style="margin-bottom: 24px;">
+      <div class="stat-card">
+        <div class="num green">24</div>
+        <div class="label">通过 ✓</div>
+      </div>
+      <div class="stat-card">
+        <div class="num orange">11</div>
+        <div class="label">部分 / 待验证 ⚠</div>
+      </div>
+      <div class="stat-card">
+        <div class="num red">2</div>
+        <div class="label">不达标 ✗</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <div style="display:flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
+        <span style="font-weight:600;">整体合规率</span>
+        <span style="font-weight:700; color: var(--ob-warning);">65% 严格通过率（24/37，不含 1 项 N/A）</span>
+      </div>
+      <div class="progress-bar"><div class="fill orange" style="width: 65%;"></div></div>
+    </div>
+
+    <div class="note">
+      <strong>核心结论：</strong>本库继承 antd 5.x 的语义结构、键盘与部分 ARIA 能力；默认主题定义于 <code>packages/design/src/theme/default.ts</code>。与 WCAG 2.1 AA 的主要差距为：（1）<strong>语义色作正文</strong>时 <code>colorSuccess</code> / <code>colorWarning</code> / <code>colorError</code> 等在白底上仍低于 4.5:1，但 <code>color*Text</code> 与浅色 <code>color*Bg</code> 组合已满足说明性文案对比度；（2）<strong>焦点可见性</strong> — 仓库已恢复 <code>lineWidthFocus: 2</code>、移除削弱焦点的 Select token 覆写，并在 <code>global.tsx</code> 为非 antd 类名原生控件增加 <code>:focus-visible</code> 兜底；复杂页面仍建议走查 2.4.7；（3）<strong>@oceanbase/ui</strong> — 已对 Dialog、DocDialog、BasicLayout、SideTip、BatchOperationBar、Highlight、NavMenu 等分批补充 <code>role</code> / <code>aria-*</code> 与语义化按钮，其余导出组件仍建议按同类模板扩展。TaskGraph、GraphToolbar 已于仓库移除，审计范围以当前 <code>packages/ui/src/index.ts</code> 导出为准。
+    </div>
+  </div>
+
+  <!-- 1b. Repo evidence -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon gray">🔗</span>
+      仓库内与 WCAG 直接相关的实现（事实锚点）
+    </div>
+    <ul class="detail-list">
+      <li>
+        <span class="marker pass">✓</span>
+        <div><strong>全局样式</strong> — <code>packages/design/src/style/global.tsx</code> 引入 <code>antd/dist/reset.css</code>，为外链 / 文案链接补充 hover 下划线，字体使用 <code>font-display: swap</code>，有利于可感知性与性能（1.4.x / 感知替代间接相关）。</div>
+      </li>
+      <li>
+        <span class="marker pass">✓</span>
+        <div><strong>焦点线宽与兜底轮廓</strong> — 默认主题已将 <code>lineWidthFocus</code> 恢复为 <code>2</code>，并去掉 Select 上 <code>controlOutlineWidth: 0</code> 覆写；<code>packages/design/src/style/global.tsx</code> 对非 <code>ant-</code> 前缀类名的原生可聚焦元素提供 <code>:focus-visible</code> 轮廓，与 <strong>2.4.7</strong> 对齐。</div>
+      </li>
+      <li>
+        <span class="marker pass">✓</span>
+        <div><strong>自动化 axe 冒烟</strong> — <code>packages/design/src/__tests__/a11y-smoke.test.tsx</code> 对 <code>ConfigProvider</code> + 主按钮运行 axe-core（wcag2a / wcag2aa 标签集），本地/CI 可通过 <code>npm run test</code> 或 <code>npm run test:a11y</code> 执行。</div>
+      </li>
+      <li>
+        <span class="marker pass">✓</span>
+        <div><strong>占位符对比度补丁</strong> — DatePicker / Input / InputNumber / Select 等将 <code>colorTextQuaternary</code> 覆写为 <code>gray8</code>（#5c6b8a），相对 token 默认的 <code>gray6</code> 提升占位符与边框可读性。</div>
+      </li>
+      <li>
+        <span class="marker info">i</span>
+        <div><strong>通知面板背景</strong> — <code>components.Notification</code> 将成功/错误/信息/警告背景设为白底，状态语义主要依赖图标与标题色，需业务侧避免仅用浅色底区分关键状态（与 1.4.1 相关）。</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2. Color Contrast Analysis -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon orange">🎨</span>
+      颜色对比度分析
+    </div>
+    <p style="font-size:14px; color:var(--ob-text-secondary); margin-bottom: 20px;">
+      WCAG 2.1 AA 要求：正文文本 ≥ 4.5:1，大号文本 ≥ 3:1，UI 组件/图形 ≥ 3:1。以下数值按 sRGB 相对亮度公式计算，色值取自当前默认主题 <code>packages/design/src/theme/default.ts</code>（未含业务侧二次覆盖）。
+    </p>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="text-contrast">文本对比度</div>
+      <div class="tab" data-tab="ui-contrast">UI 组件对比度</div>
+      <div class="tab" data-tab="status-contrast">状态色对比度</div>
+    </div>
+
+    <div class="tab-content active" id="text-contrast">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>色值组合</th>
+              <th>前景色</th>
+              <th>背景色</th>
+              <th>对比度</th>
+              <th>AA 正文 (4.5:1)</th>
+              <th>AA 大号 (3:1)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>主文本 colorText</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#132039;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #132039</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">16.2:1</code></td>
+              <td><span class="badge pass">通过</span></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+            <tr>
+              <td><strong>次要文本 colorTextSecondary</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#5c6b8a;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #5c6b8a</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">5.4:1</code></td>
+              <td><span class="badge pass">通过</span></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+            <tr>
+              <td><strong>第三级文本 colorTextTertiary ⚠</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#8592ad;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #8592ad</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">3.1:1</code></td>
+              <td><span class="badge fail">失败</span></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+            <tr>
+              <td><strong>第四级文本 colorTextQuaternary ✗</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#b6c0d4;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #b6c0d4</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">1.8:1</code></td>
+              <td><span class="badge fail">失败</span></td>
+              <td><span class="badge fail">失败</span></td>
+            </tr>
+            <tr>
+              <td><strong>主色 colorPrimary</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#0d6cf2;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #0d6cf2</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">4.7:1</code></td>
+              <td><span class="badge pass">通过</span></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+            <tr>
+              <td><strong>主色 Hover colorPrimaryHover</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#0852bb;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #0852bb</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">7.2:1</code></td>
+              <td><span class="badge pass">通过</span></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+            <tr>
+              <td><strong>成功色 colorSuccess（作正文）</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#16b882;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #16b882</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">2.6:1</code></td>
+              <td><span class="badge fail">失败</span></td>
+              <td><span class="badge fail">失败</span></td>
+            </tr>
+            <tr>
+              <td><strong>警告色 colorWarning（作正文）</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#f49f25;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #f49f25</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">2.1:1</code></td>
+              <td><span class="badge fail">失败</span></td>
+              <td><span class="badge fail">失败</span></td>
+            </tr>
+            <tr>
+              <td><strong>错误色 colorError（作正文）</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#eb4242;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #eb4242</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">3.9:1</code></td>
+              <td><span class="badge fail">失败</span></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+            <tr>
+              <td><strong>Slider 轨道悬停（组件 token）</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#0852bb;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #0852bb (blue5)</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">7.2:1</code></td>
+              <td><span class="badge pass">通过</span></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tab-content" id="ui-contrast">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>UI 元素</th>
+              <th>颜色</th>
+              <th>背景</th>
+              <th>对比度</th>
+              <th>AA UI (3:1)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>主按钮填充（白字）</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;color:#fff;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#0d6cf2;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #0d6cf2</td>
+              <td><code style="font-family:var(--font-mono);">4.7:1</code></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+            <tr>
+              <td><strong>边框 colorBorder</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#cdd5e4;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #cdd5e4</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">1.5:1</code></td>
+              <td><span class="badge fail">失败</span></td>
+            </tr>
+            <tr>
+              <td><strong>次要边框 colorBorderSecondary</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#e2e8f3;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #e2e8f3</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">1.2:1</code></td>
+              <td><span class="badge fail">失败</span></td>
+            </tr>
+            <tr>
+              <td><strong>图标 colorIcon（gray8）</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#5c6b8a;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #5c6b8a</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">5.4:1</code></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+            <tr>
+              <td><strong>Layout 背景 colorBgLayout</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#fbfcfe;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #fbfcfe</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">1.03:1</code></td>
+              <td><span class="badge neutral">N/A (装饰)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tab-content" id="status-contrast">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>状态</th>
+              <th>前景色</th>
+              <th>背景色</th>
+              <th>对比度</th>
+              <th>AA 正文 (4.5:1)</th>
+              <th>AA UI (3:1)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Success 说明色</strong><br><small style="color:var(--ob-text-tertiary);">colorSuccessText on colorSuccessBg</small></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#09593f;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #09593f</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#f5faf8;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #f5faf8</td>
+              <td><code style="font-family:var(--font-mono);">7.9:1</code></td>
+              <td><span class="badge pass">通过</span></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+            <tr>
+              <td><strong>Warning 说明色</strong><br><small style="color:var(--ob-text-tertiary);">colorWarningText on colorWarningBg</small></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#6c4408;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #6c4408</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#fff9ee;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #fff9ee</td>
+              <td><code style="font-family:var(--font-mono);">8.1:1</code></td>
+              <td><span class="badge pass">通过</span></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+            <tr>
+              <td><strong>Error 说明色</strong><br><small style="color:var(--ob-text-tertiary);">colorErrorText on colorErrorBg</small></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#8a1b1b;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #8a1b1b</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#fff2f2;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #fff2f2</td>
+              <td><code style="font-family:var(--font-mono);">8.5:1</code></td>
+              <td><span class="badge pass">通过</span></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+            <tr>
+              <td><strong>Info 说明色</strong><br><small style="color:var(--ob-text-tertiary);">colorInfoText on colorInfoBg</small></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#0d3c80;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #0d3c80</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#f3f8fe;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #f3f8fe</td>
+              <td><code style="font-family:var(--font-mono);">10.0:1</code></td>
+              <td><span class="badge pass">通过</span></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+            <tr>
+              <td><strong>Success 主色块（作正文）</strong><br><small style="color:var(--ob-text-tertiary);">colorSuccess on #fff</small></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#16b882;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #16b882</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">2.6:1</code></td>
+              <td><span class="badge fail">失败</span></td>
+              <td><span class="badge fail">失败</span></td>
+            </tr>
+            <tr>
+              <td><strong>Warning 主色块（作正文）</strong></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#f49f25;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #f49f25</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">2.1:1</code></td>
+              <td><span class="badge fail">失败</span></td>
+              <td><span class="badge fail">失败</span></td>
+            </tr>
+            <tr>
+              <td><strong>Error Active</strong><br><small style="color:var(--ob-text-tertiary);">colorErrorActive</small></td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#b52727;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #b52727</td>
+              <td><span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:#FFFFFF;vertical-align:middle;border:1px solid rgba(0,0,0,.1);"></span> #FFFFFF</td>
+              <td><code style="font-family:var(--font-mono);">6.4:1</code></td>
+              <td><span class="badge pass">通过</span></td>
+              <td><span class="badge pass">通过</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>关键发现：</strong>主题已为 Alert 等场景提供高对比 <code>color*Text</code> + <code>color*Bg</code> 组合（上表前四行均 ≥7:1）。风险在于业务若直接用 <code>colorSuccess</code> / <code>colorWarning</code> 作为正文或图标主色叠白底，仍低于 4.5:1。中性边框 <code>#cdd5e4</code> / <code>#e2e8f3</code> 相对白底不足 3:1，不满足 1.4.11 对「用户界面组件视觉呈现」的非文本对比度，应依赖线宽、阴影或相邻深色内容区分边界，而非仅靠边框色相。
+    </div>
+  </div>
+
+  <!-- 3. WCAG Criteria Mapping -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon green">📋</span>
+      WCAG 2.1 AA 逐项评估（37 条映射，其中 1 条 N/A）
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:100px;">准则编号</th>
+            <th>名称</th>
+            <th>等级</th>
+            <th>状态</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 1. Perceivable -->
+          <tr style="background: var(--ob-bg-layout);">
+            <td colspan="5" style="font-weight:600; font-size:13px;">1.1 文本替代</td>
+          </tr>
+          <tr>
+            <td><code>1.1.1</code></td>
+            <td>Non-text Content</td>
+            <td>A</td>
+            <td><span class="badge warn">部分</span></td>
+            <td>antd 图标组件无 alt 文本；@oceanbase/icons 已支持装饰性 <code>aria-hidden</code> 与语义 <code>aria-label</code>；业务自定义图标按钮仍需可访问名称</td>
+          </tr>
+
+          <tr style="background: var(--ob-bg-layout);">
+            <td colspan="5" style="font-weight:600; font-size:13px;">1.3 可适配性</td>
+          </tr>
+          <tr>
+            <td><code>1.3.1</code></td>
+            <td>Info and Relationships</td>
+            <td>A</td>
+            <td><span class="badge warn">部分</span></td>
+            <td>antd 表单/表格具备语义化结构；<code>@oceanbase/ui</code> 中 BatchOperationBar、BasicLayout 等复合布局需业务侧补充 landmark / <code>aria-*</code> 时关联性不完整</td>
+          </tr>
+          <tr>
+            <td><code>1.3.4</code></td>
+            <td>Orientation</td>
+            <td>AA</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>组件库无固定方向锁定，支持横竖屏</td>
+          </tr>
+          <tr>
+            <td><code>1.3.5</code></td>
+            <td>Identify Input Purpose</td>
+            <td>AA</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>表单组件支持 autocomplete 属性传递</td>
+          </tr>
+
+          <tr style="background: var(--ob-bg-layout);">
+            <td colspan="5" style="font-weight:600; font-size:13px;">1.4 可辨识性</td>
+          </tr>
+          <tr>
+            <td><code>1.4.1</code></td>
+            <td>Use of Color</td>
+            <td>A</td>
+            <td><span class="badge warn">部分</span></td>
+            <td>若仅用 <code>colorSuccess</code> 等主色块传达状态仍不足；主题提供的 <code>color*Text</code> + 浅色底组合对比充足。Tag/Alert 建议保留图标或文案前缀，避免单色依赖（1.4.1）</td>
+          </tr>
+          <tr>
+            <td><code>1.4.3</code></td>
+            <td>Contrast (Minimum)</td>
+            <td>AA</td>
+            <td><span class="badge fail">失败</span></td>
+            <td>正文级：第三级文本 #8592ad 3.1:1、第四级 #b6c0d4 1.8:1；语义主色作正文时 Success/Warning 低于 4.5:1；Error #eb4242 约 3.9:1。Slider 悬停轨道已改为 blue5 #0852bb（7.2:1）。次要文本 #5c6b8a 已达标。见 <a href="/docs/design-accessibility" target="_blank" rel="noopener noreferrer">可访问性文档</a> 约定用法。</td>
+          </tr>
+          <tr>
+            <td><code>1.4.4</code></td>
+            <td>Resize Text</td>
+            <td>AA</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>antd 使用 rem/em 单位；OceanBase 主题未固定 px 字号；支持 200% 缩放</td>
+          </tr>
+          <tr>
+            <td><code>1.4.10</code></td>
+            <td>Reflow</td>
+            <td>AA</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>组件基于 Flex/Grid 布局，支持 320px 宽度无水平滚动</td>
+          </tr>
+          <tr>
+            <td><code>1.4.11</code></td>
+            <td>Non-text Contrast</td>
+            <td>AA</td>
+            <td><span class="badge fail">失败</span></td>
+            <td>边框 #cdd5e4 / #e2e8f3 相对白底 &lt;3:1；焦点环已由主题 <code>lineWidthFocus: 2</code> 与 <code>global.tsx</code> 兜底轮廓补强（2.4.7 主要风险已降低）</td>
+          </tr>
+          <tr>
+            <td><code>1.4.12</code></td>
+            <td>Text Spacing</td>
+            <td>AA</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>antd 组件支持行高/字间距覆盖；未使用固定容器限制文字扩展</td>
+          </tr>
+          <tr>
+            <td><code>1.4.13</code></td>
+            <td>Content on Hover or Focus</td>
+            <td>AA</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>Tooltip/Popover 支持 hover 和 focus 触发；Popover 可通过 ESC 关闭</td>
+          </tr>
+
+          <tr style="background: var(--ob-bg-layout);">
+            <td colspan="5" style="font-weight:600; font-size:13px;">2.1 键盘可访问</td>
+          </tr>
+          <tr>
+            <td><code>2.1.1</code></td>
+            <td>Keyboard</td>
+            <td>A</td>
+            <td><span class="badge warn">部分</span></td>
+            <td>antd 核心组件具备键盘导航；<code>@oceanbase/ui</code> 中部分自定义控件使用非 <code>&lt;button&gt;</code> 的可点击元素时可能无法通过 Tab 聚焦；另受 antd DatePicker tab 顺序问题影响（issue #53638）</td>
+          </tr>
+          <tr>
+            <td><code>2.1.4</code></td>
+            <td>Character Key Shortcuts</td>
+            <td>A</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>组件库未使用单字符快捷键；Hotkeys 需组合键触发</td>
+          </tr>
+
+          <tr style="background: var(--ob-bg-layout);">
+            <td colspan="5" style="font-weight:600; font-size:13px;">2.2 足够时间</td>
+          </tr>
+          <tr>
+            <td><code>2.2.1</code></td>
+            <td>Timing Adjustable</td>
+            <td>A</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>Message/Notification 自动消失支持配置 duration；Tour 步骤无自动推进</td>
+          </tr>
+          <tr>
+            <td><code>2.2.2</code></td>
+            <td>Pause, Stop, Hide</td>
+            <td>A</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>Message/Notification 支持手动关闭；无自动播放媒体内容</td>
+          </tr>
+
+          <tr style="background: var(--ob-bg-layout);">
+            <td colspan="5" style="font-weight:600; font-size:13px;">2.3 癫痫 / 身体反应</td>
+          </tr>
+          <tr>
+            <td><code>2.3.1</code></td>
+            <td>Three Flashes</td>
+            <td>A</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>无闪烁动画；Loading 动画速率安全；Lottie 动画由业务控制</td>
+          </tr>
+
+          <tr style="background: var(--ob-bg-layout);">
+            <td colspan="5" style="font-weight:600; font-size:13px;">2.4 可导航</td>
+          </tr>
+          <tr>
+            <td><code>2.4.3</code></td>
+            <td>Focus Order</td>
+            <td>A</td>
+            <td><span class="badge warn">部分</span></td>
+            <td>antd Modal/Drawer 支持 focus trap；@oceanbase/ui 的 Dialog 已增强打开时焦点进入与 Escape 关闭；SideTip 等浮动面板的完整焦点陷阱仍需业务场景验证</td>
+          </tr>
+          <tr>
+            <td><code>2.4.7</code></td>
+            <td>Focus Visible</td>
+            <td>AA</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>默认主题 <code>lineWidthFocus: 2</code>，<code>global.tsx</code> 对非 antd 类名原生控件补充 <code>:focus-visible</code>；建议在业务复杂布局上仍做一次键盘走查</td>
+          </tr>
+          <tr>
+            <td><code>2.4.11</code></td>
+            <td>Focus Not Obscured</td>
+            <td>AA</td>
+            <td><span class="badge warn">部分</span></td>
+            <td>固定表头/底栏可能遮挡键盘焦点；BasicLayout 侧栏折叠控件已改为 <code>button</code> 并带 <code>aria-expanded</code> / <code>aria-label</code>，复杂嵌套滚动区仍需验证</td>
+          </tr>
+
+          <tr style="background: var(--ob-bg-layout);">
+            <td colspan="5" style="font-weight:600; font-size:13px;">2.5 输入方式</td>
+          </tr>
+          <tr>
+            <td><code>2.5.1</code></td>
+            <td>Pointer Gestures</td>
+            <td>A</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>无复杂手势依赖；拖拽类操作（Table 列排序）提供按钮替代</td>
+          </tr>
+          <tr>
+            <td><code>2.5.2</code></td>
+            <td>Pointer Cancellation</td>
+            <td>A</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>Button 使用 mousedown+click 模式；无按下即生效的长按操作</td>
+          </tr>
+          <tr>
+            <td><code>2.5.7</code></td>
+            <td>Dragging Movements</td>
+            <td>A</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>无纯拖拽功能；Table 列排序提供按钮操作</td>
+          </tr>
+          <tr>
+            <td><code>2.5.8</code></td>
+            <td>Target Size (Minimum)</td>
+            <td>AA</td>
+            <td><span class="badge warn">部分</span></td>
+            <td>Dialog / FullscreenBox 控制按钮已增至 ≥24×24px；Table / ProTable 行内 icon-only 仍可能紧凑，见 <a href="/docs/design-accessibility" target="_blank" rel="noopener noreferrer">可访问性文档</a> 2.5.8 约定</td>
+          </tr>
+
+          <tr style="background: var(--ob-bg-layout);">
+            <td colspan="5" style="font-weight:600; font-size:13px;">3.1 可读</td>
+          </tr>
+          <tr>
+            <td><code>3.1.1</code></td>
+            <td>Language of Page</td>
+            <td>A</td>
+            <td><span class="badge warn">部分</span></td>
+            <td>组件库支持多语言 locale（zh-CN/zh-TW/en-US），但页面级 html lang 需由业务侧设置</td>
+          </tr>
+          <tr>
+            <td><code>3.1.2</code></td>
+            <td>Language of Parts</td>
+            <td>AA</td>
+            <td><span class="badge neutral">N/A</span></td>
+            <td>组件内容语言一致，无多语言混合场景</td>
+          </tr>
+
+          <tr style="background: var(--ob-bg-layout);">
+            <td colspan="5" style="font-weight:600; font-size:13px;">3.2 可预测</td>
+          </tr>
+          <tr>
+            <td><code>3.2.1</code></td>
+            <td>On Focus</td>
+            <td>A</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>focus 事件不触发上下文变更</td>
+          </tr>
+          <tr>
+            <td><code>3.2.2</code></td>
+            <td>On Input</td>
+            <td>A</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>表单输入不自动提交；Filter 支持手动触发搜索</td>
+          </tr>
+          <tr>
+            <td><code>3.2.3</code></td>
+            <td>Consistent Navigation</td>
+            <td>AA</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>BasicLayout 导航结构一致；NavMenu 渲染规则统一</td>
+          </tr>
+          <tr>
+            <td><code>3.2.4</code></td>
+            <td>Consistent Identification</td>
+            <td>AA</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>同功能组件在各页面中表现一致</td>
+          </tr>
+
+          <tr style="background: var(--ob-bg-layout);">
+            <td colspan="5" style="font-weight:600; font-size:13px;">3.3 输入辅助</td>
+          </tr>
+          <tr>
+            <td><code>3.3.1</code></td>
+            <td>Error Identification</td>
+            <td>A</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>Form 组件支持校验错误展示；FormItem 提供错误文本</td>
+          </tr>
+          <tr>
+            <td><code>3.3.2</code></td>
+            <td>Labels or Instructions</td>
+            <td>A</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>表单组件支持 label 属性；placeholder 提供额外说明</td>
+          </tr>
+          <tr>
+            <td><code>3.3.3</code></td>
+            <td>Error Suggestion</td>
+            <td>AA</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>Password 组件提供密码强度规则提示；Form 支持自定义校验消息</td>
+          </tr>
+          <tr>
+            <td><code>3.3.4</code></td>
+            <td>Error Prevention</td>
+            <td>AA</td>
+            <td><span class="badge pass">通过</span></td>
+            <td>Modal 确认对话框防止误操作；BatchOperationBar 批量操作需二次确认</td>
+          </tr>
+
+          <tr style="background: var(--ob-bg-layout);">
+            <td colspan="5" style="font-weight:600; font-size:13px;">4.1 兼容</td>
+          </tr>
+          <tr>
+            <td><code>4.1.2</code></td>
+            <td>Name, Role, Value</td>
+            <td>A</td>
+            <td><span class="badge warn">部分</span></td>
+            <td>antd 组件具备基本 ARIA；<code>@oceanbase/ui</code> 已对 Dialog、BasicLayout（含 <code>aria-current</code>）、Password、DateRanger 及 SideTip、BatchOperationBar 等补充 <code>role</code> / <code>aria-*</code>；低交互导出组件仍可按需扩展</td>
+          </tr>
+          <tr>
+            <td><code>4.1.3</code></td>
+            <td>Status Messages</td>
+            <td>AA</td>
+            <td><span class="badge warn">部分</span></td>
+            <td>Message/Notification 使用 aria-live 区域（antd 提供）；BackgroundTaskManager 已增加队列长度的 <code>aria-live="polite"</code> 状态区，具体进度文案仍依赖 notification 配置</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 4. Component Inventory -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon blue">🧩</span>
+      组件清单与 WCAG 继承状态
+    </div>
+
+    <h3 style="font-size:15px; font-weight:600; margin-bottom:12px;">@oceanbase/design（<code>packages/design</code>）</h3>
+    <p style="font-size:14px; color:var(--ob-text-secondary); margin-bottom:16px;">
+      通过 <code>export * from 'antd'</code> 继承 antd 全量组件与无障碍基线；并在 <code>src/index.ts</code> 中导出封装/扩展模块，包括但不限于：Alert、App、Badge、Breadcrumb、Button、Card、Checkbox、ConfigProvider、Descriptions、Drawer、Dropdown、Empty、Form、Input、InputNumber、List、Lottie、Modal、Radio、Result、Segmented、Select、Slider、Space、Spin、Switch、Table、Tabs、Tag、Tooltip、TreeSelect、Typography、Grid（Row/Col）、Filter（含 FilterProvider、useFilterContext 及各子组件）、以及 <code>message</code> / <code>notification</code> / <code>token</code> 等静态 API。主题与全局样式见 <code>src/theme/default.ts</code>、<code>src/style/global.tsx</code>。
+    </p>
+    <div class="note" style="margin-bottom:20px;">
+      <strong>继承关系：</strong>未改 DOM 结构的 antd 封装（如 Button、Modal）以 antd 5 的 ARIA 与键盘行为为主；自定义较多的 Filter、Lottie、Drawer 扩展等需在迭代中单独做焦点与屏幕阅读器验证。
+    </div>
+
+    <h3 style="font-size:15px; font-weight:600; margin-bottom:12px;">@oceanbase/ui（<code>packages/ui</code>，以 <code>src/index.ts</code> 为准）</h3>
+    <p style="font-size:13px; color:var(--ob-text-tertiary); margin-bottom:12px;">另 re-export <code>@ant-design/pro-components</code>（ProTable、ProLayout 等以该库无障碍状态为准）。以下为本包一等公民导出：</p>
+    <div class="comp-grid" style="margin-bottom: 24px;">
+      <div class="comp-item"><span class="dot warn"></span>Action</div>
+      <div class="comp-item"><span class="dot warn"></span>BackgroundTaskManager</div>
+      <div class="comp-item"><span class="dot warn"></span>BasicLayout</div>
+      <div class="comp-item"><span class="dot warn"></span>BatchOperationBar</div>
+      <div class="comp-item"><span class="dot warn"></span>Boundary</div>
+      <div class="comp-item"><span class="dot warn"></span>ContentWithIcon</div>
+      <div class="comp-item"><span class="dot warn"></span>ContentWithQuestion</div>
+      <div class="comp-item"><span class="dot warn"></span>DateRanger</div>
+      <div class="comp-item"><span class="dot warn"></span>Dialog</div>
+      <div class="comp-item"><span class="dot warn"></span>DocDialog</div>
+      <div class="comp-item"><span class="dot warn"></span>FooterToolbar</div>
+      <div class="comp-item"><span class="dot warn"></span>FullscreenBox</div>
+      <div class="comp-item"><span class="dot warn"></span>Highlight</div>
+      <div class="comp-item"><span class="dot unknown"></span>IconFont</div>
+      <div class="comp-item"><span class="dot warn"></span>LightFilter</div>
+      <div class="comp-item"><span class="dot warn"></span>LocaleDropdown</div>
+      <div class="comp-item"><span class="dot warn"></span>Login</div>
+      <div class="comp-item"><span class="dot unknown"></span>Lottie</div>
+      <div class="comp-item"><span class="dot warn"></span>NavMenu</div>
+      <div class="comp-item"><span class="dot warn"></span>PageContainer</div>
+      <div class="comp-item"><span class="dot warn"></span>PageLoading</div>
+      <div class="comp-item"><span class="dot warn"></span>Password</div>
+      <div class="comp-item"><span class="dot warn"></span>ProCard</div>
+      <div class="comp-item"><span class="dot warn"></span>ProTable</div>
+      <div class="comp-item"><span class="dot warn"></span>Ranger</div>
+      <div class="comp-item"><span class="dot warn"></span>SideTip</div>
+      <div class="comp-item"><span class="dot warn"></span>TagSelect</div>
+      <div class="comp-item"><span class="dot warn"></span>TreeSearch</div>
+      <div class="comp-item"><span class="dot warn"></span>Welcome</div>
+    </div>
+
+    <div class="note">
+      <strong>图例说明：</strong><span style="display:inline-flex;align-items:center;gap:4px;margin-right:12px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ob-success);"></span> 直接继承 antd 无障碍能力</span><span style="display:inline-flex;align-items:center;gap:4px;margin-right:12px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ob-warning);"></span> 自定义封装，缺乏 ARIA 标注</span><span style="display:inline-flex;align-items:center;gap:4px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ob-text-quaternary);"></span> 纯逻辑/非 UI 组件</span>
+    </div>
+  </div>
+
+  <!-- 5. @oceanbase/ui 组件 ARIA 标注详单 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon orange">📝</span>
+      @oceanbase/ui 自定义组件 ARIA 标注方案（按用途分类）
+    </div>
+    <p style="font-size:14px; color:var(--ob-text-secondary); margin-bottom: 20px;">
+      基于源码逐行审查，以下逐一列出每个自定义组件的用途、当前 DOM 结构、缺失的 ARIA 标注，以及具体的 aria-* 属性标注方案。
+    </p>
+
+    <!-- Category 1: 弹窗/浮层 -->
+    <h3 style="font-size:15px; font-weight:600; margin: 0 0 16px 0; padding-bottom: 8px; border-bottom: 1px solid var(--ob-border-secondary);">🔲 弹窗 / 浮层类（4 个）</h3>
+
+    <div class="table-wrap" style="margin-bottom: 24px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:130px;">组件</th>
+            <th style="width:140px;">用途</th>
+            <th>当前 DOM 结构</th>
+            <th style="width:300px;">缺失的 ARIA 标注</th>
+            <th style="width:90px;">严重度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Dialog</strong></td>
+            <td>可拖拽、可缩放的浮动对话框，支持最小化/最大化/关闭</td>
+            <td>根容器 &lt;div&gt;（带 tabIndex:0），&lt;header&gt;（标题 + 控制按钮），&lt;main&gt;（内容），通过 createPortal 渲染到 body</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>root: role="dialog" aria-modal="true"</code></div>
+                <div style="margin-bottom:4px;"><code>header: aria-labelledby="dialog-title"</code>（title span 加 id="dialog-title"）</div>
+                <div style="margin-bottom:4px;"><code>关闭按钮: aria-label="关闭对话框"</code></div>
+                <div style="margin-bottom:4px;"><code>最小化按钮: aria-label="最小化"</code></div>
+                <div style="margin-bottom:4px;"><code>最大化按钮: aria-label="最大化"</code></div>
+                <div>实现 focus trap：打开时聚焦到第一个可交互元素，ESC 关闭</div>
+              </div>
+            </td>
+            <td><span class="badge pass">已落地</span></td>
+          </tr>
+          <tr>
+            <td><strong>DocDialog</strong></td>
+            <td>文档帮助弹窗，内嵌 iframe 加载文档页面，基于 Dialog 封装</td>
+            <td>复用 Dialog 的 DOM 结构 + &lt;iframe&gt; 加载外部文档 URL</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>iframe: title="帮助文档"</code>（iframe 必须提供 title）</div>
+                <div style="margin-bottom:4px;"><code>iframe: role="document"</code></div>
+                <div>Dialog 的 ARIA 标注同样适用</div>
+              </div>
+            </td>
+            <td><span class="badge pass">已落地</span></td>
+          </tr>
+          <tr>
+            <td><strong>SideTip</strong></td>
+            <td>页面右下角悬浮按钮，点击弹出内容面板，支持拖拽和隐藏</td>
+            <td>外层拖拽容器 + 按钮 &lt;div&gt; + 可选 Tooltip + 隐藏按钮</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>按钮: role="button" aria-expanded="{open}"</code></div>
+                <div style="margin-bottom:4px;"><code>按钮: aria-label="{tooltip.title || 操作提示}"</code></div>
+                <div style="margin-bottom:4px;"><code>按钮: aria-haspopup="dialog"</code></div>
+                <div style="margin-bottom:4px;"><code>关闭按钮: aria-label="关闭侧边提示"</code></div>
+                <div style="margin-bottom:4px;"><code>隐藏按钮: aria-label="隐藏此按钮"</code></div>
+                <div>按钮需加 tabIndex="0" 和 keydown 处理（Enter/Space 触发点击）</div>
+              </div>
+            </td>
+            <td><span class="badge pass">已落地</span></td>
+          </tr>
+          <tr>
+            <td><strong>FullscreenBox</strong></td>
+            <td>视口/浏览器全屏切换容器，支持自定义 header</td>
+            <td>外层 &lt;div&gt; + header（含全屏切换图标 onClick）+ children</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>全屏按钮: role="button" aria-label="{locale.fullscreen || 进入全屏}"</code></div>
+                <div style="margin-bottom:4px;"><code>全屏按钮: aria-pressed="{innerFullscreen}"</code></div>
+                <div><code>container (全屏态): aria-live="polite"</code> 通知状态变化</div>
+              </div>
+            </td>
+            <td><span class="badge pass">已落地</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Category 2: 表单/输入 -->
+    <h3 style="font-size:15px; font-weight:600; margin: 0 0 16px 0; padding-bottom: 8px; border-bottom: 1px solid var(--ob-border-secondary);">✏️ 表单 / 输入类（3 个）</h3>
+
+    <div class="table-wrap" style="margin-bottom: 24px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:130px;">组件</th>
+            <th style="width:140px;">用途</th>
+            <th>当前 DOM 结构</th>
+            <th style="width:300px;">缺失的 ARIA 标注</th>
+            <th style="width:90px;">严重度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Password</strong></td>
+            <td>密码输入框，含强度校验 Popover、随机生成按钮、复制链接</td>
+            <td>基于 antd Input.Password + Popover（强度面板）+ Button（随机生成）+ &lt;a&gt;（复制）</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>Popover: aria-label="密码强度规则"</code></div>
+                <div style="margin-bottom:4px;"><code>随机生成按钮: aria-label="随机生成密码"</code></div>
+                <div style="margin-bottom:4px;"><code>复制链接: aria-label="复制密码"</code></div>
+                <div style="margin-bottom:4px;"><code>Popover: role="tooltip" aria-describedby</code></div>
+                <div>✅ antd Input.Password 自带 toggleVisibility 按钮已有 aria-label</div>
+              </div>
+            </td>
+            <td><span class="badge warn">中等</span></td>
+          </tr>
+          <tr>
+            <td><strong>Ranger</strong><br><small style="color:var(--ob-text-tertiary);">(DateRanger)</small></td>
+            <td>快捷时间范围选择器，基于 antd RangePicker + QuickPicker</td>
+            <td>Space + QuickPicker（下拉/选择模式）+ DatePicker.RangePicker</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>QuickPicker: aria-label="快捷时间范围选择"</code></div>
+                <div style="margin-bottom:4px;"><code>下拉模式: role="listbox" aria-label="时间范围"</code></div>
+                <div style="margin-bottom:4px;"><code>选中项: role="option" aria-selected="true"</code></div>
+                <div>⚠️ antd RangePicker 已知 tab 导航问题（issue #53638）</div>
+              </div>
+            </td>
+            <td><span class="badge warn">轻微</span></td>
+          </tr>
+          <tr>
+            <td><strong>Login</strong></td>
+            <td>登录/注册/激活页面容器，含表单切换和 locale 切换</td>
+            <td>基于 LoginForm / RegisterForm / ActivateForm 子组件 + antd Form</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>根容器: role="form" aria-label="登录"</code>（动态变化）</div>
+                <div style="margin-bottom:4px;"><code>切换按钮: aria-label="切换到注册"/"切换到登录"</code></div>
+                <div style="margin-bottom:4px;"><code>语言切换: aria-label="切换语言"</code></div>
+                <div style="margin-bottom:4px;"><code>错误提示: role="alert" aria-live="assertive"</code></div>
+              </div>
+            </td>
+            <td><span class="badge warn">轻微</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Category 3: 布局/导航 -->
+    <h3 style="font-size:15px; font-weight:600; margin: 0 0 16px 0; padding-bottom: 8px; border-bottom: 1px solid var(--ob-border-secondary);">🧭 布局 / 导航类（3 个）</h3>
+
+    <div class="table-wrap" style="margin-bottom: 24px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:130px;">组件</th>
+            <th style="width:140px;">用途</th>
+            <th>当前 DOM 结构</th>
+            <th style="width:300px;">缺失的 ARIA 标注</th>
+            <th style="width:90px;">严重度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>BasicLayout</strong></td>
+            <td>全局布局：顶栏 + 侧栏菜单（可收起）+ 主内容区</td>
+            <td>antd Layout + Sider + Menu + Content，收起按钮 &lt;div&gt;（非 &lt;button&gt;）</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>Sider: role="navigation" aria-label="主导航"</code></div>
+                <div style="margin-bottom:4px;"><code>收起按钮: role="button" aria-label="{收起/展开}侧边栏"</code></div>
+                <div style="margin-bottom:4px;"><code>收起按钮: aria-expanded="{!collapsed}"</code></div>
+                <div style="margin-bottom:4px;"><code>当前页面 MenuItem: aria-current="page"</code></div>
+                <div style="margin-bottom:4px;"><code>Content: role="main"</code></div>
+                <div>⚠️ 收起按钮当前为 &lt;div&gt; 非语义化元素，需改为 &lt;button&gt; 或加 role="button"</div>
+              </div>
+            </td>
+            <td><span class="badge fail">严重</span></td>
+          </tr>
+          <tr>
+            <td><strong>NavMenu</strong></td>
+            <td>侧边导航菜单，基于 URL 路径自动匹配高亮</td>
+            <td>外层 &lt;div&gt; + antd Menu + &lt;a&gt; 链接</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>外层: role="navigation" aria-label="页面导航"</code></div>
+                <div style="margin-bottom:4px;"><code>当前选中项: aria-current="page"</code></div>
+                <div>antd Menu 已提供基础 ARIA 属性</div>
+              </div>
+            </td>
+            <td><span class="badge warn">中等</span></td>
+          </tr>
+          <tr>
+            <td><strong>PageContainer</strong></td>
+            <td>页面容器：面包屑 + 标题 + 内容区 + 可选刷新按钮</td>
+            <td>基于 @ant-design/pro-components PageContainer 封装</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>刷新按钮: aria-label="刷新页面"</code></div>
+                <div style="margin-bottom:4px;"><code>面包屑: nav[aria-label="Breadcrumb"]</code>（antd 已支持）</div>
+                <div style="margin-bottom:4px;"><code>内容区: role="region" aria-labelledby="page-title"</code></div>
+              </div>
+            </td>
+            <td><span class="badge warn">轻微</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Category 4: 数据操作 -->
+    <h3 style="font-size:15px; font-weight:600; margin: 0 0 16px 0; padding-bottom: 8px; border-bottom: 1px solid var(--ob-border-secondary);">📊 数据操作类（2 个）</h3>
+
+    <div class="table-wrap" style="margin-bottom: 24px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:130px;">组件</th>
+            <th style="width:140px;">用途</th>
+            <th>当前 DOM 结构</th>
+            <th style="width:300px;">缺失的 ARIA 标注</th>
+            <th style="width:90px;">严重度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>BatchOperationBar</strong></td>
+            <td>表格批量操作栏：显示选中数量、取消选择、展开/收起操作面板</td>
+            <td>外层 &lt;div&gt; + header（标题 + 数量 + 取消 + 展开按钮）+ 内容区</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>根容器: role="toolbar" aria-label="批量操作"</code></div>
+                <div style="margin-bottom:4px;"><code>取消按钮: role="button" aria-label="取消选择"</code></div>
+                <div style="margin-bottom:4px;"><code>展开/收起按钮: aria-expanded="{isOpen}"</code></div>
+                <div style="margin-bottom:4px;"><code>展开/收起按钮: aria-label="{展开/收起}操作面板"</code></div>
+                <div style="margin-bottom:4px;"><code>选中数量: aria-live="polite"</code>（更新时通知屏幕阅读器）</div>
+              </div>
+            </td>
+            <td><span class="badge warn">中等</span></td>
+          </tr>
+          <tr>
+            <td><strong>TreeSearch</strong></td>
+            <td>树形搜索选择器：输入搜索 + Tree 勾选</td>
+            <td>Form + Input（搜索）+ Divider + antd Tree / Empty</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>搜索框: aria-label="搜索树节点"</code></div>
+                <div style="margin-bottom:4px;"><code>Tree: aria-label="可选树列表"</code></div>
+                <div style="margin-bottom:4px;"><code>Empty 状态: aria-label="无搜索结果"</code></div>
+                <div>antd Tree 已提供基础 checkbox ARIA（aria-checked 等）</div>
+              </div>
+            </td>
+            <td><span class="badge warn">轻微</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Category 5: 工具/辅助 -->
+    <h3 style="font-size:15px; font-weight:600; margin: 0 0 16px 0; padding-bottom: 8px; border-bottom: 1px solid var(--ob-border-secondary);">🔧 工具 / 辅助类（7 个）</h3>
+
+    <div class="table-wrap" style="margin-bottom: 24px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:130px;">组件</th>
+            <th style="width:140px;">用途</th>
+            <th>当前 DOM 结构</th>
+            <th style="width:300px;">缺失的 ARIA 标注</th>
+            <th style="width:90px;">严重度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Highlight</strong></td>
+            <td>代码高亮显示，支持复制、行号、diff、JSON 查看</td>
+            <td>&lt;pre&gt;（tabIndex=-1）+ 复制 &lt;button&gt; + &lt;table&gt; 代码行</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>&lt;pre&gt;: role="region" aria-label="代码块"</code></div>
+                <div style="margin-bottom:4px;"><code>复制按钮: aria-label="复制代码" aria-pressed="{copied}"</code></div>
+                <div style="margin-bottom:4px;"><code>复制成功: aria-live="polite" 提示"已复制"</code></div>
+                <div>✅ tabIndex="-1" 正确（代码块本身不应 tab 聚焦）</div>
+              </div>
+            </td>
+            <td><span class="badge warn">中等</span></td>
+          </tr>
+          <tr>
+            <td><strong>BackgroundTaskManager</strong></td>
+            <td>后台任务管理器：轮询任务状态，通过 notification 通知</td>
+            <td>纯逻辑组件，无直接 DOM；通过 antd notification 输出</td>
+            <td>
+              <div style="font-size:12px;">
+                <div>无直接 DOM，但通知弹出时应确保 aria-live="assertive"</div>
+                <div>antd notification 已支持 aria-live</div>
+              </div>
+            </td>
+            <td><span class="badge neutral">N/A</span></td>
+          </tr>
+          <tr>
+            <td><strong>ContentWithQuestion</strong></td>
+            <td>带问号帮助图标的文本，hover 显示 Tooltip</td>
+            <td>span + Space + Tooltip（含 QuestionCircleOutlined）</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>帮助图标: aria-label="帮助信息" role="img"</code></div>
+                <div style="margin-bottom:4px;"><code>Tooltip: role="tooltip" id="tooltip-help"</code></div>
+                <div style="margin-bottom:4px;"><code>内容: aria-describedby="tooltip-help"</code></div>
+              </div>
+            </td>
+            <td><span class="badge warn">轻微</span></td>
+          </tr>
+          <tr>
+            <td><strong>LocaleDropdown</strong></td>
+            <td>语言切换下拉菜单：🌐 图标 + 语言简称</td>
+            <td>Dropdown + Menu（zh-CN / zh-TW / en-US）</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>触发器: aria-label="切换语言" aria-haspopup="listbox"</code></div>
+                <div style="margin-bottom:4px;"><code>当前语言: aria-current="true"</code></div>
+                <div>antd Dropdown 已提供基础 ARIA</div>
+              </div>
+            </td>
+            <td><span class="badge warn">轻微</span></td>
+          </tr>
+          <tr>
+            <td><strong>Welcome</strong></td>
+            <td>产品欢迎页：头图 + 功能介绍 + 引导步骤 + 帮助文档</td>
+            <td>Row/Col 布局 + Card + Button + img + h3/p 文本</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>功能介绍图片: alt="{item.title} 功能介绍"</code></div>
+                <div style="margin-bottom:4px;"><code>步骤编号: aria-label="步骤 {index+1}"</code></div>
+                <div style="margin-bottom:4px;"><code>帮助按钮: aria-label="打开帮助: {item.title}"</code></div>
+                <div>✅ 装饰性图片 alt="" 正确，但介绍性图片需补充 alt</div>
+              </div>
+            </td>
+            <td><span class="badge warn">轻微</span></td>
+          </tr>
+          <tr>
+            <td><strong>IconFont</strong></td>
+            <td>自定义图标字体组件，基于 iconfont.cn</td>
+            <td>&lt;i&gt; 或 &lt;svg&gt;</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>默认: aria-hidden="true"</code>（装饰性图标）</div>
+                <div style="margin-bottom:4px;"><code>新增 aria-label prop: 语义性图标提供描述</code></div>
+                <div style="margin-bottom:4px;"><code>role="img"</code>（当提供 aria-label 时）</div>
+              </div>
+            </td>
+            <td><span class="badge warn">轻微</span></td>
+          </tr>
+          <tr>
+            <td><strong>Lottie</strong></td>
+            <td>Lottie 动画播放组件</td>
+            <td>lottie-web 渲染容器</td>
+            <td>
+              <div style="font-size:12px;">
+                <div style="margin-bottom:4px;"><code>容器: role="img" aria-label="{描述}"</code></div>
+                <div style="margin-bottom:4px;"><code>装饰性动画: aria-hidden="true"</code></div>
+                <div>新增 aria-label prop 支持</div>
+              </div>
+            </td>
+            <td><span class="badge neutral">未审查</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note" style="margin-bottom: 20px;">
+      <strong>范围说明：</strong>上表按交互复杂度优先覆盖 19 个典型组件（4+3+3+2+7）。<code>index.ts</code> 中尚有 Action、Boundary、ContentWithIcon、DateRanger、FooterToolbar、LightFilter、PageLoading、ProCard、ProTable、TagSelect、Ranger 与 Welcome 等未逐行展开，建议按同类（工具栏 / 表单 / 布局）套用相同 ARIA 与键盘模式。
+    </div>
+
+    <!-- Summary Table -->
+    <h3 style="font-size:15px; font-weight:600; margin: 24px 0 16px 0;">📋 ARIA 标注实施汇总</h3>
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card">
+        <div class="num blue">19</div>
+        <div class="label">已分类组件</div>
+      </div>
+      <div class="stat-card">
+        <div class="num orange">17</div>
+        <div class="label">建议补充 ARIA / 语义</div>
+      </div>
+      <div class="stat-card">
+        <div class="num green">2</div>
+        <div class="label">N/A / 待业务验证</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>严重度</th>
+            <th>数量</th>
+            <th>组件</th>
+            <th>核心问题</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge fail">严重</span></td>
+            <td>3</td>
+            <td>Dialog、DocDialog、BasicLayout</td>
+            <td>弹窗/导航缺少 role、aria-modal、aria-labelledby、aria-current；部分触发器非原生 <code>&lt;button&gt;</code></td>
+          </tr>
+          <tr>
+            <td><span class="badge warn">中等</span></td>
+            <td>6</td>
+            <td>SideTip、FullscreenBox、Password、NavMenu、BatchOperationBar、Highlight</td>
+            <td>交互控件缺少 aria-label / aria-expanded / aria-live；复合组件需与 antd 能力对齐</td>
+          </tr>
+          <tr>
+            <td><span class="badge neutral">轻微</span></td>
+            <td>8</td>
+            <td>Ranger、Login、PageContainer、TreeSearch、ContentWithQuestion、LocaleDropdown、Welcome、IconFont</td>
+            <td>辅助性标注（alt、aria-describedby、aria-live），可随迭代补齐</td>
+          </tr>
+          <tr>
+            <td><span class="badge neutral">N/A</span></td>
+            <td>2</td>
+            <td>BackgroundTaskManager、Lottie</td>
+            <td>无 DOM 或需结合动效语义单独设计</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>💡 实施建议：</strong>优先处理 3 个「严重」组件（Dialog 系列与 BasicLayout），其次处理 6 个「中等」组件。其余导出组件见上文范围说明，按同类模式扩展。
+    </div>
+  </div>
+
+  <!-- 6. antd 5.x WCAG Inherited Features -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon green">🏗️</span>
+      antd 5.29.3 已提供的 WCAG 能力
+    </div>
+    <ul class="detail-list">
+      <li>
+        <span class="marker pass">✓</span>
+        <div><strong>ARIA 属性自动注入</strong> — antd v5 为 Button、Modal、Drawer、Select、Input 等核心组件注入 aria-* 属性（aria-expanded、aria-haspopup、aria-checked 等）</div>
+      </li>
+      <li>
+        <span class="marker pass">✓</span>
+        <div><strong>键盘导航支持</strong> — Menu、Tabs、Select、Tree 等组件支持方向键导航；Modal/Drawer 支持 focus trap 和 ESC 关闭</div>
+      </li>
+      <li>
+        <span class="marker pass">✓</span>
+        <div><strong>自动无障碍测试</strong> — antd 团队已对所有组件 Demo 接入自动化 a11y 测试（issue #51348）</div>
+      </li>
+      <li>
+        <span class="marker pass">✓</span>
+        <div><strong>表单关联</strong> — Form + Form.Item 通过 htmlFor 关联 label 与 input</div>
+      </li>
+      <li>
+        <span class="marker pass">✓</span>
+        <div><strong>Drawer aria-labelledby</strong> — 标题存在时自动添加 aria-labelledby</div>
+      </li>
+      <li>
+        <span class="marker pass">✓</span>
+        <div><strong>Input.Password 可访问性</strong> — 密码显隐按钮具备可访问名称</div>
+      </li>
+      <li>
+        <span class="marker pass">✓</span>
+        <div><strong>Cascader data/aria 支持</strong> — 支持透传 data-* 和 aria-* 属性</div>
+      </li>
+      <li>
+        <span class="marker pass">✓</span>
+        <div><strong>主题焦点线宽与兜底</strong> — OceanBase 默认主题已将 <code>lineWidthFocus</code> 设为 <code>2</code>，并在 <code>global.tsx</code> 为非 antd 类名原生控件提供 <code>:focus-visible</code> 轮廓，与 antd 控制项 token 协同满足键盘可见焦点。</div>
+      </li>
+      <li>
+        <span class="marker warn">⚠</span>
+        <div><strong>已知问题 — DatePicker/TimePicker tab 导航</strong> — 键盘 tab 顺序存在问题（issue #53638），影响 WCAG 2.1.1 和 2.4.3</div>
+      </li>
+      <li>
+        <span class="marker warn">⚠</span>
+        <div><strong>已知问题 — Drawer aria-dialog-name</strong> — 部分场景下缺少 accessible name（issue #55682）</div>
+      </li>
+      <li>
+        <span class="marker warn">⚠</span>
+        <div><strong>focus-visible 样式较弱</strong> — antd 默认 focus 样式为蓝色 outline，在浅色背景上不够醒目，需要自定义增强</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 7. OceanBase Specific Gaps -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon red">🔍</span>
+      OceanBase 组件库特有差距
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>差距类别</th>
+            <th>影响范围</th>
+            <th>详情</th>
+            <th>严重度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>颜色对比度</strong></td>
+            <td>全局</td>
+            <td>主题在语义背景上使用 <code>color*Text</code> 时对比度充足；第三级/四级文本、语义主色作正文、细边框仍不足 WCAG AA；详见上文色表。</td>
+            <td><span class="badge fail">严重</span></td>
+          </tr>
+          <tr>
+            <td><strong>ARIA 标注缺失</strong></td>
+            <td>@oceanbase/ui</td>
+            <td>已对 Dialog、DocDialog、BasicLayout、SideTip、BatchOperationBar、Highlight、NavMenu 等补充 <code>aria-*</code> / 语义按钮；<code>index.ts</code> 其余导出（如 FooterToolbar、TagSelect 等）仍建议按工具栏/表单/布局同类模式扩展</td>
+            <td><span class="badge warn">中等</span></td>
+          </tr>
+          <tr>
+            <td><strong>Focus Visible</strong></td>
+            <td>全局</td>
+            <td>主题 <code>lineWidthFocus: 2</code> 与 <code>global.tsx</code> 原生 <code>:focus-visible</code> 兜底已落地；极端自定义样式下仍建议走查</td>
+            <td><span class="badge warn">部分</span></td>
+          </tr>
+          <tr>
+            <td><strong>键盘导航</strong></td>
+            <td>Password, Highlight</td>
+            <td>Highlight 复制为 <code>&lt;button&gt;</code> 时具备默认可访问性；自定义 Dialog、Graph 类工具栏（已自仓库移除）等模式若在业务 fork 中复现，需单独验证键盘与焦点陷阱</td>
+            <td><span class="badge warn">中等</span></td>
+          </tr>
+          <tr>
+            <td><strong>Focus Trap</strong></td>
+            <td>Dialog, SideTip</td>
+            <td>自定义 Dialog 已补充焦点进入与 Escape；SideTip 等浮动层完整 focus trap 仍建议在业务中结合模态场景验证</td>
+            <td><span class="badge warn">中等</span></td>
+          </tr>
+          <tr>
+            <td><strong>aria-live 区域</strong></td>
+            <td>BackgroundTaskManager</td>
+            <td>已增加队列长度 <code>aria-live="polite"</code> 状态区；细粒度进度仍依赖 notification 文案</td>
+            <td><span class="badge pass">已缓解</span></td>
+          </tr>
+          <tr>
+            <td><strong>触控目标尺寸</strong></td>
+            <td>Table、含 icon-only 的工具栏</td>
+            <td>部分 icon-only 按钮间距紧凑，触控区域可能 &lt; 24×24px（2.5.8）</td>
+            <td><span class="badge warn">轻微</span></td>
+          </tr>
+          <tr>
+            <td><strong>图标 alt 文本</strong></td>
+            <td>@oceanbase/icons</td>
+            <td><code>@oceanbase/icons</code> 包装层：无名称且无点击时默认 <code>aria-hidden</code>；提供 <code>aria-label</code> / <code>ariaLabel</code> 时作为语义图像暴露名称</td>
+            <td><span class="badge pass">通过</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 8. Recommendations -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon orange">🛠️</span>
+      修复建议（按优先级排序）
+    </div>
+
+    <div class="rec p1">
+      <span class="priority">P1</span>
+      <div class="rec-text">
+        <div class="rec-title">调整主题色对比度</div>
+        <div class="rec-desc">按上文色表：避免将 <code>colorSuccess</code> / <code>colorWarning</code> 直接用作小号正文；第三级文本 <code>colorTextTertiary</code> 仅作大号或辅助说明；正文级状态文案优先使用 <code>color*Text</code> + <code>color*Bg</code>。边框可配合阴影或加粗而不仅依赖色相。</div>
+      </div>
+    </div>
+
+    <div class="rec p1">
+      <span class="priority">P1</span>
+      <div class="rec-text">
+        <div class="rec-title">为 @oceanbase/ui 自定义组件添加 ARIA 标注</div>
+        <div class="rec-desc">已对 Dialog、DocDialog、BasicLayout、SideTip、BatchOperationBar、Highlight、NavMenu 等落地 <code>role</code> / <code>aria-*</code>、<code>aria-live</code> 与语义化按钮；请继续为 FooterToolbar、TagSelect、LightFilter 等其余导出按同类模式扩展，并为需要的路由项补充 <code>aria-current="page"</code>。</div>
+      </div>
+    </div>
+
+    <div class="rec p3">
+      <span class="priority">P3</span>
+      <div class="rec-text">
+        <div class="rec-title">焦点可见性（已完成基线，持续走查）</div>
+        <div class="rec-desc">默认主题已将 <code>lineWidthFocus</code> 设为 2，<code>global.tsx</code> 为非 antd 类名原生控件提供 <code>:focus-visible</code>；建议在业务侧对复杂嵌套滚动、iframe、Monaco 等场景继续做键盘走查。</div>
+      </div>
+    </div>
+
+    <div class="rec p3">
+      <span class="priority">P3</span>
+      <div class="rec-text">
+        <div class="rec-title">图标组件 aria 策略（包装层已落地）</div>
+        <div class="rec-desc">装饰性图标默认 <code>aria-hidden</code>；语义图标通过 <code>aria-label</code> / <code>ariaLabel</code> 透传；业务仍需为带交互的图标按钮提供可访问名称。</div>
+      </div>
+    </div>
+
+    <div class="rec p2">
+      <span class="priority">P2</span>
+      <div class="rec-text">
+        <div class="rec-title">Dialog/SideTip 实现 focus trap</div>
+        <div class="rec-desc">复用 antd 的 FocusTrap 或 rc-util 的 focus 工具，确保弹窗打开时焦点锁定在内部，关闭时返回触发元素。</div>
+      </div>
+    </div>
+
+    <div class="rec p2">
+      <span class="priority">P2</span>
+      <div class="rec-text">
+        <div class="rec-title">BackgroundTaskManager 添加 aria-live</div>
+        <div class="rec-desc">在任务进度更新时使用 aria-live="polite" 区域通知屏幕阅读器，如 "3/10 任务已完成"。</div>
+      </div>
+    </div>
+
+    <div class="rec p3">
+      <span class="priority">P3</span>
+      <div class="rec-text">
+        <div class="rec-title">增大触控目标至 ≥ 24×24px</div>
+        <div class="rec-desc">Table 操作列、ProTable 行内 icon-only 按钮等确保最小可点区域 ≥24×24px（含透明 hit slop）。</div>
+      </div>
+    </div>
+
+    <div class="rec p3">
+      <span class="priority">P3</span>
+      <div class="rec-text">
+        <div class="rec-title">为状态色增加非颜色标识</div>
+        <div class="rec-desc">Alert、Tag 组件在颜色之外增加图标前缀，满足 WCAG 1.4.1 "信息不应仅依赖颜色传达"。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. WCAG 2.1 AA Reference Card -->
+  <div class="section">
+    <div class="section-title">
+      <span class="icon gray">📖</span>
+      WCAG 2.1 AA 速查卡
+    </div>
+    <div class="grid-2">
+      <div>
+        <h4 style="font-size:14px; font-weight:600; margin-bottom: 12px; color: var(--ob-text-secondary);">对比度要求</h4>
+        <div style="padding: 12px 16px; background: var(--ob-bg-layout); border-radius: var(--radius); margin-bottom: 8px;">
+          <div style="font-size: 13px;"><strong>正文文本</strong> → <span style="color: var(--ob-primary); font-weight: 600;">≥ 4.5:1</span></div>
+        </div>
+        <div style="padding: 12px 16px; background: var(--ob-bg-layout); border-radius: var(--radius); margin-bottom: 8px;">
+          <div style="font-size: 13px;"><strong>大号文本</strong> (≥18pt / ≥14pt 粗体) → <span style="color: var(--ob-primary); font-weight: 600;">≥ 3:1</span></div>
+        </div>
+        <div style="padding: 12px 16px; background: var(--ob-bg-layout); border-radius: var(--radius); margin-bottom: 8px;">
+          <div style="font-size: 13px;"><strong>UI 组件 / 图形</strong> → <span style="color: var(--ob-primary); font-weight: 600;">≥ 3:1</span></div>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:14px; font-weight:600; margin-bottom: 12px; color: var(--ob-text-secondary);">四大原则</h4>
+        <div style="padding: 12px 16px; background: var(--ob-bg-layout); border-radius: var(--radius); margin-bottom: 8px;">
+          <div style="font-size: 13px;"><strong>Perceivable 可感知</strong> — 信息不可仅依赖颜色</div>
+        </div>
+        <div style="padding: 12px 16px; background: var(--ob-bg-layout); border-radius: var(--radius); margin-bottom: 8px;">
+          <div style="font-size: 13px;"><strong>Operable 可操作</strong> — 全键盘可访问、焦点可见</div>
+        </div>
+        <div style="padding: 12px 16px; background: var(--ob-bg-layout); border-radius: var(--radius); margin-bottom: 8px;">
+          <div style="font-size: 13px;"><strong>Understandable 可理解</strong> — 语言标记、错误提示</div>
+        </div>
+        <div style="padding: 12px 16px; background: var(--ob-bg-layout); border-radius: var(--radius); margin-bottom: 8px;">
+          <div style="font-size: 13px;"><strong>Robust 健壮</strong> — ARIA 标注、屏幕阅读器兼容</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>OceanBase 组件库 WCAG 2.1 可访问性审计报告 · 2026-05-14</p>
+  <p style="margin-top: 4px;">覆盖 packages/design · packages/ui · packages/icons · antd ^5.29.3 · 37 项 WCAG 2.1 AA 准则映射 + 色值与源码锚点（随仓库更新，非官方认证）</p>
+</div>
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    const tabId = this.dataset.tab;
+    const parent = this.closest('.section');
+    parent.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+  });
+});
+
+// Animate score ring on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const ring = entry.target.querySelector('.ring-fill');
+      if (ring) {
+        ring.style.strokeDashoffset = '119';
+      }
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.score-ring').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
