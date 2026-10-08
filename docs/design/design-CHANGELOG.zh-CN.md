@@ -8,6 +8,52 @@ group: 基础组件
 
 ---
 
+## 1.6.0
+
+`2026-10-08`
+
+- Button
+  - 🐞 修复幽灵按钮（ghost）hover 时文字和边框变深、在有色背景上不易辨认的问题。[#1581](https://github.com/oceanbase/oceanbase-design/pull/1581)
+  - 💄 `type="text"` 按钮的图标颜色与 outlined、dashed 按钮对齐。[#1584](https://github.com/oceanbase/oceanbase-design/pull/1584)
+- Checkbox
+  - 🐞 修复通过 `options` 渲染选项时 `Checkbox.Group` 样式不生效的问题，勾选框恢复为与文案按设计规范对齐。[#1586](https://github.com/oceanbase/oceanbase-design/pull/1586)
+- ConfigProvider
+  - 🆕 新增 `notification` 属性用于通知全局配置，包含 `notification.duration`。[#1583](https://github.com/oceanbase/oceanbase-design/pull/1583)
+  - 🆕 新增 `typography.copyable.hover` 全局设置默认的 hover 行为，组件级 `copyable.hover` 优先级更高。[#1584](https://github.com/oceanbase/oceanbase-design/pull/1584)
+- Descriptions
+  - 🆕 无边框模式下，新增组件级 `contentProps`，可统一设置所有描述项的内容属性，单项 `contentProps` 可覆盖。[#1591](https://github.com/oceanbase/oceanbase-design/pull/1591)
+  - 🆕 无边框模式下，`contentProps.ellipsis` 支持 `'css'` 轻量模式：纯 CSS 单行截断 + 原生 `title`（字符串内容自动派生），不产生 Typography 的溢出测量和 `Tooltip` 开销，适合描述项数量多的场景。单项开启 `copyable` 或 `editable` 时回退为完整模式，内联操作按钮和 `Tooltip` 均可正常使用。[#1591](https://github.com/oceanbase/oceanbase-design/pull/1591)
+  - ⭐️ 新增导出类型 `DescriptionsContentProps`，用于 `contentProps`。[#1591](https://github.com/oceanbase/oceanbase-design/pull/1591)
+- Dropdown
+  - 💄 亮色主题下，下拉菜单项和子菜单标题的图标改用线性图标色 `colorIcon`（`gray8` `#5c6b8a`）；选中、危险和禁用项保持原有状态色。[#1589](https://github.com/oceanbase/oceanbase-design/pull/1589)
+- Empty
+  - 🆕 新增 `fullHeight` 属性，用于撑满父容器高度，并将内容整体居中。[#1587](https://github.com/oceanbase/oceanbase-design/pull/1587)
+  - 🐞 修复横向布局在容器宽度不足时未纵向堆叠的问题，现在会自动改为纵向排列。[#1588](https://github.com/oceanbase/oceanbase-design/pull/1588)
+  - 💄 横向布局的纵向堆叠阈值调整为容器宽度 ≤592px（原设定为 560px，但未实际生效）。[#1588](https://github.com/oceanbase/oceanbase-design/pull/1588)
+- Filter
+  - 🐞 修复 `Filter.Select`、`Filter.Checkbox`、`Filter.Cascader` 搜索框占位与无匹配结果文案未跟随国际化的问题，现取 `Filter.search` / `Filter.noResult`（默认 `Search` / `No matching results`）。[#1590](https://github.com/oceanbase/oceanbase-design/pull/1590)
+  - 📢 `Filter.Select` / `Filter.Range` / `Filter.Cascader` / `Filter.Slot` 的默认占位文案改为跟随国际化 `Filter.pleaseSelect`，不再固定为「请选择」；未提供 locale 时回落为英文 `Please select`。[#1590](https://github.com/oceanbase/oceanbase-design/pull/1590)
+- Menu
+  - 💄 亮色主题下，菜单项和子菜单标题的图标改用线性图标色 `colorIcon`（`gray8` `#5c6b8a`），与 Button、Card、Table 的图标保持一致；选中、危险和禁用项保持原有状态色。[#1589](https://github.com/oceanbase/oceanbase-design/pull/1589)
+- Notification
+  - 🆕 `duration` 支持按类型配置的对象（也支持数字），并可通过 `ConfigProvider`、`notification.config`、`message.config` 全局配置，无需逐条传入。[#1583](https://github.com/oceanbase/oceanbase-design/pull/1583)
+  - 🆕 优先级为单次调用 > `useNotification(config)` > `ConfigProvider` > `notification.config` / `message.config` > 内置策略（仅标题 5s、含描述 10s、error 不自动关闭）。[#1583](https://github.com/oceanbase/oceanbase-design/pull/1583)
+- Radio
+  - 🐞 修复仅渲染 `Radio.Group` 和 `Radio.Button`（未渲染 `Radio`）时 `Radio.Button` 样式不生效的问题，包括未选中按钮的图标颜色、仅图标按钮的内边距与 hover 边框色。[#1586](https://github.com/oceanbase/oceanbase-design/pull/1586)
+  - 🐞 修复通过 `options` 渲染选项时 `Radio.Group` 样式不生效的问题，单选框恢复为与文案按设计规范对齐。[#1586](https://github.com/oceanbase/oceanbase-design/pull/1586)
+- Result
+  - 🆕 新增 `fullHeight` 属性，用于撑满父容器高度，并将内容整体居中。[#1587](https://github.com/oceanbase/oceanbase-design/pull/1587)
+- Table
+  - 🆕 `pagination.showTotal` 传 `false` 可关闭分页总数展示；`ConfigProvider` 的 `pagination` 同样支持，且组件级配置优先于上下文配置。[#1579](https://github.com/oceanbase/oceanbase-design/pull/1579)
+  - 💄 无总数文案且无批量操作栏时不再渲染总数插槽，消除多余空白。[#1579](https://github.com/oceanbase/oceanbase-design/pull/1579)
+  - 🐞 修复非中文排版下小尺寸和中尺寸表格的单元格字号（13px）比默认尺寸（12px）更大的问题，现与默认尺寸一致为 12px。[#1580](https://github.com/oceanbase/oceanbase-design/pull/1580)
+  - 🐞 修复批量操作栏在无告警、已选文案与展开链接时左侧残留空白间距的问题。[#1592](https://github.com/oceanbase/oceanbase-design/pull/1592)
+- Typography
+  - 🆕 `Text`、`Paragraph` 和 `Title` 开启 `ellipsis` 后，默认在内容溢出时通过 Tooltip 展示完整文本，鼠标悬停即可查看被截断的内容；如需关闭，可设置 `ellipsis.tooltip: false`。[#1578](https://github.com/oceanbase/oceanbase-design/pull/1578)
+  - 🆕 新增 `copyable.hover`，复制图标仅在鼠标悬停或键盘聚焦时显示，`Text`、`Link`、`Paragraph`、`Title` 均支持。[#1584](https://github.com/oceanbase/oceanbase-design/pull/1584)
+- 📖 修复 Design Token 文档（中文）中 CSS 代码块的渲染异常，并精简 IDE 编码提示中偏实现细节的说明。[#1585](https://github.com/oceanbase/oceanbase-design/pull/1585)
+- 🐞 设计站 `/design.md` 重新发布完整 Ant Design 基线与 OceanBase 覆盖（部署后不再变成短 stub）。[#1597](https://github.com/oceanbase/oceanbase-design/pull/1597)
+
 ## 1.5.0
 
 `2026-09-10`

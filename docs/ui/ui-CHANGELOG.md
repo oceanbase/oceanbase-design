@@ -8,6 +8,21 @@ group: Biz Components
 
 ---
 
+## 1.6.0
+
+`2026-10-08`
+
+- DateRanger
+  - 🆕 Date and time fields in the selection panel are now segmented inputs: click a segment to edit it, typed digits overwrite the segment, and a digit that exceeds the segment limit is carried into the next segment. [#1582](https://github.com/oceanbase/oceanbase-design/pull/1582)
+  - 🆕 Added two-stage `Enter` confirmation: the first `Enter` confirms the focused input, the second `Enter` confirms the whole selection (same as clicking Confirm). [#1582](https://github.com/oceanbase/oceanbase-design/pull/1582)
+  - 🐞 Editing only the date no longer resets the entered time to `00:00:00`. [#1582](https://github.com/oceanbase/oceanbase-design/pull/1582)
+  - 💄 The sync-to-current button is now an icon button, consistent with the other toolbar buttons. [#1582](https://github.com/oceanbase/oceanbase-design/pull/1582)
+  - 🐞 Made step-back / step-forward buttons square by using `controlHeight` width and centered icons. [#1594](https://github.com/oceanbase/oceanbase-design/pull/1594)
+- Highlight
+  - 🐞 Replaced the JSON viewer dependency to remove the risky transitive `base16@1.0.0` (author-link reputation risk). [#1595](https://github.com/oceanbase/oceanbase-design/pull/1595)
+- ProTable
+  - 🆕 `pagination.showTotal: false` hides the pagination total, aligned with Table. [#1579](https://github.com/oceanbase/oceanbase-design/pull/1579)
+
 ## 1.4.4
 
 `2026-09-04`
