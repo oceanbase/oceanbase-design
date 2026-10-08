@@ -1,0 +1,34 @@
+name: 'Monorepo Release Helper'
+description: 'A GitHub Action that help you publish monorepo release'
+author: 'dengfuping'
+branding:
+  icon: 'shield'
+  color: 'blue'
+inputs:
+  branch:
+    description: 'The changelog file branch'
+  changelogs:
+    description: 'The changelog file path'
+  dingding-changelogs:
+    description: 'The changelog file path for DingTalk'
+  dingding-token:
+    description: 'DingTalk token, support multiple token'
+  dingding-delay-minute:
+    description: 'DingTalk delay time for posting message'
+  dingding-message-title:
+    description: 'DingTalk message title'
+  dingding-message-poster:
+    description: 'DingTalk poster url'
+  dingding-message-footer:
+    description: 'DingTalk message footer'
+  dingding-message-prettier:
+    description: 'whether to prettier DingTalk message'
+  commit-sha:
+    description: 'Optional Publish commit SHA for workflow_dispatch backfill (uses that commit message instead of head_commit)'
+  token:
+    description: 'Github token'
+    default: ${{ github.token }}
+
+runs:
+  using: node20
+  main: 'dist/index.js'

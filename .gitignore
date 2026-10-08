@@ -35,6 +35,7 @@ useless-locale.txt
 !.cursor/rules/**
 .claude
 AGENTS.md
+package-lock.json
 
 .agents/
 skills-lock.json

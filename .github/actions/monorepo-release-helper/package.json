@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "monorepo-release-helper",
+  "license": "MIT",
+  "scripts": {
+    "package": "ncc build src/main.ts -o dist"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^4.0.0",
+    "@octokit/rest": "^19.0.5",
+    "actions-util": "^1.0.0",
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@vercel/ncc": "0.34.0",
+    "typescript": "^4.9.5"
+  }
+}
