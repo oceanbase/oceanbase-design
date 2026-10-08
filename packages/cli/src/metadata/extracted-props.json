@@ -122,7 +122,8 @@
       "collapsed",
       "defaultCollapsed",
       "onCollapse",
-      "contentAlign"
+      "contentAlign",
+      "contentProps"
     ],
     "allInterfaceProps": [
       "items",
@@ -130,7 +131,8 @@
       "collapsed",
       "defaultCollapsed",
       "onCollapse",
-      "contentAlign"
+      "contentAlign",
+      "contentProps"
     ]
   },
   "Drawer": {
