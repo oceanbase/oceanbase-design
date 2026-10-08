@@ -10,7 +10,7 @@ test('resolveAntdCliInvocation returns a valid invocation', () => {
   assert.ok(['path', 'local-bin', 'local-package', 'bundled-bin', 'bundled-package', 'npx'].includes(inv.via));
   if (inv.via === 'npx') {
     assert.equal(inv.command, 'npx');
-    assert.deepEqual(inv.args, ['-y', '@ant-design/cli']);
+    assert.deepEqual(inv.args, ['-y', '-p', '@ant-design/cli', 'antd']);
   }
 });
 
