@@ -8,6 +8,21 @@ group: 业务组件
 
 ---
 
+## 1.6.0
+
+`2026-10-08`
+
+- DateRanger
+  - 🆕 选择面板中的日期、时间输入框改为分段输入：点击某一分段后直接输入数字覆盖该分段，超出分段上限的数字会自动进位到下一分段。[#1582](https://github.com/oceanbase/oceanbase-design/pull/1582)
+  - 🆕 回车确认分两步：第一次回车确认当前输入框，第二次回车整体确认（等价点击确认按钮）。[#1582](https://github.com/oceanbase/oceanbase-design/pull/1582)
+  - 🐞 只修改日期时，不再把已填写的时间重置为 `00:00:00`。[#1582](https://github.com/oceanbase/oceanbase-design/pull/1582)
+  - 💄 同步到当前时间按钮改为图标按钮，与工具栏其他按钮保持一致。[#1582](https://github.com/oceanbase/oceanbase-design/pull/1582)
+  - 🐞 前后步进按钮改为正方形：宽度对齐 `controlHeight`，图标居中。[#1594](https://github.com/oceanbase/oceanbase-design/pull/1594)
+- Highlight
+  - 🐞 替换 JSON 查看器依赖，移除存在舆情风险的间接依赖 `base16@1.0.0`（作者链接风险）。[#1595](https://github.com/oceanbase/oceanbase-design/pull/1595)
+- ProTable
+  - 🆕 `pagination.showTotal` 传 `false` 可关闭分页总数展示，与 Table 对齐。[#1579](https://github.com/oceanbase/oceanbase-design/pull/1579)
+
 ## 1.4.4
 
 `2026-09-04`

@@ -8,6 +8,52 @@ group: General
 
 ---
 
+## 1.6.0
+
+`2026-10-08`
+
+- Button
+  - 🐞 Fixed ghost buttons turning dark text and border on hover, which made them hard to read on colored backgrounds. [#1581](https://github.com/oceanbase/oceanbase-design/pull/1581)
+  - 💄 Aligned the icon color of `type="text"` buttons with outlined and dashed buttons. [#1584](https://github.com/oceanbase/oceanbase-design/pull/1584)
+- Checkbox
+  - 🐞 Fixed `Checkbox.Group` styles not taking effect when options are rendered through the `options` prop, so checkboxes align with their labels as designed. [#1586](https://github.com/oceanbase/oceanbase-design/pull/1586)
+- ConfigProvider
+  - 🆕 Added the `notification` prop for global notification config, including `notification.duration`. [#1583](https://github.com/oceanbase/oceanbase-design/pull/1583)
+  - 🆕 Added `typography.copyable.hover` to set the default hover behavior globally; component-level `copyable.hover` takes precedence. [#1584](https://github.com/oceanbase/oceanbase-design/pull/1584)
+- Descriptions
+  - 🆕 In borderless mode, support component-level `contentProps` to set content props for all items at once, overridable by each item's `contentProps`. [#1591](https://github.com/oceanbase/oceanbase-design/pull/1591)
+  - 🆕 In borderless mode, `contentProps.ellipsis` supports the `'css'` lightweight mode: pure CSS single-line truncation + native `title` (auto-derived from string children), without Typography's overflow measuring and `Tooltip`. Ideal for descriptions with many items. An item that enables `copyable` or `editable` falls back to the full mode, so its inline action buttons and `Tooltip` keep working. [#1591](https://github.com/oceanbase/oceanbase-design/pull/1591)
+  - ⭐️ New exported type `DescriptionsContentProps` for `contentProps`. [#1591](https://github.com/oceanbase/oceanbase-design/pull/1591)
+- Dropdown
+  - 💄 In light theme, icons of dropdown menu items and submenu titles now use the linear icon color `colorIcon` (`gray8` `#5c6b8a`); selected, danger and disabled items keep their own colors. [#1589](https://github.com/oceanbase/oceanbase-design/pull/1589)
+- Empty
+  - 🆕 Added `fullHeight` to fill the parent container height and center the content. [#1587](https://github.com/oceanbase/oceanbase-design/pull/1587)
+  - 🐞 Horizontal layout now stacks the illustration and the text vertically once the container is too narrow for both, instead of keeping them side by side. [#1588](https://github.com/oceanbase/oceanbase-design/pull/1588)
+  - 💄 The horizontal layout stacks at container width ≤592px (previously the intended threshold was 560px but never took effect). [#1588](https://github.com/oceanbase/oceanbase-design/pull/1588)
+- Filter
+  - 🐞 Fixed the search box placeholder and empty text of `Filter.Select`, `Filter.Checkbox` and `Filter.Cascader` not following locale; they now use `Filter.search` / `Filter.noResult` (`Search` / `No matching results` by default). [#1590](https://github.com/oceanbase/oceanbase-design/pull/1590)
+  - 📢 The default placeholder of `Filter.Select` / `Filter.Range` / `Filter.Cascader` / `Filter.Slot` now follows the `Filter.pleaseSelect` locale text instead of the hardcoded `请选择`, and falls back to `Please select` when no locale is provided. [#1590](https://github.com/oceanbase/oceanbase-design/pull/1590)
+- Menu
+  - 💄 In light theme, icons of menu items and submenu titles now use the linear icon color `colorIcon` (`gray8` `#5c6b8a`), consistent with Button, Card and Table icons; selected, danger and disabled items keep their own colors. [#1589](https://github.com/oceanbase/oceanbase-design/pull/1589)
+- Notification
+  - 🆕 `duration` accepts a per-type object as well as a number, and can be configured globally via `ConfigProvider`, `notification.config`, or `message.config` instead of on every call. [#1583](https://github.com/oceanbase/oceanbase-design/pull/1583)
+  - 🆕 Resolution order: single call > `useNotification(config)` > `ConfigProvider` > `notification.config` / `message.config` > built-in strategy (5s for title only, 10s with description, errors stay open). [#1583](https://github.com/oceanbase/oceanbase-design/pull/1583)
+- Radio
+  - 🐞 Fixed `Radio.Button` styles not taking effect (icon color, icon-only padding, hover border color) when only `Radio.Group` and `Radio.Button` are rendered. [#1586](https://github.com/oceanbase/oceanbase-design/pull/1586)
+  - 🐞 Fixed `Radio.Group` styles not taking effect when options are rendered through the `options` prop, so radios align with their labels as designed. [#1586](https://github.com/oceanbase/oceanbase-design/pull/1586)
+- Result
+  - 🆕 Added `fullHeight` to fill the parent container height and center the content. [#1587](https://github.com/oceanbase/oceanbase-design/pull/1587)
+- Table
+  - 🆕 `pagination.showTotal: false` hides the pagination total; `ConfigProvider` pagination supports it as well, and component-level config wins over context. [#1579](https://github.com/oceanbase/oceanbase-design/pull/1579)
+  - 💄 The total slot is no longer rendered when there is no total text and no batch operation bar, removing the extra blank space. [#1579](https://github.com/oceanbase/oceanbase-design/pull/1579)
+  - 🐞 Fixed the cell font size of small and middle size tables (13px) being larger than the default size in non-Chinese locales; it now stays at 12px, the same as the default size. [#1580](https://github.com/oceanbase/oceanbase-design/pull/1580)
+  - 🐞 Fixed the batch operation bar leaving redundant empty space on the left when no alert, selection text, or expand link is rendered. [#1592](https://github.com/oceanbase/oceanbase-design/pull/1592)
+- Typography
+  - 🆕 `Text`, `Paragraph` and `Title` now show a Tooltip with the full text by default when `ellipsis` is enabled, so truncated content can be read on hover. Set `ellipsis.tooltip: false` to turn the default Tooltip off. [#1578](https://github.com/oceanbase/oceanbase-design/pull/1578)
+  - 🆕 Added `copyable.hover` to show the copy icon only on hover or keyboard focus, supported by `Text`, `Link`, `Paragraph`, and `Title`. [#1584](https://github.com/oceanbase/oceanbase-design/pull/1584)
+- 📖 Fixed a broken CSS code block in the Design Token doc (zh-CN) and trimmed the IDE IntelliSense implementation notes. [#1585](https://github.com/oceanbase/oceanbase-design/pull/1585)
+- 🐞 Site `/design.md` publishes the full Ant Design baseline with OceanBase overrides again (no stub after deploy). [#1597](https://github.com/oceanbase/oceanbase-design/pull/1597)
+
 ## 1.5.0
 
 `2026-09-10`
