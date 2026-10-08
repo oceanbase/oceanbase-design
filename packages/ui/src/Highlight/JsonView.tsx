@@ -1,7 +1,7 @@
 import { ConfigProvider } from '@oceanbase/design';
 import classNames from 'classnames';
 import React, { useContext, useRef } from 'react';
-import ReactJson from 'react-json-view';
+import ReactJson from '@microlink/react-json-view';
 import type { HighlightProps } from '.';
 import { THEME_DARK } from '.';
 import { useKeyDownCopyEvent } from './useKeyDownCopyEvent';
