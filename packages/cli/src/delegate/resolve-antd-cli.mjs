@@ -133,11 +133,12 @@ export function resolveAntdCliInvocation(cwd = process.cwd()) {
     return _cached;
   }
 
+  // Explicit bin name: `npx -y @ant-design/cli …` can fail on Linux CI with `antd: not found`.
   _cached = {
     command: 'npx',
-    args: ['-y', '@ant-design/cli'],
+    args: ['-y', '-p', '@ant-design/cli', 'antd'],
     via: 'npx',
-    label: 'npx -y @ant-design/cli',
+    label: 'npx -y -p @ant-design/cli antd',
   };
   return _cached;
 }

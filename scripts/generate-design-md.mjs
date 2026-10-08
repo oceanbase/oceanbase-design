@@ -1,15 +1,21 @@
 #!/usr/bin/env node
 /**
- * @input @ant-design/cli design.md (v6 baseline), OB overlay
+ * @input @ant-design/cli design.md (v6 baseline) or https://ant.design/design.md, OB overlay
  * @output public/design.md — site root + ob-design design.md
+ *
+ * Prefer bundled/local @ant-design/cli (after pnpm install). On total fetch failure,
+ * keep the committed public/design.md instead of overwriting with a stub.
  */
 import { execFileSync } from 'node:child_process';
-import { writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { resolveAntdCliInvocation } from '../packages/cli/src/delegate/resolve-antd-cli.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const outPath = join(root, 'public/design.md');
+
+const STUB_MARKER = 'Regenerate with network access to merge full antd baseline';
 
 const OB_OVERLAY = `
 ## OceanBase Design overrides
@@ -50,18 +56,79 @@ Never \`from 'antd'\` or \`@ant-design/icons\`.
 - Guide: \`https://design.oceanbase.com/docs/react/design-md\`
 `;
 
-function fetchAntdDesignMd() {
+const STUB_BODY = `---
+version: alpha
+name: OceanBase Design
+description: Enterprise React design system extending Ant Design for OceanBase products
+colors:
+  primary: '#0D6CF2'
+---
+
+Inherits [Ant Design design.md](https://ant.design/design.md). ${STUB_MARKER}.
+`;
+
+function isUsableDesignMd(content) {
+  return Boolean(
+    content &&
+      !content.includes(STUB_MARKER) &&
+      content.includes('name: OceanBase Design') &&
+      content.length > 4000,
+  );
+}
+
+function fetchAntdDesignMdViaCli() {
   try {
-    return execFileSync('npx', ['-y', '@ant-design/cli', 'design.md', '--version', '6'], {
+    const inv = resolveAntdCliInvocation(root);
+    const out = execFileSync(inv.command, [...inv.args, 'design.md', '--version', '6'], {
       encoding: 'utf8',
       cwd: root,
       timeout: 120000,
       stdio: ['ignore', 'pipe', 'pipe'],
     });
+    if (out?.includes('name: Ant Design') || out?.includes('name: OceanBase Design')) {
+      console.log(`generate-design-md: fetched via ${inv.via} (${inv.label})`);
+      return out;
+    }
+    console.warn('generate-design-md: CLI returned unexpected content');
+    return null;
   } catch (e) {
-    console.warn('generate-design-md: antd design.md unavailable —', e.message?.slice(0, 120));
+    const detail = [e.stderr, e.message].filter(Boolean).join(' | ').slice(0, 200);
+    console.warn('generate-design-md: antd CLI unavailable —', detail);
     return null;
   }
+}
+
+async function fetchAntdDesignMdViaHttp() {
+  try {
+    const res = await fetch('https://ant.design/design.md', {
+      headers: { Accept: 'text/markdown,text/plain,*/*' },
+      signal: AbortSignal.timeout(30000),
+    });
+    if (!res.ok) {
+      console.warn(`generate-design-md: HTTP ${res.status} from ant.design/design.md`);
+      return null;
+    }
+    const text = await res.text();
+    if (!text.includes('name: Ant Design')) {
+      console.warn('generate-design-md: HTTP body missing Ant Design frontmatter');
+      return null;
+    }
+    console.log('generate-design-md: fetched via https://ant.design/design.md');
+    return text;
+  } catch (e) {
+    console.warn('generate-design-md: HTTP fetch unavailable —', e.message?.slice(0, 120));
+    return null;
+  }
+}
+
+function readExistingFallback() {
+  if (!existsSync(outPath)) return null;
+  const existing = readFileSync(outPath, 'utf8');
+  if (!isUsableDesignMd(existing)) return null;
+  console.warn(
+    `generate-design-md: keeping existing ${outPath} (${existing.length} bytes) after fetch failure`,
+  );
+  return existing;
 }
 
 function patchForOb(content) {
@@ -74,25 +141,37 @@ function patchForOb(content) {
     .replace(/^(\s+primary: )'#[0-9A-Fa-f]{6}'/m, "$1'#0D6CF2'");
 }
 
-let body = fetchAntdDesignMd();
-if (!body) {
-  body = `---
-version: alpha
-name: OceanBase Design
-description: Enterprise React design system extending Ant Design for OceanBase products
-colors:
-  primary: '#0D6CF2'
----
-
-Inherits [Ant Design design.md](https://ant.design/design.md). Regenerate with network access to merge full antd baseline.
-`;
-} else {
-  body = patchForOb(body);
+function withOverlay(body) {
+  if (body.includes('## OceanBase Design overrides')) return body;
+  return `${body.trimEnd()}\n${OB_OVERLAY}`;
 }
 
-if (!body.includes('## OceanBase Design overrides')) {
-  body = `${body.trimEnd()}\n${OB_OVERLAY}`;
+async function main() {
+  let body = fetchAntdDesignMdViaCli();
+  if (!body) {
+    body = await fetchAntdDesignMdViaHttp();
+  }
+
+  let source = 'fresh';
+  if (body) {
+    body = withOverlay(patchForOb(body));
+  } else {
+    const existing = readExistingFallback();
+    if (existing) {
+      body = withOverlay(existing);
+      source = 'existing';
+    } else {
+      body = withOverlay(STUB_BODY);
+      source = 'stub';
+      console.warn('generate-design-md: writing stub — no CLI/HTTP/existing baseline available');
+    }
+  }
+
+  writeFileSync(outPath, body);
+  console.log(`generate:design-md wrote ${outPath} (${body.length} bytes, source=${source})`);
 }
 
-writeFileSync(outPath, body);
-console.log(`generate:design-md wrote ${outPath} (${body.length} bytes)`);
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
