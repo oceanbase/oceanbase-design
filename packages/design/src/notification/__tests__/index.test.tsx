@@ -22,10 +22,21 @@ describe('ErrorDetails', () => {
       />
     );
 
+  // `copy-to-clipboard` 通过选中临时节点 + `document.execCommand('copy')` 写入剪贴板，
+  // 因此在 execCommand 执行期间读取选区即可拿到实际待复制的内容
+  const mockExecCommand = () => {
+    let copiedText = '';
+    const execCommand = vi.fn(() => {
+      copiedText = window.getSelection()?.toString() ?? '';
+      return true;
+    });
+    document.execCommand = execCommand;
+    return { execCommand, getCopiedText: () => copiedText };
+  };
+
   it('renders error details with expand and copy actions', () => {
     // `copy-to-clipboard` 内部走 `document.execCommand('copy')`，非安全上下文同样可用
-    const execCommand = vi.fn(() => true);
-    document.execCommand = execCommand;
+    const { execCommand, getCopiedText } = mockExecCommand();
     const successSpy = vi.spyOn(message, 'success').mockReturnValue(undefined as any);
 
     const { getByText } = renderErrorDetails();
@@ -36,7 +47,26 @@ describe('ErrorDetails', () => {
     fireEvent.click(getByText('Copy'));
 
     expect(execCommand).toHaveBeenCalledWith('copy');
+    expect(getCopiedText()).toBe('- Request ID: abc\n- Error Code: ROLE_NOT_AUTHORIZE');
     expect(successSpy).toHaveBeenCalledWith('Copied');
+  });
+
+  it('only copies items without copyable: false', () => {
+    const { getCopiedText } = mockExecCommand();
+    vi.spyOn(message, 'success').mockReturnValue(undefined as any);
+
+    const { getByText } = render(
+      <ErrorDetails
+        prefixCls="ant-notification-notice"
+        items={[
+          { label: 'Request ID', value: 'abc' },
+          { label: 'Error Code', value: 'ROLE_NOT_AUTHORIZE', copyable: false },
+        ]}
+      />
+    );
+    fireEvent.click(getByText('Copy'));
+
+    expect(getCopiedText()).toBe('- Request ID: abc');
   });
 
   it('shows the failure message when the browser cannot copy', () => {
