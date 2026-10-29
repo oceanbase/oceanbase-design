@@ -395,6 +395,9 @@ importers:
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
+      copy-to-clipboard:
+        specifier: ^3.3.3
+        version: 3.3.3
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
