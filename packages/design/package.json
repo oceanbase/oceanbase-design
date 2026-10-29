@@ -47,6 +47,7 @@
     "ahooks": "^2.10.14",
     "antd": "^5.29.3",
     "classnames": "^2.5.1",
+    "copy-to-clipboard": "^3.3.3",
     "lodash": "^4.17.21",
     "lottie-web": "^5.13.0",
     "prop-types": "^15.8.1",

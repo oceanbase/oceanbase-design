@@ -1,4 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react';
+import copy from 'copy-to-clipboard';
 import ConfigProvider from '../config-provider';
 import { message } from '../static-function';
 import type { ErrorDetailItem } from './interface';
@@ -26,14 +27,15 @@ const ErrorDetails: React.FC<ErrorDetailsProps> = ({ items, prefixCls }) => {
     [items, prefixCls]
   );
 
-  const handleCopy = async () => {
+  const handleCopy = () => {
     const copyableItems = items.filter(item => item.copyable !== false);
-    try {
-      await navigator.clipboard.writeText(formatMarkdown(copyableItems));
+    // `navigator.clipboard` 只在安全上下文可用，`copy-to-clipboard` 内部走 execCommand，
+    // 在 HTTP 页面同样可以复制
+    if (copy(formatMarkdown(copyableItems))) {
       message.success(notificationLocale?.copied ?? 'Copied');
-    } catch {
-      message.error(notificationLocale?.copyFailed ?? 'Copy failed');
+      return;
     }
+    message.error(notificationLocale?.copyFailed ?? 'Copy failed');
   };
 
   const showExpand = !expanded && items.length > 0;
