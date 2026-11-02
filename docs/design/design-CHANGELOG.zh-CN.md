@@ -8,6 +8,13 @@ group: 基础组件
 
 ---
 
+## 1.6.1
+
+`2026-11-02`
+
+- Notification
+  - 🐞 修复错误详情在非安全上下文（如 HTTP 页面）下点击复制提示 `Copy failed` 的问题；复制不再依赖 `navigator.clipboard`，在这些环境下也能正常使用。[#1600](https://github.com/oceanbase/oceanbase-design/pull/1600)
+
 ## 1.6.0
 
 `2026-10-08`
