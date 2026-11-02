@@ -8,6 +8,13 @@ group: General
 
 ---
 
+## 1.6.1
+
+`2026-11-02`
+
+- Notification
+  - 🐞 Fixed the error details copy action showing `Copy failed` on non-secure origins such as HTTP pages; copying no longer depends on `navigator.clipboard` and works in those environments. [#1600](https://github.com/oceanbase/oceanbase-design/pull/1600)
+
 ## 1.6.0
 
 `2026-10-08`
