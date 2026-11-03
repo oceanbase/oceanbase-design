@@ -15,6 +15,7 @@ export default {
   syncToCurrent: '同步到當前時間',
   zoomOutRange: '放大時間範圍',
   history: '歷史記錄',
+  copyFailed: '複製失敗',
   // Template for the custom-range description, where {0} is replaced with the actual value.
   nearlyYears: '近 {0} 年',
   nearlyMonths: '近 {0} 個月',

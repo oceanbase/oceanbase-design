@@ -15,6 +15,7 @@ export default {
   syncToCurrent: '現在時刻に同期',
   zoomOutRange: '時間範囲を拡大',
   history: '履歴',
+  copyFailed: 'コピーに失敗しました',
   // Template for the custom-range description, where {0} is replaced with the actual value.
   nearlyYears: '約 {0} 年',
   nearlyMonths: '約 {0} ヶ月',

@@ -44,6 +44,7 @@
     "@oceanbase/util": "workspace:^",
     "ahooks": "^2.10.14",
     "classnames": "^2.5.1",
+    "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.19",
     "diff": "^5.2.0",
     "highlight.js": "^11.11.1",

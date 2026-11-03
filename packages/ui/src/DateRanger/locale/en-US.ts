@@ -15,6 +15,7 @@ export default {
   syncToCurrent: 'Sync to current time',
   zoomOutRange: 'Expand time range',
   history: 'History records',
+  copyFailed: 'Copy failed',
   // Template for the custom-range description, where {0} is replaced with the actual value.
   nearlyYears: 'Nearly {0} years',
   nearlyMonths: 'Nearly {0} months',

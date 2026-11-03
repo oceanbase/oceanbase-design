@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
-import { ConfigProvider } from '@oceanbase/design';
+import { ConfigProvider, message } from '@oceanbase/design';
 import { DateRanger } from '@oceanbase/ui';
 import { DATE_TIME_MONTH_FORMAT_CN, NEAR_1_MINUTES, NEAR_30_MINUTES } from '../constant';
 import jaJP from '../locale/ja-JP';
@@ -264,6 +264,70 @@ describe('DateRanger', () => {
       // Dropdown panel should be destroyed when close.
       expect(dropdownTrigger.classList.contains('ant-dropdown-open')).toBeFalsy();
       expect(document.querySelector('.ant-date-ranger-dropdown-picker')).toBeFalsy();
+    });
+  });
+  suite('History copy' /** 复制历史记录 */, () => {
+    const historyKey = 'ant-date-ranger-date-ranger-history';
+    const historyRange = ['2024-10-12 08:30:00', '2024-10-20 18:00:00'];
+    const originalExecCommand = document.execCommand;
+
+    beforeEach(() => {
+      window.localStorage.setItem(historyKey, JSON.stringify([historyRange]));
+    });
+
+    afterEach(() => {
+      window.localStorage.removeItem(historyKey);
+      document.execCommand = originalExecCommand;
+    });
+
+    /** 打开面板并进入历史记录菜单，返回历史记录所在的弹出层 */
+    const openHistoryMenu = (container: HTMLElement) => {
+      fireEvent.click(container.querySelector('.ant-date-ranger-wrapper > .ant-dropdown-trigger'));
+      const panel = document.querySelector('.ant-date-ranger-dropdown-picker');
+      const historyButton = Array.from(panel.querySelectorAll('button')).find(button =>
+        (button.textContent || '').includes('历史记录')
+      );
+      fireEvent.click(historyButton);
+      return panel;
+    };
+
+    /** 点击历史记录中的复制按钮 */
+    const clickHistoryCopy = (container: HTMLElement) => {
+      const panel = openHistoryMenu(container);
+      fireEvent.click(
+        panel.querySelector('.ant-date-ranger-history-menu-item .ant-date-ranger-menu-text-btn')
+      );
+    };
+
+    it('Should copy the history range' /** 历史记录可以正常复制 */, () => {
+      let copiedText = '';
+      const execCommand = vi.fn(() => {
+        copiedText = window.getSelection()?.toString() ?? '';
+        return true;
+      });
+      document.execCommand = execCommand;
+      const successSpy = vi.spyOn(message, 'success').mockReturnValue(undefined as any);
+
+      const { container } = render(<DateRanger history />);
+      clickHistoryCopy(container);
+
+      expect(execCommand).toHaveBeenCalledWith('copy');
+      expect(copiedText).toBe('2024-10-12 08:30:00~2024-10-20 18:00:00');
+      expect(successSpy).toHaveBeenCalledWith('2024-10-12 08:30:00~2024-10-20 18:00:00');
+      successSpy.mockRestore();
+    });
+
+    it('Should show the copy failed message when the browser cannot copy' /** 复制不可用时给出失败提示 */, () => {
+      document.execCommand = undefined as any;
+      const errorSpy = vi.spyOn(message, 'error').mockReturnValue(undefined as any);
+      const promptSpy = vi.spyOn(window, 'prompt').mockImplementation(() => null);
+
+      const { container } = render(<DateRanger history />);
+      clickHistoryCopy(container);
+
+      expect(errorSpy).toHaveBeenCalledWith('复制失败');
+      errorSpy.mockRestore();
+      promptSpy.mockRestore();
     });
   });
 });

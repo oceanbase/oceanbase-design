@@ -38,6 +38,7 @@ import { findIndex, isEqual as _isEqual, isNil, noop, omit } from 'lodash';
 import type { Moment } from 'moment';
 import moment from 'moment';
 import classNames from 'classnames';
+import copy from 'copy-to-clipboard';
 import LocaleWrapper from '../locale/LocaleWrapper';
 import {
   CUSTOMIZE,
@@ -541,8 +542,11 @@ const Ranger = React.forwardRef((props: DateRangerProps, ref) => {
                                         e.stopPropagation();
                                         const vList = range.map(v => v);
                                         const text = `${vList.join('~')}`;
-                                        navigator.clipboard.writeText(text);
-                                        message.success(text);
+                                        if (copy(text)) {
+                                          message.success(text);
+                                        } else {
+                                          message.error(locale.copyFailed);
+                                        }
                                       }}
                                     >
                                       <CopyOutlined />
