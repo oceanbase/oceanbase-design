@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { ConfigProvider, Table, compactTheme } from '@oceanbase/design';
-import type { TableProps } from '@oceanbase/design';
+import { ConfigProvider, Table, Button, compactTheme, defaultTheme } from '@oceanbase/design';
+import type { TableProps, ThemeConfig } from '@oceanbase/design';
 import zhCN from '../../locale/zh-CN';
 import enUS from '../../locale/en-US';
 
@@ -83,6 +83,68 @@ describe('Table', () => {
       </ConfigProvider>
     );
     expect(getCellFontSize(compactTable, 'small')).toBe('12px');
+  });
+
+  it('embedded controls follow cell font scale instead of locale', () => {
+    const getEmbeddedStyles = (theme?: ThemeConfig) => {
+      const { container, unmount } = render(
+        <ConfigProvider locale={zhCN} theme={theme}>
+          <Table
+            columns={[
+              { title: 'Name', dataIndex: 'name' },
+              {
+                title: 'Action',
+                dataIndex: 'action',
+                render: () => <Button>Edit</Button>,
+              },
+            ]}
+            dataSource={[{ key: 1, name: 'John' }]}
+          />
+        </ConfigProvider>
+      );
+      const button = container.querySelector('.ant-table-tbody .ant-btn') as HTMLElement;
+      const paginationItem = container.querySelector('.ant-pagination-item') as HTMLElement;
+      const styles = {
+        buttonFontSize: getComputedStyle(button).fontSize,
+        buttonHeight: getComputedStyle(button).height,
+        paginationItemHeight: getComputedStyle(paginationItem).height,
+      };
+      unmount();
+      return styles;
+    };
+
+    // 单元格与正文同为 14px 时，表格内嵌控件沿用正常尺寸
+    expect(getEmbeddedStyles(defaultTheme)).toEqual({
+      buttonFontSize: '14px',
+      buttonHeight: '28px',
+      paginationItemHeight: '28px',
+    });
+
+    // 单元格 12px、正文 13px 时，表格内嵌控件收敛到单元格字号
+    expect(getEmbeddedStyles(compactTheme)).toEqual({
+      buttonFontSize: '12px',
+      buttonHeight: '24px',
+      paginationItemHeight: '24px',
+    });
+
+    // 单元格字号大于正文时不收敛，避免把更大的文字塞进更小的控件
+    const largerCellTheme: ThemeConfig = {
+      ...defaultTheme,
+      components: {
+        ...defaultTheme.components,
+        Table: {
+          ...defaultTheme.components?.Table,
+          cellFontSize: 16,
+          cellFontSizeSM: 16,
+          cellFontSizeMD: 16,
+        },
+      },
+    };
+    expect(getEmbeddedStyles(largerCellTheme)).toEqual({
+      buttonFontSize: '14px',
+      buttonHeight: '28px',
+      paginationItemHeight: '28px',
+    });
   });
 
   it('hideOnSinglePage should be false by default', () => {

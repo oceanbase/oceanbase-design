@@ -19,6 +19,15 @@ import seedTheme, {
 
 type LocaleCodeCarrier = Pick<AntLocale, 'locale'>;
 
+/**
+ * 应用主题中与字号相关的显式配置。只用于判断「是否显式设置」，不读取其他字段，
+ * 因此不依赖具体 provider 的 ThemeConfig 类型。
+ */
+type ExplicitSizeTheme = {
+  token?: { fontSize?: number };
+  components?: { Table?: { cellFontSize?: number } };
+};
+
 const OB_TYPOGRAPHY_PRESET_KEY = '__obTypographyPreset' as const;
 
 type OBTypographyPreset = 'default' | 'compact';
@@ -93,21 +102,6 @@ const getLocaleTokenValue = (
   return {};
 };
 
-const getLocaleTokenValueCn = (
-  mergedThemeToken: GlobalToken,
-  locale: LocaleCodeCarrier,
-  tokenKey: string,
-  tokenValue: string | number | undefined,
-  tokenValueEn: number,
-  tokenValueCn: number
-) => {
-  return tokenValue !== mergedThemeToken[tokenKey]
-    ? { [tokenKey]: tokenValue }
-    : isCnLikeLocale(locale.locale) && (tokenValue === undefined || tokenValue === tokenValueEn)
-      ? { [tokenKey]: tokenValueCn }
-      : {};
-};
-
 /**
  * Locale font-family and font-weight patch (always applied; follows locale).
  */
@@ -156,59 +150,43 @@ function resolveLocaleFontPatch(
   };
 }
 
-/** Table locale alignment patch (always applied; follows locale). */
-function getLocaleTableLocalePatch(mergedLocale: LocaleCodeCarrier): ThemeConfig {
-  if (!isEnLikeLocale(mergedLocale.locale)) {
-    return {};
-  }
-  return {
-    components: {
-      Table: {
-        localeEnEmbeddedControls: true,
-      },
-    },
-  };
-}
-
 /**
- * Locale typography patch. Size/table cell patches skip when preset locks size;
- * font and table locale alignment always follow locale.
+ * Locale typography patch. Size/table cell patches skip when the preset locks size or the
+ * app theme sets the size explicitly; font family and weights always follow locale.
  */
 export function resolveLocaleTypographyPatch(
   mergedLocale: LocaleCodeCarrier,
   mergedTheme: ThemeConfig,
-  resolvedFontSize: number | undefined,
+  userTheme: ExplicitSizeTheme | undefined,
   resolvedTokens: LocaleFontTokens,
   options?: { sizeLocked?: boolean }
 ): ThemeConfig {
   return merge(
     {},
-    options?.sizeLocked
-      ? {}
-      : getLocaleFontSizeThemePatch(mergedLocale, mergedTheme, resolvedFontSize),
-    resolveLocaleFontPatch(mergedLocale, mergedTheme, resolvedTokens),
-    getLocaleTableLocalePatch(mergedLocale)
+    options?.sizeLocked ? {} : getLocaleFontSizeThemePatch(mergedLocale, userTheme),
+    resolveLocaleFontPatch(mergedLocale, mergedTheme, resolvedTokens)
   );
 }
 
+/**
+ * Cn-like locale body/table font patch.
+ *
+ * Detect explicit config by "did the app theme set it", not by "does the value equal the
+ * default": an explicit `fontSize: 13` (or `Table.cellFontSize: 12`) cannot be told apart
+ * from the seed default by value and used to be silently overridden to 14.
+ */
 function getLocaleFontSizeThemePatch(
   mergedLocale: LocaleCodeCarrier,
-  mergedTheme: ThemeConfig,
-  resolvedFontSize: number | undefined
+  userTheme: ExplicitSizeTheme | undefined
 ): ThemeConfig {
-  const tokenPatch = getLocaleTokenValueCn(
-    (mergedTheme.token ?? {}) as GlobalToken,
-    mergedLocale,
-    'fontSize',
-    resolvedFontSize,
-    fontSizeEn,
-    fontSizeCn
-  );
+  if (!isCnLikeLocale(mergedLocale.locale)) {
+    return {};
+  }
 
   const patch: ThemeConfig = {};
-  if ('fontSize' in tokenPatch && tokenPatch.fontSize !== undefined) {
+  if (userTheme?.token?.fontSize === undefined) {
     patch.token = {
-      fontSize: tokenPatch.fontSize as number,
+      fontSize: fontSizeCn,
       lineHeight: lineHeightCn,
       fontHeight: fontHeightCn,
     };
@@ -216,11 +194,7 @@ function getLocaleFontSizeThemePatch(
 
   const tablePatch: NonNullable<ThemeConfig['components']>['Table'] = {};
 
-  const cellFs = mergedTheme.components?.Table?.cellFontSize;
-  if (
-    (cellFs === undefined || cellFs === tableCellFontSizeEn) &&
-    isCnLikeLocale(mergedLocale.locale)
-  ) {
+  if (userTheme?.components?.Table?.cellFontSize === undefined) {
     Object.assign(tablePatch, getTableCellFontTokens(fontSizeCn));
   }
 
