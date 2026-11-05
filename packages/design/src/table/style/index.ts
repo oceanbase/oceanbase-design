@@ -13,7 +13,7 @@ const antdPrepareComponentToken = antdPrepareComponentTokenImport as unknown as 
 /**
  * `genStyleHooks` 注册名为 `OB-Table`，`@ant-design/cssinjs-utils` 的 getComponentToken 只合并 `token.OB-Table`，
  * 而 ConfigProvider 的 `theme.components.Table` 挂在 `token.Table` 上。若不合并，自定义 Table 组件 token（含
- * `localeEnEmbeddedControls`）不会进入样式计算。
+ * `cellFontSize`）不会进入样式计算。
  */
 function prepareComponentToken(token: GlobalToken) {
   const base = antdPrepareComponentToken(token);
@@ -26,19 +26,20 @@ function prepareComponentToken(token: GlobalToken) {
 }
 
 /**
- * 单元格是否与全局正文同档（`cellFontSize === token.fontSize`）。
+ * 单元格字号是否比全局正文小一档（表格更密）。
+ * 只有更密时才让内嵌控件收敛；单元格字号等于或大于正文时沿用正常尺寸。
  */
-const isTableCellBodyFontScale = (token: TableToken): boolean =>
-  token.cellFontSize === token.fontSize;
+const isTableCellFontSmaller = (token: TableToken): boolean => token.cellFontSize < token.fontSize;
 
 const getTableCellLineHeight = (token: TableToken): number =>
-  isTableCellBodyFontScale(token) ? token.lineHeight : token.lineHeightSM;
+  isTableCellFontSmaller(token) ? token.lineHeightSM : token.lineHeight;
 
 const getTableEmbeddedControlHeight = (token: TableToken): number =>
-  isTableCellBodyFontScale(token) ? token.controlHeight : token.controlHeightSM;
+  isTableCellFontSmaller(token) ? token.controlHeightSM : token.controlHeight;
 
+/** 单元格字号比正文小时，表格内的默认尺寸 Button 收敛到单元格字号与行高。 */
 const genSmallBtnStyle = (token: TableToken): CSSObject => {
-  if (!token.localeEnEmbeddedControls) {
+  if (!isTableCellFontSmaller(token)) {
     return {};
   }
   const { antCls } = token;
@@ -62,9 +63,9 @@ const genSmallBtnStyle = (token: TableToken): CSSObject => {
   };
 };
 
-/** 英文 locale 下分页条与 page size Select 与单元格内嵌控件对齐的样式（与 {@link genSmallBtnStyle} 同开关）。 */
+/** 分页条与 page size Select 与单元格内嵌控件对齐的样式（与 {@link genSmallBtnStyle} 同判据）。 */
 const genSmallPaginationStyle = (token: TableToken): CSSObject => {
-  if (!token.localeEnEmbeddedControls) {
+  if (!isTableCellFontSmaller(token)) {
     return {};
   }
   const { antCls, calc } = token;

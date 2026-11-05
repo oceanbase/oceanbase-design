@@ -216,7 +216,6 @@ const ConfigProvider: ConfigProviderType = ({
 
   const { token } = themeConfig.useToken();
   const fontFamily = mergedTheme.token?.fontFamily || token.fontFamily;
-  const fontSize = mergedTheme.token?.fontSize ?? token.fontSize;
   const fontWeightWeak = mergedTheme.token?.fontWeightWeak || token.fontWeightWeak;
   const fontWeight = mergedTheme.token?.fontWeight || token.fontWeight;
   const fontWeightStrong = mergedTheme.token?.fontWeightStrong || token.fontWeightStrong;
@@ -236,7 +235,7 @@ const ConfigProvider: ConfigProviderType = ({
   const localeTypographyPatch = resolveLocaleTypographyPatch(
     mergedLocale,
     mergedTheme,
-    fontSize,
+    theme,
     resolvedTokens,
     { sizeLocked: typographyLocked }
   );

@@ -51,12 +51,7 @@ describe('locale typography presets', () => {
 
   it('resolveLocaleTypographyPatch returns Cn patch for zh locale', () => {
     const baseTheme = seedTheme as ThemeConfig;
-    const patch = resolveLocaleTypographyPatch(
-      zhCN,
-      baseTheme,
-      baseTheme.token?.fontSize,
-      resolvedTokens
-    );
+    const patch = resolveLocaleTypographyPatch(zhCN, baseTheme, undefined, resolvedTokens);
     expect(patch.token?.fontSize).toBe(14);
     expect(patch.token?.fontHeight).toBe(22);
     expect(patch.components?.Table?.cellFontSize).toBe(14);
@@ -64,34 +59,50 @@ describe('locale typography presets', () => {
     expect(patch.components?.Table?.cellFontSizeMD).toBe(14);
   });
 
-  it('resolveLocaleTypographyPatch returns en typography patch', () => {
+  it('resolveLocaleTypographyPatch returns en typography patch without table control alignment', () => {
     const baseTheme = seedTheme as ThemeConfig;
-    const patch = resolveLocaleTypographyPatch(
-      enUS,
-      baseTheme,
-      baseTheme.token?.fontSize,
-      resolvedTokens
-    );
+    const patch = resolveLocaleTypographyPatch(enUS, baseTheme, undefined, resolvedTokens);
     expect(patch.token?.fontFamily).toBe(fontFamilyEn);
-    expect(patch.components?.Table?.localeEnEmbeddedControls).toBe(true);
+    // 表格内嵌控件是否收敛由单元格字号决定，不再由 locale 触发
+    expect(patch.components?.Table?.cellFontSize).toBeUndefined();
   });
 
   it('resolveLocaleTypographyPatch does not override custom Table cellFontSize', () => {
     const custom: ThemeConfig = {
-      ...seedTheme,
       components: {
         ...seedTheme.components,
         Table: { ...seedTheme.components?.Table, cellFontSize: 13 },
       },
     };
-    const patch = resolveLocaleTypographyPatch(
-      zhCN,
-      custom,
-      custom.token?.fontSize,
-      resolvedTokens
-    );
+    const patch = resolveLocaleTypographyPatch(zhCN, custom, custom, resolvedTokens);
     expect(patch.token?.fontSize).toBe(14);
     expect(patch.components?.Table?.cellFontSize).toBeUndefined();
+  });
+
+  it('zh locale keeps an explicit fontSize of 13', () => {
+    const Child = () => {
+      const { token } = useToken();
+      expect(token.fontSize).toBe(13);
+      return <div />;
+    };
+    render(
+      <ConfigProvider locale={zhCN} theme={{ token: { fontSize: 13 } }}>
+        <Child />
+      </ConfigProvider>
+    );
+  });
+
+  it('zh locale keeps an explicit Table cellFontSize of 12', () => {
+    const Child = () => {
+      const { token } = useToken();
+      expect(token.Table?.cellFontSize).toBe(12);
+      return <div />;
+    };
+    render(
+      <ConfigProvider locale={zhCN} theme={{ components: { Table: { cellFontSize: 12 } } }}>
+        <Child />
+      </ConfigProvider>
+    );
   });
 
   it('zh locale without theme uses 14px body and seed fontFamily', () => {
@@ -155,7 +166,7 @@ describe('locale typography presets', () => {
 
   it('custom fontSize guard still patches Table cellFontSize for zh', () => {
     const customTheme: ThemeConfig = { token: { fontSize: 16 } };
-    const patch = resolveLocaleTypographyPatch(zhCN, customTheme, 16, {
+    const patch = resolveLocaleTypographyPatch(zhCN, customTheme, customTheme, {
       fontFamily: seedTheme.token.fontFamily,
       fontWeightWeak: seedTheme.token.fontWeightWeak,
       fontWeight: seedTheme.token.fontWeight,
