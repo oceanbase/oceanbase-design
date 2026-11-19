@@ -67,7 +67,7 @@ const Page: React.FC = () => {
     <Space
       direction="vertical"
       size={[0, 16]}
-      style={{ width: '100%', paddingTop: 16, borderTop: `1px solid #d9d9d9` }}
+      style={{ width: '100%', paddingTop: 16, borderTop: `1px solid var(--ob-color-divider)` }}
     >
       <Pagination defaultCurrent={1} total={50} showSizeChanger />
       <Space wrap>
@@ -90,7 +90,13 @@ const Page: React.FC = () => {
         </Popconfirm>
       </Space>
       <Transfer dataSource={[]} showSearch targetKeys={[]} />
-      <div style={{ width: 320, border: `1px solid #d9d9d9`, borderRadius: 8 }}>
+      <div
+        style={{
+          width: 320,
+          border: `1px solid var(--ob-color-border-default)`,
+          borderRadius: 8,
+        }}
+      >
         <Calendar fullscreen={false} value={dayjs()} />
       </div>
       <Table dataSource={[]} columns={columns} />
