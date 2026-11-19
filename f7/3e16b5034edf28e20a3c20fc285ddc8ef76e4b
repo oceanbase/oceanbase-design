@@ -1,0 +1,50 @@
+packages/design/tokens/ob-css-vars.css-data.json
+  s_cd8349e3e74af1::t_340bd186fcd440 325-327,531
+  s_cd8349e3e74af1::t_0a83251fb95c4b 220-223,252-255,268-271,324,528-530
+packages/design/src/theme/obToken.tsx
+  s_cd8349e3e74af1::t_50694894f6c3b8 97,101
+  s_cd8349e3e74af1::t_bdbf05bcf778f9 327,331
+  s_cd8349e3e74af1::t_355d8455f7f94d 361
+  s_cd8349e3e74af1::t_335feacb00b05f 133
+  s_cd8349e3e74af1::t_b29f21d4fb2080 117
+  s_cd8349e3e74af1::t_2d33b8ca5b6bb1 366-367,369-371,373-375,377-379,381-383,385
+  s_cd8349e3e74af1::t_8760abac43688f 139-140,142-144,146-148,150-152,154-156,158
+  s_cd8349e3e74af1::t_4670082c61d3db 317
+  s_cd8349e3e74af1::t_599ea870360e13 347
+  s_cd8349e3e74af1::t_3e80eec84e43e6 87
+packages/design/src/theme/default.ts
+  s_cd8349e3e74af1::t_a6189c27af0954 38
+packages/cli/src/metadata/obToken.css-vars.json
+  s_cd8349e3e74af1::t_0a83251fb95c4b 5,24,38,43,231,247,252,333-334,383,523-530,635-642,675-680,1686-1689
+  s_cd8349e3e74af1::t_340bd186fcd440 79,260,903-909
+  s_cd8349e3e74af1::t_0a1543277bbc71 681-682,910
+packages/design/tokens/ob-css-vars.reference.css
+  s_cd8349e3e74af1::t_0a83251fb95c4b 64,73,77,148
+  s_cd8349e3e74af1::t_4ac4665e82a90d 35
+  s_cd8349e3e74af1::t_340bd186fcd440 92
+packages/design/src/theme/obTokenMeta.ts
+  s_cd8349e3e74af1::t_5669f889ed0706 404,875-881
+  s_cd8349e3e74af1::t_fffeef61fc128a 432-438
+  s_cd8349e3e74af1::t_0ade0403fe4a45 532-538
+  s_cd8349e3e74af1::t_936f1f9c18376f 346-352
+  s_cd8349e3e74af1::t_cfa0e5e175a45c 405-410
+packages/design/src/theme/__tests__/obToken.test.tsx
+  s_cd8349e3e74af1::t_2a72d2549beb24 123-124,126-152
+  s_cd8349e3e74af1::t_591b5c808aaedb 125
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f73e16b5034edf28e20a3c20fc285ddc8ef76e4b",
+  "prompts": {},
+  "sessions": {
+    "s_cd8349e3e74af1": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "b18be67a-9c7c-41d8-841a-2244555cbb98",
+        "model": "5998288cf433a589"
+      },
+      "human_author": "dengfuping <fuping.dfp@antgroup.com>"
+    }
+  }
+}
