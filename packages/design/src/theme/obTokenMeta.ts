@@ -343,6 +343,13 @@ export const obTokenMeta: ObTokenMeta[] = [
     category: 'color-bg',
     token: 'red1',
   },
+  {
+    name: 'color-bg-critical',
+    desc: '严重/警示背景色',
+    descEn: 'Critical background',
+    category: 'color-bg',
+    token: 'fuchsia1',
+  },
 
   // 边框色 Border
   {
@@ -395,6 +402,13 @@ export const obTokenMeta: ObTokenMeta[] = [
     token: 'blue4',
   },
   {
+    name: 'color-border-info',
+    desc: '信息边框色',
+    descEn: 'Info border',
+    category: 'color-border',
+    token: 'blue4',
+  },
+  {
     name: 'color-border-success',
     desc: '成功边框色',
     descEn: 'Success border',
@@ -414,6 +428,13 @@ export const obTokenMeta: ObTokenMeta[] = [
     descEn: 'Warning border',
     category: 'color-border',
     token: 'orange4',
+  },
+  {
+    name: 'color-border-critical',
+    desc: '严重/警示边框色',
+    descEn: 'Critical border',
+    category: 'color-border',
+    token: 'fuchsia4',
   },
 
   // 文本色 Text
@@ -507,6 +528,13 @@ export const obTokenMeta: ObTokenMeta[] = [
     descEn: 'Warning text',
     category: 'color-text',
     token: 'orange4',
+  },
+  {
+    name: 'color-text-critical',
+    desc: '严重/警示文本色',
+    descEn: 'Critical text',
+    category: 'color-text',
+    token: 'fuchsia4',
   },
 
   // 图标色 Icon
@@ -843,6 +871,13 @@ export const obTokenMeta: ObTokenMeta[] = [
     descEn: 'Space 800',
     category: 'space',
     token: 'paddingXL',
+  },
+  {
+    name: 'space-negative-25',
+    desc: '负间距 25',
+    descEn: 'Negative space 25',
+    category: 'space',
+    value: '-1px',
   },
 
   // ==================== 组件 Token ====================

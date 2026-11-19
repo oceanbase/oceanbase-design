@@ -218,6 +218,10 @@
       "description": "错误背景色 / Error background"
     },
     {
+      "name": "--ob-color-bg-critical",
+      "description": "严重/警示背景色 / Critical background"
+    },
+    {
       "name": "--ob-color-divider",
       "description": "分割线颜色 / Divider color"
     },
@@ -246,6 +250,10 @@
       "description": "聚焦边框色 / Focus border"
     },
     {
+      "name": "--ob-color-border-info",
+      "description": "信息边框色 / Info border"
+    },
+    {
       "name": "--ob-color-border-success",
       "description": "成功边框色 / Success border"
     },
@@ -256,6 +264,10 @@
     {
       "name": "--ob-color-border-warning",
       "description": "警告边框色 / Warning border"
+    },
+    {
+      "name": "--ob-color-border-critical",
+      "description": "严重/警示边框色 / Critical border"
     },
     {
       "name": "--ob-color-text-default",
@@ -308,6 +320,10 @@
     {
       "name": "--ob-color-text-warning",
       "description": "警告文本色 / Warning text"
+    },
+    {
+      "name": "--ob-color-text-critical",
+      "description": "严重/警示文本色 / Critical text"
     },
     {
       "name": "--ob-color-icon-default",
@@ -508,6 +524,10 @@
     {
       "name": "--ob-space-800",
       "description": "间距 800 / Space 800"
+    },
+    {
+      "name": "--ob-space-negative-25",
+      "description": "负间距 25 / Negative space 25"
     },
     {
       "name": "--ob-navi-color-bg",

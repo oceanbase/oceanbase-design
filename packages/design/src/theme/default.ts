@@ -35,7 +35,7 @@ export const green6 = '#09593f';
 // 橙色 Orange
 export const orange1 = '#fff9ee';
 export const orange2 = '#ffe7c2';
-export const orange3 = '#fac373';
+export const orange3 = '#F7CA88';
 export const orange4 = '#f49f25';
 export const orange5 = '#ac690b';
 export const orange6 = '#6c4408';

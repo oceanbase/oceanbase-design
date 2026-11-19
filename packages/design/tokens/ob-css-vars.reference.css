@@ -32,7 +32,7 @@
   --ob-green-6: #09593f;
   --ob-orange-1: #fff9ee;
   --ob-orange-2: #ffe7c2;
-  --ob-orange-3: #fac373;
+  --ob-orange-3: #f7ca88;
   --ob-orange-4: #f49f25;
   --ob-orange-5: #ac690b;
   --ob-orange-6: #6c4408;
@@ -61,6 +61,7 @@
   --ob-color-bg-success: #f5faf8;
   --ob-color-bg-warning: #fff9ee;
   --ob-color-bg-error: #fff2f2;
+  --ob-color-bg-critical: #faf0fc;
   /* color-border */
   --ob-color-divider: #e2e8f3;
   --ob-color-border-default: #cdd5e4;
@@ -69,9 +70,11 @@
   --ob-color-border-hover: #8592ad;
   --ob-color-border-selected: #0d6cf2;
   --ob-color-border-focus: #0d6cf2;
+  --ob-color-border-info: #0d6cf2;
   --ob-color-border-success: #16b882;
   --ob-color-border-error: #eb4242;
   --ob-color-border-warning: #f49f25;
+  --ob-color-border-critical: #b04ec4;
   /* color-text */
   --ob-color-text-default: #132039;
   --ob-color-text-navigation: #3b4a69;
@@ -86,6 +89,7 @@
   --ob-color-text-success: #16b882;
   --ob-color-text-error: #eb4242;
   --ob-color-text-warning: #f49f25;
+  --ob-color-text-critical: #b04ec4;
   /* color-icon */
   --ob-color-icon-default: #5c6b8a;
   --ob-color-icon-hover: #0d6cf2;
@@ -141,6 +145,7 @@
   --ob-space-500: 20px;
   --ob-space-600: 24px;
   --ob-space-800: 32px;
+  --ob-space-negative-25: -1px;
   /* component */
   --ob-navi-color-bg: #f1f6ff;
   --ob-navi-color-bg-hover: #e8effb;

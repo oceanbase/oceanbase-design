@@ -84,6 +84,7 @@ const genObToken = (token: GlobalToken, prefix = 'ob') => {
     colorBgSuccess: token.green1,
     colorBgWarning: token.orange1,
     colorBgError: token.red1,
+    colorBgCritical: token.fuchsia1,
 
     // 边框色 Border
     colorDivider: token.gray4,
@@ -93,9 +94,11 @@ const genObToken = (token: GlobalToken, prefix = 'ob') => {
     colorBorderHover: token.gray7,
     colorBorderSelected: token.blue4,
     colorBorderFocus: token.blue4,
+    colorBorderInfo: token.blue4,
     colorBorderSuccess: token.green4,
     colorBorderError: token.red4,
     colorBorderWarning: token.orange4,
+    colorBorderCritical: token.fuchsia4,
 
     // 文本色 Text
     colorTextDefault: token.colorText,
@@ -111,6 +114,7 @@ const genObToken = (token: GlobalToken, prefix = 'ob') => {
     colorTextSuccess: token.green4,
     colorTextError: token.red4,
     colorTextWarning: token.orange4,
+    colorTextCritical: token.fuchsia4,
 
     // 图标色 Icon
     colorIconDefault: token.gray8,
@@ -126,31 +130,32 @@ const genObToken = (token: GlobalToken, prefix = 'ob') => {
 
     /**
      * 兼容旧版「状态色」字段（与 DTCG 语义色并存；勿在新代码中使用，亦不在文档中列出）
+     * 取值与同名的新版语义色对齐，避免两套命名混用时出现色差
      */
     colorDefaultText: token.colorText,
     colorDefaultIcon: token.gray8,
     colorDefaultFill: token.gray2,
     colorDefaultBorder: token.gray2,
-    colorInfoText: token.blue6,
-    colorInfoIcon: token.blue6,
+    colorInfoText: token.blue4,
+    colorInfoIcon: token.blue4,
     colorInfoFill: token.blue1,
-    colorInfoBorder: token.blue3,
-    colorSuccessText: token.green6,
-    colorSuccessIcon: token.green6,
+    colorInfoBorder: token.blue4,
+    colorSuccessText: token.green4,
+    colorSuccessIcon: token.green4,
     colorSuccessFill: token.green1,
-    colorSuccessBorder: token.green3,
-    colorWarningText: token.orange6,
-    colorWarningIcon: token.orange6,
+    colorSuccessBorder: token.green4,
+    colorWarningText: token.orange4,
+    colorWarningIcon: token.orange4,
     colorWarningFill: token.orange1,
-    colorWarningBorder: token.orange3,
-    colorErrorText: token.red6,
-    colorErrorIcon: token.red6,
+    colorWarningBorder: token.orange4,
+    colorErrorText: token.red4,
+    colorErrorIcon: token.red4,
     colorErrorFill: token.red1,
-    colorErrorBorder: token.red3,
-    colorCriticalText: token.fuchsia6,
-    colorCriticalIcon: token.fuchsia6,
+    colorErrorBorder: token.red4,
+    colorCriticalText: token.fuchsia4,
+    colorCriticalIcon: token.fuchsia4,
     colorCriticalFill: token.fuchsia1,
-    colorCriticalBorder: token.fuchsia3,
+    colorCriticalBorder: token.fuchsia4,
 
     // ==================== 字体 Token ====================
     fontFamilyDefault: token.fontFamily,
@@ -309,6 +314,7 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
         [`--${prefix}-color-bg-success`]: token.green1,
         [`--${prefix}-color-bg-warning`]: token.orange1,
         [`--${prefix}-color-bg-error`]: token.red1,
+        [`--${prefix}-color-bg-critical`]: token.fuchsia1,
 
         // 边框色 Border
         [`--${prefix}-color-divider`]: token.gray4,
@@ -318,9 +324,11 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
         [`--${prefix}-color-border-hover`]: token.gray7,
         [`--${prefix}-color-border-selected`]: token.blue4,
         [`--${prefix}-color-border-focus`]: token.blue4,
+        [`--${prefix}-color-border-info`]: token.blue4,
         [`--${prefix}-color-border-success`]: token.green4,
         [`--${prefix}-color-border-error`]: token.red4,
         [`--${prefix}-color-border-warning`]: token.orange4,
+        [`--${prefix}-color-border-critical`]: token.fuchsia4,
 
         // 文本色 Text
         [`--${prefix}-color-text-default`]: token.colorText,
@@ -336,6 +344,7 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
         [`--${prefix}-color-text-success`]: token.green4,
         [`--${prefix}-color-text-error`]: token.red4,
         [`--${prefix}-color-text-warning`]: token.orange4,
+        [`--${prefix}-color-text-critical`]: token.fuchsia4,
 
         // 图标色 Icon
         [`--${prefix}-color-icon-default`]: token.gray8,
@@ -349,31 +358,31 @@ const genCssVariablesStyle = (token: GlobalToken, prefix = 'ob'): CSSInterpolati
         [`--${prefix}-color-icon-error`]: token.red4,
         [`--${prefix}-color-icon-critical`]: token.fuchsia4,
 
-        /* 兼容旧版「状态色」CSS 变量（勿在新代码中使用，亦不在文档中列出） */
+        /* 兼容旧版「状态色」CSS 变量（勿在新代码中使用，亦不在文档中列出；取值与同名语义色对齐） */
         [`--${prefix}-color-default-text`]: token.colorText,
         [`--${prefix}-color-default-icon`]: token.gray8,
         [`--${prefix}-color-default-fill`]: token.gray2,
         [`--${prefix}-color-default-border`]: token.gray2,
-        [`--${prefix}-color-info-text`]: token.blue6,
-        [`--${prefix}-color-info-icon`]: token.blue6,
+        [`--${prefix}-color-info-text`]: token.blue4,
+        [`--${prefix}-color-info-icon`]: token.blue4,
         [`--${prefix}-color-info-fill`]: token.blue1,
-        [`--${prefix}-color-info-border`]: token.blue3,
-        [`--${prefix}-color-success-text`]: token.green6,
-        [`--${prefix}-color-success-icon`]: token.green6,
+        [`--${prefix}-color-info-border`]: token.blue4,
+        [`--${prefix}-color-success-text`]: token.green4,
+        [`--${prefix}-color-success-icon`]: token.green4,
         [`--${prefix}-color-success-fill`]: token.green1,
-        [`--${prefix}-color-success-border`]: token.green3,
-        [`--${prefix}-color-warning-text`]: token.orange6,
-        [`--${prefix}-color-warning-icon`]: token.orange6,
+        [`--${prefix}-color-success-border`]: token.green4,
+        [`--${prefix}-color-warning-text`]: token.orange4,
+        [`--${prefix}-color-warning-icon`]: token.orange4,
         [`--${prefix}-color-warning-fill`]: token.orange1,
-        [`--${prefix}-color-warning-border`]: token.orange3,
-        [`--${prefix}-color-error-text`]: token.red6,
-        [`--${prefix}-color-error-icon`]: token.red6,
+        [`--${prefix}-color-warning-border`]: token.orange4,
+        [`--${prefix}-color-error-text`]: token.red4,
+        [`--${prefix}-color-error-icon`]: token.red4,
         [`--${prefix}-color-error-fill`]: token.red1,
-        [`--${prefix}-color-error-border`]: token.red3,
-        [`--${prefix}-color-critical-text`]: token.fuchsia6,
-        [`--${prefix}-color-critical-icon`]: token.fuchsia6,
+        [`--${prefix}-color-error-border`]: token.red4,
+        [`--${prefix}-color-critical-text`]: token.fuchsia4,
+        [`--${prefix}-color-critical-icon`]: token.fuchsia4,
         [`--${prefix}-color-critical-fill`]: token.fuchsia1,
-        [`--${prefix}-color-critical-border`]: token.fuchsia3,
+        [`--${prefix}-color-critical-border`]: token.fuchsia4,
 
         // ==================== 字体 Token ====================
         [`--${prefix}-font-family-default`]: token.fontFamily,

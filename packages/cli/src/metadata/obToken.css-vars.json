@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "source": "packages/design/src/theme/obToken.tsx",
   "metaSource": "packages/design/src/theme/obTokenMeta.ts",
-  "count": 173,
+  "count": 177,
   "tokens": [
     "--ob-black",
     "--ob-blue-1",
@@ -21,6 +21,7 @@
     "--ob-btn-color-secondary-border",
     "--ob-btn-color-secondary-icon",
     "--ob-btn-color-secondary-text",
+    "--ob-color-bg-critical",
     "--ob-color-bg-default",
     "--ob-color-bg-disabled",
     "--ob-color-bg-error",
@@ -34,10 +35,12 @@
     "--ob-color-bg-success",
     "--ob-color-bg-warning",
     "--ob-color-border-container",
+    "--ob-color-border-critical",
     "--ob-color-border-default",
     "--ob-color-border-error",
     "--ob-color-border-focus",
     "--ob-color-border-hover",
+    "--ob-color-border-info",
     "--ob-color-border-inverse",
     "--ob-color-border-selected",
     "--ob-color-border-success",
@@ -73,6 +76,7 @@
     "--ob-color-success-fill",
     "--ob-color-success-icon",
     "--ob-color-success-text",
+    "--ob-color-text-critical",
     "--ob-color-text-default",
     "--ob-color-text-description",
     "--ob-color-text-disabled",
@@ -224,6 +228,7 @@
       "--ob-white"
     ],
     "color-bg": [
+      "--ob-color-bg-critical",
       "--ob-color-bg-default",
       "--ob-color-bg-disabled",
       "--ob-color-bg-error",
@@ -239,10 +244,12 @@
     ],
     "color-border": [
       "--ob-color-border-container",
+      "--ob-color-border-critical",
       "--ob-color-border-default",
       "--ob-color-border-error",
       "--ob-color-border-focus",
       "--ob-color-border-hover",
+      "--ob-color-border-info",
       "--ob-color-border-inverse",
       "--ob-color-border-selected",
       "--ob-color-border-success",
@@ -250,6 +257,7 @@
       "--ob-color-divider"
     ],
     "color-text": [
+      "--ob-color-text-critical",
       "--ob-color-text-default",
       "--ob-color-text-description",
       "--ob-color-text-disabled",
@@ -322,7 +330,8 @@
       "--ob-space-50",
       "--ob-space-500",
       "--ob-space-600",
-      "--ob-space-800"
+      "--ob-space-800",
+      "--ob-space-negative-25"
     ],
     "component": [
       "--ob-btn-color-danger-border",
@@ -371,8 +380,7 @@
       "--ob-color-warning-border",
       "--ob-color-warning-fill",
       "--ob-color-warning-icon",
-      "--ob-color-warning-text",
-      "--ob-space-negative-25"
+      "--ob-color-warning-text"
     ]
   },
   "entries": [
@@ -513,6 +521,14 @@
       "category": "component"
     },
     {
+      "cssVar": "--ob-color-bg-critical",
+      "name": "color-bg-critical",
+      "jsToken": "colorBgCritical",
+      "desc": "严重/警示背景色",
+      "descEn": "Critical background",
+      "category": "color-bg"
+    },
+    {
       "cssVar": "--ob-color-bg-default",
       "name": "color-bg-default",
       "jsToken": "colorBgDefault",
@@ -617,6 +633,14 @@
       "category": "color-border"
     },
     {
+      "cssVar": "--ob-color-border-critical",
+      "name": "color-border-critical",
+      "jsToken": "colorBorderCritical",
+      "desc": "严重/警示边框色",
+      "descEn": "Critical border",
+      "category": "color-border"
+    },
+    {
       "cssVar": "--ob-color-border-default",
       "name": "color-border-default",
       "jsToken": "colorBorderDefault",
@@ -646,6 +670,14 @@
       "jsToken": "colorBorderHover",
       "desc": "悬停边框色",
       "descEn": "Hover border",
+      "category": "color-border"
+    },
+    {
+      "cssVar": "--ob-color-border-info",
+      "name": "color-border-info",
+      "jsToken": "colorBorderInfo",
+      "desc": "信息边框色",
+      "descEn": "Info border",
       "category": "color-border"
     },
     {
@@ -867,6 +899,14 @@
       "cssVar": "--ob-color-success-text",
       "name": "color-success-text",
       "category": "other"
+    },
+    {
+      "cssVar": "--ob-color-text-critical",
+      "name": "color-text-critical",
+      "jsToken": "colorTextCritical",
+      "desc": "严重/警示文本色",
+      "descEn": "Critical text",
+      "category": "color-text"
     },
     {
       "cssVar": "--ob-color-text-default",
@@ -1643,7 +1683,10 @@
     {
       "cssVar": "--ob-space-negative-25",
       "name": "space-negative-25",
-      "category": "other"
+      "jsToken": "spaceNegative-25",
+      "desc": "负间距 25",
+      "descEn": "Negative space 25",
+      "category": "space"
     },
     {
       "cssVar": "--ob-switch-color-bg-active",
