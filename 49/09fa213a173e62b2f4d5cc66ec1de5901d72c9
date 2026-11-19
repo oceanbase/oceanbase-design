@@ -1,0 +1,14 @@
+packages/design/src/locale/demo/basic.tsx
+  h_f99a5e82bb4645 70,93-99
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "4909fa213a173e62b2f4d5cc66ec1de5901d72c9",
+  "prompts": {},
+  "humans": {
+    "h_f99a5e82bb4645": {
+      "author": "dengfuping <fuping.dfp@antgroup.com>"
+    }
+  }
+}
