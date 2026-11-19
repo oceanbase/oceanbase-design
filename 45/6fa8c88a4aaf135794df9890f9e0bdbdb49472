@@ -1,0 +1,28 @@
+packages/design/src/notification/ErrorDetails.tsx
+  s_66786657f8ac6c::t_62093ac69c8e17 92
+  s_66786657f8ac6c::t_9d1891b769f360 1,3,11-12,15-17,21,23-24,28-33,49-54,62,64-66,69,74,78,80-91,93-114
+packages/design/src/notification/style/index.ts
+  s_66786657f8ac6c::t_ec18d2d7aba7d0 249-253,257-261,263-264,274-278
+packages/design/src/notification/__tests__/index.test.tsx
+  s_66786657f8ac6c::t_82b8f821bacb63 14,22,50-62,64-65,69-89
+  s_66786657f8ac6c::t_e446a5b7823f0a 63,66-68
+packages/design/src/notification/NotificationContent.tsx
+  s_66786657f8ac6c::t_3893ba074ef5c9 20,22
+  s_66786657f8ac6c::t_62093ac69c8e17 21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "456fa8c88a4aaf135794df9890f9e0bdbdb49472",
+  "prompts": {},
+  "sessions": {
+    "s_66786657f8ac6c": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "b4f86b6b-5fc0-4971-9b37-a3c9d83db732",
+        "model": "5998288cf433a589"
+      },
+      "human_author": "dengfuping <fuping.dfp@antgroup.com>"
+    }
+  }
+}
