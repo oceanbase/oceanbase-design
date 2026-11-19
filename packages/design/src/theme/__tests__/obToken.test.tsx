@@ -120,6 +120,36 @@ describe('obToken', () => {
         </ConfigProvider>
       );
     });
+
+    it('should keep legacy status tokens aligned with semantic tokens', () => {
+      const pairs: [keyof typeof obToken, keyof typeof obToken][] = [
+        ['colorDefaultText', 'colorTextDefault'],
+        ['colorDefaultIcon', 'colorIconDefault'],
+        ['colorInfoFill', 'colorBgInfo'],
+        ['colorInfoText', 'colorIconInfo'],
+        ['colorInfoIcon', 'colorIconInfo'],
+        ['colorInfoBorder', 'colorBorderInfo'],
+        ['colorSuccessFill', 'colorBgSuccess'],
+        ['colorSuccessText', 'colorTextSuccess'],
+        ['colorSuccessIcon', 'colorIconSuccess'],
+        ['colorSuccessBorder', 'colorBorderSuccess'],
+        ['colorWarningFill', 'colorBgWarning'],
+        ['colorWarningText', 'colorTextWarning'],
+        ['colorWarningIcon', 'colorIconWarning'],
+        ['colorWarningBorder', 'colorBorderWarning'],
+        ['colorErrorFill', 'colorBgError'],
+        ['colorErrorText', 'colorTextError'],
+        ['colorErrorIcon', 'colorIconError'],
+        ['colorErrorBorder', 'colorBorderError'],
+        ['colorCriticalFill', 'colorBgCritical'],
+        ['colorCriticalText', 'colorTextCritical'],
+        ['colorCriticalIcon', 'colorIconCritical'],
+        ['colorCriticalBorder', 'colorBorderCritical'],
+      ];
+      pairs.forEach(([legacy, semantic]) => {
+        expect(obToken[legacy]).toBe(obToken[semantic]);
+      });
+    });
   });
 
   describe('obToken with custom theme', () => {
