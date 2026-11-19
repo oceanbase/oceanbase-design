@@ -246,10 +246,22 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
             fontSize,
             lineHeight: unit(titleLineHeight),
           },
+          // 描述与异常明细之间使用分割线区分（设计稿 border/divider）
+          [`${noticeCls}-error-details-with-divider`]: {
+            paddingTop: token.paddingXXS,
+            borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+          },
           [`${noticeCls}-error-details-line`]: {
             display: 'block',
           },
+          [`${noticeCls}-error-details-collapsed-row`]: {
+            display: 'flex',
+            alignItems: 'baseline',
+            columnGap: token.marginXS,
+          },
           [`${noticeCls}-error-details-collapsed`]: {
+            flex: '1 1 auto',
+            minWidth: 0,
             overflow: 'hidden',
             whiteSpace: 'nowrap',
             textOverflow: 'ellipsis',
@@ -258,6 +270,11 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
             marginTop: token.marginXXS,
             display: 'flex',
             gap: token.marginSM,
+          },
+          // 未展开时操作行与首行明细同行，无需额外上间距
+          [`${noticeCls}-error-details-collapsed-row ${noticeCls}-error-details-actions`]: {
+            marginTop: 0,
+            flexShrink: 0,
           },
           [`${noticeCls}-error-details-action`]: {
             cursor: 'pointer',

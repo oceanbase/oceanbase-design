@@ -11,7 +11,7 @@ describe('ErrorDetails', () => {
     vi.restoreAllMocks();
   });
 
-  const renderErrorDetails = () =>
+  const renderErrorDetails = (props = {}) =>
     render(
       <ErrorDetails
         prefixCls="ant-notification-notice"
@@ -19,6 +19,7 @@ describe('ErrorDetails', () => {
           { label: 'Request ID', value: 'abc' },
           { label: 'Error Code', value: 'ROLE_NOT_AUTHORIZE' },
         ]}
+        {...props}
       />
     );
 
@@ -37,8 +38,6 @@ describe('ErrorDetails', () => {
   it('renders error details with expand and copy actions', () => {
     // `copy-to-clipboard` 内部走 `document.execCommand('copy')`，非安全上下文同样可用
     const { execCommand, getCopiedText } = mockExecCommand();
-    const successSpy = vi.spyOn(message, 'success').mockReturnValue(undefined as any);
-
     const { getByText } = renderErrorDetails();
 
     expect(getByText('Show more')).toBeTruthy();
@@ -48,12 +47,50 @@ describe('ErrorDetails', () => {
 
     expect(execCommand).toHaveBeenCalledWith('copy');
     expect(getCopiedText()).toBe('- Request ID: abc\n- Error Code: ROLE_NOT_AUTHORIZE');
-    expect(successSpy).toHaveBeenCalledWith('Copied');
+  });
+
+  it('keeps actions on the same row as the collapsed first line', () => {
+    const { container, getByText } = renderErrorDetails();
+    const collapsedRow = container.querySelector(
+      '.ant-notification-notice-error-details-collapsed-row'
+    );
+
+    expect(collapsedRow).toBeTruthy();
+    // 折叠态只展示首行明细，展开和复制按钮都位于同一行内
+    expect(collapsedRow?.textContent).toContain('Request ID: abc');
+    expect(collapsedRow?.textContent).toContain('Show more');
+    expect(collapsedRow?.textContent).toContain('Copy');
+    expect(collapsedRow?.textContent).not.toContain('Error Code');
+    // 展开后明细和操作行分开渲染
+    fireEvent.click(getByText('Show more'));
+    expect(
+      container.querySelector('.ant-notification-notice-error-details-collapsed-row')
+    ).toBeFalsy();
+  });
+
+  it('shows the copied label instead of a success notification', () => {
+    mockExecCommand();
+    const successSpy = vi.spyOn(message, 'success').mockReturnValue(undefined as any);
+
+    const { getByText, queryByText } = renderErrorDetails();
+    fireEvent.click(getByText('Copy'));
+
+    // 复制成功通过操作文案变化反馈，不再唤起成功通知
+    expect(getByText('Copied')).toBeTruthy();
+    expect(queryByText('Copy')).toBeFalsy();
+    expect(successSpy).not.toHaveBeenCalled();
+  });
+
+  it('renders a divider when placed below the description', () => {
+    const { container } = renderErrorDetails({ withDivider: true });
+
+    expect(
+      container.querySelector('.ant-notification-notice-error-details-with-divider')
+    ).toBeTruthy();
   });
 
   it('only copies items without copyable: false', () => {
     const { getCopiedText } = mockExecCommand();
-    vi.spyOn(message, 'success').mockReturnValue(undefined as any);
 
     const { getByText } = render(
       <ErrorDetails
