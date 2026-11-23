@@ -8,6 +8,26 @@ group: 基础组件
 
 ---
 
+## 1.7.0
+
+`2026-11-23`
+
+- ConfigProvider
+  - 🐞 修复应用渲染到多个 React 根节点时，`message`、`notification` 和 `Modal` 静态方法静默不生效的问题：某个根节点卸载后，静态方法仍绑定在已销毁的 `App` 实例上。现在会跟随最近挂载且仍存活的根节点。[#1606](https://github.com/oceanbase/oceanbase-design/pull/1606)
+  - 🐞 修复在中文等 locale 下，显式设置的 `theme.token.fontSize`、`theme.components.Table.cellFontSize` 被 locale 预设覆盖的问题；显式配置的字号现在会生效，只有未设置时才回退到 locale 预设。[#1604](https://github.com/oceanbase/oceanbase-design/pull/1604)
+- Design Token
+  - 🌈 新增 `colorBgCritical`、`colorBorderInfo`、`colorBorderCritical`、`colorTextCritical` 和 `spaceNegative25` token。[#1605](https://github.com/oceanbase/oceanbase-design/pull/1605)
+  - 🌈 旧版状态色（`colorInfoText`、`colorSuccessText`、`colorWarningText`、`colorErrorText` 及其 icon、border 变体）取值与同名语义色对齐，两套命名混用时不再出现色差。[#1605](https://github.com/oceanbase/oceanbase-design/pull/1605)
+  - 🌈 `orange3` 由 `#fac373` 更新为 `#f7ca88`，警告边框色同步对齐。[#1605](https://github.com/oceanbase/oceanbase-design/pull/1605) [#1609](https://github.com/oceanbase/oceanbase-design/pull/1609)
+- Notification
+  - 💄 错误详情与设计稿对齐：详情与描述之间增加分割线，收起时操作按钮与首行详情同行展示。[#1607](https://github.com/oceanbase/oceanbase-design/pull/1607)
+  - 🆕 复制操作改为在按钮上显示 2 秒的复制成功反馈，期间不可重复点击，不再额外弹出成功提示。[#1607](https://github.com/oceanbase/oceanbase-design/pull/1607)
+- Table
+  - 💄 表格内嵌控件（按钮、分页器和每页条数选择器）改为按单元格字号收敛：单元格字号小于正文时使用紧凑尺寸，等于或大于正文时保持正常尺寸，不再只对英文界面生效。[#1604](https://github.com/oceanbase/oceanbase-design/pull/1604)
+- Tag
+  - ⚠️ 不兼容变更：`ellipsis` 默认关闭，标签内容不再自动省略；需要省略效果时请显式传入 `ellipsis="css"` 或 `ellipsis`。[#1608](https://github.com/oceanbase/oceanbase-design/pull/1608)
+  - 🆕 `ellipsis="css"` 仅在内容实际溢出时才派生原生 `title`（hover 时测量），短标签不再出现多余的提示。[#1608](https://github.com/oceanbase/oceanbase-design/pull/1608)
+
 ## 1.6.1
 
 `2026-11-02`

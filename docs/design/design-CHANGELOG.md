@@ -8,6 +8,26 @@ group: General
 
 ---
 
+## 1.7.0
+
+`2026-11-23`
+
+- ConfigProvider
+  - 🐞 Fixed `message`, `notification` and `Modal` static methods silently dropping content when an app renders into multiple React roots: a root that unmounted left the static methods bound to its destroyed `App` instance. They now follow the most recently mounted root that is still mounted. [#1606](https://github.com/oceanbase/oceanbase-design/pull/1606)
+  - 🐞 Fixed an explicitly set `theme.token.fontSize` or `theme.components.Table.cellFontSize` being overridden in Chinese-like locales; explicitly configured sizes are now respected, and only unset sizes fall back to the locale preset. [#1604](https://github.com/oceanbase/oceanbase-design/pull/1604)
+- Design Token
+  - 🌈 Added `colorBgCritical`, `colorBorderInfo`, `colorBorderCritical`, `colorTextCritical` and `spaceNegative25`. [#1605](https://github.com/oceanbase/oceanbase-design/pull/1605)
+  - 🌈 Aligned the legacy status colors (`colorInfoText`, `colorSuccessText`, `colorWarningText`, `colorErrorText` and their icon and border variants) with the same-name semantic colors, so mixing both naming schemes no longer produces color differences. [#1605](https://github.com/oceanbase/oceanbase-design/pull/1605)
+  - 🌈 Updated `orange3` `#fac373` => `#f7ca88` and aligned the warning border color. [#1605](https://github.com/oceanbase/oceanbase-design/pull/1605) [#1609](https://github.com/oceanbase/oceanbase-design/pull/1609)
+- Notification
+  - 💄 Aligned error details with the design: a divider separates the details from the description, and in the collapsed state the actions share the first detail line. [#1607](https://github.com/oceanbase/oceanbase-design/pull/1607)
+  - 🆕 The copy action now shows a copied acknowledgement on the button for 2 seconds and ignores repeat clicks during that time, instead of showing a separate success message. [#1607](https://github.com/oceanbase/oceanbase-design/pull/1607)
+- Table
+  - 💄 Embedded controls (buttons, pagination and the page-size `Select`) now switch to compact sizes based on the cell font being smaller than the body font, instead of only on English UI; cells whose font is equal to or larger than the body font keep normal sizes. [#1604](https://github.com/oceanbase/oceanbase-design/pull/1604)
+- Tag
+  - ⚠️ Breaking: `ellipsis` is disabled by default, so tag content is no longer truncated automatically. Pass `ellipsis="css"` or `ellipsis` to opt in. [#1608](https://github.com/oceanbase/oceanbase-design/pull/1608)
+  - 🆕 `ellipsis="css"` now derives the native `title` only when the content actually overflows, measured on hover, so short tags no longer show a redundant tooltip. [#1608](https://github.com/oceanbase/oceanbase-design/pull/1608)
+
 ## 1.6.1
 
 `2026-11-02`

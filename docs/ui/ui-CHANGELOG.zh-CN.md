@@ -8,6 +8,13 @@ group: 业务组件
 
 ---
 
+## 1.6.1
+
+`2026-11-23`
+
+- DateRanger
+  - 🐞 修复历史范围复制在非安全上下文（如 HTTP 页面）下不可用的问题；复制不再依赖 `navigator.clipboard`，失败时会提示「复制失败」。[#1603](https://github.com/oceanbase/oceanbase-design/pull/1603)
+
 ## 1.6.0
 
 `2026-10-08`
