@@ -1,0 +1,34 @@
+packages/design/src/notification/style/index.ts
+  s_66786657f8ac6c::t_e6d865bd1b1c7e 249
+  s_66786657f8ac6c::t_c1c1eabf968c8b 274
+packages/design/src/notification/__tests__/index.test.tsx
+  s_66786657f8ac6c::t_0bffbaaf1ea8ea 39-40
+  s_66786657f8ac6c::t_453ab66e24975a 2
+  s_66786657f8ac6c::t_8f9fd675c252fb 60
+  s_66786657f8ac6c::t_7abbc17d24999c 79
+  s_66786657f8ac6c::t_59fb52e1d0d561 131
+  s_66786657f8ac6c::t_d26283657a67be 65
+  s_66786657f8ac6c::t_503fd4d64deaf7 85-104
+  s_66786657f8ac6c::t_6433917c91d940 26-27
+packages/design/src/notification/ErrorDetails.tsx
+  s_66786657f8ac6c::t_2bc98fd31fcbf1 28-29
+  s_66786657f8ac6c::t_0df7ec5299893b 1-2,12,16
+  s_66786657f8ac6c::t_a06796fd060ce1 43-44,46
+  s_66786657f8ac6c::t_09adffb9bb6804 102
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "3a4b419b625f70dd3be5969f59faa97bcab79c09",
+  "prompts": {},
+  "sessions": {
+    "s_66786657f8ac6c": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "b4f86b6b-5fc0-4971-9b37-a3c9d83db732",
+        "model": "5998288cf433a589"
+      },
+      "human_author": "dengfuping <fuping.dfp@antgroup.com>"
+    }
+  }
+}
