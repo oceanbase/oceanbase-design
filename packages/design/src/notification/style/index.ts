@@ -246,10 +246,22 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
             fontSize,
             lineHeight: unit(titleLineHeight),
           },
+          // Separate the description from the error details (design border/divider)
+          [`${noticeCls}-error-details-with-divider`]: {
+            paddingTop: token.paddingXXS,
+            borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
+          },
           [`${noticeCls}-error-details-line`]: {
             display: 'block',
           },
+          [`${noticeCls}-error-details-collapsed-row`]: {
+            display: 'flex',
+            alignItems: 'baseline',
+            columnGap: token.marginXS,
+          },
           [`${noticeCls}-error-details-collapsed`]: {
+            flex: '1 1 auto',
+            minWidth: 0,
             overflow: 'hidden',
             whiteSpace: 'nowrap',
             textOverflow: 'ellipsis',
@@ -259,8 +271,17 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
             display: 'flex',
             gap: token.marginSM,
           },
+          // Collapsed: actions share the first detail line, so no extra top margin is needed
+          [`${noticeCls}-error-details-collapsed-row ${noticeCls}-error-details-actions`]: {
+            marginTop: 0,
+            flexShrink: 0,
+          },
           [`${noticeCls}-error-details-action`]: {
             cursor: 'pointer',
+          },
+          // The action shows a "Copied" acknowledgement and is not clickable until it reverts
+          [`${noticeCls}-error-details-action-copied`]: {
+            cursor: 'default',
           },
         },
         ...typeStyles,

@@ -17,7 +17,9 @@ const BuildNotificationContent = ({
     description || errorDetails?.length ? (
       <>
         {description}
-        {errorDetails?.length ? <ErrorDetails items={errorDetails} prefixCls={prefixCls} /> : null}
+        {errorDetails?.length ? (
+          <ErrorDetails items={errorDetails} prefixCls={prefixCls} withDivider={!!description} />
+        ) : null}
       </>
     ) : undefined;
 
