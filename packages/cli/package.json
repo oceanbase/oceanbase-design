@@ -1,6 +1,6 @@
 {
   "name": "@oceanbase/design-cli",
-  "version": "1.5.1",
+  "version": "1.7.0",
   "description": "CLI and MCP for OceanBase Design",
   "type": "module",
   "bin": {
