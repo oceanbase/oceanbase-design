@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
+import { useTimeout } from 'ahooks';
 import copy from 'copy-to-clipboard';
 import classNames from 'classnames';
 import ConfigProvider from '../config-provider';
@@ -8,11 +9,11 @@ import type { ErrorDetailItem } from './interface';
 export interface ErrorDetailsProps {
   items: ErrorDetailItem[];
   prefixCls: string;
-  /** 与描述内容之间是否展示分割线 */
+  /** Whether to show a divider between the details and the description above */
   withDivider?: boolean;
 }
 
-/** 复制成功后，操作文案（如「已复制」）恢复到「复制」的时长 */
+/** How long the copy action label (e.g. "Copied") stays before reverting to "Copy" */
 const COPIED_RESET_DELAY = 2000;
 
 const formatMarkdown = (items: ErrorDetailItem[]) =>
@@ -21,15 +22,11 @@ const formatMarkdown = (items: ErrorDetailItem[]) =>
 const ErrorDetails: React.FC<ErrorDetailsProps> = ({ items, prefixCls, withDivider }) => {
   const [expanded, setExpanded] = useState(false);
   const [copied, setCopied] = useState(false);
-  const copiedTimerRef = useRef<number>();
   const { locale } = useContext(ConfigProvider.ConfigContext);
   const notificationLocale = locale?.Notification;
 
-  useEffect(() => {
-    return () => {
-      window.clearTimeout(copiedTimerRef.current);
-    };
-  }, []);
+  // Revert the copy feedback after a short delay so the action can be triggered again
+  useTimeout(() => setCopied(false), copied ? COPIED_RESET_DELAY : undefined);
 
   const lines = useMemo(
     () =>
@@ -43,15 +40,11 @@ const ErrorDetails: React.FC<ErrorDetailsProps> = ({ items, prefixCls, withDivid
 
   const handleCopy = () => {
     const copyableItems = items.filter(item => item.copyable !== false);
-    // `navigator.clipboard` 只在安全上下文可用，`copy-to-clipboard` 内部走 execCommand，
-    // 在 HTTP 页面同样可以复制
+    // `navigator.clipboard` only works in secure contexts, while `copy-to-clipboard`
+    // falls back to `execCommand` and also works on plain HTTP pages
     if (copy(formatMarkdown(copyableItems))) {
-      // 复制成功直接通过操作文案反馈，不再额外弹出成功通知
+      // Successful copies are acknowledged by the action label instead of a success message
       setCopied(true);
-      window.clearTimeout(copiedTimerRef.current);
-      copiedTimerRef.current = window.setTimeout(() => {
-        setCopied(false);
-      }, COPIED_RESET_DELAY);
       return;
     }
     message.error(notificationLocale?.copyFailed ?? 'Copy failed');
@@ -106,7 +99,7 @@ const ErrorDetails: React.FC<ErrorDetailsProps> = ({ items, prefixCls, withDivid
           {actions}
         </>
       ) : (
-        // 未展开时，操作按钮与折叠后的首行明细放在同一行
+        // Collapsed: keep the action buttons on the same row as the first detail line
         <div className={`${prefixCls}-error-details-collapsed-row`}>
           <span className={`${prefixCls}-error-details-collapsed`}>{firstLine}</span>
           {actions}

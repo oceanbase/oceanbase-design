@@ -246,7 +246,7 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
             fontSize,
             lineHeight: unit(titleLineHeight),
           },
-          // 描述与异常明细之间使用分割线区分（设计稿 border/divider）
+          // Separate the description from the error details (design border/divider)
           [`${noticeCls}-error-details-with-divider`]: {
             paddingTop: token.paddingXXS,
             borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorSplit}`,
@@ -271,7 +271,7 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
             display: 'flex',
             gap: token.marginSM,
           },
-          // 未展开时操作行与首行明细同行，无需额外上间距
+          // Collapsed: actions share the first detail line, so no extra top margin is needed
           [`${noticeCls}-error-details-collapsed-row ${noticeCls}-error-details-actions`]: {
             marginTop: 0,
             flexShrink: 0,
