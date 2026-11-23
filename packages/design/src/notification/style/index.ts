@@ -279,6 +279,10 @@ export const genNotificationStyle: GenerateStyle<NotificationToken> = (
           [`${noticeCls}-error-details-action`]: {
             cursor: 'pointer',
           },
+          // The action shows a "Copied" acknowledgement and is not clickable until it reverts
+          [`${noticeCls}-error-details-action-copied`]: {
+            cursor: 'default',
+          },
         },
         ...typeStyles,
       },

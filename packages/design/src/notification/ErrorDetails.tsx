@@ -72,15 +72,22 @@ const ErrorDetails: React.FC<ErrorDetailsProps> = ({ items, prefixCls, withDivid
         </span>
       )}
       <span
-        className={`${prefixCls}-error-details-action`}
-        onClick={handleCopy}
+        className={classNames(`${prefixCls}-error-details-action`, {
+          [`${prefixCls}-error-details-action-copied`]: copied,
+        })}
         role="button"
-        tabIndex={0}
-        onKeyDown={e => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            handleCopy();
-          }
-        }}
+        aria-disabled={copied || undefined}
+        tabIndex={copied ? -1 : 0}
+        onClick={copied ? undefined : handleCopy}
+        onKeyDown={
+          copied
+            ? undefined
+            : e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handleCopy();
+                }
+              }
+        }
       >
         {copied ? copiedLabel : (notificationLocale?.copy ?? 'Copy')}
       </span>

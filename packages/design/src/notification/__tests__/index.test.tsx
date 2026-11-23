@@ -82,6 +82,20 @@ describe('ErrorDetails', () => {
     expect(successSpy).not.toHaveBeenCalled();
   });
 
+  it('ignores clicks on the copied label until it reverts', () => {
+    const { execCommand } = mockExecCommand();
+
+    const { getByText } = renderErrorDetails();
+    fireEvent.click(getByText('Copy'));
+
+    const copiedAction = getByText('Copied');
+    expect(copiedAction).toHaveAttribute('aria-disabled', 'true');
+    expect(copiedAction).toHaveAttribute('tabindex', '-1');
+
+    fireEvent.click(copiedAction);
+    expect(execCommand).toHaveBeenCalledTimes(1);
+  });
+
   it('reverts the copy label after the feedback delay', () => {
     mockExecCommand();
     vi.useFakeTimers();
@@ -97,6 +111,7 @@ describe('ErrorDetails', () => {
 
       expect(queryByText('Copied')).toBeFalsy();
       expect(getByText('Copy')).toBeTruthy();
+      expect(getByText('Copy')).not.toHaveAttribute('aria-disabled');
     } finally {
       vi.useRealTimers();
     }
