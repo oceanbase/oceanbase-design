@@ -1,0 +1,24 @@
+packages/design/src/notification/ErrorDetails.tsx
+  s_66786657f8ac6c::t_33b8834d605f63 75-77,79-90
+packages/design/src/notification/style/index.ts
+  s_66786657f8ac6c::t_9f8755bb875732 282-285
+packages/design/src/notification/__tests__/index.test.tsx
+  s_66786657f8ac6c::t_bfdc0d80c9a068 85-98
+  s_66786657f8ac6c::t_60d58d4b4f2f9b 114
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "7809f4f5de7ea3c55b14812164943e1a8fdb7a3d",
+  "prompts": {},
+  "sessions": {
+    "s_66786657f8ac6c": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "b4f86b6b-5fc0-4971-9b37-a3c9d83db732",
+        "model": "5998288cf433a589"
+      },
+      "human_author": "dengfuping <fuping.dfp@antgroup.com>"
+    }
+  }
+}
