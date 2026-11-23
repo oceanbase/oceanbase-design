@@ -8,6 +8,13 @@ group: Biz Components
 
 ---
 
+## 1.7.0
+
+`2026-11-23`
+
+- DateRanger
+  - 🐞 Fixed copying a history range not working on non-secure origins such as HTTP pages; copying no longer depends on `navigator.clipboard` and now shows `Copy failed` when it does not succeed. [#1603](https://github.com/oceanbase/oceanbase-design/pull/1603)
+
 ## 1.6.0
 
 `2026-10-08`
