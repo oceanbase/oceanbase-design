@@ -1,0 +1,47 @@
+packages/design/src/tag/index.md
+  s_54605e9f0caf0d::t_93103414fc7cec 28
+  s_54605e9f0caf0d::t_f5a8bc5f073d59 35
+  s_54605e9f0caf0d::t_e84cb809c32978 13
+  s_54605e9f0caf0d::t_40c304283bed3e 27
+  s_54605e9f0caf0d::t_bb2aaf00abeaea 12,14
+packages/design/src/tag/index.en-US.md
+  s_54605e9f0caf0d::t_0b7c1f06433a14 13
+  s_54605e9f0caf0d::t_238aa90f6809a9 35
+  s_54605e9f0caf0d::t_25d2ab618a7f69 27
+  s_54605e9f0caf0d::t_c23324eee98cfe 28
+  s_54605e9f0caf0d::t_4950238636e5f3 12,14
+packages/design/src/tag/index.tsx
+  s_54605e9f0caf0d::t_22a25a556a9545 86
+  s_54605e9f0caf0d::t_cae3dac7b48a1f 1,14,17-18,35,45,61-78,85,94-96
+  s_54605e9f0caf0d::t_b87decea542367 15-16
+  s_54605e9f0caf0d::t_19eb7c1b3297c6 31
+packages/design/src/tag/__tests__/index.test.tsx
+  s_54605e9f0caf0d::t_217be8df6af10d 2
+  s_54605e9f0caf0d::t_ccc0f44febfc9d 29-31
+  s_54605e9f0caf0d::t_575f725e0c4236 27,32-33,37-42
+  s_54605e9f0caf0d::t_4925475670df36 81-82,86-98
+  s_54605e9f0caf0d::t_8158d4bd28482e 43-44
+  s_54605e9f0caf0d::t_1779e242701fb0 99-100
+packages/design/src/filter/components/WrappedTagsDisplay.tsx
+  s_54605e9f0caf0d::t_29f36ba2a86531 51
+packages/design/src/tag/demo/ellipsis.tsx
+  s_54605e9f0caf0d::t_133f88295b34a2 7,13
+packages/design/src/tag/__tests__/__snapshots__/index.test.tsx.snap
+  s_54605e9f0caf0d::t_887aee3c5146e0 32,34,36-37,39-40,44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "7d21797a46c3c4d0f83891485910f88d4867173e",
+  "prompts": {},
+  "sessions": {
+    "s_54605e9f0caf0d": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "89f6db88-d923-45b4-8d2a-97a41fafe533",
+        "model": "5998288cf433a589"
+      },
+      "human_author": "dengfuping <fuping.dfp@antgroup.com>"
+    }
+  }
+}
