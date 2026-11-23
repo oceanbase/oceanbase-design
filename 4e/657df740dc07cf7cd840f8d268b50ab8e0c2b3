@@ -1,0 +1,21 @@
+docs/ui/ui-CHANGELOG.md
+  s_ede2f8c7e31a1a::t_d0b5bb73f95742 11
+docs/ui/ui-CHANGELOG.zh-CN.md
+  s_ede2f8c7e31a1a::t_5eb43f9fe11ad8 11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "4e657df740dc07cf7cd840f8d268b50ab8e0c2b3",
+  "prompts": {},
+  "sessions": {
+    "s_ede2f8c7e31a1a": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "a501cd48-1f6f-4144-81d4-fc3d54fde975",
+        "model": "5998288cf433a589"
+      },
+      "human_author": "dengfuping <fuping.dfp@antgroup.com>"
+    }
+  }
+}
