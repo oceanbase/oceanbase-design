@@ -1,0 +1,27 @@
+docs/design/design-CHANGELOG.md
+  s_ede2f8c7e31a1a::t_cdf7b67b2c5eda 21
+  s_ede2f8c7e31a1a::t_0a1a02b16851e8 11-20,22-30
+docs/design/design-CHANGELOG.zh-CN.md
+  s_ede2f8c7e31a1a::t_a0cc227ed3c52a 21
+  s_ede2f8c7e31a1a::t_d5ee263f0d8342 11-20,22-30
+docs/ui/ui-CHANGELOG.md
+  s_ede2f8c7e31a1a::t_5964df3ec2fdf4 11-17
+docs/ui/ui-CHANGELOG.zh-CN.md
+  s_ede2f8c7e31a1a::t_601ec7644160c4 11-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "000acae1c24803465d4bfd9655f7b548521756d7",
+  "prompts": {},
+  "sessions": {
+    "s_ede2f8c7e31a1a": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "a501cd48-1f6f-4144-81d4-fc3d54fde975",
+        "model": "5998288cf433a589"
+      },
+      "human_author": "dengfuping <fuping.dfp@antgroup.com>"
+    }
+  }
+}
