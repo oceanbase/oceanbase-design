@@ -4,13 +4,13 @@ import React from 'react';
 
 const App: React.FC = () => (
   <Space direction="vertical" style={{ width: '100%' }}>
-    <Tag>
+    <Tag ellipsis>
       Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for
       excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show
       ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for
       excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.
     </Tag>
-    <Tag icon={<CheckCircleOutlined />} closable>
+    <Tag ellipsis icon={<CheckCircleOutlined />} closable>
       Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for
       excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show
       ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for

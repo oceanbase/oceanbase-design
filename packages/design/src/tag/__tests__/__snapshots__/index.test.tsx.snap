@@ -3,7 +3,6 @@
 exports[`Tag > css ellipsis renders lightweight structure without typography 1`] = `
 <span
   class="ant-tag ant-tag-ellipsis-css"
-  title="Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess."
 >
   <span
     class="ant-tag-ellipsis-css-content"
@@ -30,24 +29,19 @@ exports[`Tag > custom ellipsis 1`] = `
 </span>
 `;
 
-exports[`Tag > default ellipsis 1`] = `
+exports[`Tag > disable ellipsis 1`] = `
 <span
-  class="ant-tag ant-tag-ellipsis"
+  class="ant-tag"
 >
-  <span
-    aria-describedby="test-id"
-    class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line"
+  <div
+    id="test"
   >
-    <div
-      id="test"
-    >
-      Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.
-    </div>
-  </span>
+    Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.Show ellipsis for excess.
+  </div>
 </span>
 `;
 
-exports[`Tag > disable ellipsis 1`] = `
+exports[`Tag > ellipsis is disabled by default 1`] = `
 <span
   class="ant-tag"
 >

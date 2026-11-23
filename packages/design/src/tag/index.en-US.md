@@ -9,8 +9,9 @@ nav:
 - 💄 Custom theme and styles, aligned with OceanBase Design specification.
 - 🆕 New `critical` status color for severe scenarios (e.g. critical alert level).
 - 🆕 New `pill` prop for pill-style tag.
-- 🆕 New `ellipsis` prop for overflow ellipsis and Tooltip.
-- 🆕 New `ellipsis="css"` lightweight mode: pure CSS truncation + native `title` (auto-derived from string children), zero measuring/Tooltip overhead, for tag-dense scenes such as detail pages and tables.
+- 🆕 `ellipsis` is disabled by default, so tag content is no longer truncated by default. Pass `ellipsis="css"` to opt into the lightweight mode: pure CSS truncation + native `title` (only shown when content overflows), with no measuring or Tooltip overhead, ideal for tag-dense scenes such as detail pages and tables.
+- 🆕 Pass `ellipsis={true}` or an `EllipsisConfig` to opt into the full mode: overflow detection + Tooltip, with custom tooltip content and multi-line ellipsis support.
+- ⚠️ Breaking change: `ellipsis` is now disabled by default instead of on by default. After upgrading, pass `ellipsis="css"` or `ellipsis` explicitly if you still need the truncation.
 
 ## Code Examples
 
@@ -23,14 +24,14 @@ nav:
 <code src="./demo/icon.tsx" title="Custom Icon and Color"></code>
 <code src="./demo/borderless.tsx" title="Borderless"></code>
 <code src="./demo/checkable.tsx" title="Checkable Tag"></code>
-<code src="./demo/ellipsis.tsx" title="Over-length Ellipsis" description="Default mode based on overflow detection with Tooltip; for few tags, or when custom Tooltip content / placement is needed."></code>
-<code src="./demo/ellipsis-css.tsx" title="Lightweight Ellipsis" description="`ellipsis='css'` uses pure CSS truncation + native `title`, no measuring or Tooltip overhead, ideal for tag-dense detail pages and tables. A width-constrained parent (e.g. `max-width`, flex layout) is required for the ellipsis to appear, and the hint must be plain text."></code>
+<code src="./demo/ellipsis.tsx" title="Over-length Ellipsis" description="Full mode based on overflow detection with Tooltip; for few tags, or when custom Tooltip content / placement is needed."></code>
+<code src="./demo/ellipsis-css.tsx" title="Lightweight Ellipsis" description="Pass `ellipsis='css'` to use pure CSS truncation + native `title`, only shown when content overflows, with no measuring or Tooltip overhead; ideal for tag-dense detail pages and tables. A width-constrained parent (e.g. `max-width`, flex layout) is required for the ellipsis to appear, and the hint must be plain text."></code>
 
 ## API
 
 | Property | Description | Type | Default |
 | :-- | :-- | :-- | :-- |
 | pill | Whether pill style | `boolean` | false |
-| ellipsis | Auto-ellipsis when over-length. `"css"` is the lightweight mode: pure CSS single-line truncation + native `title` (auto-derived from string children), no Tooltip and no measuring overhead, but a width-constrained parent (e.g. `max-width`, flex layout) is required for the ellipsis to appear; ideal for tag-dense scenes. `true` or an [EllipsisConfig](https://ant-design.antgroup.com/components/typography-cn#ellipsis) is the full mode: overflow detection + Tooltip, custom tooltip content and multi-line ellipsis supported | `boolean` \| [EllipsisConfig](https://ant-design.antgroup.com/components/typography-cn#ellipsis) \| `"css"` | true |
+| ellipsis | Auto-ellipsis when over-length, disabled by default. Pass `"css"` to opt into the lightweight mode: pure CSS single-line truncation + native `title` (only when content overflows), no Tooltip and no measuring overhead, ideal for tag-dense scenes such as detail pages and tables; a width-constrained parent (e.g. `max-width`, flex layout) is required for the ellipsis to appear. Pass `true` or an [EllipsisConfig](https://ant-design.antgroup.com/components/typography-cn#ellipsis) to opt into the full mode: overflow detection + Tooltip, with custom tooltip content and multi-line ellipsis support | `boolean` \| [EllipsisConfig](https://ant-design.antgroup.com/components/typography-cn#ellipsis) \| `"css"` | false |
 
 - See antd Tag docs: https://ant.design/components/tag-cn/

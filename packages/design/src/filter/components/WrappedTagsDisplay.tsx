@@ -48,6 +48,7 @@ const WrappedTagsDisplay: React.FC<WrappedTagsDisplayProps> = ({
       {visibleTags.map(item => (
         <Tag
           key={item.value}
+          ellipsis="css"
           closable={!!onRemove}
           onClose={e => {
             e.preventDefault();
