@@ -1,0 +1,19 @@
+.cursor/rules/code-comments.mdc
+  s_66786657f8ac6c::t_0ec7f8e34d0353 1-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "2ab415aa6f29ad0f63a0fb5ea2ad3771698e59c8",
+  "prompts": {},
+  "sessions": {
+    "s_66786657f8ac6c": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "b4f86b6b-5fc0-4971-9b37-a3c9d83db732",
+        "model": "5998288cf433a589"
+      },
+      "human_author": "dengfuping <fuping.dfp@antgroup.com>"
+    }
+  }
+}
