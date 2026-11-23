@@ -1,0 +1,10 @@
+---
+description: Code comments — always English; explain intent, not the mechanics
+alwaysApply: true
+---
+
+# Code comments
+
+- Write every code comment in **English**: inline `//`, block `/* */`, JSDoc `/** */`, and comments inside tests, demos, and scripts.
+- Put comments around intent, trade-offs, or non-obvious constraints. Skip comments that merely restate the code.
+- Chinese belongs in user-facing copy (`locale` values, UI text), docs under `docs/`, and changelog — never in source comments.
