@@ -1,0 +1,16 @@
+packages/design/src/theme/style/compact.less
+  h_f99a5e82bb4645 191-192,356
+packages/design/src/theme/style/default.less
+  h_f99a5e82bb4645 191-192,356
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "a6a4ecc848d89833787bf1bf449854ed2a390853",
+  "prompts": {},
+  "humans": {
+    "h_f99a5e82bb4645": {
+      "author": "dengfuping <fuping.dfp@antgroup.com>"
+    }
+  }
+}
