@@ -63,7 +63,10 @@ const genSmallBtnStyle = (token: TableToken): CSSObject => {
   };
 };
 
-/** 分页条与 page size Select 与单元格内嵌控件对齐的样式（与 {@link genSmallBtnStyle} 同判据）。 */
+/**
+ * 单元格比正文小时，分页条与 page size Select 的高度与内嵌控件对齐，但字号沿用正文：
+ * 分页是导航信息，不随表格单元格一起缩小。
+ */
 const genSmallPaginationStyle = (token: TableToken): CSSObject => {
   if (!isTableCellFontSmaller(token)) {
     return {};
@@ -71,7 +74,7 @@ const genSmallPaginationStyle = (token: TableToken): CSSObject => {
   const { antCls, calc } = token;
   const embeddedControlH = getTableEmbeddedControlHeight(token);
   return {
-    fontSize: token.cellFontSize,
+    fontSize: token.fontSize,
     [`${antCls}-pagination-item, ${antCls}-pagination-total-text, ${antCls}-pagination-prev, ${antCls}-pagination-next`]:
       {
         height: embeddedControlH,
@@ -81,7 +84,7 @@ const genSmallPaginationStyle = (token: TableToken): CSSObject => {
     [`${antCls}-pagination-options ${antCls}-select-single`]: {
       height: embeddedControlH,
       [`${antCls}-select-selector`]: {
-        fontSize: token.cellFontSize,
+        fontSize: token.fontSize,
         paddingInline: calc(token.paddingXS).sub(token.lineWidth).equal(),
       },
     },

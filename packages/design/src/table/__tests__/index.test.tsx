@@ -85,7 +85,7 @@ describe('Table', () => {
     expect(getCellFontSize(compactTable, 'small')).toBe('12px');
   });
 
-  it('embedded controls follow cell font scale instead of locale', () => {
+  it('embedded controls follow cell font scale while pagination keeps the body font size', () => {
     const getEmbeddedStyles = (theme?: ThemeConfig) => {
       const { container, unmount } = render(
         <ConfigProvider locale={zhCN} theme={theme}>
@@ -98,33 +98,40 @@ describe('Table', () => {
                 render: () => <Button>Edit</Button>,
               },
             ]}
-            dataSource={[{ key: 1, name: 'John' }]}
+            dataSource={dataSource}
           />
         </ConfigProvider>
       );
       const button = container.querySelector('.ant-table-tbody .ant-btn') as HTMLElement;
+      const pagination = container.querySelector('.ant-pagination') as HTMLElement;
       const paginationItem = container.querySelector('.ant-pagination-item') as HTMLElement;
+      const pageSizeSelect = container.querySelector(
+        '.ant-pagination-options .ant-select-selector'
+      ) as HTMLElement;
       const styles = {
         buttonFontSize: getComputedStyle(button).fontSize,
         buttonHeight: getComputedStyle(button).height,
+        paginationFontSize: getComputedStyle(pagination).fontSize,
         paginationItemHeight: getComputedStyle(paginationItem).height,
+        pageSizeSelectFontSize: getComputedStyle(pageSizeSelect).fontSize,
       };
       unmount();
       return styles;
     };
 
     // 单元格与正文同为 14px 时，表格内嵌控件沿用正常尺寸
-    expect(getEmbeddedStyles(defaultTheme)).toEqual({
-      buttonFontSize: '14px',
-      buttonHeight: '28px',
-      paginationItemHeight: '28px',
-    });
+    const defaultStyles = getEmbeddedStyles(defaultTheme);
+    expect(defaultStyles.buttonFontSize).toBe('14px');
+    expect(defaultStyles.buttonHeight).toBe('28px');
+    expect(defaultStyles.paginationItemHeight).toBe('28px');
 
-    // 单元格 12px、正文 13px 时，表格内嵌控件收敛到单元格字号
+    // 单元格 12px、正文 13px 时，按钮与分页高度收敛，分页字号仍沿用正文 13px
     expect(getEmbeddedStyles(compactTheme)).toEqual({
       buttonFontSize: '12px',
       buttonHeight: '24px',
+      paginationFontSize: '13px',
       paginationItemHeight: '24px',
+      pageSizeSelectFontSize: '13px',
     });
 
     // 单元格字号大于正文时不收敛，避免把更大的文字塞进更小的控件
@@ -140,11 +147,10 @@ describe('Table', () => {
         },
       },
     };
-    expect(getEmbeddedStyles(largerCellTheme)).toEqual({
-      buttonFontSize: '14px',
-      buttonHeight: '28px',
-      paginationItemHeight: '28px',
-    });
+    const largerStyles = getEmbeddedStyles(largerCellTheme);
+    expect(largerStyles.buttonFontSize).toBe('14px');
+    expect(largerStyles.buttonHeight).toBe('28px');
+    expect(largerStyles.paginationItemHeight).toBe('28px');
   });
 
   it('hideOnSinglePage should be false by default', () => {
