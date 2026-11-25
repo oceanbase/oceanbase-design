@@ -37,6 +37,17 @@ const getTableCellLineHeight = (token: TableToken): number =>
 const getTableEmbeddedControlHeight = (token: TableToken): number =>
   isTableCellFontSmaller(token) ? token.controlHeightSM : token.controlHeight;
 
+/**
+ * Whether the pagination (including the page size Select) uses the compact cell-scale size.
+ *
+ * - `Table.paginationCompact: true` always uses the compact size; `false` keeps antd's default
+ *   pagination size, which still follows the Table `size` prop (28px for default, 24px for
+ *   middle/small).
+ * - Unset keeps pagination in sync with the cell font scale, so it lines up with embedded Buttons.
+ */
+const shouldUseCompactPagination = (token: TableToken): boolean =>
+  token.paginationCompact ?? isTableCellFontSmaller(token);
+
 /** 单元格字号比正文小时，表格内的默认尺寸 Button 收敛到单元格字号与行高。 */
 const genSmallBtnStyle = (token: TableToken): CSSObject => {
   if (!isTableCellFontSmaller(token)) {
@@ -63,23 +74,27 @@ const genSmallBtnStyle = (token: TableToken): CSSObject => {
   };
 };
 
-/** 分页条与 page size Select 与单元格内嵌控件对齐的样式（与 {@link genSmallBtnStyle} 同判据）。 */
+/**
+ * Compact pagination and page size Select sizes; see {@link shouldUseCompactPagination}.
+ * Compact always uses `controlHeightSM`, so forcing it on is visible even when the cell font
+ * still matches the body font.
+ */
 const genSmallPaginationStyle = (token: TableToken): CSSObject => {
-  if (!isTableCellFontSmaller(token)) {
+  if (!shouldUseCompactPagination(token)) {
     return {};
   }
   const { antCls, calc } = token;
-  const embeddedControlH = getTableEmbeddedControlHeight(token);
+  const paginationH = token.controlHeightSM;
   return {
     fontSize: token.cellFontSize,
     [`${antCls}-pagination-item, ${antCls}-pagination-total-text, ${antCls}-pagination-prev, ${antCls}-pagination-next`]:
       {
-        height: embeddedControlH,
-        minWidth: embeddedControlH,
-        lineHeight: unit(calc(embeddedControlH).sub(calc(token.lineWidth).mul(2)).equal()),
+        height: paginationH,
+        minWidth: paginationH,
+        lineHeight: unit(calc(paginationH).sub(calc(token.lineWidth).mul(2)).equal()),
       },
     [`${antCls}-pagination-options ${antCls}-select-single`]: {
-      height: embeddedControlH,
+      height: paginationH,
       [`${antCls}-select-selector`]: {
         fontSize: token.cellFontSize,
         paddingInline: calc(token.paddingXS).sub(token.lineWidth).equal(),
