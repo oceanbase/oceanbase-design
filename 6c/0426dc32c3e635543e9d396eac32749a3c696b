@@ -1,0 +1,21 @@
+docs/design/design-CHANGELOG.zh-CN.md
+  s_c84c218dc7ccf5::t_73eed9fb29737d 11-17
+docs/design/design-CHANGELOG.md
+  s_c84c218dc7ccf5::t_05221148f6636a 11-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "6c0426dc32c3e635543e9d396eac32749a3c696b",
+  "prompts": {},
+  "sessions": {
+    "s_c84c218dc7ccf5": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "50738664-0662-4756-a703-a3a9eb614e9b",
+        "model": "5998288cf433a589"
+      },
+      "human_author": "dengfuping <fuping.dfp@antgroup.com>"
+    }
+  }
+}
