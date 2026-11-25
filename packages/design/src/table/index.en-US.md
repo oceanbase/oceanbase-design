@@ -43,6 +43,7 @@ markdown: |
 <code src="./demo/pro-card-table.tsx" title="With ProCard" debug></code>
 <code src="./demo/empty.tsx" title="Empty State"></code>
 <code src="./demo/button.tsx" title="With Button" description="Cell buttons default to small size" debug></code>
+<code src="./demo/pagination-compact.tsx" title="Pagination Compact" description="Control the pagination and page size Select height via `theme.components.Table.paginationCompact`; compare across Table sizes." debug></code>
 
 ## API
 

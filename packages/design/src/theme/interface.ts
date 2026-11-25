@@ -163,6 +163,21 @@ export type FullToken<C extends TokenMapKey<ComponentTokenMap>> = FullTokenTypeU
   C
 >;
 
+declare module 'antd/es/table/style' {
+  export interface ComponentToken {
+    /**
+     * @nameZH 分页器是否使用紧凑尺寸
+     * @nameEN Whether the pagination uses the compact size
+     * @desc 控制分页器和每页条数选择器是否使用与单元格一致的紧凑尺寸。`true` 始终紧凑；`false`
+     * 使用默认分页尺寸（仍随 Table 的 `size` 变化）；不设置时跟随单元格字号（`cellFontSize < fontSize`）。
+     * @descEN Use the compact cell-scale size for the pagination and page size Select. `true` always
+     * compacts; `false` keeps the default pagination size, which still follows the Table `size`
+     * prop; unset follows the cell font scale (`cellFontSize < fontSize`).
+     */
+    paginationCompact?: boolean;
+  }
+}
+
 declare module 'antd/es/notification/style' {
   export interface ComponentToken {
     /**

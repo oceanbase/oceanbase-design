@@ -43,6 +43,7 @@ markdown: |
 <code src="./demo/pro-card-table.tsx" title="和 ProCard 组合使用" debug></code>
 <code src="./demo/empty.tsx" title="空状态"></code>
 <code src="./demo/button.tsx" title="带按钮" description="单元格内的按钮默认为小尺寸" debug></code>
+<code src="./demo/pagination-compact.tsx" title="分页器紧凑尺寸" description="通过 `theme.components.Table.paginationCompact` 控制分页器和每页条数选择器的高度，可对比不同 Table size 下的表现。" debug></code>
 
 ## API
 

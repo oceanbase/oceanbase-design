@@ -147,6 +147,86 @@ describe('Table', () => {
     });
   });
 
+  it('paginationCompact works across themes and table sizes', () => {
+    const withPaginationCompact = (
+      theme: ThemeConfig,
+      paginationCompact: boolean
+    ): ThemeConfig => ({
+      ...theme,
+      components: {
+        ...theme.components,
+        Table: { ...theme.components?.Table, paginationCompact },
+      },
+    });
+
+    const getStyles = (theme?: ThemeConfig, size?: TableProps<any>['size']) => {
+      const { container, unmount } = render(
+        <ConfigProvider locale={enUS} theme={theme}>
+          <Table
+            size={size}
+            columns={[
+              { title: 'Name', dataIndex: 'name' },
+              {
+                title: 'Action',
+                dataIndex: 'action',
+                render: () => <Button>Edit</Button>,
+              },
+            ]}
+            dataSource={[{ key: 1, name: 'John' }]}
+          />
+        </ConfigProvider>
+      );
+      const table = container.querySelector('.ant-table') as HTMLElement;
+      const button = container.querySelector('.ant-table-tbody .ant-btn') as HTMLElement;
+      const paginationItem = container.querySelector('.ant-pagination-item') as HTMLElement;
+      const styles = {
+        cellFontSize: getComputedStyle(table).fontSize,
+        buttonFontSize: getComputedStyle(button).fontSize,
+        buttonHeight: getComputedStyle(button).height,
+        paginationItemHeight: getComputedStyle(paginationItem).height,
+      };
+      unmount();
+      return styles;
+    };
+
+    // English typography (12px cells < 13px body): pagination is compact by default for every size.
+    expect(getStyles(compactTheme)).toEqual({
+      cellFontSize: '12px',
+      buttonFontSize: '12px',
+      buttonHeight: '24px',
+      paginationItemHeight: '24px',
+    });
+    expect(getStyles(compactTheme, 'middle').paginationItemHeight).toBe('24px');
+    expect(getStyles(compactTheme, 'small').paginationItemHeight).toBe('24px');
+
+    // Chinese typography (cells match body): pagination keeps antd's per-size default, so a default
+    // size table is 28px while middle/small tables use antd's built-in small pagination (24px).
+    expect(getStyles(defaultTheme).paginationItemHeight).toBe('28px');
+    expect(getStyles(defaultTheme, 'middle').paginationItemHeight).toBe('24px');
+    expect(getStyles(defaultTheme, 'small').paginationItemHeight).toBe('24px');
+
+    // Turning paginationCompact off restores antd's per-size pagination size without touching the
+    // cell font size or embedded Buttons.
+    expect(getStyles(withPaginationCompact(compactTheme, false))).toEqual({
+      cellFontSize: '12px',
+      buttonFontSize: '12px',
+      buttonHeight: '24px',
+      paginationItemHeight: '28px',
+    });
+    expect(
+      getStyles(withPaginationCompact(compactTheme, false), 'middle').paginationItemHeight
+    ).toBe('24px');
+    expect(
+      getStyles(withPaginationCompact(compactTheme, false), 'small').paginationItemHeight
+    ).toBe('24px');
+
+    // Forcing paginationCompact on compacts the pagination even when cells match the body font.
+    const forcedStyles = getStyles(withPaginationCompact(defaultTheme, true));
+    expect(forcedStyles.cellFontSize).toBe('14px');
+    expect(forcedStyles.buttonHeight).toBe('28px');
+    expect(forcedStyles.paginationItemHeight).toBe('24px');
+  });
+
   it('hideOnSinglePage should be false by default', () => {
     const { container, asFragment } = render(<TableTest dataSource={dataSource.slice(0, 10)} />);
     expect(container.querySelector('.ant-pagination')).toBeTruthy();
