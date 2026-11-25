@@ -8,6 +8,13 @@ group: 基础组件
 
 ---
 
+## 1.7.1
+
+`2026-11-25`
+
+- Table
+  - 🆕 新增 `theme.components.Table.paginationCompact` token，用于控制分页器和每页条数选择器是否使用紧凑尺寸。`true` 始终使用紧凑高度，即使单元格字号与正文一致；`false` 保持默认分页尺寸，仍随 Table 的 `size` 变化；不设置时与单元格字号保持同步。[#1612](https://github.com/oceanbase/oceanbase-design/pull/1612)
+
 ## 1.7.0
 
 `2026-11-23`

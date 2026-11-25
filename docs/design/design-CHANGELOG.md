@@ -8,6 +8,13 @@ group: General
 
 ---
 
+## 1.7.1
+
+`2026-11-25`
+
+- Table
+  - 🆕 Added the `theme.components.Table.paginationCompact` token to control whether the pagination and the page-size `Select` use the compact size. `true` always uses the compact height, even when the cell font matches the body font; `false` keeps the default pagination size, which still follows the Table `size` prop; unset keeps them in sync with the cell font. [#1612](https://github.com/oceanbase/oceanbase-design/pull/1612)
+
 ## 1.7.0
 
 `2026-11-23`
