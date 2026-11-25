@@ -1,0 +1,18 @@
+packages/codemod/package.json
+  h_f99a5e82bb4645 3
+packages/design/package.json
+  h_f99a5e82bb4645 3
+packages/ui/package.json
+  h_f99a5e82bb4645 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "1b9d551243ddd518ffd705a4e5dae71ecad3641b",
+  "prompts": {},
+  "humans": {
+    "h_f99a5e82bb4645": {
+      "author": "dengfuping <fuping.dfp@antgroup.com>"
+    }
+  }
+}
