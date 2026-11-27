@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import type { TablePaginationConfig } from 'antd';
 import ConfigProvider from '../../config-provider';
 import type { ConfigConsumerProps, OBPaginationConfig } from '../../config-provider';
-import defaultLocale from '../../locale/en-US';
-import type { PaginationLocale } from '../../locale';
+import useDefaultShowTotal from '../../pagination/useDefaultShowTotal';
 
 /**
  * Table 分页配置：在 antd TablePaginationConfig 基础上，`showTotal` 额外支持传 `false` 关闭总数展示。
@@ -13,13 +12,11 @@ export type OBTablePaginationConfig = Omit<TablePaginationConfig, 'showTotal'> &
   Pick<OBPaginationConfig, 'showTotal'>;
 
 export default (pagination?: false | OBTablePaginationConfig): false | TablePaginationConfig => {
-  const { locale: contextLocale, pagination: contextPagination } = useContext<ConfigConsumerProps>(
+  const { pagination: contextPagination } = useContext<ConfigConsumerProps>(
     ConfigProvider.ConfigContext
   );
-  const paginationLocale: PaginationLocale = {
-    ...defaultLocale.Pagination,
-    ...contextLocale?.Pagination,
-  };
+  // Shared with Pagination so both components fall back to the same locale-driven total text.
+  const defaultShowTotal = useDefaultShowTotal();
   if (pagination === false) {
     return pagination;
   }
@@ -30,7 +27,7 @@ export default (pagination?: false | OBTablePaginationConfig): false | TablePagi
     defaultPageSize: 10,
     showSizeChanger: true,
     pageSizeOptions: ['10', '20', '50', '100'],
-    showTotal: total => paginationLocale.total?.split('${total}').join(total?.toString()),
+    showTotal: defaultShowTotal,
     ...contextPagination,
     ...pagination,
   };

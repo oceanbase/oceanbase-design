@@ -54,6 +54,9 @@ export type { ErrorDetailItem, NotificationType } from './notification/interface
 export { default as List } from './list';
 export type { ListProps } from './list';
 
+export { default as Pagination } from './pagination';
+export type { PaginationProps } from './pagination';
+
 export { default as Table } from './table';
 export type { TableProps, TableColumnsType } from './table';
 
