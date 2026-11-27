@@ -1,0 +1,38 @@
+packages/design/src/pagination/__tests__/index.test.tsx
+  s_e5f75cf647ed88::t_dfff995b865046 1-72
+packages/design/src/pagination/index.md
+  s_e5f75cf647ed88::t_257ac423e948cb 10,16,23
+packages/design/src/table/hooks/useDefaultPagination.ts
+  s_e5f75cf647ed88::t_507888a01b0d70 1,5,15,18-19,30
+packages/design/src/pagination/useDefaultShowTotal.ts
+  s_e5f75cf647ed88::t_ba0df6aab29ce3 1-26
+packages/design/src/index.ts
+  s_e5f75cf647ed88::t_6f46be21c5ae18 57-59
+packages/design/src/pagination/demo/total.tsx
+  s_e5f75cf647ed88::t_09fe4c2272b2bb 6,14-15
+packages/design/src/pagination/index.tsx
+  s_e5f75cf647ed88::t_062dce4cfa8e8d 24-28,33-39
+  s_e5f75cf647ed88::t_2f83ae875d1b09 1-11,14-23,29-32,40-55
+  s_e5f75cf647ed88::t_2866369460a451 12-13
+packages/design/src/pagination/index.en-US.md
+  s_e5f75cf647ed88::t_29eb16dc401a9c 10,16,23
+packages/design/src/config-provider/index.tsx
+  s_e5f75cf647ed88::t_11c36a0b7e677c 74-81
+  s_e5f75cf647ed88::t_7024203290cc70 90-94
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "e3a3cb105a0941978fd8897cbf294be54dd97682",
+  "prompts": {},
+  "sessions": {
+    "s_e5f75cf647ed88": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "890e7ebd-d87c-4c2b-b7cd-fe09af753398",
+        "model": "5998288cf433a589"
+      },
+      "human_author": "dengfuping <fuping.dfp@antgroup.com>"
+    }
+  }
+}
