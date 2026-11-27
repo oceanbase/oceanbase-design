@@ -3,12 +3,7 @@ import { Pagination } from '@oceanbase/design';
 
 const App: React.FC = () => (
   <>
-    <Pagination
-      total={85}
-      showTotal={total => `Total ${total} items`}
-      defaultPageSize={20}
-      defaultCurrent={1}
-    />
+    <Pagination total={85} defaultPageSize={20} defaultCurrent={1} />
     <br />
     <Pagination
       total={85}
@@ -16,6 +11,8 @@ const App: React.FC = () => (
       defaultPageSize={20}
       defaultCurrent={1}
     />
+    <br />
+    <Pagination total={85} showTotal={false} defaultPageSize={20} defaultCurrent={1} />
   </>
 );
 
