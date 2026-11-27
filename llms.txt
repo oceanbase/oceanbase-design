@@ -1,0 +1,48 @@
+# OceanBase Design
+
+Enterprise React design system extending Ant Design for OceanBase products.
+
+## Agent entry
+
+- [For Agents](./docs/react/for-agents.md)
+- [design.md guide](./docs/react/design-md.md)
+- [design.md (root)](./design.md)
+- [LLMs.txt guide](./docs/react/llms.md)
+- [Agent Skills](./docs/design/design-skills.md)
+- [MCP Server](./docs/react/mcp.md)
+- [CLI](./docs/react/cli.md)
+
+## More for agents
+
+- [Migrate guide](./docs/react/migrate.md)
+
+## LLM resources
+
+- [Full Documentation](./llms-full.txt)
+- [OB Constraints](./llms-ob-constraints.txt)
+- [Codemod](./llms-codemod.txt)
+
+## Docs
+
+- [design-md](/docs/react/design-md.md)
+- [design-md.zh-CN](/docs/react/design-md.zh-CN.md)
+- [design-skills](/docs/design/design-skills.md)
+- [for-agents](/docs/react/for-agents.md)
+- [for-agents.zh-CN](/docs/react/for-agents.zh-CN.md)
+- [llms](/docs/react/llms.md)
+- [llms.zh-CN](/docs/react/llms.zh-CN.md)
+- [mcp](/docs/react/mcp.md)
+- [mcp.zh-CN](/docs/react/mcp.zh-CN.md)
+- [migrate](/docs/react/migrate.md)
+- [migrate.zh-CN](/docs/react/migrate.zh-CN.md)
+- [One-off without global install](/docs/react/cli.md)
+- [无需全局安装：一次性命令](/docs/react/cli.zh-CN.md)
+
+## Design Components
+
+
+## UI Components
+
+
+## Charts
+
